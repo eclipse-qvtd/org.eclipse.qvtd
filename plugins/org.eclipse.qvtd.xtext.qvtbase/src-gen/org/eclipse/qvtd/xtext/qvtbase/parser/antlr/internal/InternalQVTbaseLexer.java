@@ -1,6 +1,6 @@
 package org.eclipse.qvtd.xtext.qvtbase.parser.antlr.internal;
 
-// Hack: Use our own Lexer superclass by means of import. 
+// Hack: Use our own Lexer superclass by means of import.
 // Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.parser.antlr.Lexer;
 
@@ -137,7 +137,7 @@ public class InternalQVTbaseLexer extends Lexer {
     // delegates
     // delegators
 
-    public InternalQVTbaseLexer() {;} 
+    public InternalQVTbaseLexer() {;}
     public InternalQVTbaseLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
@@ -155,7 +155,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:11:7: ( 'static' )
             // InternalQVTbase.g:11:9: 'static'
             {
-            match("static"); 
+            match("static");
 
 
             }
@@ -176,7 +176,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:12:7: ( 'definition' )
             // InternalQVTbase.g:12:9: 'definition'
             {
-            match("definition"); 
+            match("definition");
 
 
             }
@@ -197,7 +197,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:13:7: ( 'attribute' )
             // InternalQVTbase.g:13:9: 'attribute'
             {
-            match("attribute"); 
+            match("attribute");
 
 
             }
@@ -218,7 +218,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:14:7: ( ':' )
             // InternalQVTbase.g:14:9: ':'
             {
-            match(':'); 
+            match(':');
 
             }
 
@@ -238,7 +238,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:15:7: ( '=' )
             // InternalQVTbase.g:15:9: '='
             {
-            match('='); 
+            match('=');
 
             }
 
@@ -258,7 +258,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:16:7: ( '{' )
             // InternalQVTbase.g:16:9: '{'
             {
-            match('{'); 
+            match('{');
 
             }
 
@@ -278,7 +278,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:17:7: ( 'derived' )
             // InternalQVTbase.g:17:9: 'derived'
             {
-            match("derived"); 
+            match("derived");
 
 
             }
@@ -299,7 +299,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:18:7: ( '!derived' )
             // InternalQVTbase.g:18:9: '!derived'
             {
-            match("!derived"); 
+            match("!derived");
 
 
             }
@@ -320,7 +320,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:19:7: ( 'id' )
             // InternalQVTbase.g:19:9: 'id'
             {
-            match("id"); 
+            match("id");
 
 
             }
@@ -341,7 +341,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:20:7: ( '!id' )
             // InternalQVTbase.g:20:9: '!id'
             {
-            match("!id"); 
+            match("!id");
 
 
             }
@@ -362,7 +362,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:21:7: ( 'ordered' )
             // InternalQVTbase.g:21:9: 'ordered'
             {
-            match("ordered"); 
+            match("ordered");
 
 
             }
@@ -383,7 +383,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:22:7: ( '!ordered' )
             // InternalQVTbase.g:22:9: '!ordered'
             {
-            match("!ordered"); 
+            match("!ordered");
 
 
             }
@@ -404,7 +404,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:23:7: ( 'readonly' )
             // InternalQVTbase.g:23:9: 'readonly'
             {
-            match("readonly"); 
+            match("readonly");
 
 
             }
@@ -425,7 +425,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:24:7: ( '!readonly' )
             // InternalQVTbase.g:24:9: '!readonly'
             {
-            match("!readonly"); 
+            match("!readonly");
 
 
             }
@@ -446,7 +446,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:25:7: ( 'transient' )
             // InternalQVTbase.g:25:9: 'transient'
             {
-            match("transient"); 
+            match("transient");
 
 
             }
@@ -467,7 +467,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:26:7: ( '!transient' )
             // InternalQVTbase.g:26:9: '!transient'
             {
-            match("!transient"); 
+            match("!transient");
 
 
             }
@@ -488,7 +488,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:27:7: ( 'unique' )
             // InternalQVTbase.g:27:9: 'unique'
             {
-            match("unique"); 
+            match("unique");
 
 
             }
@@ -509,7 +509,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:28:7: ( '!unique' )
             // InternalQVTbase.g:28:9: '!unique'
             {
-            match("!unique"); 
+            match("!unique");
 
 
             }
@@ -530,7 +530,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:29:7: ( 'unsettable' )
             // InternalQVTbase.g:29:9: 'unsettable'
             {
-            match("unsettable"); 
+            match("unsettable");
 
 
             }
@@ -551,7 +551,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:30:7: ( '!unsettable' )
             // InternalQVTbase.g:30:9: '!unsettable'
             {
-            match("!unsettable"); 
+            match("!unsettable");
 
 
             }
@@ -572,7 +572,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:31:7: ( 'volatile' )
             // InternalQVTbase.g:31:9: 'volatile'
             {
-            match("volatile"); 
+            match("volatile");
 
 
             }
@@ -593,7 +593,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:32:7: ( '!volatile' )
             // InternalQVTbase.g:32:9: '!volatile'
             {
-            match("!volatile"); 
+            match("!volatile");
 
 
             }
@@ -614,7 +614,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:33:7: ( ',' )
             // InternalQVTbase.g:33:9: ','
             {
-            match(','); 
+            match(',');
 
             }
 
@@ -634,7 +634,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:34:7: ( '}' )
             // InternalQVTbase.g:34:9: '}'
             {
-            match('}'); 
+            match('}');
 
             }
 
@@ -654,7 +654,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:35:7: ( 'initial' )
             // InternalQVTbase.g:35:9: 'initial'
             {
-            match("initial"); 
+            match("initial");
 
 
             }
@@ -675,7 +675,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:36:7: ( ';' )
             // InternalQVTbase.g:36:9: ';'
             {
-            match(';'); 
+            match(';');
 
             }
 
@@ -695,7 +695,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:37:7: ( 'derivation' )
             // InternalQVTbase.g:37:9: 'derivation'
             {
-            match("derivation"); 
+            match("derivation");
 
 
             }
@@ -716,7 +716,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:38:7: ( 'primitive' )
             // InternalQVTbase.g:38:9: 'primitive'
             {
-            match("primitive"); 
+            match("primitive");
 
 
             }
@@ -737,7 +737,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:39:7: ( 'datatype' )
             // InternalQVTbase.g:39:9: 'datatype'
             {
-            match("datatype"); 
+            match("datatype");
 
 
             }
@@ -758,7 +758,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:40:7: ( 'serializable' )
             // InternalQVTbase.g:40:9: 'serializable'
             {
-            match("serializable"); 
+            match("serializable");
 
 
             }
@@ -779,7 +779,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:41:7: ( '!serializable' )
             // InternalQVTbase.g:41:9: '!serializable'
             {
-            match("!serializable"); 
+            match("!serializable");
 
 
             }
@@ -800,7 +800,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:42:7: ( 'enum' )
             // InternalQVTbase.g:42:9: 'enum'
             {
-            match("enum"); 
+            match("enum");
 
 
             }
@@ -821,7 +821,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:43:7: ( 'literal' )
             // InternalQVTbase.g:43:9: 'literal'
             {
-            match("literal"); 
+            match("literal");
 
 
             }
@@ -842,7 +842,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:44:7: ( 'operation' )
             // InternalQVTbase.g:44:9: 'operation'
             {
-            match("operation"); 
+            match("operation");
 
 
             }
@@ -863,7 +863,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:45:7: ( '(' )
             // InternalQVTbase.g:45:9: '('
             {
-            match('('); 
+            match('(');
 
             }
 
@@ -883,7 +883,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:46:7: ( ')' )
             // InternalQVTbase.g:46:9: ')'
             {
-            match(')'); 
+            match(')');
 
             }
 
@@ -903,7 +903,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:47:7: ( 'throws' )
             // InternalQVTbase.g:47:9: 'throws'
             {
-            match("throws"); 
+            match("throws");
 
 
             }
@@ -924,7 +924,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:48:7: ( 'body' )
             // InternalQVTbase.g:48:9: 'body'
             {
-            match("body"); 
+            match("body");
 
 
             }
@@ -945,7 +945,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:49:7: ( 'property' )
             // InternalQVTbase.g:49:9: 'property'
             {
-            match("property"); 
+            match("property");
 
 
             }
@@ -966,7 +966,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:50:7: ( '#' )
             // InternalQVTbase.g:50:9: '#'
             {
-            match('#'); 
+            match('#');
 
             }
 
@@ -986,7 +986,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:51:7: ( 'composes' )
             // InternalQVTbase.g:51:9: 'composes'
             {
-            match("composes"); 
+            match("composes");
 
 
             }
@@ -1007,7 +1007,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:52:7: ( '!composes' )
             // InternalQVTbase.g:52:9: '!composes'
             {
-            match("!composes"); 
+            match("!composes");
 
 
             }
@@ -1028,7 +1028,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:53:7: ( 'resolve' )
             // InternalQVTbase.g:53:9: 'resolve'
             {
-            match("resolve"); 
+            match("resolve");
 
 
             }
@@ -1049,7 +1049,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:54:7: ( '!resolve' )
             // InternalQVTbase.g:54:9: '!resolve'
             {
-            match("!resolve"); 
+            match("!resolve");
 
 
             }
@@ -1070,7 +1070,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:55:7: ( 'abstract' )
             // InternalQVTbase.g:55:9: 'abstract'
             {
-            match("abstract"); 
+            match("abstract");
 
 
             }
@@ -1091,7 +1091,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:56:7: ( 'class' )
             // InternalQVTbase.g:56:9: 'class'
             {
-            match("class"); 
+            match("class");
 
 
             }
@@ -1112,7 +1112,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:57:7: ( 'extends' )
             // InternalQVTbase.g:57:9: 'extends'
             {
-            match("extends"); 
+            match("extends");
 
 
             }
@@ -1133,7 +1133,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:58:7: ( 'interface' )
             // InternalQVTbase.g:58:9: 'interface'
             {
-            match("interface"); 
+            match("interface");
 
 
             }
@@ -1154,7 +1154,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:59:7: ( '-' )
             // InternalQVTbase.g:59:9: '-'
             {
-            match('-'); 
+            match('-');
 
             }
 
@@ -1174,7 +1174,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:60:7: ( 'not' )
             // InternalQVTbase.g:60:9: 'not'
             {
-            match("not"); 
+            match("not");
 
 
             }
@@ -1195,7 +1195,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:61:7: ( '*' )
             // InternalQVTbase.g:61:9: '*'
             {
-            match('*'); 
+            match('*');
 
             }
 
@@ -1215,7 +1215,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:62:7: ( '/' )
             // InternalQVTbase.g:62:9: '/'
             {
-            match('/'); 
+            match('/');
 
             }
 
@@ -1235,7 +1235,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:63:7: ( '+' )
             // InternalQVTbase.g:63:9: '+'
             {
-            match('+'); 
+            match('+');
 
             }
 
@@ -1255,7 +1255,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:64:7: ( '>' )
             // InternalQVTbase.g:64:9: '>'
             {
-            match('>'); 
+            match('>');
 
             }
 
@@ -1275,7 +1275,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:65:7: ( '<' )
             // InternalQVTbase.g:65:9: '<'
             {
-            match('<'); 
+            match('<');
 
             }
 
@@ -1295,7 +1295,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:66:7: ( '>=' )
             // InternalQVTbase.g:66:9: '>='
             {
-            match(">="); 
+            match(">=");
 
 
             }
@@ -1316,7 +1316,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:67:7: ( '<=' )
             // InternalQVTbase.g:67:9: '<='
             {
-            match("<="); 
+            match("<=");
 
 
             }
@@ -1337,7 +1337,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:68:7: ( '<>' )
             // InternalQVTbase.g:68:9: '<>'
             {
-            match("<>"); 
+            match("<>");
 
 
             }
@@ -1358,7 +1358,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:69:7: ( 'and' )
             // InternalQVTbase.g:69:9: 'and'
             {
-            match("and"); 
+            match("and");
 
 
             }
@@ -1379,7 +1379,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:70:7: ( 'or' )
             // InternalQVTbase.g:70:9: 'or'
             {
-            match("or"); 
+            match("or");
 
 
             }
@@ -1400,7 +1400,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:71:7: ( 'xor' )
             // InternalQVTbase.g:71:9: 'xor'
             {
-            match("xor"); 
+            match("xor");
 
 
             }
@@ -1421,7 +1421,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:72:7: ( 'implies' )
             // InternalQVTbase.g:72:9: 'implies'
             {
-            match("implies"); 
+            match("implies");
 
 
             }
@@ -1442,7 +1442,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:73:7: ( '.' )
             // InternalQVTbase.g:73:9: '.'
             {
-            match('.'); 
+            match('.');
 
             }
 
@@ -1462,7 +1462,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:74:7: ( '->' )
             // InternalQVTbase.g:74:9: '->'
             {
-            match("->"); 
+            match("->");
 
 
             }
@@ -1483,7 +1483,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:75:7: ( '?.' )
             // InternalQVTbase.g:75:9: '?.'
             {
-            match("?."); 
+            match("?.");
 
 
             }
@@ -1504,7 +1504,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:76:7: ( '?->' )
             // InternalQVTbase.g:76:9: '?->'
             {
-            match("?->"); 
+            match("?->");
 
 
             }
@@ -1525,7 +1525,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:77:7: ( 'Map' )
             // InternalQVTbase.g:77:9: 'Map'
             {
-            match("Map"); 
+            match("Map");
 
 
             }
@@ -1546,7 +1546,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:78:7: ( 'Tuple' )
             // InternalQVTbase.g:78:9: 'Tuple'
             {
-            match("Tuple"); 
+            match("Tuple");
 
 
             }
@@ -1567,7 +1567,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:79:7: ( 'Boolean' )
             // InternalQVTbase.g:79:9: 'Boolean'
             {
-            match("Boolean"); 
+            match("Boolean");
 
 
             }
@@ -1588,7 +1588,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:80:7: ( 'Integer' )
             // InternalQVTbase.g:80:9: 'Integer'
             {
-            match("Integer"); 
+            match("Integer");
 
 
             }
@@ -1609,7 +1609,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:81:7: ( 'Real' )
             // InternalQVTbase.g:81:9: 'Real'
             {
-            match("Real"); 
+            match("Real");
 
 
             }
@@ -1630,7 +1630,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:82:7: ( 'String' )
             // InternalQVTbase.g:82:9: 'String'
             {
-            match("String"); 
+            match("String");
 
 
             }
@@ -1651,7 +1651,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:83:7: ( 'UnlimitedNatural' )
             // InternalQVTbase.g:83:9: 'UnlimitedNatural'
             {
-            match("UnlimitedNatural"); 
+            match("UnlimitedNatural");
 
 
             }
@@ -1672,7 +1672,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:84:7: ( 'OclAny' )
             // InternalQVTbase.g:84:9: 'OclAny'
             {
-            match("OclAny"); 
+            match("OclAny");
 
 
             }
@@ -1693,7 +1693,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:85:7: ( 'OclInvalid' )
             // InternalQVTbase.g:85:9: 'OclInvalid'
             {
-            match("OclInvalid"); 
+            match("OclInvalid");
 
 
             }
@@ -1714,7 +1714,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:86:7: ( 'OclVoid' )
             // InternalQVTbase.g:86:9: 'OclVoid'
             {
-            match("OclVoid"); 
+            match("OclVoid");
 
 
             }
@@ -1735,7 +1735,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:87:7: ( 'Set' )
             // InternalQVTbase.g:87:9: 'Set'
             {
-            match("Set"); 
+            match("Set");
 
 
             }
@@ -1756,7 +1756,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:88:7: ( 'Bag' )
             // InternalQVTbase.g:88:9: 'Bag'
             {
-            match("Bag"); 
+            match("Bag");
 
 
             }
@@ -1777,7 +1777,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:89:7: ( 'Sequence' )
             // InternalQVTbase.g:89:9: 'Sequence'
             {
-            match("Sequence"); 
+            match("Sequence");
 
 
             }
@@ -1798,7 +1798,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:90:7: ( 'Collection' )
             // InternalQVTbase.g:90:9: 'Collection'
             {
-            match("Collection"); 
+            match("Collection");
 
 
             }
@@ -1819,7 +1819,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:91:7: ( 'OrderedSet' )
             // InternalQVTbase.g:91:9: 'OrderedSet'
             {
-            match("OrderedSet"); 
+            match("OrderedSet");
 
 
             }
@@ -1840,7 +1840,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:92:7: ( '..' )
             // InternalQVTbase.g:92:9: '..'
             {
-            match(".."); 
+            match("..");
 
 
             }
@@ -1861,7 +1861,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:93:7: ( '++' )
             // InternalQVTbase.g:93:9: '++'
             {
-            match("++"); 
+            match("++");
 
 
             }
@@ -1882,7 +1882,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:94:8: ( 'Lambda' )
             // InternalQVTbase.g:94:10: 'Lambda'
             {
-            match("Lambda"); 
+            match("Lambda");
 
 
             }
@@ -1903,7 +1903,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:95:8: ( '<-' )
             // InternalQVTbase.g:95:10: '<-'
             {
-            match("<-"); 
+            match("<-");
 
 
             }
@@ -1924,7 +1924,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:96:8: ( 'true' )
             // InternalQVTbase.g:96:10: 'true'
             {
-            match("true"); 
+            match("true");
 
 
             }
@@ -1945,7 +1945,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:97:8: ( 'false' )
             // InternalQVTbase.g:97:10: 'false'
             {
-            match("false"); 
+            match("false");
 
 
             }
@@ -1966,7 +1966,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:98:8: ( 'invalid' )
             // InternalQVTbase.g:98:10: 'invalid'
             {
-            match("invalid"); 
+            match("invalid");
 
 
             }
@@ -1987,7 +1987,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:99:8: ( 'null' )
             // InternalQVTbase.g:99:10: 'null'
             {
-            match("null"); 
+            match("null");
 
 
             }
@@ -2008,7 +2008,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:100:8: ( '@' )
             // InternalQVTbase.g:100:10: '@'
             {
-            match('@'); 
+            match('@');
 
             }
 
@@ -2028,7 +2028,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:101:8: ( 'pre' )
             // InternalQVTbase.g:101:10: 'pre'
             {
-            match("pre"); 
+            match("pre");
 
 
             }
@@ -2049,7 +2049,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:102:8: ( '[' )
             // InternalQVTbase.g:102:10: '['
             {
-            match('['); 
+            match('[');
 
             }
 
@@ -2069,7 +2069,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:103:8: ( ']' )
             // InternalQVTbase.g:103:10: ']'
             {
-            match(']'); 
+            match(']');
 
             }
 
@@ -2089,7 +2089,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:104:8: ( 'in' )
             // InternalQVTbase.g:104:10: 'in'
             {
-            match("in"); 
+            match("in");
 
 
             }
@@ -2110,7 +2110,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:105:8: ( '|' )
             // InternalQVTbase.g:105:10: '|'
             {
-            match('|'); 
+            match('|');
 
             }
 
@@ -2130,7 +2130,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:106:8: ( 'if' )
             // InternalQVTbase.g:106:10: 'if'
             {
-            match("if"); 
+            match("if");
 
 
             }
@@ -2151,7 +2151,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:107:8: ( 'then' )
             // InternalQVTbase.g:107:10: 'then'
             {
-            match("then"); 
+            match("then");
 
 
             }
@@ -2172,7 +2172,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:108:8: ( 'else' )
             // InternalQVTbase.g:108:10: 'else'
             {
-            match("else"); 
+            match("else");
 
 
             }
@@ -2193,7 +2193,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:109:8: ( 'endif' )
             // InternalQVTbase.g:109:10: 'endif'
             {
-            match("endif"); 
+            match("endif");
 
 
             }
@@ -2214,7 +2214,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:110:8: ( 'elseif' )
             // InternalQVTbase.g:110:10: 'elseif'
             {
-            match("elseif"); 
+            match("elseif");
 
 
             }
@@ -2235,7 +2235,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:111:8: ( 'let' )
             // InternalQVTbase.g:111:10: 'let'
             {
-            match("let"); 
+            match("let");
 
 
             }
@@ -2256,7 +2256,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:112:8: ( 'self' )
             // InternalQVTbase.g:112:10: 'self'
             {
-            match("self"); 
+            match("self");
 
 
             }
@@ -2277,7 +2277,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:113:8: ( '|?' )
             // InternalQVTbase.g:113:10: '|?'
             {
-            match("|?"); 
+            match("|?");
 
 
             }
@@ -2298,7 +2298,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:114:8: ( '|1' )
             // InternalQVTbase.g:114:10: '|1'
             {
-            match("|1"); 
+            match("|1");
 
 
             }
@@ -2319,7 +2319,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:115:8: ( '?' )
             // InternalQVTbase.g:115:10: '?'
             {
-            match('?'); 
+            match('?');
 
             }
 
@@ -2339,7 +2339,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:116:8: ( '::' )
             // InternalQVTbase.g:116:10: '::'
             {
-            match("::"); 
+            match("::");
 
 
             }
@@ -2360,7 +2360,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:117:8: ( '&&' )
             // InternalQVTbase.g:117:10: '&&'
             {
-            match("&&"); 
+            match("&&");
 
 
             }
@@ -2381,7 +2381,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7763:22: ( '\\u00A3$%^\\u00A3$%^' )
             // InternalQVTbase.g:7763:24: '\\u00A3$%^\\u00A3$%^'
             {
-            match("\u00A3$%^\u00A3$%^"); 
+            match("\u00A3$%^\u00A3$%^");
 
 
             }
@@ -2400,7 +2400,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7765:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
             // InternalQVTbase.g:7765:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
             {
-            match('\\'); 
+            match('\\');
             if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
                 input.consume();
 
@@ -2451,7 +2451,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7769:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
             // InternalQVTbase.g:7769:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
-            match('\"'); 
+            match('\"');
             // InternalQVTbase.g:7769:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
             loop1:
             do {
@@ -2470,7 +2470,7 @@ public class InternalQVTbaseLexer extends Lexer {
             	case 1 :
             	    // InternalQVTbase.g:7769:34: RULE_ESCAPED_CHARACTER
             	    {
-            	    mRULE_ESCAPED_CHARACTER(); 
+            	    mRULE_ESCAPED_CHARACTER();
 
             	    }
             	    break;
@@ -2495,7 +2495,7 @@ public class InternalQVTbaseLexer extends Lexer {
                 }
             } while (true);
 
-            match('\"'); 
+            match('\"');
 
             }
 
@@ -2515,7 +2515,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7771:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             // InternalQVTbase.g:7771:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
-            match('\''); 
+            match('\'');
             // InternalQVTbase.g:7771:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop2:
             do {
@@ -2534,7 +2534,7 @@ public class InternalQVTbaseLexer extends Lexer {
             	case 1 :
             	    // InternalQVTbase.g:7771:35: RULE_ESCAPED_CHARACTER
             	    {
-            	    mRULE_ESCAPED_CHARACTER(); 
+            	    mRULE_ESCAPED_CHARACTER();
 
             	    }
             	    break;
@@ -2559,7 +2559,7 @@ public class InternalQVTbaseLexer extends Lexer {
                 }
             } while (true);
 
-            match('\''); 
+            match('\'');
 
             }
 
@@ -2579,7 +2579,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7773:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
             // InternalQVTbase.g:7773:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
             {
-            match("/'"); 
+            match("/'");
 
             // InternalQVTbase.g:7773:38: ( options {greedy=false; } : . )*
             loop3:
@@ -2608,7 +2608,7 @@ public class InternalQVTbaseLexer extends Lexer {
             	case 1 :
             	    // InternalQVTbase.g:7773:66: .
             	    {
-            	    matchAny(); 
+            	    matchAny();
 
             	    }
             	    break;
@@ -2618,7 +2618,7 @@ public class InternalQVTbaseLexer extends Lexer {
                 }
             } while (true);
 
-            match("'/"); 
+            match("'/");
 
 
             }
@@ -2639,7 +2639,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7775:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
             // InternalQVTbase.g:7775:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             {
-            mRULE_LETTER_CHARACTER(); 
+            mRULE_LETTER_CHARACTER();
             // InternalQVTbase.g:7775:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             loop4:
             do {
@@ -2692,8 +2692,8 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7777:17: ( '_' RULE_SINGLE_QUOTED_STRING )
             // InternalQVTbase.g:7777:19: '_' RULE_SINGLE_QUOTED_STRING
             {
-            match('_'); 
-            mRULE_SINGLE_QUOTED_STRING(); 
+            match('_');
+            mRULE_SINGLE_QUOTED_STRING();
 
             }
 
@@ -2729,7 +2729,7 @@ public class InternalQVTbaseLexer extends Lexer {
             	case 1 :
             	    // InternalQVTbase.g:7779:13: '0' .. '9'
             	    {
-            	    matchRange('0','9'); 
+            	    matchRange('0','9');
 
             	    }
             	    break;
@@ -2762,7 +2762,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7781:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // InternalQVTbase.g:7781:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("/*"); 
+            match("/*");
 
             // InternalQVTbase.g:7781:24: ( options {greedy=false; } : . )*
             loop6:
@@ -2791,7 +2791,7 @@ public class InternalQVTbaseLexer extends Lexer {
             	case 1 :
             	    // InternalQVTbase.g:7781:52: .
             	    {
-            	    matchAny(); 
+            	    matchAny();
 
             	    }
             	    break;
@@ -2801,7 +2801,7 @@ public class InternalQVTbaseLexer extends Lexer {
                 }
             } while (true);
 
-            match("*/"); 
+            match("*/");
 
 
             }
@@ -2822,7 +2822,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7783:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
             // InternalQVTbase.g:7783:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
-            match("--"); 
+            match("--");
 
             // InternalQVTbase.g:7783:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop7:
@@ -2879,14 +2879,14 @@ public class InternalQVTbaseLexer extends Lexer {
                         case 1 :
                             // InternalQVTbase.g:7783:41: '\\r'
                             {
-                            match('\r'); 
+                            match('\r');
 
                             }
                             break;
 
                     }
 
-                    match('\n'); 
+                    match('\n');
 
                     }
                     break;
@@ -2969,7 +2969,7 @@ public class InternalQVTbaseLexer extends Lexer {
             // InternalQVTbase.g:7787:16: ( . )
             // InternalQVTbase.g:7787:18: .
             {
-            matchAny(); 
+            matchAny();
 
             }
 
@@ -2989,826 +2989,826 @@ public class InternalQVTbaseLexer extends Lexer {
             case 1 :
                 // InternalQVTbase.g:1:10: T__17
                 {
-                mT__17(); 
+                mT__17();
 
                 }
                 break;
             case 2 :
                 // InternalQVTbase.g:1:16: T__18
                 {
-                mT__18(); 
+                mT__18();
 
                 }
                 break;
             case 3 :
                 // InternalQVTbase.g:1:22: T__19
                 {
-                mT__19(); 
+                mT__19();
 
                 }
                 break;
             case 4 :
                 // InternalQVTbase.g:1:28: T__20
                 {
-                mT__20(); 
+                mT__20();
 
                 }
                 break;
             case 5 :
                 // InternalQVTbase.g:1:34: T__21
                 {
-                mT__21(); 
+                mT__21();
 
                 }
                 break;
             case 6 :
                 // InternalQVTbase.g:1:40: T__22
                 {
-                mT__22(); 
+                mT__22();
 
                 }
                 break;
             case 7 :
                 // InternalQVTbase.g:1:46: T__23
                 {
-                mT__23(); 
+                mT__23();
 
                 }
                 break;
             case 8 :
                 // InternalQVTbase.g:1:52: T__24
                 {
-                mT__24(); 
+                mT__24();
 
                 }
                 break;
             case 9 :
                 // InternalQVTbase.g:1:58: T__25
                 {
-                mT__25(); 
+                mT__25();
 
                 }
                 break;
             case 10 :
                 // InternalQVTbase.g:1:64: T__26
                 {
-                mT__26(); 
+                mT__26();
 
                 }
                 break;
             case 11 :
                 // InternalQVTbase.g:1:70: T__27
                 {
-                mT__27(); 
+                mT__27();
 
                 }
                 break;
             case 12 :
                 // InternalQVTbase.g:1:76: T__28
                 {
-                mT__28(); 
+                mT__28();
 
                 }
                 break;
             case 13 :
                 // InternalQVTbase.g:1:82: T__29
                 {
-                mT__29(); 
+                mT__29();
 
                 }
                 break;
             case 14 :
                 // InternalQVTbase.g:1:88: T__30
                 {
-                mT__30(); 
+                mT__30();
 
                 }
                 break;
             case 15 :
                 // InternalQVTbase.g:1:94: T__31
                 {
-                mT__31(); 
+                mT__31();
 
                 }
                 break;
             case 16 :
                 // InternalQVTbase.g:1:100: T__32
                 {
-                mT__32(); 
+                mT__32();
 
                 }
                 break;
             case 17 :
                 // InternalQVTbase.g:1:106: T__33
                 {
-                mT__33(); 
+                mT__33();
 
                 }
                 break;
             case 18 :
                 // InternalQVTbase.g:1:112: T__34
                 {
-                mT__34(); 
+                mT__34();
 
                 }
                 break;
             case 19 :
                 // InternalQVTbase.g:1:118: T__35
                 {
-                mT__35(); 
+                mT__35();
 
                 }
                 break;
             case 20 :
                 // InternalQVTbase.g:1:124: T__36
                 {
-                mT__36(); 
+                mT__36();
 
                 }
                 break;
             case 21 :
                 // InternalQVTbase.g:1:130: T__37
                 {
-                mT__37(); 
+                mT__37();
 
                 }
                 break;
             case 22 :
                 // InternalQVTbase.g:1:136: T__38
                 {
-                mT__38(); 
+                mT__38();
 
                 }
                 break;
             case 23 :
                 // InternalQVTbase.g:1:142: T__39
                 {
-                mT__39(); 
+                mT__39();
 
                 }
                 break;
             case 24 :
                 // InternalQVTbase.g:1:148: T__40
                 {
-                mT__40(); 
+                mT__40();
 
                 }
                 break;
             case 25 :
                 // InternalQVTbase.g:1:154: T__41
                 {
-                mT__41(); 
+                mT__41();
 
                 }
                 break;
             case 26 :
                 // InternalQVTbase.g:1:160: T__42
                 {
-                mT__42(); 
+                mT__42();
 
                 }
                 break;
             case 27 :
                 // InternalQVTbase.g:1:166: T__43
                 {
-                mT__43(); 
+                mT__43();
 
                 }
                 break;
             case 28 :
                 // InternalQVTbase.g:1:172: T__44
                 {
-                mT__44(); 
+                mT__44();
 
                 }
                 break;
             case 29 :
                 // InternalQVTbase.g:1:178: T__45
                 {
-                mT__45(); 
+                mT__45();
 
                 }
                 break;
             case 30 :
                 // InternalQVTbase.g:1:184: T__46
                 {
-                mT__46(); 
+                mT__46();
 
                 }
                 break;
             case 31 :
                 // InternalQVTbase.g:1:190: T__47
                 {
-                mT__47(); 
+                mT__47();
 
                 }
                 break;
             case 32 :
                 // InternalQVTbase.g:1:196: T__48
                 {
-                mT__48(); 
+                mT__48();
 
                 }
                 break;
             case 33 :
                 // InternalQVTbase.g:1:202: T__49
                 {
-                mT__49(); 
+                mT__49();
 
                 }
                 break;
             case 34 :
                 // InternalQVTbase.g:1:208: T__50
                 {
-                mT__50(); 
+                mT__50();
 
                 }
                 break;
             case 35 :
                 // InternalQVTbase.g:1:214: T__51
                 {
-                mT__51(); 
+                mT__51();
 
                 }
                 break;
             case 36 :
                 // InternalQVTbase.g:1:220: T__52
                 {
-                mT__52(); 
+                mT__52();
 
                 }
                 break;
             case 37 :
                 // InternalQVTbase.g:1:226: T__53
                 {
-                mT__53(); 
+                mT__53();
 
                 }
                 break;
             case 38 :
                 // InternalQVTbase.g:1:232: T__54
                 {
-                mT__54(); 
+                mT__54();
 
                 }
                 break;
             case 39 :
                 // InternalQVTbase.g:1:238: T__55
                 {
-                mT__55(); 
+                mT__55();
 
                 }
                 break;
             case 40 :
                 // InternalQVTbase.g:1:244: T__56
                 {
-                mT__56(); 
+                mT__56();
 
                 }
                 break;
             case 41 :
                 // InternalQVTbase.g:1:250: T__57
                 {
-                mT__57(); 
+                mT__57();
 
                 }
                 break;
             case 42 :
                 // InternalQVTbase.g:1:256: T__58
                 {
-                mT__58(); 
+                mT__58();
 
                 }
                 break;
             case 43 :
                 // InternalQVTbase.g:1:262: T__59
                 {
-                mT__59(); 
+                mT__59();
 
                 }
                 break;
             case 44 :
                 // InternalQVTbase.g:1:268: T__60
                 {
-                mT__60(); 
+                mT__60();
 
                 }
                 break;
             case 45 :
                 // InternalQVTbase.g:1:274: T__61
                 {
-                mT__61(); 
+                mT__61();
 
                 }
                 break;
             case 46 :
                 // InternalQVTbase.g:1:280: T__62
                 {
-                mT__62(); 
+                mT__62();
 
                 }
                 break;
             case 47 :
                 // InternalQVTbase.g:1:286: T__63
                 {
-                mT__63(); 
+                mT__63();
 
                 }
                 break;
             case 48 :
                 // InternalQVTbase.g:1:292: T__64
                 {
-                mT__64(); 
+                mT__64();
 
                 }
                 break;
             case 49 :
                 // InternalQVTbase.g:1:298: T__65
                 {
-                mT__65(); 
+                mT__65();
 
                 }
                 break;
             case 50 :
                 // InternalQVTbase.g:1:304: T__66
                 {
-                mT__66(); 
+                mT__66();
 
                 }
                 break;
             case 51 :
                 // InternalQVTbase.g:1:310: T__67
                 {
-                mT__67(); 
+                mT__67();
 
                 }
                 break;
             case 52 :
                 // InternalQVTbase.g:1:316: T__68
                 {
-                mT__68(); 
+                mT__68();
 
                 }
                 break;
             case 53 :
                 // InternalQVTbase.g:1:322: T__69
                 {
-                mT__69(); 
+                mT__69();
 
                 }
                 break;
             case 54 :
                 // InternalQVTbase.g:1:328: T__70
                 {
-                mT__70(); 
+                mT__70();
 
                 }
                 break;
             case 55 :
                 // InternalQVTbase.g:1:334: T__71
                 {
-                mT__71(); 
+                mT__71();
 
                 }
                 break;
             case 56 :
                 // InternalQVTbase.g:1:340: T__72
                 {
-                mT__72(); 
+                mT__72();
 
                 }
                 break;
             case 57 :
                 // InternalQVTbase.g:1:346: T__73
                 {
-                mT__73(); 
+                mT__73();
 
                 }
                 break;
             case 58 :
                 // InternalQVTbase.g:1:352: T__74
                 {
-                mT__74(); 
+                mT__74();
 
                 }
                 break;
             case 59 :
                 // InternalQVTbase.g:1:358: T__75
                 {
-                mT__75(); 
+                mT__75();
 
                 }
                 break;
             case 60 :
                 // InternalQVTbase.g:1:364: T__76
                 {
-                mT__76(); 
+                mT__76();
 
                 }
                 break;
             case 61 :
                 // InternalQVTbase.g:1:370: T__77
                 {
-                mT__77(); 
+                mT__77();
 
                 }
                 break;
             case 62 :
                 // InternalQVTbase.g:1:376: T__78
                 {
-                mT__78(); 
+                mT__78();
 
                 }
                 break;
             case 63 :
                 // InternalQVTbase.g:1:382: T__79
                 {
-                mT__79(); 
+                mT__79();
 
                 }
                 break;
             case 64 :
                 // InternalQVTbase.g:1:388: T__80
                 {
-                mT__80(); 
+                mT__80();
 
                 }
                 break;
             case 65 :
                 // InternalQVTbase.g:1:394: T__81
                 {
-                mT__81(); 
+                mT__81();
 
                 }
                 break;
             case 66 :
                 // InternalQVTbase.g:1:400: T__82
                 {
-                mT__82(); 
+                mT__82();
 
                 }
                 break;
             case 67 :
                 // InternalQVTbase.g:1:406: T__83
                 {
-                mT__83(); 
+                mT__83();
 
                 }
                 break;
             case 68 :
                 // InternalQVTbase.g:1:412: T__84
                 {
-                mT__84(); 
+                mT__84();
 
                 }
                 break;
             case 69 :
                 // InternalQVTbase.g:1:418: T__85
                 {
-                mT__85(); 
+                mT__85();
 
                 }
                 break;
             case 70 :
                 // InternalQVTbase.g:1:424: T__86
                 {
-                mT__86(); 
+                mT__86();
 
                 }
                 break;
             case 71 :
                 // InternalQVTbase.g:1:430: T__87
                 {
-                mT__87(); 
+                mT__87();
 
                 }
                 break;
             case 72 :
                 // InternalQVTbase.g:1:436: T__88
                 {
-                mT__88(); 
+                mT__88();
 
                 }
                 break;
             case 73 :
                 // InternalQVTbase.g:1:442: T__89
                 {
-                mT__89(); 
+                mT__89();
 
                 }
                 break;
             case 74 :
                 // InternalQVTbase.g:1:448: T__90
                 {
-                mT__90(); 
+                mT__90();
 
                 }
                 break;
             case 75 :
                 // InternalQVTbase.g:1:454: T__91
                 {
-                mT__91(); 
+                mT__91();
 
                 }
                 break;
             case 76 :
                 // InternalQVTbase.g:1:460: T__92
                 {
-                mT__92(); 
+                mT__92();
 
                 }
                 break;
             case 77 :
                 // InternalQVTbase.g:1:466: T__93
                 {
-                mT__93(); 
+                mT__93();
 
                 }
                 break;
             case 78 :
                 // InternalQVTbase.g:1:472: T__94
                 {
-                mT__94(); 
+                mT__94();
 
                 }
                 break;
             case 79 :
                 // InternalQVTbase.g:1:478: T__95
                 {
-                mT__95(); 
+                mT__95();
 
                 }
                 break;
             case 80 :
                 // InternalQVTbase.g:1:484: T__96
                 {
-                mT__96(); 
+                mT__96();
 
                 }
                 break;
             case 81 :
                 // InternalQVTbase.g:1:490: T__97
                 {
-                mT__97(); 
+                mT__97();
 
                 }
                 break;
             case 82 :
                 // InternalQVTbase.g:1:496: T__98
                 {
-                mT__98(); 
+                mT__98();
 
                 }
                 break;
             case 83 :
                 // InternalQVTbase.g:1:502: T__99
                 {
-                mT__99(); 
+                mT__99();
 
                 }
                 break;
             case 84 :
                 // InternalQVTbase.g:1:508: T__100
                 {
-                mT__100(); 
+                mT__100();
 
                 }
                 break;
             case 85 :
                 // InternalQVTbase.g:1:515: T__101
                 {
-                mT__101(); 
+                mT__101();
 
                 }
                 break;
             case 86 :
                 // InternalQVTbase.g:1:522: T__102
                 {
-                mT__102(); 
+                mT__102();
 
                 }
                 break;
             case 87 :
                 // InternalQVTbase.g:1:529: T__103
                 {
-                mT__103(); 
+                mT__103();
 
                 }
                 break;
             case 88 :
                 // InternalQVTbase.g:1:536: T__104
                 {
-                mT__104(); 
+                mT__104();
 
                 }
                 break;
             case 89 :
                 // InternalQVTbase.g:1:543: T__105
                 {
-                mT__105(); 
+                mT__105();
 
                 }
                 break;
             case 90 :
                 // InternalQVTbase.g:1:550: T__106
                 {
-                mT__106(); 
+                mT__106();
 
                 }
                 break;
             case 91 :
                 // InternalQVTbase.g:1:557: T__107
                 {
-                mT__107(); 
+                mT__107();
 
                 }
                 break;
             case 92 :
                 // InternalQVTbase.g:1:564: T__108
                 {
-                mT__108(); 
+                mT__108();
 
                 }
                 break;
             case 93 :
                 // InternalQVTbase.g:1:571: T__109
                 {
-                mT__109(); 
+                mT__109();
 
                 }
                 break;
             case 94 :
                 // InternalQVTbase.g:1:578: T__110
                 {
-                mT__110(); 
+                mT__110();
 
                 }
                 break;
             case 95 :
                 // InternalQVTbase.g:1:585: T__111
                 {
-                mT__111(); 
+                mT__111();
 
                 }
                 break;
             case 96 :
                 // InternalQVTbase.g:1:592: T__112
                 {
-                mT__112(); 
+                mT__112();
 
                 }
                 break;
             case 97 :
                 // InternalQVTbase.g:1:599: T__113
                 {
-                mT__113(); 
+                mT__113();
 
                 }
                 break;
             case 98 :
                 // InternalQVTbase.g:1:606: T__114
                 {
-                mT__114(); 
+                mT__114();
 
                 }
                 break;
             case 99 :
                 // InternalQVTbase.g:1:613: T__115
                 {
-                mT__115(); 
+                mT__115();
 
                 }
                 break;
             case 100 :
                 // InternalQVTbase.g:1:620: T__116
                 {
-                mT__116(); 
+                mT__116();
 
                 }
                 break;
             case 101 :
                 // InternalQVTbase.g:1:627: T__117
                 {
-                mT__117(); 
+                mT__117();
 
                 }
                 break;
             case 102 :
                 // InternalQVTbase.g:1:634: T__118
                 {
-                mT__118(); 
+                mT__118();
 
                 }
                 break;
             case 103 :
                 // InternalQVTbase.g:1:641: T__119
                 {
-                mT__119(); 
+                mT__119();
 
                 }
                 break;
             case 104 :
                 // InternalQVTbase.g:1:648: T__120
                 {
-                mT__120(); 
+                mT__120();
 
                 }
                 break;
             case 105 :
                 // InternalQVTbase.g:1:655: T__121
                 {
-                mT__121(); 
+                mT__121();
 
                 }
                 break;
             case 106 :
                 // InternalQVTbase.g:1:662: T__122
                 {
-                mT__122(); 
+                mT__122();
 
                 }
                 break;
             case 107 :
                 // InternalQVTbase.g:1:669: T__123
                 {
-                mT__123(); 
+                mT__123();
 
                 }
                 break;
             case 108 :
                 // InternalQVTbase.g:1:676: RULE_UNQUOTED_STRING
                 {
-                mRULE_UNQUOTED_STRING(); 
+                mRULE_UNQUOTED_STRING();
 
                 }
                 break;
             case 109 :
                 // InternalQVTbase.g:1:697: RULE_DOUBLE_QUOTED_STRING
                 {
-                mRULE_DOUBLE_QUOTED_STRING(); 
+                mRULE_DOUBLE_QUOTED_STRING();
 
                 }
                 break;
             case 110 :
                 // InternalQVTbase.g:1:723: RULE_SINGLE_QUOTED_STRING
                 {
-                mRULE_SINGLE_QUOTED_STRING(); 
+                mRULE_SINGLE_QUOTED_STRING();
 
                 }
                 break;
             case 111 :
                 // InternalQVTbase.g:1:749: RULE_ML_SINGLE_QUOTED_STRING
                 {
-                mRULE_ML_SINGLE_QUOTED_STRING(); 
+                mRULE_ML_SINGLE_QUOTED_STRING();
 
                 }
                 break;
             case 112 :
                 // InternalQVTbase.g:1:778: RULE_SIMPLE_ID
                 {
-                mRULE_SIMPLE_ID(); 
+                mRULE_SIMPLE_ID();
 
                 }
                 break;
             case 113 :
                 // InternalQVTbase.g:1:793: RULE_ESCAPED_ID
                 {
-                mRULE_ESCAPED_ID(); 
+                mRULE_ESCAPED_ID();
 
                 }
                 break;
             case 114 :
                 // InternalQVTbase.g:1:809: RULE_INT
                 {
-                mRULE_INT(); 
+                mRULE_INT();
 
                 }
                 break;
             case 115 :
                 // InternalQVTbase.g:1:818: RULE_ML_COMMENT
                 {
-                mRULE_ML_COMMENT(); 
+                mRULE_ML_COMMENT();
 
                 }
                 break;
             case 116 :
                 // InternalQVTbase.g:1:834: RULE_SL_COMMENT
                 {
-                mRULE_SL_COMMENT(); 
+                mRULE_SL_COMMENT();
 
                 }
                 break;
             case 117 :
                 // InternalQVTbase.g:1:850: RULE_WS
                 {
-                mRULE_WS(); 
+                mRULE_WS();
 
                 }
                 break;
             case 118 :
                 // InternalQVTbase.g:1:858: RULE_ANY_OTHER
                 {
-                mRULE_ANY_OTHER(); 
+                mRULE_ANY_OTHER();
 
                 }
                 break;
@@ -4355,7 +4355,7 @@ public class InternalQVTbaseLexer extends Lexer {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
-                    case 0 : 
+                    case 0 :
                         int LA11_52 = input.LA(1);
 
                         s = -1;
@@ -4365,7 +4365,7 @@ public class InternalQVTbaseLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 1 :
                         int LA11_53 = input.LA(1);
 
                         s = -1;
@@ -4375,7 +4375,7 @@ public class InternalQVTbaseLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 2 :
                         int LA11_0 = input.LA(1);
 
                         s = -1;
@@ -4504,6 +4504,6 @@ public class InternalQVTbaseLexer extends Lexer {
             throw nvae;
         }
     }
- 
+
 
 }

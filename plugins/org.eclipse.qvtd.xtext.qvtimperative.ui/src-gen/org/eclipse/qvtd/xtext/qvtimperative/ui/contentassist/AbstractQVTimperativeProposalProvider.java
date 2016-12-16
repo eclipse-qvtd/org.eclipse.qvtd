@@ -17,12 +17,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
  * Represents a generated, default implementation of superclass {@link org.eclipse.qvtd.xtext.qvtbase.ui.contentassist.QVTbaseProposalProvider}.
- * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
- * with a more concrete subtype. 
+ * Methods are dynamically dispatched on the first parameter, i.e., you can override them
+ * with a more concrete subtype.
  */
 @SuppressWarnings("all")
 public class AbstractQVTimperativeProposalProvider extends org.eclipse.qvtd.xtext.qvtbase.ui.contentassist.QVTbaseProposalProvider {
-		
+
 	public void completeTopLevelCS_OwnedImports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
@@ -285,7 +285,7 @@ public class AbstractQVTimperativeProposalProvider extends org.eclipse.qvtd.xtex
 	public void completeTransformationCS_OwnedDirections(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-    
+
 	public void complete_TopLevelCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}

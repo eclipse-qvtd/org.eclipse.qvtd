@@ -75,7 +75,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected AbstractElementAlias match_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__;
 	protected AbstractElementAlias match_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
-	
+
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (QVTcoreGrammarAccess) access;
@@ -126,14 +126,14 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 		match_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_6_2()));
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
-	
+
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (ruleCall.getRule() == grammarAccess.getUnrestrictedNameRule())
 			return getUnrestrictedNameToken(semanticObject, ruleCall, node);
 		return "";
 	}
-	
+
 	/**
 	 * UnrestrictedName returns ecore::EString:
 	 * 	EssentialOCLUnrestrictedName
@@ -155,7 +155,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 			return getTokenText(node);
 		return "";
 	}
-	
+
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (transition.getAmbiguousSyntaxes().isEmpty()) return;
@@ -264,387 +264,387 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!id' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!id'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!id' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!id'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='id' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='id'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='id' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='id'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     qualifiers+='!derived' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
@@ -939,7 +939,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS_CommaKeyword_5_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';'
@@ -968,471 +968,471 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_____DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4___or___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4____a_RightCurlyBracketKeyword_6_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     UnrestrictedName?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (
-	 *         default=SINGLE_QUOTED_STRING 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         default=SINGLE_QUOTED_STRING
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         name=UnrestrictedName 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         name=UnrestrictedName
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         ownedType=TypedMultiplicityRefCS 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         ownedType=TypedMultiplicityRefCS
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!id' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!id'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='id' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='id'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 */
 	protected void emit_AttributeCS_UnrestrictedNameParserRuleCall_6_0_1_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     UnrestrictedName?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (
-	 *         default=SINGLE_QUOTED_STRING 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         default=SINGLE_QUOTED_STRING
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         name=UnrestrictedName 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         name=UnrestrictedName
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         ownedType=TypedMultiplicityRefCS 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         ownedType=TypedMultiplicityRefCS
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!id' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!id'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='id' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='id'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 */
 	protected void emit_AttributeCS_UnrestrictedNameParserRuleCall_6_0_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('derivation' UnrestrictedName? ':' ';' ('initial' UnrestrictedName? ':' ';')*)*
@@ -1443,7 +1443,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('derivation' UnrestrictedName? ':' ';')*
@@ -1473,24 +1473,24 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (
-	  *         ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')*) | 
+	  *         ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')*) |
 	  *         (
-	  *             ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')* ';')? 
-	  *             ('initial' UnrestrictedName? ':' ';')+ 
-	  *             'derivation' 
-	  *             UnrestrictedName? 
-	  *             ':' 
-	  *             (';' 'derivation' UnrestrictedName? ':')* 
+	  *             ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')* ';')?
+	  *             ('initial' UnrestrictedName? ':' ';')+
+	  *             'derivation'
+	  *             UnrestrictedName?
+	  *             ':'
+	  *             (';' 'derivation' UnrestrictedName? ':')*
 	  *             (
-	  *                 ';' 
-	  *                 ('initial' UnrestrictedName? ':' ';')+ 
-	  *                 'derivation' 
-	  *                 UnrestrictedName? 
-	  *                 ':' 
+	  *                 ';'
+	  *                 ('initial' UnrestrictedName? ':' ';')+
+	  *                 'derivation'
+	  *                 UnrestrictedName?
+	  *                 ':'
 	  *                 (';' 'derivation' UnrestrictedName? ':')*
 	  *             )*
 	  *         )
@@ -1502,7 +1502,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2___SemicolonKeyword_6_0_1_1_4_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a___or_____DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2___SemicolonKeyword_6_0_1_1_4_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a_SemicolonKeyword_6_0_1_1_4__q___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__p_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2___SemicolonKeyword_6_0_1_1_4_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__p_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2___SemicolonKeyword_6_0_1_1_4_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a__a__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('initial' UnrestrictedName? ':' ';' ('derivation' UnrestrictedName? ':' ';')*)*
@@ -1513,7 +1513,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('initial' UnrestrictedName? ':' ';')*
@@ -1543,24 +1543,24 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (
-	  *         ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')*) | 
+	  *         ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')*) |
 	  *         (
-	  *             ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')* ';')? 
-	  *             ('derivation' UnrestrictedName? ':' ';')+ 
-	  *             'initial' 
-	  *             UnrestrictedName? 
-	  *             ':' 
-	  *             (';' 'initial' UnrestrictedName? ':')* 
+	  *             ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')* ';')?
+	  *             ('derivation' UnrestrictedName? ':' ';')+
+	  *             'initial'
+	  *             UnrestrictedName?
+	  *             ':'
+	  *             (';' 'initial' UnrestrictedName? ':')*
 	  *             (
-	  *                 ';' 
-	  *                 ('derivation' UnrestrictedName? ':' ';')+ 
-	  *                 'initial' 
-	  *                 UnrestrictedName? 
-	  *                 ':' 
+	  *                 ';'
+	  *                 ('derivation' UnrestrictedName? ':' ';')+
+	  *                 'initial'
+	  *                 UnrestrictedName?
+	  *                 ':'
 	  *                 (';' 'initial' UnrestrictedName? ':')*
 	  *             )*
 	  *         )
@@ -1572,7 +1572,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2___SemicolonKeyword_6_0_1_0_4_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__a___or_____InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2___SemicolonKeyword_6_0_1_0_4_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__a_SemicolonKeyword_6_0_1_0_4__q___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__p_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2___SemicolonKeyword_6_0_1_0_4_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__a___SemicolonKeyword_6_0_1_0_4___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__p_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2___SemicolonKeyword_6_0_1_0_4_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__a__a__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
@@ -1601,7 +1601,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___SemicolonKeyword_6_0_1_0_4___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__a_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')+
@@ -1612,7 +1612,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___SemicolonKeyword_6_0_1_0_4___DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4__a_InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
@@ -1641,7 +1641,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')+
@@ -1652,7 +1652,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_AttributeCS___SemicolonKeyword_6_0_1_1_4___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4__a_DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';' | ('{' '}')
@@ -1666,7 +1666,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_DataTypeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_RightCurlyBracketKeyword_6_0_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' '!serializable'? '}')?
@@ -1682,7 +1682,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_DataTypeCS___LeftCurlyBracketKeyword_5_0_SerializableKeyword_5_1_1_q_RightCurlyBracketKeyword_5_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';' | ('{' '}')
@@ -1696,7 +1696,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_EnumerationCS_SemicolonKeyword_5_1_or___LeftCurlyBracketKeyword_5_0_0_RightCurlyBracketKeyword_5_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' '!serializable'? '}')?
@@ -1715,7 +1715,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_EnumerationCS___LeftCurlyBracketKeyword_4_0_SerializableKeyword_4_1_1_q_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
@@ -1728,7 +1728,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     '|?'?
@@ -1743,7 +1743,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ','?
@@ -1801,7 +1801,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_OperationCS_CommaKeyword_9_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' ('body' UnrestrictedName? ':' ';')* '}') | ';'
@@ -1821,7 +1821,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_OperationCS_SemicolonKeyword_10_1_or___LeftCurlyBracketKeyword_10_0_0___BodyKeyword_10_0_1_0_UnrestrictedNameParserRuleCall_10_0_1_1_q_ColonKeyword_10_0_1_2_SemicolonKeyword_10_0_1_4__a_RightCurlyBracketKeyword_10_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     UnrestrictedName?
@@ -1841,7 +1841,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_OperationCS_UnrestrictedNameParserRuleCall_10_0_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('body' UnrestrictedName? ':' ';')*
@@ -1852,7 +1852,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_OperationCS___BodyKeyword_10_0_1_0_UnrestrictedNameParserRuleCall_10_0_1_1_q_ColonKeyword_10_0_1_2_SemicolonKeyword_10_0_1_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' 'body' UnrestrictedName? ':')*
@@ -1872,7 +1872,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_OperationCS___SemicolonKeyword_10_0_1_4_BodyKeyword_10_0_1_0_UnrestrictedNameParserRuleCall_10_0_1_1_q_ColonKeyword_10_0_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' 'body' UnrestrictedName? ':')+
@@ -1883,7 +1883,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_OperationCS___SemicolonKeyword_10_0_1_4_BodyKeyword_10_0_1_0_UnrestrictedNameParserRuleCall_10_0_1_1_q_ColonKeyword_10_0_1_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ','?
@@ -1913,7 +1913,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ParameterCS_CommaKeyword_2_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
@@ -1929,7 +1929,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ParameterCS___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
@@ -1942,442 +1942,442 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_QualifiedPackageCS_SemicolonKeyword_5_1_or___LeftCurlyBracketKeyword_5_0_0_RightCurlyBracketKeyword_5_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ','?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (
-	 *         qualifiers+='!composes' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!composes'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!composes' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!composes'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!resolve' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!resolve'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!resolve' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!resolve'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='!volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='!volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='composes' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='composes'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='composes' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='composes'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='derived'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='ordered'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='readonly'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='resolve' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='resolve'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='resolve' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='resolve'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='transient'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='unique'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='unsettable'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')* 
+	 *         qualifiers+='volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         UnrestrictedName? 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')* 
+	 *         qualifiers+='volatile'
+	 *         (ambiguity)
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         UnrestrictedName?
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     qualifiers+='!composes' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
@@ -2744,7 +2744,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS_CommaKeyword_6_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';'
@@ -2776,539 +2776,539 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_____DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4___or___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4____a_RightCurlyBracketKeyword_7_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     UnrestrictedName?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (
-	 *         default=SINGLE_QUOTED_STRING 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         default=SINGLE_QUOTED_STRING
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         name=UnrestrictedName 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         name=UnrestrictedName
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         ownedType=TypedMultiplicityRefCS 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         ownedType=TypedMultiplicityRefCS
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!composes' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!composes'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!resolve' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!resolve'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='!volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='composes' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='composes'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='resolve' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='resolve'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         qualifiers+='volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         referredOpposite=[Property|UnrestrictedName] 
-	 *         '{' 
-	 *         ('derivation' UnrestrictedName? ':' ';')* 
-	 *         'initial' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')* 
+	 *         referredOpposite=[Property|UnrestrictedName]
+	 *         '{'
+	 *         ('derivation' UnrestrictedName? ':' ';')*
+	 *         'initial'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 */
 	protected void emit_ReferenceCS_UnrestrictedNameParserRuleCall_7_0_1_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     UnrestrictedName?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (
-	 *         default=SINGLE_QUOTED_STRING 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         default=SINGLE_QUOTED_STRING
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         name=UnrestrictedName 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         name=UnrestrictedName
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         ownedType=TypedMultiplicityRefCS 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         ownedType=TypedMultiplicityRefCS
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!composes' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!composes'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!resolve' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!resolve'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='!volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='!volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='composes' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='composes'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='derived' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='derived'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='ordered' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='ordered'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='readonly' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='readonly'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='resolve' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='resolve'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='transient' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='transient'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unique' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='unique'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='unsettable' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='unsettable'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         qualifiers+='volatile' 
-	 *         ','? 
-	 *         '}' 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         qualifiers+='volatile'
+	 *         ','?
+	 *         '}'
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 *     (
-	 *         referredOpposite=[Property|UnrestrictedName] 
-	 *         '{' 
-	 *         ('initial' UnrestrictedName? ':' ';')* 
-	 *         'derivation' 
-	 *         (ambiguity) 
-	 *         ':' 
-	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')* 
+	 *         referredOpposite=[Property|UnrestrictedName]
+	 *         '{'
+	 *         ('initial' UnrestrictedName? ':' ';')*
+	 *         'derivation'
+	 *         (ambiguity)
+	 *         ':'
+	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' (ambiguity) ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
 	 */
 	protected void emit_ReferenceCS_UnrestrictedNameParserRuleCall_7_0_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('derivation' UnrestrictedName? ':' ';' ('initial' UnrestrictedName? ':' ';')*)*
@@ -3319,7 +3319,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('derivation' UnrestrictedName? ':' ';')*
@@ -3352,24 +3352,24 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (
-	  *         ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')*) | 
+	  *         ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')*) |
 	  *         (
-	  *             ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')* ';')? 
-	  *             ('initial' UnrestrictedName? ':' ';')+ 
-	  *             'derivation' 
-	  *             UnrestrictedName? 
-	  *             ':' 
-	  *             (';' 'derivation' UnrestrictedName? ':')* 
+	  *             ('derivation' UnrestrictedName? ':' (';' 'derivation' UnrestrictedName? ':')* ';')?
+	  *             ('initial' UnrestrictedName? ':' ';')+
+	  *             'derivation'
+	  *             UnrestrictedName?
+	  *             ':'
+	  *             (';' 'derivation' UnrestrictedName? ':')*
 	  *             (
-	  *                 ';' 
-	  *                 ('initial' UnrestrictedName? ':' ';')+ 
-	  *                 'derivation' 
-	  *                 UnrestrictedName? 
-	  *                 ':' 
+	  *                 ';'
+	  *                 ('initial' UnrestrictedName? ':' ';')+
+	  *                 'derivation'
+	  *                 UnrestrictedName?
+	  *                 ':'
 	  *                 (';' 'derivation' UnrestrictedName? ':')*
 	  *             )*
 	  *         )
@@ -3381,7 +3381,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2___SemicolonKeyword_7_0_1_1_4_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a___or_____DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2___SemicolonKeyword_7_0_1_1_4_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a_SemicolonKeyword_7_0_1_1_4__q___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__p_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2___SemicolonKeyword_7_0_1_1_4_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__p_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2___SemicolonKeyword_7_0_1_1_4_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a__a__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('initial' UnrestrictedName? ':' ';' ('derivation' UnrestrictedName? ':' ';')*)*
@@ -3392,7 +3392,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('initial' UnrestrictedName? ':' ';')*
@@ -3425,24 +3425,24 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (
-	  *         ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')*) | 
+	  *         ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')*) |
 	  *         (
-	  *             ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')* ';')? 
-	  *             ('derivation' UnrestrictedName? ':' ';')+ 
-	  *             'initial' 
-	  *             UnrestrictedName? 
-	  *             ':' 
-	  *             (';' 'initial' UnrestrictedName? ':')* 
+	  *             ('initial' UnrestrictedName? ':' (';' 'initial' UnrestrictedName? ':')* ';')?
+	  *             ('derivation' UnrestrictedName? ':' ';')+
+	  *             'initial'
+	  *             UnrestrictedName?
+	  *             ':'
+	  *             (';' 'initial' UnrestrictedName? ':')*
 	  *             (
-	  *                 ';' 
-	  *                 ('derivation' UnrestrictedName? ':' ';')+ 
-	  *                 'initial' 
-	  *                 UnrestrictedName? 
-	  *                 ':' 
+	  *                 ';'
+	  *                 ('derivation' UnrestrictedName? ':' ';')+
+	  *                 'initial'
+	  *                 UnrestrictedName?
+	  *                 ':'
 	  *                 (';' 'initial' UnrestrictedName? ':')*
 	  *             )*
 	  *         )
@@ -3454,7 +3454,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2___SemicolonKeyword_7_0_1_0_4_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__a___or_____InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2___SemicolonKeyword_7_0_1_0_4_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__a_SemicolonKeyword_7_0_1_0_4__q___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__p_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2___SemicolonKeyword_7_0_1_0_4_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__a___SemicolonKeyword_7_0_1_0_4___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__p_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2___SemicolonKeyword_7_0_1_0_4_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__a__a__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')*
@@ -3486,7 +3486,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___SemicolonKeyword_7_0_1_0_4___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__a_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('derivation' UnrestrictedName? ':' ';')* 'initial' UnrestrictedName? ':')+
@@ -3497,7 +3497,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___SemicolonKeyword_7_0_1_0_4___DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2_SemicolonKeyword_7_0_1_1_4__a_InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
@@ -3529,7 +3529,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')+
@@ -3540,7 +3540,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_ReferenceCS___SemicolonKeyword_7_0_1_1_4___InitialKeyword_7_0_1_0_0_UnrestrictedNameParserRuleCall_7_0_1_0_1_q_ColonKeyword_7_0_1_0_2_SemicolonKeyword_7_0_1_0_4__a_DerivationKeyword_7_0_1_1_0_UnrestrictedNameParserRuleCall_7_0_1_1_1_q_ColonKeyword_7_0_1_1_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';' | ('{' '}')
@@ -3555,7 +3555,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
@@ -3581,7 +3581,7 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
@@ -3593,5 +3593,5 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	protected void emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 }

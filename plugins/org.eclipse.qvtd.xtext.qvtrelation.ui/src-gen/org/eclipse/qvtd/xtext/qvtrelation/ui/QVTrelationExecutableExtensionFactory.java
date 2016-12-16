@@ -19,7 +19,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
- * introduced subclass. 
+ * introduced subclass.
  */
 public class QVTrelationExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -27,10 +27,10 @@ public class QVTrelationExecutableExtensionFactory extends AbstractGuiceAwareExe
 	protected Bundle getBundle() {
 		return QVTrelationActivator.getInstance().getBundle();
 	}
-	
+
 	@Override
 	protected Injector getInjector() {
 		return QVTrelationActivator.getInstance().getInjector(QVTrelationActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION);
 	}
-	
+
 }

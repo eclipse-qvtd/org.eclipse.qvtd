@@ -19,7 +19,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
- * introduced subclass. 
+ * introduced subclass.
  */
 public class QVTimperativeExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -27,10 +27,10 @@ public class QVTimperativeExecutableExtensionFactory extends AbstractGuiceAwareE
 	protected Bundle getBundle() {
 		return QVTimperativeActivator.getInstance().getBundle();
 	}
-	
+
 	@Override
 	protected Injector getInjector() {
 		return QVTimperativeActivator.getInstance().getInjector(QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE);
 	}
-	
+
 }

@@ -19,7 +19,7 @@ import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
- * introduced subclass. 
+ * introduced subclass.
  */
 public class QVTcoreExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -27,10 +27,10 @@ public class QVTcoreExecutableExtensionFactory extends AbstractGuiceAwareExecuta
 	protected Bundle getBundle() {
 		return QVTcoreActivator.getInstance().getBundle();
 	}
-	
+
 	@Override
 	protected Injector getInjector() {
 		return QVTcoreActivator.getInstance().getInjector(QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE);
 	}
-	
+
 }
