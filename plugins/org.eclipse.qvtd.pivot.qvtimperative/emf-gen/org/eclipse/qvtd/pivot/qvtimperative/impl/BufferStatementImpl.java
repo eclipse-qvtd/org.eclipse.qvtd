@@ -181,11 +181,11 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = ownedExpression <> null implies
+		 *       let result : Boolean[?] = ownedExpression <> null implies
 		 *         ownedExpression.type.oclAsType(CollectionType)
 		 *         .elementType.conformsTo(type)
 		 *       in
-		 *         'BufferStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'BufferStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -197,7 +197,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -226,13 +226,13 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_conformsTo);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_conformsTo);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_BufferStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_BufferStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

@@ -193,9 +193,9 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = valueExp.type.conformsTo(variable.type)
+		 *         result : Boolean[1] = valueExp.type.conformsTo(variable.type)
 		 *       in
-		 *         'RelationDomainAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'RelationDomainAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -206,7 +206,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression valueExp = this.getValueExp();
@@ -214,13 +214,13 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Variable variable = this.getVariable();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = variable.getType();
-				final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

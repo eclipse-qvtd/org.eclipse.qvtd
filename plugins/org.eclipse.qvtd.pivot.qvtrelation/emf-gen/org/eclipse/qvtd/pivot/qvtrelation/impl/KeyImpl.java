@@ -228,9 +228,9 @@ public class KeyImpl extends ElementImpl implements Key {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
+		 *         result : Boolean[1] = transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
 		 *       in
-		 *         'Key::IdentifiesIsAUsedPackageClass'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Key::IdentifiesIsAUsedPackageClass'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -242,7 +242,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtrelation.@Nullable RelationalTransformation transformation = this.getTransformation();
 				if (transformation == null) {
@@ -273,13 +273,13 @@ public class KeyImpl extends ElementImpl implements Key {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package owningPackage = identifies.getOwningPackage();
-				final /*@Thrown*/ boolean status = CollectionIncludesOperation.INSTANCE.evaluate(collect, owningPackage).booleanValue();
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(collect, owningPackage).booleanValue();
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_IdentifiesIsAUsedPackageClass, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_IdentifiesIsAUsedPackageClass, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -301,9 +301,9 @@ public class KeyImpl extends ElementImpl implements Key {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = oppositePart->forAll(opposite <> null)
+		 *         result : Boolean[?] = oppositePart->forAll(opposite <> null)
 		 *       in
-		 *         'Key::OppositePartsHaveOpposites'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Key::OppositePartsHaveOpposites'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -315,18 +315,18 @@ public class KeyImpl extends ElementImpl implements Key {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -349,7 +349,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					}
 					//
 					if (CAUGHT_ne == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						status = ValueUtil.FALSE_VALUE;
+						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (CAUGHT_ne == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
@@ -362,12 +362,12 @@ public class KeyImpl extends ElementImpl implements Key {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_OppositePartsHaveOpposites, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_OppositePartsHaveOpposites, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -390,10 +390,10 @@ public class KeyImpl extends ElementImpl implements Key {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = oppositePart->forAll(
+		 *         result : Boolean[?] = oppositePart->forAll(
 		 *           self.identifies.conformsTo(type))
 		 *       in
-		 *         'Key::OppositePartsAreOppositeParts'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Key::OppositePartsAreOppositeParts'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -405,18 +405,18 @@ public class KeyImpl extends ElementImpl implements Key {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -441,7 +441,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					}
 					//
 					if (CAUGHT_conformsTo == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						status = ValueUtil.FALSE_VALUE;
+						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (CAUGHT_conformsTo == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
@@ -454,12 +454,12 @@ public class KeyImpl extends ElementImpl implements Key {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_OppositePartsAreOppositeParts, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_OppositePartsAreOppositeParts, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -481,10 +481,10 @@ public class KeyImpl extends ElementImpl implements Key {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = part->forAll(
+		 *         result : Boolean[?] = part->forAll(
 		 *           self.identifies.conformsTo(owningClass))
 		 *       in
-		 *         'Key::PartsAreParts'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Key::PartsAreParts'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -496,18 +496,18 @@ public class KeyImpl extends ElementImpl implements Key {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Property> part = this.getPart();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -532,7 +532,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					}
 					//
 					if (CAUGHT_conformsTo == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						status = ValueUtil.FALSE_VALUE;
+						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (CAUGHT_conformsTo == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
@@ -545,12 +545,12 @@ public class KeyImpl extends ElementImpl implements Key {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_PartsAreParts, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_PartsAreParts, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -572,9 +572,9 @@ public class KeyImpl extends ElementImpl implements Key {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = part->excludesAll(oppositePart.opposite)
+		 *         result : Boolean[1] = part->excludesAll(oppositePart.opposite)
 		 *       in
-		 *         'Key::PartsAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Key::PartsAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -586,7 +586,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Property> part = this.getPart();
@@ -611,13 +611,13 @@ public class KeyImpl extends ElementImpl implements Key {
 					//
 					accumulator.add(opposite);
 				}
-				final /*@Thrown*/ boolean status = CollectionExcludesAllOperation.INSTANCE.evaluate(BOXED_part, collect).booleanValue();
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = CollectionExcludesAllOperation.INSTANCE.evaluate(BOXED_part, collect).booleanValue();
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_PartsAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_PartsAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

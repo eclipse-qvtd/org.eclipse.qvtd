@@ -186,9 +186,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = name <> null
+		 *       let result : Boolean[1] = name <> null
 		 *       in
-		 *         'Mapping::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Mapping::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -199,16 +199,16 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-				final /*@Thrown*/ boolean status = name != null;
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = name != null;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -230,9 +230,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = ownedMappingParameters->isUnique(name)
+		 *       let result : Boolean[1] = ownedMappingParameters->isUnique(name)
 		 *       in
-		 *         'Mapping::MappingParameterNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Mapping::MappingParameterNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -244,17 +244,17 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						status = ValueUtil.TRUE_VALUE;
+						result = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -265,19 +265,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 					final /*@Thrown*/ java.lang.@Nullable String name = _1.getName();
 					//
 					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-						status = ValueUtil.FALSE_VALUE;			// Abort after second find
+						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
 						accumulator.add(name);
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_MappingParameterNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_MappingParameterNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -300,11 +300,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = ownedMappingParameters->union(
+		 *         result : Boolean[1] = ownedMappingParameters->union(
 		 *           ownedStatements->selectByKind(VariableStatement))
 		 *         ->isUnique(name)
 		 *       in
-		 *         'Mapping::LocalVariabelNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Mapping::LocalVariabelNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -316,7 +316,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_VariableStatement = idResolver.getClass(QVTimperativeTables.CLSSid_VariableStatement, null);
 				@SuppressWarnings("null")
@@ -329,10 +329,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue union = (SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
 				@NonNull Iterator<Object> ITERATOR__1 = union.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						status = ValueUtil.TRUE_VALUE;
+						result = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -343,19 +343,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 					final /*@Thrown*/ java.lang.@Nullable String name = _1.getName();
 					//
 					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-						status = ValueUtil.FALSE_VALUE;			// Abort after second find
+						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
 						accumulator.add(name);
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_LocalVariabelNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_LocalVariabelNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

@@ -48,7 +48,6 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
-import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -359,69 +358,64 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = referredNames = referringNames
-		 *       in
-		 *         let
-		 *           message : String[?] = if status <> true
-		 *           then 'Mismatched bindings ' + referredMapping.name +
-		 *             joinNames(referredNames) + ' <= ' +
-		 *             joinNames(referringNames)
-		 *           else null
-		 *           endif
+		 *       let
+		 *         result : OclAny[1] = let status : Boolean[1] = referredNames = referringNames
 		 *         in
-		 *           'MappingCall::MatchingCallBindings'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *           if status = true
+		 *           then true
+		 *           else
+		 *             Tuple{message = 'Mismatched bindings ' + referredMapping.name +
+		 *               joinNames(referredNames) + ' <= ' +
+		 *               joinNames(referringNames), status = status
+		 *             }
+		 *           endif
+		 *       in
+		 *         'MappingCall::MatchingCallBindings'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_2;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_2 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<String> referredNames = this.getReferredNames();
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<String> referringNames = this.getReferringNames();
 				final /*@Thrown*/ boolean status = referredNames.equals(referringNames);
-				CAUGHT_status = status;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
+				if (status) {
+					symbol_1 = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping referredMapping = this.getReferredMapping();
+					final /*@Thrown*/ java.lang.@Nullable String name = referredMapping.getName();
+					final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_Mismatched_32_bindings_32, name);
+					@SuppressWarnings("null")
+					final /*@Thrown*/ java.lang.@NonNull String joinNames = this.joinNames((EList<String>)referredNames);
+					final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, joinNames);
+					final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeTables.STR__32_l_q_32);
+					@SuppressWarnings("null")
+					final /*@Thrown*/ java.lang.@NonNull String joinNames_0 = this.joinNames((EList<String>)referringNames);
+					final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, joinNames_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_2, status);
+					symbol_1 = symbol_0;
+				}
+				CAUGHT_symbol_1 = symbol_1;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
 			}
-			if (CAUGHT_status instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_status;
-			}
-			final /*@Thrown*/ boolean ne = CAUGHT_status == Boolean.FALSE;
-			/*@NonInvalid*/ java.lang.@Nullable String message_0;
-			if (ne) {
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping referredMapping = this.getReferredMapping();
-				final /*@Thrown*/ java.lang.@Nullable String name = referredMapping.getName();
-				final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_Mismatched_32_bindings_32, name);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<String> referredNames_0 = this.getReferredNames();
-				@SuppressWarnings("null")
-				final /*@Thrown*/ java.lang.@NonNull String joinNames = this.joinNames((EList<String>)referredNames_0);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, joinNames);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeTables.STR__32_l_q_32);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<String> referringNames_0 = this.getReferringNames();
-				@SuppressWarnings("null")
-				final /*@Thrown*/ java.lang.@NonNull String joinNames_0 = this.joinNames((EList<String>)referringNames_0);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, joinNames_0);
-				message_0 = sum_2;
-			}
-			else {
-				message_0 = null;
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings, this, (Object)null, diagnostics, context, message_0, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTimperativeTables.INT_0).booleanValue();
+			symbol_2 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_2;
 	}
 
 	/**
@@ -440,9 +434,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = not (isInstall and isInvoke)
+		 *       let result : Boolean[?] = not (isInstall and isInvoke)
 		 *       in
-		 *         'MappingCall::NotBothInstallAndInvoke'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'MappingCall::NotBothInstallAndInvoke'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -453,7 +447,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_and;
 				try {
@@ -479,13 +473,13 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				catch (Exception e) {
 					CAUGHT_and = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_NotBothInstallAndInvoke, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_NotBothInstallAndInvoke, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -507,9 +501,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = ownedMappingParameterBindings->isUnique(boundVariable)
+		 *         result : Boolean[1] = ownedMappingParameterBindings->isUnique(boundVariable)
 		 *       in
-		 *         'MappingCall::UniqueCallBindings'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'MappingCall::UniqueCallBindings'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -521,17 +515,17 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						status = ValueUtil.TRUE_VALUE;
+						result = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -543,19 +537,19 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = _1.getBoundVariable();
 					//
 					if (accumulator.includes(boundVariable) == ValueUtil.TRUE_VALUE) {
-						status = ValueUtil.FALSE_VALUE;			// Abort after second find
+						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
 						accumulator.add(boundVariable);
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_UniqueCallBindings, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_UniqueCallBindings, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

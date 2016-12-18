@@ -190,9 +190,9 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = name <> null
+		 *       let result : Boolean[1] = name <> null
 		 *       in
-		 *         'ImperativeTypedModel::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'ImperativeTypedModel::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -203,16 +203,16 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-				final /*@Thrown*/ boolean status = name != null;
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = name != null;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -234,9 +234,9 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = not (isChecked and isEnforced)
+		 *       let result : Boolean[?] = not (isChecked and isEnforced)
 		 *       in
-		 *         'ImperativeTypedModel::NotBothCheckedAndEnforced'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'ImperativeTypedModel::NotBothCheckedAndEnforced'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -247,7 +247,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_and;
 				try {
@@ -273,13 +273,13 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 				catch (Exception e) {
 					CAUGHT_and = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

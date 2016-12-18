@@ -128,7 +128,7 @@
         <details key="originalName" value="NestedNameIsNull"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;--&#x9;_context &lt;> null implies name = null&#xA;&#x9;transformation = null implies name = null&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;_context &lt;> null implies name = null&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

@@ -269,9 +269,9 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = ownedExpression.type.conformsTo(targetVariable.type)
+		 *         result : Boolean[1] = ownedExpression.type.conformsTo(targetVariable.type)
 		 *       in
-		 *         'AddStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'AddStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -282,7 +282,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
@@ -290,13 +290,13 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable targetVariable = this.getTargetVariable();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = targetVariable.getType();
-				final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_AddStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_AddStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

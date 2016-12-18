@@ -256,9 +256,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = domain->forAll(oclIsKindOf(CoreDomain))
+		 *         result : Boolean[?] = domain->forAll(oclIsKindOf(CoreDomain))
 		 *       in
-		 *         'Mapping::DomainsAreCoreDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Mapping::DomainsAreCoreDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -270,18 +270,18 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Domain> domain = this.getDomain();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -297,7 +297,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_CoreDomain).booleanValue();
 					//
 					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						status = ValueUtil.FALSE_VALUE;
+						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
@@ -307,12 +307,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -333,9 +333,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = transformation = null implies name = null
+		 *       let result : Boolean[?] = context <> null implies name = null
 		 *       in
-		 *         'Mapping::NestedNameIsNull'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Mapping::NestedNameIsNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -346,33 +346,33 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
+				/*@Caught*/ @NonNull Object CAUGHT_ne;
+				try {
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtcore.@Nullable Mapping context_0 = this.getContext();
+					final /*@Thrown*/ boolean ne = context_0 != null;
+					CAUGHT_ne = ne;
+				}
+				catch (Exception e) {
+					CAUGHT_ne = ValueUtil.createInvalidValue(e);
+				}
 				/*@Caught*/ @NonNull Object CAUGHT_eq;
 				try {
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
-					final /*@Thrown*/ boolean eq = transformation == null;
+					final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
+					final /*@Thrown*/ boolean eq = name == null;
 					CAUGHT_eq = eq;
 				}
 				catch (Exception e) {
 					CAUGHT_eq = ValueUtil.createInvalidValue(e);
 				}
-				/*@Caught*/ @NonNull Object CAUGHT_eq_0;
-				try {
-					final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-					final /*@Thrown*/ boolean eq_0 = name == null;
-					CAUGHT_eq_0 = eq_0;
-				}
-				catch (Exception e) {
-					CAUGHT_eq_0 = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_eq_0);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -393,9 +393,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = transformation <> null implies name <> null
+		 *       let result : Boolean[?] = transformation <> null implies name <> null
 		 *       in
-		 *         'Mapping::RootNameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Mapping::RootNameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -406,7 +406,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -426,13 +426,13 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				catch (Exception e) {
 					CAUGHT_ne_0 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_ne_0);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_ne_0);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

@@ -225,10 +225,10 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = variable->forAll(
+		 *         result : Boolean[?] = variable->forAll(
 		 *           oclIsKindOf(BottomVariable))
 		 *       in
-		 *         'BottomPattern::VariablesAreBottomVariables'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'BottomPattern::VariablesAreBottomVariables'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -240,18 +240,18 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Variable> variable = this.getVariable();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -267,7 +267,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_BottomVariable).booleanValue();
 					//
 					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						status = ValueUtil.FALSE_VALUE;
+						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
@@ -277,12 +277,12 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_BottomPattern_c_c_VariablesAreBottomVariables, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_BottomPattern_c_c_VariablesAreBottomVariables, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

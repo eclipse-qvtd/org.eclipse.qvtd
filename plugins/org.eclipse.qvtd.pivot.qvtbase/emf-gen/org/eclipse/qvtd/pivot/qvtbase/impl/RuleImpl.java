@@ -312,9 +312,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = domain->isUnique(name)
+		 *       let result : Boolean[1] = domain->isUnique(name)
 		 *       in
-		 *         'Rule::DomainNameIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Rule::DomainNameIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -326,17 +326,17 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<Domain> domain = this.getDomain();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						status = ValueUtil.TRUE_VALUE;
+						result = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -347,19 +347,19 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					final /*@Thrown*/ java.lang.@Nullable String name = _1.getName();
 					//
 					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-						status = ValueUtil.FALSE_VALUE;			// Abort after second find
+						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
 						accumulator.add(name);
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_DomainNameIsUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_DomainNameIsUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -381,13 +381,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = overrides <> null implies
+		 *       let result : Boolean[?] = overrides <> null implies
 		 *         let
 		 *           extendedRules : Bag(qvtbase::Rule) = transformation->closure(extends)
 		 *           ->excluding(transformation).rule
 		 *         in extendedRules->includes(overrides)
 		 *       in
-		 *         'Rule::OverridesRuleIsExtendedRule'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Rule::OverridesRuleIsExtendedRule'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -400,7 +400,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			symbol_2 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -467,13 +467,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception e) {
 					CAUGHT_includes = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_includes);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_includes);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridesRuleIsExtendedRule, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridesRuleIsExtendedRule, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 			symbol_2 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_2;
@@ -495,11 +495,11 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = overrides <> null implies
+		 *       let result : Boolean[?] = overrides <> null implies
 		 *         overrides.domain->forAll(od |
 		 *           self.domain.name->includes(od.name))
 		 *       in
-		 *         'Rule::OverridesRuleOverridesAllDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Rule::OverridesRuleOverridesAllDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -511,7 +511,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -598,13 +598,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception e) {
 					CAUGHT_forAll = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_forAll);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_forAll);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridesRuleOverridesAllDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridesRuleOverridesAllDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

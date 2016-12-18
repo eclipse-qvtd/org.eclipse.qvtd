@@ -183,9 +183,9 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)
+		 *         result : Boolean[1] = owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)
 		 *       in
-		 *         'MappingParameterBinding::ParameterIsMappingParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'MappingParameterBinding::ParameterIsMappingParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -197,7 +197,7 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall owningMappingCall = this.getOwningMappingCall();
@@ -208,13 +208,13 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
-				final /*@Thrown*/ boolean status = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable).booleanValue();
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable).booleanValue();
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingParameterBinding_c_c_ParameterIsMappingParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingParameterBinding_c_c_ParameterIsMappingParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

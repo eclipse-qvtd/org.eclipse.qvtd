@@ -163,9 +163,10 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = part->isUnique(resolvedProperty)
+		 *       let
+		 *         result : Boolean[1] = part->isUnique(resolvedProperty)
 		 *       in
-		 *         'ObjectTemplateExp::PartPropertyIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'ObjectTemplateExp::PartPropertyIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -177,17 +178,17 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<PropertyTemplateItem> part = this.getPart();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
-						status = ValueUtil.TRUE_VALUE;
+						result = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -199,19 +200,19 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = _1.getResolvedProperty();
 					//
 					if (accumulator.includes(resolvedProperty) == ValueUtil.TRUE_VALUE) {
-						status = ValueUtil.FALSE_VALUE;			// Abort after second find
+						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
 						accumulator.add(resolvedProperty);
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_ObjectTemplateExp_c_c_PartPropertyIsUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_ObjectTemplateExp_c_c_PartPropertyIsUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -233,9 +234,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = type = referredClass
+		 *       let result : Boolean[1] = type = referredClass
 		 *       in
-		 *         'ObjectTemplateExp::TypeisObjectType'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'ObjectTemplateExp::TypeisObjectType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -246,18 +247,18 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = this.getReferredClass();
-				final /*@Thrown*/ boolean status = (type != null) ? (type.getTypeId() == referredClass.getTypeId()) : false;
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = (type != null) ? (type.getTypeId() == referredClass.getTypeId()) : false;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_ObjectTemplateExp_c_c_TypeisObjectType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_ObjectTemplateExp_c_c_TypeisObjectType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

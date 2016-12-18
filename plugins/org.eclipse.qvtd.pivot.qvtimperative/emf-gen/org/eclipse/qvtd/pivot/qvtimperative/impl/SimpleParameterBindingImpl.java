@@ -189,10 +189,10 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = isCheck implies
+		 *       let result : Boolean[?] = isCheck implies
 		 *         boundVariable.type.conformsTo(value.type)
 		 *       in
-		 *         'SimpleParameterBinding::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'SimpleParameterBinding::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -203,7 +203,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_isCheck;
 				try {
@@ -227,13 +227,13 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isCheck, CAUGHT_conformsTo);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isCheck, CAUGHT_conformsTo);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -255,10 +255,10 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = not isCheck implies
+		 *       let result : Boolean[?] = not isCheck implies
 		 *         value.type.conformsTo(boundVariable.type)
 		 *       in
-		 *         'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -269,7 +269,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_not;
 				try {
@@ -301,13 +301,13 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

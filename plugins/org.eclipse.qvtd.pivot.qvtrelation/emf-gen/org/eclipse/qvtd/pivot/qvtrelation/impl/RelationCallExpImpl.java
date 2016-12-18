@@ -171,11 +171,11 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = self.argument->size() =
+		 *         result : Boolean[1] = self.argument->size() =
 		 *         self.referredRelation.domain.oclAsType(RelationDomain)
 		 *         .rootVariable->size()
 		 *       in
-		 *         'RelationCallExp::MatchingArgumentCount'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'RelationCallExp::MatchingArgumentCount'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -187,7 +187,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<OCLExpression> argument = this.getArgument();
@@ -237,13 +237,13 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					}
 				}
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(collect);
-				final /*@Thrown*/ boolean status = size.equals(size_0);
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = size.equals(size_0);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationCallExp_c_c_MatchingArgumentCount, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationCallExp_c_c_MatchingArgumentCount, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

@@ -218,10 +218,10 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = isCheck implies
+		 *       let result : Boolean[?] = isCheck implies
 		 *         type.conformsTo(ownedExpression.type)
 		 *       in
-		 *         'DeclareStatement::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'DeclareStatement::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -232,7 +232,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_isCheck;
 				try {
@@ -254,13 +254,13 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isCheck, CAUGHT_conformsTo);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isCheck, CAUGHT_conformsTo);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_DeclareStatement_c_c_CompatibleTypeForCheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_DeclareStatement_c_c_CompatibleTypeForCheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -282,10 +282,10 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = not isCheck implies
+		 *       let result : Boolean[?] = not isCheck implies
 		 *         ownedExpression.type.conformsTo(type)
 		 *       in
-		 *         'DeclareStatement::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'DeclareStatement::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -296,7 +296,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_not;
 				try {
@@ -326,13 +326,13 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_DeclareStatement_c_c_CompatibleTypeForUncheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_DeclareStatement_c_c_CompatibleTypeForUncheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

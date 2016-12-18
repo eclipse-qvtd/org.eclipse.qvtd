@@ -190,9 +190,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = where <> null implies where.type = Boolean
+		 *       let result : Boolean[?] = where <> null implies where.type = Boolean
 		 *       in
-		 *         'TemplateExp::WhereIsBoolean'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'TemplateExp::WhereIsBoolean'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -204,7 +204,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -229,13 +229,13 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 				catch (Exception e) {
 					CAUGHT_eq = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_TemplateExp_c_c_WhereIsBoolean, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_TemplateExp_c_c_WhereIsBoolean, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

@@ -220,10 +220,10 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = member->forAll(
+		 *         result : Boolean[?] = member->forAll(
 		 *           type.conformsTo(referredCollectionType.elementType))
 		 *       in
-		 *         'CollectionTemplateExp::MemberTypeisCollectionElementType'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'CollectionTemplateExp::MemberTypeisCollectionElementType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -235,18 +235,18 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
 				final /*@Thrown*/ java.util.@NonNull List<OCLExpression> member = this.getMember();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
-				/*@Thrown*/ boolean status;
+				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							result = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -274,7 +274,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 					}
 					//
 					if (CAUGHT_conformsTo == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						status = ValueUtil.FALSE_VALUE;
+						result = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (CAUGHT_conformsTo == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
@@ -287,12 +287,12 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				CAUGHT_status = status;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -314,9 +314,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = rest <> null implies rest.type = referredCollectionType
+		 *       let result : Boolean[?] = rest <> null implies rest.type = referredCollectionType
 		 *       in
-		 *         'CollectionTemplateExp::RestTypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'CollectionTemplateExp::RestTypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -327,7 +327,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -353,13 +353,13 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 				catch (Exception e) {
 					CAUGHT_eq = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_RestTypeisCollectionType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_RestTypeisCollectionType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -381,9 +381,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = type = referredCollectionType
+		 *       let result : Boolean[1] = type = referredCollectionType
 		 *       in
-		 *         'CollectionTemplateExp::TypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'CollectionTemplateExp::TypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -394,18 +394,18 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
-				final /*@Thrown*/ boolean status = (type != null) ? (type.getTypeId() == referredCollectionType.getTypeId()) : false;
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean result = (type != null) ? (type.getTypeId() == referredCollectionType.getTypeId()) : false;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

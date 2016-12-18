@@ -324,76 +324,61 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[1] = objContainer.referredClass.conformsTo(resolvedProperty.owningClass)
-		 *       in
-		 *         let
-		 *           message : String[?] = if status <> true
-		 *           then objContainer.referredClass.name + ' must conform to ' + resolvedProperty.owningClass.name
-		 *           else null
-		 *           endif
+		 *         result : OclAny[1] = let
+		 *           status : Boolean[1] = objContainer.referredClass.conformsTo(resolvedProperty.owningClass)
 		 *         in
-		 *           'PropertyTemplateItem::CompatibleClassForProperty'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *           if status = true
+		 *           then true
+		 *           else
+		 *             Tuple{message = objContainer.referredClass.name + ' must conform to ' + resolvedProperty.owningClass.name, status = status
+		 *             }
+		 *           endif
+		 *       in
+		 *         'PropertyTemplateItem::CompatibleClassForProperty'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleClassForProperty);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_2;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_2 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
 			try {
+				@SuppressWarnings("null")
+				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp objContainer = this.getObjContainer();
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = objContainer.getReferredClass();
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
 				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty.getOwningClass();
 				final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, referredClass, owningClass).booleanValue();
-				CAUGHT_status = status;
-			}
-			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
-			}
-			/*@Caught*/ @Nullable Object CAUGHT_message_0;
-			try {
-				if (CAUGHT_status instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_status;
-				}
-				final /*@Thrown*/ boolean ne = CAUGHT_status == Boolean.FALSE;
-				/*@Thrown*/ java.lang.@Nullable String message_0;
-				if (ne) {
-					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp objContainer_0 = this.getObjContainer();
-					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class referredClass_0 = objContainer_0.getReferredClass();
-					final /*@Thrown*/ java.lang.@Nullable String name = referredClass_0.getName();
-					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
-					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class owningClass_0 = resolvedProperty_0.getOwningClass();
-					if (owningClass_0 == null) {
-						throw new InvalidValueException("Null source for \'NamedElement::name\'");
-					}
-					final /*@Thrown*/ java.lang.@Nullable String name_0 = owningClass_0.getName();
-					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
-					message_0 = sum_0;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
+				if (status) {
+					symbol_1 = ValueUtil.TRUE_VALUE;
 				}
 				else {
-					message_0 = null;
+					final /*@Thrown*/ java.lang.@Nullable String name = referredClass.getName();
+					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
+					if (owningClass == null) {
+						throw new InvalidValueException("Null source for \'NamedElement::name\'");
+					}
+					final /*@Thrown*/ java.lang.@Nullable String name_0 = owningClass.getName();
+					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_0, status);
+					symbol_1 = symbol_0;
 				}
-				CAUGHT_message_0 = message_0;
+				CAUGHT_symbol_1 = symbol_1;
 			}
 			catch (Exception e) {
-				CAUGHT_message_0 = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleClassForProperty, this, (Object)null, diagnostics, context, CAUGHT_message_0, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleClassForProperty, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTtemplateTables.INT_0).booleanValue();
+			symbol_2 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_2;
 	}
 
 	/**
@@ -413,33 +398,35 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = not resolvedProperty.type.oclIsKindOf(CollectionType) implies
-		 *         let propertyType : Type[?] = resolvedProperty.type
-		 *         in
-		 *           let valueType : Type[?] = value.type
+		 *         result : OclAny[1] = let
+		 *           status : Boolean[?] = not resolvedProperty.type.oclIsKindOf(CollectionType) implies
+		 *           let propertyType : Type[?] = resolvedProperty.type
 		 *           in
-		 *             valueType.conformsTo(propertyType) or
-		 *             propertyType.conformsTo(valueType)
-		 *       in
-		 *         let
-		 *           message : String[?] = if status <> true
-		 *           then value.type.name + ' must conform to ' + resolvedProperty.type.name + ' or vice-versa'
-		 *           else null
-		 *           endif
+		 *             let valueType : Type[?] = value.type
+		 *             in
+		 *               valueType.conformsTo(propertyType) or
+		 *               propertyType.conformsTo(valueType)
 		 *         in
-		 *           'PropertyTemplateItem::CompatibleTypeForObjectValue'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *           if status = true
+		 *           then true
+		 *           else
+		 *             Tuple{message = value.type.name + ' must conform to ' + resolvedProperty.type.name + ' or vice-versa', status = status
+		 *             }
+		 *           endif
+		 *       in
+		 *         'PropertyTemplateItem::CompatibleTypeForObjectValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_3;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_3 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_2;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_not;
 				try {
@@ -518,19 +505,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					CAUGHT_or = ValueUtil.createInvalidValue(e);
 				}
 				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_or);
-				CAUGHT_status = status;
-			}
-			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
-			}
-			/*@Caught*/ @Nullable Object CAUGHT_message_0;
-			try {
-				if (CAUGHT_status instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_status;
+				final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_2;
+				if (symbol_0) {
+					symbol_2 = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ boolean ne = CAUGHT_status == Boolean.FALSE;
-				/*@Thrown*/ java.lang.@Nullable String message_0;
-				if (ne) {
+				else {
 					@SuppressWarnings("null")
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_0 = this.getValue();
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value_0.getType();
@@ -548,20 +528,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					final /*@Thrown*/ java.lang.@Nullable String name_0 = type_1.getName();
 					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
 					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-					message_0 = sum_1;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+					symbol_2 = symbol_1;
 				}
-				else {
-					message_0 = null;
-				}
-				CAUGHT_message_0 = message_0;
+				CAUGHT_symbol_2 = symbol_2;
 			}
 			catch (Exception e) {
-				CAUGHT_message_0 = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_2 = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue, this, (Object)null, diagnostics, context, CAUGHT_message_0, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_2, QVTtemplateTables.INT_0).booleanValue();
+			symbol_3 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_3;
 	}
 
 	/**
@@ -581,36 +559,38 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = resolvedProperty.type.oclIsKindOf(CollectionType) and
-		 *         not value.type.oclIsKindOf(CollectionType) implies
-		 *         let
-		 *           propertyType : Type[1] = resolvedProperty.type.oclAsType(CollectionType).elementType
-		 *         in
-		 *           let valueType : Type[?] = value.type
+		 *         result : OclAny[1] = let
+		 *           status : Boolean[?] = resolvedProperty.type.oclIsKindOf(CollectionType) and
+		 *           not value.type.oclIsKindOf(CollectionType) implies
+		 *           let
+		 *             propertyType : Type[1] = resolvedProperty.type.oclAsType(CollectionType).elementType
 		 *           in
-		 *             valueType.conformsTo(propertyType) or
-		 *             propertyType.conformsTo(valueType)
-		 *       in
-		 *         let
-		 *           message : String[?] = if status <> true
-		 *           then value.type.name + ' must conform to ' +
-		 *             resolvedProperty.type.oclAsType(CollectionType).elementType.name + ' or vice-versa'
-		 *           else null
-		 *           endif
+		 *             let valueType : Type[?] = value.type
+		 *             in
+		 *               valueType.conformsTo(propertyType) or
+		 *               propertyType.conformsTo(valueType)
 		 *         in
-		 *           'PropertyTemplateItem::CompatibleTypeForCollectionElementValue'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *           if status = true
+		 *           then true
+		 *           else
+		 *             Tuple{message = value.type.name + ' must conform to ' +
+		 *               resolvedProperty.type.oclAsType(CollectionType).elementType.name + ' or vice-versa', status = status
+		 *             }
+		 *           endif
+		 *       in
+		 *         'PropertyTemplateItem::CompatibleTypeForCollectionElementValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_3;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_3 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_2;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_and;
 				try {
@@ -713,19 +693,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					CAUGHT_or = ValueUtil.createInvalidValue(e);
 				}
 				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_or);
-				CAUGHT_status = status;
-			}
-			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
-			}
-			/*@Caught*/ @Nullable Object CAUGHT_message_0;
-			try {
-				if (CAUGHT_status instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_status;
+				final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_2;
+				if (symbol_0) {
+					symbol_2 = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ boolean ne = CAUGHT_status == Boolean.FALSE;
-				/*@Thrown*/ java.lang.@Nullable String message_0;
-				if (ne) {
+				else {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_3 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
@@ -744,20 +717,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					final /*@Thrown*/ java.lang.@Nullable String name_0 = elementType.getName();
 					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
 					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-					message_0 = sum_1;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+					symbol_2 = symbol_1;
 				}
-				else {
-					message_0 = null;
-				}
-				CAUGHT_message_0 = message_0;
+				CAUGHT_symbol_2 = symbol_2;
 			}
 			catch (Exception e) {
-				CAUGHT_message_0 = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_2 = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue, this, (Object)null, diagnostics, context, CAUGHT_message_0, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_2, QVTtemplateTables.INT_0).booleanValue();
+			symbol_3 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_3;
 	}
 
 	/**
@@ -777,38 +748,40 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = resolvedProperty.type.oclIsKindOf(CollectionType) and
-		 *         value.type.oclIsKindOf(CollectionType) implies
-		 *         let
-		 *           propertyType : Type[1] = resolvedProperty.type.oclAsType(CollectionType).elementType
-		 *         in
+		 *         result : OclAny[1] = let
+		 *           status : Boolean[?] = resolvedProperty.type.oclIsKindOf(CollectionType) and
+		 *           value.type.oclIsKindOf(CollectionType) implies
 		 *           let
-		 *             valueType : Type[1] = value.type.oclAsType(CollectionType).elementType
+		 *             propertyType : Type[1] = resolvedProperty.type.oclAsType(CollectionType).elementType
 		 *           in
-		 *             valueType.conformsTo(propertyType) or
-		 *             propertyType.conformsTo(valueType)
-		 *       in
-		 *         let
-		 *           message : String[?] = if status <> true
-		 *           then
-		 *             value.type.oclAsType(CollectionType).elementType.name + ' must conform to ' +
-		 *             resolvedProperty.type.oclAsType(CollectionType).elementType.name + ' or vice-versa'
-		 *           else null
-		 *           endif
+		 *             let
+		 *               valueType : Type[1] = value.type.oclAsType(CollectionType).elementType
+		 *             in
+		 *               valueType.conformsTo(propertyType) or
+		 *               propertyType.conformsTo(valueType)
 		 *         in
-		 *           'PropertyTemplateItem::CompatibleTypeForCollectionValue'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *           if status = true
+		 *           then true
+		 *           else
+		 *             Tuple{
+		 *               message = value.type.oclAsType(CollectionType).elementType.name + ' must conform to ' +
+		 *               resolvedProperty.type.oclAsType(CollectionType).elementType.name + ' or vice-versa', status = status
+		 *             }
+		 *           endif
+		 *       in
+		 *         'PropertyTemplateItem::CompatibleTypeForCollectionValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_3;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_3 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_2;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_and;
 				try {
@@ -907,19 +880,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					CAUGHT_or = ValueUtil.createInvalidValue(e);
 				}
 				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_or);
-				CAUGHT_status = status;
-			}
-			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
-			}
-			/*@Caught*/ @Nullable Object CAUGHT_message_0;
-			try {
-				if (CAUGHT_status instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_status;
+				final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_2;
+				if (symbol_0) {
+					symbol_2 = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ boolean ne = CAUGHT_status == Boolean.FALSE;
-				/*@Thrown*/ java.lang.@Nullable String message_0;
-				if (ne) {
+				else {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_5 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
@@ -938,20 +904,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					final /*@Thrown*/ java.lang.@Nullable String name_0 = elementType_0.getName();
 					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
 					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-					message_0 = sum_1;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+					symbol_2 = symbol_1;
 				}
-				else {
-					message_0 = null;
-				}
-				CAUGHT_message_0 = message_0;
+				CAUGHT_symbol_2 = symbol_2;
 			}
 			catch (Exception e) {
-				CAUGHT_message_0 = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_2 = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue, this, (Object)null, diagnostics, context, CAUGHT_message_0, severity_0, CAUGHT_status, QVTtemplateTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_2, QVTtemplateTables.INT_0).booleanValue();
+			symbol_3 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_3;
 	}
 
 	/**

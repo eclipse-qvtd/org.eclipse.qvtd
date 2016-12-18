@@ -148,27 +148,29 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = targetVariable.type.conformsTo(value.type) or
-		 *         value.type.conformsTo(targetVariable.type)
-		 *       in
-		 *         let
-		 *           message : String[?] = if status <> true
-		 *           then 'VariableAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + targetVariable.type.name + ' or vice-versa'
-		 *           else null
-		 *           endif
+		 *         result : OclAny[1] = let
+		 *           status : Boolean[?] = targetVariable.type.conformsTo(value.type) or
+		 *           value.type.conformsTo(targetVariable.type)
 		 *         in
-		 *           'VariableAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *           if status = true
+		 *           then true
+		 *           else
+		 *             Tuple{message = 'VariableAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + targetVariable.type.name + ' or vice-versa', status = status
+		 *             }
+		 *           endif
+		 *       in
+		 *         'VariableAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_3;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_3 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_2;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
@@ -199,44 +201,42 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
 				}
 				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
-				CAUGHT_status = status;
+				final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_2;
+				if (symbol_0) {
+					symbol_2 = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_3 = value_1.getType();
+					if (type_3 == null) {
+						throw new InvalidValueException("Null source for \'NamedElement::name\'");
+					}
+					final /*@Thrown*/ java.lang.@Nullable String name = type_3.getName();
+					final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, name);
+					final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_1 = this.getTargetVariable();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_4 = targetVariable_1.getType();
+					if (type_4 == null) {
+						throw new InvalidValueException("Null source for \'NamedElement::name\'");
+					}
+					final /*@Thrown*/ java.lang.@Nullable String name_0 = type_4.getName();
+					final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_0);
+					final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+					symbol_2 = symbol_1;
+				}
+				CAUGHT_symbol_2 = symbol_2;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_2 = ValueUtil.createInvalidValue(e);
 			}
-			if (CAUGHT_status instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_status;
-			}
-			final /*@Thrown*/ boolean ne = CAUGHT_status == Boolean.FALSE;
-			/*@NonInvalid*/ java.lang.@Nullable String message_0;
-			if (ne) {
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_3 = value_1.getType();
-				if (type_3 == null) {
-					throw new InvalidValueException("Null source for \'NamedElement::name\'");
-				}
-				final /*@Thrown*/ java.lang.@Nullable String name = type_3.getName();
-				final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, name);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_1 = this.getTargetVariable();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_4 = targetVariable_1.getType();
-				if (type_4 == null) {
-					throw new InvalidValueException("Null source for \'NamedElement::name\'");
-				}
-				final /*@Thrown*/ java.lang.@Nullable String name_0 = type_4.getName();
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_0);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
-				message_0 = sum_2;
-			}
-			else {
-				message_0 = null;
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, message_0, severity_0, CAUGHT_status, QVTcoreTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_2, QVTcoreTables.INT_0).booleanValue();
+			symbol_3 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_3;
 	}
 
 	/**

@@ -350,9 +350,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[?] = typedModel <> null implies name = typedModel.name
+		 *       let result : Boolean[?] = typedModel <> null implies name = typedModel.name
 		 *       in
-		 *         'Domain::NameIsTypedModelName'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Domain::NameIsTypedModelName'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -363,7 +363,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_ne;
 				try {
@@ -388,13 +388,13 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 				catch (Exception e) {
 					CAUGHT_eq = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -417,13 +417,13 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		 *     then true
 		 *     else
 		 *       let
-		 *         status : OclAny[?] = oclContainer()
+		 *         result : Boolean[?] = oclContainer()
 		 *         .oclIsKindOf(Transformation) and typedModel <> null implies
 		 *         oclContainer()
 		 *         .oclAsType(Transformation)
 		 *         .modelParameter->includes(typedModel)
 		 *       in
-		 *         'Domain::TypedModelIsTransformationModelParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *         'Domain::TypedModelIsTransformationModelParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -435,7 +435,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_status;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				/*@Caught*/ @Nullable Object CAUGHT_and;
 				try {
@@ -478,13 +478,13 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 				catch (Exception e) {
 					CAUGHT_includes = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
-				CAUGHT_status = status;
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_status = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
