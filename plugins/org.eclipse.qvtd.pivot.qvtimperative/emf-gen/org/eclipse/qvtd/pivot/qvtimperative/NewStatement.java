@@ -107,4 +107,11 @@ public interface NewStatement extends VariableStatement, ObservableStatement {
 	 * @generated
 	 */
 	boolean validateCompatibleTypeForValue(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNonDataTypeForType(DiagnosticChain diagnostics, Map<Object, Object> context);
 } // NewStatement

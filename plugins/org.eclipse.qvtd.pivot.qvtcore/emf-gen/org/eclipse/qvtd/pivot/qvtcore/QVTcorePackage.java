@@ -2387,13 +2387,22 @@ public interface QVTcorePackage extends EPackage {
 	int REALIZED_VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Non Data Type For Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Realized Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+	int REALIZED_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
@@ -3032,6 +3041,16 @@ public interface QVTcorePackage extends EPackage {
 	EClass getRealizedVariable();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.RealizedVariable#validateNonDataTypeForType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Non Data Type For Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Non Data Type For Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.RealizedVariable#validateNonDataTypeForType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.VariableAssignment <em>Variable Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3529,6 +3548,14 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass REALIZED_VARIABLE = eINSTANCE.getRealizedVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Non Data Type For Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.

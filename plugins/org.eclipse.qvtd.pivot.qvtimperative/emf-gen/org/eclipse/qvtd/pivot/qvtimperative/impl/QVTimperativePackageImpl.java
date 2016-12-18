@@ -1048,6 +1048,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EOperation getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map() {
+		return newStatementEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getObservableStatement() {
 		return observableStatementEClass;
 	}
@@ -1393,6 +1403,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(newStatementEClass, NEW_STATEMENT__REFERRED_TYPED_MODEL);
 		createEReference(newStatementEClass, NEW_STATEMENT__OWNED_EXPRESSION);
 		createEOperation(newStatementEClass, NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(newStatementEClass, NEW_STATEMENT___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
 
 		observableStatementEClass = createEClass(OBSERVABLE_STATEMENT);
 		createEReference(observableStatementEClass, OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES);
@@ -1715,6 +1726,15 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNonDataTypeForType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(observableStatementEClass, ObservableStatement.class, "ObservableStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObservableStatement_ObservedProperties(), thePivotPackage.getProperty(), null, "observedProperties", null, 0, -1, ObservableStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
@@ -1922,6 +1942,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 			source,
 			new String[] {
 				"originalName", "CompatibleTypeForValue"
+		});
+		addAnnotation
+		(getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NonDataTypeForType"
 		});
 		addAnnotation
 		(getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),

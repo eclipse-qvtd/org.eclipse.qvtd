@@ -143,12 +143,20 @@ public class QVTcoreValidator extends EObjectValidator {
 	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 11;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Data Type For Type' of 'Realized Variable'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REALIZED_VARIABLE__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 12;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Variable Assignment'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 12;
+	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 13;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -156,7 +164,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 12;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 13;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -202,7 +210,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTcorePackage.eINSTANCE;
+		return QVTcorePackage.eINSTANCE;
 	}
 
 	/**
@@ -604,7 +612,18 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(realizedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(realizedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariable_validateCompatibleInitialiserType(realizedVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRealizedVariable_validateNonDataTypeForType(realizedVariable, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateNonDataTypeForType constraint of '<em>Realized Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRealizedVariable_validateNonDataTypeForType(RealizedVariable realizedVariable, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return realizedVariable.validateNonDataTypeForType(diagnostics, context);
 	}
 
 	/**

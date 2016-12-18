@@ -32,17 +32,17 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
- * 
+ *
  * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
- * 
+ *
  * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
- * 
+ *
  * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
- * 
+ *
  * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
- * 
+ *
  * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
- * 
+ *
  * All writes to multi-valued properties must be guaranteed to occur before any read of the property.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
@@ -4047,13 +4047,22 @@ public interface QVTimperativePackage extends EPackage {
 	int NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Non Data Type For Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>New Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 1;
+	int NEW_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl <em>Set Statement</em>}' class.
@@ -5336,6 +5345,16 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#validateNonDataTypeForType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Non Data Type For Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Non Data Type For Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatement#validateNonDataTypeForType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement <em>Observable Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6214,6 +6233,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Non Data Type For Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NEW_STATEMENT___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ObservableStatementImpl <em>Observable Statement</em>}' class.

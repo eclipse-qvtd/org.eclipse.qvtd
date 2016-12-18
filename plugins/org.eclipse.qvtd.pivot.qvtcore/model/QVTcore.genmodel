@@ -112,7 +112,12 @@
         <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateTargetPropetyIsSlotProperty/context"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-RealizedVariable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-RealizedVariable">
+      <genOperations ecoreOperation="QVTcore.ecore#//RealizedVariable/validateNonDataTypeForType">
+        <genParameters ecoreParameter="QVTcore.ecore#//RealizedVariable/validateNonDataTypeForType/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//RealizedVariable/validateNonDataTypeForType/context"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-VariableAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-VariableAssignment-targetVariable"/>
       <genOperations ecoreOperation="QVTcore.ecore#//VariableAssignment/validateCompatibleTypeForValue">
