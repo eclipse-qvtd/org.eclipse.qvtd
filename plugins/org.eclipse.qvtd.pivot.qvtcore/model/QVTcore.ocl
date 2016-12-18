@@ -15,8 +15,7 @@ inv DomainsAreCoreDomains:
 	domain->forAll(oclIsKindOf(CoreDomain))
 
 inv NestedNameIsNull:
---	_context <> null implies name = null
-	transformation = null implies name = null
+	_context <> null implies name = null
 
 inv RootNameIsNotNull:
 	transformation <> null implies name <> null
