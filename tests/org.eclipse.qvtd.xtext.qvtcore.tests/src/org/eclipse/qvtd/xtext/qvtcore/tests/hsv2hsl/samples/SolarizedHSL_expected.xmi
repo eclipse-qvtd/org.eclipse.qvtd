@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pfx:HSLNode
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pfx="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree ../HLSTree.ecore"
+    hsl="192,100,11" name="base03">
+  <children hsl="192,81,14" name="base02"/>
+  <children hsl="194,14,40" name="base01">
+    <children hsl="196,13,45" name="base00">
+      <children hsl="186,8,55" name="base0">
+        <children hsl="180,7,60" name="base1"/>
+      </children>
+    </children>
+  </children>
+  <children hsl="46,42,88" name="base2">
+    <children hsl="44,87,94" name="base3"/>
+  </children>
+  <children hsl="45,100,35" name="yellow">
+    <children hsl="18,80,44" name="orange">
+      <children hsl="1,71,52" name="red">
+        <children hsl="331,64,52" name="magenta"/>
+        <children hsl="237,43,60" name="violet">
+          <children hsl="205,69,49" name="blue">
+          <children hsl="175,59,40" name="cyan">
+            <children hsl="68,100,30" name="green"/>
+          </children>
+        </children>
+      </children>
+      </children>
+    </children>
+  </children>
+</pfx:HSLNode>

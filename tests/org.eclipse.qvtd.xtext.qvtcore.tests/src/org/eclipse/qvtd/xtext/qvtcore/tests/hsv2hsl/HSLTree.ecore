@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="HSLTree" nsURI="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HSL/1.0/HSLTree"
+    nsPrefix="hsl">
+  <eClassifiers xsi:type="ecore:EDataType" name="HSL" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HSLNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//HSLNode"
+        eOpposite="#//HSLNode/children"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//HSLNode" containment="true" eOpposite="#//HSLNode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hsl" lowerBound="1" eType="#//HSL"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

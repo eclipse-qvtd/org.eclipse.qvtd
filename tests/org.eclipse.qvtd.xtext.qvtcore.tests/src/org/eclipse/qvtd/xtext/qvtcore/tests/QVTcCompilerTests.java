@@ -61,10 +61,10 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPa
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.forward2reverse.Forward2ReverseNormalizer;
-import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLSNormalizer;
-import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HLSTree.HLSTreePackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLS.HSV2HLSPackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSVTree.HSVTreePackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSV2HSLNormalizer;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSLTree.HSLTreePackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSV2HSL.HSV2HSLPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSVTree.HSVTreePackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.SimpleRDBMSNormalizer;
@@ -498,24 +498,24 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_HSVToHLS() throws Exception {
+	public void testQVTcCompiler_HSVToHSL() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		String testFolderName = "hsv2hls";
+		String testFolderName = "hsv2hsl";
 		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 		MyQVT myQVT = new MyQVT(testFolderName);
-		myQVT.loadEcoreFile(testFolderURI.appendSegment("HSV2HLS.ecore"), HSV2HLSPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("HSV2HSL.ecore"), HSV2HSLPackage.eINSTANCE);
 		myQVT.loadEcoreFile(testFolderURI.appendSegment("HSVTree.ecore"), HSVTreePackage.eINSTANCE);
-		myQVT.loadEcoreFile(testFolderURI.appendSegment("HLSTree.ecore"), HLSTreePackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("HSLTree.ecore"), HSLTreePackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtc", "hls");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("HSV2HSL.qvtc", "hsl");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
-			myQVT.createModel("hls", "SolarizedHLS_Interpreted.xmi");
+			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HSL_trace.xmi");
+			myQVT.createModel("hsl", "SolarizedHSL_Interpreted.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", HSV2HLSNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
+			myQVT.saveOutput("hsl", "SolarizedHSL_Interpreted.xmi", "SolarizedHSL_expected.xmi", HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
 		}
 		finally {
 			myQVT.dispose();
@@ -523,7 +523,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTcCompiler_HSVToHLS_CG() throws Exception {
+	public void testQVTcCompiler_HSVToHSL_CG() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		Scheduler.EDGE_ORDER.setState(true);
@@ -534,17 +534,18 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
-		String testFolderName = "hsv2hls";
+		String testFolderName = "hsv2hsl";
 		MyQVT myQVT = new MyQVT(testFolderName);
 		try {
-			myQVT.buildTransformation("HSV2HLS.qvtc", "hls", "HSV2HLS.genmodel");
+			//			myQVT.createGeneratedExecutor(hsv2hsl.class);
+			myQVT.buildTransformation("HSV2HSL.qvtc", "hsl", "HSV2HSL.genmodel");
 			myQVT.assertRegionCount(BasicMappingRegion.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
 			myQVT.assertRegionCount(MicroMappingRegion.class, 2);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("hls", "SolarizedHLS_CG.xmi", "SolarizedHLS_expected.xmi", HSV2HLSNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
+			myQVT.saveOutput("hsl", "SolarizedHSL_CG.xmi", "SolarizedHSL_expected.xmi", HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
 		}
 		finally {
 			myQVT.dispose();
