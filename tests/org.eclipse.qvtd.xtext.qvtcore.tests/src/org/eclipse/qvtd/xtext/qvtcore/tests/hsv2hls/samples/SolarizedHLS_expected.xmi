@@ -5,26 +5,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:pfx="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HLS/1.0/HLSTree"
     xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/HSV2HLS/1.0/HLSTree ../HLSTree.ecore"
-    hls = "192,100,21.2" name="base03">
-  <children hls="192,89.4,25.9" name="base02"/>
-  <children hls="194,24.8,45.9" name="base01">
-    <children hls="196,22.9,51.44" name="base00">
-      <children hls="186,12.7,58.8" name="base0">
-        <children hls="180,8.7,63.1" name="base1"/>
+    hls = "192,100,11" name="base03">
+  <children hls="192,81,14" name="base02"/>
+  <children hls="194,14,40" name="base01">
+    <children hls="196,13,45" name="base00">
+      <children hls="186,8,55" name="base0">
+        <children hls="180,7,60" name="base1"/>
       </children>
     </children>
   </children>
-  <children hls="46,10.5,93.3" name="base2">
-    <children hls="44,10.3,99.2" name="base3"/>
+  <children hls="46,42,88" name="base2">
+    <children hls="44,87,94" name="base3"/>
   </children>
-  <children hls="45,100,71" name="yellow">
-    <children hls="18,89.2,79.6" name="orange">
-      <children hls="1,78.6,86.3" name="red">
-        <children hls="331,74.4,82.7" name="magenta"/>
-        <children hls="237,44.9,76.9" name="violet">
-          <children hls="205,81.9,82.4" name="blue">
-          <children hls="175,73.9,63.1" name="cyan">
-            <children hls="68,100,60" name="green"/>
+  <children hls="45,100,35" name="yellow">
+    <children hls="18,80,44" name="orange">
+      <children hls="1,71,52" name="red">
+        <children hls="331,64,52" name="magenta"/>
+        <children hls="237,43,60" name="violet">
+          <children hls="205,69,49" name="blue">
+          <children hls="175,59,40" name="cyan">
+            <children hls="68,100,30" name="green"/>
           </children>
         </children>
       </children>
