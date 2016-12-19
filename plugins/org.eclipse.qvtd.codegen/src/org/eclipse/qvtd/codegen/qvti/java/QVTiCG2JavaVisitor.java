@@ -19,8 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -52,12 +56,14 @@ import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -459,10 +465,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
-	protected boolean doEcoreCreate(@NonNull CGValuedElement cgElement, @NonNull EClassifier eClassifier) {
+	protected boolean doEcoreCreateClass(@NonNull CGValuedElement cgElement, @NonNull EClass eClass) {
+		String createMethodName = "create" + eClass.getName();
 		boolean doSetNonNull = false;
-		EPackage ePackage = eClassifier.getEPackage();
-		String createMethodName = "create" + eClassifier.getName();
+		EPackage ePackage = eClass.getEPackage();
 		String javaClass;
 		if (ePackage != null) {
 			Class<?> factoryClass = genModelHelper.getEcoreFactoryClass(ePackage);
@@ -472,7 +478,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				if (factoryMethod != null) {
 					if (context.getIsNonNull(factoryMethod) == Boolean.TRUE) {
 						doSetNonNull = true;
-					};
+					}
 				}
 			}
 			else {
@@ -486,10 +492,83 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendDeclaration(cgElement);
 		js.append(" = ");
 		js.appendClassReference(javaClass);
-		//		js.appendReferenceTo(localContext.getExecutorType(cgRealizedVariable.getPivotTypeId()));
 		js.append(".eINSTANCE.");
 		js.append(createMethodName);
 		js.append("();\n");
+		//		js.append("assert ");
+		//		js.appendValueName(cgElement);
+		//		js.append(" != null;\n");
+		//
+		return doSetNonNull;
+	}
+
+	protected boolean doEcoreCreateDataType(@NonNull CGValuedElement cgElement, @NonNull EDataType eDataType, @NonNull CGValuedElement cgInit) {
+		//
+		//	Availability of a GenPackage is mandatory since we must have an EFactory.createFromString method to do the construction.
+		//
+		final Class<?> javaClass = eDataType.getInstanceClass();
+		if (javaClass == null) {
+			throw new IllegalStateException("No Java class for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()");
+		}
+		final EPackage ePackage = eDataType.getEPackage();
+		String nsURI = ePackage.getNsURI();
+		if (nsURI == null) {
+			throw new IllegalStateException("No EPackage NsURI for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()");
+		}
+		GenPackage genPackage = environmentFactory.getMetamodelManager().getGenPackage(nsURI);
+		if (genPackage == null) {
+			throw new IllegalStateException("No GenPackage for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()");
+		}
+		final String eFactoryName = genPackage.getQualifiedFactoryInterfaceName();
+		final String ePackageName = genPackage.getQualifiedPackageInterfaceName();
+		final String dataTypeName = CodeGenUtil.upperName(eDataType.getName());
+		ClassLoader classLoader = eDataType.getClass().getClassLoader();
+		Class<?> factoryClass;
+		Class<?> packageClass;
+		try {
+			factoryClass = classLoader.loadClass(eFactoryName);
+			packageClass = eDataType.getClass().getClassLoader().loadClass(ePackageName);
+		}
+		catch (ClassNotFoundException e) {
+			throw new IllegalStateException("Load class failure for " + cgElement + " in CG2JavaVisitor.visitCGEcoreDataTypeShadowExp()", e);
+		}
+		//
+
+
+
+		String createMethodName = "createFromString";
+		boolean doSetNonNull = false;
+		//		String javaClass2;
+		//		Class<?> factoryClass2 = genModelHelper.getEcoreFactoryClass(ePackage);
+		if (factoryClass != null) {
+			//			javaClass2 = factoryClass.getName();
+			Method factoryMethod = context.getLeastDerivedMethod(factoryClass, createMethodName);
+			if (factoryMethod != null) {
+				if (context.getIsNonNull(factoryMethod) == Boolean.TRUE) {
+					doSetNonNull = true;
+				}
+			}
+		}
+		//		else {
+		//			javaClass2 = genModelHelper.getQualifiedFactoryInterfaceName(ePackage);
+		//		}
+		//
+		js.appendDeclaration(cgElement);
+		js.append(" = ");
+		js.append("(");
+		js.appendClassReference(javaClass);
+		js.append(")");
+		js.appendClassReference(factoryClass);
+		js.append(".eINSTANCE.");
+		js.append(createMethodName);
+		js.append("(");
+		js.appendClassReference(packageClass);
+		js.append(".Literals." + dataTypeName + ", ");
+		js.appendValueName(cgInit);
+		js.append(");\n");
+		js.append("assert ");
+		js.appendValueName(cgElement);
+		js.append(" != null;\n");
 		//
 		return doSetNonNull;
 	}
@@ -610,27 +689,37 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" {\n");
 		js.pushIndentation(null);
 		EClassifier eClassifier = ClassUtil.nonNullState(cgShadowExp.getEcoreClassifier());
-		doEcoreCreate(cgShadowExp, eClassifier);
-		int index = 0;
-		for (@NonNull CGShadowPart cgShadowPart : ClassUtil.nullFree(cgShadowExp.getParts())) {
-			Property asProperty = ClassUtil.nonNullState(((ShadowPart)cgShadowPart.getAst()).getReferredProperty());
-			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(getESObject(asProperty));
-			js.appendValueName(cgShadowExp);
-			js.append(".");
-			if (eStructuralFeature.isMany()) {
-				String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-				//
-				js.append(getAccessor);
-				js.append("().addAll");
+		if (eClassifier instanceof EDataType) {
+			CGShadowPart cgShadowPart = ClassUtil.nullFree(cgShadowExp.getParts()).get(0);
+			CGValuedElement cgInit = ClassUtil.nonNullState(cgShadowPart.getInit());
+			if (!js.appendLocalStatements(cgInit)) {
+				return false;
 			}
-			else {
-				String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
-				//
-				js.append(setAccessor);
+			doEcoreCreateDataType(cgShadowExp, (EDataType)eClassifier, cgInit);
+		}
+		else if (eClassifier instanceof EClass) {
+			doEcoreCreateClass(cgShadowExp, (EClass)eClassifier);
+			int index = 0;
+			for (@NonNull CGShadowPart cgShadowPart : ClassUtil.nullFree(cgShadowExp.getParts())) {
+				Property asProperty = ClassUtil.nonNullState(((ShadowPart)cgShadowPart.getAst()).getReferredProperty());
+				EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(getESObject(asProperty));
+				js.appendValueName(cgShadowExp);
+				js.append(".");
+				if (eStructuralFeature.isMany()) {
+					String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
+					//
+					js.append(getAccessor);
+					js.append("().addAll");
+				}
+				else {
+					String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
+					//
+					js.append(setAccessor);
+				}
+				js.append("(");
+				js.appendClassCast(cgShadowPart);
+				js.append("boundValues[" + index++ + "]);\n");
 			}
-			js.append("(");
-			js.appendClassCast(cgShadowPart);
-			js.append("boundValues[" + index++ + "]);\n");
 		}
 		//
 		js.appendThis(functionName);
@@ -673,7 +762,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		else if (bestInputTypedModel != null) {
 			asTypedModel = bestInputTypedModel;
 		}
-		if (asTypedModel != null) {			// FIXME Why are shadow objects put in a model at all -- testQVTrCompiler_SeqToStm_CG requires it
+		if ((eClassifier instanceof EClass) && (asTypedModel != null)) {			// FIXME Why are shadow objects put in a model at all -- testQVTrCompiler_SeqToStm_CG requires it
 			CGTypedModel cgTypedModel = context.getAnalyzer().getTypedModel(asTypedModel);
 			js.append(QVTiGlobalContext.MODELS_NAME);
 			js.append("[");
@@ -758,7 +847,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		for (@NonNull CGOperation cgOperation : cgOperations) {
 			if (cgOperation instanceof CGFunction) {
 				CGFunction cgFunction = (CGFunction)cgOperation;
-				if ((useClass(cgFunction) != null) || useCache(cgFunction)) {
+				if (useClass(cgFunction) || useCache(cgFunction)) {
 					String functionName = getFunctionName(cgFunction);
 					js.append("protected final ");
 					js.appendIsRequired(true);
@@ -1522,15 +1611,20 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return !(ast instanceof Operation) || !((Operation)ast).isIsTransient();
 	}
 
-	protected @Nullable CGShadowExp useClass(@NonNull CGFunction cgFunction) {
+	protected @Nullable CGShadowExp useClassToCreateObject(@NonNull CGFunction cgFunction) {
 		CGValuedElement cgBody = cgFunction.getBody();
 		while (cgBody instanceof CGLetExp) {
 			cgBody = ((CGLetExp)cgBody).getIn();
 		}
-		if (cgBody instanceof CGShadowExp) {
-			return (CGShadowExp)cgBody;		// FIXME replace with clearer strategy
+		if (cgBody instanceof CGShadowExp) {			// QVTr Key
+			if (!(((TypedElement)cgBody.getAst()).getType() instanceof DataType))
+				return (CGShadowExp)cgBody;		// FIXME replace with clearer strategy
 		}
 		return null;
+	}
+
+	protected boolean useClass(@NonNull CGFunction cgFunction) {
+		return true;
 	}
 
 	protected boolean useClass(@NonNull CGMapping cgMapping) {
@@ -1697,7 +1791,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgRealizedVariable) {
 		EClassifier eClassifier = ClassUtil.nonNullState(cgRealizedVariable.getEClassifier());
-		if (doEcoreCreate(cgRealizedVariable, eClassifier)) {
+		if (doEcoreCreateClass(cgRealizedVariable, (EClass)eClassifier)) {
 			cgRealizedVariable.setNonNull();
 		}
 		//
@@ -1719,7 +1813,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				List<CGParameter> cgParameters = cgFunction.getParameters();
 				//
 				js.appendCommentWithOCL(null, cgFunction.getAst());
-				CGShadowExp cgShadowExp = useClass(cgFunction);
+				CGShadowExp cgShadowExp = useClassToCreateObject(cgFunction);
 				String functionName = getFunctionName(cgFunction);
 				if (cgShadowExp != null) {
 					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
@@ -1821,9 +1915,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	public @NonNull Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		CGFunction cgFunction = ClassUtil.nonNullState(cgFunctionCallExp.getFunction());
-		CGShadowExp cgShadowExp = useClass(cgFunction);
+		boolean useClass = useClass(cgFunction);
+		boolean useClassToCreateObject = useClassToCreateObject(cgFunction) != null;
 		boolean useCache = useCache(cgFunction);
-		boolean isIdentifiedInstance = (cgShadowExp != null) || useCache;
+		boolean isIdentifiedInstance = useClass || useCache;
 		List<CGValuedElement> cgArguments = cgFunctionCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameters();
 		//
@@ -1843,7 +1938,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(")");
 			js.append(getFunctionCtorName(cgFunction));
 			js.append(".getUniqueComputation(");
-			if (useCache && (cgShadowExp == null)) {
+			if (useCache && !useClassToCreateObject) {
 				CGClass cgClass = ClassUtil.nonNullState(cgFunction.getContainingClass());
 				//				js.appendClassReference(cgClass);
 				//				js.append(".this");
