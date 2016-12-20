@@ -144,6 +144,10 @@ public class QVTcSerializeTests extends LoadTestCase
 		doSerializeRoundTripFromCS("Class2RDBMS/Class2RDBMS");
 	}
 
+	public void testSerialize_HSV2HSL() throws Exception {
+		doSerializeRoundTripFromCS("hsv2hsl/HSV2HSL");
+	}
+
 	public void testSerialize_platformResource_BaseCS2AS() throws Exception {
 		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtp");
 	}

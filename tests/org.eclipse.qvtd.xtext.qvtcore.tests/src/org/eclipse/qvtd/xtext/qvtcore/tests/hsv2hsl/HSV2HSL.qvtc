@@ -89,7 +89,7 @@ map HSV2HSLRecursion in hsv2hsl
 
 query hsv2hsl::hsl2rgb(color : HSLTree::HSL) : HSV2HSL::RGB[1]
 {
-	color
+	HSV2HSL::RGB{value=color}
 }
 
 query hsv2hsl::hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB[1]
@@ -104,12 +104,12 @@ query hsv2hsl::hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB[1]
 	let x : Real = c * (1 - (hh2 - 1).abs()) in
 	let m : Real = v -c in
 	let t : Tuple(r:Real,g:Real,b:Real) =
-	if h < 60 then Tuple{r=c,g=x,b=0}
-	elseif h < 120 then Tuple{r=x,g=c,b=0}
-	elseif h < 180 then Tuple{r=0,g=c,b=x}
-	elseif h < 240 then Tuple{r=0,g=x,b=c}
-	elseif h < 300 then Tuple{r=x,g=0,b=c}
-	else Tuple{r=c,g=0,b=x} endif in
+	if h < 60 then Tuple{r=c,g=x,b=0.0}
+	elseif h < 120 then Tuple{r=x,g=c,b=0.0}
+	elseif h < 180 then Tuple{r=0.0,g=c,b=x}
+	elseif h < 240 then Tuple{r=0.0,g=x,b=c}
+	elseif h < 300 then Tuple{r=x,g=0.0,b=c}
+	else Tuple{r=c,g=0.0,b=x} endif in
 	let r = (255 * (t.r + m)).round() in
 	let g = (255 * (t.g + m)).round() in
 	let b = (255 * (t.b + m)).round() in
@@ -137,8 +137,7 @@ query hsv2hsl::rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL[1]
 
 query hsv2hsl::rgb2hsv(color : HSV2HSL::RGB) : HSVTree::HSV[1]
 {
-	color
---	HSVTree::HSV{'color'}
+	HSVTree::HSV{value=color}
 }
 
 /*

@@ -47,7 +47,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
@@ -211,7 +210,7 @@ public class XtextTestCase extends PivotTestCase
 			return false;
 		}
 		if (pivotElement instanceof TupleType) {
-			return PivotUtilInternal.isLibraryType((TupleType)pivotElement);
+			return false;
 		}
 		if (pivotElement instanceof Type) {
 			EObject eContainer = pivotElement.eContainer();
