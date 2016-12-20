@@ -234,6 +234,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 			((OCLInternal)ocl).getMetamodelManager().getASmetamodel();
 		}
 		Resource resource = asResourceSet.getResource(asURI, true);
+		assert resource != null;
 		EcoreUtil.resolveAll(resource);
 		assertNoUnresolvedProxies("Loading", resource);
 		assertNoResourceErrors("Loading", resource);
@@ -314,20 +315,20 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	/**
-	 * Test hsv 2 hls.
+	 * Test hsv 2 hsl.
 	 *
 	 * @throws Exception the exception
 	 */
 	@Test
-	public void testHSV2HLS() throws Exception {
+	public void testHSV2HSL() throws Exception {
 		MyQVT myQVT = createQVT();
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		MyQvtiExecutor testEvaluator = myQVT.createEvaluator("HSV2HLS", "HSV2HLS.qvti");
+		MyQvtiExecutor testEvaluator = myQVT.createEvaluator("HSV2HSL", "HSV2HSL.qvti");
 		testEvaluator.saveTransformation(null);
 		testEvaluator.loadModel("hsv", "HSVNode.xmi");
-		testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
-		testEvaluator.createModel("hls", "HLSNode.xmi");
-		testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+		testEvaluator.createModel("middle", "HSL2HSLNode.xmi");
+		testEvaluator.createModel("hsl", "HSLNode.xmi");
+		testEvaluator.loadReference("hsl", "HSLNodeValidate.xmi");
 		testEvaluator.test();
 		testEvaluator.dispose();
 

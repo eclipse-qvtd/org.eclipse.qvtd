@@ -215,19 +215,19 @@ public class QVTiCompilerTests extends LoadTestCase
 		super.setUp();
 	}
 
-	public void testCG_HSV2HLS_qvti() throws Exception {
+	public void testCG_HSV2HSL_qvti() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI transformURI = getProjectFileURI("HSV2HLS/HSV2HLS.qvti");
-		URI genModelURI = getProjectFileURI("HSV2HLS/HSV2HLS.genmodel");
-		URI inputModelURI = getProjectFileURI("HSV2HLS/HSVNode.xmi");
-		URI outputModelURI = getProjectFileURI("HSV2HLS/HLSNode.xmi");
-		URI referenceModelURI = getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi");
+		URI transformURI = getProjectFileURI("HSV2HSL/HSV2HSL.qvti");
+		URI genModelURI = getProjectFileURI("HSV2HSL/HSV2HSL.genmodel");
+		URI inputModelURI = getProjectFileURI("HSV2HSL/HSVNode.xmi");
+		URI outputModelURI = getProjectFileURI("HSV2HSL/HSLNode.xmi");
+		URI referenceModelURI = getProjectFileURI("HSV2HSL/HSLNodeValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "hsv", inputModelURI);
 		tx.run();
-		myQVT.saveOutput(tx, "hls", outputModelURI, referenceModelURI, null);
+		myQVT.saveOutput(tx, "hsl", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	}
 

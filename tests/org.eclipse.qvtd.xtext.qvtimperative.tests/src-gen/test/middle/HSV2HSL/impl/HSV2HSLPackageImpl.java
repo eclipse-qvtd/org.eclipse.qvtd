@@ -10,7 +10,7 @@
  *******************************************************************************/
 /**
  */
-package test.hsv.HSVTree.impl;
+package test.middle.HSV2HSL.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,11 +22,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import test.hsl.HSLTree.HSLTreePackage;
 import test.hsl.HSLTree.impl.HSLTreePackageImpl;
-import test.hsv.HSVTree.HSVNode;
-import test.hsv.HSVTree.HSVTreeFactory;
 import test.hsv.HSVTree.HSVTreePackage;
+
+import test.hsv.HSVTree.impl.HSVTreePackageImpl;
+import test.middle.HSV2HSL.HSV2HSLFactory;
 import test.middle.HSV2HSL.HSV2HSLPackage;
-import test.middle.HSV2HSL.impl.HSV2HSLPackageImpl;
+import test.middle.HSV2HSL.HSVNode2HSLNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,20 +35,20 @@ import test.middle.HSV2HSL.impl.HSV2HSLPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
+public class HSV2HSLPackageImpl extends EPackageImpl implements HSV2HSLPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass hsvNodeEClass = null;
+	private EClass hsvNode2HSLNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType hsvEDataType = null;
+	private EDataType rgbEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -60,12 +61,12 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see test.hsv.HSVTree.HSVTreePackage#eNS_URI
+	 * @see test.middle.HSV2HSL.HSV2HSLPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private HSVTreePackageImpl() {
-		super(eNS_URI, HSVTreeFactory.eINSTANCE);
+	private HSV2HSLPackageImpl() {
+		super(eNS_URI, HSV2HSLFactory.eINSTANCE);
 	}
 
 	/**
@@ -77,8 +78,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
-	 * <p>This method is used to initialize {@link HSVTreePackage#eINSTANCE} when that field is accessed.
+	 *
+	 * <p>This method is used to initialize {@link HSV2HSLPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,36 +88,36 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static HSVTreePackage init() {
-		if (isInited) return (HSVTreePackage)EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI);
+	public static HSV2HSLPackage init() {
+		if (isInited) return (HSV2HSLPackage)EPackage.Registry.INSTANCE.getEPackage(HSV2HSLPackage.eNS_URI);
 
 		// Obtain or create and register package
 		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		HSVTreePackageImpl theHSVTreePackage = (HSVTreePackageImpl)(ePackage instanceof HSVTreePackageImpl ? ePackage : new HSVTreePackageImpl());
+		HSV2HSLPackageImpl theHSV2HSLPackage = (HSV2HSLPackageImpl)(ePackage instanceof HSV2HSLPackageImpl ? ePackage : new HSV2HSLPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		HSV2HSLPackageImpl theHSV2HSLPackage = (HSV2HSLPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(HSV2HSLPackage.eNS_URI) instanceof HSV2HSLPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(HSV2HSLPackage.eNS_URI) : HSV2HSLPackage.eINSTANCE);
+		HSVTreePackageImpl theHSVTreePackage = (HSVTreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI) instanceof HSVTreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI) : HSVTreePackage.eINSTANCE);
 		HSLTreePackageImpl theHSLTreePackage = (HSLTreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(HSLTreePackage.eNS_URI) instanceof HSLTreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(HSLTreePackage.eNS_URI) : HSLTreePackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theHSVTreePackage.createPackageContents();
 		theHSV2HSLPackage.createPackageContents();
+		theHSVTreePackage.createPackageContents();
 		theHSLTreePackage.createPackageContents();
 
 		// Initialize created meta-data
-		theHSVTreePackage.initializePackageContents();
 		theHSV2HSLPackage.initializePackageContents();
+		theHSVTreePackage.initializePackageContents();
 		theHSLTreePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theHSVTreePackage.freeze();
+		theHSV2HSLPackage.freeze();
 
-  
+
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(HSVTreePackage.eNS_URI, theHSVTreePackage);
-		return theHSVTreePackage;
+		EPackage.Registry.INSTANCE.put(HSV2HSLPackage.eNS_URI, theHSV2HSLPackage);
+		return theHSV2HSLPackage;
 	}
 
 	/**
@@ -125,8 +126,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getHSVNode() {
-		return hsvNodeEClass;
+	public EClass getHSVNode2HSLNode() {
+		return hsvNode2HSLNodeEClass;
 	}
 
 	/**
@@ -135,8 +136,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getHSVNode_Parent() {
-		return (EReference)hsvNodeEClass.getEStructuralFeatures().get(0);
+	public EReference getHSVNode2HSLNode_Parent() {
+		return (EReference)hsvNode2HSLNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -145,8 +146,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getHSVNode_Children() {
-		return (EReference)hsvNodeEClass.getEStructuralFeatures().get(1);
+	public EReference getHSVNode2HSLNode_Children() {
+		return (EReference)hsvNode2HSLNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -155,8 +156,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getHSVNode_Hsv() {
-		return (EAttribute)hsvNodeEClass.getEStructuralFeatures().get(2);
+	public EReference getHSVNode2HSLNode_Hsv() {
+		return (EReference)hsvNode2HSLNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -165,8 +166,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getHSVNode_Name() {
-		return (EAttribute)hsvNodeEClass.getEStructuralFeatures().get(3);
+	public EReference getHSVNode2HSLNode_Hsl() {
+		return (EReference)hsvNode2HSLNodeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -175,8 +176,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public EDataType getHSV() {
-		return hsvEDataType;
+	public EAttribute getHSVNode2HSLNode_Rgb() {
+		return (EAttribute)hsvNode2HSLNodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -185,8 +186,28 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * @generated
 	 */
 	@Override
-	public HSVTreeFactory getHSVTreeFactory() {
-		return (HSVTreeFactory)getEFactoryInstance();
+	public EAttribute getHSVNode2HSLNode_Name() {
+		return (EAttribute)hsvNode2HSLNodeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getRGB() {
+		return rgbEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public HSV2HSLFactory getHSV2HSLFactory() {
+		return (HSV2HSLFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -208,14 +229,16 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		hsvNodeEClass = createEClass(HSV_NODE);
-		createEReference(hsvNodeEClass, HSV_NODE__PARENT);
-		createEReference(hsvNodeEClass, HSV_NODE__CHILDREN);
-		createEAttribute(hsvNodeEClass, HSV_NODE__HSV);
-		createEAttribute(hsvNodeEClass, HSV_NODE__NAME);
+		hsvNode2HSLNodeEClass = createEClass(HSV_NODE2_HSL_NODE);
+		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__PARENT);
+		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__CHILDREN);
+		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__HSV);
+		createEReference(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__HSL);
+		createEAttribute(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__RGB);
+		createEAttribute(hsvNode2HSLNodeEClass, HSV_NODE2_HSL_NODE__NAME);
 
 		// Create data types
-		hsvEDataType = createEDataType(HSV);
+		rgbEDataType = createEDataType(RGB);
 	}
 
 	/**
@@ -241,6 +264,10 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		HSVTreePackage theHSVTreePackage = (HSVTreePackage)EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI);
+		HSLTreePackage theHSLTreePackage = (HSLTreePackage)EPackage.Registry.INSTANCE.getEPackage(HSLTreePackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -248,17 +275,19 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(hsvNodeEClass, HSVNode.class, "HSVNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHSVNode_Parent(), this.getHSVNode(), this.getHSVNode_Children(), "parent", null, 0, 1, HSVNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHSVNode_Children(), this.getHSVNode(), this.getHSVNode_Parent(), "children", null, 0, -1, HSVNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHSVNode_Hsv(), this.getHSV(), "hsv", "", 1, 1, HSVNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHSVNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, HSVNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(hsvNode2HSLNodeEClass, HSVNode2HSLNode.class, "HSVNode2HSLNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getHSVNode2HSLNode_Parent(), this.getHSVNode2HSLNode(), this.getHSVNode2HSLNode_Children(), "parent", null, 0, 1, HSVNode2HSLNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHSVNode2HSLNode_Children(), this.getHSVNode2HSLNode(), this.getHSVNode2HSLNode_Parent(), "children", null, 0, -1, HSVNode2HSLNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHSVNode2HSLNode_Hsv(), theHSVTreePackage.getHSVNode(), null, "hsv", null, 1, 1, HSVNode2HSLNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHSVNode2HSLNode_Hsl(), theHSLTreePackage.getHSLNode(), null, "hsl", null, 1, 1, HSVNode2HSLNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHSVNode2HSLNode_Rgb(), this.getRGB(), "rgb", null, 1, 1, HSVNode2HSLNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHSVNode2HSLNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, HSVNode2HSLNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
-		initEDataType(hsvEDataType, String.class, "HSV", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(rgbEDataType, String.class, "RGB", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
 	}
 
-} //HSVTreePackageImpl
+} //HSV2HSLPackageImpl

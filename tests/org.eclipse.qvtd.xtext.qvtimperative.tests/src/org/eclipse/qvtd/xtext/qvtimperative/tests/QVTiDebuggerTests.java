@@ -118,18 +118,18 @@ public class QVTiDebuggerTests extends XtextTestCase
 		return getClass().getPackage().getName().replace('.', '/');
 	}
 
-	public void testDebugger_Run_HSV2HLS() throws Exception {
+	public void testDebugger_Run_HSV2HSL() throws Exception {
 		TestUIUtil.closeIntro();
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
 		IProject iProject = TestUIUtil.createIProject("QVTiDebuggerRunTests");
-		IFile txFile = TestUIUtil.copyIFile(iProject.getFile("HSV2HLS.qvti"), getProjectFileURI("HSV2HLS/HSV2HLS.qvti"), "UTF-8");
-		TestUIUtil.copyIFile(iProject.getFile("HSVTree.ecore"), getProjectFileURI("HSV2HLS/HSVTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HLSTree.ecore"), getProjectFileURI("HSV2HLS/HLSTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HSV2HLS.ecore"), getProjectFileURI("HSV2HLS/HSV2HLS.ecore"), null);
-		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HLS/HSVNode.xmi"), null);
-		IFile outFile = iProject.getFile("HLSNode.xmi");
-		IFile middleFile = iProject.getFile("HSV2HLSNode.xmi");
+		IFile txFile = TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.qvti"), getProjectFileURI("HSV2HSL/HSV2HSL.qvti"), "UTF-8");
+		TestUIUtil.copyIFile(iProject.getFile("HSVTree.ecore"), getProjectFileURI("HSV2HSL/HSVTree.ecore"), null);
+		TestUIUtil.copyIFile(iProject.getFile("HSLTree.ecore"), getProjectFileURI("HSV2HSL/HSLTree.ecore"), null);
+		TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.ecore"), getProjectFileURI("HSV2HSL/HSV2HSL.ecore"), null);
+		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HSL/HSVNode.xmi"), null);
+		IFile outFile = iProject.getFile("HSLNode.xmi");
+		IFile middleFile = iProject.getFile("HSV2HSLNode.xmi");
 		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
 		URI inURI = URI.createPlatformResourceURI(inFile.getFullPath().toString(), true);
 		URI outURI = URI.createPlatformResourceURI(outFile.getFullPath().toString(), true);
@@ -137,10 +137,10 @@ public class QVTiDebuggerTests extends XtextTestCase
 		Map<String,String> inMap = new HashMap<String,String>();
 		inMap.put("hsv", inURI.toString());
 		Map<String,String> outMap = new HashMap<String,String>();
-		outMap.put("hls", outURI.toString());
+		outMap.put("hsl", outURI.toString());
 		outMap.put("middle", middleURI.toString());
 
-		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(iProject, "HSV2HLS", txURI, inMap, outMap);
+		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(iProject, "HSV2HSL", txURI, inMap, outMap);
 		launchConfiguration.doSave();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.RUN_MODE, null);
@@ -154,7 +154,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 			TestUIUtil.wait(1000);
 		}
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		Resource expectedResource = expectedResourceSet.getResource(getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi"), true);
+		Resource expectedResource = expectedResourceSet.getResource(getProjectFileURI("HSV2HSL/HSLNodeValidate.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
 		Resource actualResource = actualResourceSet.getResource(outURI, true);
@@ -162,8 +162,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUtil.assertSameModel(expectedResource, actualResource);
 	}
 
-	public void testDebugger_Debug_HSV2HLS() throws Exception {
-		final @NonNull String inName = "hls";
+	public void testDebugger_Debug_HSV2HSL() throws Exception {
+		final @NonNull String inName = "hsl";
 		final @NonNull String outName = "hsv";
 		final @NonNull String middleName = "middle";
 		//
@@ -171,13 +171,13 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
 		IProject iProject = TestUIUtil.createIProject("QVTiDebuggerDebugTests");
-		IFile txFile = TestUIUtil.copyIFile(iProject.getFile("HSV2HLS.qvti"), getProjectFileURI("HSV2HLS/HSV2HLS.qvti"), "UTF-8");
-		TestUIUtil.copyIFile(iProject.getFile("HSVTree.ecore"), getProjectFileURI("HSV2HLS/HSVTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HLSTree.ecore"), getProjectFileURI("HSV2HLS/HLSTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HSV2HLS.ecore"), getProjectFileURI("HSV2HLS/HSV2HLS.ecore"), null);
-		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HLS/HSVNode.xmi"), null);
-		IFile outFile = iProject.getFile("HLSNode.xmi");
-		IFile middleFile = iProject.getFile("HSV2HLSNode.xmi");
+		IFile txFile = TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.qvti"), getProjectFileURI("HSV2HSL/HSV2HSL.qvti"), "UTF-8");
+		TestUIUtil.copyIFile(iProject.getFile("HSVTree.ecore"), getProjectFileURI("HSV2HSL/HSVTree.ecore"), null);
+		TestUIUtil.copyIFile(iProject.getFile("HSLTree.ecore"), getProjectFileURI("HSV2HSL/HSLTree.ecore"), null);
+		TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.ecore"), getProjectFileURI("HSV2HSL/HSV2HSL.ecore"), null);
+		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HSL/HSVNode.xmi"), null);
+		IFile outFile = iProject.getFile("HSLNode.xmi");
+		IFile middleFile = iProject.getFile("HSV2HSLNode.xmi");
 		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
 		URI inURI = URI.createPlatformResourceURI(inFile.getFullPath().toString(), true);
 		URI outURI = URI.createPlatformResourceURI(outFile.getFullPath().toString(), true);
@@ -188,7 +188,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		outMap.put(inName, outURI.toString());
 		outMap.put(middleName, middleURI.toString());
 
-		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(iProject, "HSV2HLS", txURI, inMap, outMap);
+		ILaunchConfigurationWorkingCopy launchConfiguration = createLaunchConfiguration(iProject, "HSV2HSL", txURI, inMap, outMap);
 		launchConfiguration.doSave();
 		TestUIUtil.flushEvents();
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.DEBUG_MODE, null);
@@ -245,7 +245,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		//
 		TestUIUtil.flushEvents();
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		Resource expectedResource = expectedResourceSet.getResource(getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi"), true);
+		Resource expectedResource = expectedResourceSet.getResource(getProjectFileURI("HSV2HSL/HSLNodeValidate.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
 		Resource actualResource = actualResourceSet.getResource(outURI, true);

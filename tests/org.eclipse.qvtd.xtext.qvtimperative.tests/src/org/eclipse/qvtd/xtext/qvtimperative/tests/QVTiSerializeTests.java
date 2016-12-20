@@ -166,12 +166,12 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip("Graph2GraphMinimal/Graph2GraphMinimal");
 	}
 
-	public void testSerialize_HSV2HLS_qvti() throws Exception {
-		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
+	public void testSerialize_HSV2HSL_qvti() throws Exception {
+		doSerializeRoundTrip("HSV2HSL/HSV2HSL");
 	}
 
-	public void testSerialize_HSV2HLSas_qvtias() throws Exception {
-		doSerialize("HSV2HLS/HSV2HLSas");
+	public void testSerialize_HSV2HSLas_qvtias() throws Exception {
+		doSerialize("HSV2HSL/HSV2HSLas");
 	}
 
 	public void testSerialize_KiamaRewrite_qvti() throws Exception {

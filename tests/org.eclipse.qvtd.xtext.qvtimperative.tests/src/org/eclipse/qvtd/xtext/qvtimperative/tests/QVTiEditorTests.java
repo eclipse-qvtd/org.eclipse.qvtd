@@ -41,8 +41,8 @@ public class QVTiEditorTests extends LoadTestCase
 		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
-	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HLS/HSV2HLS.qvti", null);
+	public void testLoad_HSV2HSL_qvti() throws IOException, InterruptedException {
+		doLoad_Concrete("HSV2HSL/HSV2HSL.qvti", null);
 	}
 
 

@@ -56,16 +56,16 @@ Workflow {
     	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/Tree2TallTree/Tree2TallTree.genmodel"
     }
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HSV2HLS.genmodel"
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HSL/HSV2HSL.genmodel"
     }
 
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/Families2Persons/Families2Persons.genmodel"
-    }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.genmodel"
-    }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UpperToLower/SimpleGraph2Graph.genmodel"
-    }
+//	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+//    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/Families2Persons/Families2Persons.genmodel"
+//    }
+//	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+//    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.genmodel"
+//    }
+//	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+//    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UpperToLower/SimpleGraph2Graph.genmodel"
+//    }
 }
