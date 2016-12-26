@@ -1,0 +1,33 @@
+grammar org.eclipse.qvtd.cs2as.compiler.tests.models.companies.Companies hidden(WS)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://cs2as/tests/companies/CS/1.0" as companies
+
+company returns companies::company :
+  'company' name=STRING '{' deparment+=department* '}'
+;
+
+department returns companies::department:
+  'department' name=STRING '{' 
+    department_manager = department_manager
+    department_employees = department_employees
+    deparment += department*
+  '}';
+
+department_manager returns companies::department_manager:
+  'manager' employee=employee;
+
+department_employees returns companies::department_employees:
+  {companies::department_employees}
+  ('employee' employee+=employee)* ;
+
+employee returns companies::employee:
+  name=STRING '{'
+    'address' address=STRING
+    'salary' salary=FLOAT
+    ('mentor' mentor=STRING)?
+  '}';
+
+terminal STRING  :   '"' (!'"')* '"';
+terminal FLOAT  returns ecore::EDouble :   ('0'..'9')+ ('.' ('0'..'9')+)?;
+terminal WS      :   (' '|'\r'? '\n'|'\t')+ ;

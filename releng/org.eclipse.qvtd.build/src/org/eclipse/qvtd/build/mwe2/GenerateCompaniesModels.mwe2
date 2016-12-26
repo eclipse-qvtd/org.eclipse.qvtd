@@ -1,0 +1,44 @@
+/*******************************************************************************
+ * Copyright (c) 2016 Willink Transformations Ltd., University of York and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
+ * 
+ *******************************************************************************/
+module org.eclipse.qvtd.build.mwe2.GenerateCompaniesModels
+
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
+var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/companies"
+
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = ProjectMapSetup{ resourceSet = resourceSet}
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/${projectName}/${examplesFolder}/Company.genmodel"
+    }
+    
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/${projectName}/${examplesFolder}/Companies.genmodel"
+    }
+    
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/${projectName}/${examplesFolder}/Lookup.genmodel"
+    }
+    
+    component = GenerateASVisitors { resourceSet = resourceSet
+    	projectName = "${projectName}"
+    	genModelFile = "${examplesFolder}/Company.genmodel"
+    }
+}
+
+

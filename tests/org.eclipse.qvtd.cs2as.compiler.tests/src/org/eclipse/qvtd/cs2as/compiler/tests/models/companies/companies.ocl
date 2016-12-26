@@ -1,0 +1,32 @@
+import  cs : 'Companies.ecore#/'
+import  as : 'Company.ecore#/'
+--import 'companiesHelpers.ocl'
+import 'companiesLookup.ocl'
+
+package cs
+
+context company
+def : ast() : as::Company =
+	as::Company {
+		name = name,  
+		depts = self.deparment.ast()->asOrderedSet() 
+	}
+	
+context department
+def : ast() : as::Department =
+	as::Department {
+		name = name, 
+	subdepts = self.deparment.ast()->asOrderedSet() , 
+	manager = self.department_manager.employee.ast(), 
+	employees = self.department_employees.employee.ast()->asOrderedSet() 
+	}
+	
+context employee
+def : ast() : as::Employee =
+	as::Employee {
+		name = name,
+		address = address,
+		salary = salary,
+		mentor = ast().lookupEmployee(mentor) 
+	}
+endpackage

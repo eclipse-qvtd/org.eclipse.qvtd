@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c)  2016 Willink Transformations, Univesity of York and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;     Adolfo Sanchez-Barbudo Herrera - initial API and implementation"
+    modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/emf-gen" editDirectory="/org.eclipse.qvtd.cs2as.compiler.tests.edit/emf-gen"
+    editorDirectory="/org.eclipse.qvtd.cs2as.compiler.tests.editor/emf-gen" modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests"
+    modelName="Company" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="cs2as.company.util.Visitor"/>
+    <details key="Visitable Interface" value="cs2as.company.util.Visitable"/>
+  </genAnnotations>
+  <foreignModel>Company.ecore</foreignModel>
+  <genPackages prefix="Company" basePackage="cs2as" disposableProviderFactory="true"
+      fileExtensions="companyas" ecorePackage="Company.ecore#/">
+    <genClasses ecoreClass="Company.ecore#//Company">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Company.ecore#//Company/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Company.ecore#//Company/depts"/>
+    </genClasses>
+    <genClasses ecoreClass="Company.ecore#//Department">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Company.ecore#//Department/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Company.ecore#//Department/manager"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Company.ecore#//Department/subdepts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Company.ecore#//Department/employees"/>
+    </genClasses>
+    <genClasses ecoreClass="Company.ecore#//Employee">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Company.ecore#//Employee/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Company.ecore#//Employee/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Company.ecore#//Employee/salary"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Company.ecore#//Employee/mentor"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Company.ecore#//Visitable"/>
+  </genPackages>
+</genmodel:GenModel>
