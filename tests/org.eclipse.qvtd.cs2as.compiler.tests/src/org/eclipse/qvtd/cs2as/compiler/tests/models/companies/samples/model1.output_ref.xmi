@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com:Company xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com="http://cs2as/tests/companies/AS/1.0"  xsi:schemaLocation="http://cs2as/tests/companies/AS/1.0 ../Company.ecore" name="aCompany">
+  <depts name="D1_">
+    <manager name="D1_manager" address="D1_manager_addr" salary="10251.293661778143"/>
+    <employees name="D1_employee1" address="D1_employee1_addr" salary="10872.643406301017"/>
+    <employees name="D1_employee2" address="D1_employee2_addr" salary="11606.54952395503" mentor="//@depts.2/@employees.1"/>
+    <employees name="D1_employee3" address="D1_employee3_addr" salary="10476.472589893485"/>
+  </depts>
+  <depts name="D2_">
+    <manager name="D2_manager" address="D2_manager_addr" salary="10938.44083355622" mentor="//@depts.0/@manager"/>
+    <employees name="D2_employee1" address="D2_employee1_addr" salary="11558.861622954013" mentor="//@depts.1/@employees.0"/>
+    <employees name="D2_employee2" address="D2_employee2_addr" salary="10371.821997951269" mentor="//@depts.1/@employees.2"/>
+    <employees name="D2_employee3" address="D2_employee3_addr" salary="11882.112090706238"/>
+  </depts>
+  <depts name="D3_">
+    <manager name="D3_manager" address="D3_manager_addr" salary="10703.50075409595" mentor="//@depts.2/@manager"/>
+    <employees name="D3_employee1" address="D3_employee1_addr" salary="11353.60267374801" mentor="//@depts.0/@employees.2"/>
+    <employees name="D3_employee2" address="D3_employee2_addr" salary="11148.133803212078" mentor="//@depts.2/@employees.0"/>
+    <employees name="D3_employee3" address="D3_employee3_addr" salary="11850.620499193463" mentor="//@depts.0/@employees.1"/>
+  </depts>
+</com:Company>
