@@ -1,0 +1,67 @@
+/**
+ * Copyright (c)  2016 Willink Transformations, Univesity of York and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *      Adolfo Sanchez-Barbudo Herrera - initial API and implementation
+ */
+package astm;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Delphi Implementation Section</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link astm.DelphiImplementationSection#getUses <em>Uses</em>}</li>
+ *   <li>{@link astm.DelphiImplementationSection#getExports <em>Exports</em>}</li>
+ * </ul>
+ *
+ * @see astm.AstmPackage#getDelphiImplementationSection()
+ * @model
+ * @generated
+ */
+public interface DelphiImplementationSection extends CompilationUnit {
+	/**
+	 * Returns the value of the '<em><b>Uses</b></em>' containment reference list.
+	 * The list contents are of type {@link astm.NamedTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Uses</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Uses</em>' containment reference list.
+	 * @see astm.AstmPackage#getDelphiImplementationSection_Uses()
+	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/delphi/AS/1.0!DelphiImplementationSection!uses'"
+	 * @generated
+	 */
+	EList<NamedTypeReference> getUses();
+
+	/**
+	 * Returns the value of the '<em><b>Exports</b></em>' containment reference list.
+	 * The list contents are of type {@link astm.NamedTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exports</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exports</em>' containment reference list.
+	 * @see astm.AstmPackage#getDelphiImplementationSection_Exports()
+	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/delphi/AS/1.0!DelphiImplementationSection!exports'"
+	 * @generated
+	 */
+	EList<NamedTypeReference> getExports();
+
+} // DelphiImplementationSection

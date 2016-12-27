@@ -31,5 +31,13 @@ Export-Package: org.eclipse.qvtd.cs2as.compiler.tests,
  org.eclipse.qvtd.cs2as.compiler.tests.models.companies.scoping,
  org.eclipse.qvtd.cs2as.compiler.tests.models.companies.serializer,
  org.eclipse.qvtd.cs2as.compiler.tests.models.companies.services,
- org.eclipse.qvtd.cs2as.compiler.tests.models.companies.validation
+ org.eclipse.qvtd.cs2as.compiler.tests.models.companies.validation,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.serializer,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.scoping,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.generator,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.validation,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.services,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.parser.antlr.internal,
+ org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.parser.antlr
 Import-Package: org.apache.log4j
