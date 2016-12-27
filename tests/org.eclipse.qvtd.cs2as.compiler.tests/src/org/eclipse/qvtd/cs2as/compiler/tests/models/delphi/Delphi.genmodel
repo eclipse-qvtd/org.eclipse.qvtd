@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c)  2016 Willink Transformations, Univesity of York and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;     Adolfo Sanchez-Barbudo Herrera - initial API and implementation"
+    modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/emf-gen" modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests"
+    forceOverwrite="true" modelName="Delphi" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.12" usedGenPackages="astm.genmodel#//astm">
+  <genPackages prefix="Delphi" disposableProviderFactory="true" fileExtensions="delphi"
+      ecorePackage="Delphi.ecore#/">
+    <genClasses ecoreClass="Delphi.ecore#//mainRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//mainRule/file"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//file">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//file/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//program/paramsList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//program/block"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//unit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//unit/port"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//unit/interfaceSect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//unit/implementationSect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//unit/initSect"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//packageDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//packageDecl/requires"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//packageDecl/contains"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//library/pBlock"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//programBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//programBlock/uses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//programBlock/block"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//usesClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//usesClause/idList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//interfaceSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//interfaceSection/uses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//interfaceSection/interfaceDecl"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//interfaceDecl"/>
+    <genClasses ecoreClass="Delphi.ecore#//exportedHeading">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exportedHeading/pHeading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exportedHeading/directive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exportedHeading/fHeading"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//implementationSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//implementationSection/uses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//implementationSection/declSect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//implementationSection/exports"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//block/declSect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//block/exports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//block/compound"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//exportsItem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exportsItem/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exportsItem/constExp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//exportsStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exportsStmt/items"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//declSection"/>
+    <genClasses ecoreClass="Delphi.ecore#//labelDeclSection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//labelDeclSection/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//constSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//constSection/constantDecl"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//constantDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//constantDecl/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//constantDecl/const"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//constantDecl/port"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//constantDecl/typeRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//constantDecl/typedConstat"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//typeSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typeSection/typeDecl"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//typeDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typeDecl/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typeDecl/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//typeDecl/port"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typeDecl/restrictedType"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//typedConstant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typedConstant/const"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typedConstant/array"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typedConstant/record"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//arrayConstant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//arrayConstant/typedConstant"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//recordConstant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recordConstant/recordField"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//recordFieldConstant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recordFieldConstant/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recordFieldConstant/typedConstant"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//type"/>
+    <genClasses ecoreClass="Delphi.ecore#//restrictedType"/>
+    <genClasses ecoreClass="Delphi.ecore#//classRefType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classRefType/typeRef"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//simpleType"/>
+    <genClasses ecoreClass="Delphi.ecore#//realType"/>
+    <genClasses ecoreClass="Delphi.ecore#//ordinalType"/>
+    <genClasses ecoreClass="Delphi.ecore#//ordIdent"/>
+    <genClasses ecoreClass="Delphi.ecore#//variantType"/>
+    <genClasses ecoreClass="Delphi.ecore#//subrangeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//subrangeType/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//subrangeType/last"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//enumeratedType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//enumeratedType/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//enumeratedTypeElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//enumeratedTypeElement/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//enumeratedTypeElement/literalExp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//stringType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//stringType/constExp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//strucType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//strucType/port"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//arrayType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//arrayType/ordinalType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//arrayType/ordinalTyp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//arrayType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//recType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recType/fields"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//fieldList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//fieldList/field"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//fieldList/variantSect"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//fieldDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//fieldDecl/idList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//fieldDecl/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//fieldDecl/port"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//variantSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//variantSection/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//variantSection/typeRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//variantSection/recVariants"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//recVariant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recVariant/constExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recVariant/fieldList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//setType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//setType/ordinal"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//fileType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//fileType/typeRef"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//pointerType"/>
+    <genClasses ecoreClass="Delphi.ecore#//procedureType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//procedureType/pHeading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//procedureType/fHeading"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//varSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//varSection/varDecls"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//varDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//varDecl/idList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//varDecl/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//varDecl/absId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//varDecl/absConst"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//varDecl/absIniti"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//expression"/>
+    <genClasses ecoreClass="Delphi.ecore#//simpleExpression"/>
+    <genClasses ecoreClass="Delphi.ecore#//term"/>
+    <genClasses ecoreClass="Delphi.ecore#//factor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//factor/designator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//factor/expList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//factor/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//factor/string"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//factor/nestedExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//factor/exp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//factor/setConstuctor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//factor/typeRef"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//relOp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//relOp/op"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//addOp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//addOp/op"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//mulOp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//mulOp/op"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//designator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//designator/subpart"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//designator/designator"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//designatorSubPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//designatorSubPart/part"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//designatorSubPart/exprList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//designatorPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//designatorPart/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//designatorPart/reservedWord"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//designatorPart/id2"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//setConstructor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//setConstructor/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//setElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//setElement/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//setElement/last"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//exprList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exprList/exps"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//stmtList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//stmtList/statments"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//statement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//statement/labelId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//statement/statement"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//unlabelledStatement"/>
+    <genClasses ecoreClass="Delphi.ecore#//simpleStatement"/>
+    <genClasses ecoreClass="Delphi.ecore#//structStmt"/>
+    <genClasses ecoreClass="Delphi.ecore#//compoundStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//compoundStmt/stamtList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//conditionalStmt"/>
+    <genClasses ecoreClass="Delphi.ecore#//ifStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//ifStmt/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//ifStmt/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//ifStmt/else"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//caseStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseStmt/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseStmt/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseStmt/default"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//caseSelector">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseSelector/labels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseSelector/stmt"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//caseLabel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseLabel/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//caseLabel/last"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//loopStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//loopStmt/stmt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//loopStmt/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//repeatStmt"/>
+    <genClasses ecoreClass="Delphi.ecore#//whileStmt"/>
+    <genClasses ecoreClass="Delphi.ecore#//forStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//forStmt/varId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//forStmt/varInit"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//withStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//withStmt/vars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//withStmt/stmt"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//tryStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//tryStmt/stmtList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//tryStmt/exception"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//tryStmt/final"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//exceptionBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exceptionBlock/exceptionId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exceptionBlock/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exceptionBlock/doStmt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//exceptionBlock/elseStmts"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//raiseStmt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//raiseStmt/raise"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//raiseStmt/at"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//assemblerStmt"/>
+    <genClasses ecoreClass="Delphi.ecore#//procedureDeclSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//procedureDeclSection/directive"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//procedureDeclSection/port"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//procedureDeclSection/block"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//procedureDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//procedureDecl/heading"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//functionDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//functionDecl/heading"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//functionHeading">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//functionHeading/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//procedureHeading"/>
+    <genClasses ecoreClass="Delphi.ecore#//formalParameters">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//formalParameters/params"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//formalParm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//formalParm/param"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//parameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//parameter/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//directive">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//directive/dir"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//directive/messageExp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//objectType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//objectType/heritage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//objectType/fieldList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//objectType/methodList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//objHeritage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//objHeritage/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//methodList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//methodList/heading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//methodList/directive"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//methodHeading">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//methodHeading/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//methodHeading/formalParams"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//constructorHeading"/>
+    <genClasses ecoreClass="Delphi.ecore#//destructorHeading"/>
+    <genClasses ecoreClass="Delphi.ecore#//objFieldList"/>
+    <genClasses ecoreClass="Delphi.ecore#//initSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//initSection/stmtList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//initSection/endStmtList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classType/heritage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//classType/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classType/fieldList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classType/methodList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classType/propList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classHeritage"/>
+    <genClasses ecoreClass="Delphi.ecore#//classFieldList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classFieldList/field"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//classField/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classField/fieldList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classMethodList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classMethodList/metod"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//classMethod/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classMethod/methodList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classPropertyList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classPropertyList/property"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//classProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//classProperty/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//classProperty/propList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//propertyList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyList/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyList/interface"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyList/specifiers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//propertyList/port"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//propertyInterface">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyInterface/paramList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyInterface/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//propertyParameterList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyParameterList/idList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertyParameterList/typeRef"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//propertySpecifiers">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/readId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/writeId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/storeId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/storeExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/defaulExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//propertySpecifiers/implement"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//interfaceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//interfaceType/heritage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//interfaceType/methodList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//interfaceType/propList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//interfaceHeritage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//interfaceHeritage/idList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//requiresClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//requiresClause/idList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//containsClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//containsClause/idList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//identList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//identList/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//identList/ids"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//qualId">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//qualId/unitId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//qualId/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//typeId">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typeId/unitId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//typeId/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//ident"/>
+    <genClasses ecoreClass="Delphi.ecore#//reservedWord">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//reservedWord/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//constExpr"/>
+    <genClasses ecoreClass="Delphi.ecore#//recordConstExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recordConstExpr/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//recordConstExpr/constExp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//unitId">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//unitId/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//relExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//relExp/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//relExp/relOp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//relExp/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//addExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//addExp/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//addExp/addOp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//addExp/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//multExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//multExp/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//multExp/multOp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//multExp/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//simpleFactor"/>
+    <genClasses ecoreClass="Delphi.ecore#//assignmentStmnt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//assignmentStmnt/designator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//assignmentStmnt/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//assignmentStmnt/exp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//callStmnt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//callStmnt/designator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//callStmnt/args"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//inheritedStamnt"/>
+    <genClasses ecoreClass="Delphi.ecore#//gotoStmnt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//gotoStmnt/label"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//parameterList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//parameterList/idList"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//parameterSimple">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//parameterSimple/if"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//parameterSimple/initExp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//MultipleId">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//MultipleId/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//ReservedId">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//ReservedId/reservedWord"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//MineID">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//MineID/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Delphi.ecore#//MineID/second"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//ConstExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//ConstExp/exp"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//MultipleConstExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//MultipleConstExp/exps"/>
+    </genClasses>
+    <genClasses ecoreClass="Delphi.ecore#//RecordConstExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Delphi.ecore#//RecordConstExp/exps"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Delphi.ecore#//CSTrace">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Delphi.ecore#//CSTrace/ast"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

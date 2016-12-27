@@ -1,0 +1,667 @@
+grammar org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.Delphi hidden(WS, COMMENT, MORECOMMENT, LINE_COMMENT)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+import "http://cs2as/tests/delphi/CS/1.0" as delphi
+
+mainRule returns delphi::mainRule: 
+	file=file // ASBH modified
+	;
+
+file returns delphi::file
+  : (program 
+	| packageDecl 
+	| library 
+	| unit);
+	
+program returns delphi::program:	
+	('program' id=ident ('(' paramsList=identList ')')? ';')? block=programBlock '.'
+	; 
+          
+unit returns delphi::unit:
+	'unit' id=ident (port=portabilityDirective)? ';' interfaceSect=interfaceSection implementationSect=implementationSection initSect=initSection '.'
+	;
+
+packageDecl returns delphi::packageDecl:
+	'package' id=ident ';' (requires=requiresClause)? (contains=containsClause)? 'end' '.'
+	;
+
+library returns delphi::library:
+	'library' id=ident ';' pBlock=programBlock '.'	;
+
+programBlock returns delphi::programBlock:
+	uses=(usesClause)? block=block
+	;  
+
+usesClause returns delphi::usesClause:
+	'uses' idList=identList ';'
+	;
+
+portabilityDirective 
+	: 	'platform'
+    	|	'deprecated'
+    	|	'library'
+	;
+
+interfaceSection returns delphi::interfaceSection: 
+	{delphi::interfaceSection} 'interface' (uses=usesClause)? (interfaceDecl+=interfaceDecl)*
+	;
+
+interfaceDecl returns delphi::interfaceDecl 
+	: 	constSection
+    	|	typeSection
+    	|	varSection
+    	|	exportedHeading
+	;
+
+exportedHeading returns delphi::exportedHeading
+	: 	pHeading=procedureHeading ';' (directive=directive)?
+	| 	fHeading=functionHeading ';' (directive=directive)?
+	;
+
+implementationSection returns delphi::implementationSection 
+	: 	{delphi::implementationSection} 'implementation' (uses=usesClause)? (declSect+=declSection)* (exports+=exportsStmt)*
+	;
+
+block returns delphi::block
+	: 	(declSect=declSection)? (exports+=exportsStmt)* compound=compoundStmt (exports+=exportsStmt)*
+	;
+
+
+exportsItem returns delphi::exportsItem // modified	
+	: {delphi::exportsItem}	id=ident ('name' | 'index'  constExp+=constExpr)? ('index' | 'name' constExp+=constExpr)?
+	;
+exportsStmt returns delphi::exportsStmt
+	: 	'exports' items+=exportsItem (',' items+=exportsItem)*
+	;
+
+
+declSection returns delphi::declSection
+	: 	labelDeclSection
+    	|	constSection
+    	| 	typeSection
+    	| 	varSection
+    	| 	procedureDeclSection
+	;
+
+labelDeclSection returns delphi::labelDeclSection
+	: 	'label' id=labelId
+	;
+
+constSection returns delphi::constSection
+	: {delphi::constSection} 'const' (constantDecl+=constantDecl ';')*
+	;
+
+constantDecl returns delphi::constantDecl
+	: 	id=ident '=' const=constExpr (port=portabilityDirective)?
+    	|	id=ident ':' typeRef=typeId '=' typedConstat=typedConstant (port=portabilityDirective)?
+	;
+
+typeSection returns delphi::typeSection
+	:	{delphi::typeSection} 'type' (typeDecl+=typeDecl ';')*
+	;
+
+typeDecl returns delphi::typeDecl
+	: 	id=ident '=' ('type')? type=type (port=portabilityDirective)?
+	|	id=ident '=' ('type')? restrictedType=restrictedType (port=portabilityDirective)?
+	;
+
+typedConstant returns delphi::typedConstant
+	: 	{delphi::typedConstant}(const=constExpr | array=arrayConstant | record=recordConstant)
+	;
+
+arrayConstant returns delphi::arrayConstant
+	: 	'(' typedConstant=typedConstant ',' ')'
+	;
+
+recordConstant returns delphi::recordConstant 
+	: 	{delphi::recordConstant} '(' (recordField+=recordFieldConstant ';')* ')' 
+	;
+
+recordFieldConstant returns delphi::recordFieldConstant 
+	: 	id=ident ':' typedConstant=typedConstant
+	;
+
+type returns delphi::type
+	: 	typeId
+    	|	simpleType
+   	|	strucType
+    	|	pointerType
+    	|	stringType 
+    	|	procedureType
+   	|	variantType
+    	|	classRefType
+	;
+
+restrictedType returns delphi::restrictedType
+	: 	objectType
+    	|	classType
+    	|	interfaceType
+	;
+
+classRefType returns delphi::classRefType
+	: 	'class' 'of' typeRef=typeId
+	;
+
+simpleType returns delphi::simpleType 
+	: 	ordinalType 
+	| 	realType
+	;
+
+realType returns delphi::realType
+	: {delphi::realType} ( 'real48'
+    	|	'real'
+    	|	'single'
+    	|	'double'
+    	|	'extended'
+    	|	'currency'
+    	|	'comp')
+	;
+
+ordinalType returns delphi::ordinalType
+	: 	subrangeType 
+	| 	enumeratedType 
+	| 	ordIdent
+	;
+
+ordIdent returns delphi::ordIdent
+	: {delphi::ordIdent} (	'shortint'
+    	|	'smallint'
+    	|	'integer'
+    	|	'byte'
+	| 	'longint'
+   	|	'int64'
+    	|	'word'
+    	|	'boolean'
+    	|	'char'
+    	|	'widechar'
+    	|	'longword'
+    	|	'pchar')
+	;
+
+variantType returns delphi::variantType
+	:  {delphi::variantType} ('variant'
+    	|	'olevariant')
+	;
+
+subrangeType returns delphi::subrangeType 
+	: 	first=constExpr '..' last=constExpr
+	;
+
+enumeratedType returns delphi::enumeratedType
+	: {delphi::enumeratedType}	'(' (element+=enumeratedTypeElement ',')* ')'
+	;
+
+enumeratedTypeElement returns delphi::enumeratedTypeElement
+	: 	id=ident ('=' literalExp=constExpr )?
+	;
+
+stringType returns delphi::stringType
+	: 	{delphi::stringType} ('string'
+    	|	'ansistring'
+    	|	'widestring'
+    	|	'string' '(' constExp=constExpr ')')
+	;
+
+strucType returns delphi::strucType
+	: 	('packed')? (arrayType | setType | fileType | recType ('packed')?)
+	;
+
+arrayType returns delphi::arrayType
+	: 	'array' ('[' ordinalType+=ordinalType (',' ordinalTyp+=ordinalType)* ']')? 'of' type=type (port=portabilityDirective)?
+	;
+
+recType returns delphi::recType
+	:  {delphi::recType} 'record' (fields=fieldList)? 'end' (port=portabilityDirective) ?
+	;
+
+fieldList returns delphi::fieldList
+	: 	(field+=fieldDecl ';')+ (variantSect=variantSection)? (';')?
+	;
+
+fieldDecl returns delphi::fieldDecl
+	: 	idList=identList ':' type=type (port=portabilityDirective)?
+	;
+
+variantSection returns delphi::variantSection
+	: 	'case' (id=ident ':')? typeRef=typeId 'of' (recVariants+=recVariant ';')+
+	;
+
+recVariant returns delphi::recVariant
+	: 	constExp+=constExpr ',' (constExp+=constExpr)+ ':' '(' (fieldList=fieldList) ')'
+	;
+
+setType returns delphi::setType
+	: 	'set' 'of' ordinal=ordinalType (port=portabilityDirective)?
+	;
+
+fileType returns delphi::fileType
+	: 	'file' 'of' typeRef=typeId (port=portabilityDirective)?
+	;
+
+pointerType returns delphi::pointerType
+	: 	'^' typeId (portabilityDirective)?
+	;
+
+procedureType returns delphi::procedureType
+	: 	(pHeading=procedureHeading | fHeading=functionHeading) ('of' 'object')?
+	;
+
+varSection returns delphi::varSection
+	: 	'var' (varDecls+=varDecl ';')+
+	;
+
+varDecl returns delphi::varDecl
+	: 	idList=identList ':' type=type (('absolute' (absId=ident | absConst=constExpr)) | '=' absIniti=constExpr)? (portabilityDirective)?
+//	| 	identList ':' type ('absolute' (ident) | '=' constExpr)? (portabilityDirective)?
+	;
+
+expression returns delphi::expression
+	: 	simpleExpression ({delphi::relExp.left=current} relOp=relOp right=simpleExpression)*
+	;
+
+simpleExpression returns delphi::simpleExpression
+	: 	('+' | '-')? term ({delphi::addExp.left=current} addOp=addOp right=term)*
+	;
+
+term returns delphi::term
+	:	factor ({delphi::multExp.left=current}multOp=mulOp right=factor)*
+	;
+
+factor returns delphi::factor
+	:  
+	designator=designator '(' expList=exprList ')'
+	| {delphi::simpleFactor} designator=designator
+   	|	'@' {delphi::simpleFactor} designator=designator
+    	|	number=number
+    	|	string=string
+    	|	{delphi::factor} 'nil'
+    	|	'(' nestedExp=expression ')'
+    	|	'not'  exp= factor
+    	|	setConstuctor=setConstructor
+    	|	typeRef=typeId '(' exp=expression ')'
+	;
+
+relOp returns delphi::relOp
+	: {delphi::relOp} op=('='
+	|	'>'
+    	|	'<'
+    	|	'<='
+    	|	'>='
+    	|	'<>'
+	|	'in'
+    	|	'is'
+    	|	'as')
+	;
+
+addOp returns delphi::addOp
+	: {delphi::addOp} op=('+'
+    	|	'-'
+    	|	'or'
+    	|	'xor')
+	;
+
+mulOp returns delphi::mulOp
+	: {delphi::mulOp} op=('*'
+   	|	'/'
+    	|	'div'
+    	|	'mod'
+    	|	'and'
+    	|	'shl'
+    	|	'shr')
+	;
+
+designator returns delphi::designator
+	:	subpart=designatorSubPart ('.' designator=designator)?
+	;
+
+designatorSubPart returns delphi::designatorSubPart // modified
+	: 	part=designatorPart ( '[' exprList+=exprList ']' | '^')*
+	;
+
+designatorPart returns delphi::designatorPart // modified
+	: 	id=ID 
+	|	'&'reservedWord=reservedWord
+	|	id=ID '(' id2=ID '^' ')' // mine
+	;
+setConstructor returns delphi::setConstructor
+	: 	'[' (element+=setElement (',' element+=setElement)*) ']'
+	;
+
+setElement returns delphi::setElement
+	: 	first=expression ('..' last=expression)?
+	;
+
+exprList returns delphi::exprList
+	: 	exps+=expression (',' exps+=expression)*
+	;
+
+stmtList returns delphi::stmtList
+	: {delphi::stmtList}	(statments+=statement (';')?)*
+	;
+
+statement returns delphi::statement // ASBH modified
+	: 	(labelId=labelId ':')? statement=unlabelledStatement 
+	;
+
+	
+unlabelledStatement returns delphi::unlabelledStatement
+	: simpleStatement | structStmt
+	;
+	
+simpleStatement returns delphi::simpleStatement
+	:	{delphi::assignmentStmnt} designator=designator operator=':=' exp=expression
+	|	{delphi::callStmnt}designator=designator ('(' args=exprList ')')?
+	| 	{delphi::inheritedStamnt} 'inherited'
+	|	{delphi::gotoStmnt}'goto' label=labelId
+	;
+
+structStmt returns delphi::structStmt
+	: 	compoundStmt
+    	|	conditionalStmt
+    	|	loopStmt
+    	|	withStmt
+    	|	tryStmt
+    	|	raiseStmt
+    	|	assemblerStmt
+	;
+
+compoundStmt returns delphi::compoundStmt
+	: 	'begin' stamtList=stmtList 'end'
+	;
+
+conditionalStmt returns delphi::conditionalStmt 
+	: 	ifStmt
+	|	caseStmt
+	;
+
+ifStmt returns delphi::ifStmt 
+	: 	'if' condition=expression 'then' then=statement  (';')? ('else' else=statement  (';')?)?
+	;
+
+caseStmt returns delphi::caseStmt
+	: 	'case' expression=expression 'of' cases+=caseSelector ';' (cases+=caseSelector ';')* ('else' default=stmtList) (';') 'end'
+	;
+
+caseSelector returns delphi::caseSelector
+	: 	labels+=caseLabel (',' labels+=caseLabel)* ':' stmt=statement  (';')?
+	;
+
+caseLabel returns delphi::caseLabel
+	: 	first=constExpr ('..' last=constExpr)?
+	;
+
+loopStmt returns delphi::loopStmt
+	: 	repeatStmt
+	|	whileStmt
+	|	forStmt
+	;
+
+repeatStmt returns delphi::repeatStmt
+	: 	'repeat' stmt=statement  (';')? 'until' condition=expression
+	;
+
+whileStmt returns delphi::whileStmt
+	: 	'while' condition=expression 'do' stmt=statement  (';')?
+	;
+
+forStmt returns delphi::forStmt
+	: 	'for' varId=qualId ':=' varInit=expression ('to' | 'downto') condition=expression 'do' stmt=statement  (';')?
+	;
+
+withStmt returns delphi::withStmt // added simpleStatement
+	: 	'with' vars=identList 'do' stmt=statement (';')? // changed identList by expression
+	;
+
+tryStmt returns delphi::tryStmt // Joined
+	: 	'try' stmtList=stmtList (';')? ('except' exception=exceptionBlock |  'finally' final=stmtList) 'end'
+	;
+
+exceptionBlock returns delphi::exceptionBlock
+	: 	{delphi::exceptionBlock} ('on' (exceptionId+=ident ':')? type+=type'id' 'do' doStmt+=statement (';')?)* (('else')? elseStmts=stmtList )?
+	;
+
+raiseStmt returns delphi::raiseStmt 
+	: 	//'raise' (object)? ('at' address)?
+		{delphi::raiseStmt} 'raise' (raise=ID)? ('at' at=ID)?
+	;
+
+assemblerStmt returns delphi::assemblerStmt
+	: 	{delphi::assemblerStmt} 'asm'
+    //|	<assemblylanguage>
+    //	|	'end'
+	;
+
+procedureDeclSection returns delphi::procedureDeclSection
+	: 	procedureDecl
+    	|	functionDecl
+	;
+
+procedureDecl returns delphi::procedureDecl
+	:	heading=procedureHeading ';' (directive=directive)? (port=portabilityDirective)? block=block ';'
+	;
+
+functionDecl returns delphi::functionDecl
+	: 	heading=functionHeading ';' (directive=directive)? (port=portabilityDirective)? block=block ';'
+	;
+
+functionHeading returns delphi::functionHeading
+	: 	('class')? 'function' id=ident (formalParams=formalParameters)? ':' type=type
+	;
+
+procedureHeading returns delphi::procedureHeading
+	: 	('class')?'procedure' id=ident (formalParams=formalParameters)?
+	;
+
+formalParameters returns delphi::formalParameters
+	: 	'(' (params+=formalParm (';' params+=formalParm)*) ')'
+	;
+
+formalParm returns delphi::formalParm
+	: 	('var' | 'const' | 'out')? param=parameter
+	;
+
+parameter returns delphi::parameter
+	: 	{delphi::parameterList} idList=identList (':' (('array' 'of')? type=type | 'file'))? // changed simpleType by type, deleted string alternative
+	| 	{delphi::parameterSimple} if=ident ':' type=type '=' initExp=constExpr // changed simpleType by type
+	;
+
+directive returns delphi::directive
+	: 	dir='cdecl'
+    	|	dir='register'
+    	|	dir='dynamic'
+    	|	dir='virtual'
+    	|	dir='export'
+    	|	dir='external'
+    	|	dir='near'
+    	|	dir='far'
+    	|	dir='forward'
+	|	dir='message' messageExp=constExpr
+    	|	dir='override'
+    	|	dir='overload'
+   	|	dir='pascal'
+   	|	dir='reintroduce'
+    	|	dir='safecall'
+    	|	dir='stdcall'
+    	|	dir='varargs'
+    	|	dir='local'
+    	|	dir='abstract'
+	;
+
+objectType returns delphi::objectType
+	: 	{delphi::objectType} 'object' (heritage=objHeritage)? (fieldList=objFieldList)? (methodList=methodList)? 'end'
+	;
+
+objHeritage returns delphi::objHeritage
+	: 	'(' id=qualId ')'
+	;
+
+methodList returns delphi::methodList
+	: 	(heading=methodHeading (';' 'virtual')? (';' directive+=directive)*) ';'
+	;
+
+methodHeading returns delphi::methodHeading
+	: 	procedureHeading
+	|	functionHeading
+	|	constructorHeading
+    	|	destructorHeading
+	;
+
+constructorHeading returns delphi::constructorHeading
+	: 	'constructor' id=ident (formalParams=formalParameters)?
+	;
+
+destructorHeading returns delphi::destructorHeading
+	: 	'destructor' id=ident (formalParams=formalParameters)?
+	;
+
+objFieldList returns delphi::objFieldList
+	: 	(identList ':' type=type) ';'
+	;
+
+initSection returns delphi::initSection
+	: 	{delphi::initSection} ('initialization' stmtList=stmtList ('finalization' endStmtList=stmtList)? 'end'
+    	|	'begin' stmtList=stmtList 'end'
+    	|	'end')
+	;
+
+classType returns delphi::classType
+	: 	{delphi::classType} 'class' (heritage=classHeritage)? (visibility=classVisibility)? (fieldList=classFieldList)? (methodList=classMethodList)? (propList=classPropertyList)? 'end'
+	;
+
+classHeritage returns delphi::classHeritage
+	: 	'(' identList ')'
+	;
+
+classVisibility 
+	: 	'public' 
+	| 	'protected' 
+	| 	'private' 
+	| 	'published'
+	;
+
+classFieldList returns delphi::classFieldList
+	: 	field+=classField+
+	;
+
+classField returns delphi::classField
+	:	 visibility=classVisibility? fieldList=objFieldList
+	;
+
+classMethodList returns delphi::classMethodList
+	: 	metod+=classMethod+
+	;
+	
+classMethod returns delphi::classMethod
+	:	visibility=classVisibility? methodList=methodList
+	;
+
+classPropertyList returns delphi::classPropertyList 
+	: 	property+=classProperty+
+	;
+	
+classProperty returns delphi::classProperty
+	:	visibility=classVisibility 
+	|	visibility=classVisibility? propList=propertyList
+	;
+	
+propertyList returns delphi::propertyList
+	: 	'property' id=ident (interface=propertyInterface)? (specifiers=propertySpecifiers)? (port=portabilityDirective)? ';'
+	;
+
+propertyInterface returns delphi::propertyInterface
+	: 	(paramList=propertyParameterList)? ':' id=ident
+	;
+
+propertyParameterList returns delphi::propertyParameterList
+	: 	'[' idList+=identList ':' typeRef+=typeId ';' (idList+=identList ':' typeRef+=typeId ';')* ']' 
+	;
+
+propertySpecifiers returns delphi::propertySpecifiers // Modified constExpr
+	: {delphi::propertySpecifiers} ('index' index=constExpr)? ('read' readId=ident)? ('write' writeId=ident)? ('stored' (storeId=ident | storeExp=constExpr))? (('default' defaulExp=constExpr) | 'nodefault')? ('implements' implement=typeId)?
+	;
+
+interfaceType returns delphi::interfaceType
+	: 	'interface' (heritage=interfaceHeritage) (methodList=classMethodList) (propList+=classPropertyList)* 'end'
+	;
+
+interfaceHeritage returns delphi::interfaceHeritage
+	: 	'(' idList=identList ')'
+	;
+
+requiresClause returns delphi::requiresClause
+	: 	{delphi::requiresClause} 'requires' idList+=identList* ';'
+	;
+
+containsClause returns delphi::containsClause
+	: 	{delphi::containsClause} 'contains' idList+=identList* ';'
+	;
+
+identList returns delphi::identList
+	: 	ids+=ident (',' ids+=ident)*
+	;
+
+qualId returns delphi::qualId
+	: 	(unitId=unitId '.')? id=ident
+	;
+
+typeId returns delphi::typeId //modified
+	: 	(unitId=unitId '.')? id=qualId
+	;
+
+ident returns delphi::ident // modified
+	: 	{delphi::MultipleId} id+=ID ('.' id+=ID)*
+	|	{delphi::ReservedId} '&' reservedWord=reservedWord
+	|	{delphi::MineID} first=ID '(' second=ID '^' ')' // mine
+	;
+
+reservedWord returns delphi::reservedWord
+	: 	id=ID
+	;
+
+// ASBH modified
+constExpr returns delphi::constExpr // modified
+	: {delphi::ConstExp} exp=expression
+	| {delphi::MultipleConstExp} '(' exps+=constExpr (',' exps+=constExpr)*')'
+	| {delphi::RecordConstExp} '(' exps+=recordConstExpr (',' exps+=recordConstExpr)* ')'
+	;
+
+recordConstExpr returns delphi::recordConstExpr
+ // added
+	:	id=ident ':' constExp=constExpr
+	;
+
+unitId returns delphi::unitId
+ // modified
+	: 	id=ID
+	;
+
+labelId  // modified
+	: 	ID
+	|	INT
+	|	HEX
+	;
+
+number 
+	: 	INT
+	|	'#' INT
+	;
+
+string   
+	: 	QVALUE
+	|	DQVALUE
+	;
+
+// Lexer tokens
+terminal SLASH 			:	 '\\';
+terminal QUOTE			:	 '\'';
+terminal ID 			:	 ('a'..'z' | 'A'..'Z' | '_') ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '$' | '#' | SLASH | '-')*;
+terminal DOUBLEQUOTE		: 	'"';
+terminal DQVALUE			: 	DOUBLEQUOTE ( !DOUBLEQUOTE )*  DOUBLEQUOTE;
+terminal QVALUE			: 	QUOTE ( !QUOTE )* QUOTE;
+terminal HEX				:	('+' | '-')?  '0' ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+terminal INT returns ecore::EInt			: 	('+' | '-')? ('0'..'9')+;
+terminal COMMENT			:  	 '/*' -> '*/' ;
+terminal MORECOMMENT	:  	 '{' -> '}';
+terminal LINE_COMMENT		: 	'//' !('\n'|'\r')* ('\r'? '\n')? ;
+terminal WS  				:  	(' '|'\r'|'\t'|'\u000C'|'\n');
