@@ -46,6 +46,7 @@ import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTp;
 import org.eclipse.qvtd.cs2as.compiler.tests.models.companies.CompaniesStandaloneSetup;
+import org.eclipse.qvtd.cs2as.compiler.tests.models.delphi.DelphiStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
@@ -69,7 +70,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import astm.AstmPackage;
 import cs2as.company.lookup.LookupPackage;
+import delphi.DelphiPackage;
 import example1.source.SourcePackage;
 import example1.target.TargetPackage;
 import example2.classes.ClassesPackage;
@@ -734,8 +737,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		@NonNull Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
 				.compileTransformation(myQVT, qvtiTransf, cgParams);
-
-
 		// Execute CGed transformation
 		myQVT.executeModelsTX_CG(txClass, createCompaniesModelNames_CG("model1"));
 		myQVT.executeModelsTX_CG(txClass, createCompaniesModelNames_CG("model2"));
@@ -746,6 +747,31 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			myQVT.executeModelsTX_CG(txClass, createCompaniesModelNames_CG("model6"));
 			myQVT.executeModelsTX_CG(txClass, createCompaniesModelNames_CG("model7"));
 		}
+		myQVT.dispose();
+	}
+
+	@Test
+	public void testDelphi_CG() throws Exception {
+		DelphiStandaloneSetup.doSetup();
+		MyQVT myQVT = new MyQVT("delphi");
+		//myQVT.loadEcoreFile("Lookup.ecore", astm.lookup.LookupPackage.eINSTANCE);
+		myQVT.loadGenModels("Delphi.genmodel", "astm.genmodel", "Lookup.genmodel");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Delphi.ocl");
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+			"",
+			"",
+			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		@NonNull Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+				.compileTransformation(myQVT, qvtiTransf, cgParams);
+
+		myQVT.dispose();
+		myQVT = new MyQVT("delphi");
+		myQVT.loadEcoreFile("Delphi.ecore", DelphiPackage.eINSTANCE);
+		myQVT.loadEcoreFile("astm.ecore", AstmPackage.eINSTANCE);
+		// Execute CGed transformation
+		myQVT.executeModelsTX_CG(txClass, createDelphiModelNames_CG("untClAux"));
+		myQVT.executeModelsTX_CG(txClass, createDelphiModelNames_CG("untClFormatos"));
+		myQVT.executeModelsTX_CG(txClass, createDelphiModelNames_CG("untClArchivo"));
 		myQVT.dispose();
 	}
 
@@ -859,5 +885,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	protected static @NonNull TestModels createCompaniesModelNames_CG(String modelName) {
 		return new TestModels(modelName, ".101", ".output_CG.xmi", ".output_ref.xmi");
 	}
-
+	protected static @NonNull TestModels createDelphiModelNames_CG(String modelName) {
+		return new TestModels(modelName, ".delphi", ".output_CG.xmi", ".output_ref.xmi");
+	}
 }
