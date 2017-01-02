@@ -54,9 +54,9 @@ inv NonDataTypeForType: not type.oclIsKindOf(ocl::DataType)
 
 context SetStatement
 def:resolvedProperty : ocl::Property[1] = if isOpposite then targetProperty.opposite else targetProperty endif
-inv CompatibleClassForProperty(targetVariable.type.name + ' must conform to ' + resolvedProperty.owningClass.name):
+inv CompatibleClassForProperty(targetVariable.type?.name + ' must conform to ' + resolvedProperty.owningClass?.name):
 targetVariable.type.conformsTo(resolvedProperty.owningClass)
-inv CompatibleTypeForValue(ownedExpression.type.name + ' must conform to ' + resolvedProperty.type.name):
+inv CompatibleTypeForValue(ownedExpression.type?.name + ' must conform to ' + resolvedProperty.type?.name):
 ownedExpression.type.conformsTo(resolvedProperty.type)
 inv ValueDoesNotNavigateFromRealizedVariables:
 ownedExpression->closure(e : ocl::OclElement | e.oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(s | s.oclContainer().oclIsKindOf(ocl::CallExp) and s.oclContainer().oclAsType(ocl::CallExp).ownedSource = s)->isEmpty()

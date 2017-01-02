@@ -24,17 +24,17 @@ context PropertyTemplateItem
 def:resolvedProperty : ocl::Property[1] =
 	if isOpposite then referredProperty.opposite else referredProperty endif
 
-inv CompatibleClassForProperty(objContainer.referredClass.name + ' must conform to ' + resolvedProperty.owningClass.name):
+inv CompatibleClassForProperty(objContainer.referredClass.name + ' must conform to ' + resolvedProperty.owningClass?.name):
 	objContainer.referredClass.conformsTo(resolvedProperty.owningClass)
 
-inv CompatibleTypeForObjectValue(value.type.name + ' must conform to ' + resolvedProperty.type.name + ' or vice-versa'):
+inv CompatibleTypeForObjectValue(value.type?.name + ' must conform to ' + resolvedProperty.type?.name + ' or vice-versa'):
 	not resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies
 		let propertyType = resolvedProperty.type in
 		let valueType = value.type in
 			valueType.conformsTo(propertyType)
 			or propertyType.conformsTo(valueType)
 
-inv CompatibleTypeForCollectionElementValue(value.type.name + ' must conform to ' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + ' or vice-versa'):
+inv CompatibleTypeForCollectionElementValue(value.type?.name + ' must conform to ' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + ' or vice-versa'):
 	resolvedProperty.type.oclIsKindOf(ocl::CollectionType)
 	and not value.type.oclIsKindOf(ocl::CollectionType) implies
 		let propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in
