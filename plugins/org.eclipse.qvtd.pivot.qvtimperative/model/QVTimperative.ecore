@@ -641,7 +641,7 @@
         <details key="originalName" value="CompatibleClassForProperty"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = targetVariable.type.name + ' must conform to ' + resolvedProperty.owningClass.name,&#xA;&#x9;status : Boolean = &#xA;targetVariable.type.conformsTo(resolvedProperty.owningClass)&#xA;&#xA;}.status"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = targetVariable.type?.name + ' must conform to ' + resolvedProperty.owningClass?.name,&#xA;&#x9;status : Boolean = &#xA;targetVariable.type.conformsTo(resolvedProperty.owningClass)&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -656,7 +656,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = ownedExpression.type.name + ' must conform to ' + resolvedProperty.type.name,&#xA;&#x9;status : Boolean = &#xA;ownedExpression.type.conformsTo(resolvedProperty.type)&#xA;&#xA;}.status"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = ownedExpression.type?.name + ' must conform to ' + resolvedProperty.type?.name,&#xA;&#x9;status : Boolean = &#xA;ownedExpression.type.conformsTo(resolvedProperty.type)&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

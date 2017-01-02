@@ -719,6 +719,24 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.OCL_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Is Non Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CALL_EXP___IS_NON_NULL = PivotPackage.OCL_EXPRESSION___IS_NON_NULL;
+
+	/**
+	 * The operation id for the '<em>Is Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CALL_EXP___IS_NULL = PivotPackage.OCL_EXPRESSION___IS_NULL;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

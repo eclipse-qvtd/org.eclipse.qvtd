@@ -187,7 +187,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + getReferredTargetProperty().type.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + getReferredTargetProperty().type?.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -246,7 +246,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'PropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + getReferredTargetProperty().type.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'PropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + getReferredTargetProperty().type?.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -318,7 +318,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'VariableAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + targetVariable.type.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;targetVariable.type.conformsTo(value.type)&#xA;&#x9;or value.type.conformsTo(targetVariable.type)&#xA;&#xA;&#xA;}.status"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'VariableAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + targetVariable.type?.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;targetVariable.type.conformsTo(value.type)&#xA;&#x9;or value.type.conformsTo(targetVariable.type)&#xA;&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

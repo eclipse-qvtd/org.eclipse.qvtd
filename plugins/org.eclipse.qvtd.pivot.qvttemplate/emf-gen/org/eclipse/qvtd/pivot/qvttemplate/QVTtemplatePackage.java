@@ -219,6 +219,24 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Is Non Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___IS_NON_NULL = PivotPackage.LITERAL_EXP___IS_NON_NULL;
+
+	/**
+	 * The operation id for the '<em>Is Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___IS_NULL = PivotPackage.LITERAL_EXP___IS_NULL;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,6 +434,24 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Is Non Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___IS_NON_NULL = TEMPLATE_EXP___IS_NON_NULL;
+
+	/**
+	 * The operation id for the '<em>Is Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___IS_NULL = TEMPLATE_EXP___IS_NULL;
 
 	/**
 	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
@@ -633,6 +669,24 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Is Non Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___IS_NON_NULL = TEMPLATE_EXP___IS_NON_NULL;
+
+	/**
+	 * The operation id for the '<em>Is Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___IS_NULL = TEMPLATE_EXP___IS_NULL;
 
 	/**
 	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
