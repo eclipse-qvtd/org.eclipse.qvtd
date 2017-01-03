@@ -1,0 +1,103 @@
+/*******************************************************************************
+ * Copyright (c) 2016 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation for ModelMorf
+ *******************************************************************************/
+import pnMM : 'PetriNets.ecore'::PetriNet; 
+import scMM : 'StateCharts.ecore'::statecharts; 
+
+/**
+ * Transform a PetriNet into a StateChart.
+ * See: https://github.com/louismrose/ttc_pn2sc/ and https://arxiv.org/pdf/1312.0342.pdf
+ */
+package org::eclipse::qvtd::xtext::qvtrelation::tests::pn2sc {
+	transformation PetriNet2StateChart(pn:pnMM, sc:scMM)
+	{
+		top relation Net2StateChart {
+			domain pn net : Net {};	   
+			enforce domain sc statechart : Statechart {
+				topState = ts : AND {}
+			};
+		}
+
+		top relation Place2Basic {
+			sc : scMM::Statechart;
+			topState : scMM::AND;
+			domain pn p : Place {
+				cnet = net : Net{} ,
+				name = placeName : String{}
+			};	   
+			enforce domain sc b : Basic {
+				name = placeName,
+				rcontains = o : OR {
+					rcontains = topState
+				}
+				{ topState = sc.topState }
+			};
+			when {
+				Net2StateChart(net, sc);
+			}
+		}
+	    
+/*	    relation PlaceSet2BasicSet
+	    {
+	        pnRest: OrderedSet(pnMM::Place);
+	        scRest: OrderedSet(scMM::Basic);
+	        
+	        domain pn
+	            pnSet:OrderedSet(Place) {
+	            	pnVar:Place {} ++ pnRest
+	            };
+	        enforce domain sc
+	            scSet:OrderedSet(Basic) {
+	        	   scVar:Basic {} ++ scRest
+	            };
+	        where {
+	            Place2Basic(pnVar, scVar);
+	            if (pnRest->isEmpty())
+	            then
+	                scRest = OrderedSet{}
+	            else
+	                PlaceSet2BasicSet(pnRest, scRest)
+	            endif;
+	        }
+	    } */
+
+		top relation Transition2HyperEdge {  -- no need to do both bidirectionals
+	        postps: OrderedSet(pnMM::Place);
+	        rnexts: OrderedSet(scMM::Basic);
+			domain pn t : Transition {
+				name = transitionName : String{},
+--				prep = preps:OrderedSet(Place){prep:Place{} ++ _},
+				postp = postps:OrderedSet(Place){postp:Place{} ++ _}
+			};	   
+			enforce domain sc e : HyperEdge {
+				name = transitionName,
+--				next = nexts:OrderedSet(State){next:State{} ++ _},
+				rnext = rnexts:OrderedSet(State){rnext:State{} ++ _}
+			};
+			when {
+--				Place2Basic(prep, next);
+				Place2Basic(postp, rnext);
+			}
+		}
+
+/*retype Place to Basic
+migrate Place {
+	var container = new SC!OR;
+	container.name = original.name.replace("P", "O");
+	container.contains.add(migrated);
+	original.cnet.equivalent().topstate.contains.add(container);
+}
+
+retype Transition to HyperEdge
+migrate Transition {
+	migrated.rnext = original.prep.equivalent();
+	migrated.next = original.postp.equivalent();
+}*/	}
+}

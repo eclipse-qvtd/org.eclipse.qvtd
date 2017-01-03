@@ -449,6 +449,35 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
+	/*	@Test
+	public void testQVTrCompiler_PN2SC_CG() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		MyQVT myQVT = new MyQVT("pn2sc");
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("pn2sc", "PetriNet2StateChart.qvtr", "sc",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/pn2sc/PNtoSC", false);//,
+			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("pn", "testcase1-in.petrinet");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("sc", "testcase1-out_CG.petrinet", "testcase1-out.petrinet", null);
+			//
+			//	        myQVT.createGeneratedExecutor(txClass);
+			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+			//	    	myQVT.executeTransformation();
+			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	} */
+
 	@Test
 	public void testQVTrCompiler_SeqToStm() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schart:Statechart xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:schart="http://uam.es/StateCharts"
+    xsi:schemaLocation="http://uam.es/StateCharts java://org.eclipse.qvtd.xtext.qvtrelation.tests.pn2sc.statecharts.statechartsPackage">
+  <topState>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E10"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E0"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E1"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E2"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E3"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E4"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E5"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E6"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E7"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E8"/>
+    </contains>
+    <contains xsi:type="schart:OR">
+      <contains xsi:type="schart:Basic" name="E9"/>
+    </contains>
+  </topState>
+</schart:Statechart>
