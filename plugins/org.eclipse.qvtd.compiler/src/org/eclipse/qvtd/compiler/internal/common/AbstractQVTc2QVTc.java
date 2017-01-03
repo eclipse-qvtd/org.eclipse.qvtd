@@ -556,7 +556,7 @@ public abstract class AbstractQVTc2QVTc
 			Element dIn = context.basicEquivalentSource(dOut);
 			TypedModel tmOut;
 			if (dIn instanceof CoreDomain) {
-				tmOut = context.equivalentTarget(((CoreDomain)dIn).getTypedModel());
+				tmOut = context.equivalentTarget(QVTcoreUtil.getTypedModel((CoreDomain)dIn));
 			}
 			else {
 				tmOut = context.getMiddleTypedModelTarget();
@@ -726,7 +726,7 @@ public abstract class AbstractQVTc2QVTc
 	}
 
 	protected final @NonNull EnvironmentFactory environmentFactory;
-	private final @NonNull QVTcoreHelper helper;
+	protected final @NonNull QVTcoreHelper helper;
 	protected final @NonNull AbstractCreateVisitor<@NonNull ?> createVisitor;
 	protected final @NonNull AbstractUpdateVisitor<@NonNull ?> updateVisitor;
 	private TypedModel middleTypedModelTarget = null;

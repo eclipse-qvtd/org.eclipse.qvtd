@@ -17,12 +17,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /*public*/ class TopLevelRelationToMappingForEnforcement extends AbstractQVTr2QVTcRelations
 {
@@ -41,17 +41,17 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 //					List<@NonNull Variable> rOtherDomainVariables = ClassUtil.nullFree(rOtherDomainPattern.getBindsTo());
 //					TemplateExp rOtherTemplateExpression = rOtherDomainPattern.getTemplateExpression();
 //					Variable rOtherRootVariable = ClassUtil.nonNullState(rOtherTemplateExpression.getBindsTo());
-//					Set<@NonNull Variable> rOtherGuardDomainVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
+//					Set<@NonNull Variable> rOtherGuardDomainVariables = new HashSet<>(rOtherDomainVariables);
 //					rOtherGuardDomainVariables.retainAll(rWhenVariables);
 //					rOtherGuardDomainVariables.add(rOtherRootVariable);
 //					rOtherGuardDomainVariables.removeAll(rSharedVariables);
 					//
-//					Set<@NonNull Variable> rOtherBottomDomainVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
+//					Set<@NonNull Variable> rOtherBottomDomainVariables = new HashSet<>(rOtherDomainVariables);
 //					rOtherBottomDomainVariables.removeAll(rWhenVariables);
 //					rOtherBottomDomainVariables.removeAll(rSharedVariables);
 //					rOtherBottomDomainVariables.remove(rOtherRootVariable);
 					//
-//					Set<@NonNull Variable> rMiddleBottomDomainVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
+//					Set<@NonNull Variable> rMiddleBottomDomainVariables = new HashSet<>(rOtherDomainVariables);
 //					rMiddleBottomDomainVariables.removeAll(rWhenVariables);
 //					rMiddleBottomDomainVariables.retainAll(rSharedVariables);
 //					rMiddleBottomDomainVariables.remove(rOtherRootVariable);
@@ -70,7 +70,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 		public TopEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
-			this.cEnforcedRootVariables = new ArrayList<@NonNull RealizedVariable>(rEnforcedRootVariables.size());
+			this.cEnforcedRootVariables = new ArrayList<>(rEnforcedRootVariables.size());
 			/*			for (@NonNull Variable rEnforcedRootVariable : rEnforcedRootVariables) {
 				if (!rWhenVariables.contains(rEnforcedRootVariable)) {
 					Variable realizedVariable = mapRealizedVariable(rEnforcedRootVariable);
@@ -88,7 +88,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 		@Override
 		protected @NonNull Set<@NonNull Variable> getEnforcedBottomDomainVariables() { // FIXME unify with Invoked
-			Set<@NonNull Variable> rEnforcedBottomDomainVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
+			Set<@NonNull Variable> rEnforcedBottomDomainVariables = new HashSet<>(rEnforcedReferredVariables);
 			rEnforcedBottomDomainVariables.removeAll(rWhenVariable2rDomain.keySet());
 			rEnforcedBottomDomainVariables.removeAll(rSharedVariables);
 			return rEnforcedBottomDomainVariables;
@@ -96,7 +96,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 		/*		@Override
 		protected @NonNull Set<@NonNull Variable> getEnforcedDomainGuardVariables(@NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables) { // FIXME unify with Invoked
-			Set<@NonNull Variable> rEnforcedDomainGuardVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
+			Set<@NonNull Variable> rEnforcedDomainGuardVariables = new HashSet<>(rEnforcedReferredVariables);
 			rEnforcedDomainGuardVariables.retainAll(rWhenVariables);
 			rEnforcedBottomDomainVariables.removeAll(rSharedVariables);
 			//
@@ -119,17 +119,16 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 	}
 
 	/**
-	 * Each enforced domain is synthesized as a separate mapping.
+	 * Return the list of mappings, one for each possible enforced domain.
 	 */
 	@Override
 	protected @NonNull List<@NonNull TopEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException {
-		List<@NonNull TopEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<@NonNull TopEnforceableRelationDomain2CoreMapping>();
-		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+		List<@NonNull TopEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<>();
+		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 			if (rDomain.isIsEnforceable()) {
-				RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
-				String rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
+				String rEnforcedDomainName = PivotUtil.getName(rDomain);
 				String coreMappingName = rRelationName + '_' + rEnforcedDomainName;
-				enforceableRelationDomain2coreMappings.add(new TopEnforceableRelationDomain2CoreMapping(rEnforcedDomain, coreMappingName));
+				enforceableRelationDomain2coreMappings.add(new TopEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 			}
 		}
 		return enforceableRelationDomain2coreMappings;

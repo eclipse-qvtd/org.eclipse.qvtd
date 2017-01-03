@@ -66,6 +66,17 @@ public class QVTbaseUtil extends PivotUtil
 		}
 	}
 
+	public static class Internal extends PivotUtilInternal
+	{
+		public static @NonNull List<@NonNull ? extends Operation> getOwnedOperationsList(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			return ClassUtil.nullFree(asClass.getOwnedOperations());
+		}
+
+		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
+			return ClassUtil.nullFree(asPattern.getPredicate());
+		}
+	}
+
 	/**
 	 * Return all transformations in asModel.
 	 */
@@ -141,6 +152,10 @@ public class QVTbaseUtil extends PivotUtil
 				getAllUsedPackagesInternal(allUsedPackages, usedPackage.getImportedPackages());
 			}
 		}
+	}
+
+	public static @NonNull OCLExpression getConditionExpression(@NonNull Predicate asPredicate) {
+		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
 	}
 
 	public static @Nullable Domain getContainingDomain(@Nullable EObject eObject) {
@@ -270,8 +285,44 @@ public class QVTbaseUtil extends PivotUtil
 		return externalVariables;
 	}
 
-	public static @NonNull List<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
+	public static @NonNull Iterable<@NonNull TypedModel> getModelParameters(@NonNull Transformation asTransformation) {
+		return ClassUtil.nullFree(asTransformation.getModelParameter());
+	}
+
+	public static @NonNull List<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {
+		return ClassUtil.nullFree(asTransformation.getOwnedOperations());
+	}
+
+	//	public static @NonNull List<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
+	//		return ClassUtil.nullFree(asPattern.getPredicate());
+	//	}
+
+	public static @NonNull Iterable<@NonNull Predicate> getPredicates(@NonNull Pattern asPattern) {
 		return ClassUtil.nullFree(asPattern.getPredicate());
+	}
+
+	public static @NonNull Variable getReferredVariable(@NonNull VariableExp asVariableExp) {
+		return (Variable) ClassUtil.nonNullState(asVariableExp.getReferredVariable());
+	}
+
+	public static @NonNull List<@NonNull Rule> getRule(@NonNull Transformation asTransformation) {
+		return ClassUtil.nullFree(asTransformation.getRule());
+	}
+
+	public static @NonNull TypedModel getTypedModel(@NonNull Domain asDomain) {
+		return ClassUtil.nonNullState(asDomain.getTypedModel());
+	}
+
+	public static @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel asTypedModel) {
+		Set<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = new HashSet<>();
+		for (org.eclipse.ocl.pivot.@NonNull Package rPackage : ClassUtil.nullFree(asTypedModel.getUsedPackage())) {
+			usedClasses.addAll(ClassUtil.nullFree(rPackage.getOwnedClasses()));
+		}
+		return usedClasses;
+	}
+
+	public static @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackages(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nullFree(asTypedModel.getUsedPackage());
 	}
 
 	/**

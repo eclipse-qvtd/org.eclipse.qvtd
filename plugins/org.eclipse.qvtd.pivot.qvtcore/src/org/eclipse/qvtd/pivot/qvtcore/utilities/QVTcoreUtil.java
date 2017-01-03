@@ -76,6 +76,15 @@ public class QVTcoreUtil extends QVTbaseUtil
 		}
 	}
 
+	public static @Nullable TypedModel basicGetTypedModel(@Nullable Area area) {
+		if (area instanceof CoreDomain) {
+			return ((CoreDomain)area).getTypedModel();
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static @NonNull Set<Mapping> getAllRefinedMappings(@NonNull Mapping mapping) {
 		return getAllRefinedMappings(new HashSet<Mapping>(), mapping);
 	}
@@ -158,15 +167,6 @@ public class QVTcoreUtil extends QVTbaseUtil
 			return ClassUtil.nonNullState(referredProperty.getOpposite());
 		}
 		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
-	}
-
-	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {
-		if (area instanceof CoreDomain) {
-			return ((CoreDomain)area).getTypedModel();
-		}
-		else {
-			return null;
-		}
 	}
 
 	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {

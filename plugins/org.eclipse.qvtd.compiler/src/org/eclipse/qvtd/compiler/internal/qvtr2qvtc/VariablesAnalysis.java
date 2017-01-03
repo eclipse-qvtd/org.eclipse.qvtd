@@ -92,12 +92,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * Return all variables referenced within the composition tree of each of asRoots.
 	 */
 	public static void gatherReferredVariables(@NonNull Set<@NonNull Variable> referredVariables, @NonNull Iterable<@NonNull ? extends Element> asRoots) {
-		for (Element asRoot : asRoots) {
+		for (@NonNull Element asRoot : asRoots) {
 			gatherReferredVariables(referredVariables, asRoot);
 		}
 	}
 	public static void gatherReferredVariables(@NonNull Set<@NonNull Variable> referredVariables, @NonNull Element asRoot) {
-		for (EObject eObject : new TreeIterable(asRoot, true)) {
+		for (@NonNull EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
 				if (referredVariable instanceof Variable) {
@@ -176,10 +176,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * Return the variables that are used by more than one domain of the relation and so must be middle variables.
 	 */
 	public static @NonNull Set<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
-		Set<@NonNull Variable> rSomeDomainVariables = new HashSet<@NonNull Variable>();
-		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<@NonNull Variable>();
+		Set<@NonNull Variable> rSomeDomainVariables = new HashSet<>();
+		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<>();
 		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
-			Set<@NonNull Variable> rThisDomainVariables = new HashSet<@NonNull Variable>();
+			Set<@NonNull Variable> rThisDomainVariables = new HashSet<>();
 			VariablesAnalysis.gatherReferredVariables(rThisDomainVariables, rDomain);
 			for (@NonNull Variable rVariable : rThisDomainVariables) {
 				if (!rSomeDomainVariables.add(rVariable)) {
@@ -205,17 +205,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * Map from the each core variable name in use to an originating object, typically the VariableAnalysis of a relation variable,
 	 * but the RElationCallExp of a where, the invoking relation of a call-from invocation, or this for the middle variable.
 	 */
-	private @NonNull Map<@NonNull String, @NonNull VariableAnalysis> name2originator = new HashMap<@NonNull String, @NonNull VariableAnalysis>();
+	private @NonNull Map<@NonNull String, @NonNull VariableAnalysis> name2originator = new HashMap<>();
 
 	/**
 	 * The analysis of each relation variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> rVariable2analysis = new HashMap<@NonNull Variable, @NonNull VariableAnalysis>();
+	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> rVariable2analysis = new HashMap<>();
 
 	/**
 	 * The analysis of each core variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<@NonNull Variable, @NonNull VariableAnalysis>();
+	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<>();
 
 	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass, boolean isInvoked) {
 		super(qvtr2qvtc.getEnvironmentFactory());
@@ -280,7 +280,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) {
 		assert cMapping == QVTcoreUtil.getContainingMapping(cExpectedCorePattern);
 		QVTr2QVTc.SYNTHESIS.println("  addPredicate " + cExpression);
-		Set<@NonNull Variable> cReferredVariables = new HashSet<@NonNull Variable>();
+		Set<@NonNull Variable> cReferredVariables = new HashSet<>();
 		gatherReferredVariables(cReferredVariables, cExpression);
 		boolean isGuard = true;
 		boolean isMiddle = false;
@@ -455,7 +455,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		List<@NonNull String> names = new ArrayList<@NonNull String>(name2originator.keySet());
+		List<@NonNull String> names = new ArrayList<>(name2originator.keySet());
 		Collections.sort(names);
 		for (@NonNull String name : names) {
 			if (s.length() > 0) {

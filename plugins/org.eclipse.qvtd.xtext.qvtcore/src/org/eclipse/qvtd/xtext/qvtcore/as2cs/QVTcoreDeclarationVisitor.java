@@ -232,7 +232,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	}
 
 	protected @Nullable Package getScope(@NonNull Variable asVariable) {
-		TypedModel typedModel = QVTcoreUtil.getTypedModel(QVTcoreUtil.getContainingArea(asVariable));
+		TypedModel typedModel = QVTcoreUtil.basicGetTypedModel(QVTcoreUtil.getContainingArea(asVariable));
 		if (typedModel == null) {
 			return null;
 		}

@@ -151,7 +151,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (asGuardPattern != null) {
-			context.refreshList(Predicate.class, QVTbaseUtil.getOwnedPredicates(asGuardPattern), csElement.getOwnedPredicates());
+			context.refreshList(Predicate.class, QVTbaseUtil.Internal.getPredicatesList(asGuardPattern), csElement.getOwnedPredicates());
 		}
 		return null;
 	}

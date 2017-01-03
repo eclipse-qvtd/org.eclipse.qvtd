@@ -156,80 +156,75 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 * Optional configuration of the NsURI of the trace package.
 	 */
 	private @Nullable String traceNsURI = null;
-	private final @NonNull Map<@NonNull Element, @NonNull Element> globalTarget2source = new HashMap<@NonNull Element, @NonNull Element>();
-	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> globalSource2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
+	private final @NonNull Map<@NonNull Element, @NonNull Element> globalTarget2source = new HashMap<>();
+	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> globalSource2targets = new HashMap<>();
 
 	/**
 	 * All leaf packages that contribute to the trace. Typically just one leaf package. May be many.
 	 */
-	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> txTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
-	//	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
+	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> txTracePackages = new ArrayList<>();
+	//	private final @NonNull List<@NonNull Transformation> cTransformations = new ArrayList<@NonNull Transformation>();
 
 	/**
 	 * Mapping from each key to its corresponding identification constructor function.
 	 */
-	private final @NonNull Map<@NonNull Key, @NonNull Function> key2function = new HashMap<@NonNull Key, @NonNull Function>();
+	private final @NonNull Map<@NonNull Key, @NonNull Function> key2function = new HashMap<>();
 
 	// Un-navigable opposites
 	//
 	//	The Key that identifies each Class.
 	// FIXME can there be two keys for the same Class?
 	//
-	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key>();
+	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<>();
 
 	/**
 	 * Mapping from each relation to its corresponding trace class.
 	 */
-	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
+	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<>();
 
 	/**
 	 * Map from each relation to all the expressions that call the relation.
 	 */
-	private final @NonNull Map<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>> relation2invocations = new HashMap<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>>();
+	private final @NonNull Map<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>> relation2invocations = new HashMap<>();
 
 	/**
 	 * Map from each relation invocation the relation whose where predicate contains the invocation.
 	 * @deprecated computable - no cache required
 	 */
 	@Deprecated
-	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> invocation2invokingRelation = new HashMap<@NonNull RelationCallExp, @NonNull Relation>();
+	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> invocation2invokingRelation = new HashMap<>();
 
 	private @NonNull CoreModel coreModel;
 
 	/**
 	 * The core Transformation for each RelationalTransformation.
 	 */
-	private @NonNull Map<@NonNull RelationalTransformation, @NonNull Transformation> relationalTransformation2coreTransformation
-	= new HashMap<@NonNull RelationalTransformation, @NonNull Transformation>();
+	private @NonNull Map<@NonNull RelationalTransformation, @NonNull Transformation> relationalTransformation2coreTransformation = new HashMap<>();
 
 	/**
 	 * The trace Package for each RelationalTransformation.
 	 */
-	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package> relationalTransformation2tracePackage
-	= new HashMap<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package>();
+	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package> relationalTransformation2tracePackage = new HashMap<>();
 
 	/**
 	 * The core TypedModel for each Relational TypedModel.
 	 */
-	private @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> relationalTypedModel2coreTypedModel
-	= new HashMap<@NonNull TypedModel, @NonNull TypedModel>();
+	private @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> relationalTypedModel2coreTypedModel = new HashMap<>();
 
 	/**
 	 * The lazily created named Trace Properties in each Trace Class.
 	 */
-	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> traceClass2name2traceProperty
-	= new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>>();
+	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> traceClass2name2traceProperty = new HashMap<>();
 
 	/**
 	 * The lazily created named Core mappings for each transformation.
 	 */
-	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping
-	= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();
+	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping = new HashMap<>();
 
 	/**
 	 * The root variables (in relation call order) of each relation.
 	 */
-	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<@NonNull Relation, @NonNull List<@NonNull Variable>>();
+	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<>();
 
 	private @Nullable Property oclContainerProperty = null;
 
@@ -270,7 +265,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					Relation calledRelation = ClassUtil.nonNullState(relationInvocation.getReferredRelation());
 					List<@NonNull RelationCallExp> relationInvocations = relation2invocations.get(calledRelation);
 					if (relationInvocations == null) {
-						relationInvocations = new ArrayList<@NonNull RelationCallExp>();
+						relationInvocations = new ArrayList<>();
 						relation2invocations.put(calledRelation, relationInvocations);
 					}
 					relationInvocations.add(relationInvocation);
@@ -287,7 +282,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	protected void analyzeRootVariables(@NonNull Relation relation) {
-		List<@NonNull Variable> rootVariables = new ArrayList<@NonNull Variable>();
+		List<@NonNull Variable> rootVariables = new ArrayList<>();
 		for (@NonNull Domain rDomain : ClassUtil.nullFree(relation.getDomain())) {
 			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
 				TemplateExp rRootTemplateExpression = rDomainPattern.getTemplateExpression();
@@ -336,22 +331,22 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	/**
-	 * Create the name Mapping for a coreTransformation.
+	 * Create the name Mapping for a cTransformation.
 	 */
 	/*public*/ @NonNull Mapping createMapping(@NonNull Relation relation, @NonNull String name) {
 		RelationalTransformation rt = (RelationalTransformation) relation.getTransformation();
 		assert rt != null;
-		@NonNull Transformation coreTransformation = getCoreTransformation(rt);
-		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(coreTransformation);
+		@NonNull Transformation cTransformation = getCoreTransformation(rt);
+		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(cTransformation);
 		if (name2mapping == null) {
-			name2mapping = new HashMap<@NonNull String, @NonNull Mapping>();
-			transformation2name2mapping.put(coreTransformation, name2mapping);
+			name2mapping = new HashMap<>();
+			transformation2name2mapping.put(cTransformation, name2mapping);
 		}
 		Mapping coreMapping = name2mapping.get(name);
 		assert (coreMapping == null);// {
 		coreMapping = helper.createMapping(name);
 		putGlobalTrace(coreMapping, relation);
-		coreMapping.setTransformation(coreTransformation);
+		coreMapping.setTransformation(cTransformation);
 		name2mapping.put(name, coreMapping);
 		//		}
 		return coreMapping;
@@ -450,8 +445,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		reportDiagnostics(new Issues(), diagnostic);
 	}
 
-	/*public*/ @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation relationalTransformation) {
-		return ClassUtil.nonNullState(relationalTransformation2coreTransformation.get(relationalTransformation));
+	/*public*/ @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation rTransformation) {
+		return ClassUtil.nonNullState(relationalTransformation2coreTransformation.get(rTransformation));
 	}
 
 	/*public*/ @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel relationTypedModel) {
@@ -566,8 +561,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return ClassUtil.nonNullState(relation2traceClass.get(relation));
 	}
 
-	/*public*/ org.eclipse.ocl.pivot.@NonNull Package getTracePackage(@NonNull RelationalTransformation relationalTransformation) {
-		return ClassUtil.nonNullState(relationalTransformation2tracePackage.get(relationalTransformation));
+	/*public*/ org.eclipse.ocl.pivot.@NonNull Package getTracePackage(@NonNull RelationalTransformation rTransformation) {
+		return ClassUtil.nonNullState(relationalTransformation2tracePackage.get(rTransformation));
 	}
 
 	public @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel rTypedModel) {
@@ -624,7 +619,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		assert oldRelationElement == null;
 		List<@NonNull Element> targets = globalSource2targets.get(relationElement);
 		if (targets == null) {
-			targets = new ArrayList<@NonNull Element> ();
+			targets = new ArrayList<> ();
 			globalSource2targets.put(relationElement, targets);
 		}
 		targets.add(coreElement);
@@ -749,7 +744,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					}
 					genPackages.add(genPackage);
 				}
-				Set<org.eclipse.ocl.pivot.@NonNull Package> asPackages = new HashSet<org.eclipse.ocl.pivot.@NonNull Package>();
+				Set<org.eclipse.ocl.pivot.@NonNull Package> asPackages = new HashSet<>();
 				for (EObject element : new TreeIterable(asModel, false)) {
 					if (element instanceof Property) {
 						Property property = (Property)element;
@@ -772,7 +767,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 						asPackages.add(asPackage);
 					}
 				}
-				List<org.eclipse.ocl.pivot.@NonNull Package> asPackageList = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>(asPackages);
+				List<org.eclipse.ocl.pivot.@NonNull Package> asPackageList = new ArrayList<>(asPackages);
 				Collections.sort(asPackageList, NameUtil.NAMEABLE_COMPARATOR);
 				for (org.eclipse.ocl.pivot.@NonNull Package asPackage : asPackageList) {
 					EPackage ePackage = (EPackage) asPackage.getESObject();
@@ -801,7 +796,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			}
 		}
 		genModel.reconcile();
-		Map<Object, Object> saveOptions = new HashMap<Object, Object>(saveOptions2);
+		Map<Object, Object> saveOptions = new HashMap<>(saveOptions2);
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 		saveOptions.put(DerivedConstants.RESOURCE_OPTION_LINE_DELIMITER, "\n");
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
@@ -981,7 +976,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					org.eclipse.ocl.pivot.Package nestedTracePackage = relationalTransformationToTracePackage.doRelationalTransformationToTracePackage((RelationalTransformation)relationClass);
 					txTracePackages.add(nestedTracePackage);
 					if (nestedTracePackages == null) {
-						nestedTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+						nestedTracePackages = new ArrayList<>();
 					}
 					nestedTracePackages.add(nestedTracePackage);
 				}
@@ -989,7 +984,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages2 = transformToTracePackageHierarchy(ClassUtil.nullFree(relationPackage.getOwnedPackages()));
 			if (nestedTracePackages2 != null) {
 				if (nestedTracePackages == null) {
-					nestedTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+					nestedTracePackages = new ArrayList<>();
 				}
 				nestedTracePackages.addAll(nestedTracePackages2);
 			}
@@ -1004,7 +999,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				//				org.eclipse.ocl.pivot.Package nestingTracePackage = helper.createPackage(ClassUtil.nonNull(relationPackage.getName()), relationPackage.getNsPrefix(), uri);
 				//				nestingTracePackage.getOwnedPackages().addAll(nestedTracePackages);
 				if (nestingTracePackages == null) {
-					nestingTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+					nestingTracePackages = new ArrayList<>();
 				}
 				//				nestingTracePackages.add(nestingTracePackage);
 				nestingTracePackages.addAll(nestedTracePackages);
@@ -1020,7 +1015,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	/*public*/ @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) {
 		Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
 		if (name2traceProperty == null) {
-			name2traceProperty = new HashMap<@NonNull String, @NonNull Property>();
+			name2traceProperty = new HashMap<>();
 			traceClass2name2traceProperty.put(traceClass, name2traceProperty);
 		}
 		Property traceProperty = name2traceProperty.get(name);

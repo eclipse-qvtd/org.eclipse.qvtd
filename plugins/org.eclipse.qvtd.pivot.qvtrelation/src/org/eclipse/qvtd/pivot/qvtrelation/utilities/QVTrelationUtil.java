@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -27,11 +28,15 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
+
+import com.google.common.collect.Iterables;
 
 public class QVTrelationUtil extends QVTbaseUtil
 {
@@ -44,6 +49,34 @@ public class QVTrelationUtil extends QVTbaseUtil
 			}
 		}
 		return null;
+	}
+
+	public static org.eclipse.ocl.pivot.@NonNull Class getIdentifies(@NonNull Key rKey) {
+		return ClassUtil.nonNullState(rKey.getIdentifies());
+	}
+
+	public static @NonNull List<@NonNull OCLExpression> getOwnedArguments(@NonNull RelationCallExp rInvocation) {
+		return ClassUtil.nullFree(rInvocation.getArgument());
+	}
+
+	public static @NonNull Iterable<@NonNull RelationDomain> getOwnedDomains(@NonNull Relation rRelation) {
+		return Iterables.filter(ClassUtil.nullFree(rRelation.getDomain()), RelationDomain.class);
+	}
+
+	public static @NonNull Iterable<@NonNull Key> getOwnedKey(@NonNull RelationalTransformation rTransformation) {
+		return ClassUtil.nullFree(rTransformation.getOwnedKey());
+	}
+
+	public static @NonNull Iterable<@NonNull DomainPattern> getOwnedPatterns(@NonNull RelationDomain rRelationDomain) {
+		return ClassUtil.nullFree(rRelationDomain.getPattern());
+	}
+
+	public static @NonNull Iterable<@NonNull Relation> getOwnedRelations(@NonNull RelationalTransformation rTransformation) {
+		return Iterables.filter(ClassUtil.nullFree(rTransformation.getRule()), Relation.class);
+	}
+
+	public static @NonNull Relation getReferredRelation(@NonNull RelationCallExp rInvocation) {
+		return ClassUtil.nonNullState(rInvocation.getReferredRelation());
 	}
 
 	/**
@@ -110,6 +143,14 @@ public class QVTrelationUtil extends QVTbaseUtil
 			rootVariables.add(rootVariable);
 		}
 		return rootVariables;
+	}
+
+	public static @NonNull RelationalTransformation getTransformation(@NonNull Relation rRelation) {
+		return (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
+	}
+
+	public static @NonNull TemplateExp getOwnedTemplateExpression(@NonNull DomainPattern rDomainPattern) {
+		return ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
 	}
 
 	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {

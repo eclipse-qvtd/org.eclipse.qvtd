@@ -59,6 +59,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
@@ -222,7 +223,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		for (Rule rule : qvtpTransformation.getRule()) {
 			for (Domain domain : rule.getDomain()) {
 				if (domain.isIsCheckable()) {
-					ImperativeTypedModel checkableTypedModel = qvtpTypedModel2qvtiTypedModel.get(domain.getTypedModel());
+					ImperativeTypedModel checkableTypedModel = qvtpTypedModel2qvtiTypedModel.get(QVTcoreUtil.getTypedModel(domain));
 					if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
 						checkableTypedModel.setIsChecked(true);
 						if (enforceableTypedModels.contains(checkableTypedModel)) {
@@ -235,7 +236,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 					}
 				}
 				if (domain.isIsEnforceable()) {
-					ImperativeTypedModel enforceableTypedModel = qvtpTypedModel2qvtiTypedModel.get(domain.getTypedModel());
+					ImperativeTypedModel enforceableTypedModel = qvtpTypedModel2qvtiTypedModel.get(QVTcoreUtil.getTypedModel(domain));
 					if ((enforceableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(enforceableTypedModel)) {
 						enforceableTypedModel.setIsEnforced(true);
 						if (checkableTypedModels.contains(enforceableTypedModel)) {

@@ -147,44 +147,44 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			Area thisArea = getArea(getMapping());
 			if (thisArea != null) {
 				GuardPattern thisGuardPattern = QVTcoreUtil.getGuardPattern(thisArea);
-				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(thisGuardPattern));
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(thisGuardPattern));
 				gatherVariables(QVTcoreUtil.getOwnedVariables(thisGuardPattern), MergedVariable.GUARD);
 				BottomPattern thisBottomPattern = QVTcoreUtil.getBottomPattern(thisArea);
 				gatherVariables(QVTcoreUtil.getOwnedVariables(thisBottomPattern), MergedVariable.BOTTOM);
 				gatherAssignments(QVTcoreUtil.getOwnedAssignments(thisBottomPattern), ASSIGNMENT);
-				bottomPredicates.addAll(QVTbaseUtil.getOwnedPredicates(thisBottomPattern));
+				Iterables.addAll(bottomPredicates, QVTbaseUtil.getPredicates(thisBottomPattern));
 				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(thisBottomPattern), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area childArea : getChildAreas()) {
 				GuardPattern childGuardPattern = QVTcoreUtil.getGuardPattern(childArea);
-				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(childGuardPattern));
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(childGuardPattern));
 				gatherVariables(QVTcoreUtil.getOwnedVariables(childGuardPattern), MergedVariable.GUARD);
 				BottomPattern childBottomPattern = QVTcoreUtil.getBottomPattern(childArea);
 				gatherVariables(QVTcoreUtil.getOwnedVariables(childBottomPattern), MergedVariable.BOTTOM);
 				gatherAssignments(QVTcoreUtil.getOwnedAssignments(childBottomPattern), ASSIGNMENT);
-				bottomPredicates.addAll(QVTbaseUtil.getOwnedPredicates(childBottomPattern));
+				Iterables.addAll(bottomPredicates, QVTbaseUtil.getPredicates(childBottomPattern));
 				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(childBottomPattern), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area parentArea : getParentAreas()) {
 				assert (parentArea != thisArea);
 				GuardPattern parentGuardPattern = QVTcoreUtil.getGuardPattern(parentArea);
-				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(parentGuardPattern));
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(parentGuardPattern));
 				gatherVariables(QVTcoreUtil.getOwnedVariables(parentGuardPattern), MergedVariable.GUARD);
 				BottomPattern parentBottomPattern = QVTcoreUtil.getBottomPattern(parentArea);
 				gatherVariables(QVTcoreUtil.getOwnedVariables(parentBottomPattern), MergedVariable.GUARD);			// Hoist
 				gatherAssignments(QVTcoreUtil.getOwnedAssignments(parentBottomPattern), PREDICATE);
-				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(parentBottomPattern));									// Hoist
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(parentBottomPattern));									// Hoist
 				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(parentBottomPattern), MergedVariable.GUARD);	// Hoist
 			}
 			for (@NonNull Area siblingArea : getSiblingAreas()) {
 				if (siblingArea != thisArea) {
 					GuardPattern siblingGuardPattern = QVTcoreUtil.getGuardPattern(siblingArea);
-					guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(siblingGuardPattern));
+					Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(siblingGuardPattern));
 					gatherVariables(QVTcoreUtil.getOwnedVariables(siblingGuardPattern), MergedVariable.GUARD);
 					BottomPattern siblingBottomPattern = QVTcoreUtil.getBottomPattern(siblingArea);
 					gatherVariables(QVTcoreUtil.getOwnedVariables(siblingBottomPattern), MergedVariable.BOTTOM);		// FIXME legacy compatibility
 					gatherAssignments(QVTcoreUtil.getOwnedAssignments(siblingBottomPattern), ASSIGNMENT);
-					bottomPredicates.addAll(QVTbaseUtil.getOwnedPredicates(siblingBottomPattern));		// FIXME legacy compatibility
+					Iterables.addAll(bottomPredicates, QVTbaseUtil.getPredicates(siblingBottomPattern));		// FIXME legacy compatibility
 					gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(siblingBottomPattern), MergedVariable.BOTTOM);
 				}
 			}
@@ -523,8 +523,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			computeParentMappings(parentMappings, uMapping);
 			for (@NonNull Mapping uMapping : Iterables.concat(siblingMappings, parentMappings, childMappings)) {
 				for (@NonNull Domain uDomain : ClassUtil.nullFree(uMapping.getDomain())) {
-					TypedModel uTypedModel = uDomain.getTypedModel();
-					assert uTypedModel != null;
+					TypedModel uTypedModel = QVTcoreUtil.getTypedModel(uDomain);
 					if (uTypedModel2mergedDomain.get(uTypedModel) == null) {
 						uTypedModel2mergedDomain.put(uTypedModel, new MergedDomain(createVisitor, this, uTypedModel, (@NonNull CoreDomain) uDomain));
 					}

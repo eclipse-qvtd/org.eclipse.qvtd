@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -345,7 +346,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @NonNull CoreDomain visitCoreDomain(@NonNull CoreDomain dIn) {
 			CoreDomain dOut = super.visitCoreDomain(dIn);
-			String name = dIn.getTypedModel().getName();
+			String name = QVTcoreUtil.getTypedModel(dIn).getName();
 			dOut.setName(name);			// Redundant replication of Epsilon functionality
 			if (qvtuConfiguration.isInput(name)) {
 				dOut.setIsEnforceable(false);
@@ -397,7 +398,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 
 		//
-		//	Output only bottom predicates are discarded.
+		//	Bottom pattern predicates invoving output variables are discarded; they are assignments.
 		//
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
@@ -595,7 +596,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	private @Nullable MappingMode getComposedMappingMode(@NonNull Mapping mapping) {
 		MappingMode mergedMode = MappingMode.NULL;
 		for (@NonNull Domain domain: ClassUtil.nullFree(mapping.getDomain())) {
-			String name = domain.getTypedModel().getName();
+			String name = PivotUtil.getName(QVTcoreUtil.getTypedModel(domain));
 			if (qvtuConfiguration.isInput(name)) {
 				mergedMode = mergedMode.asInput();
 				domain2mode.put((CoreDomain)domain, DomainMode.INPUT);
