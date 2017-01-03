@@ -296,6 +296,9 @@ public abstract class AbstractQVTc2QVTc
 			if (paIn.eIsSet(QVTcorePackage.Literals.ASSIGNMENT__IS_DEFAULT)) {
 				paOut.setIsDefault(paIn.isIsDefault());
 			}
+			if (paIn.eIsSet(QVTcorePackage.Literals.ASSIGNMENT__IS_PARTIAL)) {
+				paOut.setIsPartial(paIn.isIsPartial());
+			}
 			paOut.setTargetProperty(paIn.getTargetProperty());
 			createAll(paIn.getOwnedComments(), paOut.getOwnedComments());
 			return paOut;

@@ -689,6 +689,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csStatement.setReferredProperty(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		csStatement.setOwnedExpression(createExpCS(asSetStatement.getOwnedExpression()));
 		csStatement.setIsNotify(asSetStatement.isIsNotify());
+		csStatement.setIsPartial(asSetStatement.isIsPartial());
 		refreshObservedProperties(asSetStatement, csStatement.getObservedProperties(), ClassUtil.nullFree(asSetStatement.getObservedProperties()));
 		return csStatement;
 	}

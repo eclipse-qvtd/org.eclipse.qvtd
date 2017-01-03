@@ -311,10 +311,13 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
-			context.refreshModelElement(VariableAssignment.class, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			VariableAssignment asAssignment = context.refreshModelElement(VariableAssignment.class, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			asAssignment.setIsPartial(csElement.isIsPartial());
 		}
 		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			PropertyAssignment asAssignment = context.refreshModelElement(PropertyAssignment.class, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			asAssignment.setIsDefault(csElement.isIsDefault());
+			asAssignment.setIsPartial(csElement.isIsPartial());
 		}
 		return null;
 	}

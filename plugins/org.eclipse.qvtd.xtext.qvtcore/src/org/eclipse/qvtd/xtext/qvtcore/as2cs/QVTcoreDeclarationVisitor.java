@@ -468,6 +468,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
 		csAssignment.setOwnedInitExpression(createExpCS(asNavigationAssignment.getValue()));
 		csAssignment.setIsDefault(asNavigationAssignment.isIsDefault());
+		csAssignment.setIsPartial(asNavigationAssignment.isIsPartial());
 		return csAssignment;
 	}
 
@@ -617,6 +618,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		}
 		csAssignment.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asVariableAssignment.getValue()));
 		csAssignment.setIsDefault(asVariableAssignment.isIsDefault());
+		csAssignment.setIsPartial(asVariableAssignment.isIsPartial());
 		return csAssignment;
 	}
 

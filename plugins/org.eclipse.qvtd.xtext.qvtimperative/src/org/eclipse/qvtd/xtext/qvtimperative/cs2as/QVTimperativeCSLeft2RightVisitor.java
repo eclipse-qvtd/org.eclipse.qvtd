@@ -120,7 +120,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}
-			Iterable<? extends Operation> nonStaticOperations = metamodelManager.getAllOperations(asType, FeatureFilter.SELECT_NON_STATIC, name);
+			Iterable<@NonNull ? extends Operation> nonStaticOperations = metamodelManager.getAllOperations(asType, FeatureFilter.SELECT_NON_STATIC, name);
 			List<NamedElement> invocations = getInvocationsInternal(null, nonStaticOperations, iteratorCount, expressionCount);
 			//			if (asTypeValue != null) {
 			//				Iterable<? extends Operation> staticOperations = metamodelManager.getAllOperations(asTypeValue, FeatureFilter.SELECT_STATIC, name);

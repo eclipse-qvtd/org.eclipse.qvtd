@@ -347,6 +347,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public @Nullable Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csSetStatement) {
 		SetStatement asSetStatement = context.refreshModelElement(SetStatement.class, QVTimperativePackage.Literals.SET_STATEMENT, csSetStatement);
 		asSetStatement.setIsNotify(csSetStatement.isIsNotify());
+		asSetStatement.setIsPartial(csSetStatement.isIsPartial());
 		return null;
 	}
 
