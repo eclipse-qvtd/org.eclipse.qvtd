@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 /**
@@ -447,20 +448,28 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return null;
 	}
 
-	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variable) {
-		Node node = variable2node.get(variable);
+	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
+		Node node = variable2node.get(variableDeclaration);
 		if (node == null) {
-			if (variable instanceof Variable) {
-				OCLExpression ownedInit = ((Variable)variable).getOwnedInit();
+			if (variableDeclaration instanceof Variable) {
+				Variable variable = (Variable)variableDeclaration;
+				OCLExpression ownedInit = variable.getOwnedInit();
 				if (ownedInit != null) {
-					node = analyzeVariable((Variable) variable, ownedInit);
+					node = analyzeVariable(variable, ownedInit);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					node = RegionUtil.createLoadedStepNode(this, variable);		// FIXME Predicated ??
+					DomainUsage domainUsage = getSchedulerConstants().getDomainUsage(variable);
+					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
+					if (isEnforceable) {
+						node = RegionUtil.createRealizedStepNode(this, variable);
+					}
+					else {
+						node = RegionUtil.createLoadedStepNode(this, variable);		// FIXME Predicated ??
+					}
 				}
 			}
 		}
-		assert node != null : "No variable2simpleNode entry for " + variable;
+		assert node != null : "No variable2simpleNode entry for " + variableDeclaration;
 		return node;
 		/*		if (variable instanceof RealizedVariable) {
 			return RegionUtil.REALIZED_VARIABLE.createNode(this, (RealizedVariable)variable);
@@ -491,7 +500,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		//
 		// Create the GREEN realized nodes.
 		//
-		analyzeRealizedVariables();
+		analyzeRealizedVariables();		// FIXME bottom variables too
 		//
 		// Create the initialization/predicate/computation nodes and edges
 		//

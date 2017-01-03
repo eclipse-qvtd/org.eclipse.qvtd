@@ -30,6 +30,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Iterables;
@@ -114,8 +115,8 @@ public class Partitioner
 	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
 	private final @NonNull Set<@NonNull NavigableEdge> navigableEdges = new HashSet<>();
-	private final @NonNull Set<@NonNull NavigableEdge> realizedEdges = new HashSet<>();
-	private final @NonNull List<@NonNull NavigableEdge> realizedOutputEdges = new ArrayList<>();
+	private final @NonNull Set<@NonNull Edge> realizedEdges = new HashSet<>();
+	private final @NonNull List<@NonNull Edge> realizedOutputEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> trueNodes = new ArrayList<>();
 	private boolean hasLoadedNodes = false;
 
@@ -194,14 +195,13 @@ public class Partitioner
 					predicatedEdges.add(edge);
 				}
 				if (edge.isNavigation()) {
-					NavigableEdge navigationEdge = (NavigableEdge) edge;
 					if (edge.isRealized()) {
-						realizedEdges.add(navigationEdge);
+						realizedEdges.add(edge);
 						Node sourceNode = edge.getSource();
 						if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode.isPredicated() || sourceNode.isRealized())) {
 							Node targetNode = edge.getTarget();
 							if (!realizedMiddleNodes.contains(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
-								realizedOutputEdges.add(navigationEdge);
+								realizedOutputEdges.add(edge);
 							}
 						}
 						if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
@@ -215,6 +215,19 @@ public class Partitioner
 						if (!targetNode.isExplicitNull()) {
 							//							navigableEdges.add(navigationEdge);
 						}
+					}
+				}
+				else if (RegionUtil.isRealizedIncludes(edge)) {
+					realizedEdges.add(edge);
+					Node sourceNode = edge.getSource();
+					if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode.isPredicated() || sourceNode.isRealized())) {
+						Node targetNode = edge.getTarget();
+						if (!realizedMiddleNodes.contains(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
+							realizedOutputEdges.add(edge);
+						}
+					}
+					if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
+						//							navigableEdges.add(navigationEdge);
 					}
 				}
 			}
@@ -351,7 +364,7 @@ public class Partitioner
 		return deadNodes;
 	}
 
-	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull NavigableEdge outputEdge, int i) {
+	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull Edge outputEdge, int i) {
 		AssignmentPartition realizedPartition = new AssignmentPartition(this, outputEdge);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
@@ -411,7 +424,7 @@ public class Partitioner
 		return predicatedOutputNodes;
 	}
 
-	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
+	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
 		return realizedEdges;
 	}
 
@@ -515,7 +528,7 @@ public class Partitioner
 					regions.add(createSpeculationRegion());
 					regions.add(createSpeculatedRegion());
 				}
-				for (@NonNull NavigableEdge outputEdge : realizedOutputEdges) {
+				for (@NonNull Edge outputEdge : realizedOutputEdges) {
 					if (!hasRealizedEdge(outputEdge)) {
 						regions.add(createAssignmentRegion(outputEdge, regions.size()));
 					}

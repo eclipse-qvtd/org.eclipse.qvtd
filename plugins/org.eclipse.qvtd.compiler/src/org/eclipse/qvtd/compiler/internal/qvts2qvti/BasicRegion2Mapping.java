@@ -61,6 +61,7 @@ import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
@@ -69,6 +70,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -637,12 +639,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//		this.expressionCreator = new ExpressionCreator();
 		//		this.inlineExpressionCreator = new InlineExpressionCreator();
 		@SuppressWarnings("unused")String name = region.getName();
+		if ("«edge2»\\nTransition2HyperEdge__sc".equals(name)) {
+			name = region.getName();
+		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createNavigablePredicates();				// BLUE/CYAN navigable nodes and edges
 		createExternalPredicates();					// BLUE/CYAN computations involving a true guard node
 		createRealizedVariables();					// GREEN nodes
 		createPropertyAssignments();				// GREEN edges
 		createAddStatements();						// export to append nodes
+		createRealizedIncludesAssignments();
 		createObservedProperties();					// wrap observable clauses around hazardous accesses
 	}
 
@@ -809,7 +815,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		} */
 		for (@NonNull Edge edge : region.getEdges()) {
-			if (edge.isPredicate()) {
+			if (edge.isPredicate() && !RegionUtil.isRealizedIncludes(edge)) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				ExpressionCreator inlineExpressionCreator = expressionCreator.getInlineExpressionCreator();
 				Node sourceNode = edge.getSource();
@@ -992,6 +998,19 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigableEdge traversedEdge : navigationForest.getForestNavigations()) {
 			Node sourceNode = traversedEdge.getSource();
 			Node targetNode = traversedEdge.getTarget();
+			Boolean isJustRealizedIncludes = null;
+			for (@NonNull Edge outgoingEdge : targetNode.getOutgoingEdges()) {
+				if (!RegionUtil.isRealizedIncludes(outgoingEdge)) {
+					isJustRealizedIncludes = false;
+					break;
+				}
+				else {
+					isJustRealizedIncludes = true;
+				}
+			}
+			if (isJustRealizedIncludes == Boolean.TRUE) {
+				continue;
+			}
 			Property property = traversedEdge.getProperty();
 			OCLExpression sourceExp = createVariableExp(sourceNode);
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
@@ -1204,22 +1223,42 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		ECollections.sort(statements, new StatementComparator(statements));
 	}
 
-	/*	private boolean isHazardousRead(@NonNull NavigableEdge edge) {
-		Node sourceNode = edge.getSource();
-		Property asProperty = edge.getProperty();
-		TypedModel typedModel = sourceNode.getClassDatumAnalysis().getTypedModel();
-		Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(typedModel);
-		if (checkedEdges != null) {
-			Property asOppositeProperty = asProperty.getOpposite();
-			for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
-				Property edgeProperty = checkedEdge.getProperty();
-				if ((edgeProperty == asProperty) || (edgeProperty == asOppositeProperty)) {
-					return true;
+	private void createRealizedIncludesAssignments() {
+		List<@NonNull Edge> realizedIncludesEdges = null;
+		//		ImperativeBottomPattern bottomPattern = (ImperativeBottomPattern) mapping.getBottomPattern();
+		for (@NonNull Edge edge : region.getRealizedEdges()) {
+			if (RegionUtil.isRealizedIncludes(edge)) {
+				if (realizedIncludesEdges == null) {
+					realizedIncludesEdges = new ArrayList<>();
 				}
+				realizedIncludesEdges.add(edge);
 			}
 		}
-		return false;
-	}*/
+		if (realizedIncludesEdges != null) {
+			if (realizedIncludesEdges.size() > 1) {
+				Collections.sort(realizedIncludesEdges, ToStringComparator.INSTANCE);
+			}
+			for (@NonNull Edge edge : realizedIncludesEdges) {
+				Node sourceNode = edge.getSource();
+				Node targetNode = edge.getTarget();
+				/*				if (targetNode.isDataType()) {
+					OCLExpression slotVariableExp = createVariableExp(sourceNode);
+					Property property = edge.getProperty();
+					OCLExpression valueExp = expressionCreator.getExpression(targetNode);
+					if (valueExp == null) {
+						valueExp = expressionCreator.getExpression(targetNode);		// FIXME debugging
+					}
+					if (valueExp != null) {
+						PropertyAssignment propertyAssignment = QVTimperativeUtil.createPropertyAssignment(slotVariableExp, property, valueExp);
+						bottomPattern.getAssignment().add(propertyAssignment);
+					}
+					else {
+						System.err.println("No assignment in " + this + " to " + slotVariableExp + "." + property);
+				 */
+
+			}
+		}
+	}
 
 	private void createRealizedVariables() {
 		for (@NonNull Node newNode : region.getNewNodes()) {

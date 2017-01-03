@@ -533,6 +533,16 @@ public class RegionUtil
 		return isUnconditional(typedElement);
 	}
 
+	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
+		if (!edge.isRealized()) {
+			return false;
+		}
+		if (!edge.isComputation()) {
+			return false;
+		}
+		return "«includes»".equals(edge.getName()) || "«includesAll»".equals(edge.getName());
+	}
+
 	public static boolean isUnconditional(@NonNull TypedElement typedElement) {
 		EObject eContainer = typedElement.eContainer();
 		if (eContainer instanceof IfExp) {

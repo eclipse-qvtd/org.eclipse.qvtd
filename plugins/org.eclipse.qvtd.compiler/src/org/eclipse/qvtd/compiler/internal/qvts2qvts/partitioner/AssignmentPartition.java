@@ -26,9 +26,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
  */
 class AssignmentPartition extends AbstractPartition
 {
-	protected final @NonNull NavigableEdge realizedEdge;
+	protected final @NonNull Edge realizedEdge;
 
-	public AssignmentPartition(@NonNull Partitioner partitioner, @NonNull NavigableEdge realizedEdge) {
+	public AssignmentPartition(@NonNull Partitioner partitioner, @NonNull Edge realizedEdge) {
 		super(partitioner);
 		this.realizedEdge = realizedEdge;
 		//
