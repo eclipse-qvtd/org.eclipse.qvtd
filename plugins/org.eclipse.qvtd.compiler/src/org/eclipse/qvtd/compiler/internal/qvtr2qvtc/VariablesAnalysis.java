@@ -80,7 +80,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				if (eObject instanceof CollectionTemplateExp) {						// ?? VariableExp members are bound
 					Variable rest = ((CollectionTemplateExp)eObject).getRest();		// ?? not bound
-					if (rest != null) {
+					if ((rest != null) && !rest.isIsImplicit()) {
 						boundVariables.put(rest, null);
 					}
 				}
@@ -114,7 +114,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				if (eObject instanceof CollectionTemplateExp) {
 					Variable rest = ((CollectionTemplateExp)eObject).getRest();
-					if (rest != null) {
+					if ((rest != null) && !rest.isIsImplicit()) {
 						referredVariables.add(rest);
 					}
 				}
@@ -153,7 +153,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				if (eObject instanceof CollectionTemplateExp) {
 					Variable rest = ((CollectionTemplateExp)eObject).getRest();
-					if (rest != null) {
+					if ((rest != null) && !rest.isIsImplicit()) {
 						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, rest, null);
 					}
 				}

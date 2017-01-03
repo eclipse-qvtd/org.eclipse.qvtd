@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
@@ -117,7 +118,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		CorePattern cPattern = getCorePattern();
 		boolean isRealized = isRealized();
 		assert (cVariable != null) && (cVariable.eContainer() == cPattern);
-		assert (cVariable instanceof RealizedVariable) == isRealized;
+		assert (cVariable instanceof RealizedVariable) == (isRealized && !(cVariable.getType() instanceof DataType));
 	}
 
 	@Override
@@ -154,6 +155,10 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		else if (cThisArea != null) {
 			isGuard = false;
 			cArea = cThisArea;
+		}
+		else if (isEnforcedReferred && (cOtherReferred == null)) {
+			isGuard = true;
+			cArea = variablesAnalysis.cEnforcedDomain;
 		}
 		assert cArea != null;
 		return ClassUtil.nonNullState(isGuard ? cArea.getGuardPattern() : cArea.getBottomPattern());
@@ -297,6 +302,15 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			if (isKeyed) {
 				cVariable2 = variablesAnalysis.createBottomVariable(name, type, true, null);
 				initializeKeyedVariable(cVariable2);
+				cPattern.getVariable().add(cVariable2);
+			}
+			else if (type instanceof DataType) {
+				if (cPattern instanceof GuardPattern) {
+					cVariable2 = variablesAnalysis.createGuardVariable(name, type, rVariable.isIsRequired(), null);
+				}
+				else {
+					cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
+				}
 				cPattern.getVariable().add(cVariable2);
 			}
 			else if (!isRealized) {
