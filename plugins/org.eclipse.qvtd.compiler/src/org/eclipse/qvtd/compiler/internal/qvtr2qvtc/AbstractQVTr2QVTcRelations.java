@@ -110,18 +110,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 
 			// new
-			private void mapOtherCollectionTemplateExpression(@NonNull Variable cTemplateVariable, @NonNull Property partProperty, @NonNull CollectionTemplateExp cte) throws CompilerChainException {
-				/**
-				 * Each PropertyTemplateItem whose value is a CollectionTemplateExp
-				 * converts to a VariableAssignment and Predicates.
-				 *
-				 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp;
-				 */
+			private void mapOtherCollectionTemplateExpression(@NonNull CollectionTemplateExp cte) throws CompilerChainException {
 				Variable vcte = ClassUtil.nonNullState(cte.getBindsTo());
 				Variable mvcte = variablesAnalysis.getCoreVariable(vcte);
-				NavigationCallExp pce =  createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
-				VariableAssignment a = createVariableAssignment(mvcte, pce);
-				cMiddleBottomPattern.getAssignment().add(a);
 				/**
 				 * Each CollectionTemplateExp member that is not a variable
 				 * converts to a VariableAssignment of a new variable the member expression.
@@ -237,68 +228,73 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 
 			// loop body of RDomainPatternToMDBottomPatternComposite
-			private void mapOtherObjectTemplateExpression(@NonNull Variable rTemplateVariable, @NonNull Property partProperty, @NonNull ObjectTemplateExp pte) throws CompilerChainException {
-				/**
-				 * Each PropertyTemplateItem whose value is an ObjectTemplateExp
-				 * converts to a PropertyAssignment.
-				 *
-				 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
-				 */
-				Variable vpte = ClassUtil.nonNullState(pte.getBindsTo());
-				Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
-				mapOtherTemplateExpression(pte);
-				variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, createVariableExp(mvpte));
-			}
-
-			// loop body of RDomainPatternToMDBottomPatternSimpleNonVarExpr
-			private void mapOtherSimpleNonVariableExpression(@NonNull Variable rTemplateVariable, @NonNull Property partProperty, @NonNull OCLExpression ptv) {
-				/**
-				 * Each PropertyTemplateItem whose value is not a TemplateExp and not a VariableExp
-				 * converts to a PropertyAssignment.
-				 *
-				 * ve1:T{tp = me}   =>   ve1.tp := me;
-				 */
-				variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, mapExpression(ptv));
-			}
-
-			// body of RDomainPatternToMDBottomPatternSimpleSharedVarExpr and RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
-			private void mapOtherSimpleVariableExpression(@NonNull Variable rTemplateVariable, @NonNull Property partProperty, @NonNull VariableExp e) {
-				/**
-				 * Each PropertyTemplateItem whose value is a simple VariableExp
-				 * converts to a domain(unshared) / middle(shared) PropertyAssignment.
-				 *
-				 * ve1:T{tp = ve2}   =>   ve1.tp := ve2;
-				 */
-				Variable rVariable/*vpte*/ = ClassUtil.nonNullState((Variable) e.getReferredVariable());
-				Variable cVariable/*mvpte*/ = variablesAnalysis.getCoreVariable(rVariable);
-				//				BottomPattern cBottomPattern = rSharedVariables.contains(rVariable) ? cMiddleBottomPattern : cEnforcedBottomPattern;
-				variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, createVariableExp(cVariable));
+			private void mapOtherObjectTemplateExpression(@NonNull ObjectTemplateExp rTemplateExpression) throws CompilerChainException {
+				Variable rTemplateVariable = ClassUtil.nonNullState(rTemplateExpression.getBindsTo());
+				for (@NonNull PropertyTemplateItem propertyTemplateItem : ClassUtil.nullFree(rTemplateExpression.getPart())) {
+					Property partProperty = ClassUtil.nonNullState(propertyTemplateItem.getReferredProperty());
+					Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
+					OCLExpression propertyTemplateValue = ClassUtil.nonNullState(propertyTemplateItem.getValue());
+					if (propertyTemplateValue instanceof VariableExp) {
+						// body of RDomainPatternToMDBottomPatternSimpleSharedVarExpr and RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
+						/**
+						 * Each PropertyTemplateItem whose value is a simple VariableExp
+						 * converts to a domain(unshared) / middle(shared) PropertyAssignment.
+						 *
+						 * ve1:T{tp = ve2}   =>   ve1.tp := ve2;
+						 */
+						Variable rVariable/*vpte*/ = ClassUtil.nonNullState((Variable) ((VariableExp)propertyTemplateValue).getReferredVariable());
+						Variable cVariable/*mvpte*/ = variablesAnalysis.getCoreVariable(rVariable);
+						//				BottomPattern cBottomPattern = rSharedVariables.contains(rVariable) ? cMiddleBottomPattern : cEnforcedBottomPattern;
+						variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, createVariableExp(cVariable));
+					}
+					else if (propertyTemplateValue instanceof CollectionTemplateExp) {
+						/**
+						 * Each PropertyTemplateItem whose value is a CollectionTemplateExp
+						 * converts to a VariableAssignment and Predicates.
+						 *
+						 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp;
+						 */
+						CollectionTemplateExp cte = (CollectionTemplateExp)propertyTemplateValue;
+						Variable vcte = ClassUtil.nonNullState(cte.getBindsTo());
+						Variable mvcte = variablesAnalysis.getCoreVariable(vcte);
+						NavigationCallExp pce =  createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
+						VariableAssignment a = createVariableAssignment(mvcte, pce);
+						cMiddleBottomPattern.getAssignment().add(a);
+						mapOtherCollectionTemplateExpression(cte);
+					}
+					else if (propertyTemplateValue instanceof ObjectTemplateExp) {
+						/**
+						 * Each PropertyTemplateItem whose value is an ObjectTemplateExp
+						 * converts to a PropertyAssignment.
+						 *
+						 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
+						 */
+						ObjectTemplateExp pte = (ObjectTemplateExp)propertyTemplateValue;
+						Variable vpte = ClassUtil.nonNullState(pte.getBindsTo());
+						Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
+						variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, createVariableExp(mvpte));
+						mapOtherObjectTemplateExpression(pte);
+					}
+					else {
+						// loop body of RDomainPatternToMDBottomPatternSimpleNonVarExpr
+						/**
+						 * Each PropertyTemplateItem whose value is not a TemplateExp and not a VariableExp
+						 * converts to a PropertyAssignment.
+						 *
+						 * ve1:T{tp = me}   =>   ve1.tp := me;
+						 */
+						variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, mapExpression(propertyTemplateValue));
+					}
+				}
 			}
 
 			// RDomainPatternToMDBottomPattern
 			protected void mapOtherTemplateExpression(@NonNull TemplateExp rTemplateExpression) throws CompilerChainException {
-				Variable rTemplateVariable = ClassUtil.nonNullState(rTemplateExpression.getBindsTo());
 				if (rTemplateExpression instanceof ObjectTemplateExp) {
-					for (@NonNull PropertyTemplateItem propertyTemplateItem : ClassUtil.nullFree(((ObjectTemplateExp)rTemplateExpression).getPart())) {
-						Property partProperty = ClassUtil.nonNullState(propertyTemplateItem.getReferredProperty());
-						Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
-						OCLExpression propertyTemplateValue = ClassUtil.nonNullState(propertyTemplateItem.getValue());
-						if (propertyTemplateValue instanceof VariableExp) {
-							mapOtherSimpleVariableExpression(rTemplateVariable, partProperty, (VariableExp)propertyTemplateValue);
-						}
-						else if (propertyTemplateValue instanceof CollectionTemplateExp) {
-							mapOtherCollectionTemplateExpression(cTemplateVariable, partProperty, (CollectionTemplateExp)propertyTemplateValue);
-						}
-						else if (propertyTemplateValue instanceof ObjectTemplateExp) {
-							mapOtherObjectTemplateExpression(rTemplateVariable, partProperty, (ObjectTemplateExp)propertyTemplateValue);
-						}
-						else {
-							mapOtherSimpleNonVariableExpression(rTemplateVariable, partProperty, propertyTemplateValue);
-						}
-					}
+					mapOtherObjectTemplateExpression((ObjectTemplateExp)rTemplateExpression);
 				}
-				else {
-
+				else if (rTemplateExpression instanceof CollectionTemplateExp) {
+					mapOtherCollectionTemplateExpression((CollectionTemplateExp)rTemplateExpression);
 				}
 				OCLExpression rGuardPredicate = rTemplateExpression.getWhere();
 				if (rGuardPredicate != null) {
