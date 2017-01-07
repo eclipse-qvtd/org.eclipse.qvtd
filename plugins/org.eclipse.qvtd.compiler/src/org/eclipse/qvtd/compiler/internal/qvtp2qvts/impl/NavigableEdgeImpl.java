@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
@@ -156,7 +157,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			return "null";
 		}
 		else if (source2targetProperty2.eContainer() != null) {
-			return source2targetProperty2.getName() + "\\n" + SchedulerConstants.getMultiplicity(source2targetProperty2);
+			return source2targetProperty2.getName() + "\\n" + PivotUtil.getMultiplicity(source2targetProperty2);
 		}
 		else {
 			return source2targetProperty2.getName();

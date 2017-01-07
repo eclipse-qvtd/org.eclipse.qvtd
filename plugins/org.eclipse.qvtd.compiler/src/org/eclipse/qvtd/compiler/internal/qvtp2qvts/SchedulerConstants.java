@@ -37,8 +37,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.StringUtil;
-import org.eclipse.ocl.pivot.values.Unlimited;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
@@ -73,21 +71,6 @@ public abstract class SchedulerConstants
 	public static final @NonNull List<@NonNull NodeConnection> EMPTY_NODE_CONNECTION_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull Region> EMPTY_REGION_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
-
-	public static @NonNull String getMultiplicity(@NonNull TypedElement typedElement) {
-		StringBuilder s = new StringBuilder();
-		Type type = typedElement.getType();
-		if (type instanceof CollectionType) {
-			CollectionType collectionType = (CollectionType)type;
-			Number lower = collectionType.getLower();
-			Number upper = collectionType.getUpper();
-			StringUtil.appendMultiplicity(s, lower.intValue(), upper instanceof Unlimited ? -1 : upper.intValue(), collectionType.isIsNullFree());
-		}
-		else {
-			s.append(typedElement.isIsRequired() ? "[1]" : "[?]");
-		}
-		return s.toString();
-	}
 
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
