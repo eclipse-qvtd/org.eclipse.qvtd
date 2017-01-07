@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
 public class QVTiCGUtil extends CGUtil
 {
@@ -66,6 +67,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull MappingCall getAST(@NonNull CGMappingCall cgMappingCall) {
 		return ClassUtil.nonNullState((MappingCall)cgMappingCall.getAst());
+	}
+
+	public static @NonNull SetStatement getAST(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+		return ClassUtil.nonNullState((SetStatement)cgPropertyAssignment.getAst());
 	}
 
 	public static @NonNull NewStatement getAST(@NonNull CGRealizedVariable cgRealizedVariable) {

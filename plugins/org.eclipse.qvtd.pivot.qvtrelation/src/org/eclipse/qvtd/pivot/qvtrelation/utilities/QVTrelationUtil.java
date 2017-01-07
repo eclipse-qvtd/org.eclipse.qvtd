@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -34,12 +35,23 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 import com.google.common.collect.Iterables;
 
 public class QVTrelationUtil extends QVTbaseUtil
 {
+
+	public static class Internal extends QVTbaseUtil.Internal
+	{
+		public static List<@NonNull OCLExpression> getOwnedArgumentsList(@NonNull RelationCallExp rInvocation) {
+			return ClassUtil.nullFree(rInvocation.getArgument());
+		}
+	}
+
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
 
 	public static @Nullable Relation getContainingRelation(@Nullable EObject eObject) {
@@ -55,7 +67,7 @@ public class QVTrelationUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(rKey.getIdentifies());
 	}
 
-	public static @NonNull List<@NonNull OCLExpression> getOwnedArguments(@NonNull RelationCallExp rInvocation) {
+	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedArguments(@NonNull RelationCallExp rInvocation) {
 		return ClassUtil.nullFree(rInvocation.getArgument());
 	}
 
@@ -67,12 +79,32 @@ public class QVTrelationUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(rTransformation.getOwnedKey());
 	}
 
+	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedMembers(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
+		return ClassUtil.nullFree(rCollectionTemplateExp.getMember());
+	}
+
+	public static @NonNull Iterable<@NonNull PropertyTemplateItem> getOwnedParts(@NonNull ObjectTemplateExp eObject) {
+		return ClassUtil.nullFree(eObject.getPart());
+	}
+
 	public static @NonNull Iterable<@NonNull DomainPattern> getOwnedPatterns(@NonNull RelationDomain rRelationDomain) {
 		return ClassUtil.nullFree(rRelationDomain.getPattern());
 	}
 
 	public static @NonNull Iterable<@NonNull Relation> getOwnedRelations(@NonNull RelationalTransformation rTransformation) {
 		return Iterables.filter(ClassUtil.nullFree(rTransformation.getRule()), Relation.class);
+	}
+
+	public static @NonNull OCLExpression getOwnedValue(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
+		return ClassUtil.nonNullState(rPropertyTemplateItem.getValue());
+	}
+
+	public static @NonNull Iterable<@NonNull Variable> getOwnedVariable(@NonNull Relation rRelation) {
+		return ClassUtil.nullFree(rRelation.getVariable());
+	}
+
+	public static @NonNull Property getReferredProperty(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
+		return ClassUtil.nonNullState(rPropertyTemplateItem.getReferredProperty());
 	}
 
 	public static @NonNull Relation getReferredRelation(@NonNull RelationCallExp rInvocation) {

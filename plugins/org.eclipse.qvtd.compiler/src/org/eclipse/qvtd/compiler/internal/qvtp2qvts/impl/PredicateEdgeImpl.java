@@ -25,7 +25,7 @@ public class PredicateEdgeImpl extends EdgeImpl
 	}
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		return create(edgeRole, sourceNode, getName(), targetNode);
 	}
 

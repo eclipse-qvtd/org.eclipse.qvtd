@@ -32,7 +32,7 @@ public interface VariableAnalysis
 	 * Add the NavigationAssignment "cVariable.cProperty := cExpression" to the cBottomPattern inverting the usage
 	 * of a Collection element assignment to "cExpression.cOppositeProperty := cVariable".
 	 */
-	void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression);
+	void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial);
 
 	/**
 	 * Perform diagnostic checks at the end of the analysis.

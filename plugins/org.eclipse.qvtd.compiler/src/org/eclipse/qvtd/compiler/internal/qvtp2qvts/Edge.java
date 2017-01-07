@@ -23,7 +23,7 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
 	 */
-	@NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
+	@NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
 
 	void destroy();
 
@@ -134,6 +134,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 * Return true if this edge is a property navigation.
 	 */
 	boolean isNavigation();
+
+	/**
+	 * Return true if this edge is for a partial many-to-one relationship.
+	 */
+	boolean isPartial();
 
 	/**
 	 * Return true if this edge is for a predicate.

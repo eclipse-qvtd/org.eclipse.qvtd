@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.CollectionItem;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
@@ -86,11 +87,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	{
 		protected ConditionalExpressionAnalyzer() {
 			super(ExpressionAnalyzer.this.context);
-		}
-
-		@Override
-		protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
@@ -216,7 +212,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		String name = operationCallExp.getReferredOperation().getName();
 		assert name != null;
 		Node oclContainerNode = createStepNode(name, operationCallExp, sourceNode);
-		oclContainerEdge = createNavigationEdge(sourceNode, oclContainerProperty, oclContainerNode);
+		oclContainerEdge = createNavigationEdge(sourceNode, oclContainerProperty, oclContainerNode, false);
 		return oclContainerNode;
 		/*		String name = operationCallExp.getReferredOperation().getName();
 		assert name != null;
@@ -328,21 +324,22 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	}
 
 	protected @NonNull NavigableEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode, false);
 	}
 
-	protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
+	protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	protected @NonNull NavigableEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		assert navigationEdge == null;
+		Boolean isPartial = navigationAssignment != null ? navigationAssignment.isIsPartial() : null;
 		if ((navigationAssignment != null) || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
-			navigationEdge = createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode);
+			navigationEdge = createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 		}
 		else {
-			navigationEdge = createNavigationEdge(sourceNode, source2targetProperty, targetNode);
+			navigationEdge = createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 		}
 		return navigationEdge;
 	}
@@ -371,8 +368,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		return RegionUtil.createRealizedExpressionEdge(sourceNode, name, targetNode);
 	}
 
-	protected @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return RegionUtil.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode);
+	protected @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+		return RegionUtil.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
@@ -548,7 +545,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 				String name = referenceTargetNode.getName();
 				ClassDatumAnalysis classDatumAnalysis = referenceTargetNode.getClassDatumAnalysis();
 				Node instantiatedTargetNode = createDependencyNode(name, classDatumAnalysis);
-				createNavigationEdge(instantiatedNode, referenceEdge.getProperty(), instantiatedTargetNode);
+				createNavigationEdge(instantiatedNode, referenceEdge.getProperty(), instantiatedTargetNode, false);
 				instantiate(instantiatedTargetNode, referenceTargetNode);
 			}
 		}
@@ -626,7 +623,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		else {
 			Node varNode = createLetNode(ownedVariable, initNode);
 			Property castProperty = scheduler.getCastProperty(type);
-			createNavigationEdge(initNode, castProperty, varNode);
+			createNavigationEdge(initNode, castProperty, varNode, false);
 		}
 		return analyze(letExp.getOwnedIn());
 	}
@@ -714,7 +711,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 		Node valueNode = navigationEdge.getTarget();
 		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
-		Type propertyType = ClassUtil.nonNullState(property.getType());
+		Type propertyType = PivotUtil.getType(property);
+		if (asNavigationAssignment.isIsPartial()) {
+			propertyType = PivotUtil.getElementType(((CollectionType)propertyType));
+		}
 		CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
 			// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp

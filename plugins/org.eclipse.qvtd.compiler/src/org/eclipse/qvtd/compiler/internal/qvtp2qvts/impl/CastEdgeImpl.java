@@ -44,7 +44,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl
 	}
 
 	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		return createEdge(edgeRole, sourceNode, getProperty(), targetNode);
 	}
 

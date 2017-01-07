@@ -325,7 +325,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	public ElementCS visitBottomPattern(@NonNull BottomPattern asBottomPattern) {
 		BottomPatternCS csBottomPattern = context.refreshElement(BottomPatternCS.class, QVTcoreCSPackage.Literals.BOTTOM_PATTERN_CS, asBottomPattern);
 		csBottomPattern.setPivot(asBottomPattern);
-		List<Element> asConstraints = new ArrayList<Element>(asBottomPattern.getAssignment());
+		List<Element> asConstraints = new ArrayList<>(asBottomPattern.getAssignment());
 		asConstraints.addAll(asBottomPattern.getPredicate());
 		context.refreshList(csBottomPattern.getOwnedConstraints(), context.visitDeclarations(PredicateOrAssignmentCS.class, asConstraints, null));
 		context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
@@ -361,13 +361,13 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
-		List<Transformation> asTransformations = new ArrayList<Transformation>();
+		List<Transformation> asTransformations = new ArrayList<>();
 		gatherTransformations(asTransformations, asModel.getOwnedPackages());
 		for (Transformation asTransformation : asTransformations) {
 			for (Rule asRule : asTransformation.getRule()) {
 				if (asRule instanceof Mapping) {
 					if (asMappings == null) {
-						asMappings = new ArrayList<Mapping>();
+						asMappings = new ArrayList<>();
 					}
 					asMappings.add((Mapping) asRule);
 				}
@@ -375,7 +375,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 			for (Operation asOperation : asTransformation.getOwnedOperations()) {
 				if (asOperation instanceof Function) {
 					if (asQueries == null) {
-						asQueries = new ArrayList<Function>();
+						asQueries = new ArrayList<>();
 					}
 					asQueries.add((Function) asOperation);
 				}

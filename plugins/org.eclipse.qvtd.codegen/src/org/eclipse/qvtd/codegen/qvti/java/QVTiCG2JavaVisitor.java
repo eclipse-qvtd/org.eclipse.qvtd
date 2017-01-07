@@ -220,14 +220,16 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendValueName(cgMappingCallBinding.getOwnedValue());
 	}
 
-	protected void appendEcoreSet(@NonNull CGValuedElement cgSlot, @NonNull EStructuralFeature eStructuralFeature, @NonNull CGValuedElement cgInit) {
+	protected void appendEcoreSet(@NonNull CGValuedElement cgSlot, @NonNull EStructuralFeature eStructuralFeature, @NonNull CGValuedElement cgInit, boolean isPartial) {
 		if (eStructuralFeature.isMany()) {
 			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 			//
 			js.appendValueName(cgSlot);
 			js.append(".");
 			js.append(getAccessor);
-			js.append("().addAll(");
+			js.append("().");
+			js.append(isPartial ? "add" : "addAll");
+			js.append("(");
 			js.appendAtomicReferenceTo(cgInit);
 			js.append(");\n");
 		}
@@ -2090,6 +2092,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 		//		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
 		//		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
+		SetStatement asSetStatement = QVTiCGUtil.getAST(cgPropertyAssignment);
 		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyAssignment);
 		CGValuedElement cgSlot = getExpression(QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment));
 		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
@@ -2103,7 +2106,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (!js.appendLocalStatements(cgInit)) {
 			return false;
 		}
-		appendEcoreSet(cgSlot, eStructuralFeature, cgInit);
+		appendEcoreSet(cgSlot, eStructuralFeature, cgInit, asSetStatement.isIsPartial());
 		doAssigned(cgPropertyAssignment);
 		return true;
 	}

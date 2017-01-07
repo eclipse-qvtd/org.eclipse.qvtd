@@ -150,7 +150,7 @@ public class OperationRegion extends AbstractRegion
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
 								Node elementNode = RegionUtil.createOperationElementNode(this, name, elementClassDatumAnalysis, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
-								RegionUtil.createNavigationEdge(dependencyNode2, iterateProperty, elementNode);
+								RegionUtil.createNavigationEdge(dependencyNode2, iterateProperty, elementNode, false);
 								dependencyNode2 = elementNode;
 							}
 							//							assert !dependencyNode2.isMatched();
@@ -161,7 +161,7 @@ public class OperationRegion extends AbstractRegion
 							else {
 								nextNode = RegionUtil.createDataTypeNode(dependencyNode2, property);
 							}
-							RegionUtil.createNavigationEdge(dependencyNode2, property, nextNode);
+							RegionUtil.createNavigationEdge(dependencyNode2, property, nextNode, false);
 							dependencyNode2 = nextNode;
 						}
 					}

@@ -30,7 +30,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Iterables;
@@ -217,7 +216,7 @@ public class Partitioner
 						}
 					}
 				}
-				else if (RegionUtil.isRealizedIncludes(edge)) {
+				/*				else if (RegionUtil.isRealizedIncludes(edge)) {
 					realizedEdges.add(edge);
 					Node sourceNode = edge.getSource();
 					if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode.isPredicated() || sourceNode.isRealized())) {
@@ -229,7 +228,7 @@ public class Partitioner
 					if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
 						//							navigableEdges.add(navigationEdge);
 					}
-				}
+				} */
 			}
 		}
 		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {

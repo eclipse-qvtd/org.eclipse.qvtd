@@ -68,22 +68,25 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::pn2sc {
 	        }
 	    } */
 
-		top relation Transition2HyperEdge {  -- no need to do both bidirectionals
-	        postps: OrderedSet(pnMM::Place);
-	        rnexts: OrderedSet(scMM::Basic);
+		top relation Transition2HyperEdge {
 			domain pn t : Transition {
-				name = transitionName : String{},
---				prep = preps:OrderedSet(Place){prep:Place{} ++ _},
-				postp = postps:OrderedSet(Place){postp:Place{} ++ _}
+				name = transitionName : String{}
 			};	   
 			enforce domain sc e : HyperEdge {
-				name = transitionName,
---				next = nexts:OrderedSet(State){next:State{} ++ _},
-				rnext = rnexts:OrderedSet(State){rnext:State{} ++ _}
+				name = transitionName
+			};
+		}
+
+		top relation Transition2HyperEdge_Content {  -- no need to do both bidirectionals
+			domain pn postp:Place {
+				pret = t:Transition{}
+			};	   
+			enforce domain sc rnext:State {
+				rnext = e:HyperEdge{}
 			};
 			when {
---				Place2Basic(prep, next);
 				Place2Basic(postp, rnext);
+				Transition2HyperEdge(t, e);
 			}
 		}
 

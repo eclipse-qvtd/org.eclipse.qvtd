@@ -71,7 +71,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -798,7 +797,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Property property = edge.getProperty();
 				OCLExpression targetVariableExp = createVariableExp(targetNode);
 				boolean isNotify = isHazardousWrite(edge);
-				SetStatement setStatement = QVTimperativeUtil.createSetStatement(slotVariable, property, targetVariableExp, isNotify);
+				SetStatement setStatement = QVTimperativeUtil.createSetStatement(slotVariable, property, targetVariableExp, edge.isPartial(), isNotify);
 				mapping.getOwnedStatements().add(setStatement);
 			}
 		}
@@ -821,7 +820,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		} */
 		for (@NonNull Edge edge : region.getEdges()) {
-			if (edge.isPredicate() && !RegionUtil.isRealizedIncludes(edge)) {
+			if (edge.isPredicate()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				ExpressionCreator inlineExpressionCreator = expressionCreator.getInlineExpressionCreator();
 				Node sourceNode = edge.getSource();
@@ -1004,19 +1003,19 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigableEdge traversedEdge : navigationForest.getForestNavigations()) {
 			Node sourceNode = traversedEdge.getSource();
 			Node targetNode = traversedEdge.getTarget();
-			Boolean isJustRealizedIncludes = null;
-			for (@NonNull Edge outgoingEdge : targetNode.getOutgoingEdges()) {
-				if (!RegionUtil.isRealizedIncludes(outgoingEdge)) {
-					isJustRealizedIncludes = false;
-					break;
-				}
-				else {
-					isJustRealizedIncludes = true;
-				}
-			}
-			if (isJustRealizedIncludes == Boolean.TRUE) {
-				continue;
-			}
+			//			Boolean isJustRealizedIncludes = null;
+			//			for (@NonNull Edge outgoingEdge : targetNode.getOutgoingEdges()) {
+			//				if (!RegionUtil.isRealizedIncludes(outgoingEdge)) {
+			//					isJustRealizedIncludes = false;
+			//					break;
+			//				}
+			//				else {
+			//					isJustRealizedIncludes = true;
+			//				}
+			//			}
+			//			if (isJustRealizedIncludes == Boolean.TRUE) {
+			//				continue;
+			//			}
 			Property property = traversedEdge.getProperty();
 			OCLExpression sourceExp = createVariableExp(sourceNode);
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
@@ -1199,7 +1198,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 				if (valueExp != null) {
 					boolean isNotify = isHazardousWrite(edge);
-					SetStatement setStatement = QVTimperativeUtil.createSetStatement(asVariable, property, valueExp, isNotify);
+					SetStatement setStatement = QVTimperativeUtil.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
 					//					addObservedProperties(setStatement);
 					mapping.getOwnedStatements().add(setStatement);
 				}
@@ -1233,12 +1232,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		List<@NonNull Edge> realizedIncludesEdges = null;
 		//		ImperativeBottomPattern bottomPattern = (ImperativeBottomPattern) mapping.getBottomPattern();
 		for (@NonNull Edge edge : region.getRealizedEdges()) {
-			if (RegionUtil.isRealizedIncludes(edge)) {
-				if (realizedIncludesEdges == null) {
-					realizedIncludesEdges = new ArrayList<>();
-				}
-				realizedIncludesEdges.add(edge);
-			}
+			//			if (RegionUtil.isRealizedIncludes(edge)) {
+			//				if (realizedIncludesEdges == null) {
+			//					realizedIncludesEdges = new ArrayList<>();
+			//				}
+			//				realizedIncludesEdges.add(edge);
+			//			}
 		}
 		if (realizedIncludesEdges != null) {
 			if (realizedIncludesEdges.size() > 1) {

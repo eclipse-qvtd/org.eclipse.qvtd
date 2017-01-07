@@ -100,7 +100,7 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 		if (edgeRole == null) {
 			return null;
 		}
-		return edge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
+		return edge.createEdge(edgeRole, partialSourceNode, partialTargetNode, edge.isPartial());
 	}
 
 	@Override
@@ -142,7 +142,7 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 		if (edgeRole == null) {
 			return null;
 		}
-		return navigableEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
+		return navigableEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode, navigableEdge.isPartial());
 	}
 
 	@Override

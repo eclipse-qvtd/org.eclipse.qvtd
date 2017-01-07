@@ -60,7 +60,7 @@ class EdgeMerger
 		Edge newEdge2 = newEdge;
 		assert newEdge2 == null;
 		for (@NonNull Edge oldEdge : oldEdges) {
-			newEdge2 = newEdge = oldEdge.createEdge(edgeRole, sourceNodeMerger, targetNodeMerger);
+			newEdge2 = newEdge = oldEdge.createEdge(edgeRole, sourceNodeMerger, targetNodeMerger, oldEdge.isPartial());
 			break;
 		}
 		if (newEdge2 == null) {

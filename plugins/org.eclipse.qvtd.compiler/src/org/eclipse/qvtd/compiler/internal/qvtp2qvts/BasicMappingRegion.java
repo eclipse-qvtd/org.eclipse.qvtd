@@ -313,7 +313,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						RegionUtil.createNavigationEdge(sourceNode, referredProperty, targetNode);
+						RegionUtil.createNavigationEdge(sourceNode, referredProperty, targetNode, false);
 					}
 					else {
 						assert predicateEdge.getTarget() == targetNode;

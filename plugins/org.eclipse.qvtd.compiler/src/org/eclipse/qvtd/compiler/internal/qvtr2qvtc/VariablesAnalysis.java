@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
@@ -273,8 +274,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public void addNavigationAssignment(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
-		getVariableAnalysis(rTargetVariable).addNavigationAssignment(targetProperty, cExpression);
+	public void addNavigationAssignment(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) {
+		getVariableAnalysis(rTargetVariable).addNavigationAssignment(targetProperty, cExpression, isPartial);
+	}
+
+	public void addNavigationPredicate(@NonNull CorePattern cCorePattern, @NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
+		Variable cTargetVariable = getCoreVariable(rTargetVariable);
+		NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cTargetVariable), targetProperty);
+		addConditionPredicate(cCorePattern, cNavigationExp, cExpression);
 	}
 
 	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) {
@@ -333,7 +340,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
 			VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable);
 			OCLExpression cExpression = createVariableExp(cVariable);
-			NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cTargetProperty, cExpression);
+			NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cTargetProperty, cExpression, false);
 			QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
 			assertNewAssignment(QVTcoreUtil.getOwnedAssignments(cMiddleBottomPattern), cAssignment);
 			cMiddleBottomPattern.getAssignment().add(cAssignment);

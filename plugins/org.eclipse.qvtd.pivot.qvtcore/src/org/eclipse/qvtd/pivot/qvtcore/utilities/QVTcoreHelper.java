@@ -67,7 +67,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 		return coreMapping;
 	}
 
-	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isPartial) {
 		NavigationAssignment asNavigationAssignment;
 		if (asProperty.isIsImplicit()) {
 			OppositePropertyAssignment asPropertyAssignment = QVTcoreFactory.eINSTANCE.createOppositePropertyAssignment();
@@ -81,6 +81,8 @@ public class QVTcoreHelper extends QVTbaseHelper
 		}
 		asNavigationAssignment.setSlotExpression(asSlotExpression);
 		asNavigationAssignment.setValue(asValueExpression);
+		asNavigationAssignment.setIsDefault(false);
+		asNavigationAssignment.setIsPartial(isPartial);
 		return asNavigationAssignment;
 	}
 
@@ -96,6 +98,8 @@ public class QVTcoreHelper extends QVTbaseHelper
 		VariableAssignment asVariableAssignment = QVTcoreFactory.eINSTANCE.createVariableAssignment();
 		asVariableAssignment.setTargetVariable(asVariable);
 		asVariableAssignment.setValue(asValueExpression);
+		asVariableAssignment.setIsDefault(false);
+		asVariableAssignment.setIsPartial(false);
 		return asVariableAssignment;
 	}
 }

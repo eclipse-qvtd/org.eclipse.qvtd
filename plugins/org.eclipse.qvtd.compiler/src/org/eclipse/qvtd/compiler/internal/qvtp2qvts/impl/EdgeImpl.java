@@ -285,6 +285,11 @@ public abstract class EdgeImpl implements Edge
 	}
 
 	@Override
+	public boolean isPartial() {
+		return false;
+	}
+
+	@Override
 	public boolean isPredicate() {
 		return false;
 	}

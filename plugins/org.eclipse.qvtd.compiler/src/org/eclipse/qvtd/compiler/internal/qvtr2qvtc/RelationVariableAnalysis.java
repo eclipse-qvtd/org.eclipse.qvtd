@@ -69,7 +69,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	 * of a Collection element assignment to "cExpression.cOppositeProperty := cVariable".
 	 */
 	@Override
-	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
+	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) {
 		Key rKey2 = rKey;
 		if (isKeyed() && (rKey2 != null)) {
 			if (rKey2.getPart().contains(targetProperty)) {
@@ -81,24 +81,27 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		}
 		Variable cVariable2 = getCoreVariable();
 		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.getOwnedAssignments(variablesAnalysis.getMiddleBottomPattern());
-		if (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
-			VariableExp cSlotVariableExp = variablesAnalysis.createVariableExp(cVariable2);
-			NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
-			QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
-			variablesAnalysis.assertNewAssignment(cMiddleBottomAssignments, cAssignment);
-			cMiddleBottomAssignments.add(cAssignment);
-			return;
+		if (isPartial == null) {
+			isPartial = targetProperty.isIsMany() && !(cExpression.getType() instanceof CollectionType);
 		}
-		Property cOppositeProperty = targetProperty.getOpposite();
+		//		if (isPartial == isPartial2) {
+		VariableExp cSlotVariableExp = variablesAnalysis.createVariableExp(cVariable2);
+		NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression, isPartial);
+		QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
+		variablesAnalysis.assertNewAssignment(cMiddleBottomAssignments, cAssignment);
+		cMiddleBottomAssignments.add(cAssignment);
+		return;
+		//		}
+		/*		Property cOppositeProperty = targetProperty.getOpposite();
 		if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable2.getType() instanceof CollectionType))) {
 			VariableExp cSlotVariableExp = (VariableExp)cExpression;
-			NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, cOppositeProperty, variablesAnalysis.createVariableExp(cVariable2));
+			NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, cOppositeProperty, variablesAnalysis.createVariableExp(cVariable2), isPartial);
 			QVTr2QVTc.SYNTHESIS.println("  addOppositePropertyAssignment " + cAssignment);
 			variablesAnalysis.assertNewAssignment(cMiddleBottomAssignments, cAssignment);
 			cMiddleBottomAssignments.add(cAssignment);
 			return;
-		}
-		throw new IllegalStateException("Unsupported collection assign " + cVariable2 + " . " + targetProperty + " := " + cExpression);
+		} */
+		//		throw new IllegalStateException("Unsupported collection assign " + cVariable2 + " . " + targetProperty + " := " + cExpression);
 	}
 
 	public @Nullable RealizedVariable basicGetCoreRealizedVariable() {

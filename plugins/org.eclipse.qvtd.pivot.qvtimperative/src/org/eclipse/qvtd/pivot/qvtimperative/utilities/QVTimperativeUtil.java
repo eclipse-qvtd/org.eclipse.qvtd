@@ -200,7 +200,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return newStatement;
 	}
 
-	public static @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isNotify) {
+	public static @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isPartial, boolean isNotify) {
 		SetStatement asSetAssignment = QVTimperativeFactory.eINSTANCE.createSetStatement();
 		if (asProperty.isIsImplicit()) {
 			asSetAssignment.setTargetProperty(asProperty.getOpposite());
@@ -212,7 +212,9 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		}
 		asSetAssignment.setTargetVariable(asVariable);
 		asSetAssignment.setOwnedExpression(asValueExpression);
+		asSetAssignment.setIsPartial(isPartial);
 		asSetAssignment.setIsNotify(isNotify);
+		assert isPartial == ((asSetAssignment.getTargetProperty().getType() instanceof CollectionType) && !(asValueExpression.getType() instanceof CollectionType));	// FIXME inadequate for nested types but good for initial debugging
 		return asSetAssignment;
 	}
 

@@ -133,7 +133,7 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 		safeVisit(asNavigationAssignment.getSlotExpression());
 		append(".");
 		appendName(QVTcoreUtil.getTargetProperty(asNavigationAssignment));
-		append(" := ");
+		append(asNavigationAssignment.isIsPartial() ? " += " : " := ");
 		safeVisit(asNavigationAssignment.getValue());
 		return null;
 	}

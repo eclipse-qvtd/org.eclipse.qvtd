@@ -43,7 +43,7 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 	}
 
 	@Override
-	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
+	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) {
 		System.out.println("Unexpected " + getClass().getSimpleName() + ".addNavigationAssignment for " + this);
 	}
 

@@ -181,10 +181,10 @@ public class RegionUtil
 		return PatternVariableNodeImpl.create(nodeRole, region, stepVariable, true);
 	}
 
-	public static @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	public static @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		EdgeRole.Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
-		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
+		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
@@ -263,9 +263,9 @@ public class RegionUtil
 		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
-	public static @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	public static @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.REALIZED);
-		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
+		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	public static @NonNull VariableNodeImpl createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
@@ -533,7 +533,7 @@ public class RegionUtil
 		return isUnconditional(typedElement);
 	}
 
-	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
+	/*	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
 		if (!edge.isRealized()) {
 			return false;
 		}
@@ -541,7 +541,7 @@ public class RegionUtil
 			return false;
 		}
 		return "«includes»".equals(edge.getName()) || "«includesAll»".equals(edge.getName());
-	}
+	} */
 
 	public static boolean isUnconditional(@NonNull TypedElement typedElement) {
 		EObject eContainer = typedElement.eContainer();
