@@ -25,8 +25,8 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTbaseCSVisitor<R, C>
-extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
-implements QVTbaseCSVisitor<R>
+	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
+	implements QVTbaseCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

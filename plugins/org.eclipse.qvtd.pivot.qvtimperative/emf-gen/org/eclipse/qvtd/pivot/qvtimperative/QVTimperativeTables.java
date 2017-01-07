@@ -692,10 +692,11 @@ public class QVTimperativeTables
 
 		public static final @NonNull ExecutorProperty _SetStatement__isNotify = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__IS_NOTIFY, Types._SetStatement, 0);
 		public static final @NonNull ExecutorProperty _SetStatement__isOpposite = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__IS_OPPOSITE, Types._SetStatement, 1);
-		public static final @NonNull ExecutorProperty _SetStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__OWNED_EXPRESSION, Types._SetStatement, 2);
-		public static final @NonNull ExecutorProperty _SetStatement__resolvedProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__RESOLVED_PROPERTY, Types._SetStatement, 3);
-		public static final @NonNull ExecutorProperty _SetStatement__targetProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__TARGET_PROPERTY, Types._SetStatement, 4);
-		public static final @NonNull ExecutorProperty _SetStatement__targetVariable = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__TARGET_VARIABLE, Types._SetStatement, 5);
+		public static final @NonNull ExecutorProperty _SetStatement__isPartial = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__IS_PARTIAL, Types._SetStatement, 2);
+		public static final @NonNull ExecutorProperty _SetStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__OWNED_EXPRESSION, Types._SetStatement, 3);
+		public static final @NonNull ExecutorProperty _SetStatement__resolvedProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__RESOLVED_PROPERTY, Types._SetStatement, 4);
+		public static final @NonNull ExecutorProperty _SetStatement__targetProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__TARGET_PROPERTY, Types._SetStatement, 5);
+		public static final @NonNull ExecutorProperty _SetStatement__targetVariable = new EcoreExecutorProperty(QVTimperativePackage.Literals.SET_STATEMENT__TARGET_VARIABLE, Types._SetStatement, 6);
 
 		public static final @NonNull ExecutorProperty _SimpleParameter__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER__REFERRED_TYPED_MODEL, Types._SimpleParameter, 0);
 
@@ -2691,6 +2692,7 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorProperty @NonNull [] _SetStatement = {
 			QVTimperativeTables.Properties._SetStatement__isNotify,
 			QVTimperativeTables.Properties._SetStatement__isOpposite,
+			QVTimperativeTables.Properties._SetStatement__isPartial,
 			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
 			QVTimperativeTables.Properties._SetStatement__ownedExpression,
 			QVTimperativeTables.Properties._SetStatement__resolvedProperty,

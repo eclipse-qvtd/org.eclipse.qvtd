@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -2750,31 +2750,47 @@ ruleSetStatementCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_9=':='
+)(	otherlv_9=':='
     {
-    	newLeafNode(otherlv_9, grammarAccess.getSetStatementCSAccess().getColonEqualsSignKeyword_6());
+    	newLeafNode(otherlv_9, grammarAccess.getSetStatementCSAccess().getColonEqualsSignKeyword_6_0());
     }
+
+    |(
 (
+		lv_isPartial_10_0=	'+='
+    {
+        newLeafNode(lv_isPartial_10_0, grammarAccess.getSetStatementCSAccess().getIsPartialPlusSignEqualsSignKeyword_6_1_0());
+    }
+
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSetStatementCSRule());
+	        }
+       		setWithLastConsumed($current, "isPartial", true, "+=");
+	    }
+
+)
+))(
 (
 		{
 	        newCompositeNode(grammarAccess.getSetStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_7_0());
 	    }
-		lv_ownedExpression_10_0=ruleExpCS		{
+		lv_ownedExpression_11_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSetStatementCSRule());
 	        }
        		set(
        			$current,
        			"ownedExpression",
-        		lv_ownedExpression_10_0,
+        		lv_ownedExpression_11_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_11=';'
+)	otherlv_12=';'
     {
-    	newLeafNode(otherlv_11, grammarAccess.getSetStatementCSAccess().getSemicolonKeyword_8());
+    	newLeafNode(otherlv_12, grammarAccess.getSetStatementCSAccess().getSemicolonKeyword_8());
     }
 )
 ;

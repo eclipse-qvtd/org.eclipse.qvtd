@@ -26,6 +26,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#isIsPartial <em>Is Partial</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  * </ul>
@@ -37,6 +38,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 public interface PredicateOrAssignmentCS extends ExpCS {
 	/**
 	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Default</em>' attribute isn't clear,
@@ -46,7 +48,7 @@ public interface PredicateOrAssignmentCS extends ExpCS {
 	 * @return the value of the '<em>Is Default</em>' attribute.
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getPredicateOrAssignmentCS_IsDefault()
-	 * @model
+	 * @model default="false"
 	 * @generated
 	 */
 	boolean isIsDefault();
@@ -60,6 +62,33 @@ public interface PredicateOrAssignmentCS extends ExpCS {
 	 * @generated
 	 */
 	void setIsDefault(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Partial</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Partial</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Partial</em>' attribute.
+	 * @see #setIsPartial(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getPredicateOrAssignmentCS_IsPartial()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsPartial();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#isIsPartial <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Partial</em>' attribute.
+	 * @see #isIsPartial()
+	 * @generated
+	 */
+	void setIsPartial(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Target</b></em>' containment reference.

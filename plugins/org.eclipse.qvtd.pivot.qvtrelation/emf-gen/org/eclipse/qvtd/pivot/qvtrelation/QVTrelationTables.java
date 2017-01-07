@@ -1,15 +1,15 @@
 /*******************************************************************************
  * <copyright>
- *
+ * 
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- *
+ * 
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
@@ -418,148 +418,148 @@ public class QVTrelationTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _DomainPattern =
-			{
-				Fragments._DomainPattern__OclAny /* 0 */,
-				Fragments._DomainPattern__OclElement /* 1 */,
-				Fragments._DomainPattern__Visitable /* 2 */,
-				Fragments._DomainPattern__Element /* 3 */,
-				Fragments._DomainPattern__Pattern /* 4 */,
-				Fragments._DomainPattern__DomainPattern /* 5 */
-			};
+		{
+			Fragments._DomainPattern__OclAny /* 0 */,
+			Fragments._DomainPattern__OclElement /* 1 */,
+			Fragments._DomainPattern__Visitable /* 2 */,
+			Fragments._DomainPattern__Element /* 3 */,
+			Fragments._DomainPattern__Pattern /* 4 */,
+			Fragments._DomainPattern__DomainPattern /* 5 */
+		};
 		private static final int @NonNull [] __DomainPattern = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Key =
-			{
-				Fragments._Key__OclAny /* 0 */,
-				Fragments._Key__OclElement /* 1 */,
-				Fragments._Key__Visitable /* 2 */,
-				Fragments._Key__Element /* 3 */,
-				Fragments._Key__Key /* 4 */
-			};
+		{
+			Fragments._Key__OclAny /* 0 */,
+			Fragments._Key__OclElement /* 1 */,
+			Fragments._Key__Visitable /* 2 */,
+			Fragments._Key__Element /* 3 */,
+			Fragments._Key__Key /* 4 */
+		};
 		private static final int @NonNull [] __Key = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Relation =
-			{
-				Fragments._Relation__OclAny /* 0 */,
-				Fragments._Relation__OclElement /* 1 */,
-				Fragments._Relation__Nameable /* 2 */,
-				Fragments._Relation__Visitable /* 2 */,
-				Fragments._Relation__Element /* 3 */,
-				Fragments._Relation__NamedElement /* 4 */,
-				Fragments._Relation__Rule /* 5 */,
-				Fragments._Relation__Relation /* 6 */
-			};
+		{
+			Fragments._Relation__OclAny /* 0 */,
+			Fragments._Relation__OclElement /* 1 */,
+			Fragments._Relation__Nameable /* 2 */,
+			Fragments._Relation__Visitable /* 2 */,
+			Fragments._Relation__Element /* 3 */,
+			Fragments._Relation__NamedElement /* 4 */,
+			Fragments._Relation__Rule /* 5 */,
+			Fragments._Relation__Relation /* 6 */
+		};
 		private static final int @NonNull [] __Relation = { 1,1,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelationCallExp =
-			{
-				Fragments._RelationCallExp__OclAny /* 0 */,
-				Fragments._RelationCallExp__OclElement /* 1 */,
-				Fragments._RelationCallExp__Nameable /* 2 */,
-				Fragments._RelationCallExp__Visitable /* 2 */,
-				Fragments._RelationCallExp__Element /* 3 */,
-				Fragments._RelationCallExp__NamedElement /* 4 */,
-				Fragments._RelationCallExp__TypedElement /* 5 */,
-				Fragments._RelationCallExp__OCLExpression /* 6 */,
-				Fragments._RelationCallExp__RelationCallExp /* 7 */
-			};
+		{
+			Fragments._RelationCallExp__OclAny /* 0 */,
+			Fragments._RelationCallExp__OclElement /* 1 */,
+			Fragments._RelationCallExp__Nameable /* 2 */,
+			Fragments._RelationCallExp__Visitable /* 2 */,
+			Fragments._RelationCallExp__Element /* 3 */,
+			Fragments._RelationCallExp__NamedElement /* 4 */,
+			Fragments._RelationCallExp__TypedElement /* 5 */,
+			Fragments._RelationCallExp__OCLExpression /* 6 */,
+			Fragments._RelationCallExp__RelationCallExp /* 7 */
+		};
 		private static final int @NonNull [] __RelationCallExp = { 1,1,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelationDomain =
-			{
-				Fragments._RelationDomain__OclAny /* 0 */,
-				Fragments._RelationDomain__OclElement /* 1 */,
-				Fragments._RelationDomain__Nameable /* 2 */,
-				Fragments._RelationDomain__ReferringElement /* 2 */,
-				Fragments._RelationDomain__Visitable /* 2 */,
-				Fragments._RelationDomain__Element /* 3 */,
-				Fragments._RelationDomain__NamedElement /* 4 */,
-				Fragments._RelationDomain__Domain /* 5 */,
-				Fragments._RelationDomain__RelationDomain /* 6 */
-			};
+		{
+			Fragments._RelationDomain__OclAny /* 0 */,
+			Fragments._RelationDomain__OclElement /* 1 */,
+			Fragments._RelationDomain__Nameable /* 2 */,
+			Fragments._RelationDomain__ReferringElement /* 2 */,
+			Fragments._RelationDomain__Visitable /* 2 */,
+			Fragments._RelationDomain__Element /* 3 */,
+			Fragments._RelationDomain__NamedElement /* 4 */,
+			Fragments._RelationDomain__Domain /* 5 */,
+			Fragments._RelationDomain__RelationDomain /* 6 */
+		};
 		private static final int @NonNull [] __RelationDomain = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelationDomainAssignment =
-			{
-				Fragments._RelationDomainAssignment__OclAny /* 0 */,
-				Fragments._RelationDomainAssignment__OclElement /* 1 */,
-				Fragments._RelationDomainAssignment__Visitable /* 2 */,
-				Fragments._RelationDomainAssignment__Element /* 3 */,
-				Fragments._RelationDomainAssignment__RelationDomainAssignment /* 4 */
-			};
+		{
+			Fragments._RelationDomainAssignment__OclAny /* 0 */,
+			Fragments._RelationDomainAssignment__OclElement /* 1 */,
+			Fragments._RelationDomainAssignment__Visitable /* 2 */,
+			Fragments._RelationDomainAssignment__Element /* 3 */,
+			Fragments._RelationDomainAssignment__RelationDomainAssignment /* 4 */
+		};
 		private static final int @NonNull [] __RelationDomainAssignment = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelationImplementation =
-			{
-				Fragments._RelationImplementation__OclAny /* 0 */,
-				Fragments._RelationImplementation__OclElement /* 1 */,
-				Fragments._RelationImplementation__Visitable /* 2 */,
-				Fragments._RelationImplementation__Element /* 3 */,
-				Fragments._RelationImplementation__RelationImplementation /* 4 */
-			};
+		{
+			Fragments._RelationImplementation__OclAny /* 0 */,
+			Fragments._RelationImplementation__OclElement /* 1 */,
+			Fragments._RelationImplementation__Visitable /* 2 */,
+			Fragments._RelationImplementation__Element /* 3 */,
+			Fragments._RelationImplementation__RelationImplementation /* 4 */
+		};
 		private static final int @NonNull [] __RelationImplementation = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelationModel =
-			{
-				Fragments._RelationModel__OclAny /* 0 */,
-				Fragments._RelationModel__OclElement /* 1 */,
-				Fragments._RelationModel__Nameable /* 2 */,
-				Fragments._RelationModel__Visitable /* 2 */,
-				Fragments._RelationModel__Element /* 3 */,
-				Fragments._RelationModel__NamedElement /* 4 */,
-				Fragments._RelationModel__Namespace /* 5 */,
-				Fragments._RelationModel__Model /* 6 */,
-				Fragments._RelationModel__BaseModel /* 7 */,
-				Fragments._RelationModel__RelationModel /* 8 */
-			};
+		{
+			Fragments._RelationModel__OclAny /* 0 */,
+			Fragments._RelationModel__OclElement /* 1 */,
+			Fragments._RelationModel__Nameable /* 2 */,
+			Fragments._RelationModel__Visitable /* 2 */,
+			Fragments._RelationModel__Element /* 3 */,
+			Fragments._RelationModel__NamedElement /* 4 */,
+			Fragments._RelationModel__Namespace /* 5 */,
+			Fragments._RelationModel__Model /* 6 */,
+			Fragments._RelationModel__BaseModel /* 7 */,
+			Fragments._RelationModel__RelationModel /* 8 */
+		};
 		private static final int @NonNull [] __RelationModel = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelationalTransformation =
-			{
-				Fragments._RelationalTransformation__OclAny /* 0 */,
-				Fragments._RelationalTransformation__OclElement /* 1 */,
-				Fragments._RelationalTransformation__Nameable /* 2 */,
-				Fragments._RelationalTransformation__OclType /* 2 */,
-				Fragments._RelationalTransformation__Visitable /* 2 */,
-				Fragments._RelationalTransformation__Element /* 3 */,
-				Fragments._RelationalTransformation__NamedElement /* 4 */,
-				Fragments._RelationalTransformation__TemplateableElement /* 4 */,
-				Fragments._RelationalTransformation__Namespace /* 5 */,
-				Fragments._RelationalTransformation__Type /* 5 */,
-				Fragments._RelationalTransformation__Class /* 6 */,
-				Fragments._RelationalTransformation__Transformation /* 7 */,
-				Fragments._RelationalTransformation__RelationalTransformation /* 8 */
-			};
+		{
+			Fragments._RelationalTransformation__OclAny /* 0 */,
+			Fragments._RelationalTransformation__OclElement /* 1 */,
+			Fragments._RelationalTransformation__Nameable /* 2 */,
+			Fragments._RelationalTransformation__OclType /* 2 */,
+			Fragments._RelationalTransformation__Visitable /* 2 */,
+			Fragments._RelationalTransformation__Element /* 3 */,
+			Fragments._RelationalTransformation__NamedElement /* 4 */,
+			Fragments._RelationalTransformation__TemplateableElement /* 4 */,
+			Fragments._RelationalTransformation__Namespace /* 5 */,
+			Fragments._RelationalTransformation__Type /* 5 */,
+			Fragments._RelationalTransformation__Class /* 6 */,
+			Fragments._RelationalTransformation__Transformation /* 7 */,
+			Fragments._RelationalTransformation__RelationalTransformation /* 8 */
+		};
 		private static final int @NonNull [] __RelationalTransformation = { 1,1,3,1,2,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _SharedVariable =
-			{
-				Fragments._SharedVariable__OclAny /* 0 */,
-				Fragments._SharedVariable__OclElement /* 1 */,
-				Fragments._SharedVariable__Nameable /* 2 */,
-				Fragments._SharedVariable__Visitable /* 2 */,
-				Fragments._SharedVariable__Element /* 3 */,
-				Fragments._SharedVariable__NamedElement /* 4 */,
-				Fragments._SharedVariable__TypedElement /* 5 */,
-				Fragments._SharedVariable__VariableDeclaration /* 6 */,
-				Fragments._SharedVariable__Variable /* 7 */,
-				Fragments._SharedVariable__SharedVariable /* 8 */
-			};
+		{
+			Fragments._SharedVariable__OclAny /* 0 */,
+			Fragments._SharedVariable__OclElement /* 1 */,
+			Fragments._SharedVariable__Nameable /* 2 */,
+			Fragments._SharedVariable__Visitable /* 2 */,
+			Fragments._SharedVariable__Element /* 3 */,
+			Fragments._SharedVariable__NamedElement /* 4 */,
+			Fragments._SharedVariable__TypedElement /* 5 */,
+			Fragments._SharedVariable__VariableDeclaration /* 6 */,
+			Fragments._SharedVariable__Variable /* 7 */,
+			Fragments._SharedVariable__SharedVariable /* 8 */
+		};
 		private static final int @NonNull [] __SharedVariable = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TemplateVariable =
-			{
-				Fragments._TemplateVariable__OclAny /* 0 */,
-				Fragments._TemplateVariable__OclElement /* 1 */,
-				Fragments._TemplateVariable__Nameable /* 2 */,
-				Fragments._TemplateVariable__Visitable /* 2 */,
-				Fragments._TemplateVariable__Element /* 3 */,
-				Fragments._TemplateVariable__NamedElement /* 4 */,
-				Fragments._TemplateVariable__TypedElement /* 5 */,
-				Fragments._TemplateVariable__VariableDeclaration /* 6 */,
-				Fragments._TemplateVariable__Variable /* 7 */,
-				Fragments._TemplateVariable__TemplateVariable /* 8 */
-			};
+		{
+			Fragments._TemplateVariable__OclAny /* 0 */,
+			Fragments._TemplateVariable__OclElement /* 1 */,
+			Fragments._TemplateVariable__Nameable /* 2 */,
+			Fragments._TemplateVariable__Visitable /* 2 */,
+			Fragments._TemplateVariable__Element /* 3 */,
+			Fragments._TemplateVariable__NamedElement /* 4 */,
+			Fragments._TemplateVariable__TypedElement /* 5 */,
+			Fragments._TemplateVariable__VariableDeclaration /* 6 */,
+			Fragments._TemplateVariable__Variable /* 7 */,
+			Fragments._TemplateVariable__TemplateVariable /* 8 */
+		};
 		private static final int @NonNull [] __TemplateVariable = { 1,1,2,1,1,1,1,1,1 };
 
 		/**

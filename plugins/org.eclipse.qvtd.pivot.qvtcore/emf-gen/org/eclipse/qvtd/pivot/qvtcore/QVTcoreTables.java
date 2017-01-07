@@ -439,7 +439,8 @@ public class QVTcoreTables
 
 		public static final @NonNull ExecutorProperty _Assignment__bottomPattern = new EcoreExecutorProperty(QVTcorePackage.Literals.ASSIGNMENT__BOTTOM_PATTERN, Types._Assignment, 0);
 		public static final @NonNull ExecutorProperty _Assignment__isDefault = new EcoreExecutorProperty(QVTcorePackage.Literals.ASSIGNMENT__IS_DEFAULT, Types._Assignment, 1);
-		public static final @NonNull ExecutorProperty _Assignment__value = new EcoreExecutorProperty(QVTcorePackage.Literals.ASSIGNMENT__VALUE, Types._Assignment, 2);
+		public static final @NonNull ExecutorProperty _Assignment__isPartial = new EcoreExecutorProperty(QVTcorePackage.Literals.ASSIGNMENT__IS_PARTIAL, Types._Assignment, 2);
+		public static final @NonNull ExecutorProperty _Assignment__value = new EcoreExecutorProperty(QVTcorePackage.Literals.ASSIGNMENT__VALUE, Types._Assignment, 3);
 
 		public static final @NonNull ExecutorProperty _BottomPattern__area = new EcoreExecutorProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__AREA, Types._BottomPattern, 0);
 		public static final @NonNull ExecutorProperty _BottomPattern__assignment = new EcoreExecutorProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__ASSIGNMENT, Types._BottomPattern, 1);
@@ -1529,6 +1530,7 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorProperty @NonNull [] _Assignment = {
 			QVTcoreTables.Properties._Assignment__bottomPattern,
 			QVTcoreTables.Properties._Assignment__isDefault,
+			QVTcoreTables.Properties._Assignment__isPartial,
 			QVTcoreTables.Properties._Assignment__value
 		};
 
@@ -1580,6 +1582,7 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorProperty @NonNull [] _NavigationAssignment = {
 			QVTcoreTables.Properties._Assignment__bottomPattern,
 			QVTcoreTables.Properties._Assignment__isDefault,
+			QVTcoreTables.Properties._Assignment__isPartial,
 			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
 			QVTcoreTables.Properties._Assignment__value
 		};
@@ -1587,6 +1590,7 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorProperty @NonNull [] _OppositePropertyAssignment = {
 			QVTcoreTables.Properties._Assignment__bottomPattern,
 			QVTcoreTables.Properties._Assignment__isDefault,
+			QVTcoreTables.Properties._Assignment__isPartial,
 			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
 			QVTcoreTables.Properties._OppositePropertyAssignment__targetProperty,
 			QVTcoreTables.Properties._Assignment__value
@@ -1595,6 +1599,7 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorProperty @NonNull [] _PropertyAssignment = {
 			QVTcoreTables.Properties._Assignment__bottomPattern,
 			QVTcoreTables.Properties._Assignment__isDefault,
+			QVTcoreTables.Properties._Assignment__isPartial,
 			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
 			QVTcoreTables.Properties._PropertyAssignment__targetProperty,
 			QVTcoreTables.Properties._Assignment__value
@@ -1605,6 +1610,7 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorProperty @NonNull [] _VariableAssignment = {
 			QVTcoreTables.Properties._Assignment__bottomPattern,
 			QVTcoreTables.Properties._Assignment__isDefault,
+			QVTcoreTables.Properties._Assignment__isPartial,
 			QVTcoreTables.Properties._VariableAssignment__targetVariable,
 			QVTcoreTables.Properties._Assignment__value
 		};

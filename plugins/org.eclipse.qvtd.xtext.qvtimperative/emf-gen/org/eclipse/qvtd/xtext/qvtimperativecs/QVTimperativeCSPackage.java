@@ -2528,13 +2528,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int SET_STATEMENT_CS__IS_NOTIFY = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT_CS__IS_PARTIAL = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Set Statement CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS_FEATURE_COUNT = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4;
+	int SET_STATEMENT_CS_FEATURE_COUNT = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SimpleParameterBindingCSImpl <em>Simple Parameter Binding CS</em>}' class.
@@ -3749,6 +3758,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EAttribute getSetStatementCS_IsNotify();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsPartial <em>Is Partial</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Partial</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsPartial()
+	 * @see #getSetStatementCS()
+	 * @generated
+	 */
+	EAttribute getSetStatementCS_IsPartial();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS <em>Simple Parameter Binding CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4488,6 +4508,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SET_STATEMENT_CS__IS_NOTIFY = eINSTANCE.getSetStatementCS_IsNotify();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Partial</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SET_STATEMENT_CS__IS_PARTIAL = eINSTANCE.getSetStatementCS_IsPartial();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SimpleParameterBindingCSImpl <em>Simple Parameter Binding CS</em>}' class.

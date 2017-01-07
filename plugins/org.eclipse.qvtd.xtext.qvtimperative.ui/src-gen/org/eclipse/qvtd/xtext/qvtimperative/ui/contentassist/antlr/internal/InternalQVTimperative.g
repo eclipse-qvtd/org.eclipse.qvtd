@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -3921,6 +3921,30 @@ rule__QueryCS__Alternatives_9
 { before(grammarAccess.getQueryCSAccess().getGroup_9_1()); }
 (rule__QueryCS__Group_9_1__0)
 { after(grammarAccess.getQueryCSAccess().getGroup_9_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SetStatementCS__Alternatives_6
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSetStatementCSAccess().getColonEqualsSignKeyword_6_0()); }
+
+	':='
+
+{ after(grammarAccess.getSetStatementCSAccess().getColonEqualsSignKeyword_6_0()); }
+)
+
+    |(
+{ before(grammarAccess.getSetStatementCSAccess().getIsPartialAssignment_6_1()); }
+(rule__SetStatementCS__IsPartialAssignment_6_1)
+{ after(grammarAccess.getSetStatementCSAccess().getIsPartialAssignment_6_1()); }
 )
 
 ;
@@ -11490,11 +11514,9 @@ rule__SetStatementCS__Group__6__Impl
     }
 :
 (
-{ before(grammarAccess.getSetStatementCSAccess().getColonEqualsSignKeyword_6()); }
-
-	':='
-
-{ after(grammarAccess.getSetStatementCSAccess().getColonEqualsSignKeyword_6()); }
+{ before(grammarAccess.getSetStatementCSAccess().getAlternatives_6()); }
+(rule__SetStatementCS__Alternatives_6)
+{ after(grammarAccess.getSetStatementCSAccess().getAlternatives_6()); }
 )
 
 ;
@@ -27673,6 +27695,29 @@ rule__SetStatementCS__ReferredPropertyAssignment_5
 	ruleUnrestrictedName{ after(grammarAccess.getSetStatementCSAccess().getReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1()); }
 )
 { after(grammarAccess.getSetStatementCSAccess().getReferredPropertyPropertyCrossReference_5_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SetStatementCS__IsPartialAssignment_6_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSetStatementCSAccess().getIsPartialPlusSignEqualsSignKeyword_6_1_0()); }
+(
+{ before(grammarAccess.getSetStatementCSAccess().getIsPartialPlusSignEqualsSignKeyword_6_1_0()); }
+
+	'+='
+
+{ after(grammarAccess.getSetStatementCSAccess().getIsPartialPlusSignEqualsSignKeyword_6_1_0()); }
+)
+
+{ after(grammarAccess.getSetStatementCSAccess().getIsPartialPlusSignEqualsSignKeyword_6_1_0()); }
 )
 
 ;

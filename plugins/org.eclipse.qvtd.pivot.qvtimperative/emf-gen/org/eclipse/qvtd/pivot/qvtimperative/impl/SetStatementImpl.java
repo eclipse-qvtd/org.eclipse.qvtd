@@ -72,8 +72,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getTargetProperty <em>Target Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsPartial <em>Is Partial</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsNotify <em>Is Notify</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getResolvedProperty <em>Resolved Property</em>}</li>
  * </ul>
@@ -102,24 +103,24 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	protected Property targetProperty;
 
 	/**
-	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * The default value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
+	 * @see #isIsPartial()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_OPPOSITE_EDEFAULT = false;
+	protected static final boolean IS_PARTIAL_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * The cached value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
+	 * @see #isIsPartial()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
+	protected boolean isPartial = IS_PARTIAL_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIsNotify() <em>Is Notify</em>}' attribute.
@@ -140,6 +141,26 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	 * @ordered
 	 */
 	protected boolean isNotify = IS_NOTIFY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_OPPOSITE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
@@ -248,6 +269,29 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		targetProperty = newTargetProperty;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY, oldTargetProperty, targetProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsPartial() {
+		return isPartial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPartial(boolean newIsPartial) {
+		boolean oldIsPartial = isPartial;
+		isPartial = newIsPartial;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_PARTIAL, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -813,10 +857,12 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				if (resolve) return getTargetProperty();
 				return basicGetTargetProperty();
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
-				return isIsOpposite();
+			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+				return isIsPartial();
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				return isIsNotify();
+			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+				return isIsOpposite();
 			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
 				return getOwnedExpression();
 			case QVTimperativePackage.SET_STATEMENT__RESOLVED_PROPERTY:
@@ -839,11 +885,14 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
-				setIsOpposite((Boolean)newValue);
+			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+				setIsPartial((Boolean)newValue);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				setIsNotify((Boolean)newValue);
+				return;
+			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+				setIsOpposite((Boolean)newValue);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)newValue);
@@ -866,11 +915,14 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)null);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
-				setIsOpposite(IS_OPPOSITE_EDEFAULT);
+			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+				setIsPartial(IS_PARTIAL_EDEFAULT);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
+				return;
+			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+				setIsOpposite(IS_OPPOSITE_EDEFAULT);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)null);
@@ -891,10 +943,12 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				return targetVariable != null;
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				return targetProperty != null;
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
-				return isOpposite != IS_OPPOSITE_EDEFAULT;
+			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+				return isPartial != IS_PARTIAL_EDEFAULT;
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				return isNotify != IS_NOTIFY_EDEFAULT;
+			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+				return isOpposite != IS_OPPOSITE_EDEFAULT;
 			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
 				return ownedExpression != null;
 			case QVTimperativePackage.SET_STATEMENT__RESOLVED_PROPERTY:

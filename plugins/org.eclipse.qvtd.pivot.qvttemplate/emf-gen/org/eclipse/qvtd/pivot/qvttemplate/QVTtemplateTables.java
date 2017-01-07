@@ -1,15 +1,15 @@
 /*******************************************************************************
  * <copyright>
- *
+ * 
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- *
+ * 
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
@@ -302,60 +302,60 @@ public class QVTtemplateTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CollectionTemplateExp =
-			{
-				Fragments._CollectionTemplateExp__OclAny /* 0 */,
-				Fragments._CollectionTemplateExp__OclElement /* 1 */,
-				Fragments._CollectionTemplateExp__Nameable /* 2 */,
-				Fragments._CollectionTemplateExp__Visitable /* 2 */,
-				Fragments._CollectionTemplateExp__Element /* 3 */,
-				Fragments._CollectionTemplateExp__NamedElement /* 4 */,
-				Fragments._CollectionTemplateExp__TypedElement /* 5 */,
-				Fragments._CollectionTemplateExp__OCLExpression /* 6 */,
-				Fragments._CollectionTemplateExp__LiteralExp /* 7 */,
-				Fragments._CollectionTemplateExp__TemplateExp /* 8 */,
-				Fragments._CollectionTemplateExp__CollectionTemplateExp /* 9 */
-			};
+		{
+			Fragments._CollectionTemplateExp__OclAny /* 0 */,
+			Fragments._CollectionTemplateExp__OclElement /* 1 */,
+			Fragments._CollectionTemplateExp__Nameable /* 2 */,
+			Fragments._CollectionTemplateExp__Visitable /* 2 */,
+			Fragments._CollectionTemplateExp__Element /* 3 */,
+			Fragments._CollectionTemplateExp__NamedElement /* 4 */,
+			Fragments._CollectionTemplateExp__TypedElement /* 5 */,
+			Fragments._CollectionTemplateExp__OCLExpression /* 6 */,
+			Fragments._CollectionTemplateExp__LiteralExp /* 7 */,
+			Fragments._CollectionTemplateExp__TemplateExp /* 8 */,
+			Fragments._CollectionTemplateExp__CollectionTemplateExp /* 9 */
+		};
 		private static final int @NonNull [] __CollectionTemplateExp = { 1,1,2,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ObjectTemplateExp =
-			{
-				Fragments._ObjectTemplateExp__OclAny /* 0 */,
-				Fragments._ObjectTemplateExp__OclElement /* 1 */,
-				Fragments._ObjectTemplateExp__Nameable /* 2 */,
-				Fragments._ObjectTemplateExp__Visitable /* 2 */,
-				Fragments._ObjectTemplateExp__Element /* 3 */,
-				Fragments._ObjectTemplateExp__NamedElement /* 4 */,
-				Fragments._ObjectTemplateExp__TypedElement /* 5 */,
-				Fragments._ObjectTemplateExp__OCLExpression /* 6 */,
-				Fragments._ObjectTemplateExp__LiteralExp /* 7 */,
-				Fragments._ObjectTemplateExp__TemplateExp /* 8 */,
-				Fragments._ObjectTemplateExp__ObjectTemplateExp /* 9 */
-			};
+		{
+			Fragments._ObjectTemplateExp__OclAny /* 0 */,
+			Fragments._ObjectTemplateExp__OclElement /* 1 */,
+			Fragments._ObjectTemplateExp__Nameable /* 2 */,
+			Fragments._ObjectTemplateExp__Visitable /* 2 */,
+			Fragments._ObjectTemplateExp__Element /* 3 */,
+			Fragments._ObjectTemplateExp__NamedElement /* 4 */,
+			Fragments._ObjectTemplateExp__TypedElement /* 5 */,
+			Fragments._ObjectTemplateExp__OCLExpression /* 6 */,
+			Fragments._ObjectTemplateExp__LiteralExp /* 7 */,
+			Fragments._ObjectTemplateExp__TemplateExp /* 8 */,
+			Fragments._ObjectTemplateExp__ObjectTemplateExp /* 9 */
+		};
 		private static final int @NonNull [] __ObjectTemplateExp = { 1,1,2,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PropertyTemplateItem =
-			{
-				Fragments._PropertyTemplateItem__OclAny /* 0 */,
-				Fragments._PropertyTemplateItem__OclElement /* 1 */,
-				Fragments._PropertyTemplateItem__Visitable /* 2 */,
-				Fragments._PropertyTemplateItem__Element /* 3 */,
-				Fragments._PropertyTemplateItem__PropertyTemplateItem /* 4 */
-			};
+		{
+			Fragments._PropertyTemplateItem__OclAny /* 0 */,
+			Fragments._PropertyTemplateItem__OclElement /* 1 */,
+			Fragments._PropertyTemplateItem__Visitable /* 2 */,
+			Fragments._PropertyTemplateItem__Element /* 3 */,
+			Fragments._PropertyTemplateItem__PropertyTemplateItem /* 4 */
+		};
 		private static final int @NonNull [] __PropertyTemplateItem = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TemplateExp =
-			{
-				Fragments._TemplateExp__OclAny /* 0 */,
-				Fragments._TemplateExp__OclElement /* 1 */,
-				Fragments._TemplateExp__Nameable /* 2 */,
-				Fragments._TemplateExp__Visitable /* 2 */,
-				Fragments._TemplateExp__Element /* 3 */,
-				Fragments._TemplateExp__NamedElement /* 4 */,
-				Fragments._TemplateExp__TypedElement /* 5 */,
-				Fragments._TemplateExp__OCLExpression /* 6 */,
-				Fragments._TemplateExp__LiteralExp /* 7 */,
-				Fragments._TemplateExp__TemplateExp /* 8 */
-			};
+		{
+			Fragments._TemplateExp__OclAny /* 0 */,
+			Fragments._TemplateExp__OclElement /* 1 */,
+			Fragments._TemplateExp__Nameable /* 2 */,
+			Fragments._TemplateExp__Visitable /* 2 */,
+			Fragments._TemplateExp__Element /* 3 */,
+			Fragments._TemplateExp__NamedElement /* 4 */,
+			Fragments._TemplateExp__TypedElement /* 5 */,
+			Fragments._TemplateExp__OCLExpression /* 6 */,
+			Fragments._TemplateExp__LiteralExp /* 7 */,
+			Fragments._TemplateExp__TemplateExp /* 8 */
+		};
 		private static final int @NonNull [] __TemplateExp = { 1,1,2,1,1,1,1,1,1 };
 
 		/**

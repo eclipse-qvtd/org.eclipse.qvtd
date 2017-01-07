@@ -175,7 +175,7 @@ public class QVTtemplateValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return QVTtemplatePackage.eINSTANCE;
+	  return QVTtemplatePackage.eINSTANCE;
 	}
 
 	/**

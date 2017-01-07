@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -591,31 +591,31 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//name=Identifier
 		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
-		//Identifier
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.1/@elements.0/@terminal'
 		public RuleCall getNameIdentifierParserRuleCall_1_0_0() { return cNameIdentifierParserRuleCall_1_0_0; }
 
-		//':'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.1/@elements.1'
 		public Keyword getColonKeyword_1_1() { return cColonKeyword_1_1; }
 
-		//ownedPathName=URIPathNameCS
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.2'
 		public Assignment getOwnedPathNameAssignment_2() { return cOwnedPathNameAssignment_2; }
 
-		//URIPathNameCS
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.2/@terminal'
 		public RuleCall getOwnedPathNameURIPathNameCSParserRuleCall_2_0() { return cOwnedPathNameURIPathNameCSParserRuleCall_2_0; }
 
-		//(isAll?='::' '*')?
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3'
 		public Group getGroup_3() { return cGroup_3; }
 
-		//isAll?='::'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3/@elements.0'
 		public Assignment getIsAllAssignment_3_0() { return cIsAllAssignment_3_0; }
 
-		//'::'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3/@elements.0/@terminal'
 		public Keyword getIsAllColonColonKeyword_3_0_0() { return cIsAllColonColonKeyword_3_0_0; }
 
-		//'*'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3/@elements.1'
 		public Keyword getAsteriskKeyword_3_1() { return cAsteriskKeyword_3_1; }
 
-		//';'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.4'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
@@ -653,36 +653,31 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedComposedMappingsMappingCSParserRuleCall_9_0 = (RuleCall)cOwnedComposedMappingsAssignment_9.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 
-		//MappingCS:
-		//	{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
-		//	refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
-		//	ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#XtextFragmentProvider_org.eclipse.qvtd.xtext.qvtcore.QVTcore/MappingCS'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
-		//refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
-		//ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives'
 		public Group getGroup() { return cGroup; }
 
-		//{MappingCS}
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.0'
 		public Action getMappingCSAction_0() { return cMappingCSAction_0; }
 
-		//isDefault?='default'?
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.1'
 		public Assignment getIsDefaultAssignment_1() { return cIsDefaultAssignment_1; }
 
-		//'default'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.1/@terminal'
 		public Keyword getIsDefaultDefaultKeyword_1_0() { return cIsDefaultDefaultKeyword_1_0; }
 
-		//'map'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.2'
 		public Keyword getMapKeyword_2() { return cMapKeyword_2; }
 
-		//name=UnrestrictedName?
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.3'
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 
-		//UnrestrictedName
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.3/@terminal'
 		public RuleCall getNameUnrestrictedNameParserRuleCall_3_0() { return cNameUnrestrictedNameParserRuleCall_3_0; }
 
-		//('in' ownedInPathName=PathNameCS)?
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.4'
 		public Group getGroup_4() { return cGroup_4; }
 
 		//'in'
@@ -806,10 +801,10 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//GuardPatternCS
 		public RuleCall getOwnedGuardPatternGuardPatternCSParserRuleCall_3_0() { return cOwnedGuardPatternGuardPatternCSParserRuleCall_3_0; }
 
-		//ownedBottomPattern=BottomPatternCS
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#XtextFragmentProvider_org.eclipse.qvtd.xtext.qvtcore.QVTcore/BottomPatternCS'
 		public Assignment getOwnedBottomPatternAssignment_4() { return cOwnedBottomPatternAssignment_4; }
 
-		//BottomPatternCS
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.7/@alternatives/@elements.4/@terminal'
 		public RuleCall getOwnedBottomPatternBottomPatternCSParserRuleCall_4_0() { return cOwnedBottomPatternBottomPatternCSParserRuleCall_4_0; }
 	}
 
@@ -991,7 +986,10 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cOwnedTargetExpCSParserRuleCall_1_0 = (RuleCall)cOwnedTargetAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cColonEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Alternatives cAlternatives_2_0 = (Alternatives)cGroup_2.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_2_0_0 = (Keyword)cAlternatives_2_0.eContents().get(0);
+		private final Assignment cIsPartialAssignment_2_0_1 = (Assignment)cAlternatives_2_0.eContents().get(1);
+		private final Keyword cIsPartialPlusSignEqualsSignKeyword_2_0_1_0 = (Keyword)cIsPartialAssignment_2_0_1.eContents().get(0);
 		private final Assignment cOwnedInitExpressionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_2_1_0 = (RuleCall)cOwnedInitExpressionAssignment_2_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -1001,29 +999,38 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
 		// PredicateOrAssignmentCS:
-		//	isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
+		//	isDefault?='default'? ownedTarget=ExpCS ((':=' | isPartial?='+=') ownedInitExpression=ExpCS)? ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives'
 		public Group getGroup() { return cGroup; }
 
-		//isDefault?='default'?
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.0'
 		public Assignment getIsDefaultAssignment_0() { return cIsDefaultAssignment_0; }
 
-		//'default'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.0/@terminal'
 		public Keyword getIsDefaultDefaultKeyword_0_0() { return cIsDefaultDefaultKeyword_0_0; }
 
-		//ownedTarget=ExpCS
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.1'
 		public Assignment getOwnedTargetAssignment_1() { return cOwnedTargetAssignment_1; }
 
-		//ExpCS
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.1/@terminal'
 		public RuleCall getOwnedTargetExpCSParserRuleCall_1_0() { return cOwnedTargetExpCSParserRuleCall_1_0; }
 
-		//(':=' ownedInitExpression=ExpCS)?
+		//((':=' | isPartial?='+=') ownedInitExpression=ExpCS)?
 		public Group getGroup_2() { return cGroup_2; }
 
+		//(':=' | isPartial?='+=')
+		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
+
 		//':='
-		public Keyword getColonEqualsSignKeyword_2_0() { return cColonEqualsSignKeyword_2_0; }
+		public Keyword getColonEqualsSignKeyword_2_0_0() { return cColonEqualsSignKeyword_2_0_0; }
+
+		//isPartial?='+='
+		public Assignment getIsPartialAssignment_2_0_1() { return cIsPartialAssignment_2_0_1; }
+
+		//'+='
+		public Keyword getIsPartialPlusSignEqualsSignKeyword_2_0_1_0() { return cIsPartialPlusSignEqualsSignKeyword_2_0_1_0; }
 
 		//ownedInitExpression=ExpCS
 		public Assignment getOwnedInitExpressionAssignment_2_1() { return cOwnedInitExpressionAssignment_2_1; }
@@ -1139,10 +1146,10 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_9_0() { return cSemicolonKeyword_9_0; }
 
-		//'{' ownedExpression=ExpCS '}'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.1'
 		public Group getGroup_9_1() { return cGroup_9_1; }
 
-		//'{'
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.1/@elements.0'
 		public Keyword getLeftCurlyBracketKeyword_9_1_0() { return cLeftCurlyBracketKeyword_9_1_0; }
 
 		//ownedExpression=ExpCS
@@ -1299,7 +1306,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//(':=' ownedInitExpression=ExpCS)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//':='
+		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.15/@alternatives/@elements.2/@elements.0'
 		public Keyword getColonEqualsSignKeyword_2_0() { return cColonEqualsSignKeyword_2_0; }
 
 		//ownedInitExpression=ExpCS
@@ -1675,7 +1682,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
 	// PredicateOrAssignmentCS:
-	//	isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
+	//	isDefault?='default'? ownedTarget=ExpCS ((':=' | isPartial?='+=') ownedInitExpression=ExpCS)? ';';
 	public PredicateOrAssignmentCSElements getPredicateOrAssignmentCSAccess() {
 		return pPredicateOrAssignmentCS;
 	}

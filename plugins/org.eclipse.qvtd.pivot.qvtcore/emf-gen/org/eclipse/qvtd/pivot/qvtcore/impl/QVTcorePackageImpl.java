@@ -213,7 +213,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		EValidator.Registry.INSTANCE.put
 			(theQVTcorePackage, 
 			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
+				 @Override
+				public EValidator getEValidator() {
 					 return QVTcoreValidator.INSTANCE;
 				 }
 			 });
@@ -295,6 +296,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	@Override
 	public EAttribute getAssignment_IsDefault() {
 		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAssignment_IsPartial() {
+		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -712,6 +723,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map() {
 		return realizedVariableEClass.getEOperations().get(0);
 	}
@@ -813,6 +825,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEReference(assignmentEClass, ASSIGNMENT__BOTTOM_PATTERN);
 		createEReference(assignmentEClass, ASSIGNMENT__VALUE);
 		createEAttribute(assignmentEClass, ASSIGNMENT__IS_DEFAULT);
+		createEAttribute(assignmentEClass, ASSIGNMENT__IS_PARTIAL);
 
 		bottomPatternEClass = createEClass(BOTTOM_PATTERN);
 		createEReference(bottomPatternEClass, BOTTOM_PATTERN__AREA);
@@ -938,7 +951,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEClass(assignmentEClass, Assignment.class, "Assignment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssignment_BottomPattern(), this.getBottomPattern(), this.getBottomPattern_Assignment(), "bottomPattern", null, 1, 1, Assignment.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssignment_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssignment_IsDefault(), ecorePackage.getEBoolean(), "isDefault", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignment_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignment_IsPartial(), ecorePackage.getEBoolean(), "isPartial", "false", 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bottomPatternEClass, BottomPattern.class, "BottomPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBottomPattern_Area(), this.getArea(), this.getArea_BottomPattern(), "area", null, 1, 1, BottomPattern.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

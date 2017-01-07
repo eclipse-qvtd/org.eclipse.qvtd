@@ -162,7 +162,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		EValidator.Registry.INSTANCE.put
 			(theQVTbasePackage, 
 			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
+				 @Override
+				public EValidator getEValidator() {
 					 return QVTbaseValidator.INSTANCE;
 				 }
 			 });

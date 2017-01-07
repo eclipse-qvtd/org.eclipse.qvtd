@@ -250,13 +250,22 @@ public interface QVTcorePackage extends EPackage {
 	int ASSIGNMENT__IS_DEFAULT = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__IS_PARTIAL = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Assignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int ASSIGNMENT_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1826,6 +1835,15 @@ public interface QVTcorePackage extends EPackage {
 	int NAVIGATION_ASSIGNMENT__IS_DEFAULT = ASSIGNMENT__IS_DEFAULT;
 
 	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_ASSIGNMENT__IS_PARTIAL = ASSIGNMENT__IS_PARTIAL;
+
+	/**
 	 * The feature id for the '<em><b>Slot Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1942,6 +1960,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPPOSITE_PROPERTY_ASSIGNMENT__IS_DEFAULT = NAVIGATION_ASSIGNMENT__IS_DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__IS_PARTIAL = NAVIGATION_ASSIGNMENT__IS_PARTIAL;
 
 	/**
 	 * The feature id for the '<em><b>Slot Expression</b></em>' containment reference.
@@ -2105,6 +2132,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_ASSIGNMENT__IS_DEFAULT = NAVIGATION_ASSIGNMENT__IS_DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__IS_PARTIAL = NAVIGATION_ASSIGNMENT__IS_PARTIAL;
 
 	/**
 	 * The feature id for the '<em><b>Slot Expression</b></em>' containment reference.
@@ -2478,6 +2514,15 @@ public interface QVTcorePackage extends EPackage {
 	int VARIABLE_ASSIGNMENT__IS_DEFAULT = ASSIGNMENT__IS_DEFAULT;
 
 	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT__IS_PARTIAL = ASSIGNMENT__IS_PARTIAL;
+
+	/**
 	 * The feature id for the '<em><b>Target Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2615,6 +2660,17 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAssignment_IsDefault();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsPartial <em>Is Partial</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Partial</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsPartial()
+	 * @see #getAssignment()
+	 * @generated
+	 */
+	EAttribute getAssignment_IsPartial();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.BottomPattern <em>Bottom Pattern</em>}'.
@@ -3194,6 +3250,14 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ASSIGNMENT__IS_DEFAULT = eINSTANCE.getAssignment_IsDefault();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Partial</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSIGNMENT__IS_PARTIAL = eINSTANCE.getAssignment_IsPartial();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.BottomPatternImpl <em>Bottom Pattern</em>}' class.

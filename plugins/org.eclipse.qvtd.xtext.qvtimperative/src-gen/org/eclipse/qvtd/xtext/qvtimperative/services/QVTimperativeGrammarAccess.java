@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -1603,7 +1603,10 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cReferredPropertyAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final CrossReference cReferredPropertyPropertyCrossReference_5_0 = (CrossReference)cReferredPropertyAssignment_5.eContents().get(0);
 		private final RuleCall cReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1 = (RuleCall)cReferredPropertyPropertyCrossReference_5_0.eContents().get(1);
-		private final Keyword cColonEqualsSignKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Keyword cColonEqualsSignKeyword_6_0 = (Keyword)cAlternatives_6.eContents().get(0);
+		private final Assignment cIsPartialAssignment_6_1 = (Assignment)cAlternatives_6.eContents().get(1);
+		private final Keyword cIsPartialPlusSignEqualsSignKeyword_6_1_0 = (Keyword)cIsPartialAssignment_6_1.eContents().get(0);
 		private final Assignment cOwnedExpressionAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cOwnedExpressionExpCSParserRuleCall_7_0 = (RuleCall)cOwnedExpressionAssignment_7.eContents().get(0);
 		private final Keyword cSemicolonKeyword_8 = (Keyword)cGroup.eContents().get(8);
@@ -1611,12 +1614,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//SetStatementCS:
 		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
 		//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
-		//	referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedExpression=ExpCS ';';
+		//	referredProperty=[pivot::Property|UnrestrictedName] (':=' | isPartial?='+=') ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
 		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName]
-		//':=' ownedExpression=ExpCS ';'
+		//(':=' | isPartial?='+=') ownedExpression=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
@@ -1673,8 +1676,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1() { return cReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1; }
 
+		//(':=' | isPartial?='+=')
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+
 		//':='
-		public Keyword getColonEqualsSignKeyword_6() { return cColonEqualsSignKeyword_6; }
+		public Keyword getColonEqualsSignKeyword_6_0() { return cColonEqualsSignKeyword_6_0; }
+
+		//isPartial?='+='
+		public Assignment getIsPartialAssignment_6_1() { return cIsPartialAssignment_6_1; }
+
+		//'+='
+		public Keyword getIsPartialPlusSignEqualsSignKeyword_6_1_0() { return cIsPartialPlusSignEqualsSignKeyword_6_1_0; }
 
 		//ownedExpression=ExpCS
 		public Assignment getOwnedExpressionAssignment_7() { return cOwnedExpressionAssignment_7; }
@@ -2312,7 +2324,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//SetStatementCS:
 	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
 	//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
-	//	referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedExpression=ExpCS ';';
+	//	referredProperty=[pivot::Property|UnrestrictedName] (':=' | isPartial?='+=') ownedExpression=ExpCS ';';
 	public SetStatementCSElements getSetStatementCSAccess() {
 		return pSetStatementCS;
 	}

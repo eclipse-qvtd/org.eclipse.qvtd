@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -56,6 +56,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifiedPackageCSAccess().getAlternatives_5_0_1(), "rule__QualifiedPackageCS__Alternatives_5_0_1");
 					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesAlternatives_5_0_1_1_0(), "rule__QualifiedPackageCS__OwnedClassesAlternatives_5_0_1_1_0");
 					put(grammarAccess.getQueryCSAccess().getAlternatives_9(), "rule__QueryCS__Alternatives_9");
+					put(grammarAccess.getSetStatementCSAccess().getAlternatives_6(), "rule__SetStatementCS__Alternatives_6");
 					put(grammarAccess.getUnrestrictedNameAccess().getAlternatives(), "rule__UnrestrictedName__Alternatives");
 					put(grammarAccess.getAttributeCSAccess().getAlternatives_0(), "rule__AttributeCS__Alternatives_0");
 					put(grammarAccess.getAttributeCSAccess().getAlternatives_5_1_0(), "rule__AttributeCS__Alternatives_5_1_0");
@@ -402,6 +403,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSetStatementCSAccess().getIsNotifyAssignment_1(), "rule__SetStatementCS__IsNotifyAssignment_1");
 					put(grammarAccess.getSetStatementCSAccess().getReferredVariableAssignment_3(), "rule__SetStatementCS__ReferredVariableAssignment_3");
 					put(grammarAccess.getSetStatementCSAccess().getReferredPropertyAssignment_5(), "rule__SetStatementCS__ReferredPropertyAssignment_5");
+					put(grammarAccess.getSetStatementCSAccess().getIsPartialAssignment_6_1(), "rule__SetStatementCS__IsPartialAssignment_6_1");
 					put(grammarAccess.getSetStatementCSAccess().getOwnedExpressionAssignment_7(), "rule__SetStatementCS__OwnedExpressionAssignment_7");
 					put(grammarAccess.getSimpleParameterBindingCSAccess().getIsCheckAssignment_0(), "rule__SimpleParameterBindingCS__IsCheckAssignment_0");
 					put(grammarAccess.getSimpleParameterBindingCSAccess().getReferredVariableAssignment_1(), "rule__SimpleParameterBindingCS__ReferredVariableAssignment_1");

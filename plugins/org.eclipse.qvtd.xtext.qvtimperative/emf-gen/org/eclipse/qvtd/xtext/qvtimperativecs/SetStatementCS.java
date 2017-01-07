@@ -31,6 +31,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsNotify <em>Is Notify</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsPartial <em>Is Partial</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS()
@@ -142,5 +143,32 @@ public interface SetStatementCS extends ObservableStatementCS {
 	 * @generated
 	 */
 	void setIsNotify(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Partial</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Partial</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Partial</em>' attribute.
+	 * @see #setIsPartial(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_IsPartial()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsPartial();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsPartial <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Partial</em>' attribute.
+	 * @see #isIsPartial()
+	 * @generated
+	 */
+	void setIsPartial(boolean value);
 
 } // SetStatementCS

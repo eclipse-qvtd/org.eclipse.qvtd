@@ -44,6 +44,7 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.PredicateOrAssignmentCSImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.PredicateOrAssignmentCSImpl#isIsPartial <em>Is Partial</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.PredicateOrAssignmentCSImpl#getOwnedTarget <em>Owned Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.PredicateOrAssignmentCSImpl#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  * </ul>
@@ -70,6 +71,26 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	 * @ordered
 	 */
 	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_PARTIAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPartial = IS_PARTIAL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedTarget() <em>Owned Target</em>}' containment reference.
@@ -131,6 +152,29 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		isDefault = newIsDefault;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, oldIsDefault, isDefault));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsPartial() {
+		return isPartial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPartial(boolean newIsPartial) {
+		boolean oldIsPartial = isPartial;
+		isPartial = newIsPartial;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -259,6 +303,8 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		switch (featureID) {
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
 				return isIsDefault();
+			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+				return isIsPartial();
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				return getOwnedTarget();
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
@@ -277,6 +323,9 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		switch (featureID) {
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
 				setIsDefault((Boolean)newValue);
+				return;
+			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+				setIsPartial((Boolean)newValue);
 				return;
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				setOwnedTarget((ExpCS)newValue);
@@ -299,6 +348,9 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
 				setIsDefault(IS_DEFAULT_EDEFAULT);
 				return;
+			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+				setIsPartial(IS_PARTIAL_EDEFAULT);
+				return;
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				setOwnedTarget((ExpCS)null);
 				return;
@@ -319,6 +371,8 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		switch (featureID) {
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
 				return isDefault != IS_DEFAULT_EDEFAULT;
+			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+				return isPartial != IS_PARTIAL_EDEFAULT;
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				return ownedTarget != null;
 			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -3519,6 +3519,30 @@ rule__QualifiedPackageCS__OwnedClassesAlternatives_5_0_1_1_0
 { before(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesTransformationCSParserRuleCall_5_0_1_1_0_1()); }
 	ruleTransformationCS
 { after(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesTransformationCSParserRuleCall_5_0_1_1_0_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PredicateOrAssignmentCS__Alternatives_2_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0_0()); }
+
+	':='
+
+{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0_0()); }
+)
+
+    |(
+{ before(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialAssignment_2_0_1()); }
+(rule__PredicateOrAssignmentCS__IsPartialAssignment_2_0_1)
+{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialAssignment_2_0_1()); }
 )
 
 ;
@@ -9005,11 +9029,9 @@ rule__PredicateOrAssignmentCS__Group_2__0__Impl
     }
 :
 (
-{ before(grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0()); }
-
-	':='
-
-{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0()); }
+{ before(grammarAccess.getPredicateOrAssignmentCSAccess().getAlternatives_2_0()); }
+(rule__PredicateOrAssignmentCS__Alternatives_2_0)
+{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getAlternatives_2_0()); }
 )
 
 ;
@@ -25154,6 +25176,29 @@ rule__PredicateOrAssignmentCS__OwnedTargetAssignment_1
 (
 { before(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedTargetExpCSParserRuleCall_1_0()); }
 	ruleExpCS{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedTargetExpCSParserRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PredicateOrAssignmentCS__IsPartialAssignment_2_0_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialPlusSignEqualsSignKeyword_2_0_1_0()); }
+(
+{ before(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialPlusSignEqualsSignKeyword_2_0_1_0()); }
+
+	'+='
+
+{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialPlusSignEqualsSignKeyword_2_0_1_0()); }
+)
+
+{ after(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialPlusSignEqualsSignKeyword_2_0_1_0()); }
 )
 
 ;

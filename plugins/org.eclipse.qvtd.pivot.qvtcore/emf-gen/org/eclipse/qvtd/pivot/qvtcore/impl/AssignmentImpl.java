@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.AssignmentImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.AssignmentImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.AssignmentImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.AssignmentImpl#isIsPartial <em>Is Partial</em>}</li>
  * </ul>
  *
  * @generated
@@ -86,6 +87,35 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * @ordered
 	 */
 	protected boolean isDefaultESet;
+
+	/**
+	 * The default value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_PARTIAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPartial = IS_PARTIAL_EDEFAULT;
+
+	/**
+	 * This is true if the Is Partial attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPartialESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -247,6 +277,56 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsPartial() {
+		return isPartial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPartial(boolean newIsPartial) {
+		boolean oldIsPartial = isPartial;
+		isPartial = newIsPartial;
+		boolean oldIsPartialESet = isPartialESet;
+		isPartialESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__IS_PARTIAL, oldIsPartial, isPartial, !oldIsPartialESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetIsPartial() {
+		boolean oldIsPartial = isPartial;
+		boolean oldIsPartialESet = isPartialESet;
+		isPartial = IS_PARTIAL_EDEFAULT;
+		isPartialESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTcorePackage.ASSIGNMENT__IS_PARTIAL, oldIsPartial, IS_PARTIAL_EDEFAULT, oldIsPartialESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetIsPartial() {
+		return isPartialESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -314,6 +394,8 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 				return getValue();
 			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
 				return isIsDefault();
+			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+				return isIsPartial();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -334,6 +416,9 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 				return;
 			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
 				setIsDefault((Boolean)newValue);
+				return;
+			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+				setIsPartial((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -356,6 +441,9 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
 				unsetIsDefault();
 				return;
+			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+				unsetIsPartial();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -374,6 +462,8 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 				return value != null;
 			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
 				return isSetIsDefault();
+			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+				return isSetIsPartial();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1202,13 +1202,22 @@ public interface QVTcoreCSPackage extends EPackage {
 	int PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owned Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
@@ -1217,7 +1226,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Predicate Or Assignment CS</em>' class.
@@ -1226,7 +1235,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
+	int PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.QueryCSImpl <em>Query CS</em>}' class.
@@ -2280,6 +2289,17 @@ public interface QVTcoreCSPackage extends EPackage {
 	EAttribute getPredicateOrAssignmentCS_IsDefault();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#isIsPartial <em>Is Partial</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Partial</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#isIsPartial()
+	 * @see #getPredicateOrAssignmentCS()
+	 * @generated
+	 */
+	EAttribute getPredicateOrAssignmentCS_IsPartial();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2789,6 +2809,14 @@ public interface QVTcoreCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = eINSTANCE.getPredicateOrAssignmentCS_IsDefault();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Partial</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL = eINSTANCE.getPredicateOrAssignmentCS_IsPartial();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Target</b></em>' containment reference feature.

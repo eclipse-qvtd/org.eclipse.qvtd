@@ -40,6 +40,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#isIsNotify <em>Is Notify</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#isIsPartial <em>Is Partial</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,6 +95,26 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	 * @ordered
 	 */
 	protected boolean isNotify = IS_NOTIFY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_PARTIAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsPartial() <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPartial = IS_PARTIAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -268,6 +289,29 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	 * @generated
 	 */
 	@Override
+	public boolean isIsPartial() {
+		return isPartial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPartial(boolean newIsPartial) {
+		boolean oldIsPartial = isPartial;
+		isPartial = newIsPartial;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL, oldIsPartial, isPartial));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -304,6 +348,8 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 				return getOwnedExpression();
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
 				return isIsNotify();
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+				return isIsPartial();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,6 +373,9 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 				return;
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
 				setIsNotify((Boolean)newValue);
+				return;
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+				setIsPartial((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -352,6 +401,9 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
 				return;
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+				setIsPartial(IS_PARTIAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -372,6 +424,8 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 				return ownedExpression != null;
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
 				return isNotify != IS_NOTIFY_EDEFAULT;
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+				return isPartial != IS_PARTIAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

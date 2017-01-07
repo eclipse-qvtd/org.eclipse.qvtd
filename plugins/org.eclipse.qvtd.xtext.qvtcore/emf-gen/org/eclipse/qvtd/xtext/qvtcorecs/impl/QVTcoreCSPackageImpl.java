@@ -570,8 +570,18 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
+	public EAttribute getPredicateOrAssignmentCS_IsPartial() {
+		return (EAttribute)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getPredicateOrAssignmentCS_OwnedTarget() {
-		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -581,7 +591,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 */
 	@Override
 	public EReference getPredicateOrAssignmentCS_OwnedInitExpression() {
-		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -826,6 +836,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 
 		predicateOrAssignmentCSEClass = createEClass(PREDICATE_OR_ASSIGNMENT_CS);
 		createEAttribute(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT);
+		createEAttribute(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL);
 		createEReference(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET);
 		createEReference(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION);
 
@@ -950,7 +961,8 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		initEReference(getPredicateCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, PredicateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(predicateOrAssignmentCSEClass, PredicateOrAssignmentCS.class, "PredicateOrAssignmentCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPredicateOrAssignmentCS_IsDefault(), ecorePackage.getEBoolean(), "isDefault", null, 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPredicateOrAssignmentCS_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPredicateOrAssignmentCS_IsPartial(), ecorePackage.getEBoolean(), "isPartial", "false", 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredicateOrAssignmentCS_OwnedTarget(), theEssentialOCLCSPackage.getExpCS(), null, "ownedTarget", null, 1, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredicateOrAssignmentCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

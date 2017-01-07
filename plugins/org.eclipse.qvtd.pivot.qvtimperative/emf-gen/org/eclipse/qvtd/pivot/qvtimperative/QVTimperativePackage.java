@@ -32,17 +32,17 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
- *
+ * 
  * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
- *
+ * 
  * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
- *
+ * 
  * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
- *
+ * 
  * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
- *
+ * 
  * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
- *
+ * 
  * All writes to multi-valued properties must be guaranteed to occur before any read of the property.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
@@ -4156,13 +4156,13 @@ public interface QVTimperativePackage extends EPackage {
 	int SET_STATEMENT__TARGET_PROPERTY = OBSERVABLE_STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Is Opposite</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Partial</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT__IS_OPPOSITE = OBSERVABLE_STATEMENT_FEATURE_COUNT + 2;
+	int SET_STATEMENT__IS_PARTIAL = OBSERVABLE_STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Is Notify</b></em>' attribute.
@@ -4174,13 +4174,22 @@ public interface QVTimperativePackage extends EPackage {
 	int SET_STATEMENT__IS_NOTIFY = OBSERVABLE_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Opposite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT__IS_OPPOSITE = OBSERVABLE_STATEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT__OWNED_EXPRESSION = OBSERVABLE_STATEMENT_FEATURE_COUNT + 4;
+	int SET_STATEMENT__OWNED_EXPRESSION = OBSERVABLE_STATEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Resolved Property</b></em>' reference.
@@ -4189,7 +4198,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT__RESOLVED_PROPERTY = OBSERVABLE_STATEMENT_FEATURE_COUNT + 5;
+	int SET_STATEMENT__RESOLVED_PROPERTY = OBSERVABLE_STATEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Set Statement</em>' class.
@@ -4198,7 +4207,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_FEATURE_COUNT = OBSERVABLE_STATEMENT_FEATURE_COUNT + 6;
+	int SET_STATEMENT_FEATURE_COUNT = OBSERVABLE_STATEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5428,6 +5437,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getSetStatement_TargetProperty();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsPartial <em>Is Partial</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Partial</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsPartial()
+	 * @see #getSetStatement()
+	 * @generated
+	 */
+	EAttribute getSetStatement_IsPartial();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6313,6 +6333,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SET_STATEMENT__TARGET_PROPERTY = eINSTANCE.getSetStatement_TargetProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Partial</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SET_STATEMENT__IS_PARTIAL = eINSTANCE.getSetStatement_IsPartial();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Opposite</b></em>' attribute feature.

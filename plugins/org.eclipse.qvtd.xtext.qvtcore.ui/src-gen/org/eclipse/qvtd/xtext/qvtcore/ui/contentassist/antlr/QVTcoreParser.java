@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -54,6 +54,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifiedPackageCSAccess().getAlternatives_5(), "rule__QualifiedPackageCS__Alternatives_5");
 					put(grammarAccess.getQualifiedPackageCSAccess().getAlternatives_5_0_1(), "rule__QualifiedPackageCS__Alternatives_5_0_1");
 					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesAlternatives_5_0_1_1_0(), "rule__QualifiedPackageCS__OwnedClassesAlternatives_5_0_1_1_0");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getAlternatives_2_0(), "rule__PredicateOrAssignmentCS__Alternatives_2_0");
 					put(grammarAccess.getQueryCSAccess().getAlternatives_9(), "rule__QueryCS__Alternatives_9");
 					put(grammarAccess.getUnrestrictedNameAccess().getAlternatives(), "rule__UnrestrictedName__Alternatives");
 					put(grammarAccess.getAttributeCSAccess().getAlternatives_0(), "rule__AttributeCS__Alternatives_0");
@@ -364,6 +365,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPredicateCSAccess().getOwnedConditionAssignment_0(), "rule__PredicateCS__OwnedConditionAssignment_0");
 					put(grammarAccess.getPredicateOrAssignmentCSAccess().getIsDefaultAssignment_0(), "rule__PredicateOrAssignmentCS__IsDefaultAssignment_0");
 					put(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedTargetAssignment_1(), "rule__PredicateOrAssignmentCS__OwnedTargetAssignment_1");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialAssignment_2_0_1(), "rule__PredicateOrAssignmentCS__IsPartialAssignment_2_0_1");
 					put(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedInitExpressionAssignment_2_1(), "rule__PredicateOrAssignmentCS__OwnedInitExpressionAssignment_2_1");
 					put(grammarAccess.getQueryCSAccess().getIsTransientAssignment_0(), "rule__QueryCS__IsTransientAssignment_0");
 					put(grammarAccess.getQueryCSAccess().getOwnedPathNameAssignment_2(), "rule__QueryCS__OwnedPathNameAssignment_2");

@@ -40,8 +40,9 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetProperty <em>Target Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsPartial <em>Is Partial</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsNotify <em>Is Notify</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getResolvedProperty <em>Resolved Property</em>}</li>
  * </ul>
@@ -101,7 +102,35 @@ public interface SetStatement extends ObservableStatement {
 	void setTargetProperty(Property value);
 
 	/**
+	 * Returns the value of the '<em><b>Is Partial</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If not isPartial, the value of the ownedExpression is assigned as the entirety of the targetProperty of the targetVariable.
+	 * 
+	 * If isPartial, the value of the ownedExpression is included within the targetProperty of the targetVariable.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Partial</em>' attribute.
+	 * @see #setIsPartial(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_IsPartial()
+	 * @generated
+	 */
+	boolean isIsPartial();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsPartial <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Partial</em>' attribute.
+	 * @see #isIsPartial()
+	 * @generated
+	 */
+	void setIsPartial(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
@@ -127,6 +156,7 @@ public interface SetStatement extends ObservableStatement {
 
 	/**
 	 * Returns the value of the '<em><b>Is Notify</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Notify</em>' attribute isn't clear,

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 Willink Transformations and others.
+ * Copyright (c) 2011, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -1549,31 +1549,47 @@ rulePredicateOrAssignmentCS returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_2=':='
+)((	otherlv_2=':='
     {
-    	newLeafNode(otherlv_2, grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0());
+    	newLeafNode(otherlv_2, grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0_0());
     }
+
+    |(
 (
+		lv_isPartial_3_0=	'+='
+    {
+        newLeafNode(lv_isPartial_3_0, grammarAccess.getPredicateOrAssignmentCSAccess().getIsPartialPlusSignEqualsSignKeyword_2_0_1_0());
+    }
+
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getPredicateOrAssignmentCSRule());
+	        }
+       		setWithLastConsumed($current, "isPartial", true, "+=");
+	    }
+
+)
+))(
 (
 		{
 	        newCompositeNode(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_1_0());
 	    }
-		lv_ownedInitExpression_3_0=ruleExpCS		{
+		lv_ownedInitExpression_4_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPredicateOrAssignmentCSRule());
 	        }
        		set(
        			$current,
        			"ownedInitExpression",
-        		lv_ownedInitExpression_3_0,
+        		lv_ownedInitExpression_4_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?	otherlv_4=';'
+))?	otherlv_5=';'
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPredicateOrAssignmentCSAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_5, grammarAccess.getPredicateOrAssignmentCSAccess().getSemicolonKeyword_3());
     }
 )
 ;

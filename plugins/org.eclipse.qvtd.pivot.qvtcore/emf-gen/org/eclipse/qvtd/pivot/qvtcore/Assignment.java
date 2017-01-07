@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsPartial <em>Is Partial</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment()
@@ -95,6 +96,7 @@ public interface Assignment extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Default</em>' attribute isn't clear,
@@ -106,7 +108,7 @@ public interface Assignment extends Element {
 	 * @see #unsetIsDefault()
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_IsDefault()
-	 * @model unsettable="true"
+	 * @model default="false" unsettable="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!isDefault'"
 	 * @generated
 	 */
@@ -146,5 +148,60 @@ public interface Assignment extends Element {
 	 * @generated
 	 */
 	boolean isSetIsDefault();
+
+	/**
+	 * Returns the value of the '<em><b>Is Partial</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Partial</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Partial</em>' attribute.
+	 * @see #isSetIsPartial()
+	 * @see #unsetIsPartial()
+	 * @see #setIsPartial(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_IsPartial()
+	 * @model default="false" unsettable="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!isPartial'"
+	 * @generated
+	 */
+	boolean isIsPartial();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsPartial <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Partial</em>' attribute.
+	 * @see #isSetIsPartial()
+	 * @see #unsetIsPartial()
+	 * @see #isIsPartial()
+	 * @generated
+	 */
+	void setIsPartial(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsPartial <em>Is Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetIsPartial()
+	 * @see #isIsPartial()
+	 * @see #setIsPartial(boolean)
+	 * @generated
+	 */
+	void unsetIsPartial();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.Assignment#isIsPartial <em>Is Partial</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Is Partial</em>' attribute is set.
+	 * @see #unsetIsPartial()
+	 * @see #isIsPartial()
+	 * @see #setIsPartial(boolean)
+	 * @generated
+	 */
+	boolean isSetIsPartial();
 
 } // Assignment
