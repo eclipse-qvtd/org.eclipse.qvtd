@@ -28,6 +28,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Assignment-bottomPattern"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Assignment-value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcore.ecore#F-qvtcore-Assignment-isDefault"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcore.ecore#F-qvtcore-Assignment-isPartial"/>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-BottomPattern">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-area"/>

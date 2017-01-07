@@ -57,6 +57,7 @@
     </genClasses>
     <genClasses ecoreClass="QVTcoreCS.ecore#//PredicateOrAssignmentCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//PredicateOrAssignmentCS/isDefault"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//PredicateOrAssignmentCS/isPartial"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//PredicateOrAssignmentCS/ownedTarget"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//PredicateOrAssignmentCS/ownedInitExpression"/>
     </genClasses>

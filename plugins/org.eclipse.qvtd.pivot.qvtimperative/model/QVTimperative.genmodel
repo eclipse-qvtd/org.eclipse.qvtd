@@ -166,8 +166,9 @@
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-SetStatement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SetStatement-targetVariable"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SetStatement-targetProperty"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SetStatement-isOpposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SetStatement-isPartial"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SetStatement-isNotify"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SetStatement-isOpposite"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SetStatement-ownedExpression"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SetStatement-resolvedProperty"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateCompatibleClassForProperty">

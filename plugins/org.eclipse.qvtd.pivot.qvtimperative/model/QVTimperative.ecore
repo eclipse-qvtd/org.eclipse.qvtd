@@ -700,10 +700,19 @@
         name="targetVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-SetStatement-targetProperty"
         name="targetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-SetStatement-isOpposite"
-        name="isOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-SetStatement-isPartial"
+        name="isPartial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If not isPartial, the value of the ownedExpression is assigned as the entirety of the targetProperty of the targetVariable.&#xD;&#xA;&#xD;&#xA;If isPartial, the value of the ownedExpression is included within the targetProperty of the targetVariable."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-SetStatement-isNotify"
-        name="isNotify" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        name="isNotify" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-SetStatement-isOpposite"
+        name="isOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-SetStatement-ownedExpression"
         name="ownedExpression" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true"/>

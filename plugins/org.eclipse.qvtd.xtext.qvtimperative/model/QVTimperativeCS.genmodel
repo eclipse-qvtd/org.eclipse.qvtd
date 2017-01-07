@@ -97,6 +97,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/referredVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/ownedExpression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//SetStatementCS/isNotify"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//SetStatementCS/isPartial"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//SimpleParameterBindingCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SimpleParameterBindingCS/ownedValue"/>
