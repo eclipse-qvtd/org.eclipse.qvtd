@@ -148,7 +148,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 
 	/**
 	 * Return true if this node is part of an OCL expression; an iteration or operation other than
-	 * oclAsType() / includes().
+	 * oclAsType().
 	 */
 	boolean isExpression();
 
