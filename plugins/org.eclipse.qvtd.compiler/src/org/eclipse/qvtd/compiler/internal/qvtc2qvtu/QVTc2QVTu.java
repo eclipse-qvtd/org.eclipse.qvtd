@@ -128,6 +128,20 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return false;
 		}
 
+		private boolean anyReferencedOutputDomainVariables(@NonNull OCLExpression value) {
+			VariableDeclaration referredVariable = getReferredMappingVariable(value);
+			if ((referredVariable != null) && isMiddleDomain(basicGetArea(referredVariable))) {
+				return true;
+			}
+			for (TreeIterator<EObject> tit = value.eAllContents(); tit.hasNext(); ) {
+				referredVariable = getReferredMappingVariable(tit.next());
+				if ((referredVariable != null) && isOutputDomain(basicGetArea(referredVariable))) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/**
 		 * Create an ocl expression from an assignment than can be used as the
 		 * condition expression of a predicate.
@@ -398,7 +412,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 
 		//
-		//	Bottom pattern predicates invoving output variables are discarded; they are assignments.
+		//	Bottom pattern predicates involving output variables are discarded; they should be assignments.
 		//
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
@@ -409,7 +423,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			//			else if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
 			//				oldResult = false;
 			//			}
-			if ((pIn.getPattern() instanceof BottomPattern) && !allReferencedVariablesInInputDomain(pIn)) {
+			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedOutputDomainVariables(QVTcoreUtil.getConditionExpression(pIn))) {
 				//				assert !oldResult;
 				return null;
 			}
