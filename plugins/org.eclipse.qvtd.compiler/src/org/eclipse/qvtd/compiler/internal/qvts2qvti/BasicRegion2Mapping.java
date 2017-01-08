@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.Iteration;
@@ -413,6 +414,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			CollectionType collectionType = (CollectionType)pCollectionLiteralExp.getType();
 			assert collectionType != null;
 			return helper.createCollectionLiteralExp(collectionType, clonedParts);
+		}
+
+		@Override
+		public @NonNull OCLExpression visitEnumLiteralExp(@NonNull EnumLiteralExp pEnumLiteralExp) {
+			return EcoreUtil.copy(pEnumLiteralExp);
 		}
 
 		@Override
