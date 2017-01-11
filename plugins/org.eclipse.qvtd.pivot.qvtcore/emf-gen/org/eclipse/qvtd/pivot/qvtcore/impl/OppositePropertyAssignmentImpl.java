@@ -437,7 +437,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let result : Boolean[1] = targetProperty.isImplicit
+		 *       let result : Boolean[1] = getReferredTargetProperty().isImplicit
 		 *       in
 		 *         'OppositePropertyAssignment::OppositePropertyIsImplicit'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -451,8 +451,8 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		}
 		else {
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
-			final /*@NonInvalid*/ boolean result = targetProperty.isIsImplicit();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
+			final /*@NonInvalid*/ boolean result = getReferredTargetProperty.isIsImplicit();
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_OppositePropertyIsImplicit, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}

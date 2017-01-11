@@ -46,7 +46,7 @@ inv CompatibleTypeForTotalValue:
 		}.status
 
 inv OppositePropertyIsImplicit:
-	targetProperty.isImplicit
+	getReferredTargetProperty().isImplicit
 	
 inv TargetPropetyIsSlotProperty:
 	slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
