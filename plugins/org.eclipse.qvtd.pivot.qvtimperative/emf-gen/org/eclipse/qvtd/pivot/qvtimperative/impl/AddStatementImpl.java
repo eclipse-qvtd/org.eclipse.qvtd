@@ -285,11 +285,11 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable targetVariable = this.getTargetVariable();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = targetVariable.getType();
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable targetVariable = this.getTargetVariable();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = targetVariable.getType();
 				final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 				CAUGHT_result = result;
 			}

@@ -464,11 +464,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		
 			ownedProperties = _Domain.getOwnedProperties();
 			ownedProperties.add(property = pr_Domain_isCheckable);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setIsUnsettable(true);
 			ownedProperties.add(property = pr_Domain_isEnforceable);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setIsUnsettable(true);
 			ownedProperties.add(property = pr_Domain_rule);
@@ -512,7 +510,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Domain_rule);
 			ownedProperties.add(property = pr_Rule_isDefault);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Rule_overridden);
 			property.setIsResolveProxies(true);

@@ -199,19 +199,12 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression conditionExpression = this.getConditionExpression();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = conditionExpression.getType();
-				final /*@Thrown*/ boolean result = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
-				CAUGHT_result = result;
-			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Predicate_c_c_ConditionIsBoolean, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression conditionExpression = this.getConditionExpression();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = conditionExpression.getType();
+			final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Predicate_c_c_ConditionIsBoolean, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

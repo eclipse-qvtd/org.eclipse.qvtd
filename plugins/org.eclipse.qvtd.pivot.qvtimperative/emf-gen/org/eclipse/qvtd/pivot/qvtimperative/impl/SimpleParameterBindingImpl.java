@@ -203,31 +203,23 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @Nullable Object CAUGHT_isCheck;
-				try {
-					final /*@Thrown*/ java.lang.@Nullable Boolean isCheck = this.isIsCheck();
-					CAUGHT_isCheck = isCheck;
-				}
-				catch (Exception e) {
-					CAUGHT_isCheck = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
-				try {
+				final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+				/*@Thrown*/ boolean result;
+				if (isCheck) {
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = boundVariable.getType();
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = boundVariable.getType();
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					CAUGHT_conformsTo = conformsTo;
+					result = conformsTo;
 				}
-				catch (Exception e) {
-					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isCheck, CAUGHT_conformsTo);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
@@ -271,37 +263,23 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		else {
 			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
-				/*@Caught*/ @Nullable Object CAUGHT_not;
-				try {
-					/*@Caught*/ @Nullable Object CAUGHT_isCheck;
-					try {
-						final /*@Thrown*/ java.lang.@Nullable Boolean isCheck = this.isIsCheck();
-						CAUGHT_isCheck = isCheck;
-					}
-					catch (Exception e) {
-						CAUGHT_isCheck = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_isCheck);
-					CAUGHT_not = not;
-				}
-				catch (Exception e) {
-					CAUGHT_not = ValueUtil.createInvalidValue(e);
-				}
+				final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+				final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = value.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = value.getType();
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = boundVariable.getType();
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = boundVariable.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 					CAUGHT_conformsTo = conformsTo;
 				}
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {

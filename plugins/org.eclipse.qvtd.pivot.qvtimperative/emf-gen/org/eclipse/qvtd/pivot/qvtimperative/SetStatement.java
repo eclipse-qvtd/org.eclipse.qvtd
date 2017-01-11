@@ -231,7 +231,14 @@ public interface SetStatement extends ObservableStatement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleTypeForValue(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateCompatibleTypeForPartialValue(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleTypeForTotalValue(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->

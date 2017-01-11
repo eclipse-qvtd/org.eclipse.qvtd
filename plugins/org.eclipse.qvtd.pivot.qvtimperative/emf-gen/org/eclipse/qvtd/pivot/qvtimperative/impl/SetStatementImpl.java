@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -396,14 +397,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		 * if isOpposite then targetProperty.opposite else targetProperty endif
 		 */
 		@SuppressWarnings("null")
-		final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty_0 = this.getTargetProperty();
-		final /*@Thrown*/ java.lang.@Nullable Boolean isOpposite = this.isIsOpposite();
-		if (isOpposite == null) {
-			throw new InvalidValueException("Null if condition");
-		}
-		/*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Property symbol_0;
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty_0 = this.getTargetProperty();
+		final /*@NonInvalid*/ boolean isOpposite = this.isIsOpposite();
+		/*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property symbol_0;
 		if (isOpposite) {
-			final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Property opposite = targetProperty_0.getOpposite();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = targetProperty_0.getOpposite();
 			symbol_0 = opposite;
 		}
 		else {
@@ -432,15 +430,19 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : OclAny[1] = let
-		 *           status : Boolean[1] = targetVariable.type.conformsTo(resolvedProperty.owningClass)
+		 *         result : OclAny[1] = let requiredType : Class[?] = resolvedProperty.owningClass
 		 *         in
-		 *           if status = true
-		 *           then true
-		 *           else
-		 *             Tuple{message = targetVariable.type?.name + ' must conform to ' + resolvedProperty.owningClass?.name, status = status
-		 *             }
-		 *           endif
+		 *           let actualType : Type[?] = targetVariable.type
+		 *           in
+		 *             let
+		 *               status : Boolean[1] = actualType.conformsTo(requiredType)
+		 *             in
+		 *               if status = true
+		 *               then true
+		 *               else
+		 *                 Tuple{status = status, message = 'SetStatement::CompatibleClassForProperty: ' + actualType?.name + ' must conform to ' + requiredType?.name
+		 *                 }
+		 *               endif
 		 *       in
 		 *         'SetStatement::CompatibleClassForProperty'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -456,54 +458,41 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			/*@Caught*/ @NonNull Object CAUGHT_symbol_3;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class requiredType = resolvedProperty.getOwningClass();
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration targetVariable = this.getTargetVariable();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty.getOwningClass();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = targetVariable.getType();
-				final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration targetVariable = this.getTargetVariable();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type actualType = targetVariable.getType();
+				final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
 				/*@Thrown*/ java.lang.@NonNull Object symbol_3;
 				if (status) {
 					symbol_3 = ValueUtil.TRUE_VALUE;
 				}
 				else {
-					/*@Caught*/ @Nullable Object CAUGHT_type_0;
-					try {
-						CAUGHT_type_0 = type;
-					}
-					catch (Exception e) {
-						CAUGHT_type_0 = ValueUtil.createInvalidValue(e);
-					}
-					final /*@NonInvalid*/ @NonNull Object symbol_0 = CAUGHT_type_0 == null;
+					final /*@NonInvalid*/ @NonNull Object symbol_0 = actualType == null;
 					/*@Thrown*/ java.lang.@Nullable String safe_name_source;
 					if (symbol_0 == Boolean.TRUE) {
 						safe_name_source = null;
 					}
 					else {
-						assert type != null;
-						final /*@Thrown*/ java.lang.@Nullable String name = type.getName();
+						assert actualType != null;
+						final /*@Thrown*/ java.lang.@Nullable String name = actualType.getName();
 						safe_name_source = name;
 					}
-					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(safe_name_source, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
-					/*@Caught*/ @Nullable Object CAUGHT_owningClass_0;
-					try {
-						CAUGHT_owningClass_0 = owningClass;
-					}
-					catch (Exception e) {
-						CAUGHT_owningClass_0 = ValueUtil.createInvalidValue(e);
-					}
-					final /*@NonInvalid*/ @NonNull Object symbol_1 = CAUGHT_owningClass_0 == null;
+					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleClassForProperty_c_32, safe_name_source);
+					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
+					final /*@NonInvalid*/ @NonNull Object symbol_1 = requiredType == null;
 					/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
 					if (symbol_1 == Boolean.TRUE) {
 						safe_name_source_0 = null;
 					}
 					else {
-						assert owningClass != null;
-						final /*@Thrown*/ java.lang.@Nullable String name_0 = owningClass.getName();
+						assert requiredType != null;
+						final /*@Thrown*/ java.lang.@Nullable String name_0 = requiredType.getName();
 						safe_name_source_0 = name_0;
 					}
-					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_2 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_0, status);
+					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_2 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
 					symbol_3 = symbol_2;
 				}
 				CAUGHT_symbol_3 = symbol_3;
@@ -523,97 +512,206 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	 * @generated
 	 */
 	@Override
-	public boolean validateCompatibleTypeForValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateCompatibleTypeForPartialValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
-		 * inv CompatibleTypeForValue:
+		 * inv CompatibleTypeForPartialValue:
 		 *   let
-		 *     severity : Integer[1] = 'SetStatement::CompatibleTypeForValue'.getSeverity()
+		 *     severity : Integer[1] = 'SetStatement::CompatibleTypeForPartialValue'.getSeverity()
 		 *   in
 		 *     if severity <= 0
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : OclAny[1] = let
-		 *           status : Boolean[1] = ownedExpression.type.conformsTo(resolvedProperty.type)
-		 *         in
-		 *           if status = true
-		 *           then true
-		 *           else
-		 *             Tuple{message = ownedExpression.type?.name + ' must conform to ' + resolvedProperty.type?.name, status = status
-		 *             }
-		 *           endif
+		 *         result : OclAny[1] = if isPartial
+		 *         then
+		 *           let
+		 *             requiredType : Type[1] = resolvedProperty.type.oclAsType(CollectionType).elementType
+		 *           in
+		 *             let actualType : Type[?] = ownedExpression.type
+		 *             in
+		 *               let
+		 *                 status : Boolean[1] = actualType.conformsTo(requiredType)
+		 *               in
+		 *                 if status = true
+		 *                 then true
+		 *                 else
+		 *                   Tuple{status = status, message = 'SetStatement::CompatibleTypeForPartialValue: ' + actualType?.name + ' must conform to ' + requiredType.name
+		 *                   }
+		 *                 endif
+		 *         else true
+		 *         endif
 		 *       in
-		 *         'SetStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *         'SetStatement::CompatibleTypeForPartialValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_3;
+		if (le) {
+			symbol_3 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_result;
+			try {
+				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
+				/*@Thrown*/ java.lang.@NonNull Object result;
+				if (isPartial) {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = resolvedProperty.getType();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType oclAsType = ClassUtil.nonNullState((CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0));
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Type requiredType = oclAsType.getElementType();
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type actualType = ownedExpression.getType();
+					final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+					/*@Thrown*/ java.lang.@NonNull Object symbol_2;
+					if (status) {
+						symbol_2 = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						final /*@NonInvalid*/ @NonNull Object symbol_0 = actualType == null;
+						/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+						if (symbol_0 == Boolean.TRUE) {
+							safe_name_source = null;
+						}
+						else {
+							assert actualType != null;
+							final /*@Thrown*/ java.lang.@Nullable String name = actualType.getName();
+							safe_name_source = name;
+						}
+						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue_c_32, safe_name_source);
+						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
+						final /*@Thrown*/ java.lang.@Nullable String name_0 = requiredType.getName();
+						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_0);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+						symbol_2 = symbol_1;
+					}
+					result = symbol_2;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			symbol_3 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_3;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateCompatibleTypeForTotalValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv CompatibleTypeForTotalValue:
+		 *   let
+		 *     severity : Integer[1] = 'SetStatement::CompatibleTypeForTotalValue'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : OclAny[1] = if not isPartial
+		 *         then
+		 *           let requiredType : Type[?] = resolvedProperty.type
+		 *           in
+		 *             let actualType : Type[?] = ownedExpression.type
+		 *             in
+		 *               let
+		 *                 status : Boolean[1] = actualType.conformsTo(requiredType)
+		 *               in
+		 *                 if status = true
+		 *                 then true
+		 *                 else
+		 *                   Tuple{status = status, message = 'SetStatement::CompatibleTypeForTotalValue: ' + actualType?.name + ' must conform to ' + requiredType?.name
+		 *                   }
+		 *                 endif
+		 *         else true
+		 *         endif
+		 *       in
+		 *         'SetStatement::CompatibleTypeForTotalValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 		/*@NonInvalid*/ java.lang.@NonNull Object symbol_4;
 		if (le) {
 			symbol_4 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_symbol_3;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = resolvedProperty.getType();
-				final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-				/*@Thrown*/ java.lang.@NonNull Object symbol_3;
-				if (status) {
-					symbol_3 = ValueUtil.TRUE_VALUE;
+				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
+				final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isPartial);
+				if (not == null) {
+					throw new InvalidValueException("Null if condition");
+				}
+				/*@Thrown*/ java.lang.@NonNull Object result;
+				if (not) {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type requiredType = resolvedProperty.getType();
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type actualType = ownedExpression.getType();
+					final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+					/*@Thrown*/ java.lang.@NonNull Object symbol_3;
+					if (status) {
+						symbol_3 = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						final /*@NonInvalid*/ @NonNull Object symbol_0 = actualType == null;
+						/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+						if (symbol_0 == Boolean.TRUE) {
+							safe_name_source = null;
+						}
+						else {
+							assert actualType != null;
+							final /*@Thrown*/ java.lang.@Nullable String name = actualType.getName();
+							safe_name_source = name;
+						}
+						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue_c_32, safe_name_source);
+						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
+						final /*@NonInvalid*/ @NonNull Object symbol_1 = requiredType == null;
+						/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
+						if (symbol_1 == Boolean.TRUE) {
+							safe_name_source_0 = null;
+						}
+						else {
+							assert requiredType != null;
+							final /*@Thrown*/ java.lang.@Nullable String name_0 = requiredType.getName();
+							safe_name_source_0 = name_0;
+						}
+						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_2 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+						symbol_3 = symbol_2;
+					}
+					result = symbol_3;
 				}
 				else {
-					/*@Caught*/ @Nullable Object CAUGHT_type_1;
-					try {
-						CAUGHT_type_1 = type;
-					}
-					catch (Exception e) {
-						CAUGHT_type_1 = ValueUtil.createInvalidValue(e);
-					}
-					final /*@NonInvalid*/ @NonNull Object symbol_0 = CAUGHT_type_1 == null;
-					/*@Thrown*/ java.lang.@Nullable String safe_name_source;
-					if (symbol_0 == Boolean.TRUE) {
-						safe_name_source = null;
-					}
-					else {
-						assert type != null;
-						final /*@Thrown*/ java.lang.@Nullable String name = type.getName();
-						safe_name_source = name;
-					}
-					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(safe_name_source, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
-					/*@Caught*/ @Nullable Object CAUGHT_type_2;
-					try {
-						CAUGHT_type_2 = type_0;
-					}
-					catch (Exception e) {
-						CAUGHT_type_2 = ValueUtil.createInvalidValue(e);
-					}
-					final /*@NonInvalid*/ @NonNull Object symbol_1 = CAUGHT_type_2 == null;
-					/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
-					if (symbol_1 == Boolean.TRUE) {
-						safe_name_source_0 = null;
-					}
-					else {
-						assert type_0 != null;
-						final /*@Thrown*/ java.lang.@Nullable String name_0 = type_0.getName();
-						safe_name_source_0 = name_0;
-					}
-					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_2 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_0, status);
-					symbol_3 = symbol_2;
+					result = ValueUtil.TRUE_VALUE;
 				}
-				CAUGHT_symbol_3 = symbol_3;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_symbol_3 = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_3, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_4 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_4;
@@ -663,8 +761,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			try {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_VariableExp = idResolver.getClass(QVTimperativeTables.CLSSid_VariableExp, null);
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTimperativeTables.SET_CLSSid_OclElement, QVTimperativeTables.SET_CLSSid_OclElement);
@@ -677,7 +775,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					 */
 					@Override
 					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object e_0) {
-						final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = (Object)e_0;
+						final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = e_0;
 						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclContents = ClassifierOclContentsOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OclElement, symbol_0);
 						return oclContents;
 					}
@@ -699,7 +797,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					 * referredVariable.oclIsKindOf(NewStatement)
 					 */
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_NewStatement = idResolver.getClass(QVTimperativeTables.CLSSid_NewStatement, null);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration referredVariable = _1.getReferredVariable();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration referredVariable = _1.getReferredVariable();
 					final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, TYP_qvtimperative_c_c_NewStatement).booleanValue();
 					//
 					if (oclIsKindOf == ValueUtil.TRUE_VALUE) {
@@ -795,25 +893,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				/*@Caught*/ @NonNull Object CAUGHT_isReadOnly;
-				try {
-					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
-					final /*@Thrown*/ boolean isReadOnly = resolvedProperty.isIsReadOnly();
-					CAUGHT_isReadOnly = isReadOnly;
-				}
-				catch (Exception e) {
-					CAUGHT_isReadOnly = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_isReadOnly);
-				CAUGHT_result = result;
-			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SetStatement_c_c_TargetPropertyIsNotReadOnly, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+			final /*@NonInvalid*/ boolean isReadOnly = resolvedProperty.isIsReadOnly();
+			final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isReadOnly);
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SetStatement_c_c_TargetPropertyIsNotReadOnly, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -968,8 +1052,10 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		switch (operationID) {
 			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP:
 				return validateCompatibleClassForProperty((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
-				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleTypeForPartialValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleTypeForTotalValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTimperativePackage.SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP:
 				return validateValueDoesNotNavigateFromRealizedVariables((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTimperativePackage.SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP:

@@ -132,8 +132,8 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = this.getOwnedKey();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
+				final /*@NonInvalid*/ java.util.@NonNull List<Key> ownedKey = this.getOwnedKey();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_Key);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedKey.iterator();
 				/*@Thrown*/ boolean result;
@@ -148,7 +148,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 					 * identifies
 					 */
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();
 					//
 					if (accumulator.includes(identifies) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find
@@ -202,8 +202,8 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@Thrown*/ java.util.@NonNull List<Rule> rule = this.getRule();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
+				final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = this.getRule();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
 				/*@Thrown*/ boolean result;

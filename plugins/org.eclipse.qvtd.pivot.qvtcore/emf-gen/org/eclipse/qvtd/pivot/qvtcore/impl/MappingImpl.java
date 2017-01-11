@@ -30,7 +30,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -273,8 +272,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<Domain> domain = this.getDomain();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
+				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
 				/*@Thrown*/ boolean result;
@@ -346,33 +345,18 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtcore.@Nullable Mapping context_0 = this.getContext();
-					final /*@Thrown*/ boolean ne = context_0 != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_eq;
-				try {
-					final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-					final /*@Thrown*/ boolean eq = name == null;
-					CAUGHT_eq = eq;
-				}
-				catch (Exception e) {
-					CAUGHT_eq = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
-				CAUGHT_result = result;
+			final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtcore.@Nullable Mapping context_0 = this.getContext();
+			final /*@NonInvalid*/ boolean ne = context_0 != null;
+			/*@NonInvalid*/ boolean result;
+			if (ne) {
+				final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+				final /*@NonInvalid*/ boolean eq = name == null;
+				result = eq;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			else {
+				result = ValueUtil.TRUE_VALUE;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -406,33 +390,18 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
-					final /*@Thrown*/ boolean ne = transformation != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_ne_0;
-				try {
-					final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-					final /*@Thrown*/ boolean ne_0 = name != null;
-					CAUGHT_ne_0 = ne_0;
-				}
-				catch (Exception e) {
-					CAUGHT_ne_0 = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_ne_0);
-				CAUGHT_result = result;
+			final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
+			final /*@NonInvalid*/ boolean ne = transformation != null;
+			/*@NonInvalid*/ boolean result;
+			if (ne) {
+				final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+				final /*@NonInvalid*/ boolean ne_0 = name != null;
+				result = ne_0;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			else {
+				result = ValueUtil.TRUE_VALUE;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

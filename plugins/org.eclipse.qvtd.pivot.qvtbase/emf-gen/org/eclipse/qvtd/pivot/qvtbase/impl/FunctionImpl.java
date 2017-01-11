@@ -33,7 +33,6 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -170,8 +169,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@Thrown*/ java.util.@NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
+				final /*@NonInvalid*/ java.util.@NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
 				/*@Thrown*/ boolean result;
@@ -243,32 +242,23 @@ public class FunctionImpl extends OperationImpl implements Function {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression queryExpression = this.getQueryExpression();
-					final /*@Thrown*/ boolean ne = queryExpression != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_eq;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression queryExpression_0 = this.getQueryExpression();
-					if (queryExpression_0 == null) {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression queryExpression = this.getQueryExpression();
+				final /*@NonInvalid*/ boolean ne = queryExpression != null;
+				/*@Thrown*/ boolean result;
+				if (ne) {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+					if (queryExpression == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = queryExpression_0.getType();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = queryExpression.getType();
 					final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : false;
-					CAUGHT_eq = eq;
+					result = eq;
 				}
-				catch (Exception e) {
-					CAUGHT_eq = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {

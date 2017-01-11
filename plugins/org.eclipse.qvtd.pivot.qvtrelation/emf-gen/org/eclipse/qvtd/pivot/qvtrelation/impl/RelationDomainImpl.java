@@ -180,8 +180,8 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@Thrown*/ java.util.@NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
+				final /*@NonInvalid*/ java.util.@NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.iterator();
 				/*@Thrown*/ boolean result;
@@ -196,7 +196,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 					 * variable
 					 */
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Variable variable = _1.getVariable();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable variable = _1.getVariable();
 					//
 					if (accumulator.includes(variable) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find

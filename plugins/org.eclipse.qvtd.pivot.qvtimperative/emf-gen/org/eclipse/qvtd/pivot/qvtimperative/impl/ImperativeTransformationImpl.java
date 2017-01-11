@@ -104,8 +104,8 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@Thrown*/ java.util.@NonNull List<Rule> rule = this.getRule();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+				final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = this.getRule();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
 				/*@Thrown*/ boolean result;

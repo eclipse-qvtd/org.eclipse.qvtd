@@ -232,29 +232,21 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @Nullable Object CAUGHT_isCheck;
-				try {
-					final /*@Thrown*/ java.lang.@Nullable Boolean isCheck = this.isIsCheck();
-					CAUGHT_isCheck = isCheck;
-				}
-				catch (Exception e) {
-					CAUGHT_isCheck = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+				final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+				/*@Thrown*/ boolean result;
+				if (isCheck) {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = ownedExpression.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = ownedExpression.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					CAUGHT_conformsTo = conformsTo;
+					result = conformsTo;
 				}
-				catch (Exception e) {
-					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isCheck, CAUGHT_conformsTo);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
@@ -298,35 +290,21 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		else {
 			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
-				/*@Caught*/ @Nullable Object CAUGHT_not;
-				try {
-					/*@Caught*/ @Nullable Object CAUGHT_isCheck;
-					try {
-						final /*@Thrown*/ java.lang.@Nullable Boolean isCheck = this.isIsCheck();
-						CAUGHT_isCheck = isCheck;
-					}
-					catch (Exception e) {
-						CAUGHT_isCheck = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_isCheck);
-					CAUGHT_not = not;
-				}
-				catch (Exception e) {
-					CAUGHT_not = ValueUtil.createInvalidValue(e);
-				}
+				final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+				final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 					CAUGHT_conformsTo = conformsTo;
 				}
 				catch (Exception e) {
 					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {

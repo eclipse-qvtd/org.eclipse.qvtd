@@ -363,32 +363,23 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
-					final /*@Thrown*/ boolean ne = typedModel != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_eq;
-				try {
-					final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
-					if (typedModel_0 == null) {
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+				final /*@NonInvalid*/ boolean ne = typedModel != null;
+				/*@Thrown*/ boolean result;
+				if (ne) {
+					final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+					if (typedModel == null) {
 						throw new InvalidValueException("Null source for \'NamedElement::name\'");
 					}
-					final /*@Thrown*/ java.lang.@Nullable String name_0 = typedModel_0.getName();
+					final /*@Thrown*/ java.lang.@Nullable String name_0 = typedModel.getName();
 					final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
-					CAUGHT_eq = eq;
+					result = eq;
 				}
-				catch (Exception e) {
-					CAUGHT_eq = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
@@ -449,16 +440,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 					catch (Exception e) {
 						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_ne;
-					try {
-						final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
-						final /*@Thrown*/ boolean ne = typedModel != null;
-						CAUGHT_ne = ne;
-					}
-					catch (Exception e) {
-						CAUGHT_ne = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, CAUGHT_ne);
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+					final /*@NonInvalid*/ boolean ne = typedModel != null;
+					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, ne);
 					CAUGHT_and = and;
 				}
 				catch (Exception e) {
@@ -471,7 +455,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation oclAsType = ClassUtil.nonNullState((Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0));
 					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
 					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
 					CAUGHT_includes = includes;
 				}

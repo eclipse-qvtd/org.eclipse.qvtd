@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -197,36 +196,27 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@Thrown*/ boolean ne = ownedExpression != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
-				try {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ boolean ne = ownedExpression != null;
+				/*@Thrown*/ boolean result;
+				if (ne) {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression_0 = this.getOwnedExpression();
-					if (ownedExpression_0 == null) {
+					if (ownedExpression == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression_0.getType();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType oclAsType = ClassUtil.nonNullState((CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType));
 					@SuppressWarnings("null")
 					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Type elementType = oclAsType.getElementType();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, elementType, type_0).booleanValue();
-					CAUGHT_conformsTo = conformsTo;
+					result = conformsTo;
 				}
-				catch (Exception e) {
-					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_conformsTo);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
@@ -281,8 +271,8 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			//
 			s = symbol_0;
 		}
-		final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
-		final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
+		final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
+		final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
 		return sum_2;
 	}
 

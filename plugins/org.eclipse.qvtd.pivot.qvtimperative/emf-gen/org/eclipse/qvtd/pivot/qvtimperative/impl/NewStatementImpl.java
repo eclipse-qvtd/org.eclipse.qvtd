@@ -33,7 +33,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -286,32 +285,23 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@Thrown*/ boolean ne = ownedExpression != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression_0 = this.getOwnedExpression();
-					if (ownedExpression_0 == null) {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ boolean ne = ownedExpression != null;
+				/*@Thrown*/ boolean result;
+				if (ne) {
+					if (ownedExpression == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression_0.getType();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					CAUGHT_conformsTo = conformsTo;
+					result = conformsTo;
 				}
-				catch (Exception e) {
-					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_conformsTo);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
@@ -352,25 +342,18 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 			try {
-				/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
-				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTimperativeTables.CLSSid_DataType, null);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
-					final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
-					CAUGHT_oclIsKindOf = oclIsKindOf;
-				}
-				catch (Exception e) {
-					CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
-				CAUGHT_result = result;
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTimperativeTables.CLSSid_DataType, null);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+				final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
+				CAUGHT_oclIsKindOf = oclIsKindOf;
 			}
 			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
+				CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

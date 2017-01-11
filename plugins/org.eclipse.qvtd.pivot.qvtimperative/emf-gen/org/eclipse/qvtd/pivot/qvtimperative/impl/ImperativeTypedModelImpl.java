@@ -26,7 +26,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -170,7 +169,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 		/**
 		 * usedPackage
 		 */
-		final /*@Thrown*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = this.getUsedPackage();
+		final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = this.getUsedPackage();
 		return (EList<org.eclipse.ocl.pivot.Package>)usedPackage;
 	}
 
@@ -203,16 +202,9 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
-				final /*@Thrown*/ boolean result = name != null;
-				CAUGHT_result = result;
-			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+			final /*@NonInvalid*/ boolean result = name != null;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -247,39 +239,17 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				/*@Caught*/ @Nullable Object CAUGHT_and;
-				try {
-					/*@Caught*/ @Nullable Object CAUGHT_isChecked;
-					try {
-						final /*@Thrown*/ java.lang.@Nullable Boolean isChecked = this.isIsChecked();
-						CAUGHT_isChecked = isChecked;
-					}
-					catch (Exception e) {
-						CAUGHT_isChecked = ValueUtil.createInvalidValue(e);
-					}
-					/*@Caught*/ @Nullable Object CAUGHT_isEnforced;
-					try {
-						final /*@Thrown*/ java.lang.@Nullable Boolean isEnforced = this.isIsEnforced();
-						CAUGHT_isEnforced = isEnforced;
-					}
-					catch (Exception e) {
-						CAUGHT_isEnforced = ValueUtil.createInvalidValue(e);
-					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_isChecked, CAUGHT_isEnforced);
-					CAUGHT_and = and;
-				}
-				catch (Exception e) {
-					CAUGHT_and = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
-				CAUGHT_result = result;
+			final /*@NonInvalid*/ boolean isChecked = this.isIsChecked();
+			/*@NonInvalid*/ boolean and;
+			if (isChecked) {
+				final /*@NonInvalid*/ boolean isEnforced = this.isIsEnforced();
+				and = isEnforced;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			else {
+				and = ValueUtil.FALSE_VALUE;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(and);
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

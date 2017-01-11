@@ -190,14 +190,14 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<OCLExpression> argument = this.getArgument();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
+				final /*@NonInvalid*/ java.util.@NonNull List<OCLExpression> argument = this.getArgument();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation referredRelation = this.getReferredRelation();
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation referredRelation = this.getReferredRelation();
 				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<Domain> domain = referredRelation.getDomain();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
+				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = referredRelation.getDomain();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_RelationDomain);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
 				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
@@ -229,8 +229,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					/**
 					 * rootVariable
 					 */
-					final /*@Thrown*/ java.util.@NonNull List<Variable> rootVariable = _1_0.getRootVariable();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_rootVariable = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Variable, rootVariable);
+					final /*@NonInvalid*/ java.util.@NonNull List<Variable> rootVariable = _1_0.getRootVariable();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_rootVariable = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Variable, rootVariable);
 					//
 					for (Object value : BOXED_rootVariable.flatten().getElements()) {
 						accumulator_0.add(value);

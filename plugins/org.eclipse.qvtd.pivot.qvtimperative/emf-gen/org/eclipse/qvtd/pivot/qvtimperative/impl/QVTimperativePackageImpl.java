@@ -275,7 +275,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -305,18 +305,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTimperativePackage, 
-			 new EValidator.Descriptor() {
-				 @Override
-				public EValidator getEValidator() {
-					 return QVTimperativeValidator.INSTANCE;
-				 }
-			 });
+		(theQVTimperativePackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTimperativeValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -1178,7 +1178,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EOperation getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
+	public EOperation getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map() {
 		return setStatementEClass.getEOperations().get(1);
 	}
 
@@ -1188,7 +1188,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EOperation getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map() {
+	public EOperation getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map() {
 		return setStatementEClass.getEOperations().get(2);
 	}
 
@@ -1198,8 +1198,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EOperation getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map() {
+	public EOperation getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map() {
 		return setStatementEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map() {
+		return setStatementEClass.getEOperations().get(4);
 	}
 
 	/**
@@ -1438,7 +1448,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(setStatementEClass, SET_STATEMENT__OWNED_EXPRESSION);
 		createEReference(setStatementEClass, SET_STATEMENT__RESOLVED_PROPERTY);
 		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
-		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP);
 		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP);
 
@@ -1529,7 +1540,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Initialize classes, features, and operations; add parameters
 		initEClass(addStatementEClass, AddStatement.class, "AddStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddStatement_TargetVariable(), this.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAddStatement_IsEnforcedUnique(), ecorePackage.getEBoolean(), "isEnforcedUnique", null, 0, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAddStatement_IsEnforcedUnique(), ecorePackage.getEBoolean(), "isEnforcedUnique", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForValue", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1571,10 +1582,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(connectionVariableEClass, ConnectionVariable.class, "ConnectionVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConnectionVariable_IsStrict(), ecorePackage.getEBoolean(), "isStrict", "false", 0, 1, ConnectionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnectionVariable_IsStrict(), ecorePackage.getEBoolean(), "isStrict", "false", 1, 1, ConnectionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(declareStatementEClass, DeclareStatement.class, "DeclareStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDeclareStatement_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclareStatement_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 1, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeclareStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForCheckedValue", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1600,7 +1611,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(guardParameterBindingEClass, GuardParameterBinding.class, "GuardParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameterBinding_Value(), this.getConnectionVariable(), null, "value", null, 1, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGuardParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGuardParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 1, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1616,8 +1627,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(imperativeTypedModelEClass, ImperativeTypedModel.class, "ImperativeTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImperativeTypedModel_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImperativeTypedModel_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", "false", 0, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImperativeTypedModel_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImperativeTypedModel_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", "false", 1, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImperativeTypedModel_AllUsedPackages(), thePivotPackage.getPackage(), null, "allUsedPackages", null, 0, -1, ImperativeTypedModel.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 
 		op = initEOperation(getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsNotNull", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1640,13 +1651,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(loopParameterBindingEClass, LoopParameterBinding.class, "LoopParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoopParameterBinding_Value(), this.getLoopVariable(), null, "value", null, 1, 1, LoopParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLoopParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, LoopParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLoopParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 1, 1, LoopParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(loopVariableEClass, LoopVariable.class, "LoopVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoopVariable_OwningMappingLoop(), this.getMappingLoop(), this.getMappingLoop_OwnedIterators(), "owningMappingLoop", null, 1, 1, LoopVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMapping_IsStrict(), ecorePackage.getEBoolean(), "isStrict", "false", 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMapping_IsStrict(), ecorePackage.getEBoolean(), "isStrict", "false", 1, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMapping_OwnedMappingParameters(), this.getMappingParameter(), this.getMappingParameter_OwningMapping(), "ownedMappingParameters", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_OwnedStatements(), this.getStatement(), null, "ownedStatements", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1679,8 +1690,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCall_OwnedMappingParameterBindings(), this.getMappingParameterBinding(), this.getMappingParameterBinding_OwningMappingCall(), "ownedMappingParameterBindings", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMappingCall_IsInstall(), ecorePackage.getEBoolean(), "isInstall", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMappingCall_IsInvoke(), ecorePackage.getEBoolean(), "isInvoke", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCall_IsInstall(), ecorePackage.getEBoolean(), "isInstall", "false", 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCall_IsInvoke(), ecorePackage.getEBoolean(), "isInvoke", "false", 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_ReferredNames(), ecorePackage.getEString(), "referredNames", null, 0, -1, MappingCall.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_ReferringNames(), ecorePackage.getEString(), "referringNames", null, 0, -1, MappingCall.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1736,7 +1747,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newStatementEClass, NewStatement.class, "NewStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNewStatement_IsContained(), ecorePackage.getEBoolean(), "isContained", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNewStatement_IsContained(), ecorePackage.getEBoolean(), "isContained", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1764,9 +1775,9 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(setStatementEClass, SetStatement.class, "SetStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetStatement_TargetVariable(), thePivotPackage.getVariableDeclaration(), null, "targetVariable", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatement_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetStatement_IsPartial(), ecorePackage.getEBoolean(), "isPartial", "false", 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetStatement_IsNotify(), ecorePackage.getEBoolean(), "isNotify", "false", 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetStatement_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", "false", 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetStatement_IsPartial(), ecorePackage.getEBoolean(), "isPartial", "false", 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetStatement_IsNotify(), ecorePackage.getEBoolean(), "isNotify", "false", 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetStatement_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", "false", 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatement_ResolvedProperty(), thePivotPackage.getProperty(), null, "resolvedProperty", null, 1, 1, SetStatement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
@@ -1779,7 +1790,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForPartialValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForTotalValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1811,7 +1831,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(simpleParameterBindingEClass, SimpleParameterBinding.class, "SimpleParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSimpleParameterBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSimpleParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 1, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForCheckedValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1855,12 +1875,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -1870,145 +1890,151 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 		addAnnotation
-		  (getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 		addAnnotation
-		  (getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "TypeIsBoolean"
-		   });	
+		(getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TypeIsBoolean"
+		});
 		addAnnotation
-		  (getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForCheckedValue"
-		   });	
+		(getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForCheckedValue"
+		});
 		addAnnotation
-		  (getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForUncheckedValue"
-		   });	
+		(getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForUncheckedValue"
+		});
 		addAnnotation
-		  (getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "allRulesAreMappings"
-		   });	
+		(getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "allRulesAreMappings"
+		});
 		addAnnotation
-		  (getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NameIsNotNull"
-		   });	
+		(getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NameIsNotNull"
+		});
 		addAnnotation
-		  (getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NotBothCheckedAndEnforced"
-		   });	
+		(getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NotBothCheckedAndEnforced"
+		});
 		addAnnotation
-		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NameIsNotNull"
-		   });	
+		(getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NameIsNotNull"
+		});
 		addAnnotation
-		  (getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "MappingParameterNamesAreUnique"
-		   });	
+		(getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "MappingParameterNamesAreUnique"
+		});
 		addAnnotation
-		  (getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "LocalVariabelNamesAreUnique"
-		   });	
+		(getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "LocalVariabelNamesAreUnique"
+		});
 		addAnnotation
-		  (getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "MatchingCallBindings"
-		   });	
+		(getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "MatchingCallBindings"
+		});
 		addAnnotation
-		  (getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NotBothInstallAndInvoke"
-		   });	
+		(getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NotBothInstallAndInvoke"
+		});
 		addAnnotation
-		  (getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "UniqueCallBindings"
-		   });	
+		(getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "UniqueCallBindings"
+		});
 		addAnnotation
-		  (getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "ParameterIsMappingParameter"
-		   });	
+		(getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ParameterIsMappingParameter"
+		});
 		addAnnotation
-		  (getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 		addAnnotation
-		  (getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NonDataTypeForType"
-		   });	
+		(getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NonDataTypeForType"
+		});
 		addAnnotation
-		  (getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleClassForProperty"
-		   });	
+		(getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleClassForProperty"
+		});
 		addAnnotation
-		  (getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForPartialValue"
+		});
 		addAnnotation
-		  (getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "ValueDoesNotNavigateFromRealizedVariables"
-		   });	
+		(getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForTotalValue"
+		});
 		addAnnotation
-		  (getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "TargetPropertyIsNotReadOnly"
-		   });	
+		(getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ValueDoesNotNavigateFromRealizedVariables"
+		});
 		addAnnotation
-		  (getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForCheckedValue"
-		   });	
+		(getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TargetPropertyIsNotReadOnly"
+		});
 		addAnnotation
-		  (getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForUncheckedValue"
-		   });
+		(getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForCheckedValue"
+		});
+		addAnnotation
+		(getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForUncheckedValue"
+		});
 	}
 
 } //QVTimperativePackageImpl

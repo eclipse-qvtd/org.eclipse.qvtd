@@ -95,12 +95,20 @@ public class QVTcoreValidator extends EObjectValidator {
 	public static final int MAPPING__VALIDATE_ROOT_NAME_IS_NOT_NULL = 5;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Opposite Property Assignment'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Opposite Property Assignment'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 6;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 6;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Opposite Property Assignment'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Opposite Property Is Implicit' of 'Opposite Property Assignment'.
@@ -108,7 +116,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT = 7;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT = 8;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Propety Is Slot Property' of 'Opposite Property Assignment'.
@@ -116,15 +124,23 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 8;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 9;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Property Assignment'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Property Assignment'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 9;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 10;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Property Assignment'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Property Is Not Implicit' of 'Property Assignment'.
@@ -132,7 +148,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_PROPERTY_IS_NOT_IMPLICIT = 10;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_PROPERTY_IS_NOT_IMPLICIT = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Propety Is Slot Property' of 'Property Assignment'.
@@ -140,7 +156,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 11;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Data Type For Type' of 'Realized Variable'.
@@ -148,7 +164,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REALIZED_VARIABLE__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 12;
+	public static final int REALIZED_VARIABLE__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Variable Assignment'.
@@ -156,7 +172,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 13;
+	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 15;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -164,7 +180,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 13;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 15;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -506,20 +522,31 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(oppositePropertyAssignment, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateCompatibleTypeForValue(oppositePropertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateCompatibleTypeForPartialValue(oppositePropertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateCompatibleTypeForTotalValue(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateOppositePropertyIsImplicit(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateTargetPropetyIsSlotProperty(oppositePropertyAssignment, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the validateCompatibleTypeForValue constraint of '<em>Opposite Property Assignment</em>'.
+	 * Validates the validateCompatibleTypeForPartialValue constraint of '<em>Opposite Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOppositePropertyAssignment_validateCompatibleTypeForValue(OppositePropertyAssignment oppositePropertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return oppositePropertyAssignment.validateCompatibleTypeForValue(diagnostics, context);
+	public boolean validateOppositePropertyAssignment_validateCompatibleTypeForPartialValue(OppositePropertyAssignment oppositePropertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return oppositePropertyAssignment.validateCompatibleTypeForPartialValue(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForTotalValue constraint of '<em>Opposite Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOppositePropertyAssignment_validateCompatibleTypeForTotalValue(OppositePropertyAssignment oppositePropertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return oppositePropertyAssignment.validateCompatibleTypeForTotalValue(diagnostics, context);
 	}
 
 	/**
@@ -557,20 +584,31 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyAssignment, diagnostics, context);
-		if (result || diagnostics != null) result &= validatePropertyAssignment_validateCompatibleTypeForValue(propertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyAssignment_validateCompatibleTypeForPartialValue(propertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyAssignment_validateCompatibleTypeForTotalValue(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyAssignment_validatePropertyIsNotImplicit(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyAssignment_validateTargetPropetyIsSlotProperty(propertyAssignment, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the validateCompatibleTypeForValue constraint of '<em>Property Assignment</em>'.
+	 * Validates the validateCompatibleTypeForPartialValue constraint of '<em>Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePropertyAssignment_validateCompatibleTypeForValue(PropertyAssignment propertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return propertyAssignment.validateCompatibleTypeForValue(diagnostics, context);
+	public boolean validatePropertyAssignment_validateCompatibleTypeForPartialValue(PropertyAssignment propertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return propertyAssignment.validateCompatibleTypeForPartialValue(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForTotalValue constraint of '<em>Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropertyAssignment_validateCompatibleTypeForTotalValue(PropertyAssignment propertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return propertyAssignment.validateCompatibleTypeForTotalValue(diagnostics, context);
 	}
 
 	/**

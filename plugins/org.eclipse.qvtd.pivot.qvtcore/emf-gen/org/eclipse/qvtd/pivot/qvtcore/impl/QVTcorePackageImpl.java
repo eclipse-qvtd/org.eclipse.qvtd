@@ -181,7 +181,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTcorePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -211,18 +211,18 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTcorePackage, 
-			 new EValidator.Descriptor() {
-				 @Override
-				public EValidator getEValidator() {
-					 return QVTcoreValidator.INSTANCE;
-				 }
-			 });
+		(theQVTcorePackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTcoreValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTcorePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTcorePackage.eNS_URI, theQVTcorePackage);
 		return theQVTcorePackage;
@@ -624,7 +624,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
+	public EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map() {
 		return oppositePropertyAssignmentEClass.getEOperations().get(1);
 	}
 
@@ -634,7 +634,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map() {
+	public EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map() {
 		return oppositePropertyAssignmentEClass.getEOperations().get(2);
 	}
 
@@ -644,8 +644,18 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+	public EOperation getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map() {
 		return oppositePropertyAssignmentEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+		return oppositePropertyAssignmentEClass.getEOperations().get(4);
 	}
 
 	/**
@@ -684,7 +694,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
+	public EOperation getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map() {
 		return propertyAssignmentEClass.getEOperations().get(1);
 	}
 
@@ -694,7 +704,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map() {
+	public EOperation getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map() {
 		return propertyAssignmentEClass.getEOperations().get(2);
 	}
 
@@ -704,8 +714,18 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+	public EOperation getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map() {
 		return propertyAssignmentEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+		return propertyAssignmentEClass.getEOperations().get(4);
 	}
 
 	/**
@@ -870,14 +890,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		oppositePropertyAssignmentEClass = createEClass(OPPOSITE_PROPERTY_ASSIGNMENT);
 		createEReference(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
 		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY);
-		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP);
 		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
 
 		propertyAssignmentEClass = createEClass(PROPERTY_ASSIGNMENT);
 		createEReference(propertyAssignmentEClass, PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
 		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
 		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
 
@@ -951,8 +973,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEClass(assignmentEClass, Assignment.class, "Assignment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssignment_BottomPattern(), this.getBottomPattern(), this.getBottomPattern_Assignment(), "bottomPattern", null, 1, 1, Assignment.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssignment_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssignment_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssignment_IsPartial(), ecorePackage.getEBoolean(), "isPartial", "false", 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignment_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignment_IsPartial(), ecorePackage.getEBoolean(), "isPartial", "false", 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bottomPatternEClass, BottomPattern.class, "BottomPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBottomPattern_Area(), this.getArea(), this.getArea_BottomPattern(), "area", null, 1, 1, BottomPattern.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1040,7 +1062,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		initEOperation(getOppositePropertyAssignment__GetReferredTargetProperty(), thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForPartialValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForTotalValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1072,7 +1103,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		initEOperation(getPropertyAssignment__GetReferredTargetProperty(), thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForPartialValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForTotalValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1146,12 +1186,12 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -1161,37 +1201,37 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getAssignment_Value(), 
-		   source, 
-		   new String[] {
-			 "body", "valueAssignment"
-		   });	
+		(getAssignment_Value(),
+			source,
+			new String[] {
+				"body", "valueAssignment"
+		});
 		addAnnotation
-		  (getNavigationAssignment_SlotExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "slotAssignment"
-		   });	
+		(getNavigationAssignment_SlotExpression(),
+			source,
+			new String[] {
+				"body", "slotAssignment"
+		});
 		addAnnotation
-		  (getOppositePropertyAssignment_TargetProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getOppositePropertyAssignment_TargetProperty(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getPropertyAssignment_TargetProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getPropertyAssignment_TargetProperty(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getVariableAssignment_TargetVariable(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });
+		(getVariableAssignment_TargetVariable(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 	}
 
 	/**
@@ -1201,85 +1241,97 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "VariablesAreBottomVariables"
-		   });	
+		(getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "VariablesAreBottomVariables"
+		});
 		addAnnotation
-		  (getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "VariablesAreGuardVariables"
-		   });	
+		(getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "VariablesAreGuardVariables"
+		});
 		addAnnotation
-		  (getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "DomainsAreCoreDomains"
-		   });	
+		(getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "DomainsAreCoreDomains"
+		});
 		addAnnotation
-		  (getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NestedNameIsNull"
-		   });	
+		(getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NestedNameIsNull"
+		});
 		addAnnotation
-		  (getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "RootNameIsNotNull"
-		   });	
+		(getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "RootNameIsNotNull"
+		});
 		addAnnotation
-		  (getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForPartialValue"
+		});
 		addAnnotation
-		  (getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "OppositePropertyIsImplicit"
-		   });	
+		(getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForTotalValue"
+		});
 		addAnnotation
-		  (getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "TargetPropetyIsSlotProperty"
-		   });	
+		(getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OppositePropertyIsImplicit"
+		});
 		addAnnotation
-		  (getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TargetPropetyIsSlotProperty"
+		});
 		addAnnotation
-		  (getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "PropertyIsNotImplicit"
-		   });	
+		(getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForPartialValue"
+		});
 		addAnnotation
-		  (getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "TargetPropetyIsSlotProperty"
-		   });	
+		(getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForTotalValue"
+		});
 		addAnnotation
-		  (getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "NonDataTypeForType"
-		   });	
+		(getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "PropertyIsNotImplicit"
+		});
 		addAnnotation
-		  (getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });
+		(getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TargetPropetyIsSlotProperty"
+		});
+		addAnnotation
+		(getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NonDataTypeForType"
+		});
+		addAnnotation
+		(getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 	}
 
 } //QVTcorePackageImpl

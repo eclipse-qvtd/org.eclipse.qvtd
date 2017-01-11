@@ -2025,13 +2025,22 @@ public interface QVTcorePackage extends EPackage {
 	int OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * The operation id for the '<em>Validate Compatible Type For Partial Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Total Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Opposite Property Is Implicit</em>' operation.
@@ -2040,7 +2049,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Target Propety Is Slot Property</em>' operation.
@@ -2049,7 +2058,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Opposite Property Assignment</em>' class.
@@ -2058,7 +2067,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
+	int OPPOSITE_PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
@@ -2197,13 +2206,22 @@ public interface QVTcorePackage extends EPackage {
 	int PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * The operation id for the '<em>Validate Compatible Type For Partial Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+	int PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Total Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Property Is Not Implicit</em>' operation.
@@ -2212,7 +2230,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
+	int PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Target Propety Is Slot Property</em>' operation.
@@ -2221,7 +2239,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
+	int PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Property Assignment</em>' class.
@@ -2230,7 +2248,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
+	int PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
@@ -2996,14 +3014,24 @@ public interface QVTcorePackage extends EPackage {
 	EOperation getOppositePropertyAssignment__GetReferredTargetProperty();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForPartialValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Partial Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Compatible Type For Partial Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForPartialValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+	EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForTotalValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Total Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Total Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForTotalValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateOppositePropertyIsImplicit(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Opposite Property Is Implicit</em>}' operation.
@@ -3057,14 +3085,24 @@ public interface QVTcorePackage extends EPackage {
 	EOperation getPropertyAssignment__GetReferredTargetProperty();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForPartialValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Partial Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Compatible Type For Partial Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForPartialValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+	EOperation getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForTotalValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Total Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Total Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForTotalValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validatePropertyIsNotImplicit(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Property Is Not Implicit</em>}' operation.
@@ -3530,12 +3568,20 @@ public interface QVTcorePackage extends EPackage {
 		EOperation OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = eINSTANCE.getOppositePropertyAssignment__GetReferredTargetProperty();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Partial Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+		EOperation OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Total Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Opposite Property Is Implicit</b></em>' operation.
@@ -3580,12 +3626,20 @@ public interface QVTcorePackage extends EPackage {
 		EOperation PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = eINSTANCE.getPropertyAssignment__GetReferredTargetProperty();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Partial Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+		EOperation PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Total Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Property Is Not Implicit</b></em>' operation.

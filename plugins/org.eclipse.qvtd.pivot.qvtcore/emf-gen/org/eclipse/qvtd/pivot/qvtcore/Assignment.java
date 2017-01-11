@@ -108,7 +108,7 @@ public interface Assignment extends Element {
 	 * @see #unsetIsDefault()
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_IsDefault()
-	 * @model default="false" unsettable="true"
+	 * @model default="false" unsettable="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!isDefault'"
 	 * @generated
 	 */
@@ -163,7 +163,7 @@ public interface Assignment extends Element {
 	 * @see #unsetIsPartial()
 	 * @see #setIsPartial(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_IsPartial()
-	 * @model default="false" unsettable="true"
+	 * @model default="false" unsettable="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!isPartial'"
 	 * @generated
 	 */

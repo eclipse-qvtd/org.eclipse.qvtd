@@ -222,12 +222,20 @@ public class QVTimperativeValidator extends EObjectValidator {
 	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY = 18;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Set Statement'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Set Statement'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 19;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 19;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Set Statement'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Value Does Not Navigate From Realized Variables' of 'Set Statement'.
@@ -235,7 +243,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES = 20;
+	public static final int SET_STATEMENT__VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Property Is Not Read Only' of 'Set Statement'.
@@ -243,7 +251,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY = 21;
+	public static final int SET_STATEMENT__VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY = 22;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Checked Value' of 'Simple Parameter Binding'.
@@ -251,7 +259,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 22;
+	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 23;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Unchecked Value' of 'Simple Parameter Binding'.
@@ -259,7 +267,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 23;
+	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 24;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -267,7 +275,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 23;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 24;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -982,7 +990,8 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(setStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(setStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSetStatement_validateCompatibleClassForProperty(setStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateSetStatement_validateCompatibleTypeForValue(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSetStatement_validateCompatibleTypeForPartialValue(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSetStatement_validateCompatibleTypeForTotalValue(setStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSetStatement_validateValueDoesNotNavigateFromRealizedVariables(setStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSetStatement_validateTargetPropertyIsNotReadOnly(setStatement, diagnostics, context);
 		return result;
@@ -999,13 +1008,23 @@ public class QVTimperativeValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the validateCompatibleTypeForValue constraint of '<em>Set Statement</em>'.
+	 * Validates the validateCompatibleTypeForPartialValue constraint of '<em>Set Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSetStatement_validateCompatibleTypeForValue(SetStatement setStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return setStatement.validateCompatibleTypeForValue(diagnostics, context);
+	public boolean validateSetStatement_validateCompatibleTypeForPartialValue(SetStatement setStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return setStatement.validateCompatibleTypeForPartialValue(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForTotalValue constraint of '<em>Set Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSetStatement_validateCompatibleTypeForTotalValue(SetStatement setStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return setStatement.validateCompatibleTypeForTotalValue(diagnostics, context);
 	}
 
 	/**

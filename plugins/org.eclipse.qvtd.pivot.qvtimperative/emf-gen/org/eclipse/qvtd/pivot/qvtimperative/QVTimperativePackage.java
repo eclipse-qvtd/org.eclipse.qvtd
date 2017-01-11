@@ -4246,13 +4246,22 @@ public interface QVTimperativePackage extends EPackage {
 	int SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * The operation id for the '<em>Validate Compatible Type For Partial Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 1;
+	int SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Total Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Value Does Not Navigate From Realized Variables</em>' operation.
@@ -4261,7 +4270,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 2;
+	int SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Target Property Is Not Read Only</em>' operation.
@@ -4270,7 +4279,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 3;
+	int SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Set Statement</em>' class.
@@ -4279,7 +4288,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 4;
+	int SET_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SimpleParameterImpl <em>Simple Parameter</em>}' class.
@@ -5502,14 +5511,24 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForPartialValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Partial Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Compatible Type For Partial Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForPartialValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+	EOperation getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForTotalValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Total Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Total Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForTotalValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateValueDoesNotNavigateFromRealizedVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Value Does Not Navigate From Realized Variables</em>}' operation.
@@ -6383,12 +6402,20 @@ public interface QVTimperativePackage extends EPackage {
 		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Partial Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Total Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Value Does Not Navigate From Realized Variables</b></em>' operation.

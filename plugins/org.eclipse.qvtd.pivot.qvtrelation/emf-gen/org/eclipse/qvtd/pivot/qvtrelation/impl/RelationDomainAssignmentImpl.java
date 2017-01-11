@@ -209,11 +209,11 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression valueExp = this.getValueExp();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = valueExp.getType();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression valueExp = this.getValueExp();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = valueExp.getType();
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Variable variable = this.getVariable();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = variable.getType();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable variable = this.getVariable();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = variable.getType();
 				final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 				CAUGHT_result = result;
 			}

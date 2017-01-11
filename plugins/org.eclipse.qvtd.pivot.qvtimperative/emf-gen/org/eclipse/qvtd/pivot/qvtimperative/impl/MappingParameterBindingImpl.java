@@ -197,24 +197,17 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall owningMappingCall = this.getOwningMappingCall();
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping referredMapping = owningMappingCall.getReferredMapping();
-				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
-				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable).booleanValue();
-				CAUGHT_result = result;
-			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingParameterBinding_c_c_ParameterIsMappingParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall owningMappingCall = this.getOwningMappingCall();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping referredMapping = owningMappingCall.getReferredMapping();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
+			final /*@NonInvalid*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingParameterBinding_c_c_ParameterIsMappingParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

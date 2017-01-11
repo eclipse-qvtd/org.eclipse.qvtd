@@ -28,18 +28,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -142,8 +147,8 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		 * targetProperty.opposite
 		 */
 		@SuppressWarnings("null")
-		final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
-		final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Property opposite = targetProperty.getOpposite();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = targetProperty.getOpposite();
 		if (opposite == null) {
 			throw new InvalidValueException("Null body for \'qvtcore::OppositePropertyAssignment::getReferredTargetProperty() : Property[1]\'");
 		}
@@ -156,155 +161,261 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	 * @generated
 	 */
 	@Override
-	public boolean validateCompatibleTypeForValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateCompatibleTypeForPartialValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
-		 * inv CompatibleTypeForValue:
+		 * inv CompatibleTypeForPartialValue:
 		 *   let
-		 *     severity : Integer[1] = 'OppositePropertyAssignment::CompatibleTypeForValue'.getSeverity()
+		 *     severity : Integer[1] = 'OppositePropertyAssignment::CompatibleTypeForPartialValue'.getSeverity()
 		 *   in
 		 *     if severity <= 0
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : OclAny[1] = let
-		 *           status : Boolean[?] = let
-		 *             propertyType : Type[?] = getReferredTargetProperty().type
+		 *         result : OclAny[1] = if isPartial
+		 *         then
+		 *           let
+		 *             propertyType : Type[1] = getReferredTargetProperty()
+		 *             .type.oclAsType(CollectionType).elementType
 		 *           in
 		 *             let valueType : Type[?] = value.type
 		 *             in
-		 *               valueType.conformsTo(propertyType) or
-		 *               propertyType.conformsTo(valueType)
-		 *         in
-		 *           if status = true
-		 *           then true
-		 *           else
-		 *             Tuple{message = 'OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' +
-		 *               getReferredTargetProperty().type?.name + ' or vice-versa', status = status
-		 *             }
-		 *           endif
+		 *               let
+		 *                 status : Boolean[?] = valueType.conformsTo(propertyType) or
+		 *                 propertyType.conformsTo(valueType)
+		 *               in
+		 *                 if status = true
+		 *                 then true
+		 *                 else
+		 *                   Tuple{status = status, message = 'OppositePropertyAssignment::CompatibleTypeForPartialValue: ' + valueType?.name + ' must conform to ' + propertyType.name + ' or vice-versa'
+		 *                   }
+		 *                 endif
+		 *         else true
+		 *         endif
 		 *       in
-		 *         'OppositePropertyAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *         'OppositePropertyAssignment::CompatibleTypeForPartialValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_4;
+		if (le) {
+			symbol_4 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_result;
+			try {
+				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
+				/*@Thrown*/ java.lang.@NonNull Object result;
+				if (isPartial) {
+					/*@Caught*/ @NonNull Object CAUGHT_propertyType;
+					try {
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTcoreTables.CLSSid_CollectionType, null);
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = getReferredTargetProperty.getType();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType oclAsType = ClassUtil.nonNullState((CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType));
+						@SuppressWarnings("null")
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Type propertyType = oclAsType.getElementType();
+						CAUGHT_propertyType = propertyType;
+					}
+					catch (Exception e) {
+						CAUGHT_propertyType = ValueUtil.createInvalidValue(e);
+					}
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type valueType = value.getType();
+					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					try {
+						if (CAUGHT_propertyType instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_propertyType;
+						}
+						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, CAUGHT_propertyType).booleanValue();
+						CAUGHT_conformsTo = conformsTo;
+					}
+					catch (Exception e) {
+						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+					}
+					/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+					try {
+						if (CAUGHT_propertyType instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_propertyType;
+						}
+						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
+						CAUGHT_conformsTo_0 = conformsTo_0;
+					}
+					catch (Exception e) {
+						CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
+					}
+					final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+					final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
+					/*@Thrown*/ java.lang.@NonNull Object symbol_3;
+					if (symbol_0) {
+						symbol_3 = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						final /*@NonInvalid*/ @NonNull Object symbol_1 = valueType == null;
+						/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+						if (symbol_1 == Boolean.TRUE) {
+							safe_name_source = null;
+						}
+						else {
+							assert valueType != null;
+							final /*@Thrown*/ java.lang.@Nullable String name = valueType.getName();
+							safe_name_source = name;
+						}
+						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32, safe_name_source);
+						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+						if (CAUGHT_propertyType instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_propertyType;
+						}
+						final /*@Thrown*/ java.lang.@Nullable String name_0 = ((Nameable)CAUGHT_propertyType).getName();
+						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_0);
+						final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_2 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+						symbol_3 = symbol_2;
+					}
+					result = symbol_3;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+			symbol_4 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_4;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateCompatibleTypeForTotalValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv CompatibleTypeForTotalValue:
+		 *   let
+		 *     severity : Integer[1] = 'OppositePropertyAssignment::CompatibleTypeForTotalValue'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : OclAny[1] = if not isPartial
+		 *         then
+		 *           let propertyType : Type[?] = getReferredTargetProperty().type
+		 *           in
+		 *             let valueType : Type[?] = value.type
+		 *             in
+		 *               let
+		 *                 status : Boolean[?] = valueType.conformsTo(propertyType) or
+		 *                 propertyType.conformsTo(valueType)
+		 *               in
+		 *                 if status = true
+		 *                 then true
+		 *                 else
+		 *                   Tuple{status = status, message = 'OppositePropertyAssignment::CompatibleTypeForTotalValue: ' + valueType?.name + ' must conform to ' + propertyType?.name + ' or vice-versa'
+		 *                   }
+		 *                 endif
+		 *         else true
+		 *         endif
+		 *       in
+		 *         'OppositePropertyAssignment::CompatibleTypeForTotalValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 		/*@NonInvalid*/ java.lang.@NonNull Object symbol_5;
 		if (le) {
 			symbol_5 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_symbol_4;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @Nullable Object CAUGHT_propertyType;
-				try {
+				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
+				final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isPartial);
+				if (not == null) {
+					throw new InvalidValueException("Null if condition");
+				}
+				/*@Thrown*/ java.lang.@NonNull Object result;
+				if (not) {
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type propertyType = getReferredTargetProperty.getType();
-					CAUGHT_propertyType = propertyType;
-				}
-				catch (Exception e) {
-					CAUGHT_propertyType = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @Nullable Object CAUGHT_valueType;
-				try {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type propertyType = getReferredTargetProperty.getType();
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type valueType = value.getType();
-					CAUGHT_valueType = valueType;
-				}
-				catch (Exception e) {
-					CAUGHT_valueType = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
-				try {
-					if (CAUGHT_valueType instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_valueType;
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type valueType = value.getType();
+					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					try {
+						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
+						CAUGHT_conformsTo = conformsTo;
 					}
-					if (CAUGHT_propertyType instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_propertyType;
+					catch (Exception e) {
+						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_valueType, CAUGHT_propertyType).booleanValue();
-					CAUGHT_conformsTo = conformsTo;
-				}
-				catch (Exception e) {
-					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
-				try {
-					if (CAUGHT_propertyType instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_propertyType;
+					/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+					try {
+						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
+						CAUGHT_conformsTo_0 = conformsTo_0;
 					}
-					if (CAUGHT_valueType instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_valueType;
+					catch (Exception e) {
+						CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, CAUGHT_valueType).booleanValue();
-					CAUGHT_conformsTo_0 = conformsTo_0;
-				}
-				catch (Exception e) {
-					CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
-				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
-				final /*@Thrown*/ boolean symbol_0 = or == Boolean.TRUE;
-				/*@Thrown*/ java.lang.@NonNull Object symbol_4;
-				if (symbol_0) {
-					symbol_4 = ValueUtil.TRUE_VALUE;
+					final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+					final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
+					/*@Thrown*/ java.lang.@NonNull Object symbol_4;
+					if (symbol_0) {
+						symbol_4 = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						final /*@NonInvalid*/ @NonNull Object symbol_1 = valueType == null;
+						/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+						if (symbol_1 == Boolean.TRUE) {
+							safe_name_source = null;
+						}
+						else {
+							assert valueType != null;
+							final /*@Thrown*/ java.lang.@Nullable String name = valueType.getName();
+							safe_name_source = name;
+						}
+						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue_c_32, safe_name_source);
+						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+						final /*@NonInvalid*/ @NonNull Object symbol_2 = propertyType == null;
+						/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
+						if (symbol_2 == Boolean.TRUE) {
+							safe_name_source_0 = null;
+						}
+						else {
+							assert propertyType != null;
+							final /*@Thrown*/ java.lang.@Nullable String name_0 = propertyType.getName();
+							safe_name_source_0 = name_0;
+						}
+						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+						final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_3 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+						symbol_4 = symbol_3;
+					}
+					result = symbol_4;
 				}
 				else {
-					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_0 = this.getValue();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = value_0.getType();
-					/*@Caught*/ @Nullable Object CAUGHT_type;
-					try {
-						CAUGHT_type = type;
-					}
-					catch (Exception e) {
-						CAUGHT_type = ValueUtil.createInvalidValue(e);
-					}
-					final /*@NonInvalid*/ @NonNull Object symbol_1 = CAUGHT_type == null;
-					/*@Thrown*/ java.lang.@Nullable String safe_name_source;
-					if (symbol_1 == Boolean.TRUE) {
-						safe_name_source = null;
-					}
-					else {
-						assert type != null;
-						final /*@Thrown*/ java.lang.@Nullable String name = type.getName();
-						safe_name_source = name;
-					}
-					final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
-					final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
-					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = getReferredTargetProperty_0.getType();
-					/*@Caught*/ @Nullable Object CAUGHT_type_0;
-					try {
-						CAUGHT_type_0 = type_0;
-					}
-					catch (Exception e) {
-						CAUGHT_type_0 = ValueUtil.createInvalidValue(e);
-					}
-					final /*@NonInvalid*/ @NonNull Object symbol_2 = CAUGHT_type_0 == null;
-					/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
-					if (symbol_2 == Boolean.TRUE) {
-						safe_name_source_0 = null;
-					}
-					else {
-						assert type_0 != null;
-						final /*@Thrown*/ java.lang.@Nullable String name_0 = type_0.getName();
-						safe_name_source_0 = name_0;
-					}
-					final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-					final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_3 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, or);
-					symbol_4 = symbol_3;
+					result = ValueUtil.TRUE_VALUE;
 				}
-				CAUGHT_symbol_4 = symbol_4;
+				CAUGHT_result = result;
 			}
 			catch (Exception e) {
-				CAUGHT_symbol_4 = ValueUtil.createInvalidValue(e);
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_4, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 			symbol_5 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_5;
@@ -326,7 +437,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let result : Boolean[?] = targetProperty.isImplicit
+		 *       let result : Boolean[1] = targetProperty.isImplicit
 		 *       in
 		 *         'OppositePropertyAssignment::OppositePropertyIsImplicit'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -339,17 +450,10 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = targetProperty.isIsImplicit();
-				CAUGHT_result = result;
-			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_OppositePropertyIsImplicit, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
+			final /*@NonInvalid*/ boolean result = targetProperty.isIsImplicit();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_OppositePropertyIsImplicit, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -389,11 +493,11 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression slotExpression = this.getSlotExpression();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = slotExpression.getType();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression slotExpression = this.getSlotExpression();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = slotExpression.getType();
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty.getOwningClass();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty.getOwningClass();
 				final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
 				CAUGHT_result = result;
 			}
@@ -476,8 +580,10 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		switch (operationID) {
 			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY:
 				return getReferredTargetProperty();
-			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
-				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleTypeForPartialValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleTypeForTotalValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP:
 				return validateOppositePropertyIsImplicit((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP:

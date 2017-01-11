@@ -77,6 +77,7 @@ public class QVTcoreTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_BottomPattern = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("BottomPattern", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_BottomVariable = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("BottomVariable", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_$metamodel$.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionType = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CoreDomain = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("CoreDomain", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_DataType = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_$metamodel$.getClassId("DataType", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Domain = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
@@ -96,19 +97,23 @@ public class QVTcoreTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableAssignment = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("VariableAssignment", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_EnforcementMode = org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getEnumerationId("EnforcementMode");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid_ = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid__0 = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(1, "status", org.eclipse.ocl.pivot.ids.TypeId.BOOLEAN);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid_ = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(1, "status", org.eclipse.ocl.pivot.ids.TypeId.BOOLEAN);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid__0 = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_BottomPattern_c_c_VariablesAreBottomVariables = "BottomPattern::VariablesAreBottomVariables";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_GuardPattern_c_c_VariablesAreGuardVariables = "GuardPattern::VariablesAreGuardVariables";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_DomainsAreCoreDomains = "Mapping::DomainsAreCoreDomains";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_NestedNameIsNull = "Mapping::NestedNameIsNull";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_RootNameIsNotNull = "Mapping::RootNameIsNotNull";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForValue = "OppositePropertyAssignment::CompatibleTypeForValue";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForValue_c_32 = "OppositePropertyAssignment::CompatibleTypeForValue: ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue = "OppositePropertyAssignment::CompatibleTypeForPartialValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32 = "OppositePropertyAssignment::CompatibleTypeForPartialValue: ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue = "OppositePropertyAssignment::CompatibleTypeForTotalValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue_c_32 = "OppositePropertyAssignment::CompatibleTypeForTotalValue: ";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_OppositePropertyIsImplicit = "OppositePropertyAssignment::OppositePropertyIsImplicit";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_OppositePropertyAssignment_c_c_TargetPropetyIsSlotProperty = "OppositePropertyAssignment::TargetPropetyIsSlotProperty";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForValue = "PropertyAssignment::CompatibleTypeForValue";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForValue_c_32 = "PropertyAssignment::CompatibleTypeForValue: ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForPartialValue = "PropertyAssignment::CompatibleTypeForPartialValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32 = "PropertyAssignment::CompatibleTypeForPartialValue: ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForTotalValue = "PropertyAssignment::CompatibleTypeForTotalValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForTotalValue_c_32 = "PropertyAssignment::CompatibleTypeForTotalValue: ";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_PropertyIsNotImplicit = "PropertyAssignment::PropertyIsNotImplicit";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyAssignment_c_c_TargetPropetyIsSlotProperty = "PropertyAssignment::TargetPropetyIsSlotProperty";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RealizedVariable_c_c_NonDataTypeForType = "RealizedVariable::NonDataTypeForType";
@@ -122,7 +127,7 @@ public class QVTcoreTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Mapping = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.CLSSid_Mapping);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RealizedVariable = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.CLSSid_RealizedVariable);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Variable = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.CLSSid_Variable);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TupleTypeId TUPLid_ = org.eclipse.ocl.pivot.ids.IdManager.getTupleTypeId("Tuple", org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PARTid_, org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PARTid__0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TupleTypeId TUPLid_ = org.eclipse.ocl.pivot.ids.IdManager.getTupleTypeId("Tuple", org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PARTid__0, org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables.PARTid_);
 
 	/**
 	 *	The type parameters for templated types and operations.

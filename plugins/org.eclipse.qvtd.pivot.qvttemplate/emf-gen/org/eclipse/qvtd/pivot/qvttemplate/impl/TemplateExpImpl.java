@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -204,32 +203,23 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
+			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				/*@Caught*/ @NonNull Object CAUGHT_ne;
-				try {
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression where = this.getWhere();
-					final /*@Thrown*/ boolean ne = where != null;
-					CAUGHT_ne = ne;
-				}
-				catch (Exception e) {
-					CAUGHT_ne = ValueUtil.createInvalidValue(e);
-				}
-				/*@Caught*/ @NonNull Object CAUGHT_eq;
-				try {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression where = this.getWhere();
+				final /*@NonInvalid*/ boolean ne = where != null;
+				/*@Thrown*/ boolean result;
+				if (ne) {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression where_0 = this.getWhere();
-					if (where_0 == null) {
+					if (where == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = where_0.getType();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = where.getType();
 					final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
-					CAUGHT_eq = eq;
+					result = eq;
 				}
-				catch (Exception e) {
-					CAUGHT_eq = ValueUtil.createInvalidValue(e);
+				else {
+					result = ValueUtil.TRUE_VALUE;
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
