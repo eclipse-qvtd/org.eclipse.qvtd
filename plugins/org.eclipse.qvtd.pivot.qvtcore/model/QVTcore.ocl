@@ -27,11 +27,23 @@ inv RootNameIsNotNull:
 context OppositePropertyAssignment
 def: getReferredTargetProperty() : pivot::Property[1] = targetProperty.opposite
 
-inv CompatibleTypeForValue('OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + getReferredTargetProperty().type?.name + ' or vice-versa'):
-	let propertyType = getReferredTargetProperty().type in
-	let valueType = value.type in
-		valueType.conformsTo(propertyType)
-		or propertyType.conformsTo(valueType)
+inv CompatibleTypeForPartialValue:
+	isPartial implies
+		let propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in
+		let valueType = value.type in
+		Tuple{
+			status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),
+			message : String = 'OppositePropertyAssignment::CompatibleTypeForPartialValue: ' + valueType?.name + ' must conform to ' + propertyType.name + ' or vice-versa'
+		}.status
+
+inv CompatibleTypeForTotalValue:
+	not isPartial implies
+		let propertyType = getReferredTargetProperty().type in
+		let valueType = value.type in
+		Tuple{
+			status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),
+			message : String = 'OppositePropertyAssignment::CompatibleTypeForTotalValue: ' + valueType?.name + ' must conform to ' + propertyType?.name + ' or vice-versa'
+		}.status
 
 inv OppositePropertyIsImplicit:
 	targetProperty.isImplicit
@@ -42,11 +54,23 @@ inv TargetPropetyIsSlotProperty:
 context PropertyAssignment
 def: getReferredTargetProperty() : pivot::Property[1] = targetProperty
 
-inv CompatibleTypeForValue('PropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + getReferredTargetProperty().type?.name + ' or vice-versa'):
-	let propertyType = getReferredTargetProperty().type in
-	let valueType = value.type in
-		valueType.conformsTo(propertyType)
-		or propertyType.conformsTo(valueType)
+inv CompatibleTypeForPartialValue:
+	isPartial implies
+		let propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in
+		let valueType = value.type in
+		Tuple{
+			status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),
+			message : String = 'PropertyAssignment::CompatibleTypeForPartialValue: ' + valueType?.name + ' must conform to ' + propertyType.name + ' or vice-versa'
+		}.status
+
+inv CompatibleTypeForTotalValue:
+	not isPartial implies
+		let propertyType = getReferredTargetProperty().type in
+		let valueType = value.type in
+		Tuple{
+			status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),
+			message : String = 'PropertyAssignment::CompatibleTypeForTotalValue: ' + valueType?.name + ' must conform to ' + propertyType?.name + ' or vice-versa'
+		}.status
 
 inv PropertyIsNotImplicit:
 	not targetProperty.isImplicit

@@ -29,10 +29,10 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtcore-Assignment-isDefault"
-        name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        name="isDefault" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false" unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtcore-Assignment-isPartial"
-        name="isPartial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        name="isPartial" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false" unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-BottomPattern" name="BottomPattern"
@@ -185,12 +185,27 @@
         <details key="body" value="targetProperty.opposite&#xA;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="validateCompatibleTypeForPartialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="CompatibleTypeForValue"/>
+        <details key="originalName" value="CompatibleTypeForPartialValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + getReferredTargetProperty().type?.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
+        <details key="body" value="&#xA;&#x9;isPartial implies&#xA;&#x9;&#x9;let propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in&#xA;&#x9;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;Tuple{&#xA;&#x9;&#x9;&#x9;status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),&#xA;&#x9;&#x9;&#x9;message : String = 'OppositePropertyAssignment::CompatibleTypeForPartialValue: ' + valueType?.name + ' must conform to ' + propertyType.name + ' or vice-versa'&#xA;&#x9;&#x9;}.status&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateCompatibleTypeForTotalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForTotalValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;not isPartial implies&#xA;&#x9;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;Tuple{&#xA;&#x9;&#x9;&#x9;status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),&#xA;&#x9;&#x9;&#x9;message : String = 'OppositePropertyAssignment::CompatibleTypeForTotalValue: ' + valueType?.name + ' must conform to ' + propertyType?.name + ' or vice-versa'&#xA;&#x9;&#x9;}.status&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -244,12 +259,27 @@
         <details key="body" value="targetProperty&#xA;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="validateCompatibleTypeForPartialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="CompatibleTypeForValue"/>
+        <details key="originalName" value="CompatibleTypeForPartialValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'PropertyAssignment::CompatibleTypeForValue: ' + value.type?.name + ' must conform to ' + getReferredTargetProperty().type?.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
+        <details key="body" value="&#xA;&#x9;isPartial implies&#xA;&#x9;&#x9;let propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in&#xA;&#x9;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;Tuple{&#xA;&#x9;&#x9;&#x9;status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),&#xA;&#x9;&#x9;&#x9;message : String = 'PropertyAssignment::CompatibleTypeForPartialValue: ' + valueType?.name + ' must conform to ' + propertyType.name + ' or vice-versa'&#xA;&#x9;&#x9;}.status&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateCompatibleTypeForTotalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForTotalValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;not isPartial implies&#xA;&#x9;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;Tuple{&#xA;&#x9;&#x9;&#x9;status : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),&#xA;&#x9;&#x9;&#x9;message : String = 'PropertyAssignment::CompatibleTypeForTotalValue: ' + valueType?.name + ' must conform to ' + propertyType?.name + ' or vice-versa'&#xA;&#x9;&#x9;}.status&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

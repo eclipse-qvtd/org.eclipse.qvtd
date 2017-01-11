@@ -84,9 +84,13 @@
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-OppositePropertyAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-OppositePropertyAssignment-targetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/getReferredTargetProperty"/>
-      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForValue">
-        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForValue/diagnostics"/>
-        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForValue/context"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForPartialValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForPartialValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForPartialValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForTotalValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForTotalValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForTotalValue/context"/>
       </genOperations>
       <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit">
         <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit/diagnostics"/>
@@ -100,9 +104,13 @@
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-PropertyAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-PropertyAssignment-targetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/getReferredTargetProperty"/>
-      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForValue">
-        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForValue/diagnostics"/>
-        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForValue/context"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForPartialValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForPartialValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForPartialValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForTotalValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForTotalValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForTotalValue/context"/>
       </genOperations>
       <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit">
         <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit/diagnostics"/>

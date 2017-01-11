@@ -209,4 +209,34 @@ Workflow {
 //    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
 //    }
 	component = @GenerateQVTdScheduleModels {}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtbase/model"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtbase/emf-gen"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtcore/model"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtcore/emf-gen"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtimperative/model"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvttemplate/model"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvttemplate/emf-gen"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtrelation/model"
+	}
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.qvtrelation/emf-gen"
+	}
 }

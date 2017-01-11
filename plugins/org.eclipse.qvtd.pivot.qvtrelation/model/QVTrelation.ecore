@@ -144,7 +144,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtrelation-Relation-isTopLevel"
-        name="isTopLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        name="isTopLevel" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-Relation-operationalImpl"
         name="operationalImpl" ordered="false" upperBound="-1" eType="#T-qvtrelation-RelationImplementation"
         containment="true" eOpposite="#F-qvtrelation-RelationImplementation-relation"/>

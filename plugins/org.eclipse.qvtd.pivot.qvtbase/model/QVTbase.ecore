@@ -42,10 +42,10 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Domain-isCheckable"
-        name="isCheckable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        name="isCheckable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Domain-isEnforceable"
-        name="isEnforceable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        name="isEnforceable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Domain-rule"
         name="rule" lowerBound="1" eType="#T-qvtbase-Rule" transient="true" eOpposite="#F-qvtbase-Rule-domain"/>
@@ -177,7 +177,7 @@
         name="domain" upperBound="-1" eType="#T-qvtbase-Domain" containment="true"
         eOpposite="#F-qvtbase-Domain-rule"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Rule-isDefault"
-        name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        name="isDefault" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overrides"
         name="overrides" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overridden"/>

@@ -175,9 +175,13 @@
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleClassForProperty/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleClassForProperty/context"/>
       </genOperations>
-      <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForValue">
-        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForValue/diagnostics"/>
-        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForValue/context"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForPartialValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForPartialValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForPartialValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForTotalValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForTotalValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForTotalValue/context"/>
       </genOperations>
       <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateValueDoesNotNavigateFromRealizedVariables">
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateValueDoesNotNavigateFromRealizedVariables/diagnostics"/>
