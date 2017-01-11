@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -269,17 +270,34 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						mapOtherTemplateExpression(cte);
 					}
 					else if (propertyTemplateValue instanceof ObjectTemplateExp) {
-						/**
-						 * Each PropertyTemplateItem whose value is an ObjectTemplateExp
-						 * converts to a PropertyAssignment.
-						 *
-						 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
-						 */
-						ObjectTemplateExp pte = (ObjectTemplateExp)propertyTemplateValue;
-						Variable vpte = ClassUtil.nonNullState(pte.getBindsTo());
-						Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
-						variablesAnalysis.addNavigationPredicate(cOtherBottomPattern, rTemplateVariable, partProperty, createVariableExp(mvpte));
-						mapOtherTemplateExpression(pte);
+						if (partProperty.isIsMany()) {
+							/**
+							 * Each PropertyTemplateItem whose value is an ObjectTemplateExp
+							 * converts to a PropertyAssignment.
+							 *
+							 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
+							 */
+							ObjectTemplateExp pte = (ObjectTemplateExp)propertyTemplateValue;
+							Variable vpte = ClassUtil.nonNullState(pte.getBindsTo());
+							Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
+							NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cTemplateVariable), partProperty);
+							OperationCallExp eTerm = createOperationCallExp(cNavigationExp, "includes", createVariableExp(mvpte));
+							variablesAnalysis.addPredicate(cOtherBottomPattern, eTerm);
+							mapOtherTemplateExpression(pte);
+						}
+						else {
+							/**
+							 * Each PropertyTemplateItem whose value is an ObjectTemplateExp
+							 * converts to a PropertyAssignment.
+							 *
+							 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
+							 */
+							ObjectTemplateExp pte = (ObjectTemplateExp)propertyTemplateValue;
+							Variable vpte = ClassUtil.nonNullState(pte.getBindsTo());
+							Variable mvpte = variablesAnalysis.getCoreVariable(vpte);
+							variablesAnalysis.addNavigationPredicate(cOtherBottomPattern, rTemplateVariable, partProperty, createVariableExp(mvpte));
+							mapOtherTemplateExpression(pte);
+						}
 					}
 					else {
 						// loop body of RDomainPatternToMDBottomPatternSimpleNonVarExpr
@@ -632,7 +650,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			//				mb.getAssignment().add(a);
 
 			CollectionType collectionType = ClassUtil.nonNullState(cte.getReferredCollectionType());
-			int size = rMembers.size();
 			Variable rRest = cte.getRest();
 			if (rRest == null) {
 				/**
