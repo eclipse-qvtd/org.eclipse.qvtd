@@ -55,6 +55,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -117,6 +118,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	public @NonNull Node analyze(/*@NonNull*/ Visitable element) {
 		Node accept = element.accept(this);
 		return accept;
+	}
+
+	private @NonNull Node analyzeOperationCallExp_includes(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
+		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
+		String name = operationCallExp.getReferredOperation().getName();
+		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
+		return RegionUtil.createTrueNode(sourceNode.getRegion());
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclAsType(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
@@ -813,6 +821,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 		else if (PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
 			return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
+		}
+		else if ((operationCallExp.eContainer() instanceof Predicate)
+				&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
+				&& "includes".equals(operationName)) {
+			return analyzeOperationCallExp_includes(sourceNode, operationCallExp);
 		}
 		else {
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
