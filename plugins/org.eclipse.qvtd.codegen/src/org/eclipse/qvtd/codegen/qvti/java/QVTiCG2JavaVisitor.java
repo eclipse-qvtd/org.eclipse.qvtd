@@ -221,6 +221,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void appendEcoreSet(@NonNull CGValuedElement cgSlot, @NonNull EStructuralFeature eStructuralFeature, @NonNull CGValuedElement cgInit, boolean isPartial) {
+		EClassifier eType = eStructuralFeature.getEType();
+		String instanceClassName = eType.getInstanceClassName();
 		if (eStructuralFeature.isMany()) {
 			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 			//
@@ -228,9 +230,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(".");
 			js.append(getAccessor);
 			js.append("().");
-			js.append(isPartial ? "add" : "addAll");
+			js.append(isPartial ? "add" : "addAll");		// FIXME may need to loop addAll manually
 			js.append("(");
-			js.appendAtomicReferenceTo(cgInit);
+			if (instanceClassName != null) {
+				js.appendEcoreValue(instanceClassName, cgInit);
+			}
+			else {
+				js.appendAtomicReferenceTo(cgInit);
+			}
 			js.append(");\n");
 		}
 		else {
@@ -240,7 +247,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(".");
 			js.append(setAccessor);
 			js.append("(");
-			js.appendAtomicReferenceTo(cgInit);
+			if (instanceClassName != null) {
+				js.appendEcoreValue(instanceClassName, cgInit);
+			}
+			else {
+				js.appendAtomicReferenceTo(cgInit);
+			}
 			js.append(");\n");
 		}
 	}
