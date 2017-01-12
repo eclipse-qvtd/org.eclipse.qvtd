@@ -63,10 +63,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		List<@NonNull ScheduledRegion> allScheduledRegions = new ArrayList<>();
 		allScheduledRegions.add(rootScheduledRegion);
-		CyclesAnalyzer cyclesAnalyzer = new CyclesAnalyzer(rootScheduledRegion, rootScheduledRegion.getCallableRegions());
-		List<@NonNull RegionCycle> regionCycles = cyclesAnalyzer.getOrderedCycles();
-		if (regionCycles != null) {
-			/*			for (@NonNull RegionCycle regionCycle : regionCycles) {
+		//		CyclesAnalyzer cyclesAnalyzer = new CyclesAnalyzer(rootScheduledRegion, rootScheduledRegion.getCallableRegions());
+		//		List<@NonNull RegionCycle> regionCycles = cyclesAnalyzer.getOrderedCycles();
+		//		if (regionCycles != null) {
+		/*			for (@NonNull RegionCycle regionCycle : regionCycles) {
 				Iterable<@NonNull Region> regions = regionCycle.getRegions();
 				if (Iterables.size(regions) == 1) {
 					regions.iterator().next().setIsCyclic();
@@ -76,10 +76,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 					allScheduledRegions.add(cyclicRegion);
 				}
 			} */
-		}
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			rootScheduledRegion.writeDebugGraphs("4-cycles", true, true, false);
-		}
+		//		}
+		//		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		//			rootScheduledRegion.writeDebugGraphs("4-cycles", true, true, false);
+		//		}
 		//
 		//	Create the schedule for each directed acyclic scheduled region.
 		//

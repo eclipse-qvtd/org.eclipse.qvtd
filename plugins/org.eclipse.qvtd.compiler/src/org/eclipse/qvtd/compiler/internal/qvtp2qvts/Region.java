@@ -147,7 +147,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 */
 	@NonNull List<@NonNull NodeConnection> getUsedConnections();
 	boolean isChildCompositionRegion();
-	boolean isCyclicScheduledRegion();
 	boolean isOperationRegion();
 	boolean isRootCompositionRegion();
 	void refineBindings(@NonNull Region bindingRegion);

@@ -39,7 +39,6 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
@@ -188,10 +187,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 		//		assert !region.isConnectionRegion();
-		if (region.isCyclicScheduledRegion()) {
-			region2mapping = new CyclicScheduledRegion2Mapping(this, (CyclicScheduledRegion)region);
-		}
-		else if (region.isRootCompositionRegion()) {
+		if (region.isRootCompositionRegion()) {
 			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion)region);
 		}
 		else {
@@ -361,35 +357,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	@Override
 	public Element visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
 		return visiting(basicNodeConnection);
-	}
-
-	@Override
-	public @Nullable Element visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion) {
-		List<@NonNull Region> callableRegions = new ArrayList<@NonNull Region>();
-		for (@NonNull Region region : cyclicScheduledRegion.getRegions()) {
-			if (region.isOperationRegion()) {}
-			//			else if (region.isConnectionRegion()) {
-			//				callableRegions.add(region);
-			//			}
-			else {
-				callableRegions.add(region);
-			}
-		}
-
-		List<@NonNull Region> sortedRegions = AbstractRegion.EarliestRegionComparator.sort(callableRegions);
-		for (@NonNull Region region : sortedRegions) {
-			//			if (!region.isConnectionRegion()) {
-			createRegion2Mapping(region);
-			//			}
-		}
-		for (@NonNull Region region : sortedRegions) {
-			//			if (!region.isConnectionRegion()) {
-			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
-			region2Mapping.createStatements();
-			//			}
-		}
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(cyclicScheduledRegion);
-		return region2mapping.getMapping();
 	}
 
 	@Override

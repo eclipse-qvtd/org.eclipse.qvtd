@@ -25,7 +25,6 @@ public interface ScheduledRegion extends Region
 	void addEdgeConnection(@NonNull EdgeConnection edgeConnection);
 	void addNodeConnection(@NonNull NodeConnection nodeConnection);
 	void addRegion(@NonNull Region region);
-	@NonNull CyclicScheduledRegion createCyclicScheduledRegion(@NonNull Iterable<@NonNull Region> cycle);
 	void createLocalSchedule();
 	void createLocalSchedule2(@NonNull List<@NonNull Region> orderedRegions);
 	@NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis);

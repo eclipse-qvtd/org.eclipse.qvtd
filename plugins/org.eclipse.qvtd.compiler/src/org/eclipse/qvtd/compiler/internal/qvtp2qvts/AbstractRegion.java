@@ -1944,11 +1944,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public boolean isCyclicScheduledRegion() {
-		return false;
-	}
-
-	@Override
 	public boolean isOperationRegion() {
 		return false;
 	}

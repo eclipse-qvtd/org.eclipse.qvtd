@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CallExp;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
@@ -32,6 +31,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyPaths;
@@ -145,9 +145,9 @@ public class OperationRegion extends AbstractRegion
 
 							if (primaryClass instanceof CollectionType) {
 								Property iterateProperty = schedulerConstants.getIterateProperty(primaryClass);
-								Type elementType = ((CollectionType)primaryClass).getElementType();
+								Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
 								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
-								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
+								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class) elementType, typedModel2);
 								Node elementNode = RegionUtil.createOperationElementNode(this, name, elementClassDatumAnalysis, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
 								RegionUtil.createNavigationEdge(dependencyNode2, iterateProperty, elementNode, false);

@@ -91,19 +91,6 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	}
 
 	@Override
-	public  @NonNull CyclicScheduledRegion createCyclicScheduledRegion(@NonNull Iterable<@NonNull Region> cycle) {
-		for (@NonNull Region region : cycle) {
-			removeRegion(region);
-		}
-		CyclicScheduledRegion cyclicRegion = new CyclicScheduledRegion(this, cycle);
-		addRegion(cyclicRegion);
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			cyclicRegion.writeDebugGraphs("3-cycle");
-		}
-		return cyclicRegion;
-	}
-
-	@Override
 	public void createLocalSchedule() {
 		//
 		//	Partition single region recursive connections into base cases recursive case connections with associated region recursions.
