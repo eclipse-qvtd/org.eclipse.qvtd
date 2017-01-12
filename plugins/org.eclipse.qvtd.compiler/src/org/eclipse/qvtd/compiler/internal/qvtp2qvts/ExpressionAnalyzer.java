@@ -724,10 +724,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			propertyType = PivotUtil.getElementType(((CollectionType)propertyType));
 		}
 		CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
-		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
+		if (!valueCompleteClass.conformsTo(targetCompleteClass) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {	// Allow value to be physical or behavioral
 			// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
-			if (!valueCompleteClass.conformsTo(targetCompleteClass) /*&& !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())*/) {
-				throw new IllegalStateException("Incompatible types for " + asNavigationAssignment);
+			if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
+				throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
 			}
 		}
 		return slotNode;
