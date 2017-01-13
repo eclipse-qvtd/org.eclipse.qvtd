@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="umlx" version="11.1.1.201610211630">
+  <ownedViewpoints name="umlx-viewpoint-id" label="UMLX Viewpoint Label" modelFileExtension="umlx" icon="/org.eclipse.qvtd.umlx.design/icons/umlxx.gif">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Relation Diagram" titleExpression="service: umlxRelDiagramTitleExpression" domainClass="umlx.RelDiagram" rootExpression="service: umlxRelDiagramRootExpression">
+      <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="RelDomainNode" semanticCandidatesExpression="service: umlxRelDiagramSemanticsCandidatesExpression" domainClass="umlx.RelDomainNode">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="service: umlxDomainNodeLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="RelInvocationNode" semanticCandidatesExpression="service: umlxRelDiagramSemanticsCandidatesExpression" domainClass="umlx.RelInvocationNode">
+          <style xsi:type="style:LozengeNodeDescription" borderSizeComputationExpression="2" showIcon="false" labelExpression="service: umlxInvocationNodeLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UEvolution.gif" tooltipExpression="service: umlxTooltipExpression" sizeComputationExpression="" labelPosition="node" resizeKind="EAST_WEST" widthComputationExpression="5 + 2 * self.referredRelationNode.name.length()" heightComputationExpression="3">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+          <conditionnalStyles predicateExpression="service: umlxInvocationIsThen">
+            <style xsi:type="style:LozengeNodeDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="service: umlxInvocationNodeLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UEvolution.gif" tooltipExpression="service: umlxTooltipExpression" sizeComputationExpression="" labelPosition="node" resizeKind="EAST_WEST" widthComputationExpression="5 + 2 * self.referredRelationNode.name.length()" heightComputationExpression="3">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </conditionnalStyles>
+        </nodeMappings>
+        <nodeMappings name="RelPatternNode" labelDirectEdit="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@toolSections.0/@ownedTools[name='editPatternNodeName']" semanticCandidatesExpression="service: umlxRelDiagramSemanticsCandidatesExpression" domainClass="umlx.RelPatternNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" showIcon="false" labelExpression="service: umlxPatternNodeLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" tooltipExpression="service: umlxTooltipExpression" sizeComputationExpression="20 + 8 * self.referredClass.name.length()" labelPosition="node" resizeKind="EAST_WEST">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="RelConstraintNode" semanticCandidatesExpression="service: umlxRelDiagramSemanticsCandidatesExpression" domainClass="umlx.RelConstraintNode">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="feature:expression" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXConstraint.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="RelPatternEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelPatternNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelPatternNode']" targetFinderExpression="aql:[self.target/]" sourceFinderExpression="aql:[self.owningSource/]" domainClass="umlx.RelPatternEdge" useDomainElement="true">
+          <style sourceArrow="Diamond" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </centerLabelStyleDescription>
+          </style>
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeIsComposite">
+            <style sourceArrow="FillDiamond" sizeComputationExpression="2" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+              <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <endLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeEndLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeIsNotComposite">
+            <style sourceArrow="InputArrow" sizeComputationExpression="2" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+              <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <endLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeEndLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+        </edgeMappings>
+        <edgeMappings name="RelDomainEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelDomainNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelPatternNode']" targetFinderExpression="aql:[self.rootPatternNodes/]">
+          <style sourceArrow="OutputClosedArrow" targetArrow="InputClosedArrow" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="RelInvocationEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelInvocationNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelPatternNode']" targetFinderExpression="aql:[self.ownedOutgoingEdges.target/]">
+          <style targetArrow="NoDecoration" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+          <conditionnalStyles predicateExpression="service: umlxInvocationIsThen">
+            <style lineStyle="dash" sizeComputationExpression="2" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+              <centerLabelStyleDescription>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+        </edgeMappings>
+        <toolSections name="CreateNodesId" label="Nodes">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createInvocationNode" label="Invocation Node" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelInvocationNode']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXEvolution.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.InvocationNode" referenceName="ownedNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'node'+container.ownedNodes->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createPatternNode" label="Pattern Node" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelPatternNode']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXClassVariable.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.PatternNode" referenceName="ownedNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'node'+container.ownedNodes->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="editPatternNodeName">
+            <mask mask="{0}\n{1}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DiagramCreationDescription" name="createRelDiagram" label="Create UMLX Relation Diagram" elementsToSelect="service: umlxRelDiagramSelectExpression">
+            <initialOperation/>
+            <containerViewVariable name="containerView"/>
+            <representationNameVariable name="diagramName"/>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="CreateEdgesId" label="Edges">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createPatternEdge" label="Pattern Edge" edgeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.PatternEdge" referenceName="ownedOutgoingEdges">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="owningSource" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'edge'+source.diagram.ownedNodes.ownedOutgoingEdges->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" rootExpression="service: umlxTxDiagramRootExpression" enablePopupBars="true">
+      <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="TxKeyNode" domainClass="umlx.TxKeyNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="service: umlxKeyNodeLabel" iconPath="/org.eclipse.qvtd.xtext.qvtrelation.ui/icons/Key.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST" height="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="TxPackageNode" domainClass="umlx.TxPackageNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="aql:self.referredPackage.name" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EPackage.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST" height="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="TxPartNode" domainClass="umlx.TxPartNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="service: umlxPartNodeLabel" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST" height="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="TxRelDiagram" domainClass="umlx.RelDiagram">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="aql:self.name" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST" height="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="TxTransformationNode" semanticCandidatesExpression="service: umlxTxTransformationNodeCandidates" domainClass="umlx.TxTransformationNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="aql:self.name" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXTransformation.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST" height="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="TxTypedModelNode" domainClass="umlx.TxTypedModelNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="aql:self.name" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXTypedModel.gif" tooltipExpression="service: umlxTooltipExpression" labelPosition="node" resizeKind="EAST_WEST" height="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="TxPackageEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxTypedModelNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxPackageNode']" targetFinderExpression="aql:[self.txPackageNodes/]">
+          <style sourceArrow="Diamond" targetArrow="NoDecoration" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TxPartEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxKeyNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxPartNode']" targetFinderExpression="aql:[self.txPartNodes/]">
+          <style sourceArrow="FillDiamond" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TxRelationEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxTransformationNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxRelDiagram']" targetFinderExpression="aql:[self.diagram.oclAsType(umlx::TxDiagram).ownedDiagrams/]">
+          <style targetArrow="NoDecoration" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TxTypedModelEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxTransformationNode']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxTypedModelNode']" targetFinderExpression="aql:[self.txTypedModelNodes/]">
+          <style sourceArrow="FillDiamond" targetArrow="NoDecoration" sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.qvtd.umlx.design.UMLXServices"/>
+  </ownedViewpoints>
+</description:Group>
