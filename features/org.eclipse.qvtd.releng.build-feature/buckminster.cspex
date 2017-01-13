@@ -8,6 +8,7 @@
 		if we wanted the tools job produce a zip with all automated tests -->
 		<cs:dependency name="org.eclipse.qvtd.tests" componentType="eclipse.feature" />
 
+		<cs:dependency name="org.eclipse.acceleo.annotations" componentType="osgi.bundle"/>
 		<cs:dependency name="org.eclipse.acceleo.query" componentType="osgi.bundle"/>
 		<cs:dependency name="org.eclipse.sirius.ext.emf" componentType="osgi.bundle"/>
 		<cs:dependency name="org.eclipse.sirius.ext.emf.tx" componentType="osgi.bundle"/>
