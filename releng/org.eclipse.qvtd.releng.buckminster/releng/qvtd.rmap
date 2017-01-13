@@ -19,7 +19,9 @@
   <rm:locator pattern="^org\.eclipse\.acceleo.*" searchPathRef="acceleo"/>
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe.*" searchPathRef="mwe"/>
+  <rm:locator pattern="^org\.eclipse\.emf\.transaction.*" searchPathRef="emf-transaction"/>
   <rm:locator pattern="^org\.eclipse\.emf\.validation.*" searchPathRef="emf-validation"/>
+  <rm:locator pattern="^org\.eclipse\.emf\.workspace.*" searchPathRef="emf-transaction"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.epsilon.*" searchPathRef="epsilon"/>
   <rm:locator pattern="^org\.eclipse\.license.*" searchPathRef="license-source-code"/>
@@ -158,6 +160,29 @@
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emf/emf/updates/2.12">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="emf-transaction">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(&amp;(resolve.n4s=true)(build.type=S))))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/emf/transaction/updates/interim">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/emf/transaction/updates/milestones">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=M)(build.type=N)(build.type=R)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/emf/transaction/updates/releases">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
