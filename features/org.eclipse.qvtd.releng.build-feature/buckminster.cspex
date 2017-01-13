@@ -7,6 +7,8 @@
 		<!-- tests-job needs qvtd core tests to run every OCL JUnit. This also may be useful
 		if we wanted the tools job produce a zip with all automated tests -->
 		<cs:dependency name="org.eclipse.qvtd.tests" componentType="eclipse.feature" />
+
+		<cs:dependency name="org.eclipse.acceleo.query" componentType="osgi.bundle"/>
 		
 		<!-- indirect dependencies -->		
 		<cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature" />
