@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredPackage <em>Referred Package</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPackageNode()
  * @generated
  */
 public interface TxPackageNode extends TxNode {
@@ -37,6 +38,7 @@ public interface TxPackageNode extends TxNode {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Package</em>' reference.
 	 * @see #setReferredPackage(EPackage)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPackageNode_ReferredPackage()
 	 * @generated
 	 */
 	EPackage getReferredPackage();

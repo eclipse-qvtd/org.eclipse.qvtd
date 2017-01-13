@@ -11,8 +11,10 @@
 package org.eclipse.qvtd.umlx.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.TxNode;
+import org.eclipse.qvtd.umlx.UMLXPackage;
+import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +23,7 @@ import org.eclipse.qvtd.umlx.TxNode;
  *
  * @generated
  */
-public class TxNodeImpl extends NodeImpl implements TxNode {
+public class TxNodeImpl extends UMLXNodeImpl implements TxNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,7 +40,16 @@ public class TxNodeImpl extends NodeImpl implements TxNode {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UmlxPackageImpl.Literals.TX_NODE;
+		return UMLXPackage.Literals.TX_NODE;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
+		return visitor.visitTxNode(this);
 	}
 
 } //TxNodeImpl

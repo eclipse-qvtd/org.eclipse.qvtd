@@ -20,16 +20,17 @@ package org.eclipse.qvtd.umlx;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.Edge#getOwningSource <em>Owning Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.Edge#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.UMLXEdge#getOwningSource <em>Owning Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.UMLXEdge#getTarget <em>Target</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXEdge()
  * @generated
  */
-public interface Edge extends Element {
+public interface UMLXEdge extends UMLXElement {
 	/**
 	 * Returns the value of the '<em><b>Owning Source</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.Node#getOwnedOutgoingEdges <em>Owned Outgoing Edges</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.UMLXNode#getOwnedOutgoingEdges <em>Owned Outgoing Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owning Source</em>' container reference isn't clear,
@@ -37,25 +38,26 @@ public interface Edge extends Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owning Source</em>' container reference.
-	 * @see #setOwningSource(Node)
-	 * @see org.eclipse.qvtd.umlx.Node#getOwnedOutgoingEdges
+	 * @see #setOwningSource(UMLXNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXEdge_OwningSource()
+	 * @see org.eclipse.qvtd.umlx.UMLXNode#getOwnedOutgoingEdges
 	 * @generated
 	 */
-	Node getOwningSource();
+	UMLXNode getOwningSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.Edge#getOwningSource <em>Owning Source</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.UMLXEdge#getOwningSource <em>Owning Source</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owning Source</em>' container reference.
 	 * @see #getOwningSource()
 	 * @generated
 	 */
-	void setOwningSource(Node value);
+	void setOwningSource(UMLXNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.Node#getIncomingEdges <em>Incoming Edges</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.UMLXNode#getIncomingEdges <em>Incoming Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear,
@@ -63,20 +65,21 @@ public interface Edge extends Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(Node)
-	 * @see org.eclipse.qvtd.umlx.Node#getIncomingEdges
+	 * @see #setTarget(UMLXNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXEdge_Target()
+	 * @see org.eclipse.qvtd.umlx.UMLXNode#getIncomingEdges
 	 * @generated
 	 */
-	Node getTarget();
+	UMLXNode getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.Edge#getTarget <em>Target</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.UMLXEdge#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Target</em>' reference.
 	 * @see #getTarget()
 	 * @generated
 	 */
-	void setTarget(Node value);
+	void setTarget(UMLXNode value);
 
 } // Edge

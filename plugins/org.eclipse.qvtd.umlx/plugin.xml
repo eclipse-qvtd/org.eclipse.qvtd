@@ -9,14 +9,8 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2016/UMLX"
-            class="org.eclipse.qvtd.umlx.impl.UmlxPackageImpl"
+            class="org.eclipse.qvtd.umlx.impl.UMLXPackageImpl"
             genModel="model/UMLX.genmodel"/>
    </extension>
-  <!--extension point="org.eclipse.sirius.componentization">
-    <component class="org.eclipse.qvtd.umlx.Activator"
-               id="org.eclipse.qvtd.umlx"
-	       name="umlx">
-    </component>
-  </extension-->
 
 </plugin>

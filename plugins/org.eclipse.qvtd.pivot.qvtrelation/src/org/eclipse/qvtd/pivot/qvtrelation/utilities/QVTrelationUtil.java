@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
@@ -50,13 +51,22 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
 
-	public static @Nullable Relation getContainingRelation(@Nullable EObject eObject) {
+	public static @NonNull Predicate getContainingPredicate(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Predicate) {
+				return (Predicate) eObject;
+			}
+		}
+		throw new IllegalStateException();
+	}
+
+	public static @NonNull Relation getContainingRelation(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Relation) {
 				return (Relation) eObject;
 			}
 		}
-		return null;
+		throw new IllegalStateException();
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getIdentifies(@NonNull Key rKey) {
@@ -81,6 +91,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static @NonNull Iterable<@NonNull Relation> getOwnedRelations(@NonNull RelationalTransformation rTransformation) {
 		return Iterables.filter(ClassUtil.nullFree(rTransformation.getRule()), Relation.class);
+	}
+
+	public static @NonNull TemplateExp getOwnedTemplateExpression(@NonNull DomainPattern rDomainPattern) {
+		return ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
 	}
 
 	public static @NonNull Iterable<@NonNull Variable> getOwnedVariable(@NonNull Relation rRelation) {
@@ -114,7 +128,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	 * Throws an IllegalStateException if there is no such domain.
 	 */
 	public static @NonNull RelationDomain getRootVariableDomain(@NonNull Variable rootVariable) {
-		Relation relation = ClassUtil.nonNullState(getContainingRelation(rootVariable));
+		Relation relation = getContainingRelation(rootVariable);
 		for (@NonNull Domain domain : ClassUtil.nullFree(relation.getDomain())) {
 			RelationDomain relationDomain = (RelationDomain)domain;
 			for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(relationDomain.getPattern())) {
@@ -161,9 +175,13 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
 	}
 
-	public static @NonNull TemplateExp getOwnedTemplateExpression(@NonNull DomainPattern rDomainPattern) {
-		return ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
-	}
+	//	public static @NonNull Pattern getWhen(@NonNull Relation rRelation) {
+	//		return ClassUtil.nonNullState(rRelation.getWhen());
+	//	}
+
+	//	public static @NonNull Pattern getWhere(@NonNull Relation rRelation) {
+	//		return ClassUtil.nonNullState(rRelation.getWhere());
+	//	}
 
 	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);

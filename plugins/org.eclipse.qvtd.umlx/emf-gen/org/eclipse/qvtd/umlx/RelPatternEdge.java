@@ -22,11 +22,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#isIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge()
  * @generated
  */
-public interface RelPatternEdge extends Edge {
+public interface RelPatternEdge extends UMLXEdge {
 	/**
 	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -37,6 +39,7 @@ public interface RelPatternEdge extends Edge {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(EStructuralFeature)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_ReferredProperty()
 	 * @generated
 	 */
 	EStructuralFeature getReferredProperty();
@@ -50,5 +53,31 @@ public interface RelPatternEdge extends Edge {
 	 * @generated
 	 */
 	void setReferredProperty(EStructuralFeature value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Opposite</em>' attribute.
+	 * @see #setIsOpposite(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_IsOpposite()
+	 * @generated
+	 */
+	boolean isIsOpposite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#isIsOpposite <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
+	 * @see #isIsOpposite()
+	 * @generated
+	 */
+	void setIsOpposite(boolean value);
 
 } // RelPatternEdge

@@ -10,15 +10,15 @@
  */
 package org.eclipse.qvtd.umlx;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Element</b></em>'.
+ * A representation of the model object '<em><b>Rel Node</b></em>'.
  * <!-- end-user-doc -->
  *
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelNode()
  * @generated
  */
-public interface Element extends EObject {
-} // Element
+public interface RelNode extends UMLXNode {
+} // RelNode

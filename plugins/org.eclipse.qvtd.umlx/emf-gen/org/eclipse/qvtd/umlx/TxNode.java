@@ -17,7 +17,8 @@ package org.eclipse.qvtd.umlx;
  * <!-- end-user-doc -->
  *
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxNode()
  * @generated
  */
-public interface TxNode extends Node {
+public interface TxNode extends UMLXNode {
 } // TxNode

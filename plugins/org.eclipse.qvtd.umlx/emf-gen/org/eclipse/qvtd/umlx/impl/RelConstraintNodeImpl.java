@@ -12,44 +12,52 @@ package org.eclipse.qvtd.umlx.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.umlx.TxPackageNode;
+import org.eclipse.qvtd.umlx.RelConstraintNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tx Package Node</b></em>'.
+ * An implementation of the model object '<em><b>Rel Constraint Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl#getReferredPackage <em>Referred Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelConstraintNodeImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
+public class RelConstraintNodeImpl extends RelNodeImpl implements RelConstraintNode {
 	/**
-	 * The cached value of the '{@link #getReferredPackage() <em>Referred Package</em>}' reference.
+	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredPackage()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected EPackage referredPackage;
+	protected static final String EXPRESSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected String expression = EXPRESSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TxPackageNodeImpl() {
+	protected RelConstraintNodeImpl() {
 		super();
 	}
 
@@ -60,7 +68,7 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UMLXPackage.Literals.TX_PACKAGE_NODE;
+		return UMLXPackage.Literals.REL_CONSTRAINT_NODE;
 	}
 
 	/**
@@ -69,25 +77,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * @generated
 	 */
 	@Override
-	public EPackage getReferredPackage() {
-		if (referredPackage != null && referredPackage.eIsProxy()) {
-			InternalEObject oldReferredPackage = (InternalEObject)referredPackage;
-			referredPackage = (EPackage)eResolveProxy(oldReferredPackage);
-			if (referredPackage != oldReferredPackage) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE, oldReferredPackage, referredPackage));
-			}
-		}
-		return referredPackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EPackage basicGetReferredPackage() {
-		return referredPackage;
+	public String getExpression() {
+		return expression;
 	}
 
 	/**
@@ -96,11 +87,11 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredPackage(EPackage newReferredPackage) {
-		EPackage oldReferredPackage = referredPackage;
-		referredPackage = newReferredPackage;
+	public void setExpression(String newExpression) {
+		String oldExpression = expression;
+		expression = newExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE, oldReferredPackage, referredPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_CONSTRAINT_NODE__EXPRESSION, oldExpression, expression));
 	}
 
 	/**
@@ -111,9 +102,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				if (resolve) return getReferredPackage();
-				return basicGetReferredPackage();
+			case UMLXPackage.REL_CONSTRAINT_NODE__EXPRESSION:
+				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -126,8 +116,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				setReferredPackage((EPackage)newValue);
+			case UMLXPackage.REL_CONSTRAINT_NODE__EXPRESSION:
+				setExpression((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -141,8 +131,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				setReferredPackage((EPackage)null);
+			case UMLXPackage.REL_CONSTRAINT_NODE__EXPRESSION:
+				setExpression(EXPRESSION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -156,8 +146,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				return referredPackage != null;
+			case UMLXPackage.REL_CONSTRAINT_NODE__EXPRESSION:
+				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -168,7 +158,17 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 */
 	@Override
 	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
-		return visitor.visitTxPackageNode(this);
+		return visitor.visitRelConstraintNode(this);
 	}
 
-} //TxPackageNodeImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+} //RelConstraintNodeImpl

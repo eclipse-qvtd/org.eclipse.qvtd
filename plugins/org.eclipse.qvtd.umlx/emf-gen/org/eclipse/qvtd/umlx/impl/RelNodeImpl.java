@@ -11,23 +11,25 @@
 package org.eclipse.qvtd.umlx.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.qvtd.umlx.TxEdge;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.umlx.RelNode;
+import org.eclipse.qvtd.umlx.UMLXPackage;
+import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tx Edge</b></em>'.
+ * An implementation of the model object '<em><b>Rel Node</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class TxEdgeImpl extends EdgeImpl implements TxEdge {
+public class RelNodeImpl extends UMLXNodeImpl implements RelNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TxEdgeImpl() {
+	protected RelNodeImpl() {
 		super();
 	}
 
@@ -38,7 +40,16 @@ public abstract class TxEdgeImpl extends EdgeImpl implements TxEdge {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UmlxPackageImpl.Literals.TX_EDGE;
+		return UMLXPackage.Literals.REL_NODE;
 	}
 
-} //TxEdgeImpl
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
+		return visitor.visitRelNode(this);
+	}
+
+} //RelNodeImpl

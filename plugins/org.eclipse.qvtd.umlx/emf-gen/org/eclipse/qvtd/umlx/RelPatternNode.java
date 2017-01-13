@@ -26,9 +26,10 @@ import org.eclipse.emf.ecore.EClassifier;
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode()
  * @generated
  */
-public interface RelPatternNode extends Node {
+public interface RelPatternNode extends RelNode {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -39,6 +40,7 @@ public interface RelPatternNode extends Node {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_Name()
 	 * @generated
 	 */
 	String getName();
@@ -63,6 +65,7 @@ public interface RelPatternNode extends Node {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Class</em>' reference.
 	 * @see #setReferredClass(EClassifier)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_ReferredClass()
 	 * @generated
 	 */
 	EClassifier getReferredClass();
@@ -88,6 +91,7 @@ public interface RelPatternNode extends Node {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rel Domain Node</em>' reference.
 	 * @see #setRelDomainNode(RelDomainNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_RelDomainNode()
 	 * @see org.eclipse.qvtd.umlx.RelDomainNode#getRootPatternNodes
 	 * @generated
 	 */

@@ -17,7 +17,8 @@ package org.eclipse.qvtd.umlx;
  * <!-- end-user-doc -->
  *
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationEdge()
  * @generated
  */
-public interface RelInvocationEdge extends Edge {
+public interface RelInvocationEdge extends UMLXEdge {
 } // RelInvocationEdge

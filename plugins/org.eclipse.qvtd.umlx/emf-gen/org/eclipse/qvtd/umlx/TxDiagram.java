@@ -24,9 +24,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedDiagrams <em>Owned Diagrams</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxDiagram()
  * @generated
  */
-public interface TxDiagram extends Diagram {
+public interface TxDiagram extends UMLXDiagram {
 	/**
 	 * Returns the value of the '<em><b>Owned Diagrams</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelDiagram}.
@@ -37,6 +38,7 @@ public interface TxDiagram extends Diagram {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Diagrams</em>' containment reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxDiagram_OwnedDiagrams()
 	 * @generated
 	 */
 	EList<RelDiagram> getOwnedDiagrams();

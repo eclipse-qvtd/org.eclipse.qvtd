@@ -21,13 +21,14 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.Diagram#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.Diagram#getOwnedNodes <em>Owned Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.UMLXDiagram#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.UMLXDiagram#getOwnedNodes <em>Owned Nodes</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXDiagram()
  * @generated
  */
-public interface Diagram extends Element {
+public interface UMLXDiagram extends UMLXElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,12 +39,13 @@ public interface Diagram extends Element {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXDiagram_Name()
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.Diagram#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.UMLXDiagram#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -54,8 +56,8 @@ public interface Diagram extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Nodes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.umlx.Node}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.Node#getDiagram <em>Diagram</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.UMLXNode}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.UMLXNode#getDiagram <em>Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Nodes</em>' containment reference list isn't clear,
@@ -63,9 +65,10 @@ public interface Diagram extends Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Nodes</em>' containment reference list.
-	 * @see org.eclipse.qvtd.umlx.Node#getDiagram
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXDiagram_OwnedNodes()
+	 * @see org.eclipse.qvtd.umlx.UMLXNode#getDiagram
 	 * @generated
 	 */
-	EList<Node> getOwnedNodes();
+	EList<UMLXNode> getOwnedNodes();
 
 } // Diagram

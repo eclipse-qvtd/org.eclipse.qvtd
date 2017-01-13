@@ -25,9 +25,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvtd.umlx.RelDomainNode#getRootPatternNodes <em>Root Pattern Nodes</em>}</li>
  * </ul>
  *
+ * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDomainNode()
  * @generated
  */
-public interface RelDomainNode extends Node {
+public interface RelDomainNode extends RelNode {
 	/**
 	 * Returns the value of the '<em><b>Referred Typed Model Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -38,6 +39,7 @@ public interface RelDomainNode extends Node {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Typed Model Node</em>' reference.
 	 * @see #setReferredTypedModelNode(TxTypedModelNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDomainNode_ReferredTypedModelNode()
 	 * @generated
 	 */
 	TxTypedModelNode getReferredTypedModelNode();
@@ -63,6 +65,7 @@ public interface RelDomainNode extends Node {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Root Pattern Nodes</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDomainNode_RootPatternNodes()
 	 * @see org.eclipse.qvtd.umlx.RelPatternNode#getRelDomainNode
 	 * @generated
 	 */

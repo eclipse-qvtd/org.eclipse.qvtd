@@ -4,37 +4,40 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.umlx;
 
+import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
+ * @see org.eclipse.qvtd.umlx.UMLXPackage
  * @generated
  */
-public interface UmlxFactory {
+public interface UMLXFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	UmlxFactory INSTANCE = org.eclipse.qvtd.umlx.impl.UmlxFactoryImpl.eINSTANCE;
+	UMLXFactory eINSTANCE = org.eclipse.qvtd.umlx.impl.UMLXFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Model</em>'.
+	 * Returns a new object of class '<em>Rel Constraint Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model</em>'.
+	 * @return a new object of class '<em>Rel Constraint Node</em>'.
 	 * @generated
 	 */
-	Model createModel();
+	@NonNull RelConstraintNode createRelConstraintNode();
 
 	/**
 	 * Returns a new object of class '<em>Rel Diagram</em>'.
@@ -43,7 +46,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Rel Diagram</em>'.
 	 * @generated
 	 */
-	RelDiagram createRelDiagram();
+	@NonNull RelDiagram createRelDiagram();
 
 	/**
 	 * Returns a new object of class '<em>Rel Domain Node</em>'.
@@ -52,7 +55,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Rel Domain Node</em>'.
 	 * @generated
 	 */
-	RelDomainNode createRelDomainNode();
+	@NonNull RelDomainNode createRelDomainNode();
 
 	/**
 	 * Returns a new object of class '<em>Rel Invocation Edge</em>'.
@@ -61,7 +64,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Rel Invocation Edge</em>'.
 	 * @generated
 	 */
-	RelInvocationEdge createRelInvocationEdge();
+	@NonNull RelInvocationEdge createRelInvocationEdge();
 
 	/**
 	 * Returns a new object of class '<em>Rel Invocation Node</em>'.
@@ -70,7 +73,16 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Rel Invocation Node</em>'.
 	 * @generated
 	 */
-	RelInvocationNode createRelInvocationNode();
+	@NonNull RelInvocationNode createRelInvocationNode();
+
+	/**
+	 * Returns a new object of class '<em>Rel Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rel Node</em>'.
+	 * @generated
+	 */
+	@NonNull RelNode createRelNode();
 
 	/**
 	 * Returns a new object of class '<em>Rel Pattern Edge</em>'.
@@ -79,7 +91,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Rel Pattern Edge</em>'.
 	 * @generated
 	 */
-	RelPatternEdge createRelPatternEdge();
+	@NonNull RelPatternEdge createRelPatternEdge();
 
 	/**
 	 * Returns a new object of class '<em>Rel Pattern Node</em>'.
@@ -88,7 +100,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Rel Pattern Node</em>'.
 	 * @generated
 	 */
-	RelPatternNode createRelPatternNode();
+	@NonNull RelPatternNode createRelPatternNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Diagram</em>'.
@@ -97,7 +109,25 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Tx Diagram</em>'.
 	 * @generated
 	 */
-	TxDiagram createTxDiagram();
+	@NonNull TxDiagram createTxDiagram();
+
+	/**
+	 * Returns a new object of class '<em>Tx Key Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tx Key Node</em>'.
+	 * @generated
+	 */
+	@NonNull TxKeyNode createTxKeyNode();
+
+	/**
+	 * Returns a new object of class '<em>Tx Part Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tx Part Node</em>'.
+	 * @generated
+	 */
+	@NonNull TxPartNode createTxPartNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Node</em>'.
@@ -106,7 +136,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Tx Node</em>'.
 	 * @generated
 	 */
-	TxNode createTxNode();
+	@NonNull TxNode createTxNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Package Node</em>'.
@@ -115,7 +145,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Tx Package Node</em>'.
 	 * @generated
 	 */
-	TxPackageNode createTxPackageNode();
+	@NonNull TxPackageNode createTxPackageNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Transformation Node</em>'.
@@ -124,7 +154,7 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Tx Transformation Node</em>'.
 	 * @generated
 	 */
-	TxTransformationNode createTxTransformationNode();
+	@NonNull TxTransformationNode createTxTransformationNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Typed Model Node</em>'.
@@ -133,6 +163,24 @@ public interface UmlxFactory {
 	 * @return a new object of class '<em>Tx Typed Model Node</em>'.
 	 * @generated
 	 */
-	TxTypedModelNode createTxTypedModelNode();
+	@NonNull TxTypedModelNode createTxTypedModelNode();
 
-} //UmlxFactory
+	/**
+	 * Returns a new object of class '<em>Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model</em>'.
+	 * @generated
+	 */
+	@NonNull UMLXModel createUMLXModel();
+
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	UMLXPackage getUMLXPackage();
+
+} //UMLXFactory

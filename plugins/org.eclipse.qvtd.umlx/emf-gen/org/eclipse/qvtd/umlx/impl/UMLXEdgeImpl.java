@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -12,16 +12,13 @@ package org.eclipse.qvtd.umlx.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.qvtd.umlx.Edge;
-import org.eclipse.qvtd.umlx.Node;
+import org.eclipse.qvtd.umlx.UMLXEdge;
+import org.eclipse.qvtd.umlx.UMLXNode;
+import org.eclipse.qvtd.umlx.UMLXPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,13 +28,13 @@ import org.eclipse.qvtd.umlx.Node;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.EdgeImpl#getOwningSource <em>Owning Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.EdgeImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.UMLXEdgeImpl#getOwningSource <em>Owning Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.UMLXEdgeImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class EdgeImpl extends ElementImpl implements Edge {
+public abstract class UMLXEdgeImpl extends UMLXElementImpl implements UMLXEdge {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -46,14 +43,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @generated
 	 * @ordered
 	 */
-	protected Node target;
+	protected UMLXNode target;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EdgeImpl() {
+	protected UMLXEdgeImpl() {
 		super();
 	}
 
@@ -64,7 +61,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UmlxPackageImpl.Literals.EDGE;
+		return UMLXPackage.Literals.UMLX_EDGE;
 	}
 
 	/**
@@ -72,9 +69,10 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Node getOwningSource() {
-		if (eContainerFeatureID() != UmlxPackageImpl.EDGE__OWNING_SOURCE) return null;
-		return (Node)eInternalContainer();
+	@Override
+	public UMLXNode getOwningSource() {
+		if (eContainerFeatureID() != UMLXPackage.UMLX_EDGE__OWNING_SOURCE) return null;
+		return (UMLXNode)eInternalContainer();
 	}
 
 	/**
@@ -82,8 +80,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningSource(Node newOwningSource, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningSource, UmlxPackageImpl.EDGE__OWNING_SOURCE, msgs);
+	public NotificationChain basicSetOwningSource(UMLXNode newOwningSource, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningSource, UMLXPackage.UMLX_EDGE__OWNING_SOURCE, msgs);
 		return msgs;
 	}
 
@@ -92,20 +90,21 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwningSource(Node newOwningSource) {
-		if (newOwningSource != eInternalContainer() || (eContainerFeatureID() != UmlxPackageImpl.EDGE__OWNING_SOURCE && newOwningSource != null)) {
+	@Override
+	public void setOwningSource(UMLXNode newOwningSource) {
+		if (newOwningSource != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.UMLX_EDGE__OWNING_SOURCE && newOwningSource != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningSource))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningSource != null)
-				msgs = ((InternalEObject)newOwningSource).eInverseAdd(this, UmlxPackageImpl.NODE__OWNED_OUTGOING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)newOwningSource).eInverseAdd(this, UMLXPackage.UMLX_NODE__OWNED_OUTGOING_EDGES, UMLXNode.class, msgs);
 			msgs = basicSetOwningSource(newOwningSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmlxPackageImpl.EDGE__OWNING_SOURCE, newOwningSource, newOwningSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_EDGE__OWNING_SOURCE, newOwningSource, newOwningSource));
 	}
 
 	/**
@@ -113,13 +112,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Node getTarget() {
+	@Override
+	public UMLXNode getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
-			target = (Node)eResolveProxy(oldTarget);
+			target = (UMLXNode)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UmlxPackageImpl.EDGE__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.UMLX_EDGE__TARGET, oldTarget, target));
 			}
 		}
 		return target;
@@ -130,7 +130,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Node basicGetTarget() {
+	public UMLXNode basicGetTarget() {
 		return target;
 	}
 
@@ -139,11 +139,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTarget(Node newTarget, NotificationChain msgs) {
-		Node oldTarget = target;
+	public NotificationChain basicSetTarget(UMLXNode newTarget, NotificationChain msgs) {
+		UMLXNode oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UmlxPackageImpl.EDGE__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_EDGE__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -154,18 +154,19 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(Node newTarget) {
+	@Override
+	public void setTarget(UMLXNode newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, UmlxPackageImpl.NODE__INCOMING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, UMLXPackage.UMLX_NODE__INCOMING_EDGES, UMLXNode.class, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, UmlxPackageImpl.NODE__INCOMING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, UMLXPackage.UMLX_NODE__INCOMING_EDGES, UMLXNode.class, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmlxPackageImpl.EDGE__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_EDGE__TARGET, newTarget, newTarget));
 	}
 
 	/**
@@ -176,14 +177,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningSource((Node)otherEnd, msgs);
-			case UmlxPackageImpl.EDGE__TARGET:
+				return basicSetOwningSource((UMLXNode)otherEnd, msgs);
+			case UMLXPackage.UMLX_EDGE__TARGET:
 				if (target != null)
-					msgs = ((InternalEObject)target).eInverseRemove(this, UmlxPackageImpl.NODE__INCOMING_EDGES, Node.class, msgs);
-				return basicSetTarget((Node)otherEnd, msgs);
+					msgs = ((InternalEObject)target).eInverseRemove(this, UMLXPackage.UMLX_NODE__INCOMING_EDGES, UMLXNode.class, msgs);
+				return basicSetTarget((UMLXNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -196,9 +197,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
 				return basicSetOwningSource(null, msgs);
-			case UmlxPackageImpl.EDGE__TARGET:
+			case UMLXPackage.UMLX_EDGE__TARGET:
 				return basicSetTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -212,8 +213,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
-				return eInternalContainer().eInverseRemove(this, UmlxPackageImpl.NODE__OWNED_OUTGOING_EDGES, Node.class, msgs);
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.UMLX_NODE__OWNED_OUTGOING_EDGES, UMLXNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -226,9 +227,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
 				return getOwningSource();
-			case UmlxPackageImpl.EDGE__TARGET:
+			case UMLXPackage.UMLX_EDGE__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
 		}
@@ -243,11 +244,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
-				setOwningSource((Node)newValue);
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
+				setOwningSource((UMLXNode)newValue);
 				return;
-			case UmlxPackageImpl.EDGE__TARGET:
-				setTarget((Node)newValue);
+			case UMLXPackage.UMLX_EDGE__TARGET:
+				setTarget((UMLXNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -261,11 +262,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
-				setOwningSource((Node)null);
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
+				setOwningSource((UMLXNode)null);
 				return;
-			case UmlxPackageImpl.EDGE__TARGET:
-				setTarget((Node)null);
+			case UMLXPackage.UMLX_EDGE__TARGET:
+				setTarget((UMLXNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -279,12 +280,13 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UmlxPackageImpl.EDGE__OWNING_SOURCE:
+			case UMLXPackage.UMLX_EDGE__OWNING_SOURCE:
 				return getOwningSource() != null;
-			case UmlxPackageImpl.EDGE__TARGET:
+			case UMLXPackage.UMLX_EDGE__TARGET:
 				return target != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //EdgeImpl
+
+} //UMLXEdgeImpl

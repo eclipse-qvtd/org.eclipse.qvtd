@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -13,17 +13,16 @@ package org.eclipse.qvtd.umlx.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.TxDiagram;
+import org.eclipse.qvtd.umlx.UMLXPackage;
+import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +37,7 @@ import org.eclipse.qvtd.umlx.TxDiagram;
  *
  * @generated
  */
-public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
+public class TxDiagramImpl extends UMLXDiagramImpl implements TxDiagram {
 	/**
 	 * The cached value of the '{@link #getOwnedDiagrams() <em>Owned Diagrams</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -65,7 +64,7 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UmlxPackageImpl.Literals.TX_DIAGRAM;
+		return UMLXPackage.Literals.TX_DIAGRAM;
 	}
 
 	/**
@@ -73,9 +72,10 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RelDiagram> getOwnedDiagrams() {
 		if (ownedDiagrams == null) {
-			ownedDiagrams = new EObjectContainmentEList<RelDiagram>(RelDiagram.class, this, UmlxPackageImpl.TX_DIAGRAM__OWNED_DIAGRAMS);
+			ownedDiagrams = new EObjectContainmentEList<RelDiagram>(RelDiagram.class, this, UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS);
 		}
 		return ownedDiagrams;
 	}
@@ -88,7 +88,7 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UmlxPackageImpl.TX_DIAGRAM__OWNED_DIAGRAMS:
+			case UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS:
 				return ((InternalEList<?>)getOwnedDiagrams()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -102,7 +102,7 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UmlxPackageImpl.TX_DIAGRAM__OWNED_DIAGRAMS:
+			case UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS:
 				return getOwnedDiagrams();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -117,7 +117,7 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UmlxPackageImpl.TX_DIAGRAM__OWNED_DIAGRAMS:
+			case UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS:
 				getOwnedDiagrams().clear();
 				getOwnedDiagrams().addAll((Collection<? extends RelDiagram>)newValue);
 				return;
@@ -133,7 +133,7 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UmlxPackageImpl.TX_DIAGRAM__OWNED_DIAGRAMS:
+			case UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS:
 				getOwnedDiagrams().clear();
 				return;
 		}
@@ -148,10 +148,19 @@ public class TxDiagramImpl extends DiagramImpl implements TxDiagram {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UmlxPackageImpl.TX_DIAGRAM__OWNED_DIAGRAMS:
+			case UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS:
 				return ownedDiagrams != null && !ownedDiagrams.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
+		return visitor.visitTxDiagram(this);
 	}
 
 } //TxDiagramImpl
