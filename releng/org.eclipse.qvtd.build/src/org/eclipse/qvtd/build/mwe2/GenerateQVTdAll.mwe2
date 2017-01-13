@@ -20,6 +20,7 @@ Workflow {
   component = @GenerateQVTdLibraryModels {}
   component = @GenerateQVTdScheduleModels {}
   component = @GenerateQVTdEvaluationStatusModels {}
+  component = @GenerateQVTdUMLXModels {}
   component = @GenerateQVTdCSModels {}
   component = @GenerateQVTdCGModels {}
   component = @GenerateQVTcoreEditor {}
