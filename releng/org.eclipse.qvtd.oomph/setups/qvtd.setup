@@ -259,6 +259,12 @@
             pattern="org.eclipse.qvtd.runtime.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.umlx"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.umlx.*"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.*.tests"/>
       </workingSet>
       <workingSet
