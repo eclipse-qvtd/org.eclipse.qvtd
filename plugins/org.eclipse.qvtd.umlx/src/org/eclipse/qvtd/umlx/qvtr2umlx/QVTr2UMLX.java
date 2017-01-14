@@ -136,14 +136,14 @@ public class QVTr2UMLX
 		public @Nullable UMLXElement visitKey(@NonNull Key qvtrKey) {
 			TxKeyNode txKeyNode = UMLXFactory.eINSTANCE.createTxKeyNode();
 			context.putQVTr2UMLXTrace(qvtrKey, txKeyNode);
-			txKeyNode.setReferredClass(context.getEcoreOf(qvtrKey.getIdentifies()));
-			for (Property qvtrPart : qvtrKey.getPart()) {
+			txKeyNode.setReferredClass(context.getEcoreOf(QVTrelationUtil.getIdentifies(qvtrKey)));
+			for (Property qvtrPart : QVTrelationUtil.getOwnedParts(qvtrKey)) {
 				TxPartNode txPartNode = UMLXFactory.eINSTANCE.createTxPartNode();
 				//				context.addTrace(usedPackage, txPartNode);
 				txPartNode.setReferredProperty(context.getEcoreOf(qvtrPart));
 				txKeyNode.getTxPartNodes().add(txPartNode);
 			}
-			for (Property qvtrPart : qvtrKey.getOppositePart()) {
+			for (@NonNull Property qvtrPart : QVTrelationUtil.getOwnedOppositeParts(qvtrKey)) {
 				TxPartNode txPartNode = UMLXFactory.eINSTANCE.createTxPartNode();
 				//				context.addTrace(usedPackage, txPartNode);
 				txPartNode.setReferredProperty(context.getEcoreOf(qvtrPart));
@@ -225,7 +225,7 @@ public class QVTr2UMLX
 					@NonNull RelPatternNode relPatternNode = UMLXFactory.eINSTANCE.createRelPatternNode();
 					TemplateExp qvtrTemplateExp = (TemplateExp)eObject;
 					context.putQVTr2UMLXTrace(qvtrTemplateExp, relPatternNode);
-					Variable qvtrVariable = qvtrTemplateExp.getBindsTo();
+					Variable qvtrVariable = QVTrelationUtil.getBindsTo(qvtrTemplateExp);
 					context.putQVTr2UMLXTrace(qvtrVariable, relPatternNode);
 					relPatternNode.setName(qvtrVariable.getName());
 					relPatternNode.setReferredClass(context.getEcoreOf(PivotUtil.getClass(qvtrVariable)));

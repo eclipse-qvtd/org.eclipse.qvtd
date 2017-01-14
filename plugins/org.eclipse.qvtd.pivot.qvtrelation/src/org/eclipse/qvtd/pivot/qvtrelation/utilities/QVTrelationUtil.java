@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -41,7 +42,6 @@ import com.google.common.collect.Iterables;
 
 public class QVTrelationUtil extends QVTtemplateUtil
 {
-
 	public static class Internal extends QVTtemplateUtil.Internal
 	{
 		public static List<@NonNull OCLExpression> getOwnedArgumentsList(@NonNull RelationCallExp rInvocation) {
@@ -50,6 +50,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
+
+	public static @NonNull Variable getBindsTo(@NonNull TemplateExp rTemplateExp) {
+		return ClassUtil.nonNullState(rTemplateExp.getBindsTo());
+	}
 
 	public static @NonNull Predicate getContainingPredicate(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
@@ -83,6 +87,14 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static @NonNull Iterable<@NonNull Key> getOwnedKey(@NonNull RelationalTransformation rTransformation) {
 		return ClassUtil.nullFree(rTransformation.getOwnedKey());
+	}
+
+	public static @NonNull Iterable<@NonNull Property> getOwnedOppositeParts(@NonNull Key rKey) {
+		return ClassUtil.nullFree(rKey.getOppositePart());
+	}
+
+	public static @NonNull Iterable<@NonNull Property> getOwnedParts(@NonNull Key rKey) {
+		return ClassUtil.nullFree(rKey.getPart());
 	}
 
 	public static @NonNull Iterable<@NonNull DomainPattern> getOwnedPatterns(@NonNull RelationDomain rRelationDomain) {
