@@ -13,10 +13,10 @@
 import hierMM : 'HierarchicalStateMachine.ecore'::HierarchicalStateMachine; 
 import flatMM : 'FlatStateMachine.ecore'::FlatStateMachine; 
 
+package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm {
 /**
  * Transform a hierarchical StateMachine into a flat StateMachine.
  */
-package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm {
 	transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
 	{
 	--	key hierMM::State {name};

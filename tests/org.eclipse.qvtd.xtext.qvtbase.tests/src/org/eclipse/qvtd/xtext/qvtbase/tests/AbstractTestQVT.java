@@ -74,11 +74,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(TestsXMLUtil.defaultSavingOptions);
 		asResource.setURI(savedURI);
-		LoadTestCase.assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 		try {
+			LoadTestCase.assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
 		}
-		catch (Exception e) {
+		catch (Throwable e) {
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);

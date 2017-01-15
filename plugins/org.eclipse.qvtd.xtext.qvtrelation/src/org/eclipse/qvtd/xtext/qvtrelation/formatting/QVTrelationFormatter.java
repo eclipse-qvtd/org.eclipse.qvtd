@@ -83,6 +83,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			c.setNoSpace().before(a.getCommaKeyword_4_1_0());
+			//			c.setLinewrap(0).before(a.getPlusSignPlusSignKeyword_4_2());
 		}
 		{
 			DefaultValueCSElements a = f.getDefaultValueCSAccess();
@@ -97,7 +98,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			KeyDeclCSElements a = f.getKeyDeclCSAccess();
-			c.setNoSpace().after(a.getLeftCurlyBracketKeyword_2());
+			c.setNoSpace().around(a.getLeftCurlyBracketKeyword_2());
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_3_1_1());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_3_1_3());
 			c.setNoSpace().before(a.getCommaKeyword_4_0());
@@ -116,6 +117,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			ObjectTemplateCSElements a = f.getObjectTemplateCSAccess();
 			c.setLinewrap(1).before(a.getOwnedPropertyTemplatesAssignment_4_0());
 			c.setLinewrap(1).before(a.getOwnedPropertyTemplatesAssignment_4_1_1());
+			//			c.setNoSpace().before(a.getLeftCurlyBracketKeyword_3());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			c.setNoSpace().before(a.getCommaKeyword_4_1_0());
@@ -166,7 +168,8 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			TopLevelCSElements a = f.getTopLevelCSAccess();
-			c.setLinewrap(2).before(a.getOwnedTransformationsAssignment_1_1());
+			//			c.setLinewrap(2).before(a.getAlternatives_1());
+			c.setLinewrap(2).between(a.getOwnedImportsAssignment_0(), a.getAlternatives_1());
 		}
 		{
 			TransformationCSElements a = f.getTransformationCSAccess();

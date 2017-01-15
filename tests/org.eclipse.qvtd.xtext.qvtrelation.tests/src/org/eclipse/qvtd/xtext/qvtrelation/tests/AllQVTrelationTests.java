@@ -32,14 +32,15 @@ public class AllQVTrelationTests extends TestCase
 	}
 
 	public static Test suite() {
-		TestSuite result = new TestSuite("All QVTrelation Tests");			
+		TestSuite result = new TestSuite("All QVTrelation Tests");
 		result.addTestSuite(LoadTests.class);
-//		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-//			result.addTestSuite(EditorTests.class);
-//		}
-//		else {	// Bug 370824 Bug 371394 causes this to fail on Hudson
-//			result.addTestSuite(UsageTests.class);
-//		}
+		//		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+		//			result.addTestSuite(EditorTests.class);
+		//		}
+		//		else {	// Bug 370824 Bug 371394 causes this to fail on Hudson
+		//			result.addTestSuite(UsageTests.class);
+		//		}
+		result.addTestSuite(QVTrSerializeTests.class);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
 			result.addTestSuite(QVTrCompilerTests.class);
 		}
@@ -47,10 +48,10 @@ public class AllQVTrelationTests extends TestCase
 	}
 
 	public Object run(Object args)
-		throws Exception {
+			throws Exception {
 
 		TestRunner.run(suite());
 		return Arrays
-			.asList(new String[] {"Please see raw test suite output for details."});
+				.asList(new String[] {"Please see raw test suite output for details."});
 	}
 }

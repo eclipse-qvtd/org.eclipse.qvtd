@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationPlugin$Implementation
 Export-Package: org.eclipse.qvtd.xtext.qvtrelation,
+ org.eclipse.qvtd.xtext.qvtrelation.as2cs,
  org.eclipse.qvtd.xtext.qvtrelation.cs2as,
  org.eclipse.qvtd.xtext.qvtrelation.formatting,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr,

@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtrelation;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.ocl.xtext.base.services.RetokenizingTokenSource;
 import org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.QVTrelationParser;
+import org.eclipse.qvtd.xtext.qvtrelation.serializer.QVTrelationCrossReferenceSerializer;
 import org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSResource;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.resource.XtextResource;
@@ -30,10 +31,16 @@ public class QVTrelationRuntimeModule extends org.eclipse.qvtd.xtext.qvtrelation
 		super.configure(binder);
 		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
-	
+
 	@Override
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return RetokenizingQVTrelationParser.class;
+	}
+
+	@Override
+	@SuppressWarnings("restriction")
+	public Class<? extends org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer> bindICrossReferenceSerializer() {
+		return QVTrelationCrossReferenceSerializer.class;
 	}
 
 	public static class RetokenizingQVTrelationParser extends QVTrelationParser
@@ -43,7 +50,7 @@ public class QVTrelationRuntimeModule extends org.eclipse.qvtd.xtext.qvtrelation
 			return super.createTokenStream(new RetokenizingTokenSource(tokenSource, getTokenDefProvider().getTokenDefMap()));
 		}
 	}
-	
+
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return QVTrelationCSResource.class;

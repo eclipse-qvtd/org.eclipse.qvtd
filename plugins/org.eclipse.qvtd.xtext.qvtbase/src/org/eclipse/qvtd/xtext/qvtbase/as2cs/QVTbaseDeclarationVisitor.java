@@ -15,11 +15,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
@@ -27,6 +29,7 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
+import org.eclipse.ocl.xtext.basecs.MultiplicityStringCS;
 import org.eclipse.ocl.xtext.basecs.OperationCS;
 import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.SpecificationCS;
@@ -41,25 +44,44 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	public QVTbaseDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
-	
+
+	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {
+		Type asType = asTypedElement.getType();
+		TypedRefCS csTypeRef = createTypeRefCS(asType);
+		if (csTypeRef != null) {
+			if (asType instanceof CollectionType) {
+				CollectionType asCollectionType = (CollectionType)asType;
+				boolean isNullFree = asCollectionType.isIsNullFree();
+				if (!isNullFree) {
+					//					CollectionTypeCS csCollectionType = (CollectionTypeCS)csTypeRef;
+					MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
+					csMultiplicity.setIsNullFree(false);
+					csMultiplicity.setStringBounds("*");
+					csTypeRef.setOwnedMultiplicity(csMultiplicity);
+				}
+			}
+			else {
+				if (asTypedElement.isIsRequired()) {
+					MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
+					csMultiplicity.setLowerBound(1);
+					csTypeRef.setOwnedMultiplicity(csMultiplicity);
+				}
+				//			else {
+				//				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
+				//				csMultiplicity.setStringBounds("1");
+				//				csTypeRef.setOwnedMultiplicity(csMultiplicity);
+				//			}
+			}
+		}
+		return csTypeRef;
+	}
+
 	// FIXME Re-implemented to workaround Bug 496148
 	public <@NonNull T extends TypedElementCS> T refreshTypedElement(@NonNull Class<T> csClass, /*@NonNull */EClass csEClass, @NonNull TypedElement asTypedElement) {
 		T csTypedElement = context.refreshNamedElement(csClass, csEClass, asTypedElement);
 		csTypedElement.setPivot(asTypedElement);
-		TypedRefCS csTypeRef = createTypeRefCS(asTypedElement.getType());
+		TypedRefCS csTypeRef = createTypeRefCS(asTypedElement);
 		csTypedElement.setOwnedType(csTypeRef);
-		if ((csTypeRef != null) && !(asTypedElement.getType() instanceof CollectionType)) {
-			if (asTypedElement.isIsRequired()) {
-				MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
-				csMultiplicity.setLowerBound(1);
-				csTypeRef.setOwnedMultiplicity(csMultiplicity);
-			}
-//			else {
-//				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
-//				csMultiplicity.setStringBounds("1");
-//				csTypeRef.setOwnedMultiplicity(csMultiplicity);
-//			}
-		}
 		return csTypedElement;
 	}
 

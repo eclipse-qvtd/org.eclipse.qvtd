@@ -40,14 +40,14 @@ import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
 public class QVTcoreCSResource extends QVTbaseCSResource
 {
 	@Override
-	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
-		return new QVTcoreCS2AS(environmentFactory, this, asResource);
-	}
-
-	@Override
 	public @NonNull AS2CS createAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {
 		return new QVTcoreAS2CS(cs2asResourceMap, environmentFactory);
+	}
+
+	@Override
+	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
+		return new QVTcoreCS2AS(environmentFactory, this, asResource);
 	}
 
 	@Override

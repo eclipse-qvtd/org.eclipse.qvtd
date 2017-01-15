@@ -11,11 +11,11 @@
 import pnMM : 'PetriNets.ecore'::PetriNet; 
 import scMM : 'StateCharts.ecore'::statecharts; 
 
+package org::eclipse::qvtd::xtext::qvtrelation::tests::pn2sc {
 /**
  * Transform a PetriNet into a StateChart.
  * See: https://github.com/louismrose/ttc_pn2sc/ and https://arxiv.org/pdf/1312.0342.pdf
  */
-package org::eclipse::qvtd::xtext::qvtrelation::tests::pn2sc {
 	transformation PetriNet2StateChart(pn:pnMM, sc:scMM)
 	{
 		top relation Net2StateChart {
