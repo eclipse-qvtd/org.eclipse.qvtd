@@ -61328,11 +61328,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             // InternalQVTrelation.g:20736:1: ( rule__TypeNameExpCS__Group_1__0 )?
             int alt204=2;
-            int LA204_0 = input.LA(1);
-
-            if ( (LA204_0==77) ) {
-                alt204=1;
-            }
+            alt204 = dfa204.predict(input);
             switch (alt204) {
                 case 1 :
                     // InternalQVTrelation.g:20736:2: rule__TypeNameExpCS__Group_1__0
@@ -61512,11 +61508,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             // InternalQVTrelation.g:20797:1: ( rule__TypeNameExpCS__Group_1_1__0 )?
             int alt205=2;
-            int LA205_0 = input.LA(1);
-
-            if ( (LA205_0==77) ) {
-                alt205=1;
-            }
+            alt205 = dfa205.predict(input);
             switch (alt205) {
                 case 1 :
                     // InternalQVTrelation.g:20797:2: rule__TypeNameExpCS__Group_1_1__0
@@ -76177,28 +76169,28 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParamDeclarationCS__OwnedTypeAssignment_2"
-    // InternalQVTrelation.g:26063:1: rule__ParamDeclarationCS__OwnedTypeAssignment_2 : ( ruleTypedRefCS ) ;
+    // InternalQVTrelation.g:26063:1: rule__ParamDeclarationCS__OwnedTypeAssignment_2 : ( ruleTypeExpCS ) ;
     public final void rule__ParamDeclarationCS__OwnedTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:26067:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTrelation.g:26068:1: ( ruleTypedRefCS )
+            // InternalQVTrelation.g:26067:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTrelation.g:26068:1: ( ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:26068:1: ( ruleTypedRefCS )
-            // InternalQVTrelation.g:26069:1: ruleTypedRefCS
+            // InternalQVTrelation.g:26068:1: ( ruleTypeExpCS )
+            // InternalQVTrelation.g:26069:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0());
+               before(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0());
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleTypedRefCS();
+            ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0());
+               after(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0());
             }
 
             }
@@ -76312,28 +76304,28 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4"
-    // InternalQVTrelation.g:26108:1: rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 : ( ruleTypedRefCS ) ;
+    // InternalQVTrelation.g:26108:1: rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 : ( ruleTypeExpCS ) ;
     public final void rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:26112:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTrelation.g:26113:1: ( ruleTypedRefCS )
+            // InternalQVTrelation.g:26112:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTrelation.g:26113:1: ( ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:26113:1: ( ruleTypedRefCS )
-            // InternalQVTrelation.g:26114:1: ruleTypedRefCS
+            // InternalQVTrelation.g:26113:1: ( ruleTypeExpCS )
+            // InternalQVTrelation.g:26114:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0());
+               before(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0());
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleTypedRefCS();
+            ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0());
+               after(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0());
             }
 
             }
@@ -76692,28 +76684,28 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__QueryCS__OwnedTypeAssignment_7"
-    // InternalQVTrelation.g:26240:1: rule__QueryCS__OwnedTypeAssignment_7 : ( ruleTypedRefCS ) ;
+    // InternalQVTrelation.g:26240:1: rule__QueryCS__OwnedTypeAssignment_7 : ( ruleTypeExpCS ) ;
     public final void rule__QueryCS__OwnedTypeAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:26244:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTrelation.g:26245:1: ( ruleTypedRefCS )
+            // InternalQVTrelation.g:26244:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTrelation.g:26245:1: ( ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:26245:1: ( ruleTypedRefCS )
-            // InternalQVTrelation.g:26246:1: ruleTypedRefCS
+            // InternalQVTrelation.g:26245:1: ( ruleTypeExpCS )
+            // InternalQVTrelation.g:26246:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getOwnedTypeTypedRefCSParserRuleCall_7_0());
+               before(grammarAccess.getQueryCSAccess().getOwnedTypeTypeExpCSParserRuleCall_7_0());
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleTypedRefCS();
+            ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getOwnedTypeTypedRefCSParserRuleCall_7_0());
+               after(grammarAccess.getQueryCSAccess().getOwnedTypeTypeExpCSParserRuleCall_7_0());
             }
 
             }
@@ -78012,28 +78004,28 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__VarDeclarationCS__OwnedTypeAssignment_2_1"
-    // InternalQVTrelation.g:26696:1: rule__VarDeclarationCS__OwnedTypeAssignment_2_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTrelation.g:26696:1: rule__VarDeclarationCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
     public final void rule__VarDeclarationCS__OwnedTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:26700:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTrelation.g:26701:1: ( ruleTypedRefCS )
+            // InternalQVTrelation.g:26700:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTrelation.g:26701:1: ( ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:26701:1: ( ruleTypedRefCS )
-            // InternalQVTrelation.g:26702:1: ruleTypedRefCS
+            // InternalQVTrelation.g:26701:1: ( ruleTypeExpCS )
+            // InternalQVTrelation.g:26702:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_1_0());
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0());
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleTypedRefCS();
+            ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_1_0());
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0());
             }
 
             }
@@ -89205,6 +89197,36 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     }
     // $ANTLR end synpred218_InternalQVTrelation
 
+    // $ANTLR start synpred304_InternalQVTrelation
+    public final void synpred304_InternalQVTrelation_fragment() throws RecognitionException {
+        // InternalQVTrelation.g:20736:2: ( rule__TypeNameExpCS__Group_1__0 )
+        // InternalQVTrelation.g:20736:2: rule__TypeNameExpCS__Group_1__0
+        {
+        pushFollow(FollowSets000.FOLLOW_2);
+        rule__TypeNameExpCS__Group_1__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred304_InternalQVTrelation
+
+    // $ANTLR start synpred305_InternalQVTrelation
+    public final void synpred305_InternalQVTrelation_fragment() throws RecognitionException {
+        // InternalQVTrelation.g:20797:2: ( rule__TypeNameExpCS__Group_1_1__0 )
+        // InternalQVTrelation.g:20797:2: rule__TypeNameExpCS__Group_1_1__0
+        {
+        pushFollow(FollowSets000.FOLLOW_2);
+        rule__TypeNameExpCS__Group_1_1__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred305_InternalQVTrelation
+
     // Delegated rules
 
     public final boolean synpred216_InternalQVTrelation() {
@@ -89319,6 +89341,20 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         state.failed=false;
         return success;
     }
+    public final boolean synpred304_InternalQVTrelation() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred304_InternalQVTrelation_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred149_InternalQVTrelation() {
         state.backtracking++;
         int start = input.mark();
@@ -89347,6 +89383,20 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         state.failed=false;
         return success;
     }
+    public final boolean synpred305_InternalQVTrelation() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred305_InternalQVTrelation_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
 
 
     protected DFA6 dfa6 = new DFA6(this);
@@ -89366,6 +89416,8 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     protected DFA116 dfa116 = new DFA116(this);
     protected DFA117 dfa117 = new DFA117(this);
     protected DFA118 dfa118 = new DFA118(this);
+    protected DFA204 dfa204 = new DFA204(this);
+    protected DFA205 dfa205 = new DFA205(this);
     static final String dfa_1s = "\31\uffff";
     static final String dfa_2s = "\1\6\26\114\2\uffff";
     static final String dfa_3s = "\1\114\26\120\2\uffff";
@@ -90860,6 +90912,123 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
                 new NoViableAltException(getDescription(), 118, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String dfa_58s = "\15\uffff";
+    static final String dfa_59s = "\1\2\14\uffff";
+    static final String dfa_60s = "\1\21\1\0\13\uffff";
+    static final String dfa_61s = "\1\u008d\1\0\13\uffff";
+    static final String dfa_62s = "\2\uffff\1\2\11\uffff\1\1";
+    static final String dfa_63s = "\1\uffff\1\0\13\uffff}>";
+    static final String[] dfa_64s = {
+            "\1\2\36\uffff\1\2\34\uffff\1\1\3\2\1\uffff\1\2\23\uffff\1\2\3\uffff\1\2\42\uffff\1\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] dfa_58 = DFA.unpackEncodedString(dfa_58s);
+    static final short[] dfa_59 = DFA.unpackEncodedString(dfa_59s);
+    static final char[] dfa_60 = DFA.unpackEncodedStringToUnsignedChars(dfa_60s);
+    static final char[] dfa_61 = DFA.unpackEncodedStringToUnsignedChars(dfa_61s);
+    static final short[] dfa_62 = DFA.unpackEncodedString(dfa_62s);
+    static final short[] dfa_63 = DFA.unpackEncodedString(dfa_63s);
+    static final short[][] dfa_64 = unpackEncodedStringArray(dfa_64s);
+
+    class DFA204 extends DFA {
+
+        public DFA204(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 204;
+            this.eot = dfa_58;
+            this.eof = dfa_59;
+            this.min = dfa_60;
+            this.max = dfa_61;
+            this.accept = dfa_62;
+            this.special = dfa_63;
+            this.transition = dfa_64;
+        }
+        public String getDescription() {
+            return "20736:1: ( rule__TypeNameExpCS__Group_1__0 )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 :
+                        int LA204_1 = input.LA(1);
+
+
+                        int index204_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred304_InternalQVTrelation()) ) {s = 12;}
+
+                        else if ( (true) ) {s = 2;}
+
+
+                        input.seek(index204_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 204, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+
+    class DFA205 extends DFA {
+
+        public DFA205(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 205;
+            this.eot = dfa_58;
+            this.eof = dfa_59;
+            this.min = dfa_60;
+            this.max = dfa_61;
+            this.accept = dfa_62;
+            this.special = dfa_63;
+            this.transition = dfa_64;
+        }
+        public String getDescription() {
+            return "20797:1: ( rule__TypeNameExpCS__Group_1_1__0 )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 :
+                        int LA205_1 = input.LA(1);
+
+
+                        int index205_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred305_InternalQVTrelation()) ) {s = 12;}
+
+                        else if ( (true) ) {s = 2;}
+
+
+                        input.seek(index205_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 205, _s, input);
             error(nvae);
             throw nvae;
         }

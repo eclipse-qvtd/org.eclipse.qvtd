@@ -3429,7 +3429,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleParamDeclarationCS"
-    // InternalQVTrelation.g:1199:1: ruleParamDeclarationCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) ;
+    // InternalQVTrelation.g:1199:1: ruleParamDeclarationCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) ) ;
     public final EObject ruleParamDeclarationCS() throws RecognitionException {
         EObject current = null;
 
@@ -3442,11 +3442,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
          enterRule();
 
         try {
-            // InternalQVTrelation.g:1202:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) )
-            // InternalQVTrelation.g:1203:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
+            // InternalQVTrelation.g:1202:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) ) )
+            // InternalQVTrelation.g:1203:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )
             {
-            // InternalQVTrelation.g:1203:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
-            // InternalQVTrelation.g:1203:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) )
+            // InternalQVTrelation.g:1203:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )
+            // InternalQVTrelation.g:1203:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
             {
             // InternalQVTrelation.g:1203:2: ( (lv_name_0_0= ruleUnrestrictedName ) )
             // InternalQVTrelation.g:1204:1: (lv_name_0_0= ruleUnrestrictedName )
@@ -3489,19 +3489,19 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getParamDeclarationCSAccess().getColonKeyword_1());
 
             }
-            // InternalQVTrelation.g:1225:1: ( (lv_ownedType_2_0= ruleTypedRefCS ) )
-            // InternalQVTrelation.g:1226:1: (lv_ownedType_2_0= ruleTypedRefCS )
+            // InternalQVTrelation.g:1225:1: ( (lv_ownedType_2_0= ruleTypeExpCS ) )
+            // InternalQVTrelation.g:1226:1: (lv_ownedType_2_0= ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:1226:1: (lv_ownedType_2_0= ruleTypedRefCS )
-            // InternalQVTrelation.g:1227:3: lv_ownedType_2_0= ruleTypedRefCS
+            // InternalQVTrelation.g:1226:1: (lv_ownedType_2_0= ruleTypeExpCS )
+            // InternalQVTrelation.g:1227:3: lv_ownedType_2_0= ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0());
+              	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            lv_ownedType_2_0=ruleTypedRefCS();
+            lv_ownedType_2_0=ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -3514,7 +3514,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                      			current,
                      			"ownedType",
                       		lv_ownedType_2_0,
-                      		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+                      		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
               	        afterParserOrEnumRuleCall();
 
             }
@@ -3708,7 +3708,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimitiveTypeDomainCS"
-    // InternalQVTrelation.g:1303:1: rulePrimitiveTypeDomainCS returns [EObject current=null] : (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) otherlv_5= ';' ) ;
+    // InternalQVTrelation.g:1303:1: rulePrimitiveTypeDomainCS returns [EObject current=null] : (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) otherlv_5= ';' ) ;
     public final EObject rulePrimitiveTypeDomainCS() throws RecognitionException {
         EObject current = null;
 
@@ -3724,11 +3724,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
          enterRule();
 
         try {
-            // InternalQVTrelation.g:1306:28: ( (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) otherlv_5= ';' ) )
-            // InternalQVTrelation.g:1307:1: (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) otherlv_5= ';' )
+            // InternalQVTrelation.g:1306:28: ( (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) otherlv_5= ';' ) )
+            // InternalQVTrelation.g:1307:1: (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) otherlv_5= ';' )
             {
-            // InternalQVTrelation.g:1307:1: (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) otherlv_5= ';' )
-            // InternalQVTrelation.g:1307:3: otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) otherlv_5= ';'
+            // InternalQVTrelation.g:1307:1: (otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) otherlv_5= ';' )
+            // InternalQVTrelation.g:1307:3: otherlv_0= 'primitive' otherlv_1= 'domain' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) otherlv_5= ';'
             {
             otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_21); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3783,19 +3783,19 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_3, grammarAccess.getPrimitiveTypeDomainCSAccess().getColonKeyword_3());
 
             }
-            // InternalQVTrelation.g:1337:1: ( (lv_ownedType_4_0= ruleTypedRefCS ) )
-            // InternalQVTrelation.g:1338:1: (lv_ownedType_4_0= ruleTypedRefCS )
+            // InternalQVTrelation.g:1337:1: ( (lv_ownedType_4_0= ruleTypeExpCS ) )
+            // InternalQVTrelation.g:1338:1: (lv_ownedType_4_0= ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:1338:1: (lv_ownedType_4_0= ruleTypedRefCS )
-            // InternalQVTrelation.g:1339:3: lv_ownedType_4_0= ruleTypedRefCS
+            // InternalQVTrelation.g:1338:1: (lv_ownedType_4_0= ruleTypeExpCS )
+            // InternalQVTrelation.g:1339:3: lv_ownedType_4_0= ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0());
+              	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_20);
-            lv_ownedType_4_0=ruleTypedRefCS();
+            lv_ownedType_4_0=ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -3808,7 +3808,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                      			current,
                      			"ownedType",
                       		lv_ownedType_4_0,
-                      		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+                      		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
               	        afterParserOrEnumRuleCall();
 
             }
@@ -4158,7 +4158,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQueryCS"
-    // InternalQVTrelation.g:1468:1: ruleQueryCS returns [EObject current=null] : ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypedRefCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) ) ;
+    // InternalQVTrelation.g:1468:1: ruleQueryCS returns [EObject current=null] : ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypeExpCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) ) ;
     public final EObject ruleQueryCS() throws RecognitionException {
         EObject current = null;
 
@@ -4185,11 +4185,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
          enterRule();
 
         try {
-            // InternalQVTrelation.g:1471:28: ( ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypedRefCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) ) )
-            // InternalQVTrelation.g:1472:1: ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypedRefCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) )
+            // InternalQVTrelation.g:1471:28: ( ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypeExpCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) ) )
+            // InternalQVTrelation.g:1472:1: ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypeExpCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) )
             {
-            // InternalQVTrelation.g:1472:1: ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypedRefCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) )
-            // InternalQVTrelation.g:1472:2: ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypedRefCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) )
+            // InternalQVTrelation.g:1472:1: ( ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypeExpCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) ) )
+            // InternalQVTrelation.g:1472:2: ( (lv_isTransient_0_0= 'transient' ) )? otherlv_1= 'query' ( (lv_name_2_0= ruleUnrestrictedName ) ) otherlv_3= '(' ( ( (lv_ownedParameters_4_0= ruleParamDeclarationCS ) ) (otherlv_5= ',' ( (lv_ownedParameters_6_0= ruleParamDeclarationCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypeExpCS ) ) (otherlv_10= ';' | (otherlv_11= '{' ( (lv_ownedExpression_12_0= ruleExpCS ) ) otherlv_13= '}' ) )
             {
             // InternalQVTrelation.g:1472:2: ( (lv_isTransient_0_0= 'transient' ) )?
             int alt28=2;
@@ -4404,19 +4404,19 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_8, grammarAccess.getQueryCSAccess().getColonKeyword_6());
 
             }
-            // InternalQVTrelation.g:1561:1: ( (lv_ownedType_9_0= ruleTypedRefCS ) )
-            // InternalQVTrelation.g:1562:1: (lv_ownedType_9_0= ruleTypedRefCS )
+            // InternalQVTrelation.g:1561:1: ( (lv_ownedType_9_0= ruleTypeExpCS ) )
+            // InternalQVTrelation.g:1562:1: (lv_ownedType_9_0= ruleTypeExpCS )
             {
-            // InternalQVTrelation.g:1562:1: (lv_ownedType_9_0= ruleTypedRefCS )
-            // InternalQVTrelation.g:1563:3: lv_ownedType_9_0= ruleTypedRefCS
+            // InternalQVTrelation.g:1562:1: (lv_ownedType_9_0= ruleTypeExpCS )
+            // InternalQVTrelation.g:1563:3: lv_ownedType_9_0= ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedTypeTypedRefCSParserRuleCall_7_0());
+              	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedTypeTypeExpCSParserRuleCall_7_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_9);
-            lv_ownedType_9_0=ruleTypedRefCS();
+            lv_ownedType_9_0=ruleTypeExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -4429,7 +4429,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                      			current,
                      			"ownedType",
                       		lv_ownedType_9_0,
-                      		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+                      		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
               	        afterParserOrEnumRuleCall();
 
             }
@@ -6427,7 +6427,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVarDeclarationCS"
-    // InternalQVTrelation.g:2262:1: ruleVarDeclarationCS returns [EObject current=null] : ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' ) ;
+    // InternalQVTrelation.g:2262:1: ruleVarDeclarationCS returns [EObject current=null] : ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' ) ;
     public final EObject ruleVarDeclarationCS() throws RecognitionException {
         EObject current = null;
 
@@ -6447,11 +6447,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
          enterRule();
 
         try {
-            // InternalQVTrelation.g:2265:28: ( ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' ) )
-            // InternalQVTrelation.g:2266:1: ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' )
+            // InternalQVTrelation.g:2265:28: ( ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' ) )
+            // InternalQVTrelation.g:2266:1: ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' )
             {
-            // InternalQVTrelation.g:2266:1: ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' )
-            // InternalQVTrelation.g:2266:2: ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';'
+            // InternalQVTrelation.g:2266:1: ( ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';' )
+            // InternalQVTrelation.g:2266:2: ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) ) (otherlv_1= ',' ( (lv_ownedVarDeclarationIds_2_0= ruleVarDeclarationIdCS ) ) )* (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) )? (otherlv_5= '=' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )? otherlv_7= ';'
             {
             // InternalQVTrelation.g:2266:2: ( (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS ) )
             // InternalQVTrelation.g:2267:1: (lv_ownedVarDeclarationIds_0_0= ruleVarDeclarationIdCS )
@@ -6553,7 +6553,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // InternalQVTrelation.g:2306:4: (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) )?
+            // InternalQVTrelation.g:2306:4: (otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) ) )?
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -6562,7 +6562,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
             switch (alt51) {
                 case 1 :
-                    // InternalQVTrelation.g:2306:6: otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) )
+                    // InternalQVTrelation.g:2306:6: otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypeExpCS ) )
                     {
                     otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_25); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -6570,19 +6570,19 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                           	newLeafNode(otherlv_3, grammarAccess.getVarDeclarationCSAccess().getColonKeyword_2_0());
 
                     }
-                    // InternalQVTrelation.g:2310:1: ( (lv_ownedType_4_0= ruleTypedRefCS ) )
-                    // InternalQVTrelation.g:2311:1: (lv_ownedType_4_0= ruleTypedRefCS )
+                    // InternalQVTrelation.g:2310:1: ( (lv_ownedType_4_0= ruleTypeExpCS ) )
+                    // InternalQVTrelation.g:2311:1: (lv_ownedType_4_0= ruleTypeExpCS )
                     {
-                    // InternalQVTrelation.g:2311:1: (lv_ownedType_4_0= ruleTypedRefCS )
-                    // InternalQVTrelation.g:2312:3: lv_ownedType_4_0= ruleTypedRefCS
+                    // InternalQVTrelation.g:2311:1: (lv_ownedType_4_0= ruleTypeExpCS )
+                    // InternalQVTrelation.g:2312:3: lv_ownedType_4_0= ruleTypeExpCS
                     {
                     if ( state.backtracking==0 ) {
 
-                      	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_1_0());
+                      	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0());
 
                     }
                     pushFollow(FollowSets000.FOLLOW_49);
-                    lv_ownedType_4_0=ruleTypedRefCS();
+                    lv_ownedType_4_0=ruleTypeExpCS();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -6595,7 +6595,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                              			current,
                              			"ownedType",
                               		lv_ownedType_4_0,
-                              		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+                              		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
                       	        afterParserOrEnumRuleCall();
 
                     }
@@ -10120,15 +10120,15 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             if ( (LA81_0==20) ) {
                 int LA81_1 = input.LA(2);
 
-                if ( ((LA81_1>=71 && LA81_1<=72)) ) {
-                    alt81=1;
-                }
-                else if ( (LA81_1==21) ) {
-                    int LA81_4 = input.LA(3);
+                if ( (LA81_1==21) ) {
+                    int LA81_3 = input.LA(3);
 
-                    if ( (LA81_4==20||LA81_4==22) ) {
+                    if ( (LA81_3==20||LA81_3==22) ) {
                         alt81=1;
                     }
+                }
+                else if ( ((LA81_1>=71 && LA81_1<=72)) ) {
+                    alt81=1;
                 }
             }
             switch (alt81) {
@@ -14939,11 +14939,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                 {
                                 int LA139_6 = input.LA(3);
 
-                                if ( (LA139_6==75) ) {
-                                    alt139=1;
-                                }
-                                else if ( (LA139_6==52||LA139_6==78) ) {
+                                if ( (LA139_6==52||LA139_6==78) ) {
                                     alt139=2;
+                                }
+                                else if ( (LA139_6==75) ) {
+                                    alt139=1;
                                 }
 
 
@@ -14972,11 +14972,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                                 {
                                 int LA139_7 = input.LA(3);
 
-                                if ( (LA139_7==52||LA139_7==78) ) {
-                                    alt139=2;
-                                }
-                                else if ( (LA139_7==75) ) {
+                                if ( (LA139_7==75) ) {
                                     alt139=1;
+                                }
+                                else if ( (LA139_7==52||LA139_7==78) ) {
+                                    alt139=2;
                                 }
 
 
@@ -22722,11 +22722,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
             // InternalQVTrelation.g:7764:2: ( ( (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS ) ) (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )? )?
             int alt177=2;
-            int LA177_0 = input.LA(1);
-
-            if ( (LA177_0==20) ) {
-                alt177=1;
-            }
+            alt177 = dfa177.predict(input);
             switch (alt177) {
                 case 1 :
                     // InternalQVTrelation.g:7764:3: ( (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS ) ) (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )?
@@ -22768,11 +22764,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
                     // InternalQVTrelation.g:7782:2: (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )?
                     int alt176=2;
-                    int LA176_0 = input.LA(1);
-
-                    if ( (LA176_0==20) ) {
-                        alt176=1;
-                    }
+                    alt176 = dfa176.predict(input);
                     switch (alt176) {
                         case 1 :
                             // InternalQVTrelation.g:7782:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
@@ -30501,6 +30493,125 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end synpred66_InternalQVTrelation
 
+    // $ANTLR start synpred279_InternalQVTrelation
+    public final void synpred279_InternalQVTrelation_fragment() throws RecognitionException {
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_ownedPatternGuard_3_0 = null;
+
+
+        // InternalQVTrelation.g:7782:4: (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )
+        // InternalQVTrelation.g:7782:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
+        {
+        otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_19); if (state.failed) return ;
+        // InternalQVTrelation.g:7786:1: ( (lv_ownedPatternGuard_3_0= ruleExpCS ) )
+        // InternalQVTrelation.g:7787:1: (lv_ownedPatternGuard_3_0= ruleExpCS )
+        {
+        // InternalQVTrelation.g:7787:1: (lv_ownedPatternGuard_3_0= ruleExpCS )
+        // InternalQVTrelation.g:7788:3: lv_ownedPatternGuard_3_0= ruleExpCS
+        {
+        if ( state.backtracking==0 ) {
+
+          	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedPatternGuardExpCSParserRuleCall_1_1_1_0());
+
+        }
+        pushFollow(FollowSets000.FOLLOW_17);
+        lv_ownedPatternGuard_3_0=ruleExpCS();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+
+
+        }
+
+        otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_2); if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred279_InternalQVTrelation
+
+    // $ANTLR start synpred280_InternalQVTrelation
+    public final void synpred280_InternalQVTrelation_fragment() throws RecognitionException {
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_ownedCurlyBracketedClause_1_0 = null;
+
+        EObject lv_ownedPatternGuard_3_0 = null;
+
+
+        // InternalQVTrelation.g:7764:3: ( ( (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS ) ) (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )? )
+        // InternalQVTrelation.g:7764:3: ( (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS ) ) (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )?
+        {
+        // InternalQVTrelation.g:7764:3: ( (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS ) )
+        // InternalQVTrelation.g:7765:1: (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS )
+        {
+        // InternalQVTrelation.g:7765:1: (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS )
+        // InternalQVTrelation.g:7766:3: lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS
+        {
+        if ( state.backtracking==0 ) {
+
+          	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedCurlyBracketedClauseCurlyBracketedClauseCSParserRuleCall_1_0_0());
+
+        }
+        pushFollow(FollowSets000.FOLLOW_40);
+        lv_ownedCurlyBracketedClause_1_0=ruleCurlyBracketedClauseCS();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+
+
+        }
+
+        // InternalQVTrelation.g:7782:2: (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )?
+        int alt303=2;
+        int LA303_0 = input.LA(1);
+
+        if ( (LA303_0==20) ) {
+            alt303=1;
+        }
+        switch (alt303) {
+            case 1 :
+                // InternalQVTrelation.g:7782:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
+                {
+                otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_19); if (state.failed) return ;
+                // InternalQVTrelation.g:7786:1: ( (lv_ownedPatternGuard_3_0= ruleExpCS ) )
+                // InternalQVTrelation.g:7787:1: (lv_ownedPatternGuard_3_0= ruleExpCS )
+                {
+                // InternalQVTrelation.g:7787:1: (lv_ownedPatternGuard_3_0= ruleExpCS )
+                // InternalQVTrelation.g:7788:3: lv_ownedPatternGuard_3_0= ruleExpCS
+                {
+                if ( state.backtracking==0 ) {
+
+                  	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedPatternGuardExpCSParserRuleCall_1_1_1_0());
+
+                }
+                pushFollow(FollowSets000.FOLLOW_17);
+                lv_ownedPatternGuard_3_0=ruleExpCS();
+
+                state._fsp--;
+                if (state.failed) return ;
+
+                }
+
+
+                }
+
+                otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_2); if (state.failed) return ;
+
+                }
+                break;
+
+        }
+
+
+        }
+    }
+    // $ANTLR end synpred280_InternalQVTrelation
+
     // $ANTLR start synpred282_InternalQVTrelation
     public final void synpred282_InternalQVTrelation_fragment() throws RecognitionException {
         EObject this_TypeLiteralCS_1 = null;
@@ -30723,6 +30834,20 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
 
     // Delegated rules
 
+    public final boolean synpred279_InternalQVTrelation() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred279_InternalQVTrelation_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred293_InternalQVTrelation() {
         state.backtracking++;
         int start = input.mark();
@@ -30849,6 +30974,20 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred280_InternalQVTrelation() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred280_InternalQVTrelation_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred296_InternalQVTrelation() {
         state.backtracking++;
         int start = input.mark();
@@ -30878,6 +31017,8 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
     protected DFA58 dfa58 = new DFA58(this);
     protected DFA161 dfa161 = new DFA161(this);
     protected DFA164 dfa164 = new DFA164(this);
+    protected DFA177 dfa177 = new DFA177(this);
+    protected DFA176 dfa176 = new DFA176(this);
     protected DFA178 dfa178 = new DFA178(this);
     protected DFA181 dfa181 = new DFA181(this);
     protected DFA184 dfa184 = new DFA184(this);
@@ -31474,28 +31615,28 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
     static final String dfa_19s = "\1\7\26\41\2\uffff";
     static final String[] dfa_20s = {
             "\1\1\1\2\20\uffff\1\3\1\7\1\22\1\6\1\11\1\5\1\14\1\15\2\uffff\1\17\1\uffff\1\20\1\23\1\4\1\21\1\16\1\uffff\1\24\1\10\1\12\1\uffff\1\25\1\26\1\13",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
-            "\1\27\10\uffff\1\30",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
+            "\1\30\10\uffff\1\27",
             "",
             ""
     };
@@ -31511,7 +31652,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             this.eof = dfa_1;
             this.min = dfa_19;
             this.max = dfa_3;
-            this.accept = dfa_4;
+            this.accept = dfa_8;
             this.special = dfa_5;
             this.transition = dfa_20;
         }
@@ -31847,12 +31988,129 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             return "6764:1: (lv_ownedInitExpression_2_1= ruleExpCS | lv_ownedInitExpression_2_2= rulePatternExpCS )";
         }
     }
-    static final String dfa_36s = "\47\uffff";
-    static final String dfa_37s = "\1\7\36\uffff\5\0\3\uffff";
-    static final String dfa_38s = "\1\166\36\uffff\5\0\3\uffff";
-    static final String dfa_39s = "\1\uffff\1\1\25\uffff\1\2\16\uffff\1\3";
-    static final String dfa_40s = "\37\uffff\1\0\1\1\1\2\1\3\1\4\3\uffff}>";
-    static final String[] dfa_41s = {
+    static final String dfa_36s = "\15\uffff";
+    static final String dfa_37s = "\1\2\14\uffff";
+    static final String dfa_38s = "\1\23\1\0\13\uffff";
+    static final String dfa_39s = "\1\u0085\1\0\13\uffff";
+    static final String dfa_40s = "\2\uffff\1\2\11\uffff\1\1";
+    static final String dfa_41s = "\1\uffff\1\0\13\uffff}>";
+    static final String[] dfa_42s = {
+            "\1\2\1\1\4\2\11\uffff\1\2\135\uffff\1\2\2\uffff\1\2\1\uffff\1\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] dfa_36 = DFA.unpackEncodedString(dfa_36s);
+    static final short[] dfa_37 = DFA.unpackEncodedString(dfa_37s);
+    static final char[] dfa_38 = DFA.unpackEncodedStringToUnsignedChars(dfa_38s);
+    static final char[] dfa_39 = DFA.unpackEncodedStringToUnsignedChars(dfa_39s);
+    static final short[] dfa_40 = DFA.unpackEncodedString(dfa_40s);
+    static final short[] dfa_41 = DFA.unpackEncodedString(dfa_41s);
+    static final short[][] dfa_42 = unpackEncodedStringArray(dfa_42s);
+
+    class DFA177 extends DFA {
+
+        public DFA177(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 177;
+            this.eot = dfa_36;
+            this.eof = dfa_37;
+            this.min = dfa_38;
+            this.max = dfa_39;
+            this.accept = dfa_40;
+            this.special = dfa_41;
+            this.transition = dfa_42;
+        }
+        public String getDescription() {
+            return "7764:2: ( ( (lv_ownedCurlyBracketedClause_1_0= ruleCurlyBracketedClauseCS ) ) (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )? )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 :
+                        int LA177_1 = input.LA(1);
+
+
+                        int index177_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred280_InternalQVTrelation()) ) {s = 12;}
+
+                        else if ( (true) ) {s = 2;}
+
+
+                        input.seek(index177_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 177, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+
+    class DFA176 extends DFA {
+
+        public DFA176(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 176;
+            this.eot = dfa_36;
+            this.eof = dfa_37;
+            this.min = dfa_38;
+            this.max = dfa_39;
+            this.accept = dfa_40;
+            this.special = dfa_41;
+            this.transition = dfa_42;
+        }
+        public String getDescription() {
+            return "7782:2: (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 :
+                        int LA176_1 = input.LA(1);
+
+
+                        int index176_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred279_InternalQVTrelation()) ) {s = 12;}
+
+                        else if ( (true) ) {s = 2;}
+
+
+                        input.seek(index176_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 176, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String dfa_43s = "\47\uffff";
+    static final String dfa_44s = "\1\7\36\uffff\5\0\3\uffff";
+    static final String dfa_45s = "\1\166\36\uffff\5\0\3\uffff";
+    static final String dfa_46s = "\1\uffff\1\1\25\uffff\1\2\16\uffff\1\3";
+    static final String dfa_47s = "\37\uffff\1\0\1\1\1\2\1\3\1\4\3\uffff}>";
+    static final String[] dfa_48s = {
             "\2\1\20\uffff\10\1\2\uffff\1\1\1\uffff\5\1\1\uffff\3\1\1\uffff\3\1\66\uffff\12\27\1\37\1\40\1\41\1\42\1\43",
             "",
             "",
@@ -31894,25 +32152,25 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] dfa_36 = DFA.unpackEncodedString(dfa_36s);
-    static final char[] dfa_37 = DFA.unpackEncodedStringToUnsignedChars(dfa_37s);
-    static final char[] dfa_38 = DFA.unpackEncodedStringToUnsignedChars(dfa_38s);
-    static final short[] dfa_39 = DFA.unpackEncodedString(dfa_39s);
-    static final short[] dfa_40 = DFA.unpackEncodedString(dfa_40s);
-    static final short[][] dfa_41 = unpackEncodedStringArray(dfa_41s);
+    static final short[] dfa_43 = DFA.unpackEncodedString(dfa_43s);
+    static final char[] dfa_44 = DFA.unpackEncodedStringToUnsignedChars(dfa_44s);
+    static final char[] dfa_45 = DFA.unpackEncodedStringToUnsignedChars(dfa_45s);
+    static final short[] dfa_46 = DFA.unpackEncodedString(dfa_46s);
+    static final short[] dfa_47 = DFA.unpackEncodedString(dfa_47s);
+    static final short[][] dfa_48 = unpackEncodedStringArray(dfa_48s);
 
     class DFA178 extends DFA {
 
         public DFA178(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 178;
-            this.eot = dfa_36;
-            this.eof = dfa_36;
-            this.min = dfa_37;
-            this.max = dfa_38;
-            this.accept = dfa_39;
-            this.special = dfa_40;
-            this.transition = dfa_41;
+            this.eot = dfa_43;
+            this.eof = dfa_43;
+            this.min = dfa_44;
+            this.max = dfa_45;
+            this.accept = dfa_46;
+            this.special = dfa_47;
+            this.transition = dfa_48;
         }
         public String getDescription() {
             return "7829:2: (this_TypeNameExpCS_0= ruleTypeNameExpCS | this_TypeLiteralCS_1= ruleTypeLiteralCS | this_CollectionPatternCS_2= ruleCollectionPatternCS )";
@@ -32004,12 +32262,12 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String dfa_42s = "\64\uffff";
-    static final String dfa_43s = "\1\4\2\0\61\uffff";
-    static final String dfa_44s = "\1\u008a\2\0\61\uffff";
-    static final String dfa_45s = "\3\uffff\1\1\57\uffff\1\2";
-    static final String dfa_46s = "\1\uffff\1\0\1\1\61\uffff}>";
-    static final String[] dfa_47s = {
+    static final String dfa_49s = "\64\uffff";
+    static final String dfa_50s = "\1\4\2\0\61\uffff";
+    static final String dfa_51s = "\1\u008a\2\0\61\uffff";
+    static final String dfa_52s = "\3\uffff\1\1\57\uffff\1\2";
+    static final String dfa_53s = "\1\uffff\1\0\1\1\61\uffff}>";
+    static final String[] dfa_54s = {
             "\1\3\1\uffff\3\3\20\uffff\11\3\1\uffff\1\3\1\uffff\5\3\1\uffff\7\3\45\uffff\1\1\1\2\17\uffff\17\3\1\uffff\1\3\1\uffff\4\3\6\uffff\1\3\4\uffff\1\63\1\3",
             "\1\uffff",
             "\1\uffff",
@@ -32064,25 +32322,25 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] dfa_42 = DFA.unpackEncodedString(dfa_42s);
-    static final char[] dfa_43 = DFA.unpackEncodedStringToUnsignedChars(dfa_43s);
-    static final char[] dfa_44 = DFA.unpackEncodedStringToUnsignedChars(dfa_44s);
-    static final short[] dfa_45 = DFA.unpackEncodedString(dfa_45s);
-    static final short[] dfa_46 = DFA.unpackEncodedString(dfa_46s);
-    static final short[][] dfa_47 = unpackEncodedStringArray(dfa_47s);
+    static final short[] dfa_49 = DFA.unpackEncodedString(dfa_49s);
+    static final char[] dfa_50 = DFA.unpackEncodedStringToUnsignedChars(dfa_50s);
+    static final char[] dfa_51 = DFA.unpackEncodedStringToUnsignedChars(dfa_51s);
+    static final short[] dfa_52 = DFA.unpackEncodedString(dfa_52s);
+    static final short[] dfa_53 = DFA.unpackEncodedString(dfa_53s);
+    static final short[][] dfa_54 = unpackEncodedStringArray(dfa_54s);
 
     class DFA181 extends DFA {
 
         public DFA181(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 181;
-            this.eot = dfa_42;
-            this.eof = dfa_42;
-            this.min = dfa_43;
-            this.max = dfa_44;
-            this.accept = dfa_45;
-            this.special = dfa_46;
-            this.transition = dfa_47;
+            this.eot = dfa_49;
+            this.eof = dfa_49;
+            this.min = dfa_50;
+            this.max = dfa_51;
+            this.accept = dfa_52;
+            this.special = dfa_53;
+            this.transition = dfa_54;
         }
         public String getDescription() {
             return "7906:1: ( (this_PrefixedPrimaryExpCS_0= rulePrefixedPrimaryExpCS ( () ( (lv_name_2_0= ruleBinaryOperatorName ) ) ( (lv_ownedRight_3_0= ruleExpCS ) ) )? ) | this_PrefixedLetExpCS_4= rulePrefixedLetExpCS )";
@@ -32129,11 +32387,11 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String dfa_48s = "\1\4\12\uffff\7\0\42\uffff";
-    static final String dfa_49s = "\1\u008a\12\uffff\7\0\42\uffff";
-    static final String dfa_50s = "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\25\uffff\1\5\1\6\1\7";
-    static final String dfa_51s = "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\42\uffff}>";
-    static final String[] dfa_52s = {
+    static final String dfa_55s = "\1\4\12\uffff\7\0\42\uffff";
+    static final String dfa_56s = "\1\u008a\12\uffff\7\0\42\uffff";
+    static final String dfa_57s = "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\25\uffff\1\5\1\6\1\7";
+    static final String dfa_58s = "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\42\uffff}>";
+    static final String[] dfa_59s = {
             "\1\4\1\uffff\1\4\2\33\20\uffff\10\33\1\1\1\uffff\1\33\1\uffff\5\33\1\uffff\3\33\1\4\3\33\66\uffff\1\14\1\13\10\23\1\15\1\16\1\17\1\20\1\21\1\uffff\1\22\1\uffff\4\4\6\uffff\1\2\5\uffff\1\3",
             "",
             "",
@@ -32187,24 +32445,24 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             "",
             ""
     };
-    static final char[] dfa_48 = DFA.unpackEncodedStringToUnsignedChars(dfa_48s);
-    static final char[] dfa_49 = DFA.unpackEncodedStringToUnsignedChars(dfa_49s);
-    static final short[] dfa_50 = DFA.unpackEncodedString(dfa_50s);
-    static final short[] dfa_51 = DFA.unpackEncodedString(dfa_51s);
-    static final short[][] dfa_52 = unpackEncodedStringArray(dfa_52s);
+    static final char[] dfa_55 = DFA.unpackEncodedStringToUnsignedChars(dfa_55s);
+    static final char[] dfa_56 = DFA.unpackEncodedStringToUnsignedChars(dfa_56s);
+    static final short[] dfa_57 = DFA.unpackEncodedString(dfa_57s);
+    static final short[] dfa_58 = DFA.unpackEncodedString(dfa_58s);
+    static final short[][] dfa_59 = unpackEncodedStringArray(dfa_59s);
 
     class DFA184 extends DFA {
 
         public DFA184(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 184;
-            this.eot = dfa_42;
-            this.eof = dfa_42;
-            this.min = dfa_48;
-            this.max = dfa_49;
-            this.accept = dfa_50;
-            this.special = dfa_51;
-            this.transition = dfa_52;
+            this.eot = dfa_49;
+            this.eof = dfa_49;
+            this.min = dfa_55;
+            this.max = dfa_56;
+            this.accept = dfa_57;
+            this.special = dfa_58;
+            this.transition = dfa_59;
         }
         public String getDescription() {
             return "8155:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_MapLiteralExpCS_5= ruleMapLiteralExpCS | this_CollectionLiteralExpCS_6= ruleCollectionLiteralExpCS | this_LambdaLiteralExpCS_7= ruleLambdaLiteralExpCS | this_TypeLiteralExpCS_8= ruleTypeLiteralExpCS | this_NameExpCS_9= ruleNameExpCS )";
@@ -32326,8 +32584,8 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String dfa_53s = "\1\u008a\1\uffff\26\u0085\1\uffff";
-    static final String[] dfa_54s = {
+    static final String dfa_60s = "\1\u008a\1\uffff\26\u0085\1\uffff";
+    static final String[] dfa_61s = {
             "\1\1\1\uffff\1\1\1\2\1\3\11\uffff\1\30\6\uffff\1\4\1\10\1\23\1\7\1\12\1\6\1\15\1\16\1\1\1\uffff\1\20\1\uffff\1\21\1\24\1\5\1\22\1\17\1\uffff\1\25\1\11\1\13\1\1\1\26\1\27\1\14\45\uffff\2\1\17\uffff\17\1\1\uffff\1\1\1\uffff\4\1\6\uffff\1\1\4\uffff\2\1",
             "",
             "\1\30\2\1\14\uffff\1\1\10\uffff\1\1\3\uffff\1\1\50\uffff\1\1\1\uffff\17\1\26\uffff\1\1\1\uffff\1\1\4\uffff\1\1",
@@ -32354,8 +32612,8 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             "\1\30\2\1\14\uffff\1\1\10\uffff\1\1\3\uffff\1\1\50\uffff\1\1\1\uffff\17\1\26\uffff\1\1\1\uffff\1\1\4\uffff\1\1",
             ""
     };
-    static final char[] dfa_53 = DFA.unpackEncodedStringToUnsignedChars(dfa_53s);
-    static final short[][] dfa_54 = unpackEncodedStringArray(dfa_54s);
+    static final char[] dfa_60 = DFA.unpackEncodedStringToUnsignedChars(dfa_60s);
+    static final short[][] dfa_61 = unpackEncodedStringArray(dfa_61s);
 
     class DFA207 extends DFA {
 
@@ -32365,10 +32623,10 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             this.eot = dfa_1;
             this.eof = dfa_1;
             this.min = dfa_24;
-            this.max = dfa_53;
+            this.max = dfa_60;
             this.accept = dfa_26;
             this.special = dfa_5;
-            this.transition = dfa_54;
+            this.transition = dfa_61;
         }
         public String getDescription() {
             return "9195:1: (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS )";

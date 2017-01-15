@@ -1225,9 +1225,9 @@ ruleParamDeclarationCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0());
+	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0());
 	    }
-		lv_ownedType_2_0=ruleTypedRefCS		{
+		lv_ownedType_2_0=ruleTypeExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParamDeclarationCSRule());
 	        }
@@ -1235,7 +1235,7 @@ ruleParamDeclarationCS returns [EObject current=null]
        			$current,
        			"ownedType",
         		lv_ownedType_2_0,
-        		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1337,9 +1337,9 @@ rulePrimitiveTypeDomainCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0());
+	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0());
 	    }
-		lv_ownedType_4_0=ruleTypedRefCS		{
+		lv_ownedType_4_0=ruleTypeExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeDomainCSRule());
 	        }
@@ -1347,7 +1347,7 @@ rulePrimitiveTypeDomainCS returns [EObject current=null]
        			$current,
        			"ownedType",
         		lv_ownedType_4_0,
-        		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1561,9 +1561,9 @@ ruleQueryCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedTypeTypedRefCSParserRuleCall_7_0());
+	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedTypeTypeExpCSParserRuleCall_7_0());
 	    }
-		lv_ownedType_9_0=ruleTypedRefCS		{
+		lv_ownedType_9_0=ruleTypeExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getQueryCSRule());
 	        }
@@ -1571,7 +1571,7 @@ ruleQueryCS returns [EObject current=null]
        			$current,
        			"ownedType",
         		lv_ownedType_9_0,
-        		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2310,9 +2310,9 @@ ruleVarDeclarationCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_1_0());
+	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0());
 	    }
-		lv_ownedType_4_0=ruleTypedRefCS		{
+		lv_ownedType_4_0=ruleTypeExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getVarDeclarationCSRule());
 	        }
@@ -2320,7 +2320,7 @@ ruleVarDeclarationCS returns [EObject current=null]
        			$current,
        			"ownedType",
         		lv_ownedType_4_0,
-        		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.TypedRefCS");
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 

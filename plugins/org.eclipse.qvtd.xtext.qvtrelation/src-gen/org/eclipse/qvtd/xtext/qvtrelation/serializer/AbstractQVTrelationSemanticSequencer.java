@@ -759,7 +759,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     ParamDeclarationCS returns ParamDeclarationCS
 	 *
 	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypedRefCS)
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
 	 */
 	protected void sequence_ParamDeclarationCS(ISerializationContext context, ParamDeclarationCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -770,7 +770,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getNameUnrestrictedNameParserRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0(), semanticObject.getOwnedType());
+		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0(), semanticObject.getOwnedType());
 		feeder.finish();
 	}
 
@@ -823,7 +823,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     PrimitiveTypeDomainCS returns PrimitiveTypeDomainCS
 	 *
 	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypedRefCS)
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
 	 */
 	protected void sequence_PrimitiveTypeDomainCS(ISerializationContext context, PrimitiveTypeDomainCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -834,7 +834,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPrimitiveTypeDomainCSAccess().getNameUnrestrictedNameParserRuleCall_2_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0(), semanticObject.getOwnedType());
+		feeder.accept(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0(), semanticObject.getOwnedType());
 		feeder.finish();
 	}
 
@@ -878,7 +878,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *         isTransient?='transient'?
 	 *         name=UnrestrictedName
 	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)?
-	 *         ownedType=TypedRefCS
+	 *         ownedType=TypeExpCS
 	 *         ownedExpression=ExpCS?
 	 *     )
 	 */
@@ -1012,7 +1012,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     VarDeclarationCS returns VarDeclarationCS
 	 *
 	 * Constraint:
-	 *     (ownedVarDeclarationIds+=VarDeclarationIdCS ownedVarDeclarationIds+=VarDeclarationIdCS* ownedType=TypedRefCS? ownedInitExpression=ExpCS?)
+	 *     (ownedVarDeclarationIds+=VarDeclarationIdCS ownedVarDeclarationIds+=VarDeclarationIdCS* ownedType=TypeExpCS? ownedInitExpression=ExpCS?)
 	 */
 	protected void sequence_VarDeclarationCS(ISerializationContext context, VarDeclarationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
