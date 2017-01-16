@@ -11,7 +11,9 @@
 package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
 import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
+import org.eclipse.qvtd.xtext.qvtrelation.ui.model.QVTrelationDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -22,5 +24,9 @@ public class QVTrelationUiModule extends org.eclipse.qvtd.xtext.qvtrelation.ui.A
 
 	public QVTrelationUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+
+	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
+		return QVTrelationDocumentProvider.class;
 	}
 }

@@ -12,6 +12,7 @@ Export-Package: org.eclipse.qvtd.xtext.qvtrelation.ui,
  org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr.internal,
  org.eclipse.qvtd.xtext.qvtrelation.ui.internal,
  org.eclipse.qvtd.xtext.qvtrelation.ui.labeling,
+ org.eclipse.qvtd.xtext.qvtrelation.ui.model,
  org.eclipse.qvtd.xtext.qvtrelation.ui.outline,
  org.eclipse.qvtd.xtext.qvtrelation.ui.quickfix
 Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.10.0,3.0.0)",

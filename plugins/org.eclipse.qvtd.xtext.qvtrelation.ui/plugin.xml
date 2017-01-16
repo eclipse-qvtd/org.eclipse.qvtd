@@ -9,7 +9,7 @@
               class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
-              extensions="qvtr"
+              extensions="qvtr,qvtras"
               icon="icons/QVTrModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
               name="%MF_QVTrelationEditor">
