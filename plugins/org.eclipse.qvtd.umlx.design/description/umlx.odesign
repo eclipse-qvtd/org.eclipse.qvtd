@@ -99,7 +99,7 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.InvocationNode" referenceName="ownedNodes">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelInvocationNode" referenceName="ownedNodes">
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'node'+container.ownedNodes->size()"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -110,7 +110,7 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.PatternNode" referenceName="ownedNodes">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelPatternNode" referenceName="ownedNodes">
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'node'+container.ownedNodes->size()"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -224,6 +224,17 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+        <toolSections name="TxNodesId" label="Nodes">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createTxKeyNode" label="Key Node" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@nodeMappings[name='TxKeyNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxKeyNode" referenceName="ownedNodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.qvtd.umlx.design.UMLXServices"/>
