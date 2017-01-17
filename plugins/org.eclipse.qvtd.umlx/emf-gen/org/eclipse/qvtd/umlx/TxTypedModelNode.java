@@ -21,69 +21,16 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxTransformationNode <em>Tx Transformation Node</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxPackageNodes <em>Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxDiagram <em>Tx Diagram</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxPackageNodes <em>Tx Package Nodes</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode()
  * @generated
  */
-public interface TxTypedModelNode extends TxNode {
-	/**
-	 * Returns the value of the '<em><b>Tx Transformation Node</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxTransformationNode#getTxTypedModelNodes <em>Tx Typed Model Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tx Transformation Node</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tx Transformation Node</em>' container reference.
-	 * @see #setTxTransformationNode(TxTransformationNode)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_TxTransformationNode()
-	 * @see org.eclipse.qvtd.umlx.TxTransformationNode#getTxTypedModelNodes
-	 * @generated
-	 */
-	TxTransformationNode getTxTransformationNode();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxTransformationNode <em>Tx Transformation Node</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tx Transformation Node</em>' container reference.
-	 * @see #getTxTransformationNode()
-	 * @generated
-	 */
-	void setTxTransformationNode(TxTransformationNode value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_Name()
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	/**
 	 * Returns the value of the '<em><b>Tx Package Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxPackageNode}.
@@ -150,5 +97,32 @@ public interface TxTypedModelNode extends TxNode {
 	 * @generated
 	 */
 	void setEnforce(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Tx Diagram</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxDiagram#getTxTypedModelNodes <em>Tx Typed Model Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tx Diagram</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tx Diagram</em>' container reference.
+	 * @see #setTxDiagram(TxDiagram)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_TxDiagram()
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getTxTypedModelNodes
+	 * @generated
+	 */
+	TxDiagram getTxDiagram();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxDiagram <em>Tx Diagram</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tx Diagram</em>' container reference.
+	 * @see #getTxDiagram()
+	 * @generated
+	 */
+	void setTxDiagram(TxDiagram value);
 
 } // TxTypedModelNode

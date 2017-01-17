@@ -21,7 +21,7 @@ package org.eclipse.qvtd.umlx;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.RelInvocationNode#isIsThen <em>Is Then</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelationNode <em>Referred Relation Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelDiagram <em>Referred Rel Diagram</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationNode()
@@ -55,28 +55,28 @@ public interface RelInvocationNode extends RelNode {
 	void setIsThen(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Referred Relation Node</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Rel Diagram</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Relation Node</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Rel Diagram</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Relation Node</em>' reference.
-	 * @see #setReferredRelationNode(RelDiagram)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationNode_ReferredRelationNode()
+	 * @return the value of the '<em>Referred Rel Diagram</em>' reference.
+	 * @see #setReferredRelDiagram(RelDiagram)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationNode_ReferredRelDiagram()
 	 * @generated
 	 */
-	RelDiagram getReferredRelationNode();
+	RelDiagram getReferredRelDiagram();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelationNode <em>Referred Relation Node</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelDiagram <em>Referred Rel Diagram</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Relation Node</em>' reference.
-	 * @see #getReferredRelationNode()
+	 * @param value the new value of the '<em>Referred Rel Diagram</em>' reference.
+	 * @see #getReferredRelDiagram()
 	 * @generated
 	 */
-	void setReferredRelationNode(RelDiagram value);
+	void setReferredRelDiagram(RelDiagram value);
 
 } // RelInvocationNode

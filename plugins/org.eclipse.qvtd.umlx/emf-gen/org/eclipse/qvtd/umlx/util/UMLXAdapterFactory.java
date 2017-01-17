@@ -75,91 +75,95 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected UMLXSwitch<@Nullable Adapter> modelSwitch =
 			new UMLXSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseRelConstraintNode(RelConstraintNode object) {
-			return createRelConstraintNodeAdapter();
-		}
-		@Override
-		public Adapter caseRelDiagram(RelDiagram object) {
-			return createRelDiagramAdapter();
-		}
-		@Override
-		public Adapter caseRelDomainNode(RelDomainNode object) {
-			return createRelDomainNodeAdapter();
-		}
-		@Override
-		public Adapter caseRelInvocationEdge(RelInvocationEdge object) {
-			return createRelInvocationEdgeAdapter();
-		}
-		@Override
-		public Adapter caseRelInvocationNode(RelInvocationNode object) {
-			return createRelInvocationNodeAdapter();
-		}
-		@Override
-		public Adapter caseRelNode(RelNode object) {
-			return createRelNodeAdapter();
-		}
-		@Override
-		public Adapter caseRelPatternEdge(RelPatternEdge object) {
-			return createRelPatternEdgeAdapter();
-		}
-		@Override
-		public Adapter caseRelPatternNode(RelPatternNode object) {
-			return createRelPatternNodeAdapter();
-		}
-		@Override
-		public Adapter caseTxDiagram(TxDiagram object) {
-			return createTxDiagramAdapter();
-		}
-		@Override
-		public Adapter caseTxKeyNode(TxKeyNode object) {
-			return createTxKeyNodeAdapter();
-		}
-		@Override
-		public Adapter caseTxPartNode(TxPartNode object) {
-			return createTxPartNodeAdapter();
-		}
-		@Override
-		public Adapter caseTxNode(TxNode object) {
-			return createTxNodeAdapter();
-		}
-		@Override
-		public Adapter caseTxPackageNode(TxPackageNode object) {
-			return createTxPackageNodeAdapter();
-		}
-		@Override
-		public Adapter caseTxTransformationNode(TxTransformationNode object) {
-			return createTxTransformationNodeAdapter();
-		}
-		@Override
-		public Adapter caseTxTypedModelNode(TxTypedModelNode object) {
-			return createTxTypedModelNodeAdapter();
-		}
-		@Override
-		public Adapter caseUMLXDiagram(UMLXDiagram object) {
-			return createUMLXDiagramAdapter();
-		}
-		@Override
-		public Adapter caseUMLXEdge(UMLXEdge object) {
-			return createUMLXEdgeAdapter();
-		}
-		@Override
-		public Adapter caseUMLXElement(UMLXElement object) {
-			return createUMLXElementAdapter();
-		}
-		@Override
-		public Adapter caseUMLXModel(UMLXModel object) {
-			return createUMLXModelAdapter();
-		}
-		@Override
-		public Adapter caseUMLXNode(UMLXNode object) {
-			return createUMLXNodeAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseRelConstraintNode(RelConstraintNode object) {
+				return createRelConstraintNodeAdapter();
+			}
+			@Override
+			public Adapter caseRelDiagram(RelDiagram object) {
+				return createRelDiagramAdapter();
+			}
+			@Override
+			public Adapter caseRelDomainNode(RelDomainNode object) {
+				return createRelDomainNodeAdapter();
+			}
+			@Override
+			public Adapter caseRelInvocationEdge(RelInvocationEdge object) {
+				return createRelInvocationEdgeAdapter();
+			}
+			@Override
+			public Adapter caseRelInvocationNode(RelInvocationNode object) {
+				return createRelInvocationNodeAdapter();
+			}
+			@Override
+			public Adapter caseRelNode(RelNode object) {
+				return createRelNodeAdapter();
+			}
+			@Override
+			public Adapter caseRelPatternEdge(RelPatternEdge object) {
+				return createRelPatternEdgeAdapter();
+			}
+			@Override
+			public Adapter caseRelPatternNode(RelPatternNode object) {
+				return createRelPatternNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxDiagram(TxDiagram object) {
+				return createTxDiagramAdapter();
+			}
+			@Override
+			public Adapter caseTxImportNode(TxImportNode object) {
+				return createTxImportNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxKeyNode(TxKeyNode object) {
+				return createTxKeyNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxNode(TxNode object) {
+				return createTxNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxPackageNode(TxPackageNode object) {
+				return createTxPackageNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxPartNode(TxPartNode object) {
+				return createTxPartNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxTypedModelNode(TxTypedModelNode object) {
+				return createTxTypedModelNodeAdapter();
+			}
+			@Override
+			public Adapter caseUMLXDiagram(UMLXDiagram object) {
+				return createUMLXDiagramAdapter();
+			}
+			@Override
+			public Adapter caseUMLXEdge(UMLXEdge object) {
+				return createUMLXEdgeAdapter();
+			}
+			@Override
+			public Adapter caseUMLXElement(UMLXElement object) {
+				return createUMLXElementAdapter();
+			}
+			@Override
+			public Adapter caseUMLXModel(UMLXModel object) {
+				return createUMLXModelAdapter();
+			}
+			@Override
+			public Adapter caseUMLXNamedElement(UMLXNamedElement object) {
+				return createUMLXNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseUMLXNode(UMLXNode object) {
+				return createUMLXNodeAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -302,6 +306,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxImportNode <em>Tx Import Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.TxImportNode
+	 * @generated
+	 */
+	public Adapter createTxImportNodeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxKeyNode <em>Tx Key Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -354,20 +372,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTxPackageNodeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxTransformationNode <em>Tx Transformation Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.TxTransformationNode
-	 * @generated
-	 */
-	public Adapter createTxTransformationNodeAdapter() {
 		return null;
 	}
 
@@ -452,6 +456,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUMLXNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXNamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.UMLXNamedElement
+	 * @generated
+	 */
+	public Adapter createUMLXNamedElementAdapter() {
 		return null;
 	}
 

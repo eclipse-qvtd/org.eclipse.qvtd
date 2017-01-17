@@ -8,6 +8,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="RelDiagram" eSuperTypes="#//UMLXDiagram">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedNodes" upperBound="-1"
+        eType="#//RelNode" containment="true" eOpposite="#//RelNode/diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txDiagram" lowerBound="1"
+        eType="#//TxDiagram" eOpposite="#//TxDiagram/ownedDiagrams"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelDomainNode" eSuperTypes="#//RelNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModelNode"
@@ -15,22 +19,29 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rootPatternNodes" lowerBound="1"
         upperBound="-1" eType="#//RelPatternNode" eOpposite="#//RelPatternNode/relDomainNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelInvocationEdge" eSuperTypes="#//UMLXEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RelInvocationEdge" eSuperTypes="#//UMLXEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredRelPatternNode"
+        lowerBound="1" eType="#//RelPatternNode"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelInvocationNode" eSuperTypes="#//RelNode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isThen" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredRelationNode" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredRelDiagram" lowerBound="1"
         eType="#//RelDiagram"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelNode" eSuperTypes="#//UMLXNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RelNode" eSuperTypes="#//UMLXNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//RelDiagram"
+        eOpposite="#//RelDiagram/ownedNodes"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelPatternEdge" eSuperTypes="#//UMLXEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOpposite" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelPatternNode" eSuperTypes="#//RelNode">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RelPatternNode" eSuperTypes="#//RelNode #//UMLXNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relDomainNode" eType="#//RelDomainNode"
@@ -38,15 +49,32 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TxDiagram" eSuperTypes="#//UMLXDiagram">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDiagrams" upperBound="-1"
-        eType="#//RelDiagram" containment="true"/>
+        eType="#//RelDiagram" containment="true" eOpposite="#//RelDiagram/txDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txImportNodes" upperBound="-1"
+        eType="#//TxImportNode" containment="true" eOpposite="#//TxImportNode/txDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txKeyNodes" upperBound="-1"
+        eType="#//TxKeyNode" containment="true" eOpposite="#//TxKeyNode/txDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txTypedModelNodes" upperBound="-1"
+        eType="#//TxTypedModelNode" containment="true" eOpposite="#//TxTypedModelNode/txDiagram"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TxImportNode" eSuperTypes="#//TxNode #//UMLXNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txDiagram" lowerBound="1"
+        eType="#//TxDiagram" eOpposite="#//TxDiagram/txImportNodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TxKeyNode" eSuperTypes="#//TxNode">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="txTransformationNode" lowerBound="1"
-        eType="#//TxTransformationNode" eOpposite="#//TxTransformationNode/txKeyNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txDiagram" lowerBound="1"
+        eType="#//TxDiagram" eOpposite="#//TxDiagram/txKeyNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="txPartNodes" lowerBound="1"
         upperBound="-1" eType="#//TxPartNode" containment="true" eOpposite="#//TxPartNode/txKeyNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TxNode" eSuperTypes="#//UMLXNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TxPackageNode" eSuperTypes="#//TxNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPackage" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TxPartNode" eSuperTypes="#//TxNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="txKeyNode" lowerBound="1"
@@ -56,48 +84,35 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TxNode" eSuperTypes="#//UMLXNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TxPackageNode" eSuperTypes="#//TxNode">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPackage" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TxTransformationNode" eSuperTypes="#//TxNode">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="txTypedModelNodes" upperBound="-1"
-        eType="#//TxTypedModelNode" containment="true" eOpposite="#//TxTypedModelNode/txTransformationNode"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="txKeyNodes" upperBound="-1"
-        eType="#//TxKeyNode" containment="true" eOpposite="#//TxKeyNode/txTransformationNode"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TxTypedModelNode" eSuperTypes="#//TxNode">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="txTransformationNode" lowerBound="1"
-        eType="#//TxTransformationNode" eOpposite="#//TxTransformationNode/txTypedModelNodes"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="txPackageNodes" upperBound="-1"
-        eType="#//TxPackageNode" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TxTypedModelNode" eSuperTypes="#//TxNode #//UMLXNamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="check" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enforce" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txDiagram" lowerBound="1"
+        eType="#//TxDiagram" eOpposite="#//TxDiagram/txTypedModelNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="txPackageNodes" upperBound="-1"
+        eType="#//TxPackageNode" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UMLXDiagram" abstract="true" eSuperTypes="#//UMLXElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedNodes" upperBound="-1"
-        eType="#//UMLXNode" containment="true" eOpposite="#//UMLXNode/diagram"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UMLXDiagram" abstract="true" eSuperTypes="#//UMLXNamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="UMLXEdge" abstract="true" eSuperTypes="#//UMLXElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningSource" lowerBound="1"
         eType="#//UMLXNode" eOpposite="#//UMLXNode/ownedOutgoingEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//UMLXNode" eOpposite="#//UMLXNode/incomingEdges"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UMLXElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UMLXElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UMLXModel" eSuperTypes="#//UMLXElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDiagrams" upperBound="-1"
         eType="#//TxDiagram" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UMLXNamedElement" abstract="true" eSuperTypes="#//UMLXElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UMLXNode" abstract="true" eSuperTypes="#//UMLXElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//UMLXDiagram"
-        eOpposite="#//UMLXDiagram/ownedNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" upperBound="-1"
         eType="#//UMLXEdge" eOpposite="#//UMLXEdge/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOutgoingEdges" upperBound="-1"

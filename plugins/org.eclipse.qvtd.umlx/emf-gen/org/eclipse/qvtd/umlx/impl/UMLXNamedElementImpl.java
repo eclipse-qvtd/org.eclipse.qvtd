@@ -10,47 +10,52 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
-import java.util.Collection;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.umlx.UMLXElement;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.qvtd.umlx.UMLXNamedElement;
 import org.eclipse.qvtd.umlx.UMLXPackage;
-import org.eclipse.qvtd.umlx.util.UMLXVisitor;
-import org.eclipse.qvtd.umlx.utilities.UMLXToStringVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Element</b></em>'.
+ * An implementation of the model object '<em><b>Named Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.UMLXElementImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.UMLXNamedElementImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container implements UMLXElement {
+public abstract class UMLXNamedElementImpl extends UMLXElementImpl implements UMLXNamedElement {
 	/**
-	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getComments()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> comments;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UMLXElementImpl() {
+	protected UMLXNamedElementImpl() {
 		super();
 	}
 
@@ -61,7 +66,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UMLXPackage.Literals.UMLX_ELEMENT;
+		return UMLXPackage.Literals.UMLX_NAMED_ELEMENT;
 	}
 
 	/**
@@ -70,11 +75,21 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	 * @generated
 	 */
 	@Override
-	public EList<String> getComments() {
-		if (comments == null) {
-			comments = new EDataTypeUniqueEList<String>(String.class, this, UMLXPackage.UMLX_ELEMENT__COMMENTS);
-		}
-		return comments;
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_NAMED_ELEMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -84,7 +99,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	public String toString() {
-		return UMLXToStringVisitor.toString(this);
+		return super.toString();
 	}
 
 	/**
@@ -95,8 +110,8 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
-				return getComments();
+			case UMLXPackage.UMLX_NAMED_ELEMENT__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -106,13 +121,11 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
-				getComments().clear();
-				getComments().addAll((Collection<? extends String>)newValue);
+			case UMLXPackage.UMLX_NAMED_ELEMENT__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,8 +139,8 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
-				getComments().clear();
+			case UMLXPackage.UMLX_NAMED_ELEMENT__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -141,20 +154,11 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
-				return comments != null && !comments.isEmpty();
+			case UMLXPackage.UMLX_NAMED_ELEMENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
-		return visitor.visitUMLXElement(this);
-	}
 
-
-} //UMLXElementImpl
+} //UMLXNamedElementImpl

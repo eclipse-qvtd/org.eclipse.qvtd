@@ -73,11 +73,11 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 			case UMLXPackage.REL_PATTERN_EDGE: return createRelPatternEdge();
 			case UMLXPackage.REL_PATTERN_NODE: return createRelPatternNode();
 			case UMLXPackage.TX_DIAGRAM: return createTxDiagram();
+			case UMLXPackage.TX_IMPORT_NODE: return createTxImportNode();
 			case UMLXPackage.TX_KEY_NODE: return createTxKeyNode();
-			case UMLXPackage.TX_PART_NODE: return createTxPartNode();
 			case UMLXPackage.TX_NODE: return createTxNode();
 			case UMLXPackage.TX_PACKAGE_NODE: return createTxPackageNode();
-			case UMLXPackage.TX_TRANSFORMATION_NODE: return createTxTransformationNode();
+			case UMLXPackage.TX_PART_NODE: return createTxPartNode();
 			case UMLXPackage.TX_TYPED_MODEL_NODE: return createTxTypedModelNode();
 			case UMLXPackage.UMLX_MODEL: return createUMLXModel();
 			default:
@@ -190,6 +190,17 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	 * @generated
 	 */
 	@Override
+	public @NonNull TxImportNode createTxImportNode() {
+		TxImportNodeImpl txImportNode = new TxImportNodeImpl();
+		return txImportNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull TxKeyNode createTxKeyNode() {
 		TxKeyNodeImpl txKeyNode = new TxKeyNodeImpl();
 		return txKeyNode;
@@ -226,17 +237,6 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	public @NonNull TxPackageNode createTxPackageNode() {
 		TxPackageNodeImpl txPackageNode = new TxPackageNodeImpl();
 		return txPackageNode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull TxTransformationNode createTxTransformationNode() {
-		TxTransformationNodeImpl txTransformationNode = new TxTransformationNodeImpl();
-		return txTransformationNode;
 	}
 
 	/**

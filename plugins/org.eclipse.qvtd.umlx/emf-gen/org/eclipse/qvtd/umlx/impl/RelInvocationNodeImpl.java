@@ -29,7 +29,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationNodeImpl#isIsThen <em>Is Then</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationNodeImpl#getReferredRelationNode <em>Referred Relation Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationNodeImpl#getReferredRelDiagram <em>Referred Rel Diagram</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,14 +56,14 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	protected boolean isThen = IS_THEN_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getReferredRelationNode() <em>Referred Relation Node</em>}' reference.
+	 * The cached value of the '{@link #getReferredRelDiagram() <em>Referred Rel Diagram</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredRelationNode()
+	 * @see #getReferredRelDiagram()
 	 * @generated
 	 * @ordered
 	 */
-	protected RelDiagram referredRelationNode;
+	protected RelDiagram referredRelDiagram;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,16 +113,16 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * @generated
 	 */
 	@Override
-	public RelDiagram getReferredRelationNode() {
-		if (referredRelationNode != null && referredRelationNode.eIsProxy()) {
-			InternalEObject oldReferredRelationNode = (InternalEObject)referredRelationNode;
-			referredRelationNode = (RelDiagram)eResolveProxy(oldReferredRelationNode);
-			if (referredRelationNode != oldReferredRelationNode) {
+	public RelDiagram getReferredRelDiagram() {
+		if (referredRelDiagram != null && referredRelDiagram.eIsProxy()) {
+			InternalEObject oldReferredRelDiagram = (InternalEObject)referredRelDiagram;
+			referredRelDiagram = (RelDiagram)eResolveProxy(oldReferredRelDiagram);
+			if (referredRelDiagram != oldReferredRelDiagram) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_INVOCATION_NODE__REFERRED_RELATION_NODE, oldReferredRelationNode, referredRelationNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, oldReferredRelDiagram, referredRelDiagram));
 			}
 		}
-		return referredRelationNode;
+		return referredRelDiagram;
 	}
 
 	/**
@@ -130,8 +130,8 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelDiagram basicGetReferredRelationNode() {
-		return referredRelationNode;
+	public RelDiagram basicGetReferredRelDiagram() {
+		return referredRelDiagram;
 	}
 
 	/**
@@ -140,11 +140,11 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * @generated
 	 */
 	@Override
-	public void setReferredRelationNode(RelDiagram newReferredRelationNode) {
-		RelDiagram oldReferredRelationNode = referredRelationNode;
-		referredRelationNode = newReferredRelationNode;
+	public void setReferredRelDiagram(RelDiagram newReferredRelDiagram) {
+		RelDiagram oldReferredRelDiagram = referredRelDiagram;
+		referredRelDiagram = newReferredRelDiagram;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_NODE__REFERRED_RELATION_NODE, oldReferredRelationNode, referredRelationNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, oldReferredRelDiagram, referredRelDiagram));
 	}
 
 	/**
@@ -157,9 +157,9 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		switch (featureID) {
 			case UMLXPackage.REL_INVOCATION_NODE__IS_THEN:
 				return isIsThen();
-			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_RELATION_NODE:
-				if (resolve) return getReferredRelationNode();
-				return basicGetReferredRelationNode();
+			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM:
+				if (resolve) return getReferredRelDiagram();
+				return basicGetReferredRelDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -175,8 +175,8 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 			case UMLXPackage.REL_INVOCATION_NODE__IS_THEN:
 				setIsThen((Boolean)newValue);
 				return;
-			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_RELATION_NODE:
-				setReferredRelationNode((RelDiagram)newValue);
+			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM:
+				setReferredRelDiagram((RelDiagram)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,8 +193,8 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 			case UMLXPackage.REL_INVOCATION_NODE__IS_THEN:
 				setIsThen(IS_THEN_EDEFAULT);
 				return;
-			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_RELATION_NODE:
-				setReferredRelationNode((RelDiagram)null);
+			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM:
+				setReferredRelDiagram((RelDiagram)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -210,8 +210,8 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		switch (featureID) {
 			case UMLXPackage.REL_INVOCATION_NODE__IS_THEN:
 				return isThen != IS_THEN_EDEFAULT;
-			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_RELATION_NODE:
-				return referredRelationNode != null;
+			case UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM:
+				return referredRelDiagram != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -16,9 +16,40 @@ package org.eclipse.qvtd.umlx;
  * A representation of the model object '<em><b>Rel Invocation Edge</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelInvocationEdge#getReferredRelPatternNode <em>Referred Rel Pattern Node</em>}</li>
+ * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationEdge()
  * @generated
  */
 public interface RelInvocationEdge extends UMLXEdge {
+
+	/**
+	 * Returns the value of the '<em><b>Referred Rel Pattern Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Rel Pattern Node</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Rel Pattern Node</em>' reference.
+	 * @see #setReferredRelPatternNode(RelPatternNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationEdge_ReferredRelPatternNode()
+	 * @generated
+	 */
+	RelPatternNode getReferredRelPatternNode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelInvocationEdge#getReferredRelPatternNode <em>Referred Rel Pattern Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Rel Pattern Node</em>' reference.
+	 * @see #getReferredRelPatternNode()
+	 * @generated
+	 */
+	void setReferredRelPatternNode(RelPatternNode value);
 } // RelInvocationEdge

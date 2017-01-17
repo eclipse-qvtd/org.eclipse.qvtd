@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EClassifier;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRequired <em>Is Required</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getReferredClass <em>Referred Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
@@ -29,31 +29,32 @@ import org.eclipse.emf.ecore.EClassifier;
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode()
  * @generated
  */
-public interface RelPatternNode extends RelNode {
+public interface RelPatternNode extends RelNode, UMLXNamedElement {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Required</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Required</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_Name()
+	 * @return the value of the '<em>Is Required</em>' attribute.
+	 * @see #setIsRequired(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_IsRequired()
 	 * @generated
 	 */
-	String getName();
+	boolean isIsRequired();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRequired <em>Is Required</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Is Required</em>' attribute.
+	 * @see #isIsRequired()
 	 * @generated
 	 */
-	void setName(String value);
+	void setIsRequired(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Referred Class</b></em>' reference.

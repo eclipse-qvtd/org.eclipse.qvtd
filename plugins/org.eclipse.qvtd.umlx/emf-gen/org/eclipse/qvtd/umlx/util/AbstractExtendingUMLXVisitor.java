@@ -83,6 +83,11 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
+	public R visitTxImportNode(org.eclipse.qvtd.umlx.@NonNull TxImportNode object) {
+		return visitTxNode(object);
+	}
+
+	@Override
 	public R visitTxKeyNode(org.eclipse.qvtd.umlx.@NonNull TxKeyNode object) {
 		return visitTxNode(object);
 	}
@@ -103,18 +108,13 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
-	public R visitTxTransformationNode(org.eclipse.qvtd.umlx.@NonNull TxTransformationNode object) {
-		return visitTxNode(object);
-	}
-
-	@Override
 	public R visitTxTypedModelNode(org.eclipse.qvtd.umlx.@NonNull TxTypedModelNode object) {
 		return visitTxNode(object);
 	}
 
 	@Override
 	public R visitUMLXDiagram(org.eclipse.qvtd.umlx.@NonNull UMLXDiagram object) {
-		return visitUMLXElement(object);
+		return visitUMLXNamedElement(object);
 	}
 
 	@Override
@@ -129,6 +129,11 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 
 	@Override
 	public R visitUMLXModel(org.eclipse.qvtd.umlx.@NonNull UMLXModel object) {
+		return visitUMLXElement(object);
+	}
+
+	@Override
+	public R visitUMLXNamedElement(org.eclipse.qvtd.umlx.@NonNull UMLXNamedElement object) {
 		return visitUMLXElement(object);
 	}
 

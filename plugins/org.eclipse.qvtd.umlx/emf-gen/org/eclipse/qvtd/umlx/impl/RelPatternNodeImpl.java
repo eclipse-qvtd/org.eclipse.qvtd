@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
+import org.eclipse.qvtd.umlx.UMLXNamedElement;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
@@ -31,6 +32,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#isIsRequired <em>Is Required</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getReferredClass <em>Referred Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
@@ -57,6 +59,26 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsRequired() <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_REQUIRED_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isIsRequired() <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isRequired = IS_REQUIRED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
@@ -118,6 +140,29 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsRequired() {
+		return isRequired;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsRequired(boolean newIsRequired) {
+		boolean oldIsRequired = isRequired;
+		isRequired = newIsRequired;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED, oldIsRequired, isRequired));
 	}
 
 	/**
@@ -262,6 +307,8 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__NAME:
 				return getName();
+			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
+				return isIsRequired();
 			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
@@ -282,6 +329,9 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__NAME:
 				setName((String)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
 				setReferredClass((EClassifier)newValue);
@@ -304,6 +354,9 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 			case UMLXPackage.REL_PATTERN_NODE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
 				setReferredClass((EClassifier)null);
 				return;
@@ -324,12 +377,46 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
+				return isRequired != IS_REQUIRED_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
 				return referredClass != null;
 			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
 				return relDomainNode != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == UMLXNamedElement.class) {
+			switch (derivedFeatureID) {
+				case UMLXPackage.REL_PATTERN_NODE__NAME: return UMLXPackage.UMLX_NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == UMLXNamedElement.class) {
+			switch (baseFeatureID) {
+				case UMLXPackage.UMLX_NAMED_ELEMENT__NAME: return UMLXPackage.REL_PATTERN_NODE__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

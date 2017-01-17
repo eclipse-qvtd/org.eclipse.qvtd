@@ -74,13 +74,22 @@ public interface UMLXPackage extends EPackage {
 	int UMLX_ELEMENT = 17;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_ELEMENT__COMMENTS = 0;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_ELEMENT_FEATURE_COUNT = 0;
+	int UMLX_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.UMLXNodeImpl <em>Node</em>}' class.
@@ -90,16 +99,16 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXNode()
 	 * @generated
 	 */
-	int UMLX_NODE = 19;
+	int UMLX_NODE = 20;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_NODE__DIAGRAM = UMLX_ELEMENT_FEATURE_COUNT + 0;
+	int UMLX_NODE__COMMENTS = UMLX_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -108,7 +117,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_NODE__INCOMING_EDGES = UMLX_ELEMENT_FEATURE_COUNT + 1;
+	int UMLX_NODE__INCOMING_EDGES = UMLX_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Outgoing Edges</b></em>' containment reference list.
@@ -117,7 +126,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_NODE__OWNED_OUTGOING_EDGES = UMLX_ELEMENT_FEATURE_COUNT + 2;
+	int UMLX_NODE__OWNED_OUTGOING_EDGES = UMLX_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -126,7 +135,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_NODE_FEATURE_COUNT = UMLX_ELEMENT_FEATURE_COUNT + 3;
+	int UMLX_NODE_FEATURE_COUNT = UMLX_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelNodeImpl <em>Rel Node</em>}' class.
@@ -139,13 +148,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_NODE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_NODE__DIAGRAM = UMLX_NODE__DIAGRAM;
+	int REL_NODE__COMMENTS = UMLX_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -166,13 +175,22 @@ public interface UMLXPackage extends EPackage {
 	int REL_NODE__OWNED_OUTGOING_EDGES = UMLX_NODE__OWNED_OUTGOING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_NODE__DIAGRAM = UMLX_NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Rel Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_NODE_FEATURE_COUNT = UMLX_NODE_FEATURE_COUNT + 0;
+	int REL_NODE_FEATURE_COUNT = UMLX_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelConstraintNodeImpl <em>Rel Constraint Node</em>}' class.
@@ -185,13 +203,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_CONSTRAINT_NODE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_CONSTRAINT_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+	int REL_CONSTRAINT_NODE__COMMENTS = REL_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -212,6 +230,15 @@ public interface UMLXPackage extends EPackage {
 	int REL_CONSTRAINT_NODE__OWNED_OUTGOING_EDGES = REL_NODE__OWNED_OUTGOING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_CONSTRAINT_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+
+	/**
 	 * The feature id for the '<em><b>Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -230,6 +257,43 @@ public interface UMLXPackage extends EPackage {
 	int REL_CONSTRAINT_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.UMLXNamedElementImpl <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.umlx.impl.UMLXNamedElementImpl
+	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXNamedElement()
+	 * @generated
+	 */
+	int UMLX_NAMED_ELEMENT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_NAMED_ELEMENT__COMMENTS = UMLX_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_NAMED_ELEMENT__NAME = UMLX_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_NAMED_ELEMENT_FEATURE_COUNT = UMLX_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.UMLXDiagramImpl <em>Diagram</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -240,22 +304,22 @@ public interface UMLXPackage extends EPackage {
 	int UMLX_DIAGRAM = 15;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_DIAGRAM__COMMENTS = UMLX_NAMED_ELEMENT__COMMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_DIAGRAM__NAME = UMLX_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UMLX_DIAGRAM__OWNED_NODES = UMLX_ELEMENT_FEATURE_COUNT + 1;
+	int UMLX_DIAGRAM__NAME = UMLX_NAMED_ELEMENT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Diagram</em>' class.
@@ -264,7 +328,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UMLX_DIAGRAM_FEATURE_COUNT = UMLX_ELEMENT_FEATURE_COUNT + 2;
+	int UMLX_DIAGRAM_FEATURE_COUNT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl <em>Rel Diagram</em>}' class.
@@ -277,6 +341,15 @@ public interface UMLXPackage extends EPackage {
 	int REL_DIAGRAM = 1;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DIAGRAM__COMMENTS = UMLX_DIAGRAM__COMMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -284,15 +357,6 @@ public interface UMLXPackage extends EPackage {
 	 * @ordered
 	 */
 	int REL_DIAGRAM__NAME = UMLX_DIAGRAM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_DIAGRAM__OWNED_NODES = UMLX_DIAGRAM__OWNED_NODES;
 
 	/**
 	 * The feature id for the '<em><b>Is Top</b></em>' attribute.
@@ -304,13 +368,31 @@ public interface UMLXPackage extends EPackage {
 	int REL_DIAGRAM__IS_TOP = UMLX_DIAGRAM_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DIAGRAM__OWNED_NODES = UMLX_DIAGRAM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tx Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DIAGRAM__TX_DIAGRAM = UMLX_DIAGRAM_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Rel Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM_FEATURE_COUNT = UMLX_DIAGRAM_FEATURE_COUNT + 1;
+	int REL_DIAGRAM_FEATURE_COUNT = UMLX_DIAGRAM_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl <em>Rel Domain Node</em>}' class.
@@ -323,13 +405,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_DOMAIN_NODE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DOMAIN_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+	int REL_DOMAIN_NODE__COMMENTS = REL_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -348,6 +430,15 @@ public interface UMLXPackage extends EPackage {
 	 * @ordered
 	 */
 	int REL_DOMAIN_NODE__OWNED_OUTGOING_EDGES = REL_NODE__OWNED_OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DOMAIN_NODE__DIAGRAM = REL_NODE__DIAGRAM;
 
 	/**
 	 * The feature id for the '<em><b>Referred Typed Model Node</b></em>' reference.
@@ -387,6 +478,15 @@ public interface UMLXPackage extends EPackage {
 	int UMLX_EDGE = 16;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_EDGE__COMMENTS = UMLX_ELEMENT__COMMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Source</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -424,6 +524,15 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_EDGE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_INVOCATION_EDGE__COMMENTS = UMLX_EDGE__COMMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Source</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -442,13 +551,22 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_EDGE__TARGET = UMLX_EDGE__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Referred Rel Pattern Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE = UMLX_EDGE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Rel Invocation Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_INVOCATION_EDGE_FEATURE_COUNT = UMLX_EDGE_FEATURE_COUNT + 0;
+	int REL_INVOCATION_EDGE_FEATURE_COUNT = UMLX_EDGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelInvocationNodeImpl <em>Rel Invocation Node</em>}' class.
@@ -461,13 +579,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_NODE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_INVOCATION_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+	int REL_INVOCATION_NODE__COMMENTS = REL_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -488,6 +606,15 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_NODE__OWNED_OUTGOING_EDGES = REL_NODE__OWNED_OUTGOING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_INVOCATION_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+
+	/**
 	 * The feature id for the '<em><b>Is Then</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -497,13 +624,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_NODE__IS_THEN = REL_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Referred Relation Node</b></em>' reference.
+	 * The feature id for the '<em><b>Referred Rel Diagram</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_INVOCATION_NODE__REFERRED_RELATION_NODE = REL_NODE_FEATURE_COUNT + 1;
+	int REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM = REL_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Rel Invocation Node</em>' class.
@@ -523,6 +650,15 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	int REL_PATTERN_EDGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_EDGE__COMMENTS = UMLX_EDGE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Source</b></em>' container reference.
@@ -580,13 +716,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_NODE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+	int REL_PATTERN_NODE__COMMENTS = REL_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -607,6 +743,15 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_NODE__OWNED_OUTGOING_EDGES = REL_NODE__OWNED_OUTGOING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__DIAGRAM = REL_NODE__DIAGRAM;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -616,13 +761,22 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_NODE__NAME = REL_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_REQUIRED = REL_NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Referred Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_NODE__REFERRED_CLASS = REL_NODE_FEATURE_COUNT + 1;
+	int REL_PATTERN_NODE__REFERRED_CLASS = REL_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Rel Domain Node</b></em>' reference.
@@ -631,7 +785,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_NODE__REL_DOMAIN_NODE = REL_NODE_FEATURE_COUNT + 2;
+	int REL_PATTERN_NODE__REL_DOMAIN_NODE = REL_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Rel Pattern Node</em>' class.
@@ -640,7 +794,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 3;
+	int REL_PATTERN_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl <em>Tx Diagram</em>}' class.
@@ -653,6 +807,15 @@ public interface UMLXPackage extends EPackage {
 	int TX_DIAGRAM = 8;
 
 	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_DIAGRAM__COMMENTS = UMLX_DIAGRAM__COMMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -660,15 +823,6 @@ public interface UMLXPackage extends EPackage {
 	 * @ordered
 	 */
 	int TX_DIAGRAM__NAME = UMLX_DIAGRAM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_DIAGRAM__OWNED_NODES = UMLX_DIAGRAM__OWNED_NODES;
 
 	/**
 	 * The feature id for the '<em><b>Owned Diagrams</b></em>' containment reference list.
@@ -680,13 +834,49 @@ public interface UMLXPackage extends EPackage {
 	int TX_DIAGRAM__OWNED_DIAGRAMS = UMLX_DIAGRAM_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_DIAGRAM__PACKAGE = UMLX_DIAGRAM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tx Import Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_DIAGRAM__TX_IMPORT_NODES = UMLX_DIAGRAM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tx Key Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_DIAGRAM__TX_KEY_NODES = UMLX_DIAGRAM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tx Typed Model Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_DIAGRAM__TX_TYPED_MODEL_NODES = UMLX_DIAGRAM_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Tx Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_DIAGRAM_FEATURE_COUNT = UMLX_DIAGRAM_FEATURE_COUNT + 1;
+	int TX_DIAGRAM_FEATURE_COUNT = UMLX_DIAGRAM_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxNodeImpl <em>Tx Node</em>}' class.
@@ -699,13 +889,13 @@ public interface UMLXPackage extends EPackage {
 	int TX_NODE = 11;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_NODE__DIAGRAM = UMLX_NODE__DIAGRAM;
+	int TX_NODE__COMMENTS = UMLX_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -735,6 +925,79 @@ public interface UMLXPackage extends EPackage {
 	int TX_NODE_FEATURE_COUNT = UMLX_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl <em>Tx Import Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.umlx.impl.TxImportNodeImpl
+	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxImportNode()
+	 * @generated
+	 */
+	int TX_IMPORT_NODE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE__COMMENTS = TX_NODE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE__INCOMING_EDGES = TX_NODE__INCOMING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Outgoing Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE__OWNED_OUTGOING_EDGES = TX_NODE__OWNED_OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE__NAME = TX_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE__URI = TX_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tx Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE__TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Tx Import Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_IMPORT_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl <em>Tx Key Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -742,16 +1005,16 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxKeyNode()
 	 * @generated
 	 */
-	int TX_KEY_NODE = 9;
+	int TX_KEY_NODE = 10;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_KEY_NODE__DIAGRAM = TX_NODE__DIAGRAM;
+	int TX_KEY_NODE__COMMENTS = TX_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -772,22 +1035,22 @@ public interface UMLXPackage extends EPackage {
 	int TX_KEY_NODE__OWNED_OUTGOING_EDGES = TX_NODE__OWNED_OUTGOING_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Tx Transformation Node</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_KEY_NODE__TX_TRANSFORMATION_NODE = TX_NODE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Referred Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_KEY_NODE__REFERRED_CLASS = TX_NODE_FEATURE_COUNT + 1;
+	int TX_KEY_NODE__REFERRED_CLASS = TX_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tx Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_KEY_NODE__TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Tx Part Nodes</b></em>' containment reference list.
@@ -815,16 +1078,71 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPartNode()
 	 * @generated
 	 */
-	int TX_PART_NODE = 10;
+	int TX_PART_NODE = 13;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl <em>Tx Package Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl
+	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPackageNode()
+	 * @generated
+	 */
+	int TX_PACKAGE_NODE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_PART_NODE__DIAGRAM = TX_NODE__DIAGRAM;
+	int TX_PACKAGE_NODE__COMMENTS = TX_NODE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PACKAGE_NODE__INCOMING_EDGES = TX_NODE__INCOMING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Outgoing Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PACKAGE_NODE__OWNED_OUTGOING_EDGES = TX_NODE__OWNED_OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Referred Package</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PACKAGE_NODE__REFERRED_PACKAGE = TX_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Tx Package Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PACKAGE_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PART_NODE__COMMENTS = TX_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -881,134 +1199,6 @@ public interface UMLXPackage extends EPackage {
 	int TX_PART_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl <em>Tx Package Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl
-	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPackageNode()
-	 * @generated
-	 */
-	int TX_PACKAGE_NODE = 12;
-
-	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_PACKAGE_NODE__DIAGRAM = TX_NODE__DIAGRAM;
-
-	/**
-	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_PACKAGE_NODE__INCOMING_EDGES = TX_NODE__INCOMING_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Outgoing Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_PACKAGE_NODE__OWNED_OUTGOING_EDGES = TX_NODE__OWNED_OUTGOING_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Referred Package</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_PACKAGE_NODE__REFERRED_PACKAGE = TX_NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Tx Package Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_PACKAGE_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxTransformationNodeImpl <em>Tx Transformation Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.umlx.impl.TxTransformationNodeImpl
-	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxTransformationNode()
-	 * @generated
-	 */
-	int TX_TRANSFORMATION_NODE = 13;
-
-	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE__DIAGRAM = TX_NODE__DIAGRAM;
-
-	/**
-	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE__INCOMING_EDGES = TX_NODE__INCOMING_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Outgoing Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE__OWNED_OUTGOING_EDGES = TX_NODE__OWNED_OUTGOING_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE__NAME = TX_NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Tx Typed Model Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE__TX_TYPED_MODEL_NODES = TX_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Tx Key Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE__TX_KEY_NODES = TX_NODE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Tx Transformation Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TRANSFORMATION_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl <em>Tx Typed Model Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1019,13 +1209,13 @@ public interface UMLXPackage extends EPackage {
 	int TX_TYPED_MODEL_NODE = 14;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__DIAGRAM = TX_NODE__DIAGRAM;
+	int TX_TYPED_MODEL_NODE__COMMENTS = TX_NODE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -1046,31 +1236,13 @@ public interface UMLXPackage extends EPackage {
 	int TX_TYPED_MODEL_NODE__OWNED_OUTGOING_EDGES = TX_NODE__OWNED_OUTGOING_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Tx Transformation Node</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TYPED_MODEL_NODE__TX_TRANSFORMATION_NODE = TX_NODE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__NAME = TX_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Tx Package Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES = TX_NODE_FEATURE_COUNT + 2;
+	int TX_TYPED_MODEL_NODE__NAME = TX_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Check</b></em>' attribute.
@@ -1079,7 +1251,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__CHECK = TX_NODE_FEATURE_COUNT + 3;
+	int TX_TYPED_MODEL_NODE__CHECK = TX_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Enforce</b></em>' attribute.
@@ -1088,7 +1260,25 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__ENFORCE = TX_NODE_FEATURE_COUNT + 4;
+	int TX_TYPED_MODEL_NODE__ENFORCE = TX_NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tx Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_TYPED_MODEL_NODE__TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tx Package Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES = TX_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Tx Typed Model Node</em>' class.
@@ -1108,6 +1298,15 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	int UMLX_MODEL = 18;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UMLX_MODEL__COMMENTS = UMLX_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Diagrams</b></em>' containment reference list.
@@ -1170,6 +1369,28 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getRelDiagram_IsTop();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.RelDiagram#getOwnedNodes <em>Owned Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Nodes</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#getOwnedNodes()
+	 * @see #getRelDiagram()
+	 * @generated
+	 */
+	EReference getRelDiagram_OwnedNodes();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.RelDiagram#getTxDiagram <em>Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Tx Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#getTxDiagram()
+	 * @see #getRelDiagram()
+	 * @generated
+	 */
+	EReference getRelDiagram_TxDiagram();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelDomainNode <em>Rel Domain Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1212,6 +1433,17 @@ public interface UMLXPackage extends EPackage {
 	EClass getRelInvocationEdge();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelInvocationEdge#getReferredRelPatternNode <em>Referred Rel Pattern Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Rel Pattern Node</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelInvocationEdge#getReferredRelPatternNode()
+	 * @see #getRelInvocationEdge()
+	 * @generated
+	 */
+	EReference getRelInvocationEdge_ReferredRelPatternNode();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelInvocationNode <em>Rel Invocation Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1233,15 +1465,15 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getRelInvocationNode_IsThen();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelationNode <em>Referred Relation Node</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelDiagram <em>Referred Rel Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Relation Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelationNode()
+	 * @return the meta object for the reference '<em>Referred Rel Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelInvocationNode#getReferredRelDiagram()
 	 * @see #getRelInvocationNode()
 	 * @generated
 	 */
-	EReference getRelInvocationNode_ReferredRelationNode();
+	EReference getRelInvocationNode_ReferredRelDiagram();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelNode <em>Rel Node</em>}'.
@@ -1252,6 +1484,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRelNode();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.RelNode#getDiagram <em>Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelNode#getDiagram()
+	 * @see #getRelNode()
+	 * @generated
+	 */
+	EReference getRelNode_Diagram();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelPatternEdge <em>Rel Pattern Edge</em>}'.
@@ -1296,15 +1539,15 @@ public interface UMLXPackage extends EPackage {
 	EClass getRelPatternNode();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternNode#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRequired <em>Is Required</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternNode#getName()
+	 * @return the meta object for the attribute '<em>Is Required</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#isIsRequired()
 	 * @see #getRelPatternNode()
 	 * @generated
 	 */
-	EAttribute getRelPatternNode_Name();
+	EAttribute getRelPatternNode_IsRequired();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternNode#getReferredClass <em>Referred Class</em>}'.
@@ -1350,6 +1593,82 @@ public interface UMLXPackage extends EPackage {
 	EReference getTxDiagram_OwnedDiagrams();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.TxDiagram#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getPackage()
+	 * @see #getTxDiagram()
+	 * @generated
+	 */
+	EAttribute getTxDiagram_Package();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getTxImportNodes <em>Tx Import Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tx Import Nodes</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getTxImportNodes()
+	 * @see #getTxDiagram()
+	 * @generated
+	 */
+	EReference getTxDiagram_TxImportNodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getTxKeyNodes <em>Tx Key Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tx Key Nodes</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getTxKeyNodes()
+	 * @see #getTxDiagram()
+	 * @generated
+	 */
+	EReference getTxDiagram_TxKeyNodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getTxTypedModelNodes <em>Tx Typed Model Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tx Typed Model Nodes</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getTxTypedModelNodes()
+	 * @see #getTxDiagram()
+	 * @generated
+	 */
+	EReference getTxDiagram_TxTypedModelNodes();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxImportNode <em>Tx Import Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tx Import Node</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxImportNode
+	 * @generated
+	 */
+	EClass getTxImportNode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.TxImportNode#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxImportNode#getUri()
+	 * @see #getTxImportNode()
+	 * @generated
+	 */
+	EAttribute getTxImportNode_Uri();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxImportNode#getTxDiagram <em>Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Tx Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxImportNode#getTxDiagram()
+	 * @see #getTxImportNode()
+	 * @generated
+	 */
+	EReference getTxImportNode_TxDiagram();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxKeyNode <em>Tx Key Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1358,17 +1677,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTxKeyNode();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxKeyNode#getTxTransformationNode <em>Tx Transformation Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Tx Transformation Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxKeyNode#getTxTransformationNode()
-	 * @see #getTxKeyNode()
-	 * @generated
-	 */
-	EReference getTxKeyNode_TxTransformationNode();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredClass <em>Referred Class</em>}'.
@@ -1380,6 +1688,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxKeyNode_ReferredClass();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxKeyNode#getTxDiagram <em>Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Tx Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxKeyNode#getTxDiagram()
+	 * @see #getTxKeyNode()
+	 * @generated
+	 */
+	EReference getTxKeyNode_TxDiagram();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxKeyNode#getTxPartNodes <em>Tx Part Nodes</em>}'.
@@ -1467,49 +1786,6 @@ public interface UMLXPackage extends EPackage {
 	EReference getTxPackageNode_ReferredPackage();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxTransformationNode <em>Tx Transformation Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tx Transformation Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTransformationNode
-	 * @generated
-	 */
-	EClass getTxTransformationNode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.TxTransformationNode#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTransformationNode#getName()
-	 * @see #getTxTransformationNode()
-	 * @generated
-	 */
-	EAttribute getTxTransformationNode_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxTransformationNode#getTxTypedModelNodes <em>Tx Typed Model Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Tx Typed Model Nodes</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTransformationNode#getTxTypedModelNodes()
-	 * @see #getTxTransformationNode()
-	 * @generated
-	 */
-	EReference getTxTransformationNode_TxTypedModelNodes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxTransformationNode#getTxKeyNodes <em>Tx Key Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Tx Key Nodes</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTransformationNode#getTxKeyNodes()
-	 * @see #getTxTransformationNode()
-	 * @generated
-	 */
-	EReference getTxTransformationNode_TxKeyNodes();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxTypedModelNode <em>Tx Typed Model Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1518,28 +1794,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTxTypedModelNode();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxTransformationNode <em>Tx Transformation Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Tx Transformation Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getTxTransformationNode()
-	 * @see #getTxTypedModelNode()
-	 * @generated
-	 */
-	EReference getTxTypedModelNode_TxTransformationNode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getName()
-	 * @see #getTxTypedModelNode()
-	 * @generated
-	 */
-	EAttribute getTxTypedModelNode_Name();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxPackageNodes <em>Tx Package Nodes</em>}'.
@@ -1575,6 +1829,17 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getTxTypedModelNode_Enforce();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxDiagram <em>Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Tx Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getTxDiagram()
+	 * @see #getTxTypedModelNode()
+	 * @generated
+	 */
+	EReference getTxTypedModelNode_TxDiagram();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.UMLXDiagram <em>Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1583,28 +1848,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getUMLXDiagram();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.UMLXDiagram#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.umlx.UMLXDiagram#getName()
-	 * @see #getUMLXDiagram()
-	 * @generated
-	 */
-	EAttribute getUMLXDiagram_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.UMLXDiagram#getOwnedNodes <em>Owned Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Nodes</em>'.
-	 * @see org.eclipse.qvtd.umlx.UMLXDiagram#getOwnedNodes()
-	 * @see #getUMLXDiagram()
-	 * @generated
-	 */
-	EReference getUMLXDiagram_OwnedNodes();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.UMLXEdge <em>Edge</em>}'.
@@ -1649,6 +1892,17 @@ public interface UMLXPackage extends EPackage {
 	EClass getUMLXElement();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.umlx.UMLXElement#getComments <em>Comments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Comments</em>'.
+	 * @see org.eclipse.qvtd.umlx.UMLXElement#getComments()
+	 * @see #getUMLXElement()
+	 * @generated
+	 */
+	EAttribute getUMLXElement_Comments();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.UMLXModel <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1680,17 +1934,6 @@ public interface UMLXPackage extends EPackage {
 	EClass getUMLXNode();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.UMLXNode#getDiagram <em>Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Diagram</em>'.
-	 * @see org.eclipse.qvtd.umlx.UMLXNode#getDiagram()
-	 * @see #getUMLXNode()
-	 * @generated
-	 */
-	EReference getUMLXNode_Diagram();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.UMLXNode#getIncomingEdges <em>Incoming Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1711,6 +1954,27 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUMLXNode_OwnedOutgoingEdges();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.UMLXNamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Element</em>'.
+	 * @see org.eclipse.qvtd.umlx.UMLXNamedElement
+	 * @generated
+	 */
+	EClass getUMLXNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.UMLXNamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.umlx.UMLXNamedElement#getName()
+	 * @see #getUMLXNamedElement()
+	 * @generated
+	 */
+	EAttribute getUMLXNamedElement_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1772,6 +2036,22 @@ public interface UMLXPackage extends EPackage {
 		EAttribute REL_DIAGRAM__IS_TOP = eINSTANCE.getRelDiagram_IsTop();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_DIAGRAM__OWNED_NODES = eINSTANCE.getRelDiagram_OwnedNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Diagram</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_DIAGRAM__TX_DIAGRAM = eINSTANCE.getRelDiagram_TxDiagram();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl <em>Rel Domain Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1808,6 +2088,14 @@ public interface UMLXPackage extends EPackage {
 		EClass REL_INVOCATION_EDGE = eINSTANCE.getRelInvocationEdge();
 
 		/**
+		 * The meta object literal for the '<em><b>Referred Rel Pattern Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE = eINSTANCE.getRelInvocationEdge_ReferredRelPatternNode();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelInvocationNodeImpl <em>Rel Invocation Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1826,12 +2114,12 @@ public interface UMLXPackage extends EPackage {
 		EAttribute REL_INVOCATION_NODE__IS_THEN = eINSTANCE.getRelInvocationNode_IsThen();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Relation Node</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred Rel Diagram</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference REL_INVOCATION_NODE__REFERRED_RELATION_NODE = eINSTANCE.getRelInvocationNode_ReferredRelationNode();
+		EReference REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM = eINSTANCE.getRelInvocationNode_ReferredRelDiagram();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelNodeImpl <em>Rel Node</em>}' class.
@@ -1842,6 +2130,14 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REL_NODE = eINSTANCE.getRelNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Diagram</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_NODE__DIAGRAM = eINSTANCE.getRelNode_Diagram();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl <em>Rel Pattern Edge</em>}' class.
@@ -1880,12 +2176,12 @@ public interface UMLXPackage extends EPackage {
 		EClass REL_PATTERN_NODE = eINSTANCE.getRelPatternNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Required</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REL_PATTERN_NODE__NAME = eINSTANCE.getRelPatternNode_Name();
+		EAttribute REL_PATTERN_NODE__IS_REQUIRED = eINSTANCE.getRelPatternNode_IsRequired();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Class</b></em>' reference feature.
@@ -1922,6 +2218,64 @@ public interface UMLXPackage extends EPackage {
 		EReference TX_DIAGRAM__OWNED_DIAGRAMS = eINSTANCE.getTxDiagram_OwnedDiagrams();
 
 		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TX_DIAGRAM__PACKAGE = eINSTANCE.getTxDiagram_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Import Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_DIAGRAM__TX_IMPORT_NODES = eINSTANCE.getTxDiagram_TxImportNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Key Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_DIAGRAM__TX_KEY_NODES = eINSTANCE.getTxDiagram_TxKeyNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Typed Model Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_DIAGRAM__TX_TYPED_MODEL_NODES = eINSTANCE.getTxDiagram_TxTypedModelNodes();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl <em>Tx Import Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.umlx.impl.TxImportNodeImpl
+		 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxImportNode()
+		 * @generated
+		 */
+		EClass TX_IMPORT_NODE = eINSTANCE.getTxImportNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TX_IMPORT_NODE__URI = eINSTANCE.getTxImportNode_Uri();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Diagram</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_IMPORT_NODE__TX_DIAGRAM = eINSTANCE.getTxImportNode_TxDiagram();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl <em>Tx Key Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1932,20 +2286,20 @@ public interface UMLXPackage extends EPackage {
 		EClass TX_KEY_NODE = eINSTANCE.getTxKeyNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Tx Transformation Node</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_KEY_NODE__TX_TRANSFORMATION_NODE = eINSTANCE.getTxKeyNode_TxTransformationNode();
-
-		/**
 		 * The meta object literal for the '<em><b>Referred Class</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TX_KEY_NODE__REFERRED_CLASS = eINSTANCE.getTxKeyNode_ReferredClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Diagram</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_KEY_NODE__TX_DIAGRAM = eINSTANCE.getTxKeyNode_TxDiagram();
 
 		/**
 		 * The meta object literal for the '<em><b>Tx Part Nodes</b></em>' containment reference list feature.
@@ -2018,40 +2372,6 @@ public interface UMLXPackage extends EPackage {
 		EReference TX_PACKAGE_NODE__REFERRED_PACKAGE = eINSTANCE.getTxPackageNode_ReferredPackage();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxTransformationNodeImpl <em>Tx Transformation Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.umlx.impl.TxTransformationNodeImpl
-		 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxTransformationNode()
-		 * @generated
-		 */
-		EClass TX_TRANSFORMATION_NODE = eINSTANCE.getTxTransformationNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TX_TRANSFORMATION_NODE__NAME = eINSTANCE.getTxTransformationNode_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Tx Typed Model Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_TRANSFORMATION_NODE__TX_TYPED_MODEL_NODES = eINSTANCE.getTxTransformationNode_TxTypedModelNodes();
-
-		/**
-		 * The meta object literal for the '<em><b>Tx Key Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_TRANSFORMATION_NODE__TX_KEY_NODES = eINSTANCE.getTxTransformationNode_TxKeyNodes();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl <em>Tx Typed Model Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2060,22 +2380,6 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TX_TYPED_MODEL_NODE = eINSTANCE.getTxTypedModelNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Tx Transformation Node</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_TYPED_MODEL_NODE__TX_TRANSFORMATION_NODE = eINSTANCE.getTxTypedModelNode_TxTransformationNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TX_TYPED_MODEL_NODE__NAME = eINSTANCE.getTxTypedModelNode_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Tx Package Nodes</b></em>' containment reference list feature.
@@ -2102,6 +2406,14 @@ public interface UMLXPackage extends EPackage {
 		EAttribute TX_TYPED_MODEL_NODE__ENFORCE = eINSTANCE.getTxTypedModelNode_Enforce();
 
 		/**
+		 * The meta object literal for the '<em><b>Tx Diagram</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_TYPED_MODEL_NODE__TX_DIAGRAM = eINSTANCE.getTxTypedModelNode_TxDiagram();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.UMLXDiagramImpl <em>Diagram</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2110,22 +2422,6 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UMLX_DIAGRAM = eINSTANCE.getUMLXDiagram();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute UMLX_DIAGRAM__NAME = eINSTANCE.getUMLXDiagram_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UMLX_DIAGRAM__OWNED_NODES = eINSTANCE.getUMLXDiagram_OwnedNodes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.UMLXEdgeImpl <em>Edge</em>}' class.
@@ -2164,6 +2460,14 @@ public interface UMLXPackage extends EPackage {
 		EClass UMLX_ELEMENT = eINSTANCE.getUMLXElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Comments</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UMLX_ELEMENT__COMMENTS = eINSTANCE.getUMLXElement_Comments();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.UMLXModelImpl <em>Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2192,14 +2496,6 @@ public interface UMLXPackage extends EPackage {
 		EClass UMLX_NODE = eINSTANCE.getUMLXNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Diagram</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UMLX_NODE__DIAGRAM = eINSTANCE.getUMLXNode_Diagram();
-
-		/**
 		 * The meta object literal for the '<em><b>Incoming Edges</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2214,6 +2510,24 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference UMLX_NODE__OWNED_OUTGOING_EDGES = eINSTANCE.getUMLXNode_OwnedOutgoingEdges();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.UMLXNamedElementImpl <em>Named Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.umlx.impl.UMLXNamedElementImpl
+		 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXNamedElement()
+		 * @generated
+		 */
+		EClass UMLX_NAMED_ELEMENT = eINSTANCE.getUMLXNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UMLX_NAMED_ELEMENT__NAME = eINSTANCE.getUMLXNamedElement_Name();
 
 	}
 

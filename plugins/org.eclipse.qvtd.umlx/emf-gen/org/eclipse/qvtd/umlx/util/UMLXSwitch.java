@@ -87,6 +87,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				RelDiagram relDiagram = (RelDiagram)theEObject;
 				T result = caseRelDiagram(relDiagram);
 				if (result == null) result = caseUMLXDiagram(relDiagram);
+				if (result == null) result = caseUMLXNamedElement(relDiagram);
 				if (result == null) result = caseUMLXElement(relDiagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -137,6 +138,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				RelPatternNode relPatternNode = (RelPatternNode)theEObject;
 				T result = caseRelPatternNode(relPatternNode);
 				if (result == null) result = caseRelNode(relPatternNode);
+				if (result == null) result = caseUMLXNamedElement(relPatternNode);
 				if (result == null) result = caseUMLXNode(relPatternNode);
 				if (result == null) result = caseUMLXElement(relPatternNode);
 				if (result == null) result = defaultCase(theEObject);
@@ -146,7 +148,18 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				TxDiagram txDiagram = (TxDiagram)theEObject;
 				T result = caseTxDiagram(txDiagram);
 				if (result == null) result = caseUMLXDiagram(txDiagram);
+				if (result == null) result = caseUMLXNamedElement(txDiagram);
 				if (result == null) result = caseUMLXElement(txDiagram);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UMLXPackage.TX_IMPORT_NODE: {
+				TxImportNode txImportNode = (TxImportNode)theEObject;
+				T result = caseTxImportNode(txImportNode);
+				if (result == null) result = caseTxNode(txImportNode);
+				if (result == null) result = caseUMLXNamedElement(txImportNode);
+				if (result == null) result = caseUMLXNode(txImportNode);
+				if (result == null) result = caseUMLXElement(txImportNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,15 +169,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTxNode(txKeyNode);
 				if (result == null) result = caseUMLXNode(txKeyNode);
 				if (result == null) result = caseUMLXElement(txKeyNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case UMLXPackage.TX_PART_NODE: {
-				TxPartNode txPartNode = (TxPartNode)theEObject;
-				T result = caseTxPartNode(txPartNode);
-				if (result == null) result = caseTxNode(txPartNode);
-				if (result == null) result = caseUMLXNode(txPartNode);
-				if (result == null) result = caseUMLXElement(txPartNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,12 +189,12 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_TRANSFORMATION_NODE: {
-				TxTransformationNode txTransformationNode = (TxTransformationNode)theEObject;
-				T result = caseTxTransformationNode(txTransformationNode);
-				if (result == null) result = caseTxNode(txTransformationNode);
-				if (result == null) result = caseUMLXNode(txTransformationNode);
-				if (result == null) result = caseUMLXElement(txTransformationNode);
+			case UMLXPackage.TX_PART_NODE: {
+				TxPartNode txPartNode = (TxPartNode)theEObject;
+				T result = caseTxPartNode(txPartNode);
+				if (result == null) result = caseTxNode(txPartNode);
+				if (result == null) result = caseUMLXNode(txPartNode);
+				if (result == null) result = caseUMLXElement(txPartNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -198,6 +202,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				TxTypedModelNode txTypedModelNode = (TxTypedModelNode)theEObject;
 				T result = caseTxTypedModelNode(txTypedModelNode);
 				if (result == null) result = caseTxNode(txTypedModelNode);
+				if (result == null) result = caseUMLXNamedElement(txTypedModelNode);
 				if (result == null) result = caseUMLXNode(txTypedModelNode);
 				if (result == null) result = caseUMLXElement(txTypedModelNode);
 				if (result == null) result = defaultCase(theEObject);
@@ -206,6 +211,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 			case UMLXPackage.UMLX_DIAGRAM: {
 				UMLXDiagram umlxDiagram = (UMLXDiagram)theEObject;
 				T result = caseUMLXDiagram(umlxDiagram);
+				if (result == null) result = caseUMLXNamedElement(umlxDiagram);
 				if (result == null) result = caseUMLXElement(umlxDiagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -227,6 +233,13 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				UMLXModel umlxModel = (UMLXModel)theEObject;
 				T result = caseUMLXModel(umlxModel);
 				if (result == null) result = caseUMLXElement(umlxModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UMLXPackage.UMLX_NAMED_ELEMENT: {
+				UMLXNamedElement umlxNamedElement = (UMLXNamedElement)theEObject;
+				T result = caseUMLXNamedElement(umlxNamedElement);
+				if (result == null) result = caseUMLXElement(umlxNamedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -377,6 +390,21 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tx Import Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tx Import Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTxImportNode(TxImportNode object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tx Key Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -433,21 +461,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTxPackageNode(TxPackageNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tx Transformation Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tx Transformation Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTxTransformationNode(TxTransformationNode object) {
 		return null;
 	}
 
@@ -538,6 +551,21 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUMLXNode(UMLXNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUMLXNamedElement(UMLXNamedElement object) {
 		return null;
 	}
 

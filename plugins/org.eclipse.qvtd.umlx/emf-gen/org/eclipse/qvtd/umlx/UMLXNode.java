@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.UMLXNode#getDiagram <em>Diagram</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.UMLXNode#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.UMLXNode#getOwnedOutgoingEdges <em>Owned Outgoing Edges</em>}</li>
  * </ul>
@@ -30,33 +29,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface UMLXNode extends UMLXElement {
-	/**
-	 * Returns the value of the '<em><b>Diagram</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.UMLXDiagram#getOwnedNodes <em>Owned Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Diagram</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Diagram</em>' container reference.
-	 * @see #setDiagram(UMLXDiagram)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXNode_Diagram()
-	 * @see org.eclipse.qvtd.umlx.UMLXDiagram#getOwnedNodes
-	 * @generated
-	 */
-	UMLXDiagram getDiagram();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.UMLXNode#getDiagram <em>Diagram</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Diagram</em>' container reference.
-	 * @see #getDiagram()
-	 * @generated
-	 */
-	void setDiagram(UMLXDiagram value);
-
 	/**
 	 * Returns the value of the '<em><b>Incoming Edges</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.UMLXEdge}.

@@ -16,16 +16,15 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
-import org.eclipse.qvtd.umlx.TxTransformationNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
@@ -37,8 +36,8 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getTxTransformationNode <em>Tx Transformation Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getTxDiagram <em>Tx Diagram</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getTxPartNodes <em>Tx Part Nodes</em>}</li>
  * </ul>
  *
@@ -53,7 +52,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @generated
 	 * @ordered
 	 */
-	protected EClassifier referredClass;
+	protected EClass referredClass;
 
 	/**
 	 * The cached value of the '{@link #getTxPartNodes() <em>Tx Part Nodes</em>}' containment reference list.
@@ -90,53 +89,10 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @generated
 	 */
 	@Override
-	public TxTransformationNode getTxTransformationNode() {
-		if (eContainerFeatureID() != UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE) return null;
-		return (TxTransformationNode)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTxTransformationNode(TxTransformationNode newTxTransformationNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTxTransformationNode, UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTxTransformationNode(TxTransformationNode newTxTransformationNode) {
-		if (newTxTransformationNode != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE && newTxTransformationNode != null)) {
-			if (EcoreUtil.isAncestor(this, newTxTransformationNode))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTxTransformationNode != null)
-				msgs = ((InternalEObject)newTxTransformationNode).eInverseAdd(this, UMLXPackage.TX_TRANSFORMATION_NODE__TX_KEY_NODES, TxTransformationNode.class, msgs);
-			msgs = basicSetTxTransformationNode(newTxTransformationNode, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE, newTxTransformationNode, newTxTransformationNode));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClassifier getReferredClass() {
+	public EClass getReferredClass() {
 		if (referredClass != null && referredClass.eIsProxy()) {
 			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			referredClass = (EClassifier)eResolveProxy(oldReferredClass);
+			referredClass = (EClass)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_KEY_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
@@ -150,7 +106,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClassifier basicGetReferredClass() {
+	public EClass basicGetReferredClass() {
 		return referredClass;
 	}
 
@@ -160,11 +116,54 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredClass(EClassifier newReferredClass) {
-		EClassifier oldReferredClass = referredClass;
+	public void setReferredClass(EClass newReferredClass) {
+		EClass oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_KEY_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TxDiagram getTxDiagram() {
+		if (eContainerFeatureID() != UMLXPackage.TX_KEY_NODE__TX_DIAGRAM) return null;
+		return (TxDiagram)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTxDiagram(TxDiagram newTxDiagram, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newTxDiagram, UMLXPackage.TX_KEY_NODE__TX_DIAGRAM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTxDiagram(TxDiagram newTxDiagram) {
+		if (newTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_KEY_NODE__TX_DIAGRAM && newTxDiagram != null)) {
+			if (EcoreUtil.isAncestor(this, newTxDiagram))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newTxDiagram != null)
+				msgs = ((InternalEObject)newTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__TX_KEY_NODES, TxDiagram.class, msgs);
+			msgs = basicSetTxDiagram(newTxDiagram, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_KEY_NODE__TX_DIAGRAM, newTxDiagram, newTxDiagram));
 	}
 
 	/**
@@ -189,10 +188,10 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTxTransformationNode((TxTransformationNode)otherEnd, msgs);
+				return basicSetTxDiagram((TxDiagram)otherEnd, msgs);
 			case UMLXPackage.TX_KEY_NODE__TX_PART_NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTxPartNodes()).basicAdd(otherEnd, msgs);
 		}
@@ -207,8 +206,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
-				return basicSetTxTransformationNode(null, msgs);
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
+				return basicSetTxDiagram(null, msgs);
 			case UMLXPackage.TX_KEY_NODE__TX_PART_NODES:
 				return ((InternalEList<?>)getTxPartNodes()).basicRemove(otherEnd, msgs);
 		}
@@ -223,8 +222,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_TRANSFORMATION_NODE__TX_KEY_NODES, TxTransformationNode.class, msgs);
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__TX_KEY_NODES, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -237,11 +236,11 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
-				return getTxTransformationNode();
 			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
+				return getTxDiagram();
 			case UMLXPackage.TX_KEY_NODE__TX_PART_NODES:
 				return getTxPartNodes();
 		}
@@ -257,11 +256,11 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
-				setTxTransformationNode((TxTransformationNode)newValue);
-				return;
 			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
-				setReferredClass((EClassifier)newValue);
+				setReferredClass((EClass)newValue);
+				return;
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
+				setTxDiagram((TxDiagram)newValue);
 				return;
 			case UMLXPackage.TX_KEY_NODE__TX_PART_NODES:
 				getTxPartNodes().clear();
@@ -279,11 +278,11 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
-				setTxTransformationNode((TxTransformationNode)null);
-				return;
 			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
-				setReferredClass((EClassifier)null);
+				setReferredClass((EClass)null);
+				return;
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
+				setTxDiagram((TxDiagram)null);
 				return;
 			case UMLXPackage.TX_KEY_NODE__TX_PART_NODES:
 				getTxPartNodes().clear();
@@ -300,10 +299,10 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_KEY_NODE__TX_TRANSFORMATION_NODE:
-				return getTxTransformationNode() != null;
 			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
 				return referredClass != null;
+			case UMLXPackage.TX_KEY_NODE__TX_DIAGRAM:
+				return getTxDiagram() != null;
 			case UMLXPackage.TX_KEY_NODE__TX_PART_NODES:
 				return txPartNodes != null && !txPartNodes.isEmpty();
 		}

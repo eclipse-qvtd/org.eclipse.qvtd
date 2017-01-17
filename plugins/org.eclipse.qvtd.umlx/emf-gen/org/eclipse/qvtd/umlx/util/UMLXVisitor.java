@@ -50,15 +50,16 @@ public interface UMLXVisitor<R>
 	R visitRelPatternEdge(org.eclipse.qvtd.umlx.@NonNull RelPatternEdge object);
 	R visitRelPatternNode(org.eclipse.qvtd.umlx.@NonNull RelPatternNode object);
 	R visitTxDiagram(org.eclipse.qvtd.umlx.@NonNull TxDiagram object);
+	R visitTxImportNode(org.eclipse.qvtd.umlx.@NonNull TxImportNode object);
 	R visitTxKeyNode(org.eclipse.qvtd.umlx.@NonNull TxKeyNode object);
 	R visitTxNode(org.eclipse.qvtd.umlx.@NonNull TxNode object);
 	R visitTxPackageNode(org.eclipse.qvtd.umlx.@NonNull TxPackageNode object);
 	R visitTxPartNode(org.eclipse.qvtd.umlx.@NonNull TxPartNode object);
-	R visitTxTransformationNode(org.eclipse.qvtd.umlx.@NonNull TxTransformationNode object);
 	R visitTxTypedModelNode(org.eclipse.qvtd.umlx.@NonNull TxTypedModelNode object);
 	R visitUMLXDiagram(org.eclipse.qvtd.umlx.@NonNull UMLXDiagram object);
 	R visitUMLXEdge(org.eclipse.qvtd.umlx.@NonNull UMLXEdge object);
 	R visitUMLXElement(org.eclipse.qvtd.umlx.@NonNull UMLXElement object);
 	R visitUMLXModel(org.eclipse.qvtd.umlx.@NonNull UMLXModel object);
+	R visitUMLXNamedElement(org.eclipse.qvtd.umlx.@NonNull UMLXNamedElement object);
 	R visitUMLXNode(org.eclipse.qvtd.umlx.@NonNull UMLXNode object);
 }
