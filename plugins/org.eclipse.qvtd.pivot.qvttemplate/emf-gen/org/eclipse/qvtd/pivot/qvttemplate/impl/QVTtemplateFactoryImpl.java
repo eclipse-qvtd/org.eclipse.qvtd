@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -79,7 +80,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * @generated
 	 */
 	@Override
-	public CollectionTemplateExp createCollectionTemplateExp() {
+	public @NonNull CollectionTemplateExp createCollectionTemplateExp() {
 		CollectionTemplateExpImpl collectionTemplateExp = new CollectionTemplateExpImpl();
 		return collectionTemplateExp;
 	}
@@ -90,7 +91,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * @generated
 	 */
 	@Override
-	public ObjectTemplateExp createObjectTemplateExp() {
+	public @NonNull ObjectTemplateExp createObjectTemplateExp() {
 		ObjectTemplateExpImpl objectTemplateExp = new ObjectTemplateExpImpl();
 		return objectTemplateExp;
 	}
@@ -101,7 +102,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * @generated
 	 */
 	@Override
-	public PropertyTemplateItem createPropertyTemplateItem() {
+	public @NonNull PropertyTemplateItem createPropertyTemplateItem() {
 		PropertyTemplateItemImpl propertyTemplateItem = new PropertyTemplateItemImpl();
 		return propertyTemplateItem;
 	}

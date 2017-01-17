@@ -32,7 +32,6 @@ import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
-import org.eclipse.qvtd.umlx.TxTransformationNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXNode;
 
@@ -89,7 +88,7 @@ public class UMLXServices
 	 */
 	public @NonNull String umlxInvocationNodeLabel(EObject context) {
 		if (context instanceof RelInvocationNode) {
-			RelDiagram relDiagram = ((RelInvocationNode)context).getReferredRelationNode();
+			RelDiagram relDiagram = ((RelInvocationNode)context).getReferredRelDiagram();
 			if (relDiagram != null) {
 				return String.valueOf(relDiagram.getName());
 			}
@@ -227,9 +226,11 @@ public class UMLXServices
 
 	public @NonNull Collection<EObject> umlxRelDiagramSelectExpression(EObject context) {
 		if (context instanceof RelDiagram) {
-			return (Collection<EObject>)(Object)((RelDiagram)context).getOwnedNodes();
+			@SuppressWarnings("unchecked")
+			Collection<EObject> castResult = (Collection<EObject>)(Object)((RelDiagram)context).getOwnedNodes();
+			return castResult;
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	public @NonNull String umlxRelDiagramTitleExpression(EObject context) {
@@ -270,12 +271,9 @@ public class UMLXServices
 
 	public @NonNull Collection<@NonNull EObject> umlxTxTransformationNodeCandidates(EObject context) {
 		List<@NonNull EObject> candidates = new ArrayList<@NonNull EObject>();
-		if (context instanceof TxTransformationNode) {
-			candidates.addAll(ClassUtil.nullFree(((TxTransformationNode)context).getTxKeyNodes()));
-			candidates.addAll(ClassUtil.nullFree(((TxTransformationNode)context).getTxTypedModelNodes()));
-		}
-		else if (context instanceof TxDiagram) {
-			candidates.addAll(ClassUtil.nullFree(((TxDiagram)context).getOwnedNodes()));
+		if (context instanceof TxDiagram) {
+			candidates.addAll(ClassUtil.nullFree(((TxDiagram)context).getTxKeyNodes()));
+			candidates.addAll(ClassUtil.nullFree(((TxDiagram)context).getTxTypedModelNodes()));
 		}
 		return candidates;
 	}

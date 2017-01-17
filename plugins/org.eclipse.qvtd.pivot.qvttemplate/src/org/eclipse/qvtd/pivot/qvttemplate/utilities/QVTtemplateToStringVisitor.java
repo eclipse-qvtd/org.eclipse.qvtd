@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -81,12 +83,15 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 		safeVisit(object.getBindsTo());
 		append("{");
 		boolean isFirst = true;
-		for (PropertyTemplateItem part : object.getPart()) {
-			if (!isFirst) {
-				append(", ");
+		List<PropertyTemplateItem> parts = object.getPart();
+		if (parts != null) {
+			for (PropertyTemplateItem part : parts) {
+				if (!isFirst) {
+					append(", ");
+				}
+				safeVisit(part);
+				isFirst = false;
 			}
-			safeVisit(part);
-			isFirst = false;
 		}
 		append("}");
 		return null;
@@ -96,7 +101,7 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 	public String visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
 		appendName(object.getReferredProperty());
 		append(" = ");
-        safeVisit(object.getValue());
+		safeVisit(object.getValue());
 		return null;
 	}
 

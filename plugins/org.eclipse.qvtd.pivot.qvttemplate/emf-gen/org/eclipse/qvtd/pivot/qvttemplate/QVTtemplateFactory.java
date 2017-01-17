@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvttemplate;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ public interface QVTtemplateFactory extends EFactory {
 	 * @return a new object of class '<em>Collection Template Exp</em>'.
 	 * @generated
 	 */
-	CollectionTemplateExp createCollectionTemplateExp();
+	@NonNull CollectionTemplateExp createCollectionTemplateExp();
 
 	/**
 	 * Returns a new object of class '<em>Object Template Exp</em>'.
@@ -45,7 +46,7 @@ public interface QVTtemplateFactory extends EFactory {
 	 * @return a new object of class '<em>Object Template Exp</em>'.
 	 * @generated
 	 */
-	ObjectTemplateExp createObjectTemplateExp();
+	@NonNull ObjectTemplateExp createObjectTemplateExp();
 
 	/**
 	 * Returns a new object of class '<em>Property Template Item</em>'.
@@ -54,7 +55,7 @@ public interface QVTtemplateFactory extends EFactory {
 	 * @return a new object of class '<em>Property Template Item</em>'.
 	 * @generated
 	 */
-	PropertyTemplateItem createPropertyTemplateItem();
+	@NonNull PropertyTemplateItem createPropertyTemplateItem();
 
 	/**
 	 * Returns the package supported by this factory.

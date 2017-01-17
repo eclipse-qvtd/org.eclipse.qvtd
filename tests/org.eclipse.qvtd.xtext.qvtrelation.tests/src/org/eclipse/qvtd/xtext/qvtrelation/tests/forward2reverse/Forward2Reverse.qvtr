@@ -13,18 +13,19 @@
 --import listMM : '../../../../../../../../../org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/forward2reverse/DoublyLinkedList.ecore#/'; 
 import listMM : 'DoublyLinkedList.ecore#/'; 
 
+package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 /**
  * Transform a hierarchical StateMachine into a flat StateMachine.
  */
-package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 	transformation Forward2Reverse(forward:listMM, reverse:listMM)
 	{
 		/**
 		 *  Map each hierarchical StateMachine to a flat StateMachine
 		 */
 		top relation list2list {
+			listName : String;
 			domain forward forwardList : DoublyLinkedList {
-				name = listName : String{}
+				name = listName
 			};	   
 			enforce domain reverse reverseList : DoublyLinkedList {
 				name = listName
@@ -49,9 +50,10 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 		 *  Map each Leaf State to a Flat State in the corresponding StateMachine.
 		 */
 		top relation element2element {
+			elementName : String;
 			domain forward forwardElement : Element {
 				list = forwardList : DoublyLinkedList{},
-				name = elementName : String{},
+				name = elementName,
 				target = forwardTarget : Element{}
 			};
 			enforce domain reverse reverseElement : Element {

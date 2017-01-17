@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -42,7 +41,7 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	{
 		protected QVTrelationToStringFactory() {
 			ToStringVisitor.addFactory(this);
-			QVTbaseToStringVisitor.FACTORY.getClass();
+			QVTtemplateToStringVisitor.FACTORY.getClass();
 		}
 
 		@Override

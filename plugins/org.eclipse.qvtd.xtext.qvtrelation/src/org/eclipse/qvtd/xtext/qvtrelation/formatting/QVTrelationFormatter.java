@@ -152,9 +152,10 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			RelationCSElements a = f.getRelationCSAccess();
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_10());
 			setBraces(c, a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_10());
-			c.setLinewrap(2).before(a.getAlternatives_7());
-			c.setLinewrap(2).before(a.getOwnedWhenAssignment_8());
-			c.setLinewrap(2).before(a.getOwnedWhereAssignment_9());
+			c.setLinewrap(1).between(a.getOwnedVarDeclarationsAssignment_6(), a.getAlternatives_7());
+			c.setLinewrap(1).between(a.getAlternatives_7(), a.getAlternatives_7());
+			c.setLinewrap(1).between(a.getAlternatives_7(), a.getOwnedWhenAssignment_8());
+			c.setLinewrap(1).between(a.getOwnedWhenAssignment_8(), a.getOwnedWhereAssignment_9());
 		}
 		{
 			ScopeNameCSElements a = f.getScopeNameCSAccess();

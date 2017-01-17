@@ -14,10 +14,15 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.umlx.qvtr2umlx.QVTr2UMLX;
+import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrTestUtil;
 
 /**
@@ -25,10 +30,34 @@ import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrTestUtil;
  */
 public class UMLXTests extends LoadTestCase
 {
-	protected void doLoad_Concrete(URI inputURI, URI pivotURI) throws IOException {
+	protected void doLoad_QVTr(URI inputURI, URI pivotURI) throws IOException {
 		OCL ocl = OCL.newInstance(getProjectMap());
 		doLoad_Concrete(ocl, inputURI, pivotURI, null);
 		ocl.dispose();
+	}
+
+	protected void doRoundTripTest(@NonNull URI inputURI1, @NonNull URI pivotURI1, @NonNull URI umlxURI, @NonNull URI pivotURI2) throws Exception {
+		OCL ocl1 = OCL.newInstance(getProjectMap());
+		Resource qvtrResource1 = doLoad_Concrete(ocl1, inputURI1, pivotURI1, null);
+		Resource umlxResource1 = qvtrResource1.getResourceSet().createResource(umlxURI);
+		QVTr2UMLX qvtr2umlx = new QVTr2UMLX(ocl1.getEnvironmentFactory(), qvtrResource1, umlxResource1);
+		qvtr2umlx.transform();
+		umlxResource1.save(null);
+		//
+		OCL ocl2 = OCL.newInstance(getProjectMap());
+		Resource umlxResource2 = ocl2.getResourceSet().getResource(umlxURI, true);
+		Resource qvtrResource2 = ocl2.getMetamodelManager().getASResourceSet().createResource(pivotURI2);
+		UMLX2QVTr umlx2qvtr = new UMLX2QVTr(ocl2.getEnvironmentFactory(), umlxResource2, qvtrResource2);
+		umlx2qvtr.transform();
+		qvtrResource2.save(TestsXMLUtil.defaultSavingOptions);
+		//
+		Model asModel1 = PivotUtil.getModel(qvtrResource1);
+		Model asModel2 = PivotUtil.getModel(qvtrResource2);
+		asModel2.setName(asModel1.getName());
+		asModel2.setExternalURI(asModel1.getExternalURI());
+		assertSameModel(qvtrResource1, qvtrResource2);
+		ocl1.dispose();
+		ocl2.dispose();
 	}
 
 	@Override
@@ -63,7 +92,7 @@ public class UMLXTests extends LoadTestCase
 		ocl.dispose();
 	}
 
-	public void testUMLXLoad_RelToCore_qvtr() throws IOException, InterruptedException {
+	/*	public void testUMLXLoad_RelToCore_qvtr() throws IOException, InterruptedException {
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
 		URI pivotURI = getProjectFileURI("RelToCore.qvtras");
 		URI umlxURI = getProjectFileURI("RelToCore.umlx");
@@ -74,9 +103,9 @@ public class UMLXTests extends LoadTestCase
 		qvtr2umlx.transform();
 		umlxResource.save(null);
 		ocl.dispose();
-	}
+	} */
 
-	public void testUMLXLoad_SimplerRelToCore_qvtr() throws IOException, InterruptedException {
+	/*	public void testUMLXLoad_SimplerRelToCore_qvtr() throws IOException, InterruptedException {
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/SimplerRelToCore.qvtr", true);
 		URI pivotURI = getProjectFileURI("SimplerRelToCore.qvtras");
 		URI umlxURI = getProjectFileURI("SimplerRelToCore.umlx");
@@ -87,5 +116,30 @@ public class UMLXTests extends LoadTestCase
 		qvtr2umlx.transform();
 		umlxResource.save(null);
 		ocl.dispose();
+	} */
+
+	public void testUMLXRoundtrip_Forward2Reverse_qvtr() throws Exception {
+		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse.qvtr", true);
+		URI pivotURI1 = getProjectFileURI("Forward2Reverse.qvtras");
+		URI umlxURI = getProjectFileURI("Forward2Reverse.umlx");
+		URI pivotURI2 = getProjectFileURI("Forward2Reverse.regenerated.qvtras");
+		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2);
 	}
+
+	public void testUMLXRoundtrip_Keys_qvtr() throws Exception {
+		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/models/Keys.qvtr", true);
+		URI pivotURI1 = getProjectFileURI("Keys.qvtras");
+		URI umlxURI = getProjectFileURI("Keys.umlx");
+		URI pivotURI2 = getProjectFileURI("Keys.regenerated.qvtras");
+		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2);
+	}
+
+	/*	public void testUMLXRoundtrip_SeqToStm_qvtr() throws Exception {
+		BaseLinkingService.DEBUG_RETRY.setState(true);
+		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm.qvtr", true);
+		URI pivotURI1 = getProjectFileURI("SeqToStm.qvtras");
+		URI umlxURI = getProjectFileURI("SeqToStm.umlx");
+		URI pivotURI2 = getProjectFileURI("SeqToStm.regenerated.qvtras");
+		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2);
+	} */
 }

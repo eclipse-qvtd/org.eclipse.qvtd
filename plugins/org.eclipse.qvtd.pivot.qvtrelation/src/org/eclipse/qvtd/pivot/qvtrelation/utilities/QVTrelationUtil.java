@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
@@ -44,8 +45,32 @@ public class QVTrelationUtil extends QVTtemplateUtil
 {
 	public static class Internal extends QVTtemplateUtil.Internal
 	{
-		public static List<@NonNull OCLExpression> getOwnedArgumentsList(@NonNull RelationCallExp rInvocation) {
+		public static @NonNull List<@NonNull Variable> getBindsToList(@NonNull DomainPattern rDomainPattern) {
+			return ClassUtil.nullFree(rDomainPattern.getBindsTo());
+		}
+
+		public static @NonNull List<@NonNull OCLExpression> getOwnedArgumentsList(@NonNull RelationCallExp rInvocation) {
 			return ClassUtil.nullFree(rInvocation.getArgument());
+		}
+
+		public static @NonNull List<@NonNull Domain> getOwnedDomainsList(@NonNull Relation rRelation) {
+			return ClassUtil.nullFree(rRelation.getDomain());
+		}
+
+		public static @NonNull List<@NonNull Key> getOwnedKeysList(@NonNull RelationalTransformation rRelationalTransformation) {
+			return ClassUtil.nullFree(rRelationalTransformation.getOwnedKey());
+		}
+
+		public static @NonNull List<@NonNull Property> getOwnedPartsList(@NonNull Key rKey) {
+			return ClassUtil.nullFree(rKey.getPart());
+		}
+
+		public static @NonNull List<@NonNull Rule> getOwnedRelationsList(@NonNull RelationalTransformation rRelationalTransformation) {
+			return ClassUtil.nullFree(rRelationalTransformation.getRule());
+		}
+
+		public static @NonNull List<@NonNull Variable> getOwnedVariablesList(@NonNull Relation rRelation) {
+			return ClassUtil.nullFree(rRelation.getVariable());
 		}
 	}
 

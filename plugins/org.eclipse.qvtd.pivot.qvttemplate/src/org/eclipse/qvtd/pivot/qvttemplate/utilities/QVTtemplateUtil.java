@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -25,6 +27,9 @@ public class QVTtemplateUtil extends QVTbaseUtil
 
 	public static class Internal extends QVTbaseUtil.Internal
 	{
+		public static @NonNull List<@NonNull PropertyTemplateItem> getOwnedPartsList(@NonNull ObjectTemplateExp rObjectTemplateExp) {
+			return ClassUtil.nullFree(rObjectTemplateExp.getPart());
+		}
 	}
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";

@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)",
 Export-Package: org.eclipse.qvtd.umlx,
  org.eclipse.qvtd.umlx.impl,
  org.eclipse.qvtd.umlx.qvtr2umlx,
+ org.eclipse.qvtd.umlx.umlx2qvtr,
  org.eclipse.qvtd.umlx.util,
  org.eclipse.qvtd.umlx.utilities
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

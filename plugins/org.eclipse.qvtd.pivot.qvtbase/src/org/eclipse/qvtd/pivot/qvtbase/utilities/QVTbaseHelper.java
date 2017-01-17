@@ -14,7 +14,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -24,6 +26,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+
+import com.google.common.collect.Iterables;
 
 /**
  * QVTbaseHelper provides helper routines to assist creation of QVTbase model elements.
@@ -32,6 +37,12 @@ public class QVTbaseHelper extends PivotHelper
 {
 	public QVTbaseHelper(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
+	}
+
+	public @NonNull Comment createComment(@NonNull String comment) {
+		Comment asComment = PivotFactory.eINSTANCE.createComment();
+		asComment.setBody(comment);
+		return asComment;
 	}
 
 	public @NonNull Function createFunction(@NonNull String name, @NonNull Type returnType, boolean returnIsRequired, @Nullable List<@NonNull FunctionParameter> asParameters) {
@@ -59,5 +70,12 @@ public class QVTbaseHelper extends PivotHelper
 		Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		asPredicate.setConditionExpression(asConditionExpression);
 		return asPredicate;
+	}
+
+	public @NonNull TypedModel createTypedModel(@NonNull String name, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> usedPackages) {
+		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+		asTypedModel.setName(name);
+		Iterables.addAll(QVTbaseUtil.Internal.getUsedPackagesList(asTypedModel), usedPackages);
+		return asTypedModel;
 	}
 }

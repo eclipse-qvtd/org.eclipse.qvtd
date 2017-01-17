@@ -23,6 +23,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Comment;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -68,12 +71,16 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static class Internal extends PivotUtilInternal
 	{
-		public static @NonNull List<@NonNull Operation> getOwnedOperationsList(org.eclipse.ocl.pivot.@NonNull Class asClass) {
-			return ClassUtil.nullFree(asClass.getOwnedOperations());
+		public static @NonNull List<@NonNull TypedModel> getModelParameterList(@NonNull Transformation asTransformation) {
+			return ClassUtil.nullFree(asTransformation.getModelParameter());
 		}
 
 		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
 			return ClassUtil.nullFree(asPattern.getPredicate());
+		}
+
+		public static @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackagesList(@NonNull TypedModel asTypedModel) {
+			return ClassUtil.nullFree(asTypedModel.getUsedPackage());
 		}
 	}
 
@@ -207,7 +214,7 @@ public class QVTbaseUtil extends PivotUtil
 			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
 			ownedContext.setName("this");
 			ownedContext.setType(transformation);		// FIXME promote API
-			//           	ownedContext.setTypeValue(transformation);
+			ownedContext.setTypeValue(transformation);
 			ownedContext.setIsRequired(true);
 			transformation.setOwnedContext(ownedContext);
 		}
@@ -289,6 +296,14 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
 	}
 
+	public static @NonNull Iterable<@NonNull Comment> getOwnedComments(@NonNull Element asElement) {
+		return ClassUtil.nullFree(asElement.getOwnedComments());
+	}
+
+	public static @NonNull Iterable<@NonNull Import> getOwnedImports(@NonNull Model asModel) {
+		return ClassUtil.nullFree(asModel.getOwnedImports());
+	}
+
 	public static @NonNull List<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {
 		return ClassUtil.nullFree(asTransformation.getOwnedOperations());
 	}
@@ -296,6 +311,10 @@ public class QVTbaseUtil extends PivotUtil
 	//	public static @NonNull List<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
 	//		return ClassUtil.nullFree(asPattern.getPredicate());
 	//	}
+
+	public static org.eclipse.ocl.pivot.@NonNull Package getOwningPackage(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		return ClassUtil.nonNullState(asClass.getOwningPackage());
+	}
 
 	public static @NonNull Iterable<@NonNull Predicate> getPredicates(@NonNull Pattern asPattern) {
 		return ClassUtil.nullFree(asPattern.getPredicate());
