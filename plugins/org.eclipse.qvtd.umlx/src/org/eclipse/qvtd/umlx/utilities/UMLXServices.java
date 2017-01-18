@@ -12,17 +12,21 @@ package org.eclipse.qvtd.umlx.utilities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
@@ -36,6 +40,7 @@ import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
+import org.eclipse.qvtd.umlx.UMLXNamedElement;
 
 /**
  * Class owning methods used for service: umlx. The service methods
@@ -72,8 +77,57 @@ public class UMLXServices
 		}
 	}
 
+	protected @NonNull String defaultName(@NonNull EObject context, @NonNull Class<? extends UMLXNamedElement> newClass, @NonNull String prefix) {
+		Set<String> allNames = new HashSet<>();
+		Resource eResource = context.eResource();
+		assert eResource != null;
+		for (EObject eObject : new TreeIterable(eResource)) {
+			if (newClass.isAssignableFrom(eObject.getClass())) {
+				allNames.add(((UMLXNamedElement)eObject).getName());
+			}
+		}
+		for (int i = allNames.size(); true; i++) {
+			String newName = prefix + i;
+			if (!allNames.contains(newName)) {
+				return newName;
+			}
+		}
+	}
+
 	public int umlxBorderSize(EObject context) {
 		return 4;
+	}
+
+	/**
+	 * Return a default anme for context.
+	 */
+	public @NonNull String umlxDefaultName(EObject context) {
+		if (context instanceof RelPatternClassNode) {
+			return defaultName(context, RelPatternClassNode.class, "NewClass");
+		}
+		else if (context instanceof RelDiagram) {
+			return defaultName(context, RelDiagram.class, "NewRelation");
+		}
+		else if (context instanceof TxImportNode) {
+			return defaultName(context, TxImportNode.class, "NewImport");
+		}
+		else if (context instanceof TxTypedModelNode) {
+			return defaultName(context, TxTypedModelNode.class, "NewTypedModel");
+		}
+		return "«umlxDefaultName»";
+	}
+
+	/**
+	 * Return the label at the target end of an InvocationEdge.
+	 */
+	public @NonNull String umlxInvocationEdgeEndLabel(EObject context) {
+		if (context instanceof RelInvocationEdge) {
+			RelPatternClassNode relPatternNode = ((RelInvocationEdge)context).getReferredRelPatternNode();
+			if (relPatternNode != null) {
+				return String.valueOf(relPatternNode.getName());
+			}
+		}
+		return "";
 	}
 
 	/**
@@ -85,7 +139,7 @@ public class UMLXServices
 		}
 		if (context instanceof RelInvocationEdge) {
 			RelInvocationNode owningSource = ((RelInvocationEdge)context).getOwningRelInvocationNode();
-			return owningSource.isIsThen();
+			return (owningSource != null) && owningSource.isIsThen();
 		}
 		return false;
 	}
@@ -117,6 +171,9 @@ public class UMLXServices
 			if (relDiagram != null) {
 				return String.valueOf(relDiagram.getName());
 			}
+			else {
+				return "«null-referredDiagram»";
+			}
 		}
 		else if (context instanceof RelPatternClassNode) {
 			StringBuilder s = new StringBuilder();
@@ -136,6 +193,9 @@ public class UMLXServices
 			if (eClassifier != null) {
 				return String.valueOf(eClassifier.getName());
 			}
+			else {
+				return "«null-referredClass»";
+			}
 		}
 		else if (context instanceof TxPackageNode) {
 			return LabelUtil.QUALIFIED_NAME_REGISTRY.labelFor(((TxPackageNode)context).getReferredPackage());
@@ -144,6 +204,9 @@ public class UMLXServices
 			EStructuralFeature eStructuralFeature = ((TxPartNode)context).getReferredProperty();
 			if (eStructuralFeature != null) {
 				return String.valueOf(eStructuralFeature.getName());
+			}
+			else {
+				return "«null-referredProperty»";
 			}
 		}
 		else if (context instanceof TxTypedModelNode) {
@@ -185,19 +248,6 @@ public class UMLXServices
 				s.append(" ");
 				appendMultiplicity(s, eStructuralFeature);
 				return s.toString();
-			}
-		}
-		return "";
-	}
-
-	/**
-	 * Return the label at the target end of an InvocationEdge.
-	 */
-	public @NonNull String umlxInvocationEdgeEndLabel(EObject context) {
-		if (context instanceof RelInvocationEdge) {
-			RelPatternClassNode relPatternNode = ((RelInvocationEdge)context).getReferredRelPatternNode();
-			if (relPatternNode != null) {
-				return String.valueOf(relPatternNode.getName());
 			}
 		}
 		return "";
@@ -266,6 +316,16 @@ public class UMLXServices
 			candidates.add(context);
 		}
 		return candidates;
+	}
+
+	public EObject umlxEdgeContext(EObject context) {
+		if (context instanceof RelInvocationNode) {
+			return context;
+		}
+		else if (context instanceof RelPatternNode) {
+			return ((RelPatternNode)context).getOwningRelDomainNode();
+		}
+		return context;
 	}
 
 	/**

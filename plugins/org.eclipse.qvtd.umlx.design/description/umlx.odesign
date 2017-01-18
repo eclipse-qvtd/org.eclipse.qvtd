@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="umlx" version="11.1.1.201610211630">
   <ownedViewpoints name="umlx-viewpoint-id" label="UMLX Viewpoint Label" modelFileExtension="umlx" icon="/org.eclipse.qvtd.umlx.design/icons/umlxx.gif">
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Relation Diagram" titleExpression="service: umlxRelDiagramTitleExpression" domainClass="umlx.RelDiagram" rootExpression="service: umlxRelDiagramRootExpression">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Relation Diagram" titleExpression="service: umlxRelDiagramTitleExpression" domainClass="umlx.RelDiagram">
       <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="RelConstraintNode" semanticCandidatesExpression="service: umlxRelDiagramSemanticsCandidatesExpression" domainClass="umlx.RelConstraintNode">
@@ -110,52 +110,70 @@
           </conditionnalStyles>
         </containerMappings>
         <toolSections name="CreateNodesId" label="Nodes">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createInvocationNode" label="Invocation Node" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXEvolution.gif">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelInvocationNode" referenceName="ownedNodes">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'node'+container.ownedNodes->size()"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createPatternNode" label="Pattern Node" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXClassVariable.gif">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelPatternNode" referenceName="ownedNodes">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'node'+container.ownedNodes->size()"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
           <ownedTools xsi:type="tool:DirectEditLabel" name="editPatternNodeName">
             <mask mask="{0}\n{1}"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:DiagramCreationDescription" name="createRelDiagram" label="Create UMLX Relation Diagram" elementsToSelect="service: umlxRelDiagramSelectExpression">
-            <initialOperation/>
-            <containerViewVariable name="containerView"/>
-            <representationNameVariable name="diagramName"/>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createDomain" label="Domain" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelDomainNode" referenceName="ownedRelDomainNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createInvocation" label="Invocation" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelInvocationContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXEvolution.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelInvocationNode" referenceName="ownedRelInvocationNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createPatternClassNode" label="Pattern Class" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelPatternClassNode" referenceName="ownedRelPatternNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
           </ownedTools>
         </toolSections>
         <toolSections name="CreateEdgesId" label="Edges">
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createPatternEdge" label="Pattern Edge" edgeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createInvocationEdge" label="Invocation" edgeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.PatternEdge" referenceName="ownedOutgoingEdges">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="owningSource" valueExpression="var:source"/>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service: umlxEdgeContext">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelInvocationEdge" referenceName="ownedRelInvocationEdges">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="invokingRelPatternNode" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createPatternEdge" label="Pattern" edgeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service: umlxEdgeContext">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelPatternEdge" referenceName="ownedRelPatternEdges">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'edge'+source.diagram.ownedNodes.ownedOutgoingEdges->size()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -163,9 +181,17 @@
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" rootExpression="service: umlxTxDiagramRootExpression" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
       <defaultLayer name="Default">
+        <containerMappings name="TxImportContainer" semanticCandidatesExpression="feature:ownedTxImportNodes" domainClass="umlx.TxImportNode">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" labelExpression="service:umlxLabel" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif" tooltipExpression="service: umlxTooltipExpression" heightComputationExpression="2">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
         <containerMappings name="TxKeyContainer" semanticCandidatesExpression="feature:ownedTxKeyNodes" domainClass="umlx.TxKeyNode" childrenPresentation="List">
           <subNodeMappings name="TxPartNode" semanticCandidatesExpression="feature:ownedTxPartNodes" domainClass="umlx.TxPartNode">
             <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="service: umlxLabel" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif" labelAlignment="LEFT" tooltipExpression="service: umlxTooltipExpression" sizeComputationExpression="0" labelPosition="node" resizeKind="EAST_WEST">
@@ -175,6 +201,14 @@
             </style>
           </subNodeMappings>
           <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.xtext.qvtrelation.ui/icons/Key.gif" tooltipExpression="service: umlxTooltipExpression">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="TxRelDiagramContainer" semanticCandidatesExpression="feature:ownedRelDiagrams" domainClass="umlx.RelDiagram">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" tooltipExpression="service: umlxTooltipExpression" heightComputationExpression="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -196,29 +230,64 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
         </containerMappings>
-        <containerMappings name="TxImportContainer" semanticCandidatesExpression="feature:ownedTxImportNodes" domainClass="umlx.TxImportNode">
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" labelExpression="service:umlxLabel" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif" tooltipExpression="service: umlxTooltipExpression" heightComputationExpression="2">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-          </style>
-        </containerMappings>
-        <containerMappings name="TxRelDiagramContainer" semanticCandidatesExpression="feature:ownedRelDiagrams" domainClass="umlx.RelDiagram">
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" tooltipExpression="service: umlxTooltipExpression" heightComputationExpression="3">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-          </style>
-        </containerMappings>
         <toolSections name="TxNodesId" label="Nodes">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createTxKeyNode" label="Key Node">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Import" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxImportContainer']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxKeyNode" referenceName="ownedNodes"/>
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxImportNode" referenceName="ownedTxImportNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Key" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxKeyContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtrelation.ui/icons/Key.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxKeyNode" referenceName="ownedTxKeyNodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Key Part" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxKeyContainer']/@subNodeMappings[name='TxPartNode']" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxPartNode" referenceName="ownedTxPartNodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Relation" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelDiagram" referenceName="ownedRelDiagrams">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="TypedModel" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxTypedModelNode" referenceName="ownedTxTypedModelNodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="TypedModel Package" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']/@subNodeMappings[name='TxPackageNode']" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EPackage.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxPackageNode" referenceName="ownedTxPackageNodes"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
