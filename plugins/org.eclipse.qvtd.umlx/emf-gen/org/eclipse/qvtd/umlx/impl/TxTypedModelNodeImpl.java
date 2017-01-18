@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -40,8 +40,8 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isEnforce <em>Enforce</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getTxDiagram <em>Tx Diagram</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getTxPackageNodes <em>Tx Package Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  * </ul>
  *
  * @generated
@@ -108,14 +108,14 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	protected boolean enforce = ENFORCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTxPackageNodes() <em>Tx Package Nodes</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedTxPackageNodes() <em>Owned Tx Package Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTxPackageNodes()
+	 * @see #getOwnedTxPackageNodes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TxPackageNode> txPackageNodes;
+	protected EList<TxPackageNode> ownedTxPackageNodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,19 +157,6 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_TYPED_MODEL_NODE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<TxPackageNode> getTxPackageNodes() {
-		if (txPackageNodes == null) {
-			txPackageNodes = new EObjectContainmentEList<TxPackageNode>(TxPackageNode.class, this, UMLXPackage.TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES);
-		}
-		return txPackageNodes;
 	}
 
 	/**
@@ -224,8 +211,21 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @generated
 	 */
 	@Override
-	public TxDiagram getTxDiagram() {
-		if (eContainerFeatureID() != UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM) return null;
+	public EList<TxPackageNode> getOwnedTxPackageNodes() {
+		if (ownedTxPackageNodes == null) {
+			ownedTxPackageNodes = new EObjectContainmentWithInverseEList<TxPackageNode>(TxPackageNode.class, this, UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE);
+		}
+		return ownedTxPackageNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TxDiagram getOwningTxDiagram() {
+		if (eContainerFeatureID() != UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -234,8 +234,8 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTxDiagram(TxDiagram newTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTxDiagram, UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM, msgs);
+	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, msgs);
 		return msgs;
 	}
 
@@ -245,20 +245,20 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @generated
 	 */
 	@Override
-	public void setTxDiagram(TxDiagram newTxDiagram) {
-		if (newTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM && newTxDiagram != null)) {
-			if (EcoreUtil.isAncestor(this, newTxDiagram))
+	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM && newOwningTxDiagram != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTxDiagram != null)
-				msgs = ((InternalEObject)newTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__TX_TYPED_MODEL_NODES, TxDiagram.class, msgs);
-			msgs = basicSetTxDiagram(newTxDiagram, msgs);
+			if (newOwningTxDiagram != null)
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, TxDiagram.class, msgs);
+			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM, newTxDiagram, newTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -266,13 +266,16 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxPackageNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTxDiagram((TxDiagram)otherEnd, msgs);
+				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -285,10 +288,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
-				return basicSetTxDiagram(null, msgs);
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES:
-				return ((InternalEList<?>)getTxPackageNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
+				return ((InternalEList<?>)getOwnedTxPackageNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
+				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -301,8 +304,8 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__TX_TYPED_MODEL_NODES, TxDiagram.class, msgs);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -321,10 +324,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return isCheck();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				return isEnforce();
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
-				return getTxDiagram();
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES:
-				return getTxPackageNodes();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
+				return getOwnedTxPackageNodes();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
+				return getOwningTxDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -347,12 +350,12 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				setEnforce((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
-				setTxDiagram((TxDiagram)newValue);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
+				getOwnedTxPackageNodes().clear();
+				getOwnedTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
 				return;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES:
-				getTxPackageNodes().clear();
-				getTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
+				setOwningTxDiagram((TxDiagram)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -375,11 +378,11 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				setEnforce(ENFORCE_EDEFAULT);
 				return;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
-				setTxDiagram((TxDiagram)null);
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
+				getOwnedTxPackageNodes().clear();
 				return;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES:
-				getTxPackageNodes().clear();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
+				setOwningTxDiagram((TxDiagram)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -399,10 +402,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return check != CHECK_EDEFAULT;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				return enforce != ENFORCE_EDEFAULT;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_DIAGRAM:
-				return getTxDiagram() != null;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__TX_PACKAGE_NODES:
-				return txPackageNodes != null && !txPackageNodes.isEmpty();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
+				return ownedTxPackageNodes != null && !ownedTxPackageNodes.isEmpty();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
+				return getOwningTxDiagram() != null;
 		}
 		return super.eIsSet(featureID);
 	}

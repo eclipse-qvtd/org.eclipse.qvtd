@@ -23,7 +23,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.RelDiagram;
-import org.eclipse.qvtd.umlx.RelNode;
+import org.eclipse.qvtd.umlx.RelDomainNode;
+import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
@@ -37,13 +38,14 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#isIsTop <em>Is Top</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedNodes <em>Owned Nodes</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getTxDiagram <em>Tx Diagram</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedRelDomainNodes <em>Owned Rel Domain Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedRelInvocationNodes <em>Owned Rel Invocation Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
+public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	/**
 	 * The default value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -64,15 +66,23 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	protected boolean isTop = IS_TOP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnedNodes() <em>Owned Nodes</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedRelDomainNodes() <em>Owned Rel Domain Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedNodes()
+	 * @see #getOwnedRelDomainNodes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RelNode> ownedNodes;
-
+	protected EList<RelDomainNode> ownedRelDomainNodes;
+	/**
+	 * The cached value of the '{@link #getOwnedRelInvocationNodes() <em>Owned Rel Invocation Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedRelInvocationNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RelInvocationNode> ownedRelInvocationNodes;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,11 +131,11 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	 * @generated
 	 */
 	@Override
-	public EList<RelNode> getOwnedNodes() {
-		if (ownedNodes == null) {
-			ownedNodes = new EObjectContainmentWithInverseEList<RelNode>(RelNode.class, this, UMLXPackage.REL_DIAGRAM__OWNED_NODES, UMLXPackage.REL_NODE__DIAGRAM);
+	public EList<RelDomainNode> getOwnedRelDomainNodes() {
+		if (ownedRelDomainNodes == null) {
+			ownedRelDomainNodes = new EObjectContainmentWithInverseEList<RelDomainNode>(RelDomainNode.class, this, UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM);
 		}
-		return ownedNodes;
+		return ownedRelDomainNodes;
 	}
 
 	/**
@@ -134,8 +144,21 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	 * @generated
 	 */
 	@Override
-	public TxDiagram getTxDiagram() {
-		if (eContainerFeatureID() != UMLXPackage.REL_DIAGRAM__TX_DIAGRAM) return null;
+	public EList<RelInvocationNode> getOwnedRelInvocationNodes() {
+		if (ownedRelInvocationNodes == null) {
+			ownedRelInvocationNodes = new EObjectContainmentWithInverseEList<RelInvocationNode>(RelInvocationNode.class, this, UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, UMLXPackage.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM);
+		}
+		return ownedRelInvocationNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TxDiagram getOwningTxDiagram() {
+		if (eContainerFeatureID() != UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -144,8 +167,8 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTxDiagram(TxDiagram newTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTxDiagram, UMLXPackage.REL_DIAGRAM__TX_DIAGRAM, msgs);
+	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM, msgs);
 		return msgs;
 	}
 
@@ -155,20 +178,20 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	 * @generated
 	 */
 	@Override
-	public void setTxDiagram(TxDiagram newTxDiagram) {
-		if (newTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.REL_DIAGRAM__TX_DIAGRAM && newTxDiagram != null)) {
-			if (EcoreUtil.isAncestor(this, newTxDiagram))
+	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM && newOwningTxDiagram != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTxDiagram != null)
-				msgs = ((InternalEObject)newTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS, TxDiagram.class, msgs);
-			msgs = basicSetTxDiagram(newTxDiagram, msgs);
+			if (newOwningTxDiagram != null)
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS, TxDiagram.class, msgs);
+			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DIAGRAM__TX_DIAGRAM, newTxDiagram, newTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -181,10 +204,12 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 		switch (featureID) {
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				return isIsTop();
-			case UMLXPackage.REL_DIAGRAM__OWNED_NODES:
-				return getOwnedNodes();
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
-				return getTxDiagram();
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
+				return getOwnedRelDomainNodes();
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES:
+				return getOwnedRelInvocationNodes();
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
+				return getOwningTxDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,12 +226,16 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				setIsTop((Boolean)newValue);
 				return;
-			case UMLXPackage.REL_DIAGRAM__OWNED_NODES:
-				getOwnedNodes().clear();
-				getOwnedNodes().addAll((Collection<? extends RelNode>)newValue);
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
+				getOwnedRelDomainNodes().clear();
+				getOwnedRelDomainNodes().addAll((Collection<? extends RelDomainNode>)newValue);
 				return;
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
-				setTxDiagram((TxDiagram)newValue);
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES:
+				getOwnedRelInvocationNodes().clear();
+				getOwnedRelInvocationNodes().addAll((Collection<? extends RelInvocationNode>)newValue);
+				return;
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
+				setOwningTxDiagram((TxDiagram)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,11 +252,14 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
-			case UMLXPackage.REL_DIAGRAM__OWNED_NODES:
-				getOwnedNodes().clear();
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
+				getOwnedRelDomainNodes().clear();
 				return;
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
-				setTxDiagram((TxDiagram)null);
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES:
+				getOwnedRelInvocationNodes().clear();
+				return;
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
+				setOwningTxDiagram((TxDiagram)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -243,10 +275,12 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 		switch (featureID) {
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				return isTop != IS_TOP_EDEFAULT;
-			case UMLXPackage.REL_DIAGRAM__OWNED_NODES:
-				return ownedNodes != null && !ownedNodes.isEmpty();
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
-				return getTxDiagram() != null;
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
+				return ownedRelDomainNodes != null && !ownedRelDomainNodes.isEmpty();
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES:
+				return ownedRelInvocationNodes != null && !ownedRelInvocationNodes.isEmpty();
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
+				return getOwningTxDiagram() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -279,12 +313,14 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_DIAGRAM__OWNED_NODES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedNodes()).basicAdd(otherEnd, msgs);
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelDomainNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelInvocationNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTxDiagram((TxDiagram)otherEnd, msgs);
+				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -297,10 +333,12 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_DIAGRAM__OWNED_NODES:
-				return ((InternalEList<?>)getOwnedNodes()).basicRemove(otherEnd, msgs);
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
-				return basicSetTxDiagram(null, msgs);
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
+				return ((InternalEList<?>)getOwnedRelDomainNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES:
+				return ((InternalEList<?>)getOwnedRelInvocationNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
+				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -313,8 +351,8 @@ public class RelDiagramImpl extends UMLXDiagramImpl implements RelDiagram {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.REL_DIAGRAM__TX_DIAGRAM:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__OWNED_DIAGRAMS, TxDiagram.class, msgs);
+			case UMLXPackage.REL_DIAGRAM__OWNING_TX_DIAGRAM:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

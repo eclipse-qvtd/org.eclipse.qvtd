@@ -23,7 +23,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  *
  * @generated
  */
-public class TxNodeImpl extends UMLXNodeImpl implements TxNode {
+public class TxNodeImpl extends UMLXElementImpl implements TxNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

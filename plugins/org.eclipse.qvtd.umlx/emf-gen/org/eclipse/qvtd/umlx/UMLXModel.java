@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.UMLXModel#getOwnedDiagrams <em>Owned Diagrams</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.UMLXModel#getOwnedTxDiagrams <em>Owned Tx Diagrams</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXModel()
@@ -29,18 +29,18 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface UMLXModel extends UMLXElement {
 	/**
-	 * Returns the value of the '<em><b>Owned Diagrams</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Tx Diagrams</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxDiagram}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Diagrams</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Tx Diagrams</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Diagrams</em>' containment reference list.
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXModel_OwnedDiagrams()
+	 * @return the value of the '<em>Owned Tx Diagrams</em>' containment reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getUMLXModel_OwnedTxDiagrams()
 	 * @generated
 	 */
-	EList<TxDiagram> getOwnedDiagrams();
+	EList<TxDiagram> getOwnedTxDiagrams();
 
 } // Model

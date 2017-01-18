@@ -20,14 +20,41 @@ package org.eclipse.qvtd.umlx;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxImportNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxImportNode#getUri <em>Uri</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxImportNode#getTxDiagram <em>Tx Diagram</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxImportNode()
  * @generated
  */
 public interface TxImportNode extends TxNode, UMLXNamedElement {
+	/**
+	 * Returns the value of the '<em><b>Owning Tx Diagram</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxImportNodes <em>Owned Tx Import Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Tx Diagram</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Tx Diagram</em>' container reference.
+	 * @see #setOwningTxDiagram(TxDiagram)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxImportNode_OwningTxDiagram()
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxImportNodes
+	 * @generated
+	 */
+	TxDiagram getOwningTxDiagram();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxImportNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Tx Diagram</em>' container reference.
+	 * @see #getOwningTxDiagram()
+	 * @generated
+	 */
+	void setOwningTxDiagram(TxDiagram value);
+
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -52,32 +79,5 @@ public interface TxImportNode extends TxNode, UMLXNamedElement {
 	 * @generated
 	 */
 	void setUri(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Tx Diagram</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxDiagram#getTxImportNodes <em>Tx Import Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tx Diagram</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tx Diagram</em>' container reference.
-	 * @see #setTxDiagram(TxDiagram)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxImportNode_TxDiagram()
-	 * @see org.eclipse.qvtd.umlx.TxDiagram#getTxImportNodes
-	 * @generated
-	 */
-	TxDiagram getTxDiagram();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxImportNode#getTxDiagram <em>Tx Diagram</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tx Diagram</em>' container reference.
-	 * @see #getTxDiagram()
-	 * @generated
-	 */
-	void setTxDiagram(TxDiagram value);
 
 } // TxImportNode

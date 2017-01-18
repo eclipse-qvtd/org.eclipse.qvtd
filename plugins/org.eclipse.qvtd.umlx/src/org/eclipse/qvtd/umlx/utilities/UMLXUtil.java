@@ -20,9 +20,9 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
-import org.eclipse.qvtd.umlx.RelNode;
-import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
+import org.eclipse.qvtd.umlx.RelPatternEdge;
+import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
@@ -41,43 +41,83 @@ public class UMLXUtil
 		return ClassUtil.nullFree(umlxElement.getComments());
 	}
 
-	public static @NonNull RelDiagram getDiagram(@NonNull RelNode relNode) {
-		return ClassUtil.nonNullState(relNode.getDiagram());
+	//	public static @NonNull RelDiagram getDiagram(@NonNull RelPatternNode relNode) {
+	//		return ClassUtil.nonNullState(relNode.getDiagram());
+	//	}
+
+	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncoming(@NonNull RelPatternClassNode relNode) {
+		return Iterables.filter(ClassUtil.nullFree(relNode.getIncoming()), RelPatternEdge.class);
 	}
 
-	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncomingEdges(@NonNull RelPatternNode relNode) {
-		return Iterables.filter(ClassUtil.nullFree(relNode.getIncomingEdges()), RelPatternEdge.class);
+	public static @NonNull RelPatternClassNode getInvokingRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
+		return ClassUtil.nonNullState(relInvocationEdge.getInvokingRelPatternNode());
 	}
 
 	public static @NonNull String getName(@NonNull UMLXNamedElement umlxElement) {
 		return ClassUtil.nonNullState(umlxElement.getName());
 	}
 
-	public static @NonNull Iterable<@NonNull RelPatternEdge> getOutgoingEdges(@NonNull RelPatternNode relNode) {
-		return Iterables.filter(ClassUtil.nullFree(relNode.getOwnedOutgoingEdges()), RelPatternEdge.class);
+	public static @NonNull Iterable<@NonNull RelPatternEdge> getOutgoing(@NonNull RelPatternClassNode relNode) {
+		return Iterables.filter(ClassUtil.nullFree(relNode.getOutgoing()), RelPatternEdge.class);
 	}
 
-	public static @NonNull Iterable<@NonNull RelDiagram> getOwnedDiagrams(@NonNull TxDiagram txDiagram) {
-		return ClassUtil.nullFree(txDiagram.getOwnedDiagrams());
+	public static @NonNull Iterable<@NonNull RelDiagram> getOwnedRelDiagrams(@NonNull TxDiagram txDiagram) {
+		return ClassUtil.nullFree(txDiagram.getOwnedRelDiagrams());
 	}
 
-	public static @NonNull Iterable<@NonNull TxDiagram> getOwnedDiagrams(@NonNull UMLXModel umlxModel) {
-		return ClassUtil.nullFree(umlxModel.getOwnedDiagrams());
+	public static @NonNull Iterable<@NonNull RelDomainNode> getOwnedRelDomainNodes(@NonNull RelDiagram relDiagram) {
+		return ClassUtil.nullFree(relDiagram.getOwnedRelDomainNodes());
 	}
 
-	//	public static @NonNull Iterable<@NonNull RelPatternEdge> getOwnedEdges(@NonNull RelDiagram relDiagram) {
-	//		return ClassUtil.nullFree(relDiagram.getOwnedEdges());
-	//	}
+	public static @NonNull Iterable<@NonNull RelInvocationEdge> getOwnedRelInvocationEdges(@NonNull RelInvocationNode relInvocationNode) {
+		return ClassUtil.nullFree(relInvocationNode.getOwnedRelInvocationEdges());
+	}
 
-	public static @NonNull Iterable<@NonNull RelNode> getOwnedNodes(@NonNull RelDiagram relDiagram) {
-		return ClassUtil.nullFree(relDiagram.getOwnedNodes());
+	public static @NonNull Iterable<@NonNull RelInvocationNode> getOwnedRelInvocationNodes(@NonNull RelDiagram relDiagram) {
+		return ClassUtil.nullFree(relDiagram.getOwnedRelInvocationNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull RelPatternEdge> getOwnedRelPatternEdges(@NonNull RelDomainNode relDomainNode) {
+		return ClassUtil.nullFree(relDomainNode.getOwnedRelPatternEdges());
+	}
+
+	public static @NonNull Iterable<@NonNull RelPatternNode> getOwnedRelPatternNodes(@NonNull RelDomainNode relDomainNode) {
+		return ClassUtil.nullFree(relDomainNode.getOwnedRelPatternNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull TxDiagram> getOwnedTxDiagrams(@NonNull UMLXModel umlxModel) {
+		return ClassUtil.nullFree(umlxModel.getOwnedTxDiagrams());
+	}
+
+	public static @NonNull Iterable<? extends @NonNull TxImportNode> getOwnedTxImportNodes(@NonNull TxDiagram txDiagram) {
+		return ClassUtil.nullFree(txDiagram.getOwnedTxImportNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull TxKeyNode> getOwnedTxKeyNodes(@NonNull TxDiagram txDiagram) {
+		return ClassUtil.nullFree(txDiagram.getOwnedTxKeyNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull TxPackageNode> getOwnedTxPackageNodes(@NonNull TxTypedModelNode txTypedModelNode) {
+		return ClassUtil.nullFree(txTypedModelNode.getOwnedTxPackageNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull TxPartNode> getOwnedTxPartNodes(@NonNull TxKeyNode txKeyNode) {
+		return ClassUtil.nullFree(txKeyNode.getOwnedTxPartNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull TxTypedModelNode> getOwnedTxTypedModelNodes(@NonNull TxDiagram txDiagram) {
+		return ClassUtil.nullFree(txDiagram.getOwnedTxTypedModelNodes());
+	}
+
+	public static @NonNull RelDiagram getOwningRelDiagram(@NonNull RelInvocationNode relInvocationNode) {
+		return ClassUtil.nonNullState(relInvocationNode.getOwningRelDiagram());
 	}
 
 	public static @NonNull EClass getReferredClass(@NonNull TxKeyNode txKeyNode) {
 		return ClassUtil.nonNullState(txKeyNode.getReferredClass());
 	}
 
-	public static @NonNull EClassifier getReferredClassifier(@NonNull RelPatternNode relPatternNode) {
+	public static @NonNull EClassifier getReferredClassifier(@NonNull RelPatternClassNode relPatternNode) {
 		return ClassUtil.nonNullState(relPatternNode.getReferredClass());
 	}
 
@@ -97,47 +137,19 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(relInvocationNode.getReferredRelDiagram());
 	}
 
-	public static @NonNull RelPatternNode getReferredRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
+	public static @NonNull RelPatternClassNode getReferredRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
 		return ClassUtil.nonNullState(relInvocationEdge.getReferredRelPatternNode());
 	}
 
-	public static @NonNull TxTypedModelNode getReferredTypedModelNode(@NonNull RelDomainNode relDomainNode) {
-		return ClassUtil.nonNullState(relDomainNode.getReferredTypedModelNode());
+	public static @NonNull TxTypedModelNode getReferredTxTypedModelNode(@NonNull RelDomainNode relDomainNode) {
+		return ClassUtil.nonNullState(relDomainNode.getReferredTxTypedModelNode());
 	}
 
-	public static @NonNull Iterable<@NonNull RelPatternNode> getRootPatternNodes(@NonNull RelDomainNode relDomainNode) {
-		return ClassUtil.nullFree(relDomainNode.getRootPatternNodes());
+	public static @NonNull RelPatternClassNode getSource(@NonNull RelPatternEdge relPatternEdge) {
+		return (RelPatternClassNode) ClassUtil.nonNullState(relPatternEdge.getSource());
 	}
 
-	public static @NonNull RelPatternNode getSource(@NonNull RelPatternEdge relPatternEdge) {
-		return (RelPatternNode) ClassUtil.nonNullState(relPatternEdge.getOwningSource());
-	}
-
-	public static @NonNull RelPatternNode getTarget(@NonNull RelInvocationEdge relInvocationEdge) {
-		return (RelPatternNode) ClassUtil.nonNullState(relInvocationEdge.getTarget());
-	}
-
-	public static @NonNull RelPatternNode getTarget(@NonNull RelPatternEdge relPatternEdge) {
-		return (RelPatternNode) ClassUtil.nonNullState(relPatternEdge.getTarget());
-	}
-
-	public static @NonNull Iterable<? extends @NonNull TxImportNode> getTxImportNodes(@NonNull TxDiagram txDiagram) {
-		return ClassUtil.nullFree(txDiagram.getTxImportNodes());
-	}
-
-	public static @NonNull Iterable<@NonNull TxKeyNode> getTxKeyNodes(@NonNull TxDiagram txDiagram) {
-		return ClassUtil.nullFree(txDiagram.getTxKeyNodes());
-	}
-
-	public static @NonNull Iterable<@NonNull TxPackageNode> getTxPackageNodes(@NonNull TxTypedModelNode txTypedModelNode) {
-		return ClassUtil.nullFree(txTypedModelNode.getTxPackageNodes());
-	}
-
-	public static @NonNull Iterable<@NonNull TxPartNode> getTxPartNodes(@NonNull TxKeyNode txKeyNode) {
-		return ClassUtil.nullFree(txKeyNode.getTxPartNodes());
-	}
-
-	public static @NonNull Iterable<@NonNull TxTypedModelNode> getTxTypedModelNodes(@NonNull TxDiagram txDiagram) {
-		return ClassUtil.nullFree(txDiagram.getTxTypedModelNodes());
+	public static @NonNull RelPatternClassNode getTarget(@NonNull RelPatternEdge relPatternEdge) {
+		return (RelPatternClassNode) ClassUtil.nonNullState(relPatternEdge.getTarget());
 	}
 }

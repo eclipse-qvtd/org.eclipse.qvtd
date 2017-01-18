@@ -76,6 +76,15 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
 
+	public static @Nullable RelationDomain basicGetContainingRelationDomain(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof RelationDomain) {
+				return (RelationDomain) eObject;
+			}
+		}
+		return null;
+	}
+
 	public static @NonNull Variable getBindsTo(@NonNull TemplateExp rTemplateExp) {
 		return ClassUtil.nonNullState(rTemplateExp.getBindsTo());
 	}

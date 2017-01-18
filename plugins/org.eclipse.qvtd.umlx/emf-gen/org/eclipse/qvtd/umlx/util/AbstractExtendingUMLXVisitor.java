@@ -38,13 +38,8 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
-	public R visitRelConstraintNode(org.eclipse.qvtd.umlx.@NonNull RelConstraintNode object) {
-		return visitRelNode(object);
-	}
-
-	@Override
 	public R visitRelDiagram(org.eclipse.qvtd.umlx.@NonNull RelDiagram object) {
-		return visitUMLXDiagram(object);
+		return visitUMLXNamedElement(object);
 	}
 
 	@Override
@@ -53,8 +48,13 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
+	public R visitRelEdge(org.eclipse.qvtd.umlx.@NonNull RelEdge object) {
+		return visitUMLXElement(object);
+	}
+
+	@Override
 	public R visitRelInvocationEdge(org.eclipse.qvtd.umlx.@NonNull RelInvocationEdge object) {
-		return visitUMLXEdge(object);
+		return visitRelEdge(object);
 	}
 
 	@Override
@@ -64,12 +64,22 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 
 	@Override
 	public R visitRelNode(org.eclipse.qvtd.umlx.@NonNull RelNode object) {
-		return visitUMLXNode(object);
+		return visitUMLXElement(object);
+	}
+
+	@Override
+	public R visitRelPatternClassNode(org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode object) {
+		return visitRelPatternNode(object);
 	}
 
 	@Override
 	public R visitRelPatternEdge(org.eclipse.qvtd.umlx.@NonNull RelPatternEdge object) {
-		return visitUMLXEdge(object);
+		return visitRelEdge(object);
+	}
+
+	@Override
+	public R visitRelPatternExpressionNode(org.eclipse.qvtd.umlx.@NonNull RelPatternExpressionNode object) {
+		return visitRelPatternNode(object);
 	}
 
 	@Override
@@ -79,7 +89,7 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 
 	@Override
 	public R visitTxDiagram(org.eclipse.qvtd.umlx.@NonNull TxDiagram object) {
-		return visitUMLXDiagram(object);
+		return visitUMLXNamedElement(object);
 	}
 
 	@Override
@@ -94,7 +104,7 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 
 	@Override
 	public R visitTxNode(org.eclipse.qvtd.umlx.@NonNull TxNode object) {
-		return visitUMLXNode(object);
+		return visitUMLXElement(object);
 	}
 
 	@Override
@@ -113,16 +123,6 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
-	public R visitUMLXDiagram(org.eclipse.qvtd.umlx.@NonNull UMLXDiagram object) {
-		return visitUMLXNamedElement(object);
-	}
-
-	@Override
-	public R visitUMLXEdge(org.eclipse.qvtd.umlx.@NonNull UMLXEdge object) {
-		return visitUMLXElement(object);
-	}
-
-	@Override
 	public R visitUMLXElement(org.eclipse.qvtd.umlx.@NonNull UMLXElement object) {
 		return visiting(object);
 	}
@@ -134,11 +134,6 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 
 	@Override
 	public R visitUMLXNamedElement(org.eclipse.qvtd.umlx.@NonNull UMLXNamedElement object) {
-		return visitUMLXElement(object);
-	}
-
-	@Override
-	public R visitUMLXNode(org.eclipse.qvtd.umlx.@NonNull UMLXNode object) {
 		return visitUMLXElement(object);
 	}
 }

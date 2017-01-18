@@ -18,10 +18,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
+import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
@@ -35,32 +38,44 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getReferredTypedModelNode <em>Referred Typed Model Node</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getRootPatternNodes <em>Root Pattern Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getOwnedRelPatternEdges <em>Owned Rel Pattern Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getOwnedRelPatternNodes <em>Owned Rel Pattern Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getOwningRelDiagram <em>Owning Rel Diagram</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getReferredTxTypedModelNode <em>Referred Tx Typed Model Node</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	/**
-	 * The cached value of the '{@link #getReferredTypedModelNode() <em>Referred Typed Model Node</em>}' reference.
+	 * The cached value of the '{@link #getOwnedRelPatternEdges() <em>Owned Rel Pattern Edges</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredTypedModelNode()
+	 * @see #getOwnedRelPatternEdges()
 	 * @generated
 	 * @ordered
 	 */
-	protected TxTypedModelNode referredTypedModelNode;
+	protected EList<RelPatternEdge> ownedRelPatternEdges;
 
 	/**
-	 * The cached value of the '{@link #getRootPatternNodes() <em>Root Pattern Nodes</em>}' reference list.
+	 * The cached value of the '{@link #getOwnedRelPatternNodes() <em>Owned Rel Pattern Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRootPatternNodes()
+	 * @see #getOwnedRelPatternNodes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RelPatternNode> rootPatternNodes;
+	protected EList<RelPatternNode> ownedRelPatternNodes;
+
+	/**
+	 * The cached value of the '{@link #getReferredTxTypedModelNode() <em>Referred Tx Typed Model Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredTxTypedModelNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected TxTypedModelNode referredTxTypedModelNode;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,16 +102,85 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	 * @generated
 	 */
 	@Override
-	public TxTypedModelNode getReferredTypedModelNode() {
-		if (referredTypedModelNode != null && referredTypedModelNode.eIsProxy()) {
-			InternalEObject oldReferredTypedModelNode = (InternalEObject)referredTypedModelNode;
-			referredTypedModelNode = (TxTypedModelNode)eResolveProxy(oldReferredTypedModelNode);
-			if (referredTypedModelNode != oldReferredTypedModelNode) {
+	public EList<RelPatternEdge> getOwnedRelPatternEdges() {
+		if (ownedRelPatternEdges == null) {
+			ownedRelPatternEdges = new EObjectContainmentWithInverseEList<RelPatternEdge>(RelPatternEdge.class, this, UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE);
+		}
+		return ownedRelPatternEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<RelPatternNode> getOwnedRelPatternNodes() {
+		if (ownedRelPatternNodes == null) {
+			ownedRelPatternNodes = new EObjectContainmentWithInverseEList<RelPatternNode>(RelPatternNode.class, this, UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE);
+		}
+		return ownedRelPatternNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelDiagram getOwningRelDiagram() {
+		if (eContainerFeatureID() != UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM) return null;
+		return (RelDiagram)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningRelDiagram(RelDiagram newOwningRelDiagram, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningRelDiagram, UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningRelDiagram(RelDiagram newOwningRelDiagram) {
+		if (newOwningRelDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM && newOwningRelDiagram != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningRelDiagram))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningRelDiagram != null)
+				msgs = ((InternalEObject)newOwningRelDiagram).eInverseAdd(this, UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, RelDiagram.class, msgs);
+			msgs = basicSetOwningRelDiagram(newOwningRelDiagram, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, newOwningRelDiagram, newOwningRelDiagram));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TxTypedModelNode getReferredTxTypedModelNode() {
+		if (referredTxTypedModelNode != null && referredTxTypedModelNode.eIsProxy()) {
+			InternalEObject oldReferredTxTypedModelNode = (InternalEObject)referredTxTypedModelNode;
+			referredTxTypedModelNode = (TxTypedModelNode)eResolveProxy(oldReferredTxTypedModelNode);
+			if (referredTxTypedModelNode != oldReferredTxTypedModelNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_DOMAIN_NODE__REFERRED_TYPED_MODEL_NODE, oldReferredTypedModelNode, referredTypedModelNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, oldReferredTxTypedModelNode, referredTxTypedModelNode));
 			}
 		}
-		return referredTypedModelNode;
+		return referredTxTypedModelNode;
 	}
 
 	/**
@@ -104,8 +188,8 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TxTypedModelNode basicGetReferredTypedModelNode() {
-		return referredTypedModelNode;
+	public TxTypedModelNode basicGetReferredTxTypedModelNode() {
+		return referredTxTypedModelNode;
 	}
 
 	/**
@@ -114,24 +198,11 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredTypedModelNode(TxTypedModelNode newReferredTypedModelNode) {
-		TxTypedModelNode oldReferredTypedModelNode = referredTypedModelNode;
-		referredTypedModelNode = newReferredTypedModelNode;
+	public void setReferredTxTypedModelNode(TxTypedModelNode newReferredTxTypedModelNode) {
+		TxTypedModelNode oldReferredTxTypedModelNode = referredTxTypedModelNode;
+		referredTxTypedModelNode = newReferredTxTypedModelNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DOMAIN_NODE__REFERRED_TYPED_MODEL_NODE, oldReferredTypedModelNode, referredTypedModelNode));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<RelPatternNode> getRootPatternNodes() {
-		if (rootPatternNodes == null) {
-			rootPatternNodes = new EObjectWithInverseResolvingEList<RelPatternNode>(RelPatternNode.class, this, UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES, UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE);
-		}
-		return rootPatternNodes;
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, oldReferredTxTypedModelNode, referredTxTypedModelNode));
 	}
 
 	/**
@@ -143,8 +214,14 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRootPatternNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelPatternEdges()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelPatternNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningRelDiagram((RelDiagram)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -157,8 +234,12 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES:
-				return ((InternalEList<?>)getRootPatternNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
+				return ((InternalEList<?>)getOwnedRelPatternEdges()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
+				return ((InternalEList<?>)getOwnedRelPatternNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				return basicSetOwningRelDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -169,13 +250,31 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, RelDiagram.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TYPED_MODEL_NODE:
-				if (resolve) return getReferredTypedModelNode();
-				return basicGetReferredTypedModelNode();
-			case UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES:
-				return getRootPatternNodes();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
+				return getOwnedRelPatternEdges();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
+				return getOwnedRelPatternNodes();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				return getOwningRelDiagram();
+			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE:
+				if (resolve) return getReferredTxTypedModelNode();
+				return basicGetReferredTxTypedModelNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -189,12 +288,19 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TYPED_MODEL_NODE:
-				setReferredTypedModelNode((TxTypedModelNode)newValue);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
+				getOwnedRelPatternEdges().clear();
+				getOwnedRelPatternEdges().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
-			case UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES:
-				getRootPatternNodes().clear();
-				getRootPatternNodes().addAll((Collection<? extends RelPatternNode>)newValue);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
+				getOwnedRelPatternNodes().clear();
+				getOwnedRelPatternNodes().addAll((Collection<? extends RelPatternNode>)newValue);
+				return;
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				setOwningRelDiagram((RelDiagram)newValue);
+				return;
+			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE:
+				setReferredTxTypedModelNode((TxTypedModelNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -208,11 +314,17 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TYPED_MODEL_NODE:
-				setReferredTypedModelNode((TxTypedModelNode)null);
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
+				getOwnedRelPatternEdges().clear();
 				return;
-			case UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES:
-				getRootPatternNodes().clear();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
+				getOwnedRelPatternNodes().clear();
+				return;
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				setOwningRelDiagram((RelDiagram)null);
+				return;
+			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE:
+				setReferredTxTypedModelNode((TxTypedModelNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -226,10 +338,14 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TYPED_MODEL_NODE:
-				return referredTypedModelNode != null;
-			case UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES:
-				return rootPatternNodes != null && !rootPatternNodes.isEmpty();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
+				return ownedRelPatternEdges != null && !ownedRelPatternEdges.isEmpty();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
+				return ownedRelPatternNodes != null && !ownedRelPatternNodes.isEmpty();
+			case UMLXPackage.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM:
+				return getOwningRelDiagram() != null;
+			case UMLXPackage.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE:
+				return referredTxTypedModelNode != null;
 		}
 		return super.eIsSet(featureID);
 	}

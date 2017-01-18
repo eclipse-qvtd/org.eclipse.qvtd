@@ -31,7 +31,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#getTxKeyNode <em>Tx Key Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#getOwningTxKeyNode <em>Owning Tx Key Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
@@ -94,8 +94,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * @generated
 	 */
 	@Override
-	public TxKeyNode getTxKeyNode() {
-		if (eContainerFeatureID() != UMLXPackage.TX_PART_NODE__TX_KEY_NODE) return null;
+	public TxKeyNode getOwningTxKeyNode() {
+		if (eContainerFeatureID() != UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE) return null;
 		return (TxKeyNode)eInternalContainer();
 	}
 
@@ -104,8 +104,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTxKeyNode(TxKeyNode newTxKeyNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTxKeyNode, UMLXPackage.TX_PART_NODE__TX_KEY_NODE, msgs);
+	public NotificationChain basicSetOwningTxKeyNode(TxKeyNode newOwningTxKeyNode, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxKeyNode, UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE, msgs);
 		return msgs;
 	}
 
@@ -115,20 +115,20 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * @generated
 	 */
 	@Override
-	public void setTxKeyNode(TxKeyNode newTxKeyNode) {
-		if (newTxKeyNode != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_PART_NODE__TX_KEY_NODE && newTxKeyNode != null)) {
-			if (EcoreUtil.isAncestor(this, newTxKeyNode))
+	public void setOwningTxKeyNode(TxKeyNode newOwningTxKeyNode) {
+		if (newOwningTxKeyNode != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE && newOwningTxKeyNode != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTxKeyNode))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTxKeyNode != null)
-				msgs = ((InternalEObject)newTxKeyNode).eInverseAdd(this, UMLXPackage.TX_KEY_NODE__TX_PART_NODES, TxKeyNode.class, msgs);
-			msgs = basicSetTxKeyNode(newTxKeyNode, msgs);
+			if (newOwningTxKeyNode != null)
+				msgs = ((InternalEObject)newOwningTxKeyNode).eInverseAdd(this, UMLXPackage.TX_KEY_NODE__OWNED_TX_PART_NODES, TxKeyNode.class, msgs);
+			msgs = basicSetOwningTxKeyNode(newOwningTxKeyNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PART_NODE__TX_KEY_NODE, newTxKeyNode, newTxKeyNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE, newOwningTxKeyNode, newOwningTxKeyNode));
 	}
 
 	/**
@@ -202,10 +202,10 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTxKeyNode((TxKeyNode)otherEnd, msgs);
+				return basicSetOwningTxKeyNode((TxKeyNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -218,8 +218,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
-				return basicSetTxKeyNode(null, msgs);
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
+				return basicSetOwningTxKeyNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -232,8 +232,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_KEY_NODE__TX_PART_NODES, TxKeyNode.class, msgs);
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_KEY_NODE__OWNED_TX_PART_NODES, TxKeyNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -246,8 +246,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
-				return getTxKeyNode();
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
+				return getOwningTxKeyNode();
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				return isIsOpposite();
 			case UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY:
@@ -265,8 +265,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
-				setTxKeyNode((TxKeyNode)newValue);
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
+				setOwningTxKeyNode((TxKeyNode)newValue);
 				return;
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				setIsOpposite((Boolean)newValue);
@@ -286,8 +286,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
-				setTxKeyNode((TxKeyNode)null);
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
+				setOwningTxKeyNode((TxKeyNode)null);
 				return;
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);
@@ -307,8 +307,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_PART_NODE__TX_KEY_NODE:
-				return getTxKeyNode() != null;
+			case UMLXPackage.TX_PART_NODE__OWNING_TX_KEY_NODE:
+				return getOwningTxKeyNode() != null;
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				return isOpposite != IS_OPPOSITE_EDEFAULT;
 			case UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY:

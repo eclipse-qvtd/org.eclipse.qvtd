@@ -16,19 +16,19 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
-import org.eclipse.qvtd.umlx.RelConstraintNode;
+import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternNode;
+import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
-import org.eclipse.qvtd.umlx.UMLXDiagram;
 import org.eclipse.qvtd.umlx.UMLXElement;
+import org.eclipse.qvtd.umlx.UMLXNamedElement;
 import org.eclipse.qvtd.umlx.util.AbstractExtendingUMLXVisitor;
 
 public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable Object, @NonNull StringBuilder>
@@ -53,22 +53,15 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	}
 
 	@Override
-	public @Nullable Object visitRelConstraintNode(@NonNull RelConstraintNode relConstraintNode) {
-		String expression = relConstraintNode.getExpression();
-		append(expression);
-		return null;
-	}
-
-	@Override
 	public @Nullable Object visitRelDomainNode(@NonNull RelDomainNode relDomainNode) {
-		TxTypedModelNode txTypedModelNode = relDomainNode.getReferredTypedModelNode();
+		TxTypedModelNode txTypedModelNode = relDomainNode.getReferredTxTypedModelNode();
 		append(txTypedModelNode != null ? txTypedModelNode.getName() : null);
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitRelInvocationEdge(@NonNull RelInvocationEdge relInvocationEdge) {
-		RelPatternNode relPatternNode = relInvocationEdge.getReferredRelPatternNode();
+		RelPatternClassNode relPatternNode = relInvocationEdge.getReferredRelPatternNode();
 		if (relPatternNode != null) {
 			return relPatternNode.accept(this);
 		}
@@ -84,6 +77,13 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	}
 
 	@Override
+	public @Nullable Object visitRelPatternClassNode(@NonNull RelPatternClassNode relPatternClassNode) {
+		EClassifier eClassifier = relPatternClassNode.getReferredClass();
+		append(LabelUtil.getLabel(eClassifier));
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitRelPatternEdge(@NonNull RelPatternEdge relPatternEdge) {
 		EStructuralFeature eStructuralFeature = relPatternEdge.getReferredProperty();
 		if (relPatternEdge.isIsOpposite()) {
@@ -94,9 +94,9 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	}
 
 	@Override
-	public @Nullable Object visitRelPatternNode(@NonNull RelPatternNode relPatternNode) {
-		EClassifier eClassifier = relPatternNode.getReferredClass();
-		append(LabelUtil.getLabel(eClassifier));
+	public @Nullable Object visitRelPatternExpressionNode(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
+		String expression = relPatternExpressionNode.getExpression();
+		append(expression);
 		return null;
 	}
 
@@ -125,15 +125,8 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	}
 
 	@Override
-	public @Nullable Object visitTxTypedModelNode(@NonNull TxTypedModelNode txTypedModelNode) {
-		String name = txTypedModelNode.getName();
-		append(name);
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitUMLXDiagram(@NonNull UMLXDiagram umlxDiagram) {
-		String name = umlxDiagram.getName();
+	public @Nullable Object visitUMLXNamedElement(@NonNull UMLXNamedElement umlxNamedElement) {
+		String name = umlxNamedElement.getName();
 		append(name);
 		return null;
 	}

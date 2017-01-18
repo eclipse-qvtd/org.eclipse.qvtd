@@ -32,22 +32,21 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.UMLXModelImpl#getOwnedDiagrams <em>Owned Diagrams</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.UMLXModelImpl#getOwnedTxDiagrams <em>Owned Tx Diagrams</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	/**
-	 * The cached value of the '{@link #getOwnedDiagrams() <em>Owned Diagrams</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedTxDiagrams() <em>Owned Tx Diagrams</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedDiagrams()
+	 * @see #getOwnedTxDiagrams()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TxDiagram> ownedDiagrams;
-
+	protected EList<TxDiagram> ownedTxDiagrams;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,11 +72,11 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	 * @generated
 	 */
 	@Override
-	public EList<TxDiagram> getOwnedDiagrams() {
-		if (ownedDiagrams == null) {
-			ownedDiagrams = new EObjectContainmentEList<TxDiagram>(TxDiagram.class, this, UMLXPackage.UMLX_MODEL__OWNED_DIAGRAMS);
+	public EList<TxDiagram> getOwnedTxDiagrams() {
+		if (ownedTxDiagrams == null) {
+			ownedTxDiagrams = new EObjectContainmentEList<TxDiagram>(TxDiagram.class, this, UMLXPackage.UMLX_MODEL__OWNED_TX_DIAGRAMS);
 		}
-		return ownedDiagrams;
+		return ownedTxDiagrams;
 	}
 
 	/**
@@ -88,8 +87,8 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_MODEL__OWNED_DIAGRAMS:
-				return ((InternalEList<?>)getOwnedDiagrams()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.UMLX_MODEL__OWNED_TX_DIAGRAMS:
+				return ((InternalEList<?>)getOwnedTxDiagrams()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -102,8 +101,8 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_MODEL__OWNED_DIAGRAMS:
-				return getOwnedDiagrams();
+			case UMLXPackage.UMLX_MODEL__OWNED_TX_DIAGRAMS:
+				return getOwnedTxDiagrams();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -117,9 +116,9 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_MODEL__OWNED_DIAGRAMS:
-				getOwnedDiagrams().clear();
-				getOwnedDiagrams().addAll((Collection<? extends TxDiagram>)newValue);
+			case UMLXPackage.UMLX_MODEL__OWNED_TX_DIAGRAMS:
+				getOwnedTxDiagrams().clear();
+				getOwnedTxDiagrams().addAll((Collection<? extends TxDiagram>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,8 +132,8 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_MODEL__OWNED_DIAGRAMS:
-				getOwnedDiagrams().clear();
+			case UMLXPackage.UMLX_MODEL__OWNED_TX_DIAGRAMS:
+				getOwnedTxDiagrams().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -148,8 +147,8 @@ public class UMLXModelImpl extends UMLXElementImpl implements UMLXModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_MODEL__OWNED_DIAGRAMS:
-				return ownedDiagrams != null && !ownedDiagrams.isEmpty();
+			case UMLXPackage.UMLX_MODEL__OWNED_TX_DIAGRAMS:
+				return ownedTxDiagrams != null && !ownedTxDiagrams.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

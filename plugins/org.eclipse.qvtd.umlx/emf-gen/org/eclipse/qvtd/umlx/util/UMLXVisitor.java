@@ -41,13 +41,15 @@ public interface UMLXVisitor<R>
 	 */
 	R visiting(org.eclipse.qvtd.umlx.@NonNull UMLXElement visitable);
 
-	R visitRelConstraintNode(org.eclipse.qvtd.umlx.@NonNull RelConstraintNode object);
 	R visitRelDiagram(org.eclipse.qvtd.umlx.@NonNull RelDiagram object);
 	R visitRelDomainNode(org.eclipse.qvtd.umlx.@NonNull RelDomainNode object);
+	R visitRelEdge(org.eclipse.qvtd.umlx.@NonNull RelEdge object);
 	R visitRelInvocationEdge(org.eclipse.qvtd.umlx.@NonNull RelInvocationEdge object);
 	R visitRelInvocationNode(org.eclipse.qvtd.umlx.@NonNull RelInvocationNode object);
 	R visitRelNode(org.eclipse.qvtd.umlx.@NonNull RelNode object);
+	R visitRelPatternClassNode(org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode object);
 	R visitRelPatternEdge(org.eclipse.qvtd.umlx.@NonNull RelPatternEdge object);
+	R visitRelPatternExpressionNode(org.eclipse.qvtd.umlx.@NonNull RelPatternExpressionNode object);
 	R visitRelPatternNode(org.eclipse.qvtd.umlx.@NonNull RelPatternNode object);
 	R visitTxDiagram(org.eclipse.qvtd.umlx.@NonNull TxDiagram object);
 	R visitTxImportNode(org.eclipse.qvtd.umlx.@NonNull TxImportNode object);
@@ -56,10 +58,7 @@ public interface UMLXVisitor<R>
 	R visitTxPackageNode(org.eclipse.qvtd.umlx.@NonNull TxPackageNode object);
 	R visitTxPartNode(org.eclipse.qvtd.umlx.@NonNull TxPartNode object);
 	R visitTxTypedModelNode(org.eclipse.qvtd.umlx.@NonNull TxTypedModelNode object);
-	R visitUMLXDiagram(org.eclipse.qvtd.umlx.@NonNull UMLXDiagram object);
-	R visitUMLXEdge(org.eclipse.qvtd.umlx.@NonNull UMLXEdge object);
 	R visitUMLXElement(org.eclipse.qvtd.umlx.@NonNull UMLXElement object);
 	R visitUMLXModel(org.eclipse.qvtd.umlx.@NonNull UMLXModel object);
 	R visitUMLXNamedElement(org.eclipse.qvtd.umlx.@NonNull UMLXNamedElement object);
-	R visitUMLXNode(org.eclipse.qvtd.umlx.@NonNull UMLXNode object);
 }

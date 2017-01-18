@@ -38,8 +38,8 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl#getTxDiagram <em>Tx Diagram</em>}</li>
  * </ul>
  *
  * @generated
@@ -133,6 +133,49 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 	 * @generated
 	 */
 	@Override
+	public TxDiagram getOwningTxDiagram() {
+		if (eContainerFeatureID() != UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM) return null;
+		return (TxDiagram)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM && newOwningTxDiagram != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningTxDiagram != null)
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES, TxDiagram.class, msgs);
+			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM, newOwningTxDiagram, newOwningTxDiagram));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getUri() {
 		return uri;
 	}
@@ -156,49 +199,6 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 	 * @generated
 	 */
 	@Override
-	public TxDiagram getTxDiagram() {
-		if (eContainerFeatureID() != UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM) return null;
-		return (TxDiagram)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTxDiagram(TxDiagram newTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTxDiagram, UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTxDiagram(TxDiagram newTxDiagram) {
-		if (newTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM && newTxDiagram != null)) {
-			if (EcoreUtil.isAncestor(this, newTxDiagram))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTxDiagram != null)
-				msgs = ((InternalEObject)newTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__TX_IMPORT_NODES, TxDiagram.class, msgs);
-			msgs = basicSetTxDiagram(newTxDiagram, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM, newTxDiagram, newTxDiagram));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -211,10 +211,10 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTxDiagram((TxDiagram)otherEnd, msgs);
+				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -227,8 +227,8 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
-				return basicSetTxDiagram(null, msgs);
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
+				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -241,8 +241,8 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__TX_IMPORT_NODES, TxDiagram.class, msgs);
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -257,10 +257,10 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 		switch (featureID) {
 			case UMLXPackage.TX_IMPORT_NODE__NAME:
 				return getName();
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
+				return getOwningTxDiagram();
 			case UMLXPackage.TX_IMPORT_NODE__URI:
 				return getUri();
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
-				return getTxDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -276,11 +276,11 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 			case UMLXPackage.TX_IMPORT_NODE__NAME:
 				setName((String)newValue);
 				return;
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
+				setOwningTxDiagram((TxDiagram)newValue);
+				return;
 			case UMLXPackage.TX_IMPORT_NODE__URI:
 				setUri((String)newValue);
-				return;
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
-				setTxDiagram((TxDiagram)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -297,11 +297,11 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 			case UMLXPackage.TX_IMPORT_NODE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
+				setOwningTxDiagram((TxDiagram)null);
+				return;
 			case UMLXPackage.TX_IMPORT_NODE__URI:
 				setUri(URI_EDEFAULT);
-				return;
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
-				setTxDiagram((TxDiagram)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -317,10 +317,10 @@ public class TxImportNodeImpl extends TxNodeImpl implements TxImportNode {
 		switch (featureID) {
 			case UMLXPackage.TX_IMPORT_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM:
+				return getOwningTxDiagram() != null;
 			case UMLXPackage.TX_IMPORT_NODE__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case UMLXPackage.TX_IMPORT_NODE__TX_DIAGRAM:
-				return getTxDiagram() != null;
 		}
 		return super.eIsSet(featureID);
 	}

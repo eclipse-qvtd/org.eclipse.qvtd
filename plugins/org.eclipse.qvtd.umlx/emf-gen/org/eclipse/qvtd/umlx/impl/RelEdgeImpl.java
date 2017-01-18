@@ -11,23 +11,23 @@
 package org.eclipse.qvtd.umlx.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.qvtd.umlx.UMLXDiagram;
+import org.eclipse.qvtd.umlx.RelEdge;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Diagram</b></em>'.
+ * An implementation of the model object '<em><b>Rel Edge</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class UMLXDiagramImpl extends UMLXNamedElementImpl implements UMLXDiagram {
+public abstract class RelEdgeImpl extends UMLXElementImpl implements RelEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UMLXDiagramImpl() {
+	protected RelEdgeImpl() {
 		super();
 	}
 
@@ -38,8 +38,8 @@ public abstract class UMLXDiagramImpl extends UMLXNamedElementImpl implements UM
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UMLXPackage.Literals.UMLX_DIAGRAM;
+		return UMLXPackage.Literals.REL_EDGE;
 	}
 
 
-} //UMLXDiagramImpl
+} //RelEdgeImpl

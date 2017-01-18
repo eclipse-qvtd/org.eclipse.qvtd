@@ -64,14 +64,13 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case UMLXPackage.REL_CONSTRAINT_NODE: return createRelConstraintNode();
 			case UMLXPackage.REL_DIAGRAM: return createRelDiagram();
 			case UMLXPackage.REL_DOMAIN_NODE: return createRelDomainNode();
 			case UMLXPackage.REL_INVOCATION_EDGE: return createRelInvocationEdge();
 			case UMLXPackage.REL_INVOCATION_NODE: return createRelInvocationNode();
-			case UMLXPackage.REL_NODE: return createRelNode();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE: return createRelPatternClassNode();
 			case UMLXPackage.REL_PATTERN_EDGE: return createRelPatternEdge();
-			case UMLXPackage.REL_PATTERN_NODE: return createRelPatternNode();
+			case UMLXPackage.REL_PATTERN_EXPRESSION_NODE: return createRelPatternExpressionNode();
 			case UMLXPackage.TX_DIAGRAM: return createTxDiagram();
 			case UMLXPackage.TX_IMPORT_NODE: return createTxImportNode();
 			case UMLXPackage.TX_KEY_NODE: return createTxKeyNode();
@@ -83,17 +82,6 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull RelConstraintNode createRelConstraintNode() {
-		RelConstraintNodeImpl relConstraintNode = new RelConstraintNodeImpl();
-		return relConstraintNode;
 	}
 
 	/**
@@ -146,9 +134,9 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	 * @generated
 	 */
 	@Override
-	public @NonNull RelNode createRelNode() {
-		RelNodeImpl relNode = new RelNodeImpl();
-		return relNode;
+	public @NonNull RelPatternClassNode createRelPatternClassNode() {
+		RelPatternClassNodeImpl relPatternClassNode = new RelPatternClassNodeImpl();
+		return relPatternClassNode;
 	}
 
 	/**
@@ -168,9 +156,9 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	 * @generated
 	 */
 	@Override
-	public @NonNull RelPatternNode createRelPatternNode() {
-		RelPatternNodeImpl relPatternNode = new RelPatternNodeImpl();
-		return relPatternNode;
+	public @NonNull RelPatternExpressionNode createRelPatternExpressionNode() {
+		RelPatternExpressionNodeImpl relPatternExpressionNode = new RelPatternExpressionNodeImpl();
+		return relPatternExpressionNode;
 	}
 
 	/**

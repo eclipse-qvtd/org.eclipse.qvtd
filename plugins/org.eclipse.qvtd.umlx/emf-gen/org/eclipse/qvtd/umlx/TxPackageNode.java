@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EPackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredPackage <em>Referred Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPackageNode()
@@ -52,5 +53,32 @@ public interface TxPackageNode extends TxNode {
 	 * @generated
 	 */
 	void setReferredPackage(EPackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Tx Typed Model Node</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Tx Typed Model Node</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Tx Typed Model Node</em>' container reference.
+	 * @see #setOwningTxTypedModelNode(TxTypedModelNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPackageNode_OwningTxTypedModelNode()
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes
+	 * @generated
+	 */
+	TxTypedModelNode getOwningTxTypedModelNode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Tx Typed Model Node</em>' container reference.
+	 * @see #getOwningTxTypedModelNode()
+	 * @generated
+	 */
+	void setOwningTxTypedModelNode(TxTypedModelNode value);
 
 } // TxPackageNode

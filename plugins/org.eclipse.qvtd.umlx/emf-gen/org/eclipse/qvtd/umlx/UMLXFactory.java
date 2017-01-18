@@ -31,15 +31,6 @@ public interface UMLXFactory extends EFactory {
 	UMLXFactory eINSTANCE = org.eclipse.qvtd.umlx.impl.UMLXFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Rel Constraint Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rel Constraint Node</em>'.
-	 * @generated
-	 */
-	@NonNull RelConstraintNode createRelConstraintNode();
-
-	/**
 	 * Returns a new object of class '<em>Rel Diagram</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,13 +67,13 @@ public interface UMLXFactory extends EFactory {
 	@NonNull RelInvocationNode createRelInvocationNode();
 
 	/**
-	 * Returns a new object of class '<em>Rel Node</em>'.
+	 * Returns a new object of class '<em>Rel Pattern Class Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rel Node</em>'.
+	 * @return a new object of class '<em>Rel Pattern Class Node</em>'.
 	 * @generated
 	 */
-	@NonNull RelNode createRelNode();
+	@NonNull RelPatternClassNode createRelPatternClassNode();
 
 	/**
 	 * Returns a new object of class '<em>Rel Pattern Edge</em>'.
@@ -94,13 +85,13 @@ public interface UMLXFactory extends EFactory {
 	@NonNull RelPatternEdge createRelPatternEdge();
 
 	/**
-	 * Returns a new object of class '<em>Rel Pattern Node</em>'.
+	 * Returns a new object of class '<em>Rel Pattern Expression Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rel Pattern Node</em>'.
+	 * @return a new object of class '<em>Rel Pattern Expression Node</em>'.
 	 * @generated
 	 */
-	@NonNull RelPatternNode createRelPatternNode();
+	@NonNull RelPatternExpressionNode createRelPatternExpressionNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Diagram</em>'.

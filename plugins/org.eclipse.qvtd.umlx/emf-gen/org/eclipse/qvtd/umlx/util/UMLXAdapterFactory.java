@@ -76,16 +76,16 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	protected UMLXSwitch<@Nullable Adapter> modelSwitch =
 			new UMLXSwitch<@Nullable Adapter>() {
 			@Override
-			public Adapter caseRelConstraintNode(RelConstraintNode object) {
-				return createRelConstraintNodeAdapter();
-			}
-			@Override
 			public Adapter caseRelDiagram(RelDiagram object) {
 				return createRelDiagramAdapter();
 			}
 			@Override
 			public Adapter caseRelDomainNode(RelDomainNode object) {
 				return createRelDomainNodeAdapter();
+			}
+			@Override
+			public Adapter caseRelEdge(RelEdge object) {
+				return createRelEdgeAdapter();
 			}
 			@Override
 			public Adapter caseRelInvocationEdge(RelInvocationEdge object) {
@@ -100,8 +100,16 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 				return createRelNodeAdapter();
 			}
 			@Override
+			public Adapter caseRelPatternClassNode(RelPatternClassNode object) {
+				return createRelPatternClassNodeAdapter();
+			}
+			@Override
 			public Adapter caseRelPatternEdge(RelPatternEdge object) {
 				return createRelPatternEdgeAdapter();
+			}
+			@Override
+			public Adapter caseRelPatternExpressionNode(RelPatternExpressionNode object) {
+				return createRelPatternExpressionNodeAdapter();
 			}
 			@Override
 			public Adapter caseRelPatternNode(RelPatternNode object) {
@@ -136,14 +144,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 				return createTxTypedModelNodeAdapter();
 			}
 			@Override
-			public Adapter caseUMLXDiagram(UMLXDiagram object) {
-				return createUMLXDiagramAdapter();
-			}
-			@Override
-			public Adapter caseUMLXEdge(UMLXEdge object) {
-				return createUMLXEdgeAdapter();
-			}
-			@Override
 			public Adapter caseUMLXElement(UMLXElement object) {
 				return createUMLXElementAdapter();
 			}
@@ -154,10 +154,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseUMLXNamedElement(UMLXNamedElement object) {
 				return createUMLXNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseUMLXNode(UMLXNode object) {
-				return createUMLXNodeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -178,20 +174,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelConstraintNode <em>Rel Constraint Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.RelConstraintNode
-	 * @generated
-	 */
-	public Adapter createRelConstraintNodeAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelDiagram <em>Rel Diagram</em>}'.
@@ -218,6 +200,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelDomainNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelEdge <em>Rel Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.RelEdge
+	 * @generated
+	 */
+	public Adapter createRelEdgeAdapter() {
 		return null;
 	}
 
@@ -274,6 +270,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelPatternEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelPatternExpressionNode <em>Rel Pattern Expression Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.RelPatternExpressionNode
+	 * @generated
+	 */
+	public Adapter createRelPatternExpressionNodeAdapter() {
 		return null;
 	}
 
@@ -390,34 +400,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXDiagram <em>Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.UMLXDiagram
-	 * @generated
-	 */
-	public Adapter createUMLXDiagramAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXEdge <em>Edge</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.UMLXEdge
-	 * @generated
-	 */
-	public Adapter createUMLXEdgeAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -446,20 +428,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXNode <em>Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.UMLXNode
-	 * @generated
-	 */
-	public Adapter createUMLXNodeAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXNamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -470,6 +438,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUMLXNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelPatternClassNode <em>Rel Pattern Class Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode
+	 * @generated
+	 */
+	public Adapter createRelPatternClassNodeAdapter() {
 		return null;
 	}
 

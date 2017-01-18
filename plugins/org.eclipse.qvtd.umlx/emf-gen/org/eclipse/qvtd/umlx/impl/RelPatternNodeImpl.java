@@ -10,96 +10,74 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
-import org.eclipse.qvtd.umlx.UMLXNamedElement;
+import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.UMLXPackage;
-import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Rel Pattern Node</b></em>'.
+ * An implementation of the model object '<em><b>Rel Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#isIsRequired <em>Is Required</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getReferredClass <em>Referred Class</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getRelDomainNode <em>Rel Domain Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getIncoming <em>Incoming</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#isIsRoot <em>Is Root</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getOutgoing <em>Outgoing</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
+public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getIncoming()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
+	protected EList<RelPatternEdge> incoming;
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #isIsRoot() <em>Is Root</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #isIsRoot()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
-
+	protected static final boolean IS_ROOT_EDEFAULT = false;
 	/**
-	 * The default value of the '{@link #isIsRequired() <em>Is Required</em>}' attribute.
+	 * The cached value of the '{@link #isIsRoot() <em>Is Root</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsRequired()
+	 * @see #isIsRoot()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_REQUIRED_EDEFAULT = true;
-
+	protected boolean isRoot = IS_ROOT_EDEFAULT;
 	/**
-	 * The cached value of the '{@link #isIsRequired() <em>Is Required</em>}' attribute.
+	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsRequired()
+	 * @see #getOutgoing()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isRequired = IS_REQUIRED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferredClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected EClassifier referredClass;
-
-	/**
-	 * The cached value of the '{@link #getRelDomainNode() <em>Rel Domain Node</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRelDomainNode()
-	 * @generated
-	 * @ordered
-	 */
-	protected RelDomainNode relDomainNode;
-
+	protected EList<RelPatternEdge> outgoing;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -125,71 +103,11 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsRequired() {
-		return isRequired;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsRequired(boolean newIsRequired) {
-		boolean oldIsRequired = isRequired;
-		isRequired = newIsRequired;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED, oldIsRequired, isRequired));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClassifier getReferredClass() {
-		if (referredClass != null && referredClass.eIsProxy()) {
-			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			referredClass = (EClassifier)eResolveProxy(oldReferredClass);
-			if (referredClass != oldReferredClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
-			}
+	public EList<RelPatternEdge> getIncoming() {
+		if (incoming == null) {
+			incoming = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, UMLXPackage.REL_PATTERN_NODE__INCOMING, UMLXPackage.REL_PATTERN_EDGE__TARGET);
 		}
-		return referredClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClassifier basicGetReferredClass() {
-		return referredClass;
+		return incoming;
 	}
 
 	/**
@@ -198,11 +116,21 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredClass(EClassifier newReferredClass) {
-		EClassifier oldReferredClass = referredClass;
-		referredClass = newReferredClass;
+	public boolean isIsRoot() {
+		return isRoot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsRoot(boolean newIsRoot) {
+		boolean oldIsRoot = isRoot;
+		isRoot = newIsRoot;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__IS_ROOT, oldIsRoot, isRoot));
 	}
 
 	/**
@@ -211,16 +139,11 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	@Override
-	public RelDomainNode getRelDomainNode() {
-		if (relDomainNode != null && relDomainNode.eIsProxy()) {
-			InternalEObject oldRelDomainNode = (InternalEObject)relDomainNode;
-			relDomainNode = (RelDomainNode)eResolveProxy(oldRelDomainNode);
-			if (relDomainNode != oldRelDomainNode) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE, oldRelDomainNode, relDomainNode));
-			}
+	public EList<RelPatternEdge> getOutgoing() {
+		if (outgoing == null) {
+			outgoing = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, UMLXPackage.REL_PATTERN_NODE__OUTGOING, UMLXPackage.REL_PATTERN_EDGE__SOURCE);
 		}
-		return relDomainNode;
+		return outgoing;
 	}
 
 	/**
@@ -228,8 +151,10 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelDomainNode basicGetRelDomainNode() {
-		return relDomainNode;
+	@Override
+	public RelDomainNode getOwningRelDomainNode() {
+		if (eContainerFeatureID() != UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE) return null;
+		return (RelDomainNode)eInternalContainer();
 	}
 
 	/**
@@ -237,13 +162,8 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRelDomainNode(RelDomainNode newRelDomainNode, NotificationChain msgs) {
-		RelDomainNode oldRelDomainNode = relDomainNode;
-		relDomainNode = newRelDomainNode;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE, oldRelDomainNode, newRelDomainNode);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+	public NotificationChain basicSetOwningRelDomainNode(RelDomainNode newOwningRelDomainNode, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningRelDomainNode, UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, msgs);
 		return msgs;
 	}
 
@@ -253,18 +173,20 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	@Override
-	public void setRelDomainNode(RelDomainNode newRelDomainNode) {
-		if (newRelDomainNode != relDomainNode) {
+	public void setOwningRelDomainNode(RelDomainNode newOwningRelDomainNode) {
+		if (newOwningRelDomainNode != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE && newOwningRelDomainNode != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningRelDomainNode))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (relDomainNode != null)
-				msgs = ((InternalEObject)relDomainNode).eInverseRemove(this, UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES, RelDomainNode.class, msgs);
-			if (newRelDomainNode != null)
-				msgs = ((InternalEObject)newRelDomainNode).eInverseAdd(this, UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES, RelDomainNode.class, msgs);
-			msgs = basicSetRelDomainNode(newRelDomainNode, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningRelDomainNode != null)
+				msgs = ((InternalEObject)newOwningRelDomainNode).eInverseAdd(this, UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, RelDomainNode.class, msgs);
+			msgs = basicSetOwningRelDomainNode(newOwningRelDomainNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE, newRelDomainNode, newRelDomainNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, newOwningRelDomainNode, newOwningRelDomainNode));
 	}
 
 	/**
@@ -273,12 +195,27 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
-				if (relDomainNode != null)
-					msgs = ((InternalEObject)relDomainNode).eInverseRemove(this, UMLXPackage.REL_DOMAIN_NODE__ROOT_PATTERN_NODES, RelDomainNode.class, msgs);
-				return basicSetRelDomainNode((RelDomainNode)otherEnd, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningRelDomainNode((RelDomainNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -291,8 +228,12 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
-				return basicSetRelDomainNode(null, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
+				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
+				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				return basicSetOwningRelDomainNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -303,18 +244,30 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, RelDomainNode.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_NODE__NAME:
-				return getName();
-			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
-				return isIsRequired();
-			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
-				if (resolve) return getReferredClass();
-				return basicGetReferredClass();
-			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
-				if (resolve) return getRelDomainNode();
-				return basicGetRelDomainNode();
+			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
+				return getIncoming();
+			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
+				return isIsRoot();
+			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
+				return getOutgoing();
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				return getOwningRelDomainNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -324,20 +277,23 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_NODE__NAME:
-				setName((String)newValue);
+			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
+				getIncoming().clear();
+				getIncoming().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
-				setIsRequired((Boolean)newValue);
+			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
+				setIsRoot((Boolean)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
-				setReferredClass((EClassifier)newValue);
+			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
+				getOutgoing().clear();
+				getOutgoing().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
-				setRelDomainNode((RelDomainNode)newValue);
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				setOwningRelDomainNode((RelDomainNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -351,17 +307,17 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_NODE__NAME:
-				setName(NAME_EDEFAULT);
+			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
+				getIncoming().clear();
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
-				setIsRequired(IS_REQUIRED_EDEFAULT);
+			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
+				setIsRoot(IS_ROOT_EDEFAULT);
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
-				setReferredClass((EClassifier)null);
+			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
+				getOutgoing().clear();
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
-				setRelDomainNode((RelDomainNode)null);
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				setOwningRelDomainNode((RelDomainNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -375,67 +331,16 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_NODE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case UMLXPackage.REL_PATTERN_NODE__IS_REQUIRED:
-				return isRequired != IS_REQUIRED_EDEFAULT;
-			case UMLXPackage.REL_PATTERN_NODE__REFERRED_CLASS:
-				return referredClass != null;
-			case UMLXPackage.REL_PATTERN_NODE__REL_DOMAIN_NODE:
-				return relDomainNode != null;
+			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
+				return incoming != null && !incoming.isEmpty();
+			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
+				return isRoot != IS_ROOT_EDEFAULT;
+			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
+				return outgoing != null && !outgoing.isEmpty();
+			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
+				return getOwningRelDomainNode() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == UMLXNamedElement.class) {
-			switch (derivedFeatureID) {
-				case UMLXPackage.REL_PATTERN_NODE__NAME: return UMLXPackage.UMLX_NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == UMLXNamedElement.class) {
-			switch (baseFeatureID) {
-				case UMLXPackage.UMLX_NAMED_ELEMENT__NAME: return UMLXPackage.REL_PATTERN_NODE__NAME;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
-		return visitor.visitRelPatternNode(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-} //RelPatternNodeImpl
+} //RelNodeImpl

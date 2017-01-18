@@ -23,29 +23,14 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isEnforce <em>Enforce</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxDiagram <em>Tx Diagram</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxPackageNodes <em>Tx Package Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode()
  * @generated
  */
 public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
-	/**
-	 * Returns the value of the '<em><b>Tx Package Nodes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxPackageNode}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tx Package Nodes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tx Package Nodes</em>' containment reference list.
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_TxPackageNodes()
-	 * @generated
-	 */
-	EList<TxPackageNode> getTxPackageNodes();
-
 	/**
 	 * Returns the value of the '<em><b>Check</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
@@ -99,30 +84,47 @@ public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	void setEnforce(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Tx Diagram</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxDiagram#getTxTypedModelNodes <em>Tx Typed Model Nodes</em>}'.
+	 * Returns the value of the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxPackageNode}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Tx Diagram</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owned Tx Package Nodes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tx Diagram</em>' container reference.
-	 * @see #setTxDiagram(TxDiagram)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_TxDiagram()
-	 * @see org.eclipse.qvtd.umlx.TxDiagram#getTxTypedModelNodes
+	 * @return the value of the '<em>Owned Tx Package Nodes</em>' containment reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_OwnedTxPackageNodes()
+	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode
 	 * @generated
 	 */
-	TxDiagram getTxDiagram();
+	EList<TxPackageNode> getOwnedTxPackageNodes();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getTxDiagram <em>Tx Diagram</em>}' container reference.
+	 * Returns the value of the '<em><b>Owning Tx Diagram</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxTypedModelNodes <em>Owned Tx Typed Model Nodes</em>}'.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Tx Diagram</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tx Diagram</em>' container reference.
-	 * @see #getTxDiagram()
+	 * @return the value of the '<em>Owning Tx Diagram</em>' container reference.
+	 * @see #setOwningTxDiagram(TxDiagram)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_OwningTxDiagram()
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxTypedModelNodes
 	 * @generated
 	 */
-	void setTxDiagram(TxDiagram value);
+	TxDiagram getOwningTxDiagram();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Tx Diagram</em>' container reference.
+	 * @see #getOwningTxDiagram()
+	 * @generated
+	 */
+	void setOwningTxDiagram(TxDiagram value);
 
 } // TxTypedModelNode

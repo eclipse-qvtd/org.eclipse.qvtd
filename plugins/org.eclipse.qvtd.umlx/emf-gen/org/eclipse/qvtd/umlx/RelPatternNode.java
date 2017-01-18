@@ -10,102 +10,113 @@
  */
 package org.eclipse.qvtd.umlx;
 
-import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Rel Pattern Node</b></em>'.
+ * A representation of the model object '<em><b>Rel Node</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRequired <em>Is Required</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getReferredClass <em>Referred Class</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getRelDomainNode <em>Rel Domain Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getIncoming <em>Incoming</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRoot <em>Is Root</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing <em>Outgoing</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode()
  * @generated
  */
-public interface RelPatternNode extends RelNode, UMLXNamedElement {
+public interface RelPatternNode extends RelNode {
+
 	/**
-	 * Returns the value of the '<em><b>Is Required</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
+	 * Returns the value of the '<em><b>Incoming</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelPatternEdge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Required</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Incoming</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Required</em>' attribute.
-	 * @see #setIsRequired(boolean)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_IsRequired()
+	 * @return the value of the '<em>Incoming</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_Incoming()
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getTarget
 	 * @generated
 	 */
-	boolean isIsRequired();
+	EList<RelPatternEdge> getIncoming();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRequired <em>Is Required</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Required</em>' attribute.
-	 * @see #isIsRequired()
-	 * @generated
-	 */
-	void setIsRequired(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Referred Class</b></em>' reference.
+	 * Returns the value of the '<em><b>Is Root</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Class</em>' reference isn't clear,
+	 * If the meaning of the '<em>Is Root</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Class</em>' reference.
-	 * @see #setReferredClass(EClassifier)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_ReferredClass()
+	 * @return the value of the '<em>Is Root</em>' attribute.
+	 * @see #setIsRoot(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_IsRoot()
 	 * @generated
 	 */
-	EClassifier getReferredClass();
+	boolean isIsRoot();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#getReferredClass <em>Referred Class</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRoot <em>Is Root</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Class</em>' reference.
-	 * @see #getReferredClass()
+	 * @param value the new value of the '<em>Is Root</em>' attribute.
+	 * @see #isIsRoot()
 	 * @generated
 	 */
-	void setReferredClass(EClassifier value);
+	void setIsRoot(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Rel Domain Node</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelDomainNode#getRootPatternNodes <em>Root Pattern Nodes</em>}'.
+	 * Returns the value of the '<em><b>Outgoing</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelPatternEdge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Rel Domain Node</em>' reference isn't clear,
+	 * If the meaning of the '<em>Outgoing</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rel Domain Node</em>' reference.
-	 * @see #setRelDomainNode(RelDomainNode)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_RelDomainNode()
-	 * @see org.eclipse.qvtd.umlx.RelDomainNode#getRootPatternNodes
+	 * @return the value of the '<em>Outgoing</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_Outgoing()
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getSource
 	 * @generated
 	 */
-	RelDomainNode getRelDomainNode();
+	EList<RelPatternEdge> getOutgoing();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#getRelDomainNode <em>Rel Domain Node</em>}' reference.
+	 * Returns the value of the '<em><b>Owning Rel Domain Node</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternNodes <em>Owned Rel Pattern Nodes</em>}'.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Rel Domain Node</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rel Domain Node</em>' reference.
-	 * @see #getRelDomainNode()
+	 * @return the value of the '<em>Owning Rel Domain Node</em>' container reference.
+	 * @see #setOwningRelDomainNode(RelDomainNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_OwningRelDomainNode()
+	 * @see org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternNodes
 	 * @generated
 	 */
-	void setRelDomainNode(RelDomainNode value);
+	RelDomainNode getOwningRelDomainNode();
 
-} // RelPatternNode
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternNode#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Rel Domain Node</em>' container reference.
+	 * @see #getOwningRelDomainNode()
+	 * @generated
+	 */
+	void setOwningRelDomainNode(RelDomainNode value);
+} // RelNode

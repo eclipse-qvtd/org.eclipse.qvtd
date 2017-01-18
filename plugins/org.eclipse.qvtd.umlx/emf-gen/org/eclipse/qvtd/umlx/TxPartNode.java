@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#getTxKeyNode <em>Tx Key Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#getOwningTxKeyNode <em>Owning Tx Key Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
@@ -31,31 +31,31 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public interface TxPartNode extends TxNode {
 	/**
-	 * Returns the value of the '<em><b>Tx Key Node</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxKeyNode#getTxPartNodes <em>Tx Part Nodes</em>}'.
+	 * Returns the value of the '<em><b>Owning Tx Key Node</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxKeyNode#getOwnedTxPartNodes <em>Owned Tx Part Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Tx Key Node</em>' reference isn't clear,
+	 * If the meaning of the '<em>Owning Tx Key Node</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tx Key Node</em>' container reference.
-	 * @see #setTxKeyNode(TxKeyNode)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPartNode_TxKeyNode()
-	 * @see org.eclipse.qvtd.umlx.TxKeyNode#getTxPartNodes
+	 * @return the value of the '<em>Owning Tx Key Node</em>' container reference.
+	 * @see #setOwningTxKeyNode(TxKeyNode)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPartNode_OwningTxKeyNode()
+	 * @see org.eclipse.qvtd.umlx.TxKeyNode#getOwnedTxPartNodes
 	 * @generated
 	 */
-	TxKeyNode getTxKeyNode();
+	TxKeyNode getOwningTxKeyNode();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPartNode#getTxKeyNode <em>Tx Key Node</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPartNode#getOwningTxKeyNode <em>Owning Tx Key Node</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tx Key Node</em>' container reference.
-	 * @see #getTxKeyNode()
+	 * @param value the new value of the '<em>Owning Tx Key Node</em>' container reference.
+	 * @see #getOwningTxKeyNode()
 	 * @generated
 	 */
-	void setTxKeyNode(TxKeyNode value);
+	void setOwningTxKeyNode(TxKeyNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.

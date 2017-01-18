@@ -74,19 +74,9 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case UMLXPackage.REL_CONSTRAINT_NODE: {
-				RelConstraintNode relConstraintNode = (RelConstraintNode)theEObject;
-				T result = caseRelConstraintNode(relConstraintNode);
-				if (result == null) result = caseRelNode(relConstraintNode);
-				if (result == null) result = caseUMLXNode(relConstraintNode);
-				if (result == null) result = caseUMLXElement(relConstraintNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case UMLXPackage.REL_DIAGRAM: {
 				RelDiagram relDiagram = (RelDiagram)theEObject;
 				T result = caseRelDiagram(relDiagram);
-				if (result == null) result = caseUMLXDiagram(relDiagram);
 				if (result == null) result = caseUMLXNamedElement(relDiagram);
 				if (result == null) result = caseUMLXElement(relDiagram);
 				if (result == null) result = defaultCase(theEObject);
@@ -96,15 +86,21 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				RelDomainNode relDomainNode = (RelDomainNode)theEObject;
 				T result = caseRelDomainNode(relDomainNode);
 				if (result == null) result = caseRelNode(relDomainNode);
-				if (result == null) result = caseUMLXNode(relDomainNode);
 				if (result == null) result = caseUMLXElement(relDomainNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UMLXPackage.REL_EDGE: {
+				RelEdge relEdge = (RelEdge)theEObject;
+				T result = caseRelEdge(relEdge);
+				if (result == null) result = caseUMLXElement(relEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case UMLXPackage.REL_INVOCATION_EDGE: {
 				RelInvocationEdge relInvocationEdge = (RelInvocationEdge)theEObject;
 				T result = caseRelInvocationEdge(relInvocationEdge);
-				if (result == null) result = caseUMLXEdge(relInvocationEdge);
+				if (result == null) result = caseRelEdge(relInvocationEdge);
 				if (result == null) result = caseUMLXElement(relInvocationEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -113,7 +109,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				RelInvocationNode relInvocationNode = (RelInvocationNode)theEObject;
 				T result = caseRelInvocationNode(relInvocationNode);
 				if (result == null) result = caseRelNode(relInvocationNode);
-				if (result == null) result = caseUMLXNode(relInvocationNode);
 				if (result == null) result = caseUMLXElement(relInvocationNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -121,16 +116,34 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 			case UMLXPackage.REL_NODE: {
 				RelNode relNode = (RelNode)theEObject;
 				T result = caseRelNode(relNode);
-				if (result == null) result = caseUMLXNode(relNode);
 				if (result == null) result = caseUMLXElement(relNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UMLXPackage.REL_PATTERN_CLASS_NODE: {
+				RelPatternClassNode relPatternClassNode = (RelPatternClassNode)theEObject;
+				T result = caseRelPatternClassNode(relPatternClassNode);
+				if (result == null) result = caseRelPatternNode(relPatternClassNode);
+				if (result == null) result = caseUMLXNamedElement(relPatternClassNode);
+				if (result == null) result = caseRelNode(relPatternClassNode);
+				if (result == null) result = caseUMLXElement(relPatternClassNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case UMLXPackage.REL_PATTERN_EDGE: {
 				RelPatternEdge relPatternEdge = (RelPatternEdge)theEObject;
 				T result = caseRelPatternEdge(relPatternEdge);
-				if (result == null) result = caseUMLXEdge(relPatternEdge);
+				if (result == null) result = caseRelEdge(relPatternEdge);
 				if (result == null) result = caseUMLXElement(relPatternEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UMLXPackage.REL_PATTERN_EXPRESSION_NODE: {
+				RelPatternExpressionNode relPatternExpressionNode = (RelPatternExpressionNode)theEObject;
+				T result = caseRelPatternExpressionNode(relPatternExpressionNode);
+				if (result == null) result = caseRelPatternNode(relPatternExpressionNode);
+				if (result == null) result = caseRelNode(relPatternExpressionNode);
+				if (result == null) result = caseUMLXElement(relPatternExpressionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,8 +151,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				RelPatternNode relPatternNode = (RelPatternNode)theEObject;
 				T result = caseRelPatternNode(relPatternNode);
 				if (result == null) result = caseRelNode(relPatternNode);
-				if (result == null) result = caseUMLXNamedElement(relPatternNode);
-				if (result == null) result = caseUMLXNode(relPatternNode);
 				if (result == null) result = caseUMLXElement(relPatternNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -147,7 +158,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 			case UMLXPackage.TX_DIAGRAM: {
 				TxDiagram txDiagram = (TxDiagram)theEObject;
 				T result = caseTxDiagram(txDiagram);
-				if (result == null) result = caseUMLXDiagram(txDiagram);
 				if (result == null) result = caseUMLXNamedElement(txDiagram);
 				if (result == null) result = caseUMLXElement(txDiagram);
 				if (result == null) result = defaultCase(theEObject);
@@ -158,7 +168,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				T result = caseTxImportNode(txImportNode);
 				if (result == null) result = caseTxNode(txImportNode);
 				if (result == null) result = caseUMLXNamedElement(txImportNode);
-				if (result == null) result = caseUMLXNode(txImportNode);
 				if (result == null) result = caseUMLXElement(txImportNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -167,7 +176,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				TxKeyNode txKeyNode = (TxKeyNode)theEObject;
 				T result = caseTxKeyNode(txKeyNode);
 				if (result == null) result = caseTxNode(txKeyNode);
-				if (result == null) result = caseUMLXNode(txKeyNode);
 				if (result == null) result = caseUMLXElement(txKeyNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -175,7 +183,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 			case UMLXPackage.TX_NODE: {
 				TxNode txNode = (TxNode)theEObject;
 				T result = caseTxNode(txNode);
-				if (result == null) result = caseUMLXNode(txNode);
 				if (result == null) result = caseUMLXElement(txNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -184,7 +191,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				TxPackageNode txPackageNode = (TxPackageNode)theEObject;
 				T result = caseTxPackageNode(txPackageNode);
 				if (result == null) result = caseTxNode(txPackageNode);
-				if (result == null) result = caseUMLXNode(txPackageNode);
 				if (result == null) result = caseUMLXElement(txPackageNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -193,7 +199,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				TxPartNode txPartNode = (TxPartNode)theEObject;
 				T result = caseTxPartNode(txPartNode);
 				if (result == null) result = caseTxNode(txPartNode);
-				if (result == null) result = caseUMLXNode(txPartNode);
 				if (result == null) result = caseUMLXElement(txPartNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -203,23 +208,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				T result = caseTxTypedModelNode(txTypedModelNode);
 				if (result == null) result = caseTxNode(txTypedModelNode);
 				if (result == null) result = caseUMLXNamedElement(txTypedModelNode);
-				if (result == null) result = caseUMLXNode(txTypedModelNode);
 				if (result == null) result = caseUMLXElement(txTypedModelNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case UMLXPackage.UMLX_DIAGRAM: {
-				UMLXDiagram umlxDiagram = (UMLXDiagram)theEObject;
-				T result = caseUMLXDiagram(umlxDiagram);
-				if (result == null) result = caseUMLXNamedElement(umlxDiagram);
-				if (result == null) result = caseUMLXElement(umlxDiagram);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case UMLXPackage.UMLX_EDGE: {
-				UMLXEdge umlxEdge = (UMLXEdge)theEObject;
-				T result = caseUMLXEdge(umlxEdge);
-				if (result == null) result = caseUMLXElement(umlxEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -243,30 +232,8 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.UMLX_NODE: {
-				UMLXNode umlxNode = (UMLXNode)theEObject;
-				T result = caseUMLXNode(umlxNode);
-				if (result == null) result = caseUMLXElement(umlxNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rel Constraint Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rel Constraint Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelConstraintNode(RelConstraintNode object) {
-		return null;
 	}
 
 	/**
@@ -296,6 +263,21 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRelDomainNode(RelDomainNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rel Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rel Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelEdge(RelEdge object) {
 		return null;
 	}
 
@@ -356,6 +338,21 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRelPatternEdge(RelPatternEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rel Pattern Expression Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rel Pattern Expression Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelPatternExpressionNode(RelPatternExpressionNode object) {
 		return null;
 	}
 
@@ -480,36 +477,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Diagram</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUMLXDiagram(UMLXDiagram object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Edge</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUMLXEdge(UMLXEdge object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -540,21 +507,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUMLXNode(UMLXNode object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -566,6 +518,21 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUMLXNamedElement(UMLXNamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rel Pattern Class Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rel Pattern Class Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelPatternClassNode(RelPatternClassNode object) {
 		return null;
 	}
 

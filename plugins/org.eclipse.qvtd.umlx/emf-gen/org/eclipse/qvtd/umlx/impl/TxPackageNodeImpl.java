@@ -11,12 +11,15 @@
 package org.eclipse.qvtd.umlx.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.TxPackageNode;
+import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
@@ -29,6 +32,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl#getReferredPackage <em>Referred Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}</li>
  * </ul>
  *
  * @generated
@@ -109,11 +113,100 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * @generated
 	 */
 	@Override
+	public TxTypedModelNode getOwningTxTypedModelNode() {
+		if (eContainerFeatureID() != UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE) return null;
+		return (TxTypedModelNode)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningTxTypedModelNode(TxTypedModelNode newOwningTxTypedModelNode, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxTypedModelNode, UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningTxTypedModelNode(TxTypedModelNode newOwningTxTypedModelNode) {
+		if (newOwningTxTypedModelNode != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE && newOwningTxTypedModelNode != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTxTypedModelNode))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningTxTypedModelNode != null)
+				msgs = ((InternalEObject)newOwningTxTypedModelNode).eInverseAdd(this, UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, TxTypedModelNode.class, msgs);
+			msgs = basicSetOwningTxTypedModelNode(newOwningTxTypedModelNode, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE, newOwningTxTypedModelNode, newOwningTxTypedModelNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningTxTypedModelNode((TxTypedModelNode)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				return basicSetOwningTxTypedModelNode(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, TxTypedModelNode.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
 				if (resolve) return getReferredPackage();
 				return basicGetReferredPackage();
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				return getOwningTxTypedModelNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -128,6 +221,9 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 		switch (featureID) {
 			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
 				setReferredPackage((EPackage)newValue);
+				return;
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				setOwningTxTypedModelNode((TxTypedModelNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -144,6 +240,9 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
 				setReferredPackage((EPackage)null);
 				return;
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				setOwningTxTypedModelNode((TxTypedModelNode)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -158,6 +257,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 		switch (featureID) {
 			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
 				return referredPackage != null;
+			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
+				return getOwningTxTypedModelNode() != null;
 		}
 		return super.eIsSet(featureID);
 	}
