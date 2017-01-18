@@ -10,18 +10,41 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
+import org.eclipse.ocl.pivot.library.LibraryIteration;
+import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.RelDomainNode;
+import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.UMLXPackage;
+import org.eclipse.qvtd.umlx.UMLXTables;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
@@ -32,7 +55,6 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getSource <em>Source</em>}</li>
@@ -42,25 +64,6 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * @generated
  */
 public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
-	/**
-	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_OPPOSITE_EDEFAULT = true;
-	/**
-	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -218,29 +221,6 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * @generated
 	 */
 	@Override
-	public boolean isIsOpposite() {
-		return isOpposite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsOpposite(boolean newIsOpposite) {
-		boolean oldIsOpposite = isOpposite;
-		isOpposite = newIsOpposite;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_EDGE__IS_OPPOSITE, oldIsOpposite, isOpposite));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public RelDomainNode getOwningRelDomainNode() {
 		if (eContainerFeatureID() != UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE) return null;
 		return (RelDomainNode)eInternalContainer();
@@ -346,10 +326,290 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * @generated
 	 */
 	@Override
+	public boolean SourceIsClassNode(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv SourceIsClassNode:
+		 *   let
+		 *     severity : Integer[1] = 'RelPatternEdge::SourceIsClassNode'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : Boolean[1] = source.oclIsKindOf(RelPatternClassNode)
+		 *       in
+		 *         'RelPatternEdge::SourceIsClassNode'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_SourceIsClassNode);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_umlx_c_c_RelPatternClassNode_0 = idResolver.getClass(UMLXTables.CLSSid_RelPatternClassNode, null);
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
+			final /*@NonInvalid*/ boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, source, TYP_umlx_c_c_RelPatternClassNode_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_SourceIsClassNode, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean SourceIsEClass(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv SourceIsEClass:
+		 *   let severity : Integer[1] = 'RelPatternEdge::SourceIsEClass'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : Boolean[?] = source.oclIsKindOf(RelPatternClassNode) implies
+		 *         source.oclAsType(RelPatternClassNode)
+		 *         .referredClass.oclIsKindOf(ecore::EClassifier)
+		 *       in
+		 *         'RelPatternEdge::SourceIsEClass'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_SourceIsEClass);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_result;
+			try {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_umlx_c_c_RelPatternClassNode_0 = idResolver.getClass(UMLXTables.CLSSid_RelPatternClassNode, null);
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
+				final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, source, TYP_umlx_c_c_RelPatternClassNode_0).booleanValue();
+				/*@Thrown*/ boolean result;
+				if (oclIsKindOf) {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClassifier = idResolver.getClass(UMLXTables.CLSSid_EClassifier, null);
+					final /*@Thrown*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode oclAsType = ClassUtil.nonNullState((RelPatternClassNode)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, source, TYP_umlx_c_c_RelPatternClassNode_0));
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = oclAsType.getReferredClass();
+					final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredClass, TYP_ecore_c_c_EClassifier).booleanValue();
+					result = oclIsKindOf_0;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_SourceIsEClass, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean TargetIsClassNode(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv TargetIsClassNode:
+		 *   let
+		 *     severity : Integer[1] = 'RelPatternEdge::TargetIsClassNode'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : Boolean[1] = target.oclIsKindOf(RelPatternClassNode)
+		 *       in
+		 *         'RelPatternEdge::TargetIsClassNode'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_TargetIsClassNode);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_umlx_c_c_RelPatternClassNode_0 = idResolver.getClass(UMLXTables.CLSSid_RelPatternClassNode, null);
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode target = this.getTarget();
+			final /*@NonInvalid*/ boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, target, TYP_umlx_c_c_RelPatternClassNode_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_TargetIsClassNode, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean CompatiblePropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv CompatiblePropertyTarget:
+		 *   let
+		 *     severity : Integer[1] = 'RelPatternEdge::CompatiblePropertyTarget'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let result : Boolean[1] = referredProperty.eType =
+		 *         target.oclAsType(RelPatternClassNode).referredClass
+		 *       in
+		 *         'RelPatternEdge::CompatiblePropertyTarget'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertyTarget);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_result;
+			try {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_umlx_c_c_RelPatternClassNode_0 = idResolver.getClass(UMLXTables.CLSSid_RelPatternClassNode, null);
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredProperty = this.getReferredProperty();
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier eType = referredProperty.getEType();
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode target = this.getTarget();
+				final /*@Thrown*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode oclAsType = ClassUtil.nonNullState((RelPatternClassNode)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, target, TYP_umlx_c_c_RelPatternClassNode_0));
+				@SuppressWarnings("null")
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = oclAsType.getReferredClass();
+				final /*@Thrown*/ boolean result = referredClass.equals(eType);
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertyTarget, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean CompatiblePropertySource(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv CompatiblePropertySource:
+		 *   let
+		 *     severity : Integer[1] = 'RelPatternEdge::CompatiblePropertySource'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : Boolean[1] = source.oclAsType(RelPatternClassNode)
+		 *         .referredClass.oclAsType(ecore::EClass)
+		 *         ->closure(eSuperTypes)
+		 *         ->includes(referredProperty.eContainingClass)
+		 *       in
+		 *         'RelPatternEdge::CompatiblePropertySource'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertySource);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_1;
+		if (le) {
+			symbol_1 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_result;
+			try {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_umlx_c_c_RelPatternClassNode_0 = idResolver.getClass(UMLXTables.CLSSid_RelPatternClassNode, null);
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
+				final /*@Thrown*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode oclAsType = ClassUtil.nonNullState((RelPatternClassNode)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, source, TYP_umlx_c_c_RelPatternClassNode_0));
+				@SuppressWarnings("null")
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = oclAsType.getReferredClass();
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType_0 = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredClass, TYP_ecore_c_c_EClass_0));
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType_0);
+				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
+				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
+				/**
+				 * Implementation of the iterator body.
+				 */
+				final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+					/**
+					 * eSuperTypes
+					 */
+					@Override
+					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object _1) {
+						final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClass symbol_0 = (EClass)_1;
+						if (symbol_0 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ java.util.@NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+						return BOXED_eSuperTypes;
+					}
+				};
+				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredProperty = this.getReferredProperty();
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClass eContainingClass = referredProperty.getEContainingClass();
+				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(closure, eContainingClass).booleanValue();
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertySource, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+			symbol_1 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_EDGE__IS_OPPOSITE:
-				return isIsOpposite();
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode();
 			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY:
@@ -373,9 +633,6 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_EDGE__IS_OPPOSITE:
-				setIsOpposite((Boolean)newValue);
-				return;
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)newValue);
 				return;
@@ -400,9 +657,6 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_EDGE__IS_OPPOSITE:
-				setIsOpposite(IS_OPPOSITE_EDEFAULT);
-				return;
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)null);
 				return;
@@ -427,8 +681,6 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_PATTERN_EDGE__IS_OPPOSITE:
-				return isOpposite != IS_OPPOSITE_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode() != null;
 			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY:
@@ -448,16 +700,6 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	public <R> R accept(@NonNull UMLXVisitor<R> visitor) {
 		return visitor.visitRelPatternEdge(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 
 	/**

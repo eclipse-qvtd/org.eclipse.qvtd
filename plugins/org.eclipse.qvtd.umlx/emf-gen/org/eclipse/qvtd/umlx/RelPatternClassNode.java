@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClassifier;
 
 /**
@@ -105,5 +107,12 @@ public interface RelPatternClassNode extends RelPatternNode, UMLXNamedElement {
 	 * @generated
 	 */
 	void setRelDomainNode(RelDomainNode value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean EClassifierIsInTypedModel(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // RelPatternNode

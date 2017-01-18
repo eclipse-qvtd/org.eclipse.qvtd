@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
@@ -21,7 +23,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}</li>
@@ -85,32 +86,6 @@ public interface RelPatternEdge extends RelEdge {
 	void setSource(RelPatternNode value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Opposite</em>' attribute.
-	 * @see #setIsOpposite(boolean)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_IsOpposite()
-	 * @generated
-	 */
-	boolean isIsOpposite();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#isIsOpposite <em>Is Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
-	 * @see #isIsOpposite()
-	 * @generated
-	 */
-	void setIsOpposite(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Owning Rel Domain Node</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternEdges <em>Owned Rel Pattern Edges</em>}'.
 	 * <!-- begin-user-doc -->
@@ -163,5 +138,40 @@ public interface RelPatternEdge extends RelEdge {
 	 * @generated
 	 */
 	void setTarget(RelPatternNode value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean SourceIsClassNode(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean SourceIsEClass(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean TargetIsClassNode(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean CompatiblePropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean CompatiblePropertySource(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // RelPatternEdge

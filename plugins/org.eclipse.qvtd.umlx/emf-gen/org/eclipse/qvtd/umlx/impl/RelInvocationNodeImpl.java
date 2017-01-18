@@ -11,8 +11,11 @@
 package org.eclipse.qvtd.umlx.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -21,10 +24,23 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyToStringOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.qvtd.umlx.RelDiagram;
+import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
+import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
+import org.eclipse.qvtd.umlx.UMLXTables;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
@@ -164,6 +180,143 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		referredRelDiagram = newReferredRelDiagram;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, oldReferredRelDiagram, referredRelDiagram));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean CompatibleEdges(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv CompatibleEdges:
+		 *   let
+		 *     severity : Integer[1] = 'RelInvocationNode::CompatibleEdges'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : OclAny[1] = let
+		 *           expectedNodes : Sequence(umlx::RelPatternNode) = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot)
+		 *         in
+		 *           let actualNodes : Sequence(umlx::RelPatternClassNode) = ownedRelInvocationEdges.referredRelPatternNode
+		 *           in
+		 *             let status : Boolean[1] = expectedNodes = actualNodes
+		 *             in
+		 *               if status = true
+		 *               then true
+		 *               else Tuple{
+		 *                   status = status, message = expectedNodes->size()
+		 *                   .toString() + '/' +
+		 *                   expectedNodes->size()
+		 *                   .toString()}
+		 *               endif
+		 *       in
+		 *         'RelInvocationNode::CompatibleEdges'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelInvocationNode_c_c_CompatibleEdges);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_2;
+		if (le) {
+			symbol_2 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
+			try {
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelDiagram referredRelDiagram = this.getReferredRelDiagram();
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ java.util.@NonNull List<RelDomainNode> ownedRelDomainNodes = referredRelDiagram.getOwnedRelDomainNodes();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedRelDomainNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelDomainNode, ownedRelDomainNodes);
+				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedRelDomainNodes.iterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+				while (true) {
+					if (!ITERATOR__1.hasNext()) {
+						collect = accumulator;
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelDomainNode _1 = (RelDomainNode)ITERATOR__1.next();
+					/**
+					 * ownedRelPatternNodes
+					 */
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ java.util.@NonNull List<RelPatternNode> ownedRelPatternNodes = _1.getOwnedRelPatternNodes();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedRelPatternNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelPatternNode, ownedRelPatternNodes);
+					//
+					for (Object value : BOXED_ownedRelPatternNodes.flatten().getElements()) {
+						accumulator.add(value);
+					}
+				}
+				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
+				@NonNull Iterator<Object> ITERATOR__1_0 = collect.iterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue expectedNodes;
+				while (true) {
+					if (!ITERATOR__1_0.hasNext()) {
+						expectedNodes = accumulator_0;
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode _1_0 = (RelPatternNode)ITERATOR__1_0.next();
+					/**
+					 * isRoot
+					 */
+					final /*@NonInvalid*/ boolean isRoot = _1_0.isIsRoot();
+					//
+					if (isRoot == ValueUtil.TRUE_VALUE) {
+						accumulator_0.add(_1_0);
+					}
+				}
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ java.util.@NonNull List<RelInvocationEdge> ownedRelInvocationEdges = this.getOwnedRelInvocationEdges();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedRelInvocationEdges = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelInvocationEdge, ownedRelInvocationEdges);
+				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternClassNode);
+				@NonNull Iterator<Object> ITERATOR__1_1 = BOXED_ownedRelInvocationEdges.iterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue actualNodes;
+				while (true) {
+					if (!ITERATOR__1_1.hasNext()) {
+						actualNodes = accumulator_1;
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelInvocationEdge _1_1 = (RelInvocationEdge)ITERATOR__1_1.next();
+					/**
+					 * referredRelPatternNode
+					 */
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode referredRelPatternNode = _1_1.getReferredRelPatternNode();
+					//
+					accumulator_1.add(referredRelPatternNode);
+				}
+				final /*@Thrown*/ boolean status = expectedNodes.equals(actualNodes);
+				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
+				if (status) {
+					symbol_1 = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(expectedNodes);
+					final /*@Thrown*/ java.lang.@NonNull String toString_0 = OclAnyToStringOperation.INSTANCE.evaluate(size_0);
+					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(toString_0, UMLXTables.STR_quot);
+					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, toString_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_0, status);
+					symbol_1 = symbol_0;
+				}
+				CAUGHT_symbol_1 = symbol_1;
+			}
+			catch (Exception e) {
+				CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelInvocationNode_c_c_CompatibleEdges, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, UMLXTables.INT_0).booleanValue();
+			symbol_2 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_2;
 	}
 
 	/**

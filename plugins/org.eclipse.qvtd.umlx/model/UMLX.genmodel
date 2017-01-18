@@ -8,6 +8,7 @@
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
     copyrightFields="false" runtimeVersion="2.7" importOrganizing="true" pluginKey="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString">
@@ -36,9 +37,9 @@
     </genClasses>
     <genClasses image="false" ecoreClass="UMLX.ecore#//RelEdge"/>
     <genClasses ecoreClass="UMLX.ecore#//RelInvocationEdge">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelInvocationEdge/referredRelPatternNode"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelInvocationEdge/owningRelInvocationNode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelInvocationEdge/invokingRelPatternNode"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelInvocationEdge/owningRelInvocationNode"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelInvocationEdge/referredRelPatternNode"/>
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//RelInvocationNode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelInvocationNode/isThen"/>
@@ -53,7 +54,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternClassNode/relDomainNode"/>
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//RelPatternEdge">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternEdge/isOpposite"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/owningRelDomainNode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/referredProperty"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/source"/>

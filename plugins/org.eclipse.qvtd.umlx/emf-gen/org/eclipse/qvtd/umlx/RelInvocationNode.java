@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -82,6 +84,13 @@ public interface RelInvocationNode extends RelNode {
 	 * @generated
 	 */
 	void setReferredRelDiagram(RelDiagram value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean CompatibleEdges(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Rel Diagram</b></em>' container reference.

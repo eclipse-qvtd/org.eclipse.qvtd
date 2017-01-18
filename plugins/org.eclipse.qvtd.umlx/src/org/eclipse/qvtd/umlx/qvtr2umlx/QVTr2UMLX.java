@@ -424,25 +424,25 @@ public class QVTr2UMLX
 				RelPatternEdge relPatternEdge = UMLXFactory.eINSTANCE.createRelPatternEdge();
 				Property oppositeProperty = partProperty.getOpposite();
 				if (partProperty.isIsComposite()) {
-					relPatternEdge.setIsOpposite(false);
+					//					relPatternEdge.setIsOpposite(false);
 					relPatternEdge.setReferredProperty(context.getEcoreOf(partProperty));
 					relPatternEdge.setSource(relPatternNode);
 					relPatternEdge.setTarget(relPartPatternNode);
 				}
 				else if ((oppositeProperty != null) && oppositeProperty.isIsComposite()) {
-					relPatternEdge.setIsOpposite(false);
+					//					relPatternEdge.setIsOpposite(false);
 					relPatternEdge.setReferredProperty(context.getEcoreOf(oppositeProperty));
 					relPatternEdge.setSource(relPartPatternNode);
 					relPatternEdge.setTarget(relPatternNode);
 				}
 				else if ((oppositeProperty != null) && partProperty.isIsImplicit()) {
-					relPatternEdge.setIsOpposite(true);
+					//					relPatternEdge.setIsOpposite(true);
 					relPatternEdge.setReferredProperty(context.getEcoreOf(oppositeProperty));
 					relPatternEdge.setSource(relPartPatternNode);
 					relPatternEdge.setTarget(relPatternNode);
 				}
 				else {
-					relPatternEdge.setIsOpposite(false);
+					//					relPatternEdge.setIsOpposite(false);
 					relPatternEdge.setReferredProperty(context.getEcoreOf(partProperty));
 					relPatternEdge.setSource(relPatternNode);
 					relPatternEdge.setTarget(relPartPatternNode);

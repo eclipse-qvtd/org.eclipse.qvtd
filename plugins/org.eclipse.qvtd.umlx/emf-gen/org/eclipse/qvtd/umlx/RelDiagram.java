@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -119,4 +121,11 @@ public interface RelDiagram extends UMLXNamedElement {
 	 * @generated
 	 */
 	void setOwningTxDiagram(TxDiagram value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean RelPatternNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 } // RelDiagram

@@ -31,24 +31,14 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationEdgeImpl#getReferredRelPatternNode <em>Referred Rel Pattern Node</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationEdgeImpl#getOwningRelInvocationNode <em>Owning Rel Invocation Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationEdgeImpl#getInvokingRelPatternNode <em>Invoking Rel Pattern Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationEdgeImpl#getOwningRelInvocationNode <em>Owning Rel Invocation Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelInvocationEdgeImpl#getReferredRelPatternNode <em>Referred Rel Pattern Node</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationEdge {
-	/**
-	 * The cached value of the '{@link #getReferredRelPatternNode() <em>Referred Rel Pattern Node</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferredRelPatternNode()
-	 * @generated
-	 * @ordered
-	 */
-	protected RelPatternClassNode referredRelPatternNode;
-
 	/**
 	 * The cached value of the '{@link #getInvokingRelPatternNode() <em>Invoking Rel Pattern Node</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -58,6 +48,16 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 * @ordered
 	 */
 	protected RelPatternClassNode invokingRelPatternNode;
+
+	/**
+	 * The cached value of the '{@link #getReferredRelPatternNode() <em>Referred Rel Pattern Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredRelPatternNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected RelPatternClassNode referredRelPatternNode;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -253,14 +253,14 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
-				if (resolve) return getReferredRelPatternNode();
-				return basicGetReferredRelPatternNode();
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
-				return getOwningRelInvocationNode();
 			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
 				if (resolve) return getInvokingRelPatternNode();
 				return basicGetInvokingRelPatternNode();
+			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+				return getOwningRelInvocationNode();
+			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+				if (resolve) return getReferredRelPatternNode();
+				return basicGetReferredRelPatternNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -273,14 +273,14 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
-				setReferredRelPatternNode((RelPatternClassNode)newValue);
+			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+				setInvokingRelPatternNode((RelPatternClassNode)newValue);
 				return;
 			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
 				setOwningRelInvocationNode((RelInvocationNode)newValue);
 				return;
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
-				setInvokingRelPatternNode((RelPatternClassNode)newValue);
+			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+				setReferredRelPatternNode((RelPatternClassNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -294,14 +294,14 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
-				setReferredRelPatternNode((RelPatternClassNode)null);
+			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+				setInvokingRelPatternNode((RelPatternClassNode)null);
 				return;
 			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
 				setOwningRelInvocationNode((RelInvocationNode)null);
 				return;
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
-				setInvokingRelPatternNode((RelPatternClassNode)null);
+			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+				setReferredRelPatternNode((RelPatternClassNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -315,12 +315,12 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
-				return referredRelPatternNode != null;
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
-				return getOwningRelInvocationNode() != null;
 			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
 				return invokingRelPatternNode != null;
+			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+				return getOwningRelInvocationNode() != null;
+			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+				return referredRelPatternNode != null;
 		}
 		return super.eIsSet(featureID);
 	}

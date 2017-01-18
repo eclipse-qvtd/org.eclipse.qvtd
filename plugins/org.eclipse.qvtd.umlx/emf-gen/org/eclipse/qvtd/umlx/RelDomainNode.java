@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -116,5 +118,12 @@ public interface RelDomainNode extends RelNode {
 	 * @generated
 	 */
 	void setReferredTxTypedModelNode(TxTypedModelNode value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean PrimitiveDomainHasNoClassNodes(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // RelDomainNode

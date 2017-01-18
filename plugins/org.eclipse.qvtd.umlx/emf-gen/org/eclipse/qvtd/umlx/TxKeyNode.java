@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
@@ -99,5 +101,12 @@ public interface TxKeyNode extends TxNode {
 	 * @generated
 	 */
 	void setReferredClass(EClass value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean PartsAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxKeyNode

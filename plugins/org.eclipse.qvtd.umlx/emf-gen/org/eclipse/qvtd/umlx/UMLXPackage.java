@@ -451,13 +451,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_EDGE__COMMENTS = REL_EDGE__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Referred Rel Pattern Node</b></em>' reference.
+	 * The feature id for the '<em><b>Invoking Rel Pattern Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE = REL_EDGE_FEATURE_COUNT + 0;
+	int REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE = REL_EDGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owning Rel Invocation Node</b></em>' container reference.
@@ -469,13 +469,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE = REL_EDGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Invoking Rel Pattern Node</b></em>' reference.
+	 * The feature id for the '<em><b>Referred Rel Pattern Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE = REL_EDGE_FEATURE_COUNT + 2;
+	int REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE = REL_EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Rel Invocation Edge</em>' class.
@@ -704,22 +704,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_EDGE__COMMENTS = REL_EDGE__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Opposite</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_EDGE__IS_OPPOSITE = REL_EDGE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owning Rel Domain Node</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE = REL_EDGE_FEATURE_COUNT + 1;
+	int REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE = REL_EDGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -728,7 +719,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE__REFERRED_PROPERTY = REL_EDGE_FEATURE_COUNT + 2;
+	int REL_PATTERN_EDGE__REFERRED_PROPERTY = REL_EDGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -737,7 +728,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE__SOURCE = REL_EDGE_FEATURE_COUNT + 3;
+	int REL_PATTERN_EDGE__SOURCE = REL_EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -746,7 +737,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE__TARGET = REL_EDGE_FEATURE_COUNT + 4;
+	int REL_PATTERN_EDGE__TARGET = REL_EDGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Rel Pattern Edge</em>' class.
@@ -755,7 +746,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE_FEATURE_COUNT = REL_EDGE_FEATURE_COUNT + 5;
+	int REL_PATTERN_EDGE_FEATURE_COUNT = REL_EDGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternExpressionNodeImpl <em>Rel Pattern Expression Node</em>}' class.
@@ -1437,17 +1428,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelPatternEdge_Source();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternEdge#isIsOpposite <em>Is Opposite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Opposite</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#isIsOpposite()
-	 * @see #getRelPatternEdge()
-	 * @generated
-	 */
-	EAttribute getRelPatternEdge_IsOpposite();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}'.
@@ -2159,14 +2139,6 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REL_PATTERN_EDGE__SOURCE = eINSTANCE.getRelPatternEdge_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Opposite</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REL_PATTERN_EDGE__IS_OPPOSITE = eINSTANCE.getRelPatternEdge_IsOpposite();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Rel Domain Node</b></em>' container reference feature.

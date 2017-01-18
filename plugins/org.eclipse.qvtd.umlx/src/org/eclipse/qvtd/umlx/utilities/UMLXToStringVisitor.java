@@ -86,9 +86,6 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	@Override
 	public @Nullable Object visitRelPatternEdge(@NonNull RelPatternEdge relPatternEdge) {
 		EStructuralFeature eStructuralFeature = relPatternEdge.getReferredProperty();
-		if (relPatternEdge.isIsOpposite()) {
-			append("~");
-		}
 		append(LabelUtil.getLabel(eStructuralFeature));
 		return null;
 	}

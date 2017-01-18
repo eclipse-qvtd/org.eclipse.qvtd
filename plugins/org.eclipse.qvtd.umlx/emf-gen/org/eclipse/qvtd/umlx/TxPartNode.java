@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
@@ -107,5 +109,12 @@ public interface TxPartNode extends TxNode {
 	 * @generated
 	 */
 	void setReferredProperty(EStructuralFeature value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean PartIsPropertyOfKey(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxPartNode

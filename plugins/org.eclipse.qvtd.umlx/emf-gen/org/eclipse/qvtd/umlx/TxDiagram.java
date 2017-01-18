@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -124,5 +126,19 @@ public interface TxDiagram extends UMLXNamedElement {
 	 * @generated
 	 */
 	void setPackage(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean RelDiagramNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean TxTypedModelNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxDiagram
