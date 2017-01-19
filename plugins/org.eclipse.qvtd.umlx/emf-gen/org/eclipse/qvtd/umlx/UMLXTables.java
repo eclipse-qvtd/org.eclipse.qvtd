@@ -81,6 +81,7 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxPartNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxPartNode", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxTypedModelNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxTypedModelNode", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_UMLXModel = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("UMLXModel", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_EInt = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_1 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("1");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
@@ -435,16 +436,20 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _RelInvocationNode__owningRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM, Types._RelInvocationNode, 2);
 		public static final @NonNull ExecutorProperty _RelInvocationNode__referredRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, Types._RelInvocationNode, 3);
 
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__isRequired = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_REQUIRED, Types._RelPatternClassNode, 0);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__referredClass = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REFERRED_CLASS, Types._RelPatternClassNode, 1);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__relDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE, Types._RelPatternClassNode, 2);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__RelInvocationEdge__invokingRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternClassNode, 3, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE));
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__RelInvocationEdge__referredRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternClassNode, 4, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE));
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isMany = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_MANY, Types._RelPatternClassNode, 0);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isNullFree = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_NULL_FREE, Types._RelPatternClassNode, 1);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isOrdered = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_ORDERED, Types._RelPatternClassNode, 2);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isRequired = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_REQUIRED, Types._RelPatternClassNode, 3);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isUnique = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_UNIQUE, Types._RelPatternClassNode, 4);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__referredEClassifier = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER, Types._RelPatternClassNode, 5);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__relDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE, Types._RelPatternClassNode, 6);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__RelInvocationEdge__referredRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternClassNode, 7, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE));
 
 		public static final @NonNull ExecutorProperty _RelPatternEdge__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, Types._RelPatternEdge, 0);
-		public static final @NonNull ExecutorProperty _RelPatternEdge__referredProperty = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_PROPERTY, Types._RelPatternEdge, 1);
+		public static final @NonNull ExecutorProperty _RelPatternEdge__referredEStructuralFeature = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, Types._RelPatternEdge, 1);
 		public static final @NonNull ExecutorProperty _RelPatternEdge__source = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE, Types._RelPatternEdge, 2);
-		public static final @NonNull ExecutorProperty _RelPatternEdge__target = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__TARGET, Types._RelPatternEdge, 3);
+		public static final @NonNull ExecutorProperty _RelPatternEdge__sourceIndex = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE_INDEX, Types._RelPatternEdge, 3);
+		public static final @NonNull ExecutorProperty _RelPatternEdge__target = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__TARGET, Types._RelPatternEdge, 4);
 
 		public static final @NonNull ExecutorProperty _RelPatternExpressionNode__expression = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EXPRESSION_NODE__EXPRESSION, Types._RelPatternExpressionNode, 0);
 
@@ -452,6 +457,7 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _RelPatternNode__isRoot = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ROOT, Types._RelPatternNode, 1);
 		public static final @NonNull ExecutorProperty _RelPatternNode__outgoing = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OUTGOING, Types._RelPatternNode, 2);
 		public static final @NonNull ExecutorProperty _RelPatternNode__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelPatternNode, 3);
+		public static final @NonNull ExecutorProperty _RelPatternNode__RelInvocationEdge__invokingRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternNode, 4, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE));
 
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedRelDiagrams = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, Types._TxDiagram, 0);
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxImportNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_IMPORT_NODES, Types._TxDiagram, 1);
@@ -465,14 +471,14 @@ public class UMLXTables
 
 		public static final @NonNull ExecutorProperty _TxKeyNode__ownedTxPartNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNED_TX_PART_NODES, Types._TxKeyNode, 0);
 		public static final @NonNull ExecutorProperty _TxKeyNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNING_TX_DIAGRAM, Types._TxKeyNode, 1);
-		public static final @NonNull ExecutorProperty _TxKeyNode__referredClass = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__REFERRED_CLASS, Types._TxKeyNode, 2);
+		public static final @NonNull ExecutorProperty _TxKeyNode__referredEClass = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__REFERRED_ECLASS, Types._TxKeyNode, 2);
 
 		public static final @NonNull ExecutorProperty _TxPackageNode__owningTxTypedModelNode = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE, Types._TxPackageNode, 0);
-		public static final @NonNull ExecutorProperty _TxPackageNode__referredPackage = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_PACKAGE, Types._TxPackageNode, 1);
+		public static final @NonNull ExecutorProperty _TxPackageNode__referredEPackage = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, Types._TxPackageNode, 1);
 
 		public static final @NonNull ExecutorProperty _TxPartNode__isOpposite = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__IS_OPPOSITE, Types._TxPartNode, 0);
 		public static final @NonNull ExecutorProperty _TxPartNode__owningTxKeyNode = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__OWNING_TX_KEY_NODE, Types._TxPartNode, 1);
-		public static final @NonNull ExecutorProperty _TxPartNode__referredProperty = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__REFERRED_PROPERTY, Types._TxPartNode, 2);
+		public static final @NonNull ExecutorProperty _TxPartNode__referredEStructuralFeature = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, Types._TxPartNode, 2);
 
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__check = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, Types._TxTypedModelNode, 0);
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__enforce = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 1);
@@ -1526,20 +1532,25 @@ public class UMLXTables
 		private static final @NonNull ExecutorProperty @NonNull [] _RelPatternClassNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelPatternNode__incoming,
+			UMLXTables.Properties._RelPatternClassNode__isMany,
+			UMLXTables.Properties._RelPatternClassNode__isNullFree,
+			UMLXTables.Properties._RelPatternClassNode__isOrdered,
 			UMLXTables.Properties._RelPatternClassNode__isRequired,
 			UMLXTables.Properties._RelPatternNode__isRoot,
+			UMLXTables.Properties._RelPatternClassNode__isUnique,
 			UMLXTables.Properties._UMLXNamedElement__name,
 			UMLXTables.Properties._RelPatternNode__outgoing,
 			UMLXTables.Properties._RelPatternNode__owningRelDomainNode,
-			UMLXTables.Properties._RelPatternClassNode__referredClass,
+			UMLXTables.Properties._RelPatternClassNode__referredEClassifier,
 			UMLXTables.Properties._RelPatternClassNode__relDomainNode
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RelPatternEdge = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelPatternEdge__owningRelDomainNode,
-			UMLXTables.Properties._RelPatternEdge__referredProperty,
+			UMLXTables.Properties._RelPatternEdge__referredEStructuralFeature,
 			UMLXTables.Properties._RelPatternEdge__source,
+			UMLXTables.Properties._RelPatternEdge__sourceIndex,
 			UMLXTables.Properties._RelPatternEdge__target
 		};
 
@@ -1581,7 +1592,7 @@ public class UMLXTables
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxKeyNode__ownedTxPartNodes,
 			UMLXTables.Properties._TxKeyNode__owningTxDiagram,
-			UMLXTables.Properties._TxKeyNode__referredClass
+			UMLXTables.Properties._TxKeyNode__referredEClass
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TxNode = {
@@ -1591,14 +1602,14 @@ public class UMLXTables
 		private static final @NonNull ExecutorProperty @NonNull [] _TxPackageNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxPackageNode__owningTxTypedModelNode,
-			UMLXTables.Properties._TxPackageNode__referredPackage
+			UMLXTables.Properties._TxPackageNode__referredEPackage
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TxPartNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxPartNode__isOpposite,
 			UMLXTables.Properties._TxPartNode__owningTxKeyNode,
-			UMLXTables.Properties._TxPartNode__referredProperty
+			UMLXTables.Properties._TxPartNode__referredEStructuralFeature
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TxTypedModelNode = {

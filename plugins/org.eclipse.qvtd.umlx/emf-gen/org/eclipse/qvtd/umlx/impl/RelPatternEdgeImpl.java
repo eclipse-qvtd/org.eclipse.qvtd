@@ -56,8 +56,9 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getSourceIndex <em>Source Index</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternEdgeImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
@@ -65,14 +66,14 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  */
 public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	/**
-	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
+	 * The cached value of the '{@link #getReferredEStructuralFeature() <em>Referred EStructural Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredProperty()
+	 * @see #getReferredEStructuralFeature()
 	 * @generated
 	 * @ordered
 	 */
-	protected EStructuralFeature referredProperty;
+	protected EStructuralFeature referredEStructuralFeature;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
@@ -83,6 +84,26 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * @ordered
 	 */
 	protected RelPatternNode source;
+
+	/**
+	 * The default value of the '{@link #getSourceIndex() <em>Source Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceIndex()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SOURCE_INDEX_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSourceIndex() <em>Source Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceIndex()
+	 * @generated
+	 * @ordered
+	 */
+	protected int sourceIndex = SOURCE_INDEX_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -111,46 +132,6 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	@Override
 	protected EClass eStaticClass() {
 		return UMLXPackage.Literals.REL_PATTERN_EDGE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EStructuralFeature getReferredProperty() {
-		if (referredProperty != null && referredProperty.eIsProxy()) {
-			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
-			referredProperty = (EStructuralFeature)eResolveProxy(oldReferredProperty);
-			if (referredProperty != oldReferredProperty) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
-			}
-		}
-		return referredProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EStructuralFeature basicGetReferredProperty() {
-		return referredProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setReferredProperty(EStructuralFeature newReferredProperty) {
-		EStructuralFeature oldReferredProperty = referredProperty;
-		referredProperty = newReferredProperty;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -221,6 +202,29 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * @generated
 	 */
 	@Override
+	public int getSourceIndex() {
+		return sourceIndex;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSourceIndex(int newSourceIndex) {
+		int oldSourceIndex = sourceIndex;
+		sourceIndex = newSourceIndex;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_EDGE__SOURCE_INDEX, oldSourceIndex, sourceIndex));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public RelDomainNode getOwningRelDomainNode() {
 		if (eContainerFeatureID() != UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE) return null;
 		return (RelDomainNode)eInternalContainer();
@@ -256,6 +260,46 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, newOwningRelDomainNode, newOwningRelDomainNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EStructuralFeature getReferredEStructuralFeature() {
+		if (referredEStructuralFeature != null && referredEStructuralFeature.eIsProxy()) {
+			InternalEObject oldReferredEStructuralFeature = (InternalEObject)referredEStructuralFeature;
+			referredEStructuralFeature = (EStructuralFeature)eResolveProxy(oldReferredEStructuralFeature);
+			if (referredEStructuralFeature != oldReferredEStructuralFeature) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, oldReferredEStructuralFeature, referredEStructuralFeature));
+			}
+		}
+		return referredEStructuralFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EStructuralFeature basicGetReferredEStructuralFeature() {
+		return referredEStructuralFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferredEStructuralFeature(EStructuralFeature newReferredEStructuralFeature) {
+		EStructuralFeature oldReferredEStructuralFeature = referredEStructuralFeature;
+		referredEStructuralFeature = newReferredEStructuralFeature;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, oldReferredEStructuralFeature, referredEStructuralFeature));
 	}
 
 	/**
@@ -379,7 +423,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		 *       let
 		 *         result : Boolean[?] = source.oclIsKindOf(RelPatternClassNode) implies
 		 *         source.oclAsType(RelPatternClassNode)
-		 *         .referredClass.oclIsKindOf(ecore::EClassifier)
+		 *         .referredEClassifier.oclIsKindOf(ecore::EClassifier)
 		 *       in
 		 *         'RelPatternEdge::SourceIsEClass'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -404,8 +448,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClassifier = idResolver.getClass(UMLXTables.CLSSid_EClassifier, null);
 					final /*@Thrown*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode oclAsType = ClassUtil.nonNullState((RelPatternClassNode)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, source, TYP_umlx_c_c_RelPatternClassNode_0));
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = oclAsType.getReferredClass();
-					final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredClass, TYP_ecore_c_c_EClassifier).booleanValue();
+					final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = oclAsType.getReferredEClassifier();
+					final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClassifier).booleanValue();
 					result = oclIsKindOf_0;
 				}
 				else {
@@ -479,8 +523,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let result : Boolean[1] = referredProperty.eType =
-		 *         target.oclAsType(RelPatternClassNode).referredClass
+		 *       let result : Boolean[1] = referredEStructuralFeature?.eType =
+		 *         target.oclAsType(RelPatternClassNode).referredEClassifier
 		 *       in
 		 *         'RelPatternEdge::CompatiblePropertyTarget'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -489,32 +533,40 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertyTarget);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
+		/*@NonInvalid*/ boolean symbol_1;
 		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+			symbol_1 = ValueUtil.TRUE_VALUE;
 		}
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_umlx_c_c_RelPatternClassNode_0 = idResolver.getClass(UMLXTables.CLSSid_RelPatternClassNode, null);
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredProperty = this.getReferredProperty();
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier eType = referredProperty.getEType();
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+				final /*@NonInvalid*/ @NonNull Object symbol_0 = referredEStructuralFeature == null;
+				/*@Thrown*/ org.eclipse.emf.ecore.@Nullable EClassifier safe_eType_source;
+				if (symbol_0 == Boolean.TRUE) {
+					safe_eType_source = null;
+				}
+				else {
+					assert referredEStructuralFeature != null;
+					final /*@Thrown*/ org.eclipse.emf.ecore.@Nullable EClassifier eType = referredEStructuralFeature.getEType();
+					safe_eType_source = eType;
+				}
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode target = this.getTarget();
 				final /*@Thrown*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode oclAsType = ClassUtil.nonNullState((RelPatternClassNode)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, target, TYP_umlx_c_c_RelPatternClassNode_0));
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = oclAsType.getReferredClass();
-				final /*@Thrown*/ boolean result = referredClass.equals(eType);
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = oclAsType.getReferredEClassifier();
+				final /*@Thrown*/ boolean result = referredEClassifier.equals(safe_eType_source);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
 				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertyTarget, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			symbol_1 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_0;
+		return Boolean.TRUE == symbol_1;
 	}
 
 	/**
@@ -535,9 +587,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		 *     else
 		 *       let
 		 *         result : Boolean[1] = source.oclAsType(RelPatternClassNode)
-		 *         .referredClass.oclAsType(ecore::EClass)
+		 *         .referredEClassifier.oclAsType(ecore::EClass)
 		 *         ->closure(eSuperTypes)
-		 *         ->includes(referredProperty.eContainingClass)
+		 *         ->includes(referredEStructuralFeature?.eContainingClass)
 		 *       in
 		 *         'RelPatternEdge::CompatiblePropertySource'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -547,9 +599,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertySource);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_1;
+		/*@NonInvalid*/ boolean symbol_2;
 		if (le) {
-			symbol_1 = ValueUtil.TRUE_VALUE;
+			symbol_2 = ValueUtil.TRUE_VALUE;
 		}
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -560,8 +612,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
 				final /*@Thrown*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode oclAsType = ClassUtil.nonNullState((RelPatternClassNode)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, source, TYP_umlx_c_c_RelPatternClassNode_0));
 				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = oclAsType.getReferredClass();
-				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType_0 = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredClass, TYP_ecore_c_c_EClass_0));
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = oclAsType.getReferredEClassifier();
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType_0 = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0));
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType_0);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
@@ -587,19 +639,37 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				};
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredProperty = this.getReferredProperty();
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClass eContainingClass = referredProperty.getEContainingClass();
-				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(closure, eContainingClass).booleanValue();
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+				final /*@NonInvalid*/ @NonNull Object symbol_1 = referredEStructuralFeature == null;
+				/*@Thrown*/ org.eclipse.emf.ecore.@Nullable EClass safe_eContainingClass_source;
+				if (symbol_1 == Boolean.TRUE) {
+					safe_eContainingClass_source = null;
+				}
+				else {
+					assert referredEStructuralFeature != null;
+					final /*@Thrown*/ org.eclipse.emf.ecore.@Nullable EClass eContainingClass = referredEStructuralFeature.getEContainingClass();
+					safe_eContainingClass_source = eContainingClass;
+				}
+				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(closure, safe_eContainingClass_source).booleanValue();
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {
 				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternEdge_c_c_CompatiblePropertySource, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-			symbol_1 = logDiagnostic;
+			symbol_2 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_1;
+		return Boolean.TRUE == symbol_2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -612,12 +682,14 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode();
-			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY:
-				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE:
+				if (resolve) return getReferredEStructuralFeature();
+				return basicGetReferredEStructuralFeature();
 			case UMLXPackage.REL_PATTERN_EDGE__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
+			case UMLXPackage.REL_PATTERN_EDGE__SOURCE_INDEX:
+				return getSourceIndex();
 			case UMLXPackage.REL_PATTERN_EDGE__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -636,11 +708,14 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY:
-				setReferredProperty((EStructuralFeature)newValue);
+			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE:
+				setReferredEStructuralFeature((EStructuralFeature)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_EDGE__SOURCE:
 				setSource((RelPatternNode)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_EDGE__SOURCE_INDEX:
+				setSourceIndex((Integer)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_EDGE__TARGET:
 				setTarget((RelPatternNode)newValue);
@@ -660,11 +735,14 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)null);
 				return;
-			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY:
-				setReferredProperty((EStructuralFeature)null);
+			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE:
+				setReferredEStructuralFeature((EStructuralFeature)null);
 				return;
 			case UMLXPackage.REL_PATTERN_EDGE__SOURCE:
 				setSource((RelPatternNode)null);
+				return;
+			case UMLXPackage.REL_PATTERN_EDGE__SOURCE_INDEX:
+				setSourceIndex(SOURCE_INDEX_EDEFAULT);
 				return;
 			case UMLXPackage.REL_PATTERN_EDGE__TARGET:
 				setTarget((RelPatternNode)null);
@@ -683,10 +761,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode() != null;
-			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_PROPERTY:
-				return referredProperty != null;
+			case UMLXPackage.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE:
+				return referredEStructuralFeature != null;
 			case UMLXPackage.REL_PATTERN_EDGE__SOURCE:
 				return source != null;
+			case UMLXPackage.REL_PATTERN_EDGE__SOURCE_INDEX:
+				return sourceIndex != SOURCE_INDEX_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_EDGE__TARGET:
 				return target != null;
 		}

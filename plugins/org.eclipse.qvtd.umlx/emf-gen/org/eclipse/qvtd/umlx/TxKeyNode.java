@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EClass;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.TxKeyNode#getOwnedTxPartNodes <em>Owned Tx Part Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxKeyNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredEClass <em>Referred EClass</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxKeyNode()
@@ -78,29 +78,29 @@ public interface TxKeyNode extends TxNode {
 	void setOwningTxDiagram(TxDiagram value);
 
 	/**
-	 * Returns the value of the '<em><b>Referred Class</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred EClass</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Class</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred EClass</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Class</em>' reference.
-	 * @see #setReferredClass(EClass)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxKeyNode_ReferredClass()
+	 * @return the value of the '<em>Referred EClass</em>' reference.
+	 * @see #setReferredEClass(EClass)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxKeyNode_ReferredEClass()
 	 * @generated
 	 */
-	EClass getReferredClass();
+	EClass getReferredEClass();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredClass <em>Referred Class</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredEClass <em>Referred EClass</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Class</em>' reference.
-	 * @see #getReferredClass()
+	 * @param value the new value of the '<em>Referred EClass</em>' reference.
+	 * @see #getReferredEClass()
 	 * @generated
 	 */
-	void setReferredClass(EClass value);
+	void setReferredEClass(EClass value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -49,7 +49,7 @@ public class UMLXUtil
 		return Iterables.filter(ClassUtil.nullFree(relNode.getIncoming()), RelPatternEdge.class);
 	}
 
-	public static @NonNull RelPatternClassNode getInvokingRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
+	public static @NonNull RelPatternNode getInvokingRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
 		return ClassUtil.nonNullState(relInvocationEdge.getInvokingRelPatternNode());
 	}
 
@@ -113,24 +113,24 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(relInvocationNode.getOwningRelDiagram());
 	}
 
-	public static @NonNull EClass getReferredClass(@NonNull TxKeyNode txKeyNode) {
-		return ClassUtil.nonNullState(txKeyNode.getReferredClass());
+	public static @NonNull EClass getReferredEClass(@NonNull TxKeyNode txKeyNode) {
+		return ClassUtil.nonNullState(txKeyNode.getReferredEClass());
 	}
 
-	public static @NonNull EClassifier getReferredClassifier(@NonNull RelPatternClassNode relPatternNode) {
-		return ClassUtil.nonNullState(relPatternNode.getReferredClass());
+	public static @NonNull EClassifier getReferredEClassifier(@NonNull RelPatternClassNode relPatternNode) {
+		return ClassUtil.nonNullState(relPatternNode.getReferredEClassifier());
 	}
 
-	public static @NonNull EPackage getReferredPackage(@NonNull TxPackageNode txPackageNode) {
-		return ClassUtil.nonNullState(txPackageNode.getReferredPackage());
+	public static @NonNull EPackage getReferredEPackage(@NonNull TxPackageNode txPackageNode) {
+		return ClassUtil.nonNullState(txPackageNode.getReferredEPackage());
 	}
 
-	public static @NonNull EStructuralFeature getReferredProperty(@NonNull RelPatternEdge relPatternEdge) {
-		return ClassUtil.nonNullState(relPatternEdge.getReferredProperty());
+	public static @NonNull EStructuralFeature getReferredEStructuralFeature(@NonNull RelPatternEdge relPatternEdge) {
+		return ClassUtil.nonNullState(relPatternEdge.getReferredEStructuralFeature());
 	}
 
-	public static @NonNull EStructuralFeature getReferredProperty(@NonNull TxPartNode txPartNode) {
-		return ClassUtil.nonNullState(txPartNode.getReferredProperty());
+	public static @NonNull EStructuralFeature getReferredEStructuralFeature(@NonNull TxPartNode txPartNode) {
+		return ClassUtil.nonNullState(txPartNode.getReferredEStructuralFeature());
 	}
 
 	public static @NonNull RelDiagram getReferredRelDiagram(@NonNull RelInvocationNode relInvocationNode) {

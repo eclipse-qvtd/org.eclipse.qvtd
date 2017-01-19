@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
@@ -57,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.util.AbstractExtendingQVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -112,18 +114,6 @@ public class QVTr2UMLX
 			}
 		}
 
-		protected @NonNull RelDomainNode getPrimitiveRelDomainNode(@NonNull RelDiagram relDiagram) {
-			for (@NonNull RelDomainNode relDomainNode : UMLXUtil.getOwnedRelDomainNodes(relDiagram)) {
-				if (relDomainNode.getReferredTxTypedModelNode() == null) {
-					return relDomainNode;
-				}
-			}
-			RelDomainNode relDomainNode = UMLXFactory.eINSTANCE.createRelDomainNode();
-			//			context.install(qvtrRelationDomain, relDomainNode);
-			relDiagram.getOwnedRelDomainNodes().add(relDomainNode);
-			return relDomainNode;
-		}
-
 		protected <T extends UMLXElement> @NonNull T visit(@NonNull Class<T> umlxClass, @NonNull Element qvtrElement) {
 			UMLXElement umlxElement = qvtrElement.accept(this);
 			if (umlxElement == null) {
@@ -134,22 +124,6 @@ public class QVTr2UMLX
 			}
 			@SuppressWarnings("unchecked")T castElement = (T)umlxElement;
 			return castElement;
-		}
-
-		@Override
-		public @Nullable UMLXElement visitCollectionTemplateExp(@NonNull CollectionTemplateExp qvtrCollectionTemplateExp) {
-			/*	RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, qvtrCollectionTemplateExp);
-				for (@NonNull PropertyTemplateItem qvtrPropertyTemplateItem : QVTrelationUtil.getOwnedParts(qvtrObjectTemplateExp)) {
-				Property partProperty = QVTrelationUtil.getReferredProperty(qvtrPropertyTemplateItem);
-				OCLExpression partValue = QVTrelationUtil.getOwnedValue(qvtrPropertyTemplateItem);
-				RelNode relPartPatternNode = visit(RelNode.class, partValue);
-				RelPatternEdge relPatternEdge = UMLXFactory.eINSTANCE.createRelPatternEdge();
-				relPatternEdge.setOwningSource(relPatternNode);
-				relPatternEdge.setReferredProperty((EStructuralFeature) partProperty.getESObject());
-				relPatternEdge.setTarget(relPartPatternNode);
-			} */
-			//			return relPatternNode;
-			return visiting(qvtrCollectionTemplateExp);
 		}
 
 		@Override
@@ -165,17 +139,17 @@ public class QVTr2UMLX
 		public @Nullable UMLXElement visitKey(@NonNull Key qvtrKey) {
 			TxKeyNode txKeyNode = UMLXFactory.eINSTANCE.createTxKeyNode();
 			context.install(qvtrKey, txKeyNode);
-			txKeyNode.setReferredClass((EClass) context.getEcoreOf(QVTrelationUtil.getIdentifies(qvtrKey)));
+			txKeyNode.setReferredEClass((EClass) context.getEcoreOf(QVTrelationUtil.getIdentifies(qvtrKey)));
 			for (Property qvtrPart : QVTrelationUtil.getOwnedParts(qvtrKey)) {
 				TxPartNode txPartNode = UMLXFactory.eINSTANCE.createTxPartNode();
 				//				context.addTrace(usedPackage, txPartNode);
-				txPartNode.setReferredProperty(context.getEcoreOf(qvtrPart));
+				txPartNode.setReferredEStructuralFeature(context.getEcoreOf(qvtrPart));
 				txKeyNode.getOwnedTxPartNodes().add(txPartNode);
 			}
 			for (@NonNull Property qvtrPart : QVTrelationUtil.getOwnedOppositeParts(qvtrKey)) {
 				TxPartNode txPartNode = UMLXFactory.eINSTANCE.createTxPartNode();
 				//				context.addTrace(usedPackage, txPartNode);
-				txPartNode.setReferredProperty(context.getEcoreOf(qvtrPart));
+				txPartNode.setReferredEStructuralFeature(context.getEcoreOf(qvtrPart));
 				txPartNode.setIsOpposite(true);
 				txKeyNode.getOwnedTxPartNodes().add(txPartNode);
 			}
@@ -184,16 +158,7 @@ public class QVTr2UMLX
 
 		@Override
 		public @Nullable UMLXElement visitOCLExpression(@NonNull OCLExpression qvtrExpression) {
-			RelDomainNode relDomainNode;
-			RelationDomain qvtrRelationDomain = QVTrelationUtil.basicGetContainingRelationDomain(qvtrExpression);
-			if (qvtrRelationDomain != null) {
-				relDomainNode = context.getUMLXElement(RelDomainNode.class, qvtrRelationDomain);
-			}
-			else {
-				Relation qvtrRelation = QVTrelationUtil.getContainingRelation(qvtrExpression);
-				RelDiagram relDiagram = context.getUMLXElement(RelDiagram.class, qvtrRelation);
-				relDomainNode = getPrimitiveRelDomainNode(relDiagram);
-			}
+			RelDomainNode relDomainNode = context.getContainingRelDomainNode(qvtrExpression);
 			RelPatternExpressionNode relPatternExpressionNode = UMLXFactory.eINSTANCE.createRelPatternExpressionNode();
 			context.install(qvtrExpression, relPatternExpressionNode);
 			relPatternExpressionNode.setExpression(PrettyPrinter.print(qvtrExpression));
@@ -233,10 +198,10 @@ public class QVTr2UMLX
 					relPatternClassNode = UMLXFactory.eINSTANCE.createRelPatternClassNode();
 					context.install(qvtrVariable, relPatternClassNode);
 					relPatternClassNode.setName(qvtrVariable.getName());
-					relPatternClassNode.setReferredClass(context.getEcoreOf(PivotUtil.getClass(qvtrVariable)));
+					relPatternClassNode.setReferredEClassifier(context.getEcoreOf(PivotUtil.getClass(qvtrVariable)));
 					relPatternClassNode.setIsRequired(qvtrVariable.isIsRequired());
 					if (ownedNodes == null) {
-						RelDomainNode relDomainNode = getPrimitiveRelDomainNode(relDiagram);
+						RelDomainNode relDomainNode = context.getPrimitiveRelDomainNode(relDiagram);
 						ownedNodes = relDomainNode.getOwnedRelPatternNodes();
 					}
 					ownedNodes.add(relPatternClassNode);
@@ -282,7 +247,7 @@ public class QVTr2UMLX
 			relInvocationNode.setIsThen(isWhen == Boolean.FALSE);
 			relDiagram.getOwnedRelInvocationNodes().add(relInvocationNode);
 			for (@NonNull OCLExpression qvtrArgument : QVTrelationUtil.getOwnedArguments(qvtrRelationCallExp)) {
-				RelPatternClassNode relArgumentNode = create(qvtrArgument);
+				RelPatternNode relArgumentNode = create(qvtrArgument);
 				RelInvocationEdge relInvocationEdge = UMLXFactory.eINSTANCE.createRelInvocationEdge();
 				if (qvtrArgument instanceof  VariableExp) {
 					context.install(qvtrArgument, relInvocationEdge);
@@ -315,7 +280,7 @@ public class QVTr2UMLX
 					Variable qvtrVariable = QVTrelationUtil.getBindsTo(qvtrTemplateExp);
 					context.install(qvtrVariable, relPatternClassNode);
 					relPatternClassNode.setName(qvtrVariable.getName());
-					relPatternClassNode.setReferredClass(context.getEcoreOf(PivotUtil.getClass(qvtrVariable)));
+					relPatternClassNode.setReferredEClassifier(context.getEcoreOf(PivotUtil.getClass(qvtrVariable)));
 					relPatternClassNode.setIsRequired(qvtrVariable.isIsRequired());
 					ownedNodes.add(relPatternClassNode);
 				}
@@ -369,7 +334,7 @@ public class QVTr2UMLX
 			for (org.eclipse.ocl.pivot.@NonNull Package usedPackage : QVTrelationUtil.getUsedPackages(qvtrTypedModel)) {
 				TxPackageNode txPackageNode = UMLXFactory.eINSTANCE.createTxPackageNode();
 				//				context.addTrace(usedPackage, txPackageNode);
-				txPackageNode.setReferredPackage(usedPackage.getEPackage());
+				txPackageNode.setReferredEPackage(usedPackage.getEPackage());
 				txTypedModelNode.getOwnedTxPackageNodes().add(txPackageNode);
 			}
 			return txTypedModelNode;
@@ -409,9 +374,47 @@ public class QVTr2UMLX
 
 		@Override
 		public @Nullable UMLXElement visiting(@NonNull Visitable visitable) {
-			System.out.println("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
-			return null;
-			//			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
+			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
+		}
+
+		@Override
+		public @Nullable UMLXElement visitCollectionTemplateExp(@NonNull CollectionTemplateExp qvtrCollectionTemplateExp) {
+			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, qvtrCollectionTemplateExp);
+			CollectionType qvtrCollectionType = QVTrelationUtil.getReferredCollectionType(qvtrCollectionTemplateExp);
+			relPatternNode.setIsMany(true);
+			relPatternNode.setIsNullFree(qvtrCollectionType.isIsNullFree());
+			relPatternNode.setIsOrdered(qvtrCollectionType.isOrdered());
+			relPatternNode.setIsUnique(qvtrCollectionType.isUnique());
+			int sourceIndex = 1;
+			for (@NonNull OCLExpression qvtrMember : QVTrelationUtil.getOwnedMembers(qvtrCollectionTemplateExp)) {
+				RelPatternNode relMemberPatternNode = visit(RelPatternNode.class, qvtrMember);
+				RelPatternEdge relPatternEdge = UMLXFactory.eINSTANCE.createRelPatternEdge();
+				relPatternEdge.setSourceIndex(sourceIndex);
+				relPatternEdge.setSource(relPatternNode);
+				relPatternEdge.setTarget(relMemberPatternNode);
+				relMemberPatternNode.getOwningRelDomainNode().getOwnedRelPatternEdges().add(relPatternEdge);
+				sourceIndex++;
+			}
+			Variable qvtrRest = qvtrCollectionTemplateExp.getRest();
+			if (qvtrRest != null) {
+				RelPatternNode relRestPatternNode = visit(RelPatternNode.class, qvtrRest);
+				RelPatternEdge relPatternEdge = UMLXFactory.eINSTANCE.createRelPatternEdge();
+				relPatternEdge.setSourceIndex(-1);
+				relPatternEdge.setSource(relPatternNode);
+				relPatternEdge.setTarget(relRestPatternNode);
+				relRestPatternNode.getOwningRelDomainNode().getOwnedRelPatternEdges().add(relPatternEdge);
+			}
+			return relPatternNode;
+		}
+
+		@Override
+		public @Nullable UMLXElement visitOCLExpression(@NonNull OCLExpression qvtrExpression) {
+			RelDomainNode relDomainNode = context.getContainingRelDomainNode(qvtrExpression);
+			RelPatternExpressionNode relPatternExpressionNode = UMLXFactory.eINSTANCE.createRelPatternExpressionNode();
+			context.install(qvtrExpression, relPatternExpressionNode);
+			relPatternExpressionNode.setExpression(PrettyPrinter.print(qvtrExpression));
+			relDomainNode.getOwnedRelPatternNodes().add(relPatternExpressionNode);
+			return relPatternExpressionNode;
 		}
 
 		@Override
@@ -425,25 +428,25 @@ public class QVTr2UMLX
 				Property oppositeProperty = partProperty.getOpposite();
 				if (partProperty.isIsComposite()) {
 					//					relPatternEdge.setIsOpposite(false);
-					relPatternEdge.setReferredProperty(context.getEcoreOf(partProperty));
+					relPatternEdge.setReferredEStructuralFeature(context.getEcoreOf(partProperty));
 					relPatternEdge.setSource(relPatternNode);
 					relPatternEdge.setTarget(relPartPatternNode);
 				}
 				else if ((oppositeProperty != null) && oppositeProperty.isIsComposite()) {
 					//					relPatternEdge.setIsOpposite(false);
-					relPatternEdge.setReferredProperty(context.getEcoreOf(oppositeProperty));
+					relPatternEdge.setReferredEStructuralFeature(context.getEcoreOf(oppositeProperty));
 					relPatternEdge.setSource(relPartPatternNode);
 					relPatternEdge.setTarget(relPatternNode);
 				}
 				else if ((oppositeProperty != null) && partProperty.isIsImplicit()) {
 					//					relPatternEdge.setIsOpposite(true);
-					relPatternEdge.setReferredProperty(context.getEcoreOf(oppositeProperty));
+					relPatternEdge.setReferredEStructuralFeature(context.getEcoreOf(oppositeProperty));
 					relPatternEdge.setSource(relPartPatternNode);
 					relPatternEdge.setTarget(relPatternNode);
 				}
 				else {
 					//					relPatternEdge.setIsOpposite(false);
-					relPatternEdge.setReferredProperty(context.getEcoreOf(partProperty));
+					relPatternEdge.setReferredEStructuralFeature(context.getEcoreOf(partProperty));
 					relPatternEdge.setSource(relPatternNode);
 					relPatternEdge.setTarget(relPartPatternNode);
 				}
@@ -487,6 +490,12 @@ public class QVTr2UMLX
 		}
 
 		@Override
+		public @Nullable UMLXElement visitSharedVariable(@NonNull SharedVariable qvtrSharedVariable) {
+			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, qvtrSharedVariable);
+			return relPatternNode;
+		}
+
+		@Override
 		public @Nullable UMLXElement visitVariableExp(@NonNull VariableExp qvtrVariableExp) {
 			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, PivotUtil.getReferredVariable(qvtrVariableExp));
 			return relPatternNode;
@@ -519,6 +528,18 @@ public class QVTr2UMLX
 		}
 		@SuppressWarnings("unchecked")T castElement = (T)umlxElement;
 		return castElement;
+	}
+
+	protected @NonNull RelDomainNode getContainingRelDomainNode(@NonNull OCLExpression qvtrExpression) {
+		RelationDomain qvtrRelationDomain = QVTrelationUtil.basicGetContainingRelationDomain(qvtrExpression);
+		if (qvtrRelationDomain != null) {
+			return getUMLXElement(RelDomainNode.class, qvtrRelationDomain);
+		}
+		else {
+			Relation qvtrRelation = QVTrelationUtil.getContainingRelation(qvtrExpression);
+			RelDiagram relDiagram = getUMLXElement(RelDiagram.class, qvtrRelation);
+			return getPrimitiveRelDomainNode(relDiagram);
+		}
 	}
 
 	public @Nullable EStructuralFeature getEcoreOf(@NonNull Property qvtrProperty) {
@@ -559,6 +580,18 @@ public class QVTr2UMLX
 		}
 		s.append(PivotUtil.getName(qvtrNamespace));
 		return s.toString();
+	}
+
+	protected @NonNull RelDomainNode getPrimitiveRelDomainNode(@NonNull RelDiagram relDiagram) {
+		for (@NonNull RelDomainNode relDomainNode : UMLXUtil.getOwnedRelDomainNodes(relDiagram)) {
+			if (relDomainNode.getReferredTxTypedModelNode() == null) {
+				return relDomainNode;
+			}
+		}
+		RelDomainNode relDomainNode = UMLXFactory.eINSTANCE.createRelDomainNode();
+		//			context.install(qvtrRelationDomain, relDomainNode);
+		relDiagram.getOwnedRelDomainNodes().add(relDomainNode);
+		return relDomainNode;
 	}
 
 	public @NonNull String getProjectName(@NonNull URI traceURI) {

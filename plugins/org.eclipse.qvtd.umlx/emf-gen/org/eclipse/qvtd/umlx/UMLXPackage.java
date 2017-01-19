@@ -659,22 +659,58 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_CLASS_NODE__NAME = REL_PATTERN_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_CLASS_NODE__IS_MANY = REL_PATTERN_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Null Free</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_CLASS_NODE__IS_NULL_FREE = REL_PATTERN_NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_CLASS_NODE__IS_ORDERED = REL_PATTERN_NODE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_CLASS_NODE__IS_REQUIRED = REL_PATTERN_NODE_FEATURE_COUNT + 1;
+	int REL_PATTERN_CLASS_NODE__IS_REQUIRED = REL_PATTERN_NODE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Referred Class</b></em>' reference.
+	 * The feature id for the '<em><b>Is Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_CLASS_NODE__REFERRED_CLASS = REL_PATTERN_NODE_FEATURE_COUNT + 2;
+	int REL_PATTERN_CLASS_NODE__IS_UNIQUE = REL_PATTERN_NODE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Referred EClassifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER = REL_PATTERN_NODE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Rel Domain Node</b></em>' reference.
@@ -683,7 +719,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE = REL_PATTERN_NODE_FEATURE_COUNT + 3;
+	int REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE = REL_PATTERN_NODE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Rel Pattern Class Node</em>' class.
@@ -692,7 +728,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_CLASS_NODE_FEATURE_COUNT = REL_PATTERN_NODE_FEATURE_COUNT + 4;
+	int REL_PATTERN_CLASS_NODE_FEATURE_COUNT = REL_PATTERN_NODE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -713,13 +749,13 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE = REL_EDGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
+	 * The feature id for the '<em><b>Referred EStructural Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE__REFERRED_PROPERTY = REL_EDGE_FEATURE_COUNT + 1;
+	int REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE = REL_EDGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -731,13 +767,22 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_EDGE__SOURCE = REL_EDGE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Source Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_EDGE__SOURCE_INDEX = REL_EDGE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE__TARGET = REL_EDGE_FEATURE_COUNT + 3;
+	int REL_PATTERN_EDGE__TARGET = REL_EDGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Rel Pattern Edge</em>' class.
@@ -746,7 +791,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EDGE_FEATURE_COUNT = REL_EDGE_FEATURE_COUNT + 4;
+	int REL_PATTERN_EDGE_FEATURE_COUNT = REL_EDGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternExpressionNodeImpl <em>Rel Pattern Expression Node</em>}' class.
@@ -984,13 +1029,13 @@ public interface UMLXPackage extends EPackage {
 	int TX_KEY_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Referred Class</b></em>' reference.
+	 * The feature id for the '<em><b>Referred EClass</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_KEY_NODE__REFERRED_CLASS = TX_NODE_FEATURE_COUNT + 2;
+	int TX_KEY_NODE__REFERRED_ECLASS = TX_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Tx Key Node</em>' class.
@@ -1011,13 +1056,13 @@ public interface UMLXPackage extends EPackage {
 	int TX_PACKAGE_NODE__COMMENTS = TX_NODE__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Referred Package</b></em>' reference.
+	 * The feature id for the '<em><b>Referred EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_PACKAGE_NODE__REFERRED_PACKAGE = TX_NODE_FEATURE_COUNT + 0;
+	int TX_PACKAGE_NODE__REFERRED_EPACKAGE = TX_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owning Tx Typed Model Node</b></em>' container reference.
@@ -1065,13 +1110,13 @@ public interface UMLXPackage extends EPackage {
 	int TX_PART_NODE__IS_OPPOSITE = TX_NODE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
+	 * The feature id for the '<em><b>Referred EStructural Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_PART_NODE__REFERRED_PROPERTY = TX_NODE_FEATURE_COUNT + 2;
+	int TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE = TX_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Tx Part Node</em>' class.
@@ -1408,17 +1453,6 @@ public interface UMLXPackage extends EPackage {
 	EClass getRelPatternEdge();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredProperty <em>Referred Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Property</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getReferredProperty()
-	 * @see #getRelPatternEdge()
-	 * @generated
-	 */
-	EReference getRelPatternEdge_ReferredProperty();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1430,6 +1464,17 @@ public interface UMLXPackage extends EPackage {
 	EReference getRelPatternEdge_Source();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSourceIndex <em>Source Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source Index</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getSourceIndex()
+	 * @see #getRelPatternEdge()
+	 * @generated
+	 */
+	EAttribute getRelPatternEdge_SourceIndex();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1439,6 +1484,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelPatternEdge_OwningRelDomainNode();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred EStructural Feature</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getReferredEStructuralFeature()
+	 * @see #getRelPatternEdge()
+	 * @generated
+	 */
+	EReference getRelPatternEdge_ReferredEStructuralFeature();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getTarget <em>Target</em>}'.
@@ -1656,15 +1712,15 @@ public interface UMLXPackage extends EPackage {
 	EReference getTxKeyNode_OwningTxDiagram();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredClass <em>Referred Class</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxKeyNode#getReferredEClass <em>Referred EClass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Class</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxKeyNode#getReferredClass()
+	 * @return the meta object for the reference '<em>Referred EClass</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxKeyNode#getReferredEClass()
 	 * @see #getTxKeyNode()
 	 * @generated
 	 */
-	EReference getTxKeyNode_ReferredClass();
+	EReference getTxKeyNode_ReferredEClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxPartNode <em>Tx Part Node</em>}'.
@@ -1699,15 +1755,15 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getTxPartNode_IsOpposite();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredProperty <em>Referred Property</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Property</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxPartNode#getReferredProperty()
+	 * @return the meta object for the reference '<em>Referred EStructural Feature</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxPartNode#getReferredEStructuralFeature()
 	 * @see #getTxPartNode()
 	 * @generated
 	 */
-	EReference getTxPartNode_ReferredProperty();
+	EReference getTxPartNode_ReferredEStructuralFeature();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxNode <em>Tx Node</em>}'.
@@ -1730,15 +1786,15 @@ public interface UMLXPackage extends EPackage {
 	EClass getTxPackageNode();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredPackage <em>Referred Package</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredEPackage <em>Referred EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Package</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getReferredPackage()
+	 * @return the meta object for the reference '<em>Referred EPackage</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getReferredEPackage()
 	 * @see #getTxPackageNode()
 	 * @generated
 	 */
-	EReference getTxPackageNode_ReferredPackage();
+	EReference getTxPackageNode_ReferredEPackage();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}'.
@@ -1879,6 +1935,39 @@ public interface UMLXPackage extends EPackage {
 	EClass getRelPatternClassNode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsMany <em>Is Many</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Many</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#isIsMany()
+	 * @see #getRelPatternClassNode()
+	 * @generated
+	 */
+	EAttribute getRelPatternClassNode_IsMany();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsNullFree <em>Is Null Free</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Null Free</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#isIsNullFree()
+	 * @see #getRelPatternClassNode()
+	 * @generated
+	 */
+	EAttribute getRelPatternClassNode_IsNullFree();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsOrdered <em>Is Ordered</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Ordered</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#isIsOrdered()
+	 * @see #getRelPatternClassNode()
+	 * @generated
+	 */
+	EAttribute getRelPatternClassNode_IsOrdered();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsRequired <em>Is Required</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1890,15 +1979,26 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getRelPatternClassNode_IsRequired();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getReferredClass <em>Referred Class</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsUnique <em>Is Unique</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Class</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#getReferredClass()
+	 * @return the meta object for the attribute '<em>Is Unique</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#isIsUnique()
 	 * @see #getRelPatternClassNode()
 	 * @generated
 	 */
-	EReference getRelPatternClassNode_ReferredClass();
+	EAttribute getRelPatternClassNode_IsUnique();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getReferredEClassifier <em>Referred EClassifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred EClassifier</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#getReferredEClassifier()
+	 * @see #getRelPatternClassNode()
+	 * @generated
+	 */
+	EReference getRelPatternClassNode_ReferredEClassifier();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getRelDomainNode <em>Rel Domain Node</em>}'.
@@ -2125,14 +2225,6 @@ public interface UMLXPackage extends EPackage {
 		EClass REL_PATTERN_EDGE = eINSTANCE.getRelPatternEdge();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REL_PATTERN_EDGE__REFERRED_PROPERTY = eINSTANCE.getRelPatternEdge_ReferredProperty();
-
-		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2141,12 +2233,28 @@ public interface UMLXPackage extends EPackage {
 		EReference REL_PATTERN_EDGE__SOURCE = eINSTANCE.getRelPatternEdge_Source();
 
 		/**
+		 * The meta object literal for the '<em><b>Source Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_PATTERN_EDGE__SOURCE_INDEX = eINSTANCE.getRelPatternEdge_SourceIndex();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Rel Domain Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE = eINSTANCE.getRelPatternEdge_OwningRelDomainNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred EStructural Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE = eINSTANCE.getRelPatternEdge_ReferredEStructuralFeature();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
@@ -2319,12 +2427,12 @@ public interface UMLXPackage extends EPackage {
 		EReference TX_KEY_NODE__OWNING_TX_DIAGRAM = eINSTANCE.getTxKeyNode_OwningTxDiagram();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Class</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred EClass</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TX_KEY_NODE__REFERRED_CLASS = eINSTANCE.getTxKeyNode_ReferredClass();
+		EReference TX_KEY_NODE__REFERRED_ECLASS = eINSTANCE.getTxKeyNode_ReferredEClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl <em>Tx Part Node</em>}' class.
@@ -2353,12 +2461,12 @@ public interface UMLXPackage extends EPackage {
 		EAttribute TX_PART_NODE__IS_OPPOSITE = eINSTANCE.getTxPartNode_IsOpposite();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred EStructural Feature</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TX_PART_NODE__REFERRED_PROPERTY = eINSTANCE.getTxPartNode_ReferredProperty();
+		EReference TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE = eINSTANCE.getTxPartNode_ReferredEStructuralFeature();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxNodeImpl <em>Tx Node</em>}' class.
@@ -2381,12 +2489,12 @@ public interface UMLXPackage extends EPackage {
 		EClass TX_PACKAGE_NODE = eINSTANCE.getTxPackageNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Package</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred EPackage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TX_PACKAGE_NODE__REFERRED_PACKAGE = eINSTANCE.getTxPackageNode_ReferredPackage();
+		EReference TX_PACKAGE_NODE__REFERRED_EPACKAGE = eINSTANCE.getTxPackageNode_ReferredEPackage();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Tx Typed Model Node</b></em>' container reference feature.
@@ -2503,6 +2611,30 @@ public interface UMLXPackage extends EPackage {
 		EClass REL_PATTERN_CLASS_NODE = eINSTANCE.getRelPatternClassNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Many</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_PATTERN_CLASS_NODE__IS_MANY = eINSTANCE.getRelPatternClassNode_IsMany();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Null Free</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_PATTERN_CLASS_NODE__IS_NULL_FREE = eINSTANCE.getRelPatternClassNode_IsNullFree();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Ordered</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_PATTERN_CLASS_NODE__IS_ORDERED = eINSTANCE.getRelPatternClassNode_IsOrdered();
+
+		/**
 		 * The meta object literal for the '<em><b>Is Required</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2511,12 +2643,20 @@ public interface UMLXPackage extends EPackage {
 		EAttribute REL_PATTERN_CLASS_NODE__IS_REQUIRED = eINSTANCE.getRelPatternClassNode_IsRequired();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Class</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Is Unique</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference REL_PATTERN_CLASS_NODE__REFERRED_CLASS = eINSTANCE.getRelPatternClassNode_ReferredClass();
+		EAttribute REL_PATTERN_CLASS_NODE__IS_UNIQUE = eINSTANCE.getRelPatternClassNode_IsUnique();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred EClassifier</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER = eINSTANCE.getRelPatternClassNode_ReferredEClassifier();
 
 		/**
 		 * The meta object literal for the '<em><b>Rel Domain Node</b></em>' reference feature.

@@ -289,7 +289,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : Boolean[1] = ownedTxPackageNodes->isUnique(referredPackage)
+		 *         result : Boolean[1] = ownedTxPackageNodes->isUnique(referredEPackage)
 		 *       in
 		 *         'TxTypedModelNode::TxPackageNodePackagesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -319,17 +319,17 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 					@SuppressWarnings("null")
 					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxPackageNode _1 = (TxPackageNode)ITERATOR__1.next();
 					/**
-					 * referredPackage
+					 * referredEPackage
 					 */
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredPackage = _1.getReferredPackage();
+					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredEPackage = _1.getReferredEPackage();
 					//
-					if (accumulator.includes(referredPackage) == ValueUtil.TRUE_VALUE) {
+					if (accumulator.includes(referredEPackage) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
-						accumulator.add(referredPackage);
+						accumulator.add(referredEPackage);
 					}
 				}
 				CAUGHT_result = result;

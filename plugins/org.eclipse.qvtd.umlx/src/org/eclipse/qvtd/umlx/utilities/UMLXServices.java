@@ -179,7 +179,7 @@ public class UMLXServices
 			StringBuilder s = new StringBuilder();
 			s.append(String.valueOf(((RelPatternClassNode)context).getName()));
 			s.append(" : ");
-			EClassifier eClassifier = ((RelPatternClassNode)context).getReferredClass();
+			EClassifier eClassifier = ((RelPatternClassNode)context).getReferredEClassifier();
 			if (eClassifier != null) {
 				s.append(eClassifier.eIsProxy() ? EcoreUtil.getURI(eClassifier) : String.valueOf(eClassifier.getName()));
 			}
@@ -189,7 +189,7 @@ public class UMLXServices
 			return String.valueOf(((TxImportNode)context).getName());
 		}
 		else if (context instanceof TxKeyNode) {
-			EClassifier eClassifier = ((TxKeyNode)context).getReferredClass();
+			EClassifier eClassifier = ((TxKeyNode)context).getReferredEClass();
 			if (eClassifier != null) {
 				return String.valueOf(eClassifier.getName());
 			}
@@ -198,10 +198,10 @@ public class UMLXServices
 			}
 		}
 		else if (context instanceof TxPackageNode) {
-			return LabelUtil.QUALIFIED_NAME_REGISTRY.labelFor(((TxPackageNode)context).getReferredPackage());
+			return LabelUtil.QUALIFIED_NAME_REGISTRY.labelFor(((TxPackageNode)context).getReferredEPackage());
 		}
 		else if (context instanceof TxPartNode) {
-			EStructuralFeature eStructuralFeature = ((TxPartNode)context).getReferredProperty();
+			EStructuralFeature eStructuralFeature = ((TxPartNode)context).getReferredEStructuralFeature();
 			if (eStructuralFeature != null) {
 				return String.valueOf(eStructuralFeature.getName());
 			}
@@ -220,7 +220,7 @@ public class UMLXServices
 	 */
 	public @NonNull String umlxPatternEdgeBeginLabel(EObject context) {
 		if (context instanceof RelPatternEdge) {
-			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredProperty();
+			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
 			if (eStructuralFeature instanceof EReference) {
 				EReference eOpposite = ((EReference)eStructuralFeature).getEOpposite();
 				if (eOpposite == null) {
@@ -241,7 +241,7 @@ public class UMLXServices
 	 */
 	public @NonNull String umlxPatternEdgeEndLabel(EObject context) {
 		if (context instanceof RelPatternEdge) {
-			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredProperty();
+			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
 			if (eStructuralFeature != null) {
 				StringBuilder s = new StringBuilder();
 				s.append(String.valueOf(eStructuralFeature.getName()));
@@ -258,7 +258,7 @@ public class UMLXServices
 	 */
 	public boolean umlxPatternEdgeIsComposite(EObject context) {
 		if (context instanceof RelPatternEdge) {
-			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredProperty();
+			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
 			if (eStructuralFeature instanceof EReference) {
 				return ((EReference)eStructuralFeature).isContainer();
 			}
@@ -271,7 +271,7 @@ public class UMLXServices
 	 */
 	public boolean umlxPatternEdgeIsNotComposite(EObject context) {
 		if (context instanceof RelPatternEdge) {
-			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredProperty();
+			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
 			if (eStructuralFeature instanceof EReference) {
 				return !((EReference)eStructuralFeature).isContainer();
 			}

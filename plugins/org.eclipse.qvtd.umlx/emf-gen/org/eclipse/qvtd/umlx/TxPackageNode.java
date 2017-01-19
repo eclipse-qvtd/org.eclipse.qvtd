@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredPackage <em>Referred Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredEPackage <em>Referred EPackage</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}</li>
  * </ul>
  *
@@ -30,29 +30,29 @@ import org.eclipse.emf.ecore.EPackage;
  */
 public interface TxPackageNode extends TxNode {
 	/**
-	 * Returns the value of the '<em><b>Referred Package</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Package</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred EPackage</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Package</em>' reference.
-	 * @see #setReferredPackage(EPackage)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPackageNode_ReferredPackage()
+	 * @return the value of the '<em>Referred EPackage</em>' reference.
+	 * @see #setReferredEPackage(EPackage)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPackageNode_ReferredEPackage()
 	 * @generated
 	 */
-	EPackage getReferredPackage();
+	EPackage getReferredEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredPackage <em>Referred Package</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredEPackage <em>Referred EPackage</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Package</em>' reference.
-	 * @see #getReferredPackage()
+	 * @param value the new value of the '<em>Referred EPackage</em>' reference.
+	 * @see #getReferredEPackage()
 	 * @generated
 	 */
-	void setReferredPackage(EPackage value);
+	void setReferredEPackage(EPackage value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Tx Typed Model Node</b></em>' container reference.

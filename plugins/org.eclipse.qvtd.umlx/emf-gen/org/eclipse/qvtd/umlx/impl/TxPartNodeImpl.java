@@ -54,7 +54,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#getOwningTxKeyNode <em>Owning Tx Key Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#isIsOpposite <em>Is Opposite</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,14 +81,14 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
+	 * The cached value of the '{@link #getReferredEStructuralFeature() <em>Referred EStructural Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredProperty()
+	 * @see #getReferredEStructuralFeature()
 	 * @generated
 	 * @ordered
 	 */
-	protected EStructuralFeature referredProperty;
+	protected EStructuralFeature referredEStructuralFeature;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,16 +181,16 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * @generated
 	 */
 	@Override
-	public EStructuralFeature getReferredProperty() {
-		if (referredProperty != null && referredProperty.eIsProxy()) {
-			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
-			referredProperty = (EStructuralFeature)eResolveProxy(oldReferredProperty);
-			if (referredProperty != oldReferredProperty) {
+	public EStructuralFeature getReferredEStructuralFeature() {
+		if (referredEStructuralFeature != null && referredEStructuralFeature.eIsProxy()) {
+			InternalEObject oldReferredEStructuralFeature = (InternalEObject)referredEStructuralFeature;
+			referredEStructuralFeature = (EStructuralFeature)eResolveProxy(oldReferredEStructuralFeature);
+			if (referredEStructuralFeature != oldReferredEStructuralFeature) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, oldReferredEStructuralFeature, referredEStructuralFeature));
 			}
 		}
-		return referredProperty;
+		return referredEStructuralFeature;
 	}
 
 	/**
@@ -198,8 +198,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature basicGetReferredProperty() {
-		return referredProperty;
+	public EStructuralFeature basicGetReferredEStructuralFeature() {
+		return referredEStructuralFeature;
 	}
 
 	/**
@@ -208,11 +208,11 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredProperty(EStructuralFeature newReferredProperty) {
-		EStructuralFeature oldReferredProperty = referredProperty;
-		referredProperty = newReferredProperty;
+	public void setReferredEStructuralFeature(EStructuralFeature newReferredEStructuralFeature) {
+		EStructuralFeature oldReferredEStructuralFeature = referredEStructuralFeature;
+		referredEStructuralFeature = newReferredEStructuralFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, oldReferredEStructuralFeature, referredEStructuralFeature));
 	}
 
 	/**
@@ -231,9 +231,9 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : Boolean[1] = owningTxKeyNode.referredClass.oclAsType(ecore::EClass)
+		 *         result : Boolean[1] = owningTxKeyNode.referredEClass.oclAsType(ecore::EClass)
 		 *         ->closure(eSuperTypes)
-		 *         ->includes(referredProperty.eContainingClass)
+		 *         ->includes(referredEStructuralFeature.eContainingClass)
 		 *       in
 		 *         'TxPartNode::PartIsPropertyOfKey'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -254,8 +254,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxKeyNode owningTxKeyNode = this.getOwningTxKeyNode();
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClass referredClass = owningTxKeyNode.getReferredClass();
-				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredClass, TYP_ecore_c_c_EClass_0));
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClass referredEClass = owningTxKeyNode.getReferredEClass();
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, TYP_ecore_c_c_EClass_0));
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
@@ -282,8 +282,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredProperty = this.getReferredProperty();
-				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClass eContainingClass = referredProperty.getEContainingClass();
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClass eContainingClass = referredEStructuralFeature.getEContainingClass();
 				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(closure, eContainingClass).booleanValue();
 				CAUGHT_result = result;
 			}
@@ -352,9 +352,9 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 				return getOwningTxKeyNode();
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				return isIsOpposite();
-			case UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY:
-				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			case UMLXPackage.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE:
+				if (resolve) return getReferredEStructuralFeature();
+				return basicGetReferredEStructuralFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -373,8 +373,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				setIsOpposite((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY:
-				setReferredProperty((EStructuralFeature)newValue);
+			case UMLXPackage.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE:
+				setReferredEStructuralFeature((EStructuralFeature)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -394,8 +394,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);
 				return;
-			case UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY:
-				setReferredProperty((EStructuralFeature)null);
+			case UMLXPackage.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE:
+				setReferredEStructuralFeature((EStructuralFeature)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -413,8 +413,8 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 				return getOwningTxKeyNode() != null;
 			case UMLXPackage.TX_PART_NODE__IS_OPPOSITE:
 				return isOpposite != IS_OPPOSITE_EDEFAULT;
-			case UMLXPackage.TX_PART_NODE__REFERRED_PROPERTY:
-				return referredProperty != null;
+			case UMLXPackage.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE:
+				return referredEStructuralFeature != null;
 		}
 		return super.eIsSet(featureID);
 	}

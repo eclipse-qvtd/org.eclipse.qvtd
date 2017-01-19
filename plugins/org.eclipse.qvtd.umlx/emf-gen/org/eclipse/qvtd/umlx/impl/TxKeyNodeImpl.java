@@ -49,7 +49,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getOwnedTxPartNodes <em>Owned Tx Part Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl#getReferredEClass <em>Referred EClass</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,14 +66,14 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	protected EList<TxPartNode> ownedTxPartNodes;
 
 	/**
-	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
+	 * The cached value of the '{@link #getReferredEClass() <em>Referred EClass</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredClass()
+	 * @see #getReferredEClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected EClass referredClass;
+	protected EClass referredEClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,16 +156,16 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @generated
 	 */
 	@Override
-	public EClass getReferredClass() {
-		if (referredClass != null && referredClass.eIsProxy()) {
-			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			referredClass = (EClass)eResolveProxy(oldReferredClass);
-			if (referredClass != oldReferredClass) {
+	public EClass getReferredEClass() {
+		if (referredEClass != null && referredEClass.eIsProxy()) {
+			InternalEObject oldReferredEClass = (InternalEObject)referredEClass;
+			referredEClass = (EClass)eResolveProxy(oldReferredEClass);
+			if (referredEClass != oldReferredEClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_KEY_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_KEY_NODE__REFERRED_ECLASS, oldReferredEClass, referredEClass));
 			}
 		}
-		return referredClass;
+		return referredEClass;
 	}
 
 	/**
@@ -173,8 +173,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass basicGetReferredClass() {
-		return referredClass;
+	public EClass basicGetReferredEClass() {
+		return referredEClass;
 	}
 
 	/**
@@ -183,11 +183,11 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredClass(EClass newReferredClass) {
-		EClass oldReferredClass = referredClass;
-		referredClass = newReferredClass;
+	public void setReferredEClass(EClass newReferredEClass) {
+		EClass oldReferredEClass = referredEClass;
+		referredEClass = newReferredEClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_KEY_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_KEY_NODE__REFERRED_ECLASS, oldReferredEClass, referredEClass));
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : Boolean[1] = ownedTxPartNodes->isUnique(referredProperty)
+		 *         result : Boolean[1] = ownedTxPartNodes->isUnique(referredEStructuralFeature)
 		 *       in
 		 *         'TxKeyNode::PartsAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -236,17 +236,17 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 					@SuppressWarnings("null")
 					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxPartNode _1 = (TxPartNode)ITERATOR__1.next();
 					/**
-					 * referredProperty
+					 * referredEStructuralFeature
 					 */
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredProperty = _1.getReferredProperty();
+					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredEStructuralFeature = _1.getReferredEStructuralFeature();
 					//
-					if (accumulator.includes(referredProperty) == ValueUtil.TRUE_VALUE) {
+					if (accumulator.includes(referredEStructuralFeature) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
-						accumulator.add(referredProperty);
+						accumulator.add(referredEStructuralFeature);
 					}
 				}
 				CAUGHT_result = result;
@@ -321,9 +321,9 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 				return getOwnedTxPartNodes();
 			case UMLXPackage.TX_KEY_NODE__OWNING_TX_DIAGRAM:
 				return getOwningTxDiagram();
-			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
-				if (resolve) return getReferredClass();
-				return basicGetReferredClass();
+			case UMLXPackage.TX_KEY_NODE__REFERRED_ECLASS:
+				if (resolve) return getReferredEClass();
+				return basicGetReferredEClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,8 +344,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 			case UMLXPackage.TX_KEY_NODE__OWNING_TX_DIAGRAM:
 				setOwningTxDiagram((TxDiagram)newValue);
 				return;
-			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
-				setReferredClass((EClass)newValue);
+			case UMLXPackage.TX_KEY_NODE__REFERRED_ECLASS:
+				setReferredEClass((EClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -365,8 +365,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 			case UMLXPackage.TX_KEY_NODE__OWNING_TX_DIAGRAM:
 				setOwningTxDiagram((TxDiagram)null);
 				return;
-			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
-				setReferredClass((EClass)null);
+			case UMLXPackage.TX_KEY_NODE__REFERRED_ECLASS:
+				setReferredEClass((EClass)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -384,8 +384,8 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 				return ownedTxPartNodes != null && !ownedTxPartNodes.isEmpty();
 			case UMLXPackage.TX_KEY_NODE__OWNING_TX_DIAGRAM:
 				return getOwningTxDiagram() != null;
-			case UMLXPackage.TX_KEY_NODE__REFERRED_CLASS:
-				return referredClass != null;
+			case UMLXPackage.TX_KEY_NODE__REFERRED_ECLASS:
+				return referredEClass != null;
 		}
 		return super.eIsSet(featureID);
 	}

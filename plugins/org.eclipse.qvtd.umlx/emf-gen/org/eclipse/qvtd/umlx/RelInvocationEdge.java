@@ -91,11 +91,11 @@ public interface RelInvocationEdge extends RelEdge {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Invoking Rel Pattern Node</em>' reference.
-	 * @see #setInvokingRelPatternNode(RelPatternClassNode)
+	 * @see #setInvokingRelPatternNode(RelPatternNode)
 	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationEdge_InvokingRelPatternNode()
 	 * @generated
 	 */
-	RelPatternClassNode getInvokingRelPatternNode();
+	RelPatternNode getInvokingRelPatternNode();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelInvocationEdge#getInvokingRelPatternNode <em>Invoking Rel Pattern Node</em>}' reference.
@@ -105,5 +105,5 @@ public interface RelInvocationEdge extends RelEdge {
 	 * @see #getInvokingRelPatternNode()
 	 * @generated
 	 */
-	void setInvokingRelPatternNode(RelPatternClassNode value);
+	void setInvokingRelPatternNode(RelPatternNode value);
 } // RelInvocationEdge

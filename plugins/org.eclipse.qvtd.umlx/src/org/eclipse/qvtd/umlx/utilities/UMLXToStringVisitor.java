@@ -28,6 +28,7 @@ import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXElement;
+import org.eclipse.qvtd.umlx.UMLXModel;
 import org.eclipse.qvtd.umlx.UMLXNamedElement;
 import org.eclipse.qvtd.umlx.util.AbstractExtendingUMLXVisitor;
 
@@ -78,14 +79,14 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 
 	@Override
 	public @Nullable Object visitRelPatternClassNode(@NonNull RelPatternClassNode relPatternClassNode) {
-		EClassifier eClassifier = relPatternClassNode.getReferredClass();
+		EClassifier eClassifier = relPatternClassNode.getReferredEClassifier();
 		append(LabelUtil.getLabel(eClassifier));
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitRelPatternEdge(@NonNull RelPatternEdge relPatternEdge) {
-		EStructuralFeature eStructuralFeature = relPatternEdge.getReferredProperty();
+		EStructuralFeature eStructuralFeature = relPatternEdge.getReferredEStructuralFeature();
 		append(LabelUtil.getLabel(eStructuralFeature));
 		return null;
 	}
@@ -99,26 +100,31 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 
 	@Override
 	public @Nullable Object visitTxKeyNode(@NonNull TxKeyNode txKeyNode) {
-		EClassifier eClassifier = txKeyNode.getReferredClass();
+		EClassifier eClassifier = txKeyNode.getReferredEClass();
 		append(LabelUtil.getLabel(eClassifier));
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitTxPackageNode(@NonNull TxPackageNode txPackageNode) {
-		EPackage ePackage = txPackageNode.getReferredPackage();
+		EPackage ePackage = txPackageNode.getReferredEPackage();
 		append(LabelUtil.getLabel(ePackage));
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitTxPartNode(@NonNull TxPartNode txPartNode) {
-		EStructuralFeature eStructuralFeature = txPartNode.getReferredProperty();
+		EStructuralFeature eStructuralFeature = txPartNode.getReferredEStructuralFeature();
 		if (txPartNode.isIsOpposite()) {
 			append("~");
 		}
 		append(LabelUtil.getLabel(eStructuralFeature));
 		return null;
+	}
+
+	@Override
+	public @Nullable Object visitUMLXModel(@NonNull UMLXModel umlxModel) {
+		return "UMLXModel";
 	}
 
 	@Override

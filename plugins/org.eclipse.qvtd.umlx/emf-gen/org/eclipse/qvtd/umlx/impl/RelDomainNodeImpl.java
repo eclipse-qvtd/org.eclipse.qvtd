@@ -241,7 +241,8 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 		 *     else
 		 *       let result : Boolean[?] = referredTxTypedModelNode = null implies
 		 *         ownedRelPatternNodes->selectByKind(RelPatternClassNode)
-		 *         ->forAll(not referredClass.oclIsKindOf(ecore::EClass))
+		 *         ->forAll(
+		 *           not referredEClassifier.oclIsKindOf(ecore::EClass))
 		 *       in
 		 *         'RelDomainNode::PrimitiveDomainHasNoClassNodes'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -285,12 +286,12 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 						@SuppressWarnings("null")
 						/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode _1 = (RelPatternClassNode)ITERATOR__1.next();
 						/**
-						 * not referredClass.oclIsKindOf(ecore::EClass)
+						 * not referredEClassifier.oclIsKindOf(ecore::EClass)
 						 */
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = _1.getReferredClass();
-						final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredClass, TYP_ecore_c_c_EClass).booleanValue();
+						final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = _1.getReferredEClassifier();
+						final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass).booleanValue();
 						final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
 						//
 						if (not == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result

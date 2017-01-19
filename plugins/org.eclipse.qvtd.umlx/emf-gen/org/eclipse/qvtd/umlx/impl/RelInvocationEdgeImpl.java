@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternClassNode;
+import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
@@ -47,7 +48,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 * @generated
 	 * @ordered
 	 */
-	protected RelPatternClassNode invokingRelPatternNode;
+	protected RelPatternNode invokingRelPatternNode;
 
 	/**
 	 * The cached value of the '{@link #getReferredRelPatternNode() <em>Referred Rel Pattern Node</em>}' reference.
@@ -167,10 +168,10 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 * @generated
 	 */
 	@Override
-	public RelPatternClassNode getInvokingRelPatternNode() {
+	public RelPatternNode getInvokingRelPatternNode() {
 		if (invokingRelPatternNode != null && invokingRelPatternNode.eIsProxy()) {
 			InternalEObject oldInvokingRelPatternNode = (InternalEObject)invokingRelPatternNode;
-			invokingRelPatternNode = (RelPatternClassNode)eResolveProxy(oldInvokingRelPatternNode);
+			invokingRelPatternNode = (RelPatternNode)eResolveProxy(oldInvokingRelPatternNode);
 			if (invokingRelPatternNode != oldInvokingRelPatternNode) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, oldInvokingRelPatternNode, invokingRelPatternNode));
@@ -184,7 +185,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelPatternClassNode basicGetInvokingRelPatternNode() {
+	public RelPatternNode basicGetInvokingRelPatternNode() {
 		return invokingRelPatternNode;
 	}
 
@@ -194,8 +195,8 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 * @generated
 	 */
 	@Override
-	public void setInvokingRelPatternNode(RelPatternClassNode newInvokingRelPatternNode) {
-		RelPatternClassNode oldInvokingRelPatternNode = invokingRelPatternNode;
+	public void setInvokingRelPatternNode(RelPatternNode newInvokingRelPatternNode) {
+		RelPatternNode oldInvokingRelPatternNode = invokingRelPatternNode;
 		invokingRelPatternNode = newInvokingRelPatternNode;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, oldInvokingRelPatternNode, invokingRelPatternNode));
@@ -274,7 +275,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
-				setInvokingRelPatternNode((RelPatternClassNode)newValue);
+				setInvokingRelPatternNode((RelPatternNode)newValue);
 				return;
 			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
 				setOwningRelInvocationNode((RelInvocationNode)newValue);
@@ -295,7 +296,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
-				setInvokingRelPatternNode((RelPatternClassNode)null);
+				setInvokingRelPatternNode((RelPatternNode)null);
 				return;
 			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
 				setOwningRelInvocationNode((RelInvocationNode)null);

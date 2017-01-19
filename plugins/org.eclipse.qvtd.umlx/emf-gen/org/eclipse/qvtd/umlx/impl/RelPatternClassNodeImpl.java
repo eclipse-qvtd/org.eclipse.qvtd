@@ -47,8 +47,12 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsMany <em>Is Many</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsNullFree <em>Is Null Free</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsOrdered <em>Is Ordered</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsRequired <em>Is Required</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getReferredClass <em>Referred Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsUnique <em>Is Unique</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getReferredEClassifier <em>Referred EClassifier</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
  *
@@ -76,6 +80,66 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isIsMany() <em>Is Many</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsMany()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_MANY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsMany() <em>Is Many</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsMany()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isMany = IS_MANY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsNullFree() <em>Is Null Free</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsNullFree()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_NULL_FREE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isIsNullFree() <em>Is Null Free</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsNullFree()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isNullFree = IS_NULL_FREE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ORDERED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isOrdered = IS_ORDERED_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #isIsRequired() <em>Is Required</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,14 +160,34 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	protected boolean isRequired = IS_REQUIRED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
+	 * The default value of the '{@link #isIsUnique() <em>Is Unique</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredClass()
+	 * @see #isIsUnique()
 	 * @generated
 	 * @ordered
 	 */
-	protected EClassifier referredClass;
+	protected static final boolean IS_UNIQUE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isUnique = IS_UNIQUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReferredEClassifier() <em>Referred EClassifier</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredEClassifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected EClassifier referredEClassifier;
 
 	/**
 	 * The cached value of the '{@link #getRelDomainNode() <em>Rel Domain Node</em>}' reference.
@@ -163,6 +247,75 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @generated
 	 */
 	@Override
+	public boolean isIsMany() {
+		return isMany;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsMany(boolean newIsMany) {
+		boolean oldIsMany = isMany;
+		isMany = newIsMany;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY, oldIsMany, isMany));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsNullFree() {
+		return isNullFree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsNullFree(boolean newIsNullFree) {
+		boolean oldIsNullFree = isNullFree;
+		isNullFree = newIsNullFree;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE, oldIsNullFree, isNullFree));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsOrdered() {
+		return isOrdered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsOrdered(boolean newIsOrdered) {
+		boolean oldIsOrdered = isOrdered;
+		isOrdered = newIsOrdered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED, oldIsOrdered, isOrdered));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isIsRequired() {
 		return isRequired;
 	}
@@ -186,25 +339,8 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @generated
 	 */
 	@Override
-	public EClassifier getReferredClass() {
-		if (referredClass != null && referredClass.eIsProxy()) {
-			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			referredClass = (EClassifier)eResolveProxy(oldReferredClass);
-			if (referredClass != oldReferredClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
-			}
-		}
-		return referredClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClassifier basicGetReferredClass() {
-		return referredClass;
+	public boolean isIsUnique() {
+		return isUnique;
 	}
 
 	/**
@@ -213,11 +349,51 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @generated
 	 */
 	@Override
-	public void setReferredClass(EClassifier newReferredClass) {
-		EClassifier oldReferredClass = referredClass;
-		referredClass = newReferredClass;
+	public void setIsUnique(boolean newIsUnique) {
+		boolean oldIsUnique = isUnique;
+		isUnique = newIsUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_CLASS, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE, oldIsUnique, isUnique));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClassifier getReferredEClassifier() {
+		if (referredEClassifier != null && referredEClassifier.eIsProxy()) {
+			InternalEObject oldReferredEClassifier = (InternalEObject)referredEClassifier;
+			referredEClassifier = (EClassifier)eResolveProxy(oldReferredEClassifier);
+			if (referredEClassifier != oldReferredEClassifier) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER, oldReferredEClassifier, referredEClassifier));
+			}
+		}
+		return referredEClassifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClassifier basicGetReferredEClassifier() {
+		return referredEClassifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferredEClassifier(EClassifier newReferredEClassifier) {
+		EClassifier oldReferredEClassifier = referredEClassifier;
+		referredEClassifier = newReferredEClassifier;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER, oldReferredEClassifier, referredEClassifier));
 	}
 
 	/**
@@ -279,7 +455,7 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		 *       let
 		 *         result : Boolean[?] = let txTypedModelNode : TxTypedModelNode[?] = owningRelDomainNode.referredTxTypedModelNode
 		 *         in txTypedModelNode <> null implies
-		 *           txTypedModelNode.ownedTxPackageNodes.referredPackage.eClassifiers->includes(referredClass)
+		 *           txTypedModelNode.ownedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)
 		 *       in
 		 *         'RelPatternClassNode::EClassifierIsInTypedModel'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -318,12 +494,12 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 						@SuppressWarnings("null")
 						/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxPackageNode _1 = (TxPackageNode)ITERATOR__1.next();
 						/**
-						 * referredPackage
+						 * referredEPackage
 						 */
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredPackage = _1.getReferredPackage();
+						final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredEPackage = _1.getReferredEPackage();
 						//
-						accumulator.add(referredPackage);
+						accumulator.add(referredEPackage);
 					}
 					/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_EClassifier);
 					@NonNull Iterator<Object> ITERATOR__1_0 = collect_0.iterator();
@@ -347,8 +523,8 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 						}
 					}
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClassifier referredClass = this.getReferredClass();
-					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, referredClass).booleanValue();
+					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = this.getReferredEClassifier();
+					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, referredEClassifier).booleanValue();
 					implies = includes;
 				}
 				else {
@@ -375,11 +551,19 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				return getName();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
+				return isIsMany();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
+				return isIsNullFree();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED:
+				return isIsOrdered();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_REQUIRED:
 				return isIsRequired();
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_CLASS:
-				if (resolve) return getReferredClass();
-				return basicGetReferredClass();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
+				return isIsUnique();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
+				if (resolve) return getReferredEClassifier();
+				return basicGetReferredEClassifier();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				if (resolve) return getRelDomainNode();
 				return basicGetRelDomainNode();
@@ -398,11 +582,23 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				setName((String)newValue);
 				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
+				setIsMany((Boolean)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
+				setIsNullFree((Boolean)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED:
+				setIsOrdered((Boolean)newValue);
+				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_CLASS:
-				setReferredClass((EClassifier)newValue);
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
+				setIsUnique((Boolean)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
+				setReferredEClassifier((EClassifier)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				setRelDomainNode((RelDomainNode)newValue);
@@ -422,11 +618,23 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
+				setIsMany(IS_MANY_EDEFAULT);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
+				setIsNullFree(IS_NULL_FREE_EDEFAULT);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED:
+				setIsOrdered(IS_ORDERED_EDEFAULT);
+				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_CLASS:
-				setReferredClass((EClassifier)null);
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
+				setIsUnique(IS_UNIQUE_EDEFAULT);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
+				setReferredEClassifier((EClassifier)null);
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				setRelDomainNode((RelDomainNode)null);
@@ -445,10 +653,18 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
+				return isMany != IS_MANY_EDEFAULT;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
+				return isNullFree != IS_NULL_FREE_EDEFAULT;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED:
+				return isOrdered != IS_ORDERED_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_REQUIRED:
 				return isRequired != IS_REQUIRED_EDEFAULT;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_CLASS:
-				return referredClass != null;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
+				return isUnique != IS_UNIQUE_EDEFAULT;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
+				return referredEClassifier != null;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				return relDomainNode != null;
 		}

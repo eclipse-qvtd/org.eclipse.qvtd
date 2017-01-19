@@ -31,7 +31,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl#getReferredPackage <em>Referred Package</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl#getReferredEPackage <em>Referred EPackage</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}</li>
  * </ul>
  *
@@ -39,15 +39,14 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  */
 public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	/**
-	 * The cached value of the '{@link #getReferredPackage() <em>Referred Package</em>}' reference.
+	 * The cached value of the '{@link #getReferredEPackage() <em>Referred EPackage</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredPackage()
+	 * @see #getReferredEPackage()
 	 * @generated
 	 * @ordered
 	 */
-	protected EPackage referredPackage;
-
+	protected EPackage referredEPackage;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,16 +72,16 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * @generated
 	 */
 	@Override
-	public EPackage getReferredPackage() {
-		if (referredPackage != null && referredPackage.eIsProxy()) {
-			InternalEObject oldReferredPackage = (InternalEObject)referredPackage;
-			referredPackage = (EPackage)eResolveProxy(oldReferredPackage);
-			if (referredPackage != oldReferredPackage) {
+	public EPackage getReferredEPackage() {
+		if (referredEPackage != null && referredEPackage.eIsProxy()) {
+			InternalEObject oldReferredEPackage = (InternalEObject)referredEPackage;
+			referredEPackage = (EPackage)eResolveProxy(oldReferredEPackage);
+			if (referredEPackage != oldReferredEPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE, oldReferredPackage, referredPackage));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_PACKAGE_NODE__REFERRED_EPACKAGE, oldReferredEPackage, referredEPackage));
 			}
 		}
-		return referredPackage;
+		return referredEPackage;
 	}
 
 	/**
@@ -90,8 +89,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EPackage basicGetReferredPackage() {
-		return referredPackage;
+	public EPackage basicGetReferredEPackage() {
+		return referredEPackage;
 	}
 
 	/**
@@ -100,11 +99,11 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	 * @generated
 	 */
 	@Override
-	public void setReferredPackage(EPackage newReferredPackage) {
-		EPackage oldReferredPackage = referredPackage;
-		referredPackage = newReferredPackage;
+	public void setReferredEPackage(EPackage newReferredEPackage) {
+		EPackage oldReferredEPackage = referredEPackage;
+		referredEPackage = newReferredEPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE, oldReferredPackage, referredPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_PACKAGE_NODE__REFERRED_EPACKAGE, oldReferredEPackage, referredEPackage));
 	}
 
 	/**
@@ -202,9 +201,9 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				if (resolve) return getReferredPackage();
-				return basicGetReferredPackage();
+			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_EPACKAGE:
+				if (resolve) return getReferredEPackage();
+				return basicGetReferredEPackage();
 			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
 				return getOwningTxTypedModelNode();
 		}
@@ -219,8 +218,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				setReferredPackage((EPackage)newValue);
+			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_EPACKAGE:
+				setReferredEPackage((EPackage)newValue);
 				return;
 			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
 				setOwningTxTypedModelNode((TxTypedModelNode)newValue);
@@ -237,8 +236,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				setReferredPackage((EPackage)null);
+			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_EPACKAGE:
+				setReferredEPackage((EPackage)null);
 				return;
 			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
 				setOwningTxTypedModelNode((TxTypedModelNode)null);
@@ -255,8 +254,8 @@ public class TxPackageNodeImpl extends TxNodeImpl implements TxPackageNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_PACKAGE:
-				return referredPackage != null;
+			case UMLXPackage.TX_PACKAGE_NODE__REFERRED_EPACKAGE:
+				return referredEPackage != null;
 			case UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE:
 				return getOwningTxTypedModelNode() != null;
 		}

@@ -24,8 +24,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSourceIndex <em>Source Index</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternEdge#getTarget <em>Target</em>}</li>
  * </ul>
  *
@@ -33,31 +34,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * @generated
  */
 public interface RelPatternEdge extends RelEdge {
-	/**
-	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Property</em>' reference.
-	 * @see #setReferredProperty(EStructuralFeature)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_ReferredProperty()
-	 * @generated
-	 */
-	EStructuralFeature getReferredProperty();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredProperty <em>Referred Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Property</em>' reference.
-	 * @see #getReferredProperty()
-	 * @generated
-	 */
-	void setReferredProperty(EStructuralFeature value);
-
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing <em>Outgoing</em>}'.
@@ -86,6 +62,31 @@ public interface RelPatternEdge extends RelEdge {
 	void setSource(RelPatternNode value);
 
 	/**
+	 * Returns the value of the '<em><b>Source Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source Index</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source Index</em>' attribute.
+	 * @see #setSourceIndex(int)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_SourceIndex()
+	 * @generated
+	 */
+	int getSourceIndex();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSourceIndex <em>Source Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source Index</em>' attribute.
+	 * @see #getSourceIndex()
+	 * @generated
+	 */
+	void setSourceIndex(int value);
+
+	/**
 	 * Returns the value of the '<em><b>Owning Rel Domain Node</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternEdges <em>Owned Rel Pattern Edges</em>}'.
 	 * <!-- begin-user-doc -->
@@ -111,6 +112,31 @@ public interface RelPatternEdge extends RelEdge {
 	 * @generated
 	 */
 	void setOwningRelDomainNode(RelDomainNode value);
+
+	/**
+	 * Returns the value of the '<em><b>Referred EStructural Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred EStructural Feature</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred EStructural Feature</em>' reference.
+	 * @see #setReferredEStructuralFeature(EStructuralFeature)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_ReferredEStructuralFeature()
+	 * @generated
+	 */
+	EStructuralFeature getReferredEStructuralFeature();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred EStructural Feature</em>' reference.
+	 * @see #getReferredEStructuralFeature()
+	 * @generated
+	 */
+	void setReferredEStructuralFeature(EStructuralFeature value);
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.

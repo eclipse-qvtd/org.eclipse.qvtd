@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#getOwningTxKeyNode <em>Owning Tx Key Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#isIsOpposite <em>Is Opposite</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPartNode()
@@ -86,29 +86,29 @@ public interface TxPartNode extends TxNode {
 	void setIsOpposite(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred EStructural Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred EStructural Feature</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Property</em>' reference.
-	 * @see #setReferredProperty(EStructuralFeature)
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPartNode_ReferredProperty()
+	 * @return the value of the '<em>Referred EStructural Feature</em>' reference.
+	 * @see #setReferredEStructuralFeature(EStructuralFeature)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxPartNode_ReferredEStructuralFeature()
 	 * @generated
 	 */
-	EStructuralFeature getReferredProperty();
+	EStructuralFeature getReferredEStructuralFeature();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredProperty <em>Referred Property</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.TxPartNode#getReferredEStructuralFeature <em>Referred EStructural Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Property</em>' reference.
-	 * @see #getReferredProperty()
+	 * @param value the new value of the '<em>Referred EStructural Feature</em>' reference.
+	 * @see #getReferredEStructuralFeature()
 	 * @generated
 	 */
-	void setReferredProperty(EStructuralFeature value);
+	void setReferredEStructuralFeature(EStructuralFeature value);
 
 	/**
 	 * <!-- begin-user-doc -->
