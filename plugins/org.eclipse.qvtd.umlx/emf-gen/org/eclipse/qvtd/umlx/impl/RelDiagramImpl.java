@@ -31,12 +31,14 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionCountOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableGreaterThanOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.RelDiagram;
@@ -219,8 +221,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean RelPatternNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateRelPatternNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv RelPatternNodeNamesAreUnique:
@@ -232,7 +233,8 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		 *     else
 		 *       let
 		 *         result : OclAny[1] = let
-		 *           allNames : Sequence(String) = ownedRelDomainNodes.ownedRelPatternNodes->selectByKind(RelPatternClassNode).name
+		 *           allNames : Sequence(String) = ownedRelDomainNodes.ownedRelPatternNodes->selectByKind(RelPatternClassNode)
+		 *           ->select(not isAnon).name
 		 *         in
 		 *           let status : Boolean[1] = allNames->isUnique(n | n)
 		 *           in
@@ -245,7 +247,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		 *                     allNames->count(n) > 1)
 		 *                   ->asSet()
 		 *                 in
-		 *                   repeatedNames->iterate(n; acc : String[?] = 'Repeated pattern node names:' | acc + ' ' + n)
+		 *                   repeatedNames->iterate(n; acc : String[?] = 'RelDiagram::RelPatternNodeNamesAreUnique:' | acc + ' \'' + n + '\'') + ' are not unique for ' + name
 		 *               }
 		 *             endif
 		 *       in
@@ -289,25 +291,48 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 					}
 				}
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue selectByKind = (SequenceValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, collect, TYP_umlx_c_c_RelPatternClassNode);
-				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
+				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternClassNode);
 				@NonNull Iterator<Object> ITERATOR__1_0 = selectByKind.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue allNames;
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue select;
 				while (true) {
 					if (!ITERATOR__1_0.hasNext()) {
-						allNames = accumulator_0;
+						select = accumulator_0;
 						break;
 					}
 					@SuppressWarnings("null")
 					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode _1_0 = (RelPatternClassNode)ITERATOR__1_0.next();
 					/**
+					 * not isAnon
+					 */
+					final /*@NonInvalid*/ boolean isAnon = _1_0.isIsAnon();
+					final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isAnon);
+					if (not == null) {
+						throw new InvalidValueException("Null body for \'Sequence(T).select(Sequence.T[?] | Lambda T() : Boolean[1]) : Sequence(T)\'");
+					}
+					//
+					if (not == ValueUtil.TRUE_VALUE) {
+						accumulator_0.add(_1_0);
+					}
+				}
+				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
+				@NonNull Iterator<Object> ITERATOR__1_1 = select.iterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue allNames;
+				while (true) {
+					if (!ITERATOR__1_1.hasNext()) {
+						allNames = accumulator_1;
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode _1_1 = (RelPatternClassNode)ITERATOR__1_1.next();
+					/**
 					 * name
 					 */
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.lang.@NonNull String name = _1_0.getName();
+					final /*@NonInvalid*/ java.lang.@NonNull String name = _1_1.getName();
 					//
-					accumulator_0.add(name);
+					accumulator_1.add(name);
 				}
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_1 = ValueUtil.createSetAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
+				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_2 = ValueUtil.createSetAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
 				@NonNull Iterator<Object> ITERATOR_n = allNames.iterator();
 				/*@Thrown*/ boolean status;
 				while (true) {
@@ -321,12 +346,12 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 					 * n
 					 */
 					//
-					if (accumulator_1.includes(n) == ValueUtil.TRUE_VALUE) {
+					if (accumulator_2.includes(n) == ValueUtil.TRUE_VALUE) {
 						status = ValueUtil.FALSE_VALUE;			// Abort after second find
 						break;
 					}
 					else {
-						accumulator_1.add(n);
+						accumulator_2.add(n);
 					}
 				}
 				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
@@ -334,12 +359,12 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 					symbol_1 = ValueUtil.TRUE_VALUE;
 				}
 				else {
-					/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_2 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
+					/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_3 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
 					@NonNull Iterator<Object> ITERATOR_n_0 = allNames.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue select;
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue select_0;
 					while (true) {
 						if (!ITERATOR_n_0.hasNext()) {
-							select = accumulator_2;
+							select_0 = accumulator_3;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -351,11 +376,11 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						final /*@Thrown*/ boolean gt = OclComparableGreaterThanOperation.INSTANCE.evaluate(executor, count, UMLXTables.INT_1).booleanValue();
 						//
 						if (gt == ValueUtil.TRUE_VALUE) {
-							accumulator_2.add(n_0);
+							accumulator_3.add(n_0);
 						}
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue repeatedNames = CollectionAsSetOperation.INSTANCE.evaluate(select);
-					/*@NonInvalid*/ java.lang.@Nullable String acc = UMLXTables.STR_Repeated_32_pattern_32_node_32_names_c;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue repeatedNames = CollectionAsSetOperation.INSTANCE.evaluate(select_0);
+					/*@NonInvalid*/ java.lang.@Nullable String acc = UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c;
 					@NonNull Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
 					/*@Thrown*/ java.lang.@Nullable String iterate;
 					while (true) {
@@ -366,14 +391,19 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						@SuppressWarnings("null")
 						/*@NonInvalid*/ java.lang.@NonNull String n_1 = (String)ITERATOR_n_1.next();
 						/**
-						 * acc + ' ' + n
+						 * acc + ' \'' + n + '\''
 						 */
-						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32);
+						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32_39);
 						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
+						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
 						//
-						acc = sum_0;
+						acc = sum_1;
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, iterate, status);
+					final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(iterate, UMLXTables.STR__32_are_32_not_32_unique_32_for_32);
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ java.lang.@NonNull String name_0 = this.getName();
+					final /*@Thrown*/ java.lang.@NonNull String sum_3 = StringConcatOperation.INSTANCE.evaluate(sum_2, name_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_3, status);
 					symbol_1 = symbol_0;
 				}
 				CAUGHT_symbol_1 = symbol_1;

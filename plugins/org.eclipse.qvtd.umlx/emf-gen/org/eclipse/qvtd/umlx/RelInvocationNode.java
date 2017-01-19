@@ -90,7 +90,7 @@ public interface RelInvocationNode extends RelNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean CompatibleEdges(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateCompatibleEdges(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Rel Diagram</b></em>' container reference.

@@ -1,0 +1,779 @@
+import UMLMetamodel : 'http://www.eclipse.org/uml2/5.0.0/UML'; 
+import RDFConceptsMetaModel : 'odm12.ecore'::odm12::RDF::RDFConcepts;
+import RDFSMetamodel : 'odm12.ecore'::odm12::RDF::RDFS;
+import OWLMetamodel : 'odm12.ecore'::odm12::OWL;
+
+transformation UMLToOWL (uml:UMLMetamodel, owl:{OWLMetamodel, RDFSMetamodel, RDFConceptsMetaModel})
+-- Transform a UML model to an OWL model.
+{
+  -- Objects in UML have names relative to other constructs, ultimately to Package.
+  key Package{name};
+  key Class{name, _package};
+  key Association{name, _package};
+  key UMLMetamodel::Property{name, _class, association};
+  -- All objects in an OWL model instance are instances of OWLUniverse.
+  key OWLOntology {iri};
+  key OWLUniverse {iri, ontology};
+  key RDFConcepts::BlankNode {nodeID}; -- Anonymous classes
+
+  -- Queries that return constant values.
+  query XSDNamespace(): String { 'http://www.w3.org/2001/XMLSchema#' }
+  query OWLNamespace(): String { 'http://www.w3.org/2002/07/owl#' }
+
+  -- External queries.
+
+  -- Maps a UML package to its base IRI.
+  -- E.g., http://www.omg.org/example
+  query PackageToIRIBaseString(p: UML::Package): String;
+  -- Maps a UML package to its IRI, including trailing separator character.
+  -- E.g., http://www.omg.org/example#
+  query PackageToIRIString(p: UML::Package): String;
+  -- Generates a unique blank node identifier.
+  query genAnonNodeID(): String;
+
+  top relation PackageAndContentsToOntology
+  -- Maps a UML package and its contents to an OWL ontology and mapped entities.
+  {
+    checkonly domain uml p: Package { };
+    enforce domain owl o: OWLOntology { };
+    when {
+      UMLPackageToOWLOntology(p, o);
+    }
+    where {
+      ImportedPackageToOWLImports(p, o);
+      PackageClassesToOntologyClasses(p, o);
+      AssociationsToOntologyProperties(p, o);
+      NaryAssociationsToOWLClasses(p, o);
+      NaryAssociationsToOWLProps(p, o);
+      GeneralizeNariesToSubclasses(p, o);
+      GeneralizeAssocClassesToSubclasses(p, o);
+      EnumerationsToEnumeratedDatatypes(p, o);
+      CoveringsToUnions(p, o);
+      DisjointsToDisjoints(p, o);
+    }
+  }
+
+  relation PackageClassesToOntologyClasses
+  -- Maps classes in a UML package to classes in an OWL ontology.
+  {
+    checkonly domain uml p: Package { ownedMember = uc : Class { } };
+    enforce domain owl o: OWLOntology { owlUniverse = oc: OWLClass { } };
+    where {
+      UClassToOClass(uc, oc);
+      GeneralizationToSubClassOf(uc, oc);
+      ClassAttributesToOntologyProperties(uc, oc);
+    }
+  }
+
+  relation ClassAttributesToOntologyProperties
+  -- Maps attributes in a UML class to properties in an OWL ontology.
+  {
+    checkonly domain uml uc: Class {
+      ownedAttribute = attr: Property { }
+    };
+    enforce domain owl oc: OWLClass { propertyForDomain = prop: Property { } };
+    where {
+      AttributeToObjectProperty(attr, prop);
+      AttributeToDatatypeProperty(attr, prop);
+      EnumeratedAttributeToDatatypeProperty(attr, prop);
+      UpperMultToMaxCard(attr, prop);
+      LowerMultToMinCard(attr, prop);
+      UpperMultToCard(attr, prop);
+      SubsetsPropertyToSubproperty(attr, prop);
+    }
+  }
+
+  relation AssociationsToOntologyProperties
+  -- Maps associations owned by a UML package to one or more object properties in an
+  -- OWL ontology.
+  {
+    checkonly domain uml p: Package {
+      ownedMember = assoc: Association { }
+    };
+    enforce domain owl o: OWLOntology { owlUniverse = oProp: OWLObjectProperty { } };
+    where {
+      AssociationToPropertyPair(assoc, oProp);
+      SymAssociationToSymProperty(assoc, oProp);
+      assoc.oclIsKindOf(UML::AssociationClass) implies
+        AssociationClassToOWLProps(assoc, oProp);   -- Also invokes AssociationClassToOWLClass.
+      assoc.oclIsKindOf(UML::AssociationClass) implies
+        OwnedEndAttributeToObjectProperty(assoc, oProp);
+      AssocGeneralToSubProp(assoc, oProp);
+    }
+  }
+
+  relation NaryAssociationsToOWLClasses
+  -- Maps n-ary associations owned by a package to OWL classes using relation
+  -- NaryAssociationToOWLClass.
+  {
+    checkonly domain uml p: Package { ownedMember = assoc: Association { } };
+    enforce domain owl o: OWLOntology { owlUniverse = cls: OWLClass { } };
+    where {
+      NaryAssociationToOWLClass(assoc, cls);
+    }
+  }
+
+  relation NaryAssociationsToOWLProps
+  -- Maps n-ary associations owned by a package to OWL properties using relation
+  -- NaryAssociationToOWLProps.
+  {
+    checkonly domain uml p: Package { ownedMember = assoc: Association { } };
+    enforce domain owl o: OWLOntology { owlUniverse = oprop: OWLObjectProperty { } };
+    where {
+      NaryAssociationToOWLProps(assoc, oprop);
+    }
+  }
+
+  relation GeneralizeNariesToSubclasses
+  -- Maps n-ary associations owned by a UML package to subclass relationships in an OWL
+  -- ontology using relation GeneralizeNaryToSubclass.
+  {
+    checkonly domain uml p: Package {
+      ownedMember = assoc: Association { }
+    };
+    enforce domain owl o: OWLOntology {
+      owlUniverse = oclass: OWLClass { }
+    };
+    where {
+      GeneralizeNaryToSubclass(assoc, oclass);
+    }
+  } -- GeneralizeNariesToSubclasses
+
+  relation GeneralizeAssocClassesToSubclasses
+  -- Maps association class generalizations owned by a UML package to subclass relationships
+  -- in an OWL ontology using relation GeneralizeAssocClassToSubclass.
+  {
+    checkonly domain uml p: Package {
+      ownedMember = ac: AssociationClass { }
+    };
+    enforce domain owl o: OWLOntology {
+      owlUniverse = oclass: OWLClass { }
+    };
+    where {
+      GeneralizeAssocClassToSubclass(ac, oclass);
+    }
+  } -- GeneralizeAssocClassesToSubclasses
+
+  relation EnumerationsToEnumeratedDatatypes
+  -- Maps UML enumerations to OWL enumerated datatypes using relation
+  -- EnumerationToEnumeratedDatatype.
+  {
+    checkonly domain uml p: Package { ownedMember = _enum: Enumeration { } };
+    enforce domain owl o: OWLOntology { owlUniverse = edt: OWLDataEnumeration { } };
+    where {
+      EnumerationToEnumeratedDatatype(_enum, edt);
+    }
+  } -- EnumerationsToEnumeratedDatatypes
+
+  relation CoveringsToUnions
+  -- Maps covering generalization sets in a UML package to unions in an ontology using
+  -- relation IsCoveringToUnion.
+  {
+    checkonly domain uml p: Package { ownedMember = genset: GeneralizationSet { } };
+    enforce domain owl ucl: UnionClass { };
+    where {
+      IsCoveringToUnion(genset, ucl);
+    }
+  }
+
+  relation DisjointsToDisjoints
+  -- Maps UML disjoint generalizations in a UML package to disjoint subclass in an ontology
+  -- using relation IsDisjointToUnion.
+  {
+    checkonly domain uml p: Package { ownedMember = genset: GeneralizationSet { } };
+    enforce domain owl cls: OWLClass { };
+    where {
+      IsDisjointToDisjoint(genset, cls);
+    }
+  }
+
+  top relation UMLPackageToOWLOntology
+  -- Maps a UML package to an OWL ontology.  This relation does not map the package's contents.
+  {
+    checkonly domain uml p: Package { };
+    enforce   domain owl o: OWLOntology {
+      iri = : RDFConcepts::IRI { iriString = PackageToIRIBaseString(p) }
+    };
+  } -- PackageToUMLPackageToOWLOntology
+
+  top relation ImportedPackageToOWLImports
+  -- Maps an imported UML package to an OWLImports link in OWL.
+  {
+    checkonly domain uml p: Package {
+      packageImport = : PackageImport { importedPackage = imp: Package { } }
+    };
+    enforce domain owl o: OWLOntology { OWLimports = io: OWLOntology { } };
+    when {
+      UMLPackageToOWLOntology(p, o);
+      UMLPackageToOWLOntology(imp, io);
+    }
+  } -- ImportedPackageToOWLImports
+
+  top relation UClassToOClass
+  -- Maps a UML Class to an OWL Class.
+  {
+    clsName, iriStr: String;
+    o: odm12::OWL::OWLOntology;
+    checkonly domain uml uc:Class { name = clsName, _package = p: Package { } };
+    enforce domain owl oc: OWLClass {
+      iri = :odm12::RDF::RDFConcepts::IRI { iriString = iriStr },
+      ontology = o
+    };
+    -- No need to name the larger constructs unless they are used or generated
+    -- elsewhere.
+    when {
+      UMLPackageToOWLOntology(p, o);
+    }
+    where {
+      iriStr = PackageToIRIString(p) + clsName;
+    }
+  } -- UClassToOClass
+
+  top relation GeneralizationToSubClassOf
+  -- Maps generalization hierarchy to rdfs:subClassof.
+  {
+    checkonly domain uml uc: Class { superClass = gen: Class { } };
+    enforce domain owl oc: OWLClass { RDFSsubClassOf = super: OWLClass { } };
+    when{
+      UClassToOClass(uc, oc);
+      UClassToOClass(gen, super);
+    }
+  } -- GeneralizationToSubClassOf
+
+  top relation AttributeToObjectProperty
+  -- Maps ownedAttribute where property's type is a class to an object property.
+  -- Notice that the enforce creates the more specific object OWLObjectProperty, after which
+  -- the more general Property relation is invoked in the where clause.  The when clause both
+  -- forces the relation to wait until the classes have been mapped, and gives the mappings
+  -- for the classes.
+  {
+    checkonly domain uml prop: Property {
+      _class = cl: Class { }, type = tp: Class { }
+    };
+    enforce domain owl op: OWLObjectProperty {
+      RDFSdomain = dom: OWLClass { }, RDFSrange = ran: OWLClass { }
+    };
+    when {
+      UClassToOClass(cl, dom);
+      UClassToOClass(tp, ran);
+    }
+    where {
+      PropertyToProperty(prop, op);
+    }
+  } -- AttributeToObjectProperty
+
+  relation PropertyToProperty
+  -- Not a top relation.  Intended to be called in a where clause of the relation mapping one
+  -- of the more specific metaclasses.  It fills in the structures relevant to the superclass
+  -- Property.  Assumes the naming conventions for a property used as an attribute.
+  {
+    clsName, propName: String;
+    iriStr: String;
+    checkonly domain uml prop: Property {
+      name = propName,
+      _class = : Class { name = clsName, _package = p: Package { } }
+    };
+    enforce domain owl op: Property {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = iriStr },
+      ontology = o: OWLOntology { }
+    };
+    when{
+      UMLPackageToOWLOntology(p, o);
+    }
+    where {
+      -- Follows naming conventions that disambiguate the OWL property's name.
+      iriStr = PackageToIRIString(p) + clsName + propName;
+     }
+  } -- PropertyToProperty
+
+  top relation AttributeToDatatypeProperty
+  -- Maps ownedAttribute where property's type is a primitive type to datatype property.
+  {
+    checkonly domain uml prop: Property {
+      _class = cl: Class { }, type = tp: PrimitiveType { }
+    };
+    enforce domain owl dp: OWLDatatypeProperty {
+      RDFSdomain = dom: OWLClass { }, RDFSrange = ran: odm12::RDF::RDFConcepts::Literal { }
+    };
+    when {
+      UClassToOClass(cl, dom);
+      UMLPrimTypeToLiteral(tp, ran);
+    }
+    where {
+      PropertyToProperty(prop, dp);
+    }
+  } -- AttributeToDatatypeProperty
+
+  top relation EnumeratedAttributeToDatatypeProperty
+  -- Maps ownedAttribute where property's type is an enumerated type to an OWL datatype
+  -- property.
+  {
+    checkonly domain uml prop: Property {
+      _class = cl: Class { },  type = _enum: Enumeration { }
+    };
+    enforce domain owl dp: OWLDatatypeProperty {
+      RDFSdomain = dom: OWLClass { }, RDFSrange = enumDT: OWLDataEnumeration { }
+    };
+    when {
+      UClassToOClass(cl, dom);
+    }
+    where {
+      EnumerationToEnumeratedDatatype(_enum, enumDT);
+    }
+  } -- EnumeratedAttributeDatatypeProperty
+
+  top relation UMLPrimTypeToLiteral
+  -- Maps UML primitive type names to XSD literal type names used in OWL.
+  {
+    checkonly domain uml pt: PrimitiveType { };
+    enforce domain owl lit: odm12::RDF::RDFConcepts::Literal {
+      _datatype = dt: odm12::RDF::RDFS::RDFSDatatype { }
+    };
+    where {
+      UMLIntegerToXSDInteger(pt, dt);
+      UMLBooleanToXSDBoolean(pt, dt);
+      UMLStringToXSDString(pt, dt);
+      UMLUnlimitedNaturalToXSDNonNegativeInteger(pt, dt);
+      UMLRealToXSDDouble(pt, dt);
+    }
+  } -- UMLPrimTypeToLiteral
+
+  relation UMLIntegerToXSDInteger
+  -- Maps UML's primitive Integer data type to XSD's integer type.
+  {
+    checkonly domain uml intType: PrimitiveType { name = 'Integer' };
+    enforce domain owl dt: odm12::RDF::RDFS::RDFSDatatype {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'integer' }
+    };
+  } -- UMLIntegerToXSDInteger
+
+  relation UMLBooleanToXSDBoolean
+  -- Maps UML's primitive Boolean data type to XSD's boolean type.
+  {
+    checkonly domain uml boolType: PrimitiveType { name = 'Boolean' };
+    enforce domain owl dt: odm12::RDF::RDFS::RDFSDatatype {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'boolean' }
+    };
+  } -- UMLBooleanToXSDBoolean
+
+  relation UMLStringToXSDString
+  -- Maps UML's primitive String data type to XSD's string type.
+  {
+    checkonly domain uml stringType: PrimitiveType { name = 'String' };
+    enforce domain owl dt: odm12::RDF::RDFS::RDFSDatatype {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'string' }
+    };
+  } -- UMLStringToXSDString
+
+  relation UMLUnlimitedNaturalToXSDNonNegativeInteger
+  -- Maps UML's primitive UnlimitedNatural data type to XSD's nonNegativeInteger type.
+  {
+    checkonly domain uml unlimNaturalType: PrimitiveType { name = 'UnlimitedNatural' };
+    enforce domain owl dt: odm12::RDF::RDFS::RDFSDatatype {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'nonNegativeInteger' }
+    };
+  } -- UMLUnlimitedNaturalToXSDNonNegativeInteger
+
+  relation UMLRealToXSDDouble
+  -- Maps UML's primitive Real data type to XSD's double type.
+  {
+    checkonly domain uml realType: PrimitiveType { name = 'Real' };
+    enforce domain owl dt: odm12::RDF::RDFS::RDFSDatatype {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'double' }
+    };
+  } -- UMLRealToXSDDouble
+
+  top relation AssociationToPropertyPair
+  -- Maps a UML Association whose ends are of different types to a pair of inverse properties.
+  {
+  	cl1, cl2: odm12::OWL::OWLClass;
+    checkonly domain uml assn: Association {
+      memberEnd = ps: Sequence(Property) {
+        prop1: Property { type = tp1: Class { } },
+        prop2: Property { type = tp2: Class { } }
+        ++ _
+      } { ps->size() = 2 }
+    };
+    -- checkonly clause succeeds only when there are exactly two memberEnds.
+    enforce domain owl oprop1: OWLObjectProperty {
+      RDFSdomain = cl2,
+      RDFSrange = cl1,
+      OWLinverseOf = oprop2: OWLObjectProperty {
+        RDFSdomain = cl1,
+        RDFSrange = cl2
+      }
+    };
+    when {
+      prop1.type <> prop2.type; -- Ends are of different type.
+      UClassToOClass(tp1, cl1);
+      UClassToOClass(tp2, cl2);
+    }
+    where {
+      EndPropertyToProperty(prop1, oprop1);
+      EndPropertyToProperty(prop2, oprop2);
+    }
+  } -- AssociationToPropertyPair
+
+  relation EndPropertyToProperty
+  -- Not a top relation.  Intended to be called in a where clause of the relation mapping
+  -- one of the more specific metaclasses.  It fills in the structures relevant to the
+  -- superclass Property.  Assumes the naming conventions for a property used as an
+  -- association end.
+  {
+    assocName, propName: String;
+    iriStr: String;
+    o: odm12::OWL::OWLOntology;
+    checkonly domain uml prop: Property {
+      name = propName,
+      association = : Association {
+        name = assocName,
+        _package = p: Package { }
+      }
+    };
+    enforce domain owl op: Property {
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = iriStr },
+      ontology = o
+    };
+    when {
+      UMLPackageToOWLOntology(p, o);
+    }
+    where {
+      -- Follows naming conventions that disambiguate the OWL property's name.
+      iriStr = PackageToIRIString(p) + assocName + propName;
+    }
+  } -- EndPropertyToProperty
+
+  top relation SymAssociationToSymProperty
+  -- Maps a UML Association where both properties are of the same type to an OWL
+  -- symmetric property.
+  {
+  	tp: UMLMetamodel::Class;
+  	cl: odm12::OWL::OWLClass;
+    checkonly domain uml assn: Association {
+      memberEnd = ps: Sequence(Property) {
+        prop1: Property{ type = tp },
+        prop2: Property{ type = tp }
+        ++ _
+      } { ps->size() = 2 }
+      -- checkonly clause succeeds only if there are exactly two member ends.
+    };
+    enforce domain owl oprop1: OWLObjectProperty {
+      isSymmetric = true,
+      RDFSdomain = cl,
+      RDFSrange = cl
+    };
+    when {
+      UClassToOClass(tp, cl);
+    }
+    where {
+      EndPropertyToProperty(prop1, oprop1);
+    }
+  } -- SymAssociationToSymProperty
+
+  top relation AssociationClassToOWLClass
+  -- Maps a UML association class to an OWL class.  AssociationClass specializes Association,
+  -- so relation AssociationToOWLProps should also succeed.  The ontology will contain
+  -- punned entities.
+  {
+    checkonly domain uml asc: AssociationClass { };
+    enforce domain owl cl: OWLClass { };
+    where {
+      UClassToOClass(asc, cl);
+    }
+  } -- AssociationClassToOWLClass
+
+  top relation AssociationClassToOWLProps
+  -- Generates the properties coming from the member ends.
+  {
+    checkonly domain uml asc: AssociationClass {
+      memberEnd = uprop: Property { type = tp: Type { } }
+    };
+    enforce domain owl oprop: OWLObjectProperty{
+      RDFSdomain = cl: OWLClass { },
+      RDFSrange = rancl: OWLClass { }
+    };
+    when {
+      AssociationClassToOWLClass(asc, cl);
+      UClassToOClass(tp, rancl);
+      EndPropertyToProperty(uprop, oprop);
+    }
+  } -- AssociationClassToOWLProps
+
+  top relation OwnedEndAttributeToObjectProperty
+  -- Maps ownedEnd property where property's type is a class to an object property.
+  {
+    checkonly domain uml asc: AssociationClass {
+      ownedEnd = uprop: Property { type = tp: Type { } }
+    };
+    enforce domain owl op: OWLObjectProperty {
+      RDFSdomain = dom: OWLClass { },
+      RDFSrange = ran: OWLClass { }
+    };
+    when {
+      AssociationClassToOWLClass(asc, dom);
+      UClassToOClass(tp, ran);
+    }
+    where {
+      PropertyToProperty(uprop, op);
+    }
+  } -- OwnedEndAttributeToObjectProperty
+
+  top relation NaryAssociationToOWLClass
+  -- Maps an n-ary association where n > 2 to an OWL class.
+  {
+    checkonly domain uml asc: Association { };
+    enforce domain owl cl: OWLClass { };
+    when {
+      asc.memberEnd->size() > 2; -- Only associations with more than two ends.
+    }
+    where {
+      UClassToOClass(asc, cl);
+    }
+  } -- NaryAssociationToOWLClass
+
+  top relation NaryAssociationToOWLProps
+  -- Maps an n-ary association where n > 2 to OWL object properties coming from
+  -- the member ends.
+  {
+    checkonly domain uml asc: Association {
+      memberEnd = uprop: Property { type = tp: Type { } }
+    };
+    enforce domain owl oprop: OWLObjectProperty {
+      RDFSdomain = cl: OWLClass { },
+      RDFSrange = rancl: OWLClass { }
+    };
+    when {
+      NaryAssociationToOWLClass(asc, cl);
+      UClassToOClass(tp, rancl);
+      EndPropertyToProperty(uprop, oprop);
+    }
+  } -- NaryAssociationToOWLProps
+
+  top relation UpperMultToMaxCard
+  -- Upper multiplicity.
+  {
+    m: String;
+    checkonly domain uml p: Property {
+      upperValue = : LiteralString { value = m }
+        { m <> '*' } -- Excludes infinity, which is no restriction.
+    };
+    enforce domain owl owlp: Property {
+      propertyRestriction = rest: MaxCardinalityRestriction {
+        cardinality = : RDFConcepts::Literal {
+          lexicalForm = m,
+          iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'integer' }
+        }
+      }
+    };
+    when {
+      PropertyToProperty(p, owlp);
+    }
+    where {
+      BlankNodeID(p, rest);
+    }
+  } -- UpperMultToMaxCard
+  
+  top relation UpperMultToFunctionalProperty
+  -- Maps upper multiplicity to an OWL functional property when the upper multiplicity is 1.
+  {
+  	checkonly domain uml p: Property {
+  		upperValue = : LiteralString { value = '1' }
+  	};
+  	enforce domain owl owlp: Property {
+  		isFunctional = true
+  	};
+  }
+
+  relation BlankNodeID
+  -- Make sure a blank node has a nodeID.
+  {
+    n: String;
+    checkonly domain uml p: Property { };
+    enforce domain owl rest: OWLRestriction { nodeID = n };
+    where {
+      rest.nodeID->isEmpty() implies n = genAnonNodeID();
+    }
+  } -- BlankNodeID
+
+  top relation LowerMultToMinCard
+  -- Lower multiplicity.
+  {
+    m, n: String;
+    checkonly domain uml p: Property{
+      lowerValue = : LiteralString { value = m }
+        { m <> '0' } -- Excludes 0, which is no restriction.
+    };
+    enforce domain owl owlp: Property {
+      propertyRestriction = rest: MinCardinalityRestriction {
+        cardinality = : RDFConcepts::Literal {
+          lexicalForm = m,
+          iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'integer' }
+        }
+      }
+    };
+    when {
+      PropertyToProperty(p, owlp);
+    }
+    where {
+      BlankNodeID(p, rest);
+    }
+  } -- LowerMultToMinCard
+
+  top relation UpperMultToCard
+  -- Upper multiplicity.
+  {
+    m, n: String;
+    checkonly domain uml p: Property {
+      upperValue = : LiteralString { value = m }
+    };
+    enforce domain owl owlp: Property { };
+    when {
+      m <> '*'; -- Excludes infinity, which is no restriction.
+      PropertyToProperty(p, owlp);
+    }
+    where {
+      UpperMultToMaxCard(p, owlp);
+      UpperMultToFunctionalProperty(p, owlp);
+    }
+  } -- UpperMultToMaxCard
+
+  top relation SubsetsPropertyToSubproperty
+  -- Map a subsetted property to subPropertyOf.
+  {
+    checkonly domain uml prop: Property {
+      subsettedProperty = superprop: Property { }
+    };
+    enforce domain owl oprop: Property {
+      RDFSsubPropertyOf = osuperprop: Property { }
+    };
+    when {
+      PropertyToProperty(prop, oprop);
+      PropertyToProperty(superprop, osuperprop);
+    }
+  } -- SubsetsPropertyToSubproperty
+
+  top relation AssocGeneralToSubProp
+  -- Maps each member end of a generalized association to a subproperty.
+  -- Steps through the member ends by successive instantiations of the set
+  -- comprehension pattern.
+  {
+    p1, p2: odm12::OWL::Property;
+    usuper, uprop: UML::Property;
+    checkonly domain uml assn: Association {
+      general = superassn: Association {
+        memberEnd = supSeq: Sequence(Property) { _, usuper ++ _ }
+      },
+      memberEnd = subSeq: Sequence(Property) { _, uprop ++ _ }
+    } { supSeq->indexOf(usuper) = subSeq->indexOf(uprop) -- Steps through both sequences in tandem.
+    };
+    enforce domain owl oprop: Property { RDFSsubPropertyOf = osuper: Property { } };
+    when {
+      (AssociationToPropertyPair(assn, p1) and AssociationToPropertyPair(superassn, p2))
+   or (SymAssociationToSymProperty(assn, p1) and SymAssociationToSymProperty(superassn, p2))
+   or (NaryAssociationToOWLProps(assn, p1) and NaryAssociationToOWLProps(superassn, p2))
+   or (AssociationClassToOWLProps(assn, p1) and AssociationClassToOWLProps(superassn, p2));
+    }
+    where {
+      -- Makes sure associations are both mapped.
+      EndPropertyToProperty(usuper, osuper);    -- Extracts mapping of end properties.
+      EndPropertyToProperty(uprop, oprop);      -- Corresponding ends in super and sub.
+    }
+  } -- AssocGeneralToSubProp
+
+  top relation GeneralizeNaryToSubclass
+  -- Creates subclass relationship for mapped n-ary associations.
+  {
+    checkonly domain uml assn: Association { general = superassn: Association { } };
+    enforce domain owl oclass: OWLClass{ RDFSsubClassOf = osuper: OWLClass { } };
+    when {
+      NaryAssociationToOWLClass(assn, oclass);
+      NaryAssociationToOWLClass(superassn, osuper);
+    }
+  } -- GeneralizeNaryToSubclass
+
+  top relation GeneralizeAssocClassToSubclass
+  -- Creates subclass relationship for mapped association class generalization.
+  {
+    checkonly domain uml assn: AssociationClass {
+      general = superassn: AssociationClass { }
+    };
+    enforce domain owl oclass: OWLClass {
+      RDFSsubClassOf = osuper: OWLClass { }
+    };
+    when {
+      AssociationClassToOWLClass(assn, oclass);
+      AssociationClassToOWLClass(superassn, osuper);
+    }
+  } -- GeneralizeAssocClassToSubclass
+
+  top relation EnumerationToEnumeratedDatatype
+  -- Maps a UML enumeration to an OWL data enumeration.
+  {
+    checkonly domain uml _enum: Enumeration {
+      _package = p: Package { },
+      ownedLiteral = ul: EnumerationLiteral { }
+    };
+    enforce domain owl edt: OWLDataEnumeration {
+      ontology = o: OWLOntology { },
+      iri = : odm12::RDF::RDFConcepts::IRI { iriString = PackageToIRIString(p) + _enum.name },
+      dataOneOf = ol: odm12::RDF::RDFConcepts::Literal { }
+    };
+    when {
+      UMLPackageToOWLOntology(p, o);
+    }
+    where {
+      UMLEnumerationLiteralToOWLLiteral(ul, ol);
+      UClassToOClass(_enum, edt);
+    }
+  } -- EnumerationToEnumeratedDatatype
+
+  relation UMLEnumerationLiteralToOWLLiteral
+  -- Maps a UML enumeration literal to an OWL literal.
+  {
+    n: UMLMetamodel::String;
+    owningElt: UMLMetamodel::Package;
+    checkonly domain uml enumLit: EnumerationLiteral {
+      name = n,
+      enumeration = : Enumeration { owner = owningElt }
+    } { owningElt.oclIsKindOf(Package) };
+    enforce domain owl owlLit: RDFConcepts::Literal {
+      lexicalForm = PackageToIRIString(owningElt) + n,
+      _datatype = : odm12::RDF::RDFS::RDFSDatatype { iri = : odm12::RDF::RDFConcepts::IRI { iriString = XSDNamespace() + 'string' } }
+    };
+  } -- UMLEnumerationLiteralToOWLLiteral
+
+  top relation IsCoveringToUnion
+  -- Covering generalization set of classes goes to union.
+  {
+    checkonly domain uml genset: GeneralizationSet{
+      isCovering = true,
+      powertype = super: Class { },
+      generalization = : Generalization{ specific = speccl: Class { } }
+    };
+    enforce domain owl ucl: UnionClass { OWLunionOf = osc: OWLClass { } };
+    when {
+      UClassToOClass(super, ucl);
+      UClassToOClass(speccl, osc);
+    }
+  } -- IsCoveringToUnion
+
+  top relation IsDisjointToDisjoint
+  -- Disjoint generalization to disjoint subclasses.  Will generate sufficient pairs to
+  -- make the mappings all pairwise disjoint.
+  {
+    checkonly domain uml genset: GeneralizationSet {
+      isDisjoint = true,
+      powertype = : Class { },
+      generalization = xx:Sequence(UMLMetamodel::Generalization){ : UMLMetamodel::Generalization {}}
+--      generalization = : Generalization { specific = scl1: Class { } },
+--      generalization = : Generalization { specific = scl2: Class { } }
+    };
+    enforce domain owl cl1: OWLClass { OWLdisjointWith = cl2: OWLClass { } };
+    when {
+      scl1 <> scl2;     -- Ensure there is more than one specific class.
+      UClassToOClass(scl1, cl1);
+      UClassToOClass(scl2, cl2);
+    }
+  } -- IsDisjointToDisjoint
+} -- transformation UMLToOWL
+

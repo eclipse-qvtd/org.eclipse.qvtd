@@ -115,6 +115,6 @@ public interface TxPartNode extends TxNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean PartIsPropertyOfKey(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validatePartIsPropertyOfKey(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxPartNode

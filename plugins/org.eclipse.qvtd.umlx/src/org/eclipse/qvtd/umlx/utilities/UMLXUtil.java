@@ -22,6 +22,7 @@ import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
+import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -41,11 +42,15 @@ public class UMLXUtil
 		return ClassUtil.nullFree(umlxElement.getComments());
 	}
 
+	public static @NonNull String getExpression(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
+		return ClassUtil.nonNullState(relPatternExpressionNode.getExpression());
+	}
+
 	//	public static @NonNull RelDiagram getDiagram(@NonNull RelPatternNode relNode) {
 	//		return ClassUtil.nonNullState(relNode.getDiagram());
 	//	}
 
-	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncoming(@NonNull RelPatternClassNode relNode) {
+	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncoming(@NonNull RelPatternNode relNode) {
 		return Iterables.filter(ClassUtil.nullFree(relNode.getIncoming()), RelPatternEdge.class);
 	}
 
@@ -146,10 +151,10 @@ public class UMLXUtil
 	}
 
 	public static @NonNull RelPatternClassNode getSource(@NonNull RelPatternEdge relPatternEdge) {
-		return (RelPatternClassNode) ClassUtil.nonNullState(relPatternEdge.getSource());
+		return ClassUtil.nonNullState(relPatternEdge.getSource());
 	}
 
-	public static @NonNull RelPatternClassNode getTarget(@NonNull RelPatternEdge relPatternEdge) {
-		return (RelPatternClassNode) ClassUtil.nonNullState(relPatternEdge.getTarget());
+	public static @NonNull RelPatternNode getTarget(@NonNull RelPatternEdge relPatternEdge) {
+		return ClassUtil.nonNullState(relPatternEdge.getTarget());
 	}
 }

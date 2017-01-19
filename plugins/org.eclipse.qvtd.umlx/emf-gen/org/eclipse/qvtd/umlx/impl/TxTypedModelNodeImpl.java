@@ -277,8 +277,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean TxPackageNodePackagesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateTxPackageNodePackagesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv TxPackageNodePackagesAreUnique:

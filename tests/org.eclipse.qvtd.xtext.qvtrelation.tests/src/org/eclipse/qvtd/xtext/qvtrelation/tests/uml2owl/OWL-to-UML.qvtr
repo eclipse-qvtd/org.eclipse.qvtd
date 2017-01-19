@@ -1,0 +1,1544 @@
+import UMLMetamodel : 'http://www.eclipse.org/uml2/5.0.0/UML'; 
+import 'odm12.ecore'::odm12::RDF::RDFConcepts;
+import 'odm12.ecore'::odm12::RDF::RDFS;
+import OWLMetamodel : 'odm12.ecore'::odm12::OWL;
+
+transformation OntoUMLSource (owl: OWLMetamodel, uml: UMLMetamodel)
+{
+
+  -- All objects in an OWL model instance are instances of OWLUniverse, except an ontology.
+  key OWLOntology {iri};
+  key OWLUniverse {iri, ontology};    -- Named entities.
+  key RDFConcepts::BlankNode {nodeID}; -- Anonymous entities.
+
+  -- Objects in UML have names relative to other constructs, ultimately to Package.
+  key Package {name};
+  key Class {name, _package};
+  key Association {name, _package};
+  key UMLMetamodel::Property {name, _class};
+  key UMLMetamodel::Property {name, association};
+
+  -- Queries that return constant values.
+  query XSDNamespace(): String { 'http://www.w3.org/2001/XMLSchema#' }
+  query OWLNamespace(): String { 'http://www.w3.org/2002/07/owl#' }
+
+  -- External queries --
+
+  -- Maps an IRI string to a full package name.  The value returned by this query
+  -- is a sequence of names separated by "::".
+  query IRIToPackageName(IRIString: String): String;
+  -- Maps an IRI String to a member name.  The value returned by this query is the name
+  -- of a member within a UML package.
+  query IRIToMemberName(IRIString: String): String;
+  -- Transforms a string denoting a real number into its numeric value.
+  query RealForm(lexicalForm: String): UMLMetamodel::Real;
+  -- Transforms a string denoting an integer into its numeric value.
+  query IntegerForm(lexicalForm: String): UMLMetamodel::Integer;
+
+  top relation OntologyToPackage
+  -- Maps an OWL ontology to a UML package.  Maps all entities in the ontology to UML elements.
+  -- Also maps imported ontologies.
+  {
+    checkonly domain owl ont: OWLOntology { };
+    enforce domain uml pack: Package { };
+    where {
+      OntoToPackage(ont, pack);
+      VersionInfoToComment(ont, pack);
+      PriorVersionInfoToComment(ont, pack);
+      IncompatibleWithToComment(ont, pack);
+      BackwardsCompatibleWithToComment(ont, pack);
+      OntoClassAssertionsToPackageClassProperties(ont, pack);
+      OntoPropertyAssertionsToPackagePropertyAssertions(ont, pack);
+      RDFSOntologyCommentsToUMLPackageComments(ont, pack);
+      RDFSOntologyLabelsToUMLPackageComments(ont, pack);
+      OWLUniverseCommentsToUMLElementComments(ont, pack);
+      OWLUniverseLabelsToUMLElementComments(ont, pack);
+    }
+  } -- OntologyToPackage
+
+  top relation OntoToPackage
+  -- Maps an ontology to a Package.  This relation only maps the ontology to the UML package.
+  -- It does not map classes, properties, etc. in the ontology.  It does map import
+  -- directives.
+  {
+    checkonly domain owl ont: OWLOntology { };
+    enforce domain uml pack: Package { };
+    where {
+      TopOntoToPackage(ont, pack);
+      ImportedOntToPackage(ont, pack);
+    }
+  } -- OntoToPackage
+
+  relation TopOntoToPackage
+  -- Maps a top ontology (one that doesn't import any others) to a UML package.
+  {
+    iriStr: String;
+    checkonly domain owl ont: OWLOntology {
+      iri = : RDFConcepts::IRI { iriString = iriStr }
+    };
+    enforce domain uml pack: Package {
+      name = packageMemberName(IRIToPackageName(iriStr))
+    };
+    when {
+      ont.importingOntology->isEmpty();
+    }
+    where {
+      let fullName: String = IRIToPackageName(iriStr),
+          ix: Integer = lastIndexOf(fullName, '::') in
+        ix <> 0 implies NestPackage(fullName.substring(1, ix-1), pack);
+    }
+  } -- TopOntoToPackage
+
+  relation ImportedOntToPackage
+  -- Maps an imported ontology to a UML package.
+  {
+    iriStr: String;
+    checkonly domain owl ont: OWLOntology {
+      iri = : RDFConcepts::IRI { iriString = iriStr },
+      importingOntology = onta: OWLOntology { }
+    };
+    enforce domain uml pack: Package {
+      name = let ix: Integer = lastIndexOf(iriStr, '::') in
+               if ix = 0 then
+                 iriStr
+               else
+                 iriStr.substring(ix+2, iriStr.size())
+               endif,
+      _packageImport = : PackageImport {
+        importingNamespace = packa: Package { }
+      }
+    };
+    where {
+      let ix: Integer = lastIndexOf(iriStr, '::') in
+        ix <> 0 implies NestPackage(iriStr.substring(1, ix-1), pack);
+    }
+  } -- ImportedOntToPackage
+
+  relation NestPackage
+  -- Establishes the UML package hierarchy.
+  {
+    primitive domain parent: String;
+    enforce domain uml pkg: Package {
+      nestingPackage = np: Package { name = packageMemberName(parent) }
+    };
+    where {
+      let ix: Integer = lastIndexOf(parent, '::') in
+        ix <> 0 implies NestPackage(parent.substring(1, ix-1), np);
+    }
+  } -- NestPackage
+
+  -- Given a fully qualified UML name, returns the local name.  E.g., given
+  -- X::Y::Name, returns Name.
+  query packageMemberName(packageFullName: String): String
+  {
+    let ix: Integer = lastIndexOf(packageFullName, '::') in
+      if ix = 0 then
+        packageFullName
+      else
+        packageFullName.substring(ix + 2, packageFullName.size())
+      endif
+  }
+
+  relation RDFSOntologyCommentsToUMLPackageComments
+  -- Maps an ontology's RDFS comments to UML comments on the corresponding UML package.
+  {
+    umlComment: UML::LiteralString;
+    checkonly domain owl ont: OWLOntology { RDFScomment = rdfsComment: RDFConcepts::Literal { } };
+    enforce domain uml pack: Package {
+      ownedComment = : Comment {
+        _body = 'comment' + literalLang(rdfsComment) + ': '  + umlComment.value
+      }
+    };
+    when {
+      OntoToPackage(ont, pack);
+    }
+    where {
+      OWLLiteralToUMLLiteral(rdfsComment, umlComment) xor
+      XSDLiteralToUMLLiteral(rdfsComment, umlComment) xor
+      OWLLanguageTaggedLiteralToUMLStringLiteral(rdfsComment, umlComment);
+    }
+  } -- RDFSOntologyCommentsToUMLPackageComments
+
+  relation RDFSOntologyLabelsToUMLPackageComments
+  -- Maps an ontology's RDFS labels to UML comments on the corresponding UML package.
+  {
+    umlComment: UML::LiteralString;
+    checkonly domain owl ont: OWLOntology { RDFSlabel = rdfsLabel: RDFConcepts::Literal { } };
+    enforce domain uml pack: Package {
+      ownedComment = : Comment {
+        _body = 'label' + literalLang(rdfsLabel) + ': ' + umlComment.value
+      }
+    };
+    when {
+      OntoToPackage(ont, pack);
+    }
+    where {
+      OWLLiteralToUMLLiteral(rdfsLabel, umlComment) xor
+      XSDLiteralToUMLLiteral(rdfsLabel, umlComment) xor
+      OWLLanguageTaggedLiteralToUMLStringLiteral(rdfsLabel, umlComment);
+    }
+  } -- RDFSOntologyLabelsToUMLPackageComments
+
+  top relation VersionInfoToComment
+  -- Maps OWL version-information comments on an ontology to UML comments on a package.
+  {
+    v: String;
+    checkonly domain owl ont: OWLOntology { OWLversionInfo = : RDFConcepts::Literal { lexicalForm = v } };
+    enforce domain uml pack: Package { ownedComment = : Comment { _body = 'Version ' + v } };
+    where {
+      OntoToPackage(ont, pack);
+    }
+  } -- VersionInfoToComment
+
+  top relation PriorVersionInfoToComment
+  -- Notes the prior version as a comment.
+  {
+    v: String;
+    checkonly domain owl ont: OWLOntology {
+      OWLpriorVersion = : OWLOntology { OWLversionInfo = : RDFConcepts::Literal { lexicalForm = v } }
+    };
+    enforce domain uml pack: Package {
+      ownedComment = : Comment { _body = 'Prior Version ' + v }
+    };
+    where {
+      OntoToPackage(ont, pack);
+    }
+  } -- PriorVersionInfoToComment
+
+  top relation IncompatibleWithToComment
+  -- Notes the incompatibility as a comment.
+  {
+    iriStr: String;
+    checkonly domain owl ont: OWLOntology {
+      OWLincompatibleWith = : OWLOntology { iri = : RDFConcepts::IRI { iriString = iriStr } }
+    };
+    enforce domain uml pack: Package{
+      ownedComment = : Comment{ _body = 'Incompatible With ' + iriStr }
+    };
+    where {
+      OntoToPackage(ont, pack);
+    }
+  } -- IncompatibleWithToComment
+
+  top relation BackwardsCompatibleWithToComment
+  -- Notes the backwards compatibility as a comment.
+  {
+    iriStr: String;
+    checkonly domain owl ont: OWLOntology {
+      OWLbackwardCompatibleWith = : OWLOntology { iri = : RDFConcepts::IRI { iriString = iriStr } }
+    };
+    enforce domain uml pack: Package{
+      ownedComment = : Comment { _body = 'Backwards Compatible With ' + iriStr }
+    };
+    where {
+      OntoToPackage(ont, pack);
+    }
+  } -- BackwardsCompatibleWithToComment
+
+  relation OntoClassAssertionsToPackageClassProperties
+  -- Maps assertions about classes in an ontology to properties about classes in a UML package.
+  {
+    checkonly domain owl ont: OWLOntology { owlUniverse = entity: OWLUniverse { } };
+    enforce domain uml pack: Package { packagedElement = umlClass: Class { } };
+    when {
+      entity.oclIsKindOf(odm12::OWL::ClassExpression);
+    }
+    where {
+      OClassToUClass(entity, umlClass);
+      SubclassToGeneralization(entity, umlClass);
+      EquivalentClassToMutualGeneralization(entity, umlClass);
+      UnionToUML(entity, umlClass);
+      AllValuesFromToClass(entity, umlClass);
+      SomeValuesFromToClass(entity, umlClass);
+      HasValueToClass(entity, umlClass);
+    }
+  } -- OntoClassAssertionsToPackageClassProperties
+
+  top relation OClassToUClass
+  -- Maps an OWL class, named or anonymous, to a UML class.
+  {
+    checkonly domain owl cl: ClassExpression { ontology = ont: OWLOntology { } };
+    	-- This is invalid: Figure 11.8 shows OWLClass, not ClassExpression, as a subclass of
+    	-- the entity that's associated with an OWLOntology.
+    enforce domain uml ucl: Class { _package = pack: Package { } };
+    when {
+      OntoToPackage(ont, pack);
+    }
+    where {
+      UClassToClass(cl, ucl);
+      AnonClassToClass(cl, ucl);
+    }
+  } -- OClassToUClass
+
+  relation UClassToClass
+  -- Map an OWL class identified by IRI to a UML class.
+  {
+    iriStr: String;
+    checkonly domain owl cl: OWLClass { iri = : RDFConcepts::IRI { iriString = iriStr } };
+    -- Note that an anonymous class fails to have an IRI and so is excluded.
+    enforce domain uml ucl: Class { name = IRIToMemberName(iriStr) };
+  } -- UClassToClass
+
+  relation AnonClassToClass
+  --  Map an anonymous OWL class to a UML class.
+  {
+      checkonly domain owl anonClass: OWLClass { ontology = ont: OWLOntology { } };
+      enforce domain uml ucl: Class {
+        _package = pack: Package { },
+        name =
+          if anonClass.nodeID->isEmpty() then
+            'anon' + (pack.packagedElement->size() + 1).toString()
+              -- Guaranteed unique name.
+            else
+              anonClass.nodeID
+            endif
+      };
+      when {
+        anonClass.iri->isEmpty();   -- A class with an IRI is not anonymous.
+      }
+      where {
+        OntoToPackage(ont, pack);
+      }
+  } -- AnonClassToClass
+
+  top relation SubclassToGeneralization
+  -- Map the RDFSsubclassOf meta-association to a UML subclass/superclass relationship.
+  {
+    checkonly domain owl subcl: OWLClass { RDFSsubClassOf = supercl: OWLClass { } };
+    enforce domain uml usubcl: Class { superClass = usuper: Class { } };
+    where {
+      OClassToUClass(subcl, usubcl);
+      OClassToUClass(supercl, usuper);
+    }
+  } -- SubclassToGeneralization
+
+  top relation EquivalentClassToMutualGeneralization
+  -- Map equivalent classes to a pair of UML subclass/superclass relationships.
+  {
+    checkonly domain owl class1: OWLClass { OWLequivalentClass = class2: OWLClass { } };
+    enforce domain uml uclass1: Class { superClass = uclass2: Class{ superClass = uclass1 } };
+    where {
+      OClassToUClass(class1, uclass1);
+      OClassToUClass(class2, uclass2);
+    }
+  } -- EquivalentClassToMutualGeneralization
+
+  relation LocalOWLThingEquivalent
+  -- Creates a class in the current package that's equivalent to owl:Thing.  This is
+  -- needed to keep properties without domains package-specific.
+  {
+    owlThing: UMLMetamodel::Class;
+    checkonly domain owl entity : OWLUniverse { ontology = ont: OWLOntology { } };
+    enforce domain uml thing: Class {
+      name = '_Thing',
+      _package = pkg: Package { },
+      -- Make the class mapped from owl:Thing both superclass and subclass of this class.
+      superClass = owlThing: Class {
+        name = 'Thing',
+        _package = pack: Package { URI = OWLNamespace() },
+        superClass = thing
+      }
+    };
+    when {
+      OntoToPackage(ont, pkg);
+      UniversalSuperclass(entity, owlThing);
+    }
+  } -- LocalOWLThingEquivalent
+
+  relation UniversalSuperclass
+  -- Establishes the existence of a class named "Thing", in a package named "OWL"
+  -- (as mapped by packageMemberName) in the UML model, denoting class owl:Thing.
+  {
+    checkonly domain owl entity : OWL::OWLUniverse { };
+    enforce domain uml thing: Class {
+      name = 'Thing',
+      _package = pack: Package {
+        name = packageMemberName(IRIToPackageName(OWLNamespace())),
+        URI = OWLNamespace()
+      }
+    };
+    where {
+      let fullName: String = IRIToPackageName(OWLNamespace()),
+          ix: Integer = lastIndexOf(fullName, '::') in
+        ix <> 0 implies NestPackage(fullName.substring(1, ix-1), pack);
+    }
+  } -- UniversalSuperclass
+
+  top relation UnionToUML
+  -- OWL union to subclass relationships.
+  -- Will generate an instance of _Class for each instance of OWLunionOf.
+  {
+    checkonly domain owl unclass: UnionClass {
+      OWLunionOf = oclass: OWLClass { },
+      ontology = ont: OWLOntology { }
+    };
+    enforce domain uml usuper: Class {
+      Class = uclass: Class { },
+      _package = pack: Package { }
+    };
+    where {
+      OntoToPackage(ont, pack);
+      OClassToUClass(unclass, usuper);
+      OClassToUClass(oclass, uclass);
+    }
+  } -- UnionToUML
+
+  top relation EnumerationToEnumeration
+  -- Maps an OWL datarange enumeration to a UML enumeration.
+  {
+    checkonly domain owl edt: OWLDataEnumeration { dataOneOf = ol: RDFConcepts::Literal { } };
+    enforce domain uml _enum: Enumeration { ownedLiteral = ul: EnumerationLiteral { } };
+    when {
+      OClassToUClass(edt, _enum);
+    }
+    where {
+      OWLEnumLiteralToUMLEnumLiteral(ol, ul);
+    }
+  } -- EnumerationToEnumeration
+
+  relation OWLEnumLiteralToUMLEnumLiteral
+  -- Maps an OWL enumeration literal value to a UML enumeration literal value.
+  {
+    umlLit: UML::LiteralSpecification;
+    checkonly domain owl owlLit: RDFConcepts::Literal {
+      _datatype = : RDFS::RDFSDatatype { }
+    };
+    enforce domain uml umlEnum: EnumerationLiteral { specification = umlLit };
+    where {
+      OWLLanguageTaggedLiteralToUMLStringLiteral(owlLit, umlLit);
+      OWLLiteralToUMLLiteral(owlLit, umlLit);
+      XSDLiteralToUMLLiteral(owlLit, umlLit);
+    }
+  } -- OWLEnumLiteralToUMLEnumLiteral
+
+  relation OWLLanguageTaggedLiteralToUMLStringLiteral
+  -- Maps an OWL literal with a language tag to a UML LiteralString.  Embeds the language as
+  -- a comment.
+  {
+    litVal, lan: String;
+    checkonly domain owl lit: RDFConcepts::Literal { lexicalForm = litVal, language = lan };
+    enforce domain uml umlLit: LiteralString {
+      value = litVal,
+      ownedComment = : Comment { _body = 'language = ' + lan }
+    };
+  } -- OWLLanguageTaggedLiteralToUMLStringType
+
+  relation OWLLiteralToUMLLiteral
+  -- Maps OWL-specific literals to UML literals.  There are two OWL-specific types, real and
+  -- rational (see https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Datatype_Maps).  Both
+  -- are mapped to UML strings.
+  {
+
+    literalValue, literalType: String;
+    checkonly domain owl lit: RDFConcepts::Literal {
+      lexicalForm = literalValue,
+      _datatype = : RDFS::RDFSDatatype { iri = : RDFConcepts::IRI { iriString = literalType } }
+    };
+    enforce domain uml umlLit: LiteralString { value = literalValue };
+    when {
+      literalType = OWLNamespace() + 'rational' or literalType = OWLNamespace() + 'real';
+    }
+  } -- OWLLiteralToUMLLiteral
+
+  relation XSDLiteralToUMLLiteral
+  -- Maps a literal value whose datatype is in the XSD namespace to a UML literal.
+  {
+    typeSuffix: String;
+    literalType, literalValue: String;
+    checkonly domain owl lit: RDFConcepts::Literal {
+      lexicalForm = literalValue,
+      _datatype = : RDFS::RDFSDatatype { iri = : RDFConcepts::IRI { iriString = literalType } }
+    };
+    enforce domain uml umlLiteral: LiteralSpecification { };
+    when {
+      literalType.substring(1, XSDNamespace().size()) = XSDNamespace();
+    }
+    where {
+      typeSuffix = literalType.substring(XSDNamespace().size()+1, literalType.size());
+      XSDRealLiteralToUMLRealLiteral(typeSuffix, literalValue, umlLiteral);
+      XSDIntegerLiteralToUMLIntegerLiteral(typeSuffix, literalValue, umlLiteral);
+      XSDBooleanLiteralToUMLBooleanLiteral(typeSuffix, literalValue, umlLiteral);
+      XSDStringLiteralToUMLStringLiteral(typeSuffix, literalValue, umlLiteral);
+      XSDNonNegativeIntLiteralToUMLNaturalLiteral(typeSuffix, literalValue, umlLiteral);
+      XSDMiscLiteralToUMLStringLiteral(lit, umlLiteral);
+    }
+  } -- XSDLiteralToUMLLiteral
+
+  relation XSDRealLiteralToUMLRealLiteral
+  -- Maps a real-typed XSD literal to a UML Real literal.
+  {
+    primitive domain literalType: String;
+    primitive domain lexicalForm: String;
+    enforce domain uml realLit: LiteralReal { value = RealForm(lexicalForm) };
+    when {
+       Set { XSDNamespace() + 'double', XSDNamespace() + 'float' }->includes(literalType);
+    }
+  } -- XSDRealLiteralToUMLRealLiteral
+
+  relation XSDIntegerLiteralToUMLIntegerLiteral
+  -- Maps an integer-typed XSD literal to a UML integer literal.  This relation excludes
+  -- values that could be constructed as natural numbers.
+  {
+    primitive domain literalType: String;
+    primitive domain lexicalForm: String;
+    enforce domain uml integerLit: LiteralInteger { value = IntegerForm(lexicalForm) };
+    when {
+      Set { 'integer', 'int', 'byte', 'long', 'positiveInteger', 'negativeInteger',
+            'nonPositiveInteger', 'short' }->includes(literalType);
+    }
+  } -- XSDIntegerLiteralToUMLIntegerLiteral
+
+  relation XSDBooleanLiteralToUMLBooleanLiteral
+  -- Maps a Boolean-typed XSD literal to a UML Boolean literal.
+  {
+    primitive domain literalType: String;
+    primitive domain lexicalForm: String;
+    enforce domain uml boolLit: LiteralBoolean { value = (lexicalForm.toLower() = 'true') };
+    when {
+      'boolean' = literalType;
+    }
+  } -- XSDBooleanLiteralToUMLBooleanLiteral
+
+  relation XSDStringLiteralToUMLStringLiteral
+  -- Maps a string-typed XSD literal to a UML string literal.
+  {
+    primitive domain literalType: String;
+    primitive domain lexicalForm: String;
+    enforce domain uml stringLit: LiteralString { value = lexicalForm };
+    when {
+      Set { 'string', 'normalizedString', 'token', 'language', 'Name',
+            'NCName', 'NMTOKEN' }->includes(literalType);
+    }
+  } -- XSDStringLiteralToUMLStringLiteral
+
+  relation XSDNonNegativeIntLiteralToUMLNaturalLiteral
+  -- Maps a natural integer-typed literal to a UML natural literal.
+  {
+    primitive domain literalType: String;
+    primitive domain lexicalForm: String;
+    enforce domain uml stringLit: InstanceSpecification {
+      specification = : LiteralUnlimitedNatural { value = IntegerForm(lexicalForm) }
+    };
+    when {
+      Set { 'nonNegativeInteger', 'unsignedByte', 'unsignedInt',
+            'unsignedLong', 'unsignedShort' }->includes(literalType);
+    }
+  } -- XSDNonNegativeIntLiteralToUMLNaturalLiteral
+
+  relation XSDMiscLiteralToUMLStringLiteral
+  -- Maps miscellaneous XSD literals to UML string literals.
+  {
+    litValue, litType: String;
+    checkonly domain owl owlLit: RDFConcepts::Literal {
+      lexicalForm = litValue,
+      _datatype = dt : RDFS::RDFSDatatype { iri = litType }
+    };
+    enforce domain uml stringLit: LiteralString { value = litValue };
+    when {
+      let type: String = dt.iri.iriString.substring(34, litType.size()) in
+         type = 'dateTime' or type = 'dateTimeStamp'or type = 'hexBinary'
+           or type = 'base64Binary' or type = 'anyURI';
+    }
+  } -- XSDMiscLiteralToUMLStringLiteral
+
+  relation OWLTypeToUMLType
+  -- Maps OWL primitive types to XSD primitive types.
+  {
+    checkonly domain owl dt: RDFS::RDFSDatatype { };
+    enforce domain uml pt: PrimitiveType { };
+    when {
+      dt.iri.iriString.substring(1, OWLNamespace().size()) = OWLNamespace();
+    }
+    where {
+      OWLRealToUMLReal(dt, pt);
+      OWLRationalToUMLString(dt, pt);
+    }
+  } -- OWLTypeToUMLType
+
+  relation OWLRealToUMLReal
+  -- Maps OWL's owl:real to UML's Real.
+  {
+    checkonly domain owl dt: RDFS::RDFSDatatype {
+      iri = : RDFConcepts::IRI { iriString = OWLNamespace() + 'real' }
+    };
+    enforce domain uml pt: PrimitiveType { name = 'Real' };
+  } -- OWLRealToUMLReal
+
+  relation OWLRationalToUMLString
+  -- Maps OWL's owl:rational to UML's String.
+  {
+    checkonly domain owl dt: RDFS::RDFSDatatype {
+      iri = : RDFConcepts::IRI { iriString = OWLNamespace() + 'rational' }
+    };
+    enforce domain uml pt: PrimitiveType { name = 'String' };
+  } -- OWLRationalToUMLString
+
+  relation XSDTypeToUMLType
+  -- Maps XSD types to UML primitive types.
+  {
+    datatypeIRI, xsdType: String;
+    checkonly domain owl dt: RDFS::RDFSDatatype { iri = : RDFConcepts::IRI { iriString = datatypeIRI } };
+    enforce domain uml pt: PrimitiveType { };
+    when {
+      datatypeIRI.substring(1, XSDNamespace().size()) = XSDNamespace();
+    }
+    where {
+      xsdType = datatypeIRI.substring(XSDNamespace().size() + 1, datatypeIRI.size());
+      XSDIntegerToUMLInteger(xsdType, dt, pt);
+      XSDBooleanToUMLBoolean(xsdType, pt);
+      XSDStringToUMLString(xsdType, pt);
+      XSDnonNegativeIntegerToUMLUnlimitedNatural(xsdType, pt);
+      XSDRealToUMLReal(xsdType, pt);
+      XSDMiscTypeToUMLString(xsdType, pt);
+    }
+  } -- XSDTypeToUMLType
+
+  relation XSDIntegerToUMLInteger
+  -- Maps XSD integer types to UML's Integer primitive type.  It includes all general
+  -- XSD integer types.
+  {
+    primitive domain intType: String;
+    checkonly domain owl dt: RDFS::RDFSDatatype { };
+    enforce domain uml pt: PrimitiveType { name = 'Integer' };
+    when {
+      Set { 'integer', 'int', 'byte', 'long', 'positiveInteger', 'negativeInteger',
+            'nonPositiveInteger', 'short' }->includes(intType);
+    }
+  } -- XSDIntegerToUMLInteger
+
+  relation XSDBooleanToUMLBoolean
+  -- Maps XSD Boolean type to UML's Boolean primitive type.
+  {
+    primitive domain boolType: String;
+    enforce domain uml pt: PrimitiveType { name = 'Boolean' };
+    when { boolType = 'boolean'; }
+  } -- XSDBooleanToUMLBoolean
+
+  relation XSDStringToUMLString
+  -- Maps the XSD string type, and types derived from it, to UML's String primitive type.
+  -- See https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Strings.
+  {
+    primitive domain stringType: String;
+    enforce domain uml pt: PrimitiveType { name = 'String' };
+    when {
+      Set { 'string', 'normalizedString', 'token', 'language', 'Name', 'NCName',
+            'NMTOKEN' }->includes(stringType);
+    }
+  } -- XSDStringToUMLString
+
+  relation XSDnonNegativeIntegerToUMLUnlimitedNatural
+  -- Maps XSD non-negative integer to UML's natural primtive type.  It includes all
+  -- XSD non-negative integer types.
+  {
+    primitive domain nniType: String;
+    enforce domain uml pt: PrimitiveType { name = 'UnlimitedNatural' };
+    when {
+      Set { 'nonNegativeInteger', 'unsignedByte', 'unsignedInt', 'unsignedLong',
+            'unsignedShort' }->includes(nniType);
+    }
+  } -- XSDnonNegativeIntegerToUMLUnlimitedNatural
+
+  relation XSDRealToUMLReal
+  -- Maps XSD floating-point types to UML's Real type.
+  {
+    primitive domain realType: String;
+    enforce domain uml pt: PrimitiveType { name = 'Real' };
+    when {
+      realType = 'double' or realType = 'float';
+    }
+  } -- XSDRealToUMLReal
+
+  relation XSDMiscTypeToUMLString
+  -- Maps miscellaneous XSD types (those that don't have a direct primitive type
+  -- representation) to UML strings.
+  {
+    primitive domain miscType: String;
+    enforce domain uml pt: PrimitiveType { name = 'String' };
+    when {
+      Set { 'dateTime', 'dateTimeStamp', 'hexBinary', 'base64Binary',
+            'anyURI' }->includes(miscType);
+    }
+  } -- XSDMiscTypeToUMLString
+
+  top relation AllValuesFromToClass
+  -- Maps an OWL all-values-from restriction to its UML equivalent.
+  {
+    cn, pn: String;
+    up: UMLMetamodel::Property;
+    checkonly domain owl avr: AllValuesFromRestriction {
+      OWLallValuesFromClass = oc: ClassExpression { },
+      OWLonProperty = op: RDFConcepts::RDFProperty { }
+    };
+    enforce domain uml rcl: Class {
+      ownedComment = : Comment { _body = 'AllValuesFrom ' + cn + ' on ' + pn }
+    };
+    when {
+      OClassToUClass(avr, rcl);
+      OWLPropertyToUMLProperty(op, up);
+    }
+    where {
+      cn = OWLClassName(oc);
+      pn = up.name;
+      SubclassOfPropDomain(op, rcl);
+    }
+  } -- AllValuesFromToClass
+
+  relation SubclassOfPropDomain
+  -- Makes UML mapping of restriction class a subclass of mapping of property domain, if any.
+  {
+    mappedRestrictionClass: UML::Class;
+    checkonly domain owl op: Property { RDFSdomain = dom: ClassExpression { } };
+    enforce domain uml uc: Class { superClass = mappedRestrictionClass };
+    where {
+      OClassToUClass(dom, mappedRestrictionClass);
+    }
+  } -- SubclassOfPropDomain
+
+  top relation SomeValuesFromToClass
+  -- Maps an OWL some-values-from restriction to its UML equivalent.
+  {
+    cn, pn: String;
+    up: UMLMetamodel::Property;
+    checkonly domain owl svr: SomeValuesFromRestriction {
+      OWLsomeValuesFromClass = oc: ClassExpression { },
+      OWLonProperty = op: RDFConcepts::RDFProperty { }
+    };
+    enforce domain uml rcl: Class {
+      ownedComment = : Comment { _body = 'SomeValuesFrom ' + cn + ' on ' + pn }
+    };
+    when {
+      OClassToUClass(svr, rcl);
+      OWLPropertyToUMLProperty(op, up);
+    }
+    where {
+      cn = OWLClassName(oc);
+      pn = up.name;
+      SubclassOfPropDomain(op, rcl);
+    }
+  } -- SomeValuesFromToClass
+
+  top relation HasValueToClass
+  -- Only applies to the case where value is a literal.
+  {
+    v, pn: String;
+    up: UMLMetamodel::Property;
+    checkonly domain owl hvr: HasValueRestriction {
+      OWLhasLiteralValue = olit: RDFConcepts::Literal { lexicalForm = v },
+      OWLonProperty = op: RDFConcepts::RDFProperty { }
+    };
+    enforce domain uml rcl: Class {
+      ownedComment = : Comment { _body = 'HasValue ' + v + ' on ' + pn }
+    };
+    when {
+      OClassToUClass(hvr, rcl);
+      OWLPropertyToUMLProperty(op, up);
+    }
+    where {
+      pn = up.name;
+      SubclassOfPropDomain(op, rcl);
+    }
+  } -- HasValueToClass
+
+  relation OntoPropertyAssertionsToPackagePropertyAssertions
+  -- Maps assertions about properties in an ontology to class attributes or to associations.
+  {
+    checkonly domain owl ont: OWLOntology { owlUniverse = entity: OWLUniverse { } };
+    enforce domain uml pack: Package { packagedElement = umlProperty: Property { } };
+    when {
+      entity.oclIsKindOf(odm12::OWL::Property);
+    }
+    where {
+      OWLPropertyToUMLProperty(entity, umlProperty);
+      CardinalityToMultiplicity(entity, umlProperty);
+      SubpropertyToGeneralization(entity, umlProperty);
+      EquivPropertyToGeneralizations(entity, umlProperty);
+    }
+  } -- OntoPropertyAssertionsToPackagePropertyAssertions
+
+  top relation OWLPropertyToUMLProperty
+  -- Maps an OWL property to a UML Property.  The OWL property maps either to a
+  -- UML class attribute or the member end of an association between two classes.
+  {
+    checkonly domain owl owlProp: Property { };
+    enforce domain uml umlProp: Property { };
+    where {
+      OWLDatatypePropertyToUMLAttribute(owlProp, umlProp) xor  -- Exactly one of these
+      OWLObjectPropertyToUMLAttribute(owlProp, umlProp) xor    -- three relations
+      OWLObjectPropertyToUMLAssociation(owlProp, umlProp);     -- must hold.
+      FunctionalPropertyToUpperMultiplicity(owlProp, umlProp);
+      SubpropertyToGeneralization(owlProp, umlProp);
+      EquivPropertyToGeneralizations(owlProp, umlProp);
+    }
+  } -- OWLPropertyToUMLProperty
+
+  top relation OWLDatatypePropertyToUMLAttribute
+  -- Maps an OWL datatype property to a UML property.  If the datatype property has exactly
+  -- one domain, the property is owned by the class to which that domain maps.  If the
+  -- property has no specified domain, the property is owned by the universal superclass.
+  -- If the property has multiple domains, the property is owned by a class formed from
+  -- the intersection of the mapped domains.
+  {
+    iriStr: String;
+    checkonly domain owl dtp: OWLDatatypeProperty { iri = : RDFConcepts::IRI { iriString = iriStr } };
+    enforce domain uml prop: Property { name = IRIToMemberName(iriStr) };
+    where {
+      UnspecifiedDomainPropertyToUniversalSuperclassAttribute(dtp, prop);
+      SingleDomainPropertyToClassAttribute(dtp, prop);
+      MultiDomainPropertyToClassAttribute(dtp, prop);
+      DatatypePropertyRangeToPrimitiveType(dtp, prop);
+    }
+  } -- OWLDatatypePropertyToUMLAttribute
+
+  relation UnspecifiedDomainPropertyToUniversalSuperclassAttribute
+  -- Maps an OWL property whose domain is unspecified to an attribute of the
+  -- universal superclass.
+  {
+    usuper: UMLMetamodel::Class;
+    checkonly domain owl owlProp: Property { };
+    enforce domain uml umlProp: Property { _class = usuper };
+    when {
+      owlProp.RDFSdomain->isEmpty();          -- No domain declared.
+    }
+    where {
+      UniversalSuperclass(owlProp, usuper);  -- Ensure owl:Thing has been mapped to UML.
+    }
+  } -- UnspecifiedDomainPropertyToUniversalSuperclassAttribute
+
+  relation SingleDomainPropertyToClassAttribute
+  -- Maps an OWL property whose domain is a single class to an attribute of the
+  -- corresponding UML class.
+  {
+    checkonly domain owl owlProp: Property { RDFSdomain = owlCls: OWLClass { } };
+    enforce domain uml umlProp: Property { _class = umlCls: Class { } };
+    when {
+      owlProp.RDFSdomain->size() = 1;   -- Exactly one domain declared.
+    }
+    where {
+      OClassToUClass(owlCls, umlCls);
+    }
+  } -- SingleDomainPropertyToClassAttribute
+
+  relation MultiDomainPropertyToClassAttribute
+  -- Maps an OWL property whose domain is the intersection of multiple classes to an
+  -- attribute of a UML class named 'DomainIntersection_' + the name of the property.
+  -- The collection of domains of a property is assumed to be the deductive closure of
+  -- all sources of domains, in particular a range of an inverseOf property.
+  {
+    pkg: UML::Package;
+    checkonly domain owl owlProp: Property { ontology = ont: OWLOntology { } };
+    enforce domain uml prop: Property {
+      _class = domClass: Class {
+        name = 'DomainIntersection_' + IRIToMemberName(owlProp.iri.iriString),
+        _package = pkg
+      }
+    };
+    when {
+      owlProp.RDFSdomain->size() > 1;    -- More than one domain is declared.
+      OntoToPackage(ont, pkg);
+    }
+    where {
+      MultiDomainToProperty(owlProp, prop);
+    }
+  } -- MultiDomainPropertyToClassAttribute
+
+  relation MultiDomainToProperty
+  -- Completes the mapping of an OWL property whose domain is the intersection of multiple
+  -- classes to an attribute of a UML class.  This relation assumes the UML property has
+  -- already been named (see OWLDatatypePropertyToUMLAttribute).  It maps the domain classes
+  -- and creates the generalization relationships forming the intersection.
+  {
+    checkonly domain owl owlProp: Property {
+      ontology = ont: OWLOntology { },
+      RDFSdomain = dom: OWLClass { }
+    };
+    enforce domain uml uProp: Property {
+      _class = owningCls: Class {
+        _package = pkg: Package { },
+        -- class is opposite memberEnd of superClass.
+        _class = intCls: Class { _package = pkg }
+      }
+    };
+    where {
+      OntoToPackage(ont, pkg);
+      OClassToUClass(dom, intCls);  -- Instantiated once for each dom.
+    }
+  } -- MultiDomainToProperty
+
+  relation DatatypePropertyRangeToPrimitiveType
+  -- Maps the range of a datatype property to the appropriate UML primitive type.
+  {
+    checkonly domain owl dtp: OWLDatatypeProperty { };
+    enforce domain uml attr: Property { };
+    where {
+      SingleDatatypePropertyRangeToPrimitiveType(dtp, attr);
+      MultiDatatypePropertyRangeToPrimitiveType(dtp, attr);
+    }
+  } -- DatatypePropertyRangeToPrimitiveType
+
+  relation SingleDatatypePropertyRangeToPrimitiveType
+  {
+    checkonly domain owl dtp: OWLDatatypeProperty { };
+    enforce domain uml attr: Property { };
+    when {
+      dtp.RDFSrange->size() = 1;
+    }
+    where {
+      DatatypePropertyLiteralRangeToPrimitiveType(dtp, attr);
+      DatatypePropertyDataRangeToPrimitiveType(dtp, attr);
+    }
+  } -- SingleDatatypePropertyRangeToPrimitiveType
+
+  relation MultiDatatypePropertyRangeToPrimitiveType
+  {
+    pkg: UML::Package;
+    ont: odm12::OWL::OWLOntology;
+    checkonly domain owl dtp: OWLDatatypeProperty { ontology = ont };
+    enforce domain uml attr: Property {
+      type = rangeType: DataType {
+        name = 'RangeIntersection_' + IRIToMemberName(dtp.iri.iriString),
+        _package = pkg
+      }
+    };
+    when {
+      dtp.RDFSrange->size() > 1;
+      OntoToPackage(ont, pkg);
+    }
+    where {
+      MultiRangeToPropertyType(dtp, rangeType);
+    }
+  } -- MultiDatatypePropertyRangeToPrimitiveType
+
+  relation MultiRangeToPropertyType
+  {
+    checkonly domain owl dtp: OWLDatatypeProperty {
+      ontology = ont: OWLOntology { },
+      RDFSrange = rngClass: RDFS::RDFSClass { }
+    };
+    enforce domain uml rngType: DataType {
+      _package = pkg: Package { },
+      -- classifier is the opposite relation to general.
+      classifier = intDT: DataType { _package = pkg }
+    };
+    when {
+      OntoToPackage(ont, pkg);    	
+    }
+    where {
+  	  OWLTypeToUMLType(rngClass, intDT) xor XSDTypeToUMLType(rngClass, intDT);
+      EnumerationToEnumeration(rngClass, intDT);
+    }
+  } -- MultiRangeToPropertyType
+
+  relation DatatypePropertyLiteralRangeToPrimitiveType
+  -- Maps the literal-valued range of an OWL datatype property to the corresponding UML
+  -- primitive type, and establishes that primitive type as the type of the UML property
+  -- mapped from the OWL property.
+  {
+    pt: UML::PrimitiveType;
+    checkonly domain owl dtp: OWLDatatypeProperty {
+      RDFSrange = lit: RDFConcepts::Literal { _datatype = dt: RDFS::RDFSDatatype { } }
+    };
+    enforce domain uml attr: Property { type = pt };
+    where {
+      OWLTypeToUMLType(dt, pt) xor XSDTypeToUMLType(dt, pt);
+    }
+  } -- DatatypePropertyLiteralRangeToPrimitiveType
+
+  relation DatatypePropertyDataRangeToPrimitiveType
+  -- Maps the data range-valued range of an OWL datatype property to the corresponding
+  -- UML enumeration, and establishes that enumeration as the type of the UML property
+  -- mapped from the OWL property.
+  {
+    iriStr: String;
+    checkonly domain owl dtp: OWLDatatypeProperty {
+      RDFSrange = rng: DataRange { iri = : RDFConcepts::IRI { iriString = iriStr } }
+    };
+    enforce domain uml attr: Property {
+      type = _enum: Enumeration { name = IRIToMemberName(iriStr) }
+    };
+    where {
+      EnumerationToEnumeration(rng, _enum);
+    }
+  } -- DatatypePropertyDataRangeToPrimitiveType
+
+  top relation OWLObjectPropertyToUMLAttribute
+  -- Maps an OWL object property to a UML attribute.  If the object property has exactly
+  -- one domain, the attribute is owned by the class to which that domain maps.  If the
+  -- property has no specified domain, the attribute is owned by the universal superclass.
+  -- If the property has multiple domains, the attribute is owned by a class formed from
+  -- the intersection of the mapped domains.
+  {
+    iriStr: String;
+    checkonly domain owl op: OWLObjectProperty { iri = : RDFConcepts::IRI { iriString = iriStr } };
+    enforce domain uml prop: Property{ name = IRIToMemberName(iriStr) };
+    when {
+      op.inverseProperty->isEmpty();         -- No inverse.
+      op.OWLinverseOf->isEmpty();
+      not op.isSymmetric;		  -- Not its own inverse.
+      not op.isInverseFunctional; -- Not inverse functional.
+    }
+    where {
+      UnspecifiedDomainPropertyToUniversalSuperclassAttribute(op, prop);
+      SingleDomainPropertyToClassAttribute(op, prop);
+      MultiDomainPropertyToClassAttribute(op, prop);
+      PropRange(op, prop);
+    }
+  } -- OWLObjectPropertyToUMLAttribute
+
+  top relation OWLObjectPropertyToUMLAssociation
+  -- An OWL object property with an inverse, or that is inverse functional, or symmetric,
+  -- maps to an association.
+  {
+    checkonly domain owl objProp: OWLObjectProperty { };
+    enforce domain uml assn: Association { };
+    where {
+      PropertyPairToAssociation(objProp, assn);
+      SymmetricPropertyToAssociation(objProp, assn);
+      InverseFunctToAssociation(objProp, assn);
+      AddTypeToAssociationEnd(objProp, assn);
+    }
+  } -- OWLObjectPropertyToUMLAssociation
+
+  relation PropertyPairToAssociation
+  -- An OWL object property with an inverse maps to a UML association whose name
+  -- is the concatenation of the property names.
+  {
+    assocID: String;
+    p1, p2: UMLMetamodel::Property;
+    checkonly domain owl prop: OWLObjectProperty {
+      ontology = ont: OWLOntology { },
+      OWLinverseOf = invp: Property { }
+    };
+    enforce domain uml assn: Association {
+      memberEnd = ps: Sequence(Property) { p1, p2 ++ _ },
+      name = assocID,
+      _package = pack: Package { }
+    };
+    when {
+      invp.equivalentProperty->isEmpty();     -- No equivalent properties.
+      invp.OWLequivalentProperty->isEmpty();
+    }
+    where {
+      OntoToPackage(ont, pack);    -- The association will be in this package.
+      PropertyToAProperty(prop, p1);
+      PropertyToAProperty(invp, p2);
+      assocID = p1.name + p2.name; -- Association name is concatenation of property names.
+    }
+  } -- PropertyPairToAssociation
+
+  relation SymmetricPropertyToAssociation
+  -- Maps an OWL symmetric property to a UML association, both of whose member ends are the
+  -- same property.
+  {
+    assocID: String;
+    p1: UMLMetamodel::Property;
+    checkonly domain owl prop: OWLObjectProperty {
+      isSymmetric = true, ontology = ont: OWLOntology { }
+    };
+    enforce domain uml assn: Association {
+      memberEnd = ps: Sequence(Property) { p1, p1 ++ _ },
+      name = assocID,
+      _package = pack: Package { }
+    };
+    where {
+      OntoToPackage(ont, pack); -- Association will be in this package.
+      PropertyToAProperty(prop, p1);
+      assocID = p1.name;
+    }
+  } -- SymmetricPropertyToAssociation
+
+  relation InverseFunctToAssociation
+  -- Maps an OWL inverse functional property with no inverse to a UML association.
+  {
+    p1, p2: UMLMetamodel::Property;
+    assocID: String;
+    checkonly domain owl prop: OWLObjectProperty {
+      isInverseFunctional = true, ontology = ont: OWLOntology { }
+    };
+    enforce domain uml assoc: Association {
+      memberEnd = ps: Sequence(Property) { p1, p2 ++ _ },
+      name = assocID,
+      _package = pack: Package { }
+    };
+    when {
+      prop.OWLinverseOf->isEmpty();     -- The inverse functional property has no inverse
+      prop.inverseProperty->isEmpty();  -- declared.
+    }
+    where {
+      OntoToPackage(ont, pack);     -- The association will be in this package.
+      PropertyToAProperty(prop, p1);
+      PropertyToOppProperty(prop, p2);
+      assocID = p1.name;
+    }
+  } -- InverseFunctToAssociation
+
+  relation PropertyToAProperty
+  -- Maps an OWL property's name to a UML property's name in the context of an
+  -- association end.
+  {
+    iriStr: String;
+    checkonly domain owl prop: Property { iri = : RDFConcepts::IRI { iriString = iriStr } };
+    enforce domain uml uprop: Property { name = IRIToMemberName(iriStr) };
+  } -- PropertyToAProperty
+
+  relation PropertyToOppProperty
+  -- Maps an OWL property to opposite UML property in context of an association end
+  -- (for inverse functional properties).  This property has no corresponding OWL property,
+  -- so it can be fully specified.
+  {
+    iriStr: String;
+    checkonly domain owl owlProp: Property { iri = : RDFConcepts::IRI { iriString = iriStr } };
+    enforce domain uml uprop: Property {
+      name = 'opposite_' + IRIToMemberName(iriStr),
+      lowerValue = '0',
+      upperValue = '1'
+    };
+  } -- PropertyToOppProperty
+
+  relation AddTypeToAssociationEnd
+  -- Association already mapped.  Add types to properties at association ends.  The type of
+  -- the association end property is the class corresponding to the range of the
+  -- corresponding OWL property.
+  {
+    checkonly domain owl prop: OWLObjectProperty { };
+    enforce domain uml assn: Association {
+      memberEnd = upr: Property { type = ran: Class { } }
+    };
+    where {
+      PropertyToAProperty(prop, upr);
+      PropRange(prop, ran);
+    }
+  } -- AddTypeAssocEnd
+
+  relation PropRange
+  {
+    checkonly domain owl prop: Property { };
+    enforce domain uml cl: Class { };
+    where {
+      DefaultRange(prop, cl);
+      SingleRange(prop, cl);
+      MultRange(prop, cl);
+    }
+  } -- PropRange
+
+  relation DefaultRange
+  -- Create default range for a property.
+  {
+    checkonly domain owl prop: Property { };
+    enforce domain uml usuper: Class { };
+    when {
+      prop.RDFSrange->isEmpty();         -- No range declared.
+    }
+    where {
+      LocalOWLThingEquivalent(prop, usuper); -- Ensure owl:Thing is mapped to a UML class.
+    }
+  } -- DefaultRange
+
+  relation SingleRange
+  -- Find single range for a property with a single range.
+  {
+    checkonly domain owl prop: Property {
+      RDFSrange = ran: OWLClass { }
+    };
+    enforce domain uml rancl: Class { };
+    when {
+      prop.RDFSrange->size() = 1; -- Exactly one range declared.
+    }
+    where {
+      OClassToUClass(ran, rancl);
+    }
+  } -- SingleRange
+
+  relation MultRange
+  -- Find the intersection of multiple ranges for a property as subclass called
+  -- 'RangeIntersection_' + name of property.  The collection of ranges of a property is
+  -- assumed to be the deductive closure of all sources of ranges, in particular a domain
+  -- of an inverseOf property.
+  {
+    rin: String;
+    obj: UML::NamedElement;
+    checkonly domain owl prop: Property {
+      RDFSrange = ran: OWLClass { },
+      ontology = ont: OWLOntology { }
+    };
+    enforce domain uml ranintcl: Class {
+      name = rin,
+      superClass = rancl: Class { },
+      _package = pack: Package { }
+    };
+    when {
+      prop.RDFSrange->size() > 1; -- More than one range declared.
+    }
+    where {
+      OntoToPackage(ont, pack);
+      OClassToUClass(ran, rancl);          -- Will be instantiated once for each class.
+      OWLPropertyToUMLProperty(prop, obj);    -- Need the property to be created to get
+      rin = 'RangeIntersection_' + obj.name;  -- its name.
+    }
+  } -- MultRange
+
+  top relation CardinalityToMultiplicity
+  -- Maps OWL cardinality restrictions to UML multiplicities.
+  {
+    checkonly domain owl oprop: Property { };
+    enforce domain uml uprop: Property { };
+    when {
+      OWLPropertyToUMLProperty(oprop, uprop); -- Delays until properties have been created.
+    }
+    where {
+      if oprop.isFunctional then
+        FunctionalPropertyToUpperMultiplicity(oprop, uprop) and
+        InverseFunctionalPropertyToUpperLowerMultiplicity(oprop, uprop)
+      else if oprop.oclIsTypeOf(odm12::OWL::OWLObjectProperty) and oprop.oclAsType(odm12::OWL::OWLObjectProperty).isInverseFunctional then
+        InverseFunctionalToUpperMultiplicity(oprop, uprop)
+      else
+        ExactCardinalityToExactMultiplicity(oprop, uprop) or
+        MaxCardToUpperMult(oprop, uprop) or
+        MinCardToLowerMult(oprop, uprop)
+      endif endif;
+      UndefinedMaxCardinalityToUnlimitedUpperBound(oprop, uprop);
+      UndefinedMinCardinalityToZeroLowerBound(oprop, uprop);
+      QualifiedByClassRestrictionToPropertyType(oprop, uprop);
+    }
+  } -- CardinalityToMultiplicity
+
+  relation ExactCardinalityToExactMultiplicity
+  -- Maps an OWL exact cardinality restriction to a UML multiplicity where both the upper
+  -- and lower values are the same.
+  {
+    c: UnlimitedNatural;
+    checkonly domain owl oprop: Property {
+      propertyRestriction = : ExactCardinalityRestriction { cardinality = c }
+    };
+    enforce domain uml uprop: Property { upperValue = c, lowerValue = c };
+  } -- ExactCardinalityToExactMultiplicity
+
+  relation MaxCardToUpperMult
+  -- Maps an OWL maximum cardinality restriction to a UML upper-value multiplicity.
+  {
+    u: String;
+    checkonly domain owl oprop: Property {
+      propertyRestriction = : MaxCardinalityRestriction {
+        cardinality = : RDFConcepts::Literal {
+          lexicalForm = u,
+          _datatype = : RDFS::RDFSDatatype {
+            iri = : RDFConcepts::IRI { iriString = XSDNamespace() + 'integer' }
+          }
+        }
+      }
+    };
+    enforce domain uml uprop: Property { upperValue = u };
+  } -- MaxCardToUpperMult
+
+  relation MinCardToLowerMult
+  -- Maps an OWL minimum cardinality restriction to a UML lower-value multiplicity.
+  {
+    l: String;
+    checkonly domain owl oprop: Property {
+      propertyRestriction = : MinCardinalityRestriction {
+        cardinality = : RDFConcepts::Literal { lexicalForm = l }
+      }
+    };
+    enforce domain uml uprop: Property { lowerValue = 'l' };
+  } -- MinCardToLowerMult
+
+  relation FunctionalPropertyToUpperMultiplicity
+  -- Maps an OWL functional property to a UML property with an upper multiplicity of 1.
+  {
+    checkonly domain owl owlProp: Property { isFunctional = true };
+    enforce domain uml umlProp: Property { upperValue = '1' };
+  } -- FunctionalPropertyToUpperMultiplicity
+
+  relation InverseFunctionalPropertyToUpperLowerMultiplicity
+  -- Maps an OWL inverse functional property to a UML property with upper and lower
+  -- multiplicities of 1.
+  {
+    checkonly domain owl owlProp: OWLObjectProperty { isInverseFunctional = true };
+    enforce domain uml umlProp: Property { lowerValue = '1', upperValue = '1' };
+  } -- InverseFunctionalPropertyToUpperLowerMultiplicity
+
+  relation InverseFunctionalToUpperMultiplicity
+  -- If an inverse functional property has an inverse, the multiplicity goes on the inverse.
+  {
+    checkonly domain owl ifProp: OWLObjectProperty { isInverseFunctional = true };
+    enforce domain uml opProp: Property { upperValue = '1' };
+    when {
+      ifProp.OWLinverseOf->exists(
+        invProp: odm12::OWL::Property | PropertyToAProperty(invProp, opProp)
+      )
+   or ifProp.inverseProperty->exists(
+        invProp: odm12::OWL::Property | PropertyToAProperty(invProp, opProp)
+      );
+    }
+  } -- InverseFunctionalToUpperMultiplicity
+
+  relation UndefinedMaxCardinalityToUnlimitedUpperBound
+  -- Add unlimited max cardinalities to UML properties with no max cardinality.
+  {
+    checkonly domain owl owlProp: Property { };
+    enforce domain uml umlProp: Property { upperValue = '*' };
+    when {
+      not owlProp.propertyRestriction->exists(r: odm12::OWL::OWLRestriction |
+            r.oclIsKindOf(odm12::OWL::MaxCardinalityRestriction)
+         or r.oclIsKindOf(odm12::OWL::ExactCardinalityRestriction));
+    }
+  } -- UndefinedMaxCardinalityToUnlimitedUpperBound
+
+  relation UndefinedMinCardinalityToZeroLowerBound
+  -- Add zero min cardinalities to UML properties with no min cardinality.
+  {
+    checkonly domain owl owlProp: Property { };
+    enforce domain uml umlProp: Property { lowerValue = '0' };
+    when {
+      not owlProp.propertyRestriction->exists(r: odm12::OWL::OWLRestriction |
+            r.oclIsKindOf(odm12::OWL::MinCardinalityRestriction)
+         or r.oclIsKindOf(odm12::OWL::ExactCardinalityRestriction));
+    }
+  } -- UndefinedMinCardinalityToZeroLowerBound
+
+  relation QualifiedByClassRestrictionToPropertyType
+  -- Maps a qualifiedByClass property in a cardinality restriction to a UML property type.
+  {
+    checkonly domain owl oProp: Property {
+      propertyRestriction = : CardinalityRestriction {
+        qualifiedByClass = classExp: ClassExpression { }
+      }
+    };
+    enforce domain uml uProp: Property {
+    };
+    where {
+      QualifiedByClassRestrictionToAttributeType(classExp, uProp);
+      QualifiedByClassRestrictionToAssociationMemberEndType(classExp, uProp);
+    }
+  } -- UndefinedMinCardinalityToZeroLowerBound
+
+  relation QualifiedByClassRestrictionToAttributeType
+  -- Map an OWL class expression to the type of a UML property.
+  {
+    checkonly domain owl classExp: ClassExpression { };
+    enforce domain uml uProp: Property { type = umlType : Class { } };
+    where {
+      OClassToUClass(classExp, umlType);
+    }
+  } -- QualifiedByClassRestrictionToAttributeType
+
+  relation QualifiedByClassRestrictionToAssociationMemberEndType
+  -- Map an OWL class expression to the type of a UML association's member end.
+  {
+    checkonly domain owl classExp: ClassExpression { };
+    enforce domain uml uAssoc: Association {
+      memberEnd = : Sequence(Property) {
+        p1: Property { },
+        p2: Property { type = umlType: Class { } }
+        ++ _
+      }
+    };
+    where {
+      OClassToUClass(classExp, umlType);
+    }
+  } -- QualifiedByClassRestrictionToAssociationMemberEndType
+
+  top relation SubpropertyToGeneralization
+  -- A property generalizes by subsetting.
+  {
+    checkonly domain owl prop: Property { RDFSsubPropertyOf = superprop: Property { } };
+    enforce domain uml uprop: Property { subsettedProperty = superuprop: Property { } };
+    where {
+      OWLPropertyToUMLProperty(prop, uprop);
+      OWLPropertyToUMLProperty(superprop, superuprop);
+    }
+  } -- SubpropertyToGeneralization
+
+  top relation EquivPropertyToGeneralizations
+  -- Generate equivalent properties by mutual subsetting.
+  {
+    checkonly domain owl prop: Property{ OWLequivalentProperty = equivprop: Property { } };
+    enforce domain uml uprop: Property {
+      subsettedProperty = equivuprop: Property { subsettedProperty = uprop }
+    };
+    where {
+      OWLPropertyToUMLProperty(prop, uprop);
+      OWLPropertyToUMLProperty(equivprop, equivuprop);
+    }
+  } -- EquivPropertyToGeneralizations
+
+  relation UniverseToNamedElement
+  {
+    checkonly domain owl res: OWLUniverse { };
+    enforce domain uml ne: NamedElement { };
+    when {
+      OntoToPackage(res, ne) or
+      OClassToUClass(res, ne) or
+      OWLPropertyToUMLProperty(res, ne);
+    }
+  } -- UniverseToNamedElement
+
+  top relation RDFSCommentToComment
+  {
+    com: String;
+    checkonly domain owl res: OWLUniverse {
+      RDFScomment = : RDFConcepts::Literal { lexicalForm = com }
+    };
+    enforce domain uml ne: NamedElement { ownedComment = com };
+    when {
+      UniverseToNamedElement(res, ne);
+    }
+  } -- RDFSCommentToComment
+
+  top relation RDFSLabelToComment
+  {
+    com: String;
+    checkonly domain owl res: OWLUniverse { RDFSlabel = : RDFConcepts::Literal { lexicalForm = com } };
+    enforce domain uml ne: NamedElement { ownedComment = com };
+    when {
+      UniverseToNamedElement(res, ne);
+    }
+  } -- RDFSLabelToComment
+
+  top relation SeeAlsoToComment
+  {
+    com: String;
+    checkonly domain owl res: OWLUniverse { RDFSseeAlso = sr: RDFConcepts::RDFSResource { } };
+    enforce domain uml ne: NamedElement { ownedComment = com };
+    when {
+      UniverseToNamedElement(res, ne);
+    }
+    where {
+      com = if sr.oclIsTypeOf(RDFConcepts::Literal) then sr.oclAsType(RDFConcepts::Literal).lexicalForm else sr.iri.iriString endif;
+    }
+  } -- SeeAlsoToComment
+
+  top relation IsDefinedByToComment
+  {
+    com: String;
+    checkonly domain owl res: OWLUniverse { RDFSisDefinedBy = sr: RDFConcepts::RDFSResource { } };
+    enforce domain uml ne: NamedElement { ownedComment = com };
+    when {
+      UniverseToNamedElement(res, ne);
+    }
+    where {
+      com = if sr.oclIsTypeOf(RDFConcepts::Literal) then
+              sr.oclAsType(RDFConcepts::Literal).lexicalForm
+            else
+              sr.iri.iriString
+            endif;
+    }
+  } -- IsDefinedByToComment
+
+  top relation AnnotationPropertyToComment
+  -- Maps an annotation property to a comment. Excludes built-in annotation properties.
+  {
+    iriStr, propName, note: String;
+    checkonly domain owl ap: OWLAnnotationProperty {
+      iri = : RDFConcepts::IRI { iriString = iriStr },
+      tripleWithPredicate = : RDFConcepts::RDFStatement {
+        RDFsubject = res: OWLUniverse { },
+        RDFobject = obj: RDFConcepts::RDFSResource { }
+      }
+    };
+    enforce domain uml ne: NamedElement { ownedComment = (propName + ' ' + note) };
+    when {
+      UniverseToNamedElement(res, ne);
+    }
+    where {
+      propName = IRIToMemberName(iriStr);
+      note = if obj.oclIsTypeOf(RDFConcepts::Literal) then
+               obj.oclAsType(RDFConcepts::Literal).lexicalForm
+             else
+               obj.iri.iriString
+             endif;
+    }
+  } -- AnnotationPropertyToComment
+
+  relation OWLUniverseCommentsToUMLElementComments
+  -- Maps RDFS comments on OWL elements to UML comments on the corresponding UML element.
+  {
+    umlComment: UML::LiteralSpecification;
+    checkonly domain owl ont: OWLOntology {
+      owlUniverse = element: OWLUniverse { RDFScomment = rdfsComment: RDFConcepts::Literal { } }
+    };
+    enforce domain uml pack: Package {
+      packagedElement = e: UML::PackageableElement {
+        ownedComment = c: Comment { _body = commentForm(rdfsComment, umlComment) }
+      }
+    };
+    when {
+      element.oclIsKindOf(odm12::OWL::OWLClass) implies OClassToUClass(element, e);
+      element.oclIsKindOf(odm12::OWL::Property) implies OWLPropertyToUMLProperty(element, e);
+    }
+    where {
+      OWLLiteralToUMLLiteral(rdfsComment, umlComment) xor
+      XSDLiteralToUMLLiteral(rdfsComment, umlComment) xor
+      OWLLanguageTaggedLiteralToUMLStringLiteral(rdfsComment, umlComment);
+    }
+  } -- OWLUniverseCommentsToUMLElementComments
+
+  relation OWLUniverseLabelsToUMLElementComments
+  -- Maps RDFS labels on OWL elements to UML comments on the corresponding UML element.
+  {
+    umlComment: UML::LiteralSpecification;
+    checkonly domain owl ont: OWLOntology {
+      owlUniverse = element: OWLUniverse { RDFSlabel = rdfsLabel: RDFConcepts::Literal { } }
+    };
+    enforce domain uml pack: Package {
+      packagedElement = e: PackageableElement {
+        ownedComment = c: Comment { _body = commentForm(rdfsLabel, umlComment) }
+      }
+    };
+    when {
+      element.oclIsKindOf(odm12::OWL::OWLClass) implies OClassToUClass(element, e);
+      element.oclIsKindOf(odm12::OWL::Property) implies OWLPropertyToUMLProperty(element, e);
+    }
+    where {
+      OWLLiteralToUMLLiteral(rdfsLabel, umlComment) xor
+      XSDLiteralToUMLLiteral(rdfsLabel, umlComment) xor
+      OWLLanguageTaggedLiteralToUMLStringLiteral(rdfsLabel, umlComment);
+    }
+  } -- OWLUniverseLabelsToUMLElementComments
+
+  query commentForm(_literal: RDFConcepts::Literal,
+                 umlComment: UMLMetamodel::LiteralSpecification): String {
+    'comment' + literalLang(_literal) + ': ' + umlComment.oclAsType(UMLMetamodel::LiteralString).value
+  }
+
+  -- Returns the index of the last occurrence of a pattern in a string, or 0 if the
+  -- pattern doesn't occur in the string.
+  query lastIndexOf(s: String, pattern: String): Integer
+  {
+    let ix: Integer = s.indexOf(pattern) in
+      if ix <> 0 then
+        if ix + pattern.size() < s.size() then
+          let gtix: Integer = lastIndexOf(s.substring(ix+1, s.size()), pattern) in
+            if gtix <> 0 then
+              gtix
+            else
+              ix
+            endif
+        else
+          ix
+        endif
+      else
+        ix
+      endif
+  }
+  
+  -- Encapsulates obtaining the name of a ClassExpression.
+  query OWLClassName(c: odm12::OWL::ClassExpression): String
+  {
+  	if c.oclIsKindOf(odm12::OWL::OWLClass) then
+  	  IRIToMemberName(c.iri.iriString)
+  	else
+  	  'class expression'
+    endif
+  }
+  
+  query literalLang(lit: odm12::RDF::RDFConcepts::Literal): String
+  {
+  	if lit.oclIsUndefined() then
+  	    ''
+  	else
+  	  	lit.language
+  	endif
+  }
+
+} -- transformation OWLUMLSource
+

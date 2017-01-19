@@ -1,0 +1,35 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *******************************************************************************/
+import SeqMM : 'SeqMM.ecore'::SeqMM; 
+import StmcMM : 'StmcMM.ecore'::StmcMM; 
+
+transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(seqDgm: SeqMM, stm: StmcMM)
+{
+     top relation MessageToTransition
+     {
+     	rest : Set(SeqMM::MessageEvent);
+          domain seqDgm 
+          m1:Message 
+          {
+              event = eSet:Set(MessageEvent) {
+                   send:MessageEvent {},
+                   receive:MessageEvent {}
+                   ++ rest
+               }
+          };
+
+          enforce domain stm 
+          tr:Transition
+          {
+          };
+    }
+}

@@ -27,6 +27,10 @@ public class QVTtemplateUtil extends QVTbaseUtil
 
 	public static class Internal extends QVTbaseUtil.Internal
 	{
+		public static @NonNull List<@NonNull OCLExpression> getOwnedMembersList(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
+			return ClassUtil.nullFree(rCollectionTemplateExp.getMember());
+		}
+
 		public static @NonNull List<@NonNull PropertyTemplateItem> getOwnedPartsList(@NonNull ObjectTemplateExp rObjectTemplateExp) {
 			return ClassUtil.nullFree(rObjectTemplateExp.getPart());
 		}

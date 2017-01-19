@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -33,6 +34,7 @@ import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
+import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -176,14 +178,31 @@ public class UMLXServices
 			}
 		}
 		else if (context instanceof RelPatternClassNode) {
+			RelPatternClassNode relPatternClassNode = (RelPatternClassNode)context;
 			StringBuilder s = new StringBuilder();
-			s.append(String.valueOf(((RelPatternClassNode)context).getName()));
+			s.append(String.valueOf(relPatternClassNode.getName()));
 			s.append(" : ");
-			EClassifier eClassifier = ((RelPatternClassNode)context).getReferredEClassifier();
+			if (relPatternClassNode.isIsMany()) {
+				if (relPatternClassNode.isIsUnique()) {
+					s.append(relPatternClassNode.isIsOrdered() ? "OrderedSet" : "Set");
+				}
+				else {
+					s.append(relPatternClassNode.isIsOrdered() ? "Sequence" : "Bag");
+				}
+				s.append("(");
+			}
+			EClassifier eClassifier = relPatternClassNode.getReferredEClassifier();
 			if (eClassifier != null) {
 				s.append(eClassifier.eIsProxy() ? EcoreUtil.getURI(eClassifier) : String.valueOf(eClassifier.getName()));
 			}
+			if (relPatternClassNode.isIsMany()) {
+				s.append(")");
+			}
 			return s.toString();
+		}
+		else if (context instanceof RelPatternExpressionNode) {
+			String expression = ((RelPatternExpressionNode)context).getExpression();
+			return expression != null ? expression : "«null-expression»";
 		}
 		else if (context instanceof TxImportNode) {
 			return String.valueOf(((TxImportNode)context).getName());
@@ -237,6 +256,22 @@ public class UMLXServices
 	}
 
 	/**
+	 * Return the label at the source end of a PatternEdge.
+	 */
+	public @NonNull String umlxPatternEdgeCenterLabel(EObject context) {
+		if (context instanceof RelPatternEdge) {
+			int sourceIndex = ((RelPatternEdge)context).getSourceIndex();
+			if (sourceIndex > 0) {
+				return "«" + sourceIndex + "»";
+			}
+			else if (sourceIndex < 0) {
+				return "«rest»";
+			}
+		}
+		return "";
+	}
+
+	/**
 	 * Return the label at the target end of a PatternEdge.
 	 */
 	public @NonNull String umlxPatternEdgeEndLabel(EObject context) {
@@ -254,9 +289,23 @@ public class UMLXServices
 	}
 
 	/**
-	 * Return true if a PatternEdge is a composite.
+	 * Return true if the PatternEdge source is the target's container.
 	 */
-	public boolean umlxPatternEdgeIsComposite(EObject context) {
+	public boolean umlxPatternEdgeSourceIsContainer(EObject context) {
+		if (context instanceof RelPatternEdge) {
+			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
+			if (eStructuralFeature instanceof EReference) {
+				EReference eOpposite = ((EReference)eStructuralFeature).getEOpposite();
+				return (eOpposite != null) && eOpposite.isContainer();
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if a PatternEdge target is the source's container.
+	 */
+	public boolean umlxPatternEdgeTargetIsContainer(EObject context) {
 		if (context instanceof RelPatternEdge) {
 			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
 			if (eStructuralFeature instanceof EReference) {
@@ -267,14 +316,34 @@ public class UMLXServices
 	}
 
 	/**
-	 * Return true if a PatternEdge is not-a composite.
+	 * Return true if a PatternEdge target is a datatype.
 	 */
-	public boolean umlxPatternEdgeIsNotComposite(EObject context) {
+	public boolean umlxPatternEdgeTargetIsDataType(EObject context) {
 		if (context instanceof RelPatternEdge) {
 			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
-			if (eStructuralFeature instanceof EReference) {
-				return !((EReference)eStructuralFeature).isContainer();
+			if (eStructuralFeature instanceof EAttribute) {
+				return true;
 			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if a PatternEdge target is a member of the source.
+	 */
+	public boolean umlxPatternEdgeTargetIsMember(EObject context) {
+		if (context instanceof RelPatternEdge) {
+			return ((RelPatternEdge)context).getSourceIndex() > 0;
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if a PatternEdge target is the rest of the source.
+	 */
+	public boolean umlxPatternEdgeTargetIsRest(EObject context) {
+		if (context instanceof RelPatternEdge) {
+			return ((RelPatternEdge)context).getSourceIndex() < 0;
 		}
 		return false;
 	}
@@ -326,6 +395,16 @@ public class UMLXServices
 			return ((RelPatternNode)context).getOwningRelDomainNode();
 		}
 		return context;
+	}
+
+	/**
+	 * Return true if this is an expression pattern node
+	 */
+	public boolean umlxRelPatternNodeIsExpression(EObject context) {
+		if (context instanceof RelPatternExpressionNode) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

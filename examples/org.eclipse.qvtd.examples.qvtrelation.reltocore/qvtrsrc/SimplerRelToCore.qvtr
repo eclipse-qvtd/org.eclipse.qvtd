@@ -1736,7 +1736,7 @@ relation RRelImplToMBottomEnforcementOperation
 
    domain relations r:Relation {
          operationalImpl = ri:RelationImplementation {
-            inDirectionOf = tm:TypedModel{},
+            inDirectionOf = tm,
             impl = op:Operation{}
          }
       },

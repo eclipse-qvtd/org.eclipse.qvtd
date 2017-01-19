@@ -12,7 +12,7 @@
           </style>
         </nodeMappings>
         <edgeMappings name="RelPatternEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer'] //@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@nodeMappings[name='RelConstraintNode']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="umlx.RelPatternEdge" useDomainElement="true">
-          <style sourceArrow="Diamond" sizeComputationExpression="2" endsCentering="Both">
+          <style sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" sizeComputationExpression="2" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -21,8 +21,8 @@
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </endLabelStyleDescription>
           </style>
-          <conditionnalStyles predicateExpression="service: umlxPatternEdgeIsComposite">
-            <style sourceArrow="FillDiamond" sizeComputationExpression="2" endsCentering="Both">
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeSourceIsContainer">
+            <style sourceArrow="InputArrowWithFillDiamond" targetArrow="InputFillClosedArrow" sizeComputationExpression="2" endsCentering="Both">
               <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
               <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -32,8 +32,8 @@
               </endLabelStyleDescription>
             </style>
           </conditionnalStyles>
-          <conditionnalStyles predicateExpression="service: umlxPatternEdgeIsNotComposite">
-            <style sourceArrow="InputArrow" sizeComputationExpression="2" endsCentering="Both">
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeTargetIsContainer">
+            <style sourceArrow="InputFillClosedArrow" targetArrow="InputArrowWithFillDiamond" sizeComputationExpression="2" endsCentering="Both">
               <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
               <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -41,6 +41,33 @@
               <endLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeEndLabel">
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeTargetIsDataType">
+            <style sizeComputationExpression="2" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+              <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <endLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeEndLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeTargetIsMember">
+            <style sourceArrow="Diamond" targetArrow="InputFillClosedArrow" sizeComputationExpression="2" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+              <centerLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeCenterLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service: umlxPatternEdgeTargetIsRest">
+            <style sourceArrow="Diamond" targetArrow="InputFillClosedArrow" sizeComputationExpression="2" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
+              <centerLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeCenterLabel">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
             </style>
           </conditionnalStyles>
         </edgeMappings>
@@ -68,6 +95,14 @@
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
+            <conditionnalStyles predicateExpression="service: umlxRelPatternNodeIsExpression">
+              <style xsi:type="style:FlatContainerStyleDescription" arcWidth="50" arcHeight="50" borderSizeComputationExpression="2" showIcon="false" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" tooltipExpression="service: umlxTooltipExpression" roundedCorner="true" heightComputationExpression="3">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionnalStyles>
             <conditionnalStyles predicateExpression="service: umlxRelPatternNodeIsRoot">
               <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="4" showIcon="false" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" tooltipExpression="service: umlxTooltipExpression" heightComputationExpression="3">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
@@ -85,10 +120,10 @@
               </style>
             </conditionnalStyles>
           </subContainerMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" borderLineStyle="dot" showIcon="false" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" tooltipExpression="service: umlxTooltipExpression">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" showIcon="false" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" tooltipExpression="service: umlxTooltipExpression" backgroundStyle="Liquid">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.1"/>
           </style>

@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRoot <em>Is Root</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
  * </ul>
  *
@@ -75,23 +74,6 @@ public interface RelPatternNode extends RelNode {
 	 * @generated
 	 */
 	void setIsRoot(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Outgoing</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelPatternEdge}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Outgoing</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Outgoing</em>' reference list.
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_Outgoing()
-	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getSource
-	 * @generated
-	 */
-	EList<RelPatternEdge> getOutgoing();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Rel Domain Node</b></em>' container reference.

@@ -63,9 +63,11 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/UMLX", null, org.eclipse.qvtd.umlx.UMLXPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.umlx.UMLXTables.PACKid_$metamodel$.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EAttribute = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EAttribute", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EClass = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClass", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EClassifier = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClassifier", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EPackage = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EPackage", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EReference = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EReference", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EStructuralFeature = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EStructuralFeature", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelDiagram = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelDiagram", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelDomainNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelDomainNode", 0);
@@ -89,22 +91,30 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid__0 = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ = "";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique = "RelDiagram::RelPatternNodeNamesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelDomainNode_c_c_PrimitiveDomainHasNoClassNodes = "RelDomainNode::PrimitiveDomainHasNoClassNodes";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c = "RelDiagram::RelPatternNodeNamesAreUnique:";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelInvocationNode_c_c_CompatibleEdges = "RelInvocationNode::CompatibleEdges";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelInvocationNode_c_c_CompatibleEdges_32 = "RelInvocationNode::CompatibleEdges ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternClassNode_c_c_AnonIsUnnamed = "RelPatternClassNode::AnonIsUnnamed";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternClassNode_c_c_EClassifierIsInTypedModel = "RelPatternClassNode::EClassifierIsInTypedModel";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleEAttributePropertyTarget = "RelPatternEdge::CompatibleEAttributePropertyTarget";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleEReferencePropertyTarget = "RelPatternEdge::CompatibleEReferencePropertyTarget";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleMemberPropertyTarget = "RelPatternEdge::CompatibleMemberPropertyTarget";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatiblePropertySource = "RelPatternEdge::CompatiblePropertySource";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatiblePropertyTarget = "RelPatternEdge::CompatiblePropertyTarget";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleRestPropertyTarget = "RelPatternEdge::CompatibleRestPropertyTarget";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleSourceIndex = "RelPatternEdge::CompatibleSourceIndex";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleSourceMultiplicity = "RelPatternEdge::CompatibleSourceMultiplicity";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_SourceIsClassNode = "RelPatternEdge::SourceIsClassNode";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_SourceIsEClass = "RelPatternEdge::SourceIsEClass";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_TargetIsClassNode = "RelPatternEdge::TargetIsClassNode";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Repeated_32_pattern_32_node_32_names_c = "Repeated pattern node names:";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_RelDiagramNamesAreUnique = "TxDiagram::RelDiagramNamesAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_TxTypedModelNodeNamesAreUnique = "TxDiagram::TxTypedModelNodeNamesAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxKeyNode_c_c_PartsAreUnique = "TxKeyNode::PartsAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxPartNode_c_c_PartIsPropertyOfKey = "TxPartNode::PartIsPropertyOfKey";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique = "TxTypedModelNode::TxPackageNodePackagesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32 = " ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_39 = " \'";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_are_32_not_32_unique_32_for_32 = " are not unique for ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__39 = "\'";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_quot = "/";
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelDomainNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDomainNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelInvocationEdge = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationEdge);
@@ -116,7 +126,6 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelDomainNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDomainNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelInvocationEdge = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationEdge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelInvocationNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternClassNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternClassNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternEdge = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternEdge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxDiagram = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxDiagram);
@@ -130,6 +139,8 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_RelPatternClassNode = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternClassNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_EClass = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClass);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RelPatternClassNode = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternClassNode);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TupleTypeId TUPLid_ = org.eclipse.ocl.pivot.ids.IdManager.getTupleTypeId("Tuple", org.eclipse.qvtd.umlx.UMLXTables.PARTid__0, org.eclipse.qvtd.umlx.UMLXTables.PARTid_);
 
 	/**
@@ -436,14 +447,16 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _RelInvocationNode__owningRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM, Types._RelInvocationNode, 2);
 		public static final @NonNull ExecutorProperty _RelInvocationNode__referredRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, Types._RelInvocationNode, 3);
 
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__isMany = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_MANY, Types._RelPatternClassNode, 0);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__isNullFree = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_NULL_FREE, Types._RelPatternClassNode, 1);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__isOrdered = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_ORDERED, Types._RelPatternClassNode, 2);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__isRequired = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_REQUIRED, Types._RelPatternClassNode, 3);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__isUnique = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_UNIQUE, Types._RelPatternClassNode, 4);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__referredEClassifier = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER, Types._RelPatternClassNode, 5);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__relDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE, Types._RelPatternClassNode, 6);
-		public static final @NonNull ExecutorProperty _RelPatternClassNode__RelInvocationEdge__referredRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternClassNode, 7, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE));
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isAnon = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_ANON, Types._RelPatternClassNode, 0);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isMany = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_MANY, Types._RelPatternClassNode, 1);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isNullFree = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_NULL_FREE, Types._RelPatternClassNode, 2);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isOrdered = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_ORDERED, Types._RelPatternClassNode, 3);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isRequired = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_REQUIRED, Types._RelPatternClassNode, 4);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__isUnique = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__IS_UNIQUE, Types._RelPatternClassNode, 5);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__outgoing = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__OUTGOING, Types._RelPatternClassNode, 6);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__referredEClassifier = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER, Types._RelPatternClassNode, 7);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__relDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE, Types._RelPatternClassNode, 8);
+		public static final @NonNull ExecutorProperty _RelPatternClassNode__RelInvocationEdge__referredRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternClassNode, 9, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE));
 
 		public static final @NonNull ExecutorProperty _RelPatternEdge__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, Types._RelPatternEdge, 0);
 		public static final @NonNull ExecutorProperty _RelPatternEdge__referredEStructuralFeature = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, Types._RelPatternEdge, 1);
@@ -455,9 +468,8 @@ public class UMLXTables
 
 		public static final @NonNull ExecutorProperty _RelPatternNode__incoming = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INCOMING, Types._RelPatternNode, 0);
 		public static final @NonNull ExecutorProperty _RelPatternNode__isRoot = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ROOT, Types._RelPatternNode, 1);
-		public static final @NonNull ExecutorProperty _RelPatternNode__outgoing = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OUTGOING, Types._RelPatternNode, 2);
-		public static final @NonNull ExecutorProperty _RelPatternNode__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelPatternNode, 3);
-		public static final @NonNull ExecutorProperty _RelPatternNode__RelInvocationEdge__invokingRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternNode, 4, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE));
+		public static final @NonNull ExecutorProperty _RelPatternNode__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelPatternNode, 2);
+		public static final @NonNull ExecutorProperty _RelPatternNode__RelInvocationEdge__invokingRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternNode, 3, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE));
 
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedRelDiagrams = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, Types._TxDiagram, 0);
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxImportNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_IMPORT_NODES, Types._TxDiagram, 1);
@@ -1532,6 +1544,7 @@ public class UMLXTables
 		private static final @NonNull ExecutorProperty @NonNull [] _RelPatternClassNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelPatternNode__incoming,
+			UMLXTables.Properties._RelPatternClassNode__isAnon,
 			UMLXTables.Properties._RelPatternClassNode__isMany,
 			UMLXTables.Properties._RelPatternClassNode__isNullFree,
 			UMLXTables.Properties._RelPatternClassNode__isOrdered,
@@ -1539,7 +1552,7 @@ public class UMLXTables
 			UMLXTables.Properties._RelPatternNode__isRoot,
 			UMLXTables.Properties._RelPatternClassNode__isUnique,
 			UMLXTables.Properties._UMLXNamedElement__name,
-			UMLXTables.Properties._RelPatternNode__outgoing,
+			UMLXTables.Properties._RelPatternClassNode__outgoing,
 			UMLXTables.Properties._RelPatternNode__owningRelDomainNode,
 			UMLXTables.Properties._RelPatternClassNode__referredEClassifier,
 			UMLXTables.Properties._RelPatternClassNode__relDomainNode
@@ -1559,7 +1572,6 @@ public class UMLXTables
 			UMLXTables.Properties._RelPatternExpressionNode__expression,
 			UMLXTables.Properties._RelPatternNode__incoming,
 			UMLXTables.Properties._RelPatternNode__isRoot,
-			UMLXTables.Properties._RelPatternNode__outgoing,
 			UMLXTables.Properties._RelPatternNode__owningRelDomainNode
 		};
 
@@ -1567,7 +1579,6 @@ public class UMLXTables
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelPatternNode__incoming,
 			UMLXTables.Properties._RelPatternNode__isRoot,
-			UMLXTables.Properties._RelPatternNode__outgoing,
 			UMLXTables.Properties._RelPatternNode__owningRelDomainNode
 		};
 

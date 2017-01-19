@@ -35,7 +35,6 @@ import org.eclipse.qvtd.umlx.UMLXPackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#isIsRoot <em>Is Root</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
  * </ul>
  *
@@ -69,15 +68,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 	 * @ordered
 	 */
 	protected boolean isRoot = IS_ROOT_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOutgoing()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RelPatternEdge> outgoing;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,19 +121,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 		isRoot = newIsRoot;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_NODE__IS_ROOT, oldIsRoot, isRoot));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<RelPatternEdge> getOutgoing() {
-		if (outgoing == null) {
-			outgoing = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, UMLXPackage.REL_PATTERN_NODE__OUTGOING, UMLXPackage.REL_PATTERN_EDGE__SOURCE);
-		}
-		return outgoing;
 	}
 
 	/**
@@ -210,8 +187,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
-			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -230,8 +205,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
-			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
-				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				return basicSetOwningRelDomainNode(null, msgs);
 		}
@@ -264,8 +237,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 				return getIncoming();
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				return isIsRoot();
-			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
-				return getOutgoing();
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode();
 		}
@@ -288,10 +259,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				setIsRoot((Boolean)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
-				getOutgoing().clear();
-				getOutgoing().addAll((Collection<? extends RelPatternEdge>)newValue);
-				return;
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)newValue);
 				return;
@@ -313,9 +280,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				setIsRoot(IS_ROOT_EDEFAULT);
 				return;
-			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
-				getOutgoing().clear();
-				return;
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)null);
 				return;
@@ -335,8 +299,6 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 				return incoming != null && !incoming.isEmpty();
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				return isRoot != IS_ROOT_EDEFAULT;
-			case UMLXPackage.REL_PATTERN_NODE__OUTGOING:
-				return outgoing != null && !outgoing.isEmpty();
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode() != null;
 		}

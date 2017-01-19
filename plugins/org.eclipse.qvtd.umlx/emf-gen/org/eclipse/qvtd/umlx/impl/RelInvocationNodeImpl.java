@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyToStringOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -187,8 +188,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean CompatibleEdges(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateCompatibleEdges(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv CompatibleEdges:
@@ -200,19 +200,23 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		 *     else
 		 *       let
 		 *         result : OclAny[1] = let
-		 *           expectedNodes : Sequence(umlx::RelPatternNode) = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot)
+		 *           expectedNodes : Set(umlx::RelPatternNode) = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot)
+		 *           ->asSet()
 		 *         in
-		 *           let actualNodes : Sequence(umlx::RelPatternClassNode) = ownedRelInvocationEdges.referredRelPatternNode
+		 *           let
+		 *             actualNodes : Set(umlx::RelPatternClassNode) = ownedRelInvocationEdges.referredRelPatternNode->asSet()
 		 *           in
 		 *             let status : Boolean[1] = expectedNodes = actualNodes
 		 *             in
 		 *               if status = true
 		 *               then true
-		 *               else Tuple{
-		 *                   status = status, message = expectedNodes->size()
+		 *               else
+		 *                 Tuple{status = status, message = 'RelInvocationNode::CompatibleEdges ' +
+		 *                   expectedNodes->size()
 		 *                   .toString() + '/' +
 		 *                   expectedNodes->size()
-		 *                   .toString()}
+		 *                   .toString()
+		 *                 }
 		 *               endif
 		 *       in
 		 *         'RelInvocationNode::CompatibleEdges'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -257,10 +261,10 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 				}
 				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
 				@NonNull Iterator<Object> ITERATOR__1_0 = collect.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue expectedNodes;
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue select;
 				while (true) {
 					if (!ITERATOR__1_0.hasNext()) {
-						expectedNodes = accumulator_0;
+						select = accumulator_0;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -274,15 +278,16 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 						accumulator_0.add(_1_0);
 					}
 				}
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue expectedNodes = CollectionAsSetOperation.INSTANCE.evaluate(select);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<RelInvocationEdge> ownedRelInvocationEdges = this.getOwnedRelInvocationEdges();
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedRelInvocationEdges = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelInvocationEdge, ownedRelInvocationEdges);
 				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternClassNode);
 				@NonNull Iterator<Object> ITERATOR__1_1 = BOXED_ownedRelInvocationEdges.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue actualNodes;
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
 				while (true) {
 					if (!ITERATOR__1_1.hasNext()) {
-						actualNodes = accumulator_1;
+						collect_0 = accumulator_1;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -295,6 +300,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 					//
 					accumulator_1.add(referredRelPatternNode);
 				}
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue actualNodes = CollectionAsSetOperation.INSTANCE.evaluate(collect_0);
 				final /*@Thrown*/ boolean status = expectedNodes.equals(actualNodes);
 				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
 				if (status) {
@@ -303,9 +309,10 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 				else {
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(expectedNodes);
 					final /*@Thrown*/ java.lang.@NonNull String toString_0 = OclAnyToStringOperation.INSTANCE.evaluate(size_0);
-					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(toString_0, UMLXTables.STR_quot);
-					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, toString_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_0, status);
+					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(UMLXTables.STR_RelInvocationNode_c_c_CompatibleEdges_32, toString_0);
+					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, UMLXTables.STR_quot);
+					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, toString_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_1, status);
 					symbol_1 = symbol_0;
 				}
 				CAUGHT_symbol_1 = symbol_1;

@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -101,6 +102,16 @@ public class QVTrelationHelper extends QVTbaseHelper
 		//		}
 	}
 
+	public @NonNull CollectionTemplateExp createCollectionTemplateExp(@NonNull TemplateVariable asTemplateVariable, org.eclipse.ocl.pivot.@NonNull Class asClass, boolean isRequired) {
+		CollectionTemplateExp asCollectionTemplateExp = QVTtemplateFactory.eINSTANCE.createCollectionTemplateExp();
+		//		asObjectTemplateExp.setName(PivotUtil.getName(asTemplateVariable));
+		asCollectionTemplateExp.setType(asClass);
+		asCollectionTemplateExp.setReferredCollectionType((CollectionType)asClass);
+		asCollectionTemplateExp.setIsRequired(isRequired);
+		asCollectionTemplateExp.setBindsTo(asTemplateVariable);
+		return asCollectionTemplateExp;
+	}
+
 	public @NonNull DomainPattern createDomainPattern(TemplateExp asTemplateExp) {
 		DomainPattern asDomainPattern = QVTrelationFactory.eINSTANCE.createDomainPattern();
 		asDomainPattern.setTemplateExpression(asTemplateExp);
@@ -162,10 +173,11 @@ public class QVTrelationHelper extends QVTbaseHelper
 		return asRelationalTransformation;
 	}
 
-	public @NonNull SharedVariable createSharedVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
+	public @NonNull SharedVariable createSharedVariable(@Nullable String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
 		SharedVariable asVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
 		asVariable.setName(name);
 		asVariable.setType(asType);
+		asVariable.setIsImplicit(name == null);
 		asVariable.setIsRequired(isRequired);
 		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;

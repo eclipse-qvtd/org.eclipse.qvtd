@@ -80,14 +80,36 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	@Override
 	public @Nullable Object visitRelPatternClassNode(@NonNull RelPatternClassNode relPatternClassNode) {
 		EClassifier eClassifier = relPatternClassNode.getReferredEClassifier();
-		append(LabelUtil.getLabel(eClassifier));
+		append(relPatternClassNode.getName());
+		append(" : ");
+		if (relPatternClassNode.isIsMany()) {
+			if (relPatternClassNode.isIsUnique()) {
+				append(relPatternClassNode.isIsOrdered() ? "OrderedSet" : "Set");
+			}
+			else {
+				append(relPatternClassNode.isIsOrdered() ? "Sequence" : "Bag");
+			}
+			append("(");
+			append(LabelUtil.getLabel(eClassifier));
+			append(relPatternClassNode.isIsNullFree() ? "[*|1]" : "[*|?]");
+			append(")");
+		}
+		else {
+			append(LabelUtil.getLabel(eClassifier));
+		}
+		append(relPatternClassNode.isIsRequired() ? "[1]" : "[?]");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitRelPatternEdge(@NonNull RelPatternEdge relPatternEdge) {
 		EStructuralFeature eStructuralFeature = relPatternEdge.getReferredEStructuralFeature();
-		append(LabelUtil.getLabel(eStructuralFeature));
+		if (eStructuralFeature != null) {
+			append(LabelUtil.getLabel(eStructuralFeature));
+		}
+		else {
+			append("«" + relPatternEdge.getSourceIndex() + "»");
+		}
 		return null;
 	}
 
@@ -129,8 +151,7 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 
 	@Override
 	public @Nullable Object visitUMLXNamedElement(@NonNull UMLXNamedElement umlxNamedElement) {
-		String name = umlxNamedElement.getName();
-		append(name);
+		append(umlxNamedElement.getName());
 		return null;
 	}
 

@@ -13,4 +13,9 @@
             genModel="model/UMLX.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.ocl.pivot.label_generator">
+      <generator for="org.eclipse.qvtd.umlx.RelPatternEdge"
+      	class="org.eclipse.qvtd.umlx.labels.RelPatternEdgeLabelGenerator"/>
+  </extension>
+
 </plugin>

@@ -119,11 +119,4 @@ public interface RelDomainNode extends RelNode {
 	 */
 	void setReferredTxTypedModelNode(TxTypedModelNode value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	boolean PrimitiveDomainHasNoClassNodes(DiagnosticChain diagnostics, Map<Object, Object> context);
-
 } // RelDomainNode

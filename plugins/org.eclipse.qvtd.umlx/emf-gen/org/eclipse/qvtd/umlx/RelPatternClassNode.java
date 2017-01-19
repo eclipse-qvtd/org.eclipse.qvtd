@@ -12,6 +12,7 @@ package org.eclipse.qvtd.umlx;
 
 import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 
 /**
@@ -23,11 +24,13 @@ import org.eclipse.emf.ecore.EClassifier;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsAnon <em>Is Anon</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsMany <em>Is Many</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsNullFree <em>Is Null Free</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsOrdered <em>Is Ordered</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsRequired <em>Is Required</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsUnique <em>Is Unique</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getReferredEClassifier <em>Referred EClassifier</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
@@ -36,6 +39,32 @@ import org.eclipse.emf.ecore.EClassifier;
  * @generated
  */
 public interface RelPatternClassNode extends RelPatternNode, UMLXNamedElement {
+	/**
+	 * Returns the value of the '<em><b>Is Anon</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Anon</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Anon</em>' attribute.
+	 * @see #setIsAnon(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternClassNode_IsAnon()
+	 * @generated
+	 */
+	boolean isIsAnon();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsAnon <em>Is Anon</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Anon</em>' attribute.
+	 * @see #isIsAnon()
+	 * @generated
+	 */
+	void setIsAnon(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Is Many</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
@@ -167,6 +196,23 @@ public interface RelPatternClassNode extends RelPatternNode, UMLXNamedElement {
 	void setIsUnique(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Outgoing</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelPatternEdge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Outgoing</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Outgoing</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternClassNode_Outgoing()
+	 * @see org.eclipse.qvtd.umlx.RelPatternEdge#getSource
+	 * @generated
+	 */
+	EList<RelPatternEdge> getOutgoing();
+
+	/**
 	 * Returns the value of the '<em><b>Referred EClassifier</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -221,6 +267,13 @@ public interface RelPatternClassNode extends RelPatternNode, UMLXNamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean EClassifierIsInTypedModel(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateAnonIsUnnamed(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateEClassifierIsInTypedModel(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // RelPatternNode

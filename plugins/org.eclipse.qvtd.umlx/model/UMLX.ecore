@@ -14,7 +14,7 @@
       <details key="constraints" value="RelPatternNodeNamesAreUnique"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="RelPatternNodeNamesAreUnique" value="let allNames = ownedRelDomainNodes.ownedRelPatternNodes->selectByKind(RelPatternClassNode).name in&#xA;&#x9;&#x9;Tuple{status : Boolean = allNames->isUnique(n | n),&#xA;&#x9;&#x9;&#x9;message : String = let repeatedNames = allNames->select(n | allNames->count(n) > 1)->asSet() in&#xA;&#x9;&#x9;&#x9;repeatedNames->iterate(n; acc:String = 'Repeated pattern node names:' | acc + ' ' + n)&#xA;&#x9;&#x9;}.status"/>
+      <details key="RelPatternNodeNamesAreUnique" value="let allNames = ownedRelDomainNodes.ownedRelPatternNodes->selectByKind(RelPatternClassNode)->select(not isAnon).name in&#xA;&#x9;&#x9;Tuple{status : Boolean = allNames->isUnique(n | n),&#xA;&#x9;&#x9;&#x9;message : String = let repeatedNames = allNames->select(n | allNames->count(n) > 1)->asSet() in&#xA;&#x9;&#x9;&#x9;repeatedNames->iterate(n; acc:String = 'RelDiagram::RelPatternNodeNamesAreUnique:' | acc + ' \'' + n + '\'') + ' are not unique for ' + name&#xA;&#x9;&#x9;}.status"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
@@ -26,12 +26,6 @@
         eType="#//TxDiagram" eOpposite="#//TxDiagram/ownedRelDiagrams"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelDomainNode" eSuperTypes="#//RelNode">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="PrimitiveDomainHasNoClassNodes"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="PrimitiveDomainHasNoClassNodes" value="referredTxTypedModelNode = null implies&#xA;&#x9;&#x9;&#x9;ownedRelPatternNodes->selectByKind(RelPatternClassNode)->forAll(not referredEClassifier.oclIsKindOf(ecore::EClass))"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRelPatternEdges" upperBound="-1"
         eType="#//RelPatternEdge" containment="true" eOpposite="#//RelPatternEdge/owningRelDomainNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRelPatternNodes" upperBound="-1"
@@ -55,7 +49,7 @@
       <details key="constraints" value="CompatibleEdges"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="CompatibleEdges" value="&#xA;&#x9;&#x9;&#x9;let expectedNodes = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot) in&#xA;&#x9;&#x9;&#x9;let actualNodes = ownedRelInvocationEdges.referredRelPatternNode in&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Tuple{status : Boolean = expectedNodes = actualNodes,&#xA;&#x9;&#x9;&#x9;&#x9;message : String = expectedNodes->size().toString() + '/' + expectedNodes->size().toString()&#xA;&#x9;&#x9;&#x9;}.status"/>
+      <details key="CompatibleEdges" value="&#xA;&#x9;&#x9;&#x9;let expectedNodes = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot)->asSet() in&#xA;&#x9;&#x9;&#x9;let actualNodes = ownedRelInvocationEdges.referredRelPatternNode->asSet() in&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Tuple{status : Boolean = expectedNodes = actualNodes,&#xA;&#x9;&#x9;&#x9;&#x9;message : String = 'RelInvocationNode::CompatibleEdges ' + expectedNodes->size().toString() + '/' + expectedNodes->size().toString()&#xA;&#x9;&#x9;&#x9;}.status"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isThen" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
@@ -69,11 +63,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="RelNode" abstract="true" eSuperTypes="#//UMLXElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="RelPatternClassNode" eSuperTypes="#//RelPatternNode #//UMLXNamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="EClassifierIsInTypedModel"/>
+      <details key="constraints" value="AnonIsUnnamed EClassifierIsInTypedModel"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="AnonIsUnnamed" value="isAnon = (name = '')"/>
       <details key="EClassifierIsInTypedModel" value="let txTypedModelNode = owningRelDomainNode.referredTxTypedModelNode in&#xA;&#x9;&#x9;txTypedModelNode &lt;> null implies&#xA;&#x9;&#x9;txTypedModelNode.ownedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAnon" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMany" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNullFree" lowerBound="1"
@@ -84,27 +81,33 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//RelPatternEdge" eOpposite="#//RelPatternEdge/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredEClassifier" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relDomainNode" eType="#//RelDomainNode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelPatternEdge" eSuperTypes="#//RelEdge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="SourceIsClassNode SourceIsEClass CompatiblePropertySource TargetIsClassNode CompatiblePropertyTarget"/>
+      <details key="constraints" value="SourceIsClassNode SourceIsEClass CompatiblePropertySource CompatibleSourceIndex CompatibleSourceMultiplicity CompatibleEAttributePropertyTarget CompatibleEReferencePropertyTarget CompatibleMemberPropertyTarget CompatibleRestPropertyTarget"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="SourceIsClassNode" value="source.oclIsKindOf(RelPatternClassNode)"/>
-      <details key="SourceIsEClass" value="source.oclIsKindOf(RelPatternClassNode) implies source.oclAsType(RelPatternClassNode).referredEClassifier.oclIsKindOf(ecore::EClassifier)"/>
-      <details key="CompatiblePropertySource" value="source.oclAsType(RelPatternClassNode).referredEClassifier.oclAsType(ecore::EClass)->closure(eSuperTypes)->includes(referredEStructuralFeature?.eContainingClass)"/>
-      <details key="TargetIsClassNode" value="target.oclIsKindOf(RelPatternClassNode)"/>
-      <details key="CompatiblePropertyTarget" value="referredEStructuralFeature?.eType = target.oclAsType(RelPatternClassNode).referredEClassifier"/>
+      <details key="SourceIsClassNode" value="&#xA;&#x9;&#x9;&#x9;source.oclIsKindOf(RelPatternClassNode)"/>
+      <details key="SourceIsEClass" value="&#xA;&#x9;&#x9;&#x9;source.oclIsKindOf(RelPatternClassNode) implies&#xA;&#x9;&#x9;&#x9;source.oclAsType(RelPatternClassNode).referredEClassifier.oclIsKindOf(ecore::EClassifier)"/>
+      <details key="CompatiblePropertySource" value="&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature &lt;> null implies&#xA;&#x9;&#x9;&#x9;source.oclAsType(RelPatternClassNode).referredEClassifier.oclAsType(ecore::EClass)->closure(eSuperTypes)->includes(referredEStructuralFeature.eContainingClass)"/>
+      <details key="CompatibleSourceIndex" value="&#xA;&#x9;&#x9;&#x9;(referredEStructuralFeature &lt;> null) = (sourceIndex = 0)"/>
+      <details key="CompatibleSourceMultiplicity" value="&#xA;&#x9;&#x9;&#x9;(referredEStructuralFeature = null) = source.oclAsType(RelPatternClassNode).isMany"/>
+      <details key="CompatibleEAttributePropertyTarget" value="&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature &lt;> null and&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and&#xA;&#x9;&#x9;&#x9;target.oclIsKindOf(RelPatternClassNode) implies&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature.eType = target.oclAsType(RelPatternClassNode).referredEClassifier"/>
+      <details key="CompatibleEReferencePropertyTarget" value="&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature &lt;> null and&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature.oclIsKindOf(ecore::EReference) and&#xA;&#x9;&#x9;&#x9;target.oclIsKindOf(RelPatternClassNode) implies&#xA;&#x9;&#x9;&#x9;let sourceEClass = target.oclAsType(RelPatternClassNode).referredEClassifier.oclAsType(ecore::EClass) in&#xA;&#x9;&#x9;&#x9;sourceEClass->closure(eSuperTypes)->includes(referredEStructuralFeature.eType)"/>
+      <details key="CompatibleMemberPropertyTarget" value="&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature = null and&#xA;&#x9;&#x9;&#x9;sourceIndex > 0 and&#xA;&#x9;&#x9;&#x9;target.oclIsKindOf(RelPatternClassNode) implies&#xA;&#x9;&#x9;&#x9;let sourceEClass = source.oclAsType(RelPatternClassNode).referredEClassifier.oclAsType(ecore::EClass) in&#xA;&#x9;&#x9;&#x9;let targetEClass = target.oclAsType(RelPatternClassNode).referredEClassifier.oclAsType(ecore::EClass) in&#xA;&#x9;&#x9;&#x9;sourceEClass->closure(eSuperTypes)->includes(targetEClass) or targetEClass->closure(eSuperTypes)->includes(sourceEClass)"/>
+      <details key="CompatibleRestPropertyTarget" value="&#xA;&#x9;&#x9;&#x9;referredEStructuralFeature = null and&#xA;&#x9;&#x9;&#x9;sourceIndex &lt; 0 and&#xA;&#x9;&#x9;&#x9;target.oclIsKindOf(RelPatternClassNode) implies&#xA;&#x9;&#x9;&#x9;let sourceClassNode = source.oclAsType(RelPatternClassNode) in&#xA;&#x9;&#x9;&#x9;let targetClassNode = target.oclAsType(RelPatternClassNode) in&#xA;&#x9;&#x9;&#x9;let sourceEClass = sourceClassNode.referredEClassifier.oclAsType(ecore::EClass) in&#xA;&#x9;&#x9;&#x9;let targetEClass = targetClassNode.referredEClassifier.oclAsType(ecore::EClass) in&#xA;&#x9;&#x9;&#x9;sourceEClass = targetEClass and&#xA;&#x9;&#x9;&#x9;sourceClassNode.isMany = targetClassNode.isMany and&#xA;&#x9;&#x9;&#x9;sourceClassNode.isNullFree = targetClassNode.isNullFree and&#xA;&#x9;&#x9;&#x9;sourceClassNode.isOrdered = targetClassNode.isOrdered and&#xA;&#x9;&#x9;&#x9;sourceClassNode.isUnique = targetClassNode.isUnique"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningRelDomainNode" eType="#//RelDomainNode"
         eOpposite="#//RelDomainNode/ownedRelPatternEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredEStructuralFeature"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//RelPatternNode" eOpposite="#//RelPatternNode/outgoing"/>
+        eType="#//RelPatternClassNode" eOpposite="#//RelPatternClassNode/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceIndex" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
@@ -119,8 +122,6 @@
         eType="#//RelPatternEdge" eOpposite="#//RelPatternEdge/target"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRoot" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
-        eType="#//RelPatternEdge" eOpposite="#//RelPatternEdge/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningRelDomainNode" lowerBound="1"
         eType="#//RelDomainNode" eOpposite="#//RelDomainNode/ownedRelPatternNodes"/>
   </eClassifiers>

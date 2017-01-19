@@ -127,5 +127,5 @@ public interface RelDiagram extends UMLXNamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean RelPatternNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateRelPatternNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 } // RelDiagram

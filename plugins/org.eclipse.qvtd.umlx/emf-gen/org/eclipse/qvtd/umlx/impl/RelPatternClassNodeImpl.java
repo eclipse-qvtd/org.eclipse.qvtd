@@ -10,15 +10,20 @@
  */
 package org.eclipse.qvtd.umlx.impl;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -32,6 +37,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelPatternClassNode;
+import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.UMLXNamedElement;
 import org.eclipse.qvtd.umlx.UMLXPackage;
@@ -47,11 +53,13 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsAnon <em>Is Anon</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsMany <em>Is Many</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsNullFree <em>Is Null Free</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsOrdered <em>Is Ordered</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsRequired <em>Is Required</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsUnique <em>Is Unique</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getReferredEClassifier <em>Referred EClassifier</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
@@ -78,6 +86,26 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsAnon() <em>Is Anon</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAnon()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ANON_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsAnon() <em>Is Anon</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAnon()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAnon = IS_ANON_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIsMany() <em>Is Many</em>}' attribute.
@@ -180,6 +208,16 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	protected boolean isUnique = IS_UNIQUE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoing()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RelPatternEdge> outgoing;
+
+	/**
 	 * The cached value of the '{@link #getReferredEClassifier() <em>Referred EClassifier</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -235,10 +273,36 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 */
 	@Override
 	public void setName(String newName) {
+		if ("mbVars".equals(newName)) {
+			toString();
+		}
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsAnon() {
+		return isAnon;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsAnon(boolean newIsAnon) {
+		boolean oldIsAnon = isAnon;
+		isAnon = newIsAnon;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON, oldIsAnon, isAnon));
 	}
 
 	/**
@@ -362,6 +426,19 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @generated
 	 */
 	@Override
+	public EList<RelPatternEdge> getOutgoing() {
+		if (outgoing == null) {
+			outgoing = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING, UMLXPackage.REL_PATTERN_EDGE__SOURCE);
+		}
+		return outgoing;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClassifier getReferredEClassifier() {
 		if (referredEClassifier != null && referredEClassifier.eIsProxy()) {
 			InternalEObject oldReferredEClassifier = (InternalEObject)referredEClassifier;
@@ -442,7 +519,47 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @generated
 	 */
 	@Override
-	public boolean EClassifierIsInTypedModel(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateAnonIsUnnamed(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv AnonIsUnnamed:
+		 *   let
+		 *     severity : Integer[1] = 'RelPatternClassNode::AnonIsUnnamed'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let result : Boolean[1] = isAnon = name = ''
+		 *       in
+		 *         'RelPatternClassNode::AnonIsUnnamed'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_RelPatternClassNode_c_c_AnonIsUnnamed);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			final /*@NonInvalid*/ boolean isAnon = this.isIsAnon();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ java.lang.@NonNull String name = this.getName();
+			final /*@NonInvalid*/ boolean eq = name.equals(UMLXTables.STR_);
+			final /*@NonInvalid*/ boolean result = isAnon == eq;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_RelPatternClassNode_c_c_AnonIsUnnamed, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateEClassifierIsInTypedModel(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv EClassifierIsInTypedModel:
@@ -551,6 +668,8 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				return getName();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				return isIsAnon();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				return isIsMany();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
@@ -561,6 +680,8 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				return isIsRequired();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				return isIsUnique();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				return getOutgoing();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				if (resolve) return getReferredEClassifier();
 				return basicGetReferredEClassifier();
@@ -576,11 +697,15 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				setName((String)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				setIsAnon((Boolean)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				setIsMany((Boolean)newValue);
@@ -596,6 +721,10 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				setIsUnique((Boolean)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				getOutgoing().clear();
+				getOutgoing().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				setReferredEClassifier((EClassifier)newValue);
@@ -618,6 +747,9 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				setIsAnon(IS_ANON_EDEFAULT);
+				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				setIsMany(IS_MANY_EDEFAULT);
 				return;
@@ -632,6 +764,9 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				setIsUnique(IS_UNIQUE_EDEFAULT);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				getOutgoing().clear();
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				setReferredEClassifier((EClassifier)null);
@@ -653,6 +788,8 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				return isAnon != IS_ANON_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				return isMany != IS_MANY_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
@@ -663,6 +800,8 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				return isRequired != IS_REQUIRED_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				return isUnique != IS_UNIQUE_EDEFAULT;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				return outgoing != null && !outgoing.isEmpty();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				return referredEClassifier != null;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
@@ -720,6 +859,35 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	@Override
 	public String toString() {
 		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 } //RelPatternNodeImpl

@@ -29,19 +29,29 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.context.AbstractParserContext;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.ParserContext;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -60,16 +70,17 @@ import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
-import org.eclipse.qvtd.umlx.RelEdge;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
+import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -93,13 +104,159 @@ public class UMLX2QVTr extends QVTrelationHelper
 		protected final @NonNull MetamodelManager metamodelManager;
 		private final @NonNull Map<@NonNull RelPatternClassNode, @NonNull OCLExpression> relPatternNode2qvtrExpression = new HashMap<>();
 		private final @NonNull Set<@NonNull RelPatternEdge> connectedEdges = new HashSet<>();
+		private final @NonNull Set<@NonNull RelPatternClassNode> connectedClassNodeSet = new HashSet<>();
 
 		public ConnectionHelper(@NonNull UMLX2QVTr context) {
 			this.context = context;
 			this.metamodelManager = context.getMetamodelManager();
 		}
 
-		private void connect(@NonNull ObjectTemplateExp sourceTemplateExp, @NonNull EStructuralFeature eStructuralFeature, @NonNull OCLExpression targetExpression) {
+		private boolean connectCollectionEdge(@NonNull RelPatternClassNode sourceNode, int sourceIndex, @NonNull RelPatternNode targetNode) {
+			CollectionTemplateExp sourceTemplateExp = (CollectionTemplateExp) relPatternNode2qvtrExpression.get(sourceNode);
+			OCLExpression targetExpression = relPatternNode2qvtrExpression.get(targetNode);
+			assert sourceTemplateExp != null;
+			if (sourceIndex > 0) {
+				if (targetExpression == null) {
+					if (targetNode instanceof RelPatternExpressionNode) {
+						targetExpression = createUnparsedExpression((RelPatternExpressionNode) targetNode);
+					}
+					else {
+						SharedVariable sharedVariable = context.getQVTrElement(SharedVariable.class, targetNode);
+						targetExpression = context.createVariableExp(sharedVariable);
+					}
+				}
+				List<@NonNull OCLExpression> ownedMembersList = QVTrelationUtil.Internal.getOwnedMembersList(sourceTemplateExp);
+				int javaIndex = sourceIndex - 1;
+				while (ownedMembersList.size() < javaIndex) {
+					ownedMembersList.add(context.createNullLiteralExp());
+				}
+				if (ownedMembersList.size() == javaIndex) {
+					ownedMembersList.add(targetExpression);
+				}
+				else {
+					ownedMembersList.set(javaIndex, targetExpression);
+				}
+				return true;
+			}
+			else if (sourceIndex < 0) {
+				SharedVariable sharedVariable = context.getQVTrElement(SharedVariable.class, targetNode);
+				sourceTemplateExp.setRest(sharedVariable);
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		private boolean connectComplexEdge(@NonNull RelPatternClassNode sourceNode, @NonNull EStructuralFeature eStructuralFeature, @NonNull RelPatternNode targetNode) {
+			EReference eReference = (EReference)eStructuralFeature;
+			//			assert !eReference.isMany();
+			//			EReference eOpposite = eReference.getEOpposite();
+			//			if ((eOpposite != null) && (targetNode instanceof RelPatternClassNode)) {
+			//				connect((RelPatternClassNode)targetNode, eOpposite, sourceNode);
+			//				return true;
+			//			}
+			connectObjectEdge(sourceNode, eStructuralFeature, targetNode);
+			return true;
+			//			throw new UnsupportedOperationException();
+			//			return false;
+		}
+
+		private @NonNull Iterable<@NonNull RelPatternClassNode> connectComplexEdges(@NonNull RelPatternClassNode relNode) {
+			List<@NonNull RelPatternClassNode> newClassNodes = new ArrayList<>();
+			for (@NonNull RelPatternEdge relEdge : UMLXUtil.getOutgoing(relNode)) {
+				if (!connectedEdges.contains(relEdge)) {
+					RelPatternClassNode sourceNode = relNode;
+					EStructuralFeature eStructuralFeature = relEdge.getReferredEStructuralFeature();
+					RelPatternNode targetNode = UMLXUtil.getTarget(relEdge);
+					if (eStructuralFeature != null) {
+						if (connectComplexEdge(sourceNode, eStructuralFeature, targetNode)) {
+							if (targetNode instanceof RelPatternClassNode) {
+								newClassNodes.add((RelPatternClassNode)targetNode);
+							}
+							connectedEdges.add(relEdge);
+						}
+					}
+					else {
+						if (connectCollectionEdge(sourceNode, relEdge.getSourceIndex(), targetNode)) {
+							if (targetNode instanceof RelPatternClassNode) {
+								newClassNodes.add((RelPatternClassNode)targetNode);
+							}
+							connectedEdges.add(relEdge);
+						}
+					}
+				}
+			}
+			for (@NonNull RelPatternEdge relEdge : UMLXUtil.getIncoming(relNode)) {
+				if (!connectedEdges.contains(relEdge)) {
+					RelPatternClassNode sourceNode = UMLXUtil.getSource(relEdge);
+					EStructuralFeature eStructuralFeature = relEdge.getReferredEStructuralFeature();
+					RelPatternClassNode targetNode = relNode;
+					if (eStructuralFeature != null) {
+						if (connectComplexEdge(sourceNode, eStructuralFeature, targetNode)) {
+							newClassNodes.add(targetNode);
+							connectedEdges.add(relEdge);
+						}
+					}
+					else {
+						if (connectCollectionEdge(sourceNode, relEdge.getSourceIndex(), targetNode)) {
+							if (targetNode instanceof RelPatternClassNode) {
+								newClassNodes.add(targetNode);
+							}
+							connectedEdges.add(relEdge);
+						}
+					}
+				}
+			}
+			return newClassNodes;
+		}
+
+		public void connectNodes(@NonNull Iterable<@NonNull RelPatternClassNode> relRootPatternClassNodes) {
+			List<@NonNull RelPatternClassNode> connectedClassNodeList = Lists.newArrayList(relRootPatternClassNodes);
+			connectedClassNodeSet.addAll(connectedClassNodeList);
+			int iSimple = 0;
+			for (; iSimple < connectedClassNodeList.size(); iSimple++) {
+				RelPatternClassNode connectableClassNode = connectedClassNodeList.get(iSimple);
+				Iterable<@NonNull RelPatternClassNode> newClassNodes = connectSimpleEdges(connectableClassNode);
+				for (@NonNull RelPatternClassNode newClassNode : newClassNodes) {
+					if (connectedClassNodeSet.add(newClassNode)) {
+						connectedClassNodeList.add(newClassNode);
+					}
+				}
+			}
+			for (int iComplex = 0; iComplex < connectedClassNodeList.size(); iComplex++) {
+				RelPatternClassNode connectableClassNode = connectedClassNodeList.get(iComplex);
+				Iterable<@NonNull RelPatternClassNode> newClassNodes = connectComplexEdges(connectableClassNode);
+				for (@NonNull RelPatternClassNode newClassNode : newClassNodes) {
+					if (connectedClassNodeSet.add(newClassNode)) {
+						connectedClassNodeList.add(newClassNode);
+					}
+				}
+				for (; iSimple < connectedClassNodeList.size(); iSimple++) {
+					RelPatternClassNode connectableClassNode2 = connectedClassNodeList.get(iSimple);
+					Iterable<@NonNull RelPatternClassNode> newClassNodes2 = connectSimpleEdges(connectableClassNode2);
+					for (@NonNull RelPatternClassNode newClassNode : newClassNodes2) {
+						if (connectedClassNodeSet.add(newClassNode)) {
+							connectedClassNodeList.add(newClassNode);
+						}
+					}
+				}
+			}
+		}
+
+		private void connectObjectEdge(@NonNull RelPatternClassNode sourceNode, @NonNull EStructuralFeature eStructuralFeature, @NonNull RelPatternNode targetNode) {
+			ObjectTemplateExp sourceTemplateExp = (ObjectTemplateExp) relPatternNode2qvtrExpression.get(sourceNode);
+			OCLExpression targetExpression = relPatternNode2qvtrExpression.get(targetNode);
+			assert sourceTemplateExp != null;
+			if (targetExpression == null) {
+				if (targetNode instanceof RelPatternExpressionNode) {
+					targetExpression = createUnparsedExpression((RelPatternExpressionNode)targetNode);
+				}
+				else {
+					SharedVariable sharedVariable = context.getQVTrElement(SharedVariable.class, targetNode);
+					targetExpression = context.createVariableExp(sharedVariable);
+				}
+			}
 			Property asProperty = metamodelManager.getASOfEcore(Property.class, eStructuralFeature);
 			assert asProperty != null;
 			//			if (txPartNode.isIsOpposite()) {
@@ -109,134 +266,81 @@ public class UMLX2QVTr extends QVTrelationHelper
 			QVTrelationUtil.Internal.getOwnedPartsList(sourceTemplateExp).add(qvtrPropertyTemplateItem);
 		}
 
-		private void connect(@NonNull RelPatternClassNode sourceNode, @NonNull EStructuralFeature eStructuralFeature, @NonNull RelPatternClassNode targetNode) {
-			ObjectTemplateExp sourceTemplateExp = (ObjectTemplateExp) relPatternNode2qvtrExpression.get(sourceNode);
-			OCLExpression targetTemplateExp = relPatternNode2qvtrExpression.get(targetNode);
-			assert sourceTemplateExp != null;
-			if (targetTemplateExp == null) {
-				SharedVariable sharedVariable = context.getQVTrElement(SharedVariable.class, targetNode);
-				targetTemplateExp = context.createVariableExp(sharedVariable);
+		private boolean connectSimpleEdge(@NonNull RelPatternClassNode sourceNode, @NonNull EStructuralFeature eStructuralFeature, @NonNull RelPatternNode targetNode) {
+			if (eStructuralFeature instanceof EAttribute) {
+				EAttribute eAttribute = (EAttribute)eStructuralFeature;
+				connectObjectEdge(sourceNode, eAttribute, targetNode);
+				return true;
 			}
-			connect(sourceTemplateExp, eStructuralFeature, targetTemplateExp);
-		}
-
-		private @NonNull Iterable<@NonNull RelPatternClassNode> connectComplexEdges(@NonNull RelPatternClassNode relNode) {
-			List<@NonNull RelPatternClassNode> newNodes = new ArrayList<>();
-			/*				for (@NonNull RelPatternEdge relEdge : UMLXUtil.getOutgoingEdges(relNode)) {
-						if (!connectedEdges.contains(relEdge)) {
-							EStructuralFeature eStructuralFeature = UMLXUtil.getReferredProperty(relEdge);
-							if (eStructuralFeature.isMany() && (eStructuralFeature instanceof EReference)) {
-								EReference eOpposite = ((EReference)eStructuralFeature).getEOpposite();
-								if (eOpposite != null) {
-
-								}
-								else {
-									RelPatternNode targetNode = UMLXUtil.getTarget(relEdge);
-									connect2(connectionHelper, targetNode,
-										eStructuralFeature, relNode);
-									newNodes.add(targetNode);
-									connectedEdges.add(relEdge);
-								}
-							}
-						}
-					}
-					for (@NonNull RelPatternEdge relEdge : UMLXUtil.getIncomingEdges(relNode)) {
-						if (!connectedEdges.contains(relEdge)) {
-							EStructuralFeature eStructuralFeature = UMLXUtil.getReferredProperty(relEdge);
-							if (eStructuralFeature.isMany() && (eStructuralFeature instanceof EReference)) {
-								RelPatternNode sourceNode = UMLXUtil.getSource(relEdge);
-								ObjectTemplateExp targetTemplateExp = (ObjectTemplateExp) get(relNode);
-								OCLExpression sourceTemplateExp = get(sourceNode);
-								assert targetTemplateExp != null;
-								if (sourceTemplateExp == null) {
-									SharedVariable sharedVariable = context.getQVTrElement(SharedVariable.class, sourceNode);
-									sourceTemplateExp = context.createVariableExp(sharedVariable);
-								}
-								connect((ObjectTemplateExp) sourceTemplateExp, eStructuralFeature, targetTemplateExp);
-								newNodes.add(sourceNode);
-								connectedEdges.add(relEdge);
-							}
-						}
-					} */
-			return newNodes;
-		}
-
-		public void connectNodes(@NonNull Iterable<@NonNull RelPatternClassNode> relRootPatternNodes) {
-			List<@NonNull RelPatternClassNode> connectedNodes = Lists.newArrayList(relRootPatternNodes);
-			for (int i = 0; i < connectedNodes.size(); i++) {
-				RelPatternClassNode connectableNode = connectedNodes.get(i);
-				//				connectableNode.toString();
-				Iterable<@NonNull RelPatternClassNode> newNodes = connectSimpleEdges(connectableNode);
-				for (@NonNull RelPatternClassNode newNode : newNodes) {
-					if (!connectedNodes.contains(newNode)) {
-						connectedNodes.add(newNode);
-					}
+			EReference eReference = (EReference)eStructuralFeature;
+			if (!eReference.isMany()) {
+				connectObjectEdge(sourceNode, eReference, targetNode);
+				return true;
+			}
+			if (connectedClassNodeSet.contains(targetNode)) {
+				EReference eOpposite = eReference.getEOpposite();
+				if (eOpposite != null) {
+					connectObjectEdge((RelPatternClassNode)targetNode, eOpposite, sourceNode);
+					return true;
 				}
 			}
-			for (int i = 0; i < connectedNodes.size(); i++) {
-				RelPatternClassNode connectableNode = connectedNodes.get(i);
-				Iterable<@NonNull RelPatternClassNode> newNodes = connectComplexEdges(connectableNode);
-				for (@NonNull RelPatternClassNode newNode : newNodes) {
-					if (!connectedNodes.contains(newNode)) {
-						connectedNodes.add(newNode);
-					}
-				}
-				for (int j = i; j < connectedNodes.size(); j++) {
-					RelPatternClassNode connectableNode2 = connectedNodes.get(j);
-					Iterable<@NonNull RelPatternClassNode> newNodes2 = connectSimpleEdges(connectableNode2);
-					for (@NonNull RelPatternClassNode newNode : newNodes2) {
-						if (!connectedNodes.contains(newNode)) {
-							connectedNodes.add(newNode);
-						}
-					}
-				}
-			}
+			return false;
 		}
 
 		private @NonNull Iterable<@NonNull RelPatternClassNode> connectSimpleEdges(@NonNull RelPatternClassNode relNode) {
-			List<@NonNull RelPatternClassNode> newNodes = new ArrayList<>();
+			List<@NonNull RelPatternClassNode> newClassNodes = new ArrayList<>();
 			for (@NonNull RelPatternEdge relEdge : UMLXUtil.getOutgoing(relNode)) {
 				if (!connectedEdges.contains(relEdge)) {
 					RelPatternClassNode sourceNode = relNode;
-					EStructuralFeature eStructuralFeature = UMLXUtil.getReferredEStructuralFeature(relEdge);
-					RelPatternClassNode targetNode = UMLXUtil.getTarget(relEdge);
-					if (connectSimpleEdge(sourceNode, eStructuralFeature, targetNode)) {
-						newNodes.add(targetNode);
-						connectedEdges.add(relEdge);
+					EStructuralFeature eStructuralFeature = relEdge.getReferredEStructuralFeature();
+					RelPatternNode targetNode = UMLXUtil.getTarget(relEdge);
+					if (eStructuralFeature != null) {
+						if (connectSimpleEdge(sourceNode, eStructuralFeature, targetNode)) {
+							if (targetNode instanceof RelPatternClassNode) {
+								newClassNodes.add((RelPatternClassNode)targetNode);
+							}
+							connectedEdges.add(relEdge);
+						}
+					}
+					else {
+						if (connectCollectionEdge(sourceNode, relEdge.getSourceIndex(), targetNode)) {
+							if (targetNode instanceof RelPatternClassNode) {
+								newClassNodes.add((RelPatternClassNode)targetNode);
+							}
+							connectedEdges.add(relEdge);
+						}
 					}
 				}
 			}
 			for (@NonNull RelPatternEdge relEdge : UMLXUtil.getIncoming(relNode)) {
 				if (!connectedEdges.contains(relEdge)) {
 					RelPatternClassNode sourceNode = UMLXUtil.getSource(relEdge);
-					EStructuralFeature eStructuralFeature = UMLXUtil.getReferredEStructuralFeature(relEdge);
+					EStructuralFeature eStructuralFeature = relEdge.getReferredEStructuralFeature();
 					RelPatternClassNode targetNode = relNode;
-					if (connectSimpleEdge(sourceNode, eStructuralFeature, targetNode)) {
-						newNodes.add(targetNode);
-						connectedEdges.add(relEdge);
+					if (eStructuralFeature != null) {
+						if (connectSimpleEdge(sourceNode, eStructuralFeature, targetNode)) {
+							newClassNodes.add(targetNode);
+							connectedEdges.add(relEdge);
+						}
+					}
+					else {
+						if (connectCollectionEdge(sourceNode, relEdge.getSourceIndex(), targetNode)) {
+							if (targetNode instanceof RelPatternClassNode) {
+								newClassNodes.add(targetNode);
+							}
+							connectedEdges.add(relEdge);
+						}
 					}
 				}
 			}
-			return newNodes;
+			return newClassNodes;
 		}
 
-		private boolean connectSimpleEdge(@NonNull RelPatternClassNode sourceNode, @NonNull EStructuralFeature eStructuralFeature, @NonNull RelPatternClassNode targetNode) {
-			if (eStructuralFeature instanceof EAttribute) {
-				EAttribute eAttribute = (EAttribute)eStructuralFeature;
-				connect(sourceNode, eAttribute, targetNode);
-				return true;
-			}
-			EReference eReference = (EReference)eStructuralFeature;
-			if (!eReference.isMany()) {
-				connect(sourceNode, eReference, targetNode);
-				return true;
-			}
-			EReference eOpposite = eReference.getEOpposite();
-			if (eOpposite != null) {
-				connect(targetNode, eOpposite, sourceNode);
-				return true;
-			}
-			return false;
+		protected @NonNull OCLExpression createUnparsedExpression(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
+			OCLExpression targetExpression = context.createStringLiteralExp(UMLXUtil.getExpression(relPatternExpressionNode));
+			context.install(relPatternExpressionNode, targetExpression);
+			context.addReference(relPatternExpressionNode);
+			return targetExpression;
 		}
 
 		private OCLExpression get(@NonNull RelPatternClassNode relPatternNode) {
@@ -282,37 +386,62 @@ public class UMLX2QVTr extends QVTrelationHelper
 		 * No relationships between TemplateExps are established here.
 		 * Return the TemplateExp for relPatternNode.
 		 */
-		private @NonNull OCLExpression createDomainPatternNodes(@NonNull RelPatternClassNode relPatternNode, @NonNull ConnectionHelper connectionHelper) {
-			OCLExpression qvtrTemplateExp = connectionHelper.get(relPatternNode);
+		private @NonNull OCLExpression createDomainPatternNodes(@NonNull RelPatternClassNode relPatternClassNode, @NonNull ConnectionHelper connectionHelper) {
+			OCLExpression qvtrTemplateExp = connectionHelper.get(relPatternClassNode);
 			if (qvtrTemplateExp == null) {
-				TemplateVariable asVariable = visit(TemplateVariable.class, relPatternNode);
-				org.eclipse.ocl.pivot.Class asClass = metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Class.class, relPatternNode.getReferredEClassifier());
-				assert asClass != null;
-				qvtrTemplateExp = context.createObjectTemplateExp(asVariable, asClass, relPatternNode.isIsRequired());
-				//				context.putUMLX2QVTrTrace(relPatternNode, qvtrTemplateExp);
-				connectionHelper.put(relPatternNode, qvtrTemplateExp);
-				for (RelEdge relEdge : relPatternNode.getOutgoing()) {
-					if (relEdge instanceof RelPatternEdge) {
-						RelPatternEdge relPatternEdge = (RelPatternEdge)relEdge;
-						RelPatternClassNode relTargetNode = UMLXUtil.getTarget(relPatternEdge);
+				Variable asVariable = visit(Variable.class, relPatternClassNode);
+				if (asVariable instanceof TemplateVariable) {
+					TemplateVariable asTemplateVariable = (TemplateVariable)asVariable;
+					org.eclipse.ocl.pivot.Class asClass = metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Class.class, relPatternClassNode.getReferredEClassifier());
+					assert asClass != null;
+					if (relPatternClassNode.isIsMany()/*asClass instanceof CollectionType*/) {
+						qvtrTemplateExp = context.createCollectionTemplateExp(asTemplateVariable, (CollectionType)asVariable.getType(), relPatternClassNode.isIsRequired());
+					}
+					else {
+						qvtrTemplateExp = context.createObjectTemplateExp(asTemplateVariable, asClass, relPatternClassNode.isIsRequired());
+					}
+					//				context.putUMLX2QVTrTrace(relPatternNode, qvtrTemplateExp);
+					connectionHelper.put(relPatternClassNode, qvtrTemplateExp);
+					for (@NonNull RelPatternEdge relPatternEdge : UMLXUtil.getOutgoing(relPatternClassNode)) {
+						RelPatternNode relTargetNode = UMLXUtil.getTarget(relPatternEdge);
 						EStructuralFeature eStructuralFeature = relPatternEdge.getReferredEStructuralFeature();
-						if (eStructuralFeature instanceof EReference) {
-							createDomainPatternNodes(relTargetNode, connectionHelper);
+						if ((relTargetNode instanceof RelPatternClassNode) && !(eStructuralFeature instanceof EAttribute)) {
+							createDomainPatternNodes((RelPatternClassNode)relTargetNode, connectionHelper);
 						}
 					}
-				}
-				for (RelEdge relEdge : relPatternNode.getIncoming()) {
-					if (relEdge instanceof RelPatternEdge) {
-						RelPatternEdge relPatternEdge = (RelPatternEdge)relEdge;
+					for (@NonNull RelPatternEdge relPatternEdge : UMLXUtil.getIncoming(relPatternClassNode)) {
 						RelPatternClassNode relSourceNode = UMLXUtil.getSource(relPatternEdge);
 						EStructuralFeature eStructuralFeature = relPatternEdge.getReferredEStructuralFeature();
-						if (eStructuralFeature instanceof EReference) {
+						if (!(eStructuralFeature instanceof EAttribute)) {
 							createDomainPatternNodes(relSourceNode, connectionHelper);
 						}
 					}
 				}
+				else {
+					qvtrTemplateExp = context.createVariableExp(asVariable);
+				}
 			}
 			return qvtrTemplateExp;
+		}
+
+		/**
+		 * Return the most positive non-zero source index of all incoming edges. Returns null if no incoming edge has a
+		 * non-zeto source index.
+		 */
+		private @Nullable Integer getIncomingSourceIndex(@NonNull RelPatternClassNode relPatternClassNode) {
+			Integer mostPositiveSourceIndex = null;
+			for (@NonNull RelPatternEdge relPatternEdge : UMLXUtil.getIncoming(relPatternClassNode)) {
+				int sourceIndex = relPatternEdge.getSourceIndex();
+				if (sourceIndex != 0) {
+					if (mostPositiveSourceIndex == null) {
+						mostPositiveSourceIndex = sourceIndex;
+					}
+					else if (mostPositiveSourceIndex < sourceIndex) {
+						mostPositiveSourceIndex = sourceIndex;
+					}
+				}
+			}
+			return mostPositiveSourceIndex;
 		}
 
 		public org.eclipse.ocl.pivot.@NonNull Package getPackage(org.eclipse.ocl.pivot.@Nullable Package asParentPackage, @NonNull String name) {
@@ -360,7 +489,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			List<@NonNull RelationDomain> qvtrRelationDomains = new ArrayList<>();
 			ConnectionHelper connectionHelper = new ConnectionHelper(context);
 			//			Iterable<@NonNull RelPatternNode> relNodes = UMLXUtil.getOwnedNodes(relDiagram);
-			List<@NonNull RelPatternClassNode> relRootPatternNodes = new ArrayList<>();
+			List<@NonNull RelPatternClassNode> relRootPatternClassNodes = new ArrayList<>();
 			for (@NonNull RelDomainNode relDomainNode : UMLXUtil.getOwnedRelDomainNodes(relDiagram)) {
 				if (relDomainNode.getReferredTxTypedModelNode() != null) {
 					//
@@ -374,9 +503,9 @@ public class UMLX2QVTr extends QVTrelationHelper
 					for (@NonNull RelPatternNode relPatternNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
 						if (relPatternNode.isIsRoot() && (relPatternNode instanceof RelPatternClassNode)) {
 							OCLExpression qvtrTemplateExp = createDomainPatternNodes((@NonNull RelPatternClassNode) relPatternNode, connectionHelper);
-							DomainPattern qvtrRootPattern = context.createDomainPattern((ObjectTemplateExp)qvtrTemplateExp);
+							DomainPattern qvtrRootPattern = context.createDomainPattern((TemplateExp) qvtrTemplateExp);
 							qvtrRelationDomain.getPattern().add(qvtrRootPattern);
-							relRootPatternNodes.add((@NonNull RelPatternClassNode) relPatternNode);
+							relRootPatternClassNodes.add((RelPatternClassNode) relPatternNode);
 						}
 					}
 				}
@@ -392,7 +521,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 				for (@NonNull RelPatternNode relNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
 					if (relNode instanceof RelPatternClassNode) {
 						RelPatternClassNode relPatternNode = (RelPatternClassNode) relNode;
-						Variable asVariable = context.basicGetQVTrElement(TemplateVariable.class, relPatternNode);
+						Variable asVariable = context.basicGetQVTrElement(Variable.class, relPatternNode);
 						if (asVariable == null) {
 							asVariable = visit(SharedVariable.class, relPatternNode);
 						}
@@ -403,7 +532,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			//
 			//	Establish the TemplateVariable interrelationships
 			//
-			connectionHelper.connectNodes(relRootPatternNodes);
+			connectionHelper.connectNodes(relRootPatternClassNodes);
 			//
 			//	Create the Relation
 			//
@@ -452,7 +581,21 @@ public class UMLX2QVTr extends QVTrelationHelper
 			if (eClassifier instanceof EClass) {
 				org.eclipse.ocl.pivot.Class asClass = metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Class.class, eClassifier);
 				assert asClass != null;
-				Variable asVariable = context.createTemplateVariable(UMLXUtil.getName(relPatternClassNode), asClass, relPatternClassNode.isIsRequired(), null);
+				if (relPatternClassNode.isIsMany()) {
+					asClass = ((PivotMetamodelManager)metamodelManager).getCollectionType(relPatternClassNode.isIsOrdered(), relPatternClassNode.isIsUnique(), asClass,
+						relPatternClassNode.isIsNullFree(), null, null);
+				}
+				Variable asVariable;
+				Integer mostPositiveSourceIndex = getIncomingSourceIndex(relPatternClassNode);
+				if (mostPositiveSourceIndex == null) {
+					asVariable = context.createTemplateVariable(UMLXUtil.getName(relPatternClassNode), asClass, relPatternClassNode.isIsRequired(), null);
+				}
+				else if (mostPositiveSourceIndex > 0) {
+					asVariable = context.createTemplateVariable(UMLXUtil.getName(relPatternClassNode), asClass, relPatternClassNode.isIsRequired(), null);
+				}
+				else {
+					asVariable = context.createSharedVariable(relPatternClassNode.isIsAnon() ? null :  UMLXUtil.getName(relPatternClassNode), asClass, relPatternClassNode.isIsRequired(), null);
+				}
 				context.install(relPatternClassNode, asVariable);
 				return asVariable;
 			}
@@ -649,6 +792,44 @@ public class UMLX2QVTr extends QVTrelationHelper
 				context.addWherePredicate(qvtrRelation, qvtrRelationCallExp);
 			}
 			return qvtrRelationCallExp;
+		}
+
+		@Override
+		public @Nullable Element visitRelPatternExpressionNode( @NonNull RelPatternExpressionNode relPatternExpressionNode) {
+			StringLiteralExp stringExpression = context.getQVTrElement(StringLiteralExp.class, relPatternExpressionNode);
+			String textExpression = stringExpression.getStringSymbol();
+			final EObject eContainer = stringExpression.eContainer();
+			//			context.getEnvironmentFactory().getMetamodelManager().parseSpecification(specification);
+			ParserContext parserContext = new AbstractParserContext(context.getEnvironmentFactory(), null) {
+
+				@Override
+				public @Nullable ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
+
+					EObject pivot = eContainer;
+					if ((pivot instanceof Element) && (pivot.eResource() != null) && !(pivot instanceof InvalidType)) {
+						environmentView.computeLookups((Element) pivot, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());
+					}
+					return scopeView.getParent();
+				}
+			};
+			//			if (parserContext == null) {
+			//				throw new ParserException(PivotMessagesInternal.UnknownContextType_ERROR_, NameUtil.qualifiedNameFor(contextElement), PivotUtilInternal.getSpecificationRole(specification));
+			//			}
+			parserContext.setRootElement((Element) eContainer);
+			try {
+				ExpressionInOCL expressionInOCL = parserContext.parse(eContainer, textExpression);
+				if (expressionInOCL != null) {
+					OCLExpression qvtrExpression = expressionInOCL.getOwnedBody();
+					EReference eContainmentFeature = stringExpression.eContainmentFeature();
+					PivotUtilInternal.resetContainer(stringExpression);
+					PivotUtilInternal.resetContainer(qvtrExpression);
+					eContainer.eSet(eContainmentFeature, qvtrExpression);
+				}
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 		}
 	}
 

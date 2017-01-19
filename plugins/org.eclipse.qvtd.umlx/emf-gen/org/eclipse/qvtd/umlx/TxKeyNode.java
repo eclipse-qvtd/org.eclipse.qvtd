@@ -107,6 +107,6 @@ public interface TxKeyNode extends TxNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean PartsAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validatePartsAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxKeyNode

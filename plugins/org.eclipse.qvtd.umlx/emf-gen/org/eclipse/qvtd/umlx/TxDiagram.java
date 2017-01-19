@@ -132,13 +132,13 @@ public interface TxDiagram extends UMLXNamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean RelDiagramNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateRelDiagramNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean TxTypedModelNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateTxTypedModelNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxDiagram

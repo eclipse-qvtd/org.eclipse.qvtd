@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.umlx.qvtr2umlx.QVTr2UMLX;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -40,6 +41,9 @@ public class UMLXTests extends LoadTestCase
 		QVTr2UMLX qvtr2umlx = new QVTr2UMLX(ocl.getEnvironmentFactory(), qvtrResource, umlxResource);
 		qvtr2umlx.transform();
 		umlxResource.save(null);
+		//
+		assertNoValidationErrors(umlxURI.toString(), umlxResource);
+		//
 		ocl.dispose();
 	}
 
@@ -50,6 +54,8 @@ public class UMLXTests extends LoadTestCase
 		QVTr2UMLX qvtr2umlx = new QVTr2UMLX(ocl1.getEnvironmentFactory(), qvtrResource1, umlxResource1);
 		qvtr2umlx.transform();
 		umlxResource1.save(null);
+		//
+		assertNoValidationErrors(umlxURI.toString(), umlxResource1);
 		//
 		OCL ocl2 = OCL.newInstance(getProjectMap());
 		Resource umlxResource2 = ocl2.getResourceSet().getResource(umlxURI, true);
@@ -124,13 +130,14 @@ public class UMLXTests extends LoadTestCase
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2);
 	}
 
-	/*	public void testUMLXRoundtrip_SeqToStm_qvtr() throws Exception {
+	public void testUMLXRoundtrip_SeqToStm_qvtr() throws Exception {
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm.qvtr", true);
 		URI pivotURI1 = getProjectFileURI("SeqToStm.qvtras");
 		URI umlxURI = getProjectFileURI("SeqToStm.umlx");
 		URI pivotURI2 = getProjectFileURI("SeqToStm.regenerated.qvtras");
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2);
-	} */
+	}
 
 	/*	public void testUMLXRoundtrip_SimplerRelToCore_qvtr() throws Exception {
 		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/SimplerRelToCore.qvtr", true);

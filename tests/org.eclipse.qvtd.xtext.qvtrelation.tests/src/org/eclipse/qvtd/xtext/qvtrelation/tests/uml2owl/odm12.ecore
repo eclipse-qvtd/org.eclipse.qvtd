@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="odm12" nsURI="http://www.omg.org/odm12" nsPrefix="odm12">
+  <eSubpackages name="RDF" nsURI="http://www.omg.org/odm12/RDF/" nsPrefix="rdf">
+    <eSubpackages name="RDFConcepts" nsURI="http://www.omg.org/odm12/RDF/RDFConcepts/"
+        nsPrefix="rdfc">
+      <eClassifiers xsi:type="ecore:EClass" name="RDFSResource">
+        <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+          <details key="name" value="Literal"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="iri" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/IRI" containment="true" eOpposite="#//RDF/RDFConcepts/IRI/resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="referenceNode" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/ReferenceNode" eOpposite="#//RDF/RDFConcepts/ReferenceNode/resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFScomment" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Literal" containment="true"
+            eOpposite="#//RDF/RDFConcepts/Literal/commentedResource">
+          <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+            <details key="name" value="Literal"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSlabel" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Literal" containment="true"
+            eOpposite="#//RDF/RDFConcepts/Literal/labeledResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statementWithSubject"
+            ordered="false" upperBound="-1" eType="#//RDF/RDFConcepts/RDFStatement"
+            eOpposite="#//RDF/RDFConcepts/RDFStatement/RDFsubject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statementWithObject"
+            ordered="false" upperBound="-1" eType="#//RDF/RDFConcepts/RDFStatement"
+            eOpposite="#//RDF/RDFConcepts/RDFStatement/RDFobject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSisDefinedBy" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/definedResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="definedResource" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/RDFSisDefinedBy"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSseeAlso" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/referringResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="referringResource"
+            ordered="false" upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource"
+            eOpposite="#//RDF/RDFConcepts/RDFSResource/RDFSseeAlso"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFtype" ordered="false"
+            lowerBound="1" upperBound="-1" eType="#//RDF/RDFS/RDFSClass" eOpposite="#//RDF/RDFS/RDFSClass/typedResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="list" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFS/RDFList" eOpposite="#//RDF/RDFS/RDFList/RDFfirst"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="container" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/RDFSmember"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSmember" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/container"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="groupingNamespace"
+            ordered="false" eType="#//RDF/RDFConcepts/Namespace" eOpposite="#//RDF/RDFConcepts/Namespace/resourcesGrouped"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="IRI">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="iriString" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resource" ordered="false"
+            eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/iri"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" ordered="false"
+            eType="#//RDF/RDFConcepts/Namespace" eOpposite="#//RDF/RDFConcepts/Namespace/namespaceIRI"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="vocabulary" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Source" eOpposite="#//RDF/RDFConcepts/Source/xmlBase"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="document" eType="#//RDF/RDFConcepts/Document"
+            eOpposite="#//RDF/RDFConcepts/Document/documentIRI"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFProperty" eSuperTypes="#//RDF/RDFConcepts/RDFSResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tripleWithPredicate"
+            ordered="false" upperBound="-1" eType="#//RDF/RDFConcepts/Triple" eOpposite="#//RDF/RDFConcepts/Triple/rdfPredicate"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statementWithPredicate"
+            eType="#//RDF/RDFConcepts/RDFStatement" eOpposite="#//RDF/RDFConcepts/RDFStatement/RDFpredicate"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superPropertyOf" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFProperty" eOpposite="#//RDF/RDFConcepts/RDFProperty/RDFSsubPropertyOf"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSsubPropertyOf"
+            ordered="false" upperBound="-1" eType="#//RDF/RDFConcepts/RDFProperty"
+            eOpposite="#//RDF/RDFConcepts/RDFProperty/superPropertyOf"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSdomain" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFS/RDFSClass" eOpposite="#//RDF/RDFS/RDFSClass/propertyForDomain"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSrange" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFS/RDFSClass" eOpposite="#//RDF/RDFS/RDFSClass/propertyForRange"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="propertyRestriction"
+            ordered="false" upperBound="-1" eType="#//OWL/OWLRestriction" eOpposite="#//OWL/OWLRestriction/OWLonProperty"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Triple">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFsubject" lowerBound="1"
+            eType="#//RDF/RDFConcepts/Node" eOpposite="#//RDF/RDFConcepts/Node/tripleWithSubject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFobject" ordered="false"
+            lowerBound="1" upperBound="-1" eType="#//RDF/RDFConcepts/Node" eOpposite="#//RDF/RDFConcepts/Node/tripleWithObject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rdfPredicate" lowerBound="1"
+            eType="#//RDF/RDFConcepts/RDFProperty" eOpposite="#//RDF/RDFConcepts/RDFProperty/tripleWithPredicate"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" ordered="false"
+            eType="#//RDF/RDFConcepts/RDFStatement" eOpposite="#//RDF/RDFConcepts/RDFStatement/triple"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="document" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Document" eOpposite="#//RDF/RDFConcepts/Document/triple"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="graph" ordered="false"
+            eType="#//RDF/RDFConcepts/Graph.1" eOpposite="#//RDF/RDFConcepts/Graph.1/triple"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ontology" ordered="false"
+            upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/triple"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Node">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tripleWithSubject"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Triple" eOpposite="#//RDF/RDFConcepts/Triple/RDFsubject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tripleWithObject" eType="#//RDF/RDFConcepts/Triple"
+            eOpposite="#//RDF/RDFConcepts/Triple/RDFobject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="BlankNode" eSuperTypes="#//RDF/RDFConcepts/Node">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeID" ordered="false"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="graph" ordered="false"
+            lowerBound="1" eType="#//RDF/RDFConcepts/Graph" eOpposite="#//RDF/RDFConcepts/Graph/bnode"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//RDF/RDFConcepts/Node">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lexicalForm" ordered="false"
+            lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
+          <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+            <details key="name" value="Literal"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
+          <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+            <details key="name" value="Literal"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="commentedResource"
+            eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/RDFScomment"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="labeledResource" eType="#//RDF/RDFConcepts/RDFSResource"
+            eOpposite="#//RDF/RDFConcepts/RDFSResource/RDFSlabel"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ontology" ordered="false"
+            eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/OWLversionInfo"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="hasValueRestriction"
+            ordered="false" eType="#//OWL/HasValueRestriction" eOpposite="#//OWL/HasValueRestriction/OWLhasLiteralValue"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="dataRange" ordered="false"
+            upperBound="-1" eType="#//OWL/OWLDataEnumeration" eOpposite="#//OWL/OWLDataEnumeration/dataOneOf"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="datatype" ordered="false"
+            lowerBound="1" eType="#//RDF/RDFS/RDFSDatatype" eOpposite="#//RDF/RDFS/RDFSDatatype/literal"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ReferenceNode" eSuperTypes="#//RDF/RDFConcepts/Node">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resource" ordered="false"
+            lowerBound="1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/referenceNode"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Graph">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="bnode" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/BlankNode" containment="true"
+            eOpposite="#//RDF/RDFConcepts/BlankNode/graph"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFStatement" eSuperTypes="#//RDF/RDFConcepts/RDFSResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFsubject" lowerBound="1"
+            eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/statementWithSubject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFobject" lowerBound="1"
+            eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/statementWithObject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFpredicate" ordered="false"
+            lowerBound="1" upperBound="-1" eType="#//RDF/RDFConcepts/RDFProperty"
+            eOpposite="#//RDF/RDFConcepts/RDFProperty/statementWithPredicate"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="triple" ordered="false"
+            eType="#//RDF/RDFConcepts/Triple" eOpposite="#//RDF/RDFConcepts/Triple/statement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Namespace">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resourcesGrouped" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" containment="true"
+            eOpposite="#//RDF/RDFConcepts/RDFSResource/groupingNamespace"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespacedefinition"
+            lowerBound="1" eType="#//RDF/RDFConcepts/NamespaceDefinition" eOpposite="#//RDF/RDFConcepts/NamespaceDefinition/namespace"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namedGraph" ordered="false"
+            eType="#//RDF/RDFConcepts/NamedGraph" eOpposite="#//RDF/RDFConcepts/NamedGraph/graphName"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="vocabulary" ordered="false"
+            eType="#//RDF/RDFConcepts/Source" eOpposite="#//RDF/RDFConcepts/Source/defaultNamespace"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceIRI" ordered="false"
+            lowerBound="1" eType="#//RDF/RDFConcepts/IRI" eOpposite="#//RDF/RDFConcepts/IRI/namespace"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NamespaceDefinition">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Namespace" eOpposite="#//RDF/RDFConcepts/Namespace/namespacedefinition"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="vocabulary" eType="#//RDF/RDFConcepts/Source"
+            eOpposite="#//RDF/RDFConcepts/Source/namespaceDefinition"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NamedGraph">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="graphName" lowerBound="1"
+            eType="#//RDF/RDFConcepts/Namespace" containment="true" eOpposite="#//RDF/RDFConcepts/Namespace/namedGraph"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="root" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Dataset" eOpposite="#//RDF/RDFConcepts/Dataset/namedGraph"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="graph" lowerBound="1"
+            eType="#//RDF/RDFConcepts/Graph.1" eOpposite="#//RDF/RDFConcepts/Graph.1/namedGraph"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Graph">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="triple" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Triple" containment="true" eOpposite="#//RDF/RDFConcepts/Triple/graph"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namedGraph" eType="#//RDF/RDFConcepts/NamedGraph"
+            eOpposite="#//RDF/RDFConcepts/NamedGraph/graph"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#//RDF/RDFConcepts/Dataset"
+            eOpposite="#//RDF/RDFConcepts/Dataset/defaultGraph"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+            eType="#//RDF/RDFConcepts/Source" eOpposite="#//RDF/RDFConcepts/Source/graph"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Dataset">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namedGraph" upperBound="-1"
+            eType="#//RDF/RDFConcepts/NamedGraph" resolveProxies="false" eOpposite="#//RDF/RDFConcepts/NamedGraph/root"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="defaultGraph" lowerBound="1"
+            eType="#//RDF/RDFConcepts/Graph.1" eOpposite="#//RDF/RDFConcepts/Graph.1/root"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Source">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespaceSuffixDelimeter"
+            ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"
+            defaultValueLiteral="&quot;/&quot;"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="defaultNamespace" ordered="false"
+            eType="#//RDF/RDFConcepts/Namespace" eOpposite="#//RDF/RDFConcepts/Namespace/vocabulary"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceDefinition"
+            upperBound="-1" eType="#//RDF/RDFConcepts/NamespaceDefinition" containment="true"
+            eOpposite="#//RDF/RDFConcepts/NamespaceDefinition/vocabulary"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="xmlBase" ordered="false"
+            eType="#//RDF/RDFConcepts/IRI" eOpposite="#//RDF/RDFConcepts/IRI/vocabulary"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="graph" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/Graph.1" eOpposite="#//RDF/RDFConcepts/Graph.1/source"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Document" eSuperTypes="#//RDF/RDFConcepts/Source">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="triple" upperBound="-1"
+            eType="#//RDF/RDFConcepts/Triple" eOpposite="#//RDF/RDFConcepts/Triple/document"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="documentIRI" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/IRI" eOpposite="#//RDF/RDFConcepts/IRI/document"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="RDFS" nsURI="http://www.omg.org/odm12/RDF/RDFS/" nsPrefix="rdfs">
+      <eClassifiers xsi:type="ecore:EClass" name="RDFSClass" eSuperTypes="#//RDF/RDFConcepts/RDFSResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typedResource" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFSResource" eOpposite="#//RDF/RDFConcepts/RDFSResource/RDFtype"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFSsubClassOf" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFS/RDFSClass" eOpposite="#//RDF/RDFS/RDFSClass/superClassOf"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superClassOf" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFS/RDFSClass" eOpposite="#//RDF/RDFS/RDFSClass/RDFSsubClassOf"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="propertyForDomain"
+            ordered="false" upperBound="-1" eType="#//RDF/RDFConcepts/RDFProperty"
+            eOpposite="#//RDF/RDFConcepts/RDFProperty/RDFSdomain"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="propertyForRange" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFConcepts/RDFProperty" eOpposite="#//RDF/RDFConcepts/RDFProperty/RDFSrange"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFSDatatype" eSuperTypes="#//RDF/RDFS/RDFSClass">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="whereRestricted" ordered="false"
+            upperBound="-1" eType="#//OWL/DatatypeRestriction" eOpposite="#//OWL/DatatypeRestriction/datatypeRestricted"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="literal" ordered="false"
+            eType="#//RDF/RDFConcepts/Literal" eOpposite="#//RDF/RDFConcepts/Literal/datatype"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFList" eSuperTypes="#//RDF/RDFConcepts/RDFSResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFfirst" eType="#//RDF/RDFConcepts/RDFSResource"
+            eOpposite="#//RDF/RDFConcepts/RDFSResource/list"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RDFrest" ordered="false"
+            eType="#//RDF/RDFS/RDFList" eOpposite="#//RDF/RDFS/RDFList/originalList"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="originalList" ordered="false"
+            upperBound="-1" eType="#//RDF/RDFS/RDFList" eOpposite="#//RDF/RDFS/RDFList/RDFrest"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFSContainerMembershipProperty"
+          eSuperTypes="#//RDF/RDFConcepts/RDFProperty"/>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFSContainer" eSuperTypes="#//RDF/RDFConcepts/RDFSResource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFAlt" eSuperTypes="#//RDF/RDFS/RDFSContainer"/>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFBag" eSuperTypes="#//RDF/RDFS/RDFSContainer"/>
+      <eClassifiers xsi:type="ecore:EClass" name="RDFSeq" eSuperTypes="#//RDF/RDFS/RDFSContainer"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="OWL" nsURI="http://www.w3.org/2002/07/owl#" nsPrefix="owl">
+    <eClassifiers xsi:type="ecore:EClass" name="OWLOntology" eSuperTypes="#//RDF/RDFConcepts/RDFSResource">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLpriorVersion" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/newerOntology"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="newerOntology" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/OWLpriorVersion"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLincompatibleWith"
+          ordered="false" upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/incompatibleOntology"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="incompatibleOntology"
+          ordered="false" upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/OWLincompatibleWith"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLimports" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/importingOntology"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="importingOntology" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/OWLimports"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLbackwardCompatibleWith"
+          ordered="false" upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/currentOntology"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="currentOntology" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/OWLbackwardCompatibleWith"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLversionInfo" ordered="false"
+          upperBound="-1" eType="#//RDF/RDFConcepts/Literal" eOpposite="#//RDF/RDFConcepts/Literal/ontology"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="triple" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//RDF/RDFConcepts/Triple" eOpposite="#//RDF/RDFConcepts/Triple/ontology"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owlUniverse" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLUniverse" eOpposite="#//OWL/OWLUniverse/ontology"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassExpression" eSuperTypes="#//RDF/RDFS/RDFSClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="complementClass" ordered="false"
+          upperBound="-1" eType="#//OWL/ComplementClass" eOpposite="#//OWL/ComplementClass/OWLcomplementOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="intersectionClass" ordered="false"
+          upperBound="-1" eType="#//OWL/IntersectionClass" eOpposite="#//OWL/IntersectionClass/OWLintersectionOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unionClass" ordered="false"
+          upperBound="-1" eType="#//OWL/UnionClass" eOpposite="#//OWL/UnionClass/OWLunionOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="disjointClass" ordered="false"
+          upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/OWLdisjointWith"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLdisjointWith" ordered="false"
+          upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/disjointClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="equivalentClass" ordered="false"
+          upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/OWLequivalentClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLequivalentClass" ordered="false"
+          upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/equivalentClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionQualified"
+          ordered="false" upperBound="-1" eType="#//OWL/CardinalityRestriction" eOpposite="#//OWL/CardinalityRestriction/qualifiedByClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionClassSome"
+          ordered="false" upperBound="-1" eType="#//OWL/SomeValuesFromRestriction"
+          eOpposite="#//OWL/SomeValuesFromRestriction/OWLsomeValuesFromClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionClassAll"
+          ordered="false" eType="#//OWL/AllValuesFromRestriction" eOpposite="#//OWL/AllValuesFromRestriction/OWLallValuesFromClass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLClass" eSuperTypes="#//OWL/ClassExpression #//OWL/OWLUniverse">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDeprecated" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
+          defaultValueLiteral="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumeratedClass" eSuperTypes="#//OWL/ClassExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLoneOf" ordered="false"
+          upperBound="-1" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/enumeratedclass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLRestriction" abstract="true" eSuperTypes="#//OWL/ClassExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLonProperty" ordered="false"
+          lowerBound="1" eType="#//RDF/RDFConcepts/RDFProperty" eOpposite="#//RDF/RDFConcepts/RDFProperty/propertyRestriction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ComplementClass" eSuperTypes="#//OWL/ClassExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLcomplementOf" ordered="false"
+          lowerBound="1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/complementClass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Individual" eSuperTypes="#//RDF/RDFConcepts/RDFSResource #//OWL/OWLUniverse">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enumeratedclass" ordered="false"
+          upperBound="-1" eType="#//OWL/EnumeratedClass" eOpposite="#//OWL/EnumeratedClass/OWLoneOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionClass" ordered="false"
+          upperBound="-1" eType="#//OWL/HasValueRestriction" eOpposite="#//OWL/HasValueRestriction/OWLhasIndividualValue"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="differentIndividual"
+          ordered="false" upperBound="-1" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/OWLdifferentFrom"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLdifferentFrom" ordered="false"
+          upperBound="-1" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/differentIndividual"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLsameIndividual" ordered="false"
+          upperBound="-1" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/sameIndividual"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sameIndividual" ordered="false"
+          upperBound="-1" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/OWLsameIndividual"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allDifferent" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLAllDifferent" eOpposite="#//OWL/OWLAllDifferent/OWLdistinctMembers"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntersectionClass" eSuperTypes="#//OWL/ClassExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLintersectionOf" ordered="false"
+          lowerBound="2" upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/intersectionClass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnionClass" eSuperTypes="#//OWL/ClassExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLunionOf" ordered="false"
+          lowerBound="2" upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/unionClass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HasValueRestriction" eSuperTypes="#//OWL/OWLRestriction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLhasIndividualValue"
+          ordered="false" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/restrictionClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLhasLiteralValue" ordered="false"
+          upperBound="-1" eType="#//RDF/RDFConcepts/Literal" eOpposite="#//RDF/RDFConcepts/Literal/hasValueRestriction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AllValuesFromRestriction" eSuperTypes="#//OWL/OWLRestriction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLallValuesFromClass"
+          upperBound="-1" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/restrictionClassAll"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLallValuesFromDataRange"
+          ordered="false" upperBound="-1" eType="#//OWL/DataRange" eOpposite="#//OWL/DataRange/restrictionClassAll"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SomeValuesFromRestriction" eSuperTypes="#//OWL/OWLRestriction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLsomeValuesFromClass"
+          ordered="false" eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/restrictionClassSome"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLsomeValuesFromDataRange"
+          ordered="false" eType="#//OWL/DataRange" eOpposite="#//OWL/DataRange/restrictionClassSome"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CardinalityRestriction" abstract="true"
+        eSuperTypes="#//OWL/OWLRestriction">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//NonNegativeInteger"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="qualifiedByClass" ordered="false"
+          eType="#//OWL/ClassExpression" eOpposite="#//OWL/ClassExpression/restrictionQualified"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExactCardinalityRestriction" eSuperTypes="#//OWL/CardinalityRestriction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MaxCardinalityRestriction" eSuperTypes="#//OWL/CardinalityRestriction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MinCardinalityRestriction" eSuperTypes="#//OWL/CardinalityRestriction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HasSelfRestriction" eSuperTypes="#//OWL/OWLRestriction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DataRange" abstract="true" eSuperTypes="#//RDF/RDFS/RDFSClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionClassSome"
+          ordered="false" upperBound="-1" eType="#//OWL/SomeValuesFromRestriction"
+          eOpposite="#//OWL/SomeValuesFromRestriction/OWLsomeValuesFromDataRange"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionClassAll"
+          ordered="false" eType="#//OWL/AllValuesFromRestriction" eOpposite="#//OWL/AllValuesFromRestriction/OWLallValuesFromDataRange"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="complementDatatype" ordered="false"
+          upperBound="-1" eType="#//OWL/ComplementDatatype" eOpposite="#//OWL/ComplementDatatype/OWLcomplementOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="intersectionDatatype"
+          ordered="false" upperBound="-1" eType="#//OWL/IntersectionDatatype" eOpposite="#//OWL/IntersectionDatatype/OWLintersectionOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unionDatatype" upperBound="-1"
+          eType="#//OWL/UnionDatatype" eOpposite="#//OWL/UnionDatatype/OWLunionOf"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owldatatype" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLDatatype" eOpposite="#//OWL/OWLDatatype/dataRange"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLAnnotationProperty" eSuperTypes="#//RDF/RDFConcepts/RDFProperty"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true" eSuperTypes="#//RDF/RDFConcepts/RDFProperty #//OWL/OWLUniverse">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDeprecated" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFunctional" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLequivalentProperty"
+          ordered="false" upperBound="-1" eType="#//OWL/Property" eOpposite="#//OWL/Property/equivalentProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="equivalentProperty" ordered="false"
+          upperBound="-1" eType="#//OWL/Property" eOpposite="#//OWL/Property/OWLequivalentProperty"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLDatatypeProperty" eSuperTypes="#//OWL/Property"/>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLObjectProperty" eSuperTypes="#//OWL/Property">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInverseFunctional"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSymmetric" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransitive" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAsymmetric" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isIrreflexive" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReflexive" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLinverseOf" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLObjectProperty" eOpposite="#//OWL/OWLObjectProperty/inverseProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inverseProperty" ordered="false"
+          upperBound="-1" eType="#//OWL/OWLObjectProperty" eOpposite="#//OWL/OWLObjectProperty/OWLinverseOf"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLAllDifferent" eSuperTypes="#//OWL/OWLClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLdistinctMembers" ordered="false"
+          lowerBound="2" upperBound="-1" eType="#//OWL/Individual" eOpposite="#//OWL/Individual/allDifferent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ComplementDatatype" eSuperTypes="#//OWL/DataRange">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLcomplementOf" ordered="false"
+          lowerBound="1" eType="#//OWL/DataRange" eOpposite="#//OWL/DataRange/complementDatatype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntersectionDatatype" eSuperTypes="#//OWL/DataRange">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLintersectionOf" ordered="false"
+          lowerBound="2" upperBound="-1" eType="#//OWL/DataRange" eOpposite="#//OWL/DataRange/intersectionDatatype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnionDatatype" eSuperTypes="#//OWL/DataRange">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OWLunionOf" ordered="false"
+          lowerBound="2" upperBound="-1" eType="#//OWL/DataRange" eOpposite="#//OWL/DataRange/unionDatatype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DatatypeRestriction" eSuperTypes="#//OWL/DataRange">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minInclusive" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minExclusive" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxInclusive" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxExclusive" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minLength" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//PositiveInteger"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxLength" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//PositiveInteger"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exactLength" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//PositiveInteger"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="pattern" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="langRange" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="datatypeRestricted" ordered="false"
+          lowerBound="1" eType="#//RDF/RDFS/RDFSDatatype" eOpposite="#//RDF/RDFS/RDFSDatatype/whereRestricted"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLDataEnumeration" eSuperTypes="#//OWL/DataRange">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataOneOf" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//RDF/RDFConcepts/Literal" eOpposite="#//RDF/RDFConcepts/Literal/dataRange"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLDatatype" eSuperTypes="#//OWL/DataRange #//OWL/OWLUniverse">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataRange" ordered="false"
+          lowerBound="1" eType="#//OWL/DataRange" eOpposite="#//OWL/DataRange/owldatatype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLUniverse" abstract="true" eSuperTypes="#//RDF/RDFConcepts/RDFSResource">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ontology" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//OWL/OWLOntology" eOpposite="#//OWL/OWLOntology/owlUniverse"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OWLOntologyProperty" eSuperTypes="#//OWL/OWLUniverse"/>
+  </eSubpackages>
+</ecore:EPackage>

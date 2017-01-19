@@ -215,8 +215,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean RelDiagramNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateRelDiagramNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv RelDiagramNamesAreUnique:
@@ -285,8 +284,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean TxTypedModelNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateTxTypedModelNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv TxTypedModelNodeNamesAreUnique:

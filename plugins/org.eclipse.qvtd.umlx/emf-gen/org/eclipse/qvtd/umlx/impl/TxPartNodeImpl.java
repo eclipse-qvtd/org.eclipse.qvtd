@@ -220,8 +220,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean PartIsPropertyOfKey(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validatePartIsPropertyOfKey(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
 		 * inv PartIsPropertyOfKey:
