@@ -67,6 +67,7 @@ public class QVTbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7(), "rule__StructuredClassCS__Alternatives_7");
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7_0_1(), "rule__StructuredClassCS__Alternatives_7_0_1");
 					put(grammarAccess.getStructuralFeatureCSAccess().getAlternatives(), "rule__StructuralFeatureCS__Alternatives");
+					put(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAlternatives(), "rule__QVTbaseUnrestrictedName__Alternatives");
 					put(grammarAccess.getEssentialOCLReservedKeywordAccess().getAlternatives(), "rule__EssentialOCLReservedKeyword__Alternatives");
 					put(grammarAccess.getEssentialOCLUnaryOperatorNameAccess().getAlternatives(), "rule__EssentialOCLUnaryOperatorName__Alternatives");
 					put(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getAlternatives(), "rule__EssentialOCLInfixOperatorName__Alternatives");

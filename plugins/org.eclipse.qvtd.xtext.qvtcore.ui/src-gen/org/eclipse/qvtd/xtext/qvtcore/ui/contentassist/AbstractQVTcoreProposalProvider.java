@@ -259,4 +259,7 @@ public class AbstractQVTcoreProposalProvider extends org.eclipse.qvtd.xtext.qvtb
 	public void complete_UnnamedDomainCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
+	public void complete_QVTcoreUnrestrictedName(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

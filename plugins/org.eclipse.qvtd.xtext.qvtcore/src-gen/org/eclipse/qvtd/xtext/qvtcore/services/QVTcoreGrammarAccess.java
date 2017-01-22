@@ -591,31 +591,31 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//name=Identifier
 		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.1/@elements.0/@terminal'
+		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_1_0_0() { return cNameIdentifierParserRuleCall_1_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.1/@elements.1'
+		//':'
 		public Keyword getColonKeyword_1_1() { return cColonKeyword_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.2'
+		//ownedPathName=URIPathNameCS
 		public Assignment getOwnedPathNameAssignment_2() { return cOwnedPathNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.2/@terminal'
+		//URIPathNameCS
 		public RuleCall getOwnedPathNameURIPathNameCSParserRuleCall_2_0() { return cOwnedPathNameURIPathNameCSParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3'
+		//(isAll?='::' '*')?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3/@elements.0'
+		//isAll?='::'
 		public Assignment getIsAllAssignment_3_0() { return cIsAllAssignment_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3/@elements.0/@terminal'
+		//'::'
 		public Keyword getIsAllColonColonKeyword_3_0_0() { return cIsAllColonColonKeyword_3_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.3/@elements.1'
+		//'*'
 		public Keyword getAsteriskKeyword_3_1() { return cAsteriskKeyword_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.5/@alternatives/@elements.4'
+		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
@@ -653,31 +653,36 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedComposedMappingsMappingCSParserRuleCall_9_0 = (RuleCall)cOwnedComposedMappingsAssignment_9.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#XtextFragmentProvider_org.eclipse.qvtd.xtext.qvtcore.QVTcore/MappingCS'
+		//MappingCS:
+		//	{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
+		//	refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
+		//	ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives'
+		//{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
+		//refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
+		//ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}'
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.0'
+		//{MappingCS}
 		public Action getMappingCSAction_0() { return cMappingCSAction_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.1'
+		//isDefault?='default'?
 		public Assignment getIsDefaultAssignment_1() { return cIsDefaultAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.1/@terminal'
+		//'default'
 		public Keyword getIsDefaultDefaultKeyword_1_0() { return cIsDefaultDefaultKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.2'
+		//'map'
 		public Keyword getMapKeyword_2() { return cMapKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.3'
+		//name=UnrestrictedName?
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.3/@terminal'
+		//UnrestrictedName
 		public RuleCall getNameUnrestrictedNameParserRuleCall_3_0() { return cNameUnrestrictedNameParserRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.6/@alternatives/@elements.4'
+		//('in' ownedInPathName=PathNameCS)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//'in'
@@ -801,10 +806,10 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//GuardPatternCS
 		public RuleCall getOwnedGuardPatternGuardPatternCSParserRuleCall_3_0() { return cOwnedGuardPatternGuardPatternCSParserRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#XtextFragmentProvider_org.eclipse.qvtd.xtext.qvtcore.QVTcore/BottomPatternCS'
+		//ownedBottomPattern=BottomPatternCS
 		public Assignment getOwnedBottomPatternAssignment_4() { return cOwnedBottomPatternAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.7/@alternatives/@elements.4/@terminal'
+		//BottomPatternCS
 		public RuleCall getOwnedBottomPatternBottomPatternCSParserRuleCall_4_0() { return cOwnedBottomPatternBottomPatternCSParserRuleCall_4_0; }
 	}
 
@@ -1002,19 +1007,19 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//	isDefault?='default'? ownedTarget=ExpCS ((':=' | isPartial?='+=') ownedInitExpression=ExpCS)? ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives'
+		//isDefault?='default'? ownedTarget=ExpCS ((':=' | isPartial?='+=') ownedInitExpression=ExpCS)? ';'
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.0'
+		//isDefault?='default'?
 		public Assignment getIsDefaultAssignment_0() { return cIsDefaultAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.0/@terminal'
+		//'default'
 		public Keyword getIsDefaultDefaultKeyword_0_0() { return cIsDefaultDefaultKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.1'
+		//ownedTarget=ExpCS
 		public Assignment getOwnedTargetAssignment_1() { return cOwnedTargetAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.11/@alternatives/@elements.1/@terminal'
+		//ExpCS
 		public RuleCall getOwnedTargetExpCSParserRuleCall_1_0() { return cOwnedTargetExpCSParserRuleCall_1_0; }
 
 		//((':=' | isPartial?='+=') ownedInitExpression=ExpCS)?
@@ -1146,10 +1151,10 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//';'
 		public Keyword getSemicolonKeyword_9_0() { return cSemicolonKeyword_9_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.1'
+		//'{' ownedExpression=ExpCS '}'
 		public Group getGroup_9_1() { return cGroup_9_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.1/@elements.0'
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_9_1_0() { return cLeftCurlyBracketKeyword_9_1_0; }
 
 		//ownedExpression=ExpCS
@@ -1306,7 +1311,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//(':=' ownedInitExpression=ExpCS)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext#/0/@rules.15/@alternatives/@elements.2/@elements.0'
+		//':='
 		public Keyword getColonEqualsSignKeyword_2_0() { return cColonEqualsSignKeyword_2_0; }
 
 		//ownedInitExpression=ExpCS
@@ -1385,76 +1390,97 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getOwnedBottomPatternBottomPatternCSParserRuleCall_2_0() { return cOwnedBottomPatternBottomPatternCSParserRuleCall_2_0; }
 	}
 
+	public class QVTcoreUnrestrictedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtcore.QVTcore.QVTcoreUnrestrictedName");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cCheckKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cEnforceKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cImportKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cImportsKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cMapKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cPackageKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cQueryKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cRealizeKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cRefinesKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cTransformationKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cTransientKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cUsesKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+
+		//QVTcoreUnrestrictedName:
+		//	'check' //|	'default'
+		// | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
+		//	'transformation' | 'transient' | 'uses' //|	'where'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+
+		//'check' //|	'default'
+		// | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
+		//'transformation' | 'transient' | 'uses'
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//'check'
+		public Keyword getCheckKeyword_0() { return cCheckKeyword_0; }
+
+		//'enforce'
+		public Keyword getEnforceKeyword_1() { return cEnforceKeyword_1; }
+
+		//'import'
+		public Keyword getImportKeyword_2() { return cImportKeyword_2; }
+
+		//'imports'
+		public Keyword getImportsKeyword_3() { return cImportsKeyword_3; }
+
+		//'map'
+		public Keyword getMapKeyword_4() { return cMapKeyword_4; }
+
+		//'package'
+		public Keyword getPackageKeyword_5() { return cPackageKeyword_5; }
+
+		//'query'
+		public Keyword getQueryKeyword_6() { return cQueryKeyword_6; }
+
+		//'realize'
+		public Keyword getRealizeKeyword_7() { return cRealizeKeyword_7; }
+
+		//'refines'
+		public Keyword getRefinesKeyword_8() { return cRefinesKeyword_8; }
+
+		//'transformation'
+		public Keyword getTransformationKeyword_9() { return cTransformationKeyword_9; }
+
+		//'transient'
+		public Keyword getTransientKeyword_10() { return cTransientKeyword_10; }
+
+		//'uses'
+		public Keyword getUsesKeyword_11() { return cUsesKeyword_11; }
+	}
+
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEssentialOCLUnrestrictedNameParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Keyword cCheckKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cEnforceKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cImportKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cImportsKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		private final Keyword cLibraryKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final Keyword cMapKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		private final Keyword cQueryKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
-		private final Keyword cRealizeKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cRefinesKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cTransformationKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cUsesKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final RuleCall cQVTbaseUnrestrictedNameParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cQVTcoreUnrestrictedNameParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 
-		//UnrestrictedName:
-		//	EssentialOCLUnrestrictedName | 'check' //|	'creation'
-		// //|	'default'
+		////|	'creation'
 		// //|	'deletion'
-		// | 'enforce' | 'import' |
-		//	'imports' //|	'include'
-		// | 'library' | 'map' | 'query' | 'realize' | 'refines' | 'transformation' | 'uses'
-		//	//|	'where'
-		//;
+		// //|	'include'
+		// //|	'library'
+		// UnrestrictedName:
+		//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTcoreUnrestrictedName;
 		@Override public ParserRule getRule() { return rule; }
 
-		//EssentialOCLUnrestrictedName | 'check' //|	'creation'
-		// //|	'default'
-		// //|	'deletion'
-		// | 'enforce' | 'import' | 'imports'
-		////|	'include'
-		// | 'library' | 'map' | 'query' | 'realize' | 'refines' | 'transformation' | 'uses'
+		//EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTcoreUnrestrictedName
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EssentialOCLUnrestrictedName
 		public RuleCall getEssentialOCLUnrestrictedNameParserRuleCall_0() { return cEssentialOCLUnrestrictedNameParserRuleCall_0; }
 
-		//'check'
-		public Keyword getCheckKeyword_1() { return cCheckKeyword_1; }
+		//QVTbaseUnrestrictedName
+		public RuleCall getQVTbaseUnrestrictedNameParserRuleCall_1() { return cQVTbaseUnrestrictedNameParserRuleCall_1; }
 
-		//'enforce'
-		public Keyword getEnforceKeyword_2() { return cEnforceKeyword_2; }
-
-		//'import'
-		public Keyword getImportKeyword_3() { return cImportKeyword_3; }
-
-		//'imports'
-		public Keyword getImportsKeyword_4() { return cImportsKeyword_4; }
-
-		//'library'
-		public Keyword getLibraryKeyword_5() { return cLibraryKeyword_5; }
-
-		//'map'
-		public Keyword getMapKeyword_6() { return cMapKeyword_6; }
-
-		//'query'
-		public Keyword getQueryKeyword_7() { return cQueryKeyword_7; }
-
-		//'realize'
-		public Keyword getRealizeKeyword_8() { return cRealizeKeyword_8; }
-
-		//'refines'
-		public Keyword getRefinesKeyword_9() { return cRefinesKeyword_9; }
-
-		//'transformation'
-		public Keyword getTransformationKeyword_10() { return cTransformationKeyword_10; }
-
-		//'uses'
-		public Keyword getUsesKeyword_11() { return cUsesKeyword_11; }
+		//QVTcoreUnrestrictedName
+		public RuleCall getQVTcoreUnrestrictedNameParserRuleCall_2() { return cQVTcoreUnrestrictedNameParserRuleCall_2; }
 	}
 
 
@@ -1476,6 +1502,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	private final UnrealizedVariableCSElements pUnrealizedVariableCS;
 	private final RealizedVariableCSElements pRealizedVariableCS;
 	private final UnnamedDomainCSElements pUnnamedDomainCS;
+	private final QVTcoreUnrestrictedNameElements pQVTcoreUnrestrictedName;
 	private final UnrestrictedNameElements pUnrestrictedName;
 
 	private final Grammar grammar;
@@ -1513,6 +1540,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		this.pUnrealizedVariableCS = new UnrealizedVariableCSElements();
 		this.pRealizedVariableCS = new RealizedVariableCSElements();
 		this.pUnnamedDomainCS = new UnnamedDomainCSElements();
+		this.pQVTcoreUnrestrictedName = new QVTcoreUnrestrictedNameElements();
 		this.pUnrestrictedName = new UnrestrictedNameElements();
 	}
 
@@ -1760,15 +1788,25 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getUnnamedDomainCSAccess().getRule();
 	}
 
-	//UnrestrictedName:
-	//	EssentialOCLUnrestrictedName | 'check' //|	'creation'
-	// //|	'default'
-	// //|	'deletion'
-	// | 'enforce' | 'import' |
-	//	'imports' //|	'include'
-	// | 'library' | 'map' | 'query' | 'realize' | 'refines' | 'transformation' | 'uses'
-	//	//|	'where'
+	//QVTcoreUnrestrictedName:
+	//	'check' //|	'default'
+	// | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
+	//	'transformation' | 'transient' | 'uses' //|	'where'
 	//;
+	public QVTcoreUnrestrictedNameElements getQVTcoreUnrestrictedNameAccess() {
+		return pQVTcoreUnrestrictedName;
+	}
+
+	public ParserRule getQVTcoreUnrestrictedNameRule() {
+		return getQVTcoreUnrestrictedNameAccess().getRule();
+	}
+
+	////|	'creation'
+	// //|	'deletion'
+	// //|	'include'
+	// //|	'library'
+	// UnrestrictedName:
+	//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTcoreUnrestrictedName;
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return pUnrestrictedName;
 	}
@@ -1930,42 +1968,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumerationLiteralName:
-	//	EssentialOCLUnrestrictedName
-	//	/ *|	'abstract'
-	//|	'attribute'
-	//|	'body'
-	//|	'callable'
-	//|	'class'
-	//|	'composes'
-	//|	'datatype'
-	//|	'definition'
-	//|	'derivation'
-	//|	'derived'
-	//|	'enum'
-	//|	'extends'
-	//|	'id'
-	//|	'import'
-	//|	'initial'
-	//|	'interface'
-	//|	'key'
-	//|	'library'
-	//|	'module'
-	//|	'operation'
-	//|	'ordered'
-	//|	'package'
-	//|	'postcondition'
-	//|	'precondition'
-	//|	'primitive'
-	//|	'property'
-	//|	'readonly'
-	//|	'reference'
-	//|	'resolve'
-	//|	'static'
-	//|	'throws'
-	//|	'transient'
-	//|	'unique'
-	//|	'unsettable'
-	//|	'volatile' * /;
+	//	EssentialOCLUnrestrictedName;
 	public QVTbaseGrammarAccess.EnumerationLiteralNameElements getEnumerationLiteralNameAccess() {
 		return gaQVTbase.getEnumerationLiteralNameAccess();
 	}
@@ -1974,6 +1977,29 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumerationLiteralNameAccess().getRule();
 	}
 
+	//QVTbaseUnrestrictedName:
+	//	'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' |
+	//	'enum' | 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property'
+	//	| 'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile';
+	public QVTbaseGrammarAccess.QVTbaseUnrestrictedNameElements getQVTbaseUnrestrictedNameAccess() {
+		return gaQVTbase.getQVTbaseUnrestrictedNameAccess();
+	}
+
+	public ParserRule getQVTbaseUnrestrictedNameRule() {
+		return getQVTbaseUnrestrictedNameAccess().getRule();
+	}
+
+	/// *
+	//|	'callable'
+	//|	'import'
+	//|	'key'
+	//|	'library'
+	//|	'module'
+	//|	'package'
+	//|	'postcondition'
+	//|	'precondition'
+	//|	'reference'
+	// * /
 	//SIGNED ecore::EInt:
 	//	'-'? INT
 	public QVTbaseGrammarAccess.SIGNEDElements getSIGNEDAccess() {

@@ -137,17 +137,8 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	/**
 	 * UnrestrictedName returns ecore::EString:
 	 * 	EssentialOCLUnrestrictedName
-	 * |	'check'
-	 * |	'enforce'
-	 * |	'import'
-	 * |	'imports'
-	 * |	'library'
-	 * |	'map'
-	 * |	'query'
-	 * |	'realize'
-	 * |	'refines'
-	 * |	'transformation'
-	 * |	'uses'
+	 * |   QVTbaseUnrestrictedName
+	 * |   QVTcoreUnrestrictedName
 	 * ;
 	 */
 	protected String getUnrestrictedNameToken(EObject semanticObject, RuleCall ruleCall, INode node) {

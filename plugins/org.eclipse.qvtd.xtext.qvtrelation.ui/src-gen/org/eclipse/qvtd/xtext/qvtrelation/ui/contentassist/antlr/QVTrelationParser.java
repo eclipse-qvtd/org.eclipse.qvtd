@@ -61,6 +61,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransformationCSAccess().getAlternatives_10(), "rule__TransformationCS__Alternatives_10");
 					put(grammarAccess.getExpCSOrTemplateCSAccess().getAlternatives(), "rule__ExpCSOrTemplateCS__Alternatives");
 					put(grammarAccess.getTypedRefCSAccess().getAlternatives(), "rule__TypedRefCS__Alternatives");
+					put(grammarAccess.getQVTrelationUnrestrictedNameAccess().getAlternatives(), "rule__QVTrelationUnrestrictedName__Alternatives");
 					put(grammarAccess.getUnrestrictedNameAccess().getAlternatives(), "rule__UnrestrictedName__Alternatives");
 					put(grammarAccess.getAttributeCSAccess().getAlternatives_0(), "rule__AttributeCS__Alternatives_0");
 					put(grammarAccess.getAttributeCSAccess().getAlternatives_5_1_0(), "rule__AttributeCS__Alternatives_5_1_0");
@@ -85,6 +86,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7(), "rule__StructuredClassCS__Alternatives_7");
 					put(grammarAccess.getStructuredClassCSAccess().getAlternatives_7_0_1(), "rule__StructuredClassCS__Alternatives_7_0_1");
 					put(grammarAccess.getStructuralFeatureCSAccess().getAlternatives(), "rule__StructuralFeatureCS__Alternatives");
+					put(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAlternatives(), "rule__QVTbaseUnrestrictedName__Alternatives");
 					put(grammarAccess.getEssentialOCLReservedKeywordAccess().getAlternatives(), "rule__EssentialOCLReservedKeyword__Alternatives");
 					put(grammarAccess.getEssentialOCLUnaryOperatorNameAccess().getAlternatives(), "rule__EssentialOCLUnaryOperatorName__Alternatives");
 					put(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getAlternatives(), "rule__EssentialOCLInfixOperatorName__Alternatives");

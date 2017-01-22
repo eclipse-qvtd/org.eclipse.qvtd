@@ -1860,70 +1860,146 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
+	public class QVTimperativeUnrestrictedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.QVTimperativeUnrestrictedName");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cAddKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cAppendKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cAppendsToKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cBufferKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cCallKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cCheckKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cContainedKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cEnforceKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cForKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cImportsKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cInstallKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cInvokeKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cIteratesKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cMapKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cNewKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cNotifyKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cObserveKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cPackageKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cQueryKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cSetKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cStrictKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cTransformationKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
+		private final Keyword cTransientKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
+		private final Keyword cUsesKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
+		private final Keyword cVarKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
+
+		//QVTimperativeUnrestrictedName:
+		//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
+		//
+		//	| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
+		//	'transformation' | 'transient' | 'uses' | 'var';
+		@Override public ParserRule getRule() { return rule; }
+
+		//'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
+		// |
+		//'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
+		//'transformation' | 'transient' | 'uses' | 'var'
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//'add'
+		public Keyword getAddKeyword_0() { return cAddKeyword_0; }
+
+		//'append'
+		public Keyword getAppendKeyword_1() { return cAppendKeyword_1; }
+
+		//'appendsTo'
+		public Keyword getAppendsToKeyword_2() { return cAppendsToKeyword_2; }
+
+		//'buffer'
+		public Keyword getBufferKeyword_3() { return cBufferKeyword_3; }
+
+		//'call'
+		public Keyword getCallKeyword_4() { return cCallKeyword_4; }
+
+		//'check'
+		public Keyword getCheckKeyword_5() { return cCheckKeyword_5; }
+
+		//'contained'
+		public Keyword getContainedKeyword_6() { return cContainedKeyword_6; }
+
+		//'enforce'
+		public Keyword getEnforceKeyword_7() { return cEnforceKeyword_7; }
+
+		//'for'
+		public Keyword getForKeyword_8() { return cForKeyword_8; }
+
+		//'imports'
+		public Keyword getImportsKeyword_9() { return cImportsKeyword_9; }
+
+		//'install'
+		public Keyword getInstallKeyword_10() { return cInstallKeyword_10; }
+
+		//'invoke'
+		public Keyword getInvokeKeyword_11() { return cInvokeKeyword_11; }
+
+		//'iterates'
+		public Keyword getIteratesKeyword_12() { return cIteratesKeyword_12; }
+
+		//'map'
+		public Keyword getMapKeyword_13() { return cMapKeyword_13; }
+
+		//'new'
+		public Keyword getNewKeyword_14() { return cNewKeyword_14; }
+
+		//'notify'
+		public Keyword getNotifyKeyword_15() { return cNotifyKeyword_15; }
+
+		//'observe'
+		public Keyword getObserveKeyword_16() { return cObserveKeyword_16; }
+
+		//'package'
+		public Keyword getPackageKeyword_17() { return cPackageKeyword_17; }
+
+		//'query'
+		public Keyword getQueryKeyword_18() { return cQueryKeyword_18; }
+
+		//'set'
+		public Keyword getSetKeyword_19() { return cSetKeyword_19; }
+
+		//'strict'
+		public Keyword getStrictKeyword_20() { return cStrictKeyword_20; }
+
+		//'transformation'
+		public Keyword getTransformationKeyword_21() { return cTransformationKeyword_21; }
+
+		//'transient'
+		public Keyword getTransientKeyword_22() { return cTransientKeyword_22; }
+
+		//'uses'
+		public Keyword getUsesKeyword_23() { return cUsesKeyword_23; }
+
+		//'var'
+		public Keyword getVarKeyword_24() { return cVarKeyword_24; }
+	}
+
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.UnrestrictedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEssentialOCLUnrestrictedNameParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Keyword cCheckKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cEnforceKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cImportKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cImportsKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		private final Keyword cLibraryKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final Keyword cMapKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		private final Keyword cQueryKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
-		private final Keyword cRealizeKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cRefinesKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cStrictKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cTransformationKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
-		private final Keyword cUsesKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final RuleCall cQVTbaseUnrestrictedNameParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cQVTimperativeUnrestrictedNameParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 
 		//UnrestrictedName:
-		//	EssentialOCLUnrestrictedName | 'check' | 'enforce' | 'import' | 'imports' | 'library' | 'map' | 'query' | 'realize' |
-		//	'refines' | 'strict' | 'transformation' | 'uses';
+		//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTimperativeUnrestrictedName;
 		@Override public ParserRule getRule() { return rule; }
 
-		//EssentialOCLUnrestrictedName | 'check' | 'enforce' | 'import' | 'imports' | 'library' | 'map' | 'query' | 'realize' |
-		//'refines' | 'strict' | 'transformation' | 'uses'
+		//EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTimperativeUnrestrictedName
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EssentialOCLUnrestrictedName
 		public RuleCall getEssentialOCLUnrestrictedNameParserRuleCall_0() { return cEssentialOCLUnrestrictedNameParserRuleCall_0; }
 
-		//'check'
-		public Keyword getCheckKeyword_1() { return cCheckKeyword_1; }
+		//QVTbaseUnrestrictedName
+		public RuleCall getQVTbaseUnrestrictedNameParserRuleCall_1() { return cQVTbaseUnrestrictedNameParserRuleCall_1; }
 
-		//'enforce'
-		public Keyword getEnforceKeyword_2() { return cEnforceKeyword_2; }
-
-		//'import'
-		public Keyword getImportKeyword_3() { return cImportKeyword_3; }
-
-		//'imports'
-		public Keyword getImportsKeyword_4() { return cImportsKeyword_4; }
-
-		//'library'
-		public Keyword getLibraryKeyword_5() { return cLibraryKeyword_5; }
-
-		//'map'
-		public Keyword getMapKeyword_6() { return cMapKeyword_6; }
-
-		//'query'
-		public Keyword getQueryKeyword_7() { return cQueryKeyword_7; }
-
-		//'realize'
-		public Keyword getRealizeKeyword_8() { return cRealizeKeyword_8; }
-
-		//'refines'
-		public Keyword getRefinesKeyword_9() { return cRefinesKeyword_9; }
-
-		//'strict'
-		public Keyword getStrictKeyword_10() { return cStrictKeyword_10; }
-
-		//'transformation'
-		public Keyword getTransformationKeyword_11() { return cTransformationKeyword_11; }
-
-		//'uses'
-		public Keyword getUsesKeyword_12() { return cUsesKeyword_12; }
+		//QVTimperativeUnrestrictedName
+		public RuleCall getQVTimperativeUnrestrictedNameParserRuleCall_2() { return cQVTimperativeUnrestrictedNameParserRuleCall_2; }
 	}
 
 
@@ -1957,6 +2033,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	private final SimpleParameterBindingCSElements pSimpleParameterBindingCS;
 	private final SimpleParameterCSElements pSimpleParameterCS;
 	private final TransformationCSElements pTransformationCS;
+	private final QVTimperativeUnrestrictedNameElements pQVTimperativeUnrestrictedName;
 	private final UnrestrictedNameElements pUnrestrictedName;
 
 	private final Grammar grammar;
@@ -2006,6 +2083,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pSimpleParameterBindingCS = new SimpleParameterBindingCSElements();
 		this.pSimpleParameterCS = new SimpleParameterCSElements();
 		this.pTransformationCS = new TransformationCSElements();
+		this.pQVTimperativeUnrestrictedName = new QVTimperativeUnrestrictedNameElements();
 		this.pUnrestrictedName = new UnrestrictedNameElements();
 	}
 
@@ -2364,9 +2442,21 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getTransformationCSAccess().getRule();
 	}
 
+	//QVTimperativeUnrestrictedName:
+	//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
+	//
+	//	| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
+	//	'transformation' | 'transient' | 'uses' | 'var';
+	public QVTimperativeUnrestrictedNameElements getQVTimperativeUnrestrictedNameAccess() {
+		return pQVTimperativeUnrestrictedName;
+	}
+
+	public ParserRule getQVTimperativeUnrestrictedNameRule() {
+		return getQVTimperativeUnrestrictedNameAccess().getRule();
+	}
+
 	//UnrestrictedName:
-	//	EssentialOCLUnrestrictedName | 'check' | 'enforce' | 'import' | 'imports' | 'library' | 'map' | 'query' | 'realize' |
-	//	'refines' | 'strict' | 'transformation' | 'uses';
+	//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTimperativeUnrestrictedName;
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return pUnrestrictedName;
 	}
@@ -2528,42 +2618,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumerationLiteralName:
-	//	EssentialOCLUnrestrictedName
-	//	/ *|	'abstract'
-	//|	'attribute'
-	//|	'body'
-	//|	'callable'
-	//|	'class'
-	//|	'composes'
-	//|	'datatype'
-	//|	'definition'
-	//|	'derivation'
-	//|	'derived'
-	//|	'enum'
-	//|	'extends'
-	//|	'id'
-	//|	'import'
-	//|	'initial'
-	//|	'interface'
-	//|	'key'
-	//|	'library'
-	//|	'module'
-	//|	'operation'
-	//|	'ordered'
-	//|	'package'
-	//|	'postcondition'
-	//|	'precondition'
-	//|	'primitive'
-	//|	'property'
-	//|	'readonly'
-	//|	'reference'
-	//|	'resolve'
-	//|	'static'
-	//|	'throws'
-	//|	'transient'
-	//|	'unique'
-	//|	'unsettable'
-	//|	'volatile' * /;
+	//	EssentialOCLUnrestrictedName;
 	public QVTbaseGrammarAccess.EnumerationLiteralNameElements getEnumerationLiteralNameAccess() {
 		return gaQVTbase.getEnumerationLiteralNameAccess();
 	}
@@ -2572,6 +2627,29 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumerationLiteralNameAccess().getRule();
 	}
 
+	//QVTbaseUnrestrictedName:
+	//	'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' |
+	//	'enum' | 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property'
+	//	| 'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile';
+	public QVTbaseGrammarAccess.QVTbaseUnrestrictedNameElements getQVTbaseUnrestrictedNameAccess() {
+		return gaQVTbase.getQVTbaseUnrestrictedNameAccess();
+	}
+
+	public ParserRule getQVTbaseUnrestrictedNameRule() {
+		return getQVTbaseUnrestrictedNameAccess().getRule();
+	}
+
+	/// *
+	//|	'callable'
+	//|	'import'
+	//|	'key'
+	//|	'library'
+	//|	'module'
+	//|	'package'
+	//|	'postcondition'
+	//|	'precondition'
+	//|	'reference'
+	// * /
 	//SIGNED ecore::EInt:
 	//	'-'? INT
 	public QVTbaseGrammarAccess.SIGNEDElements getSIGNEDAccess() {

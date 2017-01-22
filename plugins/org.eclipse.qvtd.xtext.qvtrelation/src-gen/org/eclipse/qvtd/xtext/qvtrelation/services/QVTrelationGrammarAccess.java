@@ -1722,22 +1722,22 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_2_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_2_1_0; }
 	}
 
-	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.UnrestrictedName");
+	public class QVTrelationUnrestrictedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.QVTrelationUnrestrictedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEssentialOCLUnrestrictedNameParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Keyword cCheckonlyKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cDefaultKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cDefault_valuesKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cDomainKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		private final Keyword cEnforceKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final Keyword cExtendsKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		private final Keyword cImplementedbyKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
-		private final Keyword cImportKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cLibraryKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cKeyKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cOppositeKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
-		private final Keyword cOverridesKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cCheckonlyKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cDefaultKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cDefault_valuesKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cDomainKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cEnforceKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cExtendsKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cImplementedbyKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cImportKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cLibraryKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cKeyKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cOppositeKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cOverridesKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cPackageKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
 		private final Keyword cPrimitiveKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
 		private final Keyword cQueryKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
 		private final Keyword cRelationKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
@@ -1750,55 +1750,55 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		////ExpCS returns essentialocl::ExpCS:
 		// //	InfixedExpCS
 		// //|	TemplateCS;
-		// UnrestrictedName:
-		//	EssentialOCLUnrestrictedName | 'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' |
-		//	'implementedby' | 'import' | 'library' | 'key' | 'opposite' | 'overrides' | 'primitive' | 'query' | 'relation' |
-		//	'replace' | 'top' | 'transformation' | 'when' | 'where';
+		// QVTrelationUnrestrictedName:
+		//	'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
+		//	'library' | 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
+		//	'transformation' | 'when' | 'where';
 		@Override public ParserRule getRule() { return rule; }
 
-		//EssentialOCLUnrestrictedName | 'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' |
-		//'implementedby' | 'import' | 'library' | 'key' | 'opposite' | 'overrides' | 'primitive' | 'query' | 'relation' |
-		//'replace' | 'top' | 'transformation' | 'when' | 'where'
+		//'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' | 'library' |
+		//'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
+		//'transformation' | 'when' | 'where'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//EssentialOCLUnrestrictedName
-		public RuleCall getEssentialOCLUnrestrictedNameParserRuleCall_0() { return cEssentialOCLUnrestrictedNameParserRuleCall_0; }
-
 		//'checkonly'
-		public Keyword getCheckonlyKeyword_1() { return cCheckonlyKeyword_1; }
+		public Keyword getCheckonlyKeyword_0() { return cCheckonlyKeyword_0; }
 
 		//'default'
-		public Keyword getDefaultKeyword_2() { return cDefaultKeyword_2; }
+		public Keyword getDefaultKeyword_1() { return cDefaultKeyword_1; }
 
 		//'default_values'
-		public Keyword getDefault_valuesKeyword_3() { return cDefault_valuesKeyword_3; }
+		public Keyword getDefault_valuesKeyword_2() { return cDefault_valuesKeyword_2; }
 
 		//'domain'
-		public Keyword getDomainKeyword_4() { return cDomainKeyword_4; }
+		public Keyword getDomainKeyword_3() { return cDomainKeyword_3; }
 
 		//'enforce'
-		public Keyword getEnforceKeyword_5() { return cEnforceKeyword_5; }
+		public Keyword getEnforceKeyword_4() { return cEnforceKeyword_4; }
 
 		//'extends'
-		public Keyword getExtendsKeyword_6() { return cExtendsKeyword_6; }
+		public Keyword getExtendsKeyword_5() { return cExtendsKeyword_5; }
 
 		//'implementedby'
-		public Keyword getImplementedbyKeyword_7() { return cImplementedbyKeyword_7; }
+		public Keyword getImplementedbyKeyword_6() { return cImplementedbyKeyword_6; }
 
 		//'import'
-		public Keyword getImportKeyword_8() { return cImportKeyword_8; }
+		public Keyword getImportKeyword_7() { return cImportKeyword_7; }
 
 		//'library'
-		public Keyword getLibraryKeyword_9() { return cLibraryKeyword_9; }
+		public Keyword getLibraryKeyword_8() { return cLibraryKeyword_8; }
 
 		//'key'
-		public Keyword getKeyKeyword_10() { return cKeyKeyword_10; }
+		public Keyword getKeyKeyword_9() { return cKeyKeyword_9; }
 
 		//'opposite'
-		public Keyword getOppositeKeyword_11() { return cOppositeKeyword_11; }
+		public Keyword getOppositeKeyword_10() { return cOppositeKeyword_10; }
 
 		//'overrides'
-		public Keyword getOverridesKeyword_12() { return cOverridesKeyword_12; }
+		public Keyword getOverridesKeyword_11() { return cOverridesKeyword_11; }
+
+		//'package'
+		public Keyword getPackageKeyword_12() { return cPackageKeyword_12; }
 
 		//'primitive'
 		public Keyword getPrimitiveKeyword_13() { return cPrimitiveKeyword_13; }
@@ -1823,6 +1823,37 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'where'
 		public Keyword getWhereKeyword_20() { return cWhereKeyword_20; }
+	}
+
+	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.UnrestrictedName");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEssentialOCLUnrestrictedNameParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cQVTbaseUnrestrictedNameParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cQVTrelationUnrestrictedNameParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+
+		/// *
+		//|	'callable'
+		//|	'module'
+		//|	'package'
+		//|	'postcondition'
+		//|	'precondition'
+		//|	'reference'
+		// * / UnrestrictedName:
+		//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTrelationUnrestrictedName;
+		@Override public ParserRule getRule() { return rule; }
+
+		//EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTrelationUnrestrictedName
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//EssentialOCLUnrestrictedName
+		public RuleCall getEssentialOCLUnrestrictedNameParserRuleCall_0() { return cEssentialOCLUnrestrictedNameParserRuleCall_0; }
+
+		//QVTbaseUnrestrictedName
+		public RuleCall getQVTbaseUnrestrictedNameParserRuleCall_1() { return cQVTbaseUnrestrictedNameParserRuleCall_1; }
+
+		//QVTrelationUnrestrictedName
+		public RuleCall getQVTrelationUnrestrictedNameParserRuleCall_2() { return cQVTrelationUnrestrictedNameParserRuleCall_2; }
 	}
 
 
@@ -1853,6 +1884,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	private final ExpCSOrTemplateCSElements pExpCSOrTemplateCS;
 	private final TypedTypeRefCSElements pTypedTypeRefCS;
 	private final TypedRefCSElements pTypedRefCS;
+	private final QVTrelationUnrestrictedNameElements pQVTrelationUnrestrictedName;
 	private final UnrestrictedNameElements pUnrestrictedName;
 
 	private final Grammar grammar;
@@ -1899,6 +1931,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pExpCSOrTemplateCS = new ExpCSOrTemplateCSElements();
 		this.pTypedTypeRefCS = new TypedTypeRefCSElements();
 		this.pTypedRefCS = new TypedRefCSElements();
+		this.pQVTrelationUnrestrictedName = new QVTrelationUnrestrictedNameElements();
 		this.pUnrestrictedName = new UnrestrictedNameElements();
 	}
 
@@ -2241,10 +2274,27 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	////ExpCS returns essentialocl::ExpCS:
 	// //	InfixedExpCS
 	// //|	TemplateCS;
-	// UnrestrictedName:
-	//	EssentialOCLUnrestrictedName | 'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' |
-	//	'implementedby' | 'import' | 'library' | 'key' | 'opposite' | 'overrides' | 'primitive' | 'query' | 'relation' |
-	//	'replace' | 'top' | 'transformation' | 'when' | 'where';
+	// QVTrelationUnrestrictedName:
+	//	'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
+	//	'library' | 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
+	//	'transformation' | 'when' | 'where';
+	public QVTrelationUnrestrictedNameElements getQVTrelationUnrestrictedNameAccess() {
+		return pQVTrelationUnrestrictedName;
+	}
+
+	public ParserRule getQVTrelationUnrestrictedNameRule() {
+		return getQVTrelationUnrestrictedNameAccess().getRule();
+	}
+
+	/// *
+	//|	'callable'
+	//|	'module'
+	//|	'package'
+	//|	'postcondition'
+	//|	'precondition'
+	//|	'reference'
+	// * / UnrestrictedName:
+	//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTrelationUnrestrictedName;
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return pUnrestrictedName;
 	}
@@ -2407,42 +2457,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumerationLiteralName:
-	//	EssentialOCLUnrestrictedName
-	//	/ *|	'abstract'
-	//|	'attribute'
-	//|	'body'
-	//|	'callable'
-	//|	'class'
-	//|	'composes'
-	//|	'datatype'
-	//|	'definition'
-	//|	'derivation'
-	//|	'derived'
-	//|	'enum'
-	//|	'extends'
-	//|	'id'
-	//|	'import'
-	//|	'initial'
-	//|	'interface'
-	//|	'key'
-	//|	'library'
-	//|	'module'
-	//|	'operation'
-	//|	'ordered'
-	//|	'package'
-	//|	'postcondition'
-	//|	'precondition'
-	//|	'primitive'
-	//|	'property'
-	//|	'readonly'
-	//|	'reference'
-	//|	'resolve'
-	//|	'static'
-	//|	'throws'
-	//|	'transient'
-	//|	'unique'
-	//|	'unsettable'
-	//|	'volatile' * /;
+	//	EssentialOCLUnrestrictedName;
 	public QVTbaseGrammarAccess.EnumerationLiteralNameElements getEnumerationLiteralNameAccess() {
 		return gaQVTbase.getEnumerationLiteralNameAccess();
 	}
@@ -2451,6 +2466,29 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumerationLiteralNameAccess().getRule();
 	}
 
+	//QVTbaseUnrestrictedName:
+	//	'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' |
+	//	'enum' | 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property'
+	//	| 'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile';
+	public QVTbaseGrammarAccess.QVTbaseUnrestrictedNameElements getQVTbaseUnrestrictedNameAccess() {
+		return gaQVTbase.getQVTbaseUnrestrictedNameAccess();
+	}
+
+	public ParserRule getQVTbaseUnrestrictedNameRule() {
+		return getQVTbaseUnrestrictedNameAccess().getRule();
+	}
+
+	/// *
+	//|	'callable'
+	//|	'import'
+	//|	'key'
+	//|	'library'
+	//|	'module'
+	//|	'package'
+	//|	'postcondition'
+	//|	'precondition'
+	//|	'reference'
+	// * /
 	//SIGNED ecore::EInt:
 	//	'-'? INT
 	public QVTbaseGrammarAccess.SIGNEDElements getSIGNEDAccess() {

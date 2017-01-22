@@ -27,7 +27,7 @@ TopLevelCS:
 AddStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 
-AppendParameterBindingCS: referredVariable=[qvtimperative::AppendParameter|UnrestrictedName]  'appendsTo' value=[qvtimperative::ConnectionVariable|UnrestrictedName] ';';
+AppendParameterBindingCS: referredVariable=[qvtimperative::AppendParameter|UnrestrictedName] 'appendsTo' value=[qvtimperative::ConnectionVariable|UnrestrictedName] ';';
 
 AppendParameterCS: 'append' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 	
@@ -109,19 +109,38 @@ SimpleParameterCS: 'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedMo
 	
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
+	
+QVTimperativeUnrestrictedName:
+	'add'
+|	'append'
+|	'appendsTo'
+|	'buffer'
+|	'call'
+|	'check'
+|	'contained'
+|	'enforce'
+|	'for'
+|	'imports'
+//|	'in'
+|	'install'
+|	'invoke'
+|	'iterates'
+|	'map'
+|	'new'
+|	'notify'
+|	'observe'
+|	'package'
+|	'query'
+|	'set'
+|	'strict'
+|	'transformation'
+|	'transient'
+|	'uses'
+|	'var'
+;
 			
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
-|	'check'
-|	'enforce'
-|	'import'
-|	'imports'
-|	'library'
-|	'map'
-|	'query'
-|	'realize'
-|	'refines'
-|	'strict'
-|	'transformation'
-|	'uses'
+|   QVTbaseUnrestrictedName
+|   QVTimperativeUnrestrictedName
 ;

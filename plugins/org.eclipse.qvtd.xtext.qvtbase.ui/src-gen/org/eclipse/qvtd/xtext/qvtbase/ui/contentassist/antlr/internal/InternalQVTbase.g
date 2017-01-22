@@ -402,6 +402,8 @@ finally {
 
 
 
+
+
 // Entry rule entryRuleSIGNED
 entryRuleSIGNED
 :
@@ -3430,6 +3432,7 @@ rule__StructuralFeatureCS__Alternatives
 finally {
 	restoreStackSize(stackSize);
 }
+
 
 
 rule__EssentialOCLUnaryOperatorName__Alternatives

@@ -110,24 +110,32 @@ UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' own
 RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
 	
 UnnamedDomainCS returns DomainCS: {DomainCS} ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
-		
-UnrestrictedName returns ecore::EString:
-	EssentialOCLUnrestrictedName
-|	'check'
-//|	'creation'
+	
+QVTcoreUnrestrictedName:
+	'check'
 //|	'default'
-//|	'deletion'
 |	'enforce'
 |	'import'
 |	'imports'
-//|	'include'
-|	'library'
 |	'map'
+|	'package'
 |	'query'
 |	'realize'
 |	'refines'
 |	'transformation'
+|	'transient'
 |	'uses'
 //|	'where'
+;
+//|	'creation'
+//|	'deletion'
+//|	'include'
+//|	'library'
+
+		
+UnrestrictedName returns ecore::EString:
+	EssentialOCLUnrestrictedName
+|   QVTbaseUnrestrictedName
+|   QVTcoreUnrestrictedName
 ;
 	

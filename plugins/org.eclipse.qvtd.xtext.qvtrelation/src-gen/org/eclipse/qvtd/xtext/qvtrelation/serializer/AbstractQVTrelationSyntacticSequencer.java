@@ -139,26 +139,8 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	/**
 	 * UnrestrictedName returns ecore::EString:
 	 * 	EssentialOCLUnrestrictedName
-	 * |   'checkonly'
-	 * |   'default'
-	 * |   'default_values'
-	 * |   'domain'
-	 * |   'enforce'
-	 * |   'extends'
-	 * |   'implementedby'
-	 * |   'import'
-	 * |   'library'
-	 * |   'key'
-	 * |   'opposite'
-	 * |   'overrides'
-	 * |   'primitive'
-	 * |   'query'
-	 * |   'relation'
-	 * |   'replace'
-	 * |   'top'
-	 * |   'transformation'
-	 * |   'when'
-	 * |   'where'
+	 * |   QVTbaseUnrestrictedName
+	 * |   QVTrelationUnrestrictedName
 	 * ;
 	 */
 	protected String getUnrestrictedNameToken(EObject semanticObject, RuleCall ruleCall, INode node) {

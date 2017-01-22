@@ -3061,6 +3061,201 @@ ruleTransformationCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleQVTimperativeUnrestrictedName
+entryRuleQVTimperativeUnrestrictedName returns [String current=null]
+	:
+	{ newCompositeNode(grammarAccess.getQVTimperativeUnrestrictedNameRule()); }
+	 iv_ruleQVTimperativeUnrestrictedName=ruleQVTimperativeUnrestrictedName
+	 { $current=$iv_ruleQVTimperativeUnrestrictedName.current.getText(); }
+	 EOF
+;
+
+// Rule QVTimperativeUnrestrictedName
+ruleQVTimperativeUnrestrictedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+    @init { enterRule();
+    }
+    @after { leaveRule(); }:
+(
+	kw='add'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getAddKeyword_0());
+    }
+
+    |
+	kw='append'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getAppendKeyword_1());
+    }
+
+    |
+	kw='appendsTo'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getAppendsToKeyword_2());
+    }
+
+    |
+	kw='buffer'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getBufferKeyword_3());
+    }
+
+    |
+	kw='call'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getCallKeyword_4());
+    }
+
+    |
+	kw='check'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getCheckKeyword_5());
+    }
+
+    |
+	kw='contained'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getContainedKeyword_6());
+    }
+
+    |
+	kw='enforce'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getEnforceKeyword_7());
+    }
+
+    |
+	kw='for'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getForKeyword_8());
+    }
+
+    |
+	kw='imports'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getImportsKeyword_9());
+    }
+
+    |
+	kw='install'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getInstallKeyword_10());
+    }
+
+    |
+	kw='invoke'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getInvokeKeyword_11());
+    }
+
+    |
+	kw='iterates'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getIteratesKeyword_12());
+    }
+
+    |
+	kw='map'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getMapKeyword_13());
+    }
+
+    |
+	kw='new'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getNewKeyword_14());
+    }
+
+    |
+	kw='notify'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getNotifyKeyword_15());
+    }
+
+    |
+	kw='observe'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getObserveKeyword_16());
+    }
+
+    |
+	kw='package'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getPackageKeyword_17());
+    }
+
+    |
+	kw='query'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getQueryKeyword_18());
+    }
+
+    |
+	kw='set'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getSetKeyword_19());
+    }
+
+    |
+	kw='strict'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getStrictKeyword_20());
+    }
+
+    |
+	kw='transformation'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransformationKeyword_21());
+    }
+
+    |
+	kw='transient'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransientKeyword_22());
+    }
+
+    |
+	kw='uses'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getUsesKeyword_23());
+    }
+
+    |
+	kw='var'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getVarKeyword_24());
+    }
+)
+    ;
+
+
+
+
+
 // Entry rule entryRuleUnrestrictedName
 entryRuleUnrestrictedName returns [String current=null]
 	:
@@ -3088,87 +3283,27 @@ ruleUnrestrictedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRu
     }
 
     |
-	kw='check'
     {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getCheckKeyword_1());
+        newCompositeNode(grammarAccess.getUnrestrictedNameAccess().getQVTbaseUnrestrictedNameParserRuleCall_1());
+    }
+    this_QVTbaseUnrestrictedName_1=ruleQVTbaseUnrestrictedName    {
+		$current.merge(this_QVTbaseUnrestrictedName_1);
+    }
+
+    {
+        afterParserOrEnumRuleCall();
     }
 
     |
-	kw='enforce'
     {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getEnforceKeyword_2());
+        newCompositeNode(grammarAccess.getUnrestrictedNameAccess().getQVTimperativeUnrestrictedNameParserRuleCall_2());
+    }
+    this_QVTimperativeUnrestrictedName_2=ruleQVTimperativeUnrestrictedName    {
+		$current.merge(this_QVTimperativeUnrestrictedName_2);
     }
 
-    |
-	kw='import'
     {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getImportKeyword_3());
-    }
-
-    |
-	kw='imports'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getImportsKeyword_4());
-    }
-
-    |
-	kw='library'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getLibraryKeyword_5());
-    }
-
-    |
-	kw='map'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getMapKeyword_6());
-    }
-
-    |
-	kw='query'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getQueryKeyword_7());
-    }
-
-    |
-	kw='realize'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getRealizeKeyword_8());
-    }
-
-    |
-	kw='refines'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getRefinesKeyword_9());
-    }
-
-    |
-	kw='strict'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getStrictKeyword_10());
-    }
-
-    |
-	kw='transformation'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getTransformationKeyword_11());
-    }
-
-    |
-	kw='uses'
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getUsesKeyword_12());
+        afterParserOrEnumRuleCall();
     }
 )
     ;
@@ -5627,6 +5762,222 @@ ruleEnumerationLiteralName returns [AntlrDatatypeRuleToken current=new AntlrData
         afterParserOrEnumRuleCall();
     }
 
+    ;
+
+
+
+
+
+// Entry rule entryRuleQVTbaseUnrestrictedName
+entryRuleQVTbaseUnrestrictedName returns [String current=null]
+	:
+	{ newCompositeNode(grammarAccess.getQVTbaseUnrestrictedNameRule()); }
+	 iv_ruleQVTbaseUnrestrictedName=ruleQVTbaseUnrestrictedName
+	 { $current=$iv_ruleQVTbaseUnrestrictedName.current.getText(); }
+	 EOF
+;
+
+// Rule QVTbaseUnrestrictedName
+ruleQVTbaseUnrestrictedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+    @init { enterRule();
+    }
+    @after { leaveRule(); }:
+(
+	kw='abstract'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getAbstractKeyword_0());
+    }
+
+    |
+	kw='attribute'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getAttributeKeyword_1());
+    }
+
+    |
+	kw='body'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getBodyKeyword_2());
+    }
+
+    |
+	kw='class'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getClassKeyword_3());
+    }
+
+    |
+	kw='composes'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getComposesKeyword_4());
+    }
+
+    |
+	kw='datatype'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getDatatypeKeyword_5());
+    }
+
+    |
+	kw='definition'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getDefinitionKeyword_6());
+    }
+
+    |
+	kw='derived'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getDerivedKeyword_7());
+    }
+
+    |
+	kw='derivation'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getDerivationKeyword_8());
+    }
+
+    |
+	kw='enum'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getEnumKeyword_9());
+    }
+
+    |
+	kw='extends'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getExtendsKeyword_10());
+    }
+
+    |
+	kw='id'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getIdKeyword_11());
+    }
+
+    |
+	kw='initial'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getInitialKeyword_12());
+    }
+
+    |
+	kw='interface'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getInterfaceKeyword_13());
+    }
+
+    |
+	kw='literal'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getLiteralKeyword_14());
+    }
+
+    |
+	kw='operation'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getOperationKeyword_15());
+    }
+
+    |
+	kw='ordered'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getOrderedKeyword_16());
+    }
+
+    |
+	kw='primitive'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getPrimitiveKeyword_17());
+    }
+
+    |
+	kw='property'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getPropertyKeyword_18());
+    }
+
+    |
+	kw='readonly'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getReadonlyKeyword_19());
+    }
+
+    |
+	kw='resolve'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getResolveKeyword_20());
+    }
+
+    |
+	kw='serializable'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getSerializableKeyword_21());
+    }
+
+    |
+	kw='static'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getStaticKeyword_22());
+    }
+
+    |
+	kw='throws'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getThrowsKeyword_23());
+    }
+
+    |
+	kw='transient'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getTransientKeyword_24());
+    }
+
+    |
+	kw='unique'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getUniqueKeyword_25());
+    }
+
+    |
+	kw='unsettable'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getUnsettableKeyword_26());
+    }
+
+    |
+	kw='volatile'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTbaseUnrestrictedNameAccess().getVolatileKeyword_27());
+    }
+)
     ;
 
 

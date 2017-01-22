@@ -314,4 +314,7 @@ public class AbstractQVTrelationProposalProvider extends org.eclipse.qvtd.xtext.
 	public void complete_ExpCSOrTemplateCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
+	public void complete_QVTrelationUnrestrictedName(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

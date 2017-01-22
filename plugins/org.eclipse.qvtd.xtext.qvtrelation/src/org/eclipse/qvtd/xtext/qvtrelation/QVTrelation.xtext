@@ -136,10 +136,9 @@ TypedRefCS returns base::TypedRefCS:
 //ExpCS returns essentialocl::ExpCS:
 //	InfixedExpCS
 //|	TemplateCS;
-
-UnrestrictedName returns ecore::EString:
-	EssentialOCLUnrestrictedName
-|   'checkonly'
+	
+QVTrelationUnrestrictedName:
+    'checkonly'
 |   'default'
 |   'default_values'
 |   'domain'
@@ -151,6 +150,7 @@ UnrestrictedName returns ecore::EString:
 |   'key'
 |   'opposite'
 |   'overrides'
+|   'package'
 |   'primitive'
 |   'query'
 |   'relation'
@@ -159,4 +159,17 @@ UnrestrictedName returns ecore::EString:
 |   'transformation'
 |   'when'
 |   'where'
+;
+/*
+|	'callable'
+|	'module'
+|	'package'
+|	'postcondition'
+|	'precondition'
+|	'reference'
+*/
+UnrestrictedName returns ecore::EString:
+	EssentialOCLUnrestrictedName
+|   QVTbaseUnrestrictedName
+|   QVTrelationUnrestrictedName
 ;

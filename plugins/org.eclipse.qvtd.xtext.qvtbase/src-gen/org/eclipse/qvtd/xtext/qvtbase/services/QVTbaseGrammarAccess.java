@@ -1744,46 +1744,139 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEssentialOCLUnrestrictedNameParserRuleCall = (RuleCall)rule.eContents().get(1);
 
 		//EnumerationLiteralName:
-		//	EssentialOCLUnrestrictedName
-		//	/ *|	'abstract'
-		//|	'attribute'
-		//|	'body'
-		//|	'callable'
-		//|	'class'
-		//|	'composes'
-		//|	'datatype'
-		//|	'definition'
-		//|	'derivation'
-		//|	'derived'
-		//|	'enum'
-		//|	'extends'
-		//|	'id'
-		//|	'import'
-		//|	'initial'
-		//|	'interface'
-		//|	'key'
-		//|	'library'
-		//|	'module'
-		//|	'operation'
-		//|	'ordered'
-		//|	'package'
-		//|	'postcondition'
-		//|	'precondition'
-		//|	'primitive'
-		//|	'property'
-		//|	'readonly'
-		//|	'reference'
-		//|	'resolve'
-		//|	'static'
-		//|	'throws'
-		//|	'transient'
-		//|	'unique'
-		//|	'unsettable'
-		//|	'volatile' * /;
+		//	EssentialOCLUnrestrictedName;
 		@Override public ParserRule getRule() { return rule; }
 
 		//EssentialOCLUnrestrictedName
 		public RuleCall getEssentialOCLUnrestrictedNameParserRuleCall() { return cEssentialOCLUnrestrictedNameParserRuleCall; }
+	}
+
+	public class QVTbaseUnrestrictedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.QVTbaseUnrestrictedName");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cAbstractKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cAttributeKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cBodyKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cClassKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cComposesKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cDatatypeKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cDefinitionKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cDerivedKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cDerivationKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cEnumKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cExtendsKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cIdKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cInitialKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cInterfaceKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cLiteralKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cOperationKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cOrderedKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cPrimitiveKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cPropertyKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cReadonlyKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cResolveKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cSerializableKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
+		private final Keyword cStaticKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
+		private final Keyword cThrowsKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
+		private final Keyword cTransientKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
+		private final Keyword cUniqueKeyword_25 = (Keyword)cAlternatives.eContents().get(25);
+		private final Keyword cUnsettableKeyword_26 = (Keyword)cAlternatives.eContents().get(26);
+		private final Keyword cVolatileKeyword_27 = (Keyword)cAlternatives.eContents().get(27);
+
+		//QVTbaseUnrestrictedName:
+		//	'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' |
+		//	'enum' | 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property'
+		//	| 'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile';
+		@Override public ParserRule getRule() { return rule; }
+
+		//'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' | 'enum'
+		//| 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property' |
+		//'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile'
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//'abstract'
+		public Keyword getAbstractKeyword_0() { return cAbstractKeyword_0; }
+
+		//'attribute'
+		public Keyword getAttributeKeyword_1() { return cAttributeKeyword_1; }
+
+		//'body'
+		public Keyword getBodyKeyword_2() { return cBodyKeyword_2; }
+
+		//'class'
+		public Keyword getClassKeyword_3() { return cClassKeyword_3; }
+
+		//'composes'
+		public Keyword getComposesKeyword_4() { return cComposesKeyword_4; }
+
+		//'datatype'
+		public Keyword getDatatypeKeyword_5() { return cDatatypeKeyword_5; }
+
+		//'definition'
+		public Keyword getDefinitionKeyword_6() { return cDefinitionKeyword_6; }
+
+		//'derived'
+		public Keyword getDerivedKeyword_7() { return cDerivedKeyword_7; }
+
+		//'derivation'
+		public Keyword getDerivationKeyword_8() { return cDerivationKeyword_8; }
+
+		//'enum'
+		public Keyword getEnumKeyword_9() { return cEnumKeyword_9; }
+
+		//'extends'
+		public Keyword getExtendsKeyword_10() { return cExtendsKeyword_10; }
+
+		//'id'
+		public Keyword getIdKeyword_11() { return cIdKeyword_11; }
+
+		//'initial'
+		public Keyword getInitialKeyword_12() { return cInitialKeyword_12; }
+
+		//'interface'
+		public Keyword getInterfaceKeyword_13() { return cInterfaceKeyword_13; }
+
+		//'literal'
+		public Keyword getLiteralKeyword_14() { return cLiteralKeyword_14; }
+
+		//'operation'
+		public Keyword getOperationKeyword_15() { return cOperationKeyword_15; }
+
+		//'ordered'
+		public Keyword getOrderedKeyword_16() { return cOrderedKeyword_16; }
+
+		//'primitive'
+		public Keyword getPrimitiveKeyword_17() { return cPrimitiveKeyword_17; }
+
+		//'property'
+		public Keyword getPropertyKeyword_18() { return cPropertyKeyword_18; }
+
+		//'readonly'
+		public Keyword getReadonlyKeyword_19() { return cReadonlyKeyword_19; }
+
+		//'resolve'
+		public Keyword getResolveKeyword_20() { return cResolveKeyword_20; }
+
+		//'serializable'
+		public Keyword getSerializableKeyword_21() { return cSerializableKeyword_21; }
+
+		//'static'
+		public Keyword getStaticKeyword_22() { return cStaticKeyword_22; }
+
+		//'throws'
+		public Keyword getThrowsKeyword_23() { return cThrowsKeyword_23; }
+
+		//'transient'
+		public Keyword getTransientKeyword_24() { return cTransientKeyword_24; }
+
+		//'unique'
+		public Keyword getUniqueKeyword_25() { return cUniqueKeyword_25; }
+
+		//'unsettable'
+		public Keyword getUnsettableKeyword_26() { return cUnsettableKeyword_26; }
+
+		//'volatile'
+		public Keyword getVolatileKeyword_27() { return cVolatileKeyword_27; }
 	}
 
 	public class SIGNEDElements extends AbstractParserRuleElementFinder {
@@ -1792,6 +1885,17 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 
+		/// *
+		//|	'callable'
+		//|	'import'
+		//|	'key'
+		//|	'library'
+		//|	'module'
+		//|	'package'
+		//|	'postcondition'
+		//|	'precondition'
+		//|	'reference'
+		// * /
 		//SIGNED ecore::EInt:
 		//	'-'? INT
 		@Override public ParserRule getRule() { return rule; }
@@ -1820,6 +1924,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private final TypedMultiplicityRefCSElements pTypedMultiplicityRefCS;
 	private final StructuralFeatureCSElements pStructuralFeatureCS;
 	private final EnumerationLiteralNameElements pEnumerationLiteralName;
+	private final QVTbaseUnrestrictedNameElements pQVTbaseUnrestrictedName;
 	private final SIGNEDElements pSIGNED;
 	private final TerminalRule tUNQUOTED_STRING;
 
@@ -1849,6 +1954,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTypedMultiplicityRefCS = new TypedMultiplicityRefCSElements();
 		this.pStructuralFeatureCS = new StructuralFeatureCSElements();
 		this.pEnumerationLiteralName = new EnumerationLiteralNameElements();
+		this.pQVTbaseUnrestrictedName = new QVTbaseUnrestrictedNameElements();
 		this.pSIGNED = new SIGNEDElements();
 		this.tUNQUOTED_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtbase.QVTbase.UNQUOTED_STRING");
 	}
@@ -2035,42 +2141,7 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumerationLiteralName:
-	//	EssentialOCLUnrestrictedName
-	//	/ *|	'abstract'
-	//|	'attribute'
-	//|	'body'
-	//|	'callable'
-	//|	'class'
-	//|	'composes'
-	//|	'datatype'
-	//|	'definition'
-	//|	'derivation'
-	//|	'derived'
-	//|	'enum'
-	//|	'extends'
-	//|	'id'
-	//|	'import'
-	//|	'initial'
-	//|	'interface'
-	//|	'key'
-	//|	'library'
-	//|	'module'
-	//|	'operation'
-	//|	'ordered'
-	//|	'package'
-	//|	'postcondition'
-	//|	'precondition'
-	//|	'primitive'
-	//|	'property'
-	//|	'readonly'
-	//|	'reference'
-	//|	'resolve'
-	//|	'static'
-	//|	'throws'
-	//|	'transient'
-	//|	'unique'
-	//|	'unsettable'
-	//|	'volatile' * /;
+	//	EssentialOCLUnrestrictedName;
 	public EnumerationLiteralNameElements getEnumerationLiteralNameAccess() {
 		return pEnumerationLiteralName;
 	}
@@ -2079,6 +2150,29 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumerationLiteralNameAccess().getRule();
 	}
 
+	//QVTbaseUnrestrictedName:
+	//	'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' |
+	//	'enum' | 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property'
+	//	| 'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile';
+	public QVTbaseUnrestrictedNameElements getQVTbaseUnrestrictedNameAccess() {
+		return pQVTbaseUnrestrictedName;
+	}
+
+	public ParserRule getQVTbaseUnrestrictedNameRule() {
+		return getQVTbaseUnrestrictedNameAccess().getRule();
+	}
+
+	/// *
+	//|	'callable'
+	//|	'import'
+	//|	'key'
+	//|	'library'
+	//|	'module'
+	//|	'package'
+	//|	'postcondition'
+	//|	'precondition'
+	//|	'reference'
+	// * /
 	//SIGNED ecore::EInt:
 	//	'-'? INT
 	public SIGNEDElements getSIGNEDAccess() {
