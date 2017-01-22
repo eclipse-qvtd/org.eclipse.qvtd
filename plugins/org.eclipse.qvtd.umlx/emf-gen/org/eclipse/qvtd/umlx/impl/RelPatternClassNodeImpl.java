@@ -273,9 +273,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 */
 	@Override
 	public void setName(String newName) {
-		if ("mbVars".equals(newName)) {
-			toString();
-		}
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())

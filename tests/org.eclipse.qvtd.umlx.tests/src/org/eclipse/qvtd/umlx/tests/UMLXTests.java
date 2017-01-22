@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.umlx.tests;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,6 +20,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.umlx.qvtr2umlx.QVTr2UMLX;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
+import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrTestUtil;
@@ -76,6 +78,9 @@ public class UMLXTests extends LoadTestCase
 	@Override
 	protected void setUp() throws Exception {
 		QVTrTestUtil.doQVTrelationSetup();
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			UMLXStandaloneSetup.doSetup();
+		}
 		super.setUp();
 	}
 
