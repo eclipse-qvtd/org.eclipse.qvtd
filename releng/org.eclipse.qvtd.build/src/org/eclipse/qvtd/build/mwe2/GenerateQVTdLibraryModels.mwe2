@@ -48,6 +48,8 @@ Workflow {
     		from = "http://www.eclipse.org/qvt/2015/QVTbase"
     		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
     	}
+    	excludedEClassifierName = "Model"
+    	excludedEClassifierName = "Transformation"
     }
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.genmodel"
@@ -76,6 +78,8 @@ Workflow {
     		from = "http://www.eclipse.org/qvt/2016/QVTimperative"
     		to = "org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeMetamodel"
     	}
+    	excludedEClassifierName = "Model"
+    	excludedEClassifierName = "Transformation"
     }
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"

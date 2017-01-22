@@ -43,18 +43,18 @@
         <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfTypeTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" name="Set"
-        superClasses="#//@ownedPackages.1/@ownedClasses.6">
+    <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" isNullFree="true"
+        name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.6">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" elementType="#t.qvtbaselibrary.Model..objectsOfKindTT" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.7">
+    <ownedClasses xsi:type="pivot:SetType" elementType="#t.qvtbaselibrary.Model..objectsOfKindTT" isNullFree="true" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.7">
       <ownedBindings>
         <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfKindTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" elementType="#t.qvtbaselibrary.Model..objectsOfTypeTT" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8">
+    <ownedClasses xsi:type="pivot:SetType" elementType="#t.qvtbaselibrary.Model..objectsOfTypeTT" isNullFree="true" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8">
       <ownedBindings>
         <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfTypeTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
