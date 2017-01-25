@@ -154,8 +154,13 @@ public class UMLX2QVTr extends QVTrelationHelper
 
 		@Override
 		public @Nullable Element visitTxImportNode(@NonNull TxImportNode txImportNode) {
-			String uri = txImportNode.getUri();
-			EObject eObject = metamodelManager.getEnvironmentFactory().getResourceSet().getEObject(URI.createURI(uri), true);
+			URI uri = URI.createURI(txImportNode.getUri());
+			Resource umlxResource = txImportNode.eResource();
+			if (umlxResource != null) {
+				URI resourceURI = umlxResource.getURI();
+				uri = uri.resolve(resourceURI);
+			}
+			EObject eObject = context.getEnvironmentFactory().getResourceSet().getEObject(uri, true);
 			try {
 				Namespace asNamespace = metamodelManager.getASOf(Namespace.class, eObject);
 				if (asNamespace != null) {
@@ -229,7 +234,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 
 		@Override
 		public @Nullable Element visitUMLXModel(@NonNull UMLXModel umlxModel) {
-			qvtrModel.setExternalURI(context.qvtrResource.getURI().toString());
+			//			qvtrModel.setExternalURI(context.qvtrResource.getURI().toString());
 			context.install(umlxModel, qvtrModel);
 			Iterable<@NonNull TxDiagram> txDiagrams = UMLXUtil.getOwnedTxDiagrams(umlxModel);
 			visitAll(txDiagrams);

@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
@@ -239,10 +238,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	//		return ClassUtil.nonNullState(rRelation.getWhere());
 	//	}
 
-	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+	public static @NonNull RelationalTransformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 		try {
-			return loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
+			return (RelationalTransformation) loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
 		}
 		finally {
 			environmentFactory.setCreateStrategy(savedStrategy);

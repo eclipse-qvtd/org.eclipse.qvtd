@@ -29,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Group;
 
-public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
+public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchConstants
 {
 	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
 		CompilerChain.QVTI_STEP,

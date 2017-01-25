@@ -806,6 +806,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				}
 			}
 		}
+		//		throw new RuntimeException(e);
 		return false;
 	}
 

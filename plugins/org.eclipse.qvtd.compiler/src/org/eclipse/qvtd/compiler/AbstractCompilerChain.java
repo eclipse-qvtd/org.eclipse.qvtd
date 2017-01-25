@@ -61,6 +61,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 {
 	private static final @NonNull Map<@NonNull String, @NonNull String> step2extension = new HashMap<@NonNull String, @NonNull String>();
 	static {
+		step2extension.put(UMLX_STEP, "umlx");
 		step2extension.put(QVTR_STEP, "qvtras");
 		step2extension.put(TRACE_STEP, "ecore");
 		step2extension.put(GENMODEL_STEP, "genmodel");

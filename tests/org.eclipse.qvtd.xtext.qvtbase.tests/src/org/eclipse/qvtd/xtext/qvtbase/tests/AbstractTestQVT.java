@@ -207,7 +207,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			doSerialize(inputURI, serializedURI);
 		}
 		Class<? extends Transformer> txClass = compilerChain.generate(asTransformation, genModelFiles);
-		createGeneratedExecutor(txClass);
+		createGeneratedExecutor(txClass);	// FIXME this is convenient for a single execution, but dangerous for multi-execution
 		return txClass;
 	}
 
@@ -272,7 +272,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 		else {
 			Transformer transformer = generatedExecutor.getTransformer();
-			transformer.run();
+			transformer.run();						// FIXME BUG 511028
+			//			if (!transformer.run()) {
+			//				throw new Exception("Failed to execute");
+			//			}
 			return transformer;
 		}
 	}

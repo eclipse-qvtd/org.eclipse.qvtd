@@ -14,7 +14,6 @@ package org.eclipse.qvtd.debug.ui.launching;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,10 +27,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.debug.launching.QVTcLaunchConstants;
-import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -42,7 +37,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
-public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchConstants
+public abstract class DirectionalMainTab<TX> extends MainTab<TX> implements QVTcLaunchConstants
 {
 	private Composite directionGroup;
 	protected Combo modeCombo;
@@ -87,17 +82,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 	public void dispose() {
 		cancelCompileJob(true);
 		super.dispose();
-	}
-
-	private void gatherOutputModels(@NonNull List<TypedModel> outputModels, @NonNull TypedModel typedModel) {
-		if (!outputModels.contains(typedModel)) {
-			outputModels.add(typedModel);
-			for (TypedModel anotherTypedModel : typedModel.getDependsOn()) {
-				if (anotherTypedModel != null) {
-					gatherOutputModels(outputModels, anotherTypedModel);
-				}
-			}
-		}
 	}
 
 	@Override
@@ -149,17 +133,16 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 		configuration.setAttribute(VIEW_KEY, false);
 	}
 
-	protected void setDirections(@NonNull Set<TypedModel> enforceables) {
+	protected void setDirections(@NonNull Set<@NonNull String> enforceableDirectionNamees) {
 		//		System.out.println("setDirections");
 		if (directionCombo.isDisposed()) {
 			return;
 		}
 		String oldText = directionCombo.getText();
-		String[] directionItems = new String[enforceables.size()];
+		String[] directionItems = new String[enforceableDirectionNamees.size()];
 		int newIndex = -1;
 		int i = 0;
-		for (TypedModel typedModel : enforceables) {
-			String name = typedModel.getName();
+		for (@NonNull String name : enforceableDirectionNamees) {
 			if (ClassUtil.safeEquals(name, oldText)) {
 				newIndex = i;
 			}
@@ -168,112 +151,5 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 		Arrays.sort(directionItems);
 		directionCombo.setItems(directionItems);
 		directionCombo.select(newIndex >= 0 ? newIndex : 0);
-	}
-
-	@Override
-	protected void updateDirection(@NonNull Transformation transformation) {
-		//		System.out.println("updateDirection");
-		setDirections(QVTbaseUtil.getEnforceableTypedModels(transformation));
-	}
-
-	@Override
-	protected void updateGroups(@NonNull Transformation transformation,
-			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
-			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
-			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
-		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
-		Set<@NonNull TypedModel> inputs = new HashSet<@NonNull TypedModel>();
-		Set<@NonNull TypedModel> outputs = new HashSet<@NonNull TypedModel>();
-		String directionName = directionCombo.getText();
-		List<@NonNull TypedModel> inputModels = new ArrayList<@NonNull TypedModel>();
-		List<@NonNull TypedModel> outputModels = new ArrayList<@NonNull TypedModel>();
-		for (TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
-			if (ClassUtil.safeEquals(typedModel.getName(), directionName)) {
-				gatherOutputModels(outputModels, typedModel);
-			}
-		}
-		for (TypedModel inputModel : ClassUtil.nullFree(transformation.getModelParameter())) {
-			if (inputModel.getName() != null) {
-				inputModels.add(inputModel);
-			}
-		}
-		inputModels.removeAll(outputModels);
-		String modeName = modeCombo.getText();
-		if (QVTiLaunchConstants.CHECK_MODE.equals(modeName)) {
-			for (TypedModel inputModel : inputModels) {
-				if (inputs.add(inputModel)) {
-					String name = inputModel.getName();
-					if (name != null) {
-						newInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-					}
-				}
-			}
-			for (TypedModel outputModel : outputModels) {
-				if (outputs.add(outputModel)) {
-					String name = outputModel.getName();
-					if (name != null) {
-						oldOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-					}
-				}
-			}
-		}
-		else if (QVTiLaunchConstants.ENFORCE_CREATE_MODE.equals(modeName)) {
-			for (TypedModel inputModel : inputModels) {
-				if (inputs.add(inputModel)) {
-					String name = inputModel.getName();
-					if (name != null) {
-						newInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-					}
-				}
-			}
-			for (TypedModel outputModel : outputModels) {
-				if (outputs.add(outputModel)) {
-					String name = outputModel.getName();
-					if (name != null) {
-						newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-					}
-				}
-			}
-		}
-		if (QVTiLaunchConstants.ENFORCE_UPDATE_MODE.equals(modeName)) {
-			for (TypedModel inputModel : inputModels) {
-				if (inputs.add(inputModel)) {
-					String name = inputModel.getName();
-					if (name != null) {
-						oldInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-						newInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-					}
-				}
-			}
-			for (TypedModel outputModel : outputModels) {
-				if (outputs.add(outputModel)) {
-					String name = outputModel.getName();
-					if (name != null) {
-						oldOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-						newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-					}
-				}
-			}
-		}
-		/*		for (TypedModel outputModel : outputModels) {
-			if (outputs.add(outputModel)) {
-				String name = outputModel.getName();
-				assert name != null;
-				if (name != null) {
-					newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-				}
-			}
-		}
-		checkables.addAll(enforceables);
-		checkables.removeAll(outputModels);
-		for (TypedModel inputModel : checkables) {
-			if (inputs.add(inputModel)) {
-				String name = inputModel.getName();
-				assert name != null;
-				if (name != null) {
-					newInputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
-				}
-			}
-		} */
 	}
 }

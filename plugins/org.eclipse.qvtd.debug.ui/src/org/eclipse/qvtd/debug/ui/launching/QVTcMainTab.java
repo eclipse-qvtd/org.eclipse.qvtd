@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.swt.graphics.Image;
 
-public class QVTcMainTab extends DirectionalMainTab
+public class QVTcMainTab extends QVTDirectionalMainTab<Transformation>
 {
 	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
 		CompilerChain.QVTC_STEP,

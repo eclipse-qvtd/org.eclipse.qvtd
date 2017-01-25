@@ -23,13 +23,13 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.swt.graphics.Image;
 
-public class QVTrMainTab extends DirectionalMainTab
+public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 {
 	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
 		CompilerChain.QVTR_STEP,
@@ -71,7 +71,7 @@ public class QVTrMainTab extends DirectionalMainTab
 	}
 
 	@Override
-	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
+	protected @NonNull RelationalTransformation updateTransformation(@NonNull URI txURI) throws IOException {
 		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		return QVTrelationUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}

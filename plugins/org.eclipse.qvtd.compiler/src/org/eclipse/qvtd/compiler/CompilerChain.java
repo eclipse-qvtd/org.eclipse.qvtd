@@ -62,6 +62,7 @@ public interface CompilerChain
 	public static final @NonNull String QVTS_STEP = "QVTs";
 	public static final @NonNull String QVTU_STEP = "QVTu";
 	public static final @NonNull String TRACE_STEP = "Trace";
+	public static final @NonNull String UMLX_STEP = "UMLX";
 
 	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<>("check");
 	public static final @NonNull Key<Boolean> DEBUG_KEY = new Key<>("debug");

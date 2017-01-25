@@ -135,6 +135,10 @@
             configTypeID="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"
             icon="icons/QVTrModelFile.gif"
             id="QVTr Debug"/>
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.qvtd.debug.launching.UMLXLaunchConfigurationDelegate"
+            icon="icons/umlxx.gif"
+            id="UMLX Debug"/>
    </extension>
    
    <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
@@ -150,6 +154,10 @@
             class="org.eclipse.qvtd.debug.ui.launching.QVTrLaunchConfigurationTabGroup"
             description="Create a configuration to launch a QVTr (Relations) transformation"
             type="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"/>
+      <launchConfigurationTabGroup id="org.eclipse.qvtd.debug.launching.UMLXLaunchConfigurationTabGroup"
+            class="org.eclipse.qvtd.debug.ui.launching.UMLXLaunchConfigurationTabGroup"
+            description="Create a configuration to launch a UMLX transformation"
+            type="org.eclipse.qvtd.debug.launching.UMLXLaunchConfigurationDelegate"/>
    </extension>
 
    <extension point="org.eclipse.debug.core.launchDelegates">

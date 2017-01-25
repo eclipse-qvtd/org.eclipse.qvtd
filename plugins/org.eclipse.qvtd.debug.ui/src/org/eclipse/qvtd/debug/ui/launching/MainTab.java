@@ -56,6 +56,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -79,7 +80,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
-public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConstants
+public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchConstants
 {
 	protected class CompileButtonAdapter extends SelectionAdapter
 	{
@@ -333,7 +334,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	private boolean updating = false;
 	private boolean txModified = false;
-	private Transformation transformation = null;
+	private @Nullable TX transformation = null;
 	private boolean directionModified = false;
 	private boolean groupsModified = false;
 
@@ -403,8 +404,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 				String name = row.name.getText();
 				String path = row.path.getText();
 				URI outURI = URI.createURI(path, true).resolve(getProjectURI());
-				boolean outExists = uriConverter.exists(outURI.trimSegments(1), null);
-				if (!outExists){
+				URI trimmedURI = outURI.trimSegments(1);
+				boolean outExists1 = URIConverter.INSTANCE.exists(trimmedURI, null);		// No mappings
+				boolean outExists2 = uriConverter.exists(trimmedURI, null);					// Spurious resoirce->plugin mappings
+				if (!outExists1 && !outExists2){
 					setErrorMessage("Output '" + name + "': '" + outURI + "' uses non-existent parent folder");
 					return false;
 				}
@@ -1017,7 +1020,11 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	/*	protected void refreshParametersGroup(@NonNull Group group, int style, @NonNull Map<String, String> map, @Nullable Comparator<ParameterRow> keyComparator) {
+<<<<<<< Upstream, based on ewillink/510348
 		List<String> keys = new ArrayList<>(map.keySet());
+=======
+		List<String> keys = new ArrayList<String>(map.keySet());
+>>>>>>> 21d359e [495621] Add UMLX launch, CGed UMLX test
 		Collections.sort(keys);
 		Control[] children = group.getChildren();
 		for (int i = 0; i < children.length; i++) {
@@ -1099,7 +1106,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		super.setErrorMessage(errorMessage);
 	}
 
-	protected abstract void updateDirection(@NonNull Transformation tansformation);
+	protected abstract void updateDirection(@NonNull TX tansformation);
 
 	protected void updateGenmodelGroup() {
 		Group genmodelGroup2 = genmodelGroup;
@@ -1114,7 +1121,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 	}
 
-	protected void updateGroups(@NonNull Transformation transformation,
+	protected void updateGroups(@NonNull TX transformation,
 			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
@@ -1153,13 +1160,17 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 						transformation = updateTransformation(txURI);
 						directionModified = true;
 					}
+					catch (CompilerChainException ex) {
+						setErrorMessage("Failed to load '" + txURI + "': " + ex.getMessage());
+						return;
+					}
 					catch (Throwable ex) {
 						setErrorMessage("Failed to load '" + txURI + "': " + ex.toString());
 						return;
 					}
 					txModified = false;
 				}
-				Transformation transformation2 = transformation;
+				@Nullable TX transformation2 = transformation;
 				if (transformation2 == null) {
 					return;
 				}
@@ -1271,6 +1282,5 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		requestLayout(group);
 	}
 
-	protected abstract @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException;
-
+	protected abstract @NonNull TX updateTransformation(@NonNull URI txURI) throws IOException;
 }

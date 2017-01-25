@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doublylinkedlist:DoublyLinkedList xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:doublylinkedlist="http://www.eclipse.org/qvtd/umlx/tests/forward2reverse/1.0/DoublyLinkList" xsi:schemaLocation="http://www.eclipse.org/qvtd/umlx/tests/forward2reverse/1.0/DoublyLinkList java://org.eclipse.qvtd.umlx.tests.list2list.doublylinkedlist.DoublylinkedlistPackage"
+    headElement="//@ownedElements.1" name="three-element-list">
+  <ownedElements name="e-2" source="//@ownedElements.1" target="//@ownedElements.2"/>
+  <ownedElements name="e-0" source="//@ownedElements.2" target="//@ownedElements.0"/>
+  <ownedElements name="e-1" source="//@ownedElements.0" target="//@ownedElements.1"/>
+</doublylinkedlist:DoublyLinkedList>
