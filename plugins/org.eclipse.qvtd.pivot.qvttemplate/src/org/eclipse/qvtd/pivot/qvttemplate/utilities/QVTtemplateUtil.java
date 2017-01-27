@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
@@ -37,6 +38,15 @@ public class QVTtemplateUtil extends QVTbaseUtil
 	}
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
+
+	public static @Nullable PropertyTemplateItem basicGetPart(@NonNull ObjectTemplateExp rObjectTemplateExp, @NonNull Property asProperty) {
+		for (@NonNull PropertyTemplateItem rPropertyTemplateItem : getOwnedParts(rObjectTemplateExp)) {
+			if (rPropertyTemplateItem.getReferredProperty() == asProperty) {
+				return rPropertyTemplateItem;
+			}
+		}
+		return null;
+	}
 
 	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedMembers(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
 		return ClassUtil.nullFree(rCollectionTemplateExp.getMember());

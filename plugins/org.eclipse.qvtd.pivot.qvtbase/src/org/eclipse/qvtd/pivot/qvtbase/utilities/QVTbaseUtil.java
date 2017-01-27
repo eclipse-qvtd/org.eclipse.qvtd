@@ -17,9 +17,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -214,7 +216,7 @@ public class QVTbaseUtil extends PivotUtil
 			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
 			ownedContext.setName("this");
 			ownedContext.setType(transformation);		// FIXME promote API
-			ownedContext.setTypeValue(transformation);
+			//			ownedContext.setTypeValue(transformation);
 			ownedContext.setIsRequired(true);
 			transformation.setOwnedContext(ownedContext);
 		}
@@ -457,6 +459,25 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
         throw new IOException("Failed to locate a transformation in '" + transformationURI + "'"); */
+	}
+
+	/**
+	 * Replace oldChild at its eContainer.eContainmentFeature by newChild.
+	 */
+	public static void replaceChild(@NonNull EObject oldChild, @NonNull EObject newChild) {
+		EObject eContainer = oldChild.eContainer();
+		EReference eContainmentFeature = oldChild.eContainmentFeature();
+		if (eContainmentFeature.isMany()) {
+			@SuppressWarnings("unchecked") EList<EObject> list = (EList<EObject>)eContainer.eGet(eContainmentFeature);
+			int index = list.indexOf(oldChild);
+			assert index >= 0;
+			PivotUtilInternal.resetContainer(oldChild);
+			list.add(index, newChild);
+		}
+		else {
+			PivotUtilInternal.resetContainer(oldChild);
+			eContainer.eSet(eContainmentFeature, newChild);
+		}
 	}
 
 	/**

@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -143,7 +144,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
 	}
 
-	public static @NonNull Iterable<@NonNull Variable> getOwnedVariable(@NonNull Relation rRelation) {
+	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull Relation rRelation) {
 		return ClassUtil.nullFree(rRelation.getVariable());
 	}
 
@@ -167,6 +168,15 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			iFirst = iNext;
 		}
 		throw new IndexOutOfBoundsException(argumentIndex + " > " + iFirst + " for " + rRelation);
+	}
+
+	public static @NonNull RelationDomain getRelationDomain(@NonNull Relation qvtrRelation, @NonNull TypedModel typedModel) {
+		for (@NonNull RelationDomain rRelationDomain : getOwnedDomains(qvtrRelation)) {
+			if (rRelationDomain.getTypedModel() == typedModel) {
+				return rRelationDomain;
+			}
+		}
+		throw new IllegalArgumentException("No " + typedModel.getName() + " domain in " + qvtrRelation.getName());
 	}
 
 	/**

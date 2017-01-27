@@ -51,22 +51,22 @@ public class QVTrelationHelper extends QVTbaseHelper
 		super(environmentFactory);
 	}
 
-	public void addWhenPredicate(@NonNull Relation qvtrRelation, @NonNull RelationCallExp asRelationCallExp) {
+	public void addWhenPredicate(@NonNull Relation qvtrRelation, @NonNull OCLExpression asExpression) {
 		Pattern asPattern = qvtrRelation.getWhen();
 		if (asPattern == null) {
 			asPattern = QVTbaseFactory.eINSTANCE.createPattern();
 			qvtrRelation.setWhen(asPattern);
 		}
-		asPattern.getPredicate().add(createPredicate(asRelationCallExp));
+		asPattern.getPredicate().add(createPredicate(asExpression));
 	}
 
-	public void addWherePredicate(@NonNull Relation qvtrRelation, @NonNull RelationCallExp asRelationCallExp) {
+	public void addWherePredicate(@NonNull Relation qvtrRelation, @NonNull OCLExpression asExpression) {
 		Pattern asPattern = qvtrRelation.getWhere();
 		if (asPattern == null) {
 			asPattern = QVTbaseFactory.eINSTANCE.createPattern();
 			qvtrRelation.setWhere(asPattern);
 		}
-		asPattern.getPredicate().add(createPredicate(asRelationCallExp));
+		asPattern.getPredicate().add(createPredicate(asExpression));
 	}
 
 	/**
@@ -128,9 +128,8 @@ public class QVTrelationHelper extends QVTbaseHelper
 	public @NonNull ObjectTemplateExp createObjectTemplateExp(@NonNull TemplateVariable asTemplateVariable, org.eclipse.ocl.pivot.@NonNull Class asClass, boolean isRequired) {
 		ObjectTemplateExp asObjectTemplateExp = QVTtemplateFactory.eINSTANCE.createObjectTemplateExp();
 		//		asObjectTemplateExp.setName(PivotUtil.getName(asTemplateVariable));
-		asObjectTemplateExp.setType(asClass);
+		setType(asObjectTemplateExp, asClass,isRequired);
 		asObjectTemplateExp.setReferredClass(asClass);
-		asObjectTemplateExp.setIsRequired(isRequired);
 		asObjectTemplateExp.setBindsTo(asTemplateVariable);
 		return asObjectTemplateExp;
 	}
@@ -153,8 +152,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 		RelationCallExp asRelationCallExp = QVTrelationFactory.eINSTANCE.createRelationCallExp();
 		asRelationCallExp.setReferredRelation(asRelation);
 		Iterables.addAll(QVTrelationUtil.Internal.getOwnedArgumentsList(asRelationCallExp), asArguments);
-		asRelationCallExp.setType(environmentFactory.getStandardLibrary().getBooleanType());
-		asRelationCallExp.setIsRequired(true);;
+		setType(asRelationCallExp, environmentFactory.getStandardLibrary().getBooleanType(), true);;
 		return asRelationCallExp;
 	}
 
@@ -176,9 +174,8 @@ public class QVTrelationHelper extends QVTbaseHelper
 	public @NonNull SharedVariable createSharedVariable(@Nullable String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
 		SharedVariable asVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
 		asVariable.setName(name);
-		asVariable.setType(asType);
 		asVariable.setIsImplicit(name == null);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, asType, isRequired);
 		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;
 	}
@@ -186,8 +183,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 	public @NonNull TemplateVariable createTemplateVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
 		TemplateVariable asVariable = QVTrelationFactory.eINSTANCE.createTemplateVariable();
 		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, asType, isRequired);
 		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;
 	}

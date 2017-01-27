@@ -192,7 +192,7 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 
 	@Override
 	public @Nullable Object visitRelation(@NonNull Relation object) {
-		ClassUtil.sort(QVTrelationUtil.Internal.getOwnedDomainsList(object), RelationDomainComparator.INSTANCE);
+		// Domain Ordering is significant
 		List<@NonNull Variable> ownedVariablesList = QVTrelationUtil.Internal.getOwnedVariablesList(object);
 		if (ownedVariablesList.size() > 1) {
 			ClassUtil.sort(ownedVariablesList, new VariablesComparator(ownedVariablesList));

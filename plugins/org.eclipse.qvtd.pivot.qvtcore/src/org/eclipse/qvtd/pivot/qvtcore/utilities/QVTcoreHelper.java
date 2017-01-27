@@ -42,8 +42,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull BottomVariable createBottomVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
 		BottomVariable asVariable = QVTcoreFactory.eINSTANCE.createBottomVariable();
 		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, asType, isRequired);
 		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;
 	}
@@ -51,8 +50,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
 		GuardVariable asVariable = QVTcoreFactory.eINSTANCE.createGuardVariable();
 		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, asType, isRequired);
 		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;
 	}
@@ -89,8 +87,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
 		RealizedVariable realizedVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
-		realizedVariable.setType(type);
-		realizedVariable.setIsRequired(true);;
+		setType(realizedVariable, type, true);;
 		return realizedVariable;
 	}
 

@@ -52,8 +52,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull AppendParameter createAppendParameter(@NonNull String name, @NonNull Type asType, boolean isRequired) {
 		AppendParameter asVariable = QVTimperativeFactory.eINSTANCE.createAppendParameter();
 		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, asType, isRequired);
 		return asVariable;
 	}
 
@@ -67,8 +66,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull BufferStatement createBufferStatement(@NonNull String name, boolean isStrict, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
 		BufferStatement asVariable = QVTimperativeFactory.eINSTANCE.createBufferStatement();
 		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, asType, isRequired);
 		asVariable.setIsStrict(isStrict);
 		asVariable.setOwnedExpression(initExpression);
 		return asVariable;
@@ -85,8 +83,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asVariableStatement.setIsCheck(!initExpression.getType().conformsTo(standardLibrary, asType));
 		asVariableStatement.setOwnedExpression(initExpression);
 		asVariableStatement.setName(name);
-		asVariableStatement.setType(asType);
-		asVariableStatement.setIsRequired(isRequired);
+		setType(asVariableStatement, asType, isRequired);
 		return asVariableStatement;
 	}
 
@@ -94,8 +91,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		GuardParameter asVariable = QVTimperativeFactory.eINSTANCE.createGuardParameter();
 		asVariable.setName(name);
 		asVariable.setReferredTypedModel(typedModel);
-		asVariable.setType(type);
-		asVariable.setIsRequired(isRequired);
+		setType(asVariable, type, isRequired);
 		return asVariable;
 	}
 
@@ -112,8 +108,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull LoopVariable createLoopVariable(@NonNull String name, @NonNull Type type) {
 		LoopVariable asVariable = QVTimperativeFactory.eINSTANCE.createLoopVariable();
 		asVariable.setName(name);
-		asVariable.setType(type);
-		asVariable.setIsRequired(true);
+		setType(asVariable, type, true);
 		return asVariable;
 	}
 

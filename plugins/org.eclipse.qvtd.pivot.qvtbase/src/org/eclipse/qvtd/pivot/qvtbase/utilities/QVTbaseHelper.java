@@ -19,9 +19,11 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -48,12 +50,18 @@ public class QVTbaseHelper extends PivotHelper
 	public @NonNull Function createFunction(@NonNull String name, @NonNull Type returnType, boolean returnIsRequired, @Nullable List<@NonNull FunctionParameter> asParameters) {
 		Function asFunction = QVTbaseFactory.eINSTANCE.createFunction();
 		asFunction.setName(name);
-		asFunction.setType(returnType);
-		asFunction.setIsRequired(returnIsRequired);
+		setType(asFunction, returnType, returnIsRequired);
 		if (asParameters != null) {
 			asFunction.getOwnedParameters().addAll(asParameters);
 		}
 		return asFunction;
+	}
+
+	public @NonNull FunctionParameter createFunctionParameter(@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class asClass, boolean isRequired) {
+		FunctionParameter asParameter = QVTbaseFactory.eINSTANCE.createFunctionParameter();
+		asParameter.setName(name);
+		setType(asParameter, asClass, isRequired);
+		return asParameter;
 	}
 
 	public @NonNull FunctionParameter createFunctionParameter(@NonNull TypedElement typedElement) {
@@ -61,8 +69,7 @@ public class QVTbaseHelper extends PivotHelper
 		Type type = ClassUtil.nonNullState(typedElement.getType());
 		FunctionParameter asParameter = QVTbaseFactory.eINSTANCE.createFunctionParameter();
 		asParameter.setName(name);
-		asParameter.setType(type);
-		asParameter.setIsRequired(typedElement.isIsRequired());
+		setType(asParameter, type, typedElement.isIsRequired());
 		return asParameter;
 	}
 
@@ -77,5 +84,19 @@ public class QVTbaseHelper extends PivotHelper
 		asTypedModel.setName(name);
 		Iterables.addAll(QVTbaseUtil.Internal.getUsedPackagesList(asTypedModel), usedPackages);
 		return asTypedModel;
+	}
+
+	public void setType(@NonNull TypedElement pivotElement, Type type, boolean isRequired) {
+		Type primaryType = type != null ? ((PivotMetamodelManager)environmentFactory.getMetamodelManager()).getPrimaryType(type) : null;
+		if (primaryType != pivotElement.getType()) {
+			pivotElement.setType(primaryType);
+		}
+		boolean wasRequired = pivotElement.isIsRequired();
+		if (wasRequired != isRequired) {
+			pivotElement.setIsRequired(isRequired);
+		}
+		if (primaryType != null) {
+			PivotUtil.debugWellContainedness(primaryType);
+		}
 	}
 }
