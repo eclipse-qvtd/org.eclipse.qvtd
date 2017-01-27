@@ -136,8 +136,16 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 				return createTxPackageNodeAdapter();
 			}
 			@Override
+			public Adapter caseTxParameterNode(TxParameterNode object) {
+				return createTxParameterNodeAdapter();
+			}
+			@Override
 			public Adapter caseTxPartNode(TxPartNode object) {
 				return createTxPartNodeAdapter();
+			}
+			@Override
+			public Adapter caseTxQueryNode(TxQueryNode object) {
+				return createTxQueryNodeAdapter();
 			}
 			@Override
 			public Adapter caseTxTypedModelNode(TxTypedModelNode object) {
@@ -154,6 +162,10 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseUMLXNamedElement(UMLXNamedElement object) {
 				return createUMLXNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseUMLXTypedElement(UMLXTypedElement object) {
+				return createUMLXTypedElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -358,6 +370,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxQueryNode <em>Tx Query Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.TxQueryNode
+	 * @generated
+	 */
+	public Adapter createTxQueryNodeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxNode <em>Tx Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -382,6 +408,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTxPackageNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxParameterNode <em>Tx Parameter Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.TxParameterNode
+	 * @generated
+	 */
+	public Adapter createTxParameterNodeAdapter() {
 		return null;
 	}
 
@@ -438,6 +478,20 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUMLXNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.UMLXTypedElement <em>Typed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.umlx.UMLXTypedElement
+	 * @generated
+	 */
+	public Adapter createUMLXTypedElementAdapter() {
 		return null;
 	}
 

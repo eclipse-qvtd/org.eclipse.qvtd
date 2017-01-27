@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedRelDiagrams <em>Owned Rel Diagrams</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxImportNodes <em>Owned Tx Import Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxKeyNodes <em>Owned Tx Key Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxQueryNodes <em>Owned Tx Query Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxTypedModelNodes <em>Owned Tx Typed Model Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getPackage <em>Package</em>}</li>
  * </ul>
@@ -86,6 +87,23 @@ public interface TxDiagram extends UMLXNamedElement {
 	EList<TxKeyNode> getOwnedTxKeyNodes();
 
 	/**
+	 * Returns the value of the '<em><b>Owned Tx Query Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxQueryNode}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxQueryNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Tx Query Nodes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Tx Query Nodes</em>' containment reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxDiagram_OwnedTxQueryNodes()
+	 * @see org.eclipse.qvtd.umlx.TxQueryNode#getOwningTxDiagram
+	 * @generated
+	 */
+	EList<TxQueryNode> getOwnedTxQueryNodes();
+
+	/**
 	 * Returns the value of the '<em><b>Owned Tx Typed Model Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxTypedModelNode}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
@@ -140,5 +158,12 @@ public interface TxDiagram extends UMLXNamedElement {
 	 * @generated
 	 */
 	boolean validateTxTypedModelNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateTxQueryNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxDiagram

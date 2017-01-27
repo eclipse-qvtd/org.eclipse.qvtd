@@ -221,6 +221,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateRelPatternNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -247,7 +248,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		 *                     allNames->count(n) > 1)
 		 *                   ->asSet()
 		 *                 in
-		 *                   repeatedNames->iterate(n; acc : String[?] = 'RelDiagram::RelPatternNodeNamesAreUnique:' | acc + ' \'' + n + '\'') + ' are not unique for ' + name
+		 *                   repeatedNames->iterate(n; acc : String[1] = 'RelDiagram::RelPatternNodeNamesAreUnique:' | acc + ' \'' + n + '\'') + ' are not unique for ' + name
 		 *               }
 		 *             endif
 		 *       in
@@ -380,7 +381,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						}
 					}
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue repeatedNames = CollectionAsSetOperation.INSTANCE.evaluate(select_0);
-					/*@NonInvalid*/ java.lang.@Nullable String acc = UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c;
+					/*@NonInvalid*/ java.lang.@NonNull String acc = UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c;
 					@NonNull Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
 					/*@Thrown*/ java.lang.@Nullable String iterate;
 					while (true) {
@@ -393,9 +394,9 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						/**
 						 * acc + ' \'' + n + '\''
 						 */
-						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32_39);
-						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
-						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
+						final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32_39);
+						final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
+						final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
 						//
 						acc = sum_1;
 					}

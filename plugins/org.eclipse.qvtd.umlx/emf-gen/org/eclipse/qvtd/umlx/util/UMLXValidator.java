@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -158,7 +158,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_DIAGRAM__VALIDATE_REL_DIAGRAM_NAMES_ARE_UNIQUE = 14;
+	public static final int TX_DIAGRAM__VALIDATE_REL_DIAGRAM_NAMES_ARE_UNIQUE = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Typed Model Node Names Are Unique' of 'Tx Diagram'.
@@ -166,7 +166,15 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_DIAGRAM__VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE = 15;
+	public static final int TX_DIAGRAM__VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE = 14;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Query Node Names Are Unique' of 'Tx Diagram'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_DIAGRAM__VALIDATE_TX_QUERY_NODE_NAMES_ARE_UNIQUE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parts Are Unique' of 'Tx Key Node'.
@@ -174,7 +182,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_KEY_NODE__VALIDATE_PARTS_ARE_UNIQUE = 16;
+	public static final int TX_KEY_NODE__VALIDATE_PARTS_ARE_UNIQUE = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Part Is Property Of Key' of 'Tx Part Node'.
@@ -182,7 +190,15 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_PART_NODE__VALIDATE_PART_IS_PROPERTY_OF_KEY = 17;
+	public static final int TX_PART_NODE__VALIDATE_PART_IS_PROPERTY_OF_KEY = 18;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parameters Are Unique' of 'Tx Query Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_QUERY_NODE__VALIDATE_PARAMETERS_ARE_UNIQUE = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Package Node Packages Are Unique' of 'Tx Typed Model Node'.
@@ -190,7 +206,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_TYPED_MODEL_NODE__VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE = 18;
+	public static final int TX_TYPED_MODEL_NODE__VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE = 20;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -198,7 +214,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 18;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 20;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -226,7 +242,7 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return UMLXPackage.eINSTANCE;
+		return UMLXPackage.eINSTANCE;
 	}
 
 	/**
@@ -268,8 +284,12 @@ public class UMLXValidator extends EObjectValidator {
 				return validateTxNode((TxNode)value, diagnostics, context);
 			case UMLXPackage.TX_PACKAGE_NODE:
 				return validateTxPackageNode((TxPackageNode)value, diagnostics, context);
+			case UMLXPackage.TX_PARAMETER_NODE:
+				return validateTxParameterNode((TxParameterNode)value, diagnostics, context);
 			case UMLXPackage.TX_PART_NODE:
 				return validateTxPartNode((TxPartNode)value, diagnostics, context);
+			case UMLXPackage.TX_QUERY_NODE:
+				return validateTxQueryNode((TxQueryNode)value, diagnostics, context);
 			case UMLXPackage.TX_TYPED_MODEL_NODE:
 				return validateTxTypedModelNode((TxTypedModelNode)value, diagnostics, context);
 			case UMLXPackage.UMLX_ELEMENT:
@@ -278,6 +298,8 @@ public class UMLXValidator extends EObjectValidator {
 				return validateUMLXModel((UMLXModel)value, diagnostics, context);
 			case UMLXPackage.UMLX_NAMED_ELEMENT:
 				return validateUMLXNamedElement((UMLXNamedElement)value, diagnostics, context);
+			case UMLXPackage.UMLX_TYPED_ELEMENT:
+				return validateUMLXTypedElement((UMLXTypedElement)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -317,14 +339,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "RelPatternNodeNamesAreUnique", getObjectLabel(relDiagram, context) },
-						 new Object[] { relDiagram },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "RelPatternNodeNamesAreUnique", getObjectLabel(relDiagram, context) },
+						new Object[] { relDiagram },
+						context));
 			}
 			return false;
 		}
@@ -402,14 +424,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleEdges", getObjectLabel(relInvocationNode, context) },
-						 new Object[] { relInvocationNode },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleEdges", getObjectLabel(relInvocationNode, context) },
+						new Object[] { relInvocationNode },
+						context));
 			}
 			return false;
 		}
@@ -471,14 +493,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "AnonIsUnnamed", getObjectLabel(relPatternClassNode, context) },
-						 new Object[] { relPatternClassNode },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "AnonIsUnnamed", getObjectLabel(relPatternClassNode, context) },
+						new Object[] { relPatternClassNode },
+						context));
 			}
 			return false;
 		}
@@ -499,14 +521,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "EClassifierIsInTypedModel", getObjectLabel(relPatternClassNode, context) },
-						 new Object[] { relPatternClassNode },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "EClassifierIsInTypedModel", getObjectLabel(relPatternClassNode, context) },
+						new Object[] { relPatternClassNode },
+						context));
 			}
 			return false;
 		}
@@ -583,14 +605,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "SourceIsClassNode", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "SourceIsClassNode", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -611,14 +633,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "SourceIsEClass", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "SourceIsEClass", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -639,14 +661,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatiblePropertySource", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatiblePropertySource", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -667,14 +689,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleSourceIndex", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleSourceIndex", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -695,14 +717,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleSourceMultiplicity", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleSourceMultiplicity", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -723,14 +745,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleEAttributePropertyTarget", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleEAttributePropertyTarget", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -751,14 +773,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleEReferencePropertyTarget", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleEReferencePropertyTarget", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -779,14 +801,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleMemberPropertyTarget", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleMemberPropertyTarget", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -807,14 +829,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CompatibleRestPropertyTarget", getObjectLabel(relPatternEdge, context) },
-						 new Object[] { relPatternEdge },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "CompatibleRestPropertyTarget", getObjectLabel(relPatternEdge, context) },
+						new Object[] { relPatternEdge },
+						context));
 			}
 			return false;
 		}
@@ -945,9 +967,11 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxDiagram_RelDiagramNamesAreUnique(txDiagram, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxDiagram_TxQueryNodeNamesAreUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxDiagram_TxTypedModelNodeNamesAreUnique(txDiagram, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxDiagram_validateRelDiagramNamesAreUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxDiagram_validateTxTypedModelNodeNamesAreUnique(txDiagram, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxDiagram_validateTxQueryNodeNamesAreUnique(txDiagram, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxDiagram_validateRelDiagramNamesAreUnique(txDiagram, diagnostics, context);
 		return result;
 	}
 
@@ -965,14 +989,42 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "RelDiagramNamesAreUnique", getObjectLabel(txDiagram, context) },
-						 new Object[] { txDiagram },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "RelDiagramNamesAreUnique", getObjectLabel(txDiagram, context) },
+						new Object[] { txDiagram },
+						context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the TxQueryNodeNamesAreUnique constraint of '<em>Tx Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxDiagram_TxQueryNodeNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "TxQueryNodeNamesAreUnique", getObjectLabel(txDiagram, context) },
+						new Object[] { txDiagram },
+						context));
 			}
 			return false;
 		}
@@ -993,14 +1045,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "TxTypedModelNodeNamesAreUnique", getObjectLabel(txDiagram, context) },
-						 new Object[] { txDiagram },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "TxTypedModelNodeNamesAreUnique", getObjectLabel(txDiagram, context) },
+						new Object[] { txDiagram },
+						context));
 			}
 			return false;
 		}
@@ -1025,6 +1077,16 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateTxDiagram_validateTxTypedModelNodeNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return txDiagram.validateTxTypedModelNodeNamesAreUnique(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateTxQueryNodeNamesAreUnique constraint of '<em>Tx Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxDiagram_validateTxQueryNodeNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txDiagram.validateTxQueryNodeNamesAreUnique(diagnostics, context);
 	}
 
 	/**
@@ -1070,14 +1132,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "PartsAreUnique", getObjectLabel(txKeyNode, context) },
-						 new Object[] { txKeyNode },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "PartsAreUnique", getObjectLabel(txKeyNode, context) },
+						new Object[] { txKeyNode },
+						context));
 			}
 			return false;
 		}
@@ -1117,6 +1179,15 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateTxParameterNode(TxParameterNode txParameterNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(txParameterNode, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateTxPartNode(TxPartNode txPartNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(txPartNode, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(txPartNode, diagnostics, context);
@@ -1146,14 +1217,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "PartIsPropertyOfKey", getObjectLabel(txPartNode, context) },
-						 new Object[] { txPartNode },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "PartIsPropertyOfKey", getObjectLabel(txPartNode, context) },
+						new Object[] { txPartNode },
+						context));
 			}
 			return false;
 		}
@@ -1168,6 +1239,64 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateTxPartNode_validatePartIsPropertyOfKey(TxPartNode txPartNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return txPartNode.validatePartIsPropertyOfKey(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxQueryNode(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(txQueryNode, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxQueryNode_ParametersAreUnique(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxQueryNode_validateParametersAreUnique(txQueryNode, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the ParametersAreUnique constraint of '<em>Tx Query Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxQueryNode_ParametersAreUnique(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "ParametersAreUnique", getObjectLabel(txQueryNode, context) },
+						new Object[] { txQueryNode },
+						context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the validateParametersAreUnique constraint of '<em>Tx Query Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxQueryNode_validateParametersAreUnique(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txQueryNode.validateParametersAreUnique(diagnostics, context);
 	}
 
 	/**
@@ -1204,14 +1333,14 @@ public class UMLXValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "TxPackageNodePackagesAreUnique", getObjectLabel(txTypedModelNode, context) },
-						 new Object[] { txTypedModelNode },
-						 context));
+				(createDiagnostic
+					(Diagnostic.ERROR,
+						DIAGNOSTIC_SOURCE,
+						0,
+						"_UI_GenericConstraint_diagnostic",
+						new Object[] { "TxPackageNodePackagesAreUnique", getObjectLabel(txTypedModelNode, context) },
+						new Object[] { txTypedModelNode },
+						context));
 			}
 			return false;
 		}
@@ -1253,6 +1382,15 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateUMLXNamedElement(UMLXNamedElement umlxNamedElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(umlxNamedElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUMLXTypedElement(UMLXTypedElement umlxTypedElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(umlxTypedElement, diagnostics, context);
 	}
 
 	/**

@@ -13,6 +13,8 @@ package org.eclipse.qvtd.umlx.impl;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -85,6 +87,15 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public String toString() {
 		return UMLXToStringVisitor.toString(this);
+	}
+
+	@Override
+	protected void eBasicSetContainer(InternalEObject newContainer, int newContainerFeatureID) {
+		if (newContainer != null) {
+			EObject oldContainer = eInternalContainer();
+			assert (oldContainer == null) || oldContainer.eIsProxy() || (newContainer == oldContainer) || (oldContainer.eResource() == null);
+		}
+		super.eBasicSetContainer(newContainer, newContainerFeatureID);
 	}
 
 	/**

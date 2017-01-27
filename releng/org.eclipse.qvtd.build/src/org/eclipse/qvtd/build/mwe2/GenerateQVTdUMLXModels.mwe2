@@ -31,23 +31,6 @@ Workflow {
     	scanClassPath = true
     }
     
-    
-    
-	bean = ResourceSetImpl : umlxMergeResourceSet {}
-    bean = ProjectMapSetup { resourceSet = umlxMergeResourceSet }
-    bean = UMLStandaloneSetup { resourceSet = umlxMergeResourceSet }
-    bean = OCLStandaloneSetup {}
-    bean = EcoreGenModelSetup { resourceSet = umlxMergeResourceSet }
-    component = ConstraintMerger { resourceSet = umlxMergeResourceSet skipOnErrors = true
-    	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
-    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
-    	ecoreURI = "model/QVTtemplate.ecore"
-    	oclURI = "model/QVTtemplate.ocl"
-    	invariantPrefix = "validate"
-    }
-    
-    
-    
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true

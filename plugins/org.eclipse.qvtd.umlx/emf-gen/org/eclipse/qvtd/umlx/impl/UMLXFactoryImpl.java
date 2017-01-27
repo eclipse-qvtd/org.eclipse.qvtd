@@ -76,7 +76,9 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 			case UMLXPackage.TX_KEY_NODE: return createTxKeyNode();
 			case UMLXPackage.TX_NODE: return createTxNode();
 			case UMLXPackage.TX_PACKAGE_NODE: return createTxPackageNode();
+			case UMLXPackage.TX_PARAMETER_NODE: return createTxParameterNode();
 			case UMLXPackage.TX_PART_NODE: return createTxPartNode();
+			case UMLXPackage.TX_QUERY_NODE: return createTxQueryNode();
 			case UMLXPackage.TX_TYPED_MODEL_NODE: return createTxTypedModelNode();
 			case UMLXPackage.UMLX_MODEL: return createUMLXModel();
 			default:
@@ -211,6 +213,17 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	 * @generated
 	 */
 	@Override
+	public @NonNull TxQueryNode createTxQueryNode() {
+		TxQueryNodeImpl txQueryNode = new TxQueryNodeImpl();
+		return txQueryNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull TxNode createTxNode() {
 		TxNodeImpl txNode = new TxNodeImpl();
 		return txNode;
@@ -225,6 +238,17 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	public @NonNull TxPackageNode createTxPackageNode() {
 		TxPackageNodeImpl txPackageNode = new TxPackageNodeImpl();
 		return txPackageNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull TxParameterNode createTxParameterNode() {
+		TxParameterNodeImpl txParameterNode = new TxParameterNodeImpl();
+		return txParameterNode;
 	}
 
 	/**

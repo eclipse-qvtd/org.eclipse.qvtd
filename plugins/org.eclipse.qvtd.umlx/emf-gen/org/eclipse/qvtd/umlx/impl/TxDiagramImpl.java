@@ -35,6 +35,7 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
+import org.eclipse.qvtd.umlx.TxQueryNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.UMLXTables;
@@ -51,6 +52,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedRelDiagrams <em>Owned Rel Diagrams</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxImportNodes <em>Owned Tx Import Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxKeyNodes <em>Owned Tx Key Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxQueryNodes <em>Owned Tx Query Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxTypedModelNodes <em>Owned Tx Typed Model Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getPackage <em>Package</em>}</li>
  * </ul>
@@ -87,6 +89,16 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @ordered
 	 */
 	protected EList<TxKeyNode> ownedTxKeyNodes;
+
+	/**
+	 * The cached value of the '{@link #getOwnedTxQueryNodes() <em>Owned Tx Query Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTxQueryNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TxQueryNode> ownedTxQueryNodes;
 
 	/**
 	 * The cached value of the '{@link #getOwnedTxTypedModelNodes() <em>Owned Tx Typed Model Nodes</em>}' containment reference list.
@@ -180,6 +192,19 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @generated
 	 */
 	@Override
+	public EList<TxQueryNode> getOwnedTxQueryNodes() {
+		if (ownedTxQueryNodes == null) {
+			ownedTxQueryNodes = new EObjectContainmentWithInverseEList<TxQueryNode>(TxQueryNode.class, this, UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES, UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM);
+		}
+		return ownedTxQueryNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<TxTypedModelNode> getOwnedTxTypedModelNodes() {
 		if (ownedTxTypedModelNodes == null) {
 			ownedTxTypedModelNodes = new EObjectContainmentWithInverseEList<TxTypedModelNode>(TxTypedModelNode.class, this, UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM);
@@ -215,6 +240,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateRelDiagramNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -284,6 +310,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateTxTypedModelNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -354,6 +381,76 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @generated
 	 */
 	@Override
+	public boolean validateTxQueryNodeNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv TxQueryNodeNamesAreUnique:
+		 *   let
+		 *     severity : Integer[1] = 'TxDiagram::TxQueryNodeNamesAreUnique'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let result : Boolean[1] = ownedTxQueryNodes->isUnique(name)
+		 *       in
+		 *         'TxDiagram::TxQueryNodeNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_result;
+			try {
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ java.util.@NonNull List<TxQueryNode> ownedTxQueryNodes = this.getOwnedTxQueryNodes();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxQueryNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxQueryNode, ownedTxQueryNodes);
+				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxQueryNode);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxQueryNodes.iterator();
+				/*@Thrown*/ boolean result;
+				while (true) {
+					if (!ITERATOR__1.hasNext()) {
+						result = ValueUtil.TRUE_VALUE;
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxQueryNode _1 = (TxQueryNode)ITERATOR__1.next();
+					/**
+					 * name
+					 */
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ java.lang.@NonNull String name = _1.getName();
+					//
+					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
+						result = ValueUtil.FALSE_VALUE;			// Abort after second find
+						break;
+					}
+					else {
+						accumulator.add(name);
+					}
+				}
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -373,6 +470,8 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxImportNodes()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxKeyNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxQueryNodes()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxTypedModelNodes()).basicAdd(otherEnd, msgs);
 		}
@@ -393,6 +492,8 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				return ((InternalEList<?>)getOwnedTxImportNodes()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return ((InternalEList<?>)getOwnedTxKeyNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
+				return ((InternalEList<?>)getOwnedTxQueryNodes()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
 				return ((InternalEList<?>)getOwnedTxTypedModelNodes()).basicRemove(otherEnd, msgs);
 		}
@@ -413,6 +514,8 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				return getOwnedTxImportNodes();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return getOwnedTxKeyNodes();
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
+				return getOwnedTxQueryNodes();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
 				return getOwnedTxTypedModelNodes();
 			case UMLXPackage.TX_DIAGRAM__PACKAGE:
@@ -442,6 +545,10 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				getOwnedTxKeyNodes().clear();
 				getOwnedTxKeyNodes().addAll((Collection<? extends TxKeyNode>)newValue);
 				return;
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
+				getOwnedTxQueryNodes().clear();
+				getOwnedTxQueryNodes().addAll((Collection<? extends TxQueryNode>)newValue);
+				return;
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
 				getOwnedTxTypedModelNodes().clear();
 				getOwnedTxTypedModelNodes().addAll((Collection<? extends TxTypedModelNode>)newValue);
@@ -470,6 +577,9 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				getOwnedTxKeyNodes().clear();
 				return;
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
+				getOwnedTxQueryNodes().clear();
+				return;
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
 				getOwnedTxTypedModelNodes().clear();
 				return;
@@ -494,6 +604,8 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				return ownedTxImportNodes != null && !ownedTxImportNodes.isEmpty();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return ownedTxKeyNodes != null && !ownedTxKeyNodes.isEmpty();
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
+				return ownedTxQueryNodes != null && !ownedTxQueryNodes.isEmpty();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
 				return ownedTxTypedModelNodes != null && !ownedTxTypedModelNodes.isEmpty();
 			case UMLXPackage.TX_DIAGRAM__PACKAGE:

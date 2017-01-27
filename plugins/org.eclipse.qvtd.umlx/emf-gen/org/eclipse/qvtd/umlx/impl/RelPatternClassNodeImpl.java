@@ -42,6 +42,7 @@ import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.UMLXNamedElement;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.UMLXTables;
+import org.eclipse.qvtd.umlx.UMLXTypedElement;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
@@ -53,14 +54,14 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsAnon <em>Is Anon</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsMany <em>Is Many</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsNullFree <em>Is Null Free</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsOrdered <em>Is Ordered</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsRequired <em>Is Required</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsUnique <em>Is Unique</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getReferredEClassifier <em>Referred EClassifier</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#isIsAnon <em>Is Anon</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl#getRelDomainNode <em>Rel Domain Node</em>}</li>
  * </ul>
  *
@@ -86,26 +87,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIsAnon() <em>Is Anon</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsAnon()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ANON_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsAnon() <em>Is Anon</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsAnon()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isAnon = IS_ANON_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIsMany() <em>Is Many</em>}' attribute.
@@ -208,16 +189,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	protected boolean isUnique = IS_UNIQUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOutgoing()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RelPatternEdge> outgoing;
-
-	/**
 	 * The cached value of the '{@link #getReferredEClassifier() <em>Referred EClassifier</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,6 +197,36 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 	 * @ordered
 	 */
 	protected EClassifier referredEClassifier;
+
+	/**
+	 * The default value of the '{@link #isIsAnon() <em>Is Anon</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAnon()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ANON_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsAnon() <em>Is Anon</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAnon()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAnon = IS_ANON_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoing()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RelPatternEdge> outgoing;
 
 	/**
 	 * The cached value of the '{@link #getRelDomainNode() <em>Rel Domain Node</em>}' reference.
@@ -665,8 +666,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				return getName();
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
-				return isIsAnon();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				return isIsMany();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
@@ -677,11 +676,13 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				return isIsRequired();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				return isIsUnique();
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
-				return getOutgoing();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				if (resolve) return getReferredEClassifier();
 				return basicGetReferredEClassifier();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				return isIsAnon();
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				return getOutgoing();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				if (resolve) return getRelDomainNode();
 				return basicGetRelDomainNode();
@@ -701,9 +702,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				setName((String)newValue);
 				return;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
-				setIsAnon((Boolean)newValue);
-				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				setIsMany((Boolean)newValue);
 				return;
@@ -719,12 +717,15 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				setIsUnique((Boolean)newValue);
 				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
+				setReferredEClassifier((EClassifier)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				setIsAnon((Boolean)newValue);
+				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
 				getOutgoing().clear();
 				getOutgoing().addAll((Collection<? extends RelPatternEdge>)newValue);
-				return;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
-				setReferredEClassifier((EClassifier)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				setRelDomainNode((RelDomainNode)newValue);
@@ -744,9 +745,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
-				setIsAnon(IS_ANON_EDEFAULT);
-				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				setIsMany(IS_MANY_EDEFAULT);
 				return;
@@ -762,11 +760,14 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				setIsUnique(IS_UNIQUE_EDEFAULT);
 				return;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
-				getOutgoing().clear();
-				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				setReferredEClassifier((EClassifier)null);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				setIsAnon(IS_ANON_EDEFAULT);
+				return;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				getOutgoing().clear();
 				return;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				setRelDomainNode((RelDomainNode)null);
@@ -785,8 +786,6 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
-				return isAnon != IS_ANON_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY:
 				return isMany != IS_MANY_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE:
@@ -797,10 +796,12 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				return isRequired != IS_REQUIRED_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE:
 				return isUnique != IS_UNIQUE_EDEFAULT;
-			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
-				return outgoing != null && !outgoing.isEmpty();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER:
 				return referredEClassifier != null;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ANON:
+				return isAnon != IS_ANON_EDEFAULT;
+			case UMLXPackage.REL_PATTERN_CLASS_NODE__OUTGOING:
+				return outgoing != null && !outgoing.isEmpty();
 			case UMLXPackage.REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE:
 				return relDomainNode != null;
 		}
@@ -820,6 +821,17 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 				default: return -1;
 			}
 		}
+		if (baseClass == UMLXTypedElement.class) {
+			switch (derivedFeatureID) {
+				case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY;
+				case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE;
+				case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED;
+				case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_REQUIRED: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED;
+				case UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE;
+				case UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER: return UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -833,6 +845,17 @@ public class RelPatternClassNodeImpl extends RelPatternNodeImpl implements RelPa
 		if (baseClass == UMLXNamedElement.class) {
 			switch (baseFeatureID) {
 				case UMLXPackage.UMLX_NAMED_ELEMENT__NAME: return UMLXPackage.REL_PATTERN_CLASS_NODE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == UMLXTypedElement.class) {
+			switch (baseFeatureID) {
+				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY: return UMLXPackage.REL_PATTERN_CLASS_NODE__IS_MANY;
+				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE: return UMLXPackage.REL_PATTERN_CLASS_NODE__IS_NULL_FREE;
+				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED: return UMLXPackage.REL_PATTERN_CLASS_NODE__IS_ORDERED;
+				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED: return UMLXPackage.REL_PATTERN_CLASS_NODE__IS_REQUIRED;
+				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE: return UMLXPackage.REL_PATTERN_CLASS_NODE__IS_UNIQUE;
+				case UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER: return UMLXPackage.REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER;
 				default: return -1;
 			}
 		}

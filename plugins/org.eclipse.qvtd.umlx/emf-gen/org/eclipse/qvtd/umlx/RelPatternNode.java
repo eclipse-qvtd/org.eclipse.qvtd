@@ -23,8 +23,10 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getIncoming <em>Incoming</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getInitExpressionLines <em>Init Expression Lines</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsRoot <em>Is Root</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelPatternNode#getInvokingRelInvocationEdges <em>Invoking Rel Invocation Edges</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode()
@@ -48,6 +50,21 @@ public interface RelPatternNode extends RelNode {
 	 * @generated
 	 */
 	EList<RelPatternEdge> getIncoming();
+
+	/**
+	 * Returns the value of the '<em><b>Init Expression Lines</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Init Expression Lines</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Init Expression Lines</em>' attribute list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_InitExpressionLines()
+	 * @generated
+	 */
+	EList<String> getInitExpressionLines();
 
 	/**
 	 * Returns the value of the '<em><b>Is Root</b></em>' attribute.
@@ -101,4 +118,21 @@ public interface RelPatternNode extends RelNode {
 	 * @generated
 	 */
 	void setOwningRelDomainNode(RelDomainNode value);
+
+	/**
+	 * Returns the value of the '<em><b>Invoking Rel Invocation Edges</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelInvocationEdge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelInvocationEdge#getInvokingRelPatternNode <em>Invoking Rel Pattern Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invoking Rel Invocation Edges</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invoking Rel Invocation Edges</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternNode_InvokingRelInvocationEdges()
+	 * @see org.eclipse.qvtd.umlx.RelInvocationEdge#getInvokingRelPatternNode
+	 * @generated
+	 */
+	EList<RelInvocationEdge> getInvokingRelInvocationEdges();
 } // RelNode

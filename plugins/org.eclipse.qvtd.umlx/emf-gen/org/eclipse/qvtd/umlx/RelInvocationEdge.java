@@ -84,6 +84,7 @@ public interface RelInvocationEdge extends RelEdge {
 
 	/**
 	 * Returns the value of the '<em><b>Invoking Rel Pattern Node</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternNode#getInvokingRelInvocationEdges <em>Invoking Rel Invocation Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Invoking Rel Pattern Node</em>' reference isn't clear,
@@ -93,6 +94,7 @@ public interface RelInvocationEdge extends RelEdge {
 	 * @return the value of the '<em>Invoking Rel Pattern Node</em>' reference.
 	 * @see #setInvokingRelPatternNode(RelPatternNode)
 	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelInvocationEdge_InvokingRelPatternNode()
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#getInvokingRelInvocationEdges
 	 * @generated
 	 */
 	RelPatternNode getInvokingRelPatternNode();

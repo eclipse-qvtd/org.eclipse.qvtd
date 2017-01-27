@@ -51,6 +51,7 @@ import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.UMLXTables;
+import org.eclipse.qvtd.umlx.UMLXTypedElement;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
 
 /**
@@ -187,6 +188,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(RelPatternClassNode newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
@@ -374,6 +376,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleMemberPropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -569,6 +572,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateSourceIsClassNode(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -609,6 +613,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateSourceIsEClass(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -669,6 +674,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleSourceIndex(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -709,6 +715,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleRestPropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -802,7 +809,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							throw (InvalidValueException)CAUGHT_sourceClassNode;
 						}
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = ((RelPatternClassNode)CAUGHT_sourceClassNode).getReferredEClassifier();
+						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier = ((UMLXTypedElement)CAUGHT_sourceClassNode).getReferredEClassifier();
 						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass sourceEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0));
 						CAUGHT_sourceEClass = sourceEClass;
 					}
@@ -816,7 +823,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							throw (InvalidValueException)CAUGHT_targetClassNode;
 						}
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier_0 = ((RelPatternClassNode)CAUGHT_targetClassNode).getReferredEClassifier();
+						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClassifier referredEClassifier_0 = ((UMLXTypedElement)CAUGHT_targetClassNode).getReferredEClassifier();
 						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass targetEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1));
 						CAUGHT_targetEClass = targetEClass;
 					}
@@ -848,11 +855,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 									if (CAUGHT_sourceClassNode instanceof InvalidValueException) {
 										throw (InvalidValueException)CAUGHT_sourceClassNode;
 									}
-									final /*@Thrown*/ boolean isMany = ((RelPatternClassNode)CAUGHT_sourceClassNode).isIsMany();
+									final /*@Thrown*/ boolean isMany = ((UMLXTypedElement)CAUGHT_sourceClassNode).isIsMany();
 									if (CAUGHT_targetClassNode instanceof InvalidValueException) {
 										throw (InvalidValueException)CAUGHT_targetClassNode;
 									}
-									final /*@Thrown*/ boolean isMany_0 = ((RelPatternClassNode)CAUGHT_targetClassNode).isIsMany();
+									final /*@Thrown*/ boolean isMany_0 = ((UMLXTypedElement)CAUGHT_targetClassNode).isIsMany();
 									final /*@Thrown*/ boolean eq_1 = isMany == isMany_0;
 									CAUGHT_eq_1 = eq_1;
 								}
@@ -870,11 +877,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								if (CAUGHT_sourceClassNode instanceof InvalidValueException) {
 									throw (InvalidValueException)CAUGHT_sourceClassNode;
 								}
-								final /*@Thrown*/ boolean isNullFree = ((RelPatternClassNode)CAUGHT_sourceClassNode).isIsNullFree();
+								final /*@Thrown*/ boolean isNullFree = ((UMLXTypedElement)CAUGHT_sourceClassNode).isIsNullFree();
 								if (CAUGHT_targetClassNode instanceof InvalidValueException) {
 									throw (InvalidValueException)CAUGHT_targetClassNode;
 								}
-								final /*@Thrown*/ boolean isNullFree_0 = ((RelPatternClassNode)CAUGHT_targetClassNode).isIsNullFree();
+								final /*@Thrown*/ boolean isNullFree_0 = ((UMLXTypedElement)CAUGHT_targetClassNode).isIsNullFree();
 								final /*@Thrown*/ boolean eq_2 = isNullFree == isNullFree_0;
 								CAUGHT_eq_2 = eq_2;
 							}
@@ -892,11 +899,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							if (CAUGHT_sourceClassNode instanceof InvalidValueException) {
 								throw (InvalidValueException)CAUGHT_sourceClassNode;
 							}
-							final /*@Thrown*/ boolean isOrdered = ((RelPatternClassNode)CAUGHT_sourceClassNode).isIsOrdered();
+							final /*@Thrown*/ boolean isOrdered = ((UMLXTypedElement)CAUGHT_sourceClassNode).isIsOrdered();
 							if (CAUGHT_targetClassNode instanceof InvalidValueException) {
 								throw (InvalidValueException)CAUGHT_targetClassNode;
 							}
-							final /*@Thrown*/ boolean isOrdered_0 = ((RelPatternClassNode)CAUGHT_targetClassNode).isIsOrdered();
+							final /*@Thrown*/ boolean isOrdered_0 = ((UMLXTypedElement)CAUGHT_targetClassNode).isIsOrdered();
 							final /*@Thrown*/ boolean eq_3 = isOrdered == isOrdered_0;
 							CAUGHT_eq_3 = eq_3;
 						}
@@ -914,11 +921,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 						if (CAUGHT_sourceClassNode instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_sourceClassNode;
 						}
-						final /*@Thrown*/ boolean isUnique = ((RelPatternClassNode)CAUGHT_sourceClassNode).isIsUnique();
+						final /*@Thrown*/ boolean isUnique = ((UMLXTypedElement)CAUGHT_sourceClassNode).isIsUnique();
 						if (CAUGHT_targetClassNode instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_targetClassNode;
 						}
-						final /*@Thrown*/ boolean isUnique_0 = ((RelPatternClassNode)CAUGHT_targetClassNode).isIsUnique();
+						final /*@Thrown*/ boolean isUnique_0 = ((UMLXTypedElement)CAUGHT_targetClassNode).isIsUnique();
 						final /*@Thrown*/ boolean eq_4 = isUnique == isUnique_0;
 						CAUGHT_eq_4 = eq_4;
 					}
@@ -947,6 +954,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleEAttributePropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -1042,6 +1050,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatiblePropertySource(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -1136,6 +1145,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleSourceMultiplicity(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -1187,6 +1197,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleEReferencePropertyTarget(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *

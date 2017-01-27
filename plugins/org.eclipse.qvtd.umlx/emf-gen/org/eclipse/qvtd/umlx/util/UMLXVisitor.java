@@ -56,9 +56,12 @@ public interface UMLXVisitor<R>
 	R visitTxKeyNode(org.eclipse.qvtd.umlx.@NonNull TxKeyNode object);
 	R visitTxNode(org.eclipse.qvtd.umlx.@NonNull TxNode object);
 	R visitTxPackageNode(org.eclipse.qvtd.umlx.@NonNull TxPackageNode object);
+	R visitTxParameterNode(org.eclipse.qvtd.umlx.@NonNull TxParameterNode object);
 	R visitTxPartNode(org.eclipse.qvtd.umlx.@NonNull TxPartNode object);
+	R visitTxQueryNode(org.eclipse.qvtd.umlx.@NonNull TxQueryNode object);
 	R visitTxTypedModelNode(org.eclipse.qvtd.umlx.@NonNull TxTypedModelNode object);
 	R visitUMLXElement(org.eclipse.qvtd.umlx.@NonNull UMLXElement object);
 	R visitUMLXModel(org.eclipse.qvtd.umlx.@NonNull UMLXModel object);
 	R visitUMLXNamedElement(org.eclipse.qvtd.umlx.@NonNull UMLXNamedElement object);
+	R visitUMLXTypedElement(org.eclipse.qvtd.umlx.@NonNull UMLXTypedElement object);
 }

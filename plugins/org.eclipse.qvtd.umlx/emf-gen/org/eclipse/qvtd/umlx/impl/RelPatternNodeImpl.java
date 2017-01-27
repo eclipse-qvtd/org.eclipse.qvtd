@@ -17,10 +17,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvtd.umlx.RelDomainNode;
+import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.UMLXPackage;
@@ -34,8 +36,10 @@ import org.eclipse.qvtd.umlx.UMLXPackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getIncoming <em>Incoming</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getInitExpressionLines <em>Init Expression Lines</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#isIsRoot <em>Is Root</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl#getInvokingRelInvocationEdges <em>Invoking Rel Invocation Edges</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,6 +54,15 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 	 * @ordered
 	 */
 	protected EList<RelPatternEdge> incoming;
+	/**
+	 * The cached value of the '{@link #getInitExpressionLines() <em>Init Expression Lines</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitExpressionLines()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> initExpressionLines;
 	/**
 	 * The default value of the '{@link #isIsRoot() <em>Is Root</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -68,6 +81,15 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 	 * @ordered
 	 */
 	protected boolean isRoot = IS_ROOT_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getInvokingRelInvocationEdges() <em>Invoking Rel Invocation Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInvokingRelInvocationEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RelInvocationEdge> invokingRelInvocationEdges;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,6 +120,19 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 			incoming = new EObjectWithInverseResolvingEList<RelPatternEdge>(RelPatternEdge.class, this, UMLXPackage.REL_PATTERN_NODE__INCOMING, UMLXPackage.REL_PATTERN_EDGE__TARGET);
 		}
 		return incoming;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<String> getInitExpressionLines() {
+		if (initExpressionLines == null) {
+			initExpressionLines = new EDataTypeUniqueEList<String>(String.class, this, UMLXPackage.REL_PATTERN_NODE__INIT_EXPRESSION_LINES);
+		}
+		return initExpressionLines;
 	}
 
 	/**
@@ -172,6 +207,19 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 	 * @generated
 	 */
 	@Override
+	public EList<RelInvocationEdge> getInvokingRelInvocationEdges() {
+		if (invokingRelInvocationEdges == null) {
+			invokingRelInvocationEdges = new EObjectWithInverseResolvingEList<RelInvocationEdge>(RelInvocationEdge.class, this, UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE);
+		}
+		return invokingRelInvocationEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -191,6 +239,8 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRelDomainNode((RelDomainNode)otherEnd, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInvokingRelInvocationEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -207,6 +257,8 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				return basicSetOwningRelDomainNode(null, msgs);
+			case UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES:
+				return ((InternalEList<?>)getInvokingRelInvocationEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -235,10 +287,14 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
 				return getIncoming();
+			case UMLXPackage.REL_PATTERN_NODE__INIT_EXPRESSION_LINES:
+				return getInitExpressionLines();
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				return isIsRoot();
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode();
+			case UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES:
+				return getInvokingRelInvocationEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -256,11 +312,19 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends RelPatternEdge>)newValue);
 				return;
+			case UMLXPackage.REL_PATTERN_NODE__INIT_EXPRESSION_LINES:
+				getInitExpressionLines().clear();
+				getInitExpressionLines().addAll((Collection<? extends String>)newValue);
+				return;
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				setIsRoot((Boolean)newValue);
 				return;
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)newValue);
+				return;
+			case UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES:
+				getInvokingRelInvocationEdges().clear();
+				getInvokingRelInvocationEdges().addAll((Collection<? extends RelInvocationEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -277,11 +341,17 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
 				getIncoming().clear();
 				return;
+			case UMLXPackage.REL_PATTERN_NODE__INIT_EXPRESSION_LINES:
+				getInitExpressionLines().clear();
+				return;
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				setIsRoot(IS_ROOT_EDEFAULT);
 				return;
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				setOwningRelDomainNode((RelDomainNode)null);
+				return;
+			case UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES:
+				getInvokingRelInvocationEdges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -297,10 +367,14 @@ public abstract class RelPatternNodeImpl extends RelNodeImpl implements RelPatte
 		switch (featureID) {
 			case UMLXPackage.REL_PATTERN_NODE__INCOMING:
 				return incoming != null && !incoming.isEmpty();
+			case UMLXPackage.REL_PATTERN_NODE__INIT_EXPRESSION_LINES:
+				return initExpressionLines != null && !initExpressionLines.isEmpty();
 			case UMLXPackage.REL_PATTERN_NODE__IS_ROOT:
 				return isRoot != IS_ROOT_EDEFAULT;
 			case UMLXPackage.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE:
 				return getOwningRelDomainNode() != null;
+			case UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES:
+				return invokingRelInvocationEdges != null && !invokingRelInvocationEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

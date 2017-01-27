@@ -130,6 +130,15 @@ public interface UMLXFactory extends EFactory {
 	@NonNull TxPartNode createTxPartNode();
 
 	/**
+	 * Returns a new object of class '<em>Tx Query Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tx Query Node</em>'.
+	 * @generated
+	 */
+	@NonNull TxQueryNode createTxQueryNode();
+
+	/**
 	 * Returns a new object of class '<em>Tx Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,6 +155,15 @@ public interface UMLXFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull TxPackageNode createTxPackageNode();
+
+	/**
+	 * Returns a new object of class '<em>Tx Parameter Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tx Parameter Node</em>'.
+	 * @generated
+	 */
+	@NonNull TxParameterNode createTxParameterNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Typed Model Node</em>'.
