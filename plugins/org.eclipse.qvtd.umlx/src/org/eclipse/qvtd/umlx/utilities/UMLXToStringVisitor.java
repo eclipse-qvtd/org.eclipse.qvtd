@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.umlx.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -17,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
+import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
@@ -26,10 +29,12 @@ import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
+import org.eclipse.qvtd.umlx.TxQueryNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXElement;
 import org.eclipse.qvtd.umlx.UMLXModel;
 import org.eclipse.qvtd.umlx.UMLXNamedElement;
+import org.eclipse.qvtd.umlx.UMLXTypedElement;
 import org.eclipse.qvtd.umlx.util.AbstractExtendingUMLXVisitor;
 
 public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable Object, @NonNull StringBuilder>
@@ -79,25 +84,19 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 
 	@Override
 	public @Nullable Object visitRelPatternClassNode(@NonNull RelPatternClassNode relPatternClassNode) {
-		EClassifier eClassifier = relPatternClassNode.getReferredEClassifier();
-		append(relPatternClassNode.getName());
-		append(" : ");
-		if (relPatternClassNode.isIsMany()) {
-			if (relPatternClassNode.isIsUnique()) {
-				append(relPatternClassNode.isIsOrdered() ? "OrderedSet" : "Set");
+		visitUMLXTypedElement(relPatternClassNode);
+		List<String> lines = relPatternClassNode.getInitExpressionLines();
+		if (lines.size() > 0) {
+			append(" = ");
+			boolean firstLine = true;
+			for (String line : lines) {
+				if (!firstLine) {
+					append("\n");
+				}
+				append(line);
+				firstLine = false;
 			}
-			else {
-				append(relPatternClassNode.isIsOrdered() ? "Sequence" : "Bag");
-			}
-			append("(");
-			append(LabelUtil.getLabel(eClassifier));
-			append(relPatternClassNode.isIsNullFree() ? "[*|1]" : "[*|?]");
-			append(")");
 		}
-		else {
-			append(LabelUtil.getLabel(eClassifier));
-		}
-		append(relPatternClassNode.isIsRequired() ? "[1]" : "[?]");
 		return null;
 	}
 
@@ -115,8 +114,23 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 
 	@Override
 	public @Nullable Object visitRelPatternExpressionNode(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
-		String expression = relPatternExpressionNode.getExpression();
-		append(expression);
+		List<String> lines = relPatternExpressionNode.getInitExpressionLines();
+		if (lines.size() > 0) {
+			boolean firstLine = true;
+			for (String line : lines) {
+				if (!firstLine) {
+					append("\n");
+				}
+				append(line);
+				firstLine = false;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitTxImportNode(@NonNull TxImportNode txImportNode) {
+		append(txImportNode.getName());
 		return null;
 	}
 
@@ -145,6 +159,31 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	}
 
 	@Override
+	public @Nullable Object visitTxQueryNode(@NonNull TxQueryNode txQueryNode) {
+		visitUMLXTypedElement(txQueryNode);
+		// fixme parameters
+		List<String> lines = txQueryNode.getInitExpressionLines();
+		if (lines.size() > 0) {
+			append(" = ");
+			boolean firstLine = true;
+			for (String line : lines) {
+				if (!firstLine) {
+					append("\n");
+				}
+				append(line);
+				firstLine = false;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitTxTypedModelNode(@NonNull TxTypedModelNode txTypedModelNode) {
+		append(txTypedModelNode.getName());
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitUMLXModel(@NonNull UMLXModel umlxModel) {
 		return "UMLXModel";
 	}
@@ -152,6 +191,30 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	@Override
 	public @Nullable Object visitUMLXNamedElement(@NonNull UMLXNamedElement umlxNamedElement) {
 		append(umlxNamedElement.getName());
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitUMLXTypedElement(@NonNull UMLXTypedElement umlxTypedElement) {
+		EClassifier eClassifier = umlxTypedElement.getReferredEClassifier();
+		append(umlxTypedElement.getName());
+		append(" : ");
+		if (umlxTypedElement.isIsMany()) {
+			if (umlxTypedElement.isIsUnique()) {
+				append(umlxTypedElement.isIsOrdered() ? "OrderedSet" : "Set");
+			}
+			else {
+				append(umlxTypedElement.isIsOrdered() ? "Sequence" : "Bag");
+			}
+			append("(");
+			append(LabelUtil.getLabel(eClassifier));
+			append(umlxTypedElement.isIsNullFree() ? "[*|1]" : "[*|?]");
+			append(")");
+		}
+		else {
+			append(LabelUtil.getLabel(eClassifier));
+		}
+		append(umlxTypedElement.isIsRequired() ? "[1]" : "[?]");
 		return null;
 	}
 

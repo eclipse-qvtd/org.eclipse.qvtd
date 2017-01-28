@@ -13,27 +13,19 @@ package org.eclipse.qvtd.umlx.labels;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.AbstractLabelGenerator;
 import org.eclipse.qvtd.umlx.RelPatternClassNode;
-import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternNode;
 
-public final class RelPatternEdgeLabelGenerator extends AbstractLabelGenerator<@NonNull RelPatternEdge>
+public final class RelPatternClassNodeLabelGenerator extends AbstractLabelGenerator<@NonNull RelPatternClassNode>
 {
 	public static void initialize(@NonNull Registry registry) {
-		registry.install(RelPatternEdge.class, new RelPatternEdgeLabelGenerator());
+		registry.install(RelPatternClassNode.class, new RelPatternClassNodeLabelGenerator());
 	}
 
-	public RelPatternEdgeLabelGenerator() {
-		super(RelPatternEdge.class);
+	public RelPatternClassNodeLabelGenerator() {
+		super(RelPatternClassNode.class);
 	}
 
 	@Override
-	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull RelPatternEdge object) {
-		RelPatternClassNode source = object.getSource();
-		RelPatternNode target = object.getTarget();
-		labelBuilder.appendString(source != null ? source.getName() : null);
-		labelBuilder.appendString(" -> ");
-		if (target instanceof RelPatternClassNode) {
-			labelBuilder.appendString(((RelPatternClassNode)target).getName());
-		}
+	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull RelPatternClassNode object) {
+		labelBuilder.appendString(object.getName());
 	}
 }

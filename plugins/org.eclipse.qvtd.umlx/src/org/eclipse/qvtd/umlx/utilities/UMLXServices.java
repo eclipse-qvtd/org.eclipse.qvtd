@@ -16,18 +16,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2ASReferenceSwitch;
+import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
@@ -43,6 +50,7 @@ import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXNamedElement;
+import org.eclipse.qvtd.umlx.UMLXTypedElement;
 
 /**
  * Class owning methods used for service: umlx. The service methods
@@ -52,13 +60,11 @@ public class UMLXServices
 {
 	public UMLXServices() {}
 
-	protected void appendMultiplicity(@NonNull StringBuilder s, @NonNull ETypedElement eTypedElement) {
-		if (!eTypedElement.isMany()) {
-			s.append(eTypedElement.isRequired() ? "[1]" : "[?]");
+	protected void appendMultiplicity(@NonNull StringBuilder s, int lower, int upper) {
+		if (upper == 1) {
+			s.append(lower == 1 ? "[1]" : "[?]");
 		}
 		else {
-			int lower = eTypedElement.getLowerBound();
-			int upper = eTypedElement.getUpperBound();
 			if (upper < 0) {
 				if (lower == 0) {
 					s.append("[*]");
@@ -79,6 +85,27 @@ public class UMLXServices
 		}
 	}
 
+	protected void appendTypedElement(StringBuilder s, @NonNull UMLXTypedElement umlxTypedElement) {
+		s.append(String.valueOf(umlxTypedElement.getName()));
+		s.append(" : ");
+		if (umlxTypedElement.isIsMany()) {
+			if (umlxTypedElement.isIsUnique()) {
+				s.append(umlxTypedElement.isIsOrdered() ? "OrderedSet" : "Set");
+			}
+			else {
+				s.append(umlxTypedElement.isIsOrdered() ? "Sequence" : "Bag");
+			}
+			s.append("(");
+		}
+		EClassifier eClassifier = umlxTypedElement.getReferredEClassifier();
+		if (eClassifier != null) {
+			s.append(eClassifier.eIsProxy() ? EcoreUtil.getURI(eClassifier) : String.valueOf(eClassifier.getName()));
+		}
+		if (umlxTypedElement.isIsMany()) {
+			s.append(")");
+		}
+	}
+
 	protected @NonNull String defaultName(@NonNull EObject context, @NonNull Class<? extends UMLXNamedElement> newClass, @NonNull String prefix) {
 		Set<String> allNames = new HashSet<>();
 		Resource eResource = context.eResource();
@@ -94,6 +121,110 @@ public class UMLXServices
 				return newName;
 			}
 		}
+	}
+
+	private int getEOppositeLower(@NonNull EReference eReference) {
+		EReference eOpposite = eReference.getEOpposite();
+		if (eOpposite != null) {
+			return eOpposite.getLowerBound();
+		}
+		EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
+		if (oppositeRole != null) {
+			EMap<String, String> details = oppositeRole.getDetails();
+			String oppositeName = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
+			if (oppositeName != null) {
+				String lowerValue = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_LOWER_KEY);
+				IntegerValue one = ValueUtil.ONE_VALUE;
+				IntegerValue lower = lowerValue != null ? ValueUtil.integerValueOf(lowerValue) : one;
+				if (lower.isInvalid()) {
+					//						logger.error("Invalid " + Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
+					lower = one;
+				}
+				return lower.intValue();
+			}
+		}
+		else {
+			oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+			if (oppositeRole != null) {
+				EMap<String, String> details = oppositeRole.getDetails();
+				String oppositeName = details.get(EMOFExtendedMetaData.EMOF_COMMENT_BODY);
+				if (oppositeName != null) {
+					String lowerValue = details.get("lower");
+					IntegerValue lower = lowerValue != null ? ValueUtil.integerValueOf(lowerValue) :  PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE;
+					if (lower.isInvalid()) {
+						//						logger.error("Invalid " + Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
+						lower = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE;
+					}
+					return lower.intValue();
+				}
+			}
+		}
+		return 0;
+	}
+
+	private String getEOppositeName(@NonNull EReference eReference) {
+		EReference eOpposite = eReference.getEOpposite();
+		if (eOpposite != null) {
+			return eOpposite.getName();
+		}
+		EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
+		if (oppositeRole != null) {
+			EMap<String, String> details = oppositeRole.getDetails();
+			String oppositeName = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
+			if (oppositeName != null) {
+				return oppositeName;
+			}
+		}
+		else {
+			oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+			if (oppositeRole != null) {
+				EMap<String, String> details = oppositeRole.getDetails();
+				String oppositeName = details.get(EMOFExtendedMetaData.EMOF_COMMENT_BODY);
+				if (oppositeName != null) {
+					return oppositeName;
+				}
+			}
+		}
+		return "«inferred»";
+	}
+
+	private int getEOppositeUpper(@NonNull EReference eReference) {
+		EReference eOpposite = eReference.getEOpposite();
+		if (eOpposite != null) {
+			return eOpposite.getUpperBound();
+		}
+		EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
+		if (oppositeRole != null) {
+			EMap<String, String> details = oppositeRole.getDetails();
+			String oppositeName = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
+			if (oppositeName != null) {
+				String upperValue = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_UPPER_KEY);
+				UnlimitedNaturalValue unlimitedOne = ValueUtil.UNLIMITED_ONE_VALUE;
+				UnlimitedNaturalValue upper = upperValue != null ? ValueUtil.unlimitedNaturalValueOf(upperValue) : unlimitedOne;
+				if (upper.isInvalid()) {
+					//						logger.error("Invalid " + Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
+					upper = unlimitedOne;
+				}
+				return upper.intValue();
+			}
+		}
+		else {
+			oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+			if (oppositeRole != null) {
+				EMap<String, String> details = oppositeRole.getDetails();
+				String oppositeName = details.get(EMOFExtendedMetaData.EMOF_COMMENT_BODY);
+				if (oppositeName != null) {
+					String upperValue = details.get("upper");
+					UnlimitedNaturalValue upper = upperValue != null ? ValueUtil.unlimitedNaturalValueOf(upperValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
+					if (upper.isInvalid()) {
+						//						logger.error("Invalid " + Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
+						upper = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
+					}
+					return upper.intValue();
+				}
+			}
+		}
+		return 0;
 	}
 
 	public int umlxBorderSize(EObject context) {
@@ -178,31 +309,30 @@ public class UMLXServices
 			}
 		}
 		else if (context instanceof RelPatternClassNode) {
-			RelPatternClassNode relPatternClassNode = (RelPatternClassNode)context;
 			StringBuilder s = new StringBuilder();
-			s.append(String.valueOf(relPatternClassNode.getName()));
-			s.append(" : ");
-			if (relPatternClassNode.isIsMany()) {
-				if (relPatternClassNode.isIsUnique()) {
-					s.append(relPatternClassNode.isIsOrdered() ? "OrderedSet" : "Set");
+			RelPatternClassNode relPatternClassNode = (RelPatternClassNode)context;
+			appendTypedElement(s, relPatternClassNode);
+			List<String> initExpressionLines = relPatternClassNode.getInitExpressionLines();
+			if (initExpressionLines.size() > 0) {
+				s.append(" :=");
+				for (String line : initExpressionLines) {
+					s.append("\n");
+					s.append(line);
 				}
-				else {
-					s.append(relPatternClassNode.isIsOrdered() ? "Sequence" : "Bag");
-				}
-				s.append("(");
-			}
-			EClassifier eClassifier = relPatternClassNode.getReferredEClassifier();
-			if (eClassifier != null) {
-				s.append(eClassifier.eIsProxy() ? EcoreUtil.getURI(eClassifier) : String.valueOf(eClassifier.getName()));
-			}
-			if (relPatternClassNode.isIsMany()) {
-				s.append(")");
 			}
 			return s.toString();
 		}
 		else if (context instanceof RelPatternExpressionNode) {
-			String expression = ((RelPatternExpressionNode)context).getExpression();
-			return expression != null ? expression : "«null-expression»";
+			StringBuilder s = new StringBuilder();
+			boolean firstLine = true;
+			for (String line : ((RelPatternExpressionNode)context).getInitExpressionLines()) {
+				if (!firstLine) {
+					s.append("\n");
+					s.append(line);
+					firstLine = false;
+				}
+			}
+			return s.toString();
 		}
 		else if (context instanceof TxImportNode) {
 			return String.valueOf(((TxImportNode)context).getName());
@@ -231,6 +361,11 @@ public class UMLXServices
 		else if (context instanceof TxTypedModelNode) {
 			return String.valueOf(((TxTypedModelNode)context).getName());
 		}
+		else if (context instanceof UMLXTypedElement) {
+			StringBuilder s = new StringBuilder();
+			appendTypedElement(s, (UMLXTypedElement)context);
+			return s.toString();
+		}
 		return "«umlxLabel - " + context.getClass().getName() + " - " + context.eClass().getName() + "»";
 	}
 
@@ -241,14 +376,11 @@ public class UMLXServices
 		if (context instanceof RelPatternEdge) {
 			EStructuralFeature eStructuralFeature = ((RelPatternEdge)context).getReferredEStructuralFeature();
 			if (eStructuralFeature instanceof EReference) {
-				EReference eOpposite = ((EReference)eStructuralFeature).getEOpposite();
-				if (eOpposite == null) {
-					return "«inferred»";
-				}
+				EReference eReference = (EReference)eStructuralFeature;
 				StringBuilder s = new StringBuilder();
-				s.append(String.valueOf(eOpposite.getName()));
+				s.append(getEOppositeName(eReference));
 				s.append(" ");
-				appendMultiplicity(s, eOpposite);
+				appendMultiplicity(s, getEOppositeLower(eReference), getEOppositeUpper(eReference));
 				return s.toString();
 			}
 		}
@@ -281,7 +413,7 @@ public class UMLXServices
 				StringBuilder s = new StringBuilder();
 				s.append(String.valueOf(eStructuralFeature.getName()));
 				s.append(" ");
-				appendMultiplicity(s, eStructuralFeature);
+				appendMultiplicity(s, eStructuralFeature.getLowerBound(), eStructuralFeature.getUpperBound());
 				return s.toString();
 			}
 		}

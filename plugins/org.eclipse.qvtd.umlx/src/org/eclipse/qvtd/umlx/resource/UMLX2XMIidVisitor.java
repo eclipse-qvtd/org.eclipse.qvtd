@@ -29,7 +29,9 @@ import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
+import org.eclipse.qvtd.umlx.TxParameterNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
+import org.eclipse.qvtd.umlx.TxQueryNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXElement;
 import org.eclipse.qvtd.umlx.UMLXModel;
@@ -81,8 +83,10 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 	public static final @NonNull String TX_DIAGRAM_PREFIX = "T."; //$NON-NLS-1$
 	public static final @NonNull String TX_IMPORT_PREFIX = "I."; //$NON-NLS-1$
 	public static final @NonNull String TX_KEY_PREFIX = "K."; //$NON-NLS-1$
-	public static final @NonNull String TX_KEY_PART_PREFIX = "P."; //$NON-NLS-1$
-	public static final @NonNull String TX_MODEL_PARAMETER_PREFIX = "M."; //$NON-NLS-1$
+	public static final @NonNull String TX_KEY_PART_PREFIX = "Kp."; //$NON-NLS-1$
+	public static final @NonNull String TX_MODEL_PARAMETER_PREFIX = "Tp."; //$NON-NLS-1$
+	public static final @NonNull String TX_QUERY_PREFIX = "Q."; //$NON-NLS-1$
+	public static final @NonNull String TX_QUERY_PARAMETER_PREFIX = "Qp."; //$NON-NLS-1$
 	public static final @NonNull String TX_USED_PACKAGE_PREFIX = "U."; //$NON-NLS-1$
 
 	/*	public static final @NonNull String ACCUMULATOR_PREFIX = "a"; //$NON-NLS-1$
@@ -220,8 +224,8 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 				appendNameOf(s, UMLXUtil.getSource(incoming.get(0)));
 			}
 			else {
-				String expression = relPatternExpressionNode.getExpression();
-				int hash = expression != null ? expression.hashCode() : 0;
+				List<String> initExpressionLines = relPatternExpressionNode.getInitExpressionLines();
+				int hash = initExpressionLines.hashCode();
 				s.append(Integer.toString(hash));
 			}
 		}
@@ -386,6 +390,14 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 	}
 
 	@Override
+	public Boolean visitTxParameterNode(@NonNull TxParameterNode object) {
+		s.append(TX_QUERY_PARAMETER_PREFIX);
+		appendParent(object);
+		appendNameOf(s, object);
+		return true;
+	}
+
+	@Override
 	public Boolean visitTxPartNode(@NonNull TxPartNode object) {
 		String name = object.getReferredEStructuralFeature().getName();
 		if (name != null) {
@@ -396,6 +408,20 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 			}
 			appendName(s, name);
 			return true;
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean visitTxQueryNode(@NonNull TxQueryNode object) {
+		s.append(TX_QUERY_PREFIX);
+		appendParent(object);
+		appendNameOf(s, object);
+		for (TxParameterNode txParameterNode : object.getOwnedTxParameterNodes()) {
+			s.append(FIELD_SEPARATOR);
+			if (txParameterNode != null) {
+				appendNameOf(s, txParameterNode);
+			}
 		}
 		return true;
 	}

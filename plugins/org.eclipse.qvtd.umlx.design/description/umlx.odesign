@@ -265,6 +265,21 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
         </containerMappings>
+        <containerMappings name="TxQueryContainer" semanticCandidatesExpression="feature:ownedTxQueryNodes" domainClass="umlx.TxQueryNode" childrenPresentation="List">
+          <subNodeMappings name="TxParameterNode" semanticCandidatesExpression="feature:ownedTxParameterNodes" domainClass="umlx.TxParameterNode">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" labelExpression="service: umlxLabel" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif" labelAlignment="LEFT" tooltipExpression="service: umlxTooltipExpression" sizeComputationExpression="0" labelPosition="node" resizeKind="EAST_WEST">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" labelExpression="service:umlxLabel" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif" tooltipExpression="service: umlxTooltipExpression">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
         <toolSections name="TxNodesId" label="Nodes">
           <ownedTools xsi:type="tool:ContainerCreationDescription" name="Import" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxImportContainer']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif">
             <variable name="container"/>
@@ -292,6 +307,24 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxPartNode" referenceName="ownedTxPartNodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Query" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxQueryContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxQueryNode" referenceName="ownedTxQueryNodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Query Parameter" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxQueryContainer']/@subNodeMappings[name='TxParameterNode']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.TxParameterNode" referenceName="ownedTxParameterNodes"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>

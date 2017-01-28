@@ -34,11 +34,14 @@ import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
+import org.eclipse.qvtd.umlx.TxParameterNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
+import org.eclipse.qvtd.umlx.TxQueryNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXElement;
 import org.eclipse.qvtd.umlx.UMLXModel;
 import org.eclipse.qvtd.umlx.UMLXNamedElement;
+import org.eclipse.qvtd.umlx.UMLXTypedElement;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -50,6 +53,10 @@ public class UMLXUtil
 	{
 		public static @NonNull List<@NonNull RelPatternEdge> getIncomingList(@NonNull RelPatternNode relNode) {
 			return ClassUtil.nullFree(relNode.getIncoming());
+		}
+
+		public static @NonNull List<@NonNull RelPatternNode> getOwnedRelPatternNodesList(@NonNull RelDomainNode relDomainNode) {
+			return ClassUtil.nullFree(relDomainNode.getOwnedRelPatternNodes());
 		}
 	}
 
@@ -93,16 +100,12 @@ public class UMLXUtil
 		return ClassUtil.nullFree(umlxElement.getComments());
 	}
 
-	public static @NonNull String getExpression(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
-		return ClassUtil.nonNullState(relPatternExpressionNode.getExpression());
-	}
-
-	//	public static @NonNull RelDiagram getDiagram(@NonNull RelPatternNode relNode) {
-	//		return ClassUtil.nonNullState(relNode.getDiagram());
-	//	}
-
 	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncoming(@NonNull RelPatternNode relNode) {
 		return ClassUtil.nullFree(relNode.getIncoming());
+	}
+
+	public static @NonNull List<@NonNull String> getInitExpressionLines(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
+		return ClassUtil.nullFree(relPatternExpressionNode.getInitExpressionLines());
 	}
 
 	public static @NonNull RelPatternNode getInvokingRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
@@ -157,8 +160,16 @@ public class UMLXUtil
 		return ClassUtil.nullFree(txTypedModelNode.getOwnedTxPackageNodes());
 	}
 
+	public static @NonNull Iterable<@NonNull TxParameterNode> getOwnedTxParameterNodes(@NonNull TxQueryNode txTypedModelNode) {
+		return ClassUtil.nullFree(txTypedModelNode.getOwnedTxParameterNodes());
+	}
+
 	public static @NonNull Iterable<@NonNull TxPartNode> getOwnedTxPartNodes(@NonNull TxKeyNode txKeyNode) {
 		return ClassUtil.nullFree(txKeyNode.getOwnedTxPartNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull TxQueryNode> getOwnedTxQueryNodes(@NonNull TxDiagram txDiagram) {
+		return ClassUtil.nullFree(txDiagram.getOwnedTxQueryNodes());
 	}
 
 	public static @NonNull Iterable<@NonNull TxTypedModelNode> getOwnedTxTypedModelNodes(@NonNull TxDiagram txDiagram) {
@@ -169,12 +180,16 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(relInvocationNode.getOwningRelDiagram());
 	}
 
+	public static @NonNull RelDomainNode getOwningRelDomainNode(@NonNull RelPatternNode relPatternNode) {
+		return ClassUtil.nonNullState(relPatternNode.getOwningRelDomainNode());
+	}
+
 	public static @NonNull EClass getReferredEClass(@NonNull TxKeyNode txKeyNode) {
 		return ClassUtil.nonNullState(txKeyNode.getReferredEClass());
 	}
 
-	public static @NonNull EClassifier getReferredEClassifier(@NonNull RelPatternClassNode relPatternNode) {
-		return ClassUtil.nonNullState(relPatternNode.getReferredEClassifier());
+	public static @NonNull EClassifier getReferredEClassifier(@NonNull UMLXTypedElement umlxTypedElement) {
+		return ClassUtil.nonNullState(umlxTypedElement.getReferredEClassifier());
 	}
 
 	public static @NonNull EPackage getReferredEPackage(@NonNull TxPackageNode txPackageNode) {

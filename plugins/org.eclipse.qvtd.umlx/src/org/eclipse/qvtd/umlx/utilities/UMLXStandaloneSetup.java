@@ -21,6 +21,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.labels.RelPatternEdgeLabelGenerator;
+import org.eclipse.qvtd.umlx.labels.UMLXModelLabelGenerator;
+import org.eclipse.qvtd.umlx.labels.UMLXNamedElementLabelGenerator;
+import org.eclipse.qvtd.umlx.labels.RelDomainNodeLabelGenerator;
+import org.eclipse.qvtd.umlx.labels.RelPatternClassNodeLabelGenerator;
 import org.eclipse.qvtd.umlx.resource.UMLXResourceFactoryImpl;
 import org.eclipse.qvtd.umlx.util.UMLXValidator;
 
@@ -50,7 +54,11 @@ public class UMLXStandaloneSetup
 		}
 		EPackage.Registry.INSTANCE.put(UMLXPackage.eNS_URI, UMLXPackage.eINSTANCE);
 		EValidator.Registry.INSTANCE.put(UMLXPackage.eINSTANCE, UMLXValidator.INSTANCE);
+		RelDomainNodeLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		RelPatternClassNodeLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
 		RelPatternEdgeLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		UMLXModelLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		UMLXNamedElementLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
 	}
 
 	/**

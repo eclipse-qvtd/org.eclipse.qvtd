@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.xtext.qvtrelation.tests,
  org.eclipse.qvtd.compiler,
- org.eclipse.qvtd.umlx
+ org.eclipse.qvtd.umlx,
+ com.google.guava
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.umlx.tests
