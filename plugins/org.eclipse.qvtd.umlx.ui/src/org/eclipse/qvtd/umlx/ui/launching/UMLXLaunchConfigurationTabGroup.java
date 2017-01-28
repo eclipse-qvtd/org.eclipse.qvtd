@@ -9,7 +9,7 @@
  *     R.Dvorak and others - QVTo debugger framework
  *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
-package org.eclipse.qvtd.debug.ui.launching;
+package org.eclipse.qvtd.umlx.ui.launching;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
+import org.eclipse.qvtd.debug.ui.launching.LaunchConfigurationTabGroup;
 
 public class UMLXLaunchConfigurationTabGroup extends LaunchConfigurationTabGroup
 {

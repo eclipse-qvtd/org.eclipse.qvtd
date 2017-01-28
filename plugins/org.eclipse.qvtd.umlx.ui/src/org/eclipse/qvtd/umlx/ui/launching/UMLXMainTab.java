@@ -9,7 +9,7 @@
  *     R.Dvorak and others - QVTo debugger framework
  *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
-package org.eclipse.qvtd.debug.ui.launching;
+package org.eclipse.qvtd.umlx.ui.launching;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,11 +29,11 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
+import org.eclipse.qvtd.debug.ui.launching.DirectionalMainTab;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
@@ -44,7 +44,6 @@ import org.eclipse.swt.graphics.Image;
 public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 {
 	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
-		CompilerChain.UMLX_STEP,
 		CompilerChain.QVTR_STEP,
 		CompilerChain.QVTC_STEP,
 		CompilerChain.QVTU_STEP,
@@ -57,7 +56,8 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 	};
 
 	@Override
-	protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI,
+			@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
 		return new UMLXCompilerChain(environmentFactory, txURI, options);
 	}
@@ -75,7 +75,7 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 
 	@Override
 	public Image getImage() {
-		return QVTdDebugUIPlugin.getDefault().createImage("icons/umlxx.gif");
+		return QVTdDebugUIPlugin.getDefault().createImage("icons/UMLXModelFile.gif");
 	}
 
 	@Override

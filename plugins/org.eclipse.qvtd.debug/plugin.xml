@@ -28,10 +28,6 @@
             delegate="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"
             modes="run"
             name="QVTr (Relations) Transformation"/>
-      <launchConfigurationType id="org.eclipse.qvtd.debug.launching.UMLXLaunchConfigurationDelegate"
-            delegate="org.eclipse.qvtd.debug.launching.UMLXLaunchConfigurationDelegate"
-            modes="run"
-            name="UMLX Transformation"/>
    </extension>
 
     <extension point="org.eclipse.debug.core.sourceLocators">

@@ -9,7 +9,7 @@
  *     R.Dvorak and others - QVTo debugger framework
  *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
-package org.eclipse.qvtd.debug.launching;
+package org.eclipse.qvtd.umlx.ui.launching;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +26,8 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
+import org.eclipse.qvtd.debug.launching.QVTcLaunchConstants;
+import org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;

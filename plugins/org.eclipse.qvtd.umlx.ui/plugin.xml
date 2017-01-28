@@ -23,4 +23,25 @@
 	  </menuContribution>
 	</extension>
 
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.qvtd.umlx.launching.UMLXLaunchConfigurationDelegate"
+            icon="icons/UMLXModelFile.gif"
+            id="UMLX Debug"/>
+   </extension>
+    
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType id="org.eclipse.qvtd.umlx.launching.UMLXLaunchConfigurationDelegate"
+            delegate="org.eclipse.qvtd.umlx.ui.launching.UMLXLaunchConfigurationDelegate"
+            modes="run"
+            name="UMLX Transformation"/>
+   </extension>
+   
+   <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup id="org.eclipse.qvtd.umlx.launching.UMLXLaunchConfigurationTabGroup"
+            class="org.eclipse.qvtd.umlx.ui.launching.UMLXLaunchConfigurationTabGroup"
+            description="Create a configuration to launch a UMLX transformation"
+            type="org.eclipse.qvtd.umlx.launching.UMLXLaunchConfigurationDelegate"/>
+   </extension>
+
 </plugin>
