@@ -16,7 +16,7 @@ import listMM : 'DoublyLinkedList.ecore#/';
 /**
  * Transform a hierarchical StateMachine into a flat StateMachine.
  */
-package org::eclipse::qvtd::xtext::qvtrelation2::tests::forward2reverse {
+package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 	transformation Forward2Reverse(forward:listMM, reverse:listMM)
 	{
 		/**
