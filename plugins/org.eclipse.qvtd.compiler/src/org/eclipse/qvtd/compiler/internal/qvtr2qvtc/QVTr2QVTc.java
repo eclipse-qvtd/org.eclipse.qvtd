@@ -20,17 +20,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
-import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descriptor.Registry;
+import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descriptor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
-import org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.Monitor;
@@ -86,9 +82,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.UniqueArrayList;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.UniqueArrayList;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -114,6 +110,29 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
 	public static final @NonNull TracingOption VARIABLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/variables");
+
+	private static final class Generator extends org.eclipse.emf.codegen.ecore.generator.Generator
+	{
+		private final @NonNull Collection<GeneratorAdapterFactory> adapterFactories = new ArrayList<>();
+
+		public Generator() {
+			// Replacement for EMF to fix BUG 485764, BUG 485089
+			addAdapterFactoryDescriptor(QVTdGenModelGeneratorAdapterFactory.DESCRIPTOR);
+			// OCLinEcore embedded support
+			addAdapterFactoryDescriptor(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		}
+
+		private void addAdapterFactoryDescriptor(Descriptor descriptor) {
+			GeneratorAdapterFactory adapterFactory = descriptor.createAdapterFactory();
+			adapterFactories.add(adapterFactory);
+			adapterFactory.setGenerator(this);
+		}
+
+		@Override
+		protected Collection<GeneratorAdapterFactory> getAdapterFactories( Object object) {
+			return adapterFactories;
+		}
+	}
 
 	protected static class CreateVisitor extends AbstractCreateVisitor<@NonNull QVTr2QVTc>
 	{
@@ -394,14 +413,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	public void generateModels(@NonNull GenModel genModel) {
 		((PivotMetamodelManager)environmentFactory.getMetamodelManager()).addGenModel(genModel);
-		Registry generatorAdapterDescriptorRegistry = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
-		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(GenModelGeneratorAdapterFactory.DESCRIPTOR)) {
-			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
-		}
-		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR)) {
-			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
-		}
-		generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, QVTdGenModelGeneratorAdapterFactory.DESCRIPTOR);
 		//**		ResourceUtils.checkResourceSet(resourceSet);
 		// genModel.setCanGenerate(true);
 		// validate();
@@ -444,9 +455,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		 * // JavaCore.setOptions(defaultOptions);
 		 */
 
-		//		Generator generator = new Generator();
-		//		generator.setInput(genModel);
-		Generator generator = GenModelUtil.createGenerator(genModel);
+		Generator generator = new Generator();
+		generator.setInput(genModel);
 		Monitor monitor = /*showProgress ? new LoggerMonitor(log) :*/ new BasicMonitor();
 		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
 		reportDiagnostics(new Issues(), diagnostic);
