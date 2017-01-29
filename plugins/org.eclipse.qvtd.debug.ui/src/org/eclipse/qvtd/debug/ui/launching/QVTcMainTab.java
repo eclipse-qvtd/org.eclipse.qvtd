@@ -12,6 +12,7 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -59,6 +60,10 @@ public class QVTcMainTab extends DirectionalMainTab
 	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		super.initializeOptions(options);
 		AbstractCompilerChain.setOption(options, CompilerChain.QVTC_STEP, CompilerChain.URI_KEY, getResolvedCompilerStep(CompilerChain.QVTC_STEP));
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, getResolvedGenModel());
+		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
+		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getProjectName());
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 	}
 
 	@Override

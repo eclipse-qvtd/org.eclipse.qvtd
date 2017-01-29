@@ -356,8 +356,12 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		String projectName = getProjectName();
 		try {
+			if ("".equals(projectName)) {
+				setErrorMessage("Project does not exist");
+				return false;
+			}
 			IProject iProject = root.getProject(projectName);
-			if (iProject == null){
+			if (iProject == null) {
 				setErrorMessage("Project '" + projectName + "' does not exist");
 				return false;
 			}

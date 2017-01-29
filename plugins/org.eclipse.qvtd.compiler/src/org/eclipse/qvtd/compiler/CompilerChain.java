@@ -86,6 +86,7 @@ public interface CompilerChain
 	public static final @NonNull Key<Boolean> SCHEDULER_NO_LATE_CONSUMER_MERGE = new Key<>("schedulerNoLateConsumerMerge");
 
 	void addListener(@NonNull Listener listener);
+	@Nullable URI basicGetURI(@NonNull String stepKey, @NonNull Key<URI> uriKey);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws Exception;
 	void compiled(@NonNull String stepKey, @NonNull Object object);

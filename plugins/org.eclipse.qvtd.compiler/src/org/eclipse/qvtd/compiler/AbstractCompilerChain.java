@@ -150,9 +150,15 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 			if (genModelFiles != null) {
 				for (String genModelFile : genModelFiles) {
-					URI genModelURI = URI.createURI(genModelFile).resolve(txURI);
-					loadGenModel(genModelURI);
+					URI resolvedURI = URI.createURI(genModelFile).resolve(txURI);
+					loadGenModel(resolvedURI);
 				}
+			}
+			URI genModelURI = compilerChain.basicGetURI(GENMODEL_STEP, URI_KEY);
+			if (genModelURI != null) {
+				URI resolvedURI = genModelURI.resolve(txURI);
+				loadGenModel(resolvedURI);
+
 			}
 			QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, asTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
@@ -294,6 +300,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				environmentFactory.setCreateStrategy(savedStrategy);
 			}
 		}
+	}
+
+	@Override
+	public @Nullable URI basicGetURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
+		return getOption(stepKey, URI_KEY);
 	}
 
 	public static @Nullable String getDefaultExtension(@NonNull String key) {
