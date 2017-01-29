@@ -233,7 +233,7 @@ map classToTable in umlRdbms
 			pk.owner := t;
 			pk.kind := 'primary';
 			pc.owner := t;
-			default pc.keys := Set(SimpleRDBMS::Key){pk};
+			default pc.keys := OrderedSet(SimpleRDBMS::Key){pk};
 			default pc.type := 'NUMBER';
 			pc.keys->includes(pk);
 		}
@@ -294,7 +294,7 @@ map associationToForeignKey in umlRdbms refines flattening
 		fk.owner := st;
 		fc.owner := st;
 		fk.refersTo := rk;
-		default fc.foreignKeys := Set(SimpleRDBMS::ForeignKey){fk};
+		default fc.foreignKeys := OrderedSet(SimpleRDBMS::ForeignKey){fk};
 		fc.foreignKeys->includes(fk);
 	}
 
@@ -470,7 +470,7 @@ map complexAttribute in umlRdbms refines attributes
 	{
 
 		where() {
-			fa.leafs := fao.fromAttributes.leafs;
+			fa.leafs := fao.fromAttributes.leafs->asSet();
 		}
 	}
 }
