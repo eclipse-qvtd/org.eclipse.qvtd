@@ -12,11 +12,15 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
@@ -37,8 +41,8 @@ public class QVTcMainTab extends DirectionalMainTab
 	};
 
 	@Override
-	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
-		return new QVTcCompilerChain(environmentFactory, txURI, null);
+	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		return new QVTcCompilerChain(environmentFactory, txURI, options);
 	}
 
 	@Override
@@ -52,9 +56,15 @@ public class QVTcMainTab extends DirectionalMainTab
 	}
 
 	@Override
+	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		super.initializeOptions(options);
+		AbstractCompilerChain.setOption(options, CompilerChain.QVTC_STEP, CompilerChain.URI_KEY, getResolvedCompilerStep(CompilerChain.QVTC_STEP));
+	}
+
+	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
-//		System.out.println("QVTc::updateTransformation");
+		//		System.out.println("QVTc::updateTransformation");
 		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-    	return QVTcoreUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
+		return QVTcoreUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

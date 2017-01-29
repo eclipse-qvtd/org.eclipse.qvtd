@@ -25,6 +25,8 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.debug.launching.QVTcLaunchConstants;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -119,6 +121,16 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 		directionCombo.setText(configuration.getAttribute(DIRECTION_KEY, "NONE"));
 		modeCombo.setText(configuration.getAttribute(MODE_KEY, ENFORCE_CREATE_MODE));
 		viewCheckButton.setSelection(configuration.getAttribute(VIEW_KEY, false));
+	}
+
+	@Override
+	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		super.initializeOptions(options);
+		initializeURIOption(options, CompilerChain.QVTU_STEP);
+		initializeURIOption(options, CompilerChain.QVTM_STEP);
+		initializeURIOption(options, CompilerChain.QVTP_STEP);
+		initializeURIOption(options, CompilerChain.QVTS_STEP);
+		initializeURIOption(options, CompilerChain.QVTI_STEP);
 	}
 
 	@Override

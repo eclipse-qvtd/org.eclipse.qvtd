@@ -147,7 +147,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 						IFile genIFile = root.getFile(new Path(genModel.getModelDirectory()));
 						File genFile = URIUtil.toFile(genIFile.getLocationURI());
 						sourcePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
-						classpathProjects = JavaSourceFileObject.createClasspathProjectList("org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+						classpathProjects = JavaSourceFileObject.createClasspathProjectList(binProjectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
 					}
 					else {
 						ResourceSet resourceSet = environmentFactory.getResourceSet();

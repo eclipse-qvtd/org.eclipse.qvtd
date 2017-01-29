@@ -12,11 +12,16 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -39,11 +44,11 @@ public class QVTrMainTab extends DirectionalMainTab
 	};
 
 	@Override
-	protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
+	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		return new QVTrCompilerChain(environmentFactory, txURI, null);
+		return new QVTrCompilerChain(environmentFactory, txURI, options);
 	}
-	
+
 	@Override
 	public Image getImage() {
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTrModelFile.gif");
@@ -55,8 +60,19 @@ public class QVTrMainTab extends DirectionalMainTab
 	}
 
 	@Override
+	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		super.initializeOptions(options);
+		initializeURIOption(options, CompilerChain.QVTR_STEP);
+		initializeURIOption(options, CompilerChain.QVTC_STEP);
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, getResolvedGenModel());
+		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
+		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getProjectName());
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+	}
+
+	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
 		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-    	return QVTrelationUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
+		return QVTrelationUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

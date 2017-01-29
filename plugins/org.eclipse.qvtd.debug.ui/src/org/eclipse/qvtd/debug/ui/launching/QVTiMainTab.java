@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -37,8 +38,8 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 	};
 
 	@Override
-	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
-		return new QVTiCompilerChain(environmentFactory, txURI, null);
+	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		return new QVTiCompilerChain(environmentFactory, txURI, options);
 	}
 
 	@Override
@@ -52,6 +53,12 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 	@Override
 	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
 		return intermediateKeys;
+	}
+
+	@Override
+	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		super.initializeOptions(options);
+		initializeURIOption(options, CompilerChain.QVTI_STEP);
 	}
 
 	@Override
