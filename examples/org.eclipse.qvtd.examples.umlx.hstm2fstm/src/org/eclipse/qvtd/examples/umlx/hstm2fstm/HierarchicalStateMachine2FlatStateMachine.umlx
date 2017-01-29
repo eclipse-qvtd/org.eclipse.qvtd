@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ASCII"?>
+<umlx:UMLXModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:umlx="http://www.eclipse.org/qvt/2016/UMLX">
+  <comments>*****************************************************************************
+Copyright (c) 2007,2008 Tata Consultancy Services and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+TCS - initial implementation for ModelMorf
+E.D.Willink - alignment with evolved specification
+E.D.Willink - rename / comment
+*****************************************************************************</comments>
+  <ownedTxDiagrams xmi:id="T.HierarchicalStateMachine2FlatStateMachine" name="HierarchicalStateMachine2FlatStateMachine" package="org::eclipse::qvtd::xtext::umlx::tests::hstm2fstm">
+    <comments>Transform a hierarchical StateMachine into a flat StateMachine.</comments>
+    <ownedRelDiagrams xmi:id="R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine" name="HierachicalStateMachine2FlatStateMachine" isTop="true">
+      <comments>Map each hierarchical StateMachine to a flat StateMachine</comments>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="HierarchicalStateMachine.ecore#//StateMachine/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="FlatStateMachine.ecore#//StateMachine/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName" name="stateMachineName">
+          <referredEClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier" referredTxTypedModelNode="Tp.HierarchicalStateMachine2FlatStateMachine.hier">
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine" isRoot="true" name="hierarchicalStateMachine" outgoing="E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//StateMachine"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat" referredTxTypedModelNode="Tp.HierarchicalStateMachine2FlatStateMachine.flat">
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine" isRoot="true" name="flatStateMachine" outgoing="E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//StateMachine"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+    </ownedRelDiagrams>
+    <ownedRelDiagrams xmi:id="R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition" name="HierachicalTransition2FlatTransition" isTop="true">
+      <comments>Map each hierarchical Transition to a Flat Transition in the corresponding StateMachine
+for each combination of possible leaf end states</comments>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="FlatStateMachine.ecore#//Transition/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="HierarchicalStateMachine.ecore#//Transition/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName" name="transitionName">
+          <referredEClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafFromState" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.leafState" name="leafFromState">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafToState" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.leafState" name="leafToState">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternExpressionNode" xmi:id="X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..735140798">
+          <initExpressionLines>this.getLeafStates(hierarchicalFromState)->includes(leafFromState)</initExpressionLines>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternExpressionNode" xmi:id="X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..1258632478">
+          <initExpressionLines>this.getLeafStates(hierarchicalToState)->includes(leafToState)</initExpressionLines>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier" referredTxTypedModelNode="Tp.HierarchicalStateMachine2FlatStateMachine.hier">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalFromState">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="HierarchicalStateMachine.ecore#//Transition/fromState"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="HierarchicalStateMachine.ecore#//StateMachine/ownedTransitions"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalToState">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="HierarchicalStateMachine.ecore#//Transition/toState"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition" isRoot="true" name="hierarchicalTransition" outgoing="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//Transition"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalFromState" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState" name="hierarchicalFromState">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine" name="hierarchicalStateMachine" outgoing="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//StateMachine"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalToState" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState" name="hierarchicalToState">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat" referredTxTypedModelNode="Tp.HierarchicalStateMachine2FlatStateMachine.flat">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="FlatStateMachine.ecore#//Transition/fromState"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="FlatStateMachine.ecore#//StateMachine/ownedTransitions"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState" source="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition" target="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="FlatStateMachine.ecore#//Transition/toState"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition" isRoot="true" name="flatTransition" outgoing="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//Transition"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.flatState" name="flatFromState">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.flatStateMachine" name="flatStateMachine" outgoing="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//StateMachine"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState" incoming="E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.flatState" name="flatToState">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelInvocationNodes xmi:id="V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine" isThen="false" referredRelDiagram="R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine">
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine"/>
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.flatStateMachine" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine"/>
+      </ownedRelInvocationNodes>
+      <ownedRelInvocationNodes xmi:id="V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~" isThen="false" referredRelDiagram="R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState">
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.leafState" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafFromState" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState"/>
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.flatState" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState"/>
+      </ownedRelInvocationNodes>
+      <ownedRelInvocationNodes xmi:id="V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~" isThen="false" referredRelDiagram="R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState">
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.leafState" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafToState" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState"/>
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.flatState" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState"/>
+      </ownedRelInvocationNodes>
+    </ownedRelDiagrams>
+    <ownedRelDiagrams xmi:id="R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState" name="LeafState2FlatState" isTop="true">
+      <comments>Map each Leaf State to a Flat State in the corresponding StateMachine.</comments>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName" source="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState" target="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="FlatStateMachine.ecore#//State/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName" source="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState" target="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="HierarchicalStateMachine.ecore#//State/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName" incoming="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName" name="stateName">
+          <referredEClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier" referredTxTypedModelNode="Tp.HierarchicalStateMachine2FlatStateMachine.hier">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState" source="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine" target="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="HierarchicalStateMachine.ecore#//StateMachine/ownedStates"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState" incoming="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState" isRoot="true" name="leafState" outgoing="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine" name="hierarchicalStateMachine" outgoing="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState">
+          <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//StateMachine"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternExpressionNode" xmi:id="X.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.645304190">
+          <initExpressionLines>leafState.nestedStates->isEmpty()</initExpressionLines>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelDomainNodes xmi:id="D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat" referredTxTypedModelNode="Tp.HierarchicalStateMachine2FlatStateMachine.flat">
+        <ownedRelPatternEdges xmi:id="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState" source="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine" target="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState">
+          <referredEStructuralFeature xsi:type="ecore:EReference" href="FlatStateMachine.ecore#//StateMachine/ownedStates"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState" incoming="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState" isRoot="true" name="flatState" outgoing="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//State"/>
+        </ownedRelPatternNodes>
+        <ownedRelPatternNodes xsi:type="umlx:RelPatternClassNode" xmi:id="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine" invokingRelInvocationEdges="A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.flatStateMachine" name="flatStateMachine" outgoing="E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState">
+          <referredEClassifier xsi:type="ecore:EClass" href="FlatStateMachine.ecore#//StateMachine"/>
+        </ownedRelPatternNodes>
+      </ownedRelDomainNodes>
+      <ownedRelInvocationNodes xmi:id="V.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine" isThen="false" referredRelDiagram="R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine">
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine"/>
+        <ownedRelInvocationEdges xmi:id="A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.flatStateMachine" invokingRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine" referredRelPatternNode="C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine"/>
+      </ownedRelInvocationNodes>
+    </ownedRelDiagrams>
+    <ownedTxImportNodes xmi:id="I.HierarchicalStateMachine2FlatStateMachine.hierMM" name="hierMM" uri="HierarchicalStateMachine.ecore#/">
+      <comments>*****************************************************************************
+Copyright (c) 2007,2008 Tata Consultancy Services and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+TCS - initial implementation for ModelMorf
+E.D.Willink - alignment with evolved specification
+E.D.Willink - rename / comment
+*****************************************************************************</comments>
+    </ownedTxImportNodes>
+    <ownedTxImportNodes xmi:id="I.HierarchicalStateMachine2FlatStateMachine.flatMM" name="flatMM" uri="FlatStateMachine.ecore#/"/>
+    <ownedTxQueryNodes xmi:id="Q.HierarchicalStateMachine2FlatStateMachine.getLeafStates..hierarchicalState" name="getLeafStates" isMany="true">
+      <comments>Return the leafStates of a given hierarchicalState.</comments>
+      <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+      <initExpressionLines>hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())</initExpressionLines>
+      <ownedTxParameterNodes xmi:id="Qp.HierarchicalStateMachine2FlatStateMachine.getLeafStates.hierarchicalState" name="hierarchicalState">
+        <referredEClassifier xsi:type="ecore:EClass" href="HierarchicalStateMachine.ecore#//State"/>
+      </ownedTxParameterNodes>
+    </ownedTxQueryNodes>
+    <ownedTxTypedModelNodes xmi:id="Tp.HierarchicalStateMachine2FlatStateMachine.hier" name="hier" check="true">
+      <ownedTxPackageNodes xmi:id="U.HierarchicalStateMachine2FlatStateMachine.hier.HierarchicalStateMachine">
+        <referredEPackage href="HierarchicalStateMachine.ecore#/"/>
+      </ownedTxPackageNodes>
+    </ownedTxTypedModelNodes>
+    <ownedTxTypedModelNodes xmi:id="Tp.HierarchicalStateMachine2FlatStateMachine.flat" name="flat" check="true" enforce="true">
+      <ownedTxPackageNodes xmi:id="U.HierarchicalStateMachine2FlatStateMachine.flat.FlatStateMachine">
+        <referredEPackage href="FlatStateMachine.ecore#/"/>
+      </ownedTxPackageNodes>
+    </ownedTxTypedModelNodes>
+  </ownedTxDiagrams>
+</umlx:UMLXModel>

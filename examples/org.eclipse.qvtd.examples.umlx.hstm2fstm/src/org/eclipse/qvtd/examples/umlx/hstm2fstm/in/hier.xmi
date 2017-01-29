@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hstm:StateMachine
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:hstm="http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine HierarchicalStateMachine.ecore"
+    name="sm">
+  <ownedStates
+      outTransitions="//@ownedTransitions.0"
+      name="s1"/>
+  <ownedStates
+      inTransitions="//@ownedTransitions.0"
+      name="s2"/>
+  <ownedTransitions
+      fromState="//@ownedStates.0"
+      toState="//@ownedStates.1"
+      name="t12"/>
+</hstm:StateMachine>

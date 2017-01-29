@@ -40,6 +40,10 @@
 		<zip destfile="zips/qvtr/reltocore.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.reltocore">
 			<patternset refid="qvtr.excludes"/>
 		</zip>
+		<mkdir dir="zips/umlx"/>
+		<zip destfile="zips/umlx/hstm2fstm.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.umlx.hstm2fstm">
+			<patternset refid="qvtr2.excludes"/>
+		</zip>
 		<antcall target="refresh"/>
 	</target>
 

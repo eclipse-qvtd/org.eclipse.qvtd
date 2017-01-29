@@ -71,6 +71,15 @@
             icon="$nl$/icons/QVTrModelFile.gif">
          <description>%RelToCore_description</description>
       </wizard>
+      <wizard id="org.eclipse.qvtd.examples.umlx.hstm2fstm"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+            project="true"
+            name="%UMLX_HSTM2FSTM_name"
+            icon="$nl$/icons/UMLXModelFile.gif">
+         <description>%UMLX_HSTM2FSTM_description</description>
+      </wizard>
    </extension>
    <extension point="org.eclipse.emf.common.ui.examples">
       <example id="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
@@ -90,6 +99,15 @@
                description="%QVTr_HSTM2FSTM_description"/>
          <fileToOpen location="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"
                editorID="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"/>
+      </example>
+      <example id="org.eclipse.qvtd.examples.umlx.hstm2fstm"
+            wizardID="org.eclipse.qvtd.examples.umlx.hstm2fstm"
+            pageImage="$nl$/icons/UMLXModelFile.gif">
+         <projectDescriptor name="org.eclipse.qvtd.examples.umlx.hstm2fstm"
+               contentURI="zips/umlx/hstm2fstm.zip"
+               description="%UMLX_HSTM2FSTM_description"/>
+         <!--fileToOpen location="org.eclipse.qvtd.examples.umlx.hstm2fstm/src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"
+               editorID="org.eclipse.qvtd.xtext.umlx.QVTrelation"/-->
       </example>
    </extension>
 
