@@ -68,7 +68,7 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static class Internal extends PivotUtilInternal
 	{
-		public static @NonNull List<@NonNull ? extends Operation> getOwnedOperationsList(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		public static @NonNull List<@NonNull Operation> getOwnedOperationsList(org.eclipse.ocl.pivot.@NonNull Class asClass) {
 			return ClassUtil.nullFree(asClass.getOwnedOperations());
 		}
 
