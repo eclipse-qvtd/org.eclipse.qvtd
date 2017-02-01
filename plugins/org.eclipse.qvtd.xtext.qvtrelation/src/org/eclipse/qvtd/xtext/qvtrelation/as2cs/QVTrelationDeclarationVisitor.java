@@ -554,7 +554,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		boolean isEnforceable = asRelationDomain.isIsEnforceable();
 		csDomain.setIsCheckonly(false); //isCheckable && !isEnforceable);
 		csDomain.setIsEnforce(isEnforceable);// && !isCheckable);
-		context.refreshList(csDomain.getOwnedPattern(), context.visitDeclarations(DomainPatternCS.class, asRelationDomain.getPattern(), null));
+		context.refreshList(csDomain.getOwnedPatterns(), context.visitDeclarations(DomainPatternCS.class, asRelationDomain.getPattern(), null));
 		context.refreshList(csDomain.getOwnedDefaultValues(), context.visitDeclarations(DefaultValueCS.class, asRelationDomain.getDefaultAssignment(), null));
 		//		context.refreshList(csDomain.getOwnedImplementedBy(), context.visitDeclarations(ExpCS.class, asRelationDomain.getImplementedBy(), null));
 		return csDomain;

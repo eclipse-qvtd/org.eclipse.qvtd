@@ -78,6 +78,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
@@ -312,7 +313,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
 		List<DomainPattern> asPatterns = pivotElement.getPattern();
-		context.refreshPivotList(DomainPattern.class, asPatterns, csElement.getOwnedPattern());
+		context.refreshPivotList(DomainPattern.class, asPatterns, csElement.getOwnedPatterns());
 		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getOwnedDefaultValues());
 		if (asPatterns.size() > 0) {
 			List<Variable> rootVariables = new ArrayList<>();
@@ -400,21 +401,38 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
-		@NonNull DomainPattern asPattern = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, null);
-		List<DomainPattern> asPatterns = new ArrayList<>();
-		asPatterns.add(asPattern);
-		PivotUtilInternal.refreshList(pivotElement.getPattern(), asPatterns);
+		List<DomainPattern> asPatterns = pivotElement.getPattern();
+		context.refreshPivotList(DomainPattern.class, asPatterns, csElement.getOwnedPatterns());
+		if (asPatterns.size() > 0) {
+			List<Variable> rootVariables = new ArrayList<>();
+			for (DomainPattern asPattern : asPatterns) {
+				if (asPattern != null) {
+					//					List<@NonNull Variable> boundVariables = new ArrayList<>();
+					TemplateExp asTemplate = asPattern.getTemplateExpression();
+					if (asTemplate != null) {
+						rootVariables.add(asTemplate.getBindsTo());
+						//						gatherBoundVariables(boundVariables, asTemplate);
+					}
+					//					PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
+				}
+			}
+			PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
+		}
+		else {
+			pivotElement.getRootVariable().clear();
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitPrimitiveTypeDomainPatternCS(@NonNull PrimitiveTypeDomainPatternCS csElement) {
+		@NonNull DomainPattern asPattern = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, csElement);
 		@NonNull TemplateExp template = context.refreshModelElement(TemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null);
 		asPattern.setTemplateExpression(template);
 		@NonNull TemplateVariable rootVariable = context.refreshModelElement(TemplateVariable.class, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, null);
 		context.refreshName(rootVariable, csElement.getName());
 		template.setBindsTo(rootVariable);
-		List<Variable> rootVariables = new ArrayList<>();
-		rootVariables.add(rootVariable);
-		PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
-		List<Variable> pivotVariables = new ArrayList<>();
-		pivotVariables.add(rootVariable);
-		PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);
+		asPattern.getBindsTo().add(rootVariable);
 		return null;
 	}
 
@@ -496,7 +514,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		List<@NonNull Variable> specialVariables = new ArrayList<>();
 		for (@NonNull AbstractDomainCS csAbstractDomain : ClassUtil.nullFree(csElement.getOwnedDomains())) {
 			if (csAbstractDomain instanceof DomainCS) {
-				for (@NonNull DomainPatternCS csDomainPatternCS : ClassUtil.nullFree(((DomainCS)csAbstractDomain).getOwnedPattern())) {
+				for (@NonNull DomainPatternCS csDomainPatternCS : ClassUtil.nullFree(((DomainCS)csAbstractDomain).getOwnedPatterns())) {
 					DomainPattern asPattern = PivotUtil.getPivot(DomainPattern.class, csDomainPatternCS);
 					List<@NonNull Variable> boundVariables = new ArrayList<>();
 					TemplateCS csTemplate = csDomainPatternCS.getOwnedTemplate();

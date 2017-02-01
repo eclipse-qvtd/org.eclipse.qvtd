@@ -10,9 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -28,7 +27,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -37,6 +35,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS;
@@ -200,26 +199,22 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 	}
 
 	@Override
-	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
-		RelationDomain pivotElement = PivotUtil.getPivot(RelationDomain.class, csElement);
+	public @Nullable Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
+		// TODO Auto-generated method stub
+		return super.visitPrimitiveTypeDomainCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitPrimitiveTypeDomainPatternCS(@NonNull PrimitiveTypeDomainPatternCS csElement) {
+		DomainPattern pivotElement = PivotUtil.getPivot(DomainPattern.class, csElement);
 		if (pivotElement != null) {
 			Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
-			List<Variable> asRootVariables = pivotElement.getRootVariable();
-			if (asRootVariables.size() > 0) {
-				Variable asRootVariable = asRootVariables.get(0);
-				if (asRootVariable != null) {
-					context.setType(asRootVariable, type, true);
-				}
-			}
-			List<DomainPattern> asPatterns = pivotElement.getPattern();
-			if (asPatterns.size() > 0) {
-				DomainPattern pattern = asPatterns.get(0);
-				if (pattern != null) {
-					TemplateExp template = pattern.getTemplateExpression();
-					if (template instanceof ObjectTemplateExp) {
-						((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
-					}
-				}
+			TemplateExp template = pivotElement.getTemplateExpression();
+			Variable rootVariable = template.getBindsTo();
+			assert rootVariable != null;
+			context.setType(rootVariable, type, true);
+			if (template instanceof ObjectTemplateExp) {
+				((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
 			}
 		}
 		return null;

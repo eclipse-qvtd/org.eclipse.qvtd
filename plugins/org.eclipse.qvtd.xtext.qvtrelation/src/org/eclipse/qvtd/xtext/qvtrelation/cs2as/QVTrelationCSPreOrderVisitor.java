@@ -30,7 +30,6 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -41,6 +40,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPreOrderVisitor;
@@ -186,9 +186,9 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 		}
 	}
 
-	public static class PrimitiveTypeDomainCompletion extends SingleContinuation<PrimitiveTypeDomainCS>
+	public static class PrimitiveTypeDomainPatternCompletion extends SingleContinuation<PrimitiveTypeDomainPatternCS>
 	{
-		public PrimitiveTypeDomainCompletion(@NonNull CS2ASConversion context, @NonNull PrimitiveTypeDomainCS csElement) {
+		public PrimitiveTypeDomainPatternCompletion(@NonNull CS2ASConversion context, @NonNull PrimitiveTypeDomainPatternCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -203,20 +203,16 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			RelationDomain pivotElement = PivotUtil.getPivot(RelationDomain.class, csElement);
-			if (pivotElement != null) {
+			DomainPattern domainPattern = PivotUtil.getPivot(DomainPattern.class, csElement);
+			if (domainPattern != null) {
 				TypedRefCS csTypeRef = csElement.getOwnedType();
 				if (csTypeRef != null) {
-					for (DomainPattern domainPattern : pivotElement.getPattern()) {
-						if (domainPattern != null) {
-							TemplateExp templateExpression = domainPattern.getTemplateExpression();
-							if (templateExpression != null) {
-								context.refreshRequiredType(templateExpression, csTypeRef);
-								Variable bindsTo = templateExpression.getBindsTo();
-								if (bindsTo != null) {
-									context.refreshRequiredType(bindsTo, csTypeRef);
-								}
-							}
+					TemplateExp templateExpression = domainPattern.getTemplateExpression();
+					if (templateExpression != null) {
+						context.refreshRequiredType(templateExpression, csTypeRef);
+						Variable bindsTo = templateExpression.getBindsTo();
+						if (bindsTo != null) {
+							context.refreshRequiredType(bindsTo, csTypeRef);
 						}
 					}
 				}
@@ -255,7 +251,12 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 	@Override
 	public @Nullable Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
-		return new PrimitiveTypeDomainCompletion(context, csElement);
+		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitPrimitiveTypeDomainPatternCS(@NonNull PrimitiveTypeDomainPatternCS csElement) {
+		return new PrimitiveTypeDomainPatternCompletion(context, csElement);
 	}
 
 	@Override

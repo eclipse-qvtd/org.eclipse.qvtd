@@ -128,7 +128,8 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			PrimitiveTypeDomainCSElements a = f.getPrimitiveTypeDomainCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5());
+			setNoSpaceLineWrap(c, a.getCommaKeyword_3_0());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		}
 		{
 			QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();
