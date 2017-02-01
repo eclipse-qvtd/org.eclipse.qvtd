@@ -30,7 +30,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCS.ecore#//DomainCS/isEnforce"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DomainCS/modelId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCS.ecore#//DomainCS/isReplace"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DomainCS/ownedPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DomainCS/ownedPatterns"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DomainCS/ownedDefaultValues"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DomainCS/ownedImplementedBy"/>
     </genClasses>
@@ -59,7 +59,10 @@
     <genClasses ecoreClass="QVTrelationCS.ecore#//PredicateCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//PredicateCS/ownedCondition"/>
     </genClasses>
-    <genClasses ecoreClass="QVTrelationCS.ecore#//PrimitiveTypeDomainCS"/>
+    <genClasses ecoreClass="QVTrelationCS.ecore#//PrimitiveTypeDomainCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//PrimitiveTypeDomainCS/ownedPatterns"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTrelationCS.ecore#//PrimitiveTypeDomainPatternCS"/>
     <genClasses ecoreClass="QVTrelationCS.ecore#//PropertyTemplateCS">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//PropertyTemplateCS/owningObjectTemplate"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//PropertyTemplateCS/propertyId"/>

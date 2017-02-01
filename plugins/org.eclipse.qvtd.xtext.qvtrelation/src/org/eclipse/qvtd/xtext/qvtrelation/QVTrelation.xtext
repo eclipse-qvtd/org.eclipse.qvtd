@@ -44,7 +44,7 @@ CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
 DefaultValueCS: propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 
 DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] 
-			ownedPattern+=DomainPatternCS (',' ownedPattern+=DomainPatternCS)*
+			ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)*
              ('implementedby' implementedBy=UnrestrictedName)?
              ('default_values' '{' (ownedDefaultValues+=DefaultValueCS)+ '}')?
              ';';
@@ -72,7 +72,9 @@ ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 PredicateCS: ownedCondition=ExpCS ';';
 
-PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+PrimitiveTypeDomainCS: 'primitive' 'domain' ownedPatterns+=PrimitiveTypeDomainPatternCS (',' ownedPatterns+=PrimitiveTypeDomainPatternCS)* ';';
+
+PrimitiveTypeDomainPatternCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
 	| ('opposite' '(' ownedOppositePropertyId=PathNameCS ')'))
