@@ -23,7 +23,7 @@
   </genAnnotations>
   <foreignModel>UMLX.ecore</foreignModel>
   <genPackages prefix="UMLX" basePackage="org.eclipse.qvtd" disposableProviderFactory="true"
-      ecorePackage="UMLX.ecore#/">
+      contentTypeIdentifier="org.eclipse.qvtd.umlx" ecorePackage="UMLX.ecore#/">
     <genClasses ecoreClass="UMLX.ecore#//RelDiagram">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelDiagram/isTop"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDiagram/ownedRelDomainNodes"/>

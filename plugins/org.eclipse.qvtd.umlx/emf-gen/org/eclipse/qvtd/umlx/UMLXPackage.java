@@ -56,6 +56,14 @@ public interface UMLXPackage extends EPackage {
 	String eNS_PREFIX = "umlx";
 
 	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "org.eclipse.qvtd.umlx";
+
+	/**
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -7,7 +7,7 @@
 <plugin>
    <extension point="org.eclipse.emf.ecore.content_parser">
       <parser
-            contentTypeIdentifier="org.eclipse.ocl.oclas"
+            contentTypeIdentifier="org.eclipse.qvtd.umlx"
             class="org.eclipse.qvtd.umlx.resource.UMLXResourceFactoryImpl"/>
    </extension>
 
