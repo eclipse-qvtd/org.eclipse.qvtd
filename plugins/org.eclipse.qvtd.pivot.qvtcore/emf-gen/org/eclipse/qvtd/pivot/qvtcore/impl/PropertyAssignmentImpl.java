@@ -338,7 +338,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ java.lang.@Nullable Boolean isPartial = this.isIsPartial();
+				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
 				final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isPartial);
 				if (not == null) {
 					throw new InvalidValueException("Null if condition");
@@ -448,7 +448,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 		else {
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
-			final /*@NonInvalid*/ java.lang.@Nullable Boolean isImplicit = targetProperty.isIsImplicit();
+			final /*@NonInvalid*/ boolean isImplicit = targetProperty.isIsImplicit();
 			final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isImplicit);
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_PropertyAssignment_c_c_PropertyIsNotImplicit, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;

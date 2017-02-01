@@ -236,7 +236,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public String joinNames(final EList<String> names) {
 		/**
-		 * '{' + names->iterate(n; s : String[?] = '' |
+		 * '{' + names->iterate(n; s : String[1] = '' |
 		 *   if (s = '')
 		 *   then n
 		 *   else s + ';' + n
@@ -245,7 +245,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
-		/*@NonInvalid*/ java.lang.@Nullable String s = QVTimperativeTables.STR_;
+		/*@NonInvalid*/ java.lang.@NonNull String s = QVTimperativeTables.STR_;
 		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
 		/*@Thrown*/ java.lang.@Nullable String iterate;
 		while (true) {
@@ -258,14 +258,14 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
-			final /*@NonInvalid*/ boolean eq = QVTimperativeTables.STR_.equals(s);
-			/*@Thrown*/ java.lang.@NonNull String symbol_0;
+			final /*@NonInvalid*/ boolean eq = s.equals(QVTimperativeTables.STR_);
+			/*@NonInvalid*/ java.lang.@NonNull String symbol_0;
 			if (eq) {
 				symbol_0 = n;
 			}
 			else {
-				final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
-				final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
+				final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
+				final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
 				symbol_0 = sum_0;
 			}
 			//
