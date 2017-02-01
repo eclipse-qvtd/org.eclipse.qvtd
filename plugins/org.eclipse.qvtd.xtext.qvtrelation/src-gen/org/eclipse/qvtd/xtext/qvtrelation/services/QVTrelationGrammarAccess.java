@@ -335,12 +335,12 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cModelIdAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cModelIdTypedModelCrossReference_2_0 = (CrossReference)cModelIdAssignment_2.eContents().get(0);
 		private final RuleCall cModelIdTypedModelUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cModelIdTypedModelCrossReference_2_0.eContents().get(1);
-		private final Assignment cOwnedPatternAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOwnedPatternDomainPatternCSParserRuleCall_3_0 = (RuleCall)cOwnedPatternAssignment_3.eContents().get(0);
+		private final Assignment cOwnedPatternsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOwnedPatternsDomainPatternCSParserRuleCall_3_0 = (RuleCall)cOwnedPatternsAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cOwnedPatternAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cOwnedPatternDomainPatternCSParserRuleCall_4_1_0 = (RuleCall)cOwnedPatternAssignment_4_1.eContents().get(0);
+		private final Assignment cOwnedPatternsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cOwnedPatternsDomainPatternCSParserRuleCall_4_1_0 = (RuleCall)cOwnedPatternsAssignment_4_1.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cImplementedbyKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Assignment cImplementedByAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
@@ -355,13 +355,13 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DomainCS:
 		//	(isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain'
-		//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern+=DomainPatternCS (',' ownedPattern+=DomainPatternCS)*
+		//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)*
 		//	('implementedby' implementedBy=UnrestrictedName)? ('default_values' '{' ownedDefaultValues+=DefaultValueCS+ '}')?
 		//	';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//(isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName]
-		//ownedPattern+=DomainPatternCS (',' ownedPattern+=DomainPatternCS)* ('implementedby' implementedBy=UnrestrictedName)?
+		//ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)* ('implementedby' implementedBy=UnrestrictedName)?
 		//('default_values' '{' ownedDefaultValues+=DefaultValueCS+ '}')? ';'
 		public Group getGroup() { return cGroup; }
 
@@ -395,23 +395,23 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getModelIdTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cModelIdTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
 
-		//ownedPattern+=DomainPatternCS
-		public Assignment getOwnedPatternAssignment_3() { return cOwnedPatternAssignment_3; }
+		//ownedPatterns+=DomainPatternCS
+		public Assignment getOwnedPatternsAssignment_3() { return cOwnedPatternsAssignment_3; }
 
 		//DomainPatternCS
-		public RuleCall getOwnedPatternDomainPatternCSParserRuleCall_3_0() { return cOwnedPatternDomainPatternCSParserRuleCall_3_0; }
+		public RuleCall getOwnedPatternsDomainPatternCSParserRuleCall_3_0() { return cOwnedPatternsDomainPatternCSParserRuleCall_3_0; }
 
-		//(',' ownedPattern+=DomainPatternCS)*
+		//(',' ownedPatterns+=DomainPatternCS)*
 		public Group getGroup_4() { return cGroup_4; }
 
 		//','
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
-		//ownedPattern+=DomainPatternCS
-		public Assignment getOwnedPatternAssignment_4_1() { return cOwnedPatternAssignment_4_1; }
+		//ownedPatterns+=DomainPatternCS
+		public Assignment getOwnedPatternsAssignment_4_1() { return cOwnedPatternsAssignment_4_1; }
 
 		//DomainPatternCS
-		public RuleCall getOwnedPatternDomainPatternCSParserRuleCall_4_1_0() { return cOwnedPatternDomainPatternCSParserRuleCall_4_1_0; }
+		public RuleCall getOwnedPatternsDomainPatternCSParserRuleCall_4_1_0() { return cOwnedPatternsDomainPatternCSParserRuleCall_4_1_0; }
 
 		//('implementedby' implementedBy=UnrestrictedName)?
 		public Group getGroup_5() { return cGroup_5; }
@@ -829,18 +829,20 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPrimitiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cDomainKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cOwnedTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_4_0 = (RuleCall)cOwnedTypeAssignment_4.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOwnedPatternsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_2_0 = (RuleCall)cOwnedPatternsAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cOwnedPatternsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_3_1_0 = (RuleCall)cOwnedPatternsAssignment_3_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 
 		//PrimitiveTypeDomainCS:
-		//	'primitive' 'domain' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+		//	'primitive' 'domain' ownedPatterns+=PrimitiveTypeDomainPatternCS (',' ownedPatterns+=PrimitiveTypeDomainPatternCS)*
+		//	';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'primitive' 'domain' name=UnrestrictedName ':' ownedType=TypeExpCS ';'
+		//'primitive' 'domain' ownedPatterns+=PrimitiveTypeDomainPatternCS (',' ownedPatterns+=PrimitiveTypeDomainPatternCS)* ';'
 		public Group getGroup() { return cGroup; }
 
 		//'primitive'
@@ -849,23 +851,58 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//'domain'
 		public Keyword getDomainKeyword_1() { return cDomainKeyword_1; }
 
-		//name=UnrestrictedName
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		//ownedPatterns+=PrimitiveTypeDomainPatternCS
+		public Assignment getOwnedPatternsAssignment_2() { return cOwnedPatternsAssignment_2; }
 
-		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_2_0() { return cNameUnrestrictedNameParserRuleCall_2_0; }
+		//PrimitiveTypeDomainPatternCS
+		public RuleCall getOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_2_0() { return cOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_2_0; }
 
-		//':'
-		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
+		//(',' ownedPatterns+=PrimitiveTypeDomainPatternCS)*
+		public Group getGroup_3() { return cGroup_3; }
 
-		//ownedType=TypeExpCS
-		public Assignment getOwnedTypeAssignment_4() { return cOwnedTypeAssignment_4; }
+		//','
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 
-		//TypeExpCS
-		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_4_0() { return cOwnedTypeTypeExpCSParserRuleCall_4_0; }
+		//ownedPatterns+=PrimitiveTypeDomainPatternCS
+		public Assignment getOwnedPatternsAssignment_3_1() { return cOwnedPatternsAssignment_3_1; }
+
+		//PrimitiveTypeDomainPatternCS
+		public RuleCall getOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_3_1_0() { return cOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_3_1_0; }
 
 		//';'
-		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+	}
+
+	public class PrimitiveTypeDomainPatternCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.PrimitiveTypeDomainPatternCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cOwnedTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_2_0 = (RuleCall)cOwnedTypeAssignment_2.eContents().get(0);
+
+		//PrimitiveTypeDomainPatternCS:
+		//	name=UnrestrictedName ':' ownedType=TypeExpCS;
+		@Override public ParserRule getRule() { return rule; }
+
+		//name=UnrestrictedName ':' ownedType=TypeExpCS
+		public Group getGroup() { return cGroup; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+
+		//UnrestrictedName
+		public RuleCall getNameUnrestrictedNameParserRuleCall_0_0() { return cNameUnrestrictedNameParserRuleCall_0_0; }
+
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
+		//ownedType=TypeExpCS
+		public Assignment getOwnedTypeAssignment_2() { return cOwnedTypeAssignment_2; }
+
+		//TypeExpCS
+		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_2_0() { return cOwnedTypeTypeExpCSParserRuleCall_2_0; }
 	}
 
 	public class PropertyTemplateCSElements extends AbstractParserRuleElementFinder {
@@ -1870,6 +1907,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	private final ParamDeclarationCSElements pParamDeclarationCS;
 	private final PredicateCSElements pPredicateCS;
 	private final PrimitiveTypeDomainCSElements pPrimitiveTypeDomainCS;
+	private final PrimitiveTypeDomainPatternCSElements pPrimitiveTypeDomainPatternCS;
 	private final PropertyTemplateCSElements pPropertyTemplateCS;
 	private final QueryCSElements pQueryCS;
 	private final RelationCSElements pRelationCS;
@@ -1917,6 +1955,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pParamDeclarationCS = new ParamDeclarationCSElements();
 		this.pPredicateCS = new PredicateCSElements();
 		this.pPrimitiveTypeDomainCS = new PrimitiveTypeDomainCSElements();
+		this.pPrimitiveTypeDomainPatternCS = new PrimitiveTypeDomainPatternCSElements();
 		this.pPropertyTemplateCS = new PropertyTemplateCSElements();
 		this.pQueryCS = new QueryCSElements();
 		this.pRelationCS = new RelationCSElements();
@@ -2016,7 +2055,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//DomainCS:
 	//	(isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain'
-	//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern+=DomainPatternCS (',' ownedPattern+=DomainPatternCS)*
+	//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)*
 	//	('implementedby' implementedBy=UnrestrictedName)? ('default_values' '{' ownedDefaultValues+=DefaultValueCS+ '}')?
 	//	';';
 	public DomainCSElements getDomainCSAccess() {
@@ -2102,13 +2141,24 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveTypeDomainCS:
-	//	'primitive' 'domain' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+	//	'primitive' 'domain' ownedPatterns+=PrimitiveTypeDomainPatternCS (',' ownedPatterns+=PrimitiveTypeDomainPatternCS)*
+	//	';';
 	public PrimitiveTypeDomainCSElements getPrimitiveTypeDomainCSAccess() {
 		return pPrimitiveTypeDomainCS;
 	}
 
 	public ParserRule getPrimitiveTypeDomainCSRule() {
 		return getPrimitiveTypeDomainCSAccess().getRule();
+	}
+
+	//PrimitiveTypeDomainPatternCS:
+	//	name=UnrestrictedName ':' ownedType=TypeExpCS;
+	public PrimitiveTypeDomainPatternCSElements getPrimitiveTypeDomainPatternCSAccess() {
+		return pPrimitiveTypeDomainPatternCS;
+	}
+
+	public ParserRule getPrimitiveTypeDomainPatternCSRule() {
+		return getPrimitiveTypeDomainPatternCSAccess().getRule();
 	}
 
 	//PropertyTemplateCS:

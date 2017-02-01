@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -28,16 +29,16 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getModelId <em>Model Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsReplace <em>Is Replace</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPatterns <em>Owned Patterns</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedDefaultValues <em>Owned Default Values</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedImplementedBy <em>Owned Implemented By</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS()
- * @model
+ * @model superTypes="org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS org.eclipse.ocl.pivot.Nameable"
  * @generated
  */
-public interface DomainCS extends AbstractDomainCS {
+public interface DomainCS extends AbstractDomainCS, Nameable {
 	/**
 	 * Returns the value of the '<em><b>Implemented By</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -169,20 +170,20 @@ public interface DomainCS extends AbstractDomainCS {
 	void setIsReplace(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Pattern</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Patterns</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Pattern</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Patterns</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Pattern</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_OwnedPattern()
+	 * @return the value of the '<em>Owned Patterns</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_OwnedPatterns()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<DomainPatternCS> getOwnedPattern();
+	EList<DomainPatternCS> getOwnedPatterns();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Default Values</b></em>' containment reference list.

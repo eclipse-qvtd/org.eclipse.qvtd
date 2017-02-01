@@ -30,6 +30,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.*;
 import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
@@ -115,7 +116,6 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				AbstractDomainCS abstractDomainCS = (AbstractDomainCS)theEObject;
 				T result = caseAbstractDomainCS(abstractDomainCS);
 				if (result == null) result = caseModelElementCS(abstractDomainCS);
-				if (result == null) result = caseNameable(abstractDomainCS);
 				if (result == null) result = casePivotableElementCS(abstractDomainCS);
 				if (result == null) result = caseElementCS(abstractDomainCS);
 				if (result == null) result = casePivotable(abstractDomainCS);
@@ -154,8 +154,8 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				DomainCS domainCS = (DomainCS)theEObject;
 				T result = caseDomainCS(domainCS);
 				if (result == null) result = caseAbstractDomainCS(domainCS);
-				if (result == null) result = caseModelElementCS(domainCS);
 				if (result == null) result = caseNameable(domainCS);
+				if (result == null) result = caseModelElementCS(domainCS);
 				if (result == null) result = casePivotableElementCS(domainCS);
 				if (result == null) result = caseElementCS(domainCS);
 				if (result == null) result = casePivotable(domainCS);
@@ -267,15 +267,26 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS: {
 				PrimitiveTypeDomainCS primitiveTypeDomainCS = (PrimitiveTypeDomainCS)theEObject;
 				T result = casePrimitiveTypeDomainCS(primitiveTypeDomainCS);
-				if (result == null) result = caseTemplateVariableCS(primitiveTypeDomainCS);
 				if (result == null) result = caseAbstractDomainCS(primitiveTypeDomainCS);
-				if (result == null) result = caseNamedElementCS(primitiveTypeDomainCS);
 				if (result == null) result = caseModelElementCS(primitiveTypeDomainCS);
-				if (result == null) result = caseNameable(primitiveTypeDomainCS);
 				if (result == null) result = casePivotableElementCS(primitiveTypeDomainCS);
 				if (result == null) result = caseElementCS(primitiveTypeDomainCS);
 				if (result == null) result = casePivotable(primitiveTypeDomainCS);
 				if (result == null) result = caseVisitableCS(primitiveTypeDomainCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_PATTERN_CS: {
+				PrimitiveTypeDomainPatternCS primitiveTypeDomainPatternCS = (PrimitiveTypeDomainPatternCS)theEObject;
+				T result = casePrimitiveTypeDomainPatternCS(primitiveTypeDomainPatternCS);
+				if (result == null) result = caseTemplateVariableCS(primitiveTypeDomainPatternCS);
+				if (result == null) result = caseNamedElementCS(primitiveTypeDomainPatternCS);
+				if (result == null) result = caseModelElementCS(primitiveTypeDomainPatternCS);
+				if (result == null) result = caseNameable(primitiveTypeDomainPatternCS);
+				if (result == null) result = casePivotableElementCS(primitiveTypeDomainPatternCS);
+				if (result == null) result = caseElementCS(primitiveTypeDomainPatternCS);
+				if (result == null) result = casePivotable(primitiveTypeDomainPatternCS);
+				if (result == null) result = caseVisitableCS(primitiveTypeDomainPatternCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -731,6 +742,21 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVarDeclarationIdCS(VarDeclarationIdCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Type Domain Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Type Domain Pattern CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePrimitiveTypeDomainPatternCS(PrimitiveTypeDomainPatternCS object) {
 		return null;
 	}
 

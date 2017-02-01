@@ -43,7 +43,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getModelId <em>Model Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsReplace <em>Is Replace</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedPattern <em>Owned Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedPatterns <em>Owned Patterns</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedDefaultValues <em>Owned Default Values</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedImplementedBy <em>Owned Implemented By</em>}</li>
  * </ul>
@@ -142,14 +142,14 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	protected boolean isReplace = IS_REPLACE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnedPattern() <em>Owned Pattern</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedPatterns() <em>Owned Patterns</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedPattern()
+	 * @see #getOwnedPatterns()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DomainPatternCS> ownedPattern;
+	protected EList<DomainPatternCS> ownedPatterns;
 
 	/**
 	 * The cached value of the '{@link #getOwnedDefaultValues() <em>Owned Default Values</em>}' containment reference list.
@@ -327,12 +327,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EList<DomainPatternCS> getOwnedPattern() {
-		if (ownedPattern == null) {
-			ownedPattern = new EObjectContainmentEList<DomainPatternCS>(DomainPatternCS.class, this, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN);
+	public EList<DomainPatternCS> getOwnedPatterns() {
+		if (ownedPatterns == null) {
+			ownedPatterns = new EObjectContainmentEList<DomainPatternCS>(DomainPatternCS.class, this, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS);
 		}
-		return ownedPattern;
+		return ownedPatterns;
 	}
 
 	/**
@@ -411,8 +410,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				return ((InternalEList<?>)getOwnedPattern()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS:
+				return ((InternalEList<?>)getOwnedPatterns()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				return ((InternalEList<?>)getOwnedDefaultValues()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
@@ -440,8 +439,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 				return basicGetModelId();
 			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
 				return isIsReplace();
-			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				return getOwnedPattern();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS:
+				return getOwnedPatterns();
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				return getOwnedDefaultValues();
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
@@ -474,9 +473,9 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
 				setIsReplace((Boolean)newValue);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				getOwnedPattern().clear();
-				getOwnedPattern().addAll((Collection<? extends DomainPatternCS>)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS:
+				getOwnedPatterns().clear();
+				getOwnedPatterns().addAll((Collection<? extends DomainPatternCS>)newValue);
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				getOwnedDefaultValues().clear();
@@ -512,8 +511,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
 				setIsReplace(IS_REPLACE_EDEFAULT);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				getOwnedPattern().clear();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS:
+				getOwnedPatterns().clear();
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				getOwnedDefaultValues().clear();
@@ -543,8 +542,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 				return modelId != null;
 			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
 				return isReplace != IS_REPLACE_EDEFAULT;
-			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				return ownedPattern != null && !ownedPattern.isEmpty();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS:
+				return ownedPatterns != null && !ownedPatterns.isEmpty();
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				return ownedDefaultValues != null && !ownedDefaultValues.isEmpty();
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:

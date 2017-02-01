@@ -31,6 +31,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.*;
 import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
@@ -164,6 +165,10 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 				return createPrimitiveTypeDomainCSAdapter();
 			}
 			@Override
+			public Adapter casePrimitiveTypeDomainPatternCS(PrimitiveTypeDomainPatternCS object) {
+				return createPrimitiveTypeDomainPatternCSAdapter();
+			}
+			@Override
 			public Adapter casePropertyTemplateCS(PropertyTemplateCS object) {
 				return createPropertyTemplateCSAdapter();
 			}
@@ -220,12 +225,12 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementCSAdapter();
 			}
 			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
 			public Adapter caseExpCS(ExpCS object) {
 				return createExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
 			}
 			@Override
 			public Adapter caseNamedElementCS(NamedElementCS object) {
@@ -588,6 +593,20 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVarDeclarationIdCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS <em>Primitive Type Domain Pattern CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS
+	 * @generated
+	 */
+	public Adapter createPrimitiveTypeDomainPatternCSAdapter() {
 		return null;
 	}
 

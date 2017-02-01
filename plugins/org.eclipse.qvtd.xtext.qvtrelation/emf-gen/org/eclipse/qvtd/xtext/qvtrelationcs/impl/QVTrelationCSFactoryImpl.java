@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.xtext.qvtrelationcs.*;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS;
@@ -93,6 +94,7 @@ public class QVTrelationCSFactoryImpl extends EFactoryImpl implements QVTrelatio
 			case QVTrelationCSPackage.PATTERN_CS: return createPatternCS();
 			case QVTrelationCSPackage.PREDICATE_CS: return createPredicateCS();
 			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS: return createPrimitiveTypeDomainCS();
+			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_PATTERN_CS: return createPrimitiveTypeDomainPatternCS();
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS: return createPropertyTemplateCS();
 			case QVTrelationCSPackage.QUERY_CS: return createQueryCS();
 			case QVTrelationCSPackage.RELATION_CS: return createRelationCS();
@@ -312,6 +314,16 @@ public class QVTrelationCSFactoryImpl extends EFactoryImpl implements QVTrelatio
 	public VarDeclarationIdCS createVarDeclarationIdCS() {
 		VarDeclarationIdCSImpl varDeclarationIdCS = new VarDeclarationIdCSImpl();
 		return varDeclarationIdCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveTypeDomainPatternCS createPrimitiveTypeDomainPatternCS() {
+		PrimitiveTypeDomainPatternCSImpl primitiveTypeDomainPatternCS = new PrimitiveTypeDomainPatternCSImpl();
+		return primitiveTypeDomainPatternCS;
 	}
 
 	/**

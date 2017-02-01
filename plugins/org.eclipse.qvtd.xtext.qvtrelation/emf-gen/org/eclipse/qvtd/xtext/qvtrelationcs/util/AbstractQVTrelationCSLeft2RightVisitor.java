@@ -105,6 +105,11 @@ public abstract class AbstractQVTrelationCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainCS csElement) {
+		return visitAbstractDomainCS(csElement);
+	}
+
+	@Override
+	public @Nullable Element visitPrimitiveTypeDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainPatternCS csElement) {
 		return visitTemplateVariableCS(csElement);
 	}
 

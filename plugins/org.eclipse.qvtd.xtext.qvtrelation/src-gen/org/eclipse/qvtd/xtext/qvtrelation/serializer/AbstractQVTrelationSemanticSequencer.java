@@ -90,6 +90,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
@@ -521,6 +522,9 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS:
 				sequence_PrimitiveTypeDomainCS(context, (PrimitiveTypeDomainCS) semanticObject);
 				return;
+			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_PATTERN_CS:
+				sequence_PrimitiveTypeDomainPatternCS(context, (PrimitiveTypeDomainPatternCS) semanticObject);
+				return;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS:
 				sequence_PropertyTemplateCS(context, (PropertyTemplateCS) semanticObject);
 				return;
@@ -645,8 +649,8 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     (
 	 *         (isCheckonly?='checkonly' | isEnforce?='enforce')?
 	 *         modelId=[TypedModel|UnrestrictedName]
-	 *         ownedPattern+=DomainPatternCS
-	 *         ownedPattern+=DomainPatternCS*
+	 *         ownedPatterns+=DomainPatternCS
+	 *         ownedPatterns+=DomainPatternCS*
 	 *         implementedBy=UnrestrictedName?
 	 *         ownedDefaultValues+=DefaultValueCS*
 	 *     )
@@ -823,9 +827,21 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     PrimitiveTypeDomainCS returns PrimitiveTypeDomainCS
 	 *
 	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 *     (ownedPatterns+=PrimitiveTypeDomainPatternCS ownedPatterns+=PrimitiveTypeDomainPatternCS*)
 	 */
 	protected void sequence_PrimitiveTypeDomainCS(ISerializationContext context, PrimitiveTypeDomainCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+
+
+	/**
+	 * Contexts:
+	 *     PrimitiveTypeDomainPatternCS returns PrimitiveTypeDomainPatternCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 */
+	protected void sequence_PrimitiveTypeDomainPatternCS(ISerializationContext context, PrimitiveTypeDomainPatternCS semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
@@ -833,8 +849,8 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTrelationCSPackage.Literals.TEMPLATE_VARIABLE_CS__OWNED_TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPrimitiveTypeDomainCSAccess().getNameUnrestrictedNameParserRuleCall_2_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0(), semanticObject.getOwnedType());
+		feeder.accept(grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getNameUnrestrictedNameParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0(), semanticObject.getOwnedType());
 		feeder.finish();
 	}
 

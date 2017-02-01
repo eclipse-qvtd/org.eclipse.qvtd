@@ -101,6 +101,11 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
+	public R visitPrimitiveTypeDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainPatternCS object) {
+		return delegate.visitPrimitiveTypeDomainPatternCS(object);
+	}
+
+	@Override
 	public R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PropertyTemplateCS object) {
 		return delegate.visitPropertyTemplateCS(object);
 	}

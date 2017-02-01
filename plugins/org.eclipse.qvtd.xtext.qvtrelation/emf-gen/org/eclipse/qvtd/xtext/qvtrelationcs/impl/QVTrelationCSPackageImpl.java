@@ -34,6 +34,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSFactory;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -206,6 +207,13 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	private EClass varDeclarationIdCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass primitiveTypeDomainPatternCSEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -409,8 +417,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getDomainCS_OwnedPattern() {
+	public EReference getDomainCS_OwnedPatterns() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -622,6 +629,15 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	@Override
 	public EClass getPrimitiveTypeDomainCS() {
 		return primitiveTypeDomainCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPrimitiveTypeDomainCS_OwnedPatterns() {
+		return (EReference)primitiveTypeDomainCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -969,6 +985,15 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPrimitiveTypeDomainPatternCS() {
+		return primitiveTypeDomainPatternCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public QVTrelationCSFactory getQVTrelationCSFactory() {
 		return (QVTrelationCSFactory)getEFactoryInstance();
@@ -1009,7 +1034,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
 		createEReference(domainCSEClass, DOMAIN_CS__MODEL_ID);
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_REPLACE);
-		createEReference(domainCSEClass, DOMAIN_CS__OWNED_PATTERN);
+		createEReference(domainCSEClass, DOMAIN_CS__OWNED_PATTERNS);
 		createEReference(domainCSEClass, DOMAIN_CS__OWNED_DEFAULT_VALUES);
 		createEReference(domainCSEClass, DOMAIN_CS__OWNED_IMPLEMENTED_BY);
 
@@ -1040,6 +1065,9 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(predicateCSEClass, PREDICATE_CS__OWNED_CONDITION);
 
 		primitiveTypeDomainCSEClass = createEClass(PRIMITIVE_TYPE_DOMAIN_CS);
+		createEReference(primitiveTypeDomainCSEClass, PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS);
+
+		primitiveTypeDomainPatternCSEClass = createEClass(PRIMITIVE_TYPE_DOMAIN_PATTERN_CS);
 
 		propertyTemplateCSEClass = createEClass(PROPERTY_TEMPLATE_CS);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE);
@@ -1110,9 +1138,9 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 		// Obtain other dependent packages
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
-		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
 		QVTrelationPackage theQVTrelationPackage = (QVTrelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationPackage.eNS_URI);
+		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
 
@@ -1122,10 +1150,10 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 		// Add supertypes to classes
 		abstractDomainCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
-		abstractDomainCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		collectionTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
 		defaultValueCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
+		domainCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		domainPatternCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		elementTemplateCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		keyDeclCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
@@ -1134,8 +1162,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		patternCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		predicateCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
-		primitiveTypeDomainCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		primitiveTypeDomainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
+		primitiveTypeDomainPatternCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		propertyTemplateCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		relationCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
@@ -1164,7 +1192,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEAttribute(getDomainCS_IsEnforce(), ecorePackage.getEBoolean(), "isEnforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_ModelId(), theQVTbasePackage.getTypedModel(), null, "modelId", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_IsReplace(), ecorePackage.getEBoolean(), "isReplace", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainCS_OwnedPattern(), this.getDomainPatternCS(), null, "ownedPattern", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainCS_OwnedPatterns(), this.getDomainPatternCS(), null, "ownedPatterns", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_OwnedDefaultValues(), this.getDefaultValueCS(), null, "ownedDefaultValues", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_OwnedImplementedBy(), theEssentialOCLCSPackage.getExpCS(), null, "ownedImplementedBy", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1195,6 +1223,9 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getPredicateCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, PredicateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeDomainCSEClass, PrimitiveTypeDomainCS.class, "PrimitiveTypeDomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPrimitiveTypeDomainCS_OwnedPatterns(), this.getPrimitiveTypeDomainPatternCS(), null, "ownedPatterns", null, 0, -1, PrimitiveTypeDomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(primitiveTypeDomainPatternCSEClass, PrimitiveTypeDomainPatternCS.class, "PrimitiveTypeDomainPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(propertyTemplateCSEClass, PropertyTemplateCS.class, "PropertyTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyTemplateCS_OwningObjectTemplate(), this.getObjectTemplateCS(), this.getObjectTemplateCS_OwnedPropertyTemplates(), "owningObjectTemplate", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

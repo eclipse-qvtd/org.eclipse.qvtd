@@ -146,7 +146,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getTemplateVariableCS()
 	 * @generated
 	 */
-	int TEMPLATE_VARIABLE_CS = 17;
+	int TEMPLATE_VARIABLE_CS = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl <em>Template CS</em>}' class.
@@ -156,7 +156,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getTemplateCS()
 	 * @generated
 	 */
-	int TEMPLATE_CS = 16;
+	int TEMPLATE_CS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -657,13 +657,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DOMAIN_CS__IS_REPLACE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Owned Pattern</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Patterns</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__OWNED_PATTERN = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5;
+	int DOMAIN_CS__OWNED_PATTERNS = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Default Values</b></em>' containment reference list.
@@ -1536,7 +1536,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__CSI = TEMPLATE_VARIABLE_CS__CSI;
+	int PRIMITIVE_TYPE_DOMAIN_CS__CSI = ABSTRACT_DOMAIN_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1545,7 +1545,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__PARENT = TEMPLATE_VARIABLE_CS__PARENT;
+	int PRIMITIVE_TYPE_DOMAIN_CS__PARENT = ABSTRACT_DOMAIN_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1554,7 +1554,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__PIVOT = TEMPLATE_VARIABLE_CS__PIVOT;
+	int PRIMITIVE_TYPE_DOMAIN_CS__PIVOT = ABSTRACT_DOMAIN_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1563,7 +1563,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__ORIGINAL_XMI_ID = TEMPLATE_VARIABLE_CS__ORIGINAL_XMI_ID;
+	int PRIMITIVE_TYPE_DOMAIN_CS__ORIGINAL_XMI_ID = ABSTRACT_DOMAIN_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1572,25 +1572,16 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__OWNED_ANNOTATIONS = TEMPLATE_VARIABLE_CS__OWNED_ANNOTATIONS;
+	int PRIMITIVE_TYPE_DOMAIN_CS__OWNED_ANNOTATIONS = ABSTRACT_DOMAIN_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Patterns</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__NAME = TEMPLATE_VARIABLE_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__OWNED_TYPE = TEMPLATE_VARIABLE_CS__OWNED_TYPE;
+	int PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Type Domain CS</em>' class.
@@ -1599,7 +1590,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
+	int PRIMITIVE_TYPE_DOMAIN_CS_FEATURE_COUNT = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl <em>Property Template CS</em>}' class.
@@ -1609,7 +1600,149 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getPropertyTemplateCS()
 	 * @generated
 	 */
-	int PROPERTY_TEMPLATE_CS = 13;
+	int PROPERTY_TEMPLATE_CS = 14;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl <em>Query CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getQueryCS()
+	 * @generated
+	 */
+	int QUERY_CS = 15;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl <em>Relation CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getRelationCS()
+	 * @generated
+	 */
+	int RELATION_CS = 16;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getTopLevelCS()
+	 * @generated
+	 */
+	int TOP_LEVEL_CS = 19;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl <em>Transformation CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getTransformationCS()
+	 * @generated
+	 */
+	int TRANSFORMATION_CS = 20;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl <em>Var Declaration CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getVarDeclarationCS()
+	 * @generated
+	 */
+	int VAR_DECLARATION_CS = 21;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationIdCSImpl <em>Var Declaration Id CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationIdCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getVarDeclarationIdCS()
+	 * @generated
+	 */
+	int VAR_DECLARATION_ID_CS = 22;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PrimitiveTypeDomainPatternCSImpl <em>Primitive Type Domain Pattern CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.PrimitiveTypeDomainPatternCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getPrimitiveTypeDomainPatternCS()
+	 * @generated
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__CSI = TEMPLATE_VARIABLE_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__PARENT = TEMPLATE_VARIABLE_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__PIVOT = TEMPLATE_VARIABLE_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__ORIGINAL_XMI_ID = TEMPLATE_VARIABLE_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__OWNED_ANNOTATIONS = TEMPLATE_VARIABLE_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__NAME = TEMPLATE_VARIABLE_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS__OWNED_TYPE = TEMPLATE_VARIABLE_CS__OWNED_TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Primitive Type Domain Pattern CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1700,16 +1833,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_TEMPLATE_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl <em>Query CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getQueryCS()
-	 * @generated
-	 */
-	int QUERY_CS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1827,16 +1950,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl <em>Relation CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getRelationCS()
-	 * @generated
-	 */
-	int RELATION_CS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1965,16 +2078,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	int RELATION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getTopLevelCS()
-	 * @generated
-	 */
-	int TOP_LEVEL_CS = 18;
-
-	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2054,16 +2157,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int TOP_LEVEL_CS_FEATURE_COUNT = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl <em>Transformation CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getTransformationCS()
-	 * @generated
-	 */
-	int TRANSFORMATION_CS = 19;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2219,16 +2312,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TRANSFORMATION_CS_FEATURE_COUNT = QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl <em>Var Declaration CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getVarDeclarationCS()
-	 * @generated
-	 */
-	int VAR_DECLARATION_CS = 20;
-
-	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2308,16 +2391,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int VAR_DECLARATION_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationIdCSImpl <em>Var Declaration Id CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationIdCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getVarDeclarationIdCS()
-	 * @generated
-	 */
-	int VAR_DECLARATION_ID_CS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2522,15 +2595,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EAttribute getDomainCS_IsReplace();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPatterns <em>Owned Patterns</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Pattern</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern()
+	 * @return the meta object for the containment reference list '<em>Owned Patterns</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPatterns()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EReference getDomainCS_OwnedPattern();
+	EReference getDomainCS_OwnedPatterns();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedDefaultValues <em>Owned Default Values</em>}'.
@@ -2753,6 +2826,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPrimitiveTypeDomainCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS#getOwnedPatterns <em>Owned Patterns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Patterns</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS#getOwnedPatterns()
+	 * @see #getPrimitiveTypeDomainCS()
+	 * @generated
+	 */
+	EReference getPrimitiveTypeDomainCS_OwnedPatterns();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS <em>Property Template CS</em>}'.
@@ -3120,6 +3204,16 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getVarDeclarationIdCS();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS <em>Primitive Type Domain Pattern CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Primitive Type Domain Pattern CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS
+	 * @generated
+	 */
+	EClass getPrimitiveTypeDomainPatternCS();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3254,12 +3348,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EAttribute DOMAIN_CS__IS_REPLACE = eINSTANCE.getDomainCS_IsReplace();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Pattern</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Patterns</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_CS__OWNED_PATTERN = eINSTANCE.getDomainCS_OwnedPattern();
+		EReference DOMAIN_CS__OWNED_PATTERNS = eINSTANCE.getDomainCS_OwnedPatterns();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Default Values</b></em>' containment reference list feature.
@@ -3446,6 +3540,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PRIMITIVE_TYPE_DOMAIN_CS = eINSTANCE.getPrimitiveTypeDomainCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Patterns</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS = eINSTANCE.getPrimitiveTypeDomainCS_OwnedPatterns();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl <em>Property Template CS</em>}' class.
@@ -3736,6 +3838,16 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VAR_DECLARATION_ID_CS = eINSTANCE.getVarDeclarationIdCS();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PrimitiveTypeDomainPatternCSImpl <em>Primitive Type Domain Pattern CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.PrimitiveTypeDomainPatternCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getPrimitiveTypeDomainPatternCS()
+		 * @generated
+		 */
+		EClass PRIMITIVE_TYPE_DOMAIN_PATTERN_CS = eINSTANCE.getPrimitiveTypeDomainPatternCS();
 
 	}
 

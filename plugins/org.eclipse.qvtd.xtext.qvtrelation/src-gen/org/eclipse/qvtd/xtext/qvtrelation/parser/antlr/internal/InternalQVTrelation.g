@@ -632,16 +632,16 @@ ruleDomainCS returns [EObject current=null]
 )(
 (
 		{
-	        newCompositeNode(grammarAccess.getDomainCSAccess().getOwnedPatternDomainPatternCSParserRuleCall_3_0());
+	        newCompositeNode(grammarAccess.getDomainCSAccess().getOwnedPatternsDomainPatternCSParserRuleCall_3_0());
 	    }
-		lv_ownedPattern_5_0=ruleDomainPatternCS		{
+		lv_ownedPatterns_5_0=ruleDomainPatternCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDomainCSRule());
 	        }
        		add(
        			$current,
-       			"ownedPattern",
-        		lv_ownedPattern_5_0,
+       			"ownedPatterns",
+        		lv_ownedPatterns_5_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.DomainPatternCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -654,16 +654,16 @@ ruleDomainCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getDomainCSAccess().getOwnedPatternDomainPatternCSParserRuleCall_4_1_0());
+	        newCompositeNode(grammarAccess.getDomainCSAccess().getOwnedPatternsDomainPatternCSParserRuleCall_4_1_0());
 	    }
-		lv_ownedPattern_7_0=ruleDomainPatternCS		{
+		lv_ownedPatterns_7_0=ruleDomainPatternCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDomainCSRule());
 	        }
        		add(
        			$current,
-       			"ownedPattern",
-        		lv_ownedPattern_7_0,
+       			"ownedPatterns",
+        		lv_ownedPatterns_7_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.DomainPatternCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1315,48 +1315,109 @@ rulePrimitiveTypeDomainCS returns [EObject current=null]
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getNameUnrestrictedNameParserRuleCall_2_0());
+	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_2_0());
 	    }
-		lv_name_2_0=ruleUnrestrictedName		{
+		lv_ownedPatterns_2_0=rulePrimitiveTypeDomainPatternCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeDomainCSRule());
+	        }
+       		add(
+       			$current,
+       			"ownedPatterns",
+        		lv_ownedPatterns_2_0,
+        		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.PrimitiveTypeDomainPatternCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_3=','
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getPrimitiveTypeDomainCSAccess().getCommaKeyword_3_0());
+    }
+(
+(
+		{
+	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedPatternsPrimitiveTypeDomainPatternCSParserRuleCall_3_1_0());
+	    }
+		lv_ownedPatterns_4_0=rulePrimitiveTypeDomainPatternCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeDomainCSRule());
+	        }
+       		add(
+       			$current,
+       			"ownedPatterns",
+        		lv_ownedPatterns_4_0,
+        		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.PrimitiveTypeDomainPatternCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_5=';'
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getPrimitiveTypeDomainCSAccess().getSemicolonKeyword_4());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRulePrimitiveTypeDomainPatternCS
+entryRulePrimitiveTypeDomainPatternCS returns [EObject current=null]
+	:
+	{ newCompositeNode(grammarAccess.getPrimitiveTypeDomainPatternCSRule()); }
+	 iv_rulePrimitiveTypeDomainPatternCS=rulePrimitiveTypeDomainPatternCS
+	 { $current=$iv_rulePrimitiveTypeDomainPatternCS.current; }
+	 EOF
+;
+
+// Rule PrimitiveTypeDomainPatternCS
+rulePrimitiveTypeDomainPatternCS returns [EObject current=null]
+    @init { enterRule();
+    }
+    @after { leaveRule(); }:
+((
+(
+		{
+	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getNameUnrestrictedNameParserRuleCall_0_0());
+	    }
+		lv_name_0_0=ruleUnrestrictedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeDomainPatternCSRule());
 	        }
        		set(
        			$current,
        			"name",
-        		lv_name_2_0,
+        		lv_name_0_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3=':'
+)	otherlv_1=':'
     {
-    	newLeafNode(otherlv_3, grammarAccess.getPrimitiveTypeDomainCSAccess().getColonKeyword_3());
+    	newLeafNode(otherlv_1, grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getColonKeyword_1());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypeExpCSParserRuleCall_4_0());
+	        newCompositeNode(grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0());
 	    }
-		lv_ownedType_4_0=ruleTypeExpCS		{
+		lv_ownedType_2_0=ruleTypeExpCS		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeDomainCSRule());
+	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeDomainPatternCSRule());
 	        }
        		set(
        			$current,
        			"ownedType",
-        		lv_ownedType_4_0,
+        		lv_ownedType_2_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_5=';'
-    {
-    	newLeafNode(otherlv_5, grammarAccess.getPrimitiveTypeDomainCSAccess().getSemicolonKeyword_5());
-    }
-)
+))
 ;
 
 

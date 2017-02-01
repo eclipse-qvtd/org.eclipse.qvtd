@@ -105,6 +105,11 @@ public abstract class AbstractQVTrelationCSPreOrderVisitor
 
 	@Override
 	public @Nullable Continuation<?> visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainCS csElement) {
+		return visitAbstractDomainCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitPrimitiveTypeDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainPatternCS csElement) {
 		return visitTemplateVariableCS(csElement);
 	}
 

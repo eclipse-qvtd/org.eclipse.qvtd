@@ -37,6 +37,7 @@ public interface QVTrelationCSVisitor<R> extends org.eclipse.qvtd.xtext.qvtbasec
 	R visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PatternCS object);
 	R visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PredicateCS object);
 	R visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainCS object);
+	R visitPrimitiveTypeDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainPatternCS object);
 	R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PropertyTemplateCS object);
 	R visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull QueryCS object);
 	R visitRelationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull RelationCS object);

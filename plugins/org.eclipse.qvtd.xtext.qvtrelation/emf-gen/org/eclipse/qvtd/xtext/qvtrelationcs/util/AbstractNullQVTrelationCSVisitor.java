@@ -105,6 +105,11 @@ public abstract class AbstractNullQVTrelationCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitPrimitiveTypeDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainPatternCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PropertyTemplateCS object) {
 		return null;
 	}

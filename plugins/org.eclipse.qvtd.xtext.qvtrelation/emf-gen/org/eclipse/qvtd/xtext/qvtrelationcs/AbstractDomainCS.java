@@ -20,8 +20,8 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  *
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getAbstractDomainCS()
- * @model abstract="true" superTypes="org.eclipse.ocl.xtext.basecs.ModelElementCS org.eclipse.ocl.pivot.Nameable"
+ * @model abstract="true"
  * @generated
  */
-public interface AbstractDomainCS extends ModelElementCS, Nameable {
+public interface AbstractDomainCS extends ModelElementCS {
 } // AbstractDomainCS

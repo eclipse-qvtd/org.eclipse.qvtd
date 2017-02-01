@@ -201,6 +201,15 @@ public interface QVTrelationCSFactory extends EFactory {
 	VarDeclarationIdCS createVarDeclarationIdCS();
 
 	/**
+	 * Returns a new object of class '<em>Primitive Type Domain Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Type Domain Pattern CS</em>'.
+	 * @generated
+	 */
+	PrimitiveTypeDomainPatternCS createPrimitiveTypeDomainPatternCS();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
