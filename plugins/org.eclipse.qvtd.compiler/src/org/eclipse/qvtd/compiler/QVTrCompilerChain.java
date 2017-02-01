@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -163,7 +164,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					for (GenPackage genPackage : genModel.getGenPackages()) {
 						String basePackage = genPackage.getBasePackage();
 						String sourcePath = sourcePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
-						JavaSourceFileObject.deleteJavaFiles(sourcePath);
+						JavaFileUtil.deleteJavaFiles(sourcePath);
 					}
 					t.generateModels(genModel);
 					binFile.mkdir();
