@@ -79,7 +79,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXElement()
 	 * @generated
 	 */
-	int UMLX_ELEMENT = 19;
+	int UMLX_ELEMENT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -100,16 +100,6 @@ public interface UMLXPackage extends EPackage {
 	int UMLX_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl <em>Rel Pattern Class Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl
-	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getRelPatternClassNode()
-	 * @generated
-	 */
-	int REL_PATTERN_CLASS_NODE = 6;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.UMLXNamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,7 +107,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXNamedElement()
 	 * @generated
 	 */
-	int UMLX_NAMED_ELEMENT = 21;
+	int UMLX_NAMED_ELEMENT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl <em>Rel Diagram</em>}' class.
@@ -177,7 +167,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getRelPatternEdge()
 	 * @generated
 	 */
-	int REL_PATTERN_EDGE = 7;
+	int REL_PATTERN_EDGE = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl <em>Tx Diagram</em>}' class.
@@ -187,7 +177,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxDiagram()
 	 * @generated
 	 */
-	int TX_DIAGRAM = 10;
+	int TX_DIAGRAM = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxNodeImpl <em>Tx Node</em>}' class.
@@ -197,7 +187,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxNode()
 	 * @generated
 	 */
-	int TX_NODE = 13;
+	int TX_NODE = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl <em>Tx Import Node</em>}' class.
@@ -207,7 +197,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxImportNode()
 	 * @generated
 	 */
-	int TX_IMPORT_NODE = 11;
+	int TX_IMPORT_NODE = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl <em>Tx Key Node</em>}' class.
@@ -217,7 +207,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxKeyNode()
 	 * @generated
 	 */
-	int TX_KEY_NODE = 12;
+	int TX_KEY_NODE = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl <em>Tx Part Node</em>}' class.
@@ -227,7 +217,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPartNode()
 	 * @generated
 	 */
-	int TX_PART_NODE = 16;
+	int TX_PART_NODE = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl <em>Tx Package Node</em>}' class.
@@ -237,7 +227,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPackageNode()
 	 * @generated
 	 */
-	int TX_PACKAGE_NODE = 14;
+	int TX_PACKAGE_NODE = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl <em>Tx Typed Model Node</em>}' class.
@@ -247,7 +237,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxTypedModelNode()
 	 * @generated
 	 */
-	int TX_TYPED_MODEL_NODE = 18;
+	int TX_TYPED_MODEL_NODE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.UMLXModelImpl <em>Model</em>}' class.
@@ -257,7 +247,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXModel()
 	 * @generated
 	 */
-	int UMLX_MODEL = 20;
+	int UMLX_MODEL = 18;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -556,223 +546,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getRelPatternNode()
 	 * @generated
 	 */
-	int REL_PATTERN_NODE = 9;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE__COMMENTS = REL_NODE__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE__INCOMING = REL_NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Init Expression Lines</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE__INIT_EXPRESSION_LINES = REL_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Root</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE__IS_ROOT = REL_NODE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Owning Rel Domain Node</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE = REL_NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Invoking Rel Invocation Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES = REL_NODE_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Rel Pattern Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__COMMENTS = REL_PATTERN_NODE__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__INCOMING = REL_PATTERN_NODE__INCOMING;
-
-	/**
-	 * The feature id for the '<em><b>Init Expression Lines</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__INIT_EXPRESSION_LINES = REL_PATTERN_NODE__INIT_EXPRESSION_LINES;
-
-	/**
-	 * The feature id for the '<em><b>Is Root</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_ROOT = REL_PATTERN_NODE__IS_ROOT;
-
-	/**
-	 * The feature id for the '<em><b>Owning Rel Domain Node</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__OWNING_REL_DOMAIN_NODE = REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE;
-
-	/**
-	 * The feature id for the '<em><b>Invoking Rel Invocation Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__INVOKING_REL_INVOCATION_EDGES = REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__NAME = REL_PATTERN_NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_MANY = REL_PATTERN_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Null Free</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_NULL_FREE = REL_PATTERN_NODE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Is Ordered</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_ORDERED = REL_PATTERN_NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_REQUIRED = REL_PATTERN_NODE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Is Unique</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_UNIQUE = REL_PATTERN_NODE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Referred EClassifier</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__REFERRED_ECLASSIFIER = REL_PATTERN_NODE_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Is Anon</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__IS_ANON = REL_PATTERN_NODE_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__OUTGOING = REL_PATTERN_NODE_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Rel Domain Node</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE = REL_PATTERN_NODE_FEATURE_COUNT + 9;
-
-	/**
-	 * The number of structural features of the '<em>Rel Pattern Class Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_CLASS_NODE_FEATURE_COUNT = REL_PATTERN_NODE_FEATURE_COUNT + 10;
+	int REL_PATTERN_NODE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -838,23 +612,76 @@ public interface UMLXPackage extends EPackage {
 	int REL_PATTERN_EDGE_FEATURE_COUNT = REL_EDGE_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternExpressionNodeImpl <em>Rel Pattern Expression Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.umlx.impl.RelPatternExpressionNodeImpl
-	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getRelPatternExpressionNode()
-	 * @generated
-	 */
-	int REL_PATTERN_EXPRESSION_NODE = 8;
-
-	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EXPRESSION_NODE__COMMENTS = REL_PATTERN_NODE__COMMENTS;
+	int REL_PATTERN_NODE__COMMENTS = REL_NODE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__NAME = REL_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_MANY = REL_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Null Free</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_NULL_FREE = REL_NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_ORDERED = REL_NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_REQUIRED = REL_NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Is Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_UNIQUE = REL_NODE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Referred EClassifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__REFERRED_ECLASSIFIER = REL_NODE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -863,7 +690,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EXPRESSION_NODE__INCOMING = REL_PATTERN_NODE__INCOMING;
+	int REL_PATTERN_NODE__INCOMING = REL_NODE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Init Expression Lines</b></em>' attribute list.
@@ -872,25 +699,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EXPRESSION_NODE__INIT_EXPRESSION_LINES = REL_PATTERN_NODE__INIT_EXPRESSION_LINES;
-
-	/**
-	 * The feature id for the '<em><b>Is Root</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_EXPRESSION_NODE__IS_ROOT = REL_PATTERN_NODE__IS_ROOT;
-
-	/**
-	 * The feature id for the '<em><b>Owning Rel Domain Node</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REL_PATTERN_EXPRESSION_NODE__OWNING_REL_DOMAIN_NODE = REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE;
+	int REL_PATTERN_NODE__INIT_EXPRESSION_LINES = REL_NODE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Invoking Rel Invocation Edges</b></em>' reference list.
@@ -899,16 +708,52 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EXPRESSION_NODE__INVOKING_REL_INVOCATION_EDGES = REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES;
+	int REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES = REL_NODE_FEATURE_COUNT + 9;
 
 	/**
-	 * The number of structural features of the '<em>Rel Pattern Expression Node</em>' class.
+	 * The feature id for the '<em><b>Is Anon</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_PATTERN_EXPRESSION_NODE_FEATURE_COUNT = REL_PATTERN_NODE_FEATURE_COUNT + 0;
+	int REL_PATTERN_NODE__IS_ANON = REL_NODE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Is Root</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__IS_ROOT = REL_NODE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__OUTGOING = REL_NODE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Owning Rel Domain Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE = REL_NODE_FEATURE_COUNT + 13;
+
+	/**
+	 * The number of structural features of the '<em>Rel Pattern Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_PATTERN_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1143,7 +988,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxParameterNode()
 	 * @generated
 	 */
-	int TX_PARAMETER_NODE = 15;
+	int TX_PARAMETER_NODE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1288,7 +1133,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxQueryNode()
 	 * @generated
 	 */
-	int TX_QUERY_NODE = 17;
+	int TX_QUERY_NODE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1496,7 +1341,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXTypedElement()
 	 * @generated
 	 */
-	int UMLX_TYPED_ELEMENT = 22;
+	int UMLX_TYPED_ELEMENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1870,16 +1715,6 @@ public interface UMLXPackage extends EPackage {
 	EReference getRelPatternEdge_Target();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelPatternExpressionNode <em>Rel Pattern Expression Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Rel Pattern Expression Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternExpressionNode
-	 * @generated
-	 */
-	EClass getRelPatternExpressionNode();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelPatternNode <em>Rel Pattern Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1923,6 +1758,17 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getRelPatternNode_IsRoot();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing <em>Outgoing</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Outgoing</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing()
+	 * @see #getRelPatternNode()
+	 * @generated
+	 */
+	EReference getRelPatternNode_Outgoing();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.RelPatternNode#getOwningRelDomainNode <em>Owning Rel Domain Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1943,6 +1789,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelPatternNode_InvokingRelInvocationEdges();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternNode#isIsAnon <em>Is Anon</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Anon</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#isIsAnon()
+	 * @see #getRelPatternNode()
+	 * @generated
+	 */
+	EAttribute getRelPatternNode_IsAnon();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxDiagram <em>Tx Diagram</em>}'.
@@ -2438,49 +2295,6 @@ public interface UMLXPackage extends EPackage {
 	EReference getUMLXTypedElement_ReferredEClassifier();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.RelPatternClassNode <em>Rel Pattern Class Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Rel Pattern Class Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode
-	 * @generated
-	 */
-	EClass getRelPatternClassNode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#isIsAnon <em>Is Anon</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Anon</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#isIsAnon()
-	 * @see #getRelPatternClassNode()
-	 * @generated
-	 */
-	EAttribute getRelPatternClassNode_IsAnon();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getOutgoing <em>Outgoing</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Outgoing</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#getOutgoing()
-	 * @see #getRelPatternClassNode()
-	 * @generated
-	 */
-	EReference getRelPatternClassNode_Outgoing();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getRelDomainNode <em>Rel Domain Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Rel Domain Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#getRelDomainNode()
-	 * @see #getRelPatternClassNode()
-	 * @generated
-	 */
-	EReference getRelPatternClassNode_RelDomainNode();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2734,16 +2548,6 @@ public interface UMLXPackage extends EPackage {
 		EReference REL_PATTERN_EDGE__TARGET = eINSTANCE.getRelPatternEdge_Target();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternExpressionNodeImpl <em>Rel Pattern Expression Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.umlx.impl.RelPatternExpressionNodeImpl
-		 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getRelPatternExpressionNode()
-		 * @generated
-		 */
-		EClass REL_PATTERN_EXPRESSION_NODE = eINSTANCE.getRelPatternExpressionNode();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternNodeImpl <em>Rel Pattern Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2778,6 +2582,14 @@ public interface UMLXPackage extends EPackage {
 		EAttribute REL_PATTERN_NODE__IS_ROOT = eINSTANCE.getRelPatternNode_IsRoot();
 
 		/**
+		 * The meta object literal for the '<em><b>Outgoing</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REL_PATTERN_NODE__OUTGOING = eINSTANCE.getRelPatternNode_Outgoing();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Rel Domain Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2792,6 +2604,14 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES = eINSTANCE.getRelPatternNode_InvokingRelInvocationEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Anon</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_PATTERN_NODE__IS_ANON = eINSTANCE.getRelPatternNode_IsAnon();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl <em>Tx Diagram</em>}' class.
@@ -3186,40 +3006,6 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EReference UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER = eINSTANCE.getUMLXTypedElement_ReferredEClassifier();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl <em>Rel Pattern Class Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.umlx.impl.RelPatternClassNodeImpl
-		 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getRelPatternClassNode()
-		 * @generated
-		 */
-		EClass REL_PATTERN_CLASS_NODE = eINSTANCE.getRelPatternClassNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Anon</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REL_PATTERN_CLASS_NODE__IS_ANON = eINSTANCE.getRelPatternClassNode_IsAnon();
-
-		/**
-		 * The meta object literal for the '<em><b>Outgoing</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REL_PATTERN_CLASS_NODE__OUTGOING = eINSTANCE.getRelPatternClassNode_Outgoing();
-
-		/**
-		 * The meta object literal for the '<em><b>Rel Domain Node</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REL_PATTERN_CLASS_NODE__REL_DOMAIN_NODE = eINSTANCE.getRelPatternClassNode_RelDomainNode();
 
 	}
 

@@ -10,6 +10,9 @@
  */
 package org.eclipse.qvtd.umlx;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -53,5 +56,19 @@ public interface TxParameterNode extends TxNode, UMLXTypedElement {
 	 * @generated
 	 */
 	void setOwningTxQueryNode(TxQueryNode value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNameIsRequired(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateTypeIsRequired(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxParameterNode

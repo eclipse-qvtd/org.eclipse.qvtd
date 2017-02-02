@@ -136,4 +136,11 @@ public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	 */
 	boolean validateTxPackageNodePackagesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNameIsRequired(DiagnosticChain diagnostics, Map<Object, Object> context);
+
 } // TxTypedModelNode

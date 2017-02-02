@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public interface RelPatternEdge extends RelEdge {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternClassNode#getOutgoing <em>Outgoing</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing <em>Outgoing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear,
@@ -44,12 +44,12 @@ public interface RelPatternEdge extends RelEdge {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(RelPatternClassNode)
+	 * @see #setSource(RelPatternNode)
 	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelPatternEdge_Source()
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode#getOutgoing
+	 * @see org.eclipse.qvtd.umlx.RelPatternNode#getOutgoing
 	 * @generated
 	 */
-	RelPatternClassNode getSource();
+	RelPatternNode getSource();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelPatternEdge#getSource <em>Source</em>}' reference.
@@ -59,7 +59,7 @@ public interface RelPatternEdge extends RelEdge {
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(RelPatternClassNode value);
+	void setSource(RelPatternNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Source Index</b></em>' attribute.
@@ -170,7 +170,7 @@ public interface RelPatternEdge extends RelEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleMemberPropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateSourceIsEClass(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,7 +184,28 @@ public interface RelPatternEdge extends RelEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateSourceIsEClass(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateCompatibleEAttributePropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleSourceMultiplicity(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleEReferencePropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatiblePropertySource(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,27 +226,6 @@ public interface RelPatternEdge extends RelEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleEAttributePropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	boolean validateCompatiblePropertySource(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	boolean validateCompatibleSourceMultiplicity(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	boolean validateCompatibleEReferencePropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateCompatibleMemberPropertyTarget(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // RelPatternEdge

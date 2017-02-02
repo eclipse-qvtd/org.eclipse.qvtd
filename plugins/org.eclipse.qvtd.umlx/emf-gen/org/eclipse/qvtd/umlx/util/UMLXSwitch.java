@@ -120,17 +120,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_PATTERN_CLASS_NODE: {
-				RelPatternClassNode relPatternClassNode = (RelPatternClassNode)theEObject;
-				T result = caseRelPatternClassNode(relPatternClassNode);
-				if (result == null) result = caseRelPatternNode(relPatternClassNode);
-				if (result == null) result = caseUMLXTypedElement(relPatternClassNode);
-				if (result == null) result = caseRelNode(relPatternClassNode);
-				if (result == null) result = caseUMLXNamedElement(relPatternClassNode);
-				if (result == null) result = caseUMLXElement(relPatternClassNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case UMLXPackage.REL_PATTERN_EDGE: {
 				RelPatternEdge relPatternEdge = (RelPatternEdge)theEObject;
 				T result = caseRelPatternEdge(relPatternEdge);
@@ -139,19 +128,12 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_PATTERN_EXPRESSION_NODE: {
-				RelPatternExpressionNode relPatternExpressionNode = (RelPatternExpressionNode)theEObject;
-				T result = caseRelPatternExpressionNode(relPatternExpressionNode);
-				if (result == null) result = caseRelPatternNode(relPatternExpressionNode);
-				if (result == null) result = caseRelNode(relPatternExpressionNode);
-				if (result == null) result = caseUMLXElement(relPatternExpressionNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case UMLXPackage.REL_PATTERN_NODE: {
 				RelPatternNode relPatternNode = (RelPatternNode)theEObject;
 				T result = caseRelPatternNode(relPatternNode);
 				if (result == null) result = caseRelNode(relPatternNode);
+				if (result == null) result = caseUMLXTypedElement(relPatternNode);
+				if (result == null) result = caseUMLXNamedElement(relPatternNode);
 				if (result == null) result = caseUMLXElement(relPatternNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -371,21 +353,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rel Pattern Expression Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rel Pattern Expression Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelPatternExpressionNode(RelPatternExpressionNode object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Rel Pattern Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -592,21 +559,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUMLXTypedElement(UMLXTypedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rel Pattern Class Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rel Pattern Class Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelPatternClassNode(RelPatternClassNode object) {
 		return null;
 	}
 

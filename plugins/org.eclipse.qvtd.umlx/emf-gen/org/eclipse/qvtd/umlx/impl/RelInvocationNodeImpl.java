@@ -188,6 +188,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleEdges(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -204,7 +205,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 		 *           ->asSet()
 		 *         in
 		 *           let
-		 *             actualNodes : Set(umlx::RelPatternClassNode) = ownedRelInvocationEdges.referredRelPatternNode->asSet()
+		 *             actualNodes : Set(umlx::RelPatternNode) = ownedRelInvocationEdges.referredRelPatternNode->asSet()
 		 *           in
 		 *             let status : Boolean[1] = expectedNodes = actualNodes
 		 *             in
@@ -282,7 +283,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<RelInvocationEdge> ownedRelInvocationEdges = this.getOwnedRelInvocationEdges();
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedRelInvocationEdges = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelInvocationEdge, ownedRelInvocationEdges);
-				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternClassNode);
+				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
 				@NonNull Iterator<Object> ITERATOR__1_1 = BOXED_ownedRelInvocationEdges.iterator();
 				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
 				while (true) {
@@ -296,7 +297,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 					 * referredRelPatternNode
 					 */
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode referredRelPatternNode = _1_1.getReferredRelPatternNode();
+					final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode referredRelPatternNode = _1_1.getReferredRelPatternNode();
 					//
 					accumulator_1.add(referredRelPatternNode);
 				}

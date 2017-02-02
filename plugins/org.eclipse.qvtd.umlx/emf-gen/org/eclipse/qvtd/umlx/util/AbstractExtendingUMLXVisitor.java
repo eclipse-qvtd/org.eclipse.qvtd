@@ -68,18 +68,8 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
-	public R visitRelPatternClassNode(org.eclipse.qvtd.umlx.@NonNull RelPatternClassNode object) {
-		return visitRelPatternNode(object);
-	}
-
-	@Override
 	public R visitRelPatternEdge(org.eclipse.qvtd.umlx.@NonNull RelPatternEdge object) {
 		return visitRelEdge(object);
-	}
-
-	@Override
-	public R visitRelPatternExpressionNode(org.eclipse.qvtd.umlx.@NonNull RelPatternExpressionNode object) {
-		return visitRelPatternNode(object);
 	}
 
 	@Override

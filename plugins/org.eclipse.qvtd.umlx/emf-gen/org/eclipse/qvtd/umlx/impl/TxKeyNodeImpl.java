@@ -195,6 +195,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validatePartsAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *

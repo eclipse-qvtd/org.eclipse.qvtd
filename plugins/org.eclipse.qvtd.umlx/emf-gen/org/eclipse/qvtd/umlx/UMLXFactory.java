@@ -67,15 +67,6 @@ public interface UMLXFactory extends EFactory {
 	@NonNull RelInvocationNode createRelInvocationNode();
 
 	/**
-	 * Returns a new object of class '<em>Rel Pattern Class Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rel Pattern Class Node</em>'.
-	 * @generated
-	 */
-	@NonNull RelPatternClassNode createRelPatternClassNode();
-
-	/**
 	 * Returns a new object of class '<em>Rel Pattern Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,13 +76,13 @@ public interface UMLXFactory extends EFactory {
 	@NonNull RelPatternEdge createRelPatternEdge();
 
 	/**
-	 * Returns a new object of class '<em>Rel Pattern Expression Node</em>'.
+	 * Returns a new object of class '<em>Rel Pattern Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rel Pattern Expression Node</em>'.
+	 * @return a new object of class '<em>Rel Pattern Node</em>'.
 	 * @generated
 	 */
-	@NonNull RelPatternExpressionNode createRelPatternExpressionNode();
+	@NonNull RelPatternNode createRelPatternNode();
 
 	/**
 	 * Returns a new object of class '<em>Tx Diagram</em>'.

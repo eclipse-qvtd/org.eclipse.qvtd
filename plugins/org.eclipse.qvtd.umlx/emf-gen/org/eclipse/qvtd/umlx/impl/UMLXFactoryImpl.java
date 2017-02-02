@@ -68,9 +68,8 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 			case UMLXPackage.REL_DOMAIN_NODE: return createRelDomainNode();
 			case UMLXPackage.REL_INVOCATION_EDGE: return createRelInvocationEdge();
 			case UMLXPackage.REL_INVOCATION_NODE: return createRelInvocationNode();
-			case UMLXPackage.REL_PATTERN_CLASS_NODE: return createRelPatternClassNode();
 			case UMLXPackage.REL_PATTERN_EDGE: return createRelPatternEdge();
-			case UMLXPackage.REL_PATTERN_EXPRESSION_NODE: return createRelPatternExpressionNode();
+			case UMLXPackage.REL_PATTERN_NODE: return createRelPatternNode();
 			case UMLXPackage.TX_DIAGRAM: return createTxDiagram();
 			case UMLXPackage.TX_IMPORT_NODE: return createTxImportNode();
 			case UMLXPackage.TX_KEY_NODE: return createTxKeyNode();
@@ -136,17 +135,6 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	 * @generated
 	 */
 	@Override
-	public @NonNull RelPatternClassNode createRelPatternClassNode() {
-		RelPatternClassNodeImpl relPatternClassNode = new RelPatternClassNodeImpl();
-		return relPatternClassNode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull RelPatternEdge createRelPatternEdge() {
 		RelPatternEdgeImpl relPatternEdge = new RelPatternEdgeImpl();
 		return relPatternEdge;
@@ -158,9 +146,9 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	 * @generated
 	 */
 	@Override
-	public @NonNull RelPatternExpressionNode createRelPatternExpressionNode() {
-		RelPatternExpressionNodeImpl relPatternExpressionNode = new RelPatternExpressionNodeImpl();
-		return relPatternExpressionNode;
+	public @NonNull RelPatternNode createRelPatternNode() {
+		RelPatternNodeImpl relPatternNode = new RelPatternNodeImpl();
+		return relPatternNode;
 	}
 
 	/**

@@ -12,7 +12,6 @@ package org.eclipse.qvtd.umlx.util;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 
@@ -49,12 +48,20 @@ public class UMLXValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.qvtd.umlx";
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Rel Diagram'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REL_DIAGRAM__VALIDATE_NAME_IS_REQUIRED = 1;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rel Pattern Node Names Are Unique' of 'Rel Diagram'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_DIAGRAM__VALIDATE_REL_PATTERN_NODE_NAMES_ARE_UNIQUE = 1;
+	public static final int REL_DIAGRAM__VALIDATE_REL_PATTERN_NODE_NAMES_ARE_UNIQUE = 2;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Edges' of 'Rel Invocation Node'.
@@ -62,39 +69,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_INVOCATION_NODE__VALIDATE_COMPATIBLE_EDGES = 2;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Anon Is Unnamed' of 'Rel Pattern Class Node'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int REL_PATTERN_CLASS_NODE__VALIDATE_ANON_IS_UNNAMED = 3;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate EClassifier Is In Typed Model' of 'Rel Pattern Class Node'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int REL_PATTERN_CLASS_NODE__VALIDATE_ECLASSIFIER_IS_IN_TYPED_MODEL = 4;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Member Property Target' of 'Rel Pattern Edge'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET = 13;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Source Is Class Node' of 'Rel Pattern Edge'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_SOURCE_IS_CLASS_NODE = 6;
+	public static final int REL_INVOCATION_NODE__VALIDATE_COMPATIBLE_EDGES = 3;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Source Is EClass' of 'Rel Pattern Edge'.
@@ -102,23 +77,15 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_SOURCE_IS_ECLASS = 5;
+	public static final int REL_PATTERN_EDGE__VALIDATE_SOURCE_IS_ECLASS = 4;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Source Index' of 'Rel Pattern Edge'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Source Is Class Node' of 'Rel Pattern Edge'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_SOURCE_INDEX = 11;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Rest Property Target' of 'Rel Pattern Edge'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET = 12;
+	public static final int REL_PATTERN_EDGE__VALIDATE_SOURCE_IS_CLASS_NODE = 5;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible EAttribute Property Target' of 'Rel Pattern Edge'.
@@ -126,15 +93,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET = 7;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Property Source' of 'Rel Pattern Edge'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_PROPERTY_SOURCE = 10;
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Source Multiplicity' of 'Rel Pattern Edge'.
@@ -142,7 +101,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY = 8;
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible EReference Property Target' of 'Rel Pattern Edge'.
@@ -150,23 +109,63 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET = 9;
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET = 8;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rel Diagram Names Are Unique' of 'Tx Diagram'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Property Source' of 'Rel Pattern Edge'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_DIAGRAM__VALIDATE_REL_DIAGRAM_NAMES_ARE_UNIQUE = 16;
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_PROPERTY_SOURCE = 9;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Typed Model Node Names Are Unique' of 'Tx Diagram'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Source Index' of 'Rel Pattern Edge'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_DIAGRAM__VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE = 14;
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_SOURCE_INDEX = 10;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Rest Property Target' of 'Rel Pattern Edge'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET = 11;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Member Property Target' of 'Rel Pattern Edge'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REL_PATTERN_EDGE__VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET = 12;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Anon Is Unnamed' of 'Rel Pattern Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REL_PATTERN_NODE__VALIDATE_ANON_IS_UNNAMED = 13;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Required' of 'Rel Pattern Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REL_PATTERN_NODE__VALIDATE_TYPE_IS_REQUIRED = 14;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate EClassifier Is In Typed Model' of 'Rel Pattern Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int REL_PATTERN_NODE__VALIDATE_ECLASSIFIER_IS_IN_TYPED_MODEL = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Query Node Names Are Unique' of 'Tx Diagram'.
@@ -174,7 +173,39 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_DIAGRAM__VALIDATE_TX_QUERY_NODE_NAMES_ARE_UNIQUE = 15;
+	public static final int TX_DIAGRAM__VALIDATE_TX_QUERY_NODE_NAMES_ARE_UNIQUE = 16;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rel Diagram Names Are Unique' of 'Tx Diagram'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_DIAGRAM__VALIDATE_REL_DIAGRAM_NAMES_ARE_UNIQUE = 17;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Diagram'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_DIAGRAM__VALIDATE_NAME_IS_REQUIRED = 18;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Typed Model Node Names Are Unique' of 'Tx Diagram'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_DIAGRAM__VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE = 19;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Import Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_IMPORT_NODE__VALIDATE_NAME_IS_REQUIRED = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parts Are Unique' of 'Tx Key Node'.
@@ -182,7 +213,23 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_KEY_NODE__VALIDATE_PARTS_ARE_UNIQUE = 17;
+	public static final int TX_KEY_NODE__VALIDATE_PARTS_ARE_UNIQUE = 21;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Parameter Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_PARAMETER_NODE__VALIDATE_NAME_IS_REQUIRED = 22;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Required' of 'Tx Parameter Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_PARAMETER_NODE__VALIDATE_TYPE_IS_REQUIRED = 23;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Part Is Property Of Key' of 'Tx Part Node'.
@@ -190,7 +237,23 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_PART_NODE__VALIDATE_PART_IS_PROPERTY_OF_KEY = 18;
+	public static final int TX_PART_NODE__VALIDATE_PART_IS_PROPERTY_OF_KEY = 24;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Query Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_QUERY_NODE__VALIDATE_NAME_IS_REQUIRED = 25;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Required' of 'Tx Query Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_QUERY_NODE__VALIDATE_TYPE_IS_REQUIRED = 26;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parameters Are Unique' of 'Tx Query Node'.
@@ -198,7 +261,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_QUERY_NODE__VALIDATE_PARAMETERS_ARE_UNIQUE = 19;
+	public static final int TX_QUERY_NODE__VALIDATE_PARAMETERS_ARE_UNIQUE = 27;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Package Node Packages Are Unique' of 'Tx Typed Model Node'.
@@ -206,7 +269,15 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_TYPED_MODEL_NODE__VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE = 20;
+	public static final int TX_TYPED_MODEL_NODE__VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE = 28;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Typed Model Node'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TX_TYPED_MODEL_NODE__VALIDATE_NAME_IS_REQUIRED = 29;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -214,7 +285,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 20;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 29;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -242,7 +313,7 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return UMLXPackage.eINSTANCE;
+	  return UMLXPackage.eINSTANCE;
 	}
 
 	/**
@@ -266,12 +337,8 @@ public class UMLXValidator extends EObjectValidator {
 				return validateRelInvocationNode((RelInvocationNode)value, diagnostics, context);
 			case UMLXPackage.REL_NODE:
 				return validateRelNode((RelNode)value, diagnostics, context);
-			case UMLXPackage.REL_PATTERN_CLASS_NODE:
-				return validateRelPatternClassNode((RelPatternClassNode)value, diagnostics, context);
 			case UMLXPackage.REL_PATTERN_EDGE:
 				return validateRelPatternEdge((RelPatternEdge)value, diagnostics, context);
-			case UMLXPackage.REL_PATTERN_EXPRESSION_NODE:
-				return validateRelPatternExpressionNode((RelPatternExpressionNode)value, diagnostics, context);
 			case UMLXPackage.REL_PATTERN_NODE:
 				return validateRelPatternNode((RelPatternNode)value, diagnostics, context);
 			case UMLXPackage.TX_DIAGRAM:
@@ -320,37 +387,9 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relDiagram, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelDiagram_RelPatternNodeNamesAreUnique(relDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelDiagram_validateRelPatternNodeNamesAreUnique(relDiagram, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelDiagram_validateNameIsRequired(relDiagram, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the RelPatternNodeNamesAreUnique constraint of '<em>Rel Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelDiagram_RelPatternNodeNamesAreUnique(RelDiagram relDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "RelPatternNodeNamesAreUnique", getObjectLabel(relDiagram, context) },
-						new Object[] { relDiagram },
-						context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -361,6 +400,16 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateRelDiagram_validateRelPatternNodeNamesAreUnique(RelDiagram relDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return relDiagram.validateRelPatternNodeNamesAreUnique(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateNameIsRequired constraint of '<em>Rel Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelDiagram_validateNameIsRequired(RelDiagram relDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relDiagram.validateNameIsRequired(diagnostics, context);
 	}
 
 	/**
@@ -405,37 +454,8 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relInvocationNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relInvocationNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relInvocationNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelInvocationNode_CompatibleEdges(relInvocationNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelInvocationNode_validateCompatibleEdges(relInvocationNode, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the CompatibleEdges constraint of '<em>Rel Invocation Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelInvocationNode_CompatibleEdges(RelInvocationNode relInvocationNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleEdges", getObjectLabel(relInvocationNode, context) },
-						new Object[] { relInvocationNode },
-						context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -462,104 +482,6 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRelPatternClassNode(RelPatternClassNode relPatternClassNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relPatternClassNode, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternClassNode_AnonIsUnnamed(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternClassNode_EClassifierIsInTypedModel(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternClassNode_validateAnonIsUnnamed(relPatternClassNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternClassNode_validateEClassifierIsInTypedModel(relPatternClassNode, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the AnonIsUnnamed constraint of '<em>Rel Pattern Class Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternClassNode_AnonIsUnnamed(RelPatternClassNode relPatternClassNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "AnonIsUnnamed", getObjectLabel(relPatternClassNode, context) },
-						new Object[] { relPatternClassNode },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the EClassifierIsInTypedModel constraint of '<em>Rel Pattern Class Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternClassNode_EClassifierIsInTypedModel(RelPatternClassNode relPatternClassNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "EClassifierIsInTypedModel", getObjectLabel(relPatternClassNode, context) },
-						new Object[] { relPatternClassNode },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the validateAnonIsUnnamed constraint of '<em>Rel Pattern Class Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternClassNode_validateAnonIsUnnamed(RelPatternClassNode relPatternClassNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return relPatternClassNode.validateAnonIsUnnamed(diagnostics, context);
-	}
-
-	/**
-	 * Validates the validateEClassifierIsInTypedModel constraint of '<em>Rel Pattern Class Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternClassNode_validateEClassifierIsInTypedModel(RelPatternClassNode relPatternClassNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return relPatternClassNode.validateEClassifierIsInTypedModel(diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateRelPatternEdge(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(relPatternEdge, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(relPatternEdge, diagnostics, context);
@@ -570,15 +492,7 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_SourceIsClassNode(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_SourceIsEClass(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatiblePropertySource(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatibleSourceIndex(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatibleSourceMultiplicity(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatibleEAttributePropertyTarget(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatibleEReferencePropertyTarget(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatibleMemberPropertyTarget(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_CompatibleRestPropertyTarget(relPatternEdge, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelPatternEdge_validateCompatibleMemberPropertyTarget(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelPatternEdge_validateSourceIsEClass(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelPatternEdge_validateSourceIsClassNode(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelPatternEdge_validateCompatibleEAttributePropertyTarget(relPatternEdge, diagnostics, context);
@@ -587,260 +501,7 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateRelPatternEdge_validateCompatiblePropertySource(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelPatternEdge_validateCompatibleSourceIndex(relPatternEdge, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelPatternEdge_validateCompatibleRestPropertyTarget(relPatternEdge, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRelPatternEdge_validateCompatibleMemberPropertyTarget(relPatternEdge, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the SourceIsClassNode constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_SourceIsClassNode(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "SourceIsClassNode", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the SourceIsEClass constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_SourceIsEClass(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "SourceIsEClass", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatiblePropertySource constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatiblePropertySource(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatiblePropertySource", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatibleSourceIndex constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatibleSourceIndex(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleSourceIndex", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatibleSourceMultiplicity constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatibleSourceMultiplicity(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleSourceMultiplicity", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatibleEAttributePropertyTarget constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatibleEAttributePropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleEAttributePropertyTarget", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatibleEReferencePropertyTarget constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatibleEReferencePropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleEReferencePropertyTarget", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatibleMemberPropertyTarget constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatibleMemberPropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleMemberPropertyTarget", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the CompatibleRestPropertyTarget constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_CompatibleRestPropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "CompatibleRestPropertyTarget", getObjectLabel(relPatternEdge, context) },
-						new Object[] { relPatternEdge },
-						context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -854,16 +515,6 @@ public class UMLXValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the validateSourceIsClassNode constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_validateSourceIsClassNode(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return relPatternEdge.validateSourceIsClassNode(diagnostics, context);
-	}
-
-	/**
 	 * Validates the validateSourceIsEClass constraint of '<em>Rel Pattern Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -874,23 +525,13 @@ public class UMLXValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the validateCompatibleSourceIndex constraint of '<em>Rel Pattern Edge</em>'.
+	 * Validates the validateSourceIsClassNode constraint of '<em>Rel Pattern Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRelPatternEdge_validateCompatibleSourceIndex(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return relPatternEdge.validateCompatibleSourceIndex(diagnostics, context);
-	}
-
-	/**
-	 * Validates the validateCompatibleRestPropertyTarget constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_validateCompatibleRestPropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return relPatternEdge.validateCompatibleRestPropertyTarget(diagnostics, context);
+	public boolean validateRelPatternEdge_validateSourceIsClassNode(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternEdge.validateSourceIsClassNode(diagnostics, context);
 	}
 
 	/**
@@ -901,16 +542,6 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateRelPatternEdge_validateCompatibleEAttributePropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return relPatternEdge.validateCompatibleEAttributePropertyTarget(diagnostics, context);
-	}
-
-	/**
-	 * Validates the validateCompatiblePropertySource constraint of '<em>Rel Pattern Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelPatternEdge_validateCompatiblePropertySource(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return relPatternEdge.validateCompatiblePropertySource(diagnostics, context);
 	}
 
 	/**
@@ -934,12 +565,33 @@ public class UMLXValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the validateCompatiblePropertySource constraint of '<em>Rel Pattern Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRelPatternExpressionNode(RelPatternExpressionNode relPatternExpressionNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(relPatternExpressionNode, diagnostics, context);
+	public boolean validateRelPatternEdge_validateCompatiblePropertySource(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternEdge.validateCompatiblePropertySource(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleSourceIndex constraint of '<em>Rel Pattern Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelPatternEdge_validateCompatibleSourceIndex(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternEdge.validateCompatibleSourceIndex(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleRestPropertyTarget constraint of '<em>Rel Pattern Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelPatternEdge_validateCompatibleRestPropertyTarget(RelPatternEdge relPatternEdge, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternEdge.validateCompatibleRestPropertyTarget(diagnostics, context);
 	}
 
 	/**
@@ -948,7 +600,49 @@ public class UMLXValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRelPatternNode(RelPatternNode relPatternNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(relPatternNode, diagnostics, context);
+		if (!validate_NoCircularContainment(relPatternNode, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelPatternNode_validateEClassifierIsInTypedModel(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelPatternNode_validateAnonIsUnnamed(relPatternNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelPatternNode_validateTypeIsRequired(relPatternNode, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateEClassifierIsInTypedModel constraint of '<em>Rel Pattern Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelPatternNode_validateEClassifierIsInTypedModel(RelPatternNode relPatternNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternNode.validateEClassifierIsInTypedModel(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateAnonIsUnnamed constraint of '<em>Rel Pattern Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelPatternNode_validateAnonIsUnnamed(RelPatternNode relPatternNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternNode.validateAnonIsUnnamed(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateTypeIsRequired constraint of '<em>Rel Pattern Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelPatternNode_validateTypeIsRequired(RelPatternNode relPatternNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relPatternNode.validateTypeIsRequired(diagnostics, context);
 	}
 
 	/**
@@ -966,107 +660,11 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txDiagram, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxDiagram_RelDiagramNamesAreUnique(txDiagram, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxDiagram_TxQueryNodeNamesAreUnique(txDiagram, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxDiagram_TxTypedModelNodeNamesAreUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxDiagram_validateTxTypedModelNodeNamesAreUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxDiagram_validateTxQueryNodeNamesAreUnique(txDiagram, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxDiagram_validateRelDiagramNamesAreUnique(txDiagram, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxDiagram_validateNameIsRequired(txDiagram, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the RelDiagramNamesAreUnique constraint of '<em>Tx Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxDiagram_RelDiagramNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "RelDiagramNamesAreUnique", getObjectLabel(txDiagram, context) },
-						new Object[] { txDiagram },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the TxQueryNodeNamesAreUnique constraint of '<em>Tx Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxDiagram_TxQueryNodeNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "TxQueryNodeNamesAreUnique", getObjectLabel(txDiagram, context) },
-						new Object[] { txDiagram },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the TxTypedModelNodeNamesAreUnique constraint of '<em>Tx Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxDiagram_TxTypedModelNodeNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "TxTypedModelNodeNamesAreUnique", getObjectLabel(txDiagram, context) },
-						new Object[] { txDiagram },
-						context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the validateRelDiagramNamesAreUnique constraint of '<em>Tx Diagram</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxDiagram_validateRelDiagramNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return txDiagram.validateRelDiagramNamesAreUnique(diagnostics, context);
 	}
 
 	/**
@@ -1090,12 +688,52 @@ public class UMLXValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the validateRelDiagramNamesAreUnique constraint of '<em>Tx Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxDiagram_validateRelDiagramNamesAreUnique(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txDiagram.validateRelDiagramNamesAreUnique(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateNameIsRequired constraint of '<em>Tx Diagram</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxDiagram_validateNameIsRequired(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txDiagram.validateNameIsRequired(diagnostics, context);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean validateTxImportNode(TxImportNode txImportNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(txImportNode, diagnostics, context);
+		if (!validate_NoCircularContainment(txImportNode, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txImportNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxImportNode_validateNameIsRequired(txImportNode, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateNameIsRequired constraint of '<em>Tx Import Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxImportNode_validateNameIsRequired(TxImportNode txImportNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txImportNode.validateNameIsRequired(diagnostics, context);
 	}
 
 	/**
@@ -1113,37 +751,8 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(txKeyNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txKeyNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txKeyNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxKeyNode_PartsAreUnique(txKeyNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxKeyNode_validatePartsAreUnique(txKeyNode, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the PartsAreUnique constraint of '<em>Tx Key Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxKeyNode_PartsAreUnique(TxKeyNode txKeyNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "PartsAreUnique", getObjectLabel(txKeyNode, context) },
-						new Object[] { txKeyNode },
-						context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -1180,7 +789,38 @@ public class UMLXValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTxParameterNode(TxParameterNode txParameterNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(txParameterNode, diagnostics, context);
+		if (!validate_NoCircularContainment(txParameterNode, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxParameterNode_validateTypeIsRequired(txParameterNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxParameterNode_validateNameIsRequired(txParameterNode, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateTypeIsRequired constraint of '<em>Tx Parameter Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxParameterNode_validateTypeIsRequired(TxParameterNode txParameterNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txParameterNode.validateTypeIsRequired(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateNameIsRequired constraint of '<em>Tx Parameter Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxParameterNode_validateNameIsRequired(TxParameterNode txParameterNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txParameterNode.validateNameIsRequired(diagnostics, context);
 	}
 
 	/**
@@ -1198,37 +838,8 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(txPartNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txPartNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txPartNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxPartNode_PartIsPropertyOfKey(txPartNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxPartNode_validatePartIsPropertyOfKey(txPartNode, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the PartIsPropertyOfKey constraint of '<em>Tx Part Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxPartNode_PartIsPropertyOfKey(TxPartNode txPartNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "PartIsPropertyOfKey", getObjectLabel(txPartNode, context) },
-						new Object[] { txPartNode },
-						context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -1256,37 +867,10 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(txQueryNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txQueryNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txQueryNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxQueryNode_ParametersAreUnique(txQueryNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxQueryNode_validateParametersAreUnique(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxQueryNode_validateNameIsRequired(txQueryNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxQueryNode_validateTypeIsRequired(txQueryNode, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the ParametersAreUnique constraint of '<em>Tx Query Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxQueryNode_ParametersAreUnique(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "ParametersAreUnique", getObjectLabel(txQueryNode, context) },
-						new Object[] { txQueryNode },
-						context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -1297,6 +881,26 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateTxQueryNode_validateParametersAreUnique(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return txQueryNode.validateParametersAreUnique(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateNameIsRequired constraint of '<em>Tx Query Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxQueryNode_validateNameIsRequired(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txQueryNode.validateNameIsRequired(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateTypeIsRequired constraint of '<em>Tx Query Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTxQueryNode_validateTypeIsRequired(TxQueryNode txQueryNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txQueryNode.validateTypeIsRequired(diagnostics, context);
 	}
 
 	/**
@@ -1314,37 +918,19 @@ public class UMLXValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(txTypedModelNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txTypedModelNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txTypedModelNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxTypedModelNode_TxPackageNodePackagesAreUnique(txTypedModelNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTxTypedModelNode_validateNameIsRequired(txTypedModelNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTxTypedModelNode_validateTxPackageNodePackagesAreUnique(txTypedModelNode, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the TxPackageNodePackagesAreUnique constraint of '<em>Tx Typed Model Node</em>'.
+	 * Validates the validateNameIsRequired constraint of '<em>Tx Typed Model Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTxTypedModelNode_TxPackageNodePackagesAreUnique(TxTypedModelNode txTypedModelNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-				(createDiagnostic
-					(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE,
-						0,
-						"_UI_GenericConstraint_diagnostic",
-						new Object[] { "TxPackageNodePackagesAreUnique", getObjectLabel(txTypedModelNode, context) },
-						new Object[] { txTypedModelNode },
-						context));
-			}
-			return false;
-		}
-		return true;
+	public boolean validateTxTypedModelNode_validateNameIsRequired(TxTypedModelNode txTypedModelNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return txTypedModelNode.validateNameIsRequired(diagnostics, context);
 	}
 
 	/**

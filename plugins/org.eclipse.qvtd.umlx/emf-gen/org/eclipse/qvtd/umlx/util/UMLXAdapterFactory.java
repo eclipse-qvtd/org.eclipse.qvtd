@@ -100,16 +100,8 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 				return createRelNodeAdapter();
 			}
 			@Override
-			public Adapter caseRelPatternClassNode(RelPatternClassNode object) {
-				return createRelPatternClassNodeAdapter();
-			}
-			@Override
 			public Adapter caseRelPatternEdge(RelPatternEdge object) {
 				return createRelPatternEdgeAdapter();
-			}
-			@Override
-			public Adapter caseRelPatternExpressionNode(RelPatternExpressionNode object) {
-				return createRelPatternExpressionNodeAdapter();
 			}
 			@Override
 			public Adapter caseRelPatternNode(RelPatternNode object) {
@@ -282,20 +274,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelPatternEdgeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelPatternExpressionNode <em>Rel Pattern Expression Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.RelPatternExpressionNode
-	 * @generated
-	 */
-	public Adapter createRelPatternExpressionNodeAdapter() {
 		return null;
 	}
 
@@ -492,20 +470,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUMLXTypedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.RelPatternClassNode <em>Rel Pattern Class Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.RelPatternClassNode
-	 * @generated
-	 */
-	public Adapter createRelPatternClassNodeAdapter() {
 		return null;
 	}
 

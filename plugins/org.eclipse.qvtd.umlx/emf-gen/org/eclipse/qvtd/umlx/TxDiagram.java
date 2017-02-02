@@ -150,6 +150,13 @@ public interface TxDiagram extends UMLXNamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	boolean validateTxQueryNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	boolean validateRelDiagramNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
@@ -157,13 +164,13 @@ public interface TxDiagram extends UMLXNamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateTxTypedModelNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateNameIsRequired(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateTxQueryNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateTxTypedModelNodeNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // TxDiagram
