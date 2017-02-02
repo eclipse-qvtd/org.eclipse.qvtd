@@ -2715,7 +2715,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" * <br>\n");
 		js.append(" * Extract each output model with {@link getRootObjects(String)}\n");
 		js.append(" */\n");
-		js.append("@SuppressWarnings({\"nls\",\"unused\"})\n");
+		//		js.append("@SuppressWarnings({\"nls\",\"unused\"})\n");
+		js.append("@SuppressWarnings(\"unused\")\n");
 		js.append("public class " + className + " extends ");
 		js.appendClassReference(getAbstractTransformationExecutorClass());
 		js.pushClassBody(className);
