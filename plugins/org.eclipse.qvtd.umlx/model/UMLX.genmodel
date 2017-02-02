@@ -49,11 +49,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelInvocationNode/referredRelDiagram"/>
     </genClasses>
     <genClasses image="false" ecoreClass="UMLX.ecore#//RelNode"/>
-    <genClasses ecoreClass="UMLX.ecore#//RelPatternClassNode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternClassNode/isAnon"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternClassNode/outgoing"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternClassNode/relDomainNode"/>
-    </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//RelPatternEdge">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/owningRelDomainNode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/referredEStructuralFeature"/>
@@ -61,13 +56,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternEdge/sourceIndex"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/target"/>
     </genClasses>
-    <genClasses ecoreClass="UMLX.ecore#//RelPatternExpressionNode"/>
     <genClasses image="false" ecoreClass="UMLX.ecore#//RelPatternNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/incoming"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternNode/initExpressionLines"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternNode/isRoot"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/owningRelDomainNode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/invokingRelInvocationEdges"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternNode/isAnon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternNode/isRoot"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/outgoing"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/owningRelDomainNode"/>
+      <genOperations ecoreOperation="UMLX.ecore#//RelPatternNode/isExpression"/>
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//TxDiagram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedRelDiagrams"/>
