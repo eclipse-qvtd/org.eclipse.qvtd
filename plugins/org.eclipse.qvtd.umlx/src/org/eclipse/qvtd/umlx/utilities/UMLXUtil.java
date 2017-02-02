@@ -26,9 +26,7 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -60,12 +58,12 @@ public class UMLXUtil
 		}
 	}
 
-	public static final class IsRootPredicate implements Predicate<@NonNull RelPatternClassNode>
+	public static final class IsRootPredicate implements Predicate<@NonNull RelPatternNode>
 	{
 		public static final @NonNull IsRootPredicate INSTANCE = new IsRootPredicate();
 
 		@Override
-		public boolean apply(@NonNull RelPatternClassNode input) {
+		public boolean apply(@NonNull RelPatternNode input) {
 			return input.isIsRoot();
 		}
 	}
@@ -84,16 +82,33 @@ public class UMLXUtil
 		}
 	}
 
-	public static final class RelPatternClassNodeComparator implements Comparator<@NonNull RelPatternClassNode>
+	public static final class RelPatternNodeComparator implements Comparator<@NonNull RelPatternNode>
 	{
-		public static final @NonNull RelPatternClassNodeComparator INSTANCE = new RelPatternClassNodeComparator();
+		public static final @NonNull RelPatternNodeComparator INSTANCE = new RelPatternNodeComparator();
 
 		@Override
-		public int compare(@NonNull RelPatternClassNode o1, @NonNull RelPatternClassNode o2) {
+		public int compare(@NonNull RelPatternNode o1, @NonNull RelPatternNode o2) {
+			assertClassNode(o1);
+			assertClassNode(o2);
 			String n1 = o1.getName();
 			String n2 = o2.getName();
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
+	}
+
+	public static void assertClassNode(@NonNull RelPatternNode relPatternNode) {
+		assert !relPatternNode.isExpression();
+		assert relPatternNode.getName() != null;
+		assert relPatternNode.getReferredEClassifier() != null;
+	}
+
+	public static void assertExpressionNode(@NonNull RelPatternNode relPatternNode) {
+		assert relPatternNode.isExpression();
+		assert !relPatternNode.getInitExpressionLines().isEmpty();
+		assert relPatternNode.getName() == null;
+		assert relPatternNode.getOutgoing().isEmpty();
+		assert relPatternNode.getReferredEClassifier() == null;
+		assert !relPatternNode.isIsRoot();
 	}
 
 	public static @NonNull Iterable<@NonNull String> getComments(@NonNull UMLXElement umlxElement) {
@@ -104,8 +119,8 @@ public class UMLXUtil
 		return ClassUtil.nullFree(relNode.getIncoming());
 	}
 
-	public static @NonNull List<@NonNull String> getInitExpressionLines(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
-		return ClassUtil.nullFree(relPatternExpressionNode.getInitExpressionLines());
+	public static @NonNull List<@NonNull String> getInitExpressionLines(@NonNull RelPatternNode relPatternNode) {
+		return ClassUtil.nullFree(relPatternNode.getInitExpressionLines());
 	}
 
 	public static @NonNull RelPatternNode getInvokingRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
@@ -116,8 +131,8 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(umlxElement.getName());
 	}
 
-	public static @NonNull Iterable<@NonNull RelPatternEdge> getOutgoing(@NonNull RelPatternClassNode relNode) {
-		return Iterables.filter(ClassUtil.nullFree(relNode.getOutgoing()), RelPatternEdge.class);
+	public static @NonNull Iterable<@NonNull RelPatternEdge> getOutgoing(@NonNull RelPatternNode relNode) {
+		return ClassUtil.nullFree(relNode.getOutgoing());
 	}
 
 	public static @NonNull Iterable<@NonNull RelDiagram> getOwnedRelDiagrams(@NonNull TxDiagram txDiagram) {
@@ -208,7 +223,7 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(relInvocationNode.getReferredRelDiagram());
 	}
 
-	public static @NonNull RelPatternClassNode getReferredRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
+	public static @NonNull RelPatternNode getReferredRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
 		return ClassUtil.nonNullState(relInvocationEdge.getReferredRelPatternNode());
 	}
 
@@ -216,12 +231,12 @@ public class UMLXUtil
 		return ClassUtil.nonNullState(relDomainNode.getReferredTxTypedModelNode());
 	}
 
-	private static @NonNull Iterable<@NonNull RelPatternClassNode> getRootPatternClassNodes(@NonNull RelDomainNode relDomainNode) {
+	private static @NonNull Iterable<@NonNull RelPatternNode> getRootPatternClassNodes(@NonNull RelDomainNode relDomainNode) {
 		Iterable<@NonNull RelPatternNode> nullFree = ClassUtil.nullFree(relDomainNode.getOwnedRelPatternNodes());
-		return Iterables.filter(Iterables.filter(nullFree, RelPatternClassNode.class), IsRootPredicate.INSTANCE);
+		return Iterables.filter(nullFree, IsRootPredicate.INSTANCE);
 	}
 
-	public static @NonNull RelPatternClassNode getSource(@NonNull RelPatternEdge relPatternEdge) {
+	public static @NonNull RelPatternNode getSource(@NonNull RelPatternEdge relPatternEdge) {
 		return ClassUtil.nonNullState(relPatternEdge.getSource());
 	}
 
@@ -230,13 +245,13 @@ public class UMLXUtil
 	}
 
 	public static @NonNull List<@NonNull RelInvocationEdge> getSortedInvocationEdges(@NonNull RelInvocationNode relInvocationNode) {
-		final Map<@NonNull RelPatternClassNode, @NonNull Integer> node2index = new HashMap<>();
+		final Map<@NonNull RelPatternNode, @NonNull Integer> node2index = new HashMap<>();
 		List<@NonNull RelDomainNode> sortedRelDomainNodes = Lists.newArrayList(UMLXUtil.getOwnedRelDomainNodes(UMLXUtil.getReferredRelDiagram(relInvocationNode)));
 		Collections.sort(sortedRelDomainNodes, RelDomainNodeComparator.INSTANCE);
 		for (@NonNull RelDomainNode relDomainNode : sortedRelDomainNodes) {
-			List<@NonNull RelPatternClassNode> sortedRootNodes = Lists.newArrayList(getRootPatternClassNodes(relDomainNode));
-			Collections.sort(sortedRootNodes, RelPatternClassNodeComparator.INSTANCE);
-			for (@NonNull RelPatternClassNode relPatternClassNode : sortedRootNodes) {
+			List<@NonNull RelPatternNode> sortedRootNodes = Lists.newArrayList(getRootPatternClassNodes(relDomainNode));
+			Collections.sort(sortedRootNodes, RelPatternNodeComparator.INSTANCE);
+			for (@NonNull RelPatternNode relPatternClassNode : sortedRootNodes) {
 				node2index.put(relPatternClassNode, node2index.size());
 			}
 		}

@@ -47,9 +47,7 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.utilities.UMLXUtil;
@@ -114,14 +112,15 @@ class PatternForest
 	{
 		// Definition structure
 		private @NonNull TreeRoot treeRoot;
-		private @NonNull RelPatternClassNode patternNode;
+		private @NonNull RelPatternNode patternNode;
 		private @NonNull List<@NonNull TreeEdge> childEdges = new ArrayList<>();
 		// Derived structure
 		//			private boolean isShared = false;
 		private Variable variable = null;
 		protected boolean isRealized = false;
 
-		public TreeClassNode(@NonNull TreeRoot treeRoot, @NonNull RelPatternClassNode rootPatternNode) {
+		public TreeClassNode(@NonNull TreeRoot treeRoot, @NonNull RelPatternNode rootPatternNode) {
+			UMLXUtil.assertClassNode(rootPatternNode);
 			this.treeRoot = treeRoot;
 			this.patternNode = rootPatternNode;
 			TreeNode oldNode = patternNode2treeNode.put(rootPatternNode, this);
@@ -132,7 +131,8 @@ class PatternForest
 
 		public TreeClassNode(@NonNull RelPatternEdge patternEdge, boolean isOpposite, @NonNull TreeClassNode parentNode) {
 			this.treeRoot = parentNode.treeRoot;
-			this.patternNode = isOpposite ? UMLXUtil.getSource(patternEdge) : (RelPatternClassNode)UMLXUtil.getTarget(patternEdge);
+			this.patternNode = isOpposite ? UMLXUtil.getSource(patternEdge) : UMLXUtil.getTarget(patternEdge);
+			UMLXUtil.assertClassNode(patternNode);
 			this.parentEdge = new TreeEdge(false, patternEdge, isOpposite, parentNode, this);
 			assert parentNode.patternNode == (isOpposite ? patternEdge.getTarget() : patternEdge.getSource());
 			TreeNode oldNode = patternNode2treeNode.put(patternNode, this);
@@ -262,10 +262,11 @@ class PatternForest
 
 	private class TreeExpressionNode extends TreeNode
 	{
-		private @NonNull RelPatternExpressionNode patternNode;
+		private @NonNull RelPatternNode patternNode;
 
 		public TreeExpressionNode(@NonNull RelPatternEdge patternEdge, @NonNull TreeClassNode parentNode) {
-			this.patternNode = (RelPatternExpressionNode) UMLXUtil.getTarget(patternEdge);
+			this.patternNode = UMLXUtil.getTarget(patternEdge);
+			UMLXUtil.assertExpressionNode(patternNode);
 			this.parentEdge = new TreeEdge(false, patternEdge, false, parentNode, this);
 			assert parentNode.patternNode == patternEdge.getSource();
 			TreeNode oldNode = patternNode2treeNode.put(patternNode, this);
@@ -317,12 +318,12 @@ class PatternForest
 	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull RelDiagram relDiagram;
 	//
-	private final @NonNull List<@NonNull RelPatternClassNode> allNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull RelPatternNode> allNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull TreeRoot> treeRoots =  new ArrayList<>();
 	private final Map<@NonNull RelDomainNode, @NonNull TreeRoot> domainNode2treeRoot =  new HashMap<>();
 	private final Map<@NonNull RelPatternNode, @NonNull TreeNode> patternNode2treeNode =  new HashMap<>();
 	private final Map<@NonNull RelPatternEdge, @NonNull TreeEdge> patternEdge2treeEdge =  new HashMap<>();
-	private final @NonNull Map<@NonNull RelPatternClassNode, @NonNull Element> relPatternNode2qvtrElement = new HashMap<>();
+	private final @NonNull Map<@NonNull RelPatternNode, @NonNull Element> relPatternNode2qvtrElement = new HashMap<>();
 	private final @NonNull List<@NonNull RelationDomain> allDomains = new ArrayList<>();
 	private final @NonNull List<@NonNull Variable> allVariables = new ArrayList<>();
 
@@ -354,9 +355,8 @@ class PatternForest
 			TreeRoot treeRoot = new TreeRoot(relDomainNode);
 			domainNode2treeRoot.put(relDomainNode, treeRoot);
 			for (@NonNull RelPatternNode relPatternNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
-				if (relPatternNode.isIsRoot() && (relPatternNode instanceof RelPatternClassNode)) {
-					RelPatternClassNode rootGraphNode = (RelPatternClassNode) relPatternNode;
-					patternNode2treeNode.put(rootGraphNode, new TreeClassNode(treeRoot, rootGraphNode));
+				if (relPatternNode.isIsRoot() && !relPatternNode.isExpression()) {
+					patternNode2treeNode.put(relPatternNode, new TreeClassNode(treeRoot, relPatternNode));
 				}
 			}
 		}
@@ -393,7 +393,8 @@ class PatternForest
 		}
 	}
 
-	private void connectComplexTreeEdges(@NonNull RelPatternClassNode relNode) {
+	private void connectComplexTreeEdges(@NonNull RelPatternNode relNode) {
+		UMLXUtil.assertClassNode(relNode);
 		for (@NonNull RelPatternEdge relPatternEdge : Iterables.concat(UMLXUtil.getOutgoing(relNode), UMLXUtil.getIncoming(relNode))) {
 			if (!patternEdge2treeEdge.containsKey(relPatternEdge)) {
 				RelPatternNode sourceNode = UMLXUtil.getSource(relPatternEdge);
@@ -426,7 +427,8 @@ class PatternForest
 		}
 	}
 
-	private void connectSimpleTreeEdges(@NonNull RelPatternClassNode relNode) {
+	private void connectSimpleTreeEdges(@NonNull RelPatternNode relNode) {
+		UMLXUtil.assertClassNode(relNode);
 		for (@NonNull RelPatternEdge relPatternEdge : Iterables.concat(UMLXUtil.getOutgoing(relNode), UMLXUtil.getIncoming(relNode))) {
 			if (!patternEdge2treeEdge.containsKey(relPatternEdge)) {
 				RelPatternNode sourceNode = UMLXUtil.getSource(relPatternEdge);
@@ -439,7 +441,7 @@ class PatternForest
 						if (childNode != null) {
 							new TreeEdge(true, relPatternEdge, false, parentNode, childNode);
 						}
-						else if (targetNode instanceof RelPatternClassNode) {
+						else if (!targetNode.isExpression()) {
 							new TreeClassNode(relPatternEdge, false, parentNode);
 						}
 						else {
@@ -461,8 +463,8 @@ class PatternForest
 		//
 		for (@NonNull RelDomainNode relDomainNode : relDomainNodes) {
 			for (@NonNull RelPatternNode relPatternNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
-				if (relPatternNode instanceof RelPatternClassNode) {
-					createRelationNode((RelPatternClassNode)relPatternNode);
+				if (!relPatternNode.isExpression()) {
+					createRelationNode(relPatternNode);
 				}
 			}
 		}
@@ -491,15 +493,14 @@ class PatternForest
 		//
 		for (@NonNull RelDomainNode relDomainNode : relDomainNodes) {
 			for (@NonNull RelPatternNode relPatternNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
-				if (!relPatternNode.isIsRoot() && (relPatternNode instanceof RelPatternClassNode)) {
-					RelPatternClassNode relPatternClassNode = (RelPatternClassNode)relPatternNode;
-					TreeNode treeNode = patternNode2treeNode.get(relPatternClassNode);
+				if (!relPatternNode.isIsRoot() && !relPatternNode.isExpression()) {
+					TreeNode treeNode = patternNode2treeNode.get(relPatternNode);
 					if (treeNode == null) {
-						org.eclipse.ocl.pivot.Class asClass = umlx2qvtr.getReferredType(relPatternClassNode);
-						String name = relPatternClassNode.isIsAnon() ? null : UMLXUtil.getName(relPatternClassNode);
-						Variable variable = umlx2qvtr.createSharedVariable(name, asClass, relPatternClassNode.isIsRequired(), null);
+						org.eclipse.ocl.pivot.Class asClass = umlx2qvtr.getReferredType(relPatternNode);
+						String name = relPatternNode.isIsAnon() ? null : UMLXUtil.getName(relPatternNode);
+						Variable variable = umlx2qvtr.createSharedVariable(name, asClass, relPatternNode.isIsRequired(), null);
 						qvtrRelation.getVariable().add(variable);
-						umlx2qvtr.install(relPatternClassNode, variable);
+						umlx2qvtr.install(relPatternNode, variable);
 					}
 				}
 			}
@@ -553,12 +554,12 @@ class PatternForest
 		assert treeEdge != null;
 		TreeNode treeSource = treeEdge.parent;
 		TreeNode treeTarget = treeEdge.child;
-		RelPatternClassNode relSource;
+		RelPatternNode relSource;
 		RelPatternNode relTarget;
 		EStructuralFeature eStructuralFeature = relPatternEdge.getReferredEStructuralFeature();
 		int sourceIndex;
 		if (treeEdge.isOpposite) {
-			relSource = (RelPatternClassNode) relPatternEdge.getTarget();
+			relSource = relPatternEdge.getTarget();
 			relTarget = relPatternEdge.getSource();
 			//			eStructuralFeature = ((EReference)relPatternEdge.getReferredEStructuralFeature()).getEOpposite();
 			sourceIndex = 0;
@@ -575,7 +576,8 @@ class PatternForest
 		assert treeSource == patternNode2treeNode.get(relSource);
 		assert treeTarget == patternNode2treeNode.get(relTarget);
 		if (qvtrTarget == null) { // FIXME is a temporary StringLiteralExp still necessary?
-			RelPatternExpressionNode relPatternExpressionNode = ((TreeExpressionNode)treeTarget).patternNode;
+			RelPatternNode relPatternExpressionNode = ((TreeExpressionNode)treeTarget).patternNode;
+			UMLXUtil.assertExpressionNode(relPatternExpressionNode);
 			StringBuilder s = new StringBuilder();
 			for (String line : relPatternExpressionNode.getInitExpressionLines()) {
 				s.append(line);
@@ -629,7 +631,8 @@ class PatternForest
 		return null;
 	}
 
-	private @Nullable Element createRelationNode(@NonNull RelPatternClassNode relPatternClassNode) {
+	private @Nullable Element createRelationNode(@NonNull RelPatternNode relPatternClassNode) {
+		UMLXUtil.assertClassNode(relPatternClassNode);
 		TreeClassNode treeNode = (TreeClassNode) patternNode2treeNode.get(relPatternClassNode);
 		if (treeNode ==  null) {
 			// FIXME create shared variable
@@ -676,11 +679,12 @@ class PatternForest
 			for (@NonNull RelPatternNode relPatternNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
 				List<String> lines = relPatternNode.getInitExpressionLines();
 				if (lines.size() > 0) {
-					if (relPatternNode instanceof RelPatternClassNode) {
-						resolveRelPatternClassNodeExpression((@NonNull RelPatternClassNode) relPatternNode);
+					if (!relPatternNode.isExpression()) {
+						resolveRelPatternClassNodeExpression(relPatternNode);
 					}
 					else {
-						resolveRelPatternExpressionNodeExpression((@NonNull RelPatternExpressionNode) relPatternNode);
+						UMLXUtil.assertExpressionNode(relPatternNode);
+						resolveRelPatternExpressionNodeExpression(relPatternNode);
 					}
 				}
 			}
@@ -696,7 +700,8 @@ class PatternForest
 		}
 	}
 
-	private void resolveRelPatternClassNodeExpression(@NonNull RelPatternClassNode relPatternClassNode) throws CompilerChainException {
+	private void resolveRelPatternClassNodeExpression(@NonNull RelPatternNode relPatternClassNode) throws CompilerChainException {
+		UMLXUtil.assertClassNode(relPatternClassNode);
 		SharedVariable qvtrVariable = umlx2qvtr.getQVTrElement(SharedVariable.class, relPatternClassNode);
 		List<String> lines = relPatternClassNode.getInitExpressionLines();
 		if (lines.size() > 0) {
@@ -705,7 +710,8 @@ class PatternForest
 		}
 	}
 
-	private void resolveRelPatternExpressionNodeExpression( @NonNull RelPatternExpressionNode relPatternExpressionNode) throws CompilerChainException {
+	private void resolveRelPatternExpressionNodeExpression( @NonNull RelPatternNode relPatternExpressionNode) throws CompilerChainException {
+		UMLXUtil.assertExpressionNode(relPatternExpressionNode);
 		StringLiteralExp stringExpression = umlx2qvtr.basicGetQVTrElement(StringLiteralExp.class, relPatternExpressionNode);
 		if (stringExpression != null) {
 			resolveMemberExpression(relPatternExpressionNode, stringExpression);
@@ -723,7 +729,8 @@ class PatternForest
 		}
 	}
 
-	protected void resolveMemberExpression(@NonNull RelPatternExpressionNode relPatternExpressionNode, @NonNull StringLiteralExp stringExpression) throws CompilerChainException {
+	protected void resolveMemberExpression(@NonNull RelPatternNode relPatternExpressionNode, @NonNull StringLiteralExp stringExpression) throws CompilerChainException {
+		UMLXUtil.assertExpressionNode(relPatternExpressionNode);
 		String textExpression = stringExpression.getStringSymbol();
 		final EObject eContainer = stringExpression.eContainer();
 		assert eContainer != null;

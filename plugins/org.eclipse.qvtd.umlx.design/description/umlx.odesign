@@ -173,12 +173,12 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createPatternClassNode" label="Pattern Class" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createPatternNode" label="Pattern Node" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelPatternClassNode" referenceName="ownedRelPatternNodes">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="umlx.RelPatternNode" referenceName="ownedRelPatternNodes">
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service: umlxDefaultName"/>
                 </subModelOperations>
               </firstModelOperations>

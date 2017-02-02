@@ -21,9 +21,7 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -202,7 +200,7 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 						s2.append(SCOPE_SEPARATOR);
 					}
 					RelPatternNode invokingRelPatternNode = UMLXUtil.getInvokingRelPatternNode(relInvocationEdge);
-					if (!(invokingRelPatternNode instanceof RelPatternClassNode)) {
+					if (invokingRelPatternNode.isExpression()) {
 						needHash = true;
 					}
 					appendNameOf(s2, invokingRelPatternNode);
@@ -217,8 +215,8 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 				}
 			}
 		}
-		else if (element instanceof RelPatternExpressionNode) {
-			RelPatternExpressionNode relPatternExpressionNode = (RelPatternExpressionNode)element;
+		else if ((element instanceof RelPatternNode) && ((RelPatternNode)element).isExpression()) {
+			RelPatternNode relPatternExpressionNode = (RelPatternNode)element;
 			List<@NonNull RelPatternEdge> incoming = UMLXUtil.Internal.getIncomingList(relPatternExpressionNode);
 			if (incoming.size() == 1) {
 				appendNameOf(s, UMLXUtil.getSource(incoming.get(0)));
@@ -322,18 +320,10 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 	}
 
 	@Override
-	public Boolean visitRelPatternClassNode(@NonNull RelPatternClassNode object) {
-		s.append(REL_PATTERN_CLASS_PREFIX);
-		appendParent(object);
-		appendNameOf(s, object);
-		return true;
-	}
-
-	@Override
 	public Boolean visitRelPatternEdge(@NonNull RelPatternEdge object) {
 		s.append(REL_PATTERN_EDGE_PREFIX);
 		appendParent(object, FIELD_SEPARATOR);
-		RelPatternClassNode source = object.getSource();
+		RelPatternNode source = object.getSource();
 		if (source != null) {
 			appendNameOf(s, source);
 		}
@@ -346,11 +336,19 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 	}
 
 	@Override
-	public Boolean visitRelPatternExpressionNode(@NonNull RelPatternExpressionNode object) {
-		s.append(REL_PATTERN_EXPRESSION_PREFIX);
-		appendParent(object);
-		appendNameOf(s, object);
-		return true;
+	public @Nullable Boolean visitRelPatternNode(@NonNull RelPatternNode object) {
+		if (object.isExpression()) {
+			s.append(REL_PATTERN_EXPRESSION_PREFIX);
+			appendParent(object);
+			appendNameOf(s, object);
+			return true;
+		}
+		else {
+			s.append(REL_PATTERN_CLASS_PREFIX);
+			appendParent(object);
+			appendNameOf(s, object);
+			return true;
+		}
 	}
 
 	@Override

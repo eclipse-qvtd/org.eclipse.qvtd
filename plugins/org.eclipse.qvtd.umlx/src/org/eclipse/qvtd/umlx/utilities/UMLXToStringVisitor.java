@@ -18,14 +18,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
-import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
+import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
@@ -67,7 +66,7 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 
 	@Override
 	public @Nullable Object visitRelInvocationEdge(@NonNull RelInvocationEdge relInvocationEdge) {
-		RelPatternClassNode relPatternNode = relInvocationEdge.getReferredRelPatternNode();
+		RelPatternNode relPatternNode = relInvocationEdge.getReferredRelPatternNode();
 		if (relPatternNode != null) {
 			return relPatternNode.accept(this);
 		}
@@ -79,24 +78,6 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	public @Nullable Object visitRelInvocationNode(@NonNull RelInvocationNode relInvocationNode) {
 		RelDiagram relDiagram = relInvocationNode.getReferredRelDiagram();
 		append(relDiagram != null ? relDiagram.getName() : null);
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitRelPatternClassNode(@NonNull RelPatternClassNode relPatternClassNode) {
-		visitUMLXTypedElement(relPatternClassNode);
-		List<String> lines = relPatternClassNode.getInitExpressionLines();
-		if (lines.size() > 0) {
-			append(" = ");
-			boolean firstLine = true;
-			for (String line : lines) {
-				if (!firstLine) {
-					append("\n");
-				}
-				append(line);
-				firstLine = false;
-			}
-		}
 		return null;
 	}
 
@@ -113,19 +94,37 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 	}
 
 	@Override
-	public @Nullable Object visitRelPatternExpressionNode(@NonNull RelPatternExpressionNode relPatternExpressionNode) {
-		List<String> lines = relPatternExpressionNode.getInitExpressionLines();
-		if (lines.size() > 0) {
-			boolean firstLine = true;
-			for (String line : lines) {
-				if (!firstLine) {
-					append("\n");
+	public @Nullable Object visitRelPatternNode(@NonNull RelPatternNode relPatternNode) {
+		if (relPatternNode.isExpression()) {
+			List<String> lines = relPatternNode.getInitExpressionLines();
+			if (lines.size() > 0) {
+				boolean firstLine = true;
+				for (String line : lines) {
+					if (!firstLine) {
+						append("\n");
+					}
+					append(line);
+					firstLine = false;
 				}
-				append(line);
-				firstLine = false;
 			}
+			return null;
 		}
-		return null;
+		else {
+			visitUMLXTypedElement(relPatternNode);
+			List<String> lines = relPatternNode.getInitExpressionLines();
+			if (lines.size() > 0) {
+				append(" = ");
+				boolean firstLine = true;
+				for (String line : lines) {
+					if (!firstLine) {
+						append("\n");
+					}
+					append(line);
+					firstLine = false;
+				}
+			}
+			return null;
+		}
 	}
 
 	@Override

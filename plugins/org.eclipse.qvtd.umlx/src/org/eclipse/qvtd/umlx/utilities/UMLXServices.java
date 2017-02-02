@@ -39,9 +39,7 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -107,12 +105,12 @@ public class UMLXServices
 	}
 
 	protected @NonNull String defaultName(@NonNull EObject context, @NonNull Class<? extends UMLXNamedElement> newClass, @NonNull String prefix) {
-		Set<String> allNames = new HashSet<>();
+		Set<@NonNull String> allNames = new HashSet<>();
 		Resource eResource = context.eResource();
 		assert eResource != null;
 		for (EObject eObject : new TreeIterable(eResource)) {
 			if (newClass.isAssignableFrom(eObject.getClass())) {
-				allNames.add(((UMLXNamedElement)eObject).getName());
+				allNames.add(UMLXUtil.getName((UMLXNamedElement)eObject));
 			}
 		}
 		for (int i = allNames.size(); true; i++) {
@@ -232,11 +230,11 @@ public class UMLXServices
 	}
 
 	/**
-	 * Return a default anme for context.
+	 * Return a default name for context.
 	 */
 	public @NonNull String umlxDefaultName(EObject context) {
-		if (context instanceof RelPatternClassNode) {
-			return defaultName(context, RelPatternClassNode.class, "NewClass");
+		if ((context instanceof RelPatternNode) && !((RelPatternNode)context).isExpression()) {
+			return defaultName(context, RelPatternNode.class, "NewClass");
 		}
 		else if (context instanceof RelDiagram) {
 			return defaultName(context, RelDiagram.class, "NewRelation");
@@ -255,7 +253,7 @@ public class UMLXServices
 	 */
 	public @NonNull String umlxInvocationEdgeEndLabel(EObject context) {
 		if (context instanceof RelInvocationEdge) {
-			RelPatternClassNode relPatternNode = ((RelInvocationEdge)context).getReferredRelPatternNode();
+			RelPatternNode relPatternNode = ((RelInvocationEdge)context).getReferredRelPatternNode();
 			if (relPatternNode != null) {
 				return String.valueOf(relPatternNode.getName());
 			}
@@ -308,9 +306,9 @@ public class UMLXServices
 				return "«null-referredDiagram»";
 			}
 		}
-		else if (context instanceof RelPatternClassNode) {
+		else if ((context instanceof RelPatternNode) && !((RelPatternNode)context).isExpression()) {
 			StringBuilder s = new StringBuilder();
-			RelPatternClassNode relPatternClassNode = (RelPatternClassNode)context;
+			RelPatternNode relPatternClassNode = (RelPatternNode)context;
 			appendTypedElement(s, relPatternClassNode);
 			List<String> initExpressionLines = relPatternClassNode.getInitExpressionLines();
 			if (initExpressionLines.size() > 0) {
@@ -322,10 +320,10 @@ public class UMLXServices
 			}
 			return s.toString();
 		}
-		else if (context instanceof RelPatternExpressionNode) {
+		else if ((context instanceof RelPatternNode) && ((RelPatternNode)context).isExpression()) {
 			StringBuilder s = new StringBuilder();
 			boolean firstLine = true;
-			for (String line : ((RelPatternExpressionNode)context).getInitExpressionLines()) {
+			for (String line : ((RelPatternNode)context).getInitExpressionLines()) {
 				if (!firstLine) {
 					s.append("\n");
 				}
@@ -533,18 +531,15 @@ public class UMLXServices
 	 * Return true if this is an expression pattern node
 	 */
 	public boolean umlxRelPatternNodeIsExpression(EObject context) {
-		if (context instanceof RelPatternExpressionNode) {
-			return true;
-		}
-		return false;
+		return (context instanceof RelPatternNode) && ((RelPatternNode)context).isExpression();
 	}
 
 	/**
 	 * Return true if this is not a required pattern node
 	 */
 	public boolean umlxRelPatternNodeIsOptional(EObject context) {
-		if (context instanceof RelPatternClassNode) {
-			return !((RelPatternClassNode)context).isIsRequired();
+		if ((context instanceof RelPatternNode) && !((RelPatternNode)context).isExpression()) {
+			return !((RelPatternNode)context).isIsRequired();
 		}
 		return false;
 	}

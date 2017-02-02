@@ -76,9 +76,7 @@ import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
 import org.eclipse.qvtd.umlx.RelInvocationNode;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
-import org.eclipse.qvtd.umlx.RelPatternExpressionNode;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxImportNode;
@@ -155,7 +153,7 @@ public class QVTr2UMLX
 		@Override
 		public @Nullable UMLXElement visitOCLExpression(@NonNull OCLExpression qvtrExpression) {
 			RelDomainNode relDomainNode = context.getContainingRelDomainNode(qvtrExpression);
-			RelPatternExpressionNode relPatternExpressionNode = UMLXFactory.eINSTANCE.createRelPatternExpressionNode();
+			RelPatternNode relPatternExpressionNode = UMLXFactory.eINSTANCE.createRelPatternNode();
 			context.install(qvtrExpression, relPatternExpressionNode);
 			for (String line : PrettyPrinter.print(qvtrExpression).split("\\n")) {
 				relPatternExpressionNode.getInitExpressionLines().add(line);
@@ -165,8 +163,8 @@ public class QVTr2UMLX
 		}
 
 		@Override
-		public @Nullable RelPatternClassNode visitVariableExp(@NonNull VariableExp qvtrVariableExp) {
-			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, PivotUtil.getReferredVariable(qvtrVariableExp));
+		public @Nullable RelPatternNode visitVariableExp(@NonNull VariableExp qvtrVariableExp) {
+			RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, PivotUtil.getReferredVariable(qvtrVariableExp));
 			return relPatternNode;
 		}
 
@@ -244,8 +242,8 @@ public class QVTr2UMLX
 			return referencedDomains;
 		}
 
-		protected @NonNull RelPatternClassNode createRelPatternClassNode(@NonNull TypedElement qvtrTypedElement) {
-			RelPatternClassNode relPatternClassNode = UMLXFactory.eINSTANCE.createRelPatternClassNode();
+		protected @NonNull RelPatternNode createRelPatternClassNode(@NonNull TypedElement qvtrTypedElement) {
+			RelPatternNode relPatternClassNode = UMLXFactory.eINSTANCE.createRelPatternNode();
 			context.install(qvtrTypedElement, relPatternClassNode);
 			boolean isImplicit = (qvtrTypedElement instanceof Variable) && ((Variable)qvtrTypedElement).isIsImplicit();
 			if (isImplicit) {
@@ -303,7 +301,7 @@ public class QVTr2UMLX
 			//	Create the primitive domain and its variables
 			//
 			for (@NonNull Variable qvtrVariable : QVTrelationUtil.getOwnedVariables(qvtrRelation)) {
-				RelPatternClassNode relPatternClassNode = context.basicGetUMLXElement(RelPatternClassNode.class, qvtrVariable);
+				RelPatternNode relPatternClassNode = context.basicGetUMLXElement(RelPatternNode.class, qvtrVariable);
 				if (relPatternClassNode == null) {
 					relPatternClassNode = createRelPatternClassNode(qvtrVariable);
 					OCLExpression ownedInit = qvtrVariable.getOwnedInit();
@@ -387,7 +385,7 @@ public class QVTr2UMLX
 			for (@NonNull EObject eObject : new TreeIterable(qvtrRelationDomain, false)) {
 				if (eObject instanceof TemplateExp) {
 					TemplateExp qvtrTemplateExp = (TemplateExp)eObject;
-					RelPatternClassNode relPatternClassNode = createRelPatternClassNode(QVTrelationUtil.getBindsTo(qvtrTemplateExp));
+					RelPatternNode relPatternClassNode = createRelPatternClassNode(QVTrelationUtil.getBindsTo(qvtrTemplateExp));
 					context.install(qvtrTemplateExp, relPatternClassNode);
 
 
@@ -408,7 +406,7 @@ public class QVTr2UMLX
 						CollectionTemplateExp qvtrCollectionTemplateExp = (CollectionTemplateExp)eObject;
 						Variable qvtrRestVariable = qvtrCollectionTemplateExp.getRest();
 						if (qvtrRestVariable != null) {
-							RelPatternClassNode relPatternRestNode = createRelPatternClassNode(qvtrRestVariable);
+							RelPatternNode relPatternRestNode = createRelPatternClassNode(qvtrRestVariable);
 							ownedNodes.add(relPatternRestNode);
 						}
 					}
@@ -562,7 +560,7 @@ public class QVTr2UMLX
 
 		@Override
 		public @Nullable UMLXElement visitCollectionTemplateExp(@NonNull CollectionTemplateExp qvtrCollectionTemplateExp) {
-			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, qvtrCollectionTemplateExp);
+			RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, qvtrCollectionTemplateExp);
 			//			CollectionType qvtrCollectionType = QVTrelationUtil.getReferredCollectionType(qvtrCollectionTemplateExp);
 			assert relPatternNode.isIsMany();
 			//			relPatternNode.setIsNullFree(qvtrCollectionType.isIsNullFree());
@@ -597,7 +595,7 @@ public class QVTr2UMLX
 
 		@Override
 		public @Nullable UMLXElement visitObjectTemplateExp(@NonNull ObjectTemplateExp qvtrObjectTemplateExp) {
-			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, qvtrObjectTemplateExp);
+			RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, qvtrObjectTemplateExp);
 			for (@NonNull PropertyTemplateItem qvtrPropertyTemplateItem : QVTrelationUtil.getOwnedParts(qvtrObjectTemplateExp)) {
 				Property partProperty = QVTrelationUtil.getReferredProperty(qvtrPropertyTemplateItem);
 				OCLExpression partValue = QVTrelationUtil.getOwnedValue(qvtrPropertyTemplateItem);
@@ -610,16 +608,16 @@ public class QVTr2UMLX
 					relPatternEdge.setSource(relPatternNode);
 					relPatternEdge.setTarget(relPartPatternNode);
 				}
-				else if ((oppositeProperty != null) && (relPartPatternNode instanceof RelPatternClassNode) && oppositeProperty.isIsComposite()) {
+				else if ((oppositeProperty != null) && !relPartPatternNode.isExpression() && oppositeProperty.isIsComposite()) {
 					//					relPatternEdge.setIsOpposite(false);
 					relPatternEdge.setReferredEStructuralFeature(context.getEcoreOf(oppositeProperty));
-					relPatternEdge.setSource((RelPatternClassNode) relPartPatternNode);
+					relPatternEdge.setSource(relPartPatternNode);
 					relPatternEdge.setTarget(relPatternNode);
 				}
-				else if ((oppositeProperty != null) && (relPartPatternNode instanceof RelPatternClassNode) && partProperty.isIsImplicit()) {
+				else if ((oppositeProperty != null) && !relPartPatternNode.isExpression() && partProperty.isIsImplicit()) {
 					//					relPatternEdge.setIsOpposite(true);
 					relPatternEdge.setReferredEStructuralFeature(context.getEcoreOf(oppositeProperty));
-					relPatternEdge.setSource((RelPatternClassNode) relPartPatternNode);
+					relPatternEdge.setSource(relPartPatternNode);
 					relPatternEdge.setTarget(relPatternNode);
 				}
 				else {
@@ -651,7 +649,7 @@ public class QVTr2UMLX
 			while (itRootVariables.hasNext() && itArguments.hasNext()) {
 				Variable qvtrRootVariable = itRootVariables.next();
 				OCLExpression qvtrArgument = itArguments.next();
-				RelPatternClassNode umlxRootVariable = context.getUMLXElement(RelPatternClassNode.class, qvtrRootVariable);
+				RelPatternNode umlxRootVariable = context.getUMLXElement(RelPatternNode.class, qvtrRootVariable);
 				RelPatternNode relArgumentNode = create(qvtrArgument);
 				RelInvocationEdge relInvocationEdge = UMLXFactory.eINSTANCE.createRelInvocationEdge();
 				relInvocationEdge.setOwningRelInvocationNode(relInvocationNode);
@@ -666,7 +664,7 @@ public class QVTr2UMLX
 			RelDomainNode relDomainNode = context.getUMLXElement(RelDomainNode.class, qvtrRelationDomain);
 			for (@NonNull DomainPattern qvtrPattern : QVTrelationUtil.getOwnedPatterns(qvtrRelationDomain)) {
 				TemplateExp qvtrTemplateExpression = QVTrelationUtil.getOwnedTemplateExpression(qvtrPattern);
-				RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, qvtrTemplateExpression);
+				RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, qvtrTemplateExpression);
 				relPatternNode.setIsRoot(true);
 				qvtrTemplateExpression.accept(this);
 			}
@@ -675,7 +673,7 @@ public class QVTr2UMLX
 
 		@Override
 		public @Nullable UMLXElement visitSharedVariable(@NonNull SharedVariable qvtrSharedVariable) {
-			RelPatternClassNode relPatternNode = context.getUMLXElement(RelPatternClassNode.class, qvtrSharedVariable);
+			RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, qvtrSharedVariable);
 			return relPatternNode;
 		}
 	}

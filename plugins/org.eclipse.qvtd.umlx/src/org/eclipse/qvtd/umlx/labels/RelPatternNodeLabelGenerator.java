@@ -12,20 +12,25 @@ package org.eclipse.qvtd.umlx.labels;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.AbstractLabelGenerator;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
+import org.eclipse.qvtd.umlx.RelPatternNode;
 
-public final class RelPatternClassNodeLabelGenerator extends AbstractLabelGenerator<@NonNull RelPatternClassNode>
+public final class RelPatternNodeLabelGenerator extends AbstractLabelGenerator<@NonNull RelPatternNode>
 {
 	public static void initialize(@NonNull Registry registry) {
-		registry.install(RelPatternClassNode.class, new RelPatternClassNodeLabelGenerator());
+		registry.install(RelPatternNode.class, new RelPatternNodeLabelGenerator());
 	}
 
-	public RelPatternClassNodeLabelGenerator() {
-		super(RelPatternClassNode.class);
+	public RelPatternNodeLabelGenerator() {
+		super(RelPatternNode.class);
 	}
 
 	@Override
-	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull RelPatternClassNode object) {
-		labelBuilder.appendString(object.getName());
+	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull RelPatternNode object) {
+		if (object.isExpression()) {
+			labelBuilder.appendString(object.toString());
+		}
+		else {
+			labelBuilder.appendString(object.getName());
+		}
 	}
 }

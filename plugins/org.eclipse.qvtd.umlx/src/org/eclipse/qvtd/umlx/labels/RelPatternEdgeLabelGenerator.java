@@ -12,7 +12,6 @@ package org.eclipse.qvtd.umlx.labels;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.AbstractLabelGenerator;
-import org.eclipse.qvtd.umlx.RelPatternClassNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 
@@ -28,12 +27,12 @@ public final class RelPatternEdgeLabelGenerator extends AbstractLabelGenerator<@
 
 	@Override
 	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull RelPatternEdge object) {
-		RelPatternClassNode source = object.getSource();
+		RelPatternNode source = object.getSource();
 		RelPatternNode target = object.getTarget();
 		labelBuilder.appendString(source != null ? source.getName() : null);
 		labelBuilder.appendString(" -> ");
-		if (target instanceof RelPatternClassNode) {
-			labelBuilder.appendString(((RelPatternClassNode)target).getName());
+		if (!target.isExpression()) {
+			labelBuilder.appendString(target.getName());
 		}
 	}
 }

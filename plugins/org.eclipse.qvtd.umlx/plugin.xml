@@ -23,8 +23,8 @@
       	class="org.eclipse.qvtd.umlx.labels.RelDomainNodeLabelGenerator"/>
       <generator for="org.eclipse.qvtd.umlx.RelPatternEdge"
       	class="org.eclipse.qvtd.umlx.labels.RelPatternEdgeLabelGenerator"/>
-      <generator for="org.eclipse.qvtd.umlx.RelPatternClassNode"
-      	class="org.eclipse.qvtd.umlx.labels.RelPatternClassNodeLabelGenerator"/>
+      <generator for="org.eclipse.qvtd.umlx.RelPatternNode"
+      	class="org.eclipse.qvtd.umlx.labels.RelPatternNodeLabelGenerator"/>
       <generator for="org.eclipse.qvtd.umlx.UMLXModel"
       	class="org.eclipse.qvtd.umlx.labels.UMLXModelLabelGenerator"/>
       <generator for="org.eclipse.qvtd.umlx.UMLXNamedElement"
