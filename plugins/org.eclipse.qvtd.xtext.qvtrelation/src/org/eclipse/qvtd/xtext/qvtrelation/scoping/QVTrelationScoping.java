@@ -19,7 +19,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 
 public class QVTrelationScoping
-{	
+{
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTrelationCSPackage.Literals.ELEMENT_TEMPLATE_CS, ElementTemplateCSAttribution.INSTANCE);

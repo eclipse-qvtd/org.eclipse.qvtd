@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -55,7 +56,7 @@ import org.eclipse.qvtd.umlx.utilities.UMLXUtil;
 
 import com.google.common.collect.Iterables;
 
-public class PatternForest
+class PatternForest
 {
 	private class TreeEdge
 	{
@@ -668,8 +669,9 @@ public class PatternForest
 
 	/**
 	 * Second pass after all internal and external symbol defined; parse the OCL expression text.
+	 * @throws CompilerChainException
 	 */
-	public void resolveExpressions() {
+	public void resolveExpressions() throws CompilerChainException {
 		for (@NonNull RelDomainNode relDomainNode : UMLXUtil.getOwnedRelDomainNodes(relDiagram)) {
 			for (@NonNull RelPatternNode relPatternNode : UMLXUtil.getOwnedRelPatternNodes(relDomainNode)) {
 				List<String> lines = relPatternNode.getInitExpressionLines();
@@ -694,7 +696,7 @@ public class PatternForest
 		}
 	}
 
-	private void resolveRelPatternClassNodeExpression(@NonNull RelPatternClassNode relPatternClassNode) {
+	private void resolveRelPatternClassNodeExpression(@NonNull RelPatternClassNode relPatternClassNode) throws CompilerChainException {
 		SharedVariable qvtrVariable = umlx2qvtr.getQVTrElement(SharedVariable.class, relPatternClassNode);
 		List<String> lines = relPatternClassNode.getInitExpressionLines();
 		if (lines.size() > 0) {
@@ -703,14 +705,15 @@ public class PatternForest
 		}
 	}
 
-	private void resolveRelPatternExpressionNodeExpression( @NonNull RelPatternExpressionNode relPatternExpressionNode) {
+	private void resolveRelPatternExpressionNodeExpression( @NonNull RelPatternExpressionNode relPatternExpressionNode) throws CompilerChainException {
 		StringLiteralExp stringExpression = umlx2qvtr.basicGetQVTrElement(StringLiteralExp.class, relPatternExpressionNode);
 		if (stringExpression != null) {
 			resolveMemberExpression(relPatternExpressionNode, stringExpression);
 		}
 		else if (relPatternExpressionNode.getInvokingRelInvocationEdges().isEmpty()) {
-			//				OCLExpression qvtrExpression = createUnparsedExpression(relPatternExpressionNode);
-			//				addWhenPredicate(qvtrRelation, qvtrExpression);
+			Relation qvtrRelation = umlx2qvtr.getQVTrElement(Relation.class, relDiagram);
+			OCLExpression qvtrExpression = umlx2qvtr.parseContextualExpression(qvtrRelation, UMLXUtil.getInitExpressionLines(relPatternExpressionNode));
+			umlx2qvtr.addWhenPredicate(qvtrRelation, qvtrExpression);
 		}
 		else {
 			Relation qvtrRelation = umlx2qvtr.getQVTrElement(Relation.class, relDiagram);
@@ -720,17 +723,15 @@ public class PatternForest
 		}
 	}
 
-	protected void resolveMemberExpression(@NonNull RelPatternExpressionNode relPatternExpressionNode, @NonNull StringLiteralExp stringExpression) {
+	protected void resolveMemberExpression(@NonNull RelPatternExpressionNode relPatternExpressionNode, @NonNull StringLiteralExp stringExpression) throws CompilerChainException {
 		String textExpression = stringExpression.getStringSymbol();
 		final EObject eContainer = stringExpression.eContainer();
 		assert eContainer != null;
 		OCLExpression qvtrExpression = umlx2qvtr.parseContextualExpression(eContainer, Collections.singletonList(textExpression));
-		if (qvtrExpression != null) {
-			EReference eContainmentFeature = stringExpression.eContainmentFeature();
-			PivotUtilInternal.resetContainer(stringExpression);
-			eContainer.eSet(eContainmentFeature, qvtrExpression);
-			//				context.reinstall(relPatternExpressionNode, qvtrExpression);
-		}
+		EReference eContainmentFeature = stringExpression.eContainmentFeature();
+		PivotUtilInternal.resetContainer(stringExpression);
+		eContainer.eSet(eContainmentFeature, qvtrExpression);
+		//				context.reinstall(relPatternExpressionNode, qvtrExpression);
 	}
 
 	private @Nullable Element resolveInvocation(@NonNull RelInvocationNode relInvocationNode) {

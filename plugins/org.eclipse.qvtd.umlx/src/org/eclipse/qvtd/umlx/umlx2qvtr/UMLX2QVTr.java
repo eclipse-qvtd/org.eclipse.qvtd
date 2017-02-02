@@ -26,21 +26,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Import;
-import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.internal.context.AbstractParserContext;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
-import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
-import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.ParserContext;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -234,7 +228,6 @@ public class UMLX2QVTr extends QVTrelationHelper
 
 		@Override
 		public @Nullable Element visitUMLXModel(@NonNull UMLXModel umlxModel) {
-			//			qvtrModel.setExternalURI(context.qvtrResource.getURI().toString());
 			context.install(umlxModel, qvtrModel);
 			Iterable<@NonNull TxDiagram> txDiagrams = UMLXUtil.getOwnedTxDiagrams(umlxModel);
 			visitAll(txDiagrams);
@@ -243,8 +236,6 @@ public class UMLX2QVTr extends QVTrelationHelper
 				Iterables.addAll(txImports, UMLXUtil.getOwnedTxImportNodes(txDiagram));
 			}
 			createAll(txImports, qvtrModel.getOwnedImports());
-			//			createAll(PivotUtil.getOwnedPackages(qvtrModel), null); //umlxModel.getOwnedPackages());
-			//			createAll(relationModel.getOwnedComments(), umlxModel.getOwnedComments());
 			return null;
 		}
 
@@ -320,79 +311,25 @@ public class UMLX2QVTr extends QVTrelationHelper
 		}
 	}
 
-	/**
-	 * Create a new trace for the given list of generated objects for the given
-	 * context.
-	 *
-	protected void reinstall(@NonNull UMLXElement umlxElement, @NonNull Element qvtrElement) {
-		Element oldQVTrElement = umlx2qvtr.put(umlxElement, qvtrElement);
-		assert oldQVTrElement != null;
-		qvtrElement.getOwnedComments().addAll(oldQVTrElement.getOwnedComments());
-	} */
-
-	/*	protected @Nullable ExpressionInOCL parseContextualExpressionInOCL(@NonNull EObject eContainer, @NonNull String textExpression) {
-		//			context.getEnvironmentFactory().getMetamodelManager().parseSpecification(specification);
-		ParserContext parserContext = new AbstractParserContext(environmentFactory, null) {
-
-			@Override
-			public @Nullable ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-
-				EObject pivot = eContainer;
-				if ((pivot instanceof Element) && (pivot.eResource() != null) && !(pivot instanceof InvalidType)) {
-					environmentView.computeLookups((Element) pivot, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());
-				}
-				return scopeView.getParent();
-			}
-		};
-		//			if (parserContext == null) {
-		//				throw new ParserException(PivotMessagesInternal.UnknownContextType_ERROR_, NameUtil.qualifiedNameFor(contextElement), PivotUtilInternal.getSpecificationRole(specification));
-		//			}
-		parserContext.setRootElement((Element) eContainer);
-		try {
-			return parserContext.parse(eContainer, textExpression);
-		} catch (ParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	} */
-	protected @Nullable OCLExpression parseContextualExpression(@NonNull EObject eContainer, @NonNull List<String> textExpression) {
-		//			context.getEnvironmentFactory().getMetamodelManager().parseSpecification(specification);
-		ParserContext parserContext = new AbstractParserContext(environmentFactory, null) {
-
-			@Override
-			public @Nullable ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-
-				EObject pivot = eContainer;
-				if ((pivot instanceof Element) && (pivot.eResource() != null) && !(pivot instanceof InvalidType)) {
-					environmentView.computeLookups((Element) pivot, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());
-				}
-				return scopeView.getParent();
-			}
-		};
-		//			if (parserContext == null) {
-		//				throw new ParserException(PivotMessagesInternal.UnknownContextType_ERROR_, NameUtil.qualifiedNameFor(contextElement), PivotUtilInternal.getSpecificationRole(specification));
-		//			}
-		parserContext.setRootElement((Element) eContainer);
+	protected @NonNull OCLExpression parseContextualExpression(@NonNull EObject eContainer, @NonNull List<String> textExpression) throws CompilerChainException {
+		UMLXParserContext parserContext = new UMLXParserContext(environmentFactory, eContainer);
 		try {
 			StringBuilder s = new StringBuilder();
 			for (String line : textExpression) {
+				if (s.length() > 0) {
+					s.append("\n");
+				}
 				s.append(line);
-				s.append("\n");
 			}
-			ExpressionInOCL asExpressionInOCL = parserContext.parse(eContainer, s.toString());
-			OCLExpression asExpression = asExpressionInOCL.getOwnedBody();
-			assert asExpression != null;
+			OCLExpression asExpression = parserContext.parseExpression(eContainer, s.toString());
 			PivotUtilInternal.resetContainer(asExpression);
 			return asExpression;
-		} catch (ParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+		} catch (Exception e) {
+			throw new CompilerChainException(e);
 		}
 	}
 
-	private void resolveTxQueryBody(@NonNull TxQueryNode txQueryNode) {
+	private void resolveTxQueryBody(@NonNull TxQueryNode txQueryNode) throws CompilerChainException {
 		Function asFunction = getQVTrElement(Function.class, txQueryNode);
 		List<String> lines = txQueryNode.getInitExpressionLines();
 		if (lines.size() > 0) {

@@ -18,21 +18,23 @@ import java.util.Map;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -77,7 +79,7 @@ public class UMLXSerializeTests extends LoadTestCase
 	}
 
 	protected void doRoundTripTest(@NonNull URI inputURI1, @NonNull URI pivotURI1, @NonNull URI umlxURI, @NonNull URI pivotURI2, boolean skipCompare) throws Exception {
-		OCL ocl1 = OCL.newInstance(getProjectMap());
+		QVTrelation ocl1 = QVTrelation.newInstance(getProjectMap());
 		Resource qvtrResource1 = doLoad_Concrete(ocl1, inputURI1, pivotURI1, null);
 		Resource umlxResource1 = qvtrResource1.getResourceSet().createResource(umlxURI);
 		QVTr2UMLX qvtr2umlx = new QVTr2UMLX(ocl1.getEnvironmentFactory(), qvtrResource1, umlxResource1);
@@ -127,15 +129,22 @@ public class UMLXSerializeTests extends LoadTestCase
 		//	Find all references to all variables within the Relation
 		//
 		Map<@NonNull VariableDeclaration, @NonNull List<@NonNull Element>> variable2reference = new HashMap<>();
+		List<OCLExpression> whenExpressions = new ArrayList<>();
+		//		whenExpressions.add(asRelation.getWhen());
 		for (@NonNull EObject eObject : new TreeIterable(asRelation, true)) {
 			List<@NonNull VariableDeclaration> referredVariables = null;
 			if (eObject instanceof VariableExp) {
 				referredVariables = Lists.newArrayList(((VariableExp)eObject).getReferredVariable());
 			}
 			else if (eObject instanceof TemplateExp) {
-				referredVariables = Lists.newArrayList(((TemplateExp)eObject).getBindsTo());
+				TemplateExp templateExp = (TemplateExp)eObject;
+				referredVariables = Lists.newArrayList(templateExp.getBindsTo());
 				if (eObject instanceof CollectionTemplateExp) {
 					referredVariables.add(((CollectionTemplateExp)eObject).getRest());
+				}
+				OCLExpression where = templateExp.getWhere();
+				if (where != null) {
+					whenExpressions.add(where);
 				}
 			}
 			else if (eObject instanceof DomainPattern) {
@@ -161,18 +170,31 @@ public class UMLXSerializeTests extends LoadTestCase
 			if (variable instanceof TemplateVariable) {
 				boolean canBeShared = true;
 				for (@NonNull Element reference : references) {
-					if (reference instanceof ObjectTemplateExp) {
-						ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)reference;
-						if (!objectTemplateExp.getPart().isEmpty()) {
-							canBeShared = false;
-							break;
-						}
-						EObject eContainer = objectTemplateExp.eContainer();
+					if (reference instanceof TemplateExp) {
+						EObject eContainer = reference.eContainer();
 						if (eContainer instanceof PropertyTemplateItem) {
-							Property asProperty = ((PropertyTemplateItem)eContainer).getReferredProperty();
-							if ((asProperty == null) || asProperty.isIsComposite()) {
-								canBeShared = false;
-								break;
+							if (reference instanceof ObjectTemplateExp) {
+								ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)reference;
+								if (!objectTemplateExp.getPart().isEmpty()) {
+									canBeShared = false;
+									break;
+								}
+								Property asProperty = ((PropertyTemplateItem)eContainer).getReferredProperty();
+								if ((asProperty == null) || asProperty.isIsComposite()) {
+									canBeShared = false;
+									break;
+								}
+							}
+							else if (reference instanceof CollectionTemplateExp) {
+								CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)reference;
+								if (!collectionTemplateExp.getMember().isEmpty()) {
+									canBeShared = false;
+									break;
+								}
+								if (collectionTemplateExp.getRest() != null) {
+									canBeShared = false;
+									break;
+								}
 							}
 						}
 						else {
@@ -180,23 +202,12 @@ public class UMLXSerializeTests extends LoadTestCase
 							break;
 						}
 					}
-					else if (reference instanceof CollectionTemplateExp) {
-						CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)reference;
-						if (!collectionTemplateExp.getMember().isEmpty()) {
-							canBeShared = false;
-							break;
-						}
-						if (collectionTemplateExp.getRest() != null) {
-							canBeShared = false;
-							break;
-						}
-					}
-					EReference eContainmentFeature = reference.eContainmentFeature();
-					EClassifier eType = eContainmentFeature.getEType();
-					if (!eType.isInstance(PivotPackage.Literals.OCL_EXPRESSION)) {
-						canBeShared = false;
-						break;
-					}
+					//					EReference eContainmentFeature = reference.eContainmentFeature();
+					//					EClassifier eType = eContainmentFeature.getEType();
+					//					if (!eType.isInstance(PivotPackage.Literals.OCL_EXPRESSION)) {
+					//						canBeShared = false;
+					//						break;
+					//					}
 				}
 				if (canBeShared) {
 					VariableDeclaration sharedVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
@@ -222,6 +233,20 @@ public class UMLXSerializeTests extends LoadTestCase
 					}
 				}
 			}
+		}
+		//
+		//	Replace domain where's by relation when's
+		//
+		Pattern whenPattern = asRelation.getWhen();
+		for (OCLExpression whenExpression : whenExpressions) {
+			PivotUtilInternal.resetContainer(whenExpression);
+			Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
+			asPredicate.setConditionExpression(whenExpression);
+			if (whenPattern == null) {
+				whenPattern = QVTbaseFactory.eINSTANCE.createPattern();
+				asRelation.setWhen(whenPattern);
+			}
+			whenPattern.getPredicate().add(asPredicate);
 		}
 	}
 
@@ -275,6 +300,14 @@ public class UMLXSerializeTests extends LoadTestCase
 		URI pivotURI1 = getProjectFileURI("Forward2Reverse.qvtras");
 		URI umlxURI = getProjectFileURI("Forward2Reverse.umlx");
 		URI pivotURI2 = getProjectFileURI("Forward2Reverse.regenerated.qvtras");
+		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
+	}
+
+	public void testUMLXRoundtrip_HierarchicalStateMachine2FlatStateMachine_qvtr() throws Exception {
+		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
+		URI pivotURI1 = getProjectFileURI("HierarchicalStateMachine2FlatStateMachine.qvtras");
+		URI umlxURI = getProjectFileURI("HierarchicalStateMachine2FlatStateMachine.umlx");
+		URI pivotURI2 = getProjectFileURI("HierarchicalStateMachine2FlatStateMachine.regenerated.qvtras");
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
 	}
 
