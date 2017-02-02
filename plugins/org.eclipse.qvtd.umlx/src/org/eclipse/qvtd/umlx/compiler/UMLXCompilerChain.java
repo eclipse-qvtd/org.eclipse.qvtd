@@ -22,8 +22,10 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
 
 /**
@@ -38,15 +40,21 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 		}
 
 		public @NonNull Resource execute(@NonNull URI umlxURI) throws IOException {
-			Resource umlxResource = environmentFactory.getResourceSet().getResource(umlxURI, true);
-			if (umlxResource == null) {
-				throw new CompilerChainException("Failed to load " + umlxURI);
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				Resource umlxResource = environmentFactory.getResourceSet().getResource(umlxURI, true);
+				if (umlxResource == null) {
+					throw new CompilerChainException("Failed to load " + umlxURI);
+				}
+				Resource qvtrResource = createResource();
+				UMLX2QVTr umlx2qvtr = new UMLX2QVTr(environmentFactory, umlxResource, qvtrResource);
+				umlx2qvtr.transform();
+				saveResource(qvtrResource);
+				return qvtrResource;
 			}
-			Resource qvtrResource = createResource();
-			UMLX2QVTr umlx2qvtr = new UMLX2QVTr(environmentFactory, umlxResource, qvtrResource);
-			umlx2qvtr.transform();
-			saveResource(qvtrResource);
-			return qvtrResource;
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
 		}
 	}
 
