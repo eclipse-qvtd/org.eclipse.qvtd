@@ -33,14 +33,12 @@ public class GuardPatternAttribution extends AbstractAttribution
 		if (area instanceof Mapping) {
 			Mapping mapping = (Mapping)area;;
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
-			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {
 					for (org.eclipse.ocl.pivot.Package pPackage : typedModel.getUsedPackage()) {
 						environmentView.addNamedElement(pPackage);
 						environmentView.addNamedElements(pPackage.getOwnedClasses());
 					}
 				}
-			}
 			QVTcoreEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
 		}
 		else {

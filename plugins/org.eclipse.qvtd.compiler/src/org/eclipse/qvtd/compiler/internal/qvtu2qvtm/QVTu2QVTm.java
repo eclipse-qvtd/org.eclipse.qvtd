@@ -607,8 +607,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			mMapping.setName(name);
 			super.synthesize(mMapping);
 			Transformation uTransformation = QVTbaseUtil.getContainingTransformation(uMapping);
-			assert uTransformation != null;
-			for (@NonNull TypedModel uTypedModel : ClassUtil.nullFree(uTransformation.getModelParameter())) {
+			for (@NonNull TypedModel uTypedModel : QVTbaseUtil.getModelParameters(uTransformation)) {
 				MergedDomain mergedDomain = uTypedModel2mergedDomain.get(uTypedModel);
 				if (mergedDomain != null) {
 					CoreDomain mDomain = mergedDomain.synthesize();

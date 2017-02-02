@@ -125,7 +125,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			if (pDomain != null) {
 				TypedModel direction = csElement.getDirection();
 				if (direction == null) {
-					Transformation transformation = QVTbaseUtil.getContainingTransformation(pDomain);
+					Transformation transformation = QVTbaseUtil.basicGetContainingTransformation(pDomain);
 					if (transformation != null) {
 						direction = transformation.getModelParameter(null);
 					}

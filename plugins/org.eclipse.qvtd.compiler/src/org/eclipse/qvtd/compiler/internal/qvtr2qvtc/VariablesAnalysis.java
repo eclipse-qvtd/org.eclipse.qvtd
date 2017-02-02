@@ -230,7 +230,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		//
 		this.cMiddleRealizedVariable = addCoreRealizedVariable("trace", traceClass);
 
-		this.rThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), ClassUtil.nonNullState(QVTbaseUtil.getContainingTransformation(rEnforcedDomain)));
+		this.rThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), QVTbaseUtil.getContainingTransformation(rEnforcedDomain));
 		this.cThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), cTransformation);
 		ThisVariableAnalysis thisVariableAnalysis = new ThisVariableAnalysis(this, rThisVariable, cThisVariable);
 		addVariableAnalysis(thisVariableAnalysis);
@@ -452,7 +452,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected @NonNull VariableAnalysis getVariableAnalysis(@NonNull Variable relationVariable) {
 		VariableAnalysis analysis = rVariable2analysis.get(relationVariable);
 		if (analysis == null) {
-			assert QVTbaseUtil.getContainingTransformation(relationVariable) instanceof RelationalTransformation;
+			assert QVTbaseUtil.basicGetContainingTransformation(relationVariable) instanceof RelationalTransformation;
 			analysis = new RelationVariableAnalysis(this, relationVariable);
 			rVariable2analysis.put(relationVariable, analysis);
 		}

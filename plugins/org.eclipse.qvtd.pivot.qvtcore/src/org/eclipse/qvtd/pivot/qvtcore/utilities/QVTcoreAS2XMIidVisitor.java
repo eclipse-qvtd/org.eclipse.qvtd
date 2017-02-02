@@ -82,8 +82,8 @@ public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitRealizedVariable(@NonNull RealizedVariable object) {
 		if (object.eContainer() instanceof CorePattern) {
-			Rule rule = QVTcoreUtil.getContainingRule(object);
-			if((rule != null) && (rule.getName() != null)) {
+			Rule rule = QVTcoreUtil.basicGetContainingRule(object);
+			if ((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
 				if (name != null) {
 					s.append(VARIABLE_PREFIX);
@@ -100,8 +100,8 @@ public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor
 	public @Nullable Boolean visitVariable(@NonNull Variable object) {
 		EObject eContainer = object.eContainer();
 		if (eContainer instanceof CorePattern) {
-			Rule rule = QVTcoreUtil.getContainingRule(object);
-			if((rule != null) && (rule.getName() != null)) {
+			Rule rule = QVTcoreUtil.basicGetContainingRule(object);
+			if ((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
 				if (name != null) {
 					s.append(VARIABLE_PREFIX);

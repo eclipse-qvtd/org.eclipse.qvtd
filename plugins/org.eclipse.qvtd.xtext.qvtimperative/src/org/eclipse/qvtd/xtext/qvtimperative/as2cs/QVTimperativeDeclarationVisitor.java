@@ -342,7 +342,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		if (asMapping != null) {
 			@NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csMappingCall.setOwnedPathName(csPathName);
-			context.refreshPathName(csPathName, asMapping, QVTbaseUtil.getContainingTransformation(asMappingCall));
+			context.refreshPathName(csPathName, asMapping, QVTbaseUtil.basicGetContainingTransformation(asMappingCall));
 		}
 		else {
 			csMappingCall.setOwnedPathName(null);

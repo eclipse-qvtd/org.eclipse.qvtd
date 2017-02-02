@@ -1305,10 +1305,8 @@ public class OperationDependencyAnalysis
 			if (operation instanceof Function) {
 				Function function  = (Function)operation;
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
-				if (transformation != null) {
-					Variable thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
-					visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
-				}
+				Variable thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
+				visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
 				ownedParameters = function.getOwnedParameters();
 				ownedBody = function.getQueryExpression();
 			}
@@ -1560,9 +1558,6 @@ public class OperationDependencyAnalysis
 
 	protected @NonNull NavigationDependencyStep createPropertyDependencyStep(@NonNull Property containmentProperty, @NonNull OperationCallExp oclContainerCallExp) {
 		DomainUsage usage = getUsage(containmentProperty);
-		if (usage == null) {
-			usage = getUsage(containmentProperty);
-		}
 		DependencyStepFactory factory = getDependencyStepFactory(usage);
 		return factory.createPropertyDependencyStep(containmentProperty, oclContainerCallExp);
 	}

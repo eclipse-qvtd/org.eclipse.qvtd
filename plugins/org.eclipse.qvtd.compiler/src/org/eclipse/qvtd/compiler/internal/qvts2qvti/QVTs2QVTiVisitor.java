@@ -156,7 +156,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		}
 		Operation iOperation = qvtpOperation2qvtiOperation.get(pOperation);
 		if (iOperation == null) {
-			Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(pOperation);
+			Transformation containingTransformation = QVTbaseUtil.basicGetContainingTransformation(pOperation);
 			if (containingTransformation == qvtpTransformation) {
 				iOperation = EcoreUtil.copy(pOperation);
 				assert iOperation != null;

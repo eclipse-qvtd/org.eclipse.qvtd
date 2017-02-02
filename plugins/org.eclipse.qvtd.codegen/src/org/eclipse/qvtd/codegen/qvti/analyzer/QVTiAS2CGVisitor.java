@@ -487,11 +487,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (pOperation instanceof Function) {
 			if (cgSource == null) {			// FIXME workaround for BUG 481664
 				Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asOperationCallExp);
-				if (asTransformation != null) {
-					VariableDeclaration asThis = QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
-					VariableExp asThisExp = PivotUtil.createVariableExp(asThis);
-					cgSource = doVisit(CGValuedElement.class, asThisExp);
-				}
+				VariableDeclaration asThis = QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+				VariableExp asThisExp = PivotUtil.createVariableExp(asThis);
+				cgSource = doVisit(CGValuedElement.class, asThisExp);
 			}
 			CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 			cgFunctionCallExp.setReferredOperation(pOperation);

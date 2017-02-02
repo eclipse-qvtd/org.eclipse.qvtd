@@ -147,7 +147,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	protected @NonNull DomainUsage getDomainUsage(@Nullable EObject object) {
-		Domain domain = QVTcoreUtil.getContainingDomain(object);
+		Domain domain = QVTcoreUtil.basicGetContainingDomain(object);
 		if (domain !=  null) {
 			return visit(domain.getTypedModel());
 		}

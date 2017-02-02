@@ -107,6 +107,15 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		throw new IllegalStateException();
 	}
 
+	public static @NonNull RelationalTransformation getContainingTransformation(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof RelationalTransformation) {
+				return (RelationalTransformation) eObject;
+			}
+		}
+		throw new IllegalStateException();
+	}
+
 	public static org.eclipse.ocl.pivot.@NonNull Class getIdentifies(@NonNull Key rKey) {
 		return ClassUtil.nonNullState(rKey.getIdentifies());
 	}

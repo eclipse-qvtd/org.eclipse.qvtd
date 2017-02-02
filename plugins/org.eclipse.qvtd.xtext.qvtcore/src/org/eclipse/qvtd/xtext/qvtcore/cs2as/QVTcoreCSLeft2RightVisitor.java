@@ -23,7 +23,6 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -59,7 +58,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 				if (csParent instanceof MappingCS) {
 					Mapping asMapping = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
 					if (asMapping != null) {
-						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
+						Transformation asTransformation = QVTbaseUtil.basicGetContainingTransformation(asMapping);
 						if (asTransformation != null) {
 							next = asTransformation;
 						}
@@ -69,7 +68,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 				else if (csParent instanceof QueryCS) {
 					Function asFunction = PivotUtil.getPivot(Function.class, (QueryCS)csParent);
 					if (asFunction != null) {
-						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asFunction);;
+						Transformation asTransformation = QVTbaseUtil.basicGetContainingTransformation(asFunction);;
 						if (asTransformation != null) {
 							next = asTransformation;
 						}
@@ -143,7 +142,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
-				Transformation containingTransformation = ClassUtil.nonNullState(QVTbaseUtil.getContainingTransformation(function));
+				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
 				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, containingTransformation);
 				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);

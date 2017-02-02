@@ -555,12 +555,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				SchedulerConstants scheduler = getRegion().getMultiRegion().getSchedulerConstants();
 				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
 				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
-				if (pTransformation != null) {
-					Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
-					if (pVariableExp.getReferredVariable() == pThisVariable) {
-						VariableDeclaration iThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
-						return PivotUtil.createVariableExp(iThisVariable);
-					}
+				Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
+				if (pVariableExp.getReferredVariable() == pThisVariable) {
+					VariableDeclaration iThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
+					return PivotUtil.createVariableExp(iThisVariable);
 				}
 			}
 			if (node != null) {

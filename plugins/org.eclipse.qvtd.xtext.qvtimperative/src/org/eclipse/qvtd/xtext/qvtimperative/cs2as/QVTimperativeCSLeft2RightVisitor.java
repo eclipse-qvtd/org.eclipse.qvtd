@@ -59,7 +59,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 				if (csParent instanceof MappingCS) {
 					Mapping asMapping = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
 					if (asMapping != null) {
-						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
+						Transformation asTransformation = QVTbaseUtil.basicGetContainingTransformation(asMapping);
 						if (asTransformation != null) {
 							next = asTransformation;
 						}
@@ -69,7 +69,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 				else if (csParent instanceof QueryCS) {
 					Function asFunction = PivotUtil.getPivot(Function.class, (QueryCS)csParent);
 					if (asFunction != null) {
-						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asFunction);;
+						Transformation asTransformation = QVTbaseUtil.basicGetContainingTransformation(asFunction);;
 						if (asTransformation != null) {
 							next = asTransformation;
 						}

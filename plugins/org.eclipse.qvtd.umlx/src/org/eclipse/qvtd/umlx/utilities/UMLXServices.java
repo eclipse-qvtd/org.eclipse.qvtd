@@ -328,9 +328,9 @@ public class UMLXServices
 			for (String line : ((RelPatternExpressionNode)context).getInitExpressionLines()) {
 				if (!firstLine) {
 					s.append("\n");
-					s.append(line);
-					firstLine = false;
 				}
+				s.append(line);
+				firstLine = false;
 			}
 			return s.toString();
 		}

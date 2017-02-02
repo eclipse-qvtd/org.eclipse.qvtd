@@ -783,11 +783,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
 		if (ownedSource instanceof VariableExp) {
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
-			if (transformation != null) {
-				Variable thisVariable = QVTbaseUtil.getContextVariable(scheduler.getStandardLibrary(), transformation);
-				if (((VariableExp)ownedSource).getReferredVariable() == thisVariable) {
-					ownedSource = null;
-				}
+			Variable thisVariable = QVTbaseUtil.getContextVariable(scheduler.getStandardLibrary(), transformation);
+			if (((VariableExp)ownedSource).getReferredVariable() == thisVariable) {
+				ownedSource = null;
 			}
 		}
 		String operationName = ClassUtil.nonNullState(referredOperation.getName());

@@ -28,10 +28,8 @@ public class TypedModelAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		TypedModel typedModel = (TypedModel)target;
 		BaseModel model = QVTbaseUtil.getContainingModel(typedModel);
-		if (model != null) {
-			for (Import _import : model.getOwnedImports()) {
-				environmentView.addElement(_import.getName(), _import.getImportedNamespace());
-			}
+		for (Import _import : model.getOwnedImports()) {
+			environmentView.addElement(_import.getName(), _import.getImportedNamespace());
 		}
 		return scopeView.getParent();
 	}
