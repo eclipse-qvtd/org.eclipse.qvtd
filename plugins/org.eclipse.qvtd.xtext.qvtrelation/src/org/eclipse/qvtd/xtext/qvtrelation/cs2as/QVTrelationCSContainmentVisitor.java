@@ -143,16 +143,17 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				List<org.eclipse.ocl.pivot.Package> newUsedPackage = new ArrayList<>();
+				List<org.eclipse.ocl.pivot.Package> newUsedPackages = new ArrayList<>();
 				for (Namespace metamodelId : csElement.getMetamodelIds()) {
 					if (metamodelId instanceof Model) {
-						newUsedPackage.addAll(((Model)metamodelId).getOwnedPackages());
+						newUsedPackages.addAll(((Model)metamodelId).getOwnedPackages());
 					}
 					else if (metamodelId instanceof org.eclipse.ocl.pivot.Package) {
-						newUsedPackage.add((org.eclipse.ocl.pivot.Package)metamodelId);
+						newUsedPackages.add((org.eclipse.ocl.pivot.Package)metamodelId);
 					}
 				}
-				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), newUsedPackage);
+				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), newUsedPackages);
+				PivotUtilInternal.refreshList(pTypedModel.getDependsOn(), csElement.getDependsOn());
 			}
 			return null;
 		}

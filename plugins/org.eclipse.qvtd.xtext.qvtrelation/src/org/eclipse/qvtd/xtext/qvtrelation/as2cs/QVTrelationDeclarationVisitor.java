@@ -647,7 +647,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			csDirection.setName(null);
 		}
 		PivotUtilInternal.refreshList(csDirection.getMetamodelIds(), asTypedModel.getUsedPackage());
-		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		PivotUtilInternal.refreshList(csDirection.getDependsOn(), asTypedModel.getDependsOn());
 		return csDirection;
 	}
 }

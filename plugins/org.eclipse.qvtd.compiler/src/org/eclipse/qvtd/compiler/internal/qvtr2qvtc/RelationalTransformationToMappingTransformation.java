@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
@@ -20,9 +20,10 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /*public*/ class RelationalTransformationToMappingTransformation
-{	
+{
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 
 	public RelationalTransformationToMappingTransformation(@NonNull QVTr2QVTc qvtr2qvtc) {
@@ -36,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 		coreTransformation.getModelParameter().add(coreTypedModel);
 		return coreTypedModel;
 	}
-	
+
 	public @NonNull Transformation doRelationalTransformationToMappingTransformation(@NonNull RelationalTransformation relationalTransformation) {
 		//
 		//	Create the core Transformation
@@ -55,6 +56,14 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 		for (@NonNull TypedModel relationTypedModel : ClassUtil.nullFree(relationalTransformation.getModelParameter())) {
 			TypedModel coreTypedModel = createTypedModel(coreTransformation, relationTypedModel.getName(), ClassUtil.nullFree(relationTypedModel.getUsedPackage()));
 			qvtr2qvtc.putTypedModel(relationTypedModel, coreTypedModel);
+		}
+		for (@NonNull TypedModel relationTypedModel : ClassUtil.nullFree(relationalTransformation.getModelParameter())) {
+			if (relationTypedModel.getDependsOn().size() > 0) {
+				TypedModel coreTypedModel = qvtr2qvtc.getCoreTypedModel(relationTypedModel);
+				for (@NonNull TypedModel relationDependsOn : QVTrelationUtil.getDependsOns(relationTypedModel)) {
+					coreTypedModel.getDependsOn().add(qvtr2qvtc.getCoreTypedModel(relationDependsOn));
+				}
+			}
 		}
 		return coreTransformation;
 	}
