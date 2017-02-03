@@ -299,23 +299,23 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cUsesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Assignment cUsesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final CrossReference cUsesCoreDomainCrossReference_5_1_0 = (CrossReference)cUsesAssignment_5_1.eContents().get(0);
-		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_5_1_0.eContents().get(1);
+		private final CrossReference cUsesTypedModelCrossReference_5_1_0 = (CrossReference)cUsesAssignment_5_1.eContents().get(0);
+		private final RuleCall cUsesTypedModelUnrestrictedNameParserRuleCall_5_1_0_1 = (RuleCall)cUsesTypedModelCrossReference_5_1_0.eContents().get(1);
 		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
 		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
 		private final Assignment cUsesAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
-		private final CrossReference cUsesCoreDomainCrossReference_5_2_1_0 = (CrossReference)cUsesAssignment_5_2_1.eContents().get(0);
-		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_5_2_1_0.eContents().get(1);
+		private final CrossReference cUsesTypedModelCrossReference_5_2_1_0 = (CrossReference)cUsesAssignment_5_2_1.eContents().get(0);
+		private final RuleCall cUsesTypedModelUnrestrictedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cUsesTypedModelCrossReference_5_2_1_0.eContents().get(1);
 
 		//DirectionCS:
 		//	{DirectionCS} name=UnrestrictedName? 'imports' imports+=[pivot::Package|UnrestrictedName] (','
-		//	imports+=[pivot::Package|UnrestrictedName])* ('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (','
-		//	uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?;
+		//	imports+=[pivot::Package|UnrestrictedName])* ('uses' uses+=[qvtbase::TypedModel|UnrestrictedName] (','
+		//	uses+=[qvtbase::TypedModel|UnrestrictedName])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{DirectionCS} name=UnrestrictedName? 'imports' imports+=[pivot::Package|UnrestrictedName] (','
-		//imports+=[pivot::Package|UnrestrictedName])* ('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (','
-		//uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?
+		//imports+=[pivot::Package|UnrestrictedName])* ('uses' uses+=[qvtbase::TypedModel|UnrestrictedName] (','
+		//uses+=[qvtbase::TypedModel|UnrestrictedName])*)?
 		public Group getGroup() { return cGroup; }
 
 		//{DirectionCS}
@@ -354,35 +354,35 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_4_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_4_1_0_1; }
 
-		//('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (',' uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?
+		//('uses' uses+=[qvtbase::TypedModel|UnrestrictedName] (',' uses+=[qvtbase::TypedModel|UnrestrictedName])*)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//'uses'
 		public Keyword getUsesKeyword_5_0() { return cUsesKeyword_5_0; }
 
-		//uses+=[qvtcore::CoreDomain|UnrestrictedName]
+		//uses+=[qvtbase::TypedModel|UnrestrictedName]
 		public Assignment getUsesAssignment_5_1() { return cUsesAssignment_5_1; }
 
-		//[qvtcore::CoreDomain|UnrestrictedName]
-		public CrossReference getUsesCoreDomainCrossReference_5_1_0() { return cUsesCoreDomainCrossReference_5_1_0; }
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getUsesTypedModelCrossReference_5_1_0() { return cUsesTypedModelCrossReference_5_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1; }
+		public RuleCall getUsesTypedModelUnrestrictedNameParserRuleCall_5_1_0_1() { return cUsesTypedModelUnrestrictedNameParserRuleCall_5_1_0_1; }
 
-		//(',' uses+=[qvtcore::CoreDomain|UnrestrictedName])*
+		//(',' uses+=[qvtbase::TypedModel|UnrestrictedName])*
 		public Group getGroup_5_2() { return cGroup_5_2; }
 
 		//','
 		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
 
-		//uses+=[qvtcore::CoreDomain|UnrestrictedName]
+		//uses+=[qvtbase::TypedModel|UnrestrictedName]
 		public Assignment getUsesAssignment_5_2_1() { return cUsesAssignment_5_2_1; }
 
-		//[qvtcore::CoreDomain|UnrestrictedName]
-		public CrossReference getUsesCoreDomainCrossReference_5_2_1_0() { return cUsesCoreDomainCrossReference_5_2_1_0; }
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getUsesTypedModelCrossReference_5_2_1_0() { return cUsesTypedModelCrossReference_5_2_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1; }
+		public RuleCall getUsesTypedModelUnrestrictedNameParserRuleCall_5_2_1_0_1() { return cUsesTypedModelUnrestrictedNameParserRuleCall_5_2_1_0_1; }
 	}
 
 	public class GuardPatternCSElements extends AbstractParserRuleElementFinder {
@@ -1607,8 +1607,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//DirectionCS:
 	//	{DirectionCS} name=UnrestrictedName? 'imports' imports+=[pivot::Package|UnrestrictedName] (','
-	//	imports+=[pivot::Package|UnrestrictedName])* ('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (','
-	//	uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?;
+	//	imports+=[pivot::Package|UnrestrictedName])* ('uses' uses+=[qvtbase::TypedModel|UnrestrictedName] (','
+	//	uses+=[qvtbase::TypedModel|UnrestrictedName])*)?;
 	public DirectionCSElements getDirectionCSAccess() {
 		return pDirectionCS;
 	}

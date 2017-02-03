@@ -526,7 +526,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         name=UnrestrictedName?
 	 *         imports+=[Package|UnrestrictedName]
 	 *         imports+=[Package|UnrestrictedName]*
-	 *         (uses+=[CoreDomain|UnrestrictedName] uses+=[CoreDomain|UnrestrictedName]*)?
+	 *         (uses+=[TypedModel|UnrestrictedName] uses+=[TypedModel|UnrestrictedName]*)?
 	 *     )
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {

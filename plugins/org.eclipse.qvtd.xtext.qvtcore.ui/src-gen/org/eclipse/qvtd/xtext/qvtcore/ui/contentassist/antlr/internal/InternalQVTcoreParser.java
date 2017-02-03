@@ -73126,13 +73126,13 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             // InternalQVTcore.g:24896:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_1_0());
+               before(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_1_0());
             }
             // InternalQVTcore.g:24897:1: ( ruleUnrestrictedName )
             // InternalQVTcore.g:24898:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDirectionCSAccess().getUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1());
+               before(grammarAccess.getDirectionCSAccess().getUsesTypedModelUnrestrictedNameParserRuleCall_5_1_0_1());
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleUnrestrictedName();
@@ -73140,13 +73140,13 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDirectionCSAccess().getUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1());
+               after(grammarAccess.getDirectionCSAccess().getUsesTypedModelUnrestrictedNameParserRuleCall_5_1_0_1());
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_1_0());
+               after(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_1_0());
             }
 
             }
@@ -73183,13 +73183,13 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             // InternalQVTcore.g:24915:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_2_1_0());
+               before(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_2_1_0());
             }
             // InternalQVTcore.g:24916:1: ( ruleUnrestrictedName )
             // InternalQVTcore.g:24917:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDirectionCSAccess().getUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1());
+               before(grammarAccess.getDirectionCSAccess().getUsesTypedModelUnrestrictedNameParserRuleCall_5_2_1_0_1());
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleUnrestrictedName();
@@ -73197,13 +73197,13 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDirectionCSAccess().getUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1());
+               after(grammarAccess.getDirectionCSAccess().getUsesTypedModelUnrestrictedNameParserRuleCall_5_2_1_0_1());
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_2_1_0());
+               after(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_2_1_0());
             }
 
             }

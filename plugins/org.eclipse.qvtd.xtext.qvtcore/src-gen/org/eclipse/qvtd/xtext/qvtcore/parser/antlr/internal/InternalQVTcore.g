@@ -551,7 +551,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_1_0());
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
@@ -573,7 +573,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_2_1_0());
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_2_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();

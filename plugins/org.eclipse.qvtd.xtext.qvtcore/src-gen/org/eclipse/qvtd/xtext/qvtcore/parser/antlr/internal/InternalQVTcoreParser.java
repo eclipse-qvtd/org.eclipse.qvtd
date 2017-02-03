@@ -1756,7 +1756,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_1_0());
+                      	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_1_0());
 
                     }
                     pushFollow(FollowSets000.FOLLOW_13);
@@ -1816,7 +1816,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    }
                     	    if ( state.backtracking==0 ) {
 
-                    	      	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_2_1_0());
+                    	      	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesTypedModelCrossReference_5_2_1_0());
 
                     	    }
                     	    pushFollow(FollowSets000.FOLLOW_13);
