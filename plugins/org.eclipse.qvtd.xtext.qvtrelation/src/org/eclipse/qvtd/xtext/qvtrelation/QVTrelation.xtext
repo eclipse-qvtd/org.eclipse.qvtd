@@ -63,11 +63,11 @@ KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	
 ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName]
 	| '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
-;
-	
+	('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?;
+
 ObjectTemplateCS: name=UnrestrictedName? ':' ownedType=TypedRefCS
 	'{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}';
-	
+
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;	
 
 PredicateCS: ownedCondition=ExpCS ';';
@@ -159,6 +159,7 @@ QVTrelationUnrestrictedName:
 |   'replace'
 |   'top'
 |   'transformation'
+|   'uses'
 |   'when'
 |   'where'
 ;
