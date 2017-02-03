@@ -133,6 +133,7 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelDomainNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDomainNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelInvocationEdge = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationEdge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelInvocationNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationNode);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_TxTypedModelNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxTypedModelNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_EClass = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClass);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_EClassifier = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClassifier);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelDiagram = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDiagram);
@@ -517,10 +518,12 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _TxQueryNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNING_TX_DIAGRAM, Types._TxQueryNode, 2);
 
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__check = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, Types._TxTypedModelNode, 0);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__enforce = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 1);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__ownedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 2);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 3);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = new ExecutorPropertyWithImplementation("RelDomainNode", Types._TxTypedModelNode, 4, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE));
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__dependsOns = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS, Types._TxTypedModelNode, 1);
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__enforce = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 2);
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__ownedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 3);
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 4);
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = new ExecutorPropertyWithImplementation("RelDomainNode", Types._TxTypedModelNode, 5, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE));
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__TxTypedModelNode__dependsOns = new ExecutorPropertyWithImplementation("TxTypedModelNode", Types._TxTypedModelNode, 6, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS));
 
 		public static final @NonNull ExecutorProperty _UMLXElement__comments = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_ELEMENT__COMMENTS, Types._UMLXElement, 0);
 
@@ -1728,6 +1731,7 @@ public class UMLXTables
 		private static final @NonNull ExecutorProperty @NonNull [] _TxTypedModelNode = {
 			UMLXTables.Properties._TxTypedModelNode__check,
 			UMLXTables.Properties._UMLXElement__comments,
+			UMLXTables.Properties._TxTypedModelNode__dependsOns,
 			UMLXTables.Properties._TxTypedModelNode__enforce,
 			UMLXTables.Properties._UMLXNamedElement__name,
 			UMLXTables.Properties._TxTypedModelNode__ownedTxPackageNodes,

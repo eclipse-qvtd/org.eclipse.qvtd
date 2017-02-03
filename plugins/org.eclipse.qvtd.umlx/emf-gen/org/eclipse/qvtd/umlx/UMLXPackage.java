@@ -1271,13 +1271,22 @@ public interface UMLXPackage extends EPackage {
 	int TX_TYPED_MODEL_NODE__CHECK = TX_NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Depends Ons</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_TYPED_MODEL_NODE__DEPENDS_ONS = TX_NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Enforce</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__ENFORCE = TX_NODE_FEATURE_COUNT + 2;
+	int TX_TYPED_MODEL_NODE__ENFORCE = TX_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list.
@@ -1286,7 +1295,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES = TX_NODE_FEATURE_COUNT + 3;
+	int TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES = TX_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owning Tx Diagram</b></em>' container reference.
@@ -1295,7 +1304,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 4;
+	int TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Tx Typed Model Node</em>' class.
@@ -1304,7 +1313,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 5;
+	int TX_TYPED_MODEL_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -2123,6 +2132,17 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getTxTypedModelNode_Check();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getDependsOns <em>Depends Ons</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Depends Ons</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getDependsOns()
+	 * @see #getTxTypedModelNode()
+	 * @generated
+	 */
+	EReference getTxTypedModelNode_DependsOns();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isEnforce <em>Enforce</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2870,6 +2890,14 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TX_TYPED_MODEL_NODE__CHECK = eINSTANCE.getTxTypedModelNode_Check();
+
+		/**
+		 * The meta object literal for the '<em><b>Depends Ons</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_TYPED_MODEL_NODE__DEPENDS_ONS = eINSTANCE.getTxTypedModelNode_DependsOns();
 
 		/**
 		 * The meta object literal for the '<em><b>Enforce</b></em>' attribute feature.

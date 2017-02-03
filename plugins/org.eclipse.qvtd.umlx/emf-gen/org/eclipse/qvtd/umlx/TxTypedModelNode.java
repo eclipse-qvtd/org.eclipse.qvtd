@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isCheck <em>Check</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getDependsOns <em>Depends Ons</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isEnforce <em>Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
@@ -58,6 +59,21 @@ public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	 * @generated
 	 */
 	void setCheck(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Depends Ons</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxTypedModelNode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Depends Ons</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Depends Ons</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_DependsOns()
+	 * @generated
+	 */
+	EList<TxTypedModelNode> getDependsOns();
 
 	/**
 	 * Returns the value of the '<em><b>Enforce</b></em>' attribute.

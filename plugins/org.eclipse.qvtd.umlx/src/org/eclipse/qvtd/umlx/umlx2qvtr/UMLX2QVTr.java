@@ -136,10 +136,18 @@ public class UMLX2QVTr extends QVTrelationHelper
 			//			Collections.sort(qvtrKeys, NameUtil.NAMEABLE_COMPARATOR);
 			Iterables.addAll(QVTrelationUtil.Internal.getOwnedKeysList(qvtrRelationalTransformation), qvtrKeys);
 			QVTbaseUtil.Internal.getOwnedClassesList(asPackage).add(qvtrRelationalTransformation);
-
+			//
 			List<@NonNull Rule> allRelationsList = new ArrayList<>();
 			createAll(UMLXUtil.getOwnedRelDiagrams(txDiagram), allRelationsList);
 			createAll(UMLXUtil.getOwnedTxQueryNodes(txDiagram), QVTbaseUtil.Internal.getOwnedOperationsList(qvtrRelationalTransformation));
+			//
+			for (@NonNull TxTypedModelNode txTypedModelNode : UMLXUtil.getOwnedTxTypedModelNodes(txDiagram)) {
+				TypedModel asTypedModel = context.getQVTrElement(TypedModel.class, txTypedModelNode);
+				for (@NonNull TxTypedModelNode txDependsOn : UMLXUtil.getDependsOns(txTypedModelNode)) {
+					TypedModel asDependsOn = context.getQVTrElement(TypedModel.class, txDependsOn);
+					asTypedModel.getDependsOn().add(asDependsOn);
+				}
+			}
 			//			Collections.sort(allRelationsList, NameUtil.NAMEABLE_COMPARATOR);
 			Iterables.addAll(QVTrelationUtil.Internal.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
 			QVTbaseUtil.getContextVariable(metamodelManager.getStandardLibrary(), qvtrRelationalTransformation);

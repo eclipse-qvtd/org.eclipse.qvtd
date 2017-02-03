@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -51,6 +52,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isCheck <em>Check</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getDependsOns <em>Depends Ons</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isEnforce <em>Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
@@ -98,6 +100,16 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @ordered
 	 */
 	protected boolean check = CHECK_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDependsOns() <em>Depends Ons</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDependsOns()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TxTypedModelNode> dependsOns;
 
 	/**
 	 * The default value of the '{@link #isEnforce() <em>Enforce</em>}' attribute.
@@ -192,6 +204,19 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		check = newCheck;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_TYPED_MODEL_NODE__CHECK, oldCheck, check));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<TxTypedModelNode> getDependsOns() {
+		if (dependsOns == null) {
+			dependsOns = new EObjectResolvingEList<TxTypedModelNode>(TxTypedModelNode.class, this, UMLXPackage.TX_TYPED_MODEL_NODE__DEPENDS_ONS);
+		}
+		return dependsOns;
 	}
 
 	/**
@@ -441,6 +466,8 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return getName();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__CHECK:
 				return isCheck();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__DEPENDS_ONS:
+				return getDependsOns();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				return isEnforce();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
@@ -465,6 +492,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__CHECK:
 				setCheck((Boolean)newValue);
+				return;
+			case UMLXPackage.TX_TYPED_MODEL_NODE__DEPENDS_ONS:
+				getDependsOns().clear();
+				getDependsOns().addAll((Collection<? extends TxTypedModelNode>)newValue);
 				return;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				setEnforce((Boolean)newValue);
@@ -494,6 +525,9 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			case UMLXPackage.TX_TYPED_MODEL_NODE__CHECK:
 				setCheck(CHECK_EDEFAULT);
 				return;
+			case UMLXPackage.TX_TYPED_MODEL_NODE__DEPENDS_ONS:
+				getDependsOns().clear();
+				return;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				setEnforce(ENFORCE_EDEFAULT);
 				return;
@@ -519,6 +553,8 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case UMLXPackage.TX_TYPED_MODEL_NODE__CHECK:
 				return check != CHECK_EDEFAULT;
+			case UMLXPackage.TX_TYPED_MODEL_NODE__DEPENDS_ONS:
+				return dependsOns != null && !dependsOns.isEmpty();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				return enforce != ENFORCE_EDEFAULT;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:

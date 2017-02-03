@@ -115,6 +115,10 @@ public class UMLXUtil
 		return ClassUtil.nullFree(umlxElement.getComments());
 	}
 
+	public static @NonNull Iterable<@NonNull TxTypedModelNode> getDependsOns(@NonNull TxTypedModelNode txTypedModelNode) {
+		return ClassUtil.nullFree(txTypedModelNode.getDependsOns());
+	}
+
 	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncoming(@NonNull RelPatternNode relNode) {
 		return ClassUtil.nullFree(relNode.getIncoming());
 	}

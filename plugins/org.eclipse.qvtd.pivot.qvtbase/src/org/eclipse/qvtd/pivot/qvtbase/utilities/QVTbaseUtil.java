@@ -275,6 +275,10 @@ public class QVTbaseUtil extends PivotUtil
 		return ownedContext;
 	}
 
+	public static @NonNull Iterable<@NonNull TypedModel> getDependsOns(@NonNull TypedModel qvtrTypedModel) {
+		return ClassUtil.nullFree(qvtrTypedModel.getDependsOn());
+	}
+
 	public static @Nullable Domain getDomain(@NonNull Rule rule, @NonNull TypedModel typedModel) {
 		for (Domain domain : rule.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {

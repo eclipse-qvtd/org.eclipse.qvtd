@@ -548,6 +548,9 @@ public class QVTr2UMLX
 				txPackageNode.setReferredEPackage(usedPackage.getEPackage());
 				txTypedModelNode.getOwnedTxPackageNodes().add(txPackageNode);
 			}
+			if (qvtrTypedModel.getDependsOn().size() > 0) {
+				context.addReference(qvtrTypedModel);
+			}
 			return txTypedModelNode;
 		}
 	}
@@ -675,6 +678,16 @@ public class QVTr2UMLX
 		public @Nullable UMLXElement visitSharedVariable(@NonNull SharedVariable qvtrSharedVariable) {
 			RelPatternNode relPatternNode = context.getUMLXElement(RelPatternNode.class, qvtrSharedVariable);
 			return relPatternNode;
+		}
+
+		@Override
+		public @Nullable UMLXElement visitTypedModel(@NonNull TypedModel qvtrTypedModel) {
+			TxTypedModelNode txTypedModelNode = context.getUMLXElement(TxTypedModelNode.class, qvtrTypedModel);
+			for (@NonNull TypedModel qvtrDependsOn : QVTrelationUtil.getDependsOns(qvtrTypedModel)) {
+				TxTypedModelNode txDependsOn = context.getUMLXElement(TxTypedModelNode.class, qvtrDependsOn);
+				txTypedModelNode.getDependsOns().add(txDependsOn);
+			}
+			return txTypedModelNode;
 		}
 	}
 
