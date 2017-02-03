@@ -327,6 +327,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DomainPatternCS> getOwnedPatterns() {
 		if (ownedPatterns == null) {
 			ownedPatterns = new EObjectContainmentEList<DomainPatternCS>(DomainPatternCS.class, this, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERNS);

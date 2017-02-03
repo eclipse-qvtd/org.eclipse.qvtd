@@ -721,6 +721,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     (
 	 *         name=UnrestrictedName
 	 *         (metamodelIds+=[Namespace|UnrestrictedName] | (metamodelIds+=[Namespace|UnrestrictedName] metamodelIds+=[Namespace|UnrestrictedName]*))
+	 *         (dependsOn+=[TypedModel|UnrestrictedName] dependsOn+=[TypedModel|UnrestrictedName]*)?
 	 *     )
 	 */
 	protected void sequence_ModelDeclCS(ISerializationContext context, ModelDeclCS semanticObject) {

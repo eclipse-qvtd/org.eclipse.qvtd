@@ -321,6 +321,7 @@ public class QVTrelationCSFactoryImpl extends EFactoryImpl implements QVTrelatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveTypeDomainPatternCS createPrimitiveTypeDomainPatternCS() {
 		PrimitiveTypeDomainPatternCSImpl primitiveTypeDomainPatternCS = new PrimitiveTypeDomainPatternCSImpl();
 		return primitiveTypeDomainPatternCS;

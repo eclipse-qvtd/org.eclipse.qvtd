@@ -1070,7 +1070,51 @@ ruleModelDeclCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_7, grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_2_1_3());
     }
-)))
+))(	otherlv_8='uses'
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getModelDeclCSAccess().getUsesKeyword_3_0());
+    }
+(
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelDeclCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_1_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_10=','
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getModelDeclCSAccess().getCommaKeyword_3_2_0());
+    }
+(
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelDeclCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getDependsOnTypedModelCrossReference_3_2_1_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?)
 ;
 
 
@@ -2924,17 +2968,24 @@ ruleQVTrelationUnrestrictedName returns [AntlrDatatypeRuleToken current=new Antl
     }
 
     |
+	kw='uses'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_19());
+    }
+
+    |
 	kw='when'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_19());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_20());
     }
 
     |
 	kw='where'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_20());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_21());
     }
 )
     ;

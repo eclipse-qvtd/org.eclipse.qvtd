@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
@@ -32,6 +33,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getMetamodelIds <em>Metamodel Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getDependsOn <em>Depends On</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,6 +48,15 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @ordered
 	 */
 	protected EList<Namespace> metamodelIds;
+	/**
+	 * The cached value of the '{@link #getDependsOn() <em>Depends On</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDependsOn()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypedModel> dependsOn;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,10 +95,25 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @generated
 	 */
 	@Override
+	public EList<TypedModel> getDependsOn() {
+		if (dependsOn == null) {
+			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON);
+		}
+		return dependsOn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
 				return getMetamodelIds();
+			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+				return getDependsOn();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,6 +131,10 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 				getMetamodelIds().clear();
 				getMetamodelIds().addAll((Collection<? extends Namespace>)newValue);
 				return;
+			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+				getDependsOn().clear();
+				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -120,6 +150,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
 				getMetamodelIds().clear();
 				return;
+			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+				getDependsOn().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -134,6 +167,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 		switch (featureID) {
 			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
 				return metamodelIds != null && !metamodelIds.isEmpty();
+			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+				return dependsOn != null && !dependsOn.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -632,14 +632,26 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cMetamodelIdsNamespaceCrossReference_2_1_2_1_0 = (CrossReference)cMetamodelIdsAssignment_2_1_2_1.eContents().get(0);
 		private final RuleCall cMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1 = (RuleCall)cMetamodelIdsNamespaceCrossReference_2_1_2_1_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_2_1_3 = (Keyword)cGroup_2_1.eContents().get(3);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cUsesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cDependsOnAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cDependsOnTypedModelCrossReference_3_1_0 = (CrossReference)cDependsOnAssignment_3_1.eContents().get(0);
+		private final RuleCall cDependsOnTypedModelUnrestrictedNameParserRuleCall_3_1_0_1 = (RuleCall)cDependsOnTypedModelCrossReference_3_1_0.eContents().get(1);
+		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
+		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
+		private final Assignment cDependsOnAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
+		private final CrossReference cDependsOnTypedModelCrossReference_3_2_1_0 = (CrossReference)cDependsOnAssignment_3_2_1.eContents().get(0);
+		private final RuleCall cDependsOnTypedModelUnrestrictedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cDependsOnTypedModelCrossReference_3_2_1_0.eContents().get(1);
 
 		//ModelDeclCS:
 		//	name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName] | '{'
-		//	metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}');
+		//	metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
+		//	('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName] | '{'
 		//metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
+		//('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName
@@ -696,6 +708,36 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_1_3() { return cRightCurlyBracketKeyword_2_1_3; }
+
+		//('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//'uses'
+		public Keyword getUsesKeyword_3_0() { return cUsesKeyword_3_0; }
+
+		//dependsOn+=[qvtbase::TypedModel|UnrestrictedName]
+		public Assignment getDependsOnAssignment_3_1() { return cDependsOnAssignment_3_1; }
+
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getDependsOnTypedModelCrossReference_3_1_0() { return cDependsOnTypedModelCrossReference_3_1_0; }
+
+		//UnrestrictedName
+		public RuleCall getDependsOnTypedModelUnrestrictedNameParserRuleCall_3_1_0_1() { return cDependsOnTypedModelUnrestrictedNameParserRuleCall_3_1_0_1; }
+
+		//(',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*
+		public Group getGroup_3_2() { return cGroup_3_2; }
+
+		//','
+		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+
+		//dependsOn+=[qvtbase::TypedModel|UnrestrictedName]
+		public Assignment getDependsOnAssignment_3_2_1() { return cDependsOnAssignment_3_2_1; }
+
+		//[qvtbase::TypedModel|UnrestrictedName]
+		public CrossReference getDependsOnTypedModelCrossReference_3_2_1_0() { return cDependsOnTypedModelCrossReference_3_2_1_0; }
+
+		//UnrestrictedName
+		public RuleCall getDependsOnTypedModelUnrestrictedNameParserRuleCall_3_2_1_0_1() { return cDependsOnTypedModelUnrestrictedNameParserRuleCall_3_2_1_0_1; }
 	}
 
 	public class ObjectTemplateCSElements extends AbstractParserRuleElementFinder {
@@ -1781,8 +1823,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cReplaceKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
 		private final Keyword cTopKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
 		private final Keyword cTransformationKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
-		private final Keyword cWhenKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
-		private final Keyword cWhereKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cUsesKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cWhenKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cWhereKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
 
 		////ExpCS returns essentialocl::ExpCS:
 		// //	InfixedExpCS
@@ -1790,12 +1833,12 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		// QVTrelationUnrestrictedName:
 		//	'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
 		//	'library' | 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
-		//	'transformation' | 'when' | 'where';
+		//	'transformation' | 'uses' | 'when' | 'where';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' | 'library' |
 		//'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
-		//'transformation' | 'when' | 'where'
+		//'transformation' | 'uses' | 'when' | 'where'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'checkonly'
@@ -1855,11 +1898,14 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//'transformation'
 		public Keyword getTransformationKeyword_18() { return cTransformationKeyword_18; }
 
+		//'uses'
+		public Keyword getUsesKeyword_19() { return cUsesKeyword_19; }
+
 		//'when'
-		public Keyword getWhenKeyword_19() { return cWhenKeyword_19; }
+		public Keyword getWhenKeyword_20() { return cWhenKeyword_20; }
 
 		//'where'
-		public Keyword getWhereKeyword_20() { return cWhereKeyword_20; }
+		public Keyword getWhereKeyword_21() { return cWhereKeyword_21; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -2100,7 +2146,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ModelDeclCS:
 	//	name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName] | '{'
-	//	metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}');
+	//	metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
+	//	('uses' dependsOn+=[qvtbase::TypedModel|UnrestrictedName] (',' dependsOn+=[qvtbase::TypedModel|UnrestrictedName])*)?;
 	public ModelDeclCSElements getModelDeclCSAccess() {
 		return pModelDeclCS;
 	}
@@ -2327,7 +2374,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	// QVTrelationUnrestrictedName:
 	//	'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
 	//	'library' | 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
-	//	'transformation' | 'when' | 'where';
+	//	'transformation' | 'uses' | 'when' | 'where';
 	public QVTrelationUnrestrictedNameElements getQVTrelationUnrestrictedNameAccess() {
 		return pQVTrelationUnrestrictedName;
 	}
