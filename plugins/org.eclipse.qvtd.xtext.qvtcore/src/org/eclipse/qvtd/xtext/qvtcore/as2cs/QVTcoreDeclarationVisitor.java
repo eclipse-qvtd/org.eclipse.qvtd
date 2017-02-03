@@ -551,6 +551,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		//			context.refreshPathName(csPathName, owningPackage, null);
 		//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
+
 		return csTransformation;
 	}
 
@@ -561,7 +562,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 			csDirection.setName(null);
 		}
 		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
-		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		PivotUtilInternal.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
 	}
 
