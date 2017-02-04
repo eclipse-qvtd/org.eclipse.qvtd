@@ -95,7 +95,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		//	Partition single region recursive connections into base cases recursive case connections with associated region recursions.
 		//
-		splitConnectionVariables();
+		//		splitConnectionVariables();
 		//
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("5-cycled", true, true, false);
@@ -474,9 +474,9 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 
 	/**
 	 * After cycles have been removed, split looped connection variables to isolate the unlooping base case, from the/each looping case.
-	 */
+	 *
 	protected void splitConnectionVariables() {
-		for (@NonNull NodeConnection connection : getNodeConnections()) { //new ArrayList<>(getNodeConnections())) {
+		for (@NonNull NodeConnection connection : getNodeConnections()) { //Lists.newArrayList(getNodeConnections())) {
 			if (connection.isPassed()) {
 				Set<@NonNull Region> loopRegions = null;
 				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
@@ -509,7 +509,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				}
 			}
 		}
-	}
+	} */
 
 	@Override
 	public void toRegionGraph(@NonNull GraphStringBuilder s) {

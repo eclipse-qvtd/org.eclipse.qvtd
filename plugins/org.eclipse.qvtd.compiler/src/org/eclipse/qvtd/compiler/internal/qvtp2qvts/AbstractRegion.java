@@ -1061,16 +1061,16 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrNewNodes(headNode);
 		if (sourceNodes != null) {
 			for (@NonNull Node sourceNode : sourceNodes) {
-				Region sourceRegion = sourceNode.getRegion();
-				if (sourceRegion != this) {
-					Map<@NonNull Node, @NonNull Node> called2calling = new HashMap<>();
-					if (isCompatiblePattern(headNode, sourceNode, called2calling)) {
-						if (headSources == null) {
-							headSources = new ArrayList<>();
-						}
-						headSources.add(sourceNode);
+				//				Region sourceRegion = sourceNode.getRegion();
+				//				if (sourceRegion != this) {
+				Map<@NonNull Node, @NonNull Node> called2calling = new HashMap<>();
+				if (isCompatiblePattern(headNode, sourceNode, called2calling)) {
+					if (headSources == null) {
+						headSources = new ArrayList<>();
 					}
+					headSources.add(sourceNode);
 				}
+				//				}
 			}
 		}
 		if (headSources == null) {

@@ -29,7 +29,9 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 
 import com.google.common.base.Predicate;
@@ -198,12 +200,23 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
-		if (classDatumAnalysis.getDomainUsage().isInput()) {
-			return Collections.singletonList(rootContainmentRegion.getIntroducerNode(headNode));
+		if (!classDatumAnalysis.getDomainUsage().isInput()) {
+			return contentsAnalysis.getNewNodes(classDatumAnalysis);	// FIXME also dependsOn ??
 		}
-		else {
-			return contentsAnalysis.getNewNodes(classDatumAnalysis);
+		List<@NonNull Node> nodes = new ArrayList<>();
+		nodes.add(rootContainmentRegion.getIntroducerNode(headNode));
+		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(classDatumAnalysis.getTypedModel())) {
+			ClassDatumAnalysis classDatumAnalysis2 = getScheduler().getClassDatumAnalysis(headNode.getCompleteClass().getPrimaryClass(), dependsOn);
+			Iterable<@NonNull Node> newNodes = contentsAnalysis.getNewNodes(classDatumAnalysis2);
+			if (newNodes != null) {
+				for (@NonNull Node newNode : newNodes) {
+					if (!nodes.contains(newNode)) {
+						nodes.add(newNode);
+					}
+				}
+			}
 		}
+		return nodes;
 	}
 
 	@Override
