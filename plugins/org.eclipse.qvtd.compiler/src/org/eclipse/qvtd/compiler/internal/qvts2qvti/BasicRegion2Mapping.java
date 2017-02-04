@@ -44,8 +44,10 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -1160,7 +1162,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
 			if (checkedEdges != null) {
 				for (NavigableEdge checkedEdge : checkedEdges) {
-					allCheckedProperties.add(checkedEdge.getProperty());
+					Property asProperty = checkedEdge.getProperty();
+					allCheckedProperties.add(asProperty);
+					Property asOppositeProperty = asProperty.getOpposite();
+					if (asOppositeProperty != null) {
+						allCheckedProperties.add(asOppositeProperty);
+					}
 				}
 			}
 		}
@@ -1169,8 +1176,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (asStatement instanceof ObservableStatement) {
 				List<Property> observedProperties = ((ObservableStatement)asStatement).getObservedProperties();
 				for (EObject eObject : new TreeIterable(asStatement, false)) {
-					if (eObject instanceof NavigationCallExp) {
-						Property property = PivotUtil.getReferredProperty((NavigationCallExp) eObject);
+					if (eObject instanceof PropertyCallExp) {
+						Property property = PivotUtil.getReferredProperty((PropertyCallExp) eObject);
+						if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
+							observedProperties.add(property);
+						}
+					}
+					else if (eObject instanceof OppositePropertyCallExp) {
+						Property property = PivotUtil.getReferredProperty((NavigationCallExp) eObject).getOpposite();
 						if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
 							observedProperties.add(property);
 						}

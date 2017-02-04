@@ -1926,7 +1926,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			if (eObject instanceof ObservableStatement) {
 				List<Property> observedProperties = ((ObservableStatement)eObject).getObservedProperties();
 				Property navigatedProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
-				return observedProperties.contains(navigatedProperty);
+				if (observedProperties.contains(navigatedProperty)) {
+					return true;
+				}
+				Property navigatedOppositeProperty = navigatedProperty.getOpposite();
+				if (observedProperties.contains(navigatedOppositeProperty)) {
+					return true;
+				}
+				break;
 			}
 		}
 		return false;
