@@ -62,7 +62,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	static {
 		step2extension.put(UMLX_STEP, "umlx");
 		step2extension.put(QVTR_STEP, "qvtras");
-		step2extension.put(TRACE_STEP, "ecore");
+		step2extension.put(TRACE_STEP, "trace.ecore");
 		step2extension.put(GENMODEL_STEP, "genmodel");
 		step2extension.put(QVTC_STEP, "qvtcas");
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
