@@ -184,9 +184,9 @@ public abstract class AbstractIntervalInternal implements Interval
 					AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
 				}
 				try {
-					invocation.execute();
+					boolean success = invocation.execute();
 					if (debugInvocations) {
-						AbstractTransformer.INVOCATIONS.println("done " + invocation);
+						AbstractTransformer.INVOCATIONS.println((success ? "done "  : "fail ") + invocation);
 					}
 				}
 				catch (InvocationFailedException e) {
