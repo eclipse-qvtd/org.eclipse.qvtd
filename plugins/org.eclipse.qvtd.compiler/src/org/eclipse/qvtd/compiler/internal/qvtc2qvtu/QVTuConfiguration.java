@@ -14,6 +14,7 @@ package org.eclipse.qvtd.compiler.internal.qvtc2qvtu;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * QVTuConfiguration captures the configuration to be imposed by a QVTc2QVTu transformation
@@ -25,33 +26,40 @@ public class QVTuConfiguration
 		CHECK,
 		ENFORCE
 	}
-	
+
 	private final @NonNull Mode mode;
-	private final @NonNull List<@NonNull String> inputs;		// FIXME Names rather than TypedModel until c/u TypedModel ambiguity eliminated
-	private final @NonNull List<@NonNull String> outputs;
-	
-	public QVTuConfiguration(@NonNull Mode mode, @NonNull List<@NonNull String> inputs, @NonNull List<@NonNull String> outputs) {
+	private final @NonNull List<@NonNull TypedModel> inputTypedModels;
+	private final @NonNull List<@NonNull TypedModel> intermediateTypedModels;
+	private final @NonNull List<@NonNull TypedModel> outputTypedModels;
+
+	public QVTuConfiguration(@NonNull Mode mode, @NonNull List<@NonNull TypedModel> inputTypedModels,
+			@NonNull List<@NonNull TypedModel> intermediateTypedModels, @NonNull List<@NonNull TypedModel> outputTypedModels) {
 		this.mode = mode;
-		this.inputs = inputs;
-		this.outputs = outputs;
+		this.inputTypedModels = inputTypedModels;
+		this.intermediateTypedModels = intermediateTypedModels;
+		this.outputTypedModels = outputTypedModels;
 	}
 
 	/**
 	 * Checks if is check mode.
 	 */
 	public boolean isCheckMode() {
-    	return mode == Mode.CHECK;
-    }
-	
+		return mode == Mode.CHECK;
+	}
+
 	public boolean isEnforceMode() {
 		return mode == Mode.ENFORCE;
 	}
 
-	public boolean isInput(String name) {
-		return inputs.contains(name);
+	public boolean isInput(@NonNull TypedModel typedModel) {
+		return inputTypedModels.contains(typedModel);
 	}
 
-	public boolean isOutput(String name) {
-		return outputs.contains(name);
+	public boolean isIntermediate(@NonNull TypedModel typedModel) {
+		return intermediateTypedModels.contains(typedModel);
+	}
+
+	public boolean isOutput(@NonNull TypedModel typedModel) {
+		return outputTypedModels.contains(typedModel);
 	}
 }

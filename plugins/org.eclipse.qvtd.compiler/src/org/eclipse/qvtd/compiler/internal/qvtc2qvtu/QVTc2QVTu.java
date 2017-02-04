@@ -36,12 +36,12 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -360,9 +360,10 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @NonNull CoreDomain visitCoreDomain(@NonNull CoreDomain dIn) {
 			CoreDomain dOut = super.visitCoreDomain(dIn);
-			String name = QVTcoreUtil.getTypedModel(dIn).getName();
-			dOut.setName(name);			// Redundant replication of Epsilon functionality
-			if (qvtuConfiguration.isInput(name)) {
+			TypedModel typedModel = QVTcoreUtil.getTypedModel(dIn);
+			String name = typedModel.getName();
+			dOut.setName(name);			// Redundant replication of Epsilon prototype functionality
+			if (qvtuConfiguration.isInput(typedModel)) {
 				dOut.setIsEnforceable(false);
 				dOut.setIsCheckable(true);
 			} else {
@@ -610,12 +611,13 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	private @Nullable MappingMode getComposedMappingMode(@NonNull Mapping mapping) {
 		MappingMode mergedMode = MappingMode.NULL;
 		for (@NonNull Domain domain: ClassUtil.nullFree(mapping.getDomain())) {
-			String name = PivotUtil.getName(QVTcoreUtil.getTypedModel(domain));
-			if (qvtuConfiguration.isInput(name)) {
+			TypedModel typedModel = QVTcoreUtil.getTypedModel(domain);
+			//			String name = PivotUtil.getName(typedModel);
+			if (qvtuConfiguration.isInput(typedModel)) {
 				mergedMode = mergedMode.asInput();
 				domain2mode.put((CoreDomain)domain, DomainMode.INPUT);
 			}
-			else if (qvtuConfiguration.isOutput(name)) {
+			else if (qvtuConfiguration.isIntermediate(typedModel) || qvtuConfiguration.isOutput(typedModel)) {
 				if (!domain.isIsEnforceable()) {
 					return null;
 				}

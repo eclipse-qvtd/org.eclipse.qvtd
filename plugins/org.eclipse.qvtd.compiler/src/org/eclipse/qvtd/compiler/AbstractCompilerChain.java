@@ -13,11 +13,9 @@ package org.eclipse.qvtd.compiler;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -53,13 +51,14 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
 {
-	private static final @NonNull Map<@NonNull String, @NonNull String> step2extension = new HashMap<@NonNull String, @NonNull String>();
+	private static final @NonNull Map<@NonNull String, @NonNull String> step2extension = new HashMap<>();
 	static {
 		step2extension.put(UMLX_STEP, "umlx");
 		step2extension.put(QVTR_STEP, "qvtras");
@@ -340,7 +339,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	public static @NonNull Transformation getTransformation(Resource resource) throws IOException {
-		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
+		List<@NonNull Transformation> asTransformations = new ArrayList<>();
 		for (EObject eContent : resource.getContents()) {
 			if (eContent instanceof BaseModel) {
 				QVTbaseUtil.getAllTransformations(ClassUtil.nullFree(((BaseModel)eContent).getOwnedPackages()), asTransformations);
@@ -367,7 +366,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>> castOptions = (Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>>)(Object)options;
 		Map<@NonNull Key<T>, @Nullable T> stepOptions = castOptions.get(stepKey);
 		if (stepOptions == null) {
-			stepOptions = new HashMap<@NonNull Key<T>, @Nullable T>();
+			stepOptions = new HashMap<>();
 			castOptions.put(stepKey, stepOptions);
 		}
 		stepOptions.put(optionsKey, optionValue);
@@ -404,7 +403,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		this.asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
 		this.txURI = txURI;
 		this.prefixURI = txURI.trimSegments(1).appendSegment("temp").appendSegment(txURI.trimFileExtension().lastSegment());
-		this.options = options != null ? options : new HashMap<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>>();
+		this.options = options != null ? options : new HashMap<>();
 		this.java2classCompilerStep = createJava2ClassCompilerStep();
 		this.qvtc2qvtuCompilerStep = createQVTc2QVTuCompilerStep();
 		this.qvtu2qvtmCompilerStep = createQVTu2QVTmCompilerStep();
@@ -418,7 +417,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	public void addListener(@NonNull Listener listener) {
 		List<@NonNull Listener> listeners2 = listeners;
 		if (listeners2 == null) {
-			listeners = listeners2 = new ArrayList<@NonNull Listener>();
+			listeners = listeners2 = new ArrayList<>();
 		}
 		if (!listeners2.contains(listener)) {
 			listeners2.add(listener);
@@ -474,26 +473,34 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull String enforcedOutputName) throws IOException {
 		Transformation transformation = getTransformation(cResource);
-		List<@NonNull String> inputNames = new ArrayList<@NonNull String>();
-		boolean gotOutput = false;
-		for (TypedModel typedModel : transformation.getModelParameter()) {
+		List<@NonNull TypedModel> inputTypedModels = new ArrayList<>();
+		List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
+		List<@NonNull TypedModel> intermediateTypedModels = new ArrayList<>();
+		for (@NonNull TypedModel typedModel : QVTcoreUtil.getModelParameters(transformation)) {
 			String modelName = typedModel.getName();
 			if (modelName != null) {
 				if (modelName.equals(enforcedOutputName)) {
-					if (gotOutput) {
+					if (outputTypedModels.size() > 1) {
 						throw new CompilerChainException("Ambiguous output domain ''{0}''", enforcedOutputName);
 					}
-					gotOutput = true;
+					outputTypedModels.add(typedModel);
 				}
 				else {
-					inputNames.add(modelName);
+					//					inputNames.add(modelName);
+					inputTypedModels.add(typedModel);
+				}
+				for (@NonNull TypedModel dependsOn : QVTcoreUtil.getDependsOns(typedModel)) {
+					if (!intermediateTypedModels.contains(dependsOn)) {
+						intermediateTypedModels.add(dependsOn);
+					}
 				}
 			}
 		}
-		if (!gotOutput) {
+		if (outputTypedModels.isEmpty()) {
 			throw new CompilerChainException("Unknown output domain ''{0}''", enforcedOutputName);
 		}
-		return new QVTuConfiguration(QVTuConfiguration.Mode.ENFORCE, inputNames, Collections.singletonList(enforcedOutputName));
+		inputTypedModels.removeAll(intermediateTypedModels);
+		return new QVTuConfiguration(QVTuConfiguration.Mode.ENFORCE, inputTypedModels, intermediateTypedModels, outputTypedModels);
 	}
 
 	@Override
@@ -587,7 +594,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	public <T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object) {
 		Map<@NonNull Key<Object>, @Nullable Object> stepOptions = options.get(stepKey);
 		if (stepOptions == null) {
-			stepOptions = new HashMap<@NonNull Key<Object>, @Nullable Object>();
+			stepOptions = new HashMap<>();
 			options.put(stepKey, stepOptions);
 		}
 		@SuppressWarnings("unchecked")
