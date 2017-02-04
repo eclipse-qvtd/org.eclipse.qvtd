@@ -36,24 +36,24 @@ public abstract class ScheduleState extends ScheduleCache
 	/**
 	 * Working state: the regions that have not yet been ordered.
 	 */
-	private final @NonNull Set<@NonNull Region> blockedRegions = new HashSet<@NonNull Region>();
+	private final @NonNull Set<@NonNull Region> blockedRegions = new HashSet<>();
 
 	/**
 	 * Working state: the regions that have not yet been ordered but which are blocked by a mandatory access.
 	 */
-	private final @NonNull Set<@NonNull Region> mandatoryBlockedRegions = new HashSet<@NonNull Region>();
+	private final @NonNull Set<@NonNull Region> mandatoryBlockedRegions = new HashSet<>();
 
 	/**
 	 * Working state: the regions that have not yet been ordered but whose sources are all fully unblocked.
 	 */
-	private final @NonNull Set<@NonNull Region> unblockedRegions = new HashSet<@NonNull Region>();
+	private final @NonNull Set<@NonNull Region> unblockedRegions = new HashSet<>();
 
-	private final @NonNull Map<@NonNull Region, @NonNull Integer> callableRegion2blockedConnectionCount = new HashMap<@NonNull Region, @NonNull Integer>();
+	private final @NonNull Map<@NonNull Region, @NonNull Integer> callableRegion2blockedConnectionCount = new HashMap<>();
 
 	/**
 	 * Working state: Whether the source has unserviced content for each region's connection source.
 	 */
-	private final @NonNull Map<@NonNull DatumConnection, @NonNull Map<@NonNull Region, @NonNull Boolean>> connection2sourceRegion2hasContent = new HashMap<@NonNull DatumConnection, @NonNull Map<@NonNull Region, @NonNull Boolean>>();
+	private final @NonNull Map<@NonNull DatumConnection, @NonNull Map<@NonNull Region, @NonNull Boolean>> connection2sourceRegion2hasContent = new HashMap<>();
 
 	/**
 	 * Working state: call stack to access current region.
@@ -63,17 +63,17 @@ public abstract class ScheduleState extends ScheduleCache
 	/**
 	 * Working state: the regions that have a schedule index to define their order.
 	 */
-	private final @NonNull List<@NonNull Region> orderedRegions = new ArrayList<@NonNull Region>();
+	private final @NonNull List<@NonNull Region> orderedRegions = new ArrayList<>();
 
 	/**
 	 * Working state: connections that block a region.
 	 */
-	private final @NonNull Set<@NonNull Connection> blockedConnections = new HashSet<@NonNull Connection>();
+	private final @NonNull Set<@NonNull DatumConnection> blockedConnections = new HashSet<>();
 
 	/**
 	 * Working state: connections that block a region.
 	 */
-	private final @NonNull Set<@NonNull ScheduledRegion> blockedScheduledRegions = new HashSet<@NonNull ScheduledRegion>();
+	private final @NonNull Set<@NonNull ScheduledRegion> blockedScheduledRegions = new HashSet<>();
 
 	protected ScheduleState(@NonNull RootScheduledRegion rootScheduledRegion) {
 		super(rootScheduledRegion);
@@ -101,7 +101,7 @@ public abstract class ScheduleState extends ScheduleCache
 				Map<@NonNull Region, @NonNull Boolean> sourceRegion2hasContent = connection2sourceRegion2hasContent.get(connection);
 				assert sourceRegion2hasContent != null;
 				/*				if (sourceRegion2hasContent == null) {
-					sourceRegion2hasContent = new HashMap<@NonNull Region, @NonNull Boolean>();
+					sourceRegion2hasContent = new HashMap<>();
 					for (@NonNull Region sourceRegion : connection.getSourceRegions(scheduledRegion)) {
 						sourceRegion2hasContent.put(sourceRegion, Boolean.TRUE);
 					}
@@ -110,7 +110,7 @@ public abstract class ScheduleState extends ScheduleCache
 				//				Map<@NonNull Region, @NonNull Boolean> targetRegion2hasContent = connection2targetRegion2hasContent.get(connection);
 				//				assert targetRegion2hasContent != null;
 				/*				if (targetRegion2hasContent == null) {
-					targetRegion2hasContent = new HashMap<@NonNull Region, @NonNull Boolean>();
+					targetRegion2hasContent = new HashMap<>();
 					for (@NonNull Region targetRegion : connection.getTargetRegions(scheduledRegion)) {
 						targetRegion2hasContent.put(targetRegion, Boolean.TRUE);
 					}
@@ -143,7 +143,7 @@ public abstract class ScheduleState extends ScheduleCache
 			}
 			Map<@NonNull Region, @NonNull Boolean> sourceRegion2hasContent = connection2sourceRegion2hasContent.get(connection);
 			if (sourceRegion2hasContent == null) {
-				sourceRegion2hasContent = new HashMap<@NonNull Region, @NonNull Boolean>();
+				sourceRegion2hasContent = new HashMap<>();
 				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
 					sourceRegion2hasContent.put(sourceRegion, false);
 				}
@@ -168,7 +168,7 @@ public abstract class ScheduleState extends ScheduleCache
 		return callableRegion2blockedConnectionCount.get(region);
 	}
 
-	protected @NonNull Iterable<? extends @NonNull Connection> getBlockedConnections() {
+	protected @NonNull Iterable<? extends @NonNull DatumConnection> getBlockedConnections() {
 		return blockedConnections;
 	}
 
@@ -395,7 +395,7 @@ public abstract class ScheduleState extends ScheduleCache
 		//
 		//	Fill outgoingConnections wrt selectedRegion
 		//
-		Set<@NonNull Region> nextRegions = new HashSet<@NonNull Region>();
+		Set<@NonNull Region> nextRegions = new HashSet<>();
 		for (@NonNull DatumConnection loopingConnection : loopingConnections) {
 			loopingConnection.addIndex(thisIndex);
 			//			refreshConnectionBlockage(outgoingConnection, selectedRegion, nextRegions);
@@ -410,7 +410,7 @@ public abstract class ScheduleState extends ScheduleCache
 		//		assert !alreadyIndexed;
 		//		assert loopingConnections != null;
 		//		assert outgoingConnections != null;
-		/*			List<@NonNull Connection> connections = new ArrayList<@NonNull Connection>();
+		/*			List<@NonNull Connection> connections = new ArrayList<>();
 		connections.addAll(loopingConnections);
 		connections.addAll(outgoingConnections);
 		Collections.sort(connections, NameUtil.NAMEABLE_COMPARATOR);
@@ -462,7 +462,7 @@ public abstract class ScheduleState extends ScheduleCache
 		assert wasRemoved0;
 		boolean wasRemoved1 = unblockedRegions.remove(region);
 		boolean wasRemoved2 = callableRegion2blockedConnectionCount.remove(region) != null;
-		//		boolean wasRemoved3 = partiallyBlockedRegions2availableFraction.remove(selectedRegion) != null;
-		assert wasRemoved1 || wasRemoved2;// || wasRemoved3;
+		boolean wasRemoved3 = true;//partiallyBlockedRegions2availableFraction.remove(selectedRegion) != null;
+		assert wasRemoved1 || wasRemoved2 || wasRemoved3;
 	}
 }
