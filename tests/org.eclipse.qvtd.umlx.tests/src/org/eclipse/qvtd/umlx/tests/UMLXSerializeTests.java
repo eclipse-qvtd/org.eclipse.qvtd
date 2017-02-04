@@ -311,11 +311,27 @@ public class UMLXSerializeTests extends LoadTestCase
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
 	}
 
+	public void testUMLXRoundtrip_Iterated2Iterated_qvtr() throws Exception {
+		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/iterated2iterated/Iterated2Iterated.qvtr", true);
+		URI pivotURI1 = getProjectFileURI("Iterated2Iterated.qvtras");
+		URI umlxURI = getProjectFileURI("Iterated2Iterated.umlx");
+		URI pivotURI2 = getProjectFileURI("Iterated2Iterated.regenerated.qvtras");
+		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
+	}
+
 	public void testUMLXRoundtrip_Keys_qvtr() throws Exception {
 		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/models/Keys.qvtr", true);
 		URI pivotURI1 = getProjectFileURI("Keys.qvtras");
 		URI umlxURI = getProjectFileURI("Keys.umlx");
 		URI pivotURI2 = getProjectFileURI("Keys.regenerated.qvtras");
+		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
+	}
+
+	public void testUMLXRoundtrip_PN2SC_qvtr() throws Exception {
+		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/pn2sc/PetriNet2StateChart.qvtr", true);
+		URI pivotURI1 = getProjectFileURI("PetriNet2StateChart.qvtras");
+		URI umlxURI = getProjectFileURI("PetriNet2StateChart.umlx");
+		URI pivotURI2 = getProjectFileURI("PetriNet2StateChart.regenerated.qvtras");
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
 	}
 

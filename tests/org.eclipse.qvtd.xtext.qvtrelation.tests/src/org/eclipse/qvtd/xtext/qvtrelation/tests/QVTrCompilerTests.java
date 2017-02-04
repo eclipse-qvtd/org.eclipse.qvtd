@@ -19,9 +19,11 @@ import java.util.Map;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -90,6 +92,14 @@ public class QVTrCompilerTests extends LoadTestCase
 		public MyQVT(@NonNull String testFolderName, @NonNull EPackage... eInstances) {
 			super(TESTS_BASE_URI, PROJECT_NAME, testFolderName);
 			installEPackages(eInstances);
+			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
+			getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
+				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
 		}
 
 		public void addUsedGenPackage(@NonNull String resourcePath, @Nullable String fragment) {
@@ -300,6 +310,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
+//		QVTp2QVTs.REGION_ORDER.setState(true);
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
@@ -449,24 +460,25 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	/*	@Test
-	public void testQVTrCompiler_PN2SC_CG() throws Exception {
+	@Test
+	public void testQVTrCompiler_Iterated2Iterated_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
-		MyQVT myQVT = new MyQVT("pn2sc");
+//		QVTp2QVTs.REGION_ORDER.setState(true);
+		MyQVT myQVT = new MyQVT("iterated2iterated");
+		myQVT.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		try {
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("pn2sc", "PetriNet2StateChart.qvtr", "sc",
-				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/pn2sc/PNtoSC", false);//,
-			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("iterated2iterated", "Iterated2Iterated.qvtr", "to",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/iterated2iterated/Iterated2Iterated", false);
 			//
 			myQVT.createGeneratedExecutor(txClass);
-			myQVT.loadInput("pn", "testcase1-in.petrinet");
+			myQVT.loadInput("from", "testcase1-in.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("sc", "testcase1-out_CG.petrinet", "testcase1-out.petrinet", null);
+			myQVT.saveOutput("to", "testcase1-out_CG.iterated", "testcase1-out.xmi", null);
 			//
 			//	        myQVT.createGeneratedExecutor(txClass);
 			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
@@ -476,7 +488,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT.dispose();
 		}
-	} */
+	}
 
 	@Test
 	public void testQVTrCompiler_SeqToStm() throws Exception {

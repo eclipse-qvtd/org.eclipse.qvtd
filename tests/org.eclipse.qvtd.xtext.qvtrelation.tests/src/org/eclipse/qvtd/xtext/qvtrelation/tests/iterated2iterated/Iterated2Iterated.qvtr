@@ -1,0 +1,36 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation for ModelMorf
+ *******************************************************************************/
+import itMM : 'Iterated.ecore'::iterated; 
+
+package org::eclipse::qvtd::xtext::qvtrelation::tests::iterated2iterated {
+/**
+ * Transform a Parent with an old count to another Parent with a new count by repeated counting until
+ * the terminating condition is met.
+ */
+	transformation Iterated2Iterated(from:itMM uses via, via:itMM, to:itMM)
+	{
+		top relation Parent2ParentCount {
+			vCurrent : ecore::EInt[1];
+			vTarget : ecore::EInt[1];
+			domain from fromParent : Parent{ current = vCurrent, target = vTarget };
+			enforce domain via toParent : Parent{ current = vCurrent+1, target = vTarget };
+			when { fromParent.current < fromParent.target; }
+		}
+		
+		top relation Parent2ParentResult {
+			vCurrent : ecore::EInt[1];
+			vTarget : ecore::EInt[1];
+			domain from fromParent : Parent{ current = vCurrent, target = vTarget };
+			enforce domain to toParent : Parent{ current = vCurrent, target = vTarget };
+			when { fromParent.current >= fromParent.target; }
+		}
+	}
+}

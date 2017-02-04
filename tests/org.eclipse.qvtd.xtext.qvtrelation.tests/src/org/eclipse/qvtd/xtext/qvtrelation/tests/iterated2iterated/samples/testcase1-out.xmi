@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iterated:Parent
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:iterated="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/iterated"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/iterated ../Iterated.ecore"
+    target="5" current="5">
+</iterated:Parent>
