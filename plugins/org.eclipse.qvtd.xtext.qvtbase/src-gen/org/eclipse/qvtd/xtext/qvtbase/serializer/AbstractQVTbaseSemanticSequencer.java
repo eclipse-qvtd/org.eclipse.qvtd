@@ -161,7 +161,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				else break;
 			case BaseCSPackage.PRIMITIVE_TYPE_REF_CS:
 				if (rule == grammarAccess.getPrimitiveTypeCSRule()
-						|| rule == grammarAccess.getTypeLiteralCSRule()) {
+						|| rule == grammarAccess.getTypeLiteralCSRule()
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
 					sequence_PrimitiveTypeCS(context, (PrimitiveTypeRefCS) semanticObject);
 					return;
 				}
@@ -194,7 +195,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				return;
 			case BaseCSPackage.TUPLE_TYPE_CS:
 				if (rule == grammarAccess.getTupleTypeCSRule()
-						|| rule == grammarAccess.getTypeLiteralCSRule()) {
+						|| rule == grammarAccess.getTypeLiteralCSRule()
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
 					sequence_TupleTypeCS(context, (TupleTypeCS) semanticObject);
 					return;
 				}
@@ -238,7 +240,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				sequence_CollectionLiteralPartCS(context, (CollectionLiteralPartCS) semanticObject);
 				return;
 			case EssentialOCLCSPackage.COLLECTION_PATTERN_CS:
-				if (rule == grammarAccess.getCollectionPatternCSRule()) {
+				if (rule == grammarAccess.getCollectionPatternCSRule()
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
 					sequence_CollectionPatternCS(context, (CollectionPatternCS) semanticObject);
 					return;
 				}
@@ -249,7 +252,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				else break;
 			case EssentialOCLCSPackage.COLLECTION_TYPE_CS:
 				if (rule == grammarAccess.getCollectionTypeCSRule()
-						|| rule == grammarAccess.getTypeLiteralCSRule()) {
+						|| rule == grammarAccess.getTypeLiteralCSRule()
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
 					sequence_CollectionTypeCS(context, (CollectionTypeCS) semanticObject);
 					return;
 				}
@@ -300,7 +304,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 				return;
 			case EssentialOCLCSPackage.MAP_TYPE_CS:
 				if (rule == grammarAccess.getMapTypeCSRule()
-						|| rule == grammarAccess.getTypeLiteralCSRule()) {
+						|| rule == grammarAccess.getTypeLiteralCSRule()
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
 					sequence_MapTypeCS(context, (MapTypeCS) semanticObject);
 					return;
 				}
@@ -391,7 +396,8 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 					sequence_TypeExpCS_TypeNameExpCS(context, (TypeNameExpCS) semanticObject);
 					return;
 				}
-				else if (rule == grammarAccess.getTypeNameExpCSRule()) {
+				else if (rule == grammarAccess.getTypeNameExpCSRule()
+						|| rule == grammarAccess.getTypeExpWithoutMultiplicityCSRule()) {
 					sequence_TypeNameExpCS(context, (TypeNameExpCS) semanticObject);
 					return;
 				}

@@ -37,6 +37,7 @@ import org.eclipse.ocl.xtext.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.CollectionTypeCS;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTbaseVisitor<ElementCS>
@@ -57,7 +58,12 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 					MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
 					csMultiplicity.setIsNullFree(false);
 					csMultiplicity.setStringBounds("*");
-					csTypeRef.setOwnedMultiplicity(csMultiplicity);
+					if (csTypeRef instanceof CollectionTypeCS) {
+						((CollectionTypeCS)csTypeRef).setOwnedCollectionMultiplicity(csMultiplicity);
+					}
+					else {
+						csTypeRef.setOwnedMultiplicity(csMultiplicity);
+					}
 				}
 			}
 			else {
