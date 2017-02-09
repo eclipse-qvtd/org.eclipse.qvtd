@@ -42,7 +42,6 @@ import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
@@ -239,9 +238,6 @@ public class UMLXServices
 		else if (context instanceof RelDiagram) {
 			return defaultName(context, RelDiagram.class, "NewRelation");
 		}
-		else if (context instanceof TxImportNode) {
-			return defaultName(context, TxImportNode.class, "NewImport");
-		}
 		else if (context instanceof TxTypedModelNode) {
 			return defaultName(context, TxTypedModelNode.class, "NewTypedModel");
 		}
@@ -331,9 +327,6 @@ public class UMLXServices
 				firstLine = false;
 			}
 			return s.toString();
-		}
-		else if (context instanceof TxImportNode) {
-			return String.valueOf(((TxImportNode)context).getName());
 		}
 		else if (context instanceof TxKeyNode) {
 			EClassifier eClassifier = ((TxKeyNode)context).getReferredEClass();

@@ -16,18 +16,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
-import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
@@ -51,7 +48,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxParameterNode;
@@ -149,32 +145,31 @@ public class UMLX2QVTr extends QVTrelationHelper
 				}
 			}
 			//			Collections.sort(allRelationsList, NameUtil.NAMEABLE_COMPARATOR);
+			List<@NonNull Import> qvtrImports = QVTrelationUtil.Internal.getOwnedImportsList(qvtrModel);
+			for (@NonNull TxPackageNode txPackageNode : UMLXUtil.getOwnedTxPackageNodes(txDiagram)) {
+				for (@NonNull String name : UMLXUtil.getImportAliases(txPackageNode)) {
+					try {
+						org.eclipse.ocl.pivot.Package asImportedPackage = metamodelManager.getASOf(org.eclipse.ocl.pivot.Package.class, txPackageNode.getReferredEPackage());
+						if (asImportedPackage != null) {
+							Import qvtrImport = NameUtil.getNameable(qvtrImports, name);
+							if (qvtrImport != null) {
+								assert qvtrImport.getImportedNamespace() == asImportedPackage;
+							}
+							else {
+								qvtrImport = context.createImport(name, asImportedPackage);
+								qvtrImports.add(qvtrImport);
+							}
+						}
+					} catch (ParserException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			//
 			Iterables.addAll(QVTrelationUtil.Internal.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
 			QVTbaseUtil.getContextVariable(metamodelManager.getStandardLibrary(), qvtrRelationalTransformation);
 			return qvtrRelationalTransformation;
-		}
-
-		@Override
-		public @Nullable Element visitTxImportNode(@NonNull TxImportNode txImportNode) {
-			URI uri = URI.createURI(txImportNode.getUri());
-			Resource umlxResource = txImportNode.eResource();
-			if (umlxResource != null) {
-				URI resourceURI = umlxResource.getURI();
-				uri = uri.resolve(resourceURI);
-			}
-			EObject eObject = context.getEnvironmentFactory().getResourceSet().getEObject(uri, true);
-			try {
-				Namespace asNamespace = metamodelManager.getASOf(Namespace.class, eObject);
-				if (asNamespace != null) {
-					Import asImport = context.createImport(UMLXUtil.getName(txImportNode), asNamespace);
-					context.install(txImportNode, asImport);
-					return asImport;
-				}
-			} catch (ParserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
 		}
 
 		@Override
@@ -189,11 +184,11 @@ public class UMLX2QVTr extends QVTrelationHelper
 			return asKey;
 		}
 
-		@Override
-		public @Nullable Element visitTxPackageNode(@NonNull TxPackageNode txPackageNode) {
-			EPackage ePackage = UMLXUtil.getReferredEPackage(txPackageNode);
-			return metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Package.class, ePackage);
-		}
+		//		@Override
+		//		public @Nullable Element visitTxPackageNode(@NonNull TxPackageNode txPackageNode) {
+		//			EPackage ePackage = UMLXUtil.getReferredEPackage(txPackageNode);
+		//			return metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Package.class, ePackage);
+		//		}
 
 		@Override
 		public @Nullable Element visitTxPartNode(@NonNull TxPartNode txPartNode) {
@@ -228,7 +223,17 @@ public class UMLX2QVTr extends QVTrelationHelper
 		@Override
 		public @Nullable Element visitTxTypedModelNode(@NonNull TxTypedModelNode txTypedModelNode) {
 			List<org.eclipse.ocl.pivot.@NonNull Package> usedPackages = new ArrayList<>();
-			createAll(UMLXUtil.getOwnedTxPackageNodes(txTypedModelNode), usedPackages);
+			for (@NonNull TxPackageNode txPackageNode : UMLXUtil.getUsedTxPackageNodes(txTypedModelNode)) {
+				try {
+					org.eclipse.ocl.pivot.Package asPackage = metamodelManager.getASOf(org.eclipse.ocl.pivot.Package.class, txPackageNode.getReferredEPackage());
+					if (asPackage != null) {
+						usedPackages.add(asPackage);
+					}
+				} catch (ParserException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			TypedModel asTypedModel = context.createTypedModel(UMLXUtil.getName(txTypedModelNode), usedPackages);
 			context.install(txTypedModelNode, asTypedModel);
 			return asTypedModel;
@@ -239,11 +244,37 @@ public class UMLX2QVTr extends QVTrelationHelper
 			context.install(umlxModel, qvtrModel);
 			Iterable<@NonNull TxDiagram> txDiagrams = UMLXUtil.getOwnedTxDiagrams(umlxModel);
 			visitAll(txDiagrams);
-			List<@NonNull TxImportNode> txImports = new ArrayList<>();
-			for (@NonNull TxDiagram txDiagram : txDiagrams) {
-				Iterables.addAll(txImports, UMLXUtil.getOwnedTxImportNodes(txDiagram));
-			}
-			createAll(txImports, qvtrModel.getOwnedImports());
+			/*			for (@NonNull TxDiagram txDiagram : txDiagrams) {
+				for (@NonNull TxTypedModelNode txTypedModelNode : UMLXUtil.getOwnedTxTypedModelNodes(txDiagram)) {
+					String name = txTypedModelNode.getName();
+					if (name != null) {
+						String uriString = txTypedModelNode.getUri();
+						if (uriString != null) {
+							URI uri = URI.createURI(uriString);
+							Resource umlxResource = umlxModel.eResource();
+							if (umlxResource != null) {
+								URI resourceURI = umlxResource.getURI();
+								uri = uri.resolve(resourceURI);
+							}
+							EObject eObject = context.getEnvironmentFactory().getResourceSet().getEObject(uri, true);
+							try {
+								Namespace asNamespace = metamodelManager.getASOf(Namespace.class, eObject);
+								if (asNamespace != null) {
+
+
+									Import asImport = context.createImport(name, asNamespace);
+									//									context.install(txImportNode, asImport);
+									qvtrModel.getOwnedImports().add(asImport);
+									return asImport;
+								}
+							} catch (ParserException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			} */
 			return null;
 		}
 

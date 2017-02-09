@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
@@ -115,6 +116,10 @@ public class UMLXSerializeTests extends LoadTestCase
 			EObject eObject = tit.next();
 			if (eObject instanceof Relation) {
 				normalizeRelation((Relation)eObject);
+				tit.prune();
+			}
+			else if (eObject instanceof Import) {
+				((Import)eObject).getOwnedComments().clear();
 				tit.prune();
 			}
 		}

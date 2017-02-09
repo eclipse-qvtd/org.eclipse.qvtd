@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.umlx.RelPatternNode;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelInvocationEdge;
@@ -125,12 +124,6 @@ public class UMLXToStringVisitor extends AbstractExtendingUMLXVisitor<@Nullable 
 			}
 			return null;
 		}
-	}
-
-	@Override
-	public @Nullable Object visitTxImportNode(@NonNull TxImportNode txImportNode) {
-		append(txImportNode.getName());
-		return null;
 	}
 
 	@Override

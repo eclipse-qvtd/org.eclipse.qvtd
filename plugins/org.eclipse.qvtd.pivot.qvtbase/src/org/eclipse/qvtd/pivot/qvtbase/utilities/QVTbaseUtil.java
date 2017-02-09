@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -76,6 +77,10 @@ public class QVTbaseUtil extends PivotUtil
 
 		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
 			return ClassUtil.nullFree(asPattern.getPredicate());
+		}
+
+		public static @NonNull List<@NonNull Import> getOwnedImportsList(@NonNull Model asModel) {
+			return ClassUtil.nullFree(asModel.getOwnedImports());
 		}
 
 		public static @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackagesList(@NonNull TypedModel asTypedModel) {

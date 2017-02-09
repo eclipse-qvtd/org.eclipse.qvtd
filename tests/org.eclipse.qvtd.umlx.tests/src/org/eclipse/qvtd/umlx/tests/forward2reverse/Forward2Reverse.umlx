@@ -12,52 +12,52 @@ TCS - initial implementation for ModelMorf
 E.D.Willink - alignment with evolved specification
 E.D.Willink - rename / comment
 *****************************************************************************</comments>
-  <ownedTxDiagrams xmi:id="T.Forward2Reverse" name="Forward2Reverse" package="org::eclipse::qvtd::umlx2::tests::forward2reverse">
+  <ownedTxDiagrams xmi:id="T.Forward2Reverse" name="Forward2Reverse" package="org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse">
     <comments>Transform a hierarchical StateMachine into a flat StateMachine.</comments>
     <ownedRelDiagrams xmi:id="R.Forward2Reverse.element2element" name="element2element" isTop="true">
       <comments>Map each Leaf State to a Flat State in the corresponding StateMachine.</comments>
-      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.element2element.forward" referredTxTypedModelNode="M.Forward2Reverse.forward">
+      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.element2element.forward" referredTxTypedModelNode="Tp.Forward2Reverse.forward">
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element.forward..forwardList..forwardElement" source="C.Forward2Reverse.element2element.forward.forwardList" target="C.Forward2Reverse.element2element.forward.forwardElement">
           <referredEStructuralFeature xsi:type="ecore:EReference" href="DoublyLinkedList.ecore#//DoublyLinkedList/ownedElements"/>
         </ownedRelPatternEdges>
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element.forward..forwardElement..forwardTarget" source="C.Forward2Reverse.element2element.forward.forwardElement" target="C.Forward2Reverse.element2element.forward.forwardTarget">
           <referredEStructuralFeature xsi:type="ecore:EReference" href="DoublyLinkedList.ecore#//Element/target"/>
         </ownedRelPatternEdges>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.forward.forwardElement" incoming="E.Forward2Reverse.element2element.forward..forwardList..forwardElement" isRoot="true" name="forwardElement" outgoing="E.Forward2Reverse.element2element...forwardElement..elementName E.Forward2Reverse.element2element.forward..forwardElement..forwardTarget">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.forward.forwardElement" name="forwardElement" incoming="E.Forward2Reverse.element2element.forward..forwardList..forwardElement" isRoot="true" outgoing="E.Forward2Reverse.element2element...forwardElement..elementName E.Forward2Reverse.element2element.forward..forwardElement..forwardTarget">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//Element"/>
         </ownedRelPatternNodes>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.forward.forwardList" name="forwardList" outgoing="E.Forward2Reverse.element2element.forward..forwardList..forwardElement">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.forward.forwardList" name="forwardList" invokingRelInvocationEdges="A.Forward2Reverse.element2element.list2list.forwardList" outgoing="E.Forward2Reverse.element2element.forward..forwardList..forwardElement">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//DoublyLinkedList"/>
         </ownedRelPatternNodes>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.forward.forwardTarget" incoming="E.Forward2Reverse.element2element.forward..forwardElement..forwardTarget" name="forwardTarget">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.forward.forwardTarget" name="forwardTarget" incoming="E.Forward2Reverse.element2element.forward..forwardElement..forwardTarget" invokingRelInvocationEdges="A.Forward2Reverse.element2element.element2element.forwardElement">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//Element"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
-      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.element2element.reverse" referredTxTypedModelNode="M.Forward2Reverse.reverse">
+      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.element2element.reverse" isEnforced="true" referredTxTypedModelNode="Tp.Forward2Reverse.reverse">
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element.reverse..reverseList..reverseElement" source="C.Forward2Reverse.element2element.reverse.reverseList" target="C.Forward2Reverse.element2element.reverse.reverseElement">
           <referredEStructuralFeature xsi:type="ecore:EReference" href="DoublyLinkedList.ecore#//DoublyLinkedList/ownedElements"/>
         </ownedRelPatternEdges>
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element.reverse..reverseElement..reverseSource" source="C.Forward2Reverse.element2element.reverse.reverseElement" target="C.Forward2Reverse.element2element.reverse.reverseSource">
           <referredEStructuralFeature xsi:type="ecore:EReference" href="DoublyLinkedList.ecore#//Element/source"/>
         </ownedRelPatternEdges>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.reverse.reverseElement" incoming="E.Forward2Reverse.element2element.reverse..reverseList..reverseElement" isRoot="true" name="reverseElement" outgoing="E.Forward2Reverse.element2element...reverseElement..elementName E.Forward2Reverse.element2element.reverse..reverseElement..reverseSource">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.reverse.reverseElement" name="reverseElement" incoming="E.Forward2Reverse.element2element.reverse..reverseList..reverseElement" isRoot="true" outgoing="E.Forward2Reverse.element2element...reverseElement..elementName E.Forward2Reverse.element2element.reverse..reverseElement..reverseSource">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//Element"/>
         </ownedRelPatternNodes>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.reverse.reverseList" name="reverseList" outgoing="E.Forward2Reverse.element2element.reverse..reverseList..reverseElement">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.reverse.reverseList" name="reverseList" invokingRelInvocationEdges="A.Forward2Reverse.element2element.list2list.reverseList" outgoing="E.Forward2Reverse.element2element.reverse..reverseList..reverseElement">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//DoublyLinkedList"/>
         </ownedRelPatternNodes>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.reverse.reverseSource" incoming="E.Forward2Reverse.element2element.reverse..reverseElement..reverseSource" name="reverseSource">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element.reverse.reverseSource" name="reverseSource" incoming="E.Forward2Reverse.element2element.reverse..reverseElement..reverseSource" invokingRelInvocationEdges="A.Forward2Reverse.element2element.element2element.reverseElement">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//Element"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
       <ownedRelDomainNodes xmi:id="D.Forward2Reverse.element2element.">
-        <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element...reverseElement..elementName" source="C.Forward2Reverse.element2element.reverse.reverseElement" target="C.Forward2Reverse.element2element..elementName">
-          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="DoublyLinkedList.ecore#//Element/name"/>
-        </ownedRelPatternEdges>
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element...forwardElement..elementName" source="C.Forward2Reverse.element2element.forward.forwardElement" target="C.Forward2Reverse.element2element..elementName">
           <referredEStructuralFeature xsi:type="ecore:EAttribute" href="DoublyLinkedList.ecore#//Element/name"/>
         </ownedRelPatternEdges>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element..elementName" incoming="E.Forward2Reverse.element2element...reverseElement..elementName E.Forward2Reverse.element2element...forwardElement..elementName" name="elementName" isRequired="false">
+        <ownedRelPatternEdges xmi:id="E.Forward2Reverse.element2element...reverseElement..elementName" source="C.Forward2Reverse.element2element.reverse.reverseElement" target="C.Forward2Reverse.element2element..elementName">
+          <referredEStructuralFeature xsi:type="ecore:EAttribute" href="DoublyLinkedList.ecore#//Element/name"/>
+        </ownedRelPatternEdges>
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.element2element..elementName" name="elementName" isRequired="false" incoming="E.Forward2Reverse.element2element...forwardElement..elementName E.Forward2Reverse.element2element...reverseElement..elementName">
           <referredEClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
@@ -72,13 +72,13 @@ E.D.Willink - rename / comment
     </ownedRelDiagrams>
     <ownedRelDiagrams xmi:id="R.Forward2Reverse.list2list" name="list2list" isTop="true">
       <comments>Map each hierarchical StateMachine to a flat StateMachine</comments>
-      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.list2list.forward" referredTxTypedModelNode="M.Forward2Reverse.forward">
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.list2list.forward.forwardList" isRoot="true" name="forwardList" outgoing="E.Forward2Reverse.list2list...forwardList..listName">
+      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.list2list.forward" referredTxTypedModelNode="Tp.Forward2Reverse.forward">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.list2list.forward.forwardList" name="forwardList" invokingRelInvocationEdges="A.Forward2Reverse.list2list.listHead2listHead.forwardList" isRoot="true" outgoing="E.Forward2Reverse.list2list...forwardList..listName">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//DoublyLinkedList"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
-      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.list2list.reverse" referredTxTypedModelNode="M.Forward2Reverse.reverse">
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.list2list.reverse.reverseList" isRoot="true" name="reverseList" outgoing="E.Forward2Reverse.list2list...reverseList..listName">
+      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.list2list.reverse" isEnforced="true" referredTxTypedModelNode="Tp.Forward2Reverse.reverse">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.list2list.reverse.reverseList" name="reverseList" invokingRelInvocationEdges="A.Forward2Reverse.list2list.listHead2listHead.reverseList" isRoot="true" outgoing="E.Forward2Reverse.list2list...reverseList..listName">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//DoublyLinkedList"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
@@ -89,7 +89,7 @@ E.D.Willink - rename / comment
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.list2list...forwardList..listName" source="C.Forward2Reverse.list2list.forward.forwardList" target="C.Forward2Reverse.list2list..listName">
           <referredEStructuralFeature xsi:type="ecore:EAttribute" href="DoublyLinkedList.ecore#//DoublyLinkedList/name"/>
         </ownedRelPatternEdges>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.list2list..listName" incoming="E.Forward2Reverse.list2list...reverseList..listName E.Forward2Reverse.list2list...forwardList..listName" name="listName" isRequired="false">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.list2list..listName" name="listName" isRequired="false" incoming="E.Forward2Reverse.list2list...reverseList..listName E.Forward2Reverse.list2list...forwardList..listName">
           <referredEClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
@@ -99,25 +99,25 @@ E.D.Willink - rename / comment
       </ownedRelInvocationNodes>
     </ownedRelDiagrams>
     <ownedRelDiagrams xmi:id="R.Forward2Reverse.listHead2listHead" name="listHead2listHead">
-      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.listHead2listHead.forward" referredTxTypedModelNode="M.Forward2Reverse.forward">
+      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.listHead2listHead.forward" referredTxTypedModelNode="Tp.Forward2Reverse.forward">
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.listHead2listHead.forward..forwardList..forwardHead" source="C.Forward2Reverse.listHead2listHead.forward.forwardList" target="C.Forward2Reverse.listHead2listHead.forward.forwardHead">
           <referredEStructuralFeature xsi:type="ecore:EReference" href="DoublyLinkedList.ecore#//DoublyLinkedList/headElement"/>
         </ownedRelPatternEdges>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.forward.forwardList" isRoot="true" name="forwardList" outgoing="E.Forward2Reverse.listHead2listHead.forward..forwardList..forwardHead">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.forward.forwardList" name="forwardList" isRoot="true" outgoing="E.Forward2Reverse.listHead2listHead.forward..forwardList..forwardHead">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//DoublyLinkedList"/>
         </ownedRelPatternNodes>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.forward.forwardHead" incoming="E.Forward2Reverse.listHead2listHead.forward..forwardList..forwardHead" name="forwardHead">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.forward.forwardHead" name="forwardHead" incoming="E.Forward2Reverse.listHead2listHead.forward..forwardList..forwardHead" invokingRelInvocationEdges="A.Forward2Reverse.listHead2listHead.element2element.forwardElement">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//Element"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
-      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.listHead2listHead.reverse" referredTxTypedModelNode="M.Forward2Reverse.reverse">
+      <ownedRelDomainNodes xmi:id="D.Forward2Reverse.listHead2listHead.reverse" isEnforced="true" referredTxTypedModelNode="Tp.Forward2Reverse.reverse">
         <ownedRelPatternEdges xmi:id="E.Forward2Reverse.listHead2listHead.reverse..reverseList..reverseHead" source="C.Forward2Reverse.listHead2listHead.reverse.reverseList" target="C.Forward2Reverse.listHead2listHead.reverse.reverseHead">
           <referredEStructuralFeature xsi:type="ecore:EReference" href="DoublyLinkedList.ecore#//DoublyLinkedList/headElement"/>
         </ownedRelPatternEdges>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.reverse.reverseList" isRoot="true" name="reverseList" outgoing="E.Forward2Reverse.listHead2listHead.reverse..reverseList..reverseHead">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.reverse.reverseList" name="reverseList" isRoot="true" outgoing="E.Forward2Reverse.listHead2listHead.reverse..reverseList..reverseHead">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//DoublyLinkedList"/>
         </ownedRelPatternNodes>
-        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.reverse.reverseHead" incoming="E.Forward2Reverse.listHead2listHead.reverse..reverseList..reverseHead" name="reverseHead">
+        <ownedRelPatternNodes xmi:id="C.Forward2Reverse.listHead2listHead.reverse.reverseHead" name="reverseHead" incoming="E.Forward2Reverse.listHead2listHead.reverse..reverseList..reverseHead" invokingRelInvocationEdges="A.Forward2Reverse.listHead2listHead.element2element.reverseElement">
           <referredEClassifier xsi:type="ecore:EClass" href="DoublyLinkedList.ecore#//Element"/>
         </ownedRelPatternNodes>
       </ownedRelDomainNodes>
@@ -126,29 +126,10 @@ E.D.Willink - rename / comment
         <ownedRelInvocationEdges xmi:id="A.Forward2Reverse.listHead2listHead.element2element.reverseElement" invokingRelPatternNode="C.Forward2Reverse.listHead2listHead.reverse.reverseHead" referredRelPatternNode="C.Forward2Reverse.element2element.reverse.reverseElement"/>
       </ownedRelInvocationNodes>
     </ownedRelDiagrams>
-    <ownedTxImportNodes xmi:id="I.Forward2Reverse.listMM" name="listMM" uri="DoublyLinkedList.ecore#/">
-      <comments>*****************************************************************************
-Copyright (c) 2007,2008 Tata Consultancy Services and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-TCS - initial implementation for ModelMorf
-E.D.Willink - alignment with evolved specification
-E.D.Willink - rename / comment
-*****************************************************************************</comments>
-    </ownedTxImportNodes>
-    <ownedTxTypedModelNodes xmi:id="M.Forward2Reverse.forward" name="forward" check="true">
-      <ownedTxPackageNodes xmi:id="U.Forward2Reverse.forward.doublylinkedlist">
-        <referredEPackage href="DoublyLinkedList.ecore#/"/>
-      </ownedTxPackageNodes>
-    </ownedTxTypedModelNodes>
-    <ownedTxTypedModelNodes xmi:id="M.Forward2Reverse.reverse" name="reverse" check="true" enforce="true">
-      <ownedTxPackageNodes xmi:id="U.Forward2Reverse.reverse.doublylinkedlist">
-        <referredEPackage href="DoublyLinkedList.ecore#/"/>
-      </ownedTxPackageNodes>
-    </ownedTxTypedModelNodes>
+    <ownedTxPackageNodes xmi:id="U.Forward2Reverse.doublylinkedlist">
+      <referredEPackage href="DoublyLinkedList.ecore#/"/>
+    </ownedTxPackageNodes>
+    <ownedTxTypedModelNodes xmi:id="Tp.Forward2Reverse.forward" name="forward" check="true" usedTxPackageNodes="U.Forward2Reverse.doublylinkedlist"/>
+    <ownedTxTypedModelNodes xmi:id="Tp.Forward2Reverse.reverse" name="reverse" check="true" enforce="true" usedTxPackageNodes="U.Forward2Reverse.doublylinkedlist"/>
   </ownedTxDiagrams>
 </umlx:UMLXModel>

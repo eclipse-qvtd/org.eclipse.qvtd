@@ -536,7 +536,7 @@ class PatternForest
 		TypedModel qvtrTypedModel = umlx2qvtr.getQVTrElement(TypedModel.class, txTypedModelNode);
 		RelationDomain qvtrRelationDomain = umlx2qvtr.createRelationDomain(qvtrTypedModel);
 		qvtrRelationDomain.setIsCheckable(txTypedModelNode.isCheck());
-		qvtrRelationDomain.setIsEnforceable(txTypedModelNode.isEnforce());
+		qvtrRelationDomain.setIsEnforceable(relDomainNode.isIsEnforced());
 		umlx2qvtr.install(relDomainNode, qvtrRelationDomain);
 		allDomains.add(qvtrRelationDomain);
 		//

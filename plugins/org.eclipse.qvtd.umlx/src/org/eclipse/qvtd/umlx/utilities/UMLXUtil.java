@@ -29,7 +29,6 @@ import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxParameterNode;
@@ -119,6 +118,10 @@ public class UMLXUtil
 		return ClassUtil.nullFree(txTypedModelNode.getDependsOns());
 	}
 
+	public static @NonNull Iterable<@NonNull String> getImportAliases(@NonNull TxPackageNode txPackageNode) {
+		return ClassUtil.nullFree(txPackageNode.getImportAliases());
+	}
+
 	public static @NonNull Iterable<@NonNull RelPatternEdge> getIncoming(@NonNull RelPatternNode relNode) {
 		return ClassUtil.nullFree(relNode.getIncoming());
 	}
@@ -167,16 +170,12 @@ public class UMLXUtil
 		return ClassUtil.nullFree(umlxModel.getOwnedTxDiagrams());
 	}
 
-	public static @NonNull Iterable<? extends @NonNull TxImportNode> getOwnedTxImportNodes(@NonNull TxDiagram txDiagram) {
-		return ClassUtil.nullFree(txDiagram.getOwnedTxImportNodes());
-	}
-
 	public static @NonNull Iterable<@NonNull TxKeyNode> getOwnedTxKeyNodes(@NonNull TxDiagram txDiagram) {
 		return ClassUtil.nullFree(txDiagram.getOwnedTxKeyNodes());
 	}
 
-	public static @NonNull Iterable<@NonNull TxPackageNode> getOwnedTxPackageNodes(@NonNull TxTypedModelNode txTypedModelNode) {
-		return ClassUtil.nullFree(txTypedModelNode.getOwnedTxPackageNodes());
+	public static @NonNull Iterable<@NonNull TxPackageNode> getOwnedTxPackageNodes(@NonNull TxDiagram txDiagram) {
+		return ClassUtil.nullFree(txDiagram.getOwnedTxPackageNodes());
 	}
 
 	public static @NonNull Iterable<@NonNull TxParameterNode> getOwnedTxParameterNodes(@NonNull TxQueryNode txTypedModelNode) {
@@ -271,5 +270,9 @@ public class UMLXUtil
 			}
 		});
 		return sortedEdges;
+	}
+
+	public static @NonNull Iterable<@NonNull TxPackageNode> getUsedTxPackageNodes(@NonNull TxTypedModelNode txTypedModelNode) {
+		return ClassUtil.nullFree(txTypedModelNode.getUsedTxPackageNodes());
 	}
 }

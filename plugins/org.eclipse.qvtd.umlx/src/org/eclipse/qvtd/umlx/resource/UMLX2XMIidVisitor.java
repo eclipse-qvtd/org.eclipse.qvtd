@@ -24,7 +24,6 @@ import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxParameterNode;
@@ -79,7 +78,6 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 	public static final @NonNull String REL_PATTERN_EDGE_PREFIX = "E."; //$NON-NLS-1$
 	public static final @NonNull String REL_PATTERN_EXPRESSION_PREFIX = "X."; //$NON-NLS-1$
 	public static final @NonNull String TX_DIAGRAM_PREFIX = "T."; //$NON-NLS-1$
-	public static final @NonNull String TX_IMPORT_PREFIX = "I."; //$NON-NLS-1$
 	public static final @NonNull String TX_KEY_PREFIX = "K."; //$NON-NLS-1$
 	public static final @NonNull String TX_KEY_PART_PREFIX = "Kp."; //$NON-NLS-1$
 	public static final @NonNull String TX_MODEL_PARAMETER_PREFIX = "Tp."; //$NON-NLS-1$
@@ -354,14 +352,6 @@ public class UMLX2XMIidVisitor extends AbstractExtendingUMLXVisitor<Boolean, UML
 	@Override
 	public Boolean visitTxDiagram(@NonNull TxDiagram object) {
 		s.append(TX_DIAGRAM_PREFIX);
-		appendParent(object);
-		appendNameOf(s, object);
-		return true;
-	}
-
-	@Override
-	public Boolean visitTxImportNode(@NonNull TxImportNode object) {
-		s.append(TX_IMPORT_PREFIX);
 		appendParent(object);
 		appendNameOf(s, object);
 		return true;

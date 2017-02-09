@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -79,7 +78,6 @@ import org.eclipse.qvtd.umlx.RelInvocationNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxParameterNode;
@@ -381,6 +379,7 @@ public class QVTr2UMLX
 			}
 			if (qvtrRelationDomain.isIsEnforceable()) {
 				tyTypedModelNode.setEnforce(true);
+				relDomainNode.setIsEnforced(true);
 			}
 			for (@NonNull EObject eObject : new TreeIterable(qvtrRelationDomain, false)) {
 				if (eObject instanceof TemplateExp) {
@@ -420,6 +419,7 @@ public class QVTr2UMLX
 	protected static class CreateTransformationVisitor extends AbstractVisitor
 	{
 		protected final @NonNull UMLXModel umlxModel;
+		private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Package, @NonNull TxPackageNode> asPackage2txPackageNode = new HashMap<>();
 
 		public CreateTransformationVisitor(@NonNull QVTr2UMLX context, @NonNull UMLXModel umlxModel) {
 			super(context);
@@ -449,15 +449,6 @@ public class QVTr2UMLX
 			txParameterNode.setName(asFunctionParameter.getName());
 			setReferredEType(txParameterNode, asFunctionParameter);
 			return txParameterNode;
-		}
-
-		@Override
-		public @Nullable UMLXElement visitImport(@NonNull Import asImport) {
-			TxImportNode txImportNode = UMLXFactory.eINSTANCE.createTxImportNode();
-			context.install(asImport, txImportNode);
-			txImportNode.setName(asImport.getName());
-			txImportNode.setUri(EcoreUtil.getURI(asImport.getImportedNamespace().getESObject()).toString());
-			return txImportNode;
 		}
 
 		@Override
@@ -513,6 +504,17 @@ public class QVTr2UMLX
 			//		    createAll(relationModel.getOwnedImports(), umlxModel.getOwnedImports());
 			createAll(PivotUtil.getOwnedPackages(qvtrModel), null); //umlxModel.getOwnedPackages());
 			//			createAll(relationModel.getOwnedComments(), umlxModel.getOwnedComments());
+			for (@NonNull Import qvtrImport : QVTrelationUtil.getOwnedImports(qvtrModel)) {
+				Namespace asNamespace = qvtrImport.getImportedNamespace();
+				TxPackageNode txPackageNode = asPackage2txPackageNode.get(asNamespace);
+				if (txPackageNode != null) {
+					List<String> importAliases = txPackageNode.getImportAliases();
+					String name = qvtrImport.getName();
+					if (!importAliases.contains(name)) {
+						importAliases.add(name);
+					}
+				}
+			}
 			return null;
 		}
 
@@ -524,10 +526,24 @@ public class QVTr2UMLX
 			txDiagram.setName(qvtrTransformation.getName());
 			txDiagram.setPackage(packagePath);
 			context.install(qvtrTransformation, txDiagram);
+			//
+			Iterable<@NonNull TypedModel> modelParameters = QVTrelationUtil.getModelParameters(qvtrTransformation);
+			for (@NonNull TypedModel qvtrTypedModel : modelParameters) {
+				for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTrelationUtil.getUsedPackages(qvtrTypedModel)) {
+					TxPackageNode txPackageNode = asPackage2txPackageNode.get(asPackage);
+					if (txPackageNode == null) {
+						txPackageNode = UMLXFactory.eINSTANCE.createTxPackageNode();
+						//				context.addTrace(usedPackage, txPackageNode);
+						txPackageNode.setReferredEPackage(asPackage.getEPackage());
+						txDiagram.getOwnedTxPackageNodes().add(txPackageNode);
+						asPackage2txPackageNode.put(asPackage, txPackageNode);
+					}
+				}
+			}
+			//			Collections.sort(txDiagram.getOwnedTxPackageNodes(), NameUtil.NAMEABLE_COMPARATOR);
 			//			txTransformationNode.setOwnedContext(create(qvtrTransformation.getOwnedContext()));
 			//		    createAll(qvtrTransformation.getOwnedOperations(), txTransformationNode.getOwnedOperations());
-			createAll(QVTrelationUtil.getOwnedImports(QVTrelationUtil.getModel(context.qvtrResource)), txDiagram.getOwnedTxImportNodes());
-			createAll(QVTrelationUtil.getModelParameters(qvtrTransformation), txDiagram.getOwnedTxTypedModelNodes());
+			createAll(modelParameters, txDiagram.getOwnedTxTypedModelNodes());
 			createAll(QVTrelationUtil.getOwnedKey(qvtrTransformation), txDiagram.getOwnedTxKeyNodes());
 			createAll(QVTrelationUtil.getRule(qvtrTransformation), txDiagram.getOwnedRelDiagrams());
 			createAll(QVTrelationUtil.getOwnedOperations(qvtrTransformation), txDiagram.getOwnedTxQueryNodes());
@@ -541,12 +557,11 @@ public class QVTr2UMLX
 		public @Nullable UMLXElement visitTypedModel(@NonNull TypedModel qvtrTypedModel) {
 			TxTypedModelNode txTypedModelNode = UMLXFactory.eINSTANCE.createTxTypedModelNode();
 			context.install(qvtrTypedModel, txTypedModelNode);
-			txTypedModelNode.setName(qvtrTypedModel.getName());
+			String name = qvtrTypedModel.getName();
+			txTypedModelNode.setName(name);
 			for (org.eclipse.ocl.pivot.@NonNull Package usedPackage : QVTrelationUtil.getUsedPackages(qvtrTypedModel)) {
-				TxPackageNode txPackageNode = UMLXFactory.eINSTANCE.createTxPackageNode();
-				//				context.addTrace(usedPackage, txPackageNode);
-				txPackageNode.setReferredEPackage(usedPackage.getEPackage());
-				txTypedModelNode.getOwnedTxPackageNodes().add(txPackageNode);
+				TxPackageNode txPackageNode = asPackage2txPackageNode.get(usedPackage);
+				txTypedModelNode.getUsedTxPackageNodes().add(txPackageNode);
 			}
 			if (qvtrTypedModel.getDependsOn().size() > 0) {
 				context.addReference(qvtrTypedModel);
