@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelDomainNode#isIsEnforced <em>Is Enforced</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternEdges <em>Owned Rel Pattern Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternNodes <em>Owned Rel Pattern Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwningRelDiagram <em>Owning Rel Diagram</em>}</li>
@@ -31,6 +32,32 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface RelDomainNode extends RelNode {
+	/**
+	 * Returns the value of the '<em><b>Is Enforced</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Enforced</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Enforced</em>' attribute.
+	 * @see #setIsEnforced(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDomainNode_IsEnforced()
+	 * @generated
+	 */
+	boolean isIsEnforced();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelDomainNode#isIsEnforced <em>Is Enforced</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Enforced</em>' attribute.
+	 * @see #isIsEnforced()
+	 * @generated
+	 */
+	void setIsEnforced(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Owned Rel Pattern Edges</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.RelPatternEdge}.

@@ -27,7 +27,6 @@ import org.eclipse.qvtd.umlx.RelPatternNode;
 import org.eclipse.qvtd.umlx.RelNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxNode;
 import org.eclipse.qvtd.umlx.TxPackageNode;
@@ -112,13 +111,6 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	private EClass txDiagramEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass txImportNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -335,8 +327,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDomainNode_OwnedRelPatternEdges() {
-		return (EReference)relDomainNodeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getRelDomainNode_IsEnforced() {
+		return (EAttribute)relDomainNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -345,7 +337,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDomainNode_OwnedRelPatternNodes() {
+	public EReference getRelDomainNode_OwnedRelPatternEdges() {
 		return (EReference)relDomainNodeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -355,7 +347,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDomainNode_OwningRelDiagram() {
+	public EReference getRelDomainNode_OwnedRelPatternNodes() {
 		return (EReference)relDomainNodeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -365,8 +357,18 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDomainNode_ReferredTxTypedModelNode() {
+	public EReference getRelDomainNode_OwningRelDiagram() {
 		return (EReference)relDomainNodeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelDomainNode_ReferredTxTypedModelNode() {
+		return (EReference)relDomainNodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -645,7 +647,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxDiagram_OwnedTxImportNodes() {
+	public EReference getTxDiagram_OwnedTxKeyNodes() {
 		return (EReference)txDiagramEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -655,7 +657,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxDiagram_OwnedTxKeyNodes() {
+	public EReference getTxDiagram_OwnedTxPackageNodes() {
 		return (EReference)txDiagramEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -687,36 +689,6 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	@Override
 	public EAttribute getTxDiagram_Package() {
 		return (EAttribute)txDiagramEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getTxImportNode() {
-		return txImportNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTxImportNode_OwningTxDiagram() {
-		return (EReference)txImportNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getTxImportNode_Uri() {
-		return (EAttribute)txImportNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -865,8 +837,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxPackageNode_ReferredEPackage() {
-		return (EReference)txPackageNodeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTxPackageNode_ImportAliases() {
+		return (EAttribute)txPackageNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -875,8 +847,18 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxPackageNode_OwningTxTypedModelNode() {
+	public EReference getTxPackageNode_OwningTxDiagram() {
 		return (EReference)txPackageNodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTxPackageNode_ReferredEPackage() {
+		return (EReference)txPackageNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -945,7 +927,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxTypedModelNode_OwnedTxPackageNodes() {
+	public EReference getTxTypedModelNode_OwningTxDiagram() {
 		return (EReference)txTypedModelNodeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -955,7 +937,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTxTypedModelNode_OwningTxDiagram() {
+	public EReference getTxTypedModelNode_UsedTxPackageNodes() {
 		return (EReference)txTypedModelNodeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1125,6 +1107,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		createEReference(relDiagramEClass, REL_DIAGRAM__OWNING_TX_DIAGRAM);
 
 		relDomainNodeEClass = createEClass(REL_DOMAIN_NODE);
+		createEAttribute(relDomainNodeEClass, REL_DOMAIN_NODE__IS_ENFORCED);
 		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES);
 		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES);
 		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__OWNING_REL_DIAGRAM);
@@ -1163,15 +1146,11 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		txDiagramEClass = createEClass(TX_DIAGRAM);
 		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_REL_DIAGRAMS);
-		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_IMPORT_NODES);
 		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_KEY_NODES);
+		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_PACKAGE_NODES);
 		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_QUERY_NODES);
 		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES);
 		createEAttribute(txDiagramEClass, TX_DIAGRAM__PACKAGE);
-
-		txImportNodeEClass = createEClass(TX_IMPORT_NODE);
-		createEReference(txImportNodeEClass, TX_IMPORT_NODE__OWNING_TX_DIAGRAM);
-		createEAttribute(txImportNodeEClass, TX_IMPORT_NODE__URI);
 
 		txKeyNodeEClass = createEClass(TX_KEY_NODE);
 		createEReference(txKeyNodeEClass, TX_KEY_NODE__OWNED_TX_PART_NODES);
@@ -1181,8 +1160,9 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		txNodeEClass = createEClass(TX_NODE);
 
 		txPackageNodeEClass = createEClass(TX_PACKAGE_NODE);
+		createEAttribute(txPackageNodeEClass, TX_PACKAGE_NODE__IMPORT_ALIASES);
+		createEReference(txPackageNodeEClass, TX_PACKAGE_NODE__OWNING_TX_DIAGRAM);
 		createEReference(txPackageNodeEClass, TX_PACKAGE_NODE__REFERRED_EPACKAGE);
-		createEReference(txPackageNodeEClass, TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE);
 
 		txParameterNodeEClass = createEClass(TX_PARAMETER_NODE);
 		createEReference(txParameterNodeEClass, TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE);
@@ -1201,8 +1181,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		createEAttribute(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__CHECK);
 		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__DEPENDS_ONS);
 		createEAttribute(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__ENFORCE);
-		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES);
 		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM);
+		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES);
 
 		umlxElementEClass = createEClass(UMLX_ELEMENT);
 		createEAttribute(umlxElementEClass, UMLX_ELEMENT__COMMENTS);
@@ -1260,8 +1240,6 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		relPatternNodeEClass.getESuperTypes().add(this.getRelNode());
 		relPatternNodeEClass.getESuperTypes().add(this.getUMLXTypedElement());
 		txDiagramEClass.getESuperTypes().add(this.getUMLXNamedElement());
-		txImportNodeEClass.getESuperTypes().add(this.getTxNode());
-		txImportNodeEClass.getESuperTypes().add(this.getUMLXNamedElement());
 		txKeyNodeEClass.getESuperTypes().add(this.getTxNode());
 		txNodeEClass.getESuperTypes().add(this.getUMLXElement());
 		txPackageNodeEClass.getESuperTypes().add(this.getTxNode());
@@ -1302,6 +1280,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(relDomainNodeEClass, RelDomainNode.class, "RelDomainNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRelDomainNode_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", "false", 1, 1, RelDomainNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelDomainNode_OwnedRelPatternEdges(), this.getRelPatternEdge(), this.getRelPatternEdge_OwningRelDomainNode(), "ownedRelPatternEdges", null, 0, -1, RelDomainNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelDomainNode_OwnedRelPatternNodes(), this.getRelPatternNode(), this.getRelPatternNode_OwningRelDomainNode(), "ownedRelPatternNodes", null, 0, -1, RelDomainNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelDomainNode_OwningRelDiagram(), this.getRelDiagram(), this.getRelDiagram_OwnedRelDomainNodes(), "owningRelDiagram", null, 1, 1, RelDomainNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1459,8 +1438,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		initEClass(txDiagramEClass, TxDiagram.class, "TxDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTxDiagram_OwnedRelDiagrams(), this.getRelDiagram(), this.getRelDiagram_OwningTxDiagram(), "ownedRelDiagrams", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTxDiagram_OwnedTxImportNodes(), this.getTxImportNode(), this.getTxImportNode_OwningTxDiagram(), "ownedTxImportNodes", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxDiagram_OwnedTxKeyNodes(), this.getTxKeyNode(), this.getTxKeyNode_OwningTxDiagram(), "ownedTxKeyNodes", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTxDiagram_OwnedTxPackageNodes(), this.getTxPackageNode(), this.getTxPackageNode_OwningTxDiagram(), "ownedTxPackageNodes", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxDiagram_OwnedTxQueryNodes(), this.getTxQueryNode(), this.getTxQueryNode_OwningTxDiagram(), "ownedTxQueryNodes", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxDiagram_OwnedTxTypedModelNodes(), this.getTxTypedModelNode(), this.getTxTypedModelNode_OwningTxDiagram(), "ownedTxTypedModelNodes", null, 0, -1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTxDiagram_Package(), ecorePackage.getEString(), "package", null, 0, 1, TxDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1501,19 +1480,6 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(txImportNodeEClass, TxImportNode.class, "TxImportNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTxImportNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxImportNodes(), "owningTxDiagram", null, 1, 1, TxImportNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTxImportNode_Uri(), ecorePackage.getEString(), "uri", null, 1, 1, TxImportNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(txImportNodeEClass, ecorePackage.getEBoolean(), "validateNameIsRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(txKeyNodeEClass, TxKeyNode.class, "TxKeyNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTxKeyNode_OwnedTxPartNodes(), this.getTxPartNode(), this.getTxPartNode_OwningTxKeyNode(), "ownedTxPartNodes", null, 1, -1, TxKeyNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxKeyNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxKeyNodes(), "owningTxDiagram", null, 1, 1, TxKeyNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1531,8 +1497,9 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEClass(txNodeEClass, TxNode.class, "TxNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(txPackageNodeEClass, TxPackageNode.class, "TxPackageNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTxPackageNode_ImportAliases(), ecorePackage.getEString(), "importAliases", null, 0, -1, TxPackageNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTxPackageNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxPackageNodes(), "owningTxDiagram", null, 1, 1, TxPackageNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxPackageNode_ReferredEPackage(), ecorePackage.getEPackage(), null, "referredEPackage", null, 1, 1, TxPackageNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTxPackageNode_OwningTxTypedModelNode(), this.getTxTypedModelNode(), this.getTxTypedModelNode_OwnedTxPackageNodes(), "owningTxTypedModelNode", null, 1, 1, TxPackageNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(txParameterNodeEClass, TxParameterNode.class, "TxParameterNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTxParameterNode_OwningTxQueryNode(), this.getTxQueryNode(), this.getTxQueryNode_OwnedTxParameterNodes(), "owningTxQueryNode", null, 1, 1, TxParameterNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1605,8 +1572,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		initEAttribute(getTxTypedModelNode_Check(), ecorePackage.getEBoolean(), "check", "false", 1, 1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxTypedModelNode_DependsOns(), this.getTxTypedModelNode(), null, "dependsOns", null, 0, -1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTxTypedModelNode_Enforce(), ecorePackage.getEBoolean(), "enforce", "false", 1, 1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTxTypedModelNode_OwnedTxPackageNodes(), this.getTxPackageNode(), this.getTxPackageNode_OwningTxTypedModelNode(), "ownedTxPackageNodes", null, 0, -1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTxTypedModelNode_OwningTxDiagram(), this.getTxDiagram(), this.getTxDiagram_OwnedTxTypedModelNodes(), "owningTxDiagram", null, 1, 1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTxTypedModelNode_UsedTxPackageNodes(), this.getTxPackageNode(), null, "usedTxPackageNodes", null, 0, -1, TxTypedModelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(txTypedModelNodeEClass, ecorePackage.getEBoolean(), "validateTxPackageNodePackagesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1695,12 +1662,6 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 			source,
 			new String[] {
 				"constraints", "validateTxTypedModelNodeNamesAreUnique"
-		});
-		addAnnotation
-		(txImportNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateNameIsRequired"
 		});
 		addAnnotation
 		(txKeyNodeEClass,
@@ -1855,12 +1816,6 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 			source,
 			new String[] {
 				"originalName", "TxTypedModelNodeNamesAreUnique"
-		});
-		addAnnotation
-		(txImportNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
 		});
 		addAnnotation
 		(txKeyNodeEClass.getEOperations().get(0),

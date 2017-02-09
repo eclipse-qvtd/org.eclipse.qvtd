@@ -34,8 +34,8 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.TxDiagram;
-import org.eclipse.qvtd.umlx.TxImportNode;
 import org.eclipse.qvtd.umlx.TxKeyNode;
+import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxQueryNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
@@ -51,8 +51,8 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedRelDiagrams <em>Owned Rel Diagrams</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxImportNodes <em>Owned Tx Import Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxKeyNodes <em>Owned Tx Key Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxQueryNodes <em>Owned Tx Query Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getOwnedTxTypedModelNodes <em>Owned Tx Typed Model Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxDiagramImpl#getPackage <em>Package</em>}</li>
@@ -72,16 +72,6 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	protected EList<RelDiagram> ownedRelDiagrams;
 
 	/**
-	 * The cached value of the '{@link #getOwnedTxImportNodes() <em>Owned Tx Import Nodes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedTxImportNodes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TxImportNode> ownedTxImportNodes;
-
-	/**
 	 * The cached value of the '{@link #getOwnedTxKeyNodes() <em>Owned Tx Key Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +80,16 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @ordered
 	 */
 	protected EList<TxKeyNode> ownedTxKeyNodes;
+
+	/**
+	 * The cached value of the '{@link #getOwnedTxPackageNodes() <em>Owned Tx Package Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTxPackageNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TxPackageNode> ownedTxPackageNodes;
 
 	/**
 	 * The cached value of the '{@link #getOwnedTxQueryNodes() <em>Owned Tx Query Nodes</em>}' containment reference list.
@@ -167,11 +167,11 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @generated
 	 */
 	@Override
-	public EList<TxImportNode> getOwnedTxImportNodes() {
-		if (ownedTxImportNodes == null) {
-			ownedTxImportNodes = new EObjectContainmentWithInverseEList<TxImportNode>(TxImportNode.class, this, UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES, UMLXPackage.TX_IMPORT_NODE__OWNING_TX_DIAGRAM);
+	public EList<TxKeyNode> getOwnedTxKeyNodes() {
+		if (ownedTxKeyNodes == null) {
+			ownedTxKeyNodes = new EObjectContainmentWithInverseEList<TxKeyNode>(TxKeyNode.class, this, UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES, UMLXPackage.TX_KEY_NODE__OWNING_TX_DIAGRAM);
 		}
-		return ownedTxImportNodes;
+		return ownedTxKeyNodes;
 	}
 
 	/**
@@ -180,11 +180,11 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 	 * @generated
 	 */
 	@Override
-	public EList<TxKeyNode> getOwnedTxKeyNodes() {
-		if (ownedTxKeyNodes == null) {
-			ownedTxKeyNodes = new EObjectContainmentWithInverseEList<TxKeyNode>(TxKeyNode.class, this, UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES, UMLXPackage.TX_KEY_NODE__OWNING_TX_DIAGRAM);
+	public EList<TxPackageNode> getOwnedTxPackageNodes() {
+		if (ownedTxPackageNodes == null) {
+			ownedTxPackageNodes = new EObjectContainmentWithInverseEList<TxPackageNode>(TxPackageNode.class, this, UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES, UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_DIAGRAM);
 		}
-		return ownedTxKeyNodes;
+		return ownedTxPackageNodes;
 	}
 
 	/**
@@ -500,10 +500,10 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 		switch (featureID) {
 			case UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelDiagrams()).basicAdd(otherEnd, msgs);
-			case UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxImportNodes()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxKeyNodes()).basicAdd(otherEnd, msgs);
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxPackageNodes()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxQueryNodes()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
@@ -522,10 +522,10 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 		switch (featureID) {
 			case UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS:
 				return ((InternalEList<?>)getOwnedRelDiagrams()).basicRemove(otherEnd, msgs);
-			case UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES:
-				return ((InternalEList<?>)getOwnedTxImportNodes()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return ((InternalEList<?>)getOwnedTxKeyNodes()).basicRemove(otherEnd, msgs);
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES:
+				return ((InternalEList<?>)getOwnedTxPackageNodes()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
 				return ((InternalEList<?>)getOwnedTxQueryNodes()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
@@ -544,10 +544,10 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 		switch (featureID) {
 			case UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS:
 				return getOwnedRelDiagrams();
-			case UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES:
-				return getOwnedTxImportNodes();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return getOwnedTxKeyNodes();
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES:
+				return getOwnedTxPackageNodes();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
 				return getOwnedTxQueryNodes();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:
@@ -571,13 +571,13 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 				getOwnedRelDiagrams().clear();
 				getOwnedRelDiagrams().addAll((Collection<? extends RelDiagram>)newValue);
 				return;
-			case UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES:
-				getOwnedTxImportNodes().clear();
-				getOwnedTxImportNodes().addAll((Collection<? extends TxImportNode>)newValue);
-				return;
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				getOwnedTxKeyNodes().clear();
 				getOwnedTxKeyNodes().addAll((Collection<? extends TxKeyNode>)newValue);
+				return;
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES:
+				getOwnedTxPackageNodes().clear();
+				getOwnedTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
 				return;
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
 				getOwnedTxQueryNodes().clear();
@@ -605,11 +605,11 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 			case UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS:
 				getOwnedRelDiagrams().clear();
 				return;
-			case UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES:
-				getOwnedTxImportNodes().clear();
-				return;
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				getOwnedTxKeyNodes().clear();
+				return;
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES:
+				getOwnedTxPackageNodes().clear();
 				return;
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
 				getOwnedTxQueryNodes().clear();
@@ -634,10 +634,10 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 		switch (featureID) {
 			case UMLXPackage.TX_DIAGRAM__OWNED_REL_DIAGRAMS:
 				return ownedRelDiagrams != null && !ownedRelDiagrams.isEmpty();
-			case UMLXPackage.TX_DIAGRAM__OWNED_TX_IMPORT_NODES:
-				return ownedTxImportNodes != null && !ownedTxImportNodes.isEmpty();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_KEY_NODES:
 				return ownedTxKeyNodes != null && !ownedTxKeyNodes.isEmpty();
+			case UMLXPackage.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES:
+				return ownedTxPackageNodes != null && !ownedTxPackageNodes.isEmpty();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES:
 				return ownedTxQueryNodes != null && !ownedTxQueryNodes.isEmpty();
 			case UMLXPackage.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES:

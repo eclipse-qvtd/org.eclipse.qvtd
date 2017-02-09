@@ -78,7 +78,6 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelPatternEdge = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelPatternEdge", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelPatternNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelPatternNode", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxDiagram = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxDiagram", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxImportNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxImportNode", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxKeyNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxKeyNode", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxPackageNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxPackageNode", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxParameterNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxParameterNode", 0);
@@ -116,7 +115,6 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_RelDiagramNamesAreUnique = "TxDiagram::RelDiagramNamesAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique = "TxDiagram::TxQueryNodeNamesAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_TxTypedModelNodeNamesAreUnique = "TxDiagram::TxTypedModelNodeNamesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxImportNode_c_c_NameIsRequired = "TxImportNode::NameIsRequired";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxKeyNode_c_c_PartsAreUnique = "TxKeyNode::PartsAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxParameterNode_c_c_NameIsRequired = "TxParameterNode::NameIsRequired";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxParameterNode_c_c_TypeIsRequired = "TxParameterNode::TypeIsRequired";
@@ -143,7 +141,6 @@ public class UMLXTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternEdge = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternEdge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxDiagram = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxDiagram);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxImportNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxImportNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxKeyNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxKeyNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxPackageNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxPackageNode);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxParameterNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxParameterNode);
@@ -194,7 +191,6 @@ public class UMLXTables
 		public static final @NonNull EcoreExecutorType _RelPatternEdge = new EcoreExecutorType(UMLXPackage.Literals.REL_PATTERN_EDGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _RelPatternNode = new EcoreExecutorType(UMLXPackage.Literals.REL_PATTERN_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _TxDiagram = new EcoreExecutorType(UMLXPackage.Literals.TX_DIAGRAM, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxImportNode = new EcoreExecutorType(UMLXPackage.Literals.TX_IMPORT_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _TxKeyNode = new EcoreExecutorType(UMLXPackage.Literals.TX_KEY_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _TxNode = new EcoreExecutorType(UMLXPackage.Literals.TX_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _TxPackageNode = new EcoreExecutorType(UMLXPackage.Literals.TX_PACKAGE_NODE, PACKAGE, 0);
@@ -217,7 +213,6 @@ public class UMLXTables
 			_RelPatternEdge,
 			_RelPatternNode,
 			_TxDiagram,
-			_TxImportNode,
 			_TxKeyNode,
 			_TxNode,
 			_TxPackageNode,
@@ -307,13 +302,6 @@ public class UMLXTables
 		private static final @NonNull ExecutorFragment _TxDiagram__TxDiagram = new ExecutorFragment(Types._TxDiagram, UMLXTables.Types._TxDiagram);
 		private static final @NonNull ExecutorFragment _TxDiagram__UMLXElement = new ExecutorFragment(Types._TxDiagram, UMLXTables.Types._UMLXElement);
 		private static final @NonNull ExecutorFragment _TxDiagram__UMLXNamedElement = new ExecutorFragment(Types._TxDiagram, UMLXTables.Types._UMLXNamedElement);
-
-		private static final @NonNull ExecutorFragment _TxImportNode__OclAny = new ExecutorFragment(Types._TxImportNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxImportNode__OclElement = new ExecutorFragment(Types._TxImportNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxImportNode__TxImportNode = new ExecutorFragment(Types._TxImportNode, UMLXTables.Types._TxImportNode);
-		private static final @NonNull ExecutorFragment _TxImportNode__TxNode = new ExecutorFragment(Types._TxImportNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxImportNode__UMLXElement = new ExecutorFragment(Types._TxImportNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _TxImportNode__UMLXNamedElement = new ExecutorFragment(Types._TxImportNode, UMLXTables.Types._UMLXNamedElement);
 
 		private static final @NonNull ExecutorFragment _TxKeyNode__OclAny = new ExecutorFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _TxKeyNode__OclElement = new ExecutorFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclElement);
@@ -460,10 +448,11 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _RelDiagram__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._RelDiagram, 3);
 		public static final @NonNull ExecutorProperty _RelDiagram__RelInvocationNode__referredRelDiagram = new ExecutorPropertyWithImplementation("RelInvocationNode", Types._RelDiagram, 4, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM));
 
-		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternEdges = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, Types._RelDomainNode, 0);
-		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, Types._RelDomainNode, 1);
-		public static final @NonNull ExecutorProperty _RelDomainNode__owningRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, Types._RelDomainNode, 2);
-		public static final @NonNull ExecutorProperty _RelDomainNode__referredTxTypedModelNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, Types._RelDomainNode, 3);
+		public static final @NonNull ExecutorProperty _RelDomainNode__isEnforced = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__IS_ENFORCED, Types._RelDomainNode, 0);
+		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternEdges = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, Types._RelDomainNode, 1);
+		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, Types._RelDomainNode, 2);
+		public static final @NonNull ExecutorProperty _RelDomainNode__owningRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, Types._RelDomainNode, 3);
+		public static final @NonNull ExecutorProperty _RelDomainNode__referredTxTypedModelNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, Types._RelDomainNode, 4);
 
 		public static final @NonNull ExecutorProperty _RelInvocationEdge__invokingRelPatternNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, Types._RelInvocationEdge, 0);
 		public static final @NonNull ExecutorProperty _RelInvocationEdge__owningRelInvocationNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, Types._RelInvocationEdge, 1);
@@ -490,22 +479,21 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _RelPatternNode__RelInvocationEdge__referredRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternNode, 7, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE));
 
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedRelDiagrams = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, Types._TxDiagram, 0);
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxImportNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_IMPORT_NODES, Types._TxDiagram, 1);
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxKeyNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_KEY_NODES, Types._TxDiagram, 2);
+		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxKeyNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_KEY_NODES, Types._TxDiagram, 1);
+		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES, Types._TxDiagram, 2);
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxQueryNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_QUERY_NODES, Types._TxDiagram, 3);
 		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxTypedModelNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, Types._TxDiagram, 4);
 		public static final @NonNull ExecutorProperty _TxDiagram__package = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__PACKAGE, Types._TxDiagram, 5);
 		public static final @NonNull ExecutorProperty _TxDiagram__UMLXModel__ownedTxDiagrams = new ExecutorPropertyWithImplementation("UMLXModel", Types._TxDiagram, 6, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS));
 
-		public static final @NonNull ExecutorProperty _TxImportNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_IMPORT_NODE__OWNING_TX_DIAGRAM, Types._TxImportNode, 0);
-		public static final @NonNull ExecutorProperty _TxImportNode__uri = new EcoreExecutorProperty(UMLXPackage.Literals.TX_IMPORT_NODE__URI, Types._TxImportNode, 1);
-
 		public static final @NonNull ExecutorProperty _TxKeyNode__ownedTxPartNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNED_TX_PART_NODES, Types._TxKeyNode, 0);
 		public static final @NonNull ExecutorProperty _TxKeyNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNING_TX_DIAGRAM, Types._TxKeyNode, 1);
 		public static final @NonNull ExecutorProperty _TxKeyNode__referredEClass = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__REFERRED_ECLASS, Types._TxKeyNode, 2);
 
-		public static final @NonNull ExecutorProperty _TxPackageNode__owningTxTypedModelNode = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE, Types._TxPackageNode, 0);
-		public static final @NonNull ExecutorProperty _TxPackageNode__referredEPackage = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, Types._TxPackageNode, 1);
+		public static final @NonNull ExecutorProperty _TxPackageNode__importAliases = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__IMPORT_ALIASES, Types._TxPackageNode, 0);
+		public static final @NonNull ExecutorProperty _TxPackageNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_DIAGRAM, Types._TxPackageNode, 1);
+		public static final @NonNull ExecutorProperty _TxPackageNode__referredEPackage = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, Types._TxPackageNode, 2);
+		public static final @NonNull ExecutorProperty _TxPackageNode__TxTypedModelNode__usedTxPackageNodes = new ExecutorPropertyWithImplementation("TxTypedModelNode", Types._TxPackageNode, 3, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES));
 
 		public static final @NonNull ExecutorProperty _TxParameterNode__owningTxQueryNode = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE, Types._TxParameterNode, 0);
 
@@ -520,8 +508,8 @@ public class UMLXTables
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__check = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, Types._TxTypedModelNode, 0);
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__dependsOns = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS, Types._TxTypedModelNode, 1);
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__enforce = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 2);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__ownedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 3);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 4);
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 3);
+		public static final @NonNull ExecutorProperty _TxTypedModelNode__usedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 4);
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = new ExecutorPropertyWithImplementation("RelDomainNode", Types._TxTypedModelNode, 5, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE));
 		public static final @NonNull ExecutorProperty _TxTypedModelNode__TxTypedModelNode__dependsOns = new ExecutorPropertyWithImplementation("TxTypedModelNode", Types._TxTypedModelNode, 6, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS));
 
@@ -646,17 +634,6 @@ public class UMLXTables
 		};
 		private static final int @NonNull [] __TxDiagram = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxImportNode =
-		{
-			Fragments._TxImportNode__OclAny /* 0 */,
-			Fragments._TxImportNode__OclElement /* 1 */,
-			Fragments._TxImportNode__UMLXElement /* 2 */,
-			Fragments._TxImportNode__TxNode /* 3 */,
-			Fragments._TxImportNode__UMLXNamedElement /* 3 */,
-			Fragments._TxImportNode__TxImportNode /* 4 */
-		};
-		private static final int @NonNull [] __TxImportNode = { 1,1,1,2,1 };
-
 		private static final @NonNull ExecutorFragment @NonNull [] _TxKeyNode =
 		{
 			Fragments._TxKeyNode__OclAny /* 0 */,
@@ -780,7 +757,6 @@ public class UMLXTables
 			Types._RelPatternEdge.initFragments(_RelPatternEdge, __RelPatternEdge);
 			Types._RelPatternNode.initFragments(_RelPatternNode, __RelPatternNode);
 			Types._TxDiagram.initFragments(_TxDiagram, __TxDiagram);
-			Types._TxImportNode.initFragments(_TxImportNode, __TxImportNode);
 			Types._TxKeyNode.initFragments(_TxKeyNode, __TxKeyNode);
 			Types._TxNode.initFragments(_TxNode, __TxNode);
 			Types._TxPackageNode.initFragments(_TxPackageNode, __TxPackageNode);
@@ -1082,37 +1058,6 @@ public class UMLXTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__UMLXElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__UMLXNamedElement = {};
-
-		private static final @NonNull ExecutorOperation @NonNull [] _TxImportNode__TxImportNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxImportNode__OclAny = {
-			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
-			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
-			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
-			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
-			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
-			OCLstdlibTables.Operations._OclAny__toString /* toString() */
-		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxImportNode__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
-			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[?]) */,
-			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
-			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
-			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
-			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
-		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxImportNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxImportNode__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxImportNode__UMLXNamedElement = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__TxKeyNode = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__OclAny = {
@@ -1502,13 +1447,6 @@ public class UMLXTables
 			Fragments._TxDiagram__UMLXElement.initOperations(_TxDiagram__UMLXElement);
 			Fragments._TxDiagram__UMLXNamedElement.initOperations(_TxDiagram__UMLXNamedElement);
 
-			Fragments._TxImportNode__OclAny.initOperations(_TxImportNode__OclAny);
-			Fragments._TxImportNode__OclElement.initOperations(_TxImportNode__OclElement);
-			Fragments._TxImportNode__TxImportNode.initOperations(_TxImportNode__TxImportNode);
-			Fragments._TxImportNode__TxNode.initOperations(_TxImportNode__TxNode);
-			Fragments._TxImportNode__UMLXElement.initOperations(_TxImportNode__UMLXElement);
-			Fragments._TxImportNode__UMLXNamedElement.initOperations(_TxImportNode__UMLXNamedElement);
-
 			Fragments._TxKeyNode__OclAny.initOperations(_TxKeyNode__OclAny);
 			Fragments._TxKeyNode__OclElement.initOperations(_TxKeyNode__OclElement);
 			Fragments._TxKeyNode__TxKeyNode.initOperations(_TxKeyNode__TxKeyNode);
@@ -1604,6 +1542,7 @@ public class UMLXTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RelDomainNode = {
 			UMLXTables.Properties._UMLXElement__comments,
+			UMLXTables.Properties._RelDomainNode__isEnforced,
 			UMLXTables.Properties._RelDomainNode__ownedRelPatternEdges,
 			UMLXTables.Properties._RelDomainNode__ownedRelPatternNodes,
 			UMLXTables.Properties._RelDomainNode__owningRelDiagram,
@@ -1664,18 +1603,11 @@ public class UMLXTables
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._UMLXNamedElement__name,
 			UMLXTables.Properties._TxDiagram__ownedRelDiagrams,
-			UMLXTables.Properties._TxDiagram__ownedTxImportNodes,
 			UMLXTables.Properties._TxDiagram__ownedTxKeyNodes,
+			UMLXTables.Properties._TxDiagram__ownedTxPackageNodes,
 			UMLXTables.Properties._TxDiagram__ownedTxQueryNodes,
 			UMLXTables.Properties._TxDiagram__ownedTxTypedModelNodes,
 			UMLXTables.Properties._TxDiagram__package
-		};
-
-		private static final @NonNull ExecutorProperty @NonNull [] _TxImportNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._UMLXNamedElement__name,
-			UMLXTables.Properties._TxImportNode__owningTxDiagram,
-			UMLXTables.Properties._TxImportNode__uri
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TxKeyNode = {
@@ -1691,7 +1623,8 @@ public class UMLXTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TxPackageNode = {
 			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._TxPackageNode__owningTxTypedModelNode,
+			UMLXTables.Properties._TxPackageNode__importAliases,
+			UMLXTables.Properties._TxPackageNode__owningTxDiagram,
 			UMLXTables.Properties._TxPackageNode__referredEPackage
 		};
 
@@ -1734,8 +1667,8 @@ public class UMLXTables
 			UMLXTables.Properties._TxTypedModelNode__dependsOns,
 			UMLXTables.Properties._TxTypedModelNode__enforce,
 			UMLXTables.Properties._UMLXNamedElement__name,
-			UMLXTables.Properties._TxTypedModelNode__ownedTxPackageNodes,
-			UMLXTables.Properties._TxTypedModelNode__owningTxDiagram
+			UMLXTables.Properties._TxTypedModelNode__owningTxDiagram,
+			UMLXTables.Properties._TxTypedModelNode__usedTxPackageNodes
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _UMLXElement = {
@@ -1776,7 +1709,6 @@ public class UMLXTables
 			Fragments._RelPatternEdge__RelPatternEdge.initProperties(_RelPatternEdge);
 			Fragments._RelPatternNode__RelPatternNode.initProperties(_RelPatternNode);
 			Fragments._TxDiagram__TxDiagram.initProperties(_TxDiagram);
-			Fragments._TxImportNode__TxImportNode.initProperties(_TxImportNode);
 			Fragments._TxKeyNode__TxKeyNode.initProperties(_TxKeyNode);
 			Fragments._TxNode__TxNode.initProperties(_TxNode);
 			Fragments._TxPackageNode__TxPackageNode.initProperties(_TxPackageNode);

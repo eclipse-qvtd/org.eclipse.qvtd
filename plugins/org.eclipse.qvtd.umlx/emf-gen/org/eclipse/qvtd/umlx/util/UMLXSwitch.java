@@ -146,15 +146,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_IMPORT_NODE: {
-				TxImportNode txImportNode = (TxImportNode)theEObject;
-				T result = caseTxImportNode(txImportNode);
-				if (result == null) result = caseTxNode(txImportNode);
-				if (result == null) result = caseUMLXNamedElement(txImportNode);
-				if (result == null) result = caseUMLXElement(txImportNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case UMLXPackage.TX_KEY_NODE: {
 				TxKeyNode txKeyNode = (TxKeyNode)theEObject;
 				T result = caseTxKeyNode(txKeyNode);
@@ -379,21 +370,6 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTxDiagram(TxDiagram object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tx Import Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tx Import Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTxImportNode(TxImportNode object) {
 		return null;
 	}
 

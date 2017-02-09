@@ -17,7 +17,6 @@ package org.eclipse.qvtd.xtext.qvtcorecs;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 
 /**
  * <!-- begin-user-doc -->

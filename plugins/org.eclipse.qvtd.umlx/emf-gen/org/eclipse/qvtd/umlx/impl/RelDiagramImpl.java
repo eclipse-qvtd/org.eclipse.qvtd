@@ -268,7 +268,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		 *     else
 		 *       let
 		 *         result : OclAny[1] = let
-		 *           allNames : Sequence(String)[*|?] = ownedRelDomainNodes.ownedRelPatternNodes->select(
+		 *           allNames : Sequence(String[*|?]) = ownedRelDomainNodes.ownedRelPatternNodes->select(
 		 *             not isExpression())
 		 *           ->select(not isAnon).name
 		 *         in

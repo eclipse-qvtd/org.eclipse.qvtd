@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;

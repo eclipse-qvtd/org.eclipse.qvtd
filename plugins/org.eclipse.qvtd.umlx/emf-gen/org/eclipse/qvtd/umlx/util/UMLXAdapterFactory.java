@@ -112,10 +112,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 				return createTxDiagramAdapter();
 			}
 			@Override
-			public Adapter caseTxImportNode(TxImportNode object) {
-				return createTxImportNodeAdapter();
-			}
-			@Override
 			public Adapter caseTxKeyNode(TxKeyNode object) {
 				return createTxKeyNodeAdapter();
 			}
@@ -302,20 +298,6 @@ public class UMLXAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTxDiagramAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.umlx.TxImportNode <em>Tx Import Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.umlx.TxImportNode
-	 * @generated
-	 */
-	public Adapter createTxImportNodeAdapter() {
 		return null;
 	}
 

@@ -38,6 +38,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#isIsEnforced <em>Is Enforced</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getOwnedRelPatternEdges <em>Owned Rel Pattern Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getOwnedRelPatternNodes <em>Owned Rel Pattern Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDomainNodeImpl#getOwningRelDiagram <em>Owning Rel Diagram</em>}</li>
@@ -47,6 +48,26 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * @generated
  */
 public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
+	/**
+	 * The default value of the '{@link #isIsEnforced() <em>Is Enforced</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsEnforced()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ENFORCED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsEnforced() <em>Is Enforced</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsEnforced()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isEnforced = IS_ENFORCED_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOwnedRelPatternEdges() <em>Owned Rel Pattern Edges</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -94,6 +115,29 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	protected EClass eStaticClass() {
 		return UMLXPackage.Literals.REL_DOMAIN_NODE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsEnforced() {
+		return isEnforced;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsEnforced(boolean newIsEnforced) {
+		boolean oldIsEnforced = isEnforced;
+		isEnforced = newIsEnforced;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DOMAIN_NODE__IS_ENFORCED, oldIsEnforced, isEnforced));
 	}
 
 	/**
@@ -210,6 +254,16 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -266,6 +320,8 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case UMLXPackage.REL_DOMAIN_NODE__IS_ENFORCED:
+				return isIsEnforced();
 			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
 				return getOwnedRelPatternEdges();
 			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:
@@ -288,6 +344,9 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case UMLXPackage.REL_DOMAIN_NODE__IS_ENFORCED:
+				setIsEnforced((Boolean)newValue);
+				return;
 			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
 				getOwnedRelPatternEdges().clear();
 				getOwnedRelPatternEdges().addAll((Collection<? extends RelPatternEdge>)newValue);
@@ -314,6 +373,9 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case UMLXPackage.REL_DOMAIN_NODE__IS_ENFORCED:
+				setIsEnforced(IS_ENFORCED_EDEFAULT);
+				return;
 			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
 				getOwnedRelPatternEdges().clear();
 				return;
@@ -338,6 +400,8 @@ public class RelDomainNodeImpl extends RelNodeImpl implements RelDomainNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case UMLXPackage.REL_DOMAIN_NODE__IS_ENFORCED:
+				return isEnforced != IS_ENFORCED_EDEFAULT;
 			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES:
 				return ownedRelPatternEdges != null && !ownedRelPatternEdges.isEmpty();
 			case UMLXPackage.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES:

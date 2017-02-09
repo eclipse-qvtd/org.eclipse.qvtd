@@ -79,7 +79,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXElement()
 	 * @generated
 	 */
-	int UMLX_ELEMENT = 17;
+	int UMLX_ELEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -107,7 +107,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXNamedElement()
 	 * @generated
 	 */
-	int UMLX_NAMED_ELEMENT = 19;
+	int UMLX_NAMED_ELEMENT = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl <em>Rel Diagram</em>}' class.
@@ -187,17 +187,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxNode()
 	 * @generated
 	 */
-	int TX_NODE = 11;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl <em>Tx Import Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.umlx.impl.TxImportNodeImpl
-	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxImportNode()
-	 * @generated
-	 */
-	int TX_IMPORT_NODE = 9;
+	int TX_NODE = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl <em>Tx Key Node</em>}' class.
@@ -207,7 +197,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxKeyNode()
 	 * @generated
 	 */
-	int TX_KEY_NODE = 10;
+	int TX_KEY_NODE = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxPartNodeImpl <em>Tx Part Node</em>}' class.
@@ -217,7 +207,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPartNode()
 	 * @generated
 	 */
-	int TX_PART_NODE = 14;
+	int TX_PART_NODE = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxPackageNodeImpl <em>Tx Package Node</em>}' class.
@@ -227,7 +217,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxPackageNode()
 	 * @generated
 	 */
-	int TX_PACKAGE_NODE = 12;
+	int TX_PACKAGE_NODE = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl <em>Tx Typed Model Node</em>}' class.
@@ -237,7 +227,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxTypedModelNode()
 	 * @generated
 	 */
-	int TX_TYPED_MODEL_NODE = 16;
+	int TX_TYPED_MODEL_NODE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.UMLXModelImpl <em>Model</em>}' class.
@@ -247,7 +237,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXModel()
 	 * @generated
 	 */
-	int UMLX_MODEL = 18;
+	int UMLX_MODEL = 17;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -377,13 +367,22 @@ public interface UMLXPackage extends EPackage {
 	int REL_DOMAIN_NODE__COMMENTS = REL_NODE__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Is Enforced</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DOMAIN_NODE__IS_ENFORCED = REL_NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Rel Pattern Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES = REL_NODE_FEATURE_COUNT + 0;
+	int REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES = REL_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rel Pattern Nodes</b></em>' containment reference list.
@@ -392,7 +391,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES = REL_NODE_FEATURE_COUNT + 1;
+	int REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES = REL_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Rel Diagram</b></em>' container reference.
@@ -401,7 +400,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DOMAIN_NODE__OWNING_REL_DIAGRAM = REL_NODE_FEATURE_COUNT + 2;
+	int REL_DOMAIN_NODE__OWNING_REL_DIAGRAM = REL_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Referred Tx Typed Model Node</b></em>' reference.
@@ -410,7 +409,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE = REL_NODE_FEATURE_COUNT + 3;
+	int REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE = REL_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Rel Domain Node</em>' class.
@@ -419,7 +418,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DOMAIN_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 4;
+	int REL_DOMAIN_NODE_FEATURE_COUNT = REL_NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -783,22 +782,22 @@ public interface UMLXPackage extends EPackage {
 	int TX_DIAGRAM__OWNED_REL_DIAGRAMS = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tx Import Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_DIAGRAM__OWNED_TX_IMPORT_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Owned Tx Key Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_DIAGRAM__OWNED_TX_KEY_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int TX_DIAGRAM__OWNED_TX_KEY_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_DIAGRAM__OWNED_TX_PACKAGE_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tx Query Nodes</b></em>' containment reference list.
@@ -861,51 +860,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_IMPORT_NODE__COMMENTS = TX_NODE__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_IMPORT_NODE__NAME = TX_NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Tx Diagram</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_IMPORT_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_IMPORT_NODE__URI = TX_NODE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Tx Import Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_IMPORT_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int TX_KEY_NODE__COMMENTS = TX_NODE__COMMENTS;
 
 	/**
@@ -954,22 +908,31 @@ public interface UMLXPackage extends EPackage {
 	int TX_PACKAGE_NODE__COMMENTS = TX_NODE__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Import Aliases</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PACKAGE_NODE__IMPORT_ALIASES = TX_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Tx Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_PACKAGE_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Referred EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_PACKAGE_NODE__REFERRED_EPACKAGE = TX_NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Tx Typed Model Node</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE = TX_NODE_FEATURE_COUNT + 1;
+	int TX_PACKAGE_NODE__REFERRED_EPACKAGE = TX_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Tx Package Node</em>' class.
@@ -978,7 +941,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TX_PACKAGE_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 2;
+	int TX_PACKAGE_NODE_FEATURE_COUNT = TX_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.TxParameterNodeImpl <em>Tx Parameter Node</em>}' class.
@@ -988,7 +951,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxParameterNode()
 	 * @generated
 	 */
-	int TX_PARAMETER_NODE = 13;
+	int TX_PARAMETER_NODE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1133,7 +1096,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxQueryNode()
 	 * @generated
 	 */
-	int TX_QUERY_NODE = 15;
+	int TX_QUERY_NODE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1289,22 +1252,22 @@ public interface UMLXPackage extends EPackage {
 	int TX_TYPED_MODEL_NODE__ENFORCE = TX_NODE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES = TX_NODE_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Owning Tx Diagram</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 5;
+	int TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM = TX_NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Used Tx Package Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES = TX_NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Tx Typed Model Node</em>' class.
@@ -1350,7 +1313,7 @@ public interface UMLXPackage extends EPackage {
 	 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getUMLXTypedElement()
 	 * @generated
 	 */
-	int UMLX_TYPED_ELEMENT = 20;
+	int UMLX_TYPED_ELEMENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute list.
@@ -1496,6 +1459,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRelDomainNode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelDomainNode#isIsEnforced <em>Is Enforced</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Enforced</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelDomainNode#isIsEnforced()
+	 * @see #getRelDomainNode()
+	 * @generated
+	 */
+	EAttribute getRelDomainNode_IsEnforced();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.RelDomainNode#getOwnedRelPatternEdges <em>Owned Rel Pattern Edges</em>}'.
@@ -1832,17 +1806,6 @@ public interface UMLXPackage extends EPackage {
 	EReference getTxDiagram_OwnedRelDiagrams();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxImportNodes <em>Owned Tx Import Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Tx Import Nodes</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxImportNodes()
-	 * @see #getTxDiagram()
-	 * @generated
-	 */
-	EReference getTxDiagram_OwnedTxImportNodes();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxKeyNodes <em>Owned Tx Key Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1852,6 +1815,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxDiagram_OwnedTxKeyNodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Tx Package Nodes</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxPackageNodes()
+	 * @see #getTxDiagram()
+	 * @generated
+	 */
+	EReference getTxDiagram_OwnedTxPackageNodes();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxQueryNodes <em>Owned Tx Query Nodes</em>}'.
@@ -1885,38 +1859,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTxDiagram_Package();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxImportNode <em>Tx Import Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tx Import Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxImportNode
-	 * @generated
-	 */
-	EClass getTxImportNode();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxImportNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Tx Diagram</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxImportNode#getOwningTxDiagram()
-	 * @see #getTxImportNode()
-	 * @generated
-	 */
-	EReference getTxImportNode_OwningTxDiagram();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.TxImportNode#getUri <em>Uri</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Uri</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxImportNode#getUri()
-	 * @see #getTxImportNode()
-	 * @generated
-	 */
-	EAttribute getTxImportNode_Uri();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxKeyNode <em>Tx Key Node</em>}'.
@@ -2068,6 +2010,28 @@ public interface UMLXPackage extends EPackage {
 	EClass getTxPackageNode();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.umlx.TxPackageNode#getImportAliases <em>Import Aliases</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Import Aliases</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getImportAliases()
+	 * @see #getTxPackageNode()
+	 * @generated
+	 */
+	EAttribute getTxPackageNode_ImportAliases();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Tx Diagram</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxDiagram()
+	 * @see #getTxPackageNode()
+	 * @generated
+	 */
+	EReference getTxPackageNode_OwningTxDiagram();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.umlx.TxPackageNode#getReferredEPackage <em>Referred EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2077,17 +2041,6 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxPackageNode_ReferredEPackage();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Tx Typed Model Node</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode()
-	 * @see #getTxPackageNode()
-	 * @generated
-	 */
-	EReference getTxPackageNode_OwningTxTypedModelNode();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.TxParameterNode <em>Tx Parameter Node</em>}'.
@@ -2154,17 +2107,6 @@ public interface UMLXPackage extends EPackage {
 	EAttribute getTxTypedModelNode_Enforce();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Tx Package Nodes</em>'.
-	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes()
-	 * @see #getTxTypedModelNode()
-	 * @generated
-	 */
-	EReference getTxTypedModelNode_OwnedTxPackageNodes();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2174,6 +2116,17 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTxTypedModelNode_OwningTxDiagram();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getUsedTxPackageNodes <em>Used Tx Package Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Used Tx Package Nodes</em>'.
+	 * @see org.eclipse.qvtd.umlx.TxTypedModelNode#getUsedTxPackageNodes()
+	 * @see #getTxTypedModelNode()
+	 * @generated
+	 */
+	EReference getTxTypedModelNode_UsedTxPackageNodes();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.umlx.UMLXElement <em>Element</em>}'.
@@ -2388,6 +2341,14 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REL_DOMAIN_NODE = eINSTANCE.getRelDomainNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Enforced</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_DOMAIN_NODE__IS_ENFORCED = eINSTANCE.getRelDomainNode_IsEnforced();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Rel Pattern Edges</b></em>' containment reference list feature.
@@ -2652,20 +2613,20 @@ public interface UMLXPackage extends EPackage {
 		EReference TX_DIAGRAM__OWNED_REL_DIAGRAMS = eINSTANCE.getTxDiagram_OwnedRelDiagrams();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Tx Import Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_DIAGRAM__OWNED_TX_IMPORT_NODES = eINSTANCE.getTxDiagram_OwnedTxImportNodes();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Tx Key Nodes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TX_DIAGRAM__OWNED_TX_KEY_NODES = eINSTANCE.getTxDiagram_OwnedTxKeyNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_DIAGRAM__OWNED_TX_PACKAGE_NODES = eINSTANCE.getTxDiagram_OwnedTxPackageNodes();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Tx Query Nodes</b></em>' containment reference list feature.
@@ -2690,32 +2651,6 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TX_DIAGRAM__PACKAGE = eINSTANCE.getTxDiagram_Package();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxImportNodeImpl <em>Tx Import Node</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.umlx.impl.TxImportNodeImpl
-		 * @see org.eclipse.qvtd.umlx.impl.UMLXPackageImpl#getTxImportNode()
-		 * @generated
-		 */
-		EClass TX_IMPORT_NODE = eINSTANCE.getTxImportNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Tx Diagram</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_IMPORT_NODE__OWNING_TX_DIAGRAM = eINSTANCE.getTxImportNode_OwningTxDiagram();
-
-		/**
-		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TX_IMPORT_NODE__URI = eINSTANCE.getTxImportNode_Uri();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxKeyNodeImpl <em>Tx Key Node</em>}' class.
@@ -2840,20 +2775,28 @@ public interface UMLXPackage extends EPackage {
 		EClass TX_PACKAGE_NODE = eINSTANCE.getTxPackageNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Import Aliases</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TX_PACKAGE_NODE__IMPORT_ALIASES = eINSTANCE.getTxPackageNode_ImportAliases();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Tx Diagram</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_PACKAGE_NODE__OWNING_TX_DIAGRAM = eINSTANCE.getTxPackageNode_OwningTxDiagram();
+
+		/**
 		 * The meta object literal for the '<em><b>Referred EPackage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TX_PACKAGE_NODE__REFERRED_EPACKAGE = eINSTANCE.getTxPackageNode_ReferredEPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Tx Typed Model Node</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE = eINSTANCE.getTxPackageNode_OwningTxTypedModelNode();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.TxParameterNodeImpl <em>Tx Parameter Node</em>}' class.
@@ -2908,20 +2851,20 @@ public interface UMLXPackage extends EPackage {
 		EAttribute TX_TYPED_MODEL_NODE__ENFORCE = eINSTANCE.getTxTypedModelNode_Enforce();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES = eINSTANCE.getTxTypedModelNode_OwnedTxPackageNodes();
-
-		/**
 		 * The meta object literal for the '<em><b>Owning Tx Diagram</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM = eINSTANCE.getTxTypedModelNode_OwningTxDiagram();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Tx Package Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES = eINSTANCE.getTxTypedModelNode_UsedTxPackageNodes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.umlx.impl.UMLXElementImpl <em>Element</em>}' class.

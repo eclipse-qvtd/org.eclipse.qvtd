@@ -24,8 +24,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedRelDiagrams <em>Owned Rel Diagrams</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxImportNodes <em>Owned Tx Import Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxKeyNodes <em>Owned Tx Key Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxQueryNodes <em>Owned Tx Query Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxTypedModelNodes <em>Owned Tx Typed Model Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxDiagram#getPackage <em>Package</em>}</li>
@@ -53,23 +53,6 @@ public interface TxDiagram extends UMLXNamedElement {
 	EList<RelDiagram> getOwnedRelDiagrams();
 
 	/**
-	 * Returns the value of the '<em><b>Owned Tx Import Nodes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxImportNode}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxImportNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Tx Import Nodes</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Tx Import Nodes</em>' containment reference list.
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxDiagram_OwnedTxImportNodes()
-	 * @see org.eclipse.qvtd.umlx.TxImportNode#getOwningTxDiagram
-	 * @generated
-	 */
-	EList<TxImportNode> getOwnedTxImportNodes();
-
-	/**
 	 * Returns the value of the '<em><b>Owned Tx Key Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxKeyNode}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxKeyNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
@@ -85,6 +68,23 @@ public interface TxDiagram extends UMLXNamedElement {
 	 * @generated
 	 */
 	EList<TxKeyNode> getOwnedTxKeyNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxPackageNode}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Tx Package Nodes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Tx Package Nodes</em>' containment reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxDiagram_OwnedTxPackageNodes()
+	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxDiagram
+	 * @generated
+	 */
+	EList<TxPackageNode> getOwnedTxPackageNodes();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Tx Query Nodes</b></em>' containment reference list.

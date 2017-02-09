@@ -712,7 +712,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		 *         result : Boolean[?] = not isExpression() implies
 		 *         let txTypedModelNode : TxTypedModelNode[?] = owningRelDomainNode.referredTxTypedModelNode
 		 *         in txTypedModelNode <> null implies
-		 *           txTypedModelNode.ownedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)
+		 *           txTypedModelNode.usedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)
 		 *       in
 		 *         'RelPatternNode::EClassifierIsInTypedModel'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -739,13 +739,13 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 					/*@Thrown*/ boolean implies;
 					if (ne) {
 						if (txTypedModelNode == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxTypedModelNode::ownedTxPackageNodes\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxTypedModelNode::usedTxPackageNodes\'");
 						}
 						@SuppressWarnings("null")
-						final /*@Thrown*/ java.util.@NonNull List<TxPackageNode> ownedTxPackageNodes = txTypedModelNode.getOwnedTxPackageNodes();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, ownedTxPackageNodes);
+						final /*@Thrown*/ java.util.@NonNull List<TxPackageNode> usedTxPackageNodes = txTypedModelNode.getUsedTxPackageNodes();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
 						/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_EPackage);
-						@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxPackageNodes.iterator();
+						@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
 						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
 						while (true) {
 							if (!ITERATOR__1.hasNext()) {

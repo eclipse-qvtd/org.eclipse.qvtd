@@ -94,15 +94,6 @@ public interface UMLXFactory extends EFactory {
 	@NonNull TxDiagram createTxDiagram();
 
 	/**
-	 * Returns a new object of class '<em>Tx Import Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tx Import Node</em>'.
-	 * @generated
-	 */
-	@NonNull TxImportNode createTxImportNode();
-
-	/**
 	 * Returns a new object of class '<em>Tx Key Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -200,20 +200,12 @@ public class UMLXValidator extends EObjectValidator {
 	public static final int TX_DIAGRAM__VALIDATE_TX_TYPED_MODEL_NODE_NAMES_ARE_UNIQUE = 19;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Import Node'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int TX_IMPORT_NODE__VALIDATE_NAME_IS_REQUIRED = 20;
-
-	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parts Are Unique' of 'Tx Key Node'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_KEY_NODE__VALIDATE_PARTS_ARE_UNIQUE = 21;
+	public static final int TX_KEY_NODE__VALIDATE_PARTS_ARE_UNIQUE = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Parameter Node'.
@@ -221,7 +213,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_PARAMETER_NODE__VALIDATE_NAME_IS_REQUIRED = 22;
+	public static final int TX_PARAMETER_NODE__VALIDATE_NAME_IS_REQUIRED = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Required' of 'Tx Parameter Node'.
@@ -229,7 +221,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_PARAMETER_NODE__VALIDATE_TYPE_IS_REQUIRED = 23;
+	public static final int TX_PARAMETER_NODE__VALIDATE_TYPE_IS_REQUIRED = 22;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Part Is Property Of Key' of 'Tx Part Node'.
@@ -237,7 +229,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_PART_NODE__VALIDATE_PART_IS_PROPERTY_OF_KEY = 24;
+	public static final int TX_PART_NODE__VALIDATE_PART_IS_PROPERTY_OF_KEY = 23;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Query Node'.
@@ -245,7 +237,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_QUERY_NODE__VALIDATE_NAME_IS_REQUIRED = 25;
+	public static final int TX_QUERY_NODE__VALIDATE_NAME_IS_REQUIRED = 24;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Required' of 'Tx Query Node'.
@@ -253,7 +245,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_QUERY_NODE__VALIDATE_TYPE_IS_REQUIRED = 26;
+	public static final int TX_QUERY_NODE__VALIDATE_TYPE_IS_REQUIRED = 25;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parameters Are Unique' of 'Tx Query Node'.
@@ -261,7 +253,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_QUERY_NODE__VALIDATE_PARAMETERS_ARE_UNIQUE = 27;
+	public static final int TX_QUERY_NODE__VALIDATE_PARAMETERS_ARE_UNIQUE = 26;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Tx Package Node Packages Are Unique' of 'Tx Typed Model Node'.
@@ -269,7 +261,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_TYPED_MODEL_NODE__VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE = 28;
+	public static final int TX_TYPED_MODEL_NODE__VALIDATE_TX_PACKAGE_NODE_PACKAGES_ARE_UNIQUE = 27;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Required' of 'Tx Typed Model Node'.
@@ -277,7 +269,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TX_TYPED_MODEL_NODE__VALIDATE_NAME_IS_REQUIRED = 29;
+	public static final int TX_TYPED_MODEL_NODE__VALIDATE_NAME_IS_REQUIRED = 28;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -285,7 +277,7 @@ public class UMLXValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 29;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 28;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -343,8 +335,6 @@ public class UMLXValidator extends EObjectValidator {
 				return validateRelPatternNode((RelPatternNode)value, diagnostics, context);
 			case UMLXPackage.TX_DIAGRAM:
 				return validateTxDiagram((TxDiagram)value, diagnostics, context);
-			case UMLXPackage.TX_IMPORT_NODE:
-				return validateTxImportNode((TxImportNode)value, diagnostics, context);
 			case UMLXPackage.TX_KEY_NODE:
 				return validateTxKeyNode((TxKeyNode)value, diagnostics, context);
 			case UMLXPackage.TX_NODE:
@@ -705,35 +695,6 @@ public class UMLXValidator extends EObjectValidator {
 	 */
 	public boolean validateTxDiagram_validateNameIsRequired(TxDiagram txDiagram, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return txDiagram.validateNameIsRequired(diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxImportNode(TxImportNode txImportNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(txImportNode, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(txImportNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTxImportNode_validateNameIsRequired(txImportNode, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the validateNameIsRequired constraint of '<em>Tx Import Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTxImportNode_validateNameIsRequired(TxImportNode txImportNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return txImportNode.validateNameIsRequired(diagnostics, context);
 	}
 
 	/**

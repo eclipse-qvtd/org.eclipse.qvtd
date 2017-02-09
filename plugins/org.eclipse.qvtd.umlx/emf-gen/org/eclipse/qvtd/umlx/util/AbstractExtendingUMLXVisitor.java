@@ -83,11 +83,6 @@ public abstract class AbstractExtendingUMLXVisitor<R, C>
 	}
 
 	@Override
-	public R visitTxImportNode(org.eclipse.qvtd.umlx.@NonNull TxImportNode object) {
-		return visitTxNode(object);
-	}
-
-	@Override
 	public R visitTxKeyNode(org.eclipse.qvtd.umlx.@NonNull TxKeyNode object) {
 		return visitTxNode(object);
 	}

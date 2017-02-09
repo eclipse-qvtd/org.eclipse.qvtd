@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getDependsOns <em>Depends Ons</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#isEnforce <em>Enforce</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.TxTypedModelNode#getUsedTxPackageNodes <em>Used Tx Package Nodes</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode()
@@ -102,23 +102,6 @@ public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	void setEnforce(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Tx Package Nodes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxPackageNode}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode <em>Owning Tx Typed Model Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Tx Package Nodes</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Tx Package Nodes</em>' containment reference list.
-	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_OwnedTxPackageNodes()
-	 * @see org.eclipse.qvtd.umlx.TxPackageNode#getOwningTxTypedModelNode
-	 * @generated
-	 */
-	EList<TxPackageNode> getOwnedTxPackageNodes();
-
-	/**
 	 * Returns the value of the '<em><b>Owning Tx Diagram</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.umlx.TxDiagram#getOwnedTxTypedModelNodes <em>Owned Tx Typed Model Nodes</em>}'.
 	 * <!-- begin-user-doc -->
@@ -144,6 +127,21 @@ public interface TxTypedModelNode extends TxNode, UMLXNamedElement {
 	 * @generated
 	 */
 	void setOwningTxDiagram(TxDiagram value);
+
+	/**
+	 * Returns the value of the '<em><b>Used Tx Package Nodes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.umlx.TxPackageNode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Tx Package Nodes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Tx Package Nodes</em>' reference list.
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getTxTypedModelNode_UsedTxPackageNodes()
+	 * @generated
+	 */
+	EList<TxPackageNode> getUsedTxPackageNodes();
 
 	/**
 	 * <!-- begin-user-doc -->

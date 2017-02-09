@@ -21,10 +21,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -54,8 +52,8 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getDependsOns <em>Depends Ons</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#isEnforce <em>Enforce</em>}</li>
- *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwnedTxPackageNodes <em>Owned Tx Package Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getOwningTxDiagram <em>Owning Tx Diagram</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.TxTypedModelNodeImpl#getUsedTxPackageNodes <em>Used Tx Package Nodes</em>}</li>
  * </ul>
  *
  * @generated
@@ -132,14 +130,14 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	protected boolean enforce = ENFORCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnedTxPackageNodes() <em>Owned Tx Package Nodes</em>}' containment reference list.
+	 * The cached value of the '{@link #getUsedTxPackageNodes() <em>Used Tx Package Nodes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedTxPackageNodes()
+	 * @see #getUsedTxPackageNodes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TxPackageNode> ownedTxPackageNodes;
+	protected EList<TxPackageNode> usedTxPackageNodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -248,19 +246,6 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @generated
 	 */
 	@Override
-	public EList<TxPackageNode> getOwnedTxPackageNodes() {
-		if (ownedTxPackageNodes == null) {
-			ownedTxPackageNodes = new EObjectContainmentWithInverseEList<TxPackageNode>(TxPackageNode.class, this, UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES, UMLXPackage.TX_PACKAGE_NODE__OWNING_TX_TYPED_MODEL_NODE);
-		}
-		return ownedTxPackageNodes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public TxDiagram getOwningTxDiagram() {
 		if (eContainerFeatureID() != UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM) return null;
 		return (TxDiagram)eInternalContainer();
@@ -304,6 +289,19 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * @generated
 	 */
 	@Override
+	public EList<TxPackageNode> getUsedTxPackageNodes() {
+		if (usedTxPackageNodes == null) {
+			usedTxPackageNodes = new EObjectResolvingEList<TxPackageNode>(TxPackageNode.class, this, UMLXPackage.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES);
+		}
+		return usedTxPackageNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean validateTxPackageNodePackagesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -315,7 +313,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : Boolean[1] = ownedTxPackageNodes->isUnique(referredEPackage)
+		 *         result : Boolean[1] = usedTxPackageNodes->isUnique(referredEPackage)
 		 *       in
 		 *         'TxTypedModelNode::TxPackageNodePackagesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -332,10 +330,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<TxPackageNode> ownedTxPackageNodes = this.getOwnedTxPackageNodes();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, ownedTxPackageNodes);
+				final /*@NonInvalid*/ java.util.@NonNull List<TxPackageNode> usedTxPackageNodes = this.getUsedTxPackageNodes();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPackageNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxPackageNodes.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -410,12 +408,9 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxPackageNodes()).basicAdd(otherEnd, msgs);
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -432,8 +427,6 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
-				return ((InternalEList<?>)getOwnedTxPackageNodes()).basicRemove(otherEnd, msgs);
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				return basicSetOwningTxDiagram(null, msgs);
 		}
@@ -470,10 +463,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return getDependsOns();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				return isEnforce();
-			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
-				return getOwnedTxPackageNodes();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				return getOwningTxDiagram();
+			case UMLXPackage.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES:
+				return getUsedTxPackageNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -500,12 +493,12 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				setEnforce((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
-				getOwnedTxPackageNodes().clear();
-				getOwnedTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
-				return;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				setOwningTxDiagram((TxDiagram)newValue);
+				return;
+			case UMLXPackage.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES:
+				getUsedTxPackageNodes().clear();
+				getUsedTxPackageNodes().addAll((Collection<? extends TxPackageNode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -531,11 +524,11 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				setEnforce(ENFORCE_EDEFAULT);
 				return;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
-				getOwnedTxPackageNodes().clear();
-				return;
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				setOwningTxDiagram((TxDiagram)null);
+				return;
+			case UMLXPackage.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES:
+				getUsedTxPackageNodes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -557,10 +550,10 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				return dependsOns != null && !dependsOns.isEmpty();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__ENFORCE:
 				return enforce != ENFORCE_EDEFAULT;
-			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNED_TX_PACKAGE_NODES:
-				return ownedTxPackageNodes != null && !ownedTxPackageNodes.isEmpty();
 			case UMLXPackage.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM:
 				return getOwningTxDiagram() != null;
+			case UMLXPackage.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES:
+				return usedTxPackageNodes != null && !usedTxPackageNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
