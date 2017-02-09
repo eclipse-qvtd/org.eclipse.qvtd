@@ -31,6 +31,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelDiagram/owningTxDiagram"/>
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//RelDomainNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelDomainNode/isEnforced"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDomainNode/ownedRelPatternEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDomainNode/ownedRelPatternNodes"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//RelDomainNode/owningRelDiagram"/>
@@ -68,15 +69,11 @@
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//TxDiagram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedRelDiagrams"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedTxImportNodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedTxKeyNodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedTxPackageNodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedTxQueryNodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedTxTypedModelNodes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxDiagram/package"/>
-    </genClasses>
-    <genClasses ecoreClass="UMLX.ecore#//TxImportNode">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//TxImportNode/owningTxDiagram"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxImportNode/uri"/>
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//TxKeyNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxKeyNode/ownedTxPartNodes"/>
@@ -85,8 +82,9 @@
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//TxNode"/>
     <genClasses ecoreClass="UMLX.ecore#//TxPackageNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxPackageNode/importAliases"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//TxPackageNode/owningTxDiagram"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxPackageNode/referredEPackage"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//TxPackageNode/owningTxTypedModelNode"/>
     </genClasses>
     <genClasses ecoreClass="UMLX.ecore#//TxParameterNode">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//TxParameterNode/owningTxQueryNode"/>
@@ -105,8 +103,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxTypedModelNode/check"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxTypedModelNode/dependsOns"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxTypedModelNode/enforce"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxTypedModelNode/ownedTxPackageNodes"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//TxTypedModelNode/owningTxDiagram"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxTypedModelNode/usedTxPackageNodes"/>
     </genClasses>
     <genClasses image="false" ecoreClass="UMLX.ecore#//UMLXElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//UMLXElement/comments"/>
