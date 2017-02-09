@@ -16,8 +16,11 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::pn2sc {
  * Transform a PetriNet into a StateChart.
  * See: https://github.com/louismrose/ttc_pn2sc/ and https://arxiv.org/pdf/1312.0342.pdf
  */
-	transformation PetriNet2StateChart(pn:pnMM, sc:scMM)
+	transformation PetriNet2StateChart(pn:pnMM, pn1:pnMM, sc1:scMM, pn2:pnMM, sc2:scMM, sc:scMM)
 	{
+		key scMM::AND{contains};
+		key scMM::OR{contains};
+		
 		top relation Net2StateChart {
 			domain pn net : Net {};	   
 			enforce domain sc statechart : Statechart {
@@ -89,6 +92,201 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::pn2sc {
 				Transition2HyperEdge(t, e);
 			}
 		}
+		
+		top relation Roots2Roots {
+			domain pn1 fromNet : Net{};	   
+			domain sc1 fromTopState : AND{Statechart = fromStatechart : Statechart{}};	   
+			enforce domain pn2 toNet : Net{};
+			enforce domain sc2 toTopState : AND{Statechart = toStatechart : Statechart{}};
+		}
+
+		/**
+		 * Return the maximal Set of Places that can be ANDed with a given Place.
+		 * An AND of shared post-Transitions is preferred to an AND of shared pre-Transitions.
+		 * Returns an empty Set if no AND is possible.
+		 */
+		query getAndSet(place : pnMM::Place) : OrderedSet(pnMM::Place) {
+			let preTransitions = place.pret->asOrderedSet() in 
+			let postTransitions = place.postt->asOrderedSet() in
+			let prePostPlaces = preTransitions.postp->asOrderedSet() in 
+			let postPrePlaces = postTransitions.prep->asOrderedSet() in
+			if postPrePlaces->forAll(p | p.postt = postTransitions) and prePostPlaces->forAll(p | p.pret->includesAll(preTransitions)) then postPrePlaces
+			elseif prePostPlaces->forAll(p | p.pret = preTransitions) and postPrePlaces->forAll(p | p.postt->includesAll(postTransitions)) then prePostPlaces
+			else OrderedSet{}
+			endif
+		}
+		
+		/**
+		 * Return the first pair of Places that can be ORed with a given Place.
+		 * Within a region of eligible OR candidates, only the first candidate is
+		 * considered. This avoids complexity with overlapping concurrent ORs at the expense of
+		 * only resolving one OR per candidate region per pass. Returns an empty Set if this
+		 * place is not part of the firsr candidate.
+		 */
+		query getOrPair(place : pnMM::Place) : OrderedSet(pnMM::Place) {
+			let preTransitions = place.pret->asOrderedSet() in 
+			let postTransitions = place.postt->asOrderedSet() in
+			let prePostPlaces = preTransitions.postp->asOrderedSet() in 
+			let postPrePlaces = postTransitions.prep->asOrderedSet() in
+			if postPrePlaces->forAll(p | p.postt = postTransitions) and prePostPlaces->forAll(p | p.pret->includesAll(preTransitions)) then postPrePlaces
+			elseif prePostPlaces->forAll(p | p.pret = preTransitions) and postPrePlaces->forAll(p | p.postt->includesAll(postTransitions)) then prePostPlaces
+			else OrderedSet{}
+			endif
+		}
+
+		top relation PlaceState2PlaceState {
+			fromNet : pnMM::Net[1];
+			fromTopState : scMM::AND[1];
+			toNet : pnMM::Net[1];
+			toTopState : scMM::AND[1];
+			domain pn1 fromPlace:Place{
+				cnet = fromNet
+			};
+			domain sc1 fromState:State{
+				rcontains = fromTopState
+			};
+			enforce domain pn2
+				toPlace:Place{
+					cnet = toNet
+				};
+			enforce domain sc2
+				toState:State{
+					rcontains = toTopState
+				};
+			when {
+				Roots2Roots(fromNet, fromTopState, toNet, toTopState);
+			}
+		}
+
+		top relation PlaceState2AndPlaceState overrides PlaceState2PlaceState{
+			fromNet : pnMM::Net[1];
+			fromTopState : scMM::AND[1];
+--			fromParentState : scMM::State[1];
+			toNet : pnMM::Net[1];
+			toTopState : scMM::AND[1];
+--			toParentState : scMM::State[1];
+			fromPlaces : OrderedSet(pnMM::Place)[1] = getAndSet(fromPlace);
+			toAndState : scMM::AND[1];
+			domain pn1
+				fromPlace:Place{
+					cnet = fromNet
+				};
+			domain sc1
+				fromState:State{
+					rcontains = fromTopState
+				};
+			enforce domain pn2
+				toPlace:Place{
+					cnet = toNet
+				};
+			enforce domain sc2
+				toOrState:OR{
+					rcontains = toTopState,
+					contains = toAndState
+				};
+			when {
+				fromPlaces->notEmpty();
+				Roots2Roots(fromNet, fromTopState, toNet, toTopState);
+--				AndPlaces2AndPlaceStates(fromPlaces, toPlace, toStates);
+				AndPlaces2AndState(fromPlaces, toAndState);
+			}
+		}
+
+		relation AndPlaces2AndState {
+			domain pn1
+				fromPlaces : OrderedSet(Place){fromPlace:Place{} ++ _};
+--			domain pn2
+--				toPlace:Place{};
+			enforce domain sc2
+				toState:AND{
+					contains = toStates : OrderedSet(State){aState:State{} ++ _}
+				};
+			when {
+				fromPlaces->indexOf(fromPlace) = toStates->indexOf(toState);
+				Places2States(fromPlaces, toStates);
+				Place2State(fromPlace, aState);
+			}
+		}
+
+		relation Places2States {
+			domain pn1
+				places : OrderedSet(Place){place:Place{} ++ _};
+			domain sc1
+				states : OrderedSet(State){state:State{} ++ _};
+			when {
+				Place2State(place, state);
+			}
+		}
+
+		relation Place2State {
+			domain pn1 place:Place{};
+			enforce domain sc2 state:State{};
+		}
+		
+
+		top relation PlaceState2OrPlaceState overrides PlaceState2PlaceState{
+			fromNet : pnMM::Net[1];
+			fromTopState : scMM::AND[1];
+--			fromParentState : scMM::State[1];
+			toNet : pnMM::Net[1];
+			toTopState : scMM::AND[1];
+--			toParentState : scMM::State[1];
+			orPlaces : OrderedSet(pnMM::Place)[1] = getOrPair(fromPlace);
+			orStates : OrderedSet(scMM::State)[1];
+			domain pn1
+				fromPlace:Place{
+					cnet = fromNet
+				};
+			domain sc1
+				fromState:State{
+					rcontains = fromTopState
+				};
+			enforce domain pn2
+				toPlace:Place{
+					cnet = toNet
+				};
+			enforce domain sc2
+				toState:OR{
+--					rcontains = toParentState,
+					rcontains = toTopState,
+					contains = orStates
+				};
+			when {
+				orPlaces->notEmpty();
+				Roots2Roots(fromNet, fromTopState, toNet, toTopState);
+				Places2States(orPlaces, orStates);
+			}
+		}
+		
+
+/*		top relation CreateAND {
+			otherTtoPs:OrderedSet(pnMM::Place);
+			domain pnsc1
+				pTot:PlaceToTransition{
+					place = q:Place{},
+					transition = t:Transition{
+						TransitionToPlace = :OrderedSet(TransitionToPlace){r:Place{} ++ otherTtoPs}
+					}
+				}
+				{
+					pn_qs->forAll(pret = pn_q1.pret) and
+					pn_qs->forAll(postt = pn_q1.postt)
+				};
+			enforce domain pnsc2
+				pn_t_out:Transition{
+					prep = pn_qs:Set(Place){pn_q1:Place{} ++ pn_qs}
+				}
+				{
+					pn_qs->forAll(pret = pn_q1.pret) and
+					pn_qs->forAll(postt = pn_q1.postt)
+				};
+				pn_p:Place{},
+				sc_p:OR{
+					contains = sc_a:AND{
+--						contains = sc_a_qs:Sequence(State){sc_q1,sc_q2 ++ _}
+					}
+				};
+		} */
 
 /*retype Place to Basic
 migrate Place {

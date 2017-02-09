@@ -28,7 +28,7 @@ rule element2element {
 	to
 		reverseElement : ReverseList!Element (
 			name <- forwardElement.name,
-			list <- forwardElement.list,
-			source <- forwardElement.target
+			list <- forwardElement.list,        -- resolveTemp
+			source <- forwardElement.target     -- resolveTemp
 		)
 }

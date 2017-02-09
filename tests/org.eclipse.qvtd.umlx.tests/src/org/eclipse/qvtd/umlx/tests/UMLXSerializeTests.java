@@ -304,7 +304,7 @@ public class UMLXSerializeTests extends LoadTestCase
 	public void testUMLXRoundtrip_Forward2Reverse_qvtr() throws Exception {
 		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse.qvtr", true);
 		URI pivotURI1 = getProjectFileURI("Forward2Reverse.qvtras");
-		URI umlxURI = getProjectFileURI("Forward2Reverse.umlx");
+		URI umlxURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse.umlx", true);
 		URI pivotURI2 = getProjectFileURI("Forward2Reverse.regenerated.qvtras");
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
 	}
