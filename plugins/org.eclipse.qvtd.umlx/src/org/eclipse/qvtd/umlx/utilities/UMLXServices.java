@@ -17,10 +17,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,7 +32,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2ASReferenceSwitch;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
@@ -82,9 +83,7 @@ public class UMLXServices
 		}
 	}
 
-	protected void appendTypedElement(StringBuilder s, @NonNull UMLXTypedElement umlxTypedElement) {
-		s.append(String.valueOf(umlxTypedElement.getName()));
-		s.append(" : ");
+	protected void appendType(StringBuilder s, @NonNull UMLXTypedElement umlxTypedElement) {
 		if (umlxTypedElement.isIsMany()) {
 			if (umlxTypedElement.isIsUnique()) {
 				s.append(umlxTypedElement.isIsOrdered() ? "OrderedSet" : "Set");
@@ -101,6 +100,15 @@ public class UMLXServices
 		if (umlxTypedElement.isIsMany()) {
 			s.append(")");
 		}
+		else {
+			s.append(umlxTypedElement.isIsRequired() ? "[1]" : "[?]");
+		}
+	}
+
+	protected void appendTypedElement(StringBuilder s, @NonNull UMLXTypedElement umlxTypedElement, @NonNull String nameTypeSeparator) {
+		s.append(String.valueOf(umlxTypedElement.getName()));
+		s.append(nameTypeSeparator);
+		appendType(s, umlxTypedElement);
 	}
 
 	protected @NonNull String defaultName(@NonNull EObject context, @NonNull Class<? extends UMLXNamedElement> newClass, @NonNull String prefix) {
@@ -244,6 +252,16 @@ public class UMLXServices
 		return "«umlxDefaultName»";
 	}
 
+	public EObject umlxEdgeContext(EObject context) {
+		if (context instanceof RelInvocationNode) {
+			return context;
+		}
+		else if (context instanceof RelPatternNode) {
+			return ((RelPatternNode)context).getOwningRelDomainNode();
+		}
+		return context;
+	}
+
 	/**
 	 * Return the label at the target end of an InvocationEdge.
 	 */
@@ -269,95 +287,6 @@ public class UMLXServices
 			return (owningSource != null) && owningSource.isIsThen();
 		}
 		return false;
-	}
-
-	/**
-	 * Return the label of a KeyNode.
-	 */
-	public @NonNull String umlxLabel(EObject context) {
-		if (context instanceof RelDiagram) {
-			RelDiagram relDiagram = (RelDiagram)context;
-			if (((RelDiagram)context).isIsTop()) {
-				return "«top»\n" + String.valueOf(relDiagram.getName());
-			}
-			else {
-				return String.valueOf(relDiagram.getName());
-			}
-		}
-		else if (context instanceof RelDomainNode) {
-			TxTypedModelNode txTypedModelNode = ((RelDomainNode)context).getReferredTxTypedModelNode();
-			if (txTypedModelNode != null) {
-				return String.valueOf(txTypedModelNode.getName());
-			}
-			else {
-				return "«primitive»";
-			}
-		}
-		else if (context instanceof RelInvocationNode) {
-			RelDiagram relDiagram = ((RelInvocationNode)context).getReferredRelDiagram();
-			if (relDiagram != null) {
-				return String.valueOf(relDiagram.getName());
-			}
-			else {
-				return "«null-referredDiagram»";
-			}
-		}
-		else if ((context instanceof RelPatternNode) && !((RelPatternNode)context).isExpression()) {
-			StringBuilder s = new StringBuilder();
-			RelPatternNode relPatternClassNode = (RelPatternNode)context;
-			appendTypedElement(s, relPatternClassNode);
-			List<String> initExpressionLines = relPatternClassNode.getInitExpressionLines();
-			if (initExpressionLines.size() > 0) {
-				s.append(" :=");
-				for (String line : initExpressionLines) {
-					s.append("\n");
-					s.append(line);
-				}
-			}
-			return s.toString();
-		}
-		else if ((context instanceof RelPatternNode) && ((RelPatternNode)context).isExpression()) {
-			StringBuilder s = new StringBuilder();
-			boolean firstLine = true;
-			for (String line : ((RelPatternNode)context).getInitExpressionLines()) {
-				if (!firstLine) {
-					s.append("\n");
-				}
-				s.append(line);
-				firstLine = false;
-			}
-			return s.toString();
-		}
-		else if (context instanceof TxKeyNode) {
-			EClassifier eClassifier = ((TxKeyNode)context).getReferredEClass();
-			if (eClassifier != null) {
-				return String.valueOf(eClassifier.getName());
-			}
-			else {
-				return "«null-referredClass»";
-			}
-		}
-		else if (context instanceof TxPackageNode) {
-			return LabelUtil.QUALIFIED_NAME_REGISTRY.labelFor(((TxPackageNode)context).getReferredEPackage());
-		}
-		else if (context instanceof TxPartNode) {
-			EStructuralFeature eStructuralFeature = ((TxPartNode)context).getReferredEStructuralFeature();
-			if (eStructuralFeature != null) {
-				return String.valueOf(eStructuralFeature.getName());
-			}
-			else {
-				return "«null-referredProperty»";
-			}
-		}
-		else if (context instanceof TxTypedModelNode) {
-			return String.valueOf(((TxTypedModelNode)context).getName());
-		}
-		else if (context instanceof UMLXTypedElement) {
-			StringBuilder s = new StringBuilder();
-			appendTypedElement(s, (UMLXTypedElement)context);
-			return s.toString();
-		}
-		return "«umlxLabel - " + context.getClass().getName() + " - " + context.eClass().getName() + "»";
 	}
 
 	/**
@@ -510,14 +439,70 @@ public class UMLXServices
 		return candidates;
 	}
 
-	public EObject umlxEdgeContext(EObject context) {
-		if (context instanceof RelInvocationNode) {
-			return context;
+	/**
+	 * Return the label of a KeyNode.
+	 */
+	public @NonNull String umlxRelLabel(EObject context) {
+		if (context instanceof RelDiagram) {
+			RelDiagram relDiagram = (RelDiagram)context;
+			if (((RelDiagram)context).isIsTop()) {
+				return "«top» " + String.valueOf(relDiagram.getName());
+			}
+			else {
+				return String.valueOf(relDiagram.getName());
+			}
 		}
-		else if (context instanceof RelPatternNode) {
-			return ((RelPatternNode)context).getOwningRelDomainNode();
+		else if (context instanceof RelDomainNode) {
+			TxTypedModelNode txTypedModelNode = ((RelDomainNode)context).getReferredTxTypedModelNode();
+			if (txTypedModelNode != null) {
+				if (((RelDomainNode)context).isIsEnforced()) {
+					return "«enforce» " + String.valueOf(txTypedModelNode.getName());
+				}
+				else {
+					return String.valueOf(txTypedModelNode.getName());
+				}
+			}
+			else {
+				return "«primitive»";
+			}
 		}
-		return context;
+		else if (context instanceof RelInvocationNode) {
+			RelDiagram relDiagram = ((RelInvocationNode)context).getReferredRelDiagram();
+			if (relDiagram != null) {
+				return String.valueOf(relDiagram.getName());
+			}
+			else {
+				return "«null-referredDiagram»";
+			}
+		}
+		else if ((context instanceof RelPatternNode) && !((RelPatternNode)context).isExpression()) {
+			StringBuilder s = new StringBuilder();
+			RelPatternNode relPatternClassNode = (RelPatternNode)context;
+			s.append(String.valueOf(relPatternClassNode.getName()));
+			//			appendTypedElement(s, relPatternClassNode, "\n");
+			List<String> initExpressionLines = relPatternClassNode.getInitExpressionLines();
+			if (initExpressionLines.size() > 0) {
+				s.append(" :=");
+				for (String line : initExpressionLines) {
+					s.append("\n");
+					s.append(line);
+				}
+			}
+			return s.toString();
+		}
+		else if ((context instanceof RelPatternNode) && ((RelPatternNode)context).isExpression()) {
+			StringBuilder s = new StringBuilder();
+			boolean firstLine = true;
+			for (String line : ((RelPatternNode)context).getInitExpressionLines()) {
+				if (!firstLine) {
+					s.append("\n");
+				}
+				s.append(line);
+				firstLine = false;
+			}
+			return s.toString();
+		}
+		return "«umlxRelLabel - " + context.getClass().getName() + " - " + context.eClass().getName() + "»";
 	}
 
 	/**
@@ -547,6 +532,10 @@ public class UMLXServices
 		return false;
 	}
 
+	public EObject umlxSelfExpression(EObject context) {
+		return context;
+	}
+
 	public int umlxSize(EObject context) {
 		return 9;
 	}
@@ -573,6 +562,61 @@ public class UMLXServices
 		return "new UMLX Transformation Diagram";
 	}
 
+	/**
+	 * Return the label of a KeyNode.
+	 */
+	public @NonNull String umlxTxLabel(EObject context) {
+		if (context instanceof RelDiagram) {
+			RelDiagram relDiagram = (RelDiagram)context;
+			if (((RelDiagram)context).isIsTop()) {
+				return "«top»\n" + String.valueOf(relDiagram.getName());
+			}
+			else {
+				return String.valueOf(relDiagram.getName());
+			}
+		}
+		else if (context instanceof TxKeyNode) {
+			EClassifier eClassifier = ((TxKeyNode)context).getReferredEClass();
+			if (eClassifier != null) {
+				return String.valueOf(eClassifier.getName());
+			}
+			else {
+				return "«null-referredClass»";
+			}
+		}
+		else if (context instanceof TxPackageNode) {
+			EPackage ePackage = ((TxPackageNode)context).getReferredEPackage();
+			StringBuilder s = new StringBuilder();
+			s.append(ePackage.getName());
+			s.append(" : ");
+			s.append(ePackage.getNsURI());
+			s.append("\n");
+			@NonNull
+			URI uri = EcoreUtil.getURI(ePackage);
+			uri = uri.deresolve(context.eResource().getURI());
+			s.append(uri);
+			return s.toString();
+		}
+		else if (context instanceof TxPartNode) {
+			EStructuralFeature eStructuralFeature = ((TxPartNode)context).getReferredEStructuralFeature();
+			if (eStructuralFeature != null) {
+				return String.valueOf(eStructuralFeature.getName());
+			}
+			else {
+				return "«null-referredProperty»";
+			}
+		}
+		else if (context instanceof TxTypedModelNode) {
+			return String.valueOf(((TxTypedModelNode)context).getName());
+		}
+		else if (context instanceof UMLXTypedElement) {
+			StringBuilder s = new StringBuilder();
+			appendTypedElement(s, (UMLXTypedElement)context, " : ");
+			return s.toString();
+		}
+		return "«umlxTxLabel - " + context.getClass().getName() + " - " + context.eClass().getName() + "»";
+	}
+
 	public @NonNull Collection<@NonNull EObject> umlxTxTransformationNodeCandidates(EObject context) {
 		List<@NonNull EObject> candidates = new ArrayList<@NonNull EObject>();
 		if (context instanceof TxDiagram) {
@@ -580,5 +624,17 @@ public class UMLXServices
 			candidates.addAll(ClassUtil.nullFree(((TxDiagram)context).getOwnedTxTypedModelNodes()));
 		}
 		return candidates;
+	}
+
+	/**
+	 * Return the label of a KeyNode.
+	 */
+	public @NonNull String umlxTypeLabel(EObject context) {
+		if (context instanceof UMLXTypedElement) {
+			StringBuilder s = new StringBuilder();
+			appendType(s, (UMLXTypedElement) context);
+			return s.toString();
+		}
+		return "«umlxTypeLabel - " + context.getClass().getName() + " - " + context.eClass().getName() + "»";
 	}
 }
