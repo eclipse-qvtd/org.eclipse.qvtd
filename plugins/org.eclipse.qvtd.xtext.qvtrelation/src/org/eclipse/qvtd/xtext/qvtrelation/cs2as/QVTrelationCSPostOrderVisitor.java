@@ -21,7 +21,6 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.Continuations;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
-import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -241,18 +240,23 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 	public Continuation<?> visitVarDeclarationCS(@NonNull VarDeclarationCS csElement) {
 		Variable pivotVariable = null;
 		Type pivotType = null;
-		boolean isRequired = false;
+		Boolean isRequired = null;
 		TypedRefCS ownedType = csElement.getOwnedType();
 		if (ownedType != null) {
 			pivotType = PivotUtil.getPivot(Type.class, ownedType);
-			isRequired = ElementUtil.isRequired(ownedType);
+			isRequired = context.isRequired(ownedType);
 		}
 		OCLExpression oclExpression = null;
 		ExpCS initializer = csElement.getOwnedInitExpression();
 		if (initializer != null) {
 			oclExpression = context.visitLeft2Right(OCLExpression.class, initializer);
-			if ((pivotType == null) && (oclExpression != null)) {
-				pivotType = oclExpression.getType();
+			if (oclExpression != null) {
+				if (pivotType == null) {
+					pivotType = oclExpression.getType();
+				}
+				if (isRequired == null) {
+					isRequired = oclExpression.isIsRequired();
+				}
 			}
 		}
 		for (VarDeclarationIdCS csVarDeclarationId : csElement.getOwnedVarDeclarationIds()) {
@@ -262,7 +266,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 					context.refreshRequiredType(pivotVariable, ownedType);
 				}
 				else {
-					context.setType(pivotVariable, pivotType, isRequired);
+					context.setType(pivotVariable, pivotType, isRequired == Boolean.TRUE);
 				}
 				pivotVariable.setOwnedInit(null);
 			}

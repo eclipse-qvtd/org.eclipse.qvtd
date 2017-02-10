@@ -186,8 +186,9 @@ public class UMLXSerializeTests extends LoadTestCase
 								}
 								Property asProperty = ((PropertyTemplateItem)eContainer).getReferredProperty();
 								if ((asProperty == null) || asProperty.isIsComposite()) {
-									canBeShared = false;
-									break;
+									// perhaps this needs a further is there a when/where reference??
+									//									canBeShared = false;
+									//									break;
 								}
 							}
 							else if (reference instanceof CollectionTemplateExp) {
@@ -335,7 +336,7 @@ public class UMLXSerializeTests extends LoadTestCase
 	public void testUMLXRoundtrip_PN2SC_qvtr() throws Exception {
 		URI inputURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/pn2sc/PetriNet2StateChart.qvtr", true);
 		URI pivotURI1 = getProjectFileURI("PetriNet2StateChart.qvtras");
-		URI umlxURI = getProjectFileURI("PetriNet2StateChart.umlx");
+		URI umlxURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/pn2sc/PetriNet2StateChart.umlx", true);
 		URI pivotURI2 = getProjectFileURI("PetriNet2StateChart.regenerated.qvtras");
 		doRoundTripTest(inputURI1, pivotURI1, umlxURI, pivotURI2, false);
 	}

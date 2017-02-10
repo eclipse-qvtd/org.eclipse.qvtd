@@ -49,34 +49,28 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	public @Nullable TypedRefCS createTypeRefCS(@NonNull TypedElement asTypedElement) {
 		Type asType = asTypedElement.getType();
 		TypedRefCS csTypeRef = createTypeRefCS(asType);
-		if (csTypeRef != null) {
-			if (asType instanceof CollectionType) {
-				CollectionType asCollectionType = (CollectionType)asType;
-				boolean isNullFree = asCollectionType.isIsNullFree();
-				if (!isNullFree) {
-					//					CollectionTypeCS csCollectionType = (CollectionTypeCS)csTypeRef;
-					MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
-					csMultiplicity.setIsNullFree(false);
-					csMultiplicity.setStringBounds("*");
-					if (csTypeRef instanceof CollectionTypeCS) {
-						((CollectionTypeCS)csTypeRef).setOwnedCollectionMultiplicity(csMultiplicity);
-					}
-					else {
-						csTypeRef.setOwnedMultiplicity(csMultiplicity);
-					}
-				}
+		if ((asType instanceof CollectionType) && (csTypeRef instanceof CollectionTypeCS)) {
+			CollectionType asCollectionType = (CollectionType)asType;
+			CollectionTypeCS csCollectionType = (CollectionTypeCS)csTypeRef;
+			boolean isNullFree = asCollectionType.isIsNullFree();
+			if (!isNullFree) {
+				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
+				csMultiplicity.setIsNullFree(false);
+				csMultiplicity.setStringBounds("*");
+				csCollectionType.setOwnedCollectionMultiplicity(csMultiplicity);
 			}
-			else {
-				if (asTypedElement.isIsRequired()) {
-					MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
-					csMultiplicity.setLowerBound(1);
-					csTypeRef.setOwnedMultiplicity(csMultiplicity);
-				}
-				//			else {
-				//				MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
-				//				csMultiplicity.setStringBounds("1");
-				//				csTypeRef.setOwnedMultiplicity(csMultiplicity);
-				//			}
+			MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
+			if (!asTypedElement.isIsRequired()) {
+				csMultiplicity.setLowerBound(0);
+			}
+			csMultiplicity.setUpperBound(1);
+			csTypeRef.setOwnedMultiplicity(csMultiplicity);
+		}
+		else if (csTypeRef != null) {
+			if (asTypedElement.isIsRequired()) {
+				MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
+				csMultiplicity.setLowerBound(1);
+				csTypeRef.setOwnedMultiplicity(csMultiplicity);
 			}
 		}
 		return csTypeRef;
