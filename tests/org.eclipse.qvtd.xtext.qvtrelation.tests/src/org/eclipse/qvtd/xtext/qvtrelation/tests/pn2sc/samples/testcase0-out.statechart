@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schart:Statechart xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:schart="http://uam.es/StateCharts"
+    xsi:schemaLocation="http://uam.es/StateCharts java://org.eclipse.qvtd.xtext.qvtrelation.tests.pn2sc.statecharts.statechartsPackage">
+  <topState name="top">
+    <contains xsi:type="schart:OR" name="O10">
+      <contains xsi:type="schart:Basic" name="E10" rnext="#//@topState/@contains.2"/>
+    </contains>
+    <contains xsi:type="schart:OR" name="O9">
+      <contains xsi:type="schart:Basic" name="E9" next="#//@topState/@contains.2"/>
+    </contains>
+    <contains xsi:type="schart:HyperEdge" name="E17" next="#//@topState/@contains.0/@contains.0" rnext="#//@topState/@contains.1/@contains.0"/>
+  </topState>
+</schart:Statechart>

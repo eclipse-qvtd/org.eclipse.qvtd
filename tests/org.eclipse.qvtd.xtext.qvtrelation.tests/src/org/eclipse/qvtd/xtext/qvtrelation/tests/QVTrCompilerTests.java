@@ -310,7 +310,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
-//		QVTp2QVTs.REGION_ORDER.setState(true);
+		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
@@ -468,7 +468,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
-//		QVTp2QVTs.REGION_ORDER.setState(true);
+		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		MyQVT myQVT = new MyQVT("iterated2iterated");
 		myQVT.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		try {
@@ -479,6 +479,35 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.loadInput("from", "testcase1-in.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("to", "testcase1-out_CG.iterated", "testcase1-out.xmi", null);
+			//
+			//	        myQVT.createGeneratedExecutor(txClass);
+			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+			//	    	myQVT.executeTransformation();
+			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_PN2SC_CG() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		MyQVT myQVT = new MyQVT("pn2sc");
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("pn2sc", "PetriNet2StateChart.qvtr", "sc",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/pn2sc/PNtoSC", false);//,
+			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("pn", "testcase0-in.petrinet");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("sc", "testcase0-out_CG.statechart", "testcase0-out.statechart", null);
 			//
 			//	        myQVT.createGeneratedExecutor(txClass);
 			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");

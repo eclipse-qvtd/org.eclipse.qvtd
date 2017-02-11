@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnet:Net xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:pnet="http://uam.es/PetriNets"
+    xsi:schemaLocation="http://uam.es/PetriNets ../PetriNets.ecore"
+	xmi:id="$29">
+  <places xmi:id="$27" name="E10" pret="$6"/>
+  <places xmi:id="$0" name="E9" postt="$6"/>
+  <transitions xmi:id="$6" name="E17" prep="$0" postp="$27"/>
+</pnet:Net>
