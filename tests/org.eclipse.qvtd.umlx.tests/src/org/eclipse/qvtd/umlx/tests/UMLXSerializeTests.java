@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.umlx.tests;
 
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
+import org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
@@ -86,18 +86,15 @@ public class UMLXSerializeTests extends LoadTestCase
 		QVTrelation ocl1 = QVTrelation.newInstance(getProjectMap());
 		URI inputURI1 = URI.createPlatformResourceURI(path + stem + ".qvtr", true);
 		URI pivotURI1 = getProjectFileURI(stem + ".qvtras");
-		//		URI umlxURI = getProjectFileURI(stem + ".umlx");
 		URI umlxURI = URI.createPlatformResourceURI(path + stem + ".umlx", true);
 		URI pivotURI2 = getProjectFileURI(stem + ".regenerated.qvtras");
 
-		// FIXME Hudson debugging
 		URIConverter uriConverter = ocl1.getResourceSet().getURIConverter();
 		URI normalizedURI = uriConverter.normalize(umlxURI);
-		System.out.println("normalizedURI = " + normalizedURI);
 		URIHandler uriHandler = uriConverter.getURIHandler(normalizedURI);
-		System.out.println("uriHandler = " + uriHandler);
-		OutputStream outputStream = uriConverter.createOutputStream(umlxURI);
-		outputStream.close();
+		if (!(uriHandler instanceof FileURIHandlerImpl)) {		// platform:/plugin on Hudson
+			umlxURI = getProjectFileURI(stem + ".umlx");
+		}
 
 		Resource qvtrResource1 = doLoad_Concrete(ocl1, inputURI1, pivotURI1, null);
 		Resource umlxResource1 = qvtrResource1.getResourceSet().createResource(umlxURI);
