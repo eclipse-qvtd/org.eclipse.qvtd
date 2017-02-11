@@ -100,6 +100,12 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 		if (object.isIsTopLevel()) {
 			append("top ");
 		}
+		if (object.isIsDefault()) {
+			append("default ");
+		}
+		if (object.isIsInPlace()) {
+			append("inplace ");
+		}
 		append("relation ");
 		appendName(object);
 		return null;

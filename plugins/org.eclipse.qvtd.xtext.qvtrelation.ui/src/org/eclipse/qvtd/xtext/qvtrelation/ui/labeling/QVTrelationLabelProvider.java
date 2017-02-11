@@ -39,7 +39,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.
- * 
+ *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
@@ -65,9 +65,9 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 		return "ObjectTemplateExp.gif";
 	}
 
-//	protected String image(OppositePropertyCallExp ele) {
-//		return "OppositePropertyCallExp.gif";
-//	}
+	//	protected String image(OppositePropertyCallExp ele) {
+	//		return "OppositePropertyCallExp.gif";
+	//	}
 
 	protected String image(PropertyTemplateItem ele) {
 		return "PropertyTemplateItem.gif";
@@ -136,6 +136,12 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 		StringBuilder s = new StringBuilder();
 		if (ele.isIsTopLevel()) {
 			s.append("«top» ");
+		}
+		if (ele.isIsDefault()) {
+			s.append("«default» ");
+		}
+		if (ele.isIsInPlace()) {
+			s.append("«inplace» ");
 		}
 		appendName(s, ele);
 		return s.toString();

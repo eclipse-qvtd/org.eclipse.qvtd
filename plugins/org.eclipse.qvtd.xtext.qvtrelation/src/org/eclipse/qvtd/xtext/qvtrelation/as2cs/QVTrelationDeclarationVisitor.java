@@ -511,6 +511,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		RelationCS csRelation = context.refreshNamedElement(RelationCS.class, QVTrelationCSPackage.Literals.RELATION_CS, asRelation, "«null»");
 		csRelation.setPivot(asRelation);
 		csRelation.setIsDefault(asRelation.isIsDefault());
+		csRelation.setIsInPlace(asRelation.isIsInPlace());
 		csRelation.setIsTop(asRelation.isIsTopLevel());
 		context.refreshList(csRelation.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asRelation.getDomain(), null));
 		List<@NonNull Variable> asSharedVariables = new ArrayList<>();

@@ -526,6 +526,8 @@ class PatternForest
 		umlx2qvtr.install(relDiagram, qvtrRelation);
 		//			Collections.sort(qvtrAllVariables, NameUtil.NAMEABLE_COMPARATOR);
 		//			Iterables.addAll(QVTrelationUtil.Internal.getOwnedVariablesList(qvtrRelation), qvtrAllVariables);
+		qvtrRelation.setIsDefault(relDiagram.isIsDefault());
+		qvtrRelation.setIsInPlace(relDiagram.isIsInPlace());
 		qvtrRelation.setIsTopLevel(relDiagram.isIsTop());
 		qvtrRelation.getVariable().addAll(allVariables);
 		return qvtrRelation;
