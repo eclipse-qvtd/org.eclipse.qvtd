@@ -61,10 +61,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-overrides"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-transformation"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-overridden"/>
-      <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateDomainNameIsUnique">
-        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateDomainNameIsUnique/diagnostics"/>
-        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateDomainNameIsUnique/context"/>
-      </genOperations>
       <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateOverridesRuleIsExtendedRule">
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridesRuleIsExtendedRule/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridesRuleIsExtendedRule/context"/>

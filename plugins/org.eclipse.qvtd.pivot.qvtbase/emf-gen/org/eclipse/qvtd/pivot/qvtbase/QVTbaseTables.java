@@ -92,7 +92,6 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Function_c_c_ParametersAreFunctionParameter = "Function::ParametersAreFunctionParameter";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Function_c_c_ReturnTypeIsQueryType = "Function::ReturnTypeIsQueryType";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Predicate_c_c_ConditionIsBoolean = "Predicate::ConditionIsBoolean";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_DomainNameIsUnique = "Rule::DomainNameIsUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_OverridesRuleIsExtendedRule = "Rule::OverridesRuleIsExtendedRule";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_OverridesRuleOverridesAllDomains = "Rule::OverridesRuleOverridesAllDomains";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ContextTypeIsTransformation = "Transformation::ContextTypeIsTransformation";

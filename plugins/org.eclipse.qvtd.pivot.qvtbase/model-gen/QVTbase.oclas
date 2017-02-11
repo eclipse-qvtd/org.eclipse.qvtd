@@ -42,9 +42,6 @@
           type="#T.qvtbase.Pattern"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Rule" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
-      <ownedInvariants xmi:id="ciqvtbase.Rule.DomainNameIsUnique" isCallable="true" name="DomainNameIsUnique">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;domain->isUnique(name)&#xA;"/>
-      </ownedInvariants>
       <ownedInvariants xmi:id="ciqvtbase.Rule.OverridesRuleIsExtendedRule" isCallable="true" name="OverridesRuleIsExtendedRule">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;overrides &lt;> null implies&#xA;let extendedRules = transformation->closure(_extends)->excluding(transformation).rule&#xA;in extendedRules->includes(overrides)&#xA;"/>
       </ownedInvariants>

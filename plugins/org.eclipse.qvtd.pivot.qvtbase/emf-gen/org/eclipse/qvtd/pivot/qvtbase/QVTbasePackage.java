@@ -1260,22 +1260,13 @@ public interface QVTbasePackage extends EPackage {
 	int RULE___GET_VALUE__TYPE_STRING = PivotPackage.NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Validate Domain Name Is Unique</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+	int RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
@@ -1284,7 +1275,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
+	int RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Rule</em>' class.
@@ -1293,7 +1284,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
+	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -2069,16 +2060,6 @@ public interface QVTbasePackage extends EPackage {
 	EReference getRule_Overridden();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateDomainNameIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Domain Name Is Unique</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Domain Name Is Unique</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateDomainNameIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleIsExtendedRule(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overrides Rule Is Extended Rule</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2510,14 +2491,6 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference RULE__OVERRIDDEN = eINSTANCE.getRule_Overridden();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Domain Name Is Unique</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Overrides Rule Is Extended Rule</b></em>' operation.

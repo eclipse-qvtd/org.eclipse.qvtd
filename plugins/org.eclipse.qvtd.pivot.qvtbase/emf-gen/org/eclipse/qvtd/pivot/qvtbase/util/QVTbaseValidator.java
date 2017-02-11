@@ -99,20 +99,12 @@ public class QVTbaseValidator extends EObjectValidator {
 	public static final int PREDICATE__VALIDATE_CONDITION_IS_BOOLEAN = 5;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Domain Name Is Unique' of 'Rule'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int RULE__VALIDATE_DOMAIN_NAME_IS_UNIQUE = 6;
-
-	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Overrides Rule Is Extended Rule' of 'Rule'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RULE__VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE = 7;
+	public static final int RULE__VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Overrides Rule Overrides All Domains' of 'Rule'.
@@ -120,7 +112,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RULE__VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS = 8;
+	public static final int RULE__VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Context Type Is Transformation' of 'Transformation'.
@@ -128,7 +120,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION = 9;
+	public static final int TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION = 8;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Extended Typed Model Is Extended' of 'Transformation'.
@@ -136,7 +128,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED = 10;
+	public static final int TRANSFORMATION__VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Model Parameter Is Unique' of 'Transformation'.
@@ -144,7 +136,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TRANSFORMATION__VALIDATE_MODEL_PARAMETER_IS_UNIQUE = 11;
+	public static final int TRANSFORMATION__VALIDATE_MODEL_PARAMETER_IS_UNIQUE = 10;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -152,7 +144,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 11;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 10;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -394,20 +386,9 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rule, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRule_validateDomainNameIsUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_validateOverridesRuleIsExtendedRule(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRule_validateOverridesRuleOverridesAllDomains(rule, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the validateDomainNameIsUnique constraint of '<em>Rule</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRule_validateDomainNameIsUnique(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return rule.validateDomainNameIsUnique(diagnostics, context);
 	}
 
 	/**

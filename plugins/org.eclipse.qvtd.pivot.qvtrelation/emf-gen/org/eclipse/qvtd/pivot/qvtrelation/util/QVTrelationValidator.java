@@ -338,7 +338,6 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relation, diagnostics, context);
-		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_validateDomainsAreRelationDomains(relation, diagnostics, context);

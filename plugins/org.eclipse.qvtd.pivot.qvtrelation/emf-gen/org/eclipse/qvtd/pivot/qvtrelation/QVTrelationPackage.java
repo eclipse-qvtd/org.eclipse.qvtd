@@ -520,15 +520,6 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION___GET_VALUE__TYPE_STRING = QVTbasePackage.RULE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Validate Domain Name Is Unique</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

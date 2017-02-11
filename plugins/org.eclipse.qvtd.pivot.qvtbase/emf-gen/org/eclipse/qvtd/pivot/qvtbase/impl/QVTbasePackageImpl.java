@@ -443,7 +443,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map() {
+	public EOperation getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map() {
 		return ruleEClass.getEOperations().get(0);
 	}
 
@@ -453,18 +453,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map() {
-		return ruleEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EOperation getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map() {
-		return ruleEClass.getEOperations().get(2);
+		return ruleEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -688,7 +678,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(ruleEClass, RULE__OVERRIDES);
 		createEReference(ruleEClass, RULE__TRANSFORMATION);
 		createEReference(ruleEClass, RULE__OVERRIDDEN);
-		createEOperation(ruleEClass, RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(ruleEClass, RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(ruleEClass, RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP);
 
@@ -826,15 +815,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getRule_Overrides(), this.getRule(), this.getRule_Overridden(), "overrides", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rule(), "transformation", null, 0, 1, Rule.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Overridden(), this.getRule(), this.getRule_Overrides(), "overridden", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		op = initEOperation(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateDomainNameIsUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOverridesRuleIsExtendedRule", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -992,12 +972,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 			source,
 			new String[] {
 				"originalName", "ConditionIsBoolean"
-		});
-		addAnnotation
-		(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "DomainNameIsUnique"
 		});
 		addAnnotation
 		(getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map(),

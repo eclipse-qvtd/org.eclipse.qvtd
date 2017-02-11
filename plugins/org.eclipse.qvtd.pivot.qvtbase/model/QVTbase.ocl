@@ -21,8 +21,8 @@ inv ConditionIsBoolean:
 conditionExpression.type = Boolean
 
 context Rule
-inv DomainNameIsUnique:
-domain->isUnique(name)
+--inv DomainNameIsUnique:
+--domain->isUnique(name)
 inv OverridesRuleIsExtendedRule:
 overrides <> null implies
 let extendedRules = transformation->closure(_extends)->excluding(transformation).rule
