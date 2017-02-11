@@ -43,6 +43,7 @@ CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
 
 DefaultValueCS: propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 
+// replace is tolerated for ModelMorf compatibility see DNF.qvtr
 DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] 
 			ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)*
              ('implementedby' implementedBy=UnrestrictedName)?
@@ -85,7 +86,7 @@ QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName
       	  ':' ownedType=TypeExpCS
             (';' | '{' ownedExpression=ExpCS '}');
 
-RelationCS: isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName
+RelationCS: isTop?='top'? (isDefault?='default' | isInPlace?='inplace')? 'relation' name=UnrestrictedName
    			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
                '{'
                ownedVarDeclarations+=VarDeclarationCS*
@@ -148,6 +149,7 @@ QVTrelationUnrestrictedName:
 |   'extends'
 |   'implementedby'
 |   'import'
+|   'inplace'
 |   'library'
 |   'key'
 |   'opposite'

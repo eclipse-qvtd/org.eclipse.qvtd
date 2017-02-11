@@ -47,6 +47,7 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-Relation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelation.ecore#F-qvtrelation-Relation-isInPlace"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelation.ecore#F-qvtrelation-Relation-isTopLevel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Relation-operationalImpl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Relation-variable"/>
