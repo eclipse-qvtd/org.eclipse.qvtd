@@ -55,6 +55,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#isIsInPlace <em>Is In Place</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#isIsTopLevel <em>Is Top Level</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getOperationalImpl <em>Operational Impl</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getVariable <em>Variable</em>}</li>
@@ -65,6 +66,26 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * @generated
  */
 public class RelationImpl extends RuleImpl implements Relation {
+	/**
+	 * The default value of the '{@link #isIsInPlace() <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_IN_PLACE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsInPlace() <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isInPlace = IS_IN_PLACE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isIsTopLevel() <em>Is Top Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -142,6 +163,29 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationPackage.Literals.RELATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsInPlace() {
+		return isInPlace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsInPlace(boolean newIsInPlace) {
+		boolean oldIsInPlace = isInPlace;
+		isInPlace = newIsInPlace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__IS_IN_PLACE, oldIsInPlace, isInPlace));
 	}
 
 	/**
@@ -463,6 +507,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION__IS_IN_PLACE:
+				return isIsInPlace();
 			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
 				return isIsTopLevel();
 			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
@@ -486,6 +532,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION__IS_IN_PLACE:
+				setIsInPlace((Boolean)newValue);
+				return;
 			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
 				setIsTopLevel((Boolean)newValue);
 				return;
@@ -515,6 +564,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION__IS_IN_PLACE:
+				setIsInPlace(IS_IN_PLACE_EDEFAULT);
+				return;
 			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
 				setIsTopLevel(IS_TOP_LEVEL_EDEFAULT);
 				return;
@@ -542,6 +594,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION__IS_IN_PLACE:
+				return isInPlace != IS_IN_PLACE_EDEFAULT;
 			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
 				return isTopLevel != IS_TOP_LEVEL_EDEFAULT;
 			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:

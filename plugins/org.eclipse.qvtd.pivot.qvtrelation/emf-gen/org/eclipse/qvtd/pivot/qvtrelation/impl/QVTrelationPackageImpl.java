@@ -332,7 +332,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getRelation_IsTopLevel() {
+	public EAttribute getRelation_IsInPlace() {
 		return (EAttribute)relationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -342,8 +342,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelation_OperationalImpl() {
-		return (EReference)relationEClass.getEStructuralFeatures().get(1);
+	public EAttribute getRelation_IsTopLevel() {
+		return (EAttribute)relationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -352,7 +352,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelation_Variable() {
+	public EReference getRelation_OperationalImpl() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -362,7 +362,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelation_When() {
+	public EReference getRelation_Variable() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -372,8 +372,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelation_Where() {
+	public EReference getRelation_When() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelation_Where() {
+		return (EReference)relationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -680,6 +690,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEOperation(keyEClass, KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
 
 		relationEClass = createEClass(RELATION);
+		createEAttribute(relationEClass, RELATION__IS_IN_PLACE);
 		createEAttribute(relationEClass, RELATION__IS_TOP_LEVEL);
 		createEReference(relationEClass, RELATION__OPERATIONAL_IMPL);
 		createEReference(relationEClass, RELATION__VARIABLE);
@@ -822,6 +833,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRelation_IsInPlace(), ecorePackage.getEBoolean(), "isInPlace", "false", 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelation_IsTopLevel(), ecorePackage.getEBoolean(), "isTopLevel", null, 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelation_OperationalImpl(), this.getRelationImplementation(), this.getRelationImplementation_Relation(), "operationalImpl", null, 0, -1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getRelation_Variable(), thePivotPackage.getVariable(), null, "variable", null, 0, -1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

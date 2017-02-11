@@ -24,6 +24,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#isIsInPlace <em>Is In Place</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#getOwnedRelDomainNodes <em>Owned Rel Domain Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#getOwnedRelInvocationNodes <em>Owned Rel Invocation Nodes</em>}</li>
@@ -34,6 +36,58 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface RelDiagram extends UMLXNamedElement {
+
+	/**
+	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Default</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Default</em>' attribute.
+	 * @see #setIsDefault(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDiagram_IsDefault()
+	 * @generated
+	 */
+	boolean isIsDefault();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsDefault <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Default</em>' attribute.
+	 * @see #isIsDefault()
+	 * @generated
+	 */
+	void setIsDefault(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is In Place</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is In Place</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is In Place</em>' attribute.
+	 * @see #setIsInPlace(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDiagram_IsInPlace()
+	 * @generated
+	 */
+	boolean isIsInPlace();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsInPlace <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is In Place</em>' attribute.
+	 * @see #isIsInPlace()
+	 * @generated
+	 */
+	void setIsInPlace(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Top</b></em>' attribute.

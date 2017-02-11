@@ -24,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsInPlace <em>Is In Place</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
@@ -49,7 +50,7 @@ public interface RelationCS extends NamedElementCS {
 	 * @return the value of the '<em>Is Default</em>' attribute.
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsDefault()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsDefault();
@@ -65,6 +66,33 @@ public interface RelationCS extends NamedElementCS {
 	void setIsDefault(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Is In Place</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is In Place</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is In Place</em>' attribute.
+	 * @see #setIsInPlace(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsInPlace()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsInPlace();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsInPlace <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is In Place</em>' attribute.
+	 * @see #isIsInPlace()
+	 * @generated
+	 */
+	void setIsInPlace(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Is Top</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -76,7 +104,7 @@ public interface RelationCS extends NamedElementCS {
 	 * @return the value of the '<em>Is Top</em>' attribute.
 	 * @see #setIsTop(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsTop()
-	 * @model default="false"
+	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isIsTop();

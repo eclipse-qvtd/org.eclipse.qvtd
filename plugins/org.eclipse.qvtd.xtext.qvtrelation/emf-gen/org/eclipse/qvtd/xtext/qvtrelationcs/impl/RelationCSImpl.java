@@ -40,6 +40,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsInPlace <em>Is In Place</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
@@ -70,6 +71,26 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @ordered
 	 */
 	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsInPlace() <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_IN_PLACE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsInPlace() <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isInPlace = IS_IN_PLACE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
@@ -181,6 +202,29 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 		isDefault = newIsDefault;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__IS_DEFAULT, oldIsDefault, isDefault));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsInPlace() {
+		return isInPlace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsInPlace(boolean newIsInPlace) {
+		boolean oldIsInPlace = isInPlace;
+		isInPlace = newIsInPlace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__IS_IN_PLACE, oldIsInPlace, isInPlace));
 	}
 
 	/**
@@ -402,6 +446,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 		switch (featureID) {
 			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
 				return isIsDefault();
+			case QVTrelationCSPackage.RELATION_CS__IS_IN_PLACE:
+				return isIsInPlace();
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				return isIsTop();
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
@@ -430,6 +476,9 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 		switch (featureID) {
 			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
 				setIsDefault((Boolean)newValue);
+				return;
+			case QVTrelationCSPackage.RELATION_CS__IS_IN_PLACE:
+				setIsInPlace((Boolean)newValue);
 				return;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				setIsTop((Boolean)newValue);
@@ -466,6 +515,9 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
 				setIsDefault(IS_DEFAULT_EDEFAULT);
 				return;
+			case QVTrelationCSPackage.RELATION_CS__IS_IN_PLACE:
+				setIsInPlace(IS_IN_PLACE_EDEFAULT);
+				return;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
@@ -498,6 +550,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 		switch (featureID) {
 			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
 				return isDefault != IS_DEFAULT_EDEFAULT;
+			case QVTrelationCSPackage.RELATION_CS__IS_IN_PLACE:
+				return isInPlace != IS_IN_PLACE_EDEFAULT;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				return isTop != IS_TOP_EDEFAULT;
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:

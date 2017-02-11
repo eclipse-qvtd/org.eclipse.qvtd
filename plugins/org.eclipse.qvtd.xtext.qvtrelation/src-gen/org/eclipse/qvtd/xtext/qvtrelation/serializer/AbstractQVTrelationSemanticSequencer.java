@@ -926,7 +926,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 * Constraint:
 	 *     (
 	 *         isTop?='top'?
-	 *         isDefault?='default'?
+	 *         (isDefault?='default' | isInPlace?='inplace')?
 	 *         name=UnrestrictedName
 	 *         overrides=[Relation|UnrestrictedName]?
 	 *         ownedVarDeclarations+=VarDeclarationCS*

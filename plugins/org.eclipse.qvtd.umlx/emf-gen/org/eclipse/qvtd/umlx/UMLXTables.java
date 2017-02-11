@@ -442,11 +442,13 @@ public class UMLXTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _RelDiagram__isTop = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_TOP, Types._RelDiagram, 0);
-		public static final @NonNull ExecutorProperty _RelDiagram__ownedRelDomainNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, Types._RelDiagram, 1);
-		public static final @NonNull ExecutorProperty _RelDiagram__ownedRelInvocationNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, Types._RelDiagram, 2);
-		public static final @NonNull ExecutorProperty _RelDiagram__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._RelDiagram, 3);
-		public static final @NonNull ExecutorProperty _RelDiagram__RelInvocationNode__referredRelDiagram = new ExecutorPropertyWithImplementation("RelInvocationNode", Types._RelDiagram, 4, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM));
+		public static final @NonNull ExecutorProperty _RelDiagram__isDefault = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_DEFAULT, Types._RelDiagram, 0);
+		public static final @NonNull ExecutorProperty _RelDiagram__isInPlace = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_IN_PLACE, Types._RelDiagram, 1);
+		public static final @NonNull ExecutorProperty _RelDiagram__isTop = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_TOP, Types._RelDiagram, 2);
+		public static final @NonNull ExecutorProperty _RelDiagram__ownedRelDomainNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, Types._RelDiagram, 3);
+		public static final @NonNull ExecutorProperty _RelDiagram__ownedRelInvocationNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, Types._RelDiagram, 4);
+		public static final @NonNull ExecutorProperty _RelDiagram__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._RelDiagram, 5);
+		public static final @NonNull ExecutorProperty _RelDiagram__RelInvocationNode__referredRelDiagram = new ExecutorPropertyWithImplementation("RelInvocationNode", Types._RelDiagram, 6, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM));
 
 		public static final @NonNull ExecutorProperty _RelDomainNode__isEnforced = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__IS_ENFORCED, Types._RelDomainNode, 0);
 		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternEdges = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, Types._RelDomainNode, 1);
@@ -1533,6 +1535,8 @@ public class UMLXTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RelDiagram = {
 			UMLXTables.Properties._UMLXElement__comments,
+			UMLXTables.Properties._RelDiagram__isDefault,
+			UMLXTables.Properties._RelDiagram__isInPlace,
 			UMLXTables.Properties._RelDiagram__isTop,
 			UMLXTables.Properties._UMLXNamedElement__name,
 			UMLXTables.Properties._RelDiagram__ownedRelDomainNodes,

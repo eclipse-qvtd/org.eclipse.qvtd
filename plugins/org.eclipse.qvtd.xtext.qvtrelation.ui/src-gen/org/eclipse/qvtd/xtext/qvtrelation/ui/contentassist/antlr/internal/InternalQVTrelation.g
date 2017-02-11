@@ -3826,6 +3826,28 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__RelationCS__Alternatives_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1_0()); }
+(rule__RelationCS__IsDefaultAssignment_1_0)
+{ after(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1_0()); }
+)
+
+    |(
+{ before(grammarAccess.getRelationCSAccess().getIsInPlaceAssignment_1_1()); }
+(rule__RelationCS__IsInPlaceAssignment_1_1)
+{ after(grammarAccess.getRelationCSAccess().getIsInPlaceAssignment_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__RelationCS__Alternatives_7
     @init {
 		int stackSize = keepStackSize();
@@ -4012,115 +4034,123 @@ rule__QVTrelationUnrestrictedName__Alternatives
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_8()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getInplaceKeyword_8()); }
+
+	'inplace'
+
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getInplaceKeyword_8()); }
+)
+
+    |(
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_9()); }
 
 	'library'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_8()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_9()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_9()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_10()); }
 
 	'key'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_9()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_10()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_10()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_11()); }
 
 	'opposite'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_10()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_11()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_11()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_12()); }
 
 	'overrides'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_11()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_12()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_12()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_13()); }
 
 	'package'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_12()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_13()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_13()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_14()); }
 
 	'primitive'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_13()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_14()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_14()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_15()); }
 
 	'query'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_14()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_15()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_15()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_16()); }
 
 	'relation'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_15()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_16()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_16()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_17()); }
 
 	'replace'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_16()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_17()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_17()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_18()); }
 
 	'top'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_17()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_18()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_18()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_19()); }
 
 	'transformation'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_18()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_19()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_19()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_20()); }
 
 	'uses'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_19()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_20()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_20()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_21()); }
 
 	'when'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_20()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_21()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_21()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_22()); }
 
 	'where'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_21()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_22()); }
 )
 
 ;
@@ -10180,9 +10210,9 @@ rule__RelationCS__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1()); }
-(rule__RelationCS__IsDefaultAssignment_1)?
-{ after(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1()); }
+{ before(grammarAccess.getRelationCSAccess().getAlternatives_1()); }
+(rule__RelationCS__Alternatives_1)?
+{ after(grammarAccess.getRelationCSAccess().getAlternatives_1()); }
 )
 
 ;
@@ -27085,22 +27115,45 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RelationCS__IsDefaultAssignment_1
+rule__RelationCS__IsDefaultAssignment_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0_0()); }
 (
-{ before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0_0()); }
 
 	'default'
 
-{ after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0_0()); }
 )
 
-{ after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RelationCS__IsInPlaceAssignment_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRelationCSAccess().getIsInPlaceInplaceKeyword_1_1_0()); }
+(
+{ before(grammarAccess.getRelationCSAccess().getIsInPlaceInplaceKeyword_1_1_0()); }
+
+	'inplace'
+
+{ after(grammarAccess.getRelationCSAccess().getIsInPlaceInplaceKeyword_1_1_0()); }
+)
+
+{ after(grammarAccess.getRelationCSAccess().getIsInPlaceInplaceKeyword_1_1_0()); }
 )
 
 ;

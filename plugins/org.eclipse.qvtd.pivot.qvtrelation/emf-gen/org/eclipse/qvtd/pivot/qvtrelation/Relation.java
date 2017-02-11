@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsInPlace <em>Is In Place</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel <em>Is Top Level</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getOperationalImpl <em>Operational Impl</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getVariable <em>Variable</em>}</li>
@@ -38,6 +39,34 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * @generated
  */
 public interface Relation extends Rule {
+	/**
+	 * Returns the value of the '<em><b>Is In Place</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is In Place</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is In Place</em>' attribute.
+	 * @see #setIsInPlace(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_IsInPlace()
+	 * @model default="false" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Relation!isInPlace'"
+	 * @generated
+	 */
+	boolean isIsInPlace();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsInPlace <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is In Place</em>' attribute.
+	 * @see #isIsInPlace()
+	 * @generated
+	 */
+	void setIsInPlace(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Is Top Level</b></em>' attribute.
 	 * <!-- begin-user-doc -->

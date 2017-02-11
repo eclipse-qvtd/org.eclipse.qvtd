@@ -448,13 +448,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION__OVERRIDDEN = QVTbasePackage.RULE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Is In Place</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION__IS_IN_PLACE = QVTbasePackage.RULE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Is Top Level</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__IS_TOP_LEVEL = QVTbasePackage.RULE_FEATURE_COUNT + 0;
+	int RELATION__IS_TOP_LEVEL = QVTbasePackage.RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operational Impl</b></em>' containment reference list.
@@ -463,7 +472,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__OPERATIONAL_IMPL = QVTbasePackage.RULE_FEATURE_COUNT + 1;
+	int RELATION__OPERATIONAL_IMPL = QVTbasePackage.RULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' containment reference list.
@@ -472,7 +481,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__VARIABLE = QVTbasePackage.RULE_FEATURE_COUNT + 2;
+	int RELATION__VARIABLE = QVTbasePackage.RULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>When</b></em>' containment reference.
@@ -481,7 +490,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__WHEN = QVTbasePackage.RULE_FEATURE_COUNT + 3;
+	int RELATION__WHEN = QVTbasePackage.RULE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Where</b></em>' containment reference.
@@ -490,7 +499,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__WHERE = QVTbasePackage.RULE_FEATURE_COUNT + 4;
+	int RELATION__WHERE = QVTbasePackage.RULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Relation</em>' class.
@@ -499,7 +508,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 5;
+	int RELATION_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2221,6 +2230,17 @@ public interface QVTrelationPackage extends EPackage {
 	EClass getRelation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsInPlace <em>Is In Place</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is In Place</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsInPlace()
+	 * @see #getRelation()
+	 * @generated
+	 */
+	EAttribute getRelation_IsInPlace();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel <em>Is Top Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2677,6 +2697,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RELATION = eINSTANCE.getRelation();
+
+		/**
+		 * The meta object literal for the '<em><b>Is In Place</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RELATION__IS_IN_PLACE = eINSTANCE.getRelation_IsInPlace();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Top Level</b></em>' attribute feature.

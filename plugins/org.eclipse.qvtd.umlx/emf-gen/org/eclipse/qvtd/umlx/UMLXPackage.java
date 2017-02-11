@@ -285,13 +285,31 @@ public interface UMLXPackage extends EPackage {
 	int REL_DIAGRAM__NAME = UMLX_NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DIAGRAM__IS_DEFAULT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Is In Place</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DIAGRAM__IS_IN_PLACE = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Is Top</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__IS_TOP = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int REL_DIAGRAM__IS_TOP = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rel Domain Nodes</b></em>' containment reference list.
@@ -300,7 +318,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__OWNED_REL_DOMAIN_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int REL_DIAGRAM__OWNED_REL_DOMAIN_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rel Invocation Nodes</b></em>' containment reference list.
@@ -309,7 +327,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__OWNED_REL_INVOCATION_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REL_DIAGRAM__OWNED_REL_INVOCATION_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owning Tx Diagram</b></em>' container reference.
@@ -318,7 +336,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__OWNING_TX_DIAGRAM = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int REL_DIAGRAM__OWNING_TX_DIAGRAM = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Rel Diagram</em>' class.
@@ -327,7 +345,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM_FEATURE_COUNT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int REL_DIAGRAM_FEATURE_COUNT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelNodeImpl <em>Rel Node</em>}' class.
@@ -1407,6 +1425,28 @@ public interface UMLXPackage extends EPackage {
 	EClass getRelDiagram();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsDefault <em>Is Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Default</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#isIsDefault()
+	 * @see #getRelDiagram()
+	 * @generated
+	 */
+	EAttribute getRelDiagram_IsDefault();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsInPlace <em>Is In Place</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is In Place</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#isIsInPlace()
+	 * @see #getRelDiagram()
+	 * @generated
+	 */
+	EAttribute getRelDiagram_IsInPlace();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsTop <em>Is Top</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2299,6 +2339,22 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REL_DIAGRAM = eINSTANCE.getRelDiagram();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_DIAGRAM__IS_DEFAULT = eINSTANCE.getRelDiagram_IsDefault();
+
+		/**
+		 * The meta object literal for the '<em><b>Is In Place</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_DIAGRAM__IS_IN_PLACE = eINSTANCE.getRelDiagram_IsInPlace();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Top</b></em>' attribute feature.

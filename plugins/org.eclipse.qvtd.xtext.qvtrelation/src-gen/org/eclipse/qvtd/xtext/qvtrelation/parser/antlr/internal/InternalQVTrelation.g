@@ -1748,11 +1748,11 @@ ruleRelationCS returns [EObject current=null]
 	    }
 
 )
-)?(
+)?((
 (
 		lv_isDefault_1_0=	'default'
     {
-        newLeafNode(lv_isDefault_1_0, grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0());
+        newLeafNode(lv_isDefault_1_0, grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0_0());
     }
 
 	    {
@@ -1763,31 +1763,47 @@ ruleRelationCS returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_2='relation'
+)
+    |(
+(
+		lv_isInPlace_2_0=	'inplace'
     {
-    	newLeafNode(otherlv_2, grammarAccess.getRelationCSAccess().getRelationKeyword_2());
+        newLeafNode(lv_isInPlace_2_0, grammarAccess.getRelationCSAccess().getIsInPlaceInplaceKeyword_1_1_0());
+    }
+
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRelationCSRule());
+	        }
+       		setWithLastConsumed($current, "isInPlace", true, "inplace");
+	    }
+
+)
+))?	otherlv_3='relation'
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getRelationCSAccess().getRelationKeyword_2());
     }
 (
 (
 		{
 	        newCompositeNode(grammarAccess.getRelationCSAccess().getNameUnrestrictedNameParserRuleCall_3_0());
 	    }
-		lv_name_3_0=ruleUnrestrictedName		{
+		lv_name_4_0=ruleUnrestrictedName		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRelationCSRule());
 	        }
        		set(
        			$current,
        			"name",
-        		lv_name_3_0,
+        		lv_name_4_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_4='overrides'
+)(	otherlv_5='overrides'
     {
-    	newLeafNode(otherlv_4, grammarAccess.getRelationCSAccess().getOverridesKeyword_4_0());
+    	newLeafNode(otherlv_5, grammarAccess.getRelationCSAccess().getOverridesKeyword_4_0());
     }
 (
 (
@@ -1807,23 +1823,23 @@ ruleRelationCS returns [EObject current=null]
 	    }
 
 )
-))?	otherlv_6='{'
+))?	otherlv_7='{'
     {
-    	newLeafNode(otherlv_6, grammarAccess.getRelationCSAccess().getLeftCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_7, grammarAccess.getRelationCSAccess().getLeftCurlyBracketKeyword_5());
     }
 (
 (
 		{
 	        newCompositeNode(grammarAccess.getRelationCSAccess().getOwnedVarDeclarationsVarDeclarationCSParserRuleCall_6_0());
 	    }
-		lv_ownedVarDeclarations_7_0=ruleVarDeclarationCS		{
+		lv_ownedVarDeclarations_8_0=ruleVarDeclarationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRelationCSRule());
 	        }
        		add(
        			$current,
        			"ownedVarDeclarations",
-        		lv_ownedVarDeclarations_7_0,
+        		lv_ownedVarDeclarations_8_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.VarDeclarationCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1834,14 +1850,14 @@ ruleRelationCS returns [EObject current=null]
 		{
 	        newCompositeNode(grammarAccess.getRelationCSAccess().getOwnedDomainsDomainCSParserRuleCall_7_0_0());
 	    }
-		lv_ownedDomains_8_0=ruleDomainCS		{
+		lv_ownedDomains_9_0=ruleDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRelationCSRule());
 	        }
        		add(
        			$current,
        			"ownedDomains",
-        		lv_ownedDomains_8_0,
+        		lv_ownedDomains_9_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.DomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1853,14 +1869,14 @@ ruleRelationCS returns [EObject current=null]
 		{
 	        newCompositeNode(grammarAccess.getRelationCSAccess().getOwnedDomainsPrimitiveTypeDomainCSParserRuleCall_7_1_0());
 	    }
-		lv_ownedDomains_9_0=rulePrimitiveTypeDomainCS		{
+		lv_ownedDomains_10_0=rulePrimitiveTypeDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRelationCSRule());
 	        }
        		add(
        			$current,
        			"ownedDomains",
-        		lv_ownedDomains_9_0,
+        		lv_ownedDomains_10_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.PrimitiveTypeDomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1871,14 +1887,14 @@ ruleRelationCS returns [EObject current=null]
 		{
 	        newCompositeNode(grammarAccess.getRelationCSAccess().getOwnedWhenWhenCSParserRuleCall_8_0());
 	    }
-		lv_ownedWhen_10_0=ruleWhenCS		{
+		lv_ownedWhen_11_0=ruleWhenCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRelationCSRule());
 	        }
        		set(
        			$current,
        			"ownedWhen",
-        		lv_ownedWhen_10_0,
+        		lv_ownedWhen_11_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.WhenCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1889,22 +1905,22 @@ ruleRelationCS returns [EObject current=null]
 		{
 	        newCompositeNode(grammarAccess.getRelationCSAccess().getOwnedWhereWhereCSParserRuleCall_9_0());
 	    }
-		lv_ownedWhere_11_0=ruleWhereCS		{
+		lv_ownedWhere_12_0=ruleWhereCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRelationCSRule());
 	        }
        		set(
        			$current,
        			"ownedWhere",
-        		lv_ownedWhere_11_0,
+        		lv_ownedWhere_12_0,
         		"org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.WhereCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?	otherlv_12='}'
+)?	otherlv_13='}'
     {
-    	newLeafNode(otherlv_12, grammarAccess.getRelationCSAccess().getRightCurlyBracketKeyword_10());
+    	newLeafNode(otherlv_13, grammarAccess.getRelationCSAccess().getRightCurlyBracketKeyword_10());
     }
 )
 ;
@@ -2891,101 +2907,108 @@ ruleQVTrelationUnrestrictedName returns [AntlrDatatypeRuleToken current=new Antl
     }
 
     |
+	kw='inplace'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getInplaceKeyword_8());
+    }
+
+    |
 	kw='library'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_8());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getLibraryKeyword_9());
     }
 
     |
 	kw='key'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_9());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getKeyKeyword_10());
     }
 
     |
 	kw='opposite'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_10());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOppositeKeyword_11());
     }
 
     |
 	kw='overrides'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_11());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getOverridesKeyword_12());
     }
 
     |
 	kw='package'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_12());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPackageKeyword_13());
     }
 
     |
 	kw='primitive'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_13());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getPrimitiveKeyword_14());
     }
 
     |
 	kw='query'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_14());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getQueryKeyword_15());
     }
 
     |
 	kw='relation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_15());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getRelationKeyword_16());
     }
 
     |
 	kw='replace'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_16());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getReplaceKeyword_17());
     }
 
     |
 	kw='top'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_17());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTopKeyword_18());
     }
 
     |
 	kw='transformation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_18());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getTransformationKeyword_19());
     }
 
     |
 	kw='uses'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_19());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getUsesKeyword_20());
     }
 
     |
 	kw='when'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_20());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhenKeyword_21());
     }
 
     |
 	kw='where'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_21());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getWhereKeyword_22());
     }
 )
     ;

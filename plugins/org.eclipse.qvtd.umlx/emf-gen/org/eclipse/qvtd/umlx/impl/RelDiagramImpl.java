@@ -57,6 +57,8 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#isIsInPlace <em>Is In Place</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedRelDomainNodes <em>Owned Rel Domain Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedRelInvocationNodes <em>Owned Rel Invocation Nodes</em>}</li>
@@ -66,6 +68,42 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * @generated
  */
 public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
+	/**
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isIsInPlace() <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_IN_PLACE_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsInPlace() <em>Is In Place</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isInPlace = IS_IN_PLACE_EDEFAULT;
 	/**
 	 * The default value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -120,6 +158,52 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	protected EClass eStaticClass() {
 		return UMLXPackage.Literals.REL_DIAGRAM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsDefault() {
+		return isDefault;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
+		isDefault = newIsDefault;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DIAGRAM__IS_DEFAULT, oldIsDefault, isDefault));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsInPlace() {
+		return isInPlace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsInPlace(boolean newIsInPlace) {
+		boolean oldIsInPlace = isInPlace;
+		isInPlace = newIsInPlace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DIAGRAM__IS_IN_PLACE, oldIsInPlace, isInPlace));
 	}
 
 	/**
@@ -478,6 +562,10 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_DEFAULT:
+				return isIsDefault();
+			case UMLXPackage.REL_DIAGRAM__IS_IN_PLACE:
+				return isIsInPlace();
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				return isIsTop();
 			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
@@ -499,6 +587,12 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_DEFAULT:
+				setIsDefault((Boolean)newValue);
+				return;
+			case UMLXPackage.REL_DIAGRAM__IS_IN_PLACE:
+				setIsInPlace((Boolean)newValue);
+				return;
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				setIsTop((Boolean)newValue);
 				return;
@@ -525,6 +619,12 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_DEFAULT:
+				setIsDefault(IS_DEFAULT_EDEFAULT);
+				return;
+			case UMLXPackage.REL_DIAGRAM__IS_IN_PLACE:
+				setIsInPlace(IS_IN_PLACE_EDEFAULT);
+				return;
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
@@ -549,6 +649,10 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_DEFAULT:
+				return isDefault != IS_DEFAULT_EDEFAULT;
+			case UMLXPackage.REL_DIAGRAM__IS_IN_PLACE:
+				return isInPlace != IS_IN_PLACE_EDEFAULT;
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				return isTop != IS_TOP_EDEFAULT;
 			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:

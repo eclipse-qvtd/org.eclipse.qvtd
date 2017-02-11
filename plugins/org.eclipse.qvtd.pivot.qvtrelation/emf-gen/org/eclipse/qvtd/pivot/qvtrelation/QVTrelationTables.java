@@ -375,12 +375,13 @@ public class QVTrelationTables
 		public static final @NonNull ExecutorProperty _Key__part = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__PART, Types._Key, 2);
 		public static final @NonNull ExecutorProperty _Key__transformation = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__TRANSFORMATION, Types._Key, 3);
 
-		public static final @NonNull ExecutorProperty _Relation__isTopLevel = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__IS_TOP_LEVEL, Types._Relation, 0);
-		public static final @NonNull ExecutorProperty _Relation__operationalImpl = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__OPERATIONAL_IMPL, Types._Relation, 1);
-		public static final @NonNull ExecutorProperty _Relation__variable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__VARIABLE, Types._Relation, 2);
-		public static final @NonNull ExecutorProperty _Relation__when = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__WHEN, Types._Relation, 3);
-		public static final @NonNull ExecutorProperty _Relation__where = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__WHERE, Types._Relation, 4);
-		public static final @NonNull ExecutorProperty _Relation__relationCallExp__referredRelation = new ExecutorPropertyWithImplementation("relationCallExp", Types._Relation, 5, new EcoreLibraryOppositeProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION));
+		public static final @NonNull ExecutorProperty _Relation__isInPlace = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__IS_IN_PLACE, Types._Relation, 0);
+		public static final @NonNull ExecutorProperty _Relation__isTopLevel = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__IS_TOP_LEVEL, Types._Relation, 1);
+		public static final @NonNull ExecutorProperty _Relation__operationalImpl = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__OPERATIONAL_IMPL, Types._Relation, 2);
+		public static final @NonNull ExecutorProperty _Relation__variable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__VARIABLE, Types._Relation, 3);
+		public static final @NonNull ExecutorProperty _Relation__when = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__WHEN, Types._Relation, 4);
+		public static final @NonNull ExecutorProperty _Relation__where = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__WHERE, Types._Relation, 5);
+		public static final @NonNull ExecutorProperty _Relation__relationCallExp__referredRelation = new ExecutorPropertyWithImplementation("relationCallExp", Types._Relation, 6, new EcoreLibraryOppositeProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION));
 
 		public static final @NonNull ExecutorProperty _RelationCallExp__argument = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT, Types._RelationCallExp, 0);
 		public static final @NonNull ExecutorProperty _RelationCallExp__referredRelation = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION, Types._RelationCallExp, 1);
@@ -1151,6 +1152,7 @@ public class QVTrelationTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Relation = {
+			QVTrelationTables.Properties._Relation__isInPlace,
 			QVTrelationTables.Properties._Relation__isTopLevel,
 			QVTrelationTables.Properties._Relation__operationalImpl,
 			QVTrelationTables.Properties._Relation__variable,
