@@ -117,6 +117,8 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 		isInited = true;
 
 		// Initialize simple dependencies
+		PivotPackage.eINSTANCE.eClass();
+		QVTbasePackage.eINSTANCE.eClass();
 		QVTcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
