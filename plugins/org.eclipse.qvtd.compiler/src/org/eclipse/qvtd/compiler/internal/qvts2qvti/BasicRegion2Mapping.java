@@ -132,7 +132,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private void analyzeExpressions(@NonNull Set<Node> multiAccessedNodes, @NonNull Set<Node> conditionalNodes) {
 			Set<@NonNull Node> unconditionalNodes = new HashSet<>();
 			for (@NonNull Edge edge : region.getRealizedEdges()) {
-				analyzeIncomingPath(edge.getTarget(), unconditionalNodes, conditionalNodes, false);
+				analyzeIncomingPath(edge.getEdgeTarget(), unconditionalNodes, conditionalNodes, false);
 			}
 			conditionalNodes.removeAll(unconditionalNodes);
 			//			if (conditionalNodes.size() > 0) {
@@ -166,10 +166,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				for (@NonNull Edge edge : node.getIncomingEdges()) {
 					if (edge.isComputation()) {
 						boolean isIfThenOrElse = isIf && ("then".equals(edge.getName()) || "else".equals(edge.getName()));
-						analyzeIncomingPath(edge.getSource(), unconditionalNodes, conditionalNodes, isConditional || isIfThenOrElse);
+						analyzeIncomingPath(edge.getEdgeSource(), unconditionalNodes, conditionalNodes, isConditional || isIfThenOrElse);
 					}
 					else if (edge.isNavigation()) {
-						analyzeIncomingPath(edge.getSource(), unconditionalNodes, conditionalNodes, isConditional);
+						analyzeIncomingPath(edge.getEdgeSource(), unconditionalNodes, conditionalNodes, isConditional);
 					}
 				}
 				return;
@@ -323,7 +323,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 			}
 			for (@NonNull Edge edge : node.getArgumentEdges()) {
-				Node expNode = edge.getSource();
+				Node expNode = edge.getEdgeSource();
 				//				TypedElement oldTypedElement = expNode.getTypedElements().iterator().next();
 				//				assert oldTypedElement != null;
 				OCLExpression clonedElement = create(expNode);
@@ -341,20 +341,20 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				if (edge.isNavigation()) {
 					EdgeRole edgeRole = edge.getEdgeRole();
 					if (edgeRole.isLoaded()) {
-						OCLExpression source = getExpression(edge.getSource());
+						OCLExpression source = getExpression(edge.getEdgeSource());
 						if (source != null) {
 							return helper.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
 						}
 					}
 					else if (edgeRole.isPredicated()) {
-						OCLExpression source = create(edge.getSource());
+						OCLExpression source = create(edge.getEdgeSource());
 						return helper.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
 					}
 				}
 			}
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isExpression()) {
-					OCLExpression source = create(edge.getSource());
+					OCLExpression source = create(edge.getEdgeSource());
 					return source;
 				}
 			}
@@ -791,8 +791,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createClassSetStatements(@NonNull Iterable<@NonNull List<@NonNull NavigableEdge>> classAssignments) {
 		for (@NonNull List<@NonNull NavigableEdge> edges : classAssignments) {
 			for (@NonNull NavigableEdge edge : edges) {
-				Node sourceNode = edge.getSource();
-				Node targetNode = edge.getTarget();
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
 				VariableDeclaration slotVariable = getVariable(sourceNode);
 				Property property = edge.getProperty();
 				OCLExpression targetVariableExp = createVariableExp(targetNode);
@@ -823,8 +823,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (edge.isPredicate()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				ExpressionCreator inlineExpressionCreator = expressionCreator.getInlineExpressionCreator();
-				Node sourceNode = edge.getSource();
-				Node targetNode = edge.getTarget();
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
 				OCLExpression conditionExpression = inlineExpressionCreator.getExpression(sourceNode);
 				assert conditionExpression != null;
 				if (!targetNode.isTrue()) {
@@ -1001,8 +1001,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//	Convert the ordered forest edges to unrealized variables and initializers.
 		//
 		for (@NonNull NavigableEdge traversedEdge : navigationForest.getForestNavigations()) {
-			Node sourceNode = traversedEdge.getSource();
-			Node targetNode = traversedEdge.getTarget();
+			Node sourceNode = traversedEdge.getEdgeSource();
+			Node targetNode = traversedEdge.getEdgeTarget();
 			//			Boolean isJustRealizedIncludes = null;
 			//			for (@NonNull Edge outgoingEdge : targetNode.getOutgoingEdges()) {
 			//				if (!RegionUtil.isRealizedIncludes(outgoingEdge)) {
@@ -1041,9 +1041,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//	Convert the ordered non-forest edges to predicates.
 		//
 		for (@NonNull NavigableEdge untraversedEdge : navigationForest.getGraphPredicates()) {
-			Node sourceNode = untraversedEdge.getSource();
+			Node sourceNode = untraversedEdge.getEdgeSource();
 			if (!sourceNode.isDependency()) {
-				Node targetNode = untraversedEdge.getTarget();
+				Node targetNode = untraversedEdge.getEdgeTarget();
 				Property property = untraversedEdge.getProperty();
 				OCLExpression sourceExp = createVariableExp(sourceNode);
 				OCLExpression targetExp = createVariableExp(targetNode);
@@ -1196,8 +1196,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createPropertyAssignments() {
 		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
 		for (@NonNull NavigableEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
-			Node sourceNode = edge.getSource();
-			Node targetNode = edge.getTarget();
+			Node sourceNode = edge.getEdgeSource();
+			Node targetNode = edge.getEdgeTarget();
 			if (targetNode.isDataType()) {
 				VariableDeclaration asVariable = getVariable(sourceNode);
 				Property property = edge.getProperty();
@@ -1255,8 +1255,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Collections.sort(realizedIncludesEdges, ToStringComparator.INSTANCE);
 			}
 			for (@NonNull Edge edge : realizedIncludesEdges) {
-				Node sourceNode = edge.getSource();
-				Node targetNode = edge.getTarget();
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
 				/*				if (targetNode.isDataType()) {
 					OCLExpression slotVariableExp = createVariableExp(sourceNode);
 					Property property = edge.getProperty();
@@ -1283,7 +1283,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				OCLExpression constructor = null;
 				for (Edge edge : newNode.getIncomingEdges()) {
 					if (edge.isExpression()) {
-						Node sourceNode = edge.getSource();
+						Node sourceNode = edge.getEdgeSource();
 						if (sourceNode.isOperation()) {
 							constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);
 						}
@@ -1450,7 +1450,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}*/
 
 	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
-		Node sourceNode = edge.getSource();
+		Node sourceNode = edge.getEdgeSource();
 		Property asProperty = edge.getProperty();
 		TypedModel typedModel = sourceNode.getClassDatumAnalysis().getTypedModel();
 		Iterable<@NonNull NavigableEdge> enforcedEdges = region.getEnforcedEdges(typedModel);
@@ -1483,12 +1483,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert forwardEdges != null;
 			for (int iForward = forwardEdges.size()-1; iForward >= 0; iForward--) {
 				NavigableEdge forwardEdge = forwardEdges.get(iForward);
-				Node targetNode = forwardEdge.getTarget();
+				Node targetNode = forwardEdge.getEdgeTarget();
 				List<@NonNull NavigableEdge> reverseEdges = classAssignments.get(targetNode);
 				if (reverseEdges != null) {
 					for (int iReverse = reverseEdges.size()-1; iReverse >= 0; iReverse--) {
 						NavigableEdge reverseEdge = reverseEdges.get(iReverse);
-						if (sourceNode == reverseEdge.getTarget()) {
+						if (sourceNode == reverseEdge.getEdgeTarget()) {
 							Property forwardProperty = forwardEdge.getProperty();
 							Property reverseProperty = reverseEdge.getProperty();
 							if (forwardProperty.getOpposite() == reverseProperty) {

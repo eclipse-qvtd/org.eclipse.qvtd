@@ -43,7 +43,7 @@ class RealizedPartition extends AbstractPartition
 			gatherSourceNavigations(node, node.getNodeRole());
 			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getTarget();
+					Node targetNode = navigationEdge.getEdgeTarget();
 					NodeRole targetNodeRole = targetNode.getNodeRole();
 					if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
 						gatherSourceNavigations(targetNode, targetNodeRole);
@@ -72,8 +72,8 @@ class RealizedPartition extends AbstractPartition
 	protected void addLoadedNavigationEdgeSourceAndTargetNodes() {
 		for (@NonNull NavigableEdge edge : partitioner.getRegion().getNavigationEdges()) {
 			if (edge.isLoaded()) {
-				Node sourceNode = edge.getSource();
-				Node targetNode = edge.getTarget();
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
 				if (!hasNode(sourceNode)) {
 					addNode(sourceNode, sourceNode.getNodeRole());
 				}

@@ -140,7 +140,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
 		for (@NonNull NavigableEdge castEdge : sourceNode.getCastEdges()) {
-			Node targetNode = castEdge.getTarget();
+			Node targetNode = castEdge.getEdgeTarget();
 			predicatedClass = targetNode.getCompleteClass();
 			if (predicatedClass.conformsTo(requiredClass)) {
 				targetNode.addTypedElement(operationCallExp);
@@ -152,7 +152,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Property castProperty = scheduler.getCastProperty(castType);
 		Edge castEdge = sourceNode.getPredicateEdge(castProperty);
 		if (castEdge != null) {
-			Node castNode = castEdge.getTarget();
+			Node castNode = castEdge.getEdgeTarget();
 			castNode.addTypedElement(operationCallExp);
 			return castNode;
 		}
@@ -215,7 +215,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Property oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
 		Edge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
 		if (oclContainerEdge != null) {
-			return oclContainerEdge.getTarget();
+			return oclContainerEdge.getEdgeTarget();
 		}
 		String name = operationCallExp.getReferredOperation().getName();
 		assert name != null;
@@ -387,14 +387,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
 		if (sourceAndArgumentNodes.length > 0) {
 			for (@NonNull Edge searchEdge : sourceAndArgumentNodes[0].getComputationEdges()) {
-				Node reusedNode = searchEdge.getTarget();
+				Node reusedNode = searchEdge.getEdgeTarget();
 				if (reusedNode.isOperation() && name.equals(reusedNode.getName())) {
 					Iterable<@NonNull Edge> reusedEdges = reusedNode.getArgumentEdges();
 					int iSize = Iterables.size(reusedEdges);
 					if (iSize == sourceAndArgumentNodes.length) {
 						int i = 0;
 						for (@NonNull Edge reusedEdge : reusedEdges) {
-							Node reusedArgumentNode = reusedEdge.getSource();
+							Node reusedArgumentNode = reusedEdge.getEdgeSource();
 							if (reusedArgumentNode != sourceAndArgumentNodes[i]) {
 								break;
 							}
@@ -476,8 +476,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 		else {
 			//			if (!navigationEdge.isRealized() || targetNode.isRealized()) {
-			if (targetNode != navigationEdge.getTarget()) {
-				createExpressionEdge(targetNode, EQUALS_NAME, navigationEdge.getTarget());
+			if (targetNode != navigationEdge.getEdgeTarget()) {
+				createExpressionEdge(targetNode, EQUALS_NAME, navigationEdge.getEdgeTarget());
 			}
 		}
 		return navigationEdge;
@@ -487,7 +487,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		assert targetNode.isClass();
 		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		if (navigationEdge != null) {
-			Node target = navigationEdge.getTarget();
+			Node target = navigationEdge.getEdgeTarget();
 			if (target != targetNode) {
 				createExpressionEdge(targetNode, EQUALS_NAME, target);
 			}
@@ -528,7 +528,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		else {
 			NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 			assert navigationEdge != null;
-			Node valueNode = navigationEdge.getTarget();
+			Node valueNode = navigationEdge.getEdgeTarget();
 			assert valueNode.isRealized();
 			Type type = source2targetProperty.getType();
 			if (type instanceof DataType) {
@@ -549,7 +549,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node referenceNode) {
 		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigationEdges()) {
 			if (!referenceEdge.isSecondary()) {
-				Node referenceTargetNode = referenceEdge.getTarget();
+				Node referenceTargetNode = referenceEdge.getEdgeTarget();
 				String name = referenceTargetNode.getName();
 				ClassDatumAnalysis classDatumAnalysis = referenceTargetNode.getClassDatumAnalysis();
 				Node instantiatedTargetNode = createDependencyNode(name, classDatumAnalysis);
@@ -717,7 +717,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 		Node targetNode = analyze(value);
 		NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
-		Node valueNode = navigationEdge.getTarget();
+		Node valueNode = navigationEdge.getEdgeTarget();
 		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
 		Type propertyType = PivotUtil.getType(property);
 		if (asNavigationAssignment.isIsPartial()) {
@@ -745,7 +745,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			if (!referredProperty.isIsMany()) {
 				NavigableEdge navigationEdge = sourceNode.getNavigationEdge(referredProperty);
 				if (navigationEdge != null) {
-					return navigationEdge.getTarget();
+					return navigationEdge.getEdgeTarget();
 				}
 			}
 			Type type = referredProperty.getType();

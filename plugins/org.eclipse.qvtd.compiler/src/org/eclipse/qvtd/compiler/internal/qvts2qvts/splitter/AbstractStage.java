@@ -107,7 +107,7 @@ abstract class AbstractStage implements Stage
 					deadNodes.add(node);
 					for (@NonNull Edge edge : node.getIncomingEdges()) {
 						if (!edge.isRealized()) {
-							Node sourceNode = edge.getSource();
+							Node sourceNode = edge.getEdgeSource();
 							if (!sourceNode.isRealized()) {
 								retryNodes.add(sourceNode);
 							}

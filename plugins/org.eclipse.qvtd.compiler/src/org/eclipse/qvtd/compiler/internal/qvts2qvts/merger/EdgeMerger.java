@@ -39,8 +39,8 @@ class EdgeMerger
 	public EdgeMerger(@NonNull RegionMerger regionMerger, @NonNull Edge oldEdge) {
 		assert !oldEdge.isSecondary();
 		this.regionMerger = regionMerger;
-		mergedSourceNodeMerger = regionMerger.getNodeMerger(oldEdge.getSource());
-		mergedTargetNodeMerger = regionMerger.getNodeMerger(oldEdge.getTarget());
+		mergedSourceNodeMerger = regionMerger.getNodeMerger(oldEdge.getEdgeSource());
+		mergedTargetNodeMerger = regionMerger.getNodeMerger(oldEdge.getEdgeTarget());
 		oldEdges.add(oldEdge);
 		edgeRole = oldEdge.getEdgeRole();
 		regionMerger.mapOldEdge(oldEdge, this);
@@ -86,11 +86,11 @@ class EdgeMerger
 	}
 
 	public @NonNull Node getOldSource() {
-		return oldEdges.get(0).getSource();
+		return oldEdges.get(0).getEdgeSource();
 	}
 
 	public @NonNull Node getOldTarget() {
-		return oldEdges.get(0).getTarget();
+		return oldEdges.get(0).getEdgeTarget();
 	}
 
 	public @NonNull NodeMerger getSource() {

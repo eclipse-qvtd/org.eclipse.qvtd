@@ -90,8 +90,8 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void addSecondaryEdge(@NonNull Edge secondaryEdge) {
-		NodeMerger sourceNodeMerger = getNodeMerger(secondaryEdge.getSource());
-		NodeMerger targetNodeMerger = getNodeMerger(secondaryEdge.getTarget());
+		NodeMerger sourceNodeMerger = getNodeMerger(secondaryEdge.getEdgeSource());
+		NodeMerger targetNodeMerger = getNodeMerger(secondaryEdge.getEdgeTarget());
 		if (sourceNodeMerger != targetNodeMerger) {
 			boolean isMerged = false;
 			for (@NonNull EdgeMerger edgeMerger : sourceNodeMerger.getOutgoingEdgeMergers(targetNodeMerger)) {

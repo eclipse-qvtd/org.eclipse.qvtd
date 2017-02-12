@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
@@ -54,6 +55,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass classDatumEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass connectionRoleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -242,6 +250,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getClassDatum_Super() {
 		return (EReference)classDatumEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConnectionRole() {
+		return connectionRoleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getConnectionRole_Node() {
+		return (EAttribute)connectionRoleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -503,6 +531,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(classDatumEClass, CLASS_DATUM__PROPERTY_DATUMS);
 		createEReference(classDatumEClass, CLASS_DATUM__SUPER);
 
+		connectionRoleEClass = createEClass(CONNECTION_ROLE);
+		createEAttribute(connectionRoleEClass, CONNECTION_ROLE__NODE);
+
 		edgeRoleEClass = createEClass(EDGE_ROLE);
 
 		mappingActionEClass = createEClass(MAPPING_ACTION);
@@ -568,6 +599,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Add supertypes to classes
 		abstractDatumEClass.getESuperTypes().add(thePivotPackage.getElement());
 		classDatumEClass.getESuperTypes().add(this.getAbstractDatum());
+		connectionRoleEClass.getESuperTypes().add(thePivotPackage.getElement());
 		edgeRoleEClass.getESuperTypes().add(this.getRole());
 		mappingActionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		nodeRoleEClass.getESuperTypes().add(this.getRole());
@@ -584,6 +616,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getClassDatum_CompleteClass(), thePivotPackage.getCompleteClass(), null, "completeClass", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_PropertyDatums(), this.getPropertyDatum(), this.getPropertyDatum_ClassDatum(), "propertyDatums", null, 0, -1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_Super(), this.getClassDatum(), null, "super", null, 0, -1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(connectionRoleEClass, ConnectionRole.class, "ConnectionRole", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConnectionRole_Node(), ecorePackage.getEBoolean(), "node", "false", 1, 1, ConnectionRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(edgeRoleEClass, EdgeRole.class, "EdgeRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

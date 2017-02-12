@@ -63,8 +63,8 @@ public abstract class EdgeImpl implements Edge
 	}
 
 	protected void appendEdgeWithNode(@NonNull GraphStringBuilder s) {
-		final Node sourceNode = getSource();
-		final Node targetNode = getTarget();
+		final Node sourceNode = getEdgeSource();
+		final Node targetNode = getEdgeTarget();
 		s.appendEdge(sourceNode, this, targetNode);
 		/*		GraphEdge graphEdge1 = new GraphEdge()
 		{
@@ -211,7 +211,7 @@ public abstract class EdgeImpl implements Edge
 	}
 
 	@Override
-	public @NonNull Node getSource() {
+	public @NonNull Node getEdgeSource() {
 		return ClassUtil.nonNullState(sourceNode);
 	}
 
@@ -220,7 +220,7 @@ public abstract class EdgeImpl implements Edge
 	}
 
 	@Override
-	public @NonNull Node getTarget() {
+	public @NonNull Node getEdgeTarget() {
 		return ClassUtil.nonNullState(targetNode);
 	}
 
@@ -378,7 +378,7 @@ public abstract class EdgeImpl implements Edge
 
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.appendEdge(getSource(), this, getTarget());
+		s.appendEdge(getEdgeSource(), this, getEdgeTarget());
 	}
 
 	@Override

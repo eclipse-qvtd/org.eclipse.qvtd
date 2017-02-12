@@ -67,7 +67,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 	protected void addEdge(@NonNull NavigableEdge edge) {
 		if (!edge.isSecondary()) {
 			forwardEdges.add(edge);
-			if ((edge.getSource().isClass()) && (edge.getOppositeEdge() == null)) {
+			if ((edge.getEdgeSource().isClass()) && (edge.getOppositeEdge() == null)) {
 				manyToOneEdges.add(edge);
 			}
 		}
@@ -90,7 +90,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 				//				traversedNode2depth.put(sourceNode, depth);
 				for (@NonNull NavigableEdge forwardEdge : sourceNode.getNavigationEdges()) {
 					if (forwardEdges.contains(forwardEdge)) {
-						Node targetNode = RegionUtil.getCastTarget(forwardEdge.getTarget());
+						Node targetNode = RegionUtil.getCastTarget(forwardEdge.getEdgeTarget());
 						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
 							traversedNode2incomingEdge.put(targetNode, forwardEdge);
 							moreMoreNodes.add(targetNode);
@@ -106,9 +106,9 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 				for (@NonNull NavigableEdge forwardEdge : forwardEdges) {		// FIXME maintain reducing list of possibles
 					@Nullable NavigableEdge backwardEdge = forwardEdge.getOppositeEdge();
 					if (backwardEdge != null) {
-						Node sourceNode = backwardEdge.getSource();
+						Node sourceNode = backwardEdge.getEdgeSource();
 						if (traversedNode2incomingEdge.containsKey(sourceNode)) {
-							Node targetNode = backwardEdge.getTarget();
+							Node targetNode = backwardEdge.getEdgeTarget();
 							if (!traversedNode2incomingEdge.containsKey(targetNode)) {
 								traversedNode2incomingEdge.put(targetNode, backwardEdge);
 								moreMoreNodes.add(targetNode);
@@ -123,9 +123,9 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 					//	If no backward edge makes progress, select just one inverse edge instead.
 					//
 					for (@NonNull NavigableEdge manyToOneEdge : manyToOneEdges) {		// FIXME maintain reducing list of possibles
-						Node sourceNode = manyToOneEdge.getTarget();
+						Node sourceNode = manyToOneEdge.getEdgeTarget();
 						if (traversedNode2incomingEdge.containsKey(sourceNode)) {
-							Node targetNode = manyToOneEdge.getSource();
+							Node targetNode = manyToOneEdge.getEdgeSource();
 							if (!traversedNode2incomingEdge.containsKey(targetNode)) {
 								traversedNode2incomingEdge.put(targetNode, manyToOneEdge);
 								moreMoreNodes.add(targetNode);

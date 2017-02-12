@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 
 /**
  * An EdgeConnection supports an existence dependency between the region(s) that produce a navigation edge
@@ -28,5 +29,5 @@ public interface EdgeConnection extends DatumConnection
 	@NonNull ConnectionRole getConnectionRole(@NonNull NavigableEdge targetEdge);
 	@NonNull Iterable<@NonNull NavigableEdge> getTargetEdges();
 	@Override
-	@NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets();
+	@NonNull Map<@NonNull NavigableEdge, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> getTargets();
 }

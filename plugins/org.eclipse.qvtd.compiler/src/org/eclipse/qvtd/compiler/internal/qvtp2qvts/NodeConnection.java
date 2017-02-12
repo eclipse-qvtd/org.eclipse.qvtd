@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 
 /**
  * A NodeConnection supports a data connection from one or more source nodes to one or more target nodes.
@@ -50,7 +51,7 @@ public interface NodeConnection extends DatumConnection
 	@Override
 	@NonNull Node getTarget(@NonNull Region targetRegion);
 	@Override
-	@NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets();
+	@NonNull Map<@NonNull Node, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> getTargets();
 
 	/**
 	 * Return true if this connection is for an available value.

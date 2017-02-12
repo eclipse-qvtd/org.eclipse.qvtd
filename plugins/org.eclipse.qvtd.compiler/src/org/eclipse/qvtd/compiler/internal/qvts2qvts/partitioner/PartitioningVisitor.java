@@ -88,11 +88,11 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 		if (edge.isSecondary()) {
 			return null;
 		}
-		Node partialSourceNode = oldNode2partialNode.get(edge.getSource());
+		Node partialSourceNode = oldNode2partialNode.get(edge.getEdgeSource());
 		if (partialSourceNode == null) {
 			return null;
 		}
-		Node partialTargetNode = oldNode2partialNode.get(edge.getTarget());
+		Node partialTargetNode = oldNode2partialNode.get(edge.getEdgeTarget());
 		if (partialTargetNode == null) {
 			return null;
 		}
@@ -130,11 +130,11 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 		if (navigableEdge.isSecondary()) {
 			return null;
 		}
-		Node partialSourceNode = oldNode2partialNode.get(navigableEdge.getSource());
+		Node partialSourceNode = oldNode2partialNode.get(navigableEdge.getEdgeSource());
 		if (partialSourceNode == null) {
 			return null;
 		}
-		Node partialTargetNode = oldNode2partialNode.get(navigableEdge.getTarget());
+		Node partialTargetNode = oldNode2partialNode.get(navigableEdge.getEdgeTarget());
 		if (partialTargetNode == null) {
 			return null;
 		}

@@ -36,7 +36,7 @@ class BodyStage extends AbstractStage
 		if (nodes.add(node)) {
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isExpression()) {
-					computeOperationSources(nodes, edge.getSource());
+					computeOperationSources(nodes, edge.getEdgeSource());
 				}
 			}
 		}
@@ -173,8 +173,8 @@ class BodyStage extends AbstractStage
 		}
 		Region region = splitter.getRegion();
 		for (@NonNull Edge edge : region.getRealizedEdges()) {
-			requiredNodeSet.add(edge.getSource());
-			requiredNodeSet.add(edge.getTarget());
+			requiredNodeSet.add(edge.getEdgeSource());
+			requiredNodeSet.add(edge.getEdgeTarget());
 		}
 		for (@NonNull Node node : realizedNodes) {
 			requiredNodeSet.remove(node);
@@ -227,7 +227,7 @@ class BodyStage extends AbstractStage
 			}
 		}
 		for (@NonNull Edge edge : node.getOutgoingEdges()) {
-			Node targetNode = edge.getTarget();
+			Node targetNode = edge.getEdgeTarget();
 			if (!deadNodes.contains(targetNode) && !targetNode.isHead()) {
 				return true;	// Source of a live computation of a non-head is needed.
 			}

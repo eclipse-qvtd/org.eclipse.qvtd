@@ -75,12 +75,12 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		}
 
 		@Override
-		public @NonNull GraphNode getSource() {
+		public @NonNull GraphNode getEdgeSource() {
 			return sourceNode;
 		}
 
 		@Override
-		public @NonNull GraphNode getTarget() {
+		public @NonNull GraphNode getEdgeTarget() {
 			return targetNode;
 		}
 	}

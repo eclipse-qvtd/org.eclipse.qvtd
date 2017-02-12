@@ -105,7 +105,7 @@ public abstract class NodeImpl implements Node
 
 	@Override
 	public final void addIncomingEdge(@NonNull Edge edge) {
-		assert edge.getTarget() == this;
+		assert edge.getEdgeTarget() == this;
 		//		assert edge.getRegion() == getRegion();
 		List<@NonNull Edge> incomingEdges2 = incomingEdges;
 		if (incomingEdges2 == null) {
@@ -133,7 +133,7 @@ public abstract class NodeImpl implements Node
 
 	@Override
 	public final void addOutgoingEdge(@NonNull Edge edge) {
-		assert edge.getSource() == this;
+		assert edge.getEdgeSource() == this;
 		//		assert edge.getRegion() == getRegion();
 		List<@NonNull Edge> outgoingEdges2 = outgoingEdges;
 		if (outgoingEdges2 == null) {
@@ -356,7 +356,7 @@ public abstract class NodeImpl implements Node
 			if (edge instanceof NavigableEdge) {
 				NavigableEdge navigationEdge = (NavigableEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
-					return navigationEdge.getTarget();
+					return navigationEdge.getEdgeTarget();
 				}
 			}
 		}
@@ -730,7 +730,7 @@ public abstract class NodeImpl implements Node
 
 	@Override
 	public final void removeIncomingEdge(@NonNull Edge edge) {
-		assert edge.getTarget() == this;
+		assert edge.getEdgeTarget() == this;
 		//		assert edge.getRegion() == getRegion();
 		List<Edge> incomingEdges2 = incomingEdges;
 		assert incomingEdges2 != null;
@@ -751,7 +751,7 @@ public abstract class NodeImpl implements Node
 
 	@Override
 	public final void removeOutgoingEdge(@NonNull Edge edge) {
-		assert edge.getSource() == this;
+		assert edge.getEdgeSource() == this;
 		//		assert edge.getRegion() == getRegion();
 		List<Edge> outgoingEdges2 = outgoingEdges;
 		assert outgoingEdges2 != null;

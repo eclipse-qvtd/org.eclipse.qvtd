@@ -78,7 +78,7 @@ public class RootCompositionRegion extends AbstractRegion
 				containerEdge = edge;
 				parent2childProperty = property;
 				if (property == scheduler.getStandardLibraryHelper().getOclContainerProperty()) {
-					containingClassDatumAnalysis = edge.getSource().getClassDatumAnalysis();
+					containingClassDatumAnalysis = edge.getEdgeSource().getClassDatumAnalysis();
 				}
 				break;
 			}
@@ -105,7 +105,7 @@ public class RootCompositionRegion extends AbstractRegion
 				type2node.put(null, introducedNode);
 			}
 		}
-		else if ((containerEdge != null) && containerEdge.getTarget().isExplicitNull()) {		// At root, owned by null property
+		else if ((containerEdge != null) && containerEdge.getEdgeTarget().isExplicitNull()) {		// At root, owned by null property
 			Map<@Nullable Property, @NonNull Node> property2node = classDatumAnalysis2property2node.get(consumedClassDatumAnalysis);
 			if (property2node == null) {
 				property2node = new HashMap<>();
@@ -190,7 +190,7 @@ public class RootCompositionRegion extends AbstractRegion
 			s.appendNode(node);
 		}
 		for (@NonNull Edge edge : getEdges()) {
-			s.appendEdge(edge.getSource(), edge, edge.getTarget());
+			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		s.popCluster();
 	}

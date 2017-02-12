@@ -115,7 +115,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public ClassDatum createClassDatum() {
+	public @NonNull ClassDatum createClassDatum() {
 		ClassDatumImpl classDatum = new ClassDatumImpl();
 		return classDatum;
 	}
@@ -137,7 +137,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public MappingAction createMappingAction() {
+	public @NonNull MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
 	}
@@ -159,7 +159,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public PropertyDatum createPropertyDatum() {
+	public @NonNull PropertyDatum createPropertyDatum() {
 		PropertyDatumImpl propertyDatum = new PropertyDatumImpl();
 		return propertyDatum;
 	}

@@ -23,8 +23,8 @@ public interface GraphStringBuilder
 	{
 		//		void appendEdgeAttributes(@NonNull GraphStringBuilder s);
 		void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target);
-		@NonNull GraphNode getSource();
-		@NonNull GraphNode getTarget();
+		@NonNull GraphNode getEdgeSource();
+		@NonNull GraphNode getEdgeTarget();
 	}
 
 	//	void appendAttributedEdge(@NonNull GraphEdge edge);

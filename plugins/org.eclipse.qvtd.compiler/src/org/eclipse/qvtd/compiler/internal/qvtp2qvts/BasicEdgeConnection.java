@@ -19,6 +19,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Lists;
 
@@ -51,9 +53,9 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigableEd
 		//			mergeRole(Connections.PREFERRED_EDGE);
 		//			return;
 		//		}
-		mergeRole(mustBeLater ? Connections.MANDATORY_EDGE : Connections.PREFERRED_EDGE);
+		mergeRole(mustBeLater ? QVTscheduleConstants.MANDATORY_EDGE : QVTscheduleConstants.PREFERRED_EDGE);
 		assert !targetEnd2role.containsKey(targetEdge);
-		targetEnd2role.put(targetEdge, mustBeLater ? Connections.MANDATORY_EDGE : Connections.PREFERRED_EDGE);
+		targetEnd2role.put(targetEdge, mustBeLater ? QVTscheduleConstants.MANDATORY_EDGE : QVTscheduleConstants.PREFERRED_EDGE);
 		targetEdge.addIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
@@ -78,7 +80,7 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigableEd
 	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
 		List<@NonNull Node> sourceNodes = new ArrayList<@NonNull Node>();
 		for (@NonNull NavigableEdge sourceEdge : sourceEnds) {
-			sourceNodes.add(sourceEdge.getSource());
+			sourceNodes.add(sourceEdge.getEdgeSource());
 		}
 		return sourceNodes;
 	}
@@ -92,13 +94,13 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigableEd
 	public @NonNull Iterable<@NonNull Node> getTargetNodes() {
 		List<@NonNull Node> targetNodes = new ArrayList<@NonNull Node>();
 		for (@NonNull NavigableEdge targetEdge : targetEnd2role.keySet()) {
-			targetNodes.add(targetEdge.getTarget());
+			targetNodes.add(targetEdge.getEdgeTarget());
 		}
 		return targetNodes;
 	}
 
 	@Override
-	public @NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets() {
+	public @NonNull Map<@NonNull NavigableEdge, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> getTargets() {
 		return targetEnd2role;
 	}
 
@@ -209,17 +211,17 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigableEd
 		if (isEdge2Edge()) {
 			NavigableEdge sourceEdge = sourceEnds.iterator().next();
 			NavigableEdge targetEdge = targetEnd2role.keySet().iterator().next();
-			s.appendEdge(sourceEdge.getTarget(), this, targetEdge.getTarget());
+			s.appendEdge(sourceEdge.getEdgeTarget(), this, targetEdge.getEdgeTarget());
 		}
 		else {
 			s.appendNode(this);
 			for (@NonNull NavigableEdge source : getSources()) {
-				s.appendEdge(source.getTarget(), this, this);
+				s.appendEdge(source.getEdgeTarget(), this, this);
 			}
 			for (@NonNull NavigableEdge target : getTargetEdges()) {
 				ConnectionRole role = targetEnd2role.get(target);
 				assert role != null;
-				s.appendEdge(this, role, target.getTarget());
+				s.appendEdge(this, role, target.getEdgeTarget());
 			}
 		}
 	}

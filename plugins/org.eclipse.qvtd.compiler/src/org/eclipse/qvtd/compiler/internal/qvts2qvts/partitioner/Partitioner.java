@@ -93,7 +93,7 @@ public class Partitioner
 		for (@NonNull Node node : region.getNodes()) {
 			if (!node.isTrue() && node.isPattern() && node.isRealized() && node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					if (edge.isRealized() && edge.getTarget().isRealized()) {
+					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
 						corrolaryProperties.add(edge.getProperty());
 					}
 				}
@@ -196,21 +196,21 @@ public class Partitioner
 				if (edge.isNavigation()) {
 					if (edge.isRealized()) {
 						realizedEdges.add(edge);
-						Node sourceNode = edge.getSource();
+						Node sourceNode = edge.getEdgeSource();
 						if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode.isPredicated() || sourceNode.isRealized())) {
-							Node targetNode = edge.getTarget();
+							Node targetNode = edge.getEdgeTarget();
 							if (!realizedMiddleNodes.contains(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
 								realizedOutputEdges.add(edge);
 							}
 						}
-						if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
+						if (edge.getEdgeTarget().isLoaded() && edge.getEdgeSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
 					else if (edge.isMatched() && !edge.isCast()) {
 						assert !edge.isExpression();
 						assert !edge.isComputation();
-						Node targetNode = edge.getTarget();
+						Node targetNode = edge.getEdgeTarget();
 						if (!targetNode.isExplicitNull()) {
 							//							navigableEdges.add(navigationEdge);
 						}
@@ -347,7 +347,7 @@ public class Partitioner
 			moreDeadNodes = null;
 			for (@NonNull Node deadNode : moreDeadNodesList) {
 				for (@NonNull Edge edge : deadNode.getIncomingEdges()) {
-					Node sourceNode = edge.getSource();
+					Node sourceNode = edge.getEdgeSource();
 					if (!sourceNode.isHead() && isDead(sourceNode, deadNodes)) {
 						if (moreDeadNodes == null) {
 							moreDeadNodes = new HashSet<>();
@@ -475,14 +475,14 @@ public class Partitioner
 		}
 		for (@NonNull Edge edge : node.getIncomingEdges()) {
 			if (edge.isNavigation()) {
-				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getSource())) {
+				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
 					return false;
 				}
 			}
 		}
 		for (@NonNull Edge edge : node.getOutgoingEdges()) {
 			if (edge.isNavigation() || edge.isExpression()) {
-				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getTarget())) {
+				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeTarget())) {
 					return false;
 				}
 			}

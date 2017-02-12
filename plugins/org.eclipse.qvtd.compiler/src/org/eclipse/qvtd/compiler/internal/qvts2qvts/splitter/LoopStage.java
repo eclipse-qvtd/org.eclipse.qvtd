@@ -49,19 +49,19 @@ class LoopStage extends HeadedStage
 	@Override
 	public @NonNull Node getIteratedNode() {
 		Edge edge = getEdge();
-		return edge.isComputation() ? edge.getSource() : edge.getTarget();
+		return edge.isComputation() ? edge.getEdgeSource() : edge.getEdgeTarget();
 	}
 
 	@Override
 	public @NonNull Node getIteratorNode() {
 		Edge edge = getEdge();
-		return edge.isComputation() ? edge.getTarget() : edge.getSource();
+		return edge.isComputation() ? edge.getEdgeTarget() : edge.getEdgeSource();
 	}
 
 	@Override
 	protected boolean isLive(@NonNull Node node, @NonNull Set<@NonNull Node> deadNodes) {
 		Edge edge = getEdge();
-		if ((node == edge.getSource()) || (node == edge.getTarget())) {
+		if ((node == edge.getEdgeSource()) || (node == edge.getEdgeTarget())) {
 			return true;
 		}
 		return super.isLive(node, deadNodes);

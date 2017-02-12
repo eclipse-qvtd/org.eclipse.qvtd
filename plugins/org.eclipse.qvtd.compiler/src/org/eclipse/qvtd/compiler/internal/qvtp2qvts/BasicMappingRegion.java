@@ -192,7 +192,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				Property property = edge.getProperty();
 				Property opposite = property.getOpposite();
-				if ((opposite != null) && opposite.isIsComposite() && !edge.getTarget().isExplicitNull()) {
+				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isExplicitNull()) {
 					isContained = true;
 					break;
 				}
@@ -316,7 +316,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 						RegionUtil.createNavigationEdge(sourceNode, referredProperty, targetNode, false);
 					}
 					else {
-						assert predicateEdge.getTarget() == targetNode;
+						assert predicateEdge.getEdgeTarget() == targetNode;
 					}
 				}
 			}

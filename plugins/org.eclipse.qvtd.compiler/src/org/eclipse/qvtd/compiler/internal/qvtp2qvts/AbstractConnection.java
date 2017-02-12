@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 
 /**
  * AbstractConnection.
@@ -32,8 +33,8 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	protected final @NonNull String name;
 	private /*@LazyNonNull*/ ConnectionRole connectionRole;
 	protected @NonNull Set<@NonNull CE> sourceEnds;
-	protected final @NonNull Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<@NonNull CE, @NonNull ConnectionRole>();
-	
+	protected final @NonNull Map<@NonNull CE, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> targetEnd2role = new HashMap<@NonNull CE, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole>();
+
 	/**
 	 * The indexes in the overall schedule at which this connection propagates additional values.
 	 */
@@ -44,7 +45,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 		this.name = region.getSchedulerConstants().reserveSymbolName(symbolNameBuilder, this);
 		this.sourceEnds = sourceEnds;
 	}
-	
+
 	@Override
 	public boolean addIndex(int index) {
 		for (int i = 0; i < indexes.size(); i++) {
@@ -64,7 +65,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
-/*		if (isRegion2Region()) {
+		/*		if (isRegion2Region()) {
 			String indexText = getIndexText();
 			if (indexText != null) {
 				s.setLabel(indexText);
@@ -175,7 +176,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	}
 
 	@Override
-	public @NonNull GraphNode getSource() {
+	public @NonNull GraphNode getEdgeSource() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -242,7 +243,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	}
 
 	@Override
-	public @NonNull GraphNode getTarget() {
+	public @NonNull GraphNode getEdgeTarget() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -283,13 +284,13 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	}
 
 	@Override
-	public @NonNull Map<@NonNull ? extends ConnectionEnd, @NonNull ConnectionRole> getTargets() {
+	public @NonNull Map<@NonNull ? extends ConnectionEnd, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> getTargets() {
 		return targetEnd2role;
 	}
 
-//	private boolean isRegion2Region() {
-//		return isRegion2Region(getSourceRegion2count());
-//	}
+	//	private boolean isRegion2Region() {
+	//		return isRegion2Region(getSourceRegion2count());
+	//	}
 
 	private boolean isRegion2Region(@NonNull Map<Region, Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles) {
 		return (sourceRegion2count.size() == 1) && (targetRegion2roles.size() == 1) && (targetRegion2roles.values().iterator().next().size() == 1); //(targetEnd2role.size() == 1);
@@ -306,7 +307,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.appendEdge(getSource(), this, getTarget());
+		s.appendEdge(getEdgeSource(), this, getEdgeTarget());
 	}
 
 	@Override
@@ -315,7 +316,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 		for (@NonNull Node source : getSourceNodes()) {
 			Region sourceRegion = scheduledRegion.getNormalizedRegion(source.getRegion());
 			if (sourceRegion != null) {
-//				Integer count = sourceRegion2count.get(sourceRegion);
+				//				Integer count = sourceRegion2count.get(sourceRegion);
 				sourceRegion2count.put(sourceRegion, 1); //(count != null ? count.intValue() : 0) + 1);
 			}
 		}
@@ -327,7 +328,7 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 			if (targetRegion != null) {
 				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
 				if (roles == null) {
-					roles = new ArrayList<@NonNull ConnectionRole>();
+					roles = new ArrayList<>();
 					targetRegion2roles.put(targetRegion, roles);
 				}
 				if (!roles.contains(role)) {
@@ -354,14 +355,14 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 				assert roles != null;
 				for (@NonNull ConnectionRole role : roles) {
 					s.appendEdge(this, role, targetRegion);
-//				GraphNode targetNode = /*targetRegion.isCyclicRegion() ? getTarget(targetRegion) :*/ targetRegion;
-//				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
-//					s.appendEdge(this, role, targetNode);
+					//				GraphNode targetNode = /*targetRegion.isCyclicRegion() ? getTarget(targetRegion) :*/ targetRegion;
+					//				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
+					//					s.appendEdge(this, role, targetNode);
 				}
 			}
 			Node headNode = null;
 			if (sourceRegion2count.size() == 0) {
-/*				@Nullable ConnectionEnd targetEnd = null;
+				/*				@Nullable ConnectionEnd targetEnd = null;
 				for (@NonNull ConnectionEnd end : targetEnd2role.keySet()) {
 					if (end.getRegion() == scheduledRegion) {
 						assert targetEnd == null;
@@ -396,8 +397,8 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	@Override
 	public String toString() {
 		return getSymbolName();
-    }
-	
+	}
+
 	public String toString2() {
 		StringBuilder s = new StringBuilder();
 		ConnectionRole connectionRole = basicGetConnectionRole();
@@ -426,6 +427,6 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 			isFirst = false;
 		}
 		s.append(")");
-        return s.toString();
-    }
+		return s.toString();
+	}
 }

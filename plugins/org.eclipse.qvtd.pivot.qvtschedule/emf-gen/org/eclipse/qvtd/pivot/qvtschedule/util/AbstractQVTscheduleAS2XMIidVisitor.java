@@ -56,6 +56,11 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitConnectionRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ConnectionRole object) {
+		return visitElement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
 		return visitRole(object);
 	}

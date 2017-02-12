@@ -206,13 +206,13 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node node : moreNodes) {
 				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
-					Node sourceNode = incomingEdge.getSource();
+					Node sourceNode = incomingEdge.getEdgeSource();
 					if (!unconditionalNodes.contains(sourceNode) && conditionalNodes.add(sourceNode)) {
 						moreMoreNodes.add(sourceNode);
 					}
 				}
 				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
-					Node targetNode = outgoingEdge.getTarget();
+					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!unconditionalNodes.contains(targetNode) && conditionalNodes.add(targetNode)) {
 						moreMoreNodes.add(targetNode);
 					}
@@ -288,7 +288,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			//			targetClosure.add(navigableNode);
 			for (@NonNull Edge navigationEdge : sourceNode.getNavigationEdges()) {
 				if (!navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getTarget();
+					Node targetNode = navigationEdge.getEdgeTarget();
 					if (targetNode.isMatched() && targetNode.isClass() && !targetNode.isExplicitNull()) {
 						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
 						if (sourceClosure != null) {
@@ -397,7 +397,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node sourceNode : moreStronglyMatchedNodes) {
 				for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
-					Node targetNode = edge.getTarget();
+					Node targetNode = edge.getEdgeTarget();
 					if (canBeStronglyMatched(targetNode)) {
 						if (targetNode.isExplicitNull() || edge.getProperty().isIsRequired()) {
 							if (stronglyMatchedNodes.add(targetNode)) {
@@ -422,10 +422,10 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		Iterables.addAll(unconditionalNodes, getNewNodes());
 		for (@NonNull NavigableEdge edge : getRealizedNavigationEdges()) {
 			if (!edge.isSecondary()) {
-				Node sourceNode = edge.getSource();
+				Node sourceNode = edge.getEdgeSource();
 				assert canBeUnconditional(sourceNode);
 				unconditionalNodes.add(sourceNode);
-				Node targetNode = edge.getTarget();
+				Node targetNode = edge.getEdgeTarget();
 				assert canBeUnconditional(targetNode);
 				unconditionalNodes.add(targetNode);
 			}
@@ -435,7 +435,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node node : moreUnconditionalNodes) {
 				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
-					Node sourceNode = incomingEdge.getSource();
+					Node sourceNode = incomingEdge.getEdgeSource();
 					if (!canBeUnconditional(sourceNode)) {}
 					else if (incomingEdge.isComputation()) {
 						if (!isConditionalEdge(incomingEdge)) {
@@ -458,7 +458,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 					}
 				}
 				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
-					Node targetNode = outgoingEdge.getTarget();
+					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!canBeUnconditional(targetNode)) {}
 					else if (outgoingEdge.isComputation()) {}
 					else if (outgoingEdge.isNavigation()) {

@@ -120,9 +120,9 @@ public class Splitter extends SplitterAnalysis
 		Iterable<@NonNull Node> reachableNodes = mutualGroup.getReachableNodes();
 		for (@NonNull Node node : reachableNodes) {		// FIXME ?? can only be heads
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
-				assert edge.getTarget() == node;
+				assert edge.getEdgeTarget() == node;
 				if (!edge.isRealized() && edge.isComputation()) {
-					Node sourceNode = edge.getSource();
+					Node sourceNode = edge.getEdgeSource();
 					Iterable<@NonNull SimpleGroup> sourceGroups = basicGetReachableSimpleGroups(sourceNode);
 					if (sourceGroups == null) {
 						sourceGroups = computeComputableSourceGroups(new HashSet<@NonNull SimpleGroup>(), sourceNode);
@@ -145,7 +145,7 @@ public class Splitter extends SplitterAnalysis
 	protected Iterable<@NonNull SimpleGroup> computeComputableSourceGroups(@NonNull Set<@NonNull SimpleGroup> groups, @NonNull Node targetNode) {
 		for (@NonNull Edge edge : targetNode.getIncomingEdges()) {
 			if (edge.isComputation()) {
-				Node sourceNode = edge.getSource();
+				Node sourceNode = edge.getEdgeSource();
 				Iterable<@NonNull SimpleGroup> sourceGroups = basicGetReachableSimpleGroups(sourceNode);
 				if (sourceGroups != null) {
 					Iterables.addAll(groups, sourceGroups);

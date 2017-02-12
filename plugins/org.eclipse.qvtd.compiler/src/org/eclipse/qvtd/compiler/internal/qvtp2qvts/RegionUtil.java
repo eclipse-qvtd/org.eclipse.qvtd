@@ -326,7 +326,7 @@ public class RegionUtil extends QVTscheduleUtil
 		@NonNull NavigableEdge sourceEdge = edge;
 		while (true) {
 			@Nullable NavigableEdge targetEdge = null;
-			for (@NonNull Edge nextEdge : sourceEdge.getTarget().getOutgoingEdges()) {
+			for (@NonNull Edge nextEdge : sourceEdge.getEdgeTarget().getOutgoingEdges()) {
 				if (nextEdge.isRecursion()) {
 					continue;
 				}
@@ -362,7 +362,7 @@ public class RegionUtil extends QVTscheduleUtil
 				if (targetNode != null) {			// FIXME multi-cast support
 					return sourceNode;
 				}
-				targetNode = edge.getTarget();
+				targetNode = edge.getEdgeTarget();
 			}
 			if (targetNode == null) {
 				return sourceNode;
@@ -397,7 +397,7 @@ public class RegionUtil extends QVTscheduleUtil
 				}
 				else if (edge.isCast()) {
 					hasCast = true;
-					getCastTargets(edge.getTarget(), includeUsedIntermediates, castSources, castTargets);
+					getCastTargets(edge.getEdgeTarget(), includeUsedIntermediates, castSources, castTargets);
 				}
 				else if (includeUsedIntermediates) {
 					castTargets.add(sourceNode);
@@ -484,8 +484,8 @@ public class RegionUtil extends QVTscheduleUtil
 	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
 	 */
 	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatTarget = getCastTarget(thatEdge.getTarget());
-		Node thisTarget = getCastTarget(thisEdge.getTarget());
+		Node thatTarget = getCastTarget(thatEdge.getEdgeTarget());
+		Node thisTarget = getCastTarget(thisEdge.getEdgeTarget());
 		CompleteClass thatType = thatTarget.getCompleteClass();
 		CompleteClass thisType = thisTarget.getCompleteClass();
 		if (thatType.conformsTo(thisType)) {
@@ -504,9 +504,9 @@ public class RegionUtil extends QVTscheduleUtil
 	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
 	 */
 	public static boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatSource = thatEdge.getSource();
+		Node thatSource = thatEdge.getEdgeSource();
 		CompleteClass thatType = ClassUtil.nonNullState(thatSource.getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
-		CompleteClass thisType = ClassUtil.nonNullState(thisEdge.getSource().getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
+		CompleteClass thisType = ClassUtil.nonNullState(thisEdge.getEdgeSource().getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
 		if (thatType.conformsTo(thisType)) {
 			return true;
 		}
@@ -568,7 +568,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static boolean isUnconditional(@NonNull Edge edge) {
-		for (@NonNull TypedElement typedElement : edge.getSource().getTypedElements()) {
+		for (@NonNull TypedElement typedElement : edge.getEdgeSource().getTypedElements()) {
 			if (!isUnconditional(typedElement)) {
 				return false;
 			}

@@ -79,7 +79,7 @@ class NavigationForestBuilder extends AbstractForestBuilder
 		else {
 			assert !edge.isExpression();
 			assert !edge.isComputation();
-			Node targetNode = edge.getTarget();
+			Node targetNode = edge.getEdgeTarget();
 			targetNode = RegionUtil.getCastTarget(targetNode);
 			super.addEdge(edge.getForwardEdge());
 		}

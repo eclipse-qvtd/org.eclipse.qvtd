@@ -116,7 +116,7 @@ abstract class HeadedStage extends AbstractStage
 		}
 		int bidirectionals = 0;
 		for (@NonNull Edge edge : node.getOutgoingEdges()) {
-			if (!edge.isRealized() && !deadNodes.contains(edge.getTarget())) {
+			if (!edge.isRealized() && !deadNodes.contains(edge.getEdgeTarget())) {
 				if (!SplitterUtil.isBidirectional(edge)) {
 					return true;
 				}

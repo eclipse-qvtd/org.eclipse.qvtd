@@ -33,7 +33,7 @@ public interface DatumConnection extends Connection
 	@NonNull Iterable<@NonNull Node> getTargetNodes();
 	@NonNull Iterable<@NonNull Region> getTargetRegions();
 	@NonNull Iterable<@NonNull Region> getTargetRegions(@NonNull ScheduledRegion scheduledRegion);
-	@NonNull Map<@NonNull ? extends ConnectionEnd, @NonNull ConnectionRole> getTargets();
+	@NonNull Map<@NonNull ? extends ConnectionEnd, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> getTargets();
 
 	/**
 	 * Return true if this connection is from a nested region input port to the nested region's content.

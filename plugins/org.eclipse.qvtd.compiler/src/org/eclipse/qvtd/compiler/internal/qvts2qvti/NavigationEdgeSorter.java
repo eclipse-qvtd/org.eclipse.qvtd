@@ -60,7 +60,7 @@ public class NavigationEdgeSorter
 	public void add(@NonNull NavigableEdge navigationEdge) {
 		Set<@NonNull Node> sourceNodes = null;
 		if (navigationEdge.isRealized()) {
-			Node targetNode = navigationEdge.getTarget();
+			Node targetNode = navigationEdge.getEdgeTarget();
 			if (targetNode.isDataType()) {
 				sourceNodes = gatherSourceNodes(new HashSet<@NonNull Node>(), targetNode);
 			}
@@ -72,7 +72,7 @@ public class NavigationEdgeSorter
 		if (sourceNodes.add(node)) {
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isComputation()) {
-					gatherSourceNodes(sourceNodes, edge.getSource());
+					gatherSourceNodes(sourceNodes, edge.getEdgeSource());
 				}
 			}
 		}

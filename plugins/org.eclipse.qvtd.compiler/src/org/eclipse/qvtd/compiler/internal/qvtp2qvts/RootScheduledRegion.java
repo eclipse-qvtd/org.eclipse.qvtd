@@ -270,7 +270,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			s.appendNode(node);
 		}
 		for (@NonNull Edge edge : getEdges()) {
-			s.appendEdge(edge.getSource(), edge, edge.getTarget());
+			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		for (@NonNull Connection connection : getConnections()) {
 			connection.toGraph(s);

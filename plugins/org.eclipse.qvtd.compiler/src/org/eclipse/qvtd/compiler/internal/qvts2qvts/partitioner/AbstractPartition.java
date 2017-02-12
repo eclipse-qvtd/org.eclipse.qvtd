@@ -45,16 +45,16 @@ abstract class AbstractPartition
 			if (parentEdge != null) {
 				//			Integer targetDepth = getDepth(targetNode);
 				//			assert targetDepth != null;
-				Node sourceNode = parentEdge.getSource();
+				Node sourceNode = parentEdge.getEdgeSource();
 				if (sourceNode == targetNode) {
-					sourceNode = parentEdge.getTarget();
+					sourceNode = parentEdge.getEdgeTarget();
 				}
 				sourceNodes.add(sourceNode);
 				//			Integer sourceDepth = getDepth(sourceNode);
 				//			assert sourceDepth != null;
 			}
 			for (@NonNull Edge edge : targetNode.getComputationEdges()) {
-				sourceNodes.add(edge.getSource());
+				sourceNodes.add(edge.getEdgeSource());
 			}
 			//		sourceNodes.remove(targetNode);
 			return sourceNodes;
@@ -183,12 +183,12 @@ abstract class AbstractPartition
 		if (reachableNodes.add(node)) {
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isComputation() || edge.isNavigation()) {		// excludes only recursion
-					gatherReachables(reachableNodes, edge.getSource());
+					gatherReachables(reachableNodes, edge.getEdgeSource());
 				}
 			}
 			for (@NonNull Edge edge : node.getOutgoingEdges()) {
 				if (edge.isNavigation()) {
-					gatherReachables(reachableNodes, edge.getTarget());
+					gatherReachables(reachableNodes, edge.getEdgeTarget());
 				}
 			}
 		}
@@ -228,7 +228,7 @@ abstract class AbstractPartition
 
 	protected boolean isComputable(@NonNull Set<@NonNull Node> sourceNodes, @NonNull Edge edge) {
 		//		assert edge.isComputation();
-		Node node = edge.getSource();
+		Node node = edge.getEdgeSource();
 		if (!sourceNodes.add(node)) {
 			return true;
 		}
@@ -339,9 +339,9 @@ abstract class AbstractPartition
 	protected void resolveEdgeRoles() {
 		for (@NonNull Edge edge : partitioner.getRegion().getEdges()) {
 			if (!edge.isSecondary() && !hasEdge(edge)) {
-				NodeRole sourceNodeRole = node2nodeRole.get(edge.getSource());
+				NodeRole sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 				if (sourceNodeRole != null) {
-					NodeRole targetNodeRole = node2nodeRole.get(edge.getTarget());
+					NodeRole targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
 					if (targetNodeRole != null) {
 						EdgeRole edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
 						if (edgeRole != null) {
@@ -363,7 +363,7 @@ abstract class AbstractPartition
 	protected void resolveNavigations(@NonNull Node node) {
 		for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 			if (!partitioner.hasRealizedEdge(edge)) {
-				Node targetNode = edge.getTarget();
+				Node targetNode = edge.getEdgeTarget();
 				if (targetNode.isDataType()) {
 					if (resolveComputations(targetNode)) {
 						if (!hasNode(targetNode)) {

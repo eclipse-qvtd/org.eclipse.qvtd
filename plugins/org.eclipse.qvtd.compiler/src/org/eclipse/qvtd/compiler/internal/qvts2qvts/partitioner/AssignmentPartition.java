@@ -40,8 +40,8 @@ class AssignmentPartition extends AbstractPartition
 		//
 		//	The nodes that support identification of the realized edge are used as is.
 		//
-		gatherSourceNavigations(realizedEdge.getSource());
-		gatherSourceNavigations(realizedEdge.getTarget());
+		gatherSourceNavigations(realizedEdge.getEdgeSource());
+		gatherSourceNavigations(realizedEdge.getEdgeTarget());
 		//
 		//	Join up the edges.
 		//
@@ -63,7 +63,7 @@ class AssignmentPartition extends AbstractPartition
 			if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
 				for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
 					if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
-						Node nonUnitSourceNode = edge.getTarget();
+						Node nonUnitSourceNode = edge.getEdgeTarget();
 						gatherSourceNavigations(nonUnitSourceNode);
 					}
 				}

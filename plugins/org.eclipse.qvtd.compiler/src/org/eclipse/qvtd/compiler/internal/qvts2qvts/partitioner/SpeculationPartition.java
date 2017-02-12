@@ -40,7 +40,7 @@ class SpeculationPartition extends AbstractPartition
 				NodeRole speculationNodeRole = QVTscheduleUtil.asSpeculation(node.getNodeRole());
 				addNode(node, speculationNodeRole);
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					addReachableConstantOrLoadedNodes(edge.getTarget());
+					addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
 				}
 			}
 		}
@@ -67,7 +67,7 @@ class SpeculationPartition extends AbstractPartition
 				addNode(node, node.getNodeRole());
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isConstant() || edge.isLoaded()) {
-						addReachableConstantOrLoadedNodes(edge.getTarget());
+						addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
 					}
 				}
 			}
@@ -79,7 +79,7 @@ class SpeculationPartition extends AbstractPartition
 		if (edge.isPredicated()) {
 			return false;
 		}
-		if (edge.getTarget().isRealized()) {
+		if (edge.getEdgeTarget().isRealized()) {
 			return false;
 		}
 		return super.isComputable(sourceNodes, edge);

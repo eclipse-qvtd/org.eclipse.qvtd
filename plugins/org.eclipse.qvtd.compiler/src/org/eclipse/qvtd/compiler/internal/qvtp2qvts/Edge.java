@@ -73,13 +73,13 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 * Return the source Node.
 	 */
 	@Override
-	@NonNull Node getSource();
+	@NonNull Node getEdgeSource();
 
 	/**
 	 * Return the target Node.
 	 */
 	@Override
-	@NonNull Node getTarget();
+	@NonNull Node getEdgeTarget();
 
 	/**
 	 * Return true if this edge is for an oclAsType cast.

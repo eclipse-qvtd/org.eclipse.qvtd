@@ -41,7 +41,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Class Datum</em>'.
 	 * @generated
 	 */
-	ClassDatum createClassDatum();
+	@NonNull ClassDatum createClassDatum();
 
 	/**
 	 * Returns a new object of class '<em>Edge Role</em>'.
@@ -59,7 +59,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Action</em>'.
 	 * @generated
 	 */
-	MappingAction createMappingAction();
+	@NonNull MappingAction createMappingAction();
 
 	/**
 	 * Returns a new object of class '<em>Node Role</em>'.
@@ -77,7 +77,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Property Datum</em>'.
 	 * @generated
 	 */
-	PropertyDatum createPropertyDatum();
+	@NonNull PropertyDatum createPropertyDatum();
 
 	/**
 	 * Returns the package supported by this factory.

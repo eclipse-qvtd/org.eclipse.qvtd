@@ -40,7 +40,7 @@ class SplitterUtil
 			for (@NonNull Node unresolvedNode : new ArrayList<>(unresolvedOperationNodes)) {
 				boolean allReachable = true;
 				for (@NonNull Edge edge : unresolvedNode.getIncomingEdges()) {
-					if (edge.isExpression() && !computableTargetNodes.contains(edge.getSource())) {
+					if (edge.isExpression() && !computableTargetNodes.contains(edge.getEdgeSource())) {
 						allReachable = false;
 					}
 				}
@@ -61,7 +61,7 @@ class SplitterUtil
 		if (computableTargetNodes.add(sourceNode)) {
 			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
 				if (edge.isComputation() || (edge.isNavigation() && !edge.isMatched())) {
-					Node targetNode = edge.getTarget();
+					Node targetNode = edge.getEdgeTarget();
 					if (targetNode.isRealized() && targetNode.isOperation()) {
 						unresolvedOperationNodes.add(targetNode);		// Keys require an all-input check.
 					}
@@ -72,7 +72,7 @@ class SplitterUtil
 			}
 			for (@NonNull Edge edge : sourceNode.getIncomingEdges()) {	// FIXME gather constant inputs to avoid assert fail
 				if (edge.isComputation()){ // || (edge.isConstant())) {
-					Node node = edge.getSource();
+					Node node = edge.getEdgeSource();
 					if (node.isConstant()) {
 						computeComputableTargetNodes(computableTargetNodes, node, unresolvedOperationNodes);
 					}
@@ -122,9 +122,9 @@ class SplitterUtil
 	private static @NonNull Set<@NonNull Node> computeNavigableNodes(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node sourceNode) {
 		if (reachableNodes.add(sourceNode)) {
 			for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
-				assert edge.getSource() == sourceNode;
+				assert edge.getEdgeSource() == sourceNode;
 				if (!edge.isRealized() && edge.isMatched()) {
-					Node targetNode = edge.getTarget();
+					Node targetNode = edge.getEdgeTarget();
 					computeNavigableNodes(reachableNodes, targetNode);
 				}
 			}
@@ -136,10 +136,10 @@ class SplitterUtil
 		if (!edge.isNavigation()) {
 			return false;
 		}
-		Node sourceNode = edge.getSource();
-		Node targetNode = edge.getTarget();
+		Node sourceNode = edge.getEdgeSource();
+		Node targetNode = edge.getEdgeTarget();
 		for (@NonNull Edge edge2 : targetNode.getOutgoingEdges()) {
-			if (edge2.isNavigation() && (edge2.getTarget() == sourceNode)) {
+			if (edge2.isNavigation() && (edge2.getEdgeTarget() == sourceNode)) {
 				return true;
 			}
 		}

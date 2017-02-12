@@ -146,7 +146,7 @@ public class ContentsAnalysis
 	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = producedEdge.getProperty();
-		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = producedEdge.getEdgeSource().getClassDatumAnalysis();
 		ClassDatum forwardClassDatum = classDatumAnalysis.getElementalClassDatum();
 		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
@@ -178,7 +178,7 @@ public class ContentsAnalysis
 			return bestPropertyDatum;
 		}
 		Property reverseProperty = forwardProperty.getOpposite();
-		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
+		classDatumAnalysis = producedEdge.getEdgeTarget().getClassDatumAnalysis();
 		ClassDatum reverseClassDatum = classDatumAnalysis.getElementalClassDatum();
 		Iterable<@NonNull PropertyDatum> reversePropertyDatums = schedulerConstants.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
@@ -294,7 +294,7 @@ public class ContentsAnalysis
 		CompleteClass requiredClass = requiredClassDatumAnalysis.getCompleteClass();
 		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-			Node targetNode = realizedEdge.getTarget();
+			Node targetNode = realizedEdge.getEdgeTarget();
 			CompleteClass realizedClass = targetNode.getCompleteClass();
 			if (realizedClass.conformsTo(requiredClass) /*|| realizedClass.conformsTo(requiredClass.getBehavioralClass())*/) {
 				if (conformantRealizedEdges == null) {

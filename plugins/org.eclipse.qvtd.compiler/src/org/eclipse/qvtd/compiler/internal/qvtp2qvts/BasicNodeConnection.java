@@ -22,6 +22,8 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -57,16 +59,16 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 
 	@Override
 	public void addPassedTargetNode(@NonNull Node targetNode) {
-		mergeRole(Connections.PASSED);
+		mergeRole(QVTscheduleConstants.PASSED);
 		assert !targetEnd2role.containsKey(targetNode);
-		targetEnd2role.put(targetNode, Connections.PASSED);
+		targetEnd2role.put(targetNode, QVTscheduleConstants.PASSED);
 		targetNode.addIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
 	@Override
 	public void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater) {
-		ConnectionRole newConnectionRole = mustBeLater ? Connections.MANDATORY_NODE : Connections.PREFERRED_NODE;
+		ConnectionRole newConnectionRole = mustBeLater ? QVTscheduleConstants.MANDATORY_NODE : QVTscheduleConstants.PREFERRED_NODE;
 		ConnectionRole oldConnectionRole = targetEnd2role.get(targetNode);
 		if ((oldConnectionRole != null) && (oldConnectionRole != newConnectionRole)) {
 			newConnectionRole = newConnectionRole.merge(oldConnectionRole);
@@ -153,7 +155,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 	}
 
 	@Override
-	public @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets() {
+	public @NonNull Map<@NonNull Node, org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole> getTargets() {
 		return targetEnd2role;
 	}
 

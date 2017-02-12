@@ -126,13 +126,13 @@ public class LateConsumerMerger extends AbstractMerger
 					return true;
 				}
 				if (secondaryEdge.isOld()) {
-					if (!secondaryEdge.getTarget().isRequired()) {
+					if (!secondaryEdge.getEdgeTarget().isRequired()) {
 						return true;					// If target is optional, it's absence cannot cause a failure
 					}
 					if (!property.isIsRequired()) {
 						return true;					// If property is optional, it's absence cannot cause a failure
 					}
-					ClassDatumAnalysis classDatumAnalysis = secondaryEdge.getTarget().getClassDatumAnalysis();
+					ClassDatumAnalysis classDatumAnalysis = secondaryEdge.getEdgeTarget().getClassDatumAnalysis();
 					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatumAnalysis);
 					if (realizedEdges != null) {
 						int firstIndex = secondaryEdge.getRegion().getFirstIndex();

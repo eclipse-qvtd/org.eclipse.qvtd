@@ -150,7 +150,7 @@ class Correlator
 			boolean gotIt = false;
 			for (@NonNull Edge secondEdge : residualSecondArgumentEdges) {
 				if (ClassUtil.safeEquals(firstEdge.getName(), secondEdge.getName())) {
-					if (!correlateComputation(firstEdge.getSource(), secondEdge.getSource(), nestedFirst2second)) {
+					if (!correlateComputation(firstEdge.getEdgeSource(), secondEdge.getEdgeSource(), nestedFirst2second)) {
 						return false;
 					}
 					gotIt = true;
@@ -260,7 +260,7 @@ class Correlator
 				return false;
 			}
 			for (@NonNull NavigableEdge uncastSecondaryEdge : secondarySourceNode.getNavigationEdges()) {
-				Node uncastSecondaryTargetNode = uncastSecondaryEdge.getTarget();
+				Node uncastSecondaryTargetNode = uncastSecondaryEdge.getEdgeTarget();
 				Iterable<@NonNull Node> secondaryTargetNodes = RegionUtil.getCastTargets(uncastSecondaryTargetNode, true);
 				if (primarySourceNode != null) {
 					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigationEdge(uncastSecondaryEdge.getProperty());	// Skip isSecondary properties
@@ -268,7 +268,7 @@ class Correlator
 						return false;
 					}
 					if (uncastPrimaryEdge != null) {
-						Node uncastPrimaryTargetNode = uncastPrimaryEdge.getTarget();
+						Node uncastPrimaryTargetNode = uncastPrimaryEdge.getEdgeTarget();
 						if (uncastSecondaryTargetNode.isExplicitNull() != uncastPrimaryTargetNode.isExplicitNull()) {
 							if (debugFailures) {
 								AbstractMerger.FAILURE.println("Inconsistent ExplicitNull: " + uncastSecondaryTargetNode);

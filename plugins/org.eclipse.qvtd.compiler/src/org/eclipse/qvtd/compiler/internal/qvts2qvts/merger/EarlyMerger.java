@@ -130,12 +130,12 @@ public class EarlyMerger extends AbstractMerger
 				Property property = edge.getProperty();
 				if (edge.isNew()) {
 					if (isToZeroOrOne(property) && isToZeroOrOne(property.getOpposite())) {
-						getHostNodesAccumulator(hostNodes, edge.getTarget());
+						getHostNodesAccumulator(hostNodes, edge.getEdgeTarget());
 					}
 				}
 				else {
 					if (isToOne(property) && isToOne(property.getOpposite())) {
-						getHostNodesAccumulator(hostNodes, edge.getTarget());
+						getHostNodesAccumulator(hostNodes, edge.getEdgeTarget());
 					}
 				}
 			}

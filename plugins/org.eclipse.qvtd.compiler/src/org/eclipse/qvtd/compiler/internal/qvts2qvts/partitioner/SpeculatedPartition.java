@@ -105,19 +105,19 @@ class SpeculatedPartition extends AbstractPartition
 				Property middle2outputProperty = navigationEdge.getProperty();
 				if (partitioner.isCorrolary(incomingEdge)) {
 					assert corrolaryProperty == null;
-					Node sourceNode = navigationEdge.getSource();
+					Node sourceNode = navigationEdge.getEdgeSource();
 					while (true) {
 						NavigableEdge parentEdge = getParentEdge(sourceNode);
 						if (parentEdge == null) {
 							break;
 						}
-						if (parentEdge.getTarget() != sourceNode) {
+						if (parentEdge.getEdgeTarget() != sourceNode) {
 							parentEdge = parentEdge.getOppositeEdge();
 							if (parentEdge == null) {
 								return false;
 							}
 						}
-						sourceNode = parentEdge.getSource();
+						sourceNode = parentEdge.getEdgeSource();
 					}
 					corrolaryProperty = middle2outputProperty;
 				}
@@ -144,7 +144,7 @@ class SpeculatedPartition extends AbstractPartition
 				if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
 					for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
 						if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
-							Node nonUnitSourceNode = edge.getTarget();
+							Node nonUnitSourceNode = edge.getEdgeTarget();
 							gatherSourceNavigations(nonUnitSourceNode, nonUnitSourceNode.getNodeRole());
 						}
 					}
@@ -155,7 +155,7 @@ class SpeculatedPartition extends AbstractPartition
 
 	@Override
 	protected boolean isComputable(@NonNull Set<@NonNull Node> sourceNodes, @NonNull Edge edge) {
-		Node sourceNode = edge.getSource();
+		Node sourceNode = edge.getEdgeSource();
 		if (tracedInputNodes.contains(sourceNode)) {
 			sourceNodes.add(sourceNode);
 			return true;
@@ -176,7 +176,7 @@ class SpeculatedPartition extends AbstractPartition
 	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
 		EdgeRole edgeRole = edge.getEdgeRole();
 		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
-			if (edge.getTarget().isConstant()) {
+			if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
 			}
 			else {
@@ -189,10 +189,10 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolveMatchedPredicatedEdges() {
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
 			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && !partitioner.isCorrolary(edge)) {
-				Node sourceNode = edge.getSource();
+				Node sourceNode = edge.getEdgeSource();
 				NodeRole sourceNodeRole = sourceNode.getNodeRole();
 				if (!sourceNodeRole.isRealized()) {
-					Node targetNode = edge.getTarget();
+					Node targetNode = edge.getEdgeTarget();
 					NodeRole targetNodeRole = targetNode.getNodeRole();
 					if (!targetNodeRole.isRealized()) {
 						if (!hasNode(sourceNode)) {
@@ -241,10 +241,10 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolveRealizedEdges() {
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && !partitioner.isCorrolary(edge)) {
-				Node sourceNode = edge.getSource();
+				Node sourceNode = edge.getEdgeSource();
 				NodeRole sourceNodeRole = sourceNode.getNodeRole();
 				if (!sourceNodeRole.isRealized()) {
-					Node targetNode = edge.getTarget();
+					Node targetNode = edge.getEdgeTarget();
 					NodeRole targetNodeRole = targetNode.getNodeRole();
 					if (!targetNodeRole.isRealized()) {
 						if (!hasNode(sourceNode)) {
@@ -272,7 +272,7 @@ class SpeculatedPartition extends AbstractPartition
 				}
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (partitioner.hasRealizedEdge(edge)) {
-						tracedInputNodes.add(edge.getTarget());
+						tracedInputNodes.add(edge.getEdgeTarget());
 					}
 				}
 			}
@@ -284,7 +284,7 @@ class SpeculatedPartition extends AbstractPartition
 			gatherSourceNavigations(node, node.getNodeRole());
 			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getTarget();
+					Node targetNode = navigationEdge.getEdgeTarget();
 					NodeRole targetNodeRole = targetNode.getNodeRole();
 					if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
 						gatherSourceNavigations(targetNode, targetNodeRole);
