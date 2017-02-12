@@ -35,8 +35,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
 
 import com.google.common.collect.Iterables;
 

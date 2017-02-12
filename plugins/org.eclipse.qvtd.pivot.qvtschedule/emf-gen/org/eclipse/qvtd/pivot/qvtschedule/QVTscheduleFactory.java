@@ -35,6 +35,15 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Class Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Datum</em>'.
+	 * @generated
+	 */
+	ClassDatum createClassDatum();
+
+	/**
 	 * Returns a new object of class '<em>Edge Role</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,6 +53,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull EdgeRole createEdgeRole();
 
 	/**
+	 * Returns a new object of class '<em>Mapping Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Action</em>'.
+	 * @generated
+	 */
+	MappingAction createMappingAction();
+
+	/**
 	 * Returns a new object of class '<em>Node Role</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,6 +69,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull NodeRole createNodeRole();
+
+	/**
+	 * Returns a new object of class '<em>Property Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Datum</em>'.
+	 * @generated
+	 */
+	PropertyDatum createPropertyDatum();
 
 	/**
 	 * Returns the package supported by this factory.

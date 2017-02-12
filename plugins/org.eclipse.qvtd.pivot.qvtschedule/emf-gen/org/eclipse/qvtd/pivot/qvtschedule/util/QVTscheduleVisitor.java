@@ -26,7 +26,11 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {
+	R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object);
+	R visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object);
 	R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object);
+	R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object);
 	R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object);
+	R visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object);
 	R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object);
 }

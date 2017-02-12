@@ -69,8 +69,11 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
 			case QVTschedulePackage.EDGE_ROLE: return createEdgeRole();
+			case QVTschedulePackage.MAPPING_ACTION: return createMappingAction();
 			case QVTschedulePackage.NODE_ROLE: return createNodeRole();
+			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +115,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public ClassDatum createClassDatum() {
+		ClassDatumImpl classDatum = new ClassDatumImpl();
+		return classDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull EdgeRole createEdgeRole() {
 		EdgeRoleImpl edgeRole = new EdgeRoleImpl();
 		return edgeRole;
@@ -123,9 +137,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public MappingAction createMappingAction() {
+		MappingActionImpl mappingAction = new MappingActionImpl();
+		return mappingAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull NodeRole createNodeRole() {
 		NodeRoleImpl nodeRole = new NodeRoleImpl();
 		return nodeRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PropertyDatum createPropertyDatum() {
+		PropertyDatumImpl propertyDatum = new PropertyDatumImpl();
+		return propertyDatum;
 	}
 
 	/**

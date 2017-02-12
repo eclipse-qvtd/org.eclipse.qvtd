@@ -56,8 +56,8 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 
 public abstract class SchedulerConstants
 {

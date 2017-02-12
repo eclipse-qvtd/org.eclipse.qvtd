@@ -41,9 +41,9 @@ Workflow {
     	baseGenModelFile = "model/Pivot.genmodel"
     }
 
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/org.eclipse.qvtd.pivot.qvtschedule/model/Schedule.genmodel" 	
-    }
+//    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+//    	genModel = "/org.eclipse.qvtd.pivot.qvtschedule/model/Schedule.genmodel" 	
+//    }
 /*    component = GenerateScheduleVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.schedule"
     	genModelFile = "model/Schedule.genmodel"

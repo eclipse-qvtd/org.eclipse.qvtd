@@ -38,13 +38,33 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
+		return delegate.visitAbstractDatum(object);
+	}
+
+	@Override
+	public R visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object) {
+		return delegate.visitClassDatum(object);
+	}
+
+	@Override
 	public R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
 		return delegate.visitEdgeRole(object);
 	}
 
 	@Override
+	public R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
+		return delegate.visitMappingAction(object);
+	}
+
+	@Override
 	public R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
 		return delegate.visitNodeRole(object);
+	}
+
+	@Override
+	public R visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object) {
+		return delegate.visitPropertyDatum(object);
 	}
 
 	@Override

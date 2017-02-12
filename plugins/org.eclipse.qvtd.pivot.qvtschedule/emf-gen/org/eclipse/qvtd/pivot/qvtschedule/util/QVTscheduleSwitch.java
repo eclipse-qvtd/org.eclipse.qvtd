@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.qvtd.pivot.qvtschedule.*;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -82,11 +83,20 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTschedulePackage.ROLE: {
-				Role role = (Role)theEObject;
-				T result = caseRole(role);
-				if (result == null) result = caseElement(role);
-				if (result == null) result = caseVisitable(role);
+			case QVTschedulePackage.ABSTRACT_DATUM: {
+				AbstractDatum abstractDatum = (AbstractDatum)theEObject;
+				T result = caseAbstractDatum(abstractDatum);
+				if (result == null) result = caseElement(abstractDatum);
+				if (result == null) result = caseVisitable(abstractDatum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.CLASS_DATUM: {
+				ClassDatum classDatum = (ClassDatum)theEObject;
+				T result = caseClassDatum(classDatum);
+				if (result == null) result = caseAbstractDatum(classDatum);
+				if (result == null) result = caseElement(classDatum);
+				if (result == null) result = caseVisitable(classDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -99,6 +109,14 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.MAPPING_ACTION: {
+				MappingAction mappingAction = (MappingAction)theEObject;
+				T result = caseMappingAction(mappingAction);
+				if (result == null) result = caseElement(mappingAction);
+				if (result == null) result = caseVisitable(mappingAction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.NODE_ROLE: {
 				NodeRole nodeRole = (NodeRole)theEObject;
 				T result = caseNodeRole(nodeRole);
@@ -108,8 +126,55 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.PROPERTY_DATUM: {
+				PropertyDatum propertyDatum = (PropertyDatum)theEObject;
+				T result = casePropertyDatum(propertyDatum);
+				if (result == null) result = caseAbstractDatum(propertyDatum);
+				if (result == null) result = caseElement(propertyDatum);
+				if (result == null) result = caseVisitable(propertyDatum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.ROLE: {
+				Role role = (Role)theEObject;
+				T result = caseRole(role);
+				if (result == null) result = caseElement(role);
+				if (result == null) result = caseVisitable(role);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Datum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractDatum(AbstractDatum object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Datum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassDatum(ClassDatum object) {
+		return null;
 	}
 
 	/**
@@ -143,6 +208,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Action</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingAction(MappingAction object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Node Role</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -154,6 +234,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNodeRole(NodeRole object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Datum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyDatum(PropertyDatum object) {
 		return null;
 	}
 

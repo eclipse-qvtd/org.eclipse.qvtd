@@ -7,7 +7,51 @@
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="Role" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="producedBy" upperBound="-1"
+        eType="#//MappingAction" eOpposite="#//MappingAction/productions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"
+        eType="#//MappingAction" derived="true" eOpposite="#//MappingAction/requisites"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//CompleteClass"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDatums" upperBound="-1"
+        eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
+        eType="#//ClassDatum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeRole" eSuperTypes="#//Role">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="EdgeRole defines which of many possible roles an edge plays"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="productions" upperBound="-1"
+        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
+        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredBy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeRole" eSuperTypes="#//Role">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="NodeRole defines which of many possible roles an node plays"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
+        eType="#//ClassDatum" eOpposite="#//ClassDatum/propertyDatums"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
+        eType="#//PropertyDatum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Role defines which of many possible roles an edge plays"/>
     </eAnnotations>
@@ -66,16 +110,6 @@
         <details key="derivation" value="phase = qvtschedule::Phase::SPECULATION"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EdgeRole" eSuperTypes="#//Role">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="EdgeRole defines which of many possible roles an edge plays"/>
-    </eAnnotations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeRole" eSuperTypes="#//Role">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="NodeRole defines which of many possible roles an node plays"/>
-    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Phase">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

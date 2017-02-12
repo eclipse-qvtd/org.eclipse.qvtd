@@ -34,6 +34,30 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitAbstractDatum(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitClassDatum(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -46,10 +70,34 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitMappingAction(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitNodeRole(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitPropertyDatum(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

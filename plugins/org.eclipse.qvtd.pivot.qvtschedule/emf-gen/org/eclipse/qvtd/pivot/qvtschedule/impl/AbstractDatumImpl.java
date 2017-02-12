@@ -10,7 +10,7 @@
  *******************************************************************************/
 /**
  */
-package org.eclipse.qvtd.pivot.schedule.impl;
+package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 
@@ -20,13 +20,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
-import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getProducedBy <em>Produced By</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getRequiredBy <em>Required By</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getTypedModel <em>Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getProducedBy <em>Produced By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getRequiredBy <em>Required By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container implements AbstractDatum {
+public abstract class AbstractDatumImpl extends ElementImpl implements AbstractDatum {
 	/**
 	 * The cached value of the '{@link #getProducedBy() <em>Produced By</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -90,7 +90,7 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SchedulePackage.Literals.ABSTRACT_DATUM;
+		return QVTschedulePackage.Literals.ABSTRACT_DATUM;
 	}
 
 	/**
@@ -105,7 +105,7 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 			typedModel = (TypedModel)eResolveProxy(oldTypedModel);
 			if (typedModel != oldTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL, oldTypedModel, typedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.ABSTRACT_DATUM__TYPED_MODEL, oldTypedModel, typedModel));
 			}
 		}
 		return typedModel;
@@ -130,7 +130,7 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 		TypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL, oldTypedModel, typedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ABSTRACT_DATUM__TYPED_MODEL, oldTypedModel, typedModel));
 	}
 
 	/**
@@ -141,7 +141,7 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public EList<MappingAction> getProducedBy() {
 		if (producedBy == null) {
-			producedBy = new EObjectWithInverseResolvingEList.ManyInverse<MappingAction>(MappingAction.class, this, SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY, SchedulePackage.MAPPING_ACTION__PRODUCTIONS);
+			producedBy = new EObjectWithInverseResolvingEList.ManyInverse<MappingAction>(MappingAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY, QVTschedulePackage.MAPPING_ACTION__PRODUCTIONS);
 		}
 		return producedBy;
 	}
@@ -154,7 +154,7 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public EList<MappingAction> getRequiredBy() {
 		if (requiredBy == null) {
-			requiredBy = new EObjectWithInverseResolvingEList.ManyInverse<MappingAction>(MappingAction.class, this, SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY, SchedulePackage.MAPPING_ACTION__REQUISITES);
+			requiredBy = new EObjectWithInverseResolvingEList.ManyInverse<MappingAction>(MappingAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY, QVTschedulePackage.MAPPING_ACTION__REQUISITES);
 		}
 		return requiredBy;
 	}
@@ -168,9 +168,9 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProducedBy()).basicAdd(otherEnd, msgs);
-			case SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRequiredBy()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -184,9 +184,9 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				return ((InternalEList<?>)getProducedBy()).basicRemove(otherEnd, msgs);
-			case SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
 				return ((InternalEList<?>)getRequiredBy()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -200,11 +200,11 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				return getProducedBy();
-			case SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
 				return getRequiredBy();
-			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+			case QVTschedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
 				if (resolve) return getTypedModel();
 				return basicGetTypedModel();
 		}
@@ -220,15 +220,15 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				getProducedBy().clear();
 				getProducedBy().addAll((Collection<? extends MappingAction>)newValue);
 				return;
-			case SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
 				getRequiredBy().clear();
 				getRequiredBy().addAll((Collection<? extends MappingAction>)newValue);
 				return;
-			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+			case QVTschedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
 				setTypedModel((TypedModel)newValue);
 				return;
 		}
@@ -243,13 +243,13 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				getProducedBy().clear();
 				return;
-			case SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
 				getRequiredBy().clear();
 				return;
-			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+			case QVTschedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
 				setTypedModel((TypedModel)null);
 				return;
 		}
@@ -264,11 +264,11 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				return producedBy != null && !producedBy.isEmpty();
-			case SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
 				return requiredBy != null && !requiredBy.isEmpty();
-			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+			case QVTschedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
 				return typedModel != null;
 		}
 		return super.eIsSet(featureID);

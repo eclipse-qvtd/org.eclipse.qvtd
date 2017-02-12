@@ -10,7 +10,7 @@
  *******************************************************************************/
 /**
  */
-package org.eclipse.qvtd.pivot.schedule;
+package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -24,13 +24,12 @@ import org.eclipse.ocl.pivot.CompleteClass;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getCompleteClass <em>Complete Class</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getSchedule <em>Schedule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getSuper <em>Super</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuper <em>Super</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getClassDatum()
+ * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum()
  * @model
  * @generated
  */
@@ -45,14 +44,15 @@ public interface ClassDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Complete Class</em>' reference.
 	 * @see #setCompleteClass(CompleteClass)
-	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getClassDatum_CompleteClass()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_CompleteClass()
 	 * @model required="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!completeClass'"
 	 * @generated
 	 */
 	CompleteClass getCompleteClass();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getCompleteClass <em>Complete Class</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Complete Class</em>' reference.
@@ -63,8 +63,8 @@ public interface ClassDatum extends AbstractDatum {
 
 	/**
 	 * Returns the value of the '<em><b>Property Datums</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.PropertyDatum}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.PropertyDatum#getClassDatum <em>Class Datum</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Property Datums</em>' containment reference list isn't clear,
@@ -72,44 +72,17 @@ public interface ClassDatum extends AbstractDatum {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property Datums</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getClassDatum_PropertyDatums()
-	 * @see org.eclipse.qvtd.pivot.schedule.PropertyDatum#getClassDatum
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_PropertyDatums()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum
 	 * @model opposite="classDatum" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!propertyDatums'"
 	 * @generated
 	 */
 	EList<PropertyDatum> getPropertyDatums();
 
 	/**
-	 * Returns the value of the '<em><b>Schedule</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.Schedule#getDatums <em>Datums</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Schedule</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Schedule</em>' container reference.
-	 * @see #setSchedule(Schedule)
-	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getClassDatum_Schedule()
-	 * @see org.eclipse.qvtd.pivot.schedule.Schedule#getDatums
-	 * @model opposite="datums" required="true" transient="false"
-	 * @generated
-	 */
-	Schedule getSchedule();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getSchedule <em>Schedule</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Schedule</em>' container reference.
-	 * @see #getSchedule()
-	 * @generated
-	 */
-	void setSchedule(Schedule value);
-
-	/**
 	 * Returns the value of the '<em><b>Super</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.ClassDatum}.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Super</em>' reference list isn't clear,
@@ -117,8 +90,8 @@ public interface ClassDatum extends AbstractDatum {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getClassDatum_Super()
-	 * @model
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_Super()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!super'"
 	 * @generated
 	 */
 	EList<ClassDatum> getSuper();

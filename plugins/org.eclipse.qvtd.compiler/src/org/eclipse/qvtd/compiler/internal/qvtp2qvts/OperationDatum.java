@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.IndexableIterable;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
 /**
  * OperationDatum provides a hashed list of ClassDatums suitable for characterizing a specialized OperationRegion.

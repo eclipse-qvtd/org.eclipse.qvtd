@@ -30,13 +30,13 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 
 import com.google.common.collect.Sets;
 
 /**
- * A ContentsAnalysis provides an analysis of many (all) regions to facilate lookup of all producers consumers of particular types and properties.
+ * A ContentsAnalysis provides an analysis of many (all) regions to facilitate lookup of all producers consumers of particular types and properties.
  */
 public class ContentsAnalysis
 {

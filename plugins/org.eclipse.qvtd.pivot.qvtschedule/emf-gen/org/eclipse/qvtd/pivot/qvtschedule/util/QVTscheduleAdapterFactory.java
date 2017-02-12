@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.qvtd.pivot.qvtschedule.*;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -82,31 +83,47 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTscheduleSwitch<@Nullable Adapter> modelSwitch =
 			new QVTscheduleSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseRole(Role object) {
-			return createRoleAdapter();
-		}
-		@Override
-		public Adapter caseEdgeRole(EdgeRole object) {
-			return createEdgeRoleAdapter();
-		}
-		@Override
-		public Adapter caseNodeRole(NodeRole object) {
-			return createNodeRoleAdapter();
-		}
-		@Override
-		public Adapter caseVisitable(Visitable object) {
-			return createVisitableAdapter();
-		}
-		@Override
-		public Adapter caseElement(Element object) {
-			return createElementAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseAbstractDatum(AbstractDatum object) {
+				return createAbstractDatumAdapter();
+			}
+			@Override
+			public Adapter caseClassDatum(ClassDatum object) {
+				return createClassDatumAdapter();
+			}
+			@Override
+			public Adapter caseEdgeRole(EdgeRole object) {
+				return createEdgeRoleAdapter();
+			}
+			@Override
+			public Adapter caseMappingAction(MappingAction object) {
+				return createMappingActionAdapter();
+			}
+			@Override
+			public Adapter caseNodeRole(NodeRole object) {
+				return createNodeRoleAdapter();
+			}
+			@Override
+			public Adapter casePropertyDatum(PropertyDatum object) {
+				return createPropertyDatumAdapter();
+			}
+			@Override
+			public Adapter caseRole(Role object) {
+				return createRoleAdapter();
+			}
+			@Override
+			public Adapter caseVisitable(Visitable object) {
+				return createVisitableAdapter();
+			}
+			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -121,6 +138,34 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum
+	 * @generated
+	 */
+	public Adapter createAbstractDatumAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum <em>Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum
+	 * @generated
+	 */
+	public Adapter createClassDatumAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}'.
@@ -151,6 +196,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction <em>Mapping Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction
+	 * @generated
+	 */
+	public Adapter createMappingActionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeRole <em>Node Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -161,6 +220,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNodeRoleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum <em>Property Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum
+	 * @generated
+	 */
+	public Adapter createPropertyDatumAdapter() {
 		return null;
 	}
 

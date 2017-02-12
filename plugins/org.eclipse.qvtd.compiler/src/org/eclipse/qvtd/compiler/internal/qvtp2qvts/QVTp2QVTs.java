@@ -37,7 +37,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
 public class QVTp2QVTs extends SchedulerConstants
 {

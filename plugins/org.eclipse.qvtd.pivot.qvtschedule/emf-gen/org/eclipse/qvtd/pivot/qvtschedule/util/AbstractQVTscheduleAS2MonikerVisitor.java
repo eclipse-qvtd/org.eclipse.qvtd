@@ -46,13 +46,33 @@ public abstract class AbstractQVTscheduleAS2MonikerVisitor
 	}
 
 	@Override
+	public @Nullable Object visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object) {
+		return visitAbstractDatum(object);
+	}
+
+	@Override
 	public @Nullable Object visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
 		return visitRole(object);
 	}
 
 	@Override
+	public @Nullable Object visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
+		return visitElement(object);
+	}
+
+	@Override
 	public @Nullable Object visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
 		return visitRole(object);
+	}
+
+	@Override
+	public @Nullable Object visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object) {
+		return visitAbstractDatum(object);
 	}
 
 	@Override

@@ -58,13 +58,11 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
-import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.schedule.Schedule;
-import org.eclipse.qvtd.pivot.schedule.ScheduleFactory;
-
+import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import com.google.common.collect.Iterables;
 
 /**
@@ -75,8 +73,6 @@ public class DatumCaches
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull ContainmentAnalysis containmentAnalysis;
 	protected final @NonNull CompleteModel completeModel;
-
-	private final @NonNull Schedule schedule = ScheduleFactory.eINSTANCE.createSchedule();
 
 	// Caches
 	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
@@ -116,14 +112,16 @@ public class DatumCaches
 	}
 
 	public void analyzeTransformation(@NonNull Transformation pTransformation) {
-		List<MappingAction> actions = schedule.getActions();
+		//		List<MappingAction> actions = schedule.getActions();
 		for (@NonNull Rule pRule : ClassUtil.nullFree(pTransformation.getRule())) {
-			actions.add(analyzeMapping((Mapping) pRule));
+			@SuppressWarnings("unused")
+			MappingAction mappingAction = analyzeMapping((Mapping) pRule);
+			//			actions.add(mappingAction);
 		}
 	}
 
 	private MappingAction analyzeMapping(@NonNull Mapping mapping) {
-		MappingAction ma = ScheduleFactory.eINSTANCE.createMappingAction();
+		MappingAction ma = QVTscheduleFactory.eINSTANCE.createMappingAction();
 		ma.setMapping(mapping);
 
 		List<AbstractDatum> productions = ma.getProductions();
@@ -291,8 +289,7 @@ public class DatumCaches
 		}
 		ClassDatum classDatum = completeClass2classDatums.get(completeClass);
 		if (classDatum == null) {
-			classDatum = ScheduleFactory.eINSTANCE.createClassDatum();
-			classDatum.setSchedule(schedule);
+			classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
 			classDatum.setCompleteClass(completeClass);
 			classDatum.setTypedModel(typedModel);
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
@@ -458,7 +455,7 @@ public class DatumCaches
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
 		org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
 		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
-		PropertyDatum propertyDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
+		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setTypedModel(typedModel);
 		propertyDatum.setProperty(property);
 		propertyDatum.setClassDatum(classDatum);

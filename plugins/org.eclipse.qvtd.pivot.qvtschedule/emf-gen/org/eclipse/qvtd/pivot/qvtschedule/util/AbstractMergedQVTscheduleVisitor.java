@@ -34,12 +34,32 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
 		return visiting(object);
 	}
 
 	@Override
+	public R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object) {
 		return visiting(object);
 	}
 

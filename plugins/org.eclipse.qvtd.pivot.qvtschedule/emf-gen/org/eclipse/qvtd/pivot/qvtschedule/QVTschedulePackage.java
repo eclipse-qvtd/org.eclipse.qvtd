@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ocl.pivot.PivotPackage;
 
 /**
@@ -70,6 +71,251 @@ public interface QVTschedulePackage extends EPackage {
 	QVTschedulePackage eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl <em>Abstract Datum</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getAbstractDatum()
+	 * @generated
+	 */
+	int ABSTRACT_DATUM = 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__PRODUCED_BY = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Required By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__REQUIRED_BY = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__TYPED_MODEL = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Abstract Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl <em>Class Datum</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getClassDatum()
+	 * @generated
+	 */
+	int CLASS_DATUM = 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__ANNOTATING_COMMENTS = ABSTRACT_DATUM__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__OWNED_ANNOTATIONS = ABSTRACT_DATUM__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__OWNED_COMMENTS = ABSTRACT_DATUM__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__OWNED_EXTENSIONS = ABSTRACT_DATUM__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__PRODUCED_BY = ABSTRACT_DATUM__PRODUCED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Required By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__REQUIRED_BY = ABSTRACT_DATUM__REQUIRED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__TYPED_MODEL = ABSTRACT_DATUM__TYPED_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Complete Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__COMPLETE_CLASS = ABSTRACT_DATUM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Datums</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Super</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__SUPER = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Class Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM___ALL_OWNED_ELEMENTS = ABSTRACT_DATUM___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM___GET_VALUE__TYPE_STRING = ABSTRACT_DATUM___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Class Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM_OPERATION_COUNT = ABSTRACT_DATUM_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl <em>Role</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +323,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 0;
+	int ROLE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -240,7 +486,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdgeRole()
 	 * @generated
 	 */
-	int EDGE_ROLE = 1;
+	int EDGE_ROLE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -396,6 +642,115 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE_ROLE_OPERATION_COUNT = ROLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl <em>Mapping Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingAction()
+	 * @generated
+	 */
+	int MAPPING_ACTION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Mapping</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__MAPPING = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Productions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__PRODUCTIONS = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Requisites</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__REQUISITES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Mapping Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeRoleImpl <em>Node Role</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,7 +758,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNodeRole()
 	 * @generated
 	 */
-	int NODE_ROLE = 2;
+	int NODE_ROLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -559,6 +914,151 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE_ROLE_OPERATION_COUNT = ROLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPropertyDatum()
+	 * @generated
+	 */
+	int PROPERTY_DATUM = 5;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__ANNOTATING_COMMENTS = ABSTRACT_DATUM__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__OWNED_ANNOTATIONS = ABSTRACT_DATUM__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__OWNED_COMMENTS = ABSTRACT_DATUM__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__OWNED_EXTENSIONS = ABSTRACT_DATUM__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__PRODUCED_BY = ABSTRACT_DATUM__PRODUCED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Required By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__REQUIRED_BY = ABSTRACT_DATUM__REQUIRED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__TYPED_MODEL = ABSTRACT_DATUM__TYPED_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__PROPERTY = ABSTRACT_DATUM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Class Datum</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__CLASS_DATUM = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Opposite</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__OPPOSITE = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Super</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__SUPER = ABSTRACT_DATUM_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Property Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM___ALL_OWNED_ELEMENTS = ABSTRACT_DATUM___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM___GET_VALUE__TYPE_STRING = ABSTRACT_DATUM___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Property Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM_OPERATION_COUNT = ABSTRACT_DATUM_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -566,8 +1066,94 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPhase()
 	 * @generated
 	 */
-	int PHASE = 3;
+	int PHASE = 7;
 
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum
+	 * @generated
+	 */
+	EClass getAbstractDatum();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducedBy <em>Produced By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Produced By</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducedBy()
+	 * @see #getAbstractDatum()
+	 * @generated
+	 */
+	EReference getAbstractDatum_ProducedBy();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getRequiredBy <em>Required By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Required By</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getRequiredBy()
+	 * @see #getAbstractDatum()
+	 * @generated
+	 */
+	EReference getAbstractDatum_RequiredBy();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getTypedModel <em>Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getTypedModel()
+	 * @see #getAbstractDatum()
+	 * @generated
+	 */
+	EReference getAbstractDatum_TypedModel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum <em>Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum
+	 * @generated
+	 */
+	EClass getClassDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Complete Class</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_CompleteClass();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Property Datums</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_PropertyDatums();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuper <em>Super</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Super</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuper()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_Super();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}'.
@@ -689,6 +1275,49 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getEdgeRole();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction <em>Mapping Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Action</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction
+	 * @generated
+	 */
+	EClass getMappingAction();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getMapping <em>Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Mapping</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getMapping()
+	 * @see #getMappingAction()
+	 * @generated
+	 */
+	EReference getMappingAction_Mapping();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getProductions <em>Productions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Productions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getProductions()
+	 * @see #getMappingAction()
+	 * @generated
+	 */
+	EReference getMappingAction_Productions();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getRequisites <em>Requisites</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Requisites</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getRequisites()
+	 * @see #getMappingAction()
+	 * @generated
+	 */
+	EReference getMappingAction_Requisites();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeRole <em>Node Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -697,6 +1326,60 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNodeRole();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum <em>Property Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum
+	 * @generated
+	 */
+	EClass getPropertyDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getProperty()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_Property();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_ClassDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Opposite</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOpposite()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_Opposite();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getSuper <em>Super</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Super</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getSuper()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_Super();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}'.
@@ -731,6 +1414,74 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl <em>Abstract Datum</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getAbstractDatum()
+		 * @generated
+		 */
+		EClass ABSTRACT_DATUM = eINSTANCE.getAbstractDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Produced By</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_DATUM__PRODUCED_BY = eINSTANCE.getAbstractDatum_ProducedBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Required By</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_DATUM__REQUIRED_BY = eINSTANCE.getAbstractDatum_RequiredBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_DATUM__TYPED_MODEL = eINSTANCE.getAbstractDatum_TypedModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl <em>Class Datum</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getClassDatum()
+		 * @generated
+		 */
+		EClass CLASS_DATUM = eINSTANCE.getClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Complete Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__COMPLETE_CLASS = eINSTANCE.getClassDatum_CompleteClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Datums</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__PROPERTY_DATUMS = eINSTANCE.getClassDatum_PropertyDatums();
+
+		/**
+		 * The meta object literal for the '<em><b>Super</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__SUPER = eINSTANCE.getClassDatum_Super();
+
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl <em>Role</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -824,6 +1575,40 @@ public interface QVTschedulePackage extends EPackage {
 		EClass EDGE_ROLE = eINSTANCE.getEdgeRole();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl <em>Mapping Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingAction()
+		 * @generated
+		 */
+		EClass MAPPING_ACTION = eINSTANCE.getMappingAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_ACTION__MAPPING = eINSTANCE.getMappingAction_Mapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Productions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_ACTION__PRODUCTIONS = eINSTANCE.getMappingAction_Productions();
+
+		/**
+		 * The meta object literal for the '<em><b>Requisites</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_ACTION__REQUISITES = eINSTANCE.getMappingAction_Requisites();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeRoleImpl <em>Node Role</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -832,6 +1617,48 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass NODE_ROLE = eINSTANCE.getNodeRole();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPropertyDatum()
+		 * @generated
+		 */
+		EClass PROPERTY_DATUM = eINSTANCE.getPropertyDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__PROPERTY = eINSTANCE.getPropertyDatum_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Datum</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__CLASS_DATUM = eINSTANCE.getPropertyDatum_ClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__OPPOSITE = eINSTANCE.getPropertyDatum_Opposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Super</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__SUPER = eINSTANCE.getPropertyDatum_Super();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}' enum.

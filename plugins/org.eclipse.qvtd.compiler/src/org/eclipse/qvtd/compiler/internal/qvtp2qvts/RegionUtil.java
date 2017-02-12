@@ -61,11 +61,11 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
 public class RegionUtil extends QVTscheduleUtil
 {

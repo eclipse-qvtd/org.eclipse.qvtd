@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="&lt;copyright>&#xD;&#xA;&#xD;&#xA;Copyright (c) 2013, 2017 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation&#xD;&#xA;&#xD;&#xA;&lt;/copyright>"
     modelDirectory="/org.eclipse.qvtd.pivot.qvtschedule/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtschedule"
     modelName="QVTSchedule" modelPluginClass="" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot"
+    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel#//qvtcore"
     interfaceNamePattern="" operationReflection="true">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
@@ -25,6 +25,29 @@
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Phase/SPECULATED"/>
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Phase/OTHER"/>
     </genEnums>
+    <genClasses image="false" ecoreClass="QVTschedule.ecore#//AbstractDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//AbstractDatum/producedBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//AbstractDatum/requiredBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//AbstractDatum/typedModel"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTschedule.ecore#//ClassDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/completeClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/propertyDatums"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ClassDatum/super"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTschedule.ecore#//EdgeRole"/>
+    <genClasses ecoreClass="QVTschedule.ecore#//MappingAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingAction/mapping"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingAction/productions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingAction/requisites"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTschedule.ecore#//NodeRole"/>
+    <genClasses ecoreClass="QVTschedule.ecore#//PropertyDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/property"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/classDatum"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/opposite"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/super"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Role">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/phase"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/constant"/>
@@ -36,7 +59,5 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/speculated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/speculation"/>
     </genClasses>
-    <genClasses ecoreClass="QVTschedule.ecore#//EdgeRole"/>
-    <genClasses ecoreClass="QVTschedule.ecore#//NodeRole"/>
   </genPackages>
 </genmodel:GenModel>
