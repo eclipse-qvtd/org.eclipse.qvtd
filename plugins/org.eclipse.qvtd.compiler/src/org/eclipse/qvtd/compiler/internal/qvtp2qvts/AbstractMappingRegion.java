@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -567,7 +568,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.setColor("palegreen");
-		s.setPenwidth(Role.LINE_WIDTH);
+		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		super.toGraph(s);
 	}
 }

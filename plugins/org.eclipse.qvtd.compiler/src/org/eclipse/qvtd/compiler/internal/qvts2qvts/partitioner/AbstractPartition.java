@@ -20,13 +20,14 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -62,8 +63,8 @@ abstract class AbstractPartition
 	}
 	protected final @NonNull Partitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Edge> alreadyRealizedEdges;
-	private final @NonNull Map<@NonNull Node, @NonNull NodeRole> node2nodeRole = new HashMap<>();
-	private final @NonNull Map<@NonNull Edge, org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole> edge2edgeRole = new HashMap<>();
+	private final @NonNull Map<@NonNull Node, org.eclipse.qvtd.pivot.qvtschedule.NodeRole> node2nodeRole = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, org.eclipse.qvtd.pivot.qvtschedule.EdgeRole> edge2edgeRole = new HashMap<>();
 	private /*@LazyNonNull*/ PartitionForest forest = null;
 
 	protected AbstractPartition(@NonNull Partitioner partitioner) {

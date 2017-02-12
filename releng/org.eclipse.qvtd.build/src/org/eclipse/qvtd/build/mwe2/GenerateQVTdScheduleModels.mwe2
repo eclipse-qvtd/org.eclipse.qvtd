@@ -32,11 +32,20 @@ Workflow {
     }
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
+    component = @SubGenerateASModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtschedule"
+    	genModelFile =  "model/QVTschedule.genmodel"
+    	superProjectName = "org.eclipse.ocl.pivot"
+    	superGenModelFile = "model/Pivot.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
+    }
+
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtschedule/model/Schedule.genmodel" 	
     }
 /*    component = GenerateScheduleVisitors { resourceSet = resourceSet
-    	projectName = "org.eclipse.qvtd.pivot.qvtschedule"
+    	projectName = "org.eclipse.qvtd.pivot.schedule"
     	genModelFile = "model/Schedule.genmodel"
     } */
 	component = ConvertToUnixLineEndings {

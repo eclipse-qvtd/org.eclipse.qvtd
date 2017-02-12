@@ -21,8 +21,8 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 
 /**
  * A NodeMerger gathers the contributions for a node in a merged region and supports

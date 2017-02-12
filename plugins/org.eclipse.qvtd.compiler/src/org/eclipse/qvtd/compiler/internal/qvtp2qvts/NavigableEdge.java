@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 
 public interface NavigableEdge extends Edge, ConnectionEnd
 {

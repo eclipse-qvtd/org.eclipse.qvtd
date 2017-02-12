@@ -15,10 +15,11 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The SpeculationPartition identifies the nodes and edges required in a speculation micro-mapping
@@ -36,7 +37,7 @@ class SpeculationPartition extends AbstractPartition
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
-				NodeRole speculationNodeRole = node.getNodeRole().asSpeculation();
+				NodeRole speculationNodeRole = QVTscheduleUtil.asSpeculation(node.getNodeRole());
 				addNode(node, speculationNodeRole);
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					addReachableConstantOrLoadedNodes(edge.getTarget());

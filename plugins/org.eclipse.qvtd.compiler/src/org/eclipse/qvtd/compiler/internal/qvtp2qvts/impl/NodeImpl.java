@@ -31,9 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
@@ -42,6 +40,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -261,7 +262,7 @@ public abstract class NodeImpl implements Node
 
 	protected @NonNull String getColor() {
 		assert nodeRole != null;
-		return nodeRole.getColor();
+		return QVTscheduleUtil.getColor(nodeRole);
 	}
 
 	@Override
@@ -284,7 +285,7 @@ public abstract class NodeImpl implements Node
 
 	protected @NonNull String getFillColor() {
 		assert nodeRole != null;
-		return nodeRole.getFillColor();
+		return QVTscheduleUtil.getFillColor(nodeRole);
 	}
 
 	@Override
@@ -424,7 +425,7 @@ public abstract class NodeImpl implements Node
 	}
 
 	protected @NonNull Integer getPenwidth() {
-		return isHead() ? Role.HEAD_WIDTH : !isExpression() ? 2*Role.LINE_WIDTH : Role.LINE_WIDTH;
+		return isHead() ? QVTscheduleConstants.HEAD_WIDTH : !isExpression() ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
 	}
 
 	@Override

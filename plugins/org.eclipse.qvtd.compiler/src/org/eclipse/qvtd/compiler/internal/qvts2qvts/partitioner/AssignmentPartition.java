@@ -13,12 +13,12 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The AssignmentPartition identifies the nodes and edges required by an assignment micro-mapping
@@ -35,7 +35,7 @@ class AssignmentPartition extends AbstractPartition
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			addNode(node, node.getNodeRole().asPredicated()/*.asMatched()*/);
+			addNode(node, QVTscheduleUtil.asPredicated(node.getNodeRole())/*.asMatched()*/);
 		}
 		//
 		//	The nodes that support identification of the realized edge are used as is.
@@ -52,7 +52,7 @@ class AssignmentPartition extends AbstractPartition
 		if (!hasNode(targetNode)) {
 			NodeRole targetNodeRole = targetNode.getNodeRole();
 			if (targetNodeRole.isRealized()) {
-				targetNodeRole = targetNodeRole.asPredicated()/*.asMatched()*/;
+				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole)/*.asMatched()*/;
 			}
 			addNode(targetNode, targetNodeRole);
 			boolean hasPredecessor = false;
@@ -75,7 +75,7 @@ class AssignmentPartition extends AbstractPartition
 	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
 		EdgeRole edgeRole = edge.getEdgeRole();
 		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
-			edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.PREDICATED);
+			edgeRole = QVTscheduleUtil.getEdgeRole(Phase.PREDICATED);
 		}
 		return edgeRole;
 	}

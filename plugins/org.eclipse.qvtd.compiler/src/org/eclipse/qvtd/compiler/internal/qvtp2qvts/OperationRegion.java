@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 
@@ -240,8 +241,8 @@ public class OperationRegion extends AbstractRegion
 
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setColor(Role.OPERATION_COLOR);
-		s.setPenwidth(Role.LINE_WIDTH);
+		s.setColor(QVTscheduleConstants.OPERATION_COLOR);
+		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		super.toGraph(s);
 	}
 }

@@ -7,6 +7,14 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated QVTschedule -->
+      <package
+            uri="http://www.eclipse.org/qvt/2017/QVTschedule"
+            class="org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage"
+            genModel="model/QVTschedule.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Schedule -->
       <package
             uri="http://www.eclipse.org/qvt/2015/Schedule"

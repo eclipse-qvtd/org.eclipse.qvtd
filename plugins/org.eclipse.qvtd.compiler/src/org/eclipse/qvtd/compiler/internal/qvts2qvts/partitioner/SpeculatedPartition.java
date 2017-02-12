@@ -17,12 +17,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The SpeculatedPartition identifies the nodes and edges required by a speculated micro-mapping
@@ -179,7 +180,7 @@ class SpeculatedPartition extends AbstractPartition
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
 			}
 			else {
-				edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.PREDICATED);
+				edgeRole = QVTscheduleConstants.getEdgeRole(Phase.PREDICATED);
 			}
 		}
 		return edgeRole;
@@ -218,9 +219,9 @@ class SpeculatedPartition extends AbstractPartition
 			if (node.isMatched()) {
 				NodeRole nodeRole = node.getNodeRole();
 				if (node.isPattern() && node.isClass()) {
-					nodeRole = nodeRole.asSpeculated();
+					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
 				}
-				gatherSourceNavigations(node, nodeRole.asSpeculated());
+				gatherSourceNavigations(node, QVTscheduleUtil.asSpeculated(nodeRole));
 			}
 		}
 	}
@@ -264,7 +265,7 @@ class SpeculatedPartition extends AbstractPartition
 				NodeRole nodeRole = node.getNodeRole();
 				//				assert nodeRole.isMatched();
 				assert node.isPattern();//
-				nodeRole = nodeRole.asSpeculated();
+				nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
 				//				}
 				if (!hasNode(node)) {
 					addNode(node, nodeRole);

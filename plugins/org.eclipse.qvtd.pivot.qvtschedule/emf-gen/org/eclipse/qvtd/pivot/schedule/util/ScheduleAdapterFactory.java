@@ -17,7 +17,12 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.schedule.*;
+import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
+import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.schedule.MappingAction;
+import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.schedule.Schedule;
+import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,32 +79,32 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected ScheduleSwitch<@Nullable Adapter> modelSwitch =
-		new ScheduleSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseAbstractDatum(AbstractDatum object) {
-				return createAbstractDatumAdapter();
-			}
-			@Override
-			public Adapter caseClassDatum(ClassDatum object) {
-				return createClassDatumAdapter();
-			}
-			@Override
-			public Adapter caseMappingAction(MappingAction object) {
-				return createMappingActionAdapter();
-			}
-			@Override
-			public Adapter casePropertyDatum(PropertyDatum object) {
-				return createPropertyDatumAdapter();
-			}
-			@Override
-			public Adapter caseSchedule(Schedule object) {
-				return createScheduleAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+			new ScheduleSwitch<@Nullable Adapter>() {
+		@Override
+		public Adapter caseAbstractDatum(AbstractDatum object) {
+			return createAbstractDatumAdapter();
+		}
+		@Override
+		public Adapter caseClassDatum(ClassDatum object) {
+			return createClassDatumAdapter();
+		}
+		@Override
+		public Adapter caseMappingAction(MappingAction object) {
+			return createMappingActionAdapter();
+		}
+		@Override
+		public Adapter casePropertyDatum(PropertyDatum object) {
+			return createPropertyDatumAdapter();
+		}
+		@Override
+		public Adapter caseSchedule(Schedule object) {
+			return createScheduleAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

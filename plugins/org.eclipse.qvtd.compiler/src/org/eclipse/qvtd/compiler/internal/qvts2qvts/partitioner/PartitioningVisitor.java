@@ -19,15 +19,15 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractVisitor;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 
 /**
  * The PartitioningVisitor performs the selective clone of a region, selecting and possibly reclassifying

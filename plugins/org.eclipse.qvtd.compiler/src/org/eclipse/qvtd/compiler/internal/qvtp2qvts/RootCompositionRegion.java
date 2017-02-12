@@ -24,6 +24,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 public class RootCompositionRegion extends AbstractRegion
 {
@@ -183,7 +184,7 @@ public class RootCompositionRegion extends AbstractRegion
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.setLabel(getName());
 		s.setColor("lightblue");
-		s.setPenwidth(Role.LINE_WIDTH);
+		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		s.pushCluster();
 		for (@NonNull Node node : getNodes()) {
 			s.appendNode(node);

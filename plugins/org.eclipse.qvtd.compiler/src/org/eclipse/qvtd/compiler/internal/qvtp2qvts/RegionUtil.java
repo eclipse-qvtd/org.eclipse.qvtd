@@ -41,14 +41,12 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.CastEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ComposedNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.DependencyNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ErrorNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ExpressionEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.InputNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratedEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratorNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NavigationEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NodeRoleImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NullNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.OperationNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PatternTypedNodeImpl;
@@ -63,9 +61,13 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
-public class RegionUtil
+public class RegionUtil extends QVTscheduleUtil
 {
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
 		for (@NonNull Node firstNode : firstNodes) {
@@ -78,13 +80,14 @@ public class RegionUtil
 		return true;
 	}
 	public static @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		EdgeRole.Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
+		Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
+		assert phase != null;
+		EdgeRole edgeRole = getEdgeRole(phase);
 		return CastEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 	}
 
 	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.LOADED);
+		NodeRole nodeRole = getNodeRole(Phase.LOADED);
 		return ComposedNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
@@ -142,53 +145,54 @@ public class RegionUtil
 	}
 
 	public static @NonNull Node createDependencyNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
+		NodeRole nodeRole = getNodeRole(Phase.PREDICATED);
 		return DependencyNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.OTHER);
+		NodeRole nodeRole = getNodeRole(Phase.OTHER);
 		return ErrorNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
+		EdgeRole edgeRole = getEdgeRole(getPhase(sourceNode.getNodeRole()));
 		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
-	public static @NonNull Node createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(nodeRolePhase);
+	public static @NonNull Node createInputNode(@NonNull Region region, @NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = getNodeRole(nodeRolePhase);
 		return InputNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name,@NonNull Node targetNode) {
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
+		EdgeRole edgeRole = getEdgeRole(getPhase(sourceNode.getNodeRole()));
 		return IteratedEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
 	public static @NonNull VariableNodeImpl createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(sourceNode.getNodeRole().getPhase());
+		NodeRole nodeRole = getNodeRole(getPhase(sourceNode.getNodeRole()));
 		return IteratorNodeImpl.create(nodeRole, sourceNode.getRegion(), iterator);
 	}
 
 	public static @NonNull VariableNodeImpl createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(inNode.getNodeRole().getPhase());
+		NodeRole nodeRole = getNodeRole(getPhase(inNode.getNodeRole()));
 		return PatternVariableNodeImpl.create(nodeRole, inNode.getRegion(), letVariable, inNode.isMatched());
 	}
 
 	public static @NonNull VariableNodeImpl createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.LOADED);
+		NodeRole nodeRole = getNodeRole(Phase.LOADED);
 		return PatternVariableNodeImpl.create(nodeRole, region, stepVariable, true);
 	}
 
 	public static @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		EdgeRole.Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
+		Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
+		assert phase != null;
+		EdgeRole edgeRole = getEdgeRole(phase);
 		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.CONSTANT);
+		NodeRole nodeRole = getNodeRole(Phase.CONSTANT);
 		if (typedElement != null) {
 			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getClassDatumAnalysis(typedElement), isMatched);
 			node.addTypedElement(typedElement);
@@ -202,33 +206,33 @@ public class RegionUtil
 	public static @NonNull VariableNodeImpl createOldNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(variable);
 		boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
-		Role.Phase phase = isEnforceable ? Role.Phase.PREDICATED : Role.Phase.LOADED;
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(phase);
+		Phase phase = isEnforceable ? Phase.PREDICATED : Phase.LOADED;
+		NodeRole nodeRole = getNodeRole(phase);
 		return PatternVariableNodeImpl.create(nodeRole, region, variable, true);
 	}
 
 	public static @NonNull Node createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(sourceNode.getNodeRole().getPhase());
+		NodeRole nodeRole = getNodeRole(getPhase(sourceNode.getNodeRole()));
 		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
 	}
 
 	public static @NonNull Node createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
-		Role.Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(nodePhase);
+		Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
+		NodeRole nodeRole = getNodeRole(nodePhase);
 		Node node = OperationNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement), isMatched);
 		node.addTypedElement(typedElement);
 		return node;
 	}
 
 	public static @NonNull Node createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
+		NodeRole nodeRole = getNodeRole(Phase.PREDICATED);
 		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
 		node.setHead();
 		return node;
 	}
 
 	public static @NonNull Node createOperationResultNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(sourceNode.getNodeRole().getPhase());
+		NodeRole nodeRole = getNodeRole(getPhase(sourceNode.getNodeRole()));
 		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, false);
 	}
 
@@ -249,32 +253,32 @@ public class RegionUtil
 	}
 
 	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
+		EdgeRole edgeRole = getEdgeRole(getPhase(sourceNode.getNodeRole()));
 		return PredicateEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
 	public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.REALIZED);
+		NodeRole nodeRole = getNodeRole(Phase.REALIZED);
 		return createPatternNode(nodeRole, sourceNode, source2targetProperty, sourceNode.isMatched());
 	}
 
 	public static @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.REALIZED);
+		EdgeRole edgeRole = getEdgeRole(Phase.REALIZED);
 		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
 	public static @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.REALIZED);
+		EdgeRole edgeRole = getEdgeRole(Phase.REALIZED);
 		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	public static @NonNull VariableNodeImpl createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.REALIZED);
+		NodeRole nodeRole = getNodeRole(Phase.REALIZED);
 		return PatternVariableNodeImpl.create(nodeRole, region, stepVariable, true);
 	}
 
 	public static @NonNull Edge createRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {
-		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.OTHER);
+		EdgeRole edgeRole = getEdgeRole(Phase.OTHER);
 		return RecursionEdgeImpl.create(edgeRole, sourceNode, targetNode, isPrimary);
 	}
 
@@ -287,8 +291,8 @@ public class RegionUtil
 			Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
 			isDirty = region.getSchedulerConstants().isDirty(referredProperty);
 		}
-		Role.Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.Phase.PREDICATED : Role.Phase.LOADED;
-		NodeRole stepNodeRole = NodeRoleImpl.getNodeRole(phase);
+		Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Phase.PREDICATED : Phase.LOADED;
+		NodeRole stepNodeRole = getNodeRole(phase);
 		Node node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getClassDatumAnalysis(callExp), isMatched);
 		node.addTypedElement(callExp);
 		return node;
@@ -304,14 +308,14 @@ public class RegionUtil
 		org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.CONSTANT);
+		NodeRole nodeRole = getNodeRole(Phase.CONSTANT);
 		Node node = TrueNodeImpl.create(nodeRole, region, "«true»", classDatumAnalysis);
 		node.setHead();
 		return node;
 	}
 
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.OTHER);
+		NodeRole nodeRole = getNodeRole(Phase.OTHER);
 		return UnknownNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
 	}
 
@@ -421,7 +425,7 @@ public class RegionUtil
 		return completeClass2nodes;
 	}
 
-	public static Role.@NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+	public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		boolean isLoaded = false;
 		boolean isPredicated = false;
 		boolean isRealized = false;
@@ -448,32 +452,32 @@ public class RegionUtil
 			}
 		}
 		if (isRealized) {
-			return Role.Phase.REALIZED;
+			return Phase.REALIZED;
 		}
 		else if (isPredicated) {
-			return Role.Phase.PREDICATED;
+			return Phase.PREDICATED;
 		}
 		else if (isLoaded) {
-			return Role.Phase.LOADED;
+			return Phase.LOADED;
 		}
 		else {
-			return Role.Phase.CONSTANT;
+			return Phase.CONSTANT;
 		}
 	}
 
 	private static @NonNull NodeRole getPatternNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
-		Role.Phase phase;
+		Phase phase;
 		switch (sourceNode.getNodeRole().getPhase()) {
-			case REALIZED: phase = Role.Phase.REALIZED; break;
-			case PREDICATED: phase = Role.Phase.PREDICATED; break;
+			case REALIZED: phase = Phase.REALIZED; break;
+			case PREDICATED: phase = Phase.PREDICATED; break;
 			case LOADED: {
 				boolean isDirty = sourceNode.getRegion().getSchedulerConstants().isDirty(property);
-				phase = isDirty ? Role.Phase.PREDICATED : Role.Phase.LOADED; break;
+				phase = isDirty ? Phase.PREDICATED : Phase.LOADED; break;
 			}
-			case CONSTANT: phase = Role.Phase.CONSTANT; break;
+			case CONSTANT: phase = Phase.CONSTANT; break;
 			default: throw new UnsupportedOperationException();
 		}
-		return NodeRoleImpl.getNodeRole(phase);
+		return getNodeRole(phase);
 	}
 
 	/**
@@ -570,74 +574,6 @@ public class RegionUtil
 			}
 		}
 		return true;
-	}
-
-	public static <@NonNull R extends Role> R mergeToLessKnownPhase(R firstRole, R secondRole) {
-		if (firstRole.isRealized()) {
-			return firstRole;
-		}
-		else if (secondRole.isRealized()) {
-			return secondRole;
-		}
-		else if (firstRole.isPredicated()){
-			return firstRole;
-		}
-		else if (secondRole.isPredicated()){
-			return secondRole;
-		}
-		else if (firstRole.isLoaded()) {
-			return firstRole;
-		}
-		else if (secondRole.isLoaded()) {
-			return secondRole;
-		}
-		else if (firstRole.isConstant()) {
-			return firstRole;
-		}
-		else if (secondRole.isConstant()) {
-			return secondRole;
-		}
-		throw new UnsupportedOperationException();
-	}
-
-	public static <@NonNull R extends Role> R mergeToMoreKnownPhase(@NonNull R firstRole, @NonNull R secondRole) {
-		if (firstRole.isConstant()) {
-			return firstRole;
-		}
-		else if (secondRole.isConstant()) {
-			return secondRole;
-		}
-		else if (firstRole.isLoaded()) {
-			return firstRole;
-		}
-		else if (secondRole.isLoaded()) {
-			return secondRole;
-		}
-		else if (firstRole.isRealized()) {
-			return firstRole;
-		}
-		else if (secondRole.isRealized()) {
-			return secondRole;
-		}
-		else if (firstRole.isSpeculated()) {
-			return firstRole;
-		}
-		else if (secondRole.isSpeculated()) {
-			return secondRole;
-		}
-		else if (firstRole.isSpeculation()) {
-			return firstRole;
-		}
-		else if (secondRole.isSpeculation()) {
-			return secondRole;
-		}
-		else if (firstRole.isPredicated()) {
-			return firstRole;
-		}
-		else if (secondRole.isPredicated()) {
-			return secondRole;
-		}
-		throw new UnsupportedOperationException();
 	}
 
 	public static Node.@NonNull Utility mergeToStrongerUtility(Node.@NonNull Utility nodeUtility1, Node.@NonNull Utility nodeUtility2) {

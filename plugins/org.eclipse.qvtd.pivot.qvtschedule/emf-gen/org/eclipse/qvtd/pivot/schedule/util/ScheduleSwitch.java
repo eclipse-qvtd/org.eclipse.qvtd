@@ -16,7 +16,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.schedule.*;
+import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
+import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.schedule.MappingAction;
+import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.schedule.Schedule;
+import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 
 /**
  * <!-- begin-user-doc -->

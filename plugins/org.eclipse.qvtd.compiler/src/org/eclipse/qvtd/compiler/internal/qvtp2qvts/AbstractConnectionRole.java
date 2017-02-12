@@ -14,11 +14,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 abstract class AbstractConnectionRole implements ConnectionRole
 {
 	protected final boolean isNode;
-	
+
 	protected AbstractConnectionRole(boolean isNode) {
 		this.isNode = isNode;
 	}
@@ -45,7 +46,7 @@ abstract class AbstractConnectionRole implements ConnectionRole
 
 	@Override
 	public @NonNull String getColor() {
-		return isNode ? Role.BINDING_COLOR : Role.ORDERING_COLOR;
+		return isNode ? QVTscheduleConstants.BINDING_COLOR : QVTscheduleConstants.ORDERING_COLOR;
 	}
 
 	@Override
@@ -55,7 +56,7 @@ abstract class AbstractConnectionRole implements ConnectionRole
 
 	@Override
 	public @NonNull Integer getPenwidth() {
-		return Role.LINE_WIDTH;
+		return QVTscheduleConstants.LINE_WIDTH;
 	}
 
 	@Override

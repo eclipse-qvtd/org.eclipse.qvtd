@@ -14,14 +14,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * AbstractEdge.
@@ -177,7 +178,7 @@ public abstract class EdgeImpl implements Edge
 	@Override
 	public @NonNull String getColor() {
 		assert edgeRole != null;
-		return edgeRole.getColor();
+		return QVTscheduleUtil.getColor(edgeRole);
 	}
 
 	@Override
@@ -201,7 +202,7 @@ public abstract class EdgeImpl implements Edge
 	}
 
 	public @NonNull Integer getPenwidth() {
-		return isNavigation() ? 2*Role.LINE_WIDTH : Role.LINE_WIDTH;
+		return isNavigation() ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
 	}
 
 	@Override

@@ -13,9 +13,9 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 public class RecursionEdgeImpl extends EdgeImpl
 {
@@ -35,7 +35,7 @@ public class RecursionEdgeImpl extends EdgeImpl
 
 	@Override
 	public @NonNull String getColor() {
-		return Role.RECURSION_COLOR;
+		return QVTscheduleConstants.RECURSION_COLOR;
 	}
 
 	@Override
