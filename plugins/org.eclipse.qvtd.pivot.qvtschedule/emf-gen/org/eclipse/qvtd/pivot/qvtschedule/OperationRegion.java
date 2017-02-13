@@ -16,5 +16,8 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface OperationRegion extends Region
 {
+	void addDependencyNode(@NonNull Node node);
+	void addHeadNode(@NonNull Node node);
 	@NonNull List<@NonNull Node> getDependencyNodes();
+	void setResultNode(@NonNull Node node);
 }

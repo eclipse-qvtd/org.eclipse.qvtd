@@ -117,7 +117,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationRegion" abstract="true" eSuperTypes="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationRegion" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>

@@ -206,6 +206,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull OperationNode createOperationNode();
 
 	/**
+	 * Returns a new object of class '<em>Operation Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Region</em>'.
+	 * @generated
+	 */
+	OperationRegion createOperationRegion();
+
+	/**
 	 * Returns a new object of class '<em>Pattern Typed Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

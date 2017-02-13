@@ -88,6 +88,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.NODE_ROLE: return createNodeRole();
 			case QVTschedulePackage.NULL_NODE: return createNullNode();
 			case QVTschedulePackage.OPERATION_NODE: return createOperationNode();
+			case QVTschedulePackage.OPERATION_REGION: return createOperationRegion();
 			case QVTschedulePackage.PATTERN_TYPED_NODE: return createPatternTypedNode();
 			case QVTschedulePackage.PATTERN_VARIABLE_NODE: return createPatternVariableNode();
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
@@ -338,6 +339,16 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull OperationNode createOperationNode() {
 		OperationNodeImpl operationNode = new OperationNodeImpl();
 		return operationNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationRegion createOperationRegion() {
+		OperationRegionImpl operationRegion = new OperationRegionImpl();
+		return operationRegion;
 	}
 
 	/**
