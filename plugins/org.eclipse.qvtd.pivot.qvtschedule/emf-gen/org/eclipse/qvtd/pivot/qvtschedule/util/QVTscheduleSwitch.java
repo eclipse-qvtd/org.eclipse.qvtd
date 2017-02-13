@@ -530,20 +530,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.ROOT_SCHEDULED_REGION: {
-				RootScheduledRegion rootScheduledRegion = (RootScheduledRegion)theEObject;
-				T result = caseRootScheduledRegion(rootScheduledRegion);
-				if (result == null) result = caseScheduledRegion(rootScheduledRegion);
-				if (result == null) result = caseRegion(rootScheduledRegion);
-				if (result == null) result = caseElement(rootScheduledRegion);
-				if (result == null) result = caseGraphNode(rootScheduledRegion);
-				if (result == null) result = caseNameable(rootScheduledRegion);
-				if (result == null) result = caseSymbolable(rootScheduledRegion);
-				if (result == null) result = caseToDOTable(rootScheduledRegion);
-				if (result == null) result = caseVisitable(rootScheduledRegion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.SCHEDULED_REGION: {
 				ScheduledRegion scheduledRegion = (ScheduledRegion)theEObject;
 				T result = caseScheduledRegion(scheduledRegion);
@@ -851,21 +837,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRootCompositionRegion(RootCompositionRegion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root Scheduled Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root Scheduled Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRootScheduledRegion(RootScheduledRegion object) {
 		return null;
 	}
 

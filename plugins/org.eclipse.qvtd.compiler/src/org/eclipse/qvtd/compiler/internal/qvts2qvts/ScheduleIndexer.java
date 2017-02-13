@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
@@ -39,7 +38,7 @@ import com.google.common.collect.Lists;
  */
 public class ScheduleIndexer extends ScheduleState
 {
-	public ScheduleIndexer(@NonNull RootScheduledRegion rootScheduledRegion) {
+	public ScheduleIndexer(@NonNull ScheduledRegion rootScheduledRegion) {
 		super(rootScheduledRegion);
 	}
 

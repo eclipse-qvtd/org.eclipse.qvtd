@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
@@ -44,7 +44,7 @@ public class CallTreeBuilder
 		this.scheduleCache = scheduleCache;
 	}
 
-	public void buildTree(@NonNull RootScheduledRegion rootScheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
+	public void buildTree(@NonNull ScheduledRegion rootScheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
 		Stack<@NonNull Region> callStack = new Stack<@NonNull Region>();
 		callStack.push(rootScheduledRegion);
 		for (@NonNull Region region: orderedRegions) {

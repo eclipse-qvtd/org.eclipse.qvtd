@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016CGTests;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class BigMDE2016InterpreterTests extends QVTcCompilerTests
 				Resource inResource = interpretedExecutor.getModel("family");
 				inResource.getContents().clear();
 				inResource.getContents().addAll(FamiliesGenerator.createFamiliesModel(testSize, 9));
-				myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
+				myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
 				myQVT.createModel("person", "Persons_Interpreted.xmi");
 				BigMDE2016CGTests.garbageCollect();
 				logger.printf("%9d, ", 10*testSize);

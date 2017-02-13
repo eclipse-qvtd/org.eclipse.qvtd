@@ -71,7 +71,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
@@ -190,13 +189,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass rootCompositionRegionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass rootScheduledRegionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -471,7 +463,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -502,7 +494,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -816,16 +808,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EClass getRootCompositionRegion() {
 		return rootCompositionRegionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRootScheduledRegion() {
-		return rootScheduledRegionEClass;
 	}
 
 	/**
@@ -1390,8 +1372,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		rootCompositionRegionEClass = createEClass(ROOT_COMPOSITION_REGION);
 
-		rootScheduledRegionEClass = createEClass(ROOT_SCHEDULED_REGION);
-
 		scheduledRegionEClass = createEClass(SCHEDULED_REGION);
 
 		schedulerConstantsEClass = createEClass(SCHEDULER_CONSTANTS);
@@ -1510,7 +1490,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		regionEClass.getESuperTypes().add(this.getToDOTable());
 		roleEClass.getESuperTypes().add(thePivotPackage.getElement());
 		rootCompositionRegionEClass.getESuperTypes().add(this.getRegion());
-		rootScheduledRegionEClass.getESuperTypes().add(this.getScheduledRegion());
 		scheduledRegionEClass.getESuperTypes().add(this.getRegion());
 		schedulerConstantsEClass.getESuperTypes().add(thePivotPackage.getElement());
 		trueNodeEClass.getESuperTypes().add(this.getNode());
@@ -1619,9 +1598,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEAttribute(getRole_Speculated(), ecorePackage.getEBoolean(), "speculated", null, 1, 1, Role.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_Speculation(), ecorePackage.getEBoolean(), "speculation", null, 1, 1, Role.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(rootCompositionRegionEClass, RootCompositionRegion.class, "RootCompositionRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(rootScheduledRegionEClass, RootScheduledRegion.class, "RootScheduledRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(rootCompositionRegionEClass, RootCompositionRegion.class, "RootCompositionRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scheduledRegionEClass, ScheduledRegion.class, "ScheduledRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1667,12 +1644,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //QVTschedulePackageImpl

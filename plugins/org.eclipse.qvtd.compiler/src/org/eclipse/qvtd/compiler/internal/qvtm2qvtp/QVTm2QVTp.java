@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
  * QVTm2QVTp is now a compativility NO-OP. Fuctionality moved to a QVTs2QVTs rewrite.
@@ -43,7 +43,7 @@ public class QVTm2QVTp
 			if (eObject instanceof TypedModel) {
 				TypedModel typedModel = (TypedModel) eObject;
 				if (typedModel.getName() == null) {
-					typedModel.setName(QVTimperativeUtil.MIDDLE_DOMAIN_NAME);
+					typedModel.setName(QVTscheduleConstants.MIDDLE_DOMAIN_NAME);
 				}
 			}
 		}

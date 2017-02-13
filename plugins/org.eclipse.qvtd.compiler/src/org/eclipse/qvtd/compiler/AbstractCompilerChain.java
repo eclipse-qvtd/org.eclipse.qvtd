@@ -53,7 +53,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
@@ -241,7 +241,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTp2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+		public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
@@ -251,7 +251,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, environmentFactory, rootName);
-				RootScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
+				ScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
 				throwCompilerChainExceptionForErrors();
 				compiled(rootRegion);			// FIXME
 				//				saveResource(sResource, QVTS_STEP);
@@ -269,7 +269,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTI_STEP);
 		}
 
-		public @NonNull ImperativeTransformation execute(@NonNull RootScheduledRegion rootRegion) throws IOException {
+		public @NonNull ImperativeTransformation execute(@NonNull ScheduledRegion rootRegion) throws IOException {
 			// Default QVTi strategy ok.
 			Resource iResource = createResource();
 			QVTs2QVTi tx = new QVTs2QVTi(this, environmentFactory);
@@ -566,7 +566,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	protected @NonNull ImperativeTransformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
-		RootScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(pResource);
+		ScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(pResource);
 		return qvts2qvtiCompilerStep.execute(rootRegion);
 	}
 

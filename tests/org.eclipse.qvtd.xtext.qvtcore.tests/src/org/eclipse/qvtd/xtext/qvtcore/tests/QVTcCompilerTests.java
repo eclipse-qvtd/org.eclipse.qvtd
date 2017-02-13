@@ -31,10 +31,10 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -84,8 +84,8 @@ public class QVTcCompilerTests extends LoadTestCase
 				return new QVTp2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
-						RootScheduledRegion rootRegion = super.execute(pResource);
+					public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+						ScheduledRegion rootRegion = super.execute(pResource);
 						instrumentRegion(rootRegion);
 						return rootRegion;
 					}
@@ -203,7 +203,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("family", "Families.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
 			myQVT.createModel("person", "Persons_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
@@ -268,28 +268,28 @@ public class QVTcCompilerTests extends LoadTestCase
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "EmptyList.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "EmptyList_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "EmptyList_trace.xmi");
 			myQVT.createModel("reverse", "EmptyList_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "EmptyList_Interpreted.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "OneElementList.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "OneElementList_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "OneElementList_trace.xmi");
 			myQVT.createModel("reverse", "OneElementList_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "OneElementList_Interpreted.xmi", "OneElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "TwoElementList.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "TwoElementList_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "TwoElementList_trace.xmi");
 			myQVT.createModel("reverse", "TwoElementList_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "TwoElementList_Interpreted.xmi", "TwoElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "ThreeElementList.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "ThreeElementList_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "ThreeElementList_trace.xmi");
 			myQVT.createModel("reverse", "ThreeElementList_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "ThreeElementList_Interpreted.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
@@ -366,7 +366,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("HSV2HSL.qvtc", "hsl");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HSL_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "HSV2HSL_trace.xmi");
 			myQVT.createModel("hsl", "SolarizedHSL_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("hsl", "SolarizedHSL_Interpreted.xmi", "SolarizedHSL_expected.xmi", HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
@@ -420,21 +420,21 @@ public class QVTcCompilerTests extends LoadTestCase
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("uml", "SimplerUMLPeople.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "SimplerUML2RDBMS_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "SimplerUML2RDBMS_trace.xmi");
 			myQVT.createModel("rdbms", "SimplerRDBMSPeople_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople_Interpreted.xmi", "SimplerRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("uml", "SimplerUMLPeople2.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "SimplerUML2RDBMS2_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "SimplerUML2RDBMS2_trace.xmi");
 			myQVT.createModel("rdbms", "SimplerRDBMSPeople2_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople2_Interpreted.xmi", "SimplerRDBMSPeople2_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "SimpleUML2RDBMS_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "SimpleUML2RDBMS_trace.xmi");
 			myQVT.createModel("rdbms", "SimpleRDBMSPeople_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimpleRDBMSPeople_Interpreted.xmi", "SimpleRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
@@ -501,7 +501,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("Upper2Lower.qvtcas", "lowerGraph");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Upper2Lower_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Upper2Lower_trace.xmi");
 			myQVT.createModel("lowerGraph", "SimpleGraphLower_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("lowerGraph", "SimpleGraphLower_Interpreted.xmi", "SimpleGraphLower_expected.xmi", Upper2LowerNormalizer.INSTANCE);

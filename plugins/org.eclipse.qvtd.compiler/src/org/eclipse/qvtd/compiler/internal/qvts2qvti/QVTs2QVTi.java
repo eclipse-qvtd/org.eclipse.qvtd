@@ -42,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 /**
@@ -131,7 +131,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		}
 	}
 
-	protected void resolveTransformation(@NonNull Model model, @NonNull RootScheduledRegion scheduledRegion) {
+	protected void resolveTransformation(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
 		QVTp2QVTs scheduler = ((RootScheduledRegion2)scheduledRegion).getScheduler();
 		SymbolNameReservation symbolNameReservation = scheduler.getSymbolNameReservation();
 		Transformation transformation = scheduler.getTransformation();
@@ -151,7 +151,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		model.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)qvtiChild);
 	}
 
-	public @NonNull Model transform(@NonNull RootScheduledRegion scheduledRegion) {
+	public @NonNull Model transform(@NonNull ScheduledRegion scheduledRegion) {
 		Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 		resolveTransformation(model, scheduledRegion);
 		resolveImports(model);

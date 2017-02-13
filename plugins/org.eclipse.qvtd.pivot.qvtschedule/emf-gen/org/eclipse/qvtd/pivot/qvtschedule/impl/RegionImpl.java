@@ -52,7 +52,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
@@ -873,7 +872,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		}
 		ScheduledRegion invokingRegion2 = getInvokingRegion();
 		assert invokingRegion2 != null;
-		RootScheduledRegion rootScheduledRegion = invokingRegion2.getRootScheduledRegion();
+		ScheduledRegion rootScheduledRegion = invokingRegion2;//.getRootScheduledRegion();
 		NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
 		Node castTarget = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
 		ClassDatumAnalysis classDatumAnalysis = castTarget.getClassDatumAnalysis();
@@ -986,7 +985,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	private @Nullable NodeConnection createHeadConnection(@NonNull Node headNode) {
 		ScheduledRegion invokingRegion2 = getInvokingRegion();
 		assert invokingRegion2 != null;
-		RootScheduledRegion rootScheduledRegion = invokingRegion2.getRootScheduledRegion();
+		ScheduledRegion rootScheduledRegion = invokingRegion2;//.getRootScheduledRegion();
 		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
 		List<@NonNull Node> headSources = null;
 		//
@@ -1249,6 +1248,25 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				}
 			}
 		}
+	} */
+
+	/*	protected @Nullable Map<@NonNull Node, @NonNull Node> expandRecursion(@NonNull Node nextNode, @NonNull Node prevNode, @NonNull Map<@NonNull Node, @NonNull Node> bindings) {
+		Node oldPrevNode = bindings.put(nextNode, prevNode);
+		if (oldPrevNode != null) {
+			assert oldPrevNode == prevNode;
+			return bindings;
+		}
+		for (@NonNull NavigableEdge navigationEdge : prevNode.getNavigationEdges()) {
+			Node nextTarget = nextNode.getNavigationTarget(navigationEdge.getProperty());
+			if (nextTarget == null) {
+				return null;
+			}
+			Node prevTarget = navigationEdge.getEdgeTarget();
+			if (expandRecursion(nextTarget, prevTarget, bindings) == null) {
+				return null;
+			}
+		}
+		return bindings;
 	} */
 
 	@Override
@@ -1975,6 +1993,32 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public void resetHead(@NonNull Node headNode) {
 		throw new UnsupportedOperationException("resetHead not supported for " + this);
 	}
+
+	/*	public void resolveRecursion() {
+		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = RegionUtil.getCompleteClass2Nodes(this);
+		List<@NonNull Node> headNodes = getHeadNodes();
+		if (headNodes.size() == 1) {			// FIXME multi-heads
+			Node headNode = headNodes.get(0);
+			List<@NonNull Node> nodeList = completeClass2nodes.get(headNode.getCompleteClass());
+			assert nodeList != null;
+			if (nodeList.size() > 1) {
+				for (@NonNull Node node : nodeList) {
+					if (node != headNode) {
+						Map<@NonNull Node, @NonNull Node> bindings = expandRecursion(headNode, node, new HashMap<>());
+						if (bindings != null) {
+							//						this.recursiveBindings  = bindings;
+							for (Map.@NonNull Entry<@NonNull Node, @NonNull Node> entry : bindings.entrySet()) {
+								@NonNull Node prevNode = entry.getKey();
+								@NonNull Node nextNode = entry.getValue();
+								RegionUtil.createRecursionEdge(prevNode, nextNode, prevNode.isHead());
+							}
+							return;				// FIXME can we have more than one recursion ??
+						}
+					}
+				}
+			}
+		}
+	} */
 
 	@Override
 	public void setInvokingRegion(@NonNull ScheduledRegion invokingRegion) {

@@ -251,6 +251,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull RecursionEdge createRecursionEdge();
 
 	/**
+	 * Returns a new object of class '<em>Root Composition Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root Composition Region</em>'.
+	 * @generated
+	 */
+	RootCompositionRegion createRootCompositionRegion();
+
+	/**
 	 * Returns a new object of class '<em>True Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

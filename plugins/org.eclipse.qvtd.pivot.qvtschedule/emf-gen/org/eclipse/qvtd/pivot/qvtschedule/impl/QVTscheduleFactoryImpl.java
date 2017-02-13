@@ -93,6 +93,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
+			case QVTschedulePackage.ROOT_COMPOSITION_REGION: return createRootCompositionRegion();
 			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
 			default:
@@ -392,6 +393,16 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull RecursionEdge createRecursionEdge() {
 		RecursionEdgeImpl recursionEdge = new RecursionEdgeImpl();
 		return recursionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RootCompositionRegion createRootCompositionRegion() {
+		RootCompositionRegionImpl rootCompositionRegion = new RootCompositionRegionImpl();
+		return rootCompositionRegion;
 	}
 
 	/**

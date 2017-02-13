@@ -22,7 +22,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootCompositionRegion()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface RootCompositionRegion extends Region {

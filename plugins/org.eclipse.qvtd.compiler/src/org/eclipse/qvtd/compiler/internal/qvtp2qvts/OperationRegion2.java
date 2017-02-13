@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VoidType;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import com.google.common.collect.Iterables;
@@ -178,6 +180,11 @@ public class OperationRegion2 extends OperationRegionImpl
 		//
 		toGraph(new DOTStringBuilder());
 		toGraph(new GraphMLStringBuilder());
+	}
+
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationRegion(this);
 	}
 
 	@Override

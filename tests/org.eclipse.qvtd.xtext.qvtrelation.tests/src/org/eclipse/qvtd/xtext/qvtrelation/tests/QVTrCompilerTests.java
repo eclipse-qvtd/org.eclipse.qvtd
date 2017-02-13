@@ -40,8 +40,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -78,8 +79,8 @@ public class QVTrCompilerTests extends LoadTestCase
 				return new QVTp2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
-						RootScheduledRegion rootRegion = super.execute(pResource);
+					public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+						ScheduledRegion rootRegion = super.execute(pResource);
 						instrumentRegion(rootRegion);
 						return rootRegion;
 					}
@@ -501,7 +502,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", PROJECT_NAME + ".seq2stm", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("seqDgm", "Seq.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");
 			myQVT.createModel("stm", "Stmc_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("stm", "Stmc_Interpreted.xmi", "Stmc_expected.xmi", null);

@@ -23,7 +23,7 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.Doublylinkedlist
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.junit.Test;
 
@@ -102,7 +102,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 			assert inResource != null;
 			inResource.getContents().clear();
 			inResource.getContents().addAll(doublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
 			myQVT.createModel("reverse", "List_Interpreted.xmi");
 			AbstractEXE2016CGTests.garbageCollect();
 			logger.printf("%9d, ", testSize);

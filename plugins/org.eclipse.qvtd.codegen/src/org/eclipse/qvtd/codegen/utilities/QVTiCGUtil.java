@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
@@ -167,7 +168,7 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull CGMapping getRootMapping(@NonNull CGTransformation cgTransformation) {
-		CGMapping cgRootMapping = NameUtil.getNameable(cgTransformation.getOwnedMappings(), QVTimperativeUtil.ROOT_MAPPING_NAME);	// Obsolete relic
+		CGMapping cgRootMapping = NameUtil.getNameable(cgTransformation.getOwnedMappings(), QVTscheduleConstants.ROOT_MAPPING_NAME);	// Obsolete relic
 		for (@NonNull CGMapping cgMapping : getOwnedMappings(cgTransformation)) {
 			Mapping asMapping = getAST(cgMapping);
 			boolean isRoot = true;

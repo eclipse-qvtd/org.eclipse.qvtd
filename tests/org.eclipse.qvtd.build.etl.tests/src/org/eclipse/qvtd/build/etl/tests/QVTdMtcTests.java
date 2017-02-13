@@ -59,7 +59,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
@@ -355,7 +355,7 @@ public class QVTdMtcTests extends LoadTestCase {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("person");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("family", "Families.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
 			myQVT.createModel("person", "Persons_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
@@ -403,7 +403,7 @@ public class QVTdMtcTests extends LoadTestCase {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("hls");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
 			myQVT.createModel("hls", "SolarizedHLS_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", null);
@@ -443,7 +443,7 @@ public class QVTdMtcTests extends LoadTestCase {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("lowerGraph");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
-			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "UpperToLower_trace.xmi");
+			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "UpperToLower_trace.xmi");
 			myQVT.createModel("lowerGraph", "SimpleGraphLower_Interpreted.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("lowerGraph", "SimpleGraphLower_Interpreted.xmi", "SimpleGraphLower_expected.xmi", UpperToLowerNormalizer.INSTANCE);

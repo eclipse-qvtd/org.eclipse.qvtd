@@ -22,7 +22,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 /**
@@ -33,7 +32,7 @@ public abstract class ScheduleCache extends Region2Depth
 	/**
 	 * The overall RootScheduledRegion.
 	 */
-	protected final @NonNull RootScheduledRegion rootScheduledRegion;
+	protected final @NonNull ScheduledRegion rootScheduledRegion;
 
 	/**
 	 * All transitively callable regions within the rootScheduledRegion (no OperationRegions).
@@ -70,7 +69,7 @@ public abstract class ScheduleCache extends Region2Depth
 	 */
 	private final @NonNull Set<@NonNull Region> unpassedRegions = new HashSet<>();
 
-	protected ScheduleCache(@NonNull RootScheduledRegion rootScheduledRegion) {
+	protected ScheduleCache(@NonNull ScheduledRegion rootScheduledRegion) {
 		this.rootScheduledRegion = rootScheduledRegion;
 		this.callableRegions = analyzeRegions(rootScheduledRegion, new ArrayList<>());
 		Collections.sort(this.callableRegions, NameUtil.NAMEABLE_COMPARATOR);

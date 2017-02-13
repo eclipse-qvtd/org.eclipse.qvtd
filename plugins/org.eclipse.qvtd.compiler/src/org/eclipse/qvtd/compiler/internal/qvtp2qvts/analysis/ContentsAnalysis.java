@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -33,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
@@ -41,10 +41,6 @@ import com.google.common.collect.Sets;
  */
 public class ContentsAnalysis
 {
-	public static @NonNull BinaryOperator<@NonNull String> stringJoin(@NonNull String delimiter) {
-		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);
-	}
-
 	protected final @NonNull SchedulerConstants schedulerConstants;
 
 	/**
@@ -215,7 +211,7 @@ public class ContentsAnalysis
 				assert list != null;
 				return String.valueOf(k) + " : " + list.stream().map(
 					p -> p.getDisplayName()
-						).sorted().reduce("", stringJoin("\n\t\t"));
+						).sorted().reduce("", QVTscheduleUtil.stringJoin("\n\t\t"));
 			}
 				);
 		return entries.sorted();
@@ -229,7 +225,7 @@ public class ContentsAnalysis
 				return k.getDomainUsage() + " " + String.valueOf(k) + " : " +
 				list.stream().map(
 					p -> p.getDisplayName()
-						).sorted().reduce("", stringJoin("\n\t\t")
+						).sorted().reduce("", QVTscheduleUtil.stringJoin("\n\t\t")
 								);
 			}
 				);

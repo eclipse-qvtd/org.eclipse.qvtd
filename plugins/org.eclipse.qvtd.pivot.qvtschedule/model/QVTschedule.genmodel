@@ -96,7 +96,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/speculation"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//RootCompositionRegion"/>
-    <genClasses ecoreClass="QVTschedule.ecore#//RootScheduledRegion"/>
     <genClasses ecoreClass="QVTschedule.ecore#//ScheduledRegion"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//SchedulerConstants"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Symbolable">

@@ -60,13 +60,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class QVTimperativeUtil extends QVTbaseUtil
 {
-	/** The name of the root mapping */
-	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
-	public static final @NonNull String MIDDLE_DOMAIN_NAME = "middle";
-
 	public static final class MappingParameterBindingComparator implements Comparator<@NonNull MappingParameterBinding>
 	{
 		public static final @NonNull MappingParameterBindingComparator INSTANCE = new MappingParameterBindingComparator();
@@ -315,7 +312,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation asTransformation) {
-		Mapping asRootMapping = NameUtil.getNameable(getOwnedMappings(asTransformation), QVTimperativeUtil.ROOT_MAPPING_NAME);	// Obsolete relic
+		Mapping asRootMapping = NameUtil.getNameable(getOwnedMappings(asTransformation), QVTscheduleUtil.ROOT_MAPPING_NAME);	// Obsolete relic
 		for (@NonNull Mapping asMapping : getOwnedMappings(asTransformation)) {
 			boolean isRoot = true;
 			for (@NonNull MappingParameter asParameter : QVTimperativeUtil.getOwnedMappingParameters(asMapping)) {

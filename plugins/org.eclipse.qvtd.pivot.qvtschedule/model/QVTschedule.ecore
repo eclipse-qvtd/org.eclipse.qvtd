@@ -192,10 +192,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RootCompositionRegion" abstract="true"
-      eSuperTypes="#//Region"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RootScheduledRegion" abstract="true"
-      eSuperTypes="#//ScheduledRegion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RootCompositionRegion" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" abstract="true" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="SchedulerConstants" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>

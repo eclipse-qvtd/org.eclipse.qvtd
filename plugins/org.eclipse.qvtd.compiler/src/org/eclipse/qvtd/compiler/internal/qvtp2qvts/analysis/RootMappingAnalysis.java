@@ -1,17 +1,17 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 Willink Transformations and others.
- * All rights reserved.   This program and the accompanying materials
+ * Copyright (c) 2016 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *   E.D.Willink - Initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera - initial API and implementation
+ *     E.D.Willink - use Complete model
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,23 +19,22 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.RootCompositionRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class RootCompositionRegion2 extends RootCompositionRegionImpl
+/**
+ * A RootMappingAnalysis provides an analysis of what is introduced by the root mapping.
+ */
+public class RootMappingAnalysis
 {
+	protected final @NonNull RootCompositionRegion rootCompositionRegion;
+
 	/**
 	 * The null node that is the 'container' of all root model elements.
 	 */
@@ -53,50 +52,35 @@ public class RootCompositionRegion2 extends RootCompositionRegionImpl
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
 
-	protected RootCompositionRegion2(@NonNull MultiRegion multiRegion) {
-		super(multiRegion);
+	public RootMappingAnalysis(@NonNull RootCompositionRegion rootCompositionRegion) {
+		this.rootCompositionRegion = rootCompositionRegion;
 	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitRootCompositionRegion(this);
-	}
-
-	@Override
-	protected @NonNull SymbolNameBuilder computeSymbolName() {
-		SymbolNameBuilder s = new SymbolNameBuilder();
-		s.appendString(QVTimperativeUtil.ROOT_MAPPING_NAME);
-		return s;
-	}
-
-	@Override
-	public void createIncomingConnections() {}
 
 	public @NonNull Node getIntroducerNode(@NonNull Node consumerNode) {
+		SchedulerConstants schedulerConstants = rootCompositionRegion.getSchedulerConstants();
 		//
 		//	Identify the containment pattern.
 		//
 		NavigableEdge containerEdge = null;
 		Property parent2childProperty = null;
 		ClassDatumAnalysis containingClassDatumAnalysis = null;
-		SchedulerConstants scheduler = getSchedulerConstants();
 		for (@NonNull NavigableEdge edge : consumerNode.getNavigationEdges()) {
 			Property property = edge.getProperty().getOpposite();
 			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;
 				parent2childProperty = property;
-				if (property == scheduler.getStandardLibraryHelper().getOclContainerProperty()) {
+				if (property == schedulerConstants.getStandardLibraryHelper().getOclContainerProperty()) {
 					containingClassDatumAnalysis = edge.getEdgeSource().getClassDatumAnalysis();
 				}
 				break;
 			}
 		}
-		CompleteEnvironment completeEnvironment = scheduler.getEnvironmentFactory().getCompleteEnvironment();
+		CompleteEnvironment completeEnvironment = schedulerConstants.getEnvironmentFactory().getCompleteEnvironment();
 		ClassDatumAnalysis consumedClassDatumAnalysis = /*getCastTarget(consumerNode)*/consumerNode.getClassDatumAnalysis();
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatumAnalysis.getCompleteClass().getPrimaryClass();
 		TypedModel typedModel = consumedClassDatumAnalysis.getTypedModel();
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
-		ClassDatumAnalysis childrenClassDatumAnalysis = scheduler.getClassDatumAnalysis(childCollectionType, typedModel);
+		ClassDatumAnalysis childrenClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis(childCollectionType, typedModel);
 		//
 		//	Create / re-use the appropriate containment pattern.
 		//
@@ -109,7 +93,7 @@ public class RootCompositionRegion2 extends RootCompositionRegionImpl
 			}
 			introducedNode = type2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
 				type2node.put(null, introducedNode);
 			}
 		}
@@ -121,7 +105,7 @@ public class RootCompositionRegion2 extends RootCompositionRegionImpl
 			}
 			introducedNode = property2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
 				property2node.put(null, introducedNode);
 				RegionUtil.createNavigationEdge(getNullNode(), parent2childProperty, introducedNode, false);
 			}
@@ -134,9 +118,9 @@ public class RootCompositionRegion2 extends RootCompositionRegionImpl
 			}
 			introducedNode = type2node.get(containingClassDatumAnalysis);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
 				type2node.put(containingClassDatumAnalysis, introducedNode);
-				Node containerNode = RegionUtil.createComposingNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
+				Node containerNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
@@ -148,58 +132,23 @@ public class RootCompositionRegion2 extends RootCompositionRegionImpl
 			}
 			introducedNode = property2node.get(parent2childProperty);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatumAnalysis);
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
-				containingClassDatumAnalysis = scheduler.getClassDatumAnalysis(owningClass, typedModel);
-				Node containerNode = RegionUtil.createComposingNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
+				containingClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis(owningClass, typedModel);
+				Node containerNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		return introducedNode;
 	}
 
-	@Override
-	public @NonNull String getName() {
-		return QVTimperativeUtil.ROOT_MAPPING_NAME;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Node> getHeadNodes() {
-		return QVTscheduleConstants.EMPTY_NODE_LIST;
-	}
-
-	private @NonNull Node getNullNode() {
+	protected @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = RegionUtil.createNullNode(this, true, null);
+			nullNode = nullNode2 = QVTscheduleUtil.createNullNode(rootCompositionRegion, true, null);
 		}
 		return nullNode2;
-	}
-
-	@Override
-	protected @NonNull String getSymbolNamePrefix() {
-		return "r_";
-	}
-
-	@Override
-	public boolean isRootCompositionRegion() {
-		return true;
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setLabel(getName());
-		s.setColor("lightblue");
-		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
-		s.pushCluster();
-		for (@NonNull Node node : getNodes()) {
-			s.appendNode(node);
-		}
-		for (@NonNull Edge edge : getEdges()) {
-			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
-		}
-		s.popCluster();
 	}
 }

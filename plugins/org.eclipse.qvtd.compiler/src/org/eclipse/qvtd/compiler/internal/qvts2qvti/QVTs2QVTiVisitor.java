@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -55,9 +54,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
@@ -186,7 +186,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 		//		assert !region.isConnectionRegion();
 		if (region.isRootCompositionRegion()) {
-			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion2)region);
+			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion)region);
 		}
 		else {
 			region2mapping = new BasicRegion2Mapping(this, region);
@@ -207,7 +207,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			assert typedModelName != null;
 			ImperativeTypedModel qvtiTypedModel = QVTimperativeUtil.createTypedModel(typedModelName);
 			qvtiTypedModel.getUsedPackage().addAll(qvtpTypedModel.getUsedPackage());
-			if (QVTimperativeUtil.MIDDLE_DOMAIN_NAME.equals(typedModelName)) {
+			if (QVTscheduleConstants.MIDDLE_DOMAIN_NAME.equals(typedModelName)) {
 				assert qvtiMiddleTypedModel  == null;
 				qvtiMiddleTypedModel = qvtiTypedModel;
 			}
@@ -400,7 +400,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	@Override
-	public @Nullable Element visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
+	public @Nullable Element visitScheduledRegion(@NonNull ScheduledRegion rootScheduledRegion) {
 		//		String name = rootRegion.getName();
 		//
 		List<@NonNull Region> callableRegions = new ArrayList<>();

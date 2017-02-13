@@ -36,7 +36,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
@@ -76,8 +76,8 @@ public class UMLXCompilerTests extends LoadTestCase
 				return new QVTp2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
-						RootScheduledRegion rootRegion = super.execute(pResource);
+					public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+						ScheduledRegion rootRegion = super.execute(pResource);
 						instrumentRegion(rootRegion);
 						return rootRegion;
 					}

@@ -22,7 +22,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
@@ -75,7 +74,7 @@ public abstract class ScheduleState extends ScheduleCache
 	 */
 	private final @NonNull Set<@NonNull ScheduledRegion> blockedScheduledRegions = new HashSet<>();
 
-	protected ScheduleState(@NonNull RootScheduledRegion rootScheduledRegion) {
+	protected ScheduleState(@NonNull ScheduledRegion rootScheduledRegion) {
 		super(rootScheduledRegion);
 		blockedRegions.addAll(callableRegions);
 		for (@NonNull Region region : callableRegions) {
@@ -443,7 +442,7 @@ public abstract class ScheduleState extends ScheduleCache
 		}
 	}
 
-	public void schedule(@NonNull RootScheduledRegion rootScheduledRegion) {
+	public void schedule(@NonNull ScheduledRegion rootScheduledRegion) {
 		scheduleScheduledRegion(rootScheduledRegion);
 		/**
 		 * Propagate the additional connection indexes to their outgoing connections.

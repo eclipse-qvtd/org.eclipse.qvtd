@@ -53,7 +53,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -178,8 +178,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 					return new QVTp2QVTsCompilerStep(this)
 					{
 						@Override
-						public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
-							RootScheduledRegion rootRegion = super.execute(pResource);
+						public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+							ScheduledRegion rootRegion = super.execute(pResource);
 							instrumentRegion(rootRegion);
 							return rootRegion;
 						}
