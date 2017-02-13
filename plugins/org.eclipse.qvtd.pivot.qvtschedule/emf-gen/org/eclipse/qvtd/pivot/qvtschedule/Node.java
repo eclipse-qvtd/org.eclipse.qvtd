@@ -39,10 +39,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Visitable2"
+ * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable"
  * @generated
  */
-public interface Node extends Element, ConnectionEnd, GraphNode, Nameable, Visitable2
+public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 {
 	/**
 	 * The prioritized utility of each node.

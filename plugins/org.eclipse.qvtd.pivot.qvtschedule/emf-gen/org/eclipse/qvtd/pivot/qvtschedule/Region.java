@@ -37,10 +37,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable org.eclipse.qvtd.pivot.qvtschedule.Visitable2 org.eclipse.qvtd.pivot.qvtschedule.ToDOTable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable org.eclipse.qvtd.pivot.qvtschedule.ToDOTable"
  * @generated
  */
-public interface Region extends Element, GraphNode, Nameable, Symbolable, Visitable2, ToDOTable
+public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTable
 {
 	void addCallToChild(@NonNull Region region);
 	void addEdge(@NonNull Edge edge);

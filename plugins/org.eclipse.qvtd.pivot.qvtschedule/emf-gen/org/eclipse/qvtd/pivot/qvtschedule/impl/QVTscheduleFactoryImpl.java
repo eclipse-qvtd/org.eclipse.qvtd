@@ -158,7 +158,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public ComposedNode createComposedNode() {
+	public @NonNull ComposedNode createComposedNode() {
 		ComposedNodeImpl composedNode = new ComposedNodeImpl();
 		return composedNode;
 	}
@@ -169,7 +169,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public DependencyNode createDependencyNode() {
+	public @NonNull DependencyNode createDependencyNode() {
 		DependencyNodeImpl dependencyNode = new DependencyNodeImpl();
 		return dependencyNode;
 	}
@@ -180,7 +180,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public EdgeConnection createEdgeConnection() {
+	public @NonNull EdgeConnection createEdgeConnection() {
 		EdgeConnectionImpl edgeConnection = new EdgeConnectionImpl();
 		return edgeConnection;
 	}
@@ -202,7 +202,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public ErrorNode createErrorNode() {
+	public @NonNull ErrorNode createErrorNode() {
 		ErrorNodeImpl errorNode = new ErrorNodeImpl();
 		return errorNode;
 	}
@@ -224,7 +224,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public InputNode createInputNode() {
+	public @NonNull InputNode createInputNode() {
 		InputNodeImpl inputNode = new InputNodeImpl();
 		return inputNode;
 	}
@@ -246,7 +246,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public IteratorNode createIteratorNode() {
+	public @NonNull IteratorNode createIteratorNode() {
 		IteratorNodeImpl iteratorNode = new IteratorNodeImpl();
 		return iteratorNode;
 	}
@@ -268,7 +268,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public MicroMappingRegion createMicroMappingRegion() {
+	public @NonNull MicroMappingRegion createMicroMappingRegion() {
 		MicroMappingRegionImpl microMappingRegion = new MicroMappingRegionImpl();
 		return microMappingRegion;
 	}
@@ -279,7 +279,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public NamedMappingRegion createNamedMappingRegion() {
+	public @NonNull NamedMappingRegion createNamedMappingRegion() {
 		NamedMappingRegionImpl namedMappingRegion = new NamedMappingRegionImpl();
 		return namedMappingRegion;
 	}
@@ -301,7 +301,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public NodeConnection createNodeConnection() {
+	public @NonNull NodeConnection createNodeConnection() {
 		NodeConnectionImpl nodeConnection = new NodeConnectionImpl();
 		return nodeConnection;
 	}
@@ -323,7 +323,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public NullNode createNullNode() {
+	public @NonNull NullNode createNullNode() {
 		NullNodeImpl nullNode = new NullNodeImpl();
 		return nullNode;
 	}
@@ -334,7 +334,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public OperationNode createOperationNode() {
+	public @NonNull OperationNode createOperationNode() {
 		OperationNodeImpl operationNode = new OperationNodeImpl();
 		return operationNode;
 	}
@@ -345,7 +345,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public PatternTypedNode createPatternTypedNode() {
+	public @NonNull PatternTypedNode createPatternTypedNode() {
 		PatternTypedNodeImpl patternTypedNode = new PatternTypedNodeImpl();
 		return patternTypedNode;
 	}
@@ -356,7 +356,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public PatternVariableNode createPatternVariableNode() {
+	public @NonNull PatternVariableNode createPatternVariableNode() {
 		PatternVariableNodeImpl patternVariableNode = new PatternVariableNodeImpl();
 		return patternVariableNode;
 	}
@@ -400,7 +400,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public TrueNode createTrueNode() {
+	public @NonNull TrueNode createTrueNode() {
 		TrueNodeImpl trueNode = new TrueNodeImpl();
 		return trueNode;
 	}
@@ -411,7 +411,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public UnknownNode createUnknownNode() {
+	public @NonNull UnknownNode createUnknownNode() {
 		UnknownNodeImpl unknownNode = new UnknownNodeImpl();
 		return unknownNode;
 	}

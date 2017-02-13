@@ -56,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
-import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
@@ -166,11 +165,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				default: return -1;
 			}
 		}
-		if (baseClass == Visitable2.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == ToDOTable.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -199,11 +193,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		if (baseClass == Symbolable.class) {
 			switch (baseFeatureID) {
 				case QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME: return QVTschedulePackage.REGION__SYMBOL_NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == Visitable2.class) {
-			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

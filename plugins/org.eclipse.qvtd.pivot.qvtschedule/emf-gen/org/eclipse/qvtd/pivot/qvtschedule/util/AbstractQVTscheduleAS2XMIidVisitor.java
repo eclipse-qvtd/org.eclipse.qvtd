@@ -236,6 +236,11 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitRootScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootScheduledRegion object) {
 		return visitScheduledRegion(object);
 	}

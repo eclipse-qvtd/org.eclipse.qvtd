@@ -35,8 +35,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
-
 import com.google.common.collect.Lists;
 
 /**
@@ -86,11 +84,6 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		for (@NonNull NavigableEdge sourceEdge : sourceEdges) {
 			sourceEdge.addOutgoingConnection(this);
 		}
-	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitEdgeConnection(this);
 	}
 
 	@Override

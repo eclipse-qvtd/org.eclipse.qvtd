@@ -15,9 +15,10 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractVisitor;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
@@ -27,14 +28,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /**
  * The PartitioningVisitor performs the selective clone of a region, selecting and possibly reclassifying
  * nodes and retaining only edges between the selected nodes.
  */
-class PartitioningVisitor extends AbstractVisitor<Visitable2>
+class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
 	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion,
 			@NonNull String namePrefix, @NonNull String symbolSuffix, @NonNull AbstractPartition partition) {
@@ -49,6 +50,7 @@ class PartitioningVisitor extends AbstractVisitor<Visitable2>
 	private final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2partialNode = new HashMap<>();
 
 	protected PartitioningVisitor(@NonNull MicroMappingRegion partialRegion, @NonNull AbstractPartition partition) {
+		super(null);
 		this.partialRegion = partialRegion;
 		this.partition = partition;
 	}
@@ -194,5 +196,10 @@ class PartitioningVisitor extends AbstractVisitor<Visitable2>
 			partialNode.addTypedElement(typedElement);
 		}
 		return partialNode;
+	}
+
+	@Override
+	public @Nullable Element visiting(@NonNull Visitable visitable) {
+		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 	}
 }

@@ -59,7 +59,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Composed Node</em>'.
 	 * @generated
 	 */
-	ComposedNode createComposedNode();
+	@NonNull ComposedNode createComposedNode();
 
 	/**
 	 * Returns a new object of class '<em>Dependency Node</em>'.
@@ -68,7 +68,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Dependency Node</em>'.
 	 * @generated
 	 */
-	DependencyNode createDependencyNode();
+	@NonNull DependencyNode createDependencyNode();
 
 	/**
 	 * Returns a new object of class '<em>Edge Connection</em>'.
@@ -77,7 +77,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Edge Connection</em>'.
 	 * @generated
 	 */
-	EdgeConnection createEdgeConnection();
+	@NonNull EdgeConnection createEdgeConnection();
 
 	/**
 	 * Returns a new object of class '<em>Edge Role</em>'.
@@ -95,7 +95,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Error Node</em>'.
 	 * @generated
 	 */
-	ErrorNode createErrorNode();
+	@NonNull ErrorNode createErrorNode();
 
 	/**
 	 * Returns a new object of class '<em>Expression Edge</em>'.
@@ -113,7 +113,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Input Node</em>'.
 	 * @generated
 	 */
-	InputNode createInputNode();
+	@NonNull InputNode createInputNode();
 
 	/**
 	 * Returns a new object of class '<em>Iterated Edge</em>'.
@@ -131,7 +131,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Iterator Node</em>'.
 	 * @generated
 	 */
-	IteratorNode createIteratorNode();
+	@NonNull IteratorNode createIteratorNode();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Action</em>'.
@@ -149,7 +149,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Micro Mapping Region</em>'.
 	 * @generated
 	 */
-	MicroMappingRegion createMicroMappingRegion();
+	@NonNull MicroMappingRegion createMicroMappingRegion();
 
 	/**
 	 * Returns a new object of class '<em>Named Mapping Region</em>'.
@@ -158,7 +158,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Named Mapping Region</em>'.
 	 * @generated
 	 */
-	NamedMappingRegion createNamedMappingRegion();
+	@NonNull NamedMappingRegion createNamedMappingRegion();
 
 	/**
 	 * Returns a new object of class '<em>Navigation Edge</em>'.
@@ -176,7 +176,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Node Connection</em>'.
 	 * @generated
 	 */
-	NodeConnection createNodeConnection();
+	@NonNull NodeConnection createNodeConnection();
 
 	/**
 	 * Returns a new object of class '<em>Node Role</em>'.
@@ -194,7 +194,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Null Node</em>'.
 	 * @generated
 	 */
-	NullNode createNullNode();
+	@NonNull NullNode createNullNode();
 
 	/**
 	 * Returns a new object of class '<em>Operation Node</em>'.
@@ -203,7 +203,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Operation Node</em>'.
 	 * @generated
 	 */
-	OperationNode createOperationNode();
+	@NonNull OperationNode createOperationNode();
 
 	/**
 	 * Returns a new object of class '<em>Pattern Typed Node</em>'.
@@ -212,7 +212,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Pattern Typed Node</em>'.
 	 * @generated
 	 */
-	PatternTypedNode createPatternTypedNode();
+	@NonNull PatternTypedNode createPatternTypedNode();
 
 	/**
 	 * Returns a new object of class '<em>Pattern Variable Node</em>'.
@@ -221,7 +221,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Pattern Variable Node</em>'.
 	 * @generated
 	 */
-	PatternVariableNode createPatternVariableNode();
+	@NonNull PatternVariableNode createPatternVariableNode();
 
 	/**
 	 * Returns a new object of class '<em>Predicate Edge</em>'.
@@ -257,7 +257,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>True Node</em>'.
 	 * @generated
 	 */
-	TrueNode createTrueNode();
+	@NonNull TrueNode createTrueNode();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Node</em>'.
@@ -266,7 +266,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Unknown Node</em>'.
 	 * @generated
 	 */
-	UnknownNode createUnknownNode();
+	@NonNull UnknownNode createUnknownNode();
 
 	/**
 	 * Returns the package supported by this factory.

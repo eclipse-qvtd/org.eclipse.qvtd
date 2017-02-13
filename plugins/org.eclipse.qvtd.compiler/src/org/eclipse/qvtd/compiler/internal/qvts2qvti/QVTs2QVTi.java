@@ -139,7 +139,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
 		NamedElement qvtiChild = qvtiTransformation;
 		for (org.eclipse.ocl.pivot.Package qvtpPackage = transformation.getOwningPackage(); qvtpPackage != null; qvtpPackage = qvtpPackage.getOwningPackage()) {
-			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = visitor.createPackage(ClassUtil.nonNull(qvtpPackage.getName()), qvtpPackage.getNsPrefix(), qvtpPackage.getURI());
+			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = createPackage(ClassUtil.nonNull(qvtpPackage.getName()), qvtpPackage.getNsPrefix(), qvtpPackage.getURI());
 			if (qvtiChild instanceof Transformation) {
 				qvtiPackage.getOwnedClasses().add((Transformation)qvtiChild);
 			}

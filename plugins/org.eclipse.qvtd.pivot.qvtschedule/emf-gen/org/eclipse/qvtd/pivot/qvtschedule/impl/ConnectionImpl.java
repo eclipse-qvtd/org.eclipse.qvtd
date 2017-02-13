@@ -22,7 +22,6 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
-import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
 
 /**
  * <!-- begin-user-doc -->
@@ -132,11 +131,6 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				default: return -1;
 			}
 		}
-		if (baseClass == Visitable2.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -155,11 +149,6 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		if (baseClass == Symbolable.class) {
 			switch (baseFeatureID) {
 				case QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME: return QVTschedulePackage.CONNECTION__SYMBOL_NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == Visitable2.class) {
-			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

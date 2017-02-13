@@ -28,14 +28,14 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -45,7 +45,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -55,15 +54,17 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
+import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
-public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Element>
+public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Transformation qvtpTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
@@ -84,7 +85,8 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
 
 	public QVTs2QVTiVisitor(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
-		super(environmentFactory);
+		super(null);
+		this.environmentFactory = environmentFactory;
 		this.problemHandler = problemHandler;
 		this.qvtpTransformation = qvtpTransformation;
 		this.symbolNameReservation = symbolNameReservation;
@@ -184,7 +186,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 		//		assert !region.isConnectionRegion();
 		if (region.isRootCompositionRegion()) {
-			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion)region);
+			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion2)region);
 		}
 		else {
 			region2mapping = new BasicRegion2Mapping(this, region);
@@ -271,9 +273,8 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
-	@Override
-	public @NonNull PivotMetamodelManager getMetamodelManager() {
-		return super.getMetamodelManager();
+	public @NonNull MetamodelManager getMetamodelManager() {
+		return environmentFactory.getMetamodelManager();
 	}
 
 	public @NonNull Operation getNotEqualsOperation() {
@@ -307,7 +308,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		Set<@NonNull String> reservedNames2 = reservedNames;
 		if (reservedNames2 == null) {
 			reservedNames = reservedNames2 = new HashSet<>();
-			org.eclipse.ocl.pivot.Package standardLibraryPackage = standardLibrary.getPackage();
+			org.eclipse.ocl.pivot.Package standardLibraryPackage = getStandardLibrary().getPackage();
 			gatherReservedPackageNames(reservedNames2, Collections.singletonList(standardLibraryPackage));
 			reservedNames2.add(ClassUtil.nonNull(qvtpTransformation.getName()));
 			for (TypedModel typedModel : qvtpTransformation.getModelParameter()) {
@@ -341,7 +342,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	//	}
 
 	@Override
-	public @Nullable Element visiting(@NonNull Visitable2 visitable) {
+	public @Nullable Element visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 	}
 

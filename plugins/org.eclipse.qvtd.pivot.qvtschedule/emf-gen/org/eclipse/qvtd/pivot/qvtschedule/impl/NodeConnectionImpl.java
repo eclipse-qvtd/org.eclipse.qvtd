@@ -37,8 +37,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -99,11 +97,6 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 			//			assert !sourceNode.isConstant();
 			sourceNode.addOutgoingConnection(this);
 		}
-	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitNodeConnection(this);
 	}
 
 	@Override

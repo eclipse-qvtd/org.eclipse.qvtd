@@ -32,10 +32,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphEdge org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Visitable2"
+ * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphEdge org.eclipse.ocl.pivot.Nameable"
  * @generated
  */
-public interface Edge extends Element, GraphEdge, Nameable, Visitable2 {
+public interface Edge extends Element, GraphEdge, Nameable {
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
 	 */

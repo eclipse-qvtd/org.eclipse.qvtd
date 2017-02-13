@@ -240,6 +240,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createRoleAdapter();
 			}
 			@Override
+			public Adapter caseRootCompositionRegion(RootCompositionRegion object) {
+				return createRootCompositionRegionAdapter();
+			}
+			@Override
 			public Adapter caseRootScheduledRegion(RootScheduledRegion object) {
 				return createRootScheduledRegionAdapter();
 			}
@@ -266,10 +270,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableNode(VariableNode object) {
 				return createVariableNodeAdapter();
-			}
-			@Override
-			public Adapter caseVisitable2(Visitable2 object) {
-				return createVisitable2Adapter();
 			}
 			@Override
 			public Adapter caseGraphEdge(GraphEdge object) {
@@ -512,6 +512,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion <em>Root Composition Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion
+	 * @generated
+	 */
+	public Adapter createRootCompositionRegionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion <em>Root Scheduled Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -606,20 +620,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableNodeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.Visitable2 <em>Visitable2</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Visitable2
-	 * @generated
-	 */
-	public Adapter createVisitable2Adapter() {
 		return null;
 	}
 

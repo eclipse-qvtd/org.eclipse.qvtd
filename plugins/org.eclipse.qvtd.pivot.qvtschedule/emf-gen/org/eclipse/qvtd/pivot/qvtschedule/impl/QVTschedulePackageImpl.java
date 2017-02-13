@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
@@ -77,7 +78,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
 
 /**
  * <!-- begin-user-doc -->
@@ -189,6 +189,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass rootCompositionRegionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass rootScheduledRegionEClass = null;
 
 	/**
@@ -232,13 +239,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass variableNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass visitable2EClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -471,7 +471,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -502,7 +502,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -553,6 +553,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBasicMappingRegion() {
 		return basicMappingRegionEClass;
 	}
@@ -622,6 +623,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComposedNode() {
 		return composedNodeEClass;
 	}
@@ -681,6 +683,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDependencyNode() {
 		return dependencyNodeEClass;
 	}
@@ -811,6 +814,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getRootCompositionRegion() {
+		return rootCompositionRegionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRootScheduledRegion() {
 		return rootScheduledRegionEClass;
 	}
@@ -860,6 +873,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTrueNode() {
 		return trueNodeEClass;
 	}
@@ -869,6 +883,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUnknownNode() {
 		return unknownNodeEClass;
 	}
@@ -878,18 +893,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableNode() {
 		return variableNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVisitable2() {
-		return visitable2EClass;
 	}
 
 	/**
@@ -937,6 +943,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getErrorNode() {
 		return errorNodeEClass;
 	}
@@ -956,6 +963,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInputNode() {
 		return inputNodeEClass;
 	}
@@ -975,6 +983,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIteratorNode() {
 		return iteratorNodeEClass;
 	}
@@ -1034,6 +1043,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMicroMappingRegion() {
 		return microMappingRegionEClass;
 	}
@@ -1053,6 +1063,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedMappingRegion() {
 		return namedMappingRegionEClass;
 	}
@@ -1112,6 +1123,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNullNode() {
 		return nullNodeEClass;
 	}
@@ -1121,6 +1133,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOperationNode() {
 		return operationNodeEClass;
 	}
@@ -1140,6 +1153,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPatternTypedNode() {
 		return patternTypedNodeEClass;
 	}
@@ -1149,6 +1163,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPatternVariableNode() {
 		return patternVariableNodeEClass;
 	}
@@ -1373,6 +1388,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEAttribute(roleEClass, ROLE__SPECULATED);
 		createEAttribute(roleEClass, ROLE__SPECULATION);
 
+		rootCompositionRegionEClass = createEClass(ROOT_COMPOSITION_REGION);
+
 		rootScheduledRegionEClass = createEClass(ROOT_SCHEDULED_REGION);
 
 		scheduledRegionEClass = createEClass(SCHEDULED_REGION);
@@ -1387,8 +1404,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		unknownNodeEClass = createEClass(UNKNOWN_NODE);
 
 		variableNodeEClass = createEClass(VARIABLE_NODE);
-
-		visitable2EClass = createEClass(VISITABLE2);
 
 		graphEdgeEClass = createEClass(GRAPH_EDGE);
 
@@ -1445,7 +1460,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		connectionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		connectionEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		connectionEClass.getESuperTypes().add(this.getSymbolable());
-		connectionEClass.getESuperTypes().add(this.getVisitable2());
 		connectionRoleEClass.getESuperTypes().add(thePivotPackage.getElement());
 		datumConnectionEClass.getESuperTypes().add(this.getConnection());
 		datumConnectionEClass.getESuperTypes().add(this.getGraphEdge());
@@ -1454,7 +1468,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		edgeEClass.getESuperTypes().add(thePivotPackage.getElement());
 		edgeEClass.getESuperTypes().add(this.getGraphEdge());
 		edgeEClass.getESuperTypes().add(thePivotPackage.getNameable());
-		edgeEClass.getESuperTypes().add(this.getVisitable2());
 		g1 = createEGenericType(this.getDatumConnection());
 		EGenericType g2 = createEGenericType(this.getNavigableEdge());
 		g1.getETypeArguments().add(g2);
@@ -1477,7 +1490,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		nodeEClass.getESuperTypes().add(this.getConnectionEnd());
 		nodeEClass.getESuperTypes().add(this.getGraphNode());
 		nodeEClass.getESuperTypes().add(thePivotPackage.getNameable());
-		nodeEClass.getESuperTypes().add(this.getVisitable2());
 		g1 = createEGenericType(this.getDatumConnection());
 		g2 = createEGenericType(this.getNode());
 		g1.getETypeArguments().add(g2);
@@ -1495,9 +1507,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		regionEClass.getESuperTypes().add(this.getGraphNode());
 		regionEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		regionEClass.getESuperTypes().add(this.getSymbolable());
-		regionEClass.getESuperTypes().add(this.getVisitable2());
 		regionEClass.getESuperTypes().add(this.getToDOTable());
 		roleEClass.getESuperTypes().add(thePivotPackage.getElement());
+		rootCompositionRegionEClass.getESuperTypes().add(this.getRegion());
 		rootScheduledRegionEClass.getESuperTypes().add(this.getScheduledRegion());
 		scheduledRegionEClass.getESuperTypes().add(this.getRegion());
 		schedulerConstantsEClass.getESuperTypes().add(thePivotPackage.getElement());
@@ -1607,6 +1619,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEAttribute(getRole_Speculated(), ecorePackage.getEBoolean(), "speculated", null, 1, 1, Role.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_Speculation(), ecorePackage.getEBoolean(), "speculation", null, 1, 1, Role.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
+		initEClass(rootCompositionRegionEClass, RootCompositionRegion.class, "RootCompositionRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(rootScheduledRegionEClass, RootScheduledRegion.class, "RootScheduledRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scheduledRegionEClass, ScheduledRegion.class, "ScheduledRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1621,8 +1635,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(unknownNodeEClass, UnknownNode.class, "UnknownNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(variableNodeEClass, VariableNode.class, "VariableNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(visitable2EClass, Visitable2.class, "Visitable2", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(graphEdgeEClass, GraphEdge.class, "GraphEdge", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
@@ -1655,12 +1667,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 } //QVTschedulePackageImpl

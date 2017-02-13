@@ -228,6 +228,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object) {
+		return delegate.visitRootCompositionRegion(object);
+	}
+
+	@Override
 	public R visitRootScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootScheduledRegion object) {
 		return delegate.visitRootScheduledRegion(object);
 	}

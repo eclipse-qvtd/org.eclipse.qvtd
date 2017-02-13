@@ -310,7 +310,8 @@ public class UMLX2QVTr extends QVTrelationHelper
 		return castElement;
 	}
 
-	protected @NonNull EnvironmentFactory getEnvironmentFactory() {
+	@Override
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
 

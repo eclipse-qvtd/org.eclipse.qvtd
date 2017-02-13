@@ -31,8 +31,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -77,11 +75,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	private @Nullable EdgeConnection incomingConnection = null;
 	private @Nullable List<@NonNull EdgeConnection> outgoingConnections = null;
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitNavigableEdge(this);
-	}
 
 	@Override
 	public final void addIncomingConnection(@NonNull EdgeConnection edgeConnection) {

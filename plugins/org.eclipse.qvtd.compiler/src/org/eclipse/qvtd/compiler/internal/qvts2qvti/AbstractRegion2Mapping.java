@@ -36,8 +36,8 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -181,7 +181,7 @@ public abstract class AbstractRegion2Mapping
 		return mapping;
 	}
 
-	protected @NonNull PivotMetamodelManager getMetamodelManager() {
+	protected @NonNull MetamodelManager getMetamodelManager() {
 		return visitor.getMetamodelManager();
 	}
 

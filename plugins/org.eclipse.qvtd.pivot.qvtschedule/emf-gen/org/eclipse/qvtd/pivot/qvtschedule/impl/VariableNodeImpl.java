@@ -18,14 +18,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,11 +52,6 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	}
 
 	private @Nullable VariableDeclaration variable;			// null is only permitted during construction
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitVariableNode(this);
-	}
 
 	public @NonNull VariableDeclaration getVariable() {
 		return ClassUtil.nonNullState(variable);

@@ -45,8 +45,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -91,11 +89,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<>();
 
 	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitNode(this);
-	}
 
 	@Override
 	public final void addIncomingConnection(@NonNull NodeConnection connection) {

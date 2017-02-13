@@ -27,10 +27,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable org.eclipse.qvtd.pivot.qvtschedule.Visitable2"
+ * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable"
  * @generated
  */
-public interface Connection extends Element, Nameable, Symbolable, Visitable2
+public interface Connection extends Element, Nameable, Symbolable
 {
 	void destroy();
 

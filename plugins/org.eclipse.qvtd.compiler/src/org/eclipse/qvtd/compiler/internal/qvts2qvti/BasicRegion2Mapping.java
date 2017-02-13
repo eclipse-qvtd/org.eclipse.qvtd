@@ -63,6 +63,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -425,9 +426,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitIfExp(@NonNull IfExp pIfExp) {
-			PivotMetamodelManager metamodelManager = visitor.getMetamodelManager();
+			MetamodelManager metamodelManager = visitor.getMetamodelManager();
 			ExpressionCreator inlineExpressionCreator = getInlineExpressionCreator();
-			return metamodelManager.createIfExp(createNonNull(pIfExp.getOwnedCondition()),
+			return ((PivotMetamodelManager)metamodelManager).createIfExp(createNonNull(pIfExp.getOwnedCondition()),
 				inlineExpressionCreator.createNonNull(pIfExp.getOwnedThen()),
 				inlineExpressionCreator.createNonNull(pIfExp.getOwnedElse()));
 		}

@@ -16,24 +16,24 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Basic Mapping Region</b></em>'.
+ * An implementation of the model object '<em><b>Root Composition Region</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMappingRegion {
+public abstract class RootCompositionRegionImpl extends RegionImpl implements RootCompositionRegion {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BasicMappingRegionImpl() {
+	protected RootCompositionRegionImpl() {
 		super();
 	}
 
@@ -44,11 +44,11 @@ public abstract class BasicMappingRegionImpl extends MappingRegionImpl implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.BASIC_MAPPING_REGION;
+		return QVTschedulePackage.Literals.ROOT_COMPOSITION_REGION;
 	}
 
-	protected BasicMappingRegionImpl(@NonNull MultiRegion multiRegion) {
+	protected RootCompositionRegionImpl(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
 	}
 
-} //BasicMappingRegionImpl
+} //RootCompositionRegionImpl

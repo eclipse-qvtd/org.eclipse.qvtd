@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -38,10 +39,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
-
 import com.google.common.collect.Iterables;
 
 public class RootScheduledRegion2 extends AbstractScheduledRegion implements RootScheduledRegion
@@ -60,7 +60,7 @@ public class RootScheduledRegion2 extends AbstractScheduledRegion implements Roo
 
 	private final @NonNull ContentsAnalysis contentsAnalysis;
 
-	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(getMultiRegion());
+	private final @NonNull RootCompositionRegion2 rootContainmentRegion = new RootCompositionRegion2(getMultiRegion());
 
 	public RootScheduledRegion2(@NonNull String name, @NonNull Region primaryRegion) {
 		super(primaryRegion.getMultiRegion());
@@ -80,8 +80,8 @@ public class RootScheduledRegion2 extends AbstractScheduledRegion implements Roo
 	} */
 
 	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return ((Visitor<R>)visitor).visitRootScheduledRegion(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitRootScheduledRegion(this);
 	}
 
 	private void computeInputModels() {
@@ -135,7 +135,7 @@ public class RootScheduledRegion2 extends AbstractScheduledRegion implements Roo
 	 * Create a RootContainmentRegion that introduces model elements directly from the input model root, or from
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
-	private @NonNull RootCompositionRegion createRootContainmentRegion() {
+	private @NonNull RootCompositionRegion2 createRootContainmentRegion() {
 		addRegion(rootContainmentRegion);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootContainmentRegion.writeDebugGraphs(null);

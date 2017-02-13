@@ -35,8 +35,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -79,11 +77,6 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 
 	protected MappingRegionImpl(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
-	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitMappingRegion(this);
 	}
 
 	@Override

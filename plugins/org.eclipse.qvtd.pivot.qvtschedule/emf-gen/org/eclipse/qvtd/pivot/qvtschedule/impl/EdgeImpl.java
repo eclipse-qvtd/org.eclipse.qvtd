@@ -28,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,11 +60,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	private @Nullable Node sourceNode = null;		// null is only permitted during construction
 	private @Nullable Node targetNode = null;		// null is only permitted during construction
 	private @Nullable String name = null;
-
-	@Override
-	public <R> R accept(@NonNull Visitor2<R> visitor) {
-		return visitor.visitEdge(this);
-	}
 
 	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {

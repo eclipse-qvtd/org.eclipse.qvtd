@@ -237,6 +237,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public @Nullable Object visitRootScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootScheduledRegion object) {
 		return visitScheduledRegion(object);
 	}
