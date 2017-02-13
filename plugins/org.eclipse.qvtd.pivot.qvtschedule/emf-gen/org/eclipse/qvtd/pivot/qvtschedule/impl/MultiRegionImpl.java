@@ -21,11 +21,14 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 
+import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -36,7 +39,7 @@ import com.google.common.collect.Lists;
  *
  * @generated
  */
-public abstract class MultiRegionImpl extends ElementImpl implements MultiRegion {
+public class MultiRegionImpl extends ElementImpl implements MultiRegion {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,6 +58,18 @@ public abstract class MultiRegionImpl extends ElementImpl implements MultiRegion
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.MULTI_REGION;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitMultiRegion(this);
+	}
+
+	private SchedulerConstants schedulerConstants;
 
 	/**
 	 * The oclAsType(Type) casting property for each cast in use.
@@ -86,9 +101,14 @@ public abstract class MultiRegionImpl extends ElementImpl implements MultiRegion
 		return castProperty;
 	} */
 
-	//	@Override
+	@Override
 	public @NonNull Iterable<@NonNull OperationRegion> getOperationRegions() {
 		return Iterables.filter(allRegions, OperationRegion.class);
+	}
+
+	@Override
+	public @NonNull SchedulerConstants getSchedulerConstants() {
+		return schedulerConstants;
 	}
 
 	/*	private @NonNull List<Region> growSequentialRegions(@NonNull List<Region> orderedRegions) {
@@ -117,5 +137,10 @@ public abstract class MultiRegionImpl extends ElementImpl implements MultiRegion
 	@Override
 	public void setActiveRegions(@NonNull Iterable<@NonNull ? extends Region> activeRegions) {	// FIXME eliminate
 		this.activeRegions = Lists.newArrayList(activeRegions);
+	}
+
+	@Override
+	public void setSchedulerConstants(@NonNull SchedulerConstants schedulerConstants) {
+		this.schedulerConstants = schedulerConstants;
 	}
 } //MultiRegionImpl

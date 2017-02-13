@@ -62,7 +62,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.MultiRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -301,7 +303,8 @@ public class QVTp2QVTs extends SchedulerConstants2
 	}
 
 	public @NonNull MultiRegion transform() throws IOException {
-		MultiRegion2 multiRegion = new MultiRegion2(this);
+		MultiRegion multiRegion = QVTscheduleFactory.eINSTANCE.createMultiRegion();
+		multiRegion.setSchedulerConstants(this);
 		Iterable<@NonNull Mapping> orderedMappings = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
@@ -313,7 +316,7 @@ public class QVTp2QVTs extends SchedulerConstants2
 		List<@NonNull BasicMappingRegion2> mappingRegions = new ArrayList<>(mapping2mappingRegion.values());
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull BasicMappingRegion2 mappingRegion : mappingRegions) {
-			mappingRegion.registerConsumptionsAndProductions();
+			mappingRegion.registerConsumptionsAndProductions(this);
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			for (@NonNull MappingRegion mappingRegion : mappingRegions) {

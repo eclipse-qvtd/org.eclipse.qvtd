@@ -28,10 +28,9 @@ import org.eclipse.ocl.pivot.Element;
 public interface MultiRegion extends Element
 {
 	void addRegion(@NonNull Region region);
-	//	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
 	@NonNull List<@NonNull Region> getActiveRegions();
-	//	@NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping);
-	//	@NonNull Iterable<@NonNull OperationRegion> getOperationRegions();
+	@NonNull Iterable<@NonNull OperationRegion> getOperationRegions();
 	@NonNull SchedulerConstants getSchedulerConstants();
 	void setActiveRegions(@NonNull Iterable<@NonNull ? extends Region> activeRegions);	// FIXME eliminate
+	void setSchedulerConstants(@NonNull SchedulerConstants schedulerConstants);
 }

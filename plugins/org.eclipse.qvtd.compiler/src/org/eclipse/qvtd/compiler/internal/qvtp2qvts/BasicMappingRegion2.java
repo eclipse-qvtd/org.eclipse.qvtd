@@ -390,11 +390,6 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 	}
 
 	@Override
-	public @NonNull MultiRegion2 getMultiRegion() {
-		return (MultiRegion2)super.getMultiRegion();
-	}
-
-	@Override
 	public @NonNull String getName() {
 		return String.valueOf(getMapping().getName());
 	}
@@ -554,12 +549,12 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		return false;
 	}
 
-	public void registerConsumptionsAndProductions() {
+	public void registerConsumptionsAndProductions(@NonNull QVTp2QVTs qvtp2qts) {
 		for (@NonNull Node newNode : getNewNodes()) {
 			ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) newNode.getClassDatumAnalysis();
 			classDatumAnalysis.addProduction(this, newNode);
 			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
-				MappingRegion consumingRegion = getMultiRegion().getMappingRegion(consumingMapping);
+				MappingRegion consumingRegion = qvtp2qts.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
 						classDatumAnalysis.addConsumption(consumingRegion, consumingNode);
@@ -571,7 +566,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 			ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(this, predicatedNode);
 			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
-				MappingRegion producingRegion = getMultiRegion().getMappingRegion(producingMapping);
+				MappingRegion producingRegion = qvtp2qts.getMappingRegion(producingMapping);
 				assert producingRegion != null;
 				for (@NonNull Node newNode : producingRegion.getNewNodes()) {
 					if (newNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
