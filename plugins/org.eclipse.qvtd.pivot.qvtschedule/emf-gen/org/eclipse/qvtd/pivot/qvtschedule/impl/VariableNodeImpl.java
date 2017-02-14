@@ -19,9 +19,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 
 /**
@@ -57,7 +58,7 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 		return ClassUtil.nonNullState(variable);
 	}
 
-	protected void initialize(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
+	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
 		initialize(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getClassDatumAnalysis(variable));
 		this.variable = variable;
 		assert variable.eContainer() != null;
@@ -68,6 +69,8 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 
 	@Override
 	public @NonNull String toString() {
-		return getNodeRole().getPhase() + "-" + getClass().getSimpleName().replace("Impl",  "") + "(" + (variable != null ? variable.toString() : getName()) + ")";
+		Role nodeRole = getNodeRole();
+		Phase phase = nodeRole != null ? nodeRole.getPhase() : null;
+		return phase + "-" + getClass().getSimpleName().replace("Impl",  "") + "(" + (variable != null ? variable.toString() : getName()) + ")";
 	}
 } //VariableNodeImpl

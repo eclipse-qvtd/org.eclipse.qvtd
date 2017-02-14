@@ -76,7 +76,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
 			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
-			case QVTschedulePackage.EDGE_ROLE: return createEdgeRole();
 			case QVTschedulePackage.ERROR_NODE: return createErrorNode();
 			case QVTschedulePackage.EXPRESSION_EDGE: return createExpressionEdge();
 			case QVTschedulePackage.INPUT_NODE: return createInputNode();
@@ -88,7 +87,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
 			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
-			case QVTschedulePackage.NODE_ROLE: return createNodeRole();
 			case QVTschedulePackage.NULL_NODE: return createNullNode();
 			case QVTschedulePackage.OPERATION_NODE: return createOperationNode();
 			case QVTschedulePackage.OPERATION_REGION: return createOperationRegion();
@@ -97,6 +95,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
+			case QVTschedulePackage.ROLE: return createRole();
 			case QVTschedulePackage.ROOT_COMPOSITION_REGION: return createRootCompositionRegion();
 			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
@@ -173,7 +172,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDatumAnalysis createClassDatumAnalysis() {
+	@Override
+	public @NonNull ClassDatumAnalysis createClassDatumAnalysis() {
 		ClassDatumAnalysisImpl classDatumAnalysis = new ClassDatumAnalysisImpl();
 		return classDatumAnalysis;
 	}
@@ -209,17 +209,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull EdgeConnection createEdgeConnection() {
 		EdgeConnectionImpl edgeConnection = new EdgeConnectionImpl();
 		return edgeConnection;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull EdgeRole createEdgeRole() {
-		EdgeRoleImpl edgeRole = new EdgeRoleImpl();
-		return edgeRole;
 	}
 
 	/**
@@ -349,17 +338,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull NodeRole createNodeRole() {
-		NodeRoleImpl nodeRole = new NodeRoleImpl();
-		return nodeRole;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull NullNode createNullNode() {
 		NullNodeImpl nullNode = new NullNodeImpl();
 		return nullNode;
@@ -440,6 +418,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull RecursionEdge createRecursionEdge() {
 		RecursionEdgeImpl recursionEdge = new RecursionEdgeImpl();
 		return recursionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull Role createRole() {
+		RoleImpl role = new RoleImpl();
+		return role;
 	}
 
 	/**

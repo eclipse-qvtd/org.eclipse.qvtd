@@ -31,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -409,19 +408,19 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull NodeRole asPhase(@NonNull NodeRole nodeRole, @NonNull Phase phase) {
+	public static @NonNull Role asPhase(@NonNull Role nodeRole, @NonNull Phase phase) {
 		return getNodeRole(phase);
 	}
 
-	public static @NonNull NodeRole asPredicated(@NonNull NodeRole nodeRole) {
+	public static @NonNull Role asPredicated(@NonNull Role nodeRole) {
 		return asPhase(nodeRole, Phase.PREDICATED);
 	}
 
-	public static @NonNull NodeRole asSpeculated(@NonNull NodeRole nodeRole) {
+	public static @NonNull Role asSpeculated(@NonNull Role nodeRole) {
 		return asPhase(nodeRole, Phase.SPECULATED);
 	}
 
-	public static @NonNull NodeRole asSpeculation(@NonNull NodeRole nodeRole) {
+	public static @NonNull Role asSpeculation(@NonNull Role nodeRole) {
 		return asPhase(nodeRole, Phase.SPECULATION);
 	}
 
@@ -528,7 +527,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull String getFillColor(@NonNull NodeRole nodeRole) {
+	public static @NonNull Role getEdgeRole(@NonNull Edge edge) {
+		return ClassUtil.nonNullState(edge.getEdgeRole());
+	}
+
+	public static @NonNull String getFillColor(@NonNull Role nodeRole) {
 		switch (nodeRole.getPhase()) {
 			case CONSTANT: return LIGHT_CONSTANT_COLOR;
 			case LOADED: return LIGHT_LOADED_COLOR;
@@ -538,6 +541,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			case SPECULATED: return LIGHT_SPECULATED_COLOR;
 			default: return LIGHT_OTHER_COLOR;
 		}
+	}
+
+	public static @NonNull Role getNodeRole(@NonNull Node node) {
+		return ClassUtil.nonNullState(node.getNodeRole());
 	}
 
 	public static @NonNull Phase getPhase(@NonNull Role role) {

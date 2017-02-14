@@ -14,12 +14,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
  * The SpeculationPartition identifies the nodes and edges required in a speculation micro-mapping
@@ -37,7 +36,7 @@ class SpeculationPartition extends AbstractPartition
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
-				NodeRole speculationNodeRole = QVTscheduleUtil.asSpeculation(node.getNodeRole());
+				Role speculationNodeRole = RegionUtil.asSpeculation(RegionUtil.getNodeRole(node));
 				addNode(node, speculationNodeRole);
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
@@ -64,7 +63,7 @@ class SpeculationPartition extends AbstractPartition
 	protected void addReachableConstantOrLoadedNodes(@NonNull Node node) {
 		if (/*node.isMatched() &&*/ (node.isConstant() || node.isLoaded())) {
 			if (!hasNode(node)) {
-				addNode(node, node.getNodeRole());
+				addNode(node, RegionUtil.getNodeRole(node));
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isConstant() || edge.isLoaded()) {
 						addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
@@ -96,8 +95,8 @@ class SpeculationPartition extends AbstractPartition
 	}
 
 	@Override
-	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
-		EdgeRole edgeRole = edge.getEdgeRole();
+	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+		Role edgeRole = RegionUtil.getEdgeRole(edge);
 		if (edgeRole.isRealized()) {
 			assert !partitioner.hasRealizedEdge(edge);
 		}

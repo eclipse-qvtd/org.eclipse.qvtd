@@ -20,9 +20,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -62,14 +62,14 @@ public class IteratorNodeImpl extends VariableNodeImpl implements IteratorNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitIteratorNode(this);
 	}
 
-	public static @NonNull VariableNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
+	public static @NonNull VariableNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
 		IteratorNodeImpl node = new IteratorNodeImpl();
 		node.initialize(nodeRole, region, variable);
 		return node;
 	}
 
 	@Override
-	public @NonNull VariableNodeImpl createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull VariableNodeImpl createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getVariable());
 	}
 

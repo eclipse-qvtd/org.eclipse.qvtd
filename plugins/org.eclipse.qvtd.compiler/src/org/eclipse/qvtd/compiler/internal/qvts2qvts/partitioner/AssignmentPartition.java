@@ -12,12 +12,12 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -35,7 +35,7 @@ class AssignmentPartition extends AbstractPartition
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			addNode(node, QVTscheduleUtil.asPredicated(node.getNodeRole())/*.asMatched()*/);
+			addNode(node, QVTscheduleUtil.asPredicated(RegionUtil.getNodeRole(node))/*.asMatched()*/);
 		}
 		//
 		//	The nodes that support identification of the realized edge are used as is.
@@ -50,7 +50,7 @@ class AssignmentPartition extends AbstractPartition
 
 	private void gatherSourceNavigations(@NonNull Node targetNode) {
 		if (!hasNode(targetNode)) {
-			NodeRole targetNodeRole = targetNode.getNodeRole();
+			Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
 			if (targetNodeRole.isRealized()) {
 				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole)/*.asMatched()*/;
 			}
@@ -72,8 +72,8 @@ class AssignmentPartition extends AbstractPartition
 	}
 
 	@Override
-	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
-		EdgeRole edgeRole = edge.getEdgeRole();
+	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+		Role edgeRole = RegionUtil.getEdgeRole(edge);
 		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
 			edgeRole = QVTscheduleUtil.getEdgeRole(Phase.PREDICATED);
 		}

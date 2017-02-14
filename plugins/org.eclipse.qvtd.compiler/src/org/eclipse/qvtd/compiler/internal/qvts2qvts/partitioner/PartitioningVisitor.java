@@ -21,12 +21,11 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -99,7 +98,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (partialTargetNode == null) {
 			return null;
 		}
-		EdgeRole edgeRole = partition.getEdgeRole(edge);
+		Role edgeRole = partition.getEdgeRole(edge);
 		if (edgeRole == null) {
 			return null;
 		}
@@ -141,7 +140,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (partialTargetNode == null) {
 			return null;
 		}
-		EdgeRole edgeRole = partition.getEdgeRole(navigableEdge);
+		Role edgeRole = partition.getEdgeRole(navigableEdge);
 		if (edgeRole == null) {
 			return null;
 		}
@@ -150,7 +149,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 
 	@Override
 	public @Nullable Node visitNode(@NonNull Node node) {
-		NodeRole nodeRole = partition.getNodeRole(node);
+		Role nodeRole = partition.getNodeRole(node);
 		if (nodeRole == null) {
 			return null;
 		}
@@ -162,7 +161,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 			//
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isNavigation() && edge.isRealized()) {
-					EdgeRole edgeRole = partition.getEdgeRole(edge);
+					Role edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole.isPredicated()) {
 						partialNode = RegionUtil.createStepNode(partialRegion, node, node.isMatched());
 						break;
@@ -184,7 +183,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 
 	@Override
 	public @Nullable Node visitVariableNode(@NonNull VariableNode variableNode) {
-		NodeRole nodeRole = partition.getNodeRole(variableNode);
+		Role nodeRole = partition.getNodeRole(variableNode);
 		if (nodeRole == null) {
 			return null;
 		};

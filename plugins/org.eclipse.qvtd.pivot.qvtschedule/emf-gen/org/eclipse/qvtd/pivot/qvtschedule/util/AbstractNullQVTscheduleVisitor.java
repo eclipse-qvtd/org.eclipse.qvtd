@@ -102,11 +102,6 @@ public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
-		return null;
-	}
-
-	@Override
 	public R visitErrorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ErrorNode object) {
 		return null;
 	}
@@ -173,11 +168,6 @@ public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
 
 	@Override
 	public R visitNodeConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeConnection object) {
-		return null;
-	}
-
-	@Override
-	public R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
 		return null;
 	}
 

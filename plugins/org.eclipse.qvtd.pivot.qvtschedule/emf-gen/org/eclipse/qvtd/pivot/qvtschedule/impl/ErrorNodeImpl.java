@@ -22,9 +22,9 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -65,14 +65,14 @@ public class ErrorNodeImpl extends NodeImpl implements ErrorNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitErrorNode(this);
 	}
 
-	public static @NonNull ErrorNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public static @NonNull ErrorNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		ErrorNodeImpl node = new ErrorNodeImpl();
 		node.initialize(nodeRole, region, name, classDatumAnalysis);
 		return node;
 	}
 
 	@Override
-	public @NonNull Node createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getName(), getClassDatumAnalysis());
 	}
 

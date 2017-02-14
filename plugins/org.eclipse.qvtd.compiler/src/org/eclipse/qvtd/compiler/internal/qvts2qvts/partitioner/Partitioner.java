@@ -26,12 +26,12 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -156,7 +156,7 @@ public class Partitioner
 		analyzeEdges();
 	}
 
-	public void addEdge(@NonNull Edge edge, @NonNull EdgeRole newEdgeRole, @NonNull AbstractPartition partition) {
+	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
 		if (newEdgeRole.isPredicated()) {
 			alreadyPredicatedEdges.add(edge);
 		}

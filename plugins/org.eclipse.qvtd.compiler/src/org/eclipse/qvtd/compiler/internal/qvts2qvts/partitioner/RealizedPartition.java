@@ -12,11 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 import com.google.common.collect.Iterables;
 
@@ -40,11 +40,11 @@ class RealizedPartition extends AbstractPartition
 		//	The realized nodes are realized as is.
 		//
 		for (@NonNull Node node : Iterables.concat(realizedMiddleNodes, realizedOutputNodes)) {
-			gatherSourceNavigations(node, node.getNodeRole());
+			gatherSourceNavigations(node, RegionUtil.getNodeRole(node));
 			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getEdgeTarget();
-					NodeRole targetNodeRole = targetNode.getNodeRole();
+					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
 					if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
 						gatherSourceNavigations(targetNode, targetNodeRole);
 					}
@@ -75,27 +75,27 @@ class RealizedPartition extends AbstractPartition
 				Node sourceNode = edge.getEdgeSource();
 				Node targetNode = edge.getEdgeTarget();
 				if (!hasNode(sourceNode)) {
-					addNode(sourceNode, sourceNode.getNodeRole());
+					addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
 				}
 				if (!hasNode(targetNode)) {
-					addNode(targetNode, targetNode.getNodeRole());
+					addNode(targetNode, RegionUtil.getNodeRole(targetNode));
 				}
 			}
 		}
 	}
 
-	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull NodeRole targetNodeRole) {
+	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull Role targetNodeRole) {
 		if (!hasNode(targetNode)) {
 			addNode(targetNode, targetNodeRole);
 			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
-				gatherSourceNavigations(sourceNode, sourceNode.getNodeRole());
+				gatherSourceNavigations(sourceNode, RegionUtil.getNodeRole(sourceNode));
 			}
 		}
 	}
 
 	@Override
-	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
-		EdgeRole edgeRole = edge.getEdgeRole();
+	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+		Role edgeRole = RegionUtil.getEdgeRole(edge);
 		if (edgeRole.isRealized()) {
 			assert !partitioner.hasRealizedEdge(edge);
 		}

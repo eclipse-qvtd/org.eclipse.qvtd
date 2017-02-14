@@ -19,10 +19,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -62,7 +62,7 @@ public class OperationNodeImpl extends NodeImpl implements OperationNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationNode(this);
 	}
 
-	public static @NonNull OperationNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
+	public static @NonNull OperationNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
 		OperationNodeImpl node = new OperationNodeImpl();
 		node.initialize(nodeRole, region, name, classDatumAnalysis);
 		node.isMatched = isMatched;
@@ -72,7 +72,7 @@ public class OperationNodeImpl extends NodeImpl implements OperationNode {
 	private boolean isMatched;
 
 	@Override
-	public @NonNull Node createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getName(), getClassDatumAnalysis(), isMatched);
 	}
 

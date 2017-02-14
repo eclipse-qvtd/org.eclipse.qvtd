@@ -178,18 +178,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitEdgeRole(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
 	public R visitErrorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ErrorNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -350,18 +338,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitNodeConnection(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitNodeRole(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

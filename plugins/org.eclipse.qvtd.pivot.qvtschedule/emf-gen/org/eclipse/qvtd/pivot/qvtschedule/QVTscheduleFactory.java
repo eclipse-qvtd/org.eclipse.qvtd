@@ -68,7 +68,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Class Datum Analysis</em>'.
 	 * @generated
 	 */
-	ClassDatumAnalysis createClassDatumAnalysis();
+	@NonNull ClassDatumAnalysis createClassDatumAnalysis();
 
 	/**
 	 * Returns a new object of class '<em>Composed Node</em>'.
@@ -96,15 +96,6 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull EdgeConnection createEdgeConnection();
-
-	/**
-	 * Returns a new object of class '<em>Edge Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Edge Role</em>'.
-	 * @generated
-	 */
-	@NonNull EdgeRole createEdgeRole();
 
 	/**
 	 * Returns a new object of class '<em>Error Node</em>'.
@@ -206,15 +197,6 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull NodeConnection createNodeConnection();
 
 	/**
-	 * Returns a new object of class '<em>Node Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Node Role</em>'.
-	 * @generated
-	 */
-	@NonNull NodeRole createNodeRole();
-
-	/**
 	 * Returns a new object of class '<em>Null Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -285,6 +267,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull RecursionEdge createRecursionEdge();
+
+	/**
+	 * Returns a new object of class '<em>Role</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Role</em>'.
+	 * @generated
+	 */
+	@NonNull Role createRole();
 
 	/**
 	 * Returns a new object of class '<em>Root Composition Region</em>'.

@@ -30,6 +30,12 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * An edge is directed and abstracts any Node interconnection within a Region.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}</li>
+ * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge()
  * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphEdge org.eclipse.ocl.pivot.Nameable"
@@ -37,9 +43,36 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  */
 public interface Edge extends Element, GraphEdge, Nameable {
 	/**
+	 * Returns the value of the '<em><b>Edge Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Edge Role</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Edge Role</em>' reference.
+	 * @see #setEdgeRole(Role)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_EdgeRole()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!edgeRole'"
+	 * @generated
+	 */
+	Role getEdgeRole();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Edge Role</em>' reference.
+	 * @see #getEdgeRole()
+	 * @generated
+	 */
+	void setEdgeRole(Role value);
+
+	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
 	 */
-	@NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
+	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
 
 	void destroy();
 
@@ -57,11 +90,6 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	 * Return the color with which this edge is drawn.
 	 */
 	@NonNull String getColor();
-
-	/**
-	 * Return the role of this edge.
-	 */
-	@NonNull EdgeRole getEdgeRole();
 
 	/**
 	 * Return the forward form of this edge if this is a bidirectional edge, this edge otherwise.

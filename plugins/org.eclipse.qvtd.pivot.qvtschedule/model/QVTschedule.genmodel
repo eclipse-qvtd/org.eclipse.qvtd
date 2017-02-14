@@ -48,9 +48,10 @@
       <genTypeParameters ecoreTypeParameter="QVTschedule.ecore#//DatumConnection/CE"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//DependencyNode"/>
-    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Edge"/>
+    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Edge">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Edge/edgeRole"/>
+    </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//EdgeConnection"/>
-    <genClasses ecoreClass="QVTschedule.ecore#//EdgeRole"/>
     <genClasses ecoreClass="QVTschedule.ecore#//ErrorNode"/>
     <genClasses ecoreClass="QVTschedule.ecore#//ExpressionEdge"/>
     <genClasses ecoreClass="QVTschedule.ecore#//InputNode"/>
@@ -67,9 +68,10 @@
     <genClasses ecoreClass="QVTschedule.ecore#//NamedMappingRegion"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//NavigableEdge"/>
     <genClasses ecoreClass="QVTschedule.ecore#//NavigationEdge"/>
-    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Node"/>
+    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Node">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Node/nodeRole"/>
+    </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//NodeConnection"/>
-    <genClasses ecoreClass="QVTschedule.ecore#//NodeRole"/>
     <genClasses ecoreClass="QVTschedule.ecore#//NullNode"/>
     <genClasses ecoreClass="QVTschedule.ecore#//OperationNode"/>
     <genClasses ecoreClass="QVTschedule.ecore#//OperationRegion"/>

@@ -42,7 +42,7 @@ import org.eclipse.ocl.pivot.Element;
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface Role extends Element, Comparable<Role>

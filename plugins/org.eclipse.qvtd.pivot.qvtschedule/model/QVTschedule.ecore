@@ -54,6 +54,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edgeRole" lowerBound="1"
+        eType="#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EdgeConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -62,11 +64,6 @@
     <eGenericSuperTypes eClassifier="#//DatumConnection">
       <eTypeArguments eClassifier="#//NavigableEdge"/>
     </eGenericSuperTypes>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EdgeRole" eSuperTypes="#//Role">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="EdgeRole defines which of many possible roles an edge plays"/>
-    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ErrorNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionEdge" eSuperTypes="#//Edge"/>
@@ -99,6 +96,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping&#xD;&#xA;or Composite Region."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeRole" lowerBound="1"
+        eType="#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -107,11 +106,6 @@
     <eGenericSuperTypes eClassifier="#//DatumConnection">
       <eTypeArguments eClassifier="#//Node"/>
     </eGenericSuperTypes>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeRole" eSuperTypes="#//Role">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="NodeRole defines which of many possible roles an node plays"/>
-    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationNode" eSuperTypes="#//Node"/>
@@ -130,7 +124,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//ToDOTable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Role" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Role defines which of many possible roles an edge plays"/>
     </eAnnotations>

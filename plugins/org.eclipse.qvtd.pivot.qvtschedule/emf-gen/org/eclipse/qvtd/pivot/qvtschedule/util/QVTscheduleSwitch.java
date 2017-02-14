@@ -220,15 +220,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.EDGE_ROLE: {
-				EdgeRole edgeRole = (EdgeRole)theEObject;
-				T result = caseEdgeRole(edgeRole);
-				if (result == null) result = caseRole(edgeRole);
-				if (result == null) result = caseElement(edgeRole);
-				if (result == null) result = caseVisitable(edgeRole);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.ERROR_NODE: {
 				ErrorNode errorNode = (ErrorNode)theEObject;
 				T result = caseErrorNode(errorNode);
@@ -392,15 +383,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNameable(nodeConnection);
 				if (result == null) result = caseSymbolable(nodeConnection);
 				if (result == null) result = caseVisitable(nodeConnection);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTschedulePackage.NODE_ROLE: {
-				NodeRole nodeRole = (NodeRole)theEObject;
-				T result = caseNodeRole(nodeRole);
-				if (result == null) result = caseRole(nodeRole);
-				if (result == null) result = caseElement(nodeRole);
-				if (result == null) result = caseVisitable(nodeRole);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -976,21 +958,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Edge Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Edge Role</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEdgeRole(EdgeRole object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Error Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1197,21 +1164,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNodeConnection(NodeConnection object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node Role</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNodeRole(NodeRole object) {
 		return null;
 	}
 

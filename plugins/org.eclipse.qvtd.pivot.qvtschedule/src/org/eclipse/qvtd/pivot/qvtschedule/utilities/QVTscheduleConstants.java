@@ -20,15 +20,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionRoleImpl;
 
 public class QVTscheduleConstants
@@ -84,19 +83,19 @@ public class QVTscheduleConstants
 	public static final @NonNull List<@NonNull Region> EMPTY_REGION_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
 
-	private static final @NonNull EdgeRole CONSTANT_EDGE = createEdgeRole(Phase.CONSTANT);
-	private static final @NonNull EdgeRole LOADED_EDGE = createEdgeRole(Phase.LOADED);
-	private static final @NonNull EdgeRole PREDICATED_EDGE = createEdgeRole(Phase.PREDICATED);
-	private static final @NonNull EdgeRole REALIZED_EDGE = createEdgeRole(Phase.REALIZED);
-	private static final @NonNull EdgeRole OTHER_EDGE = createEdgeRole(Phase.OTHER);
+	private static final @NonNull Role CONSTANT_EDGE = createEdgeRole(Phase.CONSTANT);
+	private static final @NonNull Role LOADED_EDGE = createEdgeRole(Phase.LOADED);
+	private static final @NonNull Role PREDICATED_EDGE = createEdgeRole(Phase.PREDICATED);
+	private static final @NonNull Role REALIZED_EDGE = createEdgeRole(Phase.REALIZED);
+	private static final @NonNull Role OTHER_EDGE = createEdgeRole(Phase.OTHER);
 
-	private static final @NonNull NodeRole CONSTANT_NODE = createNodeRole(Phase.CONSTANT);
-	private static final @NonNull NodeRole LOADED_NODE = createNodeRole(Phase.LOADED);
-	private static final @NonNull NodeRole PREDICATED_NODE = createNodeRole(Phase.PREDICATED);
-	private static final @NonNull NodeRole REALIZED_NODE = createNodeRole(Phase.REALIZED);
-	private static final @NonNull NodeRole SPECULATED_NODE = createNodeRole(Phase.SPECULATED);
-	private static final @NonNull NodeRole SPECULATION_NODE = createNodeRole(Phase.SPECULATION);
-	private static final @NonNull NodeRole OTHER_NODE = createNodeRole(Phase.OTHER);
+	private static final @NonNull Role CONSTANT_NODE = createNodeRole(Phase.CONSTANT);
+	private static final @NonNull Role LOADED_NODE = createNodeRole(Phase.LOADED);
+	private static final @NonNull Role PREDICATED_NODE = createNodeRole(Phase.PREDICATED);
+	private static final @NonNull Role REALIZED_NODE = createNodeRole(Phase.REALIZED);
+	private static final @NonNull Role SPECULATED_NODE = createNodeRole(Phase.SPECULATED);
+	private static final @NonNull Role SPECULATION_NODE = createNodeRole(Phase.SPECULATION);
+	private static final @NonNull Role OTHER_NODE = createNodeRole(Phase.OTHER);
 
 	/**
 	 * A MANDATORY connection 'passes' a used input edge that must be fully computed before use. This is typically for a
@@ -131,19 +130,19 @@ public class QVTscheduleConstants
 	public static final @NonNull ConnectionRole PREFERRED_NODE = new PreferredConnectionRole(true);
 
 
-	private static @NonNull EdgeRole createEdgeRole(@NonNull Phase phase) {
-		EdgeRole edgeRole = QVTscheduleFactory.eINSTANCE.createEdgeRole();
+	private static @NonNull Role createEdgeRole(@NonNull Phase phase) {
+		Role edgeRole = QVTscheduleFactory.eINSTANCE.createRole();
 		edgeRole.setPhase(phase);
 		return edgeRole;
 	}
 
-	private static @NonNull NodeRole createNodeRole(@NonNull Phase phase) {
-		NodeRole nodeRole = QVTscheduleFactory.eINSTANCE.createNodeRole();
+	private static @NonNull Role createNodeRole(@NonNull Phase phase) {
+		Role nodeRole = QVTscheduleFactory.eINSTANCE.createRole();
 		nodeRole.setPhase(phase);
 		return nodeRole;
 	}
 
-	public static @NonNull EdgeRole getEdgeRole(@NonNull Phase phase) {
+	public static @NonNull Role getEdgeRole(@NonNull Phase phase) {
 		switch (phase) {
 			case CONSTANT: return CONSTANT_EDGE;
 			case LOADED: return LOADED_EDGE;
@@ -154,7 +153,7 @@ public class QVTscheduleConstants
 		throw new UnsupportedOperationException();
 	}
 
-	public static @NonNull NodeRole getNodeRole(@NonNull Phase phase) {
+	public static @NonNull Role getNodeRole(@NonNull Phase phase) {
 		switch (phase) {
 			case CONSTANT: return CONSTANT_NODE;
 			case LOADED: return LOADED_NODE;

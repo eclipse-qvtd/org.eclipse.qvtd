@@ -37,6 +37,12 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * or Composite Region.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}</li>
+ * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode()
  * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable"
@@ -44,6 +50,33 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  */
 public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 {
+	/**
+	 * Returns the value of the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Node Role</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Node Role</em>' reference.
+	 * @see #setNodeRole(Role)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_NodeRole()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!nodeRole'"
+	 * @generated
+	 */
+	Role getNodeRole();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Node Role</em>' reference.
+	 * @see #getNodeRole()
+	 * @generated
+	 */
+	void setNodeRole(Role value);
+
 	/**
 	 * The prioritized utility of each node.
 	 */
@@ -67,7 +100,7 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	/**
 	 * Create a new nodeRole node in region with the saem name, type etc as this node.
 	 */
-	@NonNull Node createNode(@NonNull NodeRole nodeRole, @NonNull Region region);
+	@NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region);
 	void destroy();
 
 	/**
@@ -91,7 +124,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
 	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull Node> getNavigationTargets();
-	@NonNull NodeRole getNodeRole();
 	@NonNull List<@NonNull NodeConnection> getOutgoingConnections();
 	@NonNull List<@NonNull Edge> getOutgoingEdges();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();

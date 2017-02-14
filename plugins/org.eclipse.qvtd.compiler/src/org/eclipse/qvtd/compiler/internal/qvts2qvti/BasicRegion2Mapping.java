@@ -94,11 +94,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.StatementComparator;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 
 import com.google.common.collect.Iterables;
@@ -341,7 +341,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isNavigation()) {
-					EdgeRole edgeRole = edge.getEdgeRole();
+					Role edgeRole = RegionUtil.getEdgeRole(edge);
 					if (edgeRole.isLoaded()) {
 						OCLExpression source = getExpression(edge.getEdgeSource());
 						if (source != null) {
@@ -1066,7 +1066,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (int i = 0; i < sourcesList.size(); i++) {
 			@NonNull Node sourceNode = sourcesList.get(i);
 			for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {		// if !edge.getEdgeRole().isRealized() && !targetNode.isNull()
-				EdgeRole edgeRole = edge.getEdgeRole();
+				Role edgeRole = edge.getEdgeRole();
 				if (!edgeRole.isRealized()) {
 					Node targetNode = edge.getTarget();
 					if (targetNode.isNull()) {

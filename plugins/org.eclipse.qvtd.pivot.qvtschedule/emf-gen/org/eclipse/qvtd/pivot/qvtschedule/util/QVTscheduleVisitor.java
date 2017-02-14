@@ -38,7 +38,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitDependencyNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyNode object);
 	R visitEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Edge object);
 	R visitEdgeConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeConnection object);
-	R visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object);
 	R visitErrorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ErrorNode object);
 	R visitExpressionEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ExpressionEdge object);
 	R visitInputNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull InputNode object);
@@ -53,7 +52,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitNavigationEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NavigationEdge object);
 	R visitNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Node object);
 	R visitNodeConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeConnection object);
-	R visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object);
 	R visitNullNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullNode object);
 	R visitOperationNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationNode object);
 	R visitOperationRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationRegion object);

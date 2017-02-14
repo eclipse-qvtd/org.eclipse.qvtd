@@ -25,7 +25,7 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 * Create an edgeRole edge from sourceNode to targetNode with the same property as this edge.	 * @param edgeRole
 	 */
 	@Override
-	@NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
+	@NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
 
 	@Override
 	@NonNull NavigableEdge getForwardEdge();

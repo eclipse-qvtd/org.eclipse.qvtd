@@ -14,7 +14,10 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -22,10 +25,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -33,10 +36,26 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Edge</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getEdgeRole <em>Edge Role</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public abstract class EdgeImpl extends ElementImpl implements Edge {
+	/**
+	 * The cached value of the '{@link #getEdgeRole() <em>Edge Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEdgeRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Role edgeRole;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,7 +75,105 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		return QVTschedulePackage.Literals.EDGE;
 	}
 
-	private @Nullable EdgeRole edgeRole = null;		// null is only permitted during construction
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Role getEdgeRole() {
+		if (edgeRole != null && edgeRole.eIsProxy()) {
+			InternalEObject oldEdgeRole = (InternalEObject)edgeRole;
+			edgeRole = (Role)eResolveProxy(oldEdgeRole);
+			if (edgeRole != oldEdgeRole) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__EDGE_ROLE, oldEdgeRole, edgeRole));
+			}
+		}
+		return edgeRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Role basicGetEdgeRole() {
+		return edgeRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEdgeRole(Role newEdgeRole) {
+		Role oldEdgeRole = edgeRole;
+		edgeRole = newEdgeRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__EDGE_ROLE, oldEdgeRole, edgeRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE__EDGE_ROLE:
+				if (resolve) return getEdgeRole();
+				return basicGetEdgeRole();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE__EDGE_ROLE:
+				setEdgeRole((Role)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE__EDGE_ROLE:
+				setEdgeRole((Role)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE__EDGE_ROLE:
+				return edgeRole != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
 	private @Nullable Node sourceNode = null;		// null is only permitted during construction
 	private @Nullable Node targetNode = null;		// null is only permitted during construction
 	private @Nullable String name = null;
@@ -204,11 +321,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
-	public @NonNull EdgeRole getEdgeRole() {
-		return ClassUtil.nonNullState(edgeRole);
-	}
-
-	@Override
 	public @NonNull Edge getForwardEdge() {
 		return this;
 	}
@@ -246,7 +358,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		return ClassUtil.nonNullState(targetNode);
 	}
 
-	protected void initialize(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	protected void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		setEdgeRole(edgeRole);
 		setName(name);
 		setSource(sourceNode);
@@ -344,15 +456,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		return ClassUtil.nonNullState(sourceNode).isUnconditional() && ClassUtil.nonNullState(targetNode).isUnconditional();
 	}
 
-	protected void mergeRole(@NonNull EdgeRole edgeRole) {
+	protected void mergeRole(@NonNull Role edgeRole) {
 		if (this.edgeRole != edgeRole) {
 			assert this.edgeRole != null;
 			this.edgeRole = QVTscheduleUtil.mergeToMoreKnownPhase(this.edgeRole, edgeRole);
 		}
-	}
-
-	public void setEdgeRole(@NonNull EdgeRole edgeRole) {
-		this.edgeRole = edgeRole;
 	}
 
 
@@ -405,8 +513,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public @NonNull String toString() {
+		Role edgeRole = getEdgeRole();
 		StringBuilder s = new StringBuilder();
-		s.append(getEdgeRole().getPhase());
+		s.append(edgeRole != null ? edgeRole.getPhase() : null);
 		s.append("-");
 		s.append(getClass().getSimpleName().replace("Impl",  ""));
 		s.append("(");

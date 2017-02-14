@@ -21,11 +21,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -64,7 +63,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitCastEdge(this);
 	}
-	private static @NonNull CastEdgeImpl create(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	private static @NonNull CastEdgeImpl create(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		CastEdgeImpl edge = new CastEdgeImpl();
 		edge.initialize(edgeRole, sourceNode, source2targetProperty, targetNode);
 		return edge;
@@ -74,7 +73,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
 	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
 	 */
-	public static @NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole,
+	public static @NonNull NavigableEdge createEdge(@NonNull Role edgeRole,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		CastEdgeImpl forwardEdge = create(edgeRole, sourceNode, source2targetProperty, targetNode);
 		Property target2sourceProperty = source2targetProperty.getOpposite();
@@ -89,7 +88,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	}
 
 	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		return createEdge(edgeRole, sourceNode, getProperty(), targetNode);
 	}
 
@@ -104,7 +103,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	}
 
 	@Override
-	public void setEdgeRole(@NonNull EdgeRole edgeRole) {
+	public void setEdgeRole(Role edgeRole) {
 		assert !edgeRole.isNew();
 		super.setEdgeRole(edgeRole);
 	}

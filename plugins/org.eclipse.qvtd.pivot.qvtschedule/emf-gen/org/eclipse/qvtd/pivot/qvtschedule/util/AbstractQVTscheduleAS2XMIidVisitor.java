@@ -106,11 +106,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitEdgeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeRole object) {
-		return visitRole(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitErrorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ErrorNode object) {
 		return visitNode(object);
 	}
@@ -178,11 +173,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitNodeConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeConnection object) {
 		return visitDatumConnection(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitNodeRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeRole object) {
-		return visitRole(object);
 	}
 
 	@Override

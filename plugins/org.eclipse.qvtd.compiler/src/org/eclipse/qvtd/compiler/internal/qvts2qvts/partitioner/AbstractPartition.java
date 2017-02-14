@@ -23,11 +23,10 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -64,8 +63,8 @@ abstract class AbstractPartition
 	}
 	protected final @NonNull Partitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Edge> alreadyRealizedEdges;
-	private final @NonNull Map<@NonNull Node, @NonNull NodeRole> node2nodeRole = new HashMap<>();
-	private final @NonNull Map<@NonNull Edge, @NonNull EdgeRole> edge2edgeRole = new HashMap<>();
+	private final @NonNull Map<@NonNull Node, @NonNull Role> node2nodeRole = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull Role> edge2edgeRole = new HashMap<>();
 	private /*@LazyNonNull*/ PartitionForest forest = null;
 
 	protected AbstractPartition(@NonNull Partitioner partitioner) {
@@ -73,8 +72,8 @@ abstract class AbstractPartition
 		this.alreadyRealizedEdges = partitioner.getAlreadyRealizedEdges();
 	}
 
-	private void addEdge(@NonNull Edge edge, @NonNull EdgeRole newEdgeRole) {
-		switch (edge.getEdgeRole().getPhase())
+	private void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
+		switch (RegionUtil.getPhase(RegionUtil.getEdgeRole(edge)))
 		{
 			case CONSTANT: {
 				assert newEdgeRole.isConstant();
@@ -105,8 +104,8 @@ abstract class AbstractPartition
 		edge2edgeRole.put(edge, newEdgeRole);
 	}
 
-	protected void addNode(@NonNull Node node, @NonNull NodeRole newNodeRole) {
-		switch (node.getNodeRole().getPhase())
+	protected void addNode(@NonNull Node node, @NonNull Role newNodeRole) {
+		switch (RegionUtil.getPhase(RegionUtil.getNodeRole(node)))
 		{
 			case CONSTANT: {
 				assert newNodeRole.isConstant();
@@ -138,7 +137,7 @@ abstract class AbstractPartition
 				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addNode " + node);
 			}
 		}
-		NodeRole oldNodeRole = node2nodeRole.put(node, newNodeRole);
+		Role oldNodeRole = node2nodeRole.put(node, newNodeRole);
 		assert (oldNodeRole == null) || (oldNodeRole == newNodeRole);
 	}
 
@@ -195,11 +194,11 @@ abstract class AbstractPartition
 		}
 	}
 
-	public @Nullable EdgeRole getEdgeRole(@NonNull Edge edge) {
+	public @Nullable Role getEdgeRole(@NonNull Edge edge) {
 		return edge2edgeRole.get(edge);
 	}
 
-	public @Nullable NodeRole getNodeRole(@NonNull Node node) {
+	public @Nullable Role getNodeRole(@NonNull Node node) {
 		return node2nodeRole.get(node);
 	}
 
@@ -322,7 +321,7 @@ abstract class AbstractPartition
 					gotIt = true;
 					for (@NonNull Node sourceNode : sourceNodes) {
 						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, sourceNode.getNodeRole());
+							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
 						}
 					}
 				}
@@ -331,7 +330,7 @@ abstract class AbstractPartition
 		return gotIt;
 	}
 
-	protected abstract @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole);
+	protected abstract @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole);
 
 	/**
 	 * Resolve all the edges that have a source and target node by invoking resolveEdgeRole to determine
@@ -340,11 +339,11 @@ abstract class AbstractPartition
 	protected void resolveEdgeRoles() {
 		for (@NonNull Edge edge : partitioner.getRegion().getEdges()) {
 			if (!edge.isSecondary() && !hasEdge(edge)) {
-				NodeRole sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
+				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 				if (sourceNodeRole != null) {
-					NodeRole targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
+					Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
 					if (targetNodeRole != null) {
-						EdgeRole edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
+						Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
 						if (edgeRole != null) {
 							if (edgeRole.isRealized()) {
 								if (partitioner.hasRealizedEdge(edge)) {
@@ -368,7 +367,7 @@ abstract class AbstractPartition
 				if (targetNode.isDataType()) {
 					if (resolveComputations(targetNode)) {
 						if (!hasNode(targetNode)) {
-							addNode(targetNode, targetNode.getNodeRole());
+							addNode(targetNode, RegionUtil.getNodeRole(targetNode));
 						}
 					}
 				}
@@ -385,7 +384,7 @@ abstract class AbstractPartition
 						if (isComputable(sourceNodes, incomingEdge)) {
 							for (@NonNull Node sourceNode : sourceNodes) {
 								if (!hasNode(sourceNode)) {
-									addNode(sourceNode, sourceNode.getNodeRole());
+									addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
 								}
 							}
 						}

@@ -136,10 +136,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createEdgeConnectionAdapter();
 			}
 			@Override
-			public Adapter caseEdgeRole(EdgeRole object) {
-				return createEdgeRoleAdapter();
-			}
-			@Override
 			public Adapter caseErrorNode(ErrorNode object) {
 				return createErrorNodeAdapter();
 			}
@@ -194,10 +190,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNodeConnection(NodeConnection object) {
 				return createNodeConnectionAdapter();
-			}
-			@Override
-			public Adapter caseNodeRole(NodeRole object) {
-				return createNodeRoleAdapter();
 			}
 			@Override
 			public Adapter caseNullNode(NullNode object) {
@@ -648,20 +640,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.EdgeRole <em>Edge Role</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.EdgeRole
-	 * @generated
-	 */
-	public Adapter createEdgeRoleAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ErrorNode <em>Error Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -854,20 +832,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNodeConnectionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeRole <em>Node Role</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeRole
-	 * @generated
-	 */
-	public Adapter createNodeRoleAdapter() {
 		return null;
 	}
 

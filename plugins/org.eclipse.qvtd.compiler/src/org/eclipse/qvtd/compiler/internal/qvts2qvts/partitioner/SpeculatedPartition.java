@@ -16,12 +16,12 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -132,20 +132,20 @@ class SpeculatedPartition extends AbstractPartition
 		return false;
 	}
 
-	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull NodeRole targetNodeRole) {
+	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull Role targetNodeRole) {
 		if (!hasNode(targetNode)) {
 			addNode(targetNode, targetNodeRole);
 			if (!tracedInputNodes.contains(targetNode)) {
 				boolean hasPredecessor = false;
 				for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
 					hasPredecessor = true;
-					gatherSourceNavigations(sourceNode, sourceNode.getNodeRole());
+					gatherSourceNavigations(sourceNode, RegionUtil.getNodeRole(sourceNode));
 				}
 				if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
 					for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
 						if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
 							Node nonUnitSourceNode = edge.getEdgeTarget();
-							gatherSourceNavigations(nonUnitSourceNode, nonUnitSourceNode.getNodeRole());
+							gatherSourceNavigations(nonUnitSourceNode, RegionUtil.getNodeRole(nonUnitSourceNode));
 						}
 					}
 				}
@@ -173,8 +173,8 @@ class SpeculatedPartition extends AbstractPartition
 
 
 	@Override
-	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
-		EdgeRole edgeRole = edge.getEdgeRole();
+	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+		Role edgeRole = RegionUtil.getEdgeRole(edge);
 		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
 			if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
@@ -190,10 +190,10 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
 			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && !partitioner.isCorrolary(edge)) {
 				Node sourceNode = edge.getEdgeSource();
-				NodeRole sourceNodeRole = sourceNode.getNodeRole();
+				Role sourceNodeRole = RegionUtil.getNodeRole(sourceNode);
 				if (!sourceNodeRole.isRealized()) {
 					Node targetNode = edge.getEdgeTarget();
-					NodeRole targetNodeRole = targetNode.getNodeRole();
+					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
 					if (!targetNodeRole.isRealized()) {
 						if (!hasNode(sourceNode)) {
 							addNode(sourceNode, sourceNodeRole);
@@ -217,7 +217,7 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolvePredicatedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
 			if (node.isMatched()) {
-				NodeRole nodeRole = node.getNodeRole();
+				Role nodeRole = RegionUtil.getNodeRole(node);
 				if (node.isPattern() && node.isClass()) {
 					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
 				}
@@ -229,7 +229,7 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
 			if (!isCorrolary(node)) {
-				NodeRole nodeRole = node.getNodeRole();
+				Role nodeRole = RegionUtil.getNodeRole(node);
 				//			if (node.isPattern() && node.isClass()) {
 				//				nodeRole = nodeRole.resetHead().asSpeculated();
 				//			}
@@ -242,10 +242,10 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && !partitioner.isCorrolary(edge)) {
 				Node sourceNode = edge.getEdgeSource();
-				NodeRole sourceNodeRole = sourceNode.getNodeRole();
+				Role sourceNodeRole = RegionUtil.getNodeRole(sourceNode);
 				if (!sourceNodeRole.isRealized()) {
 					Node targetNode = edge.getEdgeTarget();
-					NodeRole targetNodeRole = targetNode.getNodeRole();
+					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
 					if (!targetNodeRole.isRealized()) {
 						if (!hasNode(sourceNode)) {
 							addNode(sourceNode, sourceNodeRole);
@@ -262,7 +262,7 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolveRealizedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			if (node.isMatched() && node.isClass()) {
-				NodeRole nodeRole = node.getNodeRole();
+				Role nodeRole = RegionUtil.getNodeRole(node);
 				//				assert nodeRole.isMatched();
 				assert node.isPattern();//
 				nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
@@ -281,11 +281,11 @@ class SpeculatedPartition extends AbstractPartition
 
 	protected void resolveRealizedOutputNodes() {
 		for (@NonNull Node node : partitioner.getRealizedOutputNodes()) {
-			gatherSourceNavigations(node, node.getNodeRole());
+			gatherSourceNavigations(node, RegionUtil.getNodeRole(node));
 			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getEdgeTarget();
-					NodeRole targetNodeRole = targetNode.getNodeRole();
+					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
 					if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
 						gatherSourceNavigations(targetNode, targetNodeRole);
 					}

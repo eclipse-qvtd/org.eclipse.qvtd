@@ -18,8 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -39,9 +42,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -51,10 +54,26 @@ import com.google.common.collect.Iterables;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Node</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getNodeRole <em>Node Role</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
+	/**
+	 * The cached value of the '{@link #getNodeRole() <em>Node Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodeRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Role nodeRole;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,7 +93,105 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return QVTschedulePackage.Literals.NODE;
 	}
 
-	private @Nullable NodeRole nodeRole;						// null is only permitted during construction
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Role getNodeRole() {
+		if (nodeRole != null && nodeRole.eIsProxy()) {
+			InternalEObject oldNodeRole = (InternalEObject)nodeRole;
+			nodeRole = (Role)eResolveProxy(oldNodeRole);
+			if (nodeRole != oldNodeRole) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__NODE_ROLE, oldNodeRole, nodeRole));
+			}
+		}
+		return nodeRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Role basicGetNodeRole() {
+		return nodeRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setNodeRole(Role newNodeRole) {
+		Role oldNodeRole = nodeRole;
+		nodeRole = newNodeRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__NODE_ROLE, oldNodeRole, nodeRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				if (resolve) return getNodeRole();
+				return basicGetNodeRole();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				setNodeRole((Role)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				setNodeRole((Role)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				return nodeRole != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
 	private @Nullable Region region;							// null is only permitted during construction
 	private @Nullable String name;								// null is only permitted during construction
 	private @Nullable ClassDatumAnalysis classDatumAnalysis;	// null is only permitted during construction
@@ -366,11 +483,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull NodeRole getNodeRole() {
-		return ClassUtil.nonNullState(nodeRole);
-	}
-
-	@Override
 	public final @NonNull List<@NonNull NodeConnection> getOutgoingConnections() {
 		return outgoingConnections != null ? outgoingConnections : QVTscheduleConstants.EMPTY_NODE_CONNECTION_LIST;
 	}
@@ -534,7 +646,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return ClassUtil.nonNullState(utility);
 	}
 
-	protected void initialize(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		this.nodeRole = nodeRole;
 		this.region = region;
 		this.name = name;
@@ -793,8 +905,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull String toString() {
+		Role nodeRole = getNodeRole();
 		StringBuilder s = new StringBuilder();
-		s.append(getNodeRole().getPhase());
+		s.append(nodeRole != null ? nodeRole.getPhase() : null);
 		s.append("-");
 		s.append(getClass().getSimpleName().replace("Impl",  ""));
 		s.append("(");

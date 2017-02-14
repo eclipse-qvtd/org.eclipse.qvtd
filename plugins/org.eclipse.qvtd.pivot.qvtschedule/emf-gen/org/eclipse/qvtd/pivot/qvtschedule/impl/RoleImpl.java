@@ -19,12 +19,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +49,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  *
  * @generated
  */
-public abstract class RoleImpl extends ElementImpl implements Role {
+public class RoleImpl extends ElementImpl implements Role {
 	/**
 	 * The default value of the '{@link #getPhase() <em>Phase</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -448,5 +450,15 @@ public abstract class RoleImpl extends ElementImpl implements Role {
 	@Override
 	public String toString() {
 		return phase + "-" + getClass().getSimpleName();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitRole(this);
 	}
 } //RoleImpl

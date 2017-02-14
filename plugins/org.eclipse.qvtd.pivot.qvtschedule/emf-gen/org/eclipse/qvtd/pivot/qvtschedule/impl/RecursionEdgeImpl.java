@@ -20,11 +20,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
-
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -65,7 +64,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitRecursionEdge(this);
 	}
 
-	public static @NonNull RecursionEdgeImpl create(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {
+	public static @NonNull RecursionEdgeImpl create(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {
 		RecursionEdgeImpl edge = new RecursionEdgeImpl();
 		edge.initialize(edgeRole, sourceNode, null, targetNode);
 		edge.isPrimary = isPrimary;
@@ -75,7 +74,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	private boolean isPrimary = false;
 
 	@Override
-	public @NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		return create(edgeRole, sourceNode, targetNode, isPrimary);
 	}
 
