@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,7 +73,7 @@ public class DependencyNodeImpl extends NodeImpl implements DependencyNode {
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, getName(), getClassDatumAnalysis());
+		return create(nodeRole, region, QVTscheduleUtil.getName(this), getClassDatumAnalysis());
 	}
 
 	@Override

@@ -56,6 +56,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="edgeRole" lowerBound="1"
         eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceNode" lowerBound="1"
         eType="#//Node" eOpposite="#//Node/outgoingEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetNode" lowerBound="1"
@@ -100,12 +101,15 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping&#xD;&#xA;or Composite Region."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeRole" lowerBound="1"
-        eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" upperBound="-1"
         eType="#//Edge" eOpposite="#//Edge/targetNode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeRole" lowerBound="1"
+        eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" upperBound="-1"
         eType="#//Edge" eOpposite="#//Edge/sourceNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
+        eType="#//Region" eOpposite="#//Region/nodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -131,7 +135,10 @@
         eType="#//PropertyDatum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//ToDOTable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//ToDOTable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//Node" containment="true" eOpposite="#//Node/region"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Role defines which of many possible roles an edge plays"/>

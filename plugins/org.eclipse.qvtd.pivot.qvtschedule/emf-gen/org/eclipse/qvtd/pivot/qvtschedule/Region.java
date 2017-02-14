@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
@@ -35,6 +36,12 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  * A representation of the model object '<em><b>Region</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}</li>
+ * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
  * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable org.eclipse.qvtd.pivot.qvtschedule.ToDOTable"
@@ -42,12 +49,31 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  */
 public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTable
 {
+	/**
+	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nodes</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_Nodes()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion
+	 * @model opposite="region" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!nodes'"
+	 * @generated
+	 */
+	EList<Node> getNodes();
+
 	void addCallToChild(@NonNull Region region);
 	void addEdge(@NonNull Edge edge);
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	boolean addIndex(int index);
 	void addIntermediateConnection(@NonNull NodeConnection connection);
-	void addNode(@NonNull Node node);
+	//	void addNode(@NonNull Node node);
 	void addRootConnection(@NonNull NodeConnection connection);
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
 	void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges);
@@ -130,8 +156,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	 */
 	@NonNull Iterable<@NonNull DatumConnection<?>> getNextConnections();
 
-	@NonNull Collection<@NonNull Node> getNodes();
-
 	/**
 	 * Return all nodes referenced by this region. i.e. Constant, Loaded, Predicated, Speculated nodes.
 	 */
@@ -164,7 +188,7 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	void refineBindings(@NonNull Region bindingRegion);
 	void removeCallToChild(@NonNull Region region);
 	void removeEdge(@NonNull Edge edge);
-	void removeNode(@NonNull Node node);
+	//	void removeNode(@NonNull Node node);
 	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
 	void setInvokingRegion(@NonNull ScheduledRegion invokingRegion);

@@ -169,10 +169,10 @@ public class CallTreeBuilder
 				}
 			}
 		} */
-		for (@NonNull DatumConnection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {
+		for (@NonNull DatumConnection<?> incomingConnection1 : scheduleCache.getIncomingConnections(region)) {
 			for (@NonNull Region sourceRegion1 : scheduleCache.getSourceRegions(incomingConnection1)) {
 				//				if (sourceRegion1.getLoopingConnections().size() > 0) {
-				for (@NonNull DatumConnection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {
+				for (@NonNull DatumConnection<?> incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {
 					for (@NonNull Region sourceRegion2 : scheduleCache.getSourceRegions(incomingConnection2)) {
 						commonRegion = getCommonRegion(commonRegion, sourceRegion2);
 					}
@@ -195,7 +195,7 @@ public class CallTreeBuilder
 		//
 		//		Iterable<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
 		//		assert incomingConnections != null;
-		for (@NonNull DatumConnection incomingConnection : scheduleCache.getIncomingConnections(region)) {
+		for (@NonNull DatumConnection<?> incomingConnection : scheduleCache.getIncomingConnections(region)) {
 			if (incomingConnection.isPassed(region)) {
 				commonRegion = updateConnectionLocality((@NonNull NodeConnection) incomingConnection, commonRegion);
 			}

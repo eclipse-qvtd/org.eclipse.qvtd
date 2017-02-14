@@ -34,5 +34,5 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface ConnectionEnd extends EObject
 {
 	@NonNull String getDisplayName();
-	@NonNull Region getRegion();
+	/*@NonNull*/ Region getRegion();
 } // ConnectionEnd

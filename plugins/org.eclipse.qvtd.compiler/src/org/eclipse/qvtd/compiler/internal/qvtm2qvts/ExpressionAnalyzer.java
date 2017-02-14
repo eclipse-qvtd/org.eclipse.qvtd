@@ -74,7 +74,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-
 import com.google.common.collect.Iterables;
 
 public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull Node, @NonNull MappingAnalysis>
@@ -551,7 +550,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigationEdges()) {
 			if (!referenceEdge.isSecondary()) {
 				Node referenceTargetNode = referenceEdge.getEdgeTarget();
-				String name = referenceTargetNode.getName();
+				String name = RegionUtil.getName(referenceTargetNode);
 				ClassDatumAnalysis classDatumAnalysis = referenceTargetNode.getClassDatumAnalysis();
 				Node instantiatedTargetNode = createDependencyNode(name, classDatumAnalysis);
 				createNavigationEdge(instantiatedNode, referenceEdge.getProperty(), instantiatedTargetNode, false);
@@ -860,7 +859,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 							Node dependencyHead = context.getDependencyHead(classDatumAnalysis);
 							if (dependencyHead == null) {
 								dependencyHead = context.createDependencyHead(classDatumAnalysis);
-								createExpressionEdge(dependencyHead, dependencyHead.getName(), operationNode);
+								createExpressionEdge(dependencyHead, RegionUtil.getName(dependencyHead), operationNode);
 								instantiate(dependencyHead, referenceNode);
 							}
 						}

@@ -50,6 +50,7 @@
     <genClasses ecoreClass="QVTschedule.ecore#//DependencyNode"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Edge">
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Edge/edgeRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Edge/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Edge/sourceNode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Edge/targetNode"/>
     </genClasses>
@@ -71,9 +72,11 @@
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//NavigableEdge"/>
     <genClasses ecoreClass="QVTschedule.ecore#//NavigationEdge"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Node">
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Node/nodeRole"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Node/incomingEdges"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Node/name"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Node/nodeRole"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Node/outgoingEdges"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Node/region"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//NodeConnection"/>
     <genClasses ecoreClass="QVTschedule.ecore#//NullNode"/>
@@ -89,7 +92,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/super"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//RecursionEdge"/>
-    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Region"/>
+    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Region/nodes"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Role">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/phase"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/constant"/>

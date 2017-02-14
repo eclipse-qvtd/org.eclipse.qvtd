@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getEdgeRole <em>Edge Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getSourceNode <em>Source Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getTargetNode <em>Target Node</em>}</li>
  * </ul>
@@ -57,6 +58,26 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @ordered
 	 */
 	protected Role edgeRole;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSourceNode() <em>Source Node</em>}' reference.
@@ -135,6 +156,29 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		edgeRole = newEdgeRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__EDGE_ROLE, oldEdgeRole, edgeRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__NAME, oldName, name));
 	}
 
 	/**
@@ -308,6 +352,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				if (resolve) return getEdgeRole();
 				return basicGetEdgeRole();
+			case QVTschedulePackage.EDGE__NAME:
+				return getName();
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				if (resolve) return getSourceNode();
 				return basicGetSourceNode();
@@ -328,6 +374,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				setEdgeRole((Role)newValue);
+				return;
+			case QVTschedulePackage.EDGE__NAME:
+				setName((String)newValue);
 				return;
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				setSourceNode((Node)newValue);
@@ -350,6 +399,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				setEdgeRole((Role)null);
 				return;
+			case QVTschedulePackage.EDGE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				setSourceNode((Node)null);
 				return;
@@ -370,6 +422,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				return edgeRole != null;
+			case QVTschedulePackage.EDGE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				return sourceNode != null;
 			case QVTschedulePackage.EDGE__TARGET_NODE:
@@ -377,8 +431,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		}
 		return super.eIsSet(featureID);
 	}
-
-	private @Nullable String name = null;
 
 	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
@@ -536,11 +588,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		return name;
 	}
 
-	@Override
-	public @Nullable String getName() {
-		return name;
-	}
-
 	public @NonNull Integer getPenwidth() {
 		return isNavigation() ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
 	}
@@ -667,11 +714,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			assert this.edgeRole != null;
 			this.edgeRole = QVTscheduleUtil.mergeToMoreKnownPhase(this.edgeRole, edgeRole);
 		}
-	}
-
-
-	public void setName(@Nullable String name) {
-		this.name = name;
 	}
 
 	@Override

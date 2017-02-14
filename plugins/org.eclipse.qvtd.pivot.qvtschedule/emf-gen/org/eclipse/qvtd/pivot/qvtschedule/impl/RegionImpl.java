@@ -23,7 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -37,10 +42,10 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
@@ -70,6 +75,7 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getSymbolName <em>Symbol Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getNodes <em>Nodes</em>}</li>
  * </ul>
  *
  * @generated
@@ -93,6 +99,16 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 * @ordered
 	 */
 	protected String symbolName = SYMBOL_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> nodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,8 +139,42 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__SYMBOL_NAME:
 				return getSymbolName();
+			case QVTschedulePackage.REGION__NODES:
+				return getNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.REGION__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.REGION__NODES:
+				getNodes().clear();
+				return;
+		}
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -137,6 +187,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__SYMBOL_NAME:
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
+			case QVTschedulePackage.REGION__NODES:
+				return nodes != null && !nodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -210,11 +262,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 * All the edges defined in this region, but not those in nested regions.
 	 */
 	private final @NonNull List<@NonNull Edge> edges = new ArrayList<>();
-
-	/**
-	 * All the nodes defined in this region, but not those in nested regions.
-	 */
-	private final @NonNull List<@NonNull Node> nodes = new ArrayList<>();
 
 	/**
 	 * Ordered list of regions that call this region
@@ -339,12 +386,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public void addIntermediateConnection(@NonNull NodeConnection connection) {
 		assert !intermediateConnections.contains(connection);
 		intermediateConnections.add(connection);
-	}
-
-	@Override
-	public void addNode(@NonNull Node node) {
-		assert !nodes.contains(node);
-		nodes.add(node);
 	}
 
 	@Override
@@ -700,7 +741,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
 		int bestToOneSubRegionSize = 0;
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			if (node.isNew() || node.isPredicated() || node.isSpeculated()) {
 				Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), node);
 				int toOneSubRegionSize = toOneSubRegion.size();
@@ -1375,7 +1416,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getComposedNodes() {
-		return Iterables.filter(nodes, QVTscheduleUtil.IsComposedNodePredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsComposedNodePredicate.INSTANCE);
 	}
 
 	/*	public final @NonNull Iterable<@NonNull Node> getComputedNodes() {
@@ -1450,7 +1491,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				connections.add(connection);
 			}
 		}
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			if (node.isDependency() || node.isPattern()) {
 				if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
 					NodeConnection connection = node.getIncomingUsedConnection();
@@ -1566,7 +1607,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getNavigableNodes() {
-		return Iterables.filter(nodes, QVTscheduleUtil.IsNavigableNodePredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsNavigableNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -1583,7 +1624,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getNewNodes() {
-		return Iterables.filter(nodes, QVTscheduleUtil.IsNewNodePredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsNewNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -1591,20 +1632,44 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return getOutgoingConnections();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public @NonNull Collection<@NonNull Node> getNodes() {
-		return nodes;
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.REGION__NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNodes()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.REGION__NODES:
+				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getOldNodes() {
-		return Iterables.filter(nodes, QVTscheduleUtil.IsOldNodePredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsOldNodePredicate.INSTANCE);
 	}
 
 	@Override
 	public @NonNull List<@NonNull DatumConnection<?>> getOutgoingConnections() {			// FIXME cache
 		List<@NonNull DatumConnection<?>> connections = new ArrayList<>();
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
 				connections.add(connection);
 			}
@@ -1623,7 +1688,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {			// FIXME cache
 		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
 				connections.add(connection);
 			}
@@ -1634,7 +1699,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections() {			// FIXME cache
 		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
 				connections.add(connection);
 			}
@@ -1676,7 +1741,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getPatternNodes() {
-		return Iterables.filter(nodes, QVTscheduleUtil.IsPatternNodePredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsPatternNodePredicate.INSTANCE);
 	}
 
 	public final @NonNull Iterable<NavigableEdge> getPredicateEdges() {
@@ -1748,6 +1813,19 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return symbolName2;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Node> getNodes() {
+		if (nodes == null) {
+			nodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, QVTschedulePackage.REGION__NODES, QVTschedulePackage.NODE__REGION);
+		}
+		return nodes;
+	}
+
 	protected @NonNull String getSymbolNamePrefix() {
 		return "m_";
 	}
@@ -1758,7 +1836,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getTrueNodes() {
-		return Iterables.filter(nodes, QVTscheduleUtil.IsTrueNodePredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsTrueNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -1975,12 +2053,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public void removeNode(@NonNull Node node) {
-		boolean wasRemoved = nodes.remove(node);
-		assert wasRemoved;
-	}
-
-	@Override
 	public void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion) {
 		int index = callableChildren.indexOf(oldRegion);
 		callableChildren.remove(oldRegion);
@@ -2087,7 +2159,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 					@Override
 					public @NonNull GraphNode getEdgeTarget() {
-						return targetNode.getRegion();
+						return QVTscheduleUtil.getRegion(targetNode);
 					}
 				};
 				s.appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
@@ -2099,7 +2171,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.setLabel(getName());
 		s.pushCluster();
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			node.toGraph(s);
 			//			s.appendNode(node);
 		}
@@ -2114,7 +2186,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public void toRegionGraph(@NonNull GraphStringBuilder s) {
 		s.appendNode(this);
 		for (@NonNull Edge edge : getRecursionEdges()) {
-			s.appendEdge(edge.getEdgeSource().getRegion(), edge, edge.getEdgeTarget().getRegion());
+			s.appendEdge(QVTscheduleUtil.getRegion(edge.getEdgeSource()), edge, QVTscheduleUtil.getRegion(edge.getEdgeTarget()));
 		}
 	}
 

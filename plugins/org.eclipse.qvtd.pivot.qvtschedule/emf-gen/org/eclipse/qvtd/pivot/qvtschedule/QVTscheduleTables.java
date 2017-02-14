@@ -81,6 +81,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Node = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Node", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("Property", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyDatum = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("PropertyDatum", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Region = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Region", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Role = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Role", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedModel = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_Phase = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Phase");
@@ -98,6 +99,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_ClassDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ClassDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Edge = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Edge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_MappingAction = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_MappingAction);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Node = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Node);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
 
 	/**
@@ -757,16 +759,19 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _ConnectionRole__node = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION_ROLE__NODE, Types._ConnectionRole, 0);
 
 		public static final @NonNull ExecutorProperty _Edge__edgeRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__EDGE_ROLE, Types._Edge, 0);
-		public static final @NonNull ExecutorProperty _Edge__sourceNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__SOURCE_NODE, Types._Edge, 1);
-		public static final @NonNull ExecutorProperty _Edge__targetNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__TARGET_NODE, Types._Edge, 2);
+		public static final @NonNull ExecutorProperty _Edge__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__NAME, Types._Edge, 1);
+		public static final @NonNull ExecutorProperty _Edge__sourceNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__SOURCE_NODE, Types._Edge, 2);
+		public static final @NonNull ExecutorProperty _Edge__targetNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__TARGET_NODE, Types._Edge, 3);
 
 		public static final @NonNull ExecutorProperty _MappingAction__mapping = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_ACTION__MAPPING, Types._MappingAction, 0);
 		public static final @NonNull ExecutorProperty _MappingAction__productions = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_ACTION__PRODUCTIONS, Types._MappingAction, 1);
 		public static final @NonNull ExecutorProperty _MappingAction__requisites = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_ACTION__REQUISITES, Types._MappingAction, 2);
 
 		public static final @NonNull ExecutorProperty _Node__incomingEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__INCOMING_EDGES, Types._Node, 0);
-		public static final @NonNull ExecutorProperty _Node__nodeRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE, Types._Node, 1);
-		public static final @NonNull ExecutorProperty _Node__outgoingEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__OUTGOING_EDGES, Types._Node, 2);
+		public static final @NonNull ExecutorProperty _Node__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__NAME, Types._Node, 1);
+		public static final @NonNull ExecutorProperty _Node__nodeRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE, Types._Node, 2);
+		public static final @NonNull ExecutorProperty _Node__outgoingEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__OUTGOING_EDGES, Types._Node, 3);
+		public static final @NonNull ExecutorProperty _Node__region = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__REGION, Types._Node, 4);
 
 		public static final @NonNull ExecutorProperty _PropertyDatum__classDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__CLASS_DATUM, Types._PropertyDatum, 0);
 		public static final @NonNull ExecutorProperty _PropertyDatum__opposite = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
@@ -774,6 +779,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _PropertyDatum__super = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER, Types._PropertyDatum, 3);
 		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__opposite = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE));
 		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__super = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 5, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER));
+
+		public static final @NonNull ExecutorProperty _Region__nodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__NODES, Types._Region, 0);
 
 		public static final @NonNull ExecutorProperty _Role__constant = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__CONSTANT, Types._Role, 0);
 		public static final @NonNull ExecutorProperty _Role__loaded = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__LOADED, Types._Role, 1);
@@ -3647,11 +3654,13 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _BasicMappingRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CastEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
@@ -3669,8 +3678,10 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ComposedNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Connection = {
@@ -3689,12 +3700,15 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _DependencyNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Edge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
@@ -3705,12 +3719,15 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ErrorNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ExpressionEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
@@ -3721,20 +3738,25 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _InputNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IteratedEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IteratorNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingAction = {
@@ -3744,35 +3766,42 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MicroMappingRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MultiRegion = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NamedMappingRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NavigableEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NavigationEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Node = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NodeConnection = {
@@ -3781,36 +3810,46 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NullNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OperationNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OperationRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PatternTypedNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PatternVariableNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Phase = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PredicateEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
@@ -3827,11 +3866,13 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RecursionEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
+			QVTscheduleTables.Properties._Edge__name,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Region = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
@@ -3848,10 +3889,12 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RootCompositionRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ScheduledRegion = {
+			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
@@ -3865,20 +3908,26 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TrueNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _UnknownNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _VariableNode = {
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._Node__outgoingEdges
+			QVTscheduleTables.Properties._Node__outgoingEdges,
+			QVTscheduleTables.Properties._Node__region
 		};
 
 		/**

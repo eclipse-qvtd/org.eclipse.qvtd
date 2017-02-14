@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,7 +72,7 @@ public class UnknownNodeImpl extends NodeImpl implements UnknownNode {
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, getName(), getClassDatumAnalysis());
+		return create(nodeRole, region, QVTscheduleUtil.getName(this), getClassDatumAnalysis());
 	}
 
 	@Override

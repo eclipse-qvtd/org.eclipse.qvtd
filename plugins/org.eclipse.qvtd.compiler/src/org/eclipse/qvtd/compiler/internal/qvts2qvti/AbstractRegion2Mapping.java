@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractRegion2Mapping
 {
@@ -244,7 +245,7 @@ public abstract class AbstractRegion2Mapping
 	protected @NonNull String getSafeName(@NonNull Node node) {
 		String name = node2name.get(node);
 		if (name == null) {
-			name = getSafeName(node.getName());
+			name = getSafeName(QVTscheduleUtil.getName(node));
 		}
 		return name;
 	}

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -63,24 +64,16 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getNodeRole <em>Node Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getNodeRole <em>Node Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getRegion <em>Region</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
-	/**
-	 * The cached value of the '{@link #getNodeRole() <em>Node Role</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNodeRole()
-	 * @generated
-	 * @ordered
-	 */
-	protected Role nodeRole;
-
 	/**
 	 * The cached value of the '{@link #getIncomingEdges() <em>Incoming Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -90,6 +83,36 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @ordered
 	 */
 	protected EList<Edge> incomingEdges;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getNodeRole() <em>Node Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodeRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Role nodeRole;
 
 	/**
 	 * The cached value of the '{@link #getOutgoingEdges() <em>Outgoing Edges</em>}' reference list.
@@ -179,6 +202,29 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Edge> getOutgoingEdges() {
 		if (outgoingEdges == null) {
 			outgoingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__OUTGOING_EDGES, QVTschedulePackage.EDGE__SOURCE_NODE);
@@ -192,15 +238,62 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
+	public Region getRegion() {
+		if (eContainerFeatureID() != QVTschedulePackage.NODE__REGION) return null;
+		return (Region)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRegion(Region newRegion, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newRegion, QVTschedulePackage.NODE__REGION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRegion(Region newRegion) {
+		if (newRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.NODE__REGION && newRegion != null)) {
+			if (EcoreUtil.isAncestor(this, newRegion))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newRegion != null)
+				msgs = ((InternalEObject)newRegion).eInverseAdd(this, QVTschedulePackage.REGION__NODES, Region.class, msgs);
+			msgs = basicSetRegion(newRegion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__REGION, newRegion, newRegion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				return getIncomingEdges();
+			case QVTschedulePackage.NODE__NAME:
+				return getName();
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				if (resolve) return getNodeRole();
 				return basicGetNodeRole();
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
-				return getIncomingEdges();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return getOutgoingEdges();
+			case QVTschedulePackage.NODE__REGION:
+				return getRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -214,16 +307,22 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__NODE_ROLE:
-				setNodeRole((Role)newValue);
-				return;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				getIncomingEdges().clear();
 				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
+			case QVTschedulePackage.NODE__NAME:
+				setName((String)newValue);
+				return;
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				setNodeRole((Role)newValue);
+				return;
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				getOutgoingEdges().clear();
 				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.NODE__REGION:
+				setRegion((Region)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -237,14 +336,20 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__NODE_ROLE:
-				setNodeRole((Role)null);
-				return;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				getIncomingEdges().clear();
 				return;
+			case QVTschedulePackage.NODE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				setNodeRole((Role)null);
+				return;
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				getOutgoingEdges().clear();
+				return;
+			case QVTschedulePackage.NODE__REGION:
+				setRegion((Region)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -258,26 +363,26 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__NODE_ROLE:
-				return nodeRole != null;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				return incomingEdges != null && !incomingEdges.isEmpty();
+			case QVTschedulePackage.NODE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.NODE__NODE_ROLE:
+				return nodeRole != null;
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return outgoingEdges != null && !outgoingEdges.isEmpty();
+			case QVTschedulePackage.NODE__REGION:
+				return getRegion() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	private @Nullable Region region;							// null is only permitted during construction
-	private @Nullable String name;								// null is only permitted during construction
 	private @Nullable ClassDatumAnalysis classDatumAnalysis;	// null is only permitted during construction
 	private boolean isDataType;
 	private boolean isHead = false;
 	private boolean isContained = false;
 	private @Nullable NodeConnection incomingConnection = null;
-	//	private @Nullable List<@NonNull Edge> incomingEdgesOld = null;
 	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
-	//	private @Nullable List<@NonNull Edge> outgoingEdgesOld = null;
 
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<>();
 
@@ -309,7 +414,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public void addTypedElement(@NonNull TypedElement typedElement) {
 		if (!typedElements.contains(typedElement)) {
 			typedElements.add(typedElement);
-			Region region2 = region;
+			Region region2 = getRegion();
 			assert region2 != null;
 			//			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region2.isOperationRegion()) {	// FIXME this is not a sound diagnosis
 			//				boolean isMatched = RegionUtil.isMatched(typedElement);
@@ -352,8 +457,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public void destroy() {
-		assert region != null;
-		region.removeNode(this);
+		assert getRegion() != null;
+		//		region.removeNode(this);
 		Connection incomingConnection2 = incomingConnection;
 		if (incomingConnection2 != null) {
 			incomingConnection2.destroy();
@@ -435,6 +540,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull String getDisplayName() {
+		Region region = getRegion();
 		assert region != null;
 		return region.getName() + "::" + getName();
 	}
@@ -473,12 +579,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull String getLabel() {
-		return getName();
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return ClassUtil.nonNullState(name);
+		return QVTscheduleUtil.getName(this);
 	}
 
 	@Override
@@ -539,6 +640,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.NODE__REGION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetRegion((Region)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -555,8 +660,24 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.NODE__REGION:
+				return basicSetRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.NODE__REGION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__NODES, Region.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	@Override
@@ -649,11 +770,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull Region getRegion() {
-		return ClassUtil.nonNullState(region);
-	}
-
-	@Override
 	public final @NonNull Iterable<@NonNull ? extends Edge> getResultEdges() {
 		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
@@ -661,6 +777,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	//	@Override
 	public @NonNull SchedulerConstants getSchedulerConstants() {
+		Region region = getRegion();
 		assert region != null;
 		return region.getSchedulerConstants();
 	}
@@ -714,12 +831,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		this.nodeRole = nodeRole;
-		this.region = region;
-		this.name = name;
+		setNodeRole(nodeRole);
+		setRegion(region);
+		setName(name);
 		this.classDatumAnalysis = classDatumAnalysis;
 		this.isDataType = classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType;
-		region.addNode(this);
+		//		region.addNode(this);
 	}
 
 	@Override

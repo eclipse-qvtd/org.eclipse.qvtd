@@ -203,17 +203,17 @@ public class ScheduleIndexer extends ScheduleState
 		//
 		for (@NonNull DatumConnection<?> connection : blockedConnectionsList) {
 			if (connection.isPassed()) {
-				int all = 0;
+				//				int all = 0;
 				int unblocked = 0;
 				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
-					all++;
+					//					all++;
 					if (Iterables.contains(getUnblockedRegions(), sourceRegion) || Iterables.contains(getOrdering(), sourceRegion)) {
 						unblocked++;
 					}
 				}
 				if (0 < unblocked) {
 					for (@NonNull Region targetRegion : connection.getTargetRegions()) {
-						all++;
+						//						all++;
 						if (!bestRegions.contains(targetRegion) && !Iterables.contains(getOrdering(), targetRegion)) {
 							bestRegions.add(targetRegion);
 						}

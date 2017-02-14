@@ -312,7 +312,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
 		Role stepNodeRole = getNodeRole(typedNode);
-		return PatternTypedNodeImpl.create(stepNodeRole, region, typedNode.getName(), typedNode.getClassDatumAnalysis(), isMatched);
+		return PatternTypedNodeImpl.create(stepNodeRole, region, getName(typedNode), typedNode.getClassDatumAnalysis(), isMatched);
 	}
 
 	public static @NonNull Node createTrueNode(@NonNull Region region) {

@@ -515,13 +515,22 @@ public interface QVTschedulePackage extends EPackage {
 	int REGION__SYMBOL_NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__NODES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -594,6 +603,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__NODES = REGION__NODES;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Region</em>' class.
@@ -687,6 +705,15 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_MAPPING_REGION__NODES = MAPPING_REGION__NODES;
+
+	/**
 	 * The number of structural features of the '<em>Basic Mapping Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -768,13 +795,22 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE__EDGE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Target Node</b></em>' reference.
@@ -783,7 +819,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
@@ -792,7 +828,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -865,6 +901,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAVIGABLE_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__NAME = EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -964,6 +1009,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CAST_EDGE__EDGE_ROLE = NAVIGABLE_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__NAME = NAVIGABLE_EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -1254,22 +1308,31 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__NODE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__INCOMING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int NODE__INCOMING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__NODE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -1278,7 +1341,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__OUTGOING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int NODE__OUTGOING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -1287,7 +1359,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int NODE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1353,15 +1425,6 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSED_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSED_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1371,6 +1434,24 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSED_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1378,6 +1459,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSED_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Composed Node</em>' class.
@@ -1713,15 +1803,6 @@ public interface QVTschedulePackage extends EPackage {
 	int DEPENDENCY_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENCY_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1731,6 +1812,24 @@ public interface QVTschedulePackage extends EPackage {
 	int DEPENDENCY_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1738,6 +1837,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPENDENCY_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Dependency Node</em>' class.
@@ -1893,15 +2001,6 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ERROR_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1911,6 +2010,24 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1918,6 +2035,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ERROR_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Error Node</em>' class.
@@ -1999,6 +2125,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPRESSION_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__NAME = EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -2091,15 +2226,6 @@ public interface QVTschedulePackage extends EPackage {
 	int INPUT_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2109,6 +2235,24 @@ public interface QVTschedulePackage extends EPackage {
 	int INPUT_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2116,6 +2260,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Input Node</em>' class.
@@ -2197,6 +2350,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATED_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATED_EDGE__NAME = EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -2289,15 +2451,6 @@ public interface QVTschedulePackage extends EPackage {
 	int VARIABLE_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2307,6 +2460,24 @@ public interface QVTschedulePackage extends EPackage {
 	int VARIABLE_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2314,6 +2485,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Variable Node</em>' class.
@@ -2388,15 +2568,6 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE__OWNED_EXTENSIONS = VARIABLE_NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_NODE__NODE_ROLE = VARIABLE_NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2406,6 +2577,24 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE__INCOMING_EDGES = VARIABLE_NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__NAME = VARIABLE_NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__NODE_ROLE = VARIABLE_NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2413,6 +2602,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_NODE__OUTGOING_EDGES = VARIABLE_NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__REGION = VARIABLE_NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Iterator Node</em>' class.
@@ -2595,6 +2793,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__NODES = MAPPING_REGION__NODES;
+
+	/**
 	 * The number of structural features of the '<em>Micro Mapping Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2758,6 +2965,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__NODES = MAPPING_REGION__NODES;
+
+	/**
 	 * The number of structural features of the '<em>Named Mapping Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2837,6 +3053,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAVIGATION_EDGE__EDGE_ROLE = NAVIGABLE_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__NAME = NAVIGABLE_EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -3020,15 +3245,6 @@ public interface QVTschedulePackage extends EPackage {
 	int NULL_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NULL_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3038,6 +3254,24 @@ public interface QVTschedulePackage extends EPackage {
 	int NULL_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3045,6 +3279,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NULL_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Null Node</em>' class.
@@ -3129,15 +3372,6 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3147,6 +3381,24 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3154,6 +3406,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Operation Node</em>' class.
@@ -3235,6 +3496,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__NODES = REGION__NODES;
 
 	/**
 	 * The number of structural features of the '<em>Operation Region</em>' class.
@@ -3319,15 +3589,6 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_TYPED_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PATTERN_TYPED_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3337,6 +3598,24 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_TYPED_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3344,6 +3623,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_TYPED_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Pattern Typed Node</em>' class.
@@ -3428,15 +3716,6 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__OWNED_EXTENSIONS = VARIABLE_NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PATTERN_VARIABLE_NODE__NODE_ROLE = VARIABLE_NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3446,6 +3725,24 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__INCOMING_EDGES = VARIABLE_NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__NAME = VARIABLE_NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__NODE_ROLE = VARIABLE_NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3453,6 +3750,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_VARIABLE_NODE__OUTGOING_EDGES = VARIABLE_NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__REGION = VARIABLE_NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Pattern Variable Node</em>' class.
@@ -3544,6 +3850,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PREDICATE_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_EDGE__NAME = EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -3788,6 +4103,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int RECURSION_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECURSION_EDGE__NAME = EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -4052,6 +4376,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ROOT_COMPOSITION_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_COMPOSITION_REGION__NODES = REGION__NODES;
+
+	/**
 	 * The number of structural features of the '<em>Root Composition Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4141,6 +4474,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULED_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__NODES = REGION__NODES;
 
 	/**
 	 * The number of structural features of the '<em>Scheduled Region</em>' class.
@@ -4344,15 +4686,6 @@ public interface QVTschedulePackage extends EPackage {
 	int TRUE_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRUE_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4362,6 +4695,24 @@ public interface QVTschedulePackage extends EPackage {
 	int TRUE_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRUE_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRUE_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4369,6 +4720,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int TRUE_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRUE_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>True Node</em>' class.
@@ -4453,15 +4813,6 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_NODE__NODE_ROLE = NODE__NODE_ROLE;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4471,6 +4822,24 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4478,6 +4847,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNKNOWN_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_NODE__REGION = NODE__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Unknown Node</em>' class.
@@ -4817,6 +5195,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEdge_EdgeRole();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getName()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EAttribute getEdge_Name();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}'.
@@ -5259,6 +5648,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getNode_IncomingEdges();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getName()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_Name();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges <em>Outgoing Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5268,6 +5668,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNode_OutgoingEdges();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_Region();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection <em>Node Connection</em>}'.
@@ -5412,6 +5823,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRegion();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_Nodes();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}'.
@@ -5629,6 +6051,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference EDGE__EDGE_ROLE = eINSTANCE.getEdge_EdgeRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EDGE__NAME = eINSTANCE.getEdge_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Source Node</b></em>' reference feature.
@@ -6017,12 +6447,28 @@ public interface QVTschedulePackage extends EPackage {
 		EReference NODE__INCOMING_EDGES = eINSTANCE.getNode_IncomingEdges();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__NAME = eINSTANCE.getNode_Name();
+
+		/**
 		 * The meta object literal for the '<em><b>Outgoing Edges</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference NODE__OUTGOING_EDGES = eINSTANCE.getNode_OutgoingEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__REGION = eINSTANCE.getNode_Region();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl <em>Node Connection</em>}' class.
@@ -6155,6 +6601,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass REGION = eINSTANCE.getRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__NODES = eINSTANCE.getRegion_Nodes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}' enum.
