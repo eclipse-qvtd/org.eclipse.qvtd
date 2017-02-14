@@ -56,6 +56,10 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="edgeRole" lowerBound="1"
         eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceNode" lowerBound="1"
+        eType="#//Node" eOpposite="#//Node/outgoingEdges"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetNode" lowerBound="1"
+        eType="#//Node" eOpposite="#//Node/incomingEdges"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EdgeConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -98,6 +102,10 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeRole" lowerBound="1"
         eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/targetNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/sourceNode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

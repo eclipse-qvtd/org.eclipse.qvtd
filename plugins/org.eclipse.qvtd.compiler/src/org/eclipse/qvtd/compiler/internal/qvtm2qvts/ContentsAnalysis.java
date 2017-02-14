@@ -87,7 +87,7 @@ public class ContentsAnalysis
 
 	private void addNewNode(@NonNull Node newNode) {
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getElementalClassDatumAnalysis(newNode);
-		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
+		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : RegionUtil.getSuperClassDatumAnalyses(classDatumAnalysis)) {
 			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {
 				nodes = new ArrayList<>();
@@ -317,7 +317,7 @@ public class ContentsAnalysis
 	 */
 	private boolean isOnlyCastOrRecursed(@NonNull Node predicatedNode) {
 		boolean isCast = false;
-		for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
+		for (Edge outgoingEdge : RegionUtil.getOutgoingEdges(predicatedNode)) {
 			if (!outgoingEdge.isCast() && !outgoingEdge.isRecursion()) {
 				return false;
 			}

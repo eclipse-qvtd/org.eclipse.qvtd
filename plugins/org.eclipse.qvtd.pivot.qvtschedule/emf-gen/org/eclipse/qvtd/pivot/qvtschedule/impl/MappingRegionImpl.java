@@ -138,13 +138,13 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		while (moreNodes.size() > 0) {
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node node : moreNodes) {
-				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+				for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(node)) {
 					Node sourceNode = incomingEdge.getEdgeSource();
 					if (!unconditionalNodes.contains(sourceNode) && conditionalNodes.add(sourceNode)) {
 						moreMoreNodes.add(sourceNode);
 					}
 				}
-				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
 					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!unconditionalNodes.contains(targetNode) && conditionalNodes.add(targetNode)) {
 						moreMoreNodes.add(targetNode);
@@ -367,7 +367,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		while (moreUnconditionalNodes.size() > 0) {
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node node : moreUnconditionalNodes) {
-				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+				for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(node)) {
 					Node sourceNode = incomingEdge.getEdgeSource();
 					if (!canBeUnconditional(sourceNode)) {}
 					else if (incomingEdge.isComputation()) {
@@ -390,7 +390,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 						System.out.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
 					}
 				}
-				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
 					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!canBeUnconditional(targetNode)) {}
 					else if (outgoingEdge.isComputation()) {}

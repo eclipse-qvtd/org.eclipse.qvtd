@@ -42,6 +42,8 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges <em>Incoming Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges <em>Outgoing Edges</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode()
@@ -92,9 +94,7 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	}
 
 	void addIncomingConnection(@NonNull NodeConnection connection);
-	void addIncomingEdge(@NonNull Edge edge);
 	void addOutgoingConnection(@NonNull NodeConnection connection);
-	void addOutgoingEdge(@NonNull Edge edge);
 	void addTypedElement(@NonNull TypedElement typedElement);
 
 	/**
@@ -114,7 +114,7 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
 	@Nullable NodeConnection getIncomingConnection();
-	@NonNull List<@NonNull Edge> getIncomingEdges();
+	List<Edge> getIncomingEdges();
 	@Nullable NodeConnection getIncomingPassedConnection();
 	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
@@ -125,7 +125,7 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull Node> getNavigationTargets();
 	@NonNull List<@NonNull NodeConnection> getOutgoingConnections();
-	@NonNull List<@NonNull Edge> getOutgoingEdges();
+	List<Edge> getOutgoingEdges();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges();
 	//	@Nullable InterRegionEdge getPassedBindingEdge();
@@ -292,9 +292,7 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
 	void removeIncomingConnection(@NonNull NodeConnection connection);
-	void removeIncomingEdge(@NonNull Edge edge);
 	void removeOutgoingConnection(@NonNull NodeConnection connection);
-	void removeOutgoingEdge(@NonNull Edge edge);
 
 	/**
 	 * Redesignate a head node as not-a-head, typically following a multi-headed split.

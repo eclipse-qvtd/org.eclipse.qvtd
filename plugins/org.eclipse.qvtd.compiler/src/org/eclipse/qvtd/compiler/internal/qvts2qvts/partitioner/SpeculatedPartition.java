@@ -79,7 +79,7 @@ class SpeculatedPartition extends AbstractPartition
 		//
 		//	Any number of outgoing realized edges can be deferred till the corrolary is available.
 		//
-		for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+		for (@NonNull Edge outgoingEdge : RegionUtil.getOutgoingEdges(node)) {
 			if (outgoingEdge.isRealized()) {
 				// OK to defer
 			}
@@ -93,7 +93,7 @@ class SpeculatedPartition extends AbstractPartition
 		//	N o paremt edge of an incomingEdge may n=be unidorectional, else a 1:N choice gets lost
 		//
 		Property corrolaryProperty = null;
-		for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(node)) {
 			if (incomingEdge.isRealized()) {
 				// OK to defer
 			}

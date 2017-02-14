@@ -159,7 +159,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 			//	An operation result that is cached in the middle trace by a speculation partition
 			//	must be converted to a step node when re-accessed by a speculated partition.
 			//
-			for (@NonNull Edge edge : node.getIncomingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isNavigation() && edge.isRealized()) {
 					Role edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole.isPredicated()) {

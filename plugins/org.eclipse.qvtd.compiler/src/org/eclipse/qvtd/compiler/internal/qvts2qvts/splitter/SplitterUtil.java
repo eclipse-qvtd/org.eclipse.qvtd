@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -39,7 +40,7 @@ class SplitterUtil
 			boolean resolvedOne = false;
 			for (@NonNull Node unresolvedNode : new ArrayList<>(unresolvedOperationNodes)) {
 				boolean allReachable = true;
-				for (@NonNull Edge edge : unresolvedNode.getIncomingEdges()) {
+				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(unresolvedNode)) {
 					if (edge.isExpression() && !computableTargetNodes.contains(edge.getEdgeSource())) {
 						allReachable = false;
 					}
@@ -59,7 +60,7 @@ class SplitterUtil
 
 	private static void computeComputableTargetNodes(@NonNull Set<@NonNull Node> computableTargetNodes, @NonNull Node sourceNode, @NonNull Set<@NonNull Node> unresolvedOperationNodes) {
 		if (computableTargetNodes.add(sourceNode)) {
-			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(sourceNode)) {
 				if (edge.isComputation() || (edge.isNavigation() && !edge.isMatched())) {
 					Node targetNode = edge.getEdgeTarget();
 					if (targetNode.isRealized() && targetNode.isOperation()) {
@@ -70,7 +71,7 @@ class SplitterUtil
 					}
 				}
 			}
-			for (@NonNull Edge edge : sourceNode.getIncomingEdges()) {	// FIXME gather constant inputs to avoid assert fail
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(sourceNode)) {	// FIXME gather constant inputs to avoid assert fail
 				if (edge.isComputation()){ // || (edge.isConstant())) {
 					Node node = edge.getEdgeSource();
 					if (node.isConstant()) {
@@ -138,7 +139,7 @@ class SplitterUtil
 		}
 		Node sourceNode = edge.getEdgeSource();
 		Node targetNode = edge.getEdgeTarget();
-		for (@NonNull Edge edge2 : targetNode.getOutgoingEdges()) {
+		for (@NonNull Edge edge2 : RegionUtil.getOutgoingEdges(targetNode)) {
 			if (edge2.isNavigation() && (edge2.getEdgeTarget() == sourceNode)) {
 				return true;
 			}

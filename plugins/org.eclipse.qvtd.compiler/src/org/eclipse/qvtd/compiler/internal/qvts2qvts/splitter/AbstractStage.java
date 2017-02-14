@@ -19,6 +19,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -105,7 +106,7 @@ abstract class AbstractStage implements Stage
 			for (@NonNull Node node : tryNodes) {
 				if (!isLive(node, deadNodes)) {
 					deadNodes.add(node);
-					for (@NonNull Edge edge : node.getIncomingEdges()) {
+					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 						if (!edge.isRealized()) {
 							Node sourceNode = edge.getEdgeSource();
 							if (!sourceNode.isRealized()) {

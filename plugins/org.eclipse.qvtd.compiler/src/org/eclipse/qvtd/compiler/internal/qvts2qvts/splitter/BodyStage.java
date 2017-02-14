@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -34,7 +35,7 @@ class BodyStage extends AbstractStage
 {
 	private static void computeOperationSources(Set<@NonNull Node> nodes, @NonNull Node node) {
 		if (nodes.add(node)) {
-			for (@NonNull Edge edge : node.getIncomingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isExpression()) {
 					computeOperationSources(nodes, edge.getEdgeSource());
 				}
@@ -221,12 +222,12 @@ class BodyStage extends AbstractStage
 		if (node.isRealized()) {
 			return true;		// Realized node is needed
 		}
-		for (@NonNull Edge edge : node.getIncomingEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 			if (edge.isRealized()) {
 				return true;	// Target of a realized edge is needed
 			}
 		}
-		for (@NonNull Edge edge : node.getOutgoingEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
 			Node targetNode = edge.getEdgeTarget();
 			if (!deadNodes.contains(targetNode) && !targetNode.isHead()) {
 				return true;	// Source of a live computation of a non-head is needed.

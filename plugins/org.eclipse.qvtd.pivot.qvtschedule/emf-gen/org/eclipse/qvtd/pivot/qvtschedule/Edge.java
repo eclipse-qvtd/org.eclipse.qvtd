@@ -35,6 +35,8 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode <em>Target Node</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge()
@@ -68,6 +70,64 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	 * @generated
 	 */
 	void setEdgeRole(Role value);
+
+	/**
+	 * Returns the value of the '<em><b>Source Node</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges <em>Outgoing Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source Node</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source Node</em>' reference.
+	 * @see #setSourceNode(Node)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_SourceNode()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges
+	 * @model opposite="outgoingEdges" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!sourceNode'"
+	 * @generated
+	 */
+	Node getSourceNode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source Node</em>' reference.
+	 * @see #getSourceNode()
+	 * @generated
+	 */
+	void setSourceNode(Node value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Node</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges <em>Incoming Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target Node</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target Node</em>' reference.
+	 * @see #setTargetNode(Node)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_TargetNode()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges
+	 * @model opposite="incomingEdges" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!targetNode'"
+	 * @generated
+	 */
+	Node getTargetNode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode <em>Target Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Node</em>' reference.
+	 * @see #getTargetNode()
+	 * @generated
+	 */
+	void setTargetNode(Node value);
 
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.

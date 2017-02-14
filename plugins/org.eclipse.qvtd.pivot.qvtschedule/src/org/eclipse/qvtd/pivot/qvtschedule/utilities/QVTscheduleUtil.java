@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -431,7 +432,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		@NonNull NavigableEdge sourceEdge = edge;
 		while (true) {
 			@Nullable NavigableEdge targetEdge = null;
-			for (@NonNull Edge nextEdge : sourceEdge.getEdgeTarget().getOutgoingEdges()) {
+			for (@NonNull Edge nextEdge : getOutgoingEdges(sourceEdge.getEdgeTarget())) {
 				if (nextEdge.isRecursion()) {
 					continue;
 				}
@@ -457,7 +458,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		@NonNull Node sourceNode = node;
 		while (true) {
 			@Nullable Node targetNode = null;
-			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
+			for (@NonNull Edge edge : getOutgoingEdges(sourceNode)) {
 				if (edge.isRecursion() || edge.isSecondary()) {
 					continue;
 				}
@@ -481,7 +482,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 * If includeUsedIntermediates is set, cast edge inputs that are used by non-cast edges are also returned.
 	 */
 	public static @NonNull Iterable<@NonNull Node> getCastTargets(@NonNull Node node, boolean includeUsedIntermediates) {
-		for (@NonNull Edge edge : node.getOutgoingEdges()) {
+		for (@NonNull Edge edge : getOutgoingEdges(node)) {
 			if (edge.isRecursion() || edge.isSecondary()) {
 				continue;
 			}
@@ -497,7 +498,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	private static void getCastTargets(@NonNull Node sourceNode, boolean includeUsedIntermediates, @NonNull Set<@NonNull Node> castSources, @NonNull Set<@NonNull Node> castTargets) {
 		if (castSources.add(sourceNode)) {
 			boolean hasCast = false;
-			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
+			for (@NonNull Edge edge : getOutgoingEdges(sourceNode)) {
 				if (edge.isRecursion() || edge.isSecondary()) {
 					continue;
 				}
@@ -543,8 +544,16 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
+	public static @NonNull Iterable<@NonNull Edge> getIncomingEdges(@NonNull Node newNode) {
+		return ClassUtil.nullFree(newNode.getIncomingEdges());
+	}
+
 	public static @NonNull Role getNodeRole(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getNodeRole());
+	}
+
+	public static @NonNull Iterable<@NonNull Edge> getOutgoingEdges(@NonNull Node newNode) {
+		return ClassUtil.nullFree(newNode.getOutgoingEdges());
 	}
 
 	public static @NonNull Phase getPhase(@NonNull Role role) {
@@ -557,6 +566,18 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getRegion(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getRegion());
+	}
+
+	public static @NonNull Node getSourceNode(@NonNull Edge edge) {
+		return ClassUtil.nonNullState(edge.getSourceNode());
+	}
+
+	public static @NonNull Iterable<@NonNull ClassDatumAnalysis> getSuperClassDatumAnalyses(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ClassUtil.nullFree(classDatumAnalysis.getSuperClassDatumAnalyses());
+	}
+
+	public static @NonNull Node getTargetNode(@NonNull Edge edge) {
+		return ClassUtil.nonNullState(edge.getTargetNode());
 	}
 
 	/**

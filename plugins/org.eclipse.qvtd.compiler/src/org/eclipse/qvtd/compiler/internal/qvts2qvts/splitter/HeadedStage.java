@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -115,7 +116,7 @@ abstract class HeadedStage extends AbstractStage
 			return false;
 		}
 		int bidirectionals = 0;
-		for (@NonNull Edge edge : node.getOutgoingEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
 			if (!edge.isRealized() && !deadNodes.contains(edge.getEdgeTarget())) {
 				if (!SplitterUtil.isBidirectional(edge)) {
 					return true;

@@ -15,14 +15,19 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -59,6 +64,8 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getNodeRole <em>Node Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
  * </ul>
  *
  * @generated
@@ -73,6 +80,26 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @ordered
 	 */
 	protected Role nodeRole;
+
+	/**
+	 * The cached value of the '{@link #getIncomingEdges() <em>Incoming Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncomingEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> incomingEdges;
+
+	/**
+	 * The cached value of the '{@link #getOutgoingEdges() <em>Outgoing Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoingEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> outgoingEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -139,11 +166,41 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
+	public EList<Edge> getIncomingEdges() {
+		if (incomingEdges == null) {
+			incomingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__INCOMING_EDGES, QVTschedulePackage.EDGE__TARGET_NODE);
+		}
+		return incomingEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Edge> getOutgoingEdges() {
+		if (outgoingEdges == null) {
+			outgoingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__OUTGOING_EDGES, QVTschedulePackage.EDGE__SOURCE_NODE);
+		}
+		return outgoingEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				if (resolve) return getNodeRole();
 				return basicGetNodeRole();
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				return getIncomingEdges();
+			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+				return getOutgoingEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -153,11 +210,20 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				setNodeRole((Role)newValue);
+				return;
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				getIncomingEdges().clear();
+				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+				getOutgoingEdges().clear();
+				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -174,6 +240,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				setNodeRole((Role)null);
 				return;
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				getIncomingEdges().clear();
+				return;
+			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+				getOutgoingEdges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -188,6 +260,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				return nodeRole != null;
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				return incomingEdges != null && !incomingEdges.isEmpty();
+			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+				return outgoingEdges != null && !outgoingEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -199,9 +275,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isHead = false;
 	private boolean isContained = false;
 	private @Nullable NodeConnection incomingConnection = null;
-	private @Nullable List<@NonNull Edge> incomingEdges = null;
+	//	private @Nullable List<@NonNull Edge> incomingEdgesOld = null;
 	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
-	private @Nullable List<@NonNull Edge> outgoingEdges = null;
+	//	private @Nullable List<@NonNull Edge> outgoingEdgesOld = null;
 
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<>();
 
@@ -216,20 +292,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public final void addIncomingEdge(@NonNull Edge edge) {
-		assert edge.getEdgeTarget() == this;
-		//		assert edge.getRegion() == getRegion();
-		List<@NonNull Edge> incomingEdges2 = incomingEdges;
-		if (incomingEdges2 == null) {
-			incomingEdges = incomingEdges2 = new ArrayList<>();
-		}
-		else {
-			assert !incomingEdges2.contains(edge);
-		}
-		incomingEdges2.add(edge);
-	}
-
-	@Override
 	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
 		//		assert edge.getRegion() == getRegion();
@@ -241,20 +303,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			assert !outgoingConnections2.contains(connection);
 		}
 		outgoingConnections2.add(connection);
-	}
-
-	@Override
-	public final void addOutgoingEdge(@NonNull Edge edge) {
-		assert edge.getEdgeSource() == this;
-		//		assert edge.getRegion() == getRegion();
-		List<@NonNull Edge> outgoingEdges2 = outgoingEdges;
-		if (outgoingEdges2 == null) {
-			outgoingEdges = outgoingEdges2 = new ArrayList<>();
-		}
-		else {
-			assert !outgoingEdges2.contains(edge);
-		}
-		outgoingEdges2.add(edge);
 	}
 
 	@Override
@@ -316,17 +364,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				outgoingConnections2.get(0).destroy();
 			}
 		}
-		List<Edge> incomingEdges2 = incomingEdges;
-		if (incomingEdges2 != null) {
-			while (!incomingEdges2.isEmpty()) {
-				incomingEdges2.get(0).destroy();
-			}
+		List<Edge> incomingEdges2 = getIncomingEdges();
+		while (!incomingEdges2.isEmpty()) {
+			incomingEdges2.get(0).destroy();
 		}
-		List<Edge> outgoingEdges2 = outgoingEdges;
-		if (outgoingEdges2 != null) {
-			while (!outgoingEdges2.isEmpty()) {
-				outgoingEdges2.get(0).destroy();
-			}
+		List<Edge> outgoingEdges2 = getOutgoingEdges();
+		while (!outgoingEdges2.isEmpty()) {
+			outgoingEdges2.get(0).destroy();
 		}
 	}
 
@@ -344,14 +388,14 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getArgumentEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getIncomingEdges(), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getIncomingEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getCastEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsCastEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsCastEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -385,7 +429,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getComputationEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsComputationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsComputationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -403,11 +447,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public final @Nullable NodeConnection getIncomingConnection() {
 		return incomingConnection;
-	}
-
-	@Override
-	public final @NonNull List<@NonNull Edge> getIncomingEdges() {
-		return incomingEdges != null ? incomingEdges : QVTscheduleConstants.EMPTY_EDGE_LIST;
 	}
 
 	@Override
@@ -444,7 +483,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @Nullable NavigableEdge getNavigationEdge(@NonNull Property source2targetProperty) {
-		for (@NonNull Edge edge : getOutgoingEdges()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge instanceof NavigableEdge) {
 				NavigableEdge navigationEdge = (NavigableEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
@@ -458,13 +497,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public @Nullable Node getNavigationTarget(@NonNull Property source2targetProperty) {
-		for (@NonNull Edge edge : getOutgoingEdges()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge instanceof NavigableEdge) {
 				NavigableEdge navigationEdge = (NavigableEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
@@ -477,7 +516,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getNavigationTargets() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigationEdgePredicate.INSTANCE);
 		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeTargetFunction.INSTANCE);
 		return transform;
 	}
@@ -487,9 +526,37 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return outgoingConnections != null ? outgoingConnections : QVTscheduleConstants.EMPTY_NODE_CONNECTION_LIST;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public final @NonNull List<@NonNull Edge> getOutgoingEdges() {
-		return outgoingEdges != null ? outgoingEdges : QVTscheduleConstants.EMPTY_EDGE_LIST;
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_EDGES:
+				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	@Override
@@ -537,7 +604,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final @Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty) {
-		for (@NonNull Edge edge : getOutgoingEdges()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge.isPredicated() && (edge instanceof NavigableEdge)) {
 				if (((NavigableEdge)edge).getProperty() == source2targetProperty) {
 					return edge;
@@ -550,33 +617,33 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsPredicatedEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsPredicatedEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getRecursionEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getRecursionSources() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getIncomingEdges(), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getIncomingEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
 		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeSourceFunction.INSTANCE);
 		return transform;
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getRecursionTargets() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
 		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeTargetFunction.INSTANCE);
 		return transform;
 	}
@@ -588,7 +655,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final @NonNull Iterable<@NonNull ? extends Edge> getResultEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -836,16 +903,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public final void removeIncomingEdge(@NonNull Edge edge) {
-		assert edge.getEdgeTarget() == this;
-		//		assert edge.getRegion() == getRegion();
-		List<Edge> incomingEdges2 = incomingEdges;
-		assert incomingEdges2 != null;
-		boolean wasRemoved = incomingEdges2.remove(edge);
-		assert wasRemoved;
-	}
-
-	@Override
 	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
 		//		assert edge.getRegion() == getRegion();
@@ -854,16 +911,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		@SuppressWarnings("unused")
 		boolean wasRemoved = outgoingConnections2.remove(connection);
 		//		assert wasRemoved;
-	}
-
-	@Override
-	public final void removeOutgoingEdge(@NonNull Edge edge) {
-		assert edge.getEdgeSource() == this;
-		//		assert edge.getRegion() == getRegion();
-		List<Edge> outgoingEdges2 = outgoingEdges;
-		assert outgoingEdges2 != null;
-		boolean wasRemoved = outgoingEdges2.remove(edge);
-		assert wasRemoved;
 	}
 
 	@Override

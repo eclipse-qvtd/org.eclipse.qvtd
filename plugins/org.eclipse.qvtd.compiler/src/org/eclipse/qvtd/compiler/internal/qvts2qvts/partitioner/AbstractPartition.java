@@ -181,12 +181,12 @@ abstract class AbstractPartition
 
 	private void gatherReachables(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node node) {
 		if (reachableNodes.add(node)) {
-			for (@NonNull Edge edge : node.getIncomingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isComputation() || edge.isNavigation()) {		// excludes only recursion
 					gatherReachables(reachableNodes, edge.getEdgeSource());
 				}
 			}
-			for (@NonNull Edge edge : node.getOutgoingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
 				if (edge.isNavigation()) {
 					gatherReachables(reachableNodes, edge.getEdgeTarget());
 				}
@@ -242,14 +242,14 @@ abstract class AbstractPartition
 			return false;
 		}
 		if (node.isOperation()) {
-			for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+			for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(node)) {
 				if (incomingEdge.isComputation() && !isComputable(sourceNodes, incomingEdge)) {
 					return false;
 				}
 			}
 		}
 		else if (node.isPattern()) {
-			for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+			for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(node)) {
 				if (incomingEdge.isComputation() && !isComputable(sourceNodes, incomingEdge)) {
 					return false;
 				}
@@ -314,7 +314,7 @@ abstract class AbstractPartition
 
 	protected boolean resolveComputations(@NonNull Node targetNode) {
 		boolean gotIt = false;
-		for (@NonNull Edge incomingEdge : targetNode.getIncomingEdges()) {		// Should be just one.
+		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {		// Should be just one.
 			if (incomingEdge.isComputation() || (incomingEdge.isNavigation() && incomingEdge.isOld())) {
 				Set<@NonNull Node> sourceNodes = new HashSet<>();
 				if (isComputable(sourceNodes, incomingEdge)) {
@@ -378,7 +378,7 @@ abstract class AbstractPartition
 	protected void resolvePredicates() {
 		for (@NonNull Node targetNode : partitioner.getTrueNodes()) {
 			if (!partitioner.hasTrueNode(targetNode)) {
-				for (@NonNull Edge incomingEdge : targetNode.getIncomingEdges()) {		// Should be just one.
+				for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {		// Should be just one.
 					if (incomingEdge.isComputation()) {
 						Set<@NonNull Node> sourceNodes = Sets.newHashSet(targetNode);
 						if (isComputable(sourceNodes, incomingEdge)) {

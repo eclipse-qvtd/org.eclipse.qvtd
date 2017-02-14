@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -249,10 +250,10 @@ abstract class RegionMerger // implements Region
 			sourceNodeMerger.destroy();
 			for (@NonNull Node oldNode : sourceNodeMerger.getOldNodes()) {
 				targetNodeMerger.addOldNode(oldNode);
-				for (@NonNull Edge oldEdge : oldNode.getIncomingEdges()) {
+				for (@NonNull Edge oldEdge : RegionUtil.getIncomingEdges(oldNode)) {
 					addSecondaryEdge(oldEdge);
 				}
-				for (@NonNull Edge oldEdge : oldNode.getOutgoingEdges()) {
+				for (@NonNull Edge oldEdge : RegionUtil.getOutgoingEdges(oldNode)) {
 					addSecondaryEdge(oldEdge);
 				}
 			}

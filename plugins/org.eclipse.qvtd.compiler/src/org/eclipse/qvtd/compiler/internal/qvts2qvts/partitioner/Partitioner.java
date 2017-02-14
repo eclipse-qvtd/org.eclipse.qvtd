@@ -322,8 +322,8 @@ public class Partitioner
 	private @NonNull Set<@NonNull Edge> computeDeadEdges(@NonNull Iterable<@NonNull Node> deadNodes) {
 		Set<@NonNull Edge> deadEdges = new HashSet<>();
 		for (@NonNull Node node : deadNodes) {
-			deadEdges.addAll(node.getIncomingEdges());
-			deadEdges.addAll(node.getOutgoingEdges());
+			Iterables.addAll(deadEdges, RegionUtil.getIncomingEdges(node));
+			Iterables.addAll(deadEdges, RegionUtil.getOutgoingEdges(node));
 		}
 		return deadEdges;
 	}
@@ -347,7 +347,7 @@ public class Partitioner
 			List<@NonNull Node> moreDeadNodesList = new ArrayList<>(moreDeadNodes);
 			moreDeadNodes = null;
 			for (@NonNull Node deadNode : moreDeadNodesList) {
-				for (@NonNull Edge edge : deadNode.getIncomingEdges()) {
+				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(deadNode)) {
 					Node sourceNode = edge.getEdgeSource();
 					if (!sourceNode.isHead() && isDead(sourceNode, deadNodes)) {
 						if (moreDeadNodes == null) {
@@ -474,14 +474,14 @@ public class Partitioner
 		if (node.isHead()) {
 			return false;
 		}
-		for (@NonNull Edge edge : node.getIncomingEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 			if (edge.isNavigation()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
 					return false;
 				}
 			}
 		}
-		for (@NonNull Edge edge : node.getOutgoingEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
 			if (edge.isNavigation() || edge.isExpression()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeTarget())) {
 					return false;

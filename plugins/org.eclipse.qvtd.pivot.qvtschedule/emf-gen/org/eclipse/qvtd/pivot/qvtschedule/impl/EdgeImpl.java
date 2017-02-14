@@ -15,13 +15,13 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -41,6 +41,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getEdgeRole <em>Edge Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getSourceNode <em>Source Node</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getTargetNode <em>Target Node</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,6 +57,26 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @ordered
 	 */
 	protected Role edgeRole;
+
+	/**
+	 * The cached value of the '{@link #getSourceNode() <em>Source Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected Node sourceNode;
+
+	/**
+	 * The cached value of the '{@link #getTargetNode() <em>Target Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected Node targetNode;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,11 +143,177 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @generated
 	 */
 	@Override
+	public Node getSourceNode() {
+		if (sourceNode != null && sourceNode.eIsProxy()) {
+			InternalEObject oldSourceNode = (InternalEObject)sourceNode;
+			sourceNode = (Node)eResolveProxy(oldSourceNode);
+			if (sourceNode != oldSourceNode) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__SOURCE_NODE, oldSourceNode, sourceNode));
+			}
+		}
+		return sourceNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Node basicGetSourceNode() {
+		return sourceNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSourceNode(Node newSourceNode, NotificationChain msgs) {
+		Node oldSourceNode = sourceNode;
+		sourceNode = newSourceNode;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__SOURCE_NODE, oldSourceNode, newSourceNode);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSourceNode(Node newSourceNode) {
+		if (newSourceNode != sourceNode) {
+			NotificationChain msgs = null;
+			if (sourceNode != null)
+				msgs = ((InternalEObject)sourceNode).eInverseRemove(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
+			if (newSourceNode != null)
+				msgs = ((InternalEObject)newSourceNode).eInverseAdd(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
+			msgs = basicSetSourceNode(newSourceNode, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__SOURCE_NODE, newSourceNode, newSourceNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Node getTargetNode() {
+		if (targetNode != null && targetNode.eIsProxy()) {
+			InternalEObject oldTargetNode = (InternalEObject)targetNode;
+			targetNode = (Node)eResolveProxy(oldTargetNode);
+			if (targetNode != oldTargetNode) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__TARGET_NODE, oldTargetNode, targetNode));
+			}
+		}
+		return targetNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Node basicGetTargetNode() {
+		return targetNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTargetNode(Node newTargetNode, NotificationChain msgs) {
+		Node oldTargetNode = targetNode;
+		targetNode = newTargetNode;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__TARGET_NODE, oldTargetNode, newTargetNode);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTargetNode(Node newTargetNode) {
+		if (newTargetNode != targetNode) {
+			NotificationChain msgs = null;
+			if (targetNode != null)
+				msgs = ((InternalEObject)targetNode).eInverseRemove(this, QVTschedulePackage.NODE__INCOMING_EDGES, Node.class, msgs);
+			if (newTargetNode != null)
+				msgs = ((InternalEObject)newTargetNode).eInverseAdd(this, QVTschedulePackage.NODE__INCOMING_EDGES, Node.class, msgs);
+			msgs = basicSetTargetNode(newTargetNode, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__TARGET_NODE, newTargetNode, newTargetNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE__SOURCE_NODE:
+				if (sourceNode != null)
+					msgs = ((InternalEObject)sourceNode).eInverseRemove(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
+				return basicSetSourceNode((Node)otherEnd, msgs);
+			case QVTschedulePackage.EDGE__TARGET_NODE:
+				if (targetNode != null)
+					msgs = ((InternalEObject)targetNode).eInverseRemove(this, QVTschedulePackage.NODE__INCOMING_EDGES, Node.class, msgs);
+				return basicSetTargetNode((Node)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE__SOURCE_NODE:
+				return basicSetSourceNode(null, msgs);
+			case QVTschedulePackage.EDGE__TARGET_NODE:
+				return basicSetTargetNode(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				if (resolve) return getEdgeRole();
 				return basicGetEdgeRole();
+			case QVTschedulePackage.EDGE__SOURCE_NODE:
+				if (resolve) return getSourceNode();
+				return basicGetSourceNode();
+			case QVTschedulePackage.EDGE__TARGET_NODE:
+				if (resolve) return getTargetNode();
+				return basicGetTargetNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -140,6 +328,12 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				setEdgeRole((Role)newValue);
+				return;
+			case QVTschedulePackage.EDGE__SOURCE_NODE:
+				setSourceNode((Node)newValue);
+				return;
+			case QVTschedulePackage.EDGE__TARGET_NODE:
+				setTargetNode((Node)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,6 +350,12 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				setEdgeRole((Role)null);
 				return;
+			case QVTschedulePackage.EDGE__SOURCE_NODE:
+				setSourceNode((Node)null);
+				return;
+			case QVTschedulePackage.EDGE__TARGET_NODE:
+				setTargetNode((Node)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -170,12 +370,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				return edgeRole != null;
+			case QVTschedulePackage.EDGE__SOURCE_NODE:
+				return sourceNode != null;
+			case QVTschedulePackage.EDGE__TARGET_NODE:
+				return targetNode != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	private @Nullable Node sourceNode = null;		// null is only permitted during construction
-	private @Nullable Node targetNode = null;		// null is only permitted during construction
 	private @Nullable String name = null;
 
 	@Override
@@ -275,8 +477,10 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Region region = QVTscheduleUtil.getRegion(sourceNode2);
 		assert region == targetNode2.getRegion();
 		region.addEdge(this);
-		sourceNode2.addOutgoingEdge(this);
-		targetNode2.addIncomingEdge(this);
+		//		sourceNode2.addOutgoingEdge(this);
+		//		targetNode2.addIncomingEdge(this);
+		assert sourceNode2.getOutgoingEdges().contains(this);
+		assert targetNode2.getIncomingEdges().contains(this);
 		assert !sourceNode2.isDependency() || targetNode2.isDependency() || targetNode2.isOperation();	// sourceNode2.isDependency() implies (targetNode2.isDependency() or targetNode2.isOperation())
 		assert !targetNode2.isDependency() || sourceNode2.isDependency();								// targetNode2.isDependency() implies sourceNode2.isDependency()
 	}
@@ -287,21 +491,23 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Node targetNode2 = this.targetNode;
 		if ((sourceNode2 != null) && (targetNode2 != null)) {
 			Region region = QVTscheduleUtil.getRegion(sourceNode2);
-			sourceNode2.removeOutgoingEdge(this);
-			targetNode2.removeIncomingEdge(this);
+			//			sourceNode2.removeOutgoingEdge(this);
+			//			targetNode2.removeIncomingEdge(this);
 			region.removeEdge(this);
 		}
 	}
 
 	private void disconnect() {
 		if (this.sourceNode != null) {
-			this.sourceNode.removeOutgoingEdge(this);
+			//			this.sourceNode.removeOutgoingEdge(this);
 		}
 		if (this.targetNode != null) {
-			this.targetNode.removeIncomingEdge(this);
+			//			this.targetNode.removeIncomingEdge(this);
 		}
-		this.sourceNode = null;
-		this.targetNode = null;
+		//		this.sourceNode = null;
+		//		this.targetNode = null;
+		setSourceNode(null);
+		setTargetNode(null);
 	}
 
 	@Override
@@ -341,12 +547,12 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public @NonNull Region getRegion() {
-		return QVTscheduleUtil.getRegion(ClassUtil.nonNullState(sourceNode));
+		return QVTscheduleUtil.getRegion(QVTscheduleUtil.getSourceNode(this));
 	}
 
 	@Override
 	public @NonNull Node getEdgeSource() {
-		return ClassUtil.nonNullState(sourceNode);
+		return QVTscheduleUtil.getSourceNode(this);
 	}
 
 	public @Nullable String getStyle() {
@@ -355,7 +561,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public @NonNull Node getEdgeTarget() {
-		return ClassUtil.nonNullState(targetNode);
+		return QVTscheduleUtil.getTargetNode(this);
 	}
 
 	protected void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -383,7 +589,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public final boolean isDependency() {
-		return ClassUtil.nonNullState(sourceNode).isDependency();
+		return QVTscheduleUtil.getSourceNode(this).isDependency();
 	}
 
 	@Override
@@ -399,7 +605,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public final boolean isMatched() {
-		return ClassUtil.nonNullState(sourceNode).isMatched() && ClassUtil.nonNullState(targetNode).isMatched();
+		return QVTscheduleUtil.getSourceNode(this).isMatched() && QVTscheduleUtil.getTargetNode(this).isMatched();
 	}
 
 	@Override
@@ -453,7 +659,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public boolean isUnconditional() {
-		return ClassUtil.nonNullState(sourceNode).isUnconditional() && ClassUtil.nonNullState(targetNode).isUnconditional();
+		return QVTscheduleUtil.getSourceNode(this).isUnconditional() && QVTscheduleUtil.getTargetNode(this).isUnconditional();
 	}
 
 	protected void mergeRole(@NonNull Role edgeRole) {
@@ -479,7 +685,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 					//					this.sourceNode.removeOutgoingEdge(this);
 					disconnect();
 				}
-				this.sourceNode = sourceNode;
+				setSourceNode(sourceNode);
 				if (this.targetNode != null) {
 					connect();
 				}
@@ -498,7 +704,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 					//					this.targetNode.removeIncomingEdge(this);
 					disconnect();
 				}
-				this.targetNode = targetNode;
+				setTargetNode(targetNode);
 				if (this.sourceNode != null) {
 					connect();
 				}

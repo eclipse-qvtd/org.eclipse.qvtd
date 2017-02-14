@@ -145,7 +145,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//			}
 			for (@NonNull Node node : unconditionalNodes) {
 				int accesses = 0;
-				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+				for (@NonNull Edge outgoingEdge : RegionUtil.getOutgoingEdges(node)) {
 					if (outgoingEdge.isNavigation() || outgoingEdge.isComputation()) {
 						accesses++;
 					}
@@ -165,7 +165,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private void analyzeIncomingPath(@NonNull Node node, @NonNull Set<Node> unconditionalNodes, @NonNull Set<Node> conditionalNodes, boolean isConditional) {
 			if ((isConditional ? conditionalNodes : unconditionalNodes).add(node)) {
 				boolean isIf = isIfExp(node);
-				for (@NonNull Edge edge : node.getIncomingEdges()) {
+				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 					if (edge.isComputation()) {
 						boolean isIfThenOrElse = isIf && ("then".equals(edge.getName()) || "else".equals(edge.getName()));
 						analyzeIncomingPath(edge.getEdgeSource(), unconditionalNodes, conditionalNodes, isConditional || isIfThenOrElse);
@@ -339,7 +339,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 				return clonedElement;
 			}
-			for (@NonNull Edge edge : node.getIncomingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isNavigation()) {
 					Role edgeRole = RegionUtil.getEdgeRole(edge);
 					if (edgeRole.isLoaded()) {
@@ -354,7 +354,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
-			for (@NonNull Edge edge : node.getIncomingEdges()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isExpression()) {
 					OCLExpression source = create(edge.getEdgeSource());
 					return source;
@@ -1283,7 +1283,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (newNode.isPattern() && newNode.isClass()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				OCLExpression constructor = null;
-				for (Edge edge : newNode.getIncomingEdges()) {
+				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(newNode)) {
 					if (edge.isExpression()) {
 						Node sourceNode = edge.getEdgeSource();
 						if (sourceNode.isOperation()) {
@@ -1357,7 +1357,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Integer recursiveDepth = null;
 		pathDepth = node2pathDepth.size();
 		node2pathDepth.put(node, pathDepth);
-		for (Edge edge : node.getOutgoingEdges()) {
+		for (Edge edge : RegionUtil.getOutgoingEdges(node)) {
 			if (edge.isNavigation() || edge.isComputation()) {
 				Node nextNode = edge.getTarget();
 				Integer nextDepth = depthRecursion(nextNode, node2pathDepth, node2acyclicDepth, node2cyclicDepth);
