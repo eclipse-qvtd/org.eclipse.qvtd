@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode <em>Target Node</em>}</li>
  * </ul>
@@ -98,6 +99,35 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Region</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Region</em>' container reference.
+	 * @see #setRegion(Region)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_Region()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges
+	 * @model opposite="edges" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!region'"
+	 * @generated
+	 */
+	Region getRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Region</em>' container reference.
+	 * @see #getRegion()
+	 * @generated
+	 */
+	void setRegion(Region value);
 
 	/**
 	 * Returns the value of the '<em><b>Source Node</b></em>' reference.
@@ -188,11 +218,6 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	 * Return a formatted label to accompany the edge, or null for no label.
 	 */
 	@Nullable String getLabel();
-
-	/**
-	 * Return the containing Region..
-	 */
-	@NonNull Region getRegion();
 
 	/**
 	 * Return the source Node.

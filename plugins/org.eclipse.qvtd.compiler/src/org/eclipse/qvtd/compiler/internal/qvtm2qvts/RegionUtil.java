@@ -333,7 +333,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
 		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = new HashMap<>();
-		for (@NonNull Node node : region.getNodes()) {
+		for (@NonNull Node node : RegionUtil.getNodes(region)) {
 			CompleteClass completeClass = node.getCompleteClass();
 			List<@NonNull Node> mergedNodes = completeClass2nodes.get(completeClass);
 			if (mergedNodes == null) {

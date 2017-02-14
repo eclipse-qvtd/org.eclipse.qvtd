@@ -107,10 +107,10 @@ public class RootCompositionRegionImpl extends RegionImpl implements RootComposi
 		s.setColor("lightblue");
 		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		s.pushCluster();
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			s.appendNode(node);
 		}
-		for (@NonNull Edge edge : getEdges()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
 			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		s.popCluster();

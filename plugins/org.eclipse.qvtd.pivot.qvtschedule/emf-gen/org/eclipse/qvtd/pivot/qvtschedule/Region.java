@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges <em>Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}</li>
  * </ul>
  *
@@ -49,6 +49,25 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  */
 public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTable
 {
+	/**
+	 * Returns the value of the '<em><b>Edges</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Edge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Edges</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Edges</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_Edges()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion
+	 * @model opposite="region" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!edges'"
+	 * @generated
+	 */
+	EList<Edge> getEdges();
+
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
@@ -69,11 +88,9 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	EList<Node> getNodes();
 
 	void addCallToChild(@NonNull Region region);
-	void addEdge(@NonNull Edge edge);
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	boolean addIndex(int index);
 	void addIntermediateConnection(@NonNull NodeConnection connection);
-	//	void addNode(@NonNull Node node);
 	void addRootConnection(@NonNull NodeConnection connection);
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
 	void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges);
@@ -111,7 +128,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement);
 	@NonNull String getColor();
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
-	@NonNull Collection<@NonNull Edge> getEdges();
 	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel);
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
 
@@ -187,8 +203,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	boolean isRootCompositionRegion();
 	void refineBindings(@NonNull Region bindingRegion);
 	void removeCallToChild(@NonNull Region region);
-	void removeEdge(@NonNull Edge edge);
-	//	void removeNode(@NonNull Node node);
 	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
 	void setInvokingRegion(@NonNull ScheduledRegion invokingRegion);

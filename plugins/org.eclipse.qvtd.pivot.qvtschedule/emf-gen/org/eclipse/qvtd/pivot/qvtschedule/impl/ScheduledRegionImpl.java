@@ -327,10 +327,10 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 		for (@NonNull Region region : getRegions()) {
 			region.toGraph(s);
 		}
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			s.appendNode(node);
 		}
-		for (@NonNull Edge edge : getEdges()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
 			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		for (@NonNull Connection connection : getConnections()) {
@@ -389,7 +389,7 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 			//				s.appendEdge(edge.getSource().getRegion(), edge, edge.getTarget().getRegion());
 			//			}
 		}
-		for (@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			s.appendNode(node);
 		}
 		for (@NonNull Connection connection : getConnections()) {

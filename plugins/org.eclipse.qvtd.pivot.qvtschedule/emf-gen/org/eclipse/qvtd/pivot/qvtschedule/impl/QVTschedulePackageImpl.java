@@ -447,7 +447,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -478,7 +478,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -699,8 +699,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getEdge_SourceNode() {
+	public EReference getEdge_Region() {
 		return (EReference)edgeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -710,8 +709,18 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getEdge_TargetNode() {
+	public EReference getEdge_SourceNode() {
 		return (EReference)edgeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEdge_TargetNode() {
+		return (EReference)edgeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1289,9 +1298,18 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRegion_Edges() {
+		return (EReference)regionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EReference getRegion_Nodes() {
-		return (EReference)regionEClass.getEStructuralFeatures().get(0);
+		return (EReference)regionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1365,6 +1383,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		edgeEClass = createEClass(EDGE);
 		createEReference(edgeEClass, EDGE__EDGE_ROLE);
 		createEAttribute(edgeEClass, EDGE__NAME);
+		createEReference(edgeEClass, EDGE__REGION);
 		createEReference(edgeEClass, EDGE__SOURCE_NODE);
 		createEReference(edgeEClass, EDGE__TARGET_NODE);
 
@@ -1427,6 +1446,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		recursionEdgeEClass = createEClass(RECURSION_EDGE);
 
 		regionEClass = createEClass(REGION);
+		createEReference(regionEClass, REGION__EDGES);
 		createEReference(regionEClass, REGION__NODES);
 
 		roleEClass = createEClass(ROLE);
@@ -1597,6 +1617,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(edgeEClass, Edge.class, "Edge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEdge_EdgeRole(), this.getRole(), null, "edgeRole", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEdge_Name(), ecorePackage.getEString(), "name", null, 0, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEdge_Region(), this.getRegion(), this.getRegion_Edges(), "region", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_SourceNode(), this.getNode(), this.getNode_OutgoingEdges(), "sourceNode", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_TargetNode(), this.getNode(), this.getNode_IncomingEdges(), "targetNode", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1659,6 +1680,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(recursionEdgeEClass, RecursionEdge.class, "RecursionEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(regionEClass, Region.class, "Region", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRegion_Edges(), this.getEdge(), this.getEdge_Region(), "edges", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRegion_Nodes(), this.getNode(), this.getNode_Region(), "nodes", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1718,12 +1740,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //QVTschedulePackageImpl

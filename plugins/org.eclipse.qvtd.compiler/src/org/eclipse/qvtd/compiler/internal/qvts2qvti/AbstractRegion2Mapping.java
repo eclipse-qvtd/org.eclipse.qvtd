@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -89,7 +90,7 @@ public abstract class AbstractRegion2Mapping
 		assert name != null;
 		this.mapping = QVTimperativeUtil.createMapping(name);
 		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
-		for (Node node : region.getNodes()) {
+		for (@NonNull Node node : RegionUtil.getNodes(region)) {
 			for (TypedElement typedElement : node.getTypedElements()) {
 				Node oldNode = qvtm2node.put(typedElement, node);
 				assert (oldNode == null) || (oldNode == node);

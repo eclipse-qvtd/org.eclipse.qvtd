@@ -79,14 +79,14 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		super(multiRegion);
 	}
 
-	@Override
+	/*	@Override
 	public void addEdge(@NonNull Edge edge) {
 		assert stronglyMatchedNodes == null;
 		assert unconditionalNodes == null;
 		assert conditionalNodes == null;
 		assert (basicGetSymbolName() == null) || !edge.isNavigation();
 		super.addEdge(edge);
-	}
+	} */
 
 	protected void addHeadNode(@NonNull Node headNode) {
 		assert basicGetSymbolName() == null;

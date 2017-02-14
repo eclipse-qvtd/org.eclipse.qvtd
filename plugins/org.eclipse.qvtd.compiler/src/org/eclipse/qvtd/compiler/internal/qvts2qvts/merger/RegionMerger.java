@@ -70,11 +70,11 @@ abstract class RegionMerger // implements Region
 		this.primaryRegion = primaryRegion;
 		//		assert !(primaryRegion instanceof MicroMappingRegion);
 		//
-		for (@NonNull Node primaryNode : primaryRegion.getNodes()) {
+		for (@NonNull Node primaryNode : RegionUtil.getNodes(primaryRegion)) {
 			new NodeMerger(this, primaryNode);
 		}
 		//
-		for (@NonNull Edge primaryEdge : primaryRegion.getEdges()) {
+		for (@NonNull Edge primaryEdge : RegionUtil.getEdges(primaryRegion)) {
 			if (!primaryEdge.isSecondary()) {
 				new EdgeMerger(this, primaryEdge);
 			}
@@ -117,7 +117,7 @@ abstract class RegionMerger // implements Region
 		secondaryRegions.add(secondaryRegion);
 		this.secondaryNode2primaryNode.putAll(secondaryNode2primaryNode);
 		//
-		for (@NonNull Node secondaryNode : secondaryRegion.getNodes()) {
+		for (@NonNull Node secondaryNode : RegionUtil.getNodes(secondaryRegion)) {
 			Node primaryNode = secondaryNode2primaryNode.get(secondaryNode);
 			if (primaryNode != null) {
 				NodeMerger nodeMerger = oldNode2nodeMerger.get(primaryNode);
@@ -129,7 +129,7 @@ abstract class RegionMerger // implements Region
 			}
 		}
 		//
-		for (@NonNull Edge secondaryEdge : secondaryRegion.getEdges()) {
+		for (@NonNull Edge secondaryEdge : RegionUtil.getEdges(secondaryRegion)) {
 			if (!secondaryEdge.isSecondary()) {
 				addSecondaryEdge(secondaryEdge);
 			}
@@ -148,7 +148,7 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void checkEdges(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Edge oldEdge : oldRegion.getEdges()) {
+		for (@NonNull Edge oldEdge : RegionUtil.getEdges(oldRegion)) {
 			assert oldEdge.getRegion() == oldRegion;
 			if (!oldEdge.isRecursion() && !oldEdge.isSecondary()) {		// FIXME Remove this irregularity
 				EdgeMerger edgeMerger = oldEdge2edgeMerger.get(oldEdge);
@@ -164,7 +164,7 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void checkNodes(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Node oldNode : oldRegion.getNodes()) {
+		for (@NonNull Node oldNode : RegionUtil.getNodes(oldRegion)) {
 			assert oldNode.getRegion() == oldRegion;
 			Node nodeMerger = getNodeMerger(oldNode).getNewNode();
 			assert nodeMerger.getRegion() == newRegion;

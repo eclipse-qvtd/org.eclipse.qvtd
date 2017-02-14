@@ -515,13 +515,22 @@ public interface QVTschedulePackage extends EPackage {
 	int REGION__SYMBOL_NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__NODES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int REGION__NODES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -530,7 +539,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -603,6 +612,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__EDGES = REGION__EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -705,6 +723,15 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_MAPPING_REGION__EDGES = MAPPING_REGION__EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -804,13 +831,22 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Target Node</b></em>' reference.
@@ -819,7 +855,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
@@ -828,7 +864,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -910,6 +946,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAVIGABLE_EDGE__NAME = EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__REGION = EDGE__REGION;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -1018,6 +1063,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CAST_EDGE__NAME = NAVIGABLE_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__REGION = NAVIGABLE_EDGE__REGION;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -2136,6 +2190,15 @@ public interface QVTschedulePackage extends EPackage {
 	int EXPRESSION_EDGE__NAME = EDGE__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__REGION = EDGE__REGION;
+
+	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2359,6 +2422,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATED_EDGE__NAME = EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATED_EDGE__REGION = EDGE__REGION;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -2793,6 +2865,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__EDGES = MAPPING_REGION__EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2965,6 +3046,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__EDGES = MAPPING_REGION__EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3062,6 +3152,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAVIGATION_EDGE__NAME = NAVIGABLE_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__REGION = NAVIGABLE_EDGE__REGION;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -3498,6 +3597,15 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__EDGES = REGION__EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3861,6 +3969,15 @@ public interface QVTschedulePackage extends EPackage {
 	int PREDICATE_EDGE__NAME = EDGE__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_EDGE__REGION = EDGE__REGION;
+
+	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4112,6 +4229,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int RECURSION_EDGE__NAME = EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECURSION_EDGE__REGION = EDGE__REGION;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -4376,6 +4502,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ROOT_COMPOSITION_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_COMPOSITION_REGION__EDGES = REGION__EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4474,6 +4609,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULED_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__EDGES = REGION__EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -5208,6 +5352,17 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getEdge_Name();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_Region();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5825,6 +5980,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getRegion();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_Edges();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6059,6 +6225,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EDGE__NAME = eINSTANCE.getEdge_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__REGION = eINSTANCE.getEdge_Region();
 
 		/**
 		 * The meta object literal for the '<em><b>Source Node</b></em>' reference feature.
@@ -6601,6 +6775,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass REGION = eINSTANCE.getRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__EDGES = eINSTANCE.getRegion_Edges();
 
 		/**
 		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.

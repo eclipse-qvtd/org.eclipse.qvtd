@@ -110,13 +110,13 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		//
 		//	Create the nodes.
 		//
-		for (@NonNull Node node : mappingRegion.getNodes()) {
+		for (@NonNull Node node : RegionUtil.getNodes(mappingRegion)) {
 			node.accept(this);
 		}
 		//
 		//	Create the edges.
 		//
-		for (@NonNull Edge edge : mappingRegion.getEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getEdges(mappingRegion)) {
 			edge.accept(this);
 		}
 		//

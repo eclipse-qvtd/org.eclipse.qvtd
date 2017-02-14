@@ -821,7 +821,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 		} */
-		for (@NonNull Edge edge : region.getEdges()) {
+		for (@NonNull Edge edge : RegionUtil.getEdges(region)) {
 			if (edge.isPredicate()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				ExpressionCreator inlineExpressionCreator = expressionCreator.getInlineExpressionCreator();

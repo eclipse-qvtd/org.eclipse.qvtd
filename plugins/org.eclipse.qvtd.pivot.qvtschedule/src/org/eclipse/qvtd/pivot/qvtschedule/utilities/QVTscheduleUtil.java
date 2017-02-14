@@ -532,6 +532,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(edge.getEdgeRole());
 	}
 
+	public static @NonNull Iterable<@NonNull Edge> getEdges(@NonNull Region region) {
+		return ClassUtil.nullFree(region.getEdges());
+	}
+
 	public static @NonNull String getFillColor(@NonNull Role nodeRole) {
 		switch (nodeRole.getPhase()) {
 			case CONSTANT: return LIGHT_CONSTANT_COLOR;

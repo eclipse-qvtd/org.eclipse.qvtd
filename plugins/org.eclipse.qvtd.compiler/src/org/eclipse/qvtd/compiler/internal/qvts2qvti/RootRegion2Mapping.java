@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -68,7 +69,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//	Create domains
 		//
 		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
-		for (@NonNull Node node : region.getNodes()) {
+		for (@NonNull Node node : RegionUtil.getNodes(region)) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			org.eclipse.ocl.pivot.Class type = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {

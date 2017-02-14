@@ -75,6 +75,7 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getSymbolName <em>Symbol Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getEdges <em>Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getNodes <em>Nodes</em>}</li>
  * </ul>
  *
@@ -100,6 +101,15 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 */
 	protected String symbolName = SYMBOL_NAME_EDEFAULT;
 
+	/**
+	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> edges;
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -139,6 +149,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__SYMBOL_NAME:
 				return getSymbolName();
+			case QVTschedulePackage.REGION__EDGES:
+				return getEdges();
 			case QVTschedulePackage.REGION__NODES:
 				return getNodes();
 		}
@@ -154,6 +166,10 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.REGION__EDGES:
+				getEdges().clear();
+				getEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
 			case QVTschedulePackage.REGION__NODES:
 				getNodes().clear();
 				getNodes().addAll((Collection<? extends Node>)newValue);
@@ -170,6 +186,9 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.REGION__EDGES:
+				getEdges().clear();
+				return;
 			case QVTschedulePackage.REGION__NODES:
 				getNodes().clear();
 				return;
@@ -187,6 +206,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__SYMBOL_NAME:
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
+			case QVTschedulePackage.REGION__EDGES:
+				return edges != null && !edges.isEmpty();
 			case QVTschedulePackage.REGION__NODES:
 				return nodes != null && !nodes.isEmpty();
 		}
@@ -257,11 +278,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	private MultiRegion multiRegion;
 	private @Nullable ScheduledRegion invokingRegion = null;
-
-	/**
-	 * All the edges defined in this region, but not those in nested regions.
-	 */
-	private final @NonNull List<@NonNull Edge> edges = new ArrayList<>();
 
 	/**
 	 * Ordered list of regions that call this region
@@ -335,17 +351,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		checkedEdges.add(predicatedEdge);
 		QVTscheduleConstants.POLLED_PROPERTIES.println("    checked " + predicatedEdge.getProperty() +
 			" at " + getIndexRangeText() + " in " + typedModel + " for " + this);
-	}
-
-	@Override
-	public void addEdge(@NonNull Edge edge) {
-		assert !edges.contains(edge);
-		for (@NonNull Edge oldEdge : edges) {
-			if (oldEdge.getEdgeRole() == edge.getEdgeRole()) {
-				//				assert (edge.getSource() != oldEdge.getSource()) || (edge.getTarget() != oldEdge.getTarget());
-			}
-		}
-		edges.add(edge);
 	}
 
 	@Override
@@ -949,7 +954,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
 				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					edgeSourceRegions.add(realizedEdge.getRegion());
+					edgeSourceRegions.add(QVTscheduleUtil.getRegion(realizedEdge));
 				}
 				if (sourceNodes != null) {
 					for (@NonNull Node sourceNode : sourceNodes) {
@@ -971,7 +976,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 							if (!thoseEdges.contains(realizedEdge)) {
 								thoseEdges.add(realizedEdge);
 								assert conformantEdgeSourceRegions != null;
-								conformantEdgeSourceRegions.add(realizedEdge.getRegion());
+								conformantEdgeSourceRegions.add(QVTscheduleUtil.getRegion(realizedEdge));
 							}
 						}
 					}
@@ -1453,11 +1458,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	} */
 
 	@Override
-	public @NonNull Collection<@NonNull Edge> getEdges() {
-		return edges;
-	}
-
-	@Override
 	public @Nullable Set<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel) {
 		assert typedModel2enforcedEdges != null;
 		return typedModel2enforcedEdges.get(typedModel);
@@ -1465,7 +1465,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getExpressionEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(edges, QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -1612,7 +1612,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges() {
-		@NonNull Iterable<@NonNull NavigableEdge> filter = Iterables.filter(edges, NavigableEdge.class);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = Iterables.filter(QVTscheduleUtil.getEdges(this), NavigableEdge.class);
 		return filter;
 	}
 
@@ -1641,6 +1641,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.REGION__EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.REGION__NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNodes()).basicAdd(otherEnd, msgs);
 		}
@@ -1655,6 +1657,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.REGION__EDGES:
+				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.REGION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 		}
@@ -1746,33 +1750,33 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	public final @NonNull Iterable<NavigableEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(edges, QVTscheduleUtil.IsPredicatedEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getEdges(this), QVTscheduleUtil.IsPredicatedEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getPredicatedNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(edges, QVTscheduleUtil.IsPredicatedNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getEdges(this), QVTscheduleUtil.IsPredicatedNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(edges, QVTscheduleUtil.IsRealizedEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getEdges(this), QVTscheduleUtil.IsRealizedEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(edges, QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getEdges(this), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getRecursionEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(edges, QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getEdges(this), QVTscheduleUtil.IsRecursionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -1811,6 +1815,19 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(s, this);
 		}
 		return symbolName2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Edge> getEdges() {
+		if (edges == null) {
+			edges = new EObjectContainmentWithInverseEList<Edge>(Edge.class, this, QVTschedulePackage.REGION__EDGES, QVTschedulePackage.EDGE__REGION);
+		}
+		return edges;
 	}
 
 	/**
@@ -2047,12 +2064,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public void removeEdge(@NonNull Edge edge) {
-		boolean wasRemoved = edges.remove(edge);
-		assert wasRemoved;
-	}
-
-	@Override
 	public void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion) {
 		int index = callableChildren.indexOf(oldRegion);
 		callableChildren.remove(oldRegion);
@@ -2175,7 +2186,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			node.toGraph(s);
 			//			s.appendNode(node);
 		}
-		for (@NonNull Edge edge : getEdges()) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
 			edge.toGraph(s);
 			//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
