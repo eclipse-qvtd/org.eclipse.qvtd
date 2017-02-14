@@ -19,8 +19,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -34,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import com.google.common.collect.Lists;
 
@@ -41,10 +47,26 @@ import com.google.common.collect.Lists;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Edge Connection</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl#getProperty <em>Property</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> implements EdgeConnection {
+	/**
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property property;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,6 +87,119 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * This is specialized for the more specific element type known in this context.
+	 * @generated
+	 */
+	@Override
+	public EList<NavigableEdge> getSourceEnds() {
+		if (sourceEnds == null) {
+			sourceEnds = new EObjectResolvingEList<NavigableEdge>(NavigableEdge.class, this, QVTschedulePackage.EDGE_CONNECTION__SOURCE_ENDS);
+		}
+		return sourceEnds;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Property getProperty() {
+		if (property != null && property.eIsProxy()) {
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (Property)eResolveProxy(oldProperty);
+			if (property != oldProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE_CONNECTION__PROPERTY, oldProperty, property));
+			}
+		}
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property basicGetProperty() {
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setProperty(Property newProperty) {
+		Property oldProperty = property;
+		property = newProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE_CONNECTION__PROPERTY, oldProperty, property));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
+				if (resolve) return getProperty();
+				return basicGetProperty();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
+				setProperty((Property)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
+				setProperty((Property)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
+				return property != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
@@ -73,8 +208,6 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitEdgeConnection(this);
 	}
-
-	private Property property;
 
 	public EdgeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Property property) {
 		super(region, sourceEdges, symbolNameBuilder);
@@ -101,7 +234,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 
 	@Override
 	public void destroy() {
-		for (@NonNull NavigableEdge sourceEdge : sourceEnds) {
+		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
 			sourceEdge.removeOutgoingConnection(this);
 		}
 		for (@NonNull NavigableEdge targetNode : targetEnd2role.keySet()) {
@@ -111,14 +244,9 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	}
 
 	@Override
-	public @NonNull Property getProperty() {
-		return property;
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
 		List<@NonNull Node> sourceNodes = new ArrayList<>();
-		for (@NonNull NavigableEdge sourceEdge : sourceEnds) {
+		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
 			sourceNodes.add(sourceEdge.getEdgeSource());
 		}
 		return sourceNodes;
@@ -254,7 +382,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		}
 		else {
 			s.appendNode(this);
-			for (@NonNull NavigableEdge source : getSources()) {
+			for (@NonNull NavigableEdge source : QVTscheduleUtil.getSourceEnds(this)) {
 				s.appendEdge(source.getEdgeTarget(), this, this);
 			}
 			for (@NonNull NavigableEdge target : getTargetEdges()) {

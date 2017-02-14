@@ -377,7 +377,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		assert predicatedEdge.getRegion() == this;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
 		assert typedModel2checkedEdges2 != null;
-		TypedModel typedModel = predicatedEdge.getEdgeSource().getClassDatumAnalysis().getTypedModel();
+		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(predicatedEdge.getEdgeSource());
+		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
 		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
 		if (checkedEdges == null) {
 			checkedEdges = new HashSet<>();
@@ -394,7 +395,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		assert realizedEdge.getRegion() == this;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges2 = typedModel2enforcedEdges;
 		assert typedModel2enforcedEdges2 != null;
-		TypedModel typedModel = realizedEdge.getEdgeSource().getClassDatumAnalysis().getTypedModel();
+		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(realizedEdge.getEdgeSource());
+		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
 		Set<@NonNull NavigableEdge> enforcedEdges = typedModel2enforcedEdges2.get(typedModel);
 		if (enforcedEdges == null) {
 			enforcedEdges = new HashSet<>();
@@ -403,7 +405,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		enforcedEdges.add(realizedEdge);
 		QVTscheduleConstants.POLLED_PROPERTIES.println("    enforced " + realizedEdge.getProperty() +
 			" at " + getIndexRangeText() +
-			" in " + realizedEdge.getEdgeSource().getClassDatumAnalysis().getTypedModel() + " for " + this);
+			" in " + classDatumAnalysis.getTypedModel() + " for " + this);
 	}
 
 	@Override
@@ -469,9 +471,10 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges) {
 		for (@NonNull NavigableEdge predicatedEdge : getPredicatedNavigationEdges()) {
 			if (!predicatedEdge.isCast()) {
-				Property property = predicatedEdge.getProperty();
+				Property property = QVTscheduleUtil.getProperty(predicatedEdge);
 				Node predicatedNode = predicatedEdge.getEdgeSource();
-				TypedModel typedModel = predicatedNode.getClassDatumAnalysis().getTypedModel();
+				ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(predicatedNode);
+				TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
 				Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2predicatedEdges = typedModel2property2predicatedEdges.get(typedModel);
 				if (property2predicatedEdges == null) {
 					property2predicatedEdges = new HashMap<>();
@@ -492,9 +495,10 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public void buildRealizedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
 		for (@NonNull NavigableEdge realizedEdge : getRealizedNavigationEdges()) {
-			Property property = realizedEdge.getProperty();
+			Property property = QVTscheduleUtil.getProperty(realizedEdge);
 			Node realizedNode = realizedEdge.getEdgeSource();
-			TypedModel typedModel = realizedNode.getClassDatumAnalysis().getTypedModel();
+			ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(realizedNode);
+			TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
 			Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 			if (property2realizedEdges == null) {
 				property2realizedEdges = new HashMap<>();
@@ -521,7 +525,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		//		Region region = startNode.getRegion();
 		Node sourceNode = startNode;
 		for (@NonNull NavigableEdge protoEdge : protoPath) {
-			NavigableEdge edge = sourceNode.getNavigationEdge(protoEdge.getProperty());
+			NavigableEdge edge = sourceNode.getNavigationEdge(QVTscheduleUtil.getProperty(protoEdge));
 			if (edge != null) {
 				Node protoTarget = protoEdge.getEdgeTarget();
 				Node target = edge.getEdgeTarget();
@@ -597,7 +601,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
 				if (edgeConnection != null) {
 					boolean isChecked = false;
-					for (@NonNull NavigableEdge usedEdge : edgeConnection.getSources()) {
+					for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
 						Region usedRegion = usedEdge.getRegion();
 						usedRegion.addEnforcedEdge(usedEdge);
 						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {
@@ -606,7 +610,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 						}
 					}
 					if (isChecked) {
-						for (@NonNull NavigableEdge usedEdge : edgeConnection.getSources()) {
+						for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
 							Region usedRegion = usedEdge.getRegion();
 							usedRegion.addEnforcedEdge(usedEdge);
 						}
@@ -618,7 +622,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				Node predicatedTargetNode = predicatedEdge.getEdgeTarget();
 				NodeConnection usedConnection = predicatedTargetNode.getIncomingUsedConnection();
 				if (usedConnection != null) {
-					for (@NonNull Node usedSourceNode : usedConnection.getSources()) {
+					for (@NonNull Node usedSourceNode : QVTscheduleUtil.getSourceEnds(usedConnection)) {
 						Region usedRegion = QVTscheduleUtil.getRegion(usedSourceNode);
 						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {			// FIXME =
 							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
@@ -827,7 +831,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		if (bestNamingNode != null) {
 			List<@NonNull String> edgeNames = new ArrayList<>();
 			for (@NonNull NavigableEdge edge : bestNamingNode.getRealizedNavigationEdges()) {
-				String name = PivotUtil.getName(edge.getProperty());
+				String name = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
 				edgeNames.add(name);
 			}
 			if (edgeNames.size() > 0) {
@@ -841,7 +845,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 			else {
 				for (@NonNull NavigableEdge edge : getRealizedNavigationEdges()) {
-					String name = PivotUtil.getName(edge.getProperty());
+					String name = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
 					edgeNames.add(name);
 				}
 				if (edgeNames.size() > 0) {
@@ -879,7 +883,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				s.appendName(headNode.getCompleteClass().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigationEdges()) {
-					String propertyName = PivotUtil.getName(edge.getProperty());
+					String propertyName = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
 					edgeNames.add(edge.getEdgeTarget().isExplicitNull() ? propertyName + "0" : propertyName);
 				}
 				Collections.sort(edgeNames);
@@ -1067,7 +1071,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		ScheduledRegion invokingRegion2 = getInvokingRegion();
 		assert invokingRegion2 != null;
 		ScheduledRegion rootScheduledRegion = invokingRegion2;//.getRootScheduledRegion();
-		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(headNode);
 		List<@NonNull Node> headSources = null;
 		//
 		//	Locate compatible introducers and non-recursive producers
@@ -1416,7 +1420,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public @NonNull List<@NonNull Region> getCallingRegions() {
 		List<@NonNull Region> callingRegions = new ArrayList<>();			// FIXME cache
 		for (@NonNull NodeConnection callingConnection : getIncomingPassedConnections()) {
-			for (@NonNull Node callingNode : callingConnection.getSources()) {
+			for (@NonNull Node callingNode : QVTscheduleUtil.getSourceEnds(callingConnection)) {
 				Region callingRegion = QVTscheduleUtil.getRegion(callingNode);
 				if (!callingRegions.contains(callingRegion)) {
 					callingRegions.add(callingRegion);
@@ -1732,7 +1736,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 		for (@NonNull NavigableEdge edge : getNavigationEdges()) {
-			for (@NonNull EdgeConnection connection : edge.getOutgoingConnections()) {
+			for (@NonNull EdgeConnection connection : QVTscheduleUtil.getOutgoingConnections(edge)) {
 				connections.add(connection);
 			}
 		}
@@ -2034,7 +2038,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		for (@NonNull NavigableEdge calledEdge : calledNode.getNavigationEdges()) {
 			Node nextCalledNode = calledEdge.getEdgeTarget();
 			if (!nextCalledNode.isRealized() && !nextCalledNode.isDataType()) {  // FIXME why exclude AttributeNodes?
-				Edge nextCallingEdge = callingNode.getNavigationEdge(calledEdge.getProperty());
+				Edge nextCallingEdge = callingNode.getNavigationEdge(QVTscheduleUtil.getProperty(calledEdge));
 				if (nextCallingEdge != null) {
 					Node nextCallingNode = nextCallingEdge.getEdgeTarget();
 					if ((nextCallingNode.isExplicitNull() != nextCalledNode.isExplicitNull())) {

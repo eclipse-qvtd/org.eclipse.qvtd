@@ -617,10 +617,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Node sourceNode2 = this.sourceNode;
 		Node targetNode2 = this.targetNode;
 		if ((sourceNode2 != null) && (targetNode2 != null)) {
-			Region region = QVTscheduleUtil.getRegion(sourceNode2);
-			//			sourceNode2.removeOutgoingEdge(this);
-			//			targetNode2.removeIncomingEdge(this);
-			//			region.removeEdge(this);
+			setTarget(null);
+			setSource(null);
+			setRegion(null);
 		}
 	}
 

@@ -345,12 +345,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					if (edgeRole.isLoaded()) {
 						OCLExpression source = getExpression(edge.getEdgeSource());
 						if (source != null) {
-							return helper.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
+							return helper.createNavigationCallExp(source, RegionUtil.getProperty((NavigableEdge)edge));
 						}
 					}
 					else if (edgeRole.isPredicated()) {
 						OCLExpression source = create(edge.getEdgeSource());
-						return helper.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
+						return helper.createNavigationCallExp(source, RegionUtil.getProperty((NavigableEdge)edge));
 					}
 				}
 			}
@@ -796,7 +796,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Node sourceNode = edge.getEdgeSource();
 				Node targetNode = edge.getEdgeTarget();
 				VariableDeclaration slotVariable = getVariable(sourceNode);
-				Property property = edge.getProperty();
+				Property property = RegionUtil.getProperty(edge);
 				OCLExpression targetVariableExp = createVariableExp(targetNode);
 				boolean isNotify = isHazardousWrite(edge);
 				SetStatement setStatement = QVTimperativeUtil.createSetStatement(slotVariable, property, targetVariableExp, edge.isPartial(), isNotify);
@@ -1018,7 +1018,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//			if (isJustRealizedIncludes == Boolean.TRUE) {
 			//				continue;
 			//			}
-			Property property = traversedEdge.getProperty();
+			Property property = RegionUtil.getProperty(traversedEdge);
 			OCLExpression sourceExp = createVariableExp(sourceNode);
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
 			if (!targetNode.isExplicitNull()) {
@@ -1046,7 +1046,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Node sourceNode = untraversedEdge.getEdgeSource();
 			if (!sourceNode.isDependency()) {
 				Node targetNode = untraversedEdge.getEdgeTarget();
-				Property property = untraversedEdge.getProperty();
+				Property property = RegionUtil.getProperty(untraversedEdge);
 				OCLExpression sourceExp = createVariableExp(sourceNode);
 				OCLExpression targetExp = createVariableExp(targetNode);
 				OCLExpression source2targetExp = createCallExp(sourceExp, property);
@@ -1164,7 +1164,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtmTypedModel);
 			if (checkedEdges != null) {
 				for (NavigableEdge checkedEdge : checkedEdges) {
-					Property asProperty = checkedEdge.getProperty();
+					Property asProperty = RegionUtil.getProperty(checkedEdge);
 					allCheckedProperties.add(asProperty);
 					Property asOppositeProperty = asProperty.getOpposite();
 					if (asOppositeProperty != null) {
@@ -1202,7 +1202,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Node targetNode = edge.getEdgeTarget();
 			if (targetNode.isDataType()) {
 				VariableDeclaration asVariable = getVariable(sourceNode);
-				Property property = edge.getProperty();
+				Property property = RegionUtil.getProperty(edge);
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				OCLExpression valueExp = expressionCreator.getExpression(targetNode);
 				if (valueExp == null) {
@@ -1454,7 +1454,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
 		Node sourceNode = edge.getEdgeSource();
 		Property asProperty = edge.getProperty();
-		TypedModel typedModel = sourceNode.getClassDatumAnalysis().getTypedModel();
+		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatumAnalysis(sourceNode));
 		Iterable<@NonNull NavigableEdge> enforcedEdges = region.getEnforcedEdges(typedModel);
 		if (enforcedEdges != null) {
 			Property asOppositeProperty = asProperty.getOpposite();

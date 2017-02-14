@@ -114,6 +114,6 @@ class SplitterAnalysis
 
 	@Override
 	public @NonNull String toString() {
-		return region.getName();
+		return String.valueOf(region.getName());
 	}
 }

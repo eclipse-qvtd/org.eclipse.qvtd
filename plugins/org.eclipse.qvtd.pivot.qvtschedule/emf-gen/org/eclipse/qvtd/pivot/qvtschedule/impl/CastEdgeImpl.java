@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,7 +90,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 
 	@Override
 	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return createEdge(edgeRole, sourceNode, getProperty(), targetNode);
+		return createEdge(edgeRole, sourceNode, QVTscheduleUtil.getProperty(this), targetNode);
 	}
 
 	@Override

@@ -95,7 +95,7 @@ public class Partitioner
 			if (!node.isTrue() && node.isPattern() && node.isRealized() && node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
-						corrolaryProperties.add(edge.getProperty());
+						corrolaryProperties.add(RegionUtil.getProperty(edge));
 					}
 				}
 			}

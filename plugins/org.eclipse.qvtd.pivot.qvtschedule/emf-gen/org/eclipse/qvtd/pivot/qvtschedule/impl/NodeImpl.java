@@ -65,6 +65,7 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getClassDatumAnalysis <em>Class Datum Analysis</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getName <em>Name</em>}</li>
@@ -77,6 +78,16 @@ import com.google.common.collect.Iterables;
  * @generated
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
+	/**
+	 * The cached value of the '{@link #getClassDatumAnalysis() <em>Class Datum Analysis</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassDatumAnalysis()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassDatumAnalysis classDatumAnalysis;
+
 	/**
 	 * The cached value of the '{@link #getIncomingConnection() <em>Incoming Connection</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -164,6 +175,46 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.NODE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ClassDatumAnalysis getClassDatumAnalysis() {
+		if (classDatumAnalysis != null && classDatumAnalysis.eIsProxy()) {
+			InternalEObject oldClassDatumAnalysis = (InternalEObject)classDatumAnalysis;
+			classDatumAnalysis = (ClassDatumAnalysis)eResolveProxy(oldClassDatumAnalysis);
+			if (classDatumAnalysis != oldClassDatumAnalysis) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+			}
+		}
+		return classDatumAnalysis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDatumAnalysis basicGetClassDatumAnalysis() {
+		return classDatumAnalysis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setClassDatumAnalysis(ClassDatumAnalysis newClassDatumAnalysis) {
+		ClassDatumAnalysis oldClassDatumAnalysis = classDatumAnalysis;
+		classDatumAnalysis = newClassDatumAnalysis;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
 	}
 
 	/**
@@ -359,6 +410,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
+				if (resolve) return getClassDatumAnalysis();
+				return basicGetClassDatumAnalysis();
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
@@ -388,6 +442,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
+				setClassDatumAnalysis((ClassDatumAnalysis)newValue);
+				return;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				setIncomingConnection((NodeConnection)newValue);
 				return;
@@ -424,6 +481,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
+				setClassDatumAnalysis((ClassDatumAnalysis)null);
+				return;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				setIncomingConnection((NodeConnection)null);
 				return;
@@ -457,6 +517,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
+				return classDatumAnalysis != null;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				return incomingConnection != null;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
@@ -475,7 +537,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return super.eIsSet(featureID);
 	}
 
-	private @Nullable ClassDatumAnalysis classDatumAnalysis;	// null is only permitted during construction
 	private boolean isDataType;
 	private boolean isHead = false;
 	private boolean isContained = false;
@@ -486,7 +547,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(connection.getSources(), this);
+		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(connection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<NodeConnection> outgoingConnections2 = getOutgoingConnections();
 		assert !outgoingConnections2.contains(connection);
@@ -599,11 +660,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return this;
 	} */
 
-	@Override
-	public final @NonNull ClassDatumAnalysis getClassDatumAnalysis() {
-		return ClassUtil.nonNullState(classDatumAnalysis);
-	}
-
 	protected @NonNull String getColor() {
 		assert nodeRole != null;
 		return QVTscheduleUtil.getColor(nodeRole);
@@ -611,8 +667,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull CompleteClass getCompleteClass() {
-		assert classDatumAnalysis != null;
-		return classDatumAnalysis.getCompleteClass();
+		return QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatumAnalysis(this));
 	}
 
 	@Override
@@ -770,7 +825,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		List<@NonNull Node> sources = new ArrayList<>();
 		NodeConnection connection = getIncomingPassedConnection();
 		if (connection != null) {
-			for (@NonNull Node source : connection.getSources()) {
+			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(connection)) {
 				if (!sources.contains(source)) {
 					sources.add(source);
 				}
@@ -889,7 +944,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		List<@NonNull Node> sources = new ArrayList<>();
 		NodeConnection connection = getIncomingUsedConnection();
 		if (connection != null) {
-			for (@NonNull Node source : connection.getSources()) {
+			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(connection)) {
 				if (!sources.contains(source)) {
 					sources.add(source);
 				}
@@ -1049,10 +1104,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis) {
-		ClassDatumAnalysis classDatumAnalysis2 = classDatumAnalysis;
-		assert classDatumAnalysis2 != null;
-		CompleteClass oldCompleteClass = classDatumAnalysis2.getCompleteClass();
-		CompleteClass newCompleteClass = newClassDatumAnalysis.getCompleteClass();
+		ClassDatumAnalysis classDatumAnalysis2 = QVTscheduleUtil.getClassDatumAnalysis(this);
+		CompleteClass oldCompleteClass = QVTscheduleUtil.getCompleteClass(classDatumAnalysis2);
+		CompleteClass newCompleteClass = QVTscheduleUtil.getCompleteClass(newClassDatumAnalysis);
 		if (oldCompleteClass.conformsTo(newCompleteClass)) {
 			DomainUsageAnalysis.Root domainAnalysis = getSchedulerConstants().getDomainAnalysis();
 			DomainUsage.Internal oldDomainUsage = (DomainUsage.Internal) classDatumAnalysis2.getDomainUsage();
@@ -1086,7 +1140,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(connection.getSources(), this);
+		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(connection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<NodeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;

@@ -244,7 +244,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	protected Type getType(@NonNull IdResolver idResolver, @NonNull NodeConnection rootConnection) {
 		Type commonType = null;
-		for (@NonNull Node node : rootConnection.getSources()) {
+		for (@NonNull Node node : RegionUtil.getSourceEnds(rootConnection)) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
 			if (commonType == null) {
 				commonType = nodeType;

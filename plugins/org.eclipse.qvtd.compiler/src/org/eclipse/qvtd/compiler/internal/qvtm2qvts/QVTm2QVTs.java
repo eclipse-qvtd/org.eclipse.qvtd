@@ -60,7 +60,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -256,7 +255,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 							if (primaryClass instanceof CollectionType) {
 								Property iterateProperty = getIterateProperty(primaryClass);
 								Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
-								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
+								TypedModel typedModel2 = RegionUtil.getTypedModel(classDatumAnalysis);
 								ClassDatumAnalysis elementClassDatumAnalysis = getClassDatumAnalysis((org.eclipse.ocl.pivot.Class) elementType, typedModel2);
 								Node elementNode = RegionUtil.createOperationElementNode(operationRegion, operationName, elementClassDatumAnalysis, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
@@ -289,7 +288,10 @@ public class QVTm2QVTs extends SchedulerConstants2
 
 	@Override
 	protected @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum) {
-		return new ClassDatumAnalysisImpl(this, classDatum);
+		ClassDatumAnalysis classDatumAnalysis = QVTscheduleFactory.eINSTANCE.createClassDatumAnalysis();
+		classDatumAnalysis.setSchedulerConstants(this);
+		classDatumAnalysis.setClassDatum(classDatum);
+		return classDatumAnalysis;
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {

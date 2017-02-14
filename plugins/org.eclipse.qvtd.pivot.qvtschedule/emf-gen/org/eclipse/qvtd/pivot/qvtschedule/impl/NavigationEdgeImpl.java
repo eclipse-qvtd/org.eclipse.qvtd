@@ -14,8 +14,10 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -30,15 +32,41 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Navigation Edge</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#isPartial <em>Partial</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationEdge {
+	/**
+	 * The default value of the '{@link #isPartial() <em>Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean PARTIAL_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isPartial() <em>Partial</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPartial()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean partial = PARTIAL_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,6 +84,92 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.NAVIGATION_EDGE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isPartial() {
+		return partial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setPartial(boolean newPartial) {
+		boolean oldPartial = partial;
+		partial = newPartial;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGATION_EDGE__PARTIAL, oldPartial, partial));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
+				return isPartial();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
+				setPartial((Boolean)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
+				setPartial(PARTIAL_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
+				return partial != PARTIAL_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -94,19 +208,14 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		return forwardEdge;
 	}
 
-	/**
-	 * True if this edge is a partial many-to-one relationship.
-	 */
-	private boolean isPartial = false;
-
 	@Override
 	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return createEdge(edgeRole, sourceNode, getProperty(), targetNode, isPartial);
+		return createEdge(edgeRole, sourceNode, QVTscheduleUtil.getProperty(this), targetNode, isPartial);
 	}
 
 	@Override
 	public @Nullable String getLabel() {
-		if (isPartial) {
+		if (partial) {
 			return "«includes»\\n" + super.getLabel();
 		}
 		else {
@@ -132,21 +241,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			isPartial = isComputedPartial;
 		}
 		assert isPartial == isComputedPartial;
-		setIsPartial(isPartial);
-	}
-
-	@Override
-	public final boolean isPartial() {
-		return isPartial;
+		setPartial(isPartial);
 	}
 
 	@Override
 	public final boolean isNavigation() {
 		return true;
-	}
-
-	public void setIsPartial(boolean isPartial) {
-		this.isPartial  = isPartial;
 	}
 
 	@Override

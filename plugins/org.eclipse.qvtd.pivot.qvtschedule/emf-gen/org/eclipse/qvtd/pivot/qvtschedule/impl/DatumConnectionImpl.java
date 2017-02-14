@@ -15,13 +15,19 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -40,10 +46,58 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Datum Connection</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DatumConnectionImpl#getConnectionRole <em>Connection Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DatumConnectionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DatumConnectionImpl#getSourceEnds <em>Source Ends</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends ConnectionImpl implements DatumConnection<CE> {
+	/**
+	 * The cached value of the '{@link #getConnectionRole() <em>Connection Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConnectionRole connectionRole;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSourceEnds() <em>Source Ends</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceEnds()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CE> sourceEnds;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,9 +117,141 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		return QVTschedulePackage.Literals.DATUM_CONNECTION;
 	}
 
-	protected   String name;
-	private /*@LazyNonNull*/ ConnectionRole connectionRole;
-	protected  Set<@NonNull CE> sourceEnds;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConnectionRole getConnectionRole() {
+		if (connectionRole != null && connectionRole.eIsProxy()) {
+			InternalEObject oldConnectionRole = (InternalEObject)connectionRole;
+			connectionRole = (ConnectionRole)eResolveProxy(oldConnectionRole);
+			if (connectionRole != oldConnectionRole) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
+			}
+		}
+		return connectionRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATUM_CONNECTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<CE> getSourceEnds() {
+		if (sourceEnds == null) {
+			sourceEnds = new EObjectResolvingEList<CE>(ConnectionEnd.class, this, QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS);
+		}
+		return sourceEnds;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
+				if (resolve) return getConnectionRole();
+				return basicGetConnectionRole();
+			case QVTschedulePackage.DATUM_CONNECTION__NAME:
+				return getName();
+			case QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS:
+				return getSourceEnds();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
+				setConnectionRole((ConnectionRole)newValue);
+				return;
+			case QVTschedulePackage.DATUM_CONNECTION__NAME:
+				setName((String)newValue);
+				return;
+			case QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS:
+				getSourceEnds().clear();
+				getSourceEnds().addAll((Collection<? extends CE>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
+				setConnectionRole((ConnectionRole)null);
+				return;
+			case QVTschedulePackage.DATUM_CONNECTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS:
+				getSourceEnds().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
+				return connectionRole != null;
+			case QVTschedulePackage.DATUM_CONNECTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS:
+				return sourceEnds != null && !sourceEnds.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
 	protected final @NonNull Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<>();
 
 	/**
@@ -75,8 +261,8 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull SymbolNameBuilder symbolNameBuilder) {
 		setRegion(region);
-		this.name = region.getSchedulerConstants().reserveSymbolName(symbolNameBuilder, this);
-		this.sourceEnds = sourceEnds;
+		setName(region.getSchedulerConstants().reserveSymbolName(symbolNameBuilder, this));
+		getSourceEnds().addAll(sourceEnds);
 	}
 
 	@Override
@@ -138,6 +324,19 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		return connectionRole;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setConnectionRole(ConnectionRole newConnectionRole) {
+		ConnectionRole oldConnectionRole = connectionRole;
+		connectionRole = newConnectionRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
+	}
+
 	@Override
 	public void destroy() {
 		setRegion(null);
@@ -155,12 +354,6 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	public @NonNull ConnectionRole getConnectionRole(@NonNull CE targetEnd) {
 		ConnectionRole connectionRole = targetEnd2role.get(targetEnd);
-		assert connectionRole != null;
-		return connectionRole;
-	}
-
-	@Override
-	public @NonNull ConnectionRole getConnectionRole() {
 		assert connectionRole != null;
 		return connectionRole;
 	}
@@ -186,12 +379,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public @NonNull String getLabel() {
-		return name;
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return name;
+		return QVTscheduleUtil.getName(this);
 	}
 
 	public @NonNull Integer getPenwidth() {
@@ -211,7 +399,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	@Override
 	public @NonNull CE getSource(@NonNull Region sourceRegion) {
 		@Nullable CE sourceEnd = null;
-		for (@NonNull CE end : sourceEnds) {
+		for (@NonNull CE end : QVTscheduleUtil.getSourceEnds(this)) {
 			if (end.getRegion() == sourceRegion) {
 				assert sourceEnd == null;
 				sourceEnd = end;
@@ -224,7 +412,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	@Override
 	public @NonNull String getSourceDisplayNames() {
 		StringBuilder s = new StringBuilder();
-		for (@NonNull CE source : getSources()) {
+		for (@NonNull CE source : QVTscheduleUtil.getSourceEnds(this)) {
 			if (s.length() > 0) {
 				s.append(",");
 			}
@@ -236,7 +424,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	@Override
 	public @NonNull Set<@NonNull Region> getSourceRegions() {
 		Set<@NonNull Region> sourceRegions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : getSources()) {
+		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getRegion(sourceEnd);
 			sourceRegions.add(sourceRegion);
 		}
@@ -246,7 +434,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	@Override
 	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull ScheduledRegion scheduledRegion) {
 		Set<@NonNull Region> sourceRegions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : getSources()) {
+		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getRegion(sourceEnd);
 			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
 			if (sourceRegion != null) {
@@ -258,7 +446,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public @NonNull Iterable<@NonNull CE> getSources() {
-		return sourceEnds;
+		return QVTscheduleUtil.getSourceEnds(this);
 	}
 
 	public @Nullable String getStyle() {
@@ -267,7 +455,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public @NonNull String getSymbolName() {
-		return name;
+		return QVTscheduleUtil.getName(this);
 	}
 
 	@Override
@@ -405,7 +593,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 					}
 				} */
 				@Nullable ConnectionEnd sourceEnd = null;
-				for (@NonNull ConnectionEnd end : sourceEnds) {
+				for (@NonNull ConnectionEnd end : QVTscheduleUtil.getSourceEnds(this)) {
 					if (end.getRegion() == scheduledRegion) {
 						assert sourceEnd == null;
 						sourceEnd = end;
@@ -436,7 +624,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		s.append(getName());
 		s.append("(");
 		boolean isFirst = true;
-		for (@NonNull ConnectionEnd sourceEnd : sourceEnds) {
+		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			if (!isFirst) {
 				s.append(",");
 			}

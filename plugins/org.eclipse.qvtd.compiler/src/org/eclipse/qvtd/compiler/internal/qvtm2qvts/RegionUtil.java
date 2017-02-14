@@ -120,7 +120,7 @@ public class RegionUtil extends QVTscheduleUtil
 		assert name != null;
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;
-		TypedModel typedModel = targetNode.getClassDatumAnalysis().getTypedModel();
+		TypedModel typedModel = getTypedModel(getClassDatumAnalysis(targetNode));
 		Region region = getRegion(targetNode);
 		ClassDatum classDatum = region.getSchedulerConstants().getClassDatum(type, typedModel);
 		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
@@ -137,7 +137,7 @@ public class RegionUtil extends QVTscheduleUtil
 		assert property != null;
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;
-		TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
+		TypedModel typedModel = getTypedModel(getClassDatumAnalysis(parentNode));
 		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
 		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
@@ -312,7 +312,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
 		Role stepNodeRole = getNodeRole(typedNode);
-		return PatternTypedNodeImpl.create(stepNodeRole, region, getName(typedNode), typedNode.getClassDatumAnalysis(), isMatched);
+		return PatternTypedNodeImpl.create(stepNodeRole, region, getName(typedNode), getClassDatumAnalysis(typedNode), isMatched);
 	}
 
 	public static @NonNull Node createTrueNode(@NonNull Region region) {

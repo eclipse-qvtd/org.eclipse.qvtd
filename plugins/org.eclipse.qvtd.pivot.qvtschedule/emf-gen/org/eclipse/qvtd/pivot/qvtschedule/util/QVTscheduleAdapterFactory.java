@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.*;
 
 /**
@@ -258,6 +259,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableNode(VariableNode object) {
 				return createVariableNodeAdapter();
+			}
+			@Override
+			public Adapter caseDomainUsage(DomainUsage object) {
+				return createDomainUsageAdapter();
 			}
 			@Override
 			public Adapter caseGraphEdge(GraphEdge object) {
@@ -594,6 +599,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage <em>Domain Usage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage
+	 * @generated
+	 */
+	public Adapter createDomainUsageAdapter() {
 		return null;
 	}
 

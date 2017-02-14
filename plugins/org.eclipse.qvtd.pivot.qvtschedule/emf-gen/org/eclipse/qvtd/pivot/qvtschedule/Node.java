@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatumAnalysis <em>Class Datum Analysis</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getName <em>Name</em>}</li>
@@ -56,6 +57,32 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  */
 public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 {
+	/**
+	 * Returns the value of the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Non-null if this edge is part of a bidirectional pair.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Class Datum Analysis</em>' reference.
+	 * @see #setClassDatumAnalysis(ClassDatumAnalysis)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_ClassDatumAnalysis()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!classDatumAnalysis'"
+	 * @generated
+	 */
+	ClassDatumAnalysis getClassDatumAnalysis();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatumAnalysis <em>Class Datum Analysis</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Class Datum Analysis</em>' reference.
+	 * @see #getClassDatumAnalysis()
+	 * @generated
+	 */
+	void setClassDatumAnalysis(ClassDatumAnalysis value);
+
 	/**
 	 * Returns the value of the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -193,7 +220,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@NonNull Iterable<@NonNull NavigableEdge> getCastEdges();
-	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
 	/**

@@ -102,7 +102,7 @@ public class ContentsAnalysis
 		//		Region region = oldNode.getRegion();
 		//		Region invokingRegion = region.getInvokingRegion();
 		//		assert (invokingRegion == this) || (invokingRegion == null);
-		ClassDatumAnalysis classDatumAnalysis = oldNode.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(oldNode);
 		List<@NonNull Node> nodes = classDatumAnalysis2oldNodes.get(classDatumAnalysis);
 		if (nodes == null) {
 			nodes = new ArrayList<>();
@@ -143,8 +143,8 @@ public class ContentsAnalysis
 	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = producedEdge.getProperty();
-		ClassDatumAnalysis classDatumAnalysis = producedEdge.getEdgeSource().getClassDatumAnalysis();
-		ClassDatum forwardClassDatum = classDatumAnalysis.getElementalClassDatum();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeSource());
+		ClassDatum forwardClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
 		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
 		//			return forwardPropertyDatum;
@@ -175,8 +175,8 @@ public class ContentsAnalysis
 			return bestPropertyDatum;
 		}
 		Property reverseProperty = forwardProperty.getOpposite();
-		classDatumAnalysis = producedEdge.getEdgeTarget().getClassDatumAnalysis();
-		ClassDatum reverseClassDatum = classDatumAnalysis.getElementalClassDatum();
+		classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeTarget());
+		ClassDatum reverseClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
 		Iterable<@NonNull PropertyDatum> reversePropertyDatums = schedulerConstants.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
 			if ((propertyDatum.getProperty() == reverseProperty) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
@@ -288,7 +288,7 @@ public class ContentsAnalysis
 		if (realizedEdges == null) {
 			return null;
 		}
-		CompleteClass requiredClass = requiredClassDatumAnalysis.getCompleteClass();
+		CompleteClass requiredClass = RegionUtil.getCompleteClass(requiredClassDatumAnalysis);
 		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 			Node targetNode = realizedEdge.getEdgeTarget();

@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
@@ -270,7 +271,7 @@ public class EarlyMerger extends AbstractMerger
 		//
 		Map<@NonNull ClassDatumAnalysis, @NonNull Integer> hostClass2count = new HashMap<>();
 		for (@NonNull Node hostNode : getHostNodes(primaryRegion)) {
-			ClassDatumAnalysis hostClassDatumAnalysis = hostNode.getClassDatumAnalysis();
+			ClassDatumAnalysis hostClassDatumAnalysis = RegionUtil.getClassDatumAnalysis(hostNode);
 			Integer count = hostClass2count.get(hostClassDatumAnalysis);
 			hostClass2count.put(hostClassDatumAnalysis, count != null ? count+1 : 1);
 		}
@@ -281,7 +282,7 @@ public class EarlyMerger extends AbstractMerger
 		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull Integer> entry : hostClass2count.entrySet()) {
 			if (entry.getValue() == 1) {
 				ClassDatumAnalysis primaryClassDatumAnalysis = entry.getKey();
-				for (@NonNull MappingRegion secondaryRegion : primaryClassDatumAnalysis.getConsumingRegions()) {
+				for (@NonNull MappingRegion secondaryRegion : RegionUtil.getConsumingRegions(primaryClassDatumAnalysis)) {
 					if (secondaryRegion != primaryRegion) {
 						for (@NonNull Node secondaryHeadNode : secondaryRegion.getHeadNodes()) {
 							if (secondaryHeadNode.getClassDatumAnalysis() == primaryClassDatumAnalysis) {

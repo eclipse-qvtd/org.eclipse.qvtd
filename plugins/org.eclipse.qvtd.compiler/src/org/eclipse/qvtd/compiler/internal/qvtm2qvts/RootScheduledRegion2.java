@@ -165,7 +165,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		}
 		List<@NonNull Node> nodes = new ArrayList<>();
 		nodes.add(rootAnalysis.getIntroducerNode(headNode));
-		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(classDatumAnalysis.getTypedModel())) {
+		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(RegionUtil.getTypedModel(classDatumAnalysis))) {
 			ClassDatumAnalysis classDatumAnalysis2 = getScheduler().getClassDatumAnalysis(headNode.getCompleteClass().getPrimaryClass(), dependsOn);
 			Iterable<@NonNull Node> newNodes = contentsAnalysis.getNewNodes(classDatumAnalysis2);
 			if (newNodes != null) {

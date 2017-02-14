@@ -263,7 +263,7 @@ class Correlator
 				Node uncastSecondaryTargetNode = uncastSecondaryEdge.getEdgeTarget();
 				Iterable<@NonNull Node> secondaryTargetNodes = RegionUtil.getCastTargets(uncastSecondaryTargetNode, true);
 				if (primarySourceNode != null) {
-					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigationEdge(uncastSecondaryEdge.getProperty());	// Skip isSecondary properties
+					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigationEdge(RegionUtil.getProperty(uncastSecondaryEdge));	// Skip isSecondary properties
 					if (!strategy.navigableEdgesMatch(uncastSecondaryEdge, uncastPrimaryEdge)) {
 						return false;
 					}
@@ -380,7 +380,7 @@ class Correlator
 			boolean ok = !mergedNode.isIterator();
 			if (ok) {
 				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
-					Property property = predicateEdge.getProperty();
+					Property property = RegionUtil.getProperty(predicateEdge);
 					Node navigation = mergedNode.getNavigationTarget(property);
 					if (navigation == null) {
 						ok = false;

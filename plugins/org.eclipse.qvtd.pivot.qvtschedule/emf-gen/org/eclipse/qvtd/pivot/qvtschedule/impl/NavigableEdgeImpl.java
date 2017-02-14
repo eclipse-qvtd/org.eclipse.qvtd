@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -46,10 +47,10 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOppositeEdge <em>Opposite Edge</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOutgoingConnections <em>Outgoing Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#isSecondary <em>Secondary</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOppositeEdge <em>Opposite Edge</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,6 +68,17 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 
 	/**
+	 * The cached value of the '{@link #getOppositeEdge() <em>Opposite Edge</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOppositeEdge()
+	 * @generated
+	 * @ordered
+	 */
+	protected NavigableEdge oppositeEdge;
+
+
+	/**
 	 * The cached value of the '{@link #getOutgoingConnections() <em>Outgoing Connections</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,6 +87,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @ordered
 	 */
 	protected EList<EdgeConnection> outgoingConnections;
+
 
 	/**
 	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
@@ -107,17 +120,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @ordered
 	 */
 	protected boolean secondary = SECONDARY_EDEFAULT;
-
-
-	/**
-	 * The cached value of the '{@link #getOppositeEdge() <em>Opposite Edge</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOppositeEdge()
-	 * @generated
-	 * @ordered
-	 */
-	protected NavigableEdge oppositeEdge;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -305,6 +307,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
+			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+				if (resolve) return getOppositeEdge();
+				return basicGetOppositeEdge();
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				return getOutgoingConnections();
 			case QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY:
@@ -312,9 +317,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				return basicGetProperty();
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				return isSecondary();
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
-				if (resolve) return getOppositeEdge();
-				return basicGetOppositeEdge();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -331,6 +333,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
 				setIncomingConnection((EdgeConnection)newValue);
 				return;
+			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+				setOppositeEdge((NavigableEdge)newValue);
+				return;
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				getOutgoingConnections().clear();
 				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
@@ -340,9 +345,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				return;
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				setSecondary((Boolean)newValue);
-				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
-				setOppositeEdge((NavigableEdge)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -359,6 +361,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
 				setIncomingConnection((EdgeConnection)null);
 				return;
+			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+				setOppositeEdge((NavigableEdge)null);
+				return;
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				getOutgoingConnections().clear();
 				return;
@@ -367,9 +372,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				return;
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				setSecondary(SECONDARY_EDEFAULT);
-				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
-				setOppositeEdge((NavigableEdge)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -385,14 +387,14 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		switch (featureID) {
 			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
 				return incomingConnection != null;
+			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+				return oppositeEdge != null;
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
 			case QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY:
 				return property != null;
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				return secondary != SECONDARY_EDEFAULT;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
-				return oppositeEdge != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -404,7 +406,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	@Override
 	public final void addOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
-		assert Iterables.contains(edgeConnection.getSources(), this);
+		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(edgeConnection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = getOutgoingConnections();
 		assert !outgoingConnections2.contains(edgeConnection);
@@ -512,7 +514,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	@Override
 	public final void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
-		assert Iterables.contains(edgeConnection.getSources(), this);
+		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(edgeConnection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;

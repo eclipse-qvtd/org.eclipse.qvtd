@@ -251,7 +251,7 @@ public abstract class SchedulerConstants2 extends SchedulerConstantsImpl
 		if (primaryClass instanceof CollectionType) {
 			org.eclipse.ocl.pivot.Class elementType = (org.eclipse.ocl.pivot.Class)((CollectionType)primaryClass).getElementType();
 			assert elementType != null;
-			classDatumAnalysis = getClassDatumAnalysis(elementType, classDatumAnalysis.getTypedModel());
+			classDatumAnalysis = getClassDatumAnalysis(elementType, RegionUtil.getTypedModel(classDatumAnalysis));
 		}
 		return classDatumAnalysis;
 	}

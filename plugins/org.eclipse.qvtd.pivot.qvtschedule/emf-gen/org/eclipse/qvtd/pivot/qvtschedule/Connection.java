@@ -79,7 +79,7 @@ public interface Connection extends Element, Nameable, Symbolable
 	 */
 	@NonNull String getColor();
 
-	@NonNull ConnectionRole getConnectionRole();
+	ConnectionRole getConnectionRole();
 
 	/**
 	 * Return a formatted label to accompany the edge, or null for no label.

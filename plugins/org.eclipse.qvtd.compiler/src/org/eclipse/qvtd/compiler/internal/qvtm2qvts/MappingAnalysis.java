@@ -391,7 +391,7 @@ public class MappingAnalysis implements Nameable
 
 	@Override
 	public @NonNull String getName() {
-		return mappingRegion.getName();
+		return RegionUtil.getName(mappingRegion);
 	}
 
 	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
@@ -553,7 +553,7 @@ public class MappingAnalysis implements Nameable
 		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
 			classDatumAnalysis.addProduction(mappingRegion, newNode);
-			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
+			for (@NonNull Mapping consumingMapping : RegionUtil.getRequiredBy(classDatumAnalysis)) {
 				MappingRegion consumingRegion = qvtm2qts.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
@@ -565,7 +565,7 @@ public class MappingAnalysis implements Nameable
 		for (@NonNull Node predicatedNode : mappingRegion.getOldNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
-			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
+			for (@NonNull Mapping producingMapping : RegionUtil.getProducedBy(classDatumAnalysis)) {
 				MappingRegion producingRegion = qvtm2qts.getMappingRegion(producingMapping);
 				assert producingRegion != null;
 				for (@NonNull Node newNode : producingRegion.getNewNodes()) {

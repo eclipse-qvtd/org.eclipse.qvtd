@@ -18,8 +18,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -36,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -44,10 +50,26 @@ import com.google.common.collect.Lists;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Node Connection</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getClassDatumAnalysis <em>Class Datum Analysis</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements NodeConnection {
+	/**
+	 * The cached value of the '{@link #getClassDatumAnalysis() <em>Class Datum Analysis</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassDatumAnalysis()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassDatumAnalysis classDatumAnalysis;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,6 +90,119 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * This is specialized for the more specific element type known in this context.
+	 * @generated
+	 */
+	@Override
+	public EList<Node> getSourceEnds() {
+		if (sourceEnds == null) {
+			sourceEnds = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.NODE_CONNECTION__SOURCE_ENDS);
+		}
+		return sourceEnds;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ClassDatumAnalysis getClassDatumAnalysis() {
+		if (classDatumAnalysis != null && classDatumAnalysis.eIsProxy()) {
+			InternalEObject oldClassDatumAnalysis = (InternalEObject)classDatumAnalysis;
+			classDatumAnalysis = (ClassDatumAnalysis)eResolveProxy(oldClassDatumAnalysis);
+			if (classDatumAnalysis != oldClassDatumAnalysis) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+			}
+		}
+		return classDatumAnalysis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDatumAnalysis basicGetClassDatumAnalysis() {
+		return classDatumAnalysis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setClassDatumAnalysis(ClassDatumAnalysis newClassDatumAnalysis) {
+		ClassDatumAnalysis oldClassDatumAnalysis = classDatumAnalysis;
+		classDatumAnalysis = newClassDatumAnalysis;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
+				if (resolve) return getClassDatumAnalysis();
+				return basicGetClassDatumAnalysis();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
+				setClassDatumAnalysis((ClassDatumAnalysis)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
+				setClassDatumAnalysis((ClassDatumAnalysis)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
+				return classDatumAnalysis != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
@@ -76,8 +211,6 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNodeConnection(this);
 	}
-
-	private ClassDatumAnalysis classDatumAnalysis;
 
 	/**
 	 * The region that manages the data structures for the Connection.
@@ -123,7 +256,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public @Nullable Node basicGetSource(@NonNull Region sourceRegion) {
 		Node sourceNode = null;
-		for (@NonNull Node node : sourceEnds) {
+		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(this)) {
 			if (node.getRegion() == sourceRegion) {
 				assert sourceNode == null;
 				sourceNode = node;
@@ -135,17 +268,12 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public void destroy() {
 		super.destroy();
-		for (@NonNull Node sourceNode : sourceEnds) {
+		for (@NonNull Node sourceNode : QVTscheduleUtil.getSourceEnds(this)) {
 			sourceNode.removeOutgoingConnection(this);
 		}
 		for (@NonNull Node targetNode : targetEnd2role.keySet()) {
 			targetNode.setIncomingConnection(null);
 		}
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis() {
-		return classDatumAnalysis;
 	}
 
 	@Override
@@ -160,14 +288,14 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
-		return sourceEnds;
+		return QVTscheduleUtil.getSourceEnds(this);
 	}
 
 	@Override
 	public @NonNull Type getSourcesType(@NonNull IdResolver idResolver) {
 		//		System.out.println("commonType of " + this);
 		Type commonType = null;
-		for (@NonNull Node node : getSources()) {
+		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(this)) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
 			if (nodeType instanceof CollectionType) {
 				nodeType = ((CollectionType)nodeType).getElementType();		// FIXME needed for composed source nodes
@@ -362,13 +490,13 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		if (isNode2Node()) {
-			Node sourceNode = sourceEnds.iterator().next();
+			Node sourceNode = QVTscheduleUtil.getSourceEnds(this).iterator().next();
 			Node targetNode = targetEnd2role.keySet().iterator().next();
 			s.appendEdge(sourceNode, this, targetNode);
 		}
 		else {
 			s.appendNode(this);
-			for (@NonNull Node source : getSources()) {
+			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(this)) {
 				s.appendEdge(source, this, this);
 			}
 			for (@NonNull Node target : getTargetNodes()) {

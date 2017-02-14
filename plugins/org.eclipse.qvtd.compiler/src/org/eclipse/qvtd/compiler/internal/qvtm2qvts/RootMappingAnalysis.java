@@ -76,7 +76,7 @@ public class RootMappingAnalysis
 		CompleteEnvironment completeEnvironment = schedulerConstants.getEnvironmentFactory().getCompleteEnvironment();
 		ClassDatumAnalysis consumedClassDatumAnalysis = /*getCastTarget(consumerNode)*/consumerNode.getClassDatumAnalysis();
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatumAnalysis.getCompleteClass().getPrimaryClass();
-		TypedModel typedModel = consumedClassDatumAnalysis.getTypedModel();
+		TypedModel typedModel = RegionUtil.getTypedModel(consumedClassDatumAnalysis);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
 		ClassDatumAnalysis childrenClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis(childCollectionType, typedModel);
 		//

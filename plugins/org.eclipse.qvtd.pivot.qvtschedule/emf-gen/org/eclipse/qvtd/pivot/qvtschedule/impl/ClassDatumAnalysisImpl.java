@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,7 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -54,10 +60,34 @@ import com.google.common.collect.Iterables;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Class Datum Analysis</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getClassDatum <em>Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getCompleteClass <em>Complete Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getDomainUsage <em>Domain Usage</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getElementalClassDatum <em>Elemental Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getProducedBy <em>Produced By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getRequiredBy <em>Required By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getSchedulerConstants <em>Scheduler Constants</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getSuperClassDatumAnalyses <em>Super Class Datum Analyses</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl#getTypedModel <em>Typed Model</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAnalysis {
+	/**
+	 * The cached value of the '{@link #getClassDatum() <em>Class Datum</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassDatum()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassDatum classDatum;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +108,241 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ClassDatum getClassDatum() {
+		if (classDatum != null && classDatum.eIsProxy()) {
+			InternalEObject oldClassDatum = (InternalEObject)classDatum;
+			classDatum = (ClassDatum)eResolveProxy(oldClassDatum);
+			if (classDatum != oldClassDatum) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CLASS_DATUM_ANALYSIS__CLASS_DATUM, oldClassDatum, classDatum));
+			}
+		}
+		return classDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDatum basicGetClassDatum() {
+		return classDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClassDatumGen(ClassDatum newClassDatum) {
+		ClassDatum oldClassDatum = classDatum;
+		classDatum = newClassDatum;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM_ANALYSIS__CLASS_DATUM, oldClassDatum, classDatum));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Mapping> getProducedByGen() {
+		if (producedBy == null) {
+			producedBy = new EObjectResolvingEList<Mapping>(Mapping.class, this, QVTschedulePackage.CLASS_DATUM_ANALYSIS__PRODUCED_BY);
+		}
+		return producedBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Mapping> getRequiredByGen() {
+		if (requiredBy == null) {
+			requiredBy = new EObjectResolvingEList<Mapping>(Mapping.class, this, QVTschedulePackage.CLASS_DATUM_ANALYSIS__REQUIRED_BY);
+		}
+		return requiredBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ClassDatumAnalysis> getSuperClassDatumAnalysesGen() {
+		if (superClassDatumAnalyses == null) {
+			superClassDatumAnalyses = new EObjectResolvingEList<ClassDatumAnalysis>(ClassDatumAnalysis.class, this, QVTschedulePackage.CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES);
+		}
+		return superClassDatumAnalyses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SchedulerConstants getSchedulerConstants() {
+		if (schedulerConstants != null && schedulerConstants.eIsProxy()) {
+			InternalEObject oldSchedulerConstants = (InternalEObject)schedulerConstants;
+			schedulerConstants = (SchedulerConstants)eResolveProxy(oldSchedulerConstants);
+			if (schedulerConstants != oldSchedulerConstants) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS, oldSchedulerConstants, schedulerConstants));
+			}
+		}
+		return schedulerConstants;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SchedulerConstants basicGetSchedulerConstants() {
+		return schedulerConstants;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSchedulerConstants(SchedulerConstants newSchedulerConstants) {
+		SchedulerConstants oldSchedulerConstants = schedulerConstants;
+		schedulerConstants = newSchedulerConstants;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS, oldSchedulerConstants, schedulerConstants));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__CLASS_DATUM:
+				if (resolve) return getClassDatum();
+				return basicGetClassDatum();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__COMPLETE_CLASS:
+				return getCompleteClass();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__DOMAIN_USAGE:
+				return getDomainUsage();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__ELEMENTAL_CLASS_DATUM:
+				return getElementalClassDatum();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__PRODUCED_BY:
+				return getProducedBy();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__REQUIRED_BY:
+				return getRequiredBy();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS:
+				if (resolve) return getSchedulerConstants();
+				return basicGetSchedulerConstants();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES:
+				return getSuperClassDatumAnalyses();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__TYPED_MODEL:
+				return getTypedModel();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__CLASS_DATUM:
+				setClassDatum((ClassDatum)newValue);
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__PRODUCED_BY:
+				getProducedBy().clear();
+				getProducedBy().addAll((Collection<? extends Mapping>)newValue);
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__REQUIRED_BY:
+				getRequiredBy().clear();
+				getRequiredBy().addAll((Collection<? extends Mapping>)newValue);
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS:
+				setSchedulerConstants((SchedulerConstants)newValue);
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES:
+				getSuperClassDatumAnalyses().clear();
+				getSuperClassDatumAnalyses().addAll((Collection<? extends ClassDatumAnalysis>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__CLASS_DATUM:
+				setClassDatum((ClassDatum)null);
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__PRODUCED_BY:
+				getProducedBy().clear();
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__REQUIRED_BY:
+				getRequiredBy().clear();
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS:
+				setSchedulerConstants((SchedulerConstants)null);
+				return;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES:
+				getSuperClassDatumAnalyses().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__CLASS_DATUM:
+				return classDatum != null;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__COMPLETE_CLASS:
+				return getCompleteClass() != null;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__DOMAIN_USAGE:
+				return getDomainUsage() != null;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__ELEMENTAL_CLASS_DATUM:
+				return getElementalClassDatum() != null;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__PRODUCED_BY:
+				return producedBy != null && !producedBy.isEmpty();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__REQUIRED_BY:
+				return requiredBy != null && !requiredBy.isEmpty();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS:
+				return schedulerConstants != null;
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES:
+				return superClassDatumAnalyses != null && !superClassDatumAnalyses.isEmpty();
+			case QVTschedulePackage.CLASS_DATUM_ANALYSIS__TYPED_MODEL:
+				return getTypedModel() != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
@@ -87,10 +352,48 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitClassDatumAnalysis(this);
 	}
 
-	private /*final @NonNull*/ SchedulerConstants schedulerConstants;
-	private /*final @NonNull*/ ClassDatum classDatum;
-	private /*final @NonNull*/ ClassDatum elementalClassDatum;
+	/**
+	 * The cached value of the '{@link #getProducedBy() <em>Produced By</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProducedBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Mapping> producedBy;
+
+	/**
+	 * The cached value of the '{@link #getRequiredBy() <em>Required By</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiredBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Mapping> requiredBy;
+
+	/**
+	 * The cached value of the '{@link #getSchedulerConstants() <em>Scheduler Constants</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchedulerConstants()
+	 * @generated
+	 * @ordered
+	 */
+	protected SchedulerConstants schedulerConstants;
+
+	/**
+	 * The cached value of the '{@link #getSuperClassDatumAnalyses() <em>Super Class Datum Analyses</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperClassDatumAnalyses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassDatumAnalysis> superClassDatumAnalyses;
+
 	private /*final @NonNull*/ DomainUsage domainUsage;
+	private /*final @NonNull*/ ClassDatum elementalClassDatum;
 
 	/**
 	 * The non-to-one properties that may terminate in a given ClassDatum.
@@ -100,28 +403,8 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> introducer2assignmentNodes = new HashMap<>();
 	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<>();
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<>();
-	private /*@LazyNonNull*/ List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses = null;
-	private /*@LazyNonNull*/ List<@NonNull Mapping> producedBy = null;
-	private /*@LazyNonNull*/ List<@NonNull Mapping> requiredBy = null;
 
-	public ClassDatumAnalysisImpl(@NonNull SchedulerConstants schedulerConstants, @NonNull ClassDatum classDatum) {
-		this.schedulerConstants = schedulerConstants;
-		this.classDatum = classDatum;
-		TypedModel typedModel = ClassUtil.nonNullState(classDatum.getTypedModel());
-		this.domainUsage = schedulerConstants.getDomainUsage(typedModel);
-		Type type = classDatum.getCompleteClass().getPrimaryClass();
-		Type elementType = type;
-		while (elementType instanceof CollectionType) {
-			elementType = ((CollectionType)elementType).getElementType();
-		}
-		if ((elementType == null) || (elementType == type) || !(elementType instanceof org.eclipse.ocl.pivot.Class)) {
-			elementalClassDatum = classDatum;
-		}
-		else {
-			elementalClassDatum = schedulerConstants.getClassDatum((org.eclipse.ocl.pivot.Class)elementType, typedModel);
-		}
-	}
-
+	@Override
 	public void addConsumption(@NonNull MappingRegion consumer, @NonNull Node consumingNode) {
 		List<@NonNull Node> predicateNodes = consumer2predicateNodes.get(consumer);
 		if (predicateNodes == null) {
@@ -133,6 +416,7 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		}
 	}
 
+	@Override
 	public void addIntroduction(@NonNull Region introducer, @NonNull Node introducingNode) {
 		List<@NonNull Node> assignmentNodes = introducer2assignmentNodes.get(introducer);
 		if (assignmentNodes == null) {
@@ -143,6 +427,7 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		assignmentNodes.add(introducingNode);
 	}
 
+	@Override
 	public void addProduction(@NonNull MappingRegion producer, @NonNull Node producingNode) {
 		List<@NonNull Node> assignmentNodes = producer2assignmentNodes.get(producer);
 		if (assignmentNodes == null) {
@@ -154,18 +439,6 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		}
 	}
 
-	@Override
-	public @NonNull ClassDatum getClassDatum() {
-		return classDatum;
-	}
-
-	@Override
-	public @NonNull CompleteClass getCompleteClass() {
-		CompleteClass completeClass = classDatum.getCompleteClass();
-		assert completeClass != null;
-		return completeClass;
-	}
-
 	public @NonNull Iterable<Node> getConsumingNodes() {
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
@@ -175,14 +448,14 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		return new ArrayList<>(consumer2predicateNodes.keySet());
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
-	public @NonNull DomainUsage getDomainUsage() {
+	public DomainUsage getDomainUsage() {
 		return domainUsage;
-	}
-
-	@Override
-	public @NonNull ClassDatum getElementalClassDatum() {
-		return elementalClassDatum;
 	}
 
 	public @Nullable List<Property> getMultiOpposites() {
@@ -216,10 +489,10 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 	}
 
 	@Override
-	public @NonNull List</*@NonNull*/ Mapping> getProducedBy() {
-		List<@NonNull Mapping> producedBy2 = producedBy;
+	public EList<Mapping> getProducedBy() {
+		EList<Mapping> producedBy2 = producedBy;
 		if (producedBy2  == null) {
-			producedBy2 = producedBy = new ArrayList<>();
+			producedBy2 = producedBy = getProducedByGen();
 			for (@NonNull MappingAction producingAction : ClassUtil.nullFree(classDatum.getProducedBy())) {
 				Mapping mapping = producingAction.getMapping();
 				assert mapping != null;
@@ -228,11 +501,6 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		}
 		return producedBy2;
 	}
-
-	//	@SuppressWarnings("null")
-	//	public @NonNull Collection<MappingRegion> getProducers() {
-	//		return producer2assignmentNodes.keySet();
-	//	}
 
 	public @NonNull Iterable<Node> getProducingNodes() {
 		return Iterables.concat(consumer2predicateNodes.values());
@@ -243,10 +511,10 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 	}
 
 	@Override
-	public @NonNull List</*@NonNull*/ Mapping> getRequiredBy() {
-		List<@NonNull Mapping> requiredBy2 = requiredBy;
+	public EList<Mapping> getRequiredBy() {
+		EList<Mapping> requiredBy2 = requiredBy;
 		if (requiredBy2  == null) {
-			requiredBy2 = requiredBy = new ArrayList<>();
+			requiredBy2 = requiredBy = getRequiredByGen();
 			for (@NonNull MappingAction consumingAction : ClassUtil.nullFree(classDatum.getRequiredBy())) {
 				Mapping mapping = consumingAction.getMapping();
 				assert mapping != null;
@@ -266,10 +534,10 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 	}
 
 	@Override
-	public @NonNull List</*@NonNull*/ ClassDatumAnalysis> getSuperClassDatumAnalyses() {
-		List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
+	public EList<ClassDatumAnalysis> getSuperClassDatumAnalyses() {
+		EList<ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
 		if (superClassDatumAnalyses2  == null) {
-			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<@NonNull ClassDatumAnalysis>();
+			superClassDatumAnalyses2 = getSuperClassDatumAnalysesGen();
 			CompleteClass completeClass = getCompleteClass();
 			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
 				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass, ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
@@ -278,13 +546,58 @@ public class ClassDatumAnalysisImpl extends ElementImpl implements ClassDatumAna
 		return superClassDatumAnalyses2;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
-	public @NonNull TypedModel getTypedModel() {
-		return ClassUtil.nonNullState(classDatum.getTypedModel());
+	public TypedModel getTypedModel() {
+		return QVTscheduleUtil.getClassDatum(this).getTypedModel();
 	}
 
 	public boolean hasNoProducers() {
 		return producer2assignmentNodes.size() == 0;
+	}
+
+	@Override
+	public void setClassDatum(ClassDatum newClassDatum) {
+		setClassDatumGen(newClassDatum);
+		TypedModel typedModel = QVTscheduleUtil.getTypedModel(this);
+		this.domainUsage = schedulerConstants.getDomainUsage(typedModel);
+		Type type = classDatum.getCompleteClass().getPrimaryClass();
+		Type elementType = type;
+		while (elementType instanceof CollectionType) {
+			elementType = ((CollectionType)elementType).getElementType();
+		}
+		if ((elementType == null) || (elementType == type) || !(elementType instanceof org.eclipse.ocl.pivot.Class)) {
+			elementalClassDatum = classDatum;
+		}
+		else {
+			elementalClassDatum = schedulerConstants.getClassDatum((org.eclipse.ocl.pivot.Class)elementType, typedModel);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public CompleteClass getCompleteClass() {
+		CompleteClass completeClass = classDatum.getCompleteClass();
+		assert completeClass != null;
+		return completeClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public ClassDatum getElementalClassDatum() {
+		return elementalClassDatum;
 	}
 
 	@Override

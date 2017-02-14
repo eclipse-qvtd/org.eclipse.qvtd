@@ -23,13 +23,35 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
  */
 public interface NodeConnection extends DatumConnection<Node>
 {
+	/**
+	 * Returns the value of the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Non-null if this edge is part of a bidirectional pair.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Class Datum Analysis</em>' reference.
+	 * @see #setClassDatumAnalysis(ClassDatumAnalysis)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_ClassDatumAnalysis()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!classDatumAnalysis'"
+	 * @generated
+	 */
+	ClassDatumAnalysis getClassDatumAnalysis();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getClassDatumAnalysis <em>Class Datum Analysis</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Class Datum Analysis</em>' reference.
+	 * @see #getClassDatumAnalysis()
+	 * @generated
+	 */
+	void setClassDatumAnalysis(ClassDatumAnalysis value);
 	void addPassedTargetNode(@NonNull Node targetNode);
 	//	void addSubConnection(@NonNull Connection subConnection);
 	void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater);
 	@Nullable Node basicGetSource(@NonNull Region sourceRegion);
 	//	@Nullable Connection basicGetSuperConnection();
-
-	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 
 	@Nullable Region getCommonRegion();
 	@NonNull ConnectionRole getConnectionRole(@NonNull Node targetNode);

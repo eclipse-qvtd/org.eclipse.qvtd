@@ -64,14 +64,24 @@ import com.google.common.collect.Sets;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getConnections <em>Connections</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getRegions <em>Regions</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
+	/**
+	 * The cached value of the '{@link #getConnections() <em>Connections</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Connection> connections;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -91,16 +101,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getConnections() <em>Connections</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConnections()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Connection> connections;
 
 	/**
 	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
@@ -221,10 +221,10 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				return getName();
 			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
 				return getConnections();
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				return getName();
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return getRegions();
 		}
@@ -240,12 +240,12 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				setName((String)newValue);
-				return;
 			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
 				getConnections().clear();
 				getConnections().addAll((Collection<? extends Connection>)newValue);
+				return;
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				setName((String)newValue);
 				return;
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				getRegions().clear();
@@ -263,11 +263,11 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
 				getConnections().clear();
+				return;
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				getRegions().clear();
@@ -284,10 +284,10 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
 				return connections != null && !connections.isEmpty();
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return regions != null && !regions.isEmpty();
 		}
@@ -446,11 +446,11 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 
 	@Override
 	public void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode) {
-		ClassDatumAnalysis classDatumAnalysis = connection.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(connection);
 		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
 		assert nodes2connections != null;
 		Set<@NonNull Node> newSourceNodes = new HashSet<>();
-		Iterables.addAll(newSourceNodes, connection.getSources());
+		Iterables.addAll(newSourceNodes, QVTscheduleUtil.getSourceEnds(connection));
 		NodeConnection oldConnection = nodes2connections.remove(newSourceNodes);
 		assert oldConnection == connection;
 		newSourceNodes.removeAll(obsoleteSourceNodes);

@@ -133,7 +133,7 @@ public class LateConsumerMerger extends AbstractMerger
 					if (!property.isIsRequired()) {
 						return true;					// If property is optional, it's absence cannot cause a failure
 					}
-					ClassDatumAnalysis classDatumAnalysis = secondaryEdge.getEdgeTarget().getClassDatumAnalysis();
+					ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(secondaryEdge.getEdgeTarget());
 					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatumAnalysis);
 					if (realizedEdges != null) {
 						int firstIndex = secondaryEdge.getRegion().getFirstIndex();
