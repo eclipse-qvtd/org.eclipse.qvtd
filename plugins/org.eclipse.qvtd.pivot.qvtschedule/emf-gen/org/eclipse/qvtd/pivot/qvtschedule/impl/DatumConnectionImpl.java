@@ -66,7 +66,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	protected   String name;
 	private /*@LazyNonNull*/ ConnectionRole connectionRole;
 	protected  Set<@NonNull CE> sourceEnds;
-	protected   Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<>();
+	protected final @NonNull Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<>();
 
 	/**
 	 * The indexes in the overall schedule at which this connection propagates additional values.
@@ -140,7 +140,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public void destroy() {
-		getRegion().removeConnection(this);
+		setRegion(null);
 	}
 
 	@Override

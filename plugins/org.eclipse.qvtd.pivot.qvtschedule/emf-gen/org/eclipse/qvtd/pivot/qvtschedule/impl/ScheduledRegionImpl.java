@@ -445,30 +445,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public void removeConnection(@NonNull Connection connection) {
-		boolean wasRemoved = connections.remove(connection);
-		assert wasRemoved;
-		if (connection instanceof NodeConnection) {
-			NodeConnection nodeConnection = (NodeConnection)connection;
-			for (@NonNull Node targetNode : nodeConnection.getTargetNodes()) {
-				targetNode.removeIncomingConnection(nodeConnection);
-			}
-			for (@NonNull Node sourceNode : nodeConnection.getSources()) {
-				sourceNode.removeOutgoingConnection(nodeConnection);
-			}
-		}
-		else if (connection instanceof EdgeConnection) {
-			EdgeConnection edgeConnection = (EdgeConnection)connection;
-			for (@NonNull NavigableEdge targetEdge : edgeConnection.getTargetEdges()) {
-				targetEdge.removeIncomingConnection(edgeConnection);
-			}
-			for (@NonNull NavigableEdge sourceEdge : edgeConnection.getSources()) {
-				sourceEdge.removeOutgoingConnection(edgeConnection);
-			}
-		}
-	}
-
-	@Override
 	public void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode) {
 		ClassDatumAnalysis classDatumAnalysis = connection.getClassDatumAnalysis();
 		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
@@ -480,8 +456,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		newSourceNodes.removeAll(obsoleteSourceNodes);
 		newSourceNodes.add(newSourceNode);
 		NodeConnection newConnection = getNodeConnection(newSourceNodes, classDatumAnalysis);
-		for (@NonNull Node targetNode : connection.getTargetNodes()) {
-			ConnectionRole connectionRole = connection.getConnectionRole(targetNode);
+		for (@NonNull Node targetNode : oldConnection.getTargetNodes()) {
+			ConnectionRole connectionRole = oldConnection.getConnectionRole(targetNode);
 			if (connectionRole.isPassed()) {
 				newConnection.addPassedTargetNode(targetNode);
 			}
@@ -489,7 +465,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				newConnection.addUsedTargetNode(targetNode, false);			// FIXME mandatory
 			}
 		}
-		removeConnection(connection);
+		oldConnection.destroy();
 	}
 
 

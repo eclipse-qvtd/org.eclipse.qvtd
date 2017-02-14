@@ -103,7 +103,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 		mergeRole(QVTscheduleConstants.PASSED);
 		assert !targetEnd2role.containsKey(targetNode);
 		targetEnd2role.put(targetNode, QVTscheduleConstants.PASSED);
-		targetNode.addIncomingConnection(this);
+		targetNode.setIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
@@ -116,7 +116,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 		}
 		mergeRole(newConnectionRole);
 		targetEnd2role.put(targetNode, newConnectionRole);
-		targetNode.addIncomingConnection(this);
+		targetNode.setIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
@@ -134,13 +134,13 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 
 	@Override
 	public void destroy() {
+		super.destroy();
 		for (@NonNull Node sourceNode : sourceEnds) {
 			sourceNode.removeOutgoingConnection(this);
 		}
 		for (@NonNull Node targetNode : targetEnd2role.keySet()) {
-			targetNode.removeIncomingConnection(this);
+			targetNode.setIncomingConnection(null);
 		}
-		super.destroy();
 	}
 
 	@Override
@@ -310,7 +310,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	public void removeTargetRegion(@NonNull Region targetRegion) {
 		for (@NonNull Node targetNode : Lists.newArrayList(getTargetNodes())) {
 			if (targetNode.getRegion() == targetRegion) {
-				targetNode.removeIncomingConnection(this);
+				targetNode.setIncomingConnection(null);
 				removeTarget(targetNode);
 			}
 		}

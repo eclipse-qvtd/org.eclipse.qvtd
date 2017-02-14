@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -64,9 +65,11 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getNodeRole <em>Node Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingConnections <em>Outgoing Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getRegion <em>Region</em>}</li>
  * </ul>
@@ -74,6 +77,16 @@ import com.google.common.collect.Iterables;
  * @generated
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
+	/**
+	 * The cached value of the '{@link #getIncomingConnection() <em>Incoming Connection</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncomingConnection()
+	 * @generated
+	 * @ordered
+	 */
+	protected NodeConnection incomingConnection;
+
 	/**
 	 * The cached value of the '{@link #getIncomingEdges() <em>Incoming Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -115,6 +128,16 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	protected Role nodeRole;
 
 	/**
+	 * The cached value of the '{@link #getOutgoingConnections() <em>Outgoing Connections</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoingConnections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NodeConnection> outgoingConnections;
+
+	/**
 	 * The cached value of the '{@link #getOutgoingEdges() <em>Outgoing Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,6 +164,46 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.NODE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NodeConnection getIncomingConnection() {
+		if (incomingConnection != null && incomingConnection.eIsProxy()) {
+			InternalEObject oldIncomingConnection = (InternalEObject)incomingConnection;
+			incomingConnection = (NodeConnection)eResolveProxy(oldIncomingConnection);
+			if (incomingConnection != oldIncomingConnection) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__INCOMING_CONNECTION, oldIncomingConnection, incomingConnection));
+			}
+		}
+		return incomingConnection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NodeConnection basicGetIncomingConnection() {
+		return incomingConnection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIncomingConnection(NodeConnection newIncomingConnection) {
+		NodeConnection oldIncomingConnection = incomingConnection;
+		incomingConnection = newIncomingConnection;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__INCOMING_CONNECTION, oldIncomingConnection, incomingConnection));
 	}
 
 	/**
@@ -181,6 +244,19 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		nodeRole = newNodeRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__NODE_ROLE, oldNodeRole, nodeRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<NodeConnection> getOutgoingConnections() {
+		if (outgoingConnections == null) {
+			outgoingConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.NODE__OUTGOING_CONNECTIONS);
+		}
+		return outgoingConnections;
 	}
 
 	/**
@@ -283,6 +359,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+				if (resolve) return getIncomingConnection();
+				return basicGetIncomingConnection();
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				return getIncomingEdges();
 			case QVTschedulePackage.NODE__NAME:
@@ -290,6 +369,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				if (resolve) return getNodeRole();
 				return basicGetNodeRole();
+			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+				return getOutgoingConnections();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return getOutgoingEdges();
 			case QVTschedulePackage.NODE__REGION:
@@ -307,6 +388,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+				setIncomingConnection((NodeConnection)newValue);
+				return;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				getIncomingEdges().clear();
 				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
@@ -316,6 +400,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return;
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				setNodeRole((Role)newValue);
+				return;
+			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+				getOutgoingConnections().clear();
+				getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
 				return;
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				getOutgoingEdges().clear();
@@ -336,6 +424,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+				setIncomingConnection((NodeConnection)null);
+				return;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				getIncomingEdges().clear();
 				return;
@@ -344,6 +435,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return;
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				setNodeRole((Role)null);
+				return;
+			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+				getOutgoingConnections().clear();
 				return;
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				getOutgoingEdges().clear();
@@ -363,12 +457,16 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+				return incomingConnection != null;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				return incomingEdges != null && !incomingEdges.isEmpty();
 			case QVTschedulePackage.NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.NODE__NODE_ROLE:
 				return nodeRole != null;
+			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+				return outgoingConnections != null && !outgoingConnections.isEmpty();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return outgoingEdges != null && !outgoingEdges.isEmpty();
 			case QVTschedulePackage.NODE__REGION:
@@ -381,32 +479,17 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isDataType;
 	private boolean isHead = false;
 	private boolean isContained = false;
-	private @Nullable NodeConnection incomingConnection = null;
-	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
 
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<>();
 
 	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
 
 	@Override
-	public final void addIncomingConnection(@NonNull NodeConnection connection) {
-		assert (incomingConnection == null) || (incomingConnection == connection);
-		assert Iterables.contains(connection.getTargetNodes(), this);
-		//		assert edge.getRegion() == getRegion();
-		incomingConnection = connection;
-	}
-
-	@Override
 	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
 		//		assert edge.getRegion() == getRegion();
-		List<@NonNull NodeConnection> outgoingConnections2 = outgoingConnections;
-		if (outgoingConnections2 == null) {
-			outgoingConnections = outgoingConnections2 = new ArrayList<>();
-		}
-		else {
-			assert !outgoingConnections2.contains(connection);
-		}
+		List<NodeConnection> outgoingConnections2 = getOutgoingConnections();
+		assert !outgoingConnections2.contains(connection);
 		outgoingConnections2.add(connection);
 	}
 
@@ -551,11 +634,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public final @Nullable NodeConnection getIncomingConnection() {
-		return incomingConnection;
-	}
-
-	@Override
 	public final @Nullable NodeConnection getIncomingPassedConnection() {
 		NodeConnection incomingConnection2 = incomingConnection;
 		if ((incomingConnection2 != null) && incomingConnection2.isPassed()) {
@@ -622,11 +700,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return transform;
 	}
 
-	@Override
-	public final @NonNull List<@NonNull NodeConnection> getOutgoingConnections() {
-		return outgoingConnections != null ? outgoingConnections : QVTscheduleConstants.EMPTY_NODE_CONNECTION_LIST;
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -682,13 +755,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {
-		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(getOutgoingConnections(), QVTscheduleUtil.IsPassedBindingEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(QVTscheduleUtil.getOutgoingConnections(this), QVTscheduleUtil.IsPassedBindingEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges() {
-		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(getOutgoingConnections(), QVTscheduleUtil.IsUsedBindingEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(QVTscheduleUtil.getOutgoingConnections(this), QVTscheduleUtil.IsUsedBindingEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -1009,14 +1082,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		else {
 			return false;
 		}
-	}
-
-	@Override
-	public final void removeIncomingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(connection.getTargetNodes(), this);
-		//		assert edge.getRegion() == getRegion();
-		assert incomingConnection != null;
-		incomingConnection = null;
 	}
 
 	@Override

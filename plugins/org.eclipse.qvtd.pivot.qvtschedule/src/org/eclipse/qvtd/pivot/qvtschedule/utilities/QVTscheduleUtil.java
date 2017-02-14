@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -573,6 +574,14 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull Node> getNodes(@NonNull Region region) {
 		return ClassUtil.nullFree(region.getNodes());
+	}
+
+	public static @NonNull Iterable<@NonNull EdgeConnection> getOutgoingConnections(@NonNull NavigableEdge navigableEdge) {
+		return ClassUtil.nullFree(navigableEdge.getOutgoingConnections());
+	}
+
+	public static @NonNull Iterable<@NonNull NodeConnection> getOutgoingConnections(@NonNull Node node) {
+		return ClassUtil.nullFree(node.getOutgoingConnections());
 	}
 
 	public static @NonNull Iterable<@NonNull Edge> getOutgoingEdges(@NonNull Node node) {

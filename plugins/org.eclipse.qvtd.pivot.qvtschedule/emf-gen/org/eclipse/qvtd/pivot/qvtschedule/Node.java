@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -42,9 +41,11 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingConnections <em>Outgoing Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingEdges <em>Outgoing Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion <em>Region</em>}</li>
  * </ul>
@@ -55,6 +56,51 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  */
 public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 {
+	/**
+	 * Returns the value of the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Incoming Connection</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Incoming Connection</em>' reference.
+	 * @see #setIncomingConnection(NodeConnection)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_IncomingConnection()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!incomingConnection'"
+	 * @generated
+	 */
+	NodeConnection getIncomingConnection();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Incoming Connection</em>' reference.
+	 * @see #getIncomingConnection()
+	 * @generated
+	 */
+	void setIncomingConnection(NodeConnection value);
+
+	/**
+	 * Returns the value of the '<em><b>Incoming Edges</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Edge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode <em>Target Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Incoming Edges</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Incoming Edges</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_IncomingEdges()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode
+	 * @model opposite="targetNode"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!incomingEdges'"
+	 * @generated
+	 */
+	EList<Edge> getIncomingEdges();
+
 	/**
 	 * Returns the value of the '<em><b>Node Role</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -83,6 +129,41 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	void setNodeRole(Role value);
 
 	/**
+	 * Returns the value of the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Outgoing Connections</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Outgoing Connections</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_OutgoingConnections()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!outgoingConnections'"
+	 * @generated
+	 */
+	EList<NodeConnection> getOutgoingConnections();
+
+	/**
+	 * Returns the value of the '<em><b>Outgoing Edges</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Edge}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Outgoing Edges</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Outgoing Edges</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_OutgoingEdges()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode
+	 * @model opposite="sourceNode"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!outgoingEdges'"
+	 * @generated
+	 */
+	EList<Edge> getOutgoingEdges();
+
+	/**
 	 * The prioritized utility of each node.
 	 */
 	public enum Utility {
@@ -96,7 +177,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 		DEAD							// else never used
 	}
 
-	void addIncomingConnection(@NonNull NodeConnection connection);
 	void addOutgoingConnection(@NonNull NodeConnection connection);
 	void addTypedElement(@NonNull TypedElement typedElement);
 
@@ -116,8 +196,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
-	@Nullable NodeConnection getIncomingConnection();
-	List<Edge> getIncomingEdges();
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -153,8 +231,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
 	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull Node> getNavigationTargets();
-	@NonNull List<@NonNull NodeConnection> getOutgoingConnections();
-	List<Edge> getOutgoingEdges();
 	/**
 	 * Returns the value of the '<em><b>Region</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}'.
@@ -350,7 +426,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	boolean isUnconditional();
 
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
-	void removeIncomingConnection(@NonNull NodeConnection connection);
 	void removeOutgoingConnection(@NonNull NodeConnection connection);
 
 	/**

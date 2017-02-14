@@ -1029,13 +1029,58 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGABLE_EDGE__TARGET_NODE = EDGE__TARGET_NODE;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__INCOMING_CONNECTION = EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__OUTGOING_CONNECTIONS = EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__PROPERTY = EDGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Secondary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__SECONDARY = EDGE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Opposite Edge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__OPPOSITE_EDGE = EDGE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Navigable Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGABLE_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 0;
+	int NAVIGABLE_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1144,6 +1189,51 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CAST_EDGE__TARGET_NODE = NAVIGABLE_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__INCOMING_CONNECTION = NAVIGABLE_EDGE__INCOMING_CONNECTION;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__OUTGOING_CONNECTIONS = NAVIGABLE_EDGE__OUTGOING_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__PROPERTY = NAVIGABLE_EDGE__PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Secondary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__SECONDARY = NAVIGABLE_EDGE__SECONDARY;
+
+	/**
+	 * The feature id for the '<em><b>Opposite Edge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__OPPOSITE_EDGE = NAVIGABLE_EDGE__OPPOSITE_EDGE;
 
 	/**
 	 * The number of structural features of the '<em>Cast Edge</em>' class.
@@ -1416,13 +1506,22 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__INCOMING_CONNECTION = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__INCOMING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int NODE__INCOMING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1431,7 +1530,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int NODE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Node Role</b></em>' reference.
@@ -1440,7 +1539,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__NODE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int NODE__NODE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__OUTGOING_CONNECTIONS = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -1449,7 +1557,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__OUTGOING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int NODE__OUTGOING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Region</b></em>' container reference.
@@ -1458,7 +1566,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+	int NODE__REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -1467,7 +1575,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
+	int NODE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1533,6 +1641,15 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSED_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1558,6 +1675,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSED_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -1929,6 +2055,15 @@ public interface QVTschedulePackage extends EPackage {
 	int DEPENDENCY_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1954,6 +2089,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPENDENCY_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -2136,6 +2280,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2161,6 +2314,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ERROR_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -2370,6 +2532,15 @@ public interface QVTschedulePackage extends EPackage {
 	int INPUT_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2395,6 +2566,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -2604,6 +2784,15 @@ public interface QVTschedulePackage extends EPackage {
 	int VARIABLE_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2629,6 +2818,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -2721,6 +2919,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE__OWNED_EXTENSIONS = VARIABLE_NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__INCOMING_CONNECTION = VARIABLE_NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2746,6 +2953,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_NODE__NODE_ROLE = VARIABLE_NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__OUTGOING_CONNECTIONS = VARIABLE_NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -3298,6 +3514,51 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGATION_EDGE__TARGET_NODE = NAVIGABLE_EDGE__TARGET_NODE;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__INCOMING_CONNECTION = NAVIGABLE_EDGE__INCOMING_CONNECTION;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__OUTGOING_CONNECTIONS = NAVIGABLE_EDGE__OUTGOING_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__PROPERTY = NAVIGABLE_EDGE__PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Secondary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__SECONDARY = NAVIGABLE_EDGE__SECONDARY;
+
+	/**
+	 * The feature id for the '<em><b>Opposite Edge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__OPPOSITE_EDGE = NAVIGABLE_EDGE__OPPOSITE_EDGE;
+
+	/**
 	 * The number of structural features of the '<em>Navigation Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3470,6 +3731,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NULL_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3495,6 +3765,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NULL_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -3597,6 +3876,15 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3622,6 +3910,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -3841,6 +4138,15 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_TYPED_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3866,6 +4172,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_TYPED_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -3968,6 +4283,15 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__OWNED_EXTENSIONS = VARIABLE_NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__INCOMING_CONNECTION = VARIABLE_NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3993,6 +4317,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_VARIABLE_NODE__NODE_ROLE = VARIABLE_NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__OUTGOING_CONNECTIONS = VARIABLE_NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -5037,6 +5370,15 @@ public interface QVTschedulePackage extends EPackage {
 	int TRUE_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRUE_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5062,6 +5404,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int TRUE_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRUE_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -5164,6 +5515,15 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_NODE__INCOMING_CONNECTION = NODE__INCOMING_CONNECTION;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5189,6 +5549,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNKNOWN_NODE__NODE_ROLE = NODE__NODE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_NODE__OUTGOING_CONNECTIONS = NODE__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -6012,6 +6381,61 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getNavigableEdge();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getIncomingConnection <em>Incoming Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Incoming Connection</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getIncomingConnection()
+	 * @see #getNavigableEdge()
+	 * @generated
+	 */
+	EReference getNavigableEdge_IncomingConnection();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOutgoingConnections <em>Outgoing Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Outgoing Connections</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOutgoingConnections()
+	 * @see #getNavigableEdge()
+	 * @generated
+	 */
+	EReference getNavigableEdge_OutgoingConnections();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getProperty()
+	 * @see #getNavigableEdge()
+	 * @generated
+	 */
+	EReference getNavigableEdge_Property();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#isSecondary <em>Secondary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secondary</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#isSecondary()
+	 * @see #getNavigableEdge()
+	 * @generated
+	 */
+	EAttribute getNavigableEdge_Secondary();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOppositeEdge <em>Opposite Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Opposite Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOppositeEdge()
+	 * @see #getNavigableEdge()
+	 * @generated
+	 */
+	EReference getNavigableEdge_OppositeEdge();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge <em>Navigation Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6032,6 +6456,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getNode();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Incoming Connection</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_IncomingConnection();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6041,6 +6476,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNode_NodeRole();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingConnections <em>Outgoing Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Outgoing Connections</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingConnections()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_OutgoingConnections();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges <em>Incoming Edges</em>}'.
@@ -6890,6 +7336,46 @@ public interface QVTschedulePackage extends EPackage {
 		EClass NAVIGABLE_EDGE = eINSTANCE.getNavigableEdge();
 
 		/**
+		 * The meta object literal for the '<em><b>Incoming Connection</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGABLE_EDGE__INCOMING_CONNECTION = eINSTANCE.getNavigableEdge_IncomingConnection();
+
+		/**
+		 * The meta object literal for the '<em><b>Outgoing Connections</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGABLE_EDGE__OUTGOING_CONNECTIONS = eINSTANCE.getNavigableEdge_OutgoingConnections();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGABLE_EDGE__PROPERTY = eINSTANCE.getNavigableEdge_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Secondary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAVIGABLE_EDGE__SECONDARY = eINSTANCE.getNavigableEdge_Secondary();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite Edge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGABLE_EDGE__OPPOSITE_EDGE = eINSTANCE.getNavigableEdge_OppositeEdge();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl <em>Navigation Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6910,12 +7396,28 @@ public interface QVTschedulePackage extends EPackage {
 		EClass NODE = eINSTANCE.getNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Incoming Connection</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__INCOMING_CONNECTION = eINSTANCE.getNode_IncomingConnection();
+
+		/**
 		 * The meta object literal for the '<em><b>Node Role</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference NODE__NODE_ROLE = eINSTANCE.getNode_NodeRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Outgoing Connections</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__OUTGOING_CONNECTIONS = eINSTANCE.getNode_OutgoingConnections();
 
 		/**
 		 * The meta object literal for the '<em><b>Incoming Edges</b></em>' reference list feature.

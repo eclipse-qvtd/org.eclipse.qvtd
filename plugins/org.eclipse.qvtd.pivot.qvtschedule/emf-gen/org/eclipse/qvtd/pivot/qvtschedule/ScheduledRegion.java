@@ -92,7 +92,6 @@ public interface ScheduledRegion extends Region
 	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull NodeConnection> getNodeConnections();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
-	void removeConnection(@NonNull Connection connection);
 	void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

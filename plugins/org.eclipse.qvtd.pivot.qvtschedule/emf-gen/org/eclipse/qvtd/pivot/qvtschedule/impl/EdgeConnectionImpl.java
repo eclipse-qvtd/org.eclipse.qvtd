@@ -95,7 +95,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		mergeRole(mustBeLater ? QVTscheduleConstants.MANDATORY_EDGE : QVTscheduleConstants.PREFERRED_EDGE);
 		assert !targetEnd2role.containsKey(targetEdge);
 		targetEnd2role.put(targetEdge, mustBeLater ? QVTscheduleConstants.MANDATORY_EDGE : QVTscheduleConstants.PREFERRED_EDGE);
-		targetEdge.addIncomingConnection(this);
+		targetEdge.setIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
@@ -105,7 +105,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 			sourceEdge.removeOutgoingConnection(this);
 		}
 		for (@NonNull NavigableEdge targetNode : targetEnd2role.keySet()) {
-			targetNode.removeIncomingConnection(this);
+			targetNode.setIncomingConnection(null);
 		}
 		super.destroy();
 	}
@@ -216,7 +216,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	public void removeTargetRegion(@NonNull Region targetRegion) {
 		for (@NonNull NavigableEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
 			if (targetEdge.getRegion() == targetRegion) {
-				targetEdge.removeIncomingConnection(this);
+				targetEdge.setIncomingConnection(null);
 				removeTarget(targetEdge);
 			}
 		}

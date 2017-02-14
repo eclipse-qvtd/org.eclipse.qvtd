@@ -100,17 +100,40 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingConnection" eType="#//EdgeConnection"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oppositeEdge" eType="#//NavigableEdge">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingConnections" upperBound="-1"
+        eType="#//EdgeConnection"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The property to navigate from source to target."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secondary" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if this edge is the auto-created second half of a bidirectional pair."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NavigationEdge" eSuperTypes="#//NavigableEdge"/>
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//ConnectionEnd #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping&#xD;&#xA;or Composite Region."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingConnection" eType="#//NodeConnection"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" upperBound="-1"
         eType="#//Edge" eOpposite="#//Edge/targetNode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeRole" lowerBound="1"
         eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingConnections" upperBound="-1"
+        eType="#//NodeConnection"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" upperBound="-1"
         eType="#//Edge" eOpposite="#//Edge/sourceNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
