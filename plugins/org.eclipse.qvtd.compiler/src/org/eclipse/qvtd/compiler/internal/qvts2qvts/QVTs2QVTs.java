@@ -19,8 +19,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion2;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RootScheduledRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -57,7 +57,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//		splitConnectionVariables();
 		//
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduledRegion.writeDebugGraphs("5-cycled", true, true, false);
 		}
 	}
@@ -107,7 +107,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				}
 			}
 		}
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduledRegion.writeDebugGraphs("7-pruned", true, true, false);
 		}
 
@@ -357,7 +357,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		ScheduledRegion rootRegion = createRootRegion(activeRegions);
 		((RootScheduledRegion2)rootRegion).createSchedule();
 		createSchedule(rootRegion);
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootRegion.writeDebugGraphs("9-final", true, true, true);
 		}
 		return rootRegion;

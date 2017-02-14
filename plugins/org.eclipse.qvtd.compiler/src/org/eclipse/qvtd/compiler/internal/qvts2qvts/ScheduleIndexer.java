@@ -16,10 +16,10 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -52,7 +52,7 @@ public class ScheduleIndexer extends ScheduleState
 			Region selectedRegion = selectNextRegion(scheduledRegion);
 			scheduleRegion(selectedRegion);
 		}
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduledRegion.writeDebugGraphs("6-indexed", false, true, true);
 		}
 	}
@@ -75,14 +75,14 @@ public class ScheduleIndexer extends ScheduleState
 		//		Collections.sort(partiallyBlockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull DatumConnection<?>> blockedConnectionsList = Lists.newArrayList(getBlockedConnections());
 		Collections.sort(blockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
-		if (QVTp2QVTs.REGION_ORDER.isActive()) {
-			QVTp2QVTs.REGION_ORDER.println("      unblocked regions:");
+		if (QVTm2QVTs.REGION_ORDER.isActive()) {
+			QVTm2QVTs.REGION_ORDER.println("      unblocked regions:");
 			for (@NonNull Region region : unblockedRegionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + region);
+				QVTm2QVTs.REGION_ORDER.println("        " + region);
 			}
-			QVTp2QVTs.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
+			QVTm2QVTs.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
 			for (@NonNull Region region : callableRegionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
+				QVTm2QVTs.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
 				/*				List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
 				assert incomingConnections != null;
 				for (@NonNull DatumConnection connection : incomingConnections) {
@@ -131,15 +131,15 @@ public class ScheduleIndexer extends ScheduleState
 							+ connection.getSourceDisplayNames());
 				} */
 			}
-			QVTp2QVTs.REGION_ORDER.println("      mandatory blocked regions:");
+			QVTm2QVTs.REGION_ORDER.println("      mandatory blocked regions:");
 			for (@NonNull Region region : mandatoryBlockedRegionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + region);
+				QVTm2QVTs.REGION_ORDER.println("        " + region);
 			}
 			//			Scheduler.REGION_ORDER.println("      partially blocked connections:");
 			//			for (Connection connection : partiallyBlockedConnectionsList) {
 			//				Scheduler.REGION_ORDER.println("        " + connection);
 			//			}
-			QVTp2QVTs.REGION_ORDER.println("      blocked connections:");
+			QVTm2QVTs.REGION_ORDER.println("      blocked connections:");
 			for (@NonNull DatumConnection<?> connection : blockedConnectionsList) {
 				int all = 0;
 				int unblocked = 0;
@@ -149,7 +149,7 @@ public class ScheduleIndexer extends ScheduleState
 						unblocked++;
 					}
 				}
-				QVTp2QVTs.REGION_ORDER.println("        " + connection + " " + unblocked + "/" + all);
+				QVTm2QVTs.REGION_ORDER.println("        " + connection + " " + unblocked + "/" + all);
 			}
 		}
 		//		int debugRegionSize = region2incomingConnections.size();

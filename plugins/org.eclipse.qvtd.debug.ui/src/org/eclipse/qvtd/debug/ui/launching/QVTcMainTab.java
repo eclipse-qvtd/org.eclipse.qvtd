@@ -34,7 +34,6 @@ public class QVTcMainTab extends QVTDirectionalMainTab<Transformation>
 		CompilerChain.QVTC_STEP,
 		CompilerChain.QVTU_STEP,
 		CompilerChain.QVTM_STEP,
-		CompilerChain.QVTP_STEP,
 		CompilerChain.QVTS_STEP,
 		CompilerChain.QVTI_STEP,
 		CompilerChain.JAVA_STEP,

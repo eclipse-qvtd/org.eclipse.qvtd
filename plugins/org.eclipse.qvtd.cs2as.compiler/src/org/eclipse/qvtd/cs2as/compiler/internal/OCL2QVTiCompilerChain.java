@@ -36,16 +36,16 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
-	public static class OCL2QVTpCompilerStep extends AbstractCompilerStep  // FIXME split into multiple steps
+	public static class OCL2QVTmCompilerStep extends AbstractCompilerStep  // FIXME split into multiple steps
 	{
 		private @NonNull URI oclASUri;
 		private @NonNull List<URI> extendedASUris = new ArrayList<URI>();
 		private @NonNull String traceabilityPropName;
 
-		public OCL2QVTpCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
+		public OCL2QVTmCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
 				@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
 				@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-			super(compilerChain, QVTP_STEP);
+			super(compilerChain, QVTM_STEP);
 			this.traceabilityPropName = getTraceabilityPropertyName();
 			ResourceSet externalResourceSet = qvti.getResourceSet();
 			CSResource csResource = (CSResource) externalResourceSet.getResource(oclDocURI, true);
@@ -76,39 +76,39 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 			}
 		}
 
-		public @NonNull Resource ocl2qvtp(@NonNull URI oclURI) throws IOException {
-			OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName);
-			Resource pResource = ocl2qvtp.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
-			saveResource(pResource, QVTP_STEP);
+		public @NonNull Resource ocl2qvtm(@NonNull URI oclURI) throws IOException {
+			OCL2QVTm ocl2qvtm = new OCL2QVTm(environmentFactory, traceabilityPropName);
+			Resource pResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
+			saveResource(pResource, QVTM_STEP);
 			return pResource;
 		}
 
 		protected Resource execute() throws IOException {
-			Resource pModel = ocl2qvtp(oclASUri);
+			Resource mModel = ocl2qvtm(oclASUri);
 			if (!extendedASUris.isEmpty()) {
-				List<Resource> qvtpModels = new ArrayList<Resource>();
+				List<Resource> qvtmModels = new ArrayList<Resource>();
 				for (URI extendedQVTpModel : extendedASUris) {
-					qvtpModels.add(ocl2qvtp(extendedQVTpModel));
+					qvtmModels.add(ocl2qvtm(extendedQVTpModel));
 				}
-				QVTpModelsMerger.merge(environmentFactory , pModel, qvtpModels);
-				saveResource(pModel, QVTP_STEP);
-				for(Resource qvtpModel : qvtpModels) {	// unload unnecessary qvtpModels
-					qvtpModel.unload();
+				QVTmModelsMerger.merge(environmentFactory , mModel, qvtmModels);
+				saveResource(mModel, QVTM_STEP);
+				for(Resource qvtmModel : qvtmModels) {	// unload unnecessary qvtmModels
+					qvtmModel.unload();
 				}
 			}
-			return pModel;
+			return mModel;
 		}
 
 		private @NonNull String getTraceabilityPropertyName() {
-			String tracePropName = compilerChain.getOption(QVTP_STEP, TRACE_PROPERTY_NAME_KEY);
+			String tracePropName = compilerChain.getOption(QVTM_STEP, TRACE_PROPERTY_NAME_KEY);
 			return tracePropName == null ? DEFAULT_TRACE_PROPERTY_NAME : tracePropName;
 		}
 	}
 
 	public @NonNull static final String DEFAULT_TRACE_PROPERTY_NAME = "ast";
-	public @NonNull static final Key<String> TRACE_PROPERTY_NAME_KEY = new Key<String>("ocl2qvtp.tracePropName");
+	public @NonNull static final Key<String> TRACE_PROPERTY_NAME_KEY = new Key<String>("ocl2qvtm.tracePropName");
 
-	public final @NonNull OCL2QVTpCompilerStep ocl2qvtpCompilerStep;
+	public final @NonNull OCL2QVTmCompilerStep ocl2qvtmCompilerStep;
 
 	/**
 	 * To provide a different traceabilityPropName different to the default {@link OCL2QVTiCompilerChain#DEFAULT_TRACE_PROPERTY_NAME "ast"} one,
@@ -123,12 +123,12 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
 			@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
 		super(qvti.getEnvironmentFactory(), oclDocURI, options);
-		this.ocl2qvtpCompilerStep = new OCL2QVTpCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
+		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
-		return qvtp2qvti(ocl2qvtpCompilerStep.execute());
+		return qvtm2qvti(ocl2qvtmCompilerStep.execute());
 	}
 
 	public @NonNull ImperativeTransformation compile() throws IOException {
@@ -136,9 +136,9 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	protected @NonNull ImperativeTransformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
+	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource) throws IOException {
 		rewriteSafeNavigations(pResource);
-		return super.qvtp2qvti(pResource);
+		return super.qvtm2qvti(pResource);
 	}
 
 	// FIXME this workaround produces a new traversal of the resource

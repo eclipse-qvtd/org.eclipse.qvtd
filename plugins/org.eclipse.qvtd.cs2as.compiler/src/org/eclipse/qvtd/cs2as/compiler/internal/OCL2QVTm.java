@@ -10,15 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.firstToUpperCase;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContainers;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContents;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContentsIncludingSelf;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getCreationMappingName;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getExpressionContextType;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getOwningPackage;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getSuperClasses;
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getUpdateMappingName;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.firstToUpperCase;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getAllContainers;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getAllContents;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getAllContentsIncludingSelf;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getCreationMappingName;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getExpressionContextType;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getOwningPackage;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getSuperClasses;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTmUtil.getUpdateMappingName;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +69,7 @@ import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 
-public class OCL2QVTp {
+public class OCL2QVTm {
 
 	//	private @NonNull Logger logger = Logger.getLogger(getClass().getName());
 	private @NonNull EnvironmentFactory envFact;
@@ -79,7 +79,7 @@ public class OCL2QVTp {
 	public static final @NonNull String RIGHT_MODEL_TYPE_NAME = "rightAS";
 	public static final @NonNull String LEFT_MODEL_TYPE_NAME = "leftCS";
 
-	public OCL2QVTp(@NonNull EnvironmentFactory envFact, @NonNull String traceabilityPropName) {
+	public OCL2QVTm(@NonNull EnvironmentFactory envFact, @NonNull String traceabilityPropName) {
 		this.envFact = envFact;
 		this.traceabilityPropName = traceabilityPropName;
 	}
@@ -96,7 +96,7 @@ public class OCL2QVTp {
 			CoreModel outputModel = oclModelToImperativeModel().apply(model);
 
 			// We create the output resource
-			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtp.qvtcas");
+			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtm.qvtcas");
 			Resource outputResource = resourceSet.createResource(outputURI);
 			outputResource.getContents().add(outputModel);
 			return outputResource;
@@ -126,7 +126,7 @@ public class OCL2QVTp {
 					.filter(ShadowPart.class::isInstance)
 					.map(ShadowPart.class::cast).collect(Collectors.toList());
 
-			iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtp.qvtcas")); // When the externalURI is set, also is its name
+			iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtm.qvtcas")); // When the externalURI is set, also is its name
 			iModel.getOwnedImports().addAll(oclModel.getOwnedImports().stream()
 				.map(importToImport())
 				.collect(Collectors.toList()));

@@ -22,8 +22,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
@@ -367,7 +367,7 @@ public class Partitioner
 	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull Edge outputEdge, int i) {
 		AssignmentPartition realizedPartition = new AssignmentPartition(this, outputEdge);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
 		return microMappingRegion;
@@ -376,7 +376,7 @@ public class Partitioner
 	private @NonNull MicroMappingRegion createRealizedRegion() {
 		RealizedPartition realizedPartition = new RealizedPartition(this);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_r0");
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
 		return microMappingRegion;
@@ -385,7 +385,7 @@ public class Partitioner
 	private @NonNull MicroMappingRegion createSpeculatedRegion() {
 		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
 		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p1");
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
 		return microMappingRegion;
@@ -394,7 +394,7 @@ public class Partitioner
 	private @NonNull MicroMappingRegion createSpeculationRegion() {
 		SpeculationPartition speculationPartition = new SpeculationPartition(this);
 		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p0");
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
 		return microMappingRegion;

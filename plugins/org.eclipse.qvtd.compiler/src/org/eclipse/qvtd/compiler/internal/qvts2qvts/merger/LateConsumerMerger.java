@@ -19,8 +19,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ContentsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
@@ -248,7 +248,7 @@ public class LateConsumerMerger extends AbstractMerger
 	public static @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> merge(@NonNull ScheduledRegion scheduledRegion) {
 		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduledRegion);
 		lateMerger.merge();
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduledRegion.writeDebugGraphs("8-late", true, true, false);
 		}
 		return lateMerger.getMerges();

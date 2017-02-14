@@ -105,11 +105,11 @@ public class QVTcSerializeTests extends LoadTestCase
 	}
 
 	public void testSerialize_platformResource_BaseCS2AS() throws Exception {
-		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtp");
+		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtm");
 	}
 
 	//	public void testSerialize_platformResource_Mini() throws Exception {
-	//		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/MiniBaseCS2AS.qvtp");
+	//		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/MiniBaseCS2AS.qvtm");
 	//	}
 
 	/* FIXME get better source

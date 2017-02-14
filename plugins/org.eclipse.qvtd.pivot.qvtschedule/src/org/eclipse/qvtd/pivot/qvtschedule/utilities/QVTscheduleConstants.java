@@ -36,8 +36,8 @@ public class QVTscheduleConstants
 	@SuppressWarnings("null")
 	public static final @NonNull String PLUGIN_ID = QVTschedulePackage.class.getPackage().getName();
 
-	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(PLUGIN_ID, "qvtp2qvts/connectionCreation");	// FIXME
-	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(PLUGIN_ID, "qvtp2qvts/connectionRouting");
+	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionCreation");	// FIXME
+	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionRouting");
 	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(PLUGIN_ID, "qvts2qvti/polledProperties");	// FIXME
 
 	/** The name of the root mapping */

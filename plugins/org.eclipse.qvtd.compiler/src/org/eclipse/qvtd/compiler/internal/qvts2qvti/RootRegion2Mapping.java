@@ -72,8 +72,8 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			org.eclipse.ocl.pivot.Class type = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
-				TypedModel qvtpTypedModel = classDatumAnalysis.getTypedModel();
-				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
+				TypedModel qvtmTypedModel = classDatumAnalysis.getTypedModel();
+				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
 				if (qvtiTypedModel != null) {
 					checkableTypedModels.add(qvtiTypedModel);
 				}

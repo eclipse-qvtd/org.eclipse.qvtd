@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -323,17 +323,17 @@ public class OperationDependencyAnalysis
 	protected static class BasicDependencyPaths implements OperationDependencyPaths
 	{
 		protected final @NonNull OperationDependencyAnalysis operationDependencyAnalysis;
-		private final @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths;
-		private final @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> hiddenPaths;
+		private final @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths;
+		private final @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths;
 
 		protected BasicDependencyPaths(@NonNull OperationDependencyAnalysis operationDependencyAnalysis,
-				@Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths,
-				@Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> hiddenPaths) {
+				@Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths,
+				@Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths) {
 			this.operationDependencyAnalysis = operationDependencyAnalysis;
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> immutableReturnPaths;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> immutableReturnPaths;
 			if (returnPaths != null) {
 				immutableReturnPaths = new HashSet<>(returnPaths.size());
-				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> returnPath : returnPaths) {
+				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> returnPath : returnPaths) {
 					immutableReturnPaths.add(Collections.unmodifiableList(returnPath));
 				}
 			}
@@ -341,10 +341,10 @@ public class OperationDependencyAnalysis
 				immutableReturnPaths = Collections.emptySet();
 			}
 			this.returnPaths = Collections.unmodifiableSet(immutableReturnPaths);
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> immutableHiddenPaths;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> immutableHiddenPaths;
 			if (hiddenPaths != null) {
 				immutableHiddenPaths = new HashSet<>(hiddenPaths.size());
-				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> hiddenPath : hiddenPaths) {
+				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> hiddenPath : hiddenPaths) {
 					immutableHiddenPaths.add(Collections.unmodifiableList(hiddenPath));
 				}
 			}
@@ -358,11 +358,11 @@ public class OperationDependencyAnalysis
 		 * Return a new DependencyPaths formed by the addition of both the returnPaths and the hiddenPaths of secondPath to these hiddenPaths
 		 */
 		public @NonNull BasicDependencyPaths addHidden(@NonNull BasicDependencyPaths secondPath) {
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> newHiddenPaths = hiddenPaths;
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> secondPathHiddenPaths = secondPath.basicGetHiddenPaths();
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> newHiddenPaths = hiddenPaths;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> secondPathHiddenPaths = secondPath.basicGetHiddenPaths();
 			newHiddenPaths = new HashSet<>(newHiddenPaths);
 			newHiddenPaths.addAll(secondPathHiddenPaths);
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> secondPathReturnPaths = secondPath.basicGetReturnPaths();
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> secondPathReturnPaths = secondPath.basicGetReturnPaths();
 			newHiddenPaths = new HashSet<>(newHiddenPaths);
 			newHiddenPaths.addAll(secondPathReturnPaths);
 			return operationDependencyAnalysis.createDependencyPaths(returnPaths, newHiddenPaths);
@@ -373,26 +373,26 @@ public class OperationDependencyAnalysis
 		 * and the addition of the hiddenPaths of secondPath to these hiddenPaths
 		 */
 		public @NonNull BasicDependencyPaths addReturn(@NonNull BasicDependencyPaths secondPath) {
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> newReturnPaths;
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> secondPathReturnPaths = secondPath.basicGetReturnPaths();
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> newReturnPaths;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> secondPathReturnPaths = secondPath.basicGetReturnPaths();
 			newReturnPaths = new HashSet<>(returnPaths);
 			newReturnPaths.addAll(secondPathReturnPaths);
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> newHiddenPaths;
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> secondPathHiddenPaths = secondPath.basicGetHiddenPaths();
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> newHiddenPaths;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> secondPathHiddenPaths = secondPath.basicGetHiddenPaths();
 			newHiddenPaths = new HashSet<>(hiddenPaths);
 			newHiddenPaths.addAll(secondPathHiddenPaths);
 			return operationDependencyAnalysis.createDependencyPaths(newReturnPaths, newHiddenPaths);
 		}
 
 		public @NonNull BasicDependencyPaths append(@NonNull NavigationDependencyStep propertyDependencyStep) {
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> oldReturnPaths = returnPaths;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> oldReturnPaths = returnPaths;
 			if (isRedundant(oldReturnPaths, propertyDependencyStep.getProperty())) {
 				return this;
 			}
 			StandardLibrary standardLibrary = operationDependencyAnalysis.getStandardLibrary();
-			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> newReturnPaths = new HashSet<>();
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> oldReturnPath : oldReturnPaths) {
-				List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> newReturnPath = null;
+			Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> newReturnPaths = new HashSet<>();
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> oldReturnPath : oldReturnPaths) {
+				List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> newReturnPath = null;
 				int size = oldReturnPath.size();
 				assert size > 0;
 				if ((size > 0) && (oldReturnPath.get(size-1) == propertyDependencyStep)) {	// ?? conformance
@@ -427,12 +427,12 @@ public class OperationDependencyAnalysis
 		}
 
 		//	@Override
-		public @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> basicGetHiddenPaths() {
+		public @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> basicGetHiddenPaths() {
 			return hiddenPaths;
 		}
 
 		//	@Override
-		public @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> basicGetReturnPaths() {
+		public @NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> basicGetReturnPaths() {
 			return returnPaths;
 		}
 
@@ -440,16 +440,16 @@ public class OperationDependencyAnalysis
 		 * Return the hidden paths as an ordered iterable.
 		 */
 		@Override
-		public @NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> getHiddenPaths() {
-			Map<@NonNull String, @NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> map = new HashMap<>();
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> list : hiddenPaths) {
+		public @NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> getHiddenPaths() {
+			Map<@NonNull String, @NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> map = new HashMap<>();
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> list : hiddenPaths) {
 				map.put(String.valueOf(list), list);
 			}
 			List<@NonNull String> sortedKeys = new ArrayList<>(map.keySet());
 			Collections.sort(sortedKeys);
-			List<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> sortedList = new ArrayList<>();
+			List<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> sortedList = new ArrayList<>();
 			for (@NonNull String key : sortedKeys) {
-				List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps = map.get(key);
+				List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps = map.get(key);
 				assert steps != null;
 				sortedList.add(steps);
 			}
@@ -460,16 +460,16 @@ public class OperationDependencyAnalysis
 		 * Return the return paths as an ordered iterable.
 		 */
 		@Override
-		public @NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> getReturnPaths() {
-			Map<@NonNull String, @NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> map = new HashMap<>();
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> list : returnPaths) {
+		public @NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> getReturnPaths() {
+			Map<@NonNull String, @NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> map = new HashMap<>();
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> list : returnPaths) {
 				map.put(String.valueOf(list), list);
 			}
 			List<@NonNull String> sortedKeys = new ArrayList<@NonNull String>(map.keySet());
 			Collections.sort(sortedKeys);
-			List<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> sortedList = new ArrayList<>();
+			List<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> sortedList = new ArrayList<>();
 			for (@NonNull String key : sortedKeys) {
-				List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps = map.get(key);
+				List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps = map.get(key);
 				assert steps != null;
 				sortedList.add(steps);
 			}
@@ -479,8 +479,8 @@ public class OperationDependencyAnalysis
 		/**
 		 * A property isRedundant if all paths have property as their final navigation.
 		 */
-		protected static boolean isRedundant(@NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> paths, @NonNull Property property) {
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> path : paths) {
+		protected static boolean isRedundant(@NonNull Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> paths, @NonNull Property property) {
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> path : paths) {
 				int size = path.size();
 				if (size <= 0) {
 					return false;
@@ -500,9 +500,9 @@ public class OperationDependencyAnalysis
 		public @NonNull String toString() {
 			StringBuilder s = new StringBuilder();
 			s.append("{");
-			Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths2 = getReturnPaths();
+			Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths2 = getReturnPaths();
 			boolean iFirst = true;
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> path : returnPaths2) {
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> path : returnPaths2) {
 				if (!iFirst) {
 					s.append("|");
 				}
@@ -517,9 +517,9 @@ public class OperationDependencyAnalysis
 				iFirst = false;
 			}
 			s.append("}++{");
-			Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> hiddenPaths2 = getHiddenPaths();
+			Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths2 = getHiddenPaths();
 			iFirst = true;
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> path : hiddenPaths2) {
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> path : hiddenPaths2) {
 				if (!iFirst) {
 					s.append("|");
 				}
@@ -627,7 +627,7 @@ public class OperationDependencyAnalysis
 			BasicDependencyPaths result = emptyDependencyPaths;
 			for (@NonNull List<@NonNull BasicDependencyPaths> aSourceAndArgumentPaths : getEachSourceAndArgumentPaths(allSourceAndArgumentPaths)) {
 				OperationDependencyPaths sourcePaths = aSourceAndArgumentPaths.get(0);
-				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps : sourcePaths.getReturnPaths()) {
+				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : sourcePaths.getReturnPaths()) {
 					for (@NonNull OperationDependencyStep step : steps) {
 						org.eclipse.ocl.pivot.Class sourceClass = step.getElementalType();
 						CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
@@ -655,13 +655,13 @@ public class OperationDependencyAnalysis
 		private @NonNull BasicDependencyPaths analyzeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull BasicDependencyPaths> sourceAndArgumentPaths) {
 			assert sourceAndArgumentPaths.size() == 1;
 			BasicDependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
-			Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
+			Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
 			BasicDependencyPaths result = null;
 			//
 			//	The simple case of a single property can be appended to the existing path.
 			//
 			if (Iterables.size(oldReturnPaths) == 1) {
-				List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps = oldReturnPaths.iterator().next();
+				List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps = oldReturnPaths.iterator().next();
 				int size = steps.size();
 				assert size > 0;
 				OperationDependencyStep lastStep = steps.get(size-1);
@@ -680,11 +680,11 @@ public class OperationDependencyAnalysis
 			//	and each possible containment is a hidden path in addition to all the source paths.
 			//
 			if (result == null) {
-				Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> newReturnPaths = new HashSet<>();
-				Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> newHiddenPaths = new HashSet<>();
+				Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> newReturnPaths = new HashSet<>();
+				Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> newHiddenPaths = new HashSet<>();
 				Iterables.addAll(newHiddenPaths, oldReturnPaths);
 				Iterables.addAll(newHiddenPaths, sourcePath.getHiddenPaths());
-				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps : oldReturnPaths) {
+				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : oldReturnPaths) {
 					int size = steps.size();
 					assert size > 0;
 					OperationDependencyStep lastStep = steps.get(size-1);
@@ -730,8 +730,8 @@ public class OperationDependencyAnalysis
 		protected @NonNull List<@NonNull BasicDependencyPaths> getAllSourceAndArgumentPaths(@NonNull List<@NonNull BasicDependencyPaths> resultPaths) {
 			List<@NonNull BasicDependencyPaths> sourceAndArgumentPaths = new ArrayList<>(resultPaths.size());
 			for (@NonNull BasicDependencyPaths resultPath : resultPaths) {
-				Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> typePaths = new HashSet<>();
-				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> path : resultPath.basicGetReturnPaths()) {
+				Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> typePaths = new HashSet<>();
+				for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> path : resultPath.basicGetReturnPaths()) {
 					OperationDependencyStep lastStep = path.get(path.size()-1);
 					TypedElement typedElement = (TypedElement)lastStep.getElement();
 					assert typedElement != null;
@@ -747,7 +747,7 @@ public class OperationDependencyAnalysis
 
 		protected @NonNull Iterable<@NonNull List<@NonNull BasicDependencyPaths>> getEachSourceAndArgumentPaths(@NonNull List<@NonNull BasicDependencyPaths> allSourceAndArgumentPaths) {
 			List<@NonNull List<@NonNull BasicDependencyPaths>> eachSourceAndArgumentPaths = new ArrayList<>();
-			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> aSourceStep : allSourceAndArgumentPaths.get(0).getReturnPaths()) {
+			for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> aSourceStep : allSourceAndArgumentPaths.get(0).getReturnPaths()) {
 				List<@NonNull BasicDependencyPaths> aSourceAndArgumentPaths = new ArrayList<>();
 				aSourceAndArgumentPaths.add(createDependencyPaths(Collections.singleton(aSourceStep), null));
 				for (int i = 1; i < allSourceAndArgumentPaths.size(); i++) {
@@ -973,9 +973,9 @@ public class OperationDependencyAnalysis
 				//	Analyze each possible override
 				//
 				BasicDependencyPaths aSourcePath = aSourceAndArgumentPaths.get(0);
-				Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> aSourceReturnPaths = aSourcePath.getReturnPaths();
+				Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> aSourceReturnPaths = aSourcePath.getReturnPaths();
 				assert Iterables.size(aSourceReturnPaths) == 1;
-				List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps2 = aSourceReturnPaths.iterator().next();
+				List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps2 = aSourceReturnPaths.iterator().next();
 				int size = steps2.size();
 				assert size > 0;
 				OperationDependencyStep lastStep = steps2.get(size-1);
@@ -1484,7 +1484,7 @@ public class OperationDependencyAnalysis
 			for (@NonNull List<@NonNull BasicDependencyPaths> paths : paths2analysis.keySet()) {
 				for (@NonNull OperationDependencyPaths path : paths) {
 					assert Iterables.isEmpty(path.getHiddenPaths());
-					for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps : path.getReturnPaths()) {
+					for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : path.getReturnPaths()) {
 						for (@NonNull OperationDependencyStep step : steps) {
 							assert step instanceof ClassDependencyStep;
 						}
@@ -1517,12 +1517,12 @@ public class OperationDependencyAnalysis
 	}
 
 	protected @NonNull BasicDependencyPaths createDependencyPaths(@NonNull OperationDependencyStep returnStep) {
-		Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths = new HashSet<>();
+		Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths = new HashSet<>();
 		returnPaths.add(Collections.singletonList(returnStep));
 		return createDependencyPaths(returnPaths, null);
 	}
 
-	protected @NonNull BasicDependencyPaths createDependencyPaths(@Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths, @Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> hiddenPaths) {
+	protected @NonNull BasicDependencyPaths createDependencyPaths(@Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths, @Nullable Set<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths) {
 		List<@Nullable Object> content = new ArrayList<>();
 		content.add(returnPaths);
 		content.add(hiddenPaths);

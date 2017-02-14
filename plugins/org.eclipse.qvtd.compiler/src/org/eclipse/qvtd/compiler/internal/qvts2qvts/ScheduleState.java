@@ -19,11 +19,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
 
@@ -362,7 +362,7 @@ public abstract class ScheduleState extends ScheduleCache
 
 	protected void scheduleRegion(@NonNull Region region) {
 		int thisIndex = orderedRegions.size();
-		QVTp2QVTs.REGION_ORDER.println(thisIndex + " : " + region);
+		QVTm2QVTs.REGION_ORDER.println(thisIndex + " : " + region);
 		assert !orderedRegions.contains(region) : "Attempting to re-order " + region;
 		region.addIndex(thisIndex);
 		orderedRegions.add(region);

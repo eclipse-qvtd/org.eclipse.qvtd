@@ -11,7 +11,6 @@
 <mapEntry key="QVTc" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/temp/SimpleUML2RDBMS.qvtcas"/>
 <mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/temp/SimpleUML2RDBMS.qvtias"/>
 <mapEntry key="QVTm" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/temp/SimpleUML2RDBMS.qvtm.qvtcas"/>
-<mapEntry key="QVTp" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/temp/SimpleUML2RDBMS.qvtp.qvtcas"/>
 <mapEntry key="QVTs" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/temp/SimpleUML2RDBMS.qvts.xmi"/>
 <mapEntry key="QVTu" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/temp/SimpleUML2RDBMS.qvtu.qvtcas"/>
 </mapAttribute>

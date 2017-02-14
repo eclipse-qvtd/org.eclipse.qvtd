@@ -34,8 +34,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion2;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RootScheduledRegion2;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -132,14 +132,14 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	}
 
 	protected void resolveTransformation(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
-		QVTp2QVTs scheduler = ((RootScheduledRegion2)scheduledRegion).getScheduler();
+		QVTm2QVTs scheduler = ((RootScheduledRegion2)scheduledRegion).getScheduler();
 		SymbolNameReservation symbolNameReservation = scheduler.getSymbolNameReservation();
 		Transformation transformation = scheduler.getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, environmentFactory, transformation, symbolNameReservation);
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
 		NamedElement qvtiChild = qvtiTransformation;
-		for (org.eclipse.ocl.pivot.Package qvtpPackage = transformation.getOwningPackage(); qvtpPackage != null; qvtpPackage = qvtpPackage.getOwningPackage()) {
-			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = createPackage(ClassUtil.nonNull(qvtpPackage.getName()), qvtpPackage.getNsPrefix(), qvtpPackage.getURI());
+		for (org.eclipse.ocl.pivot.Package qvtmPackage = transformation.getOwningPackage(); qvtmPackage != null; qvtmPackage = qvtmPackage.getOwningPackage()) {
+			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = createPackage(ClassUtil.nonNull(qvtmPackage.getName()), qvtmPackage.getNsPrefix(), qvtmPackage.getURI());
 			if (qvtiChild instanceof Transformation) {
 				qvtiPackage.getOwnedClasses().add((Transformation)qvtiChild);
 			}

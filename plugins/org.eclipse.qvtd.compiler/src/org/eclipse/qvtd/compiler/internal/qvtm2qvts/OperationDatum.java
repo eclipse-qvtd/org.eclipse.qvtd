@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.IndexableIterable;
@@ -47,7 +47,7 @@ public class OperationDatum implements IndexableIterable<@NonNull ClassDatum>
 	/**
 	 * Construct an OperationDatum for an Scheduler that has computed the hashCode for the classDatums.
 	 */
-	public OperationDatum(@NonNull QVTp2QVTs scheduler, @NonNull String name, @NonNull ClassDatum @NonNull [] classDatums) {
+	public OperationDatum(@NonNull QVTm2QVTs scheduler, @NonNull String name, @NonNull ClassDatum @NonNull [] classDatums) {
 		int hashCode = name.hashCode();
 		for (@NonNull ClassDatum classDatum : classDatums) {
 			hashCode = 3 * hashCode + classDatum.hashCode();

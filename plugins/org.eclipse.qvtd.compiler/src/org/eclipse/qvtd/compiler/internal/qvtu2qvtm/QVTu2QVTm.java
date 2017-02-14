@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
@@ -124,6 +125,15 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			finally {
 				context.popScope();
 			}
+		}
+
+		@Override
+		public @NonNull TypedModel visitTypedModel(@NonNull TypedModel tmIn) {
+			TypedModel tmOut = super.visitTypedModel(tmIn);
+			if (tmOut.getName() == null) {
+				tmOut.setName(QVTscheduleConstants.MIDDLE_DOMAIN_NAME);		// FIXME move to super / earlier
+			}
+			return tmOut;
 		}
 	}
 

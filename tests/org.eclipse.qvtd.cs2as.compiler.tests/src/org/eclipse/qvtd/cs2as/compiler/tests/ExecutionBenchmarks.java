@@ -126,7 +126,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 
 			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			@SuppressWarnings("unchecked")
-			Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._classescs2as_qvtp_qvtcas.classescs2as_qvtp_qvtcas");
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._classescs2as_qvtm_qvtcas.classescs2as_qvtm_qvtcas");
 			assert txClass != null;
 			trackExample_CG(myQVT, txClass, baseURI, "model1", results);
 			trackExample_CG(myQVT, txClass, baseURI, "model2", results);
@@ -153,7 +153,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	//
 	//			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 	//
-	//			Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias_Manual.class;
+	//			Class<? extends TransformationExecutor> txClass = classescs2as_qvtm_qvtias_Manual.class;
 	//			Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 	//
 	//			trackExample_CG(myQVT, txConstructor, baseURI, "model1", results);

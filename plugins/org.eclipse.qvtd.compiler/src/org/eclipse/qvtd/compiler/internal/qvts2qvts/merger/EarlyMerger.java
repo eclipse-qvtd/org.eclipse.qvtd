@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
@@ -218,7 +218,7 @@ public class EarlyMerger extends AbstractMerger
 			}
 			else {
 				outputRegions.add(mergedRegion);
-				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 					mergedRegion.writeDebugGraphs(null);
 				}
 			}

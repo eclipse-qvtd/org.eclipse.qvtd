@@ -65,7 +65,6 @@ public class UMLXLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		compilerChain.setOption(CompilerChain.QVTC_STEP, CompilerChain.URI_KEY, URI.createURI(intermediatesMap.get(CompilerChain.QVTC_STEP), true));
 		compilerChain.setOption(CompilerChain.QVTU_STEP, CompilerChain.URI_KEY, URI.createURI(intermediatesMap.get(CompilerChain.QVTU_STEP), true));
 		compilerChain.setOption(CompilerChain.QVTM_STEP, CompilerChain.URI_KEY, URI.createURI(intermediatesMap.get(CompilerChain.QVTM_STEP), true));
-		compilerChain.setOption(CompilerChain.QVTP_STEP, CompilerChain.URI_KEY, URI.createURI(intermediatesMap.get(CompilerChain.QVTP_STEP), true));
 		compilerChain.setOption(CompilerChain.QVTS_STEP, CompilerChain.URI_KEY, URI.createURI(intermediatesMap.get(CompilerChain.QVTS_STEP), true));
 		compilerChain.setOption(CompilerChain.QVTI_STEP, CompilerChain.URI_KEY, URI.createURI(intermediatesMap.get(CompilerChain.QVTI_STEP), true));
 		compilerChain.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, URI.createURI(genmodelAttribute, true));

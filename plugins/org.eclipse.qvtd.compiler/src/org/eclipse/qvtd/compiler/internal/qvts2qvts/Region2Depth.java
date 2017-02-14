@@ -19,13 +19,13 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 /**
  * Region2Depth provides facilities that use a temporary cache depth of the region passing binding tree.
@@ -59,7 +59,7 @@ public class Region2Depth
 		region2children.clear();	// FIXME do intelligent update rather than recalculate
 		region2depth.clear();
 		region2parents.clear();
-		QVTp2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <reset> : " + region.getName());
+		QVTm2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <reset> : " + region.getName());
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class Region2Depth
 		Integer depth = region2depth.get(region);
 		if (depth == null) {
 			if (region2depth.containsKey(region)) {
-				QVTp2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <loop> : " + region.getName());
+				QVTm2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <loop> : " + region.getName());
 				return 0;
 			}
 			region2depth.put(region, null);
@@ -177,7 +177,7 @@ public class Region2Depth
 				}
 			}
 			region2depth.put(region, depth);
-			QVTp2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " " + depth + " : " + region.getName());
+			QVTm2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " " + depth + " : " + region.getName());
 		}
 		return depth.intValue();
 	}

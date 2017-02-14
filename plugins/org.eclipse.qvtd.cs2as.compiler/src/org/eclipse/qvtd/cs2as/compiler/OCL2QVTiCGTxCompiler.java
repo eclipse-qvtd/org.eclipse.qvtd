@@ -71,8 +71,8 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	protected @NonNull Transformation executeOCL2QVTi_CompilerChain(@NonNull QVTimperative qvt, String tracePropName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs) throws Exception {
 
 		Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>>();
-		// OCL2QVTp options
-		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.QVTP_STEP, OCL2QVTiCompilerChain.TRACE_PROPERTY_NAME_KEY, tracePropName);
+		// OCL2QVTm options
+		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.QVTM_STEP, OCL2QVTiCompilerChain.TRACE_PROPERTY_NAME_KEY, tracePropName);
 		// Default options
 		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
 		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, debug);

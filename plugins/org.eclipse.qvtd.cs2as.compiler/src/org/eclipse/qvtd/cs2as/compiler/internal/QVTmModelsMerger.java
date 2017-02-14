@@ -52,36 +52,36 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
-public class QVTpModelsMerger {
+public class QVTmModelsMerger {
 
 
 	/**
 	 * <p>
-	 * Utility to merge the QVTp models result of the OCL2QVTp transformation on different CS2AS descriptions.
+	 * Utility to merge the QVTm models result of the OCL2QVTm transformation on different CS2AS descriptions.
 	 * </p>
 	 *
 	 * <ul>
 	 * The merge utility will simply consist of:
-	 * <li> Merging all the qvtp {@link Mapping mappings} in one qvtp {@link Transformation transformation} </li>
-	 * <li> Merging all the {@link Import imports} in the containing qvtp {@link CoreModel model}, taking care of import duplications </li>
+	 * <li> Merging all the qvtm {@link Mapping mappings} in one qvtm {@link Transformation transformation} </li>
+	 * <li> Merging all the {@link Import imports} in the containing qvtm {@link CoreModel model}, taking care of import duplications </li>
 	 * </ul>
 	 *
-	 * @param extendedQVTpModels a list of the QVTp models to merge
-	 * @return a clone of the first QVTp model of the provided list, having merged the remaining QVTp models of that list
+	 * @param extendedQVTmModels a list of the QVTm models to merge
+	 * @return a clone of the first QVTm model of the provided list, having merged the remaining QVTm models of that list
 	 */
-	public static void merge(EnvironmentFactory envF, Resource targetQVTpModel, List<Resource> extendedQVTpModels) {
+	public static void merge(EnvironmentFactory envF, Resource targetQVTmModel, List<Resource> extendedQVTmModels) {
 
-		CoreModel qvtpModel = getCoreModel(targetQVTpModel);
-		Map<Class, List<Mapping>> inputType2RefiningMapping = getRefiningMappingInputTypes(qvtpModel);
-		for (Resource extendedQVTpModel : extendedQVTpModels) {
-			doMerge(envF, qvtpModel, getCoreModel(extendedQVTpModel), inputType2RefiningMapping);
+		CoreModel qvtmModel = getCoreModel(targetQVTmModel);
+		Map<Class, List<Mapping>> inputType2RefiningMapping = getRefiningMappingInputTypes(qvtmModel);
+		for (Resource extendedQVTmModel : extendedQVTmModels) {
+			doMerge(envF, qvtmModel, getCoreModel(extendedQVTmModel), inputType2RefiningMapping);
 		}
 	}
 
-	private static Map<Class, List<Mapping>> getRefiningMappingInputTypes(CoreModel qvtpModel) {
+	private static Map<Class, List<Mapping>> getRefiningMappingInputTypes(CoreModel qvtmModel) {
 
 		Map<Class, List<Mapping>> result = new HashMap<Class, List<Mapping>>();
-		Package _package = qvtpModel.getOwnedPackages().get(0);
+		Package _package = qvtmModel.getOwnedPackages().get(0);
 		Transformation tx = (Transformation) _package.getOwnedClasses().get(0);
 		for (Rule rule : tx.getRule()) {
 			Mapping mapping = (Mapping) rule;
@@ -97,37 +97,37 @@ public class QVTpModelsMerger {
 		return result;
 	}
 	/**
-	 * @param resultQVTpModel
-	 * @param mergedQVTpModel
-	 * @param refMapInputTypes a list of the types involved in the mappings of the extending QVTp model
+	 * @param resultQVTmModel
+	 * @param mergedQVTmModel
+	 * @param refMapInputTypes a list of the types involved in the mappings of the extending QVTm model
 	 */
-	private static void doMerge(EnvironmentFactory envF, CoreModel resultQVTpModel, CoreModel mergedQVTpModel, Map<Class, List<Mapping>> inputType2RefiningMapping) {
+	private static void doMerge(EnvironmentFactory envF, CoreModel resultQVTmModel, CoreModel mergedQVTmModel, Map<Class, List<Mapping>> inputType2RefiningMapping) {
 
 		// Imports
 		Set<Namespace> alreadyImportedNamespaces = new HashSet<Namespace>();
 		Set<Import> importsToRemove = new HashSet<Import>();
-		for (Import _import : resultQVTpModel.getOwnedImports()) {
+		for (Import _import : resultQVTmModel.getOwnedImports()) {
 			Namespace importedNS = _import.getImportedNamespace();
 			alreadyImportedNamespaces.add(importedNS);
-			if (doesNamespaceCorrespondToMergedQVTpModel(mergedQVTpModel, importedNS)) {
+			if (doesNamespaceCorrespondToMergedQVTmModel(mergedQVTmModel, importedNS)) {
 				importsToRemove.add(_import);
 			}
 		}
 		// Add a copy of the imported NS
-		for (Import _import : mergedQVTpModel.getOwnedImports()) {
+		for (Import _import : mergedQVTmModel.getOwnedImports()) {
 			Namespace importedNS = _import.getImportedNamespace();
 			if (!alreadyImportedNamespaces.contains(importedNS)) {
-				resultQVTpModel.getOwnedImports().add(EcoreUtil.copy(_import));
+				resultQVTmModel.getOwnedImports().add(EcoreUtil.copy(_import));
 			}
 		}
 
 		for (Import _import : importsToRemove) {
-			resultQVTpModel.getOwnedImports().remove(_import);
+			resultQVTmModel.getOwnedImports().remove(_import);
 		}
 
 
-		Transformation resultTransformation = getTransformation(resultQVTpModel);
-		Transformation mergedTransformation = getTransformation(mergedQVTpModel);
+		Transformation resultTransformation = getTransformation(resultQVTmModel);
+		Transformation mergedTransformation = getTransformation(mergedQVTmModel);
 
 		// TypedModels
 		Map<String, List<Package>> tmName2oldUsedPackages = new HashMap<String, List<Package>>();
@@ -151,13 +151,13 @@ public class QVTpModelsMerger {
 
 	}
 
-	private static boolean doesNamespaceCorrespondToMergedQVTpModel(CoreModel mergedQVTpModel, Namespace ns) {
+	private static boolean doesNamespaceCorrespondToMergedQVTmModel(CoreModel mergedQVTmModel, Namespace ns) {
 
 		if (ns instanceof Model && isAnOCLModel(ns)) {
-			URI qvtpModelURI = URI.createURI(mergedQVTpModel.getExternalURI());
-			assert assertCorrectQVTpModelFileExtenion(qvtpModelURI);
+			URI qvtmModelURI = URI.createURI(mergedQVTmModel.getExternalURI());
+			assert assertCorrectQVTmModelFileExtenion(qvtmModelURI);
 			URI importedNSURI = URI.createURI(((Model) ns).getExternalURI());
-			String fileName1 = qvtpModelURI.trimFragment().trimFileExtension().trimFileExtension().lastSegment(); // xxx.qvtp.qvias
+			String fileName1 = qvtmModelURI.trimFragment().trimFileExtension().trimFileExtension().lastSegment(); // xxx.qvtm.qvias
 			String fileName2 = importedNSURI.trimFragment().trimFileExtension().trimFileExtension(). lastSegment();	// xxx.ocl or xxx.ocl.oclas
 			return ClassUtil.nonNullState(fileName1).equals(fileName2);
 		}
@@ -193,20 +193,20 @@ public class QVTpModelsMerger {
 		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have a Transformation element.", iModel.getExternalURI()));
 	}
 
-	private static CoreModel getCoreModel(Resource qvtpResource) {
+	private static CoreModel getCoreModel(Resource qvtmResource) {
 
-		for (EObject eContent : qvtpResource.getContents()) {
+		for (EObject eContent : qvtmResource.getContents()) {
 			if (eContent instanceof CoreModel) {
 				return (CoreModel) eContent;
 			}
 		}
-		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an CoreModel element.", qvtpResource.getURI()));
+		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an CoreModel element.", qvtmResource.getURI()));
 	}
 
-	private static boolean assertCorrectQVTpModelFileExtenion(URI qvtpModelURI ) {
+	private static boolean assertCorrectQVTmModelFileExtenion(URI qvtmModelURI ) {
 
-		assert qvtpModelURI.fileExtension().equals("qvtcas");
-		assert qvtpModelURI.trimFileExtension().fileExtension().equals("qvtp");
+		assert qvtmModelURI.fileExtension().equals("qvtcas");
+		assert qvtmModelURI.trimFileExtension().fileExtension().equals("qvtm");
 		return true;
 	}
 
@@ -242,8 +242,8 @@ public class QVTpModelsMerger {
 							}
 						}
 					} else {
-						//This point should never be reached given the mapping naming convention introduced in OCL2QVTp.
-						throw new IllegalStateException("This point should never be reached given the mapping naming convention introduced in OCL2QVTp.");
+						//This point should never be reached given the mapping naming convention introduced in OCL2QVTm.
+						throw new IllegalStateException("This point should never be reached given the mapping naming convention introduced in OCL2QVTm.");
 					}
 				}
 			}
@@ -261,7 +261,7 @@ public class QVTpModelsMerger {
 	}
 
 	private static Variable getInputVariable(Mapping mapping) {
-		// In OCL2QVTp the first one is always the input domain with a unique input variable
+		// In OCL2QVTm the first one is always the input domain with a unique input variable
 		CoreDomain inputDomain = (CoreDomain) mapping.getDomain().get(0);
 		return inputDomain.getGuardPattern().getVariable().get(0);
 	}

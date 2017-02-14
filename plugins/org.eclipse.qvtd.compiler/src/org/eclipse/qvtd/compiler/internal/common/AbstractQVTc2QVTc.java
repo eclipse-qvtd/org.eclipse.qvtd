@@ -105,7 +105,7 @@ public abstract class AbstractQVTc2QVTc
 	}
 
 	/**
-	 * The CreateVisitor performs the mostly 1:1 creation of the QVTp output tree from the QVTm input tree.
+	 * The CreateVisitor performs the mostly 1:1 creation of the QVTm output tree from the QVTm input tree.
 	 *
 	 * References are left unresolved. OCLExpressions are not copied. doXXX methods provide join points for derived implementations.
 	 */

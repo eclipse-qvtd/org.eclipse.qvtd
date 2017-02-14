@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
-public class OCL2QVTpUtil {
+public class OCL2QVTmUtil {
 	
 	public static Function<EObject, @NonNull Stream<@NonNull EObject>> getAllContents() {
 		return eObject -> {

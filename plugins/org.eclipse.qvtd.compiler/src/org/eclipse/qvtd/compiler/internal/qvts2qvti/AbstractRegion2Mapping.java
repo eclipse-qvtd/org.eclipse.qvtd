@@ -61,9 +61,9 @@ public abstract class AbstractRegion2Mapping
 	protected final @NonNull Mapping mapping;
 
 	/**
-	 * Mapping from QVTp expression to Schedule Node.
+	 * Mapping from QVTm expression to Schedule Node.
 	 */
-	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtp2node = new HashMap<>();
+	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtm2node = new HashMap<>();
 
 	/**
 	 * Safe name for each node
@@ -90,7 +90,7 @@ public abstract class AbstractRegion2Mapping
 		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
 		for (Node node : region.getNodes()) {
 			for (TypedElement typedElement : node.getTypedElements()) {
-				Node oldNode = qvtp2node.put(typedElement, node);
+				Node oldNode = qvtm2node.put(typedElement, node);
 				assert (oldNode == null) || (oldNode == node);
 			}
 		}
@@ -185,29 +185,29 @@ public abstract class AbstractRegion2Mapping
 		return visitor.getMetamodelManager();
 	}
 
-	public @Nullable Node getNode(@Nullable TypedElement qvtpTypedElement) {
-		if (qvtpTypedElement instanceof VariableExp) {
-			return getNode(((VariableExp)qvtpTypedElement).getReferredVariable());
+	public @Nullable Node getNode(@Nullable TypedElement qvtmTypedElement) {
+		if (qvtmTypedElement instanceof VariableExp) {
+			return getNode(((VariableExp)qvtmTypedElement).getReferredVariable());
 		}
-		if (qvtpTypedElement instanceof LetExp) {
-			return getNode(((LetExp)qvtpTypedElement).getOwnedIn());
+		if (qvtmTypedElement instanceof LetExp) {
+			return getNode(((LetExp)qvtmTypedElement).getOwnedIn());
 		}
-		if (qvtpTypedElement instanceof OppositePropertyCallExp) {
-			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtpTypedElement;
+		if (qvtmTypedElement instanceof OppositePropertyCallExp) {
+			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtmTypedElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
 				return sourceNode.getNavigationTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty().getOpposite()));
 			}
 		}
-		if (qvtpTypedElement instanceof PropertyCallExp) {
-			PropertyCallExp propertyCallExp = (PropertyCallExp)qvtpTypedElement;
+		if (qvtmTypedElement instanceof PropertyCallExp) {
+			PropertyCallExp propertyCallExp = (PropertyCallExp)qvtmTypedElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
 				return sourceNode.getNavigationTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty()));
 			}
 		}
-		if (qvtpTypedElement != null) {
-			return qvtp2node.get(qvtpTypedElement);
+		if (qvtmTypedElement != null) {
+			return qvtm2node.get(qvtmTypedElement);
 		}
 		else {
 			return null;

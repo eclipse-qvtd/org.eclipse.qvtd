@@ -23,8 +23,8 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingAnalysis.MappingAnalysisRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.MappingAnalysisRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
@@ -80,8 +80,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			protected @NonNull QVTp2QVTsCompilerStep createQVTp2QVTsCompilerStep() {
-				return new QVTp2QVTsCompilerStep(this)
+			protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
+				return new QVTm2QVTsCompilerStep(this)
 				{
 					@Override
 					public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
@@ -171,7 +171,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTp2QVTs.DEBUG_GRAPHS.setState(true);
+		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
 		super.setUp();
 		OCLstdlib.install();
 		QVTcTestUtil.doQVTcoreSetup();

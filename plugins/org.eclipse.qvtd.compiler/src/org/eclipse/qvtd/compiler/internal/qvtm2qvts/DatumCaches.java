@@ -9,7 +9,7 @@
  *     Horacio Hoyos - initial migration from Epsilon prototype
  *     E.D.Willink - simplification
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.HashMap;
 import java.util.HashSet;

@@ -39,11 +39,11 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ContainmentAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.InheritanceAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyPaths;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContainmentAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.InheritanceAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyPaths;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -386,9 +386,9 @@ public class AnalysisTests extends XtextTestCase
 		ocl.dispose();
 	}
 
-	private Set<@NonNull List<@NonNull Element>> toElements(@NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> paths) {
+	private Set<@NonNull List<@NonNull Element>> toElements(@NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> paths) {
 		Set<@NonNull List<@NonNull Element>> newPaths = new HashSet<>();
-		for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> path : paths) {
+		for (@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> path : paths) {
 			List<@NonNull Element> newPath = new ArrayList<>();
 			for (@NonNull OperationDependencyStep step : path) {
 				newPath.add(step.getPathElement());

@@ -1,51 +1,49 @@
 # Debugging options for the org.eclipse.ocl.examples.codegen plug-in
 
 # Turn on tracing of the operation dependency analysis result of each unsuccessful attempt
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/attempt=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/attempt=false
 # Turn on tracing of the operation dependency analysis operation call calls
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/call=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/call=false
 # Turn on tracing of the operation dependency analysis creating a new operation analysis
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/create=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/create=false
 # Turn on tracing of the operation dependency analysis hypothecating to break operation analysis loops
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/hypothecating=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/hypothecating=false
 # Turn on tracing of the operation dependency analysis addition of pending operation analysis
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/pending=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/pending=false
 # Turn on tracing of the operation dependency analysis addition of refining operation analysis
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/refining=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/refining=false
 # Turn on tracing of the operation dependency analysis result of the final successful attempt
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/result=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/result=false
 # Turn on tracing of the operation dependency analysis (re)starting an operation analysis
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/start=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dependency/start=false
 
-# Turn on tracing of partitioning 
-org.eclipse.qvtd.compiler/qvtm2qvtp/partitioining=false
 # Turn on tracing of connection creation 
-org.eclipse.qvtd.compiler/qvtp2qvts/connectionCreation=false
+org.eclipse.qvtd.compiler/qvtm2qvts/connectionCreation=false
 # Turn on tracing of connection routing 
-org.eclipse.qvtd.compiler/qvtp2qvts/connectionRouting=false
+org.eclipse.qvtd.compiler/qvtm2qvts/connectionRouting=false
 # Turn on generation of debug graphs 
-org.eclipse.qvtd.compiler/qvtp2qvts/debugGraphs=false
+org.eclipse.qvtd.compiler/qvtm2qvts/debugGraphs=false
 # Turn on dump of the consuming node for each class 
-org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2consumingNodes=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dump/class2consumingNodes=false
 # Turn on dump of the consumed properties analysis 
-org.eclipse.qvtd.compiler/qvtp2qvts/dump/consumedProperties=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dump/consumedProperties=false
 # Turn on dump of the realized node for each produced class
-org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2realizedNodes=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dump/class2realizedNodes=false
 # Turn on dump of the domain usage for each input model 
-org.eclipse.qvtd.compiler/qvtp2qvts/dump/inputModel2domainUsage=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dump/inputModel2domainUsage=false
 # Turn on dump of the possible containing properties for each class 
-org.eclipse.qvtd.compiler/qvtp2qvts/dump/property2consumingClass=false
+org.eclipse.qvtd.compiler/qvtm2qvts/dump/property2consumingClass=false
 
 # Turn on tracing of the region cycle resolution 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionCycles=false
+org.eclipse.qvtd.compiler/qvtm2qvts/regionCycles=false
 # Turn on tracing of the region depth computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionDepth=false
+org.eclipse.qvtd.compiler/qvtm2qvts/regionDepth=false
 # Turn on tracing of the region order computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionOrder=false
+org.eclipse.qvtd.compiler/qvtm2qvts/regionOrder=false
 # Turn on tracing of the region call stack computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionStack=false
+org.eclipse.qvtd.compiler/qvtm2qvts/regionStack=false
 # Turn on tracing of the region traversal computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionTraversal=false
+org.eclipse.qvtd.compiler/qvtm2qvts/regionTraversal=false
 
 # Turn on tracing of the polled properties computation 
 org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
@@ -63,7 +61,7 @@ org.eclipse.qvtd.compiler/qvts2qvts/merge/failure=false
 org.eclipse.qvtd.compiler/qvts2qvts/merge/late=false
 
 # Turn on tracing of the analysis for splitting of multi-headed regions
-#org.eclipse.qvtd.compiler/qvtp2qvts/split/analysis=false
+#org.eclipse.qvtd.compiler/qvtm2qvts/split/analysis=false
 # Turn on tracing of the groups within multi-headed regions
 org.eclipse.qvtd.compiler/qvts2qvts/split/groups=false
 # Turn on tracing of the result of splitting multi-headed regions

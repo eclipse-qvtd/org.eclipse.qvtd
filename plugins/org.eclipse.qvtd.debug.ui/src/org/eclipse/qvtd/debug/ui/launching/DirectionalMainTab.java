@@ -112,7 +112,6 @@ public abstract class DirectionalMainTab<TX> extends MainTab<TX> implements QVTc
 		super.initializeOptions(options);
 		initializeURIOption(options, CompilerChain.QVTU_STEP);
 		initializeURIOption(options, CompilerChain.QVTM_STEP);
-		initializeURIOption(options, CompilerChain.QVTP_STEP);
 		initializeURIOption(options, CompilerChain.QVTS_STEP);
 		initializeURIOption(options, CompilerChain.QVTI_STEP);
 	}

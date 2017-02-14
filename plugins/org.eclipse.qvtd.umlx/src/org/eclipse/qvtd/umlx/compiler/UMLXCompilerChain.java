@@ -71,8 +71,8 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 		Resource cResource = qvtr2qvtcCompilerStep.execute(rResource);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
 		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
-		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);
-		return qvtp2qvti(pResource);
+		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
+		return qvtm2qvti(pResource);
 	}
 
 	protected @NonNull UMLX2QVTrCompilerStep createUMLX2QVTrCompilerStep() {

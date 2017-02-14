@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.List;
 
@@ -726,7 +726,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 		CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 		if (!valueCompleteClass.conformsTo(targetCompleteClass) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {	// Allow value to be physical or behavioral
-			// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
+			// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
 			if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
 				throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
 			}
@@ -851,8 +851,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 				}
 				if (referredOperation.getBodyExpression() != null) {
 					MultiRegion multiRegion = context.getMappingRegion().getMultiRegion();
-					QVTp2QVTs qvtp2qvts = (QVTp2QVTs) multiRegion.getSchedulerConstants();		// FIXME cast
-					OperationRegion operationRegion = qvtp2qvts.analyzeOperation(multiRegion, operationCallExp);
+					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) multiRegion.getSchedulerConstants();		// FIXME cast
+					OperationRegion operationRegion = qvtm2qvts.analyzeOperation(multiRegion, operationCallExp);
 					List<@NonNull Node> referenceNodes = operationRegion.getDependencyNodes();
 					if (referenceNodes.size() > 0) {
 						for (@NonNull Node referenceNode : referenceNodes) {

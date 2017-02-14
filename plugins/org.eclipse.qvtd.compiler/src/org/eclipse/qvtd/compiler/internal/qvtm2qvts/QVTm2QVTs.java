@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,21 +66,21 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 
-public class QVTp2QVTs extends SchedulerConstants2
+public class QVTm2QVTs extends SchedulerConstants2
 {
-	public static final @NonNull TracingOption DEBUG_GRAPHS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/debugGraphs");
-	public static final @NonNull TracingOption DUMP_CLASS_TO_CONSUMING_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2consumingNodes");
-	public static final @NonNull TracingOption DUMP_CLASS_TO_CONTAINING_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2containingProperty");
-	public static final @NonNull TracingOption DUMP_CLASS_TO_REALIZED_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2realizedNodes");
-	public static final @NonNull TracingOption DUMP_INPUT_MODEL_TO_DOMAIN_USAGE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/inputModel2domainUsage");
-	public static final @NonNull TracingOption DUMP_PROPERTY_TO_CONSUMING_CLASSES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/property2consumingClass");
-	public static final @NonNull TracingOption EDGE_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/edgeOrder");
-	public static final @NonNull TracingOption REGION_CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionCycles");
-	public static final @NonNull TracingOption REGION_DEPTH = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionDepth");
-	//	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionLocality");
-	public static final @NonNull TracingOption REGION_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionOrder");
-	public static final @NonNull TracingOption REGION_STACK = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionStack");
-	public static final @NonNull TracingOption REGION_TRAVERSAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionTraversal");
+	public static final @NonNull TracingOption DEBUG_GRAPHS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/debugGraphs");
+	public static final @NonNull TracingOption DUMP_CLASS_TO_CONSUMING_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/dump/class2consumingNodes");
+	public static final @NonNull TracingOption DUMP_CLASS_TO_CONTAINING_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/dump/class2containingProperty");
+	public static final @NonNull TracingOption DUMP_CLASS_TO_REALIZED_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/dump/class2realizedNodes");
+	public static final @NonNull TracingOption DUMP_INPUT_MODEL_TO_DOMAIN_USAGE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/dump/inputModel2domainUsage");
+	public static final @NonNull TracingOption DUMP_PROPERTY_TO_CONSUMING_CLASSES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/dump/property2consumingClass");
+	public static final @NonNull TracingOption EDGE_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/edgeOrder");
+	public static final @NonNull TracingOption REGION_CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/regionCycles");
+	public static final @NonNull TracingOption REGION_DEPTH = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/regionDepth");
+	//	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/regionLocality");
+	public static final @NonNull TracingOption REGION_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/regionOrder");
+	public static final @NonNull TracingOption REGION_STACK = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/regionStack");
+	public static final @NonNull TracingOption REGION_TRAVERSAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/regionTraversal");
 
 	protected final @NonNull ProblemHandler problemHandler;
 
@@ -91,7 +91,7 @@ public class QVTp2QVTs extends SchedulerConstants2
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
-	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		super(environmentFactory, asTransformation, schedulerOptions);
 		this.problemHandler = problemHandler;
@@ -118,7 +118,7 @@ public class QVTp2QVTs extends SchedulerConstants2
 			if (operationRegion == null) {
 				operationRegion = createOperationRegion(multiRegion, operationCallExp, specification, operationDatum);
 				operationDatum2operationRegion.put(operationDatum, operationRegion);
-				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 					operationRegion.writeDebugGraphs(null);
 				}
 			}
@@ -197,11 +197,11 @@ public class QVTp2QVTs extends SchedulerConstants2
 		OperationDependencyPaths paths = operationDependencyAnalysis.analyzeOperation(operationCallExp);
 		//		operationDependencyAnalysis.dump();
 		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + paths);
-		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
-		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
+		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
+		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = getDomainAnalysis();
 		Map<@NonNull ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
-		for (List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
+		for (List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;
 				for (int i = 1; i < steps.size(); i++) {
@@ -314,7 +314,7 @@ public class QVTp2QVTs extends SchedulerConstants2
 		for (@NonNull MappingAnalysis mappingRegion : mappingAnalyses) {
 			mappingRegion.registerConsumptionsAndProductions(this);
 		}
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			for (@NonNull MappingAnalysis mappingAnalysis : mappingAnalyses) {
 				mappingAnalysis.getMappingRegion().writeDebugGraphs(null);
 			}

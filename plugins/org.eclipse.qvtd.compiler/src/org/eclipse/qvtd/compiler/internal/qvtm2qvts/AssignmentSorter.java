@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +69,7 @@ public class AssignmentSorter
 	protected final @NonNull Map<@NonNull Variable, @NonNull VariableAssignment> variable2variableAssignment = new HashMap<>();
 
 	/**
-	 * FIXME List of too-complex assignments that OCL2QVTp produces; just tack them on at the end.
+	 * FIXME List of too-complex assignments that OCL2QVTm produces; just tack them on at the end.
 	 */
 	protected final @NonNull List<@NonNull Assignment> otherAssignments = new ArrayList<>();
 

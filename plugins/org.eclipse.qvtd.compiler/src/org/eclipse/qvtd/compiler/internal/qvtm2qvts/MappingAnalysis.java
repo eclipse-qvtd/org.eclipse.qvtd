@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
- * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTp mapping.
+ * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTm mapping.
  */
 public class MappingAnalysis implements Nameable
 {
@@ -549,12 +549,12 @@ public class MappingAnalysis implements Nameable
 		return false;
 	}
 
-	public void registerConsumptionsAndProductions(@NonNull QVTp2QVTs qvtp2qts) {
+	public void registerConsumptionsAndProductions(@NonNull QVTm2QVTs qvtm2qts) {
 		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
 			classDatumAnalysis.addProduction(mappingRegion, newNode);
 			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
-				MappingRegion consumingRegion = qvtp2qts.getMappingRegion(consumingMapping);
+				MappingRegion consumingRegion = qvtm2qts.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
 						classDatumAnalysis.addConsumption(consumingRegion, consumingNode);
@@ -566,7 +566,7 @@ public class MappingAnalysis implements Nameable
 			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
 			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
-				MappingRegion producingRegion = qvtp2qts.getMappingRegion(producingMapping);
+				MappingRegion producingRegion = qvtm2qts.getMappingRegion(producingMapping);
 				assert producingRegion != null;
 				for (@NonNull Node newNode : producingRegion.getNewNodes()) {
 					if (newNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance

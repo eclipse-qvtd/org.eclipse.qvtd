@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingAnalysis.MappingAnalysisRegion;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.MappingAnalysisRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -41,7 +41,7 @@ import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
-import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTp;
+import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTm;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
@@ -126,7 +126,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 			ResourceSet rSet = getResourceSet();
 			Resource inputResource = rSet.getResource(csModelURI, true);
-			tx.addRootObjects(OCL2QVTp.LEFT_MODEL_TYPE_NAME, ClassUtil.nonNullState(inputResource.getContents()));
+			tx.addRootObjects(OCL2QVTm.LEFT_MODEL_TYPE_NAME, ClassUtil.nonNullState(inputResource.getContents()));
 			assertTrue(tx.run());
 			Resource outputResource = rSet.createResource(asModelURI);
 			outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
@@ -152,8 +152,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 			BasicQVTiExecutor testEvaluator = new QVTiIncrementalExecutor(getEnvironmentFactory(), tx, QVTiIncrementalExecutor.Mode.LAZY);
 			//testEvaluator.saveTransformation(null);
-			testEvaluator.loadModel(OCL2QVTp.LEFT_MODEL_TYPE_NAME, csModelURI);
-			testEvaluator.createModel(OCL2QVTp.RIGHT_MODEL_TYPE_NAME, asModelURI, null);
+			testEvaluator.loadModel(OCL2QVTm.LEFT_MODEL_TYPE_NAME, csModelURI);
+			testEvaluator.createModel(OCL2QVTm.RIGHT_MODEL_TYPE_NAME, asModelURI, null);
 			boolean success = testEvaluator.execute();
 			testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
 			testEvaluator.dispose();
@@ -174,8 +174,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createTestCasesCompilerOptions(), mainOclDocURI, oclDocURIs)
 			{
 				@Override
-				protected @NonNull QVTp2QVTsCompilerStep createQVTp2QVTsCompilerStep() {
-					return new QVTp2QVTsCompilerStep(this)
+				protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
+					return new QVTm2QVTsCompilerStep(this)
 					{
 						@Override
 						public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
@@ -263,8 +263,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		// For testing purpose
 		//		@Override
-		//		protected Resource ocl2qvtp(URI oclDocURI) throws IOException {
-		//			return super.ocl2qvtp(oclDocURI);
+		//		protected Resource ocl2qvtm(URI oclDocURI) throws IOException {
+		//			return super.ocl2qvtm(oclDocURI);
 		//		}
 	}
 
@@ -315,7 +315,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample1_CGManual() throws Exception {
 		MyQVT myQVT = new MyQVT("example1");
 		@SuppressWarnings({"null", "unchecked"})
-		@NonNull Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._Source2Target_qvtp_qvtcas.Source2Target_qvtp_qvtcas");
+		@NonNull Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._Source2Target_qvtm_qvtcas.Source2Target_qvtm_qvtcas");
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
 		myQVT.executeModelsTX_CG(txClass, "model3");
@@ -344,16 +344,16 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 	@Test
-	public void testExample1_OCL2QVTp() throws Exception {
+	public void testExample1_OCL2QVTm() throws Exception {
 		MyQVT myQVT = new MyQVT("example1");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtcas");
+		URI qvtmFileURI = baseURI.appendSegment("Source2Target.qvtm.qvtcas");
 
 		OCL2QVTiCompilerTester mtc = new OCL2QVTiCompilerTester(baseURI, "Source2Target.ocl", myQVT);
-		mtc.ocl2qvtpCompilerStep.ocl2qvtp(oclDocURI);
-		// Test the QVTp transformation can be loaded
-		assertValidQVTiModel(qvtpFileURI);
+		mtc.ocl2qvtmCompilerStep.ocl2qvtm(oclDocURI);
+		// Test the QVTm transformation can be loaded
+		assertValidQVTiModel(qvtmFileURI);
 		myQVT.dispose();
 	}
 
@@ -492,31 +492,31 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	//  Note supported anymore
 	//	@Test
-	//	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {
+	//	public void testExample2_OCL2QVTm_MiddleModel() throws Exception {
 	//		MyQVT myQVT = new MyQVT("example2");
 	//		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 	//		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
-	//		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtcas");
+	//		URI qvtmFileURI = baseURI.appendSegment("classescs2as.qvtm.qvtcas");
 	//		URI tracesMMURI = baseURI.appendSegment("classescs2as.ecore.oclas");
 	//
 	//		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT, false);
-	//		mtc.runOCL2QVTp_MiddleModel(oclDocURI, qvtpFileURI, tracesMMURI);
-	//		// Test the QVTp transformation can be loaded
-	//		assertValidQVTiModel(qvtpFileURI);
+	//		mtc.runOCL2QVTm_MiddleModel(oclDocURI, qvtmFileURI, tracesMMURI);
+	//		// Test the QVTm transformation can be loaded
+	//		assertValidQVTiModel(qvtmFileURI);
 	//		myQVT.dispose();
 	//	}
 
 	@Test
-	public void testExample2_OCL2QVTp_MiddleFolded() throws Exception {
+	public void testExample2_OCL2QVTm_MiddleFolded() throws Exception {
 		MyQVT myQVT = new MyQVT("example2");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtcas");
+		URI qvtmFileURI = baseURI.appendSegment("classescs2as.qvtm.qvtcas");
 
 		OCL2QVTiCompilerTester mtc = new OCL2QVTiCompilerTester(baseURI, "classescs2as.ocl", myQVT);
-		mtc.ocl2qvtpCompilerStep.ocl2qvtp(oclDocURI);
-		// Test the QVTp transformation can be loaded
-		assertValidQVTiModel(qvtpFileURI);
+		mtc.ocl2qvtmCompilerStep.ocl2qvtm(oclDocURI);
+		// Test the QVTm transformation can be loaded
+		assertValidQVTiModel(qvtmFileURI);
 		myQVT.dispose();
 	}
 
@@ -555,7 +555,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		EPackage.Registry.INSTANCE.put(example3.kiamacs.KiamacsPackage.eNS_URI, example3.kiamacs.KiamacsPackage.eINSTANCE);
 		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example3");
-		Class<? extends Transformer> txClass = KiamaRewrite_qvtp_qvtcas.class;
+		Class<? extends Transformer> txClass = KiamaRewrite_qvtm_qvtcas.class;
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.dispose();
 		EPackage.Registry.INSTANCE.remove(example3.kiamaas.KiamaasPackage.eNS_URI);

@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,7 +100,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		for (Region region : sortedCallableRegions) {
 			region.createIncomingConnections();
 		}
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("4-bindings", true, true, false);
 		}
 		//		for (Region region : sortedCallableRegions) {
@@ -114,7 +114,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 	 */
 	private @NonNull RootCompositionRegion createRootContainmentRegion() {
 		addRegion(rootContainmentRegion);
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootContainmentRegion.writeDebugGraphs(null);
 		}
 		return rootContainmentRegion;
@@ -125,8 +125,8 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		//	Identify the input models.
 		//
 		computeInputModels();
-		if (QVTp2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.isActive()) {
-			QVTp2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
+		if (QVTm2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.isActive()) {
+			QVTm2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
 		}
 		//
 		//	Identify the content of each region.
@@ -134,11 +134,11 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		for (@NonNull Region region : getRegions()) {
 			contentsAnalysis.addRegion(region);
 		}
-		if (QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
-			QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(contentsAnalysis.dumpClass2newNode().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
+		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
+			QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(contentsAnalysis.dumpClass2newNode().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
 		}
-		if (QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
-			QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(contentsAnalysis.dumpClass2oldNode().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
+		if (QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
+			QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(contentsAnalysis.dumpClass2oldNode().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
 		}
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
@@ -189,7 +189,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		return contentsAnalysis.getNewNodes(classDatumAnalysis);
 	}
 
-	public @NonNull QVTp2QVTs getScheduler() {
-		return (QVTp2QVTs)getSchedulerConstants();
+	public @NonNull QVTm2QVTs getScheduler() {
+		return (QVTm2QVTs)getSchedulerConstants();
 	}
 }
