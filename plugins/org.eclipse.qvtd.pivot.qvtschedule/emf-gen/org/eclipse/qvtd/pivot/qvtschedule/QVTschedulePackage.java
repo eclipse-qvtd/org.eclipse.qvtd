@@ -4629,13 +4629,22 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__NODES = REGION__NODES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__NAME = REGION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Scheduled Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 0;
+	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5524,6 +5533,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getScheduledRegion();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getName()
+	 * @see #getScheduledRegion()
+	 * @generated
+	 */
+	EAttribute getScheduledRegion_Name();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants <em>Scheduler Constants</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6361,6 +6381,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCHEDULED_REGION = eINSTANCE.getScheduledRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCHEDULED_REGION__NAME = eINSTANCE.getScheduledRegion_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl <em>Scheduler Constants</em>}' class.

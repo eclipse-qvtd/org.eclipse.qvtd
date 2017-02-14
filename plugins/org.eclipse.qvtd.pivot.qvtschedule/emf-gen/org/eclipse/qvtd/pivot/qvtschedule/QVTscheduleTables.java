@@ -796,6 +796,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _Role__Edge__edgeRole = new ExecutorPropertyWithImplementation("Edge", Types._Role, 9, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.EDGE__EDGE_ROLE));
 		public static final @NonNull ExecutorProperty _Role__Node__nodeRole = new ExecutorPropertyWithImplementation("Node", Types._Role, 10, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE));
 
+		public static final @NonNull ExecutorProperty _ScheduledRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__NAME, Types._ScheduledRegion, 0);
+
 		public static final @NonNull ExecutorProperty _Symbolable__symbolName = new EcoreExecutorProperty(QVTschedulePackage.Literals.SYMBOLABLE__SYMBOL_NAME, Types._Symbolable, 0);
 		static {
 			Init.initEnd();
@@ -3912,6 +3914,7 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ScheduledRegion = {
 			QVTscheduleTables.Properties._Region__edges,
+			QVTscheduleTables.Properties._ScheduledRegion__name,
 			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};

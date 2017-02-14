@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -52,10 +54,36 @@ import com.google.common.collect.Sets;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Scheduled Region</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public abstract class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,12 +103,96 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 		return QVTschedulePackage.Literals.SCHEDULED_REGION;
 	}
 
-	protected ScheduledRegionImpl(@NonNull String name, @NonNull Region primaryRegion) {
-		super(primaryRegion.getMultiRegion());
-		this.name = name;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
 	}
 
-	private String name;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				return getName();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				setName((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return super.toString();
+	}
+
+	protected ScheduledRegionImpl(@NonNull String name, @NonNull Region primaryRegion) {
+		super(primaryRegion.getMultiRegion());
+		setName(name);
+	}
 
 	/**
 	 * All regions within this scheduled region.
@@ -222,11 +334,6 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getNodeConnections() {
 		return Iterables.filter(connections, NodeConnection.class);
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return name;
 	}
 
 	@Override

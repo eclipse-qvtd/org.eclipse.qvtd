@@ -2203,7 +2203,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public @NonNull String toString() {
-		return symbolName != null ? (symbolName/* + " - " + getName()*/) : getName();
+		return symbolName != null ? (symbolName/* + " - " + getName()*/) : String.valueOf(getName());
 	}
 
 	@Override

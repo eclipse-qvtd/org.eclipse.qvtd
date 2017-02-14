@@ -447,7 +447,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -478,7 +478,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -699,6 +699,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge_Region() {
 		return (EReference)edgeEClass.getEStructuralFeatures().get(2);
 	}
@@ -851,6 +852,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EClass getScheduledRegion() {
 		return scheduledRegionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getScheduledRegion_Name() {
+		return (EAttribute)scheduledRegionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1298,6 +1309,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegion_Edges() {
 		return (EReference)regionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1463,6 +1475,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		rootCompositionRegionEClass = createEClass(ROOT_COMPOSITION_REGION);
 
 		scheduledRegionEClass = createEClass(SCHEDULED_REGION);
+		createEAttribute(scheduledRegionEClass, SCHEDULED_REGION__NAME);
 
 		schedulerConstantsEClass = createEClass(SCHEDULER_CONSTANTS);
 
@@ -1697,6 +1710,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(rootCompositionRegionEClass, RootCompositionRegion.class, "RootCompositionRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scheduledRegionEClass, ScheduledRegion.class, "ScheduledRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getScheduledRegion_Name(), ecorePackage.getEString(), "name", null, 1, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(schedulerConstantsEClass, SchedulerConstants.class, "SchedulerConstants", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1740,12 +1754,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 } //QVTschedulePackageImpl

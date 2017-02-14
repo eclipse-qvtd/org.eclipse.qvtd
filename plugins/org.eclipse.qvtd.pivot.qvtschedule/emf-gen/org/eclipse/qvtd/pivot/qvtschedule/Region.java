@@ -153,8 +153,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	int getLastIndex();
 	@NonNull List<@NonNull DatumConnection<?>> getLoopingConnections();
 	@NonNull MultiRegion getMultiRegion();
-	@Override
-	@NonNull String getName();
 	/**
 	 * Return the nodes that are navigated by navigation from the region's guards.
 	 */
