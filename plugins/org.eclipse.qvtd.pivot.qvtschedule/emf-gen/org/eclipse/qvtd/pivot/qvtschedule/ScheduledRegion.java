@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -47,9 +47,26 @@ public interface ScheduledRegion extends Region
 	 * @generated
 	 */
 	void setName(String value);
+	/**
+	 * Returns the value of the '<em><b>Regions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Region}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Regions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Regions</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduledRegion_Regions()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion
+	 * @model opposite="invokingRegion" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduledRegion!regions'"
+	 * @generated
+	 */
+	EList<Region> getRegions();
 	void addEdgeConnection(@NonNull EdgeConnection edgeConnection);
 	void addNodeConnection(@NonNull NodeConnection nodeConnection);
-	void addRegion(@NonNull Region region);
 	@NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@NonNull Collection<@NonNull Connection> getConnections();
@@ -61,9 +78,7 @@ public interface ScheduledRegion extends Region
 	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull NodeConnection> getNodeConnections();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
-	@NonNull List<@NonNull Region> getRegions();
 	void removeConnection(@NonNull Connection connection);
-	void removeRegion(@NonNull Region region);
 	void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

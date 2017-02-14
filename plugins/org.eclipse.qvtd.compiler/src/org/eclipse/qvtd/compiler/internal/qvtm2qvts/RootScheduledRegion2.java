@@ -113,7 +113,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull RootCompositionRegion createRootContainmentRegion() {
-		addRegion(rootContainmentRegion);
+		rootContainmentRegion.setInvokingRegion(this);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootContainmentRegion.writeDebugGraphs(null);
 		}
@@ -131,7 +131,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		//
 		//	Identify the content of each region.
 		//
-		for (@NonNull Region region : getRegions()) {
+		for (@NonNull Region region : RegionUtil.getRegions(this)) {
 			contentsAnalysis.addRegion(region);
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {

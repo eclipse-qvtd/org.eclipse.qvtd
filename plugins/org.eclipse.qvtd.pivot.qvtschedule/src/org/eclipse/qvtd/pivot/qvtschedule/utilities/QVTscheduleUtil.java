@@ -35,6 +35,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -548,8 +550,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull Iterable<@NonNull Edge> getIncomingEdges(@NonNull Node newNode) {
-		return ClassUtil.nullFree(newNode.getIncomingEdges());
+	public static @NonNull Iterable<@NonNull Edge> getIncomingEdges(@NonNull Node node) {
+		return ClassUtil.nullFree(node.getIncomingEdges());
+	}
+
+	public static @NonNull ScheduledRegion getInvokingRegion(@NonNull Region region) {
+		return ClassUtil.nonNullState(region.getInvokingRegion());
 	}
 
 	public static @NonNull String getName(@NonNull Node node) {
@@ -564,8 +570,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(region.getNodes());
 	}
 
-	public static @NonNull Iterable<@NonNull Edge> getOutgoingEdges(@NonNull Node newNode) {
-		return ClassUtil.nullFree(newNode.getOutgoingEdges());
+	public static @NonNull Iterable<@NonNull Edge> getOutgoingEdges(@NonNull Node node) {
+		return ClassUtil.nullFree(node.getOutgoingEdges());
 	}
 
 	public static @NonNull Phase getPhase(@NonNull Role role) {
@@ -578,6 +584,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getRegion(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getRegion());
+	}
+
+	public static @NonNull Iterable<@NonNull Region> getRegions(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nullFree(scheduledRegion.getRegions());
 	}
 
 	public static @NonNull Node getSourceNode(@NonNull Edge edge) {

@@ -23,12 +23,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
@@ -43,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
@@ -59,11 +66,12 @@ import com.google.common.collect.Sets;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getRegions <em>Regions</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
+public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -83,6 +91,16 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Region> regions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,10 +150,54 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	 * @generated
 	 */
 	@Override
+	public EList<Region> getRegions() {
+		if (regions == null) {
+			regions = new EObjectContainmentWithInverseEList<Region>(Region.class, this, QVTschedulePackage.SCHEDULED_REGION__REGIONS, QVTschedulePackage.REGION__INVOKING_REGION);
+		}
+		return regions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRegions()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
+				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				return getName();
+			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
+				return getRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,11 +207,16 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				setName((String)newValue);
+				return;
+			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
+				getRegions().clear();
+				getRegions().addAll((Collection<? extends Region>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,6 +233,9 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
+				getRegions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -180,6 +250,8 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
+				return regions != null && !regions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -189,15 +261,20 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 		return super.toString();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduledRegion(this);
+	}
+
 	protected ScheduledRegionImpl(@NonNull String name, @NonNull Region primaryRegion) {
 		super(primaryRegion.getMultiRegion());
 		setName(name);
 	}
-
-	/**
-	 * All regions within this scheduled region.
-	 */
-	private final @NonNull List<@NonNull Region> regions = new ArrayList<>();
 
 	/**
 	 * All the connections defined in this region, but not those in nested regions.
@@ -237,15 +314,6 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	}
 
 	@Override
-	public void addRegion(@NonNull Region region) {
-		assert !regions.contains(region);
-		if (regions.add(region)) {
-			region.setInvokingRegion(this);
-			//			allMappingRegions.addAll(nestedRegion.getAllMappingRegions());
-		}
-	}
-
-	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendName(name);
@@ -275,7 +343,7 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 
 	@Override
 	public @NonNull Iterable<@NonNull Region> getCallableRegions() {
-		return Iterables.filter(getRegions(), QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE);
+		return Iterables.filter(QVTscheduleUtil.getRegions(this), QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE);
 	}
 
 	@Override
@@ -307,6 +375,21 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	@Override
 	public @NonNull List<@NonNull Node> getHeadNodes() {
 		return QVTscheduleConstants.EMPTY_NODE_LIST;
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
+		throw new UnsupportedOperationException();		// FIXME move to caller
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
+		throw new UnsupportedOperationException();		// FIXME move to caller
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull Node> getNewNodes( @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		throw new UnsupportedOperationException();		// FIXME move to caller
 	}
 
 	@Override
@@ -351,11 +434,6 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	}
 
 	@Override
-	public @NonNull List<@NonNull Region> getRegions() {
-		return regions;
-	}
-
-	@Override
 	protected @NonNull String getSymbolNamePrefix() {
 		return "s_";
 	}
@@ -382,11 +460,6 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 				sourceEdge.removeOutgoingConnection(edgeConnection);
 			}
 		}
-	}
-
-	@Override
-	public void removeRegion(@NonNull Region region) {
-		regions.remove(region);
 	}
 
 	@Override
@@ -431,7 +504,7 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.setLabel(getName());
 		s.pushCluster();
-		for (@NonNull Region region : getRegions()) {
+		for (@NonNull Region region : QVTscheduleUtil.getRegions(this)) {
 			region.toGraph(s);
 		}
 		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
@@ -522,6 +595,4 @@ public abstract class ScheduledRegionImpl extends RegionImpl implements Schedule
 			scheduler.writeCallGraphMLfile(this, suffix);
 		}
 	}
-
-
 } //ScheduledRegionImpl

@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -284,8 +285,7 @@ public abstract class ScheduleState extends ScheduleCache
 	 * returning true if unblocked.
 	 */
 	private boolean refreshRegionBlockage(@NonNull Region region) {
-		ScheduledRegion invokingRegion = region.getInvokingRegion();
-		assert invokingRegion != null;
+		ScheduledRegion invokingRegion = RegionUtil.getInvokingRegion(region);
 		if (blockedRegions.contains(invokingRegion) && !unblockedRegions.contains(invokingRegion)) {
 			if (!refreshRegionBlockage(invokingRegion)) {
 				return false;
@@ -456,7 +456,7 @@ public abstract class ScheduleState extends ScheduleCache
 	protected abstract void scheduleScheduledRegion(@NonNull ScheduledRegion scheduledRegion);
 
 	private void unblock(@NonNull Region region) {
-		assert !blockedRegions.contains(region.getInvokingRegion());
+		assert !blockedRegions.contains(RegionUtil.getInvokingRegion(region));
 		boolean wasRemoved0 = blockedRegions.remove(region);
 		assert wasRemoved0;
 		boolean wasRemoved1 = unblockedRegions.remove(region);

@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
@@ -73,24 +74,23 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
-			ScheduledRegion invokingRegion = primaryRegion.getInvokingRegion();
-			assert invokingRegion != null;
+			ScheduledRegion invokingRegion = RegionUtil.getInvokingRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
 			contentsAnalysis.removeRegion(primaryRegion);
 			for (@NonNull Region callableParent : callableParents) {
 				callableParent.replaceCallToChild(primaryRegion, mergedRegion);
 			}
-			invokingRegion.removeRegion(primaryRegion);
+			primaryRegion.setInvokingRegion(invokingRegion);
 			for (@NonNull Region secondaryRegion : secondaryRegions) {
 				contentsAnalysis.removeRegion(secondaryRegion);
 				assert invokingRegion == secondaryRegion.getInvokingRegion();
 				for (@NonNull Region callableParent : callableParents) {
 					callableParent.removeCallToChild(secondaryRegion);
 				}
-				invokingRegion.removeRegion(secondaryRegion);
+				secondaryRegion.setInvokingRegion(invokingRegion);
 			}
 			contentsAnalysis.addRegion(mergedRegion);
-			invokingRegion.addRegion(mergedRegion);
+			mergedRegion.setInvokingRegion(invokingRegion);
 			for (@NonNull Node oldHeadNode : primaryRegion.getHeadNodes()) {
 				NodeConnection incomingConnection = oldHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {

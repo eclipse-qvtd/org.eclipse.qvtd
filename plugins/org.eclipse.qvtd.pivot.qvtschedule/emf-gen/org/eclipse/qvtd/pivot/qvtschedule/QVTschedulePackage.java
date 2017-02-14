@@ -524,13 +524,31 @@ public interface QVTschedulePackage extends EPackage {
 	int REGION__EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__INVOKING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__NODES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int REGION__NODES = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -539,7 +557,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -623,6 +641,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__EDGES = REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__INVOKING_REGION = REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,6 +657,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_REGION__NODES = REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__REGION = REGION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Region</em>' class.
@@ -732,6 +768,15 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_MAPPING_REGION__EDGES = MAPPING_REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_MAPPING_REGION__INVOKING_REGION = MAPPING_REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -739,6 +784,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int BASIC_MAPPING_REGION__NODES = MAPPING_REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_MAPPING_REGION__REGION = MAPPING_REGION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Basic Mapping Region</em>' class.
@@ -2874,6 +2928,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__EDGES = MAPPING_REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__INVOKING_REGION = MAPPING_REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2881,6 +2944,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MICRO_MAPPING_REGION__NODES = MAPPING_REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__REGION = MAPPING_REGION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Micro Mapping Region</em>' class.
@@ -3055,6 +3127,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__EDGES = MAPPING_REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__INVOKING_REGION = MAPPING_REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3062,6 +3143,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MAPPING_REGION__NODES = MAPPING_REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__REGION = MAPPING_REGION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Named Mapping Region</em>' class.
@@ -3606,6 +3696,15 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__EDGES = REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__INVOKING_REGION = REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3613,6 +3712,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_REGION__NODES = REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__REGION = REGION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Operation Region</em>' class.
@@ -4511,6 +4619,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ROOT_COMPOSITION_REGION__EDGES = REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_COMPOSITION_REGION__INVOKING_REGION = REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4518,6 +4635,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ROOT_COMPOSITION_REGION__NODES = REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_COMPOSITION_REGION__REGION = REGION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Root Composition Region</em>' class.
@@ -4620,6 +4746,15 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__EDGES = REGION__EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Invoking Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__INVOKING_REGION = REGION__INVOKING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4627,6 +4762,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULED_REGION__NODES = REGION__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__REGION = REGION__REGION;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4638,13 +4782,22 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__NAME = REGION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__REGIONS = REGION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Scheduled Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 1;
+	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5544,6 +5697,17 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getScheduledRegion_Name();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions <em>Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Regions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions()
+	 * @see #getScheduledRegion()
+	 * @generated
+	 */
+	EReference getScheduledRegion_Regions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants <em>Scheduler Constants</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6011,6 +6175,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getRegion_Edges();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Invoking Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_InvokingRegion();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6020,6 +6195,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRegion_Nodes();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getRegion()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_Region();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}'.
@@ -6389,6 +6575,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SCHEDULED_REGION__NAME = eINSTANCE.getScheduledRegion_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Regions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULED_REGION__REGIONS = eINSTANCE.getScheduledRegion_Regions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl <em>Scheduler Constants</em>}' class.
@@ -6813,12 +7007,28 @@ public interface QVTschedulePackage extends EPackage {
 		EReference REGION__EDGES = eINSTANCE.getRegion_Edges();
 
 		/**
+		 * The meta object literal for the '<em><b>Invoking Region</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__INVOKING_REGION = eINSTANCE.getRegion_InvokingRegion();
+
+		/**
 		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference REGION__NODES = eINSTANCE.getRegion_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__REGION = eINSTANCE.getRegion_Region();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}' enum.

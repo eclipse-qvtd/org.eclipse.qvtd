@@ -267,7 +267,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				if (rootRegion == null) {
 					rootRegion = new RootScheduledRegion2(rootName, region);
 				}
-				rootRegion.addRegion(region);
+				region.setInvokingRegion(rootRegion);
 			}
 		}
 		assert rootRegion != null;
@@ -331,6 +331,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
 			for (@NonNull Region oldRegion : oldRegions) {
 				orderedRegions.remove(oldRegion);
+				oldRegion.setInvokingRegion(null);
 			}
 			orderedRegions.add(orderedRegionIndex, newRegion);
 			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());

@@ -442,7 +442,7 @@ public abstract class SchedulerConstants2 extends SchedulerConstantsImpl
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : region.getRegions()) {
+		for (@NonNull Region nestedRegion : RegionUtil.getRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}
@@ -462,7 +462,7 @@ public abstract class SchedulerConstants2 extends SchedulerConstantsImpl
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : region.getRegions()) {
+		for (@NonNull Region nestedRegion : RegionUtil.getRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}

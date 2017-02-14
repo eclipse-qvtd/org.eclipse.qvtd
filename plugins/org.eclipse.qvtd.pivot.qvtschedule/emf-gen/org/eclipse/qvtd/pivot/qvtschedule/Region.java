@@ -40,7 +40,9 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRegion <em>Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
@@ -69,6 +71,35 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	EList<Edge> getEdges();
 
 	/**
+	 * Returns the value of the '<em><b>Invoking Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions <em>Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invoking Region</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invoking Region</em>' container reference.
+	 * @see #setInvokingRegion(ScheduledRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_InvokingRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions
+	 * @model opposite="regions" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!invokingRegion'"
+	 * @generated
+	 */
+	ScheduledRegion getInvokingRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Invoking Region</em>' container reference.
+	 * @see #getInvokingRegion()
+	 * @generated
+	 */
+	void setInvokingRegion(ScheduledRegion value);
+
+	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion <em>Region</em>}'.
@@ -86,6 +117,33 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	 * @generated
 	 */
 	EList<Node> getNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Region</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Region</em>' reference.
+	 * @see #setRegion(Region)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_Region()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!region'"
+	 * @generated
+	 */
+	Region getRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRegion <em>Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Region</em>' reference.
+	 * @see #getRegion()
+	 * @generated
+	 */
+	void setRegion(Region value);
 
 	void addCallToChild(@NonNull Region region);
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
@@ -149,7 +207,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	 * The schedule index at which ALL invocations of this region occur.
 	 */
 	int getInvocationIndex();
-	@Nullable ScheduledRegion getInvokingRegion();
 	int getLastIndex();
 	@NonNull List<@NonNull DatumConnection<?>> getLoopingConnections();
 	@NonNull MultiRegion getMultiRegion();
@@ -203,7 +260,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	void removeCallToChild(@NonNull Region region);
 	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
-	void setInvokingRegion(@NonNull ScheduledRegion invokingRegion);
 	void toCallGraph(@NonNull GraphStringBuilder s);
 	//	void toGraph(@NonNull GraphStringBuilder s);
 	void toRegionGraph(@NonNull GraphStringBuilder s);

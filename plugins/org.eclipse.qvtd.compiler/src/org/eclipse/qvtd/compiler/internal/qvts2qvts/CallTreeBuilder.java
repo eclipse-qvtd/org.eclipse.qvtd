@@ -20,6 +20,7 @@ import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -113,7 +114,7 @@ public class CallTreeBuilder
 				assert commonRegion != null;
 				List<@NonNull Region> intermediateRegions = connection.getIntermediateRegions();
 				for (@NonNull Region intermediateRegion : intermediateRegions) {
-					Region checkCommonRegion = commonRegion.getLoopingConnections().size() > 0 ? commonRegion.getInvokingRegion() : commonRegion;
+					Region checkCommonRegion = commonRegion.getLoopingConnections().size() > 0 ? RegionUtil.getInvokingRegion(commonRegion) : commonRegion;
 					assert commonRegion.getLoopingConnections().size() > 0
 					? Iterables.contains(commonRegion.getCallableParents(), getCommonRegion(commonRegion, intermediateRegion))
 						: getCommonRegion(commonRegion, intermediateRegion) == checkCommonRegion;

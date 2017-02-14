@@ -97,6 +97,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
 			case QVTschedulePackage.ROLE: return createRole();
 			case QVTschedulePackage.ROOT_COMPOSITION_REGION: return createRootCompositionRegion();
+			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
 			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
 			default:
@@ -440,6 +441,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull RootCompositionRegion createRootCompositionRegion() {
 		RootCompositionRegionImpl rootCompositionRegion = new RootCompositionRegionImpl();
 		return rootCompositionRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull ScheduledRegion createScheduledRegion() {
+		ScheduledRegionImpl scheduledRegion = new ScheduledRegionImpl();
+		return scheduledRegion;
 	}
 
 	/**

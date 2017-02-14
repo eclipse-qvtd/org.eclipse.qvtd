@@ -23,11 +23,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -76,7 +79,9 @@ import com.google.common.collect.Iterables;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getSymbolName <em>Symbol Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getInvokingRegion <em>Invoking Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getRegion <em>Region</em>}</li>
  * </ul>
  *
  * @generated
@@ -121,6 +126,16 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	protected EList<Node> nodes;
 
 	/**
+	 * The cached value of the '{@link #getRegion() <em>Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegion()
+	 * @generated
+	 * @ordered
+	 */
+	protected Region region;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -151,8 +166,13 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				return getSymbolName();
 			case QVTschedulePackage.REGION__EDGES:
 				return getEdges();
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				return getInvokingRegion();
 			case QVTschedulePackage.REGION__NODES:
 				return getNodes();
+			case QVTschedulePackage.REGION__REGION:
+				if (resolve) return getRegion();
+				return basicGetRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -170,9 +190,15 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				getEdges().clear();
 				getEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				setInvokingRegion((ScheduledRegion)newValue);
+				return;
 			case QVTschedulePackage.REGION__NODES:
 				getNodes().clear();
 				getNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.REGION__REGION:
+				setRegion((Region)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -189,8 +215,14 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			case QVTschedulePackage.REGION__EDGES:
 				getEdges().clear();
 				return;
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				setInvokingRegion((ScheduledRegion)null);
+				return;
 			case QVTschedulePackage.REGION__NODES:
 				getNodes().clear();
+				return;
+			case QVTschedulePackage.REGION__REGION:
+				setRegion((Region)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -208,8 +240,12 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
 			case QVTschedulePackage.REGION__EDGES:
 				return edges != null && !edges.isEmpty();
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				return getInvokingRegion() != null;
 			case QVTschedulePackage.REGION__NODES:
 				return nodes != null && !nodes.isEmpty();
+			case QVTschedulePackage.REGION__REGION:
+				return region != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -277,7 +313,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	private MultiRegion multiRegion;
-	private @Nullable ScheduledRegion invokingRegion = null;
 
 	/**
 	 * Ordered list of regions that call this region
@@ -1572,11 +1607,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public @Nullable ScheduledRegion getInvokingRegion() {
-		return invokingRegion;
-	}
-
-	@Override
 	public int getLastIndex() {
 		int size = indexes.size();
 		assert size > 0;
@@ -1643,6 +1673,10 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetInvokingRegion((ScheduledRegion)otherEnd, msgs);
 			case QVTschedulePackage.REGION__NODES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNodes()).basicAdd(otherEnd, msgs);
 		}
@@ -1659,10 +1693,26 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__EDGES:
 				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				return basicSetInvokingRegion(null, msgs);
 			case QVTschedulePackage.REGION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.REGION__INVOKING_REGION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__REGIONS, ScheduledRegion.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	@Override
@@ -1836,11 +1886,94 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 * @generated
 	 */
 	@Override
+	public ScheduledRegion getInvokingRegion() {
+		if (eContainerFeatureID() != QVTschedulePackage.REGION__INVOKING_REGION) return null;
+		return (ScheduledRegion)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInvokingRegion(ScheduledRegion newInvokingRegion, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newInvokingRegion, QVTschedulePackage.REGION__INVOKING_REGION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setInvokingRegion(ScheduledRegion newInvokingRegion) {
+		if (newInvokingRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.REGION__INVOKING_REGION && newInvokingRegion != null)) {
+			if (EcoreUtil.isAncestor(this, newInvokingRegion))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newInvokingRegion != null)
+				msgs = ((InternalEObject)newInvokingRegion).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__REGIONS, ScheduledRegion.class, msgs);
+			msgs = basicSetInvokingRegion(newInvokingRegion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__INVOKING_REGION, newInvokingRegion, newInvokingRegion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Node> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, QVTschedulePackage.REGION__NODES, QVTschedulePackage.NODE__REGION);
 		}
 		return nodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Region getRegion() {
+		if (region != null && region.eIsProxy()) {
+			InternalEObject oldRegion = (InternalEObject)region;
+			region = (Region)eResolveProxy(oldRegion);
+			if (region != oldRegion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.REGION__REGION, oldRegion, region));
+			}
+		}
+		return region;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Region basicGetRegion() {
+		return region;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRegion(Region newRegion) {
+		Region oldRegion = region;
+		region = newRegion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__REGION, oldRegion, region));
 	}
 
 	protected @NonNull String getSymbolNamePrefix() {
@@ -2102,11 +2235,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 	} */
-
-	@Override
-	public void setInvokingRegion(@NonNull ScheduledRegion invokingRegion) {
-		this.invokingRegion  = invokingRegion;
-	}
 
 	public void setMultiRegion(@NonNull MultiRegion multiRegion) {
 		this.multiRegion = multiRegion;
