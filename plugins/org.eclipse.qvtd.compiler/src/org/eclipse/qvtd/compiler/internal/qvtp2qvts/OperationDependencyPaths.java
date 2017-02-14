@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.List;
 
@@ -28,10 +28,10 @@ public interface OperationDependencyPaths
 	/**
 	 * Return the hidden paths as an ordered iterable.
 	 */
-	@NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> getHiddenPaths();
+	@NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> getHiddenPaths();
 
 	/**
 	 * Return the return paths as an ordered iterable.
 	 */
-	@NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> getReturnPaths();
+	@NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> getReturnPaths();
 }

@@ -26,8 +26,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//ClassDatum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDatumAnalysis" abstract="true"
-      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDatumAnalysis" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionEnd" abstract="true" interface="true">

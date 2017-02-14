@@ -19,10 +19,10 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.common,
+ org.eclipse.qvtd.compiler.internal.genmodel,
  org.eclipse.qvtd.compiler.internal.qvtc2qvtu,
  org.eclipse.qvtd.compiler.internal.qvtm2qvtp,
  org.eclipse.qvtd.compiler.internal.qvtp2qvts,
- org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc,
  org.eclipse.qvtd.compiler.internal.qvts2qvti,
  org.eclipse.qvtd.compiler.internal.qvts2qvts,
@@ -30,6 +30,7 @@ Export-Package: org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter,
  org.eclipse.qvtd.compiler.internal.qvtu2qvtm,
+ org.eclipse.qvtd.compiler.internal.templates.model,
  org.eclipse.qvtd.compiler.internal.utilities
 Import-Package: com.google.common.base,
  com.google.common.collect

@@ -23,6 +23,7 @@ import java.util.function.BinaryOperator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -366,6 +367,23 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		@Override
 		public boolean apply(@NonNull NodeConnection connection) {
 			return connection.isUsed();
+		}
+	}
+
+	public static final class MultiOppositeComparator implements Comparator<@NonNull Property>
+	{
+		public static final Comparator<@NonNull ? super Property> INSTANCE = new MultiOppositeComparator();
+
+		@Override
+		public int compare(@NonNull Property o1, @NonNull Property o2) {
+			boolean c1 = o1.isIsComposite();
+			boolean c2 = o1.isIsComposite();
+			if (c1 != c2) {
+				return Boolean.compare(c1, c2);
+			}
+			else {
+				return ClassUtil.safeCompareTo(o1.getName(), o2.getName());
+			}
 		}
 	}
 

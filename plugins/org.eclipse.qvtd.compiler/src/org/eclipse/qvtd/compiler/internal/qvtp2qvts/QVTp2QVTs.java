@@ -44,10 +44,6 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysisImpl2;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyPaths;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyStep;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -64,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -200,11 +197,11 @@ public class QVTp2QVTs extends SchedulerConstants2
 		OperationDependencyPaths paths = operationDependencyAnalysis.analyzeOperation(operationCallExp);
 		//		operationDependencyAnalysis.dump();
 		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + paths);
-		Iterable<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
-		Iterable<@NonNull List<@NonNull OperationDependencyStep>> returnPaths = paths.getReturnPaths();
+		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
+		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = getDomainAnalysis();
 		Map<@NonNull ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
-		for (List<@NonNull OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
+		for (List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;
 				for (int i = 1; i < steps.size(); i++) {
@@ -292,7 +289,7 @@ public class QVTp2QVTs extends SchedulerConstants2
 
 	@Override
 	protected @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum) {
-		return new ClassDatumAnalysisImpl2(this, classDatum);
+		return new ClassDatumAnalysisImpl(this, classDatum);
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {

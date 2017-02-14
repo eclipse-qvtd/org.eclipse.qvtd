@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysisImpl2;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -552,7 +551,7 @@ public class MappingAnalysis implements Nameable
 
 	public void registerConsumptionsAndProductions(@NonNull QVTp2QVTs qvtp2qts) {
 		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
-			ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) newNode.getClassDatumAnalysis();
+			ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
 			classDatumAnalysis.addProduction(mappingRegion, newNode);
 			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
 				MappingRegion consumingRegion = qvtp2qts.getMappingRegion(consumingMapping);
@@ -564,7 +563,7 @@ public class MappingAnalysis implements Nameable
 			}
 		}
 		for (@NonNull Node predicatedNode : mappingRegion.getOldNodes()) {
-			ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) predicatedNode.getClassDatumAnalysis();
+			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
 			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
 				MappingRegion producingRegion = qvtp2qts.getMappingRegion(producingMapping);

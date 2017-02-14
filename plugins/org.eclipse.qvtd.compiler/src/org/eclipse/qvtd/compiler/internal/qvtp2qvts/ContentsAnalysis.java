@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera - initial API and implementation
  *     E.D.Willink - use Complete model
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +86,7 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) schedulerConstants.getElementalClassDatumAnalysis(newNode);
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getElementalClassDatumAnalysis(newNode);
 		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
 			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {

@@ -10,10 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 
 /**
@@ -21,13 +24,16 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
  */
 public interface ClassDatumAnalysis extends Element
 {
+	void addConsumption(@NonNull MappingRegion consumer, @NonNull Node consumingNode);
+	void addIntroduction(@NonNull Region introducer, @NonNull Node introducingNode);
+	void addProduction(@NonNull MappingRegion producer, @NonNull Node producingNode);
 	@NonNull ClassDatum getClassDatum();
-
 	@NonNull CompleteClass getCompleteClass();
-
+	List<MappingRegion> getConsumingRegions();
 	@NonNull DomainUsage getDomainUsage();
-
 	@NonNull ClassDatum getElementalClassDatum();
-
+	List<Mapping> getProducedBy();
+	List<Mapping> getRequiredBy();
+	List<ClassDatumAnalysis> getSuperClassDatumAnalyses();
 	@NonNull TypedModel getTypedModel();
 }
