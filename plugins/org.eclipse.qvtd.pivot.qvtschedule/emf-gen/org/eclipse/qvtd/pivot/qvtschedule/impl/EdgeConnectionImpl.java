@@ -80,7 +80,6 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		super(region, sourceEdges, symbolNameBuilder);
 		this.property = property;
 		assert !property.isIsImplicit();
-		region.addEdgeConnection(this);
 		for (@NonNull NavigableEdge sourceEdge : sourceEdges) {
 			sourceEdge.addOutgoingConnection(this);
 		}

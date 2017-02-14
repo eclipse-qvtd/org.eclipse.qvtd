@@ -39,7 +39,9 @@
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//ClassDatumAnalysis"/>
     <genClasses ecoreClass="QVTschedule.ecore#//ComposedNode"/>
-    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Connection"/>
+    <genClasses image="false" ecoreClass="QVTschedule.ecore#//Connection">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Connection/region"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ConnectionEnd"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ConnectionRole">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//ConnectionRole/node"/>
@@ -113,6 +115,7 @@
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//RootCompositionRegion"/>
     <genClasses ecoreClass="QVTschedule.ecore#//ScheduledRegion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//ScheduledRegion/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/connections"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/regions"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//SchedulerConstants"/>

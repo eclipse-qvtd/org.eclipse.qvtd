@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -66,6 +65,7 @@ import com.google.common.collect.Sets;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getConnections <em>Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getRegions <em>Regions</em>}</li>
  * </ul>
  *
@@ -91,6 +91,16 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConnections() <em>Connections</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Connection> connections;
 
 	/**
 	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
@@ -150,6 +160,19 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * @generated
 	 */
 	@Override
+	public EList<Connection> getConnections() {
+		if (connections == null) {
+			connections = new EObjectContainmentWithInverseEList<Connection>(Connection.class, this, QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS, QVTschedulePackage.CONNECTION__REGION);
+		}
+		return connections;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Region> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentWithInverseEList<Region>(Region.class, this, QVTschedulePackage.SCHEDULED_REGION__REGIONS, QVTschedulePackage.REGION__INVOKING_REGION);
@@ -166,6 +189,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnections()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRegions()).basicAdd(otherEnd, msgs);
 		}
@@ -180,6 +205,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
+				return ((InternalEList<?>)getConnections()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 		}
@@ -196,6 +223,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				return getName();
+			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
+				return getConnections();
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return getRegions();
 		}
@@ -213,6 +242,10 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				setName((String)newValue);
+				return;
+			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
+				getConnections().clear();
+				getConnections().addAll((Collection<? extends Connection>)newValue);
 				return;
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				getRegions().clear();
@@ -233,6 +266,9 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
+				getConnections().clear();
+				return;
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				getRegions().clear();
 				return;
@@ -250,6 +286,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULED_REGION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.SCHEDULED_REGION__CONNECTIONS:
+				return connections != null && !connections.isEmpty();
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return regions != null && !regions.isEmpty();
 		}
@@ -277,11 +315,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	/**
-	 * All the connections defined in this region, but not those in nested regions.
-	 */
-	private @NonNull List<@NonNull Connection> connections = new ArrayList<>();
-
-	/**
 	 * The per-class node connections that unite a set of sources via a shared connection.
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatumAnalysis2nodes2nodeConnections = new HashMap<>();
@@ -290,28 +323,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * The edge connections that unite a set of sources via a shared connection.
 	 */
 	private final @NonNull Map<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<>();
-
-	@Override
-	public void addEdgeConnection(@NonNull EdgeConnection edgeConnection) {
-		assert !connections.contains(edgeConnection);
-		//		for (Connection oldConnection : connections) {
-		//			if (oldConnection.getConnectionRole() == connection.getConnectionRole()) {
-		//				assert (edge.getSource() != oldConnection.getSource()) || (edge.getTarget() != oldConnection.getTarget());
-		//			}
-		//		}
-		connections.add(edgeConnection);
-	}
-
-	@Override
-	public void addNodeConnection(@NonNull NodeConnection nodeConnection) {
-		assert !connections.contains(nodeConnection);
-		//		for (Connection oldConnection : connections) {
-		//			if (oldConnection.getConnectionRole() == connection.getConnectionRole()) {
-		//				assert (edge.getSource() != oldConnection.getSource()) || (edge.getTarget() != oldConnection.getTarget());
-		//			}
-		//		}
-		connections.add(nodeConnection);
-	}
 
 	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
@@ -347,11 +358,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull Collection<@NonNull Connection> getConnections() {
-		return connections;
-	}
-
-	@Override
 	public @NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
 		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
@@ -368,8 +374,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull Iterable<EdgeConnection> getEdgeConnections() {
-		return Iterables.filter(connections, EdgeConnection.class);
+	public @NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections() {
+		return Iterables.filter(getConnections(), EdgeConnection.class);
 	}
 
 	@Override
@@ -416,7 +422,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getNodeConnections() {
-		return Iterables.filter(connections, NodeConnection.class);
+		return Iterables.filter(getConnections(), NodeConnection.class);
 	}
 
 	@Override
@@ -494,7 +500,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		for (@NonNull Region region : getCallableRegions()) {
 			region.toCallGraph(s);
 		}
-		for (@NonNull Connection connection : getConnections()) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(this)) {
 			connection.toRegionGraph(this, s);
 		}
 		s.popCluster();
@@ -513,7 +519,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
 			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
-		for (@NonNull Connection connection : getConnections()) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(this)) {
 			connection.toGraph(s);
 		}
 		s.popCluster();
@@ -572,7 +578,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
 			s.appendNode(node);
 		}
-		for (@NonNull Connection connection : getConnections()) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(this)) {
 			connection.toRegionGraph(this, s);
 		}
 		s.popCluster();

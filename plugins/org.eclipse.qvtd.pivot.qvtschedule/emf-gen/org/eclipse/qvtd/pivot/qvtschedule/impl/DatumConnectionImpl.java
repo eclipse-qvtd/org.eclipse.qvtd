@@ -63,7 +63,6 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		return QVTschedulePackage.Literals.DATUM_CONNECTION;
 	}
 
-	protected   ScheduledRegion region;
 	protected   String name;
 	private /*@LazyNonNull*/ ConnectionRole connectionRole;
 	protected  Set<@NonNull CE> sourceEnds;
@@ -75,7 +74,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
 
 	protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull SymbolNameBuilder symbolNameBuilder) {
-		this.region = region;
+		setRegion(region);
 		this.name = region.getSchedulerConstants().reserveSymbolName(symbolNameBuilder, this);
 		this.sourceEnds = sourceEnds;
 	}
@@ -141,7 +140,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public void destroy() {
-		region.removeConnection(this);
+		getRegion().removeConnection(this);
 	}
 
 	@Override
@@ -198,11 +197,6 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull Integer getPenwidth() {
 		Integer penwidth = getConnectionRole().getPenwidth();
 		return /*connectionRole.isRealized() ? 2*penwidth :*/ penwidth;
-	}
-
-	@Override
-	public @NonNull ScheduledRegion getRegion() {
-		return region;
 	}
 
 	public @NonNull String getShape() {

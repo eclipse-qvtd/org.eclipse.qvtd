@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -48,6 +47,24 @@ public interface ScheduledRegion extends Region
 	 */
 	void setName(String value);
 	/**
+	 * Returns the value of the '<em><b>Connections</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Connection}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Connections</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Connections</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduledRegion_Connections()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Connection#getRegion
+	 * @model opposite="region" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduledRegion!connections'"
+	 * @generated
+	 */
+	EList<Connection> getConnections();
+	/**
 	 * Returns the value of the '<em><b>Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Region}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}'.
@@ -65,13 +82,10 @@ public interface ScheduledRegion extends Region
 	 * @generated
 	 */
 	EList<Region> getRegions();
-	void addEdgeConnection(@NonNull EdgeConnection edgeConnection);
-	void addNodeConnection(@NonNull NodeConnection nodeConnection);
 	@NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
-	@NonNull Collection<@NonNull Connection> getConnections();
 	@NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property);
-	@NonNull Iterable<org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection> getEdgeConnections();
+	@NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections();
 	@Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode);
 	@Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis);
 	@Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis);

@@ -92,7 +92,6 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	public NodeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull Node> sourceNodes, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		super(region, sourceNodes, symbolNameBuilder);
 		this.classDatumAnalysis = classDatumAnalysis;
-		region.addNodeConnection(this);
 		for (@NonNull Node sourceNode : sourceNodes) {
 			//			assert !sourceNode.isConstant();
 			sourceNode.addOutgoingConnection(this);

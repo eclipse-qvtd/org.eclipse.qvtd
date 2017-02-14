@@ -28,7 +28,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatumAnalysis" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
+        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/connections"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionEnd" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionEnd may be the Node/Edge at the end of a NodeConnection/EdgeConnection."/>
@@ -210,6 +213,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="RootCompositionRegion" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="#//Connection" containment="true" eOpposite="#//Connection/region"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" upperBound="-1"
         eType="#//Region" containment="true" eOpposite="#//Region/invokingRegion"/>
   </eClassifiers>

@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -528,6 +529,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			case SPECULATED: return QVTscheduleConstants.SPECULATED_COLOR;
 			default: return QVTscheduleConstants.OTHER_COLOR;
 		}
+	}
+
+	public static @NonNull Iterable<@NonNull Connection> getConnections(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nullFree(scheduledRegion.getConnections());
 	}
 
 	public static @NonNull Role getEdgeRole(@NonNull Edge edge) {
