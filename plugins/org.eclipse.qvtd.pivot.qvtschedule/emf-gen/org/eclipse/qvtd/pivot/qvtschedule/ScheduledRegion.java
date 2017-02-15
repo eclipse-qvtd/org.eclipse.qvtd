@@ -114,9 +114,6 @@ public interface ScheduledRegion extends Region
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property);
 	@NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections();
-	@Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode);
-	@Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis);
-	@Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull NodeConnection> getNodeConnections();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);

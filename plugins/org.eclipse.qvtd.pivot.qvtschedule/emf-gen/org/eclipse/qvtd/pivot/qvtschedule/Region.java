@@ -156,7 +156,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	void checkIncomingConnections();
 	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges);
-	void createIncomingConnections();
 
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.

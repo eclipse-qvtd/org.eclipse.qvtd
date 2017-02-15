@@ -454,21 +454,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull Node> getNewNodes( @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
 	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
 		if (nodes2connection == null) {

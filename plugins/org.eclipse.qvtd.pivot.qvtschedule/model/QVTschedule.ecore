@@ -335,7 +335,10 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="loadingRegion" eType="#//LoadingRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="completeModel" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadingRegion" lowerBound="1"
+        eType="#//LoadingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
         containment="true" eOpposite="#//ScheduledRegion/scheduleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiRegion" eType="#//MultiRegion"

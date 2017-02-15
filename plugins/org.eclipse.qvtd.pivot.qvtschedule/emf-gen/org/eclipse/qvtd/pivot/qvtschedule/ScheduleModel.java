@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Property;
@@ -32,6 +33,31 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 public interface ScheduleModel extends Model
 {
 	/**
+	 * Returns the value of the '<em><b>Complete Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Complete Model</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Complete Model</em>' reference.
+	 * @see #setCompleteModel(CompleteModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_CompleteModel()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!completeModel'"
+	 * @generated
+	 */
+	CompleteModel getCompleteModel();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getCompleteModel <em>Complete Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Complete Model</em>' reference.
+	 * @see #getCompleteModel()
+	 * @generated
+	 */
+	void setCompleteModel(CompleteModel value);
+	/**
 	 * Returns the value of the '<em><b>Loading Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -42,7 +68,8 @@ public interface ScheduleModel extends Model
 	 * @return the value of the '<em>Loading Region</em>' reference.
 	 * @see #setLoadingRegion(LoadingRegion)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_LoadingRegion()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!loadingRegion'"
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!loadingRegion'"
 	 * @generated
 	 */
 	LoadingRegion getLoadingRegion();
@@ -123,6 +150,9 @@ public interface ScheduleModel extends Model
 	@NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(@NonNull Node calledNode);
 	@NonNull EnvironmentFactory getEnvironmentFactory();
 	@NonNull Property getIterateProperty(@NonNull Type type);
+	//	@Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode);
+	//	@Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis);
+	//	@Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis();
 	@NonNull StandardLibrary getStandardLibrary();
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();

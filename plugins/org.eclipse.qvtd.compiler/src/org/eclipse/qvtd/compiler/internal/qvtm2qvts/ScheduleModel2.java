@@ -63,7 +63,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
-public abstract class SchedulerConstants2 extends ScheduleModelImpl
+public abstract class ScheduleModel2 extends ScheduleModelImpl
 {
 	//public static final @NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
 	public static final @NonNull Set<@NonNull MappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
@@ -109,8 +109,9 @@ public abstract class SchedulerConstants2 extends ScheduleModelImpl
 
 	private /*@LazyNonNull*/ List<@NonNull Mapping> orderedMappings;	// Only ordered to improve determinacy
 
-	protected SchedulerConstants2(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+	protected ScheduleModel2(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+		setCompleteModel(environmentFactory.getCompleteModel());
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
