@@ -17,7 +17,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -63,15 +63,15 @@ public class TrueNodeImpl extends NodeImpl implements TrueNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitTrueNode(this);
 	}
 
-	public static @NonNull TrueNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public static @NonNull TrueNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum) {
 		TrueNodeImpl node = new TrueNodeImpl();
-		node.initialize(nodeRole, region, name, classDatumAnalysis);
+		node.initialize(nodeRole, region, name, classDatum);
 		return node;
 	}
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatumAnalysis(this));
+		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatum(this));
 	}
 
 	@Override

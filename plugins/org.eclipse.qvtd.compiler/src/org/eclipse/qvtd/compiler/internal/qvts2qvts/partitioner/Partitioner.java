@@ -92,7 +92,7 @@ public class Partitioner
 
 	private static void gatherCorrolaries(@NonNull Set<@NonNull Property> corrolaryProperties, @NonNull MappingRegion region) {
 		for (@NonNull Node node : RegionUtil.getNodes(region)) {
-			if (!node.isTrue() && node.isPattern() && node.isRealized() && node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
+			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
 						corrolaryProperties.add(RegionUtil.getProperty(edge));
@@ -204,7 +204,7 @@ public class Partitioner
 								realizedOutputEdges.add(edge);
 							}
 						}
-						if (edge.getEdgeTarget().isLoaded() && edge.getEdgeSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
+						if (edge.getEdgeTarget().isLoaded() && RegionUtil.getClassDatumAnalysis(edge.getEdgeSource()).getDomainUsage().isMiddle()) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
@@ -250,7 +250,7 @@ public class Partitioner
 				else if (node.isLoaded()) {
 					hasLoadedNodes  = true;
 				}
-				else if (node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
+				else if (RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
 					if (node.isPredicated()) {
 						predicatedMiddleNodes.add(node);
 					}

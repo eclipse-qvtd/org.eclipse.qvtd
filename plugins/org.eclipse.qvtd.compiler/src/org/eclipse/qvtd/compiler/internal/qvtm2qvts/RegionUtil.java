@@ -36,14 +36,15 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
@@ -72,6 +73,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RegionUtil extends QVTscheduleUtil
 {
+	public static class Internal
+	{
+		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull Region region) {
+			return ClassUtil.nullFree(region.getHeadNodes());
+		}
+	}
+
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
 		for (@NonNull Node firstNode : firstNodes) {
 			for (@NonNull Node secondNode : secondNodes) {
@@ -90,7 +98,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Role nodeRole = getNodeRole(Phase.LOADED);
-		return ComposedNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
+		return ComposedNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 	}
 
 	public static @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property) {
@@ -106,7 +114,7 @@ public class RegionUtil extends QVTscheduleUtil
 		String name = property.getName();
 		assert name != null;
 		Region region = getRegion(sourceNode);
-		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(navigationCallExp), isMatched);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatum(navigationCallExp), isMatched);
 		node.addTypedElement(navigationCallExp);
 		return node;
 	}
@@ -123,9 +131,7 @@ public class RegionUtil extends QVTscheduleUtil
 		TypedModel typedModel = getTypedModel(getClassDatumAnalysis(targetNode));
 		Region region = getRegion(targetNode);
 		ClassDatum classDatum = region.getScheduleModel().getClassDatum(type, typedModel);
-		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-		ClassDatumAnalysis classDatumAnalysis = region.getScheduleModel().getClassDatumAnalysis(classDatum);
-		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatum, true);
 		node.addTypedElement(property);
 		return node;
 	}
@@ -140,7 +146,7 @@ public class RegionUtil extends QVTscheduleUtil
 		TypedModel typedModel = getTypedModel(getClassDatumAnalysis(parentNode));
 		ClassDatum classDatum = scheduleModel.getClassDatum(type, typedModel);
 		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(classDatum);
+		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(classDatum);
 		String name = property.getName();
 		assert name != null;
 		return createDependencyNode(RegionUtil.getRegion(parentNode), name, classDatumAnalysis);
@@ -148,12 +154,12 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createDependencyNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Role nodeRole = getNodeRole(Phase.PREDICATED);
-		return DependencyNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
+		return DependencyNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 	}
 
 	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Role nodeRole = getNodeRole(Phase.OTHER);
-		return ErrorNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
+		return ErrorNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 	}
 
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
@@ -163,7 +169,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createInputNode(@NonNull Region region, @NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Role nodeRole = getNodeRole(nodeRolePhase);
-		return InputNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
+		return InputNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 	}
 
 	public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name,@NonNull Node targetNode) {
@@ -196,12 +202,12 @@ public class RegionUtil extends QVTscheduleUtil
 	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
 		Role nodeRole = getNodeRole(Phase.CONSTANT);
 		if (typedElement != null) {
-			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getScheduleModel().getClassDatumAnalysis(typedElement), isMatched);
+			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getScheduleModel().getClassDatum(typedElement), isMatched);
 			node.addTypedElement(typedElement);
 			return node;
 		}
 		else {
-			return NullNodeImpl.create(nodeRole, region, "«null»", region.getScheduleModel().getOclVoidClassDatumAnalysis(), isMatched);
+			return NullNodeImpl.create(nodeRole, region, "«null»", ((ScheduleModel2)region.getScheduleModel()).getOclVoidClassDatumAnalysis().getClassDatum(), isMatched);
 		}
 	}
 
@@ -215,27 +221,27 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(getPhase(getNodeRole(sourceNode)));
-		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
+		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum(), true);
 	}
 
 	public static @NonNull Node createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
 		Role nodeRole = getNodeRole(nodePhase);
-		Node node = OperationNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(typedElement), isMatched);
+		Node node = OperationNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatum(typedElement), isMatched);
 		node.addTypedElement(typedElement);
 		return node;
 	}
 
 	public static @NonNull Node createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Role nodeRole = getNodeRole(Phase.PREDICATED);
-		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum(), true);
 		node.setHead();
 		return node;
 	}
 
 	public static @NonNull Node createOperationResultNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
 		Role nodeRole = getNodeRole(getPhase(getNodeRole(sourceNode)));
-		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, false);
+		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis.getClassDatum(), false);
 	}
 
 	public static @NonNull Node createPatternNode(@NonNull Role nodeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isMatched) {
@@ -245,13 +251,12 @@ public class RegionUtil extends QVTscheduleUtil
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
 		assert type != null;
 		Type elementType = PivotUtil.getElementalType(type);
-		TypedModel typedModel = elementType instanceof DataType ? scheduleModel.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
+		TypedModel typedModel = elementType instanceof DataType ? scheduleModel.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getTypedModel();
 		assert typedModel != null;
 		ClassDatum classDatum = scheduleModel.getClassDatum(type, typedModel);
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(classDatum);
 		String name = source2targetProperty.getName();
 		assert name != null;
-		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, isMatched);
+		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatum, isMatched);
 	}
 
 	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -305,30 +310,38 @@ public class RegionUtil extends QVTscheduleUtil
 		}
 		Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Phase.PREDICATED : Phase.LOADED;
 		Role stepNodeRole = getNodeRole(phase);
-		Node node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(callExp), isMatched);
+		Node node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getScheduleModel().getClassDatum(callExp), isMatched);
 		node.addTypedElement(callExp);
 		return node;
 	}
 
 	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
 		Role stepNodeRole = getNodeRole(typedNode);
-		return PatternTypedNodeImpl.create(stepNodeRole, region, getName(typedNode), getClassDatumAnalysis(typedNode), isMatched);
+		return PatternTypedNodeImpl.create(stepNodeRole, region, getName(typedNode), getClassDatum(typedNode), isMatched);
 	}
 
 	public static @NonNull Node createTrueNode(@NonNull Region region) {
 		ScheduleModel scheduleModel = region.getScheduleModel();
 		org.eclipse.ocl.pivot.Class booleanType = scheduleModel.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = scheduleModel.getDomainAnalysis().getPrimitiveUsage();
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
+		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
 		Role nodeRole = getNodeRole(Phase.CONSTANT);
-		Node node = TrueNodeImpl.create(nodeRole, region, "«true»", classDatumAnalysis);
+		Node node = TrueNodeImpl.create(nodeRole, region, "«true»", classDatumAnalysis.getClassDatum());
 		node.setHead();
 		return node;
 	}
 
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		Role nodeRole = getNodeRole(Phase.OTHER);
-		return UnknownNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(typedElement));
+		return UnknownNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatum(typedElement));
+	}
+
+	public static @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Node node) {
+		return ClassDatumAnalysis.get(node);
+	}
+
+	public static @NonNull CompleteClass getCompleteClass(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ClassUtil.nonNullState(classDatumAnalysis.getClassDatum().getCompleteClass());
 	}
 
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
@@ -345,6 +358,14 @@ public class RegionUtil extends QVTscheduleUtil
 			}
 		}
 		return completeClass2nodes;
+	}
+
+	public static @NonNull Iterable<@NonNull MappingRegion> getConsumingRegions(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ClassUtil.nullFree(classDatumAnalysis.getConsumingRegions());
+	}
+
+	public static @NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ClassUtil.nonNullState(classDatumAnalysis.getElementalClassDatum());
 	}
 
 	public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
@@ -400,6 +421,29 @@ public class RegionUtil extends QVTscheduleUtil
 			default: throw new UnsupportedOperationException();
 		}
 		return getNodeRole(phase);
+	}
+
+	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ClassUtil.nonNullState(classDatumAnalysis.getClassDatum().getTypedModel());
+	}
+
+	/**
+	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
+	 */
+	public static boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
+		Node thatSource = thatEdge.getEdgeSource();
+		CompleteClass thatType = ClassUtil.nonNullState(getClassDatumAnalysis(thatSource).getElementalClassDatum().getCompleteClass());
+		CompleteClass thisType = ClassUtil.nonNullState(getClassDatumAnalysis(thisEdge.getEdgeSource()).getElementalClassDatum().getCompleteClass());
+		if (thatType.conformsTo(thisType)) {
+			return true;
+		}
+		if (thatSource.isRealized()) {
+			return false;
+		}
+		if (thisType.conformsTo(thatType)) {
+			return true;
+		}
+		return false;
 	}
 
 	public static boolean isMatched(@NonNull TypedElement typedElement) {

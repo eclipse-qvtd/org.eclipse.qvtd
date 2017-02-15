@@ -131,14 +131,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.CLASS_DATUM_ANALYSIS: {
-				ClassDatumAnalysis classDatumAnalysis = (ClassDatumAnalysis)theEObject;
-				T result = caseClassDatumAnalysis(classDatumAnalysis);
-				if (result == null) result = caseElement(classDatumAnalysis);
-				if (result == null) result = caseVisitable(classDatumAnalysis);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.COMPOSED_NODE: {
 				ComposedNode composedNode = (ComposedNode)theEObject;
 				T result = caseComposedNode(composedNode);
@@ -660,21 +652,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassDatum(ClassDatum object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Class Datum Analysis</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Class Datum Analysis</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseClassDatumAnalysis(ClassDatumAnalysis object) {
 		return null;
 	}
 

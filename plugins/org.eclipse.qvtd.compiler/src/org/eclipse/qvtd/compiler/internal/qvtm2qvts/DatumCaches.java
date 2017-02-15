@@ -229,7 +229,7 @@ public class DatumCaches
 		if (classDatums.add(cDatum)) {
 			propertyDatums.addAll(ClassUtil.nullFree(cDatum.getPropertyDatums()));
 		}
-		for (@NonNull ClassDatum superClassDatum : ClassUtil.nullFree(cDatum.getSuper())) {
+		for (@NonNull ClassDatum superClassDatum : ClassUtil.nullFree(cDatum.getSuperClassDatums())) {
 			getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);
 		}
 		return propertyDatums;
@@ -292,7 +292,7 @@ public class DatumCaches
 			classDatum.setTypedModel(typedModel);
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {
-				List<ClassDatum> superClassDatums = classDatum.getSuper();
+				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
 				for (@NonNull CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
 					if (superCompleteClass != completeClass) {		// FIXME Why is OclAny its own superClass ?
 						ClassDatum superClassDatum = getClassDatum(typedModel, superCompleteClass);

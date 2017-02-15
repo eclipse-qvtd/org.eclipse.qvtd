@@ -72,7 +72,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.BASIC_MAPPING_REGION: return createBasicMappingRegion();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
-			case QVTschedulePackage.CLASS_DATUM_ANALYSIS: return createClassDatumAnalysis();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
 			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
@@ -166,17 +165,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull ClassDatum createClassDatum() {
 		ClassDatumImpl classDatum = new ClassDatumImpl();
 		return classDatum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ClassDatumAnalysis createClassDatumAnalysis() {
-		ClassDatumAnalysisImpl classDatumAnalysis = new ClassDatumAnalysisImpl();
-		return classDatumAnalysis;
 	}
 
 	/**

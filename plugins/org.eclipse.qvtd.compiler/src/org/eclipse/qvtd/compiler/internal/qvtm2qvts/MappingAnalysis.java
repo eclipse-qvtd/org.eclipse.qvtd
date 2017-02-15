@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -45,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -378,7 +378,7 @@ public class MappingAnalysis implements Nameable
 	public @Nullable Node getDependencyHead(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (dependencyHeadNodes != null) {
 			for (@NonNull Node dependencyHeadNode : dependencyHeadNodes) {
-				if (dependencyHeadNode.getClassDatumAnalysis() == classDatumAnalysis) {
+				if (RegionUtil.getClassDatumAnalysis(dependencyHeadNode) == classDatumAnalysis) {
 					return dependencyHeadNode;
 				}
 			}
@@ -552,25 +552,25 @@ public class MappingAnalysis implements Nameable
 
 	public void registerConsumptionsAndProductions(@NonNull QVTm2QVTs qvtm2qts) {
 		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
-			ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
+			ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(newNode);
 			classDatumAnalysis.addProduction(mappingRegion, newNode);
-			for (@NonNull Mapping consumingMapping : RegionUtil.getRequiredBy(classDatumAnalysis)) {
+			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
 				MappingRegion consumingRegion = qvtm2qts.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
-					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
+					if (consumingNode.getCompleteClass() == classDatumAnalysis.getClassDatum().getCompleteClass()) {		// FIXME inheritance
 						classDatumAnalysis.addConsumption(consumingRegion, consumingNode);
 					}
 				}
 			}
 		}
 		for (@NonNull Node predicatedNode : mappingRegion.getOldNodes()) {
-			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
+			ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(predicatedNode);
 			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
-			for (@NonNull Mapping producingMapping : RegionUtil.getProducedBy(classDatumAnalysis)) {
+			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
 				MappingRegion producingRegion = qvtm2qts.getMappingRegion(producingMapping);
 				assert producingRegion != null;
 				for (@NonNull Node newNode : producingRegion.getNewNodes()) {
-					if (newNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
+					if (newNode.getCompleteClass() == classDatumAnalysis.getClassDatum().getCompleteClass()) {		// FIXME inheritance
 						classDatumAnalysis.addProduction(producingRegion, newNode);
 					}
 				}

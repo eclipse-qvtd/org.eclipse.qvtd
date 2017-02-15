@@ -66,11 +66,6 @@ public abstract class AbstractQVTscheduleAS2MonikerVisitor
 	}
 
 	@Override
-	public @Nullable Object visitClassDatumAnalysis(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatumAnalysis object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Object visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object) {
 		return visitNode(object);
 	}

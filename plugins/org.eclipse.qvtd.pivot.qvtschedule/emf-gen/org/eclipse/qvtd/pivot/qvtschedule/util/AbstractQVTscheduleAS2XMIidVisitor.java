@@ -66,11 +66,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitClassDatumAnalysis(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatumAnalysis object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object) {
 		return visitNode(object);
 	}

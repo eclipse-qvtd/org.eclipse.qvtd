@@ -69,6 +69,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -93,7 +94,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.StatementComparator;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -847,9 +848,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
-		ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(guardNode);
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
-		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel()));
+		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getClassDatum().getTypedModel()));
 		GuardParameter guardVariable = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		mapping.getOwnedMappingParameters().add(guardVariable);
 		VariableDeclaration oldVariable = node2variable.put(guardNode, guardVariable);
@@ -1292,10 +1293,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						}
 					}
 				}
-				ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
-				TypedModel pTypedModel = classDatumAnalysis.getTypedModel();
+				ClassDatum classDatum = newNode.getClassDatum();
+				TypedModel pTypedModel = classDatum.getTypedModel();
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
-				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatumAnalysis.getCompleteClass().getPrimaryClass());
+				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
 				newStatement.setIsContained(newNode.isContained());
 				mapping.getOwnedStatements().add(newStatement);

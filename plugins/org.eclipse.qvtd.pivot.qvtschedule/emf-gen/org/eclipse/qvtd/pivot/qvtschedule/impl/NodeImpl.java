@@ -23,7 +23,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -39,11 +38,8 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -65,7 +61,7 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getClassDatumAnalysis <em>Class Datum Analysis</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getClassDatum <em>Class Datum</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getName <em>Name</em>}</li>
@@ -79,14 +75,14 @@ import com.google.common.collect.Iterables;
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
 	/**
-	 * The cached value of the '{@link #getClassDatumAnalysis() <em>Class Datum Analysis</em>}' reference.
+	 * The cached value of the '{@link #getClassDatum() <em>Class Datum</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClassDatumAnalysis()
+	 * @see #getClassDatum()
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassDatumAnalysis classDatumAnalysis;
+	protected ClassDatum classDatum;
 
 	/**
 	 * The cached value of the '{@link #getIncomingConnection() <em>Incoming Connection</em>}' reference.
@@ -183,16 +179,16 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public ClassDatumAnalysis getClassDatumAnalysis() {
-		if (classDatumAnalysis != null && classDatumAnalysis.eIsProxy()) {
-			InternalEObject oldClassDatumAnalysis = (InternalEObject)classDatumAnalysis;
-			classDatumAnalysis = (ClassDatumAnalysis)eResolveProxy(oldClassDatumAnalysis);
-			if (classDatumAnalysis != oldClassDatumAnalysis) {
+	public ClassDatum getClassDatum() {
+		if (classDatum != null && classDatum.eIsProxy()) {
+			InternalEObject oldClassDatum = (InternalEObject)classDatum;
+			classDatum = (ClassDatum)eResolveProxy(oldClassDatum);
+			if (classDatum != oldClassDatum) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__CLASS_DATUM, oldClassDatum, classDatum));
 			}
 		}
-		return classDatumAnalysis;
+		return classDatum;
 	}
 
 	/**
@@ -200,8 +196,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDatumAnalysis basicGetClassDatumAnalysis() {
-		return classDatumAnalysis;
+	public ClassDatum basicGetClassDatum() {
+		return classDatum;
 	}
 
 	/**
@@ -210,11 +206,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public void setClassDatumAnalysis(ClassDatumAnalysis newClassDatumAnalysis) {
-		ClassDatumAnalysis oldClassDatumAnalysis = classDatumAnalysis;
-		classDatumAnalysis = newClassDatumAnalysis;
+	public void setClassDatum(ClassDatum newClassDatum) {
+		ClassDatum oldClassDatum = classDatum;
+		classDatum = newClassDatum;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLASS_DATUM, oldClassDatum, classDatum));
 	}
 
 	/**
@@ -410,9 +406,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
-				if (resolve) return getClassDatumAnalysis();
-				return basicGetClassDatumAnalysis();
+			case QVTschedulePackage.NODE__CLASS_DATUM:
+				if (resolve) return getClassDatum();
+				return basicGetClassDatum();
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
@@ -442,8 +438,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
-				setClassDatumAnalysis((ClassDatumAnalysis)newValue);
+			case QVTschedulePackage.NODE__CLASS_DATUM:
+				setClassDatum((ClassDatum)newValue);
 				return;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				setIncomingConnection((NodeConnection)newValue);
@@ -481,8 +477,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
-				setClassDatumAnalysis((ClassDatumAnalysis)null);
+			case QVTschedulePackage.NODE__CLASS_DATUM:
+				setClassDatum((ClassDatum)null);
 				return;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				setIncomingConnection((NodeConnection)null);
@@ -517,8 +513,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM_ANALYSIS:
-				return classDatumAnalysis != null;
+			case QVTschedulePackage.NODE__CLASS_DATUM:
+				return classDatum != null;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				return incomingConnection != null;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
@@ -626,8 +622,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void getAllAncestors(@NonNull Set<@NonNull Node> ancestors) {
 		if (ancestors.add(this)) {
-			Region region = getRegion();
-			for (@NonNull Node headNode : region.getHeadNodes()) {
+			Region region = QVTscheduleUtil.getRegion(this);
+			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
 				for (@NonNull Node passedBindingSource : headNode.getPassedBindingSources()) {
 					passedBindingSource.getAllAncestors(ancestors);
 				}
@@ -667,7 +663,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull CompleteClass getCompleteClass() {
-		return QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatumAnalysis(this));
+		return QVTscheduleUtil.getCompleteClass(QVTscheduleUtil.getClassDatum(this));
 	}
 
 	@Override
@@ -958,12 +954,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return ClassUtil.nonNullState(utility);
 	}
 
-	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum) {
 		setNodeRole(nodeRole);
 		setRegion(region);
 		setName(name);
-		this.classDatumAnalysis = classDatumAnalysis;
-		this.isDataType = classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType;
+		this.classDatum = classDatum;
+		this.isDataType = classDatum.getCompleteClass().getPrimaryClass() instanceof DataType;
 		//		region.addNode(this);
 	}
 
@@ -1102,7 +1098,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
 	}
 
-	@Override
+	/*	@Override
 	public boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis) {
 		ClassDatumAnalysis classDatumAnalysis2 = QVTscheduleUtil.getClassDatumAnalysis(this);
 		CompleteClass oldCompleteClass = QVTscheduleUtil.getCompleteClass(classDatumAnalysis2);
@@ -1136,7 +1132,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		else {
 			return false;
 		}
-	}
+	} */
 
 	@Override
 	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
@@ -1196,7 +1192,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		s.append("(");
 		s.append(getName());
 		s.append(" : ");
-		s.append(String.valueOf(classDatumAnalysis));
+		s.append(String.valueOf(classDatum));
 		s.append(")");
 		return s.toString();
 	}

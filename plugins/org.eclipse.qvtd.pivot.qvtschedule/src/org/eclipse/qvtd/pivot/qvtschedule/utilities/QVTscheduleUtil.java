@@ -30,13 +30,11 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -528,16 +526,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull ClassDatum getClassDatum(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nonNullState(classDatumAnalysis.getClassDatum());
+	public static @NonNull ClassDatum getClassDatum(@NonNull Node node) {
+		return ClassUtil.nonNullState(node.getClassDatum());
 	}
 
-	public static @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull NodeConnection connection) {
-		return ClassUtil.nonNullState(connection.getClassDatumAnalysis());
-	}
-
-	public static @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Node node) {
-		return ClassUtil.nonNullState(node.getClassDatumAnalysis());
+	public static @NonNull ClassDatum getClassDatum(@NonNull NodeConnection connection) {
+		return ClassUtil.nonNullState(connection.getClassDatum());
 	}
 
 	public static @NonNull String getColor(@NonNull Role role) {
@@ -552,16 +546,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull CompleteClass getCompleteClass(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nonNullState(classDatumAnalysis.getCompleteClass());
+	public static @NonNull CompleteClass getCompleteClass(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nonNullState(classDatum.getCompleteClass());
 	}
 
 	public static @NonNull Iterable<@NonNull Connection> getConnections(@NonNull ScheduledRegion scheduledRegion) {
 		return ClassUtil.nullFree(scheduledRegion.getConnections());
-	}
-
-	public static @NonNull Iterable<@NonNull MappingRegion> getConsumingRegions(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nullFree(classDatumAnalysis.getConsumingRegions());
 	}
 
 	public static @NonNull Iterable<@NonNull Node> getDependencyNodes(@NonNull OperationRegion operationRegion) {
@@ -574,10 +564,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull Edge> getEdges(@NonNull Region region) {
 		return ClassUtil.nullFree(region.getEdges());
-	}
-
-	public static @NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nonNullState(classDatumAnalysis.getElementalClassDatum());
 	}
 
 	public static @NonNull String getFillColor(@NonNull Role nodeRole) {
@@ -644,10 +630,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(role.getPhase());
 	}
 
-	public static @NonNull Iterable<@NonNull Mapping> getProducedBy(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nullFree(classDatumAnalysis.getProducedBy());
-	}
-
 	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
 		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}
@@ -664,10 +646,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(scheduledRegion.getRegions());
 	}
 
-	public static @NonNull Iterable<@NonNull Mapping> getRequiredBy(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nullFree(classDatumAnalysis.getRequiredBy());
-	}
-
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {
 		return ClassUtil.nonNullState(region.getScheduleModel());
 	}
@@ -680,20 +658,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(edge.getSourceNode());
 	}
 
-	public static @NonNull Iterable<@NonNull ClassDatumAnalysis> getSuperClassDatumAnalyses(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nullFree(classDatumAnalysis.getSuperClassDatumAnalyses());
-	}
-
 	public static @NonNull Node getTargetNode(@NonNull Edge edge) {
 		return ClassUtil.nonNullState(edge.getTargetNode());
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum.getTypedModel());
-	}
-
-	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nonNullState(classDatumAnalysis.getTypedModel());
 	}
 
 	/**
@@ -708,25 +678,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return true;
 		}
 		if (thatTarget.isRealized()) {
-			return false;
-		}
-		if (thisType.conformsTo(thatType)) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
-	 */
-	public static boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatSource = thatEdge.getEdgeSource();
-		CompleteClass thatType = ClassUtil.nonNullState(thatSource.getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
-		CompleteClass thisType = ClassUtil.nonNullState(thisEdge.getEdgeSource().getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
-		if (thatType.conformsTo(thisType)) {
-			return true;
-		}
-		if (thatSource.isRealized()) {
 			return false;
 		}
 		if (thisType.conformsTo(thatType)) {

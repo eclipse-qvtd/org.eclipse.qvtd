@@ -110,11 +110,11 @@ public interface ScheduledRegion extends Region
 	 * @generated
 	 */
 	void setScheduleModel(ScheduleModel value);
-	@NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis);
+	@NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatum classDatum);
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property);
 	@NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections();
-	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis);
+	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum);
 	@NonNull Iterable<@NonNull NodeConnection> getNodeConnections();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
 	void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode);

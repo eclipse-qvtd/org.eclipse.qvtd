@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -127,7 +126,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	private void computeInputModels(@NonNull ScheduledRegion rootScheduledRegion) {
-		for (ClassDatumAnalysis classDatumAnalysis : rootScheduledRegion.getScheduleModel().getClassDatumAnalyses()) {
+		for (ClassDatumAnalysis classDatumAnalysis : ((ScheduleModel2)rootScheduledRegion.getScheduleModel()).getClassDatumAnalyses()) {
 			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
 			if (domainUsage.isInput() && !domainUsage.isOutput()) {
 				Type type = classDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
@@ -227,17 +226,17 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		assert invokingRegion2 != null;
 		NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
 		Node castTarget = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
-		ClassDatumAnalysis classDatumAnalysis = castTarget.getClassDatumAnalysis();
-		if (classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType) {
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(castTarget);
+		if (classDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass() instanceof DataType) {
 			Iterable<@NonNull NavigableEdge> realizedEdges = getNewEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
 				List<@NonNull Node> sourceNodes = new ArrayList<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					if (QVTscheduleUtil.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+					if (RegionUtil.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 						sourceNodes.add(realizedEdge.getEdgeTarget());
 					}
 				}
-				NodeConnection nodeConnection = invokingRegion2.getAttributeConnection(sourceNodes, predicatedEdge.getEdgeSource().getCompleteClass(), predicatedProperty, classDatumAnalysis);
+				NodeConnection nodeConnection = invokingRegion2.getAttributeConnection(sourceNodes, predicatedEdge.getEdgeSource().getCompleteClass(), predicatedProperty, classDatumAnalysis.getClassDatum());
 				nodeConnection.addUsedTargetNode(castTarget, false);
 				if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 					QVTscheduleConstants.CONNECTION_CREATION.println("  Attribute NodeConnection \"" + nodeConnection + "\" to " + castTarget);
@@ -274,7 +273,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 					Set<@NonNull Region> conformantEdgeSourceRegions = null;
 					List<@NonNull NavigableEdge> thoseEdges = null;
 					for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-						if (QVTscheduleUtil.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+						if (RegionUtil.isElementallyConformantSource(realizedEdge, predicatedEdge) && QVTscheduleUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 							if (thoseEdges == null) {
 								thoseEdges = new ArrayList<>();
 								conformantEdgeSourceRegions = new HashSet<>();
@@ -316,7 +315,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 					//			 && !rootScheduledRegion.isOnlyCastOrRecursed(predicatedNode)
 					//			 && !hasEdgeConnection(predicatedNode)
 					) {
-				NodeConnection predicatedConnection = invokingRegion2.getNodeConnection(sourceNodes, classDatumAnalysis);
+				NodeConnection predicatedConnection = invokingRegion2.getNodeConnection(sourceNodes, classDatumAnalysis.getClassDatum());
 				predicatedConnection.addUsedTargetNode(castTarget, false);
 				if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 					QVTscheduleConstants.CONNECTION_CREATION.println("  NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
@@ -336,7 +335,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 */
 	private @Nullable NodeConnection createHeadConnection(@NonNull Region region, @NonNull Node headNode) {
 		ScheduledRegion invokingRegion2 = region.getInvokingRegion();
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(headNode);
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(headNode);
 		List<@NonNull Node> headSources = null;
 		//
 		//	Locate compatible introducers and non-recursive producers
@@ -362,7 +361,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Connect up the head
 		//
-		NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis);
+		NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis.getClassDatum());
 		if (headNode.isDependency()) {
 			headConnection.addUsedTargetNode(headNode, false);
 		}
@@ -908,7 +907,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
-		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(headNode);
 		if (!classDatumAnalysis.getDomainUsage().isInput()) {
 			return contentsAnalysis.getNewNodes(classDatumAnalysis);	// FIXME also dependsOn ??
 		}

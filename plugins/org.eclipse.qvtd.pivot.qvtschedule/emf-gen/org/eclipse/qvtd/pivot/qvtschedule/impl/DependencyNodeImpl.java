@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -65,15 +65,15 @@ public class DependencyNodeImpl extends NodeImpl implements DependencyNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitDependencyNode(this);
 	}
 
-	public static @NonNull DependencyNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public static @NonNull DependencyNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum) {
 		DependencyNodeImpl node = new DependencyNodeImpl();
-		node.initialize(nodeRole, region, name, classDatumAnalysis);
+		node.initialize(nodeRole, region, name, classDatum);
 		return node;
 	}
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatumAnalysis(this));
+		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatum(this));
 	}
 
 	@Override

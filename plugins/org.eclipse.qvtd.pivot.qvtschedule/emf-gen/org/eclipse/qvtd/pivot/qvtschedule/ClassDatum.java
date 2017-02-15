@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuper <em>Super</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum()
@@ -81,19 +81,19 @@ public interface ClassDatum extends AbstractDatum {
 	EList<PropertyDatum> getPropertyDatums();
 
 	/**
-	 * Returns the value of the '<em><b>Super</b></em>' reference list.
+	 * Returns the value of the '<em><b>Super Class Datums</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Super</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Super Class Datums</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Super</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_Super()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!super'"
+	 * @return the value of the '<em>Super Class Datums</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_SuperClassDatums()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!superClassDatums'"
 	 * @generated
 	 */
-	EList<ClassDatum> getSuper();
+	EList<ClassDatum> getSuperClassDatums();
 
 } // ClassDatum

@@ -32,52 +32,8 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDatums" upperBound="-1"
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
         eType="#//ClassDatum"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDatumAnalysis" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
-        eType="#//ClassDatum">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainUsage" lowerBound="1"
-        eType="#//DomainUsage" changeable="false" volatile="true" transient="true"
-        derived="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elementalClassDatum" lowerBound="1"
-        eType="#//ClassDatum" changeable="false" volatile="true" transient="true"
-        derived="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="producedBy" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
-        eType="#//ScheduleModel">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatumAnalyses"
-        upperBound="-1" eType="#//ClassDatumAnalysis"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">
@@ -199,8 +155,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping&#xD;&#xA;or Composite Region."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatumAnalysis" lowerBound="1"
-        eType="#//ClassDatumAnalysis">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
+        eType="#//ClassDatum">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
       </eAnnotations>
@@ -222,8 +178,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A NodeConnection supports a data connection from one or more source nodes to one or more target nodes.&#xD;&#xA;The data connection has a data type for the elemental value transfer through the connection.&#xD;&#xA;A passed connection may be realized by a simple transient point-to-point linkage or&#xD;&#xA;a full buffer that accumulates all possible values. A used connection is not actually realized; it just ensures that&#xD;&#xA;all source values exist before any target value consumes the value recomputed at the target."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatumAnalysis" lowerBound="1"
-        eType="#//ClassDatumAnalysis">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
+        eType="#//ClassDatum">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
       </eAnnotations>

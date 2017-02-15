@@ -62,15 +62,6 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ClassDatum createClassDatum();
 
 	/**
-	 * Returns a new object of class '<em>Class Datum Analysis</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Datum Analysis</em>'.
-	 * @generated
-	 */
-	@NonNull ClassDatumAnalysis createClassDatumAnalysis();
-
-	/**
 	 * Returns a new object of class '<em>Composed Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

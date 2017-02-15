@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -41,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -53,7 +54,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull AppendParameter> classDatumAnalysis2variable = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull AppendParameter> classDatumAnalysis2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
@@ -70,10 +71,10 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//
 		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
 		for (@NonNull Node node : RegionUtil.getNodes(region)) {
-			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
-			org.eclipse.ocl.pivot.Class type = classDatumAnalysis.getCompleteClass().getPrimaryClass();
+			ClassDatum classDatum = node.getClassDatum();
+			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
-				TypedModel qvtmTypedModel = classDatumAnalysis.getTypedModel();
+				TypedModel qvtmTypedModel = classDatum.getTypedModel();
 				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
 				if (qvtiTypedModel != null) {
 					checkableTypedModels.add(qvtiTypedModel);
@@ -101,10 +102,10 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {
-				ClassDatumAnalysis classDatumAnalysis = regionNode.getClassDatumAnalysis();
+				ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(regionNode);
 				AppendParameter allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
 				if (allInstancesVariable == null) {
-					Type collectionType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
+					Type collectionType = classDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
 					Type elementType = ((CollectionType)collectionType).getElementType();
 					assert elementType != null;
 					assert !(elementType instanceof CollectionType);

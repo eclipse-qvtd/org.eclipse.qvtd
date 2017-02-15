@@ -24,8 +24,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -46,13 +46,13 @@ public class ContentsAnalysis
 	/**
 	 * The Speculation or Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2newNodes = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2newNodes = new HashMap<>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2oldNodes = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2oldNodes = new HashMap<>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
@@ -86,8 +86,8 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getElementalClassDatumAnalysis(newNode);
-		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : RegionUtil.getSuperClassDatumAnalyses(classDatumAnalysis)) {
+		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getElementalClassDatumAnalysis(newNode);
+		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
 			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {
 				nodes = new ArrayList<>();
@@ -346,7 +346,7 @@ public class ContentsAnalysis
 	}
 
 	private void removeNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(newNode);
 		List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(classDatumAnalysis);
 		if (nodes != null) {
 			nodes.remove(newNode);
@@ -354,7 +354,7 @@ public class ContentsAnalysis
 	}
 
 	private void removeOldNode(@NonNull Node oldNode) {
-		ClassDatumAnalysis classDatumAnalysis = oldNode.getClassDatumAnalysis();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(oldNode);
 		List<@NonNull Node> nodes = classDatumAnalysis2oldNodes.get(classDatumAnalysis);
 		if (nodes != null) {
 			nodes.remove(oldNode);

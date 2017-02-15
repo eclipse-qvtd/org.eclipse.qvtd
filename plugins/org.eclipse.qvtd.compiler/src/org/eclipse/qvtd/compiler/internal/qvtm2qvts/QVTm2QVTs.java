@@ -44,6 +44,7 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -53,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
@@ -201,7 +201,7 @@ public class QVTm2QVTs extends ScheduleModel2
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = getDomainAnalysis();
-		Map<@NonNull ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
+		Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
 		for (List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;
@@ -221,7 +221,7 @@ public class QVTm2QVTs extends ScheduleModel2
 					TypedModel typedModel = stepUsage.getTypedModel(classStep.getElement());
 					assert typedModel != null;
 					ClassDatumAnalysis classDatumAnalysis = getClassDatumAnalysis(stepType, typedModel);
-					CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
+					CompleteClass completeClass = classDatumAnalysis.getClassDatum().getCompleteClass();
 					Type primaryClass = completeClass.getPrimaryClass();
 					if (!(primaryClass instanceof DataType) && !(primaryClass instanceof VoidType)) {
 						//					OCLExpression source = operationCallExp.getOwnedSource();
@@ -290,10 +290,7 @@ public class QVTm2QVTs extends ScheduleModel2
 
 	@Override
 	protected @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum) {
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleFactory.eINSTANCE.createClassDatumAnalysis();
-		classDatumAnalysis.setScheduleModel(this);
-		classDatumAnalysis.setClassDatum(classDatum);
-		return classDatumAnalysis;
+		return new ClassDatumAnalysis(this, classDatum);
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {

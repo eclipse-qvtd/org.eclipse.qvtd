@@ -41,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getCompleteClass <em>Complete Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getPropertyDatums <em>Property Datums</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getSuper <em>Super</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,14 +68,14 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	protected EList<PropertyDatum> propertyDatums;
 
 	/**
-	 * The cached value of the '{@link #getSuper() <em>Super</em>}' reference list.
+	 * The cached value of the '{@link #getSuperClassDatums() <em>Super Class Datums</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuper()
+	 * @see #getSuperClassDatums()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ClassDatum> super_;
+	protected EList<ClassDatum> superClassDatums;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,11 +155,11 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public EList<ClassDatum> getSuper() {
-		if (super_ == null) {
-			super_ = new EObjectResolvingEList<ClassDatum>(ClassDatum.class, this, QVTschedulePackage.CLASS_DATUM__SUPER);
+	public EList<ClassDatum> getSuperClassDatums() {
+		if (superClassDatums == null) {
+			superClassDatums = new EObjectResolvingEList<ClassDatum>(ClassDatum.class, this, QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS);
 		}
-		return super_;
+		return superClassDatums;
 	}
 
 	/**
@@ -204,8 +204,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				return basicGetCompleteClass();
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return getPropertyDatums();
-			case QVTschedulePackage.CLASS_DATUM__SUPER:
-				return getSuper();
+			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+				return getSuperClassDatums();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -226,9 +226,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				getPropertyDatums().clear();
 				getPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__SUPER:
-				getSuper().clear();
-				getSuper().addAll((Collection<? extends ClassDatum>)newValue);
+			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+				getSuperClassDatums().clear();
+				getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,8 +248,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				getPropertyDatums().clear();
 				return;
-			case QVTschedulePackage.CLASS_DATUM__SUPER:
-				getSuper().clear();
+			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+				getSuperClassDatums().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -267,8 +267,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				return completeClass != null;
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return propertyDatums != null && !propertyDatums.isEmpty();
-			case QVTschedulePackage.CLASS_DATUM__SUPER:
-				return super_ != null && !super_.isEmpty();
+			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+				return superClassDatums != null && !superClassDatums.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

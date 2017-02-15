@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -52,7 +53,6 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -157,6 +157,7 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return castProperty;
 	}
 
+	@Override
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
 		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
 		assert asType != null;
@@ -179,7 +180,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return datumCaches.getClassDatum(typedModel, asType);
 	}
 
-	@Override
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull ClassDatum classDatum) {
 		ClassDatumAnalysis classDatumAnalysis = classDatum2classDatumAnalysis.get(classDatum);
 		if (classDatumAnalysis == null) {
@@ -201,26 +201,22 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return getClassDatumAnalysis(classDatum);
 	} */
 
-	@Override
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement) {
 		ClassDatum classDatum = getClassDatum(typedElement);
 		//		DomainUsage usage = getDomainUsage(typedElement);
 		return getClassDatumAnalysis(classDatum);
 	}
 
-	@Override
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
 		ClassDatum classDatum = datumCaches.getClassDatum(typedModel, type);
 		return getClassDatumAnalysis(classDatum);
 	}
 
-	@Override
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel) {
 		ClassDatum classDatum = datumCaches.getClassDatum(typedModel, completeClass);
 		return getClassDatumAnalysis(classDatum);
 	}
 
-	@Override
 	public @NonNull Iterable<ClassDatumAnalysis> getClassDatumAnalyses() {
 		return classDatum2classDatumAnalysis.values();
 	}
@@ -244,10 +240,9 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return ClassUtil.nonNullState(analysis.getUsage(element));
 	}
 
-	@Override
 	public @NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(@NonNull Node calledNode) {
-		ClassDatumAnalysis classDatumAnalysis = calledNode.getClassDatumAnalysis();
-		CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
+		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(calledNode);
+		CompleteClass completeClass = classDatumAnalysis.getClassDatum().getCompleteClass();
 		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
 		if (primaryClass instanceof CollectionType) {
 			org.eclipse.ocl.pivot.Class elementType = (org.eclipse.ocl.pivot.Class)((CollectionType)primaryClass).getElementType();
@@ -276,7 +271,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return iterateProperty;
 	}
 
-	@Override
 	public @NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis() {
 		return oclVoidClassDatumAnalysis;
 	}

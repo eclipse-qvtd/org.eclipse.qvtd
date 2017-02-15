@@ -54,6 +54,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -66,7 +67,6 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -454,7 +454,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				CompleteClass propertyCompleteClass = context.getMappingRegion().getScheduleModel().getClassDatumAnalysis(source2targetProperty).getCompleteClass();
+				CompleteClass propertyCompleteClass = ((ScheduleModel2)context.getMappingRegion().getScheduleModel()).getClassDatumAnalysis(source2targetProperty).getClassDatum().getCompleteClass();
 				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
 				if (valueCompleteClass == propertyCompleteClass) {
 					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -595,7 +595,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
 		Class oclInvalidType = scheduleModel.getStandardLibrary().getOclInvalidType();
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(oclInvalidType, scheduleModel.getDomainAnalysis().getPrimitiveTypeModel());
+		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(oclInvalidType, scheduleModel.getDomainAnalysis().getPrimitiveTypeModel());
 		Node errorNode = createErrorNode("«error»", classDatumAnalysis);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);
@@ -622,7 +622,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Type type = ownedVariable.getType();
 		assert type != null;
 		CompleteClass actualClass = initNode.getCompleteClass();
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(ownedVariable);
+		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(ownedVariable);
 		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatumAnalysis);
 		if (actualClass.conformsTo(requiredClass)) {
 			context.addVariableNode(ownedVariable, initNode);
@@ -938,7 +938,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		assert referredType != null;
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
+		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
 		String typeName = PrettyPrinter.printType(RegionUtil.getCompleteClass(classDatumAnalysis));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;

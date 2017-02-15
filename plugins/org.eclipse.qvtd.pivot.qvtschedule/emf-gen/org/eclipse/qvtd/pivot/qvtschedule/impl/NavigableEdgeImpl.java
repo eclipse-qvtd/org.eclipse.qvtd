@@ -420,7 +420,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		NavigableEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {
 			String oppositeLabel = oppositeEdge2.getLabel();
-			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(((Node)source).getClassDatumAnalysis().getCompleteClass().getName())) {
+			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(((Node)source).getClassDatum().getCompleteClass().getName())) {
 				s.setTaillabel(oppositeLabel);
 			}
 		}

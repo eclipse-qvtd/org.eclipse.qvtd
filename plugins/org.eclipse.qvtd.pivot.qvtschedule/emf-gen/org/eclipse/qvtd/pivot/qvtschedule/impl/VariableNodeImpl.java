@@ -59,7 +59,7 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	}
 
 	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
-		initialize(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getScheduleModel().getClassDatumAnalysis(variable));
+		initialize(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getScheduleModel().getClassDatum(variable));
 		this.variable = variable;
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;

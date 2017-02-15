@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
@@ -36,9 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -379,32 +376,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	}
 
 	@Override
-	public @NonNull Iterable<ClassDatumAnalysis> getClassDatumAnalyses() {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(
-			@NonNull ClassDatum classDatum) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(
-			org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(
-			@NonNull CompleteClass completeClass,
-			@NonNull TypedModel typedModel) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(
-			@NonNull TypedElement typedElement) {
+	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement typedElement) {
 		throw new UnsupportedOperationException();		// FIXME move to caller
 	}
 
@@ -419,23 +391,12 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	}
 
 	@Override
-	public @NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(
-			@NonNull Node calledNode) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		throw new UnsupportedOperationException();		// FIXME move to caller
 	}
 
 	@Override
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis() {
 		throw new UnsupportedOperationException();		// FIXME move to caller
 	}
 

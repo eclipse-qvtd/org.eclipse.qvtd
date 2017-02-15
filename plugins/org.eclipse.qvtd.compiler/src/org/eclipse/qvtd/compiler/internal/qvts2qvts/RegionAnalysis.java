@@ -25,8 +25,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -74,8 +75,8 @@ public class RegionAnalysis implements Adapter
 		assert predicatedEdge.getRegion() == region;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
 		assert typedModel2checkedEdges2 != null;
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(predicatedEdge.getEdgeSource());
-		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
+		ClassDatum classDatum = RegionUtil.getClassDatum(predicatedEdge.getEdgeSource());
+		TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
 		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
 		if (checkedEdges == null) {
 			checkedEdges = new HashSet<>();
@@ -91,8 +92,8 @@ public class RegionAnalysis implements Adapter
 		assert realizedEdge.getRegion() == region;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges2 = typedModel2enforcedEdges;
 		assert typedModel2enforcedEdges2 != null;
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(realizedEdge.getEdgeSource());
-		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
+		ClassDatum classDatum = RegionUtil.getClassDatum(realizedEdge.getEdgeSource());
+		TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
 		Set<@NonNull NavigableEdge> enforcedEdges = typedModel2enforcedEdges2.get(typedModel);
 		if (enforcedEdges == null) {
 			enforcedEdges = new HashSet<>();
@@ -101,7 +102,7 @@ public class RegionAnalysis implements Adapter
 		enforcedEdges.add(realizedEdge);
 		QVTscheduleConstants.POLLED_PROPERTIES.println("    enforced " + realizedEdge.getProperty() +
 			" at " + region.getIndexRangeText() +
-			" in " + classDatumAnalysis.getTypedModel() + " for " + region);
+			" in " + typedModel + " for " + region);
 	}
 
 	public void buildNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
@@ -117,8 +118,8 @@ public class RegionAnalysis implements Adapter
 			if (!predicatedEdge.isCast()) {
 				Property property = QVTscheduleUtil.getProperty(predicatedEdge);
 				Node predicatedNode = predicatedEdge.getEdgeSource();
-				ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(predicatedNode);
-				TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
+				ClassDatum classDatum = RegionUtil.getClassDatum(predicatedNode);
+				TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
 				Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2predicatedEdges = typedModel2property2predicatedEdges.get(typedModel);
 				if (property2predicatedEdges == null) {
 					property2predicatedEdges = new HashMap<>();
@@ -139,8 +140,8 @@ public class RegionAnalysis implements Adapter
 		for (@NonNull NavigableEdge realizedEdge : region.getRealizedNavigationEdges()) {
 			Property property = QVTscheduleUtil.getProperty(realizedEdge);
 			Node realizedNode = realizedEdge.getEdgeSource();
-			ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(realizedNode);
-			TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
+			ClassDatum classDatum = RegionUtil.getClassDatum(realizedNode);
+			TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
 			Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 			if (property2realizedEdges == null) {
 				property2realizedEdges = new HashMap<>();
@@ -198,8 +199,8 @@ public class RegionAnalysis implements Adapter
 						if (usedRegion.getFinalExecutionIndex() >= region.getInvocationIndex()) {			// FIXME =
 							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
 							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();
-							ClassDatumAnalysis classDatumAnalysis = laterNode.getClassDatumAnalysis();
-							TypedModel typedModel = classDatumAnalysis.getTypedModel();
+							ClassDatum classDatum = laterNode.getClassDatum();
+							TypedModel typedModel = classDatum.getTypedModel();
 							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 							assert property2realizedEdges != null;
 							Property oclContainerProperty = ((RegionImpl)region).getStandardLibraryHelper().getOclContainerProperty();

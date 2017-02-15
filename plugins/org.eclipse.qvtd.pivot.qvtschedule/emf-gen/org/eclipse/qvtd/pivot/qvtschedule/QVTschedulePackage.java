@@ -190,16 +190,6 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl <em>Class Datum Analysis</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getClassDatumAnalysis()
-	 * @generated
-	 */
-	int CLASS_DATUM_ANALYSIS = 4;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl <em>Connection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -207,7 +197,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnection()
 	 * @generated
 	 */
-	int CONNECTION = 6;
+	int CONNECTION = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}' class.
@@ -217,7 +207,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionEnd()
 	 * @generated
 	 */
-	int CONNECTION_END = 7;
+	int CONNECTION_END = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionRoleImpl <em>Connection Role</em>}' class.
@@ -227,7 +217,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionRole()
 	 * @generated
 	 */
-	int CONNECTION_ROLE = 8;
+	int CONNECTION_ROLE = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DatumConnectionImpl <em>Datum Connection</em>}' class.
@@ -237,7 +227,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDatumConnection()
 	 * @generated
 	 */
-	int DATUM_CONNECTION = 9;
+	int DATUM_CONNECTION = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl <em>Edge</em>}' class.
@@ -247,7 +237,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdge()
 	 * @generated
 	 */
-	int EDGE = 11;
+	int EDGE = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl <em>Edge Connection</em>}' class.
@@ -257,7 +247,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdgeConnection()
 	 * @generated
 	 */
-	int EDGE_CONNECTION = 12;
+	int EDGE_CONNECTION = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl <em>Role</em>}' class.
@@ -267,7 +257,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 36;
+	int ROLE = 35;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl <em>Mapping Action</em>}' class.
@@ -277,7 +267,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingAction()
 	 * @generated
 	 */
-	int MAPPING_ACTION = 19;
+	int MAPPING_ACTION = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl <em>Navigable Edge</em>}' class.
@@ -287,7 +277,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigableEdge()
 	 * @generated
 	 */
-	int NAVIGABLE_EDGE = 23;
+	int NAVIGABLE_EDGE = 22;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl <em>Node</em>}' class.
@@ -297,7 +287,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 25;
+	int NODE = 24;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl <em>Node Connection</em>}' class.
@@ -307,7 +297,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNodeConnection()
 	 * @generated
 	 */
-	int NODE_CONNECTION = 26;
+	int NODE_CONNECTION = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl <em>Operation Region</em>}' class.
@@ -317,7 +307,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationRegion()
 	 * @generated
 	 */
-	int OPERATION_REGION = 29;
+	int OPERATION_REGION = 28;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
@@ -327,7 +317,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPropertyDatum()
 	 * @generated
 	 */
-	int PROPERTY_DATUM = 33;
+	int PROPERTY_DATUM = 32;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl <em>Region</em>}' class.
@@ -337,7 +327,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRegion()
 	 * @generated
 	 */
-	int REGION = 35;
+	int REGION = 34;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
@@ -347,7 +337,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingRegion()
 	 * @generated
 	 */
-	int MAPPING_REGION = 20;
+	int MAPPING_REGION = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl <em>Navigation Edge</em>}' class.
@@ -357,7 +347,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigationEdge()
 	 * @generated
 	 */
-	int NAVIGATION_EDGE = 24;
+	int NAVIGATION_EDGE = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl <em>Cast Edge</em>}' class.
@@ -377,7 +367,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDependencyNode()
 	 * @generated
 	 */
-	int DEPENDENCY_NODE = 10;
+	int DEPENDENCY_NODE = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ErrorNodeImpl <em>Error Node</em>}' class.
@@ -387,7 +377,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getErrorNode()
 	 * @generated
 	 */
-	int ERROR_NODE = 13;
+	int ERROR_NODE = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ExpressionEdgeImpl <em>Expression Edge</em>}' class.
@@ -397,7 +387,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getExpressionEdge()
 	 * @generated
 	 */
-	int EXPRESSION_EDGE = 14;
+	int EXPRESSION_EDGE = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.InputNodeImpl <em>Input Node</em>}' class.
@@ -407,7 +397,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getInputNode()
 	 * @generated
 	 */
-	int INPUT_NODE = 15;
+	int INPUT_NODE = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratedEdgeImpl <em>Iterated Edge</em>}' class.
@@ -417,7 +407,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIteratedEdge()
 	 * @generated
 	 */
-	int ITERATED_EDGE = 16;
+	int ITERATED_EDGE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.VariableNodeImpl <em>Variable Node</em>}' class.
@@ -427,7 +417,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVariableNode()
 	 * @generated
 	 */
-	int VARIABLE_NODE = 42;
+	int VARIABLE_NODE = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl <em>Iterator Node</em>}' class.
@@ -437,7 +427,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIteratorNode()
 	 * @generated
 	 */
-	int ITERATOR_NODE = 17;
+	int ITERATOR_NODE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl <em>Composed Node</em>}' class.
@@ -447,7 +437,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getComposedNode()
 	 * @generated
 	 */
-	int COMPOSED_NODE = 5;
+	int COMPOSED_NODE = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl <em>Micro Mapping Region</em>}' class.
@@ -457,7 +447,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMicroMappingRegion()
 	 * @generated
 	 */
-	int MICRO_MAPPING_REGION = 21;
+	int MICRO_MAPPING_REGION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1361,13 +1351,13 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM__PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Super</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Class Datums</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM__SUPER = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+	int CLASS_DATUM__SUPER_CLASS_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Class Datum</em>' class.
@@ -1412,159 +1402,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM_ANALYSIS__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__CLASS_DATUM = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Complete Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__COMPLETE_CLASS = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Domain Usage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__DOMAIN_USAGE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Elemental Class Datum</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__ELEMENTAL_CLASS_DATUM = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__PRODUCED_BY = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Required By</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__REQUIRED_BY = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Schedule Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__SCHEDULE_MODEL = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Super Class Datum Analyses</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES = PivotPackage.ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS__TYPED_MODEL = PivotPackage.ELEMENT_FEATURE_COUNT + 8;
-
-	/**
-	 * The number of structural features of the '<em>Class Datum Analysis</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 9;
-
-	/**
-	 * The operation id for the '<em>All Owned Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
-
-	/**
-	 * The number of operations of the '<em>Class Datum Analysis</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM_ANALYSIS_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int NODE__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
@@ -1595,13 +1432,13 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__CLASS_DATUM_ANALYSIS = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int NODE__CLASS_DATUM = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -1739,13 +1576,13 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSED_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSED_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int COMPOSED_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2189,13 +2026,13 @@ public interface QVTschedulePackage extends EPackage {
 	int DEPENDENCY_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int DEPENDENCY_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2459,13 +2296,13 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int ERROR_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2720,13 +2557,13 @@ public interface QVTschedulePackage extends EPackage {
 	int INPUT_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int INPUT_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2981,13 +2818,13 @@ public interface QVTschedulePackage extends EPackage {
 	int VARIABLE_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int VARIABLE_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -3125,13 +2962,13 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE__OWNED_EXTENSIONS = VARIABLE_NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_NODE__CLASS_DATUM_ANALYSIS = VARIABLE_NODE__CLASS_DATUM_ANALYSIS;
+	int ITERATOR_NODE__CLASS_DATUM = VARIABLE_NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -3240,7 +3077,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getLoadingRegion()
 	 * @generated
 	 */
-	int LOADING_REGION = 18;
+	int LOADING_REGION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3610,7 +3447,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNamedMappingRegion()
 	 * @generated
 	 */
-	int NAMED_MAPPING_REGION = 22;
+	int NAMED_MAPPING_REGION = 21;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3991,13 +3828,13 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE_CONNECTION__SOURCE_ENDS = DATUM_CONNECTION__SOURCE_ENDS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_CONNECTION__CLASS_DATUM_ANALYSIS = DATUM_CONNECTION_FEATURE_COUNT + 0;
+	int NODE_CONNECTION__CLASS_DATUM = DATUM_CONNECTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Node Connection</em>' class.
@@ -4043,7 +3880,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNullNode()
 	 * @generated
 	 */
-	int NULL_NODE = 27;
+	int NULL_NODE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4082,13 +3919,13 @@ public interface QVTschedulePackage extends EPackage {
 	int NULL_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NULL_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int NULL_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4197,7 +4034,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationNode()
 	 * @generated
 	 */
-	int OPERATION_NODE = 28;
+	int OPERATION_NODE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4236,13 +4073,13 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int OPERATION_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4513,7 +4350,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternTypedNode()
 	 * @generated
 	 */
-	int PATTERN_TYPED_NODE = 30;
+	int PATTERN_TYPED_NODE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4552,13 +4389,13 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_TYPED_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_TYPED_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int PATTERN_TYPED_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4667,7 +4504,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternVariableNode()
 	 * @generated
 	 */
-	int PATTERN_VARIABLE_NODE = 31;
+	int PATTERN_VARIABLE_NODE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4706,13 +4543,13 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__OWNED_EXTENSIONS = VARIABLE_NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_VARIABLE_NODE__CLASS_DATUM_ANALYSIS = VARIABLE_NODE__CLASS_DATUM_ANALYSIS;
+	int PATTERN_VARIABLE_NODE__CLASS_DATUM = VARIABLE_NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4821,7 +4658,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPredicateEdge()
 	 * @generated
 	 */
-	int PREDICATE_EDGE = 32;
+	int PREDICATE_EDGE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5083,7 +4920,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRecursionEdge()
 	 * @generated
 	 */
-	int RECURSION_EDGE = 34;
+	int RECURSION_EDGE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5363,7 +5200,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
 	 * @generated
 	 */
-	int SCHEDULE_MODEL = 37;
+	int SCHEDULE_MODEL = 36;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5517,7 +5354,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
 	 * @generated
 	 */
-	int SCHEDULED_REGION = 38;
+	int SCHEDULED_REGION = 37;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5680,7 +5517,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
 	 * @generated
 	 */
-	int SYMBOLABLE = 39;
+	int SYMBOLABLE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
@@ -5717,7 +5554,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTrueNode()
 	 * @generated
 	 */
-	int TRUE_NODE = 40;
+	int TRUE_NODE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5756,13 +5593,13 @@ public interface QVTschedulePackage extends EPackage {
 	int TRUE_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRUE_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int TRUE_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -5871,7 +5708,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
 	 * @generated
 	 */
-	int UNKNOWN_NODE = 41;
+	int UNKNOWN_NODE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5910,13 +5747,13 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE__OWNED_EXTENSIONS = NODE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Class Datum Analysis</b></em>' reference.
+	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNKNOWN_NODE__CLASS_DATUM_ANALYSIS = NODE__CLASS_DATUM_ANALYSIS;
+	int UNKNOWN_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -6025,7 +5862,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDomainUsage()
 	 * @generated
 	 */
-	int DOMAIN_USAGE = 43;
+	int DOMAIN_USAGE = 42;
 
 	/**
 	 * The number of structural features of the '<em>Domain Usage</em>' class.
@@ -6053,7 +5890,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getGraphEdge()
 	 * @generated
 	 */
-	int GRAPH_EDGE = 44;
+	int GRAPH_EDGE = 43;
 
 	/**
 	 * The number of structural features of the '<em>Graph Edge</em>' class.
@@ -6081,7 +5918,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getGraphNode()
 	 * @generated
 	 */
-	int GRAPH_NODE = 45;
+	int GRAPH_NODE = 44;
 
 	/**
 	 * The number of structural features of the '<em>Graph Node</em>' class.
@@ -6109,7 +5946,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getToDOTable()
 	 * @generated
 	 */
-	int TO_DO_TABLE = 46;
+	int TO_DO_TABLE = 45;
 
 	/**
 	 * The number of structural features of the '<em>To DO Table</em>' class.
@@ -6137,7 +5974,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPhase()
 	 * @generated
 	 */
-	int PHASE = 47;
+	int PHASE = 46;
 
 
 	/**
@@ -6258,124 +6095,15 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getClassDatum_PropertyDatums();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuper <em>Super</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuper()
+	 * @return the meta object for the reference list '<em>Super Class Datums</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums()
 	 * @see #getClassDatum()
 	 * @generated
 	 */
-	EReference getClassDatum_Super();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis <em>Class Datum Analysis</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Class Datum Analysis</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis
-	 * @generated
-	 */
-	EClass getClassDatumAnalysis();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getClassDatum <em>Class Datum</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Class Datum</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getClassDatum()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_ClassDatum();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getCompleteClass <em>Complete Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Complete Class</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getCompleteClass()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_CompleteClass();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getDomainUsage <em>Domain Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Domain Usage</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getDomainUsage()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_DomainUsage();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getElementalClassDatum <em>Elemental Class Datum</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Elemental Class Datum</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getElementalClassDatum()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_ElementalClassDatum();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getProducedBy <em>Produced By</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Produced By</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getProducedBy()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_ProducedBy();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getRequiredBy <em>Required By</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Required By</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getRequiredBy()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_RequiredBy();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getScheduleModel <em>Schedule Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Schedule Model</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getScheduleModel()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_ScheduleModel();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getSuperClassDatumAnalyses <em>Super Class Datum Analyses</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Class Datum Analyses</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getSuperClassDatumAnalyses()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_SuperClassDatumAnalyses();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getTypedModel <em>Typed Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Typed Model</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getTypedModel()
-	 * @see #getClassDatumAnalysis()
-	 * @generated
-	 */
-	EReference getClassDatumAnalysis_TypedModel();
+	EReference getClassDatum_SuperClassDatums();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ComposedNode <em>Composed Node</em>}'.
@@ -7153,15 +6881,15 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getNode();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatumAnalysis <em>Class Datum Analysis</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatum <em>Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Class Datum Analysis</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatumAnalysis()
+	 * @return the meta object for the reference '<em>Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatum()
 	 * @see #getNode()
 	 * @generated
 	 */
-	EReference getNode_ClassDatumAnalysis();
+	EReference getNode_ClassDatum();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}'.
@@ -7251,15 +6979,15 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getNodeConnection();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getClassDatumAnalysis <em>Class Datum Analysis</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getClassDatum <em>Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Class Datum Analysis</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getClassDatumAnalysis()
+	 * @return the meta object for the reference '<em>Class Datum</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getClassDatum()
 	 * @see #getNodeConnection()
 	 * @generated
 	 */
-	EReference getNodeConnection_ClassDatumAnalysis();
+	EReference getNodeConnection_ClassDatum();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NullNode <em>Null Node</em>}'.
@@ -7624,94 +7352,12 @@ public interface QVTschedulePackage extends EPackage {
 		EReference CLASS_DATUM__PROPERTY_DATUMS = eINSTANCE.getClassDatum_PropertyDatums();
 
 		/**
-		 * The meta object literal for the '<em><b>Super</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Super Class Datums</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_DATUM__SUPER = eINSTANCE.getClassDatum_Super();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl <em>Class Datum Analysis</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumAnalysisImpl
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getClassDatumAnalysis()
-		 * @generated
-		 */
-		EClass CLASS_DATUM_ANALYSIS = eINSTANCE.getClassDatumAnalysis();
-
-		/**
-		 * The meta object literal for the '<em><b>Class Datum</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__CLASS_DATUM = eINSTANCE.getClassDatumAnalysis_ClassDatum();
-
-		/**
-		 * The meta object literal for the '<em><b>Complete Class</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__COMPLETE_CLASS = eINSTANCE.getClassDatumAnalysis_CompleteClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Domain Usage</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__DOMAIN_USAGE = eINSTANCE.getClassDatumAnalysis_DomainUsage();
-
-		/**
-		 * The meta object literal for the '<em><b>Elemental Class Datum</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__ELEMENTAL_CLASS_DATUM = eINSTANCE.getClassDatumAnalysis_ElementalClassDatum();
-
-		/**
-		 * The meta object literal for the '<em><b>Produced By</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__PRODUCED_BY = eINSTANCE.getClassDatumAnalysis_ProducedBy();
-
-		/**
-		 * The meta object literal for the '<em><b>Required By</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__REQUIRED_BY = eINSTANCE.getClassDatumAnalysis_RequiredBy();
-
-		/**
-		 * The meta object literal for the '<em><b>Schedule Model</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__SCHEDULE_MODEL = eINSTANCE.getClassDatumAnalysis_ScheduleModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Super Class Datum Analyses</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__SUPER_CLASS_DATUM_ANALYSES = eINSTANCE.getClassDatumAnalysis_SuperClassDatumAnalyses();
-
-		/**
-		 * The meta object literal for the '<em><b>Typed Model</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_DATUM_ANALYSIS__TYPED_MODEL = eINSTANCE.getClassDatumAnalysis_TypedModel();
+		EReference CLASS_DATUM__SUPER_CLASS_DATUMS = eINSTANCE.getClassDatum_SuperClassDatums();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl <em>Composed Node</em>}' class.
@@ -8362,12 +8008,12 @@ public interface QVTschedulePackage extends EPackage {
 		EClass NODE = eINSTANCE.getNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Datum Analysis</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Class Datum</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NODE__CLASS_DATUM_ANALYSIS = eINSTANCE.getNode_ClassDatumAnalysis();
+		EReference NODE__CLASS_DATUM = eINSTANCE.getNode_ClassDatum();
 
 		/**
 		 * The meta object literal for the '<em><b>Incoming Connection</b></em>' reference feature.
@@ -8436,12 +8082,12 @@ public interface QVTschedulePackage extends EPackage {
 		EClass NODE_CONNECTION = eINSTANCE.getNodeConnection();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Datum Analysis</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Class Datum</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NODE_CONNECTION__CLASS_DATUM_ANALYSIS = eINSTANCE.getNodeConnection_ClassDatumAnalysis();
+		EReference NODE_CONNECTION__CLASS_DATUM = eINSTANCE.getNodeConnection_ClassDatum();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl <em>Null Node</em>}' class.

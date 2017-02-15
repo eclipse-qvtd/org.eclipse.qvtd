@@ -19,8 +19,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
@@ -42,13 +42,13 @@ public class RootMappingAnalysis
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known container property where the containing property is known.
 	 * The null containing property is used for introducer nodes required to be at the root.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>> classDatumAnalysis2property2node = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>> classDatumAnalysis2property2node = new HashMap<>();
 
 	/**
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known containing type where the containing property is just oclContainer.
 	 * The null type is used when no containing property or type is known.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
 
 	public RootMappingAnalysis(@NonNull LoadingRegion rootCompositionRegion) {
 		this.rootCompositionRegion = rootCompositionRegion;
@@ -68,23 +68,23 @@ public class RootMappingAnalysis
 				containerEdge = edge;
 				parent2childProperty = property;
 				if (property == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
-					containingClassDatumAnalysis = edge.getEdgeSource().getClassDatumAnalysis();
+					containingClassDatumAnalysis = RegionUtil.getClassDatumAnalysis(edge.getEdgeSource());
 				}
 				break;
 			}
 		}
 		CompleteEnvironment completeEnvironment = scheduleModel.getEnvironmentFactory().getCompleteEnvironment();
-		ClassDatumAnalysis consumedClassDatumAnalysis = /*getCastTarget(consumerNode)*/consumerNode.getClassDatumAnalysis();
-		org.eclipse.ocl.pivot.Class elementType = consumedClassDatumAnalysis.getCompleteClass().getPrimaryClass();
+		ClassDatumAnalysis consumedClassDatumAnalysis = /*getCastTarget(consumerNode)*/RegionUtil.getClassDatumAnalysis(consumerNode);
+		org.eclipse.ocl.pivot.Class elementType = consumedClassDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
 		TypedModel typedModel = RegionUtil.getTypedModel(consumedClassDatumAnalysis);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
-		ClassDatumAnalysis childrenClassDatumAnalysis = scheduleModel.getClassDatumAnalysis(childCollectionType, typedModel);
+		ClassDatumAnalysis childrenClassDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(childCollectionType, typedModel);
 		//
 		//	Create / re-use the appropriate containment pattern.
 		//
 		Node introducedNode;
 		if (parent2childProperty == null) {												// No known containment, owned by null type
-			Map<@Nullable ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
+			Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
 			if (type2node == null) {
 				type2node = new HashMap<>();
 				classDatumAnalysis2type2node.put(consumedClassDatumAnalysis, type2node);
@@ -109,7 +109,7 @@ public class RootMappingAnalysis
 			}
 		}
 		else if (containingClassDatumAnalysis != null) {								// Non-root oclContainer ownership
-			Map<@Nullable ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
+			Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
 			if (type2node == null) {
 				type2node = new HashMap<>();
 				classDatumAnalysis2type2node.put(consumedClassDatumAnalysis, type2node);
@@ -118,7 +118,7 @@ public class RootMappingAnalysis
 			if (introducedNode == null) {
 				introducedNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
 				type2node.put(containingClassDatumAnalysis, introducedNode);
-				Node containerNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
+				Node containerNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + containingClassDatumAnalysis.getClassDatum().getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
@@ -134,7 +134,7 @@ public class RootMappingAnalysis
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
-				containingClassDatumAnalysis = scheduleModel.getClassDatumAnalysis(owningClass, typedModel);
+				containingClassDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(owningClass, typedModel);
 				Node containerNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}

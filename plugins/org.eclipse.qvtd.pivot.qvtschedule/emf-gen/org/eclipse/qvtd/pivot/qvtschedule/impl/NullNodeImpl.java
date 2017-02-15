@@ -17,7 +17,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -63,9 +63,9 @@ public class NullNodeImpl extends NodeImpl implements NullNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNullNode(this);
 	}
 
-	public static @NonNull NullNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
+	public static @NonNull NullNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
 		NullNodeImpl node = new NullNodeImpl();
-		node.initialize(nodeRole, region, name, classDatumAnalysis);
+		node.initialize(nodeRole, region, name, classDatum);
 		node.isMatched = isMatched;
 		return node;
 	}
@@ -74,7 +74,7 @@ public class NullNodeImpl extends NodeImpl implements NullNode {
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatumAnalysis(this), isMatched);
+		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatum(this), isMatched);
 	}
 
 	@Override

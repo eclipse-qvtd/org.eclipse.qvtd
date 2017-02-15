@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -54,21 +54,21 @@ import com.google.common.collect.Lists;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getClassDatumAnalysis <em>Class Datum Analysis</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl#getClassDatum <em>Class Datum</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements NodeConnection {
 	/**
-	 * The cached value of the '{@link #getClassDatumAnalysis() <em>Class Datum Analysis</em>}' reference.
+	 * The cached value of the '{@link #getClassDatum() <em>Class Datum</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClassDatumAnalysis()
+	 * @see #getClassDatum()
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassDatumAnalysis classDatumAnalysis;
+	protected ClassDatum classDatum;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,16 +109,16 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	 * @generated
 	 */
 	@Override
-	public ClassDatumAnalysis getClassDatumAnalysis() {
-		if (classDatumAnalysis != null && classDatumAnalysis.eIsProxy()) {
-			InternalEObject oldClassDatumAnalysis = (InternalEObject)classDatumAnalysis;
-			classDatumAnalysis = (ClassDatumAnalysis)eResolveProxy(oldClassDatumAnalysis);
-			if (classDatumAnalysis != oldClassDatumAnalysis) {
+	public ClassDatum getClassDatum() {
+		if (classDatum != null && classDatum.eIsProxy()) {
+			InternalEObject oldClassDatum = (InternalEObject)classDatum;
+			classDatum = (ClassDatum)eResolveProxy(oldClassDatum);
+			if (classDatum != oldClassDatum) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM, oldClassDatum, classDatum));
 			}
 		}
-		return classDatumAnalysis;
+		return classDatum;
 	}
 
 	/**
@@ -126,8 +126,8 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDatumAnalysis basicGetClassDatumAnalysis() {
-		return classDatumAnalysis;
+	public ClassDatum basicGetClassDatum() {
+		return classDatum;
 	}
 
 	/**
@@ -136,11 +136,11 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	 * @generated
 	 */
 	@Override
-	public void setClassDatumAnalysis(ClassDatumAnalysis newClassDatumAnalysis) {
-		ClassDatumAnalysis oldClassDatumAnalysis = classDatumAnalysis;
-		classDatumAnalysis = newClassDatumAnalysis;
+	public void setClassDatum(ClassDatum newClassDatum) {
+		ClassDatum oldClassDatum = classDatum;
+		classDatum = newClassDatum;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS, oldClassDatumAnalysis, classDatumAnalysis));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM, oldClassDatum, classDatum));
 	}
 
 	/**
@@ -151,9 +151,9 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
-				if (resolve) return getClassDatumAnalysis();
-				return basicGetClassDatumAnalysis();
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+				if (resolve) return getClassDatum();
+				return basicGetClassDatum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,8 +166,8 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
-				setClassDatumAnalysis((ClassDatumAnalysis)newValue);
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+				setClassDatum((ClassDatum)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -181,8 +181,8 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
-				setClassDatumAnalysis((ClassDatumAnalysis)null);
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+				setClassDatum((ClassDatum)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -196,8 +196,8 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM_ANALYSIS:
-				return classDatumAnalysis != null;
+			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+				return classDatum != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -222,9 +222,9 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	 */
 	private List<@NonNull Region> intermediateRegions = null;
 
-	public NodeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull Node> sourceNodes, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public NodeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull Node> sourceNodes, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull ClassDatum classDatum) {
 		super(region, sourceNodes, symbolNameBuilder);
-		this.classDatumAnalysis = classDatumAnalysis;
+		this.classDatum = classDatum;
 		for (@NonNull Node sourceNode : sourceNodes) {
 			//			assert !sourceNode.isConstant();
 			sourceNode.addOutgoingConnection(this);

@@ -37,7 +37,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -387,7 +387,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	/**
 	 * The per-class node connections that unite a set of sources via a shared connection.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatumAnalysis2nodes2nodeConnections = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatum2nodes2nodeConnections = new HashMap<>();
 
 	/**
 	 * The edge connections that unite a set of sources via a shared connection.
@@ -402,11 +402,11 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
+	public @NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatum classDatum) {
+		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
 		if (nodes2connection == null) {
 			nodes2connection = new HashMap<>();
-			classDatumAnalysis2nodes2nodeConnections.put(classDatumAnalysis, nodes2connection);
+			classDatum2nodes2nodeConnections.put(classDatum, nodes2connection);
 		}
 		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
 		NodeConnection connection = nodes2connection.get(sourceSet);
@@ -416,7 +416,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			s.appendName(owningClass.getName());
 			s.appendString("_");
 			s.appendName(property.getName());
-			connection = new NodeConnectionImpl(this, sourceSet, s, classDatumAnalysis);
+			connection = new NodeConnectionImpl(this, sourceSet, s, classDatum);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
@@ -454,22 +454,22 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
+	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum) {
+		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
 		if (nodes2connection == null) {
 			nodes2connection = new HashMap<>();
-			classDatumAnalysis2nodes2nodeConnections.put(classDatumAnalysis, nodes2connection);
+			classDatum2nodes2nodeConnections.put(classDatum, nodes2connection);
 		}
 		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
 		NodeConnection connection = nodes2connection.get(sourceSet);
 		if (connection == null) {
-			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
+			DomainUsage domainUsage = getScheduleModel().getDomainUsage(QVTscheduleUtil.getTypedModel(classDatum)); //classDatumAnalysis.getDomainUsage();
 			SymbolNameBuilder s = new SymbolNameBuilder();
 			s.appendString("j");
 			s.appendString(domainUsage.isInput() ? "i" : domainUsage.isOutput() ? "o" : "m");
 			s.appendString("_");
-			s.appendName(classDatumAnalysis.getCompleteClass().getName());
-			connection = new NodeConnectionImpl(this, sourceSet, s, classDatumAnalysis);
+			s.appendName(classDatum.getCompleteClass().getName());
+			connection = new NodeConnectionImpl(this, sourceSet, s, classDatum);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
@@ -501,8 +501,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 
 	@Override
 	public void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode) {
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(connection);
-		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(connection);
+		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatum2nodes2nodeConnections.get(classDatum);
 		assert nodes2connections != null;
 		Set<@NonNull Node> newSourceNodes = new HashSet<>();
 		Iterables.addAll(newSourceNodes, QVTscheduleUtil.getSourceEnds(connection));
@@ -510,7 +510,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		assert oldConnection == connection;
 		newSourceNodes.removeAll(obsoleteSourceNodes);
 		newSourceNodes.add(newSourceNode);
-		NodeConnection newConnection = getNodeConnection(newSourceNodes, classDatumAnalysis);
+		NodeConnection newConnection = getNodeConnection(newSourceNodes, classDatum);
 		for (@NonNull Node targetNode : oldConnection.getTargetNodes()) {
 			ConnectionRole connectionRole = oldConnection.getConnectionRole(targetNode);
 			if (connectionRole.isPassed()) {
