@@ -231,13 +231,13 @@ public abstract class AbstractQVTscheduleASSaverResolveVisitor
 	}
 
 	@Override
-	public @Nullable Object visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
-		return visitRegion(object);
+	public @Nullable Object visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
+		return visitModel(object);
 	}
 
 	@Override
-	public @Nullable Object visitSchedulerConstants(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SchedulerConstants object) {
-		return visitElement(object);
+	public @Nullable Object visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
+		return visitRegion(object);
 	}
 
 	@Override

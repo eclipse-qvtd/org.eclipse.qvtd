@@ -1506,13 +1506,13 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM_ANALYSIS__REQUIRED_BY = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Scheduler Constants</b></em>' reference.
+	 * The feature id for the '<em><b>Schedule Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
+	int CLASS_DATUM_ANALYSIS__SCHEDULE_MODEL = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Super Class Datum Analyses</b></em>' reference list.
@@ -3522,13 +3522,22 @@ public interface QVTschedulePackage extends EPackage {
 	int MULTI_REGION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Schedule Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_REGION__SCHEDULE_MODEL = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Multi Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MULTI_REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int MULTI_REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5393,6 +5402,151 @@ public interface QVTschedulePackage extends EPackage {
 	int ROOT_COMPOSITION_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
+	 * @generated
+	 */
+	int SCHEDULE_MODEL = 38;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__ANNOTATING_COMMENTS = PivotPackage.MODEL__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_ANNOTATIONS = PivotPackage.MODEL__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_COMMENTS = PivotPackage.MODEL__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_EXTENSIONS = PivotPackage.MODEL__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__NAME = PivotPackage.MODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_CONSTRAINTS = PivotPackage.MODEL__OWNED_CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>External URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__EXTERNAL_URI = PivotPackage.MODEL__EXTERNAL_URI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_IMPORTS = PivotPackage.MODEL__OWNED_IMPORTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_PACKAGES = PivotPackage.MODEL__OWNED_PACKAGES;
+
+	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__SCHEDULED_REGION = PivotPackage.MODEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Multi Region</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__MULTI_REGION = PivotPackage.MODEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Schedule Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL___ALL_OWNED_ELEMENTS = PivotPackage.MODEL___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL___GET_VALUE__TYPE_STRING = PivotPackage.MODEL___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Schedule Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL_OPERATION_COUNT = PivotPackage.MODEL_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5400,7 +5554,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
 	 * @generated
 	 */
-	int SCHEDULED_REGION = 38;
+	int SCHEDULED_REGION = 39;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5511,13 +5665,22 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__REGIONS = REGION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Schedule Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__SCHEDULE_MODEL = REGION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Scheduled Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 3;
+	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5545,88 +5708,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULED_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl <em>Scheduler Constants</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSchedulerConstants()
-	 * @generated
-	 */
-	int SCHEDULER_CONSTANTS = 39;
-
-	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
-
-	/**
-	 * The number of structural features of the '<em>Scheduler Constants</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>All Owned Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
-
-	/**
-	 * The number of operations of the '<em>Scheduler Constants</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULER_CONSTANTS_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
@@ -6301,15 +6382,15 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getClassDatumAnalysis_RequiredBy();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getSchedulerConstants <em>Scheduler Constants</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getScheduleModel <em>Schedule Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Scheduler Constants</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getSchedulerConstants()
+	 * @return the meta object for the reference '<em>Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getScheduleModel()
 	 * @see #getClassDatumAnalysis()
 	 * @generated
 	 */
-	EReference getClassDatumAnalysis_SchedulerConstants();
+	EReference getClassDatumAnalysis_ScheduleModel();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getSuperClassDatumAnalyses <em>Super Class Datum Analyses</em>}'.
@@ -6654,6 +6735,38 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getRootCompositionRegion();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel <em>Schedule Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel
+	 * @generated
+	 */
+	EClass getScheduleModel();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getScheduledRegion <em>Scheduled Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Scheduled Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getScheduledRegion()
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	EReference getScheduleModel_ScheduledRegion();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMultiRegion <em>Multi Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Multi Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMultiRegion()
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	EReference getScheduleModel_MultiRegion();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion <em>Scheduled Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6697,14 +6810,15 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getScheduledRegion_Regions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants <em>Scheduler Constants</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getScheduleModel <em>Schedule Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Scheduler Constants</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants
+	 * @return the meta object for the container reference '<em>Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getScheduleModel()
+	 * @see #getScheduledRegion()
 	 * @generated
 	 */
-	EClass getSchedulerConstants();
+	EReference getScheduledRegion_ScheduleModel();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}'.
@@ -6956,6 +7070,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMultiRegion();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MultiRegion#getScheduleModel <em>Schedule Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MultiRegion#getScheduleModel()
+	 * @see #getMultiRegion()
+	 * @generated
+	 */
+	EReference getMultiRegion_ScheduleModel();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion <em>Named Mapping Region</em>}'.
@@ -7557,12 +7682,12 @@ public interface QVTschedulePackage extends EPackage {
 		EReference CLASS_DATUM_ANALYSIS__REQUIRED_BY = eINSTANCE.getClassDatumAnalysis_RequiredBy();
 
 		/**
-		 * The meta object literal for the '<em><b>Scheduler Constants</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Schedule Model</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_DATUM_ANALYSIS__SCHEDULER_CONSTANTS = eINSTANCE.getClassDatumAnalysis_SchedulerConstants();
+		EReference CLASS_DATUM_ANALYSIS__SCHEDULE_MODEL = eINSTANCE.getClassDatumAnalysis_ScheduleModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Class Datum Analyses</b></em>' reference list feature.
@@ -7841,6 +7966,32 @@ public interface QVTschedulePackage extends EPackage {
 		EClass ROOT_COMPOSITION_REGION = eINSTANCE.getRootCompositionRegion();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
+		 * @generated
+		 */
+		EClass SCHEDULE_MODEL = eINSTANCE.getScheduleModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Scheduled Region</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_MODEL__SCHEDULED_REGION = eINSTANCE.getScheduleModel_ScheduledRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Multi Region</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_MODEL__MULTI_REGION = eINSTANCE.getScheduleModel_MultiRegion();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7875,14 +8026,12 @@ public interface QVTschedulePackage extends EPackage {
 		EReference SCHEDULED_REGION__REGIONS = eINSTANCE.getScheduledRegion_Regions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl <em>Scheduler Constants</em>}' class.
+		 * The meta object literal for the '<em><b>Schedule Model</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSchedulerConstants()
 		 * @generated
 		 */
-		EClass SCHEDULER_CONSTANTS = eINSTANCE.getSchedulerConstants();
+		EReference SCHEDULED_REGION__SCHEDULE_MODEL = eINSTANCE.getScheduledRegion_ScheduleModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
@@ -8109,6 +8258,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MULTI_REGION = eINSTANCE.getMultiRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Schedule Model</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MULTI_REGION__SCHEDULE_MODEL = eINSTANCE.getMultiRegion_ScheduleModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl <em>Named Mapping Region</em>}' class.

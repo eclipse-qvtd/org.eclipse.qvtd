@@ -61,7 +61,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -587,7 +587,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		//		CompleteModel completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
+		//		CompleteModel completeModel = getScheduleModel().getEnvironmentFactory().getCompleteModel();
 		boolean doDebug = QVTscheduleConstants.POLLED_PROPERTIES.isActive();
 		if (doDebug) {
 			QVTscheduleConstants.POLLED_PROPERTIES.println("analyzing " + this + " (" + getIndexRangeText() + ")");
@@ -1127,8 +1127,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			else {
 				NodeConnection headConnection = createHeadConnection(headNode);
 				if (headConnection == null) {
-					getSchedulerConstants().addRegionError(this, "createHeadConnections abandoned for " + headNode);
-					getSchedulerConstants().addRegionError(this, "createHeadConnections abandoned for " + headNode);
+					getScheduleModel().addRegionError(this, "createHeadConnections abandoned for " + headNode);
+					getScheduleModel().addRegionError(this, "createHeadConnections abandoned for " + headNode);
 					headConnection = createHeadConnection(headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
@@ -1445,12 +1445,12 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement) {
-		return getSchedulerConstants().getClassDatumAnalysis(typedElement);
+		return getScheduleModel().getClassDatumAnalysis(typedElement);
 	}
 
 	//	@Override
 	//	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Type type) {
-	//		return getSchedulerConstants().getClassDatumAnalysis(type);
+	//		return getScheduleModel().getClassDatumAnalysis(type);
 	//	}
 
 	@Override
@@ -1840,8 +1840,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public @NonNull SchedulerConstants getSchedulerConstants() {
-		return multiRegion.getSchedulerConstants();
+	public ScheduleModel getScheduleModel() {
+		return multiRegion.getScheduleModel();
 	}
 
 	@Override
@@ -1850,7 +1850,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
-		return getSchedulerConstants().getStandardLibraryHelper();
+		return getScheduleModel().getStandardLibraryHelper();
 	}
 
 	@Override
@@ -1866,7 +1866,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			s.appendString(getSymbolNamePrefix());
 			s.appendString(computeSymbolName().toString());
 			s.appendString(getSymbolNameSuffix());
-			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(s, this);
+			symbolName = symbolName2 = getScheduleModel().reserveSymbolName(s, this);
 		}
 		return symbolName2;
 	}
@@ -2340,7 +2340,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public void writeDebugGraphs(@Nullable String context) {
-		SchedulerConstants scheduler = getSchedulerConstants();
+		ScheduleModel scheduler = getScheduleModel();
 		String suffix = context != null ? "-" + context : null;
 		scheduler.writeDOTfile(this, suffix);
 		scheduler.writeGraphMLfile(this, suffix);

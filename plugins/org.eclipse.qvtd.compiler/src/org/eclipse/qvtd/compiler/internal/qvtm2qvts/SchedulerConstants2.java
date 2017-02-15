@@ -59,11 +59,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.SchedulerConstantsImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
-public abstract class SchedulerConstants2 extends SchedulerConstantsImpl
+public abstract class SchedulerConstants2 extends ScheduleModelImpl
 {
 	//public static final @NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
 	public static final @NonNull Set<@NonNull MappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();

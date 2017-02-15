@@ -63,8 +63,8 @@
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="schedulerConstants" lowerBound="1"
-        eType="#//SchedulerConstants">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
+        eType="#//ScheduleModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
       </eAnnotations>
@@ -162,6 +162,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="The MultiRegion supervises the many Region instances that realize a transformation"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/multiRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedMappingRegion" eSuperTypes="#//MappingRegion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -255,8 +257,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//ToDOTable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
         eType="#//Edge" containment="true" eOpposite="#//Edge/region"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="invokingRegion" lowerBound="1"
-        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/regions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invokingRegion" eType="#//ScheduledRegion"
+        eOpposite="#//ScheduledRegion/regions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//Node" containment="true" eOpposite="#//Node/region"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
@@ -323,15 +325,21 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RootCompositionRegion" eSuperTypes="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScheduleModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
+        containment="true" eOpposite="#//ScheduledRegion/scheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiRegion" eType="#//MultiRegion"
+        containment="true" eOpposite="#//MultiRegion/scheduleModel"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
         eType="#//Connection" containment="true" eOpposite="#//Connection/region"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" upperBound="-1"
         eType="#//Region" containment="true" eOpposite="#//Region/invokingRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/scheduledRegion"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SchedulerConstants" abstract="true"
-      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"/>

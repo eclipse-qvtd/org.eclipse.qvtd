@@ -277,7 +277,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected @NonNull ContentsAnalysis getContentsAnalysis() {
 		ContentsAnalysis contentsAnalysis2 = contentsAnalysis;
 		if (contentsAnalysis2 == null) {
-			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(scheduledRegion.getSchedulerConstants());
+			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(RegionUtil.getScheduleModel(scheduledRegion));
 			for (@NonNull Region region : allRegions) {
 				contentsAnalysis2.addRegion(region);
 			}

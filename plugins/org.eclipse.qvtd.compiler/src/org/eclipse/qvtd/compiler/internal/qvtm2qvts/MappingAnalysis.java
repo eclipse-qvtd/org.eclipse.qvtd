@@ -163,7 +163,7 @@ public class MappingAnalysis implements Nameable
 			/*			if (conditionExpression instanceof OperationCallExp) {
 				OperationCallExp callExp = (OperationCallExp)conditionExpression;
 				OperationId operationId = callExp.getReferredOperation().getOperationId();
-				if (SchedulerConstants.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
+				if (ScheduleModel.isSameOperation(operationId, getScheduleModel().getOclAnyEqualsId())) {
 					OCLExpression leftExpression = callExp.getOwnedSource();
 					OCLExpression rightExpression = callExp.getOwnedArguments().get(0);
 					Node leftNode = expressionAnalyzer.analyze(leftExpression);
@@ -473,7 +473,7 @@ public class MappingAnalysis implements Nameable
 					node = analyzeVariable(variable, ownedInit);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					DomainUsage domainUsage = mappingRegion.getSchedulerConstants().getDomainUsage(variable);
+					DomainUsage domainUsage = mappingRegion.getScheduleModel().getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
 						node = RegionUtil.createRealizedStepNode(mappingRegion, variable);

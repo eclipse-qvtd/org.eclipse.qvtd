@@ -191,7 +191,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 		}
 		//
 		OperationDependencyAnalysis operationDependencyAnalysis = getOperationDependencyAnalysis();
-		//		OperationDependencyAnalysis operationDependencyAnalysis = new OperationDependencyAnalysis(schedulerConstants);
+		//		OperationDependencyAnalysis operationDependencyAnalysis = new OperationDependencyAnalysis(scheduleModel);
 		//		operationDependencyAnalysis.dump();
 		OperationDependencyPaths paths = operationDependencyAnalysis.analyzeOperation(operationCallExp);
 		//		operationDependencyAnalysis.dump();
@@ -249,7 +249,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 							//						typedModel = stepUsage.getTypedModel();
 							//						assert typedModel != null;
 							//						stepType = propertyStep.getType();
-							//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
+							//						classDatumAnalysis = scheduleModel.getClassDatumAnalysis(stepType, typedModel);
 							//						Node nextNode = RegionUtil.StepNodeRoleFactory.PREDICATED_STEP.createNode(this, "next", classDatumAnalysis);
 
 							if (primaryClass instanceof CollectionType) {
@@ -289,7 +289,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 	@Override
 	protected @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum) {
 		ClassDatumAnalysis classDatumAnalysis = QVTscheduleFactory.eINSTANCE.createClassDatumAnalysis();
-		classDatumAnalysis.setSchedulerConstants(this);
+		classDatumAnalysis.setScheduleModel(this);
 		classDatumAnalysis.setClassDatum(classDatum);
 		return classDatumAnalysis;
 	}
@@ -302,7 +302,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 
 	public @NonNull MultiRegion transform() throws IOException {
 		MultiRegion multiRegion = QVTscheduleFactory.eINSTANCE.createMultiRegion();
-		multiRegion.setSchedulerConstants(this);
+		multiRegion.setScheduleModel(this);
 		Iterable<@NonNull Mapping> orderedMappings = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.

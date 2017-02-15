@@ -52,7 +52,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
@@ -566,7 +566,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			//					isMatched = RegionUtil.isMatched(typedElement);
 			//				}
 			//				if (!isMatched) {
-			//					region2.getMultiRegion().getSchedulerConstants().addProblem(region2.createWarning("Cannot add unmatched " + typedElement + " to " + this));
+			//					region2.getMultiRegion().getScheduleModel().addProblem(region2.createWarning("Cannot add unmatched " + typedElement + " to " + this));
 			//				}
 			//			}
 		}
@@ -904,10 +904,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	//	@Override
-	public @NonNull SchedulerConstants getSchedulerConstants() {
+	public ScheduleModel getScheduleModel() {
 		Region region = getRegion();
 		assert region != null;
-		return region.getSchedulerConstants();
+		return region.getScheduleModel();
 	}
 
 	protected @Nullable String getShape() {
@@ -1108,25 +1108,25 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		CompleteClass oldCompleteClass = QVTscheduleUtil.getCompleteClass(classDatumAnalysis2);
 		CompleteClass newCompleteClass = QVTscheduleUtil.getCompleteClass(newClassDatumAnalysis);
 		if (oldCompleteClass.conformsTo(newCompleteClass)) {
-			DomainUsageAnalysis.Root domainAnalysis = getSchedulerConstants().getDomainAnalysis();
+			DomainUsageAnalysis.Root domainAnalysis = getScheduleModel().getDomainAnalysis();
 			DomainUsage.Internal oldDomainUsage = (DomainUsage.Internal) classDatumAnalysis2.getDomainUsage();
 			DomainUsage.Internal newDomainUsage = (DomainUsage.Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
 			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(oldCompleteClass);
 			assert refinedTypedModel != null;
-			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(oldCompleteClass, refinedTypedModel);
+			classDatumAnalysis = getScheduleModel().getClassDatumAnalysis(oldCompleteClass, refinedTypedModel);
 			return true;
 		}
 		else if (newCompleteClass.conformsTo(oldCompleteClass)) {
-			DomainUsageAnalysis.Root domainAnalysis = getSchedulerConstants().getDomainAnalysis();
+			DomainUsageAnalysis.Root domainAnalysis = getScheduleModel().getDomainAnalysis();
 			DomainUsage.Internal oldDomainUsage = (DomainUsage.Internal) classDatumAnalysis2.getDomainUsage();
 			DomainUsage.Internal newDomainUsage = (DomainUsage.Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
 			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(newCompleteClass);
 			assert refinedTypedModel != null;
-			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(newCompleteClass, refinedTypedModel);
+			classDatumAnalysis = getScheduleModel().getClassDatumAnalysis(newCompleteClass, refinedTypedModel);
 			return true;
 		}
 		else if (oldCompleteClass.getPrimaryClass().getESObject() == EcorePackage.Literals.EOBJECT) {

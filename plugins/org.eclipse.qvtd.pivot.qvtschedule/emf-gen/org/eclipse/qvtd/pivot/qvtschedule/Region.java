@@ -83,7 +83,7 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	 * @see #setInvokingRegion(ScheduledRegion)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_InvokingRegion()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions
-	 * @model opposite="regions" required="true" transient="false"
+	 * @model opposite="regions" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!invokingRegion'"
 	 * @generated
 	 */
@@ -244,7 +244,7 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	@NonNull List<@NonNull NodeConnection> getRootConnections();
-	@NonNull SchedulerConstants getSchedulerConstants();
+	ScheduleModel getScheduleModel();
 	@Nullable String getShape();
 	@Nullable String getStyle();
 	@NonNull Iterable<@NonNull Node> getTrueNodes();

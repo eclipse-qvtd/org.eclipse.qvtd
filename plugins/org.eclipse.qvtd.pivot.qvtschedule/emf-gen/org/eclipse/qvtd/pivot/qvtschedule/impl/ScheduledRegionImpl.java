@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -47,7 +48,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -67,6 +68,7 @@ import com.google.common.collect.Sets;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getConnections <em>Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getRegions <em>Regions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getScheduleModel <em>Schedule Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -185,6 +187,49 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public ScheduleModel getScheduleModel() {
+		if (eContainerFeatureID() != QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL) return null;
+		return (ScheduleModel)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScheduleModel(ScheduleModel newScheduleModel, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newScheduleModel, QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setScheduleModel(ScheduleModel newScheduleModel) {
+		if (newScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL && newScheduleModel != null)) {
+			if (EcoreUtil.isAncestor(this, newScheduleModel))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newScheduleModel != null)
+				msgs = ((InternalEObject)newScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION, ScheduleModel.class, msgs);
+			msgs = basicSetScheduleModel(newScheduleModel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL, newScheduleModel, newScheduleModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -193,6 +238,10 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnections()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRegions()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetScheduleModel((ScheduleModel)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -209,8 +258,24 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				return ((InternalEList<?>)getConnections()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				return basicSetScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION, ScheduleModel.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -227,6 +292,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				return getName();
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return getRegions();
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				return getScheduleModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,6 +318,9 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
 				return;
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				setScheduleModel((ScheduleModel)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -272,6 +342,9 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				getRegions().clear();
 				return;
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				setScheduleModel((ScheduleModel)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -290,6 +363,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.SCHEDULED_REGION__REGIONS:
 				return regions != null && !regions.isEmpty();
+			case QVTschedulePackage.SCHEDULED_REGION__SCHEDULE_MODEL:
+				return getScheduleModel() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -562,7 +637,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 
 	@Override
 	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
-		SchedulerConstants scheduler = getSchedulerConstants();
+		ScheduleModel scheduler = getScheduleModel();
 		if (doNodesGraph) {
 			writeDebugGraphs(context);
 		}

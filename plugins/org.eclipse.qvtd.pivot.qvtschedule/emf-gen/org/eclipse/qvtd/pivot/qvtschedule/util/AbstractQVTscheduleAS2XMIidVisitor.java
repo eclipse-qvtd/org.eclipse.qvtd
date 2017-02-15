@@ -231,13 +231,13 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
-		return visitRegion(object);
+	public @Nullable Boolean visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
+		return visitModel(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitSchedulerConstants(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SchedulerConstants object) {
-		return visitElement(object);
+	public @Nullable Boolean visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
+		return visitRegion(object);
 	}
 
 	@Override

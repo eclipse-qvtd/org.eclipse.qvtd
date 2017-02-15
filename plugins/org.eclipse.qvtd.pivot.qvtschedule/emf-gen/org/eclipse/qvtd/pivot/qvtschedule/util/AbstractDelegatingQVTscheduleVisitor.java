@@ -223,13 +223,13 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
-		return delegate.visitScheduledRegion(object);
+	public R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
+		return delegate.visitScheduleModel(object);
 	}
 
 	@Override
-	public R visitSchedulerConstants(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SchedulerConstants object) {
-		return delegate.visitSchedulerConstants(object);
+	public R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
+		return delegate.visitScheduledRegion(object);
 	}
 
 	@Override

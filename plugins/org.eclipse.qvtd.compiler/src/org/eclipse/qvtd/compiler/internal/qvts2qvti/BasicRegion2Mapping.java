@@ -99,7 +99,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 
 import com.google.common.collect.Iterables;
 
@@ -486,7 +486,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Operation referredOperation = visitor.create(pOperationCallExp.getReferredOperation());
 			assert referredOperation != null;
 			if ((iSource == null) && (referredOperation instanceof Function)) {
-				SchedulerConstants scheduler = getRegion().getMultiRegion().getSchedulerConstants();
+				ScheduleModel scheduler = getRegion().getMultiRegion().getScheduleModel();
 				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
 				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
 				iSource = PivotUtil.createVariableExp(thisVariable);
@@ -556,7 +556,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			VariableDeclaration pVariable = pVariableExp.getReferredVariable();
 			Node node = getNode(pVariable);
 			if (node == null) {
-				SchedulerConstants scheduler = getRegion().getMultiRegion().getSchedulerConstants();
+				ScheduleModel scheduler = getRegion().getMultiRegion().getScheduleModel();
 				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
 				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
 				Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
@@ -1159,7 +1159,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		// mappings, but that incurs many typedModel accuracy issues.
 		//
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
-		DomainUsage anyUsage = region.getSchedulerConstants().getDomainAnalysis().getAnyUsage();
+		DomainUsage anyUsage = region.getScheduleModel().getDomainAnalysis().getAnyUsage();
 		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
 			Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtmTypedModel);
 			if (checkedEdges != null) {

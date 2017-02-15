@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 import com.google.common.base.Function;
@@ -656,6 +657,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull Mapping> getRequiredBy(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		return ClassUtil.nullFree(classDatumAnalysis.getRequiredBy());
+	}
+
+	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {
+		return ClassUtil.nonNullState(region.getScheduleModel());
 	}
 
 	public static <CE extends ConnectionEnd> @NonNull Iterable<@NonNull CE> getSourceEnds(@NonNull DatumConnection<CE> datumConnection) {

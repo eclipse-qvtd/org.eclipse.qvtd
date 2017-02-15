@@ -52,7 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractRegion2Mapping
@@ -113,11 +113,11 @@ public abstract class AbstractRegion2Mapping
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
-			SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
-			if (asProperty == schedulerConstants.getStandardLibraryHelper().getOclContainerProperty()) {
+			ScheduleModel scheduleModel = getRegion().getScheduleModel();
+			if (asProperty == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
 				return helper.createOperationCallExp(asSource, "oclContainer");
 			}
-			else if ((asType != null) && (asProperty == schedulerConstants.getCastProperty(asType))) {
+			else if ((asType != null) && (asProperty == scheduleModel.getCastProperty(asType))) {
 				return createOclAsTypeCallExp(asSource, asType);
 			}
 			else {
@@ -140,8 +140,8 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull CallExp createOclAsTypeCallExp(@NonNull OCLExpression asSource, @NonNull Type asType) {
-		SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
-		CompleteClass completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
+		ScheduleModel scheduleModel = getRegion().getScheduleModel();
+		CompleteClass completeClass = scheduleModel.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
 		TypeExp asTypeExp = helper.createTypeExp(completeClass.getPrimaryClass());
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}

@@ -71,29 +71,29 @@ public interface ClassDatumAnalysis extends Element
 	 */
 	EList<Mapping> getRequiredBy();
 	/**
-	 * Returns the value of the '<em><b>Scheduler Constants</b></em>' reference.
+	 * Returns the value of the '<em><b>Schedule Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Non-null if this edge is part of a bidirectional pair.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Scheduler Constants</em>' reference.
-	 * @see #setSchedulerConstants(SchedulerConstants)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatumAnalysis_SchedulerConstants()
+	 * @return the value of the '<em>Schedule Model</em>' reference.
+	 * @see #setScheduleModel(ScheduleModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatumAnalysis_ScheduleModel()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatumAnalysis!schedulerConstants'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatumAnalysis!scheduleModel'"
 	 * @generated
 	 */
-	SchedulerConstants getSchedulerConstants();
+	ScheduleModel getScheduleModel();
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getSchedulerConstants <em>Scheduler Constants</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis#getScheduleModel <em>Schedule Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Scheduler Constants</em>' reference.
-	 * @see #getSchedulerConstants()
+	 * @param value the new value of the '<em>Schedule Model</em>' reference.
+	 * @see #getScheduleModel()
 	 * @generated
 	 */
-	void setSchedulerConstants(SchedulerConstants value);
+	void setScheduleModel(ScheduleModel value);
 	/**
 	 * Returns the value of the '<em><b>Super Class Datum Analyses</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis}.

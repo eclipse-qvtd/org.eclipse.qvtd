@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 
 /**
  * A RootMappingAnalysis provides an analysis of what is introduced by the root mapping.
@@ -55,7 +55,7 @@ public class RootMappingAnalysis
 	}
 
 	public @NonNull Node getIntroducerNode(@NonNull Node consumerNode) {
-		SchedulerConstants schedulerConstants = rootCompositionRegion.getSchedulerConstants();
+		ScheduleModel scheduleModel = rootCompositionRegion.getScheduleModel();
 		//
 		//	Identify the containment pattern.
 		//
@@ -67,18 +67,18 @@ public class RootMappingAnalysis
 			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;
 				parent2childProperty = property;
-				if (property == schedulerConstants.getStandardLibraryHelper().getOclContainerProperty()) {
+				if (property == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
 					containingClassDatumAnalysis = edge.getEdgeSource().getClassDatumAnalysis();
 				}
 				break;
 			}
 		}
-		CompleteEnvironment completeEnvironment = schedulerConstants.getEnvironmentFactory().getCompleteEnvironment();
+		CompleteEnvironment completeEnvironment = scheduleModel.getEnvironmentFactory().getCompleteEnvironment();
 		ClassDatumAnalysis consumedClassDatumAnalysis = /*getCastTarget(consumerNode)*/consumerNode.getClassDatumAnalysis();
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatumAnalysis.getCompleteClass().getPrimaryClass();
 		TypedModel typedModel = RegionUtil.getTypedModel(consumedClassDatumAnalysis);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
-		ClassDatumAnalysis childrenClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis(childCollectionType, typedModel);
+		ClassDatumAnalysis childrenClassDatumAnalysis = scheduleModel.getClassDatumAnalysis(childCollectionType, typedModel);
 		//
 		//	Create / re-use the appropriate containment pattern.
 		//
@@ -134,7 +134,7 @@ public class RootMappingAnalysis
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
-				containingClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis(owningClass, typedModel);
+				containingClassDatumAnalysis = scheduleModel.getClassDatumAnalysis(owningClass, typedModel);
 				Node containerNode = RegionUtil.createComposingNode(rootCompositionRegion, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}

@@ -287,6 +287,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull RootCompositionRegion createRootCompositionRegion();
 
 	/**
+	 * Returns a new object of class '<em>Schedule Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Schedule Model</em>'.
+	 * @generated
+	 */
+	@NonNull ScheduleModel createScheduleModel();
+
+	/**
 	 * Returns a new object of class '<em>Scheduled Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -41,7 +41,7 @@ import com.google.common.collect.Sets;
  */
 public class ContentsAnalysis
 {
-	protected final @NonNull SchedulerConstants schedulerConstants;
+	protected final @NonNull ScheduleModel scheduleModel;
 
 	/**
 	 * The Speculation or Realized Nodes that produce each ClassDatum.
@@ -59,8 +59,8 @@ public class ContentsAnalysis
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
 
-	public ContentsAnalysis(@NonNull SchedulerConstants schedulerConstants) {
-		this.schedulerConstants = schedulerConstants;
+	public ContentsAnalysis(@NonNull ScheduleModel scheduleModel) {
+		this.scheduleModel = scheduleModel;
 	}
 
 	private void addNewEdge(@NonNull NavigableEdge newEdge) {
@@ -86,7 +86,7 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getElementalClassDatumAnalysis(newNode);
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getElementalClassDatumAnalysis(newNode);
 		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : RegionUtil.getSuperClassDatumAnalyses(classDatumAnalysis)) {
 			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {
@@ -145,11 +145,11 @@ public class ContentsAnalysis
 		Property forwardProperty = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeSource());
 		ClassDatum forwardClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
-		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
+		//		PropertyDatum forwardPropertyDatum = getScheduleModel().getPropertyDatum(forwardClassDatum, property);
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
 		//			return forwardPropertyDatum;
 		//		}
-		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = schedulerConstants.getAllPropertyDatums(forwardClassDatum);
+		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = scheduleModel.getAllPropertyDatums(forwardClassDatum);
 		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
 			if ((propertyDatum.getProperty() == forwardProperty) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
 				return propertyDatum;
@@ -177,7 +177,7 @@ public class ContentsAnalysis
 		Property reverseProperty = forwardProperty.getOpposite();
 		classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeTarget());
 		ClassDatum reverseClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
-		Iterable<@NonNull PropertyDatum> reversePropertyDatums = schedulerConstants.getAllPropertyDatums(reverseClassDatum);
+		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleModel.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
 			if ((propertyDatum.getProperty() == reverseProperty) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
 				return propertyDatum;
@@ -276,7 +276,7 @@ public class ContentsAnalysis
 		}
 		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
 		if (propertyDatum == null) {
-			if (property == schedulerConstants.getStandardLibraryHelper().getOclContainerProperty()) {
+			if (property == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
 				return getCompositeNewEdges(edge);
 			}
 			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging

@@ -1399,7 +1399,7 @@ public class OperationDependencyAnalysis
 	private final @NonNull CompleteModel completeModel;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
-	//	protected final @NonNull SchedulerConstants scheduler;
+	//	protected final @NonNull ScheduleModel scheduler;
 	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull BasicDependencyPaths> content2path = new HashMap<>();
 	private final @NonNull BasicDependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
 	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();

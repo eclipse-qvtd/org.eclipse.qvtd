@@ -111,7 +111,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			scheduledRegion.writeDebugGraphs("7-pruned", true, true, false);
 		}
 
-		boolean noLateConsumerMerge = scheduledRegion.getSchedulerConstants().isNoLateConsumerMerge();
+		boolean noLateConsumerMerge = scheduledRegion.getScheduleModel().isNoLateConsumerMerge();
 		if (!noLateConsumerMerge) {
 			lateMerge(scheduledRegion, orderedRegions, typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}

@@ -261,7 +261,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull SymbolNameBuilder symbolNameBuilder) {
 		setRegion(region);
-		setName(region.getSchedulerConstants().reserveSymbolName(symbolNameBuilder, this));
+		setName(region.getScheduleModel().reserveSymbolName(symbolNameBuilder, this));
 		getSourceEnds().addAll(sourceEnds);
 	}
 

@@ -72,7 +72,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import com.google.common.collect.Iterables;
 
@@ -101,7 +101,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 	}
 
-	protected final @NonNull SchedulerConstants scheduler;
+	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
@@ -109,8 +109,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 
 	protected ExpressionAnalyzer(@NonNull MappingAnalysis context) {
 		super(context);
-		this.scheduler = context.getMappingRegion().getSchedulerConstants();
-		this.environmentFactory = scheduler.getEnvironmentFactory();
+		this.scheduleModel = RegionUtil.getScheduleModel(context.getMappingRegion());
+		this.environmentFactory = scheduleModel.getEnvironmentFactory();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
 	}
@@ -149,7 +149,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 		Type castType = type;
 		assert castType != null;
-		Property castProperty = scheduler.getCastProperty(castType);
+		Property castProperty = scheduleModel.getCastProperty(castType);
 		Edge castEdge = sourceNode.getPredicateEdge(castProperty);
 		if (castEdge != null) {
 			Node castNode = castEdge.getEdgeTarget();
@@ -455,7 +455,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				CompleteClass propertyCompleteClass = context.getMappingRegion().getSchedulerConstants().getClassDatumAnalysis(source2targetProperty).getCompleteClass();
+				CompleteClass propertyCompleteClass = context.getMappingRegion().getScheduleModel().getClassDatumAnalysis(source2targetProperty).getCompleteClass();
 				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
 				if (valueCompleteClass == propertyCompleteClass) {
 					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -595,8 +595,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
-		Class oclInvalidType = scheduler.getStandardLibrary().getOclInvalidType();
-		ClassDatumAnalysis classDatumAnalysis = scheduler.getClassDatumAnalysis(oclInvalidType, scheduler.getDomainAnalysis().getPrimitiveTypeModel());
+		Class oclInvalidType = scheduleModel.getStandardLibrary().getOclInvalidType();
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(oclInvalidType, scheduleModel.getDomainAnalysis().getPrimitiveTypeModel());
 		Node errorNode = createErrorNode("«error»", classDatumAnalysis);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);
@@ -631,7 +631,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 		else {
 			Node varNode = createLetNode(ownedVariable, initNode);
-			Property castProperty = scheduler.getCastProperty(type);
+			Property castProperty = scheduleModel.getCastProperty(type);
 			createNavigationEdge(initNode, castProperty, varNode, false);
 		}
 		return analyze(letExp.getOwnedIn());
@@ -654,7 +654,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			Node iteratorNode = createIteratorNode(iterator, sourceNode);
 			Type iteratorType = iterator.getType();
 			assert iteratorType != null;
-			//			Property iterateProperty = context.getSchedulerConstants().getIterateProperty(iteratorType);
+			//			Property iterateProperty = context.getScheduleModel().getIterateProperty(iteratorType);
 			createIteratedEdge(sourceNode, QVTscheduleConstants.LOOP_ITERATOR_NAME, iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
@@ -664,7 +664,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			Node iteratorNode = createIteratorNode(accumulator, sourceNode);
 			Type iteratorType = accumulator.getType();
 			assert iteratorType != null;
-			//			Property iterateProperty = context.getSchedulerConstants().getIterateProperty(iteratorType);
+			//			Property iterateProperty = context.getScheduleModel().getIterateProperty(iteratorType);
 			createIteratedEdge(sourceNode, QVTscheduleConstants.LOOP_ITERATOR_NAME, iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
@@ -792,7 +792,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
 		if (ownedSource instanceof VariableExp) {
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
-			Variable thisVariable = QVTbaseUtil.getContextVariable(scheduler.getStandardLibrary(), transformation);
+			Variable thisVariable = QVTbaseUtil.getContextVariable(scheduleModel.getStandardLibrary(), transformation);
 			if (((VariableExp)ownedSource).getReferredVariable() == thisVariable) {
 				ownedSource = null;
 			}
@@ -851,7 +851,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 				}
 				if (referredOperation.getBodyExpression() != null) {
 					MultiRegion multiRegion = context.getMappingRegion().getMultiRegion();
-					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) multiRegion.getSchedulerConstants();		// FIXME cast
+					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) multiRegion.getScheduleModel();		// FIXME cast
 					OperationRegion operationRegion = qvtm2qvts.analyzeOperation(multiRegion, operationCallExp);
 					List<@NonNull Node> referenceNodes = operationRegion.getDependencyNodes();
 					if (referenceNodes.size() > 0) {
@@ -936,12 +936,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 
 	@Override
 	public @NonNull Node visitTypeExp(@NonNull TypeExp typeExp) {
-		DomainUsage domainUsage = scheduler.getDomainUsage(typeExp);
+		DomainUsage domainUsage = scheduleModel.getDomainUsage(typeExp);
 		Type referredType = typeExp.getReferredType();
 		assert referredType != null;
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
-		ClassDatumAnalysis classDatumAnalysis = scheduler.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
 		String typeName = PrettyPrinter.printType(RegionUtil.getCompleteClass(classDatumAnalysis));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;

@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RootCompositionRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -57,10 +58,12 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 
 	public RootScheduledRegion2(@NonNull String name, @NonNull Region primaryRegion) {
 		super(name, primaryRegion);
-		this.contentsAnalysis = new ContentsAnalysis(getSchedulerConstants());
+		ScheduleModel scheduleModel = primaryRegion.getMultiRegion().getScheduleModel();
+		setScheduleModel(scheduleModel);
+		this.contentsAnalysis = new ContentsAnalysis(scheduleModel);
 		this.rootContainmentRegion = new RootCompositionRegionImpl(getMultiRegion());
 		this.rootAnalysis = new RootMappingAnalysis(rootContainmentRegion);
-		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
+		this.completeModel = scheduleModel.getEnvironmentFactory().getCompleteModel();
 	}
 
 	@Override
@@ -69,7 +72,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 	}
 
 	private void computeInputModels() {
-		for (ClassDatumAnalysis classDatumAnalysis : getSchedulerConstants().getClassDatumAnalyses()) {
+		for (ClassDatumAnalysis classDatumAnalysis : getScheduleModel().getClassDatumAnalyses()) {
 			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
 			if (domainUsage.isInput() && !domainUsage.isOutput()) {
 				Type type = classDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
@@ -190,6 +193,6 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 	}
 
 	public @NonNull QVTm2QVTs getScheduler() {
-		return (QVTm2QVTs)getSchedulerConstants();
+		return (QVTm2QVTs)getScheduleModel();
 	}
 }
