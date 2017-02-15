@@ -21,10 +21,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -173,10 +171,5 @@ public class NamedMappingRegionImpl extends MappingRegionImpl implements NamedMa
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNamedMappingRegion(this);
-	}
-
-	public NamedMappingRegionImpl(@NonNull MultiRegion multiRegion, @NonNull String name) {
-		super(multiRegion);
-		setName(name);
 	}
 } //NamedMappingRegionImpl

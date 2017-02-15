@@ -288,14 +288,6 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitMicroMappingRegion(this);
 	}
 
-	public MicroMappingRegionImpl(@NonNull MappingRegion mappingRegion, @NonNull String namePrefix, @NonNull String symbolSuffix) {
-		super(mappingRegion.getMultiRegion());
-		assert !(mappingRegion instanceof MicroMappingRegion);
-		setMappingRegion(mappingRegion);
-		setNamePrefix(namePrefix);
-		setSymbolSuffix(symbolSuffix);
-	}
-
 	@Override
 	public @NonNull String getName() {
 		return namePrefix + " " + mappingRegion.getName();

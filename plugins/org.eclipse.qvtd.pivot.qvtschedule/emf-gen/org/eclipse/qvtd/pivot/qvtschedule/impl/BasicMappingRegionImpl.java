@@ -22,7 +22,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -192,12 +191,6 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitBasicMappingRegion(this);
-	}
-
-	public BasicMappingRegionImpl(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
-		super(multiRegion);
-		this.mapping = mapping;
-		assert mapping != null;
 	}
 
 	@Override

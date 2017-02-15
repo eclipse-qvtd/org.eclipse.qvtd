@@ -24,11 +24,11 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
 
@@ -52,8 +52,9 @@ public class LateConsumerMerger extends AbstractMerger
 {
 	public static class LateMergedMappingRegion extends NamedMappingRegionImpl
 	{
-		public LateMergedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
-			super(multiRegion, name);
+		public LateMergedMappingRegion(@NonNull ScheduleModel scheduleModel, @NonNull String name) {
+			setFixmeScheduleModel(scheduleModel);
+			setName(name);
 		}
 
 		@Override
@@ -70,7 +71,7 @@ public class LateConsumerMerger extends AbstractMerger
 
 		@Override
 		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new LateMergedMappingRegion(primaryRegion.getMultiRegion(), newName);
+			return new LateMergedMappingRegion(RegionUtil.getScheduleModel(primaryRegion), newName);
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
@@ -91,7 +92,7 @@ public class LateConsumerMerger extends AbstractMerger
 			}
 			contentsAnalysis.addRegion(mergedRegion);
 			mergedRegion.setInvokingRegion(invokingRegion);
-			for (@NonNull Node oldHeadNode : primaryRegion.getHeadNodes()) {
+			for (@NonNull Node oldHeadNode : RegionUtil.getHeadNodes(primaryRegion)) {
 				NodeConnection incomingConnection = oldHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
 					Node newHeadNode = getNodeMerger(oldHeadNode).getNewNode();

@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -74,10 +73,6 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> conditionalNodes = null;
 	//	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> dependencyNodes = null;
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> deadNodes = null;
-
-	protected MappingRegionImpl(@NonNull MultiRegion multiRegion) {
-		super(multiRegion);
-	}
 
 	/*	@Override
 	public void addEdge(@NonNull Edge edge) {
@@ -476,7 +471,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	}
 
 	@Override
-	public final @NonNull List<@NonNull Node> getHeadNodes() {
+	public final @NonNull List<Node> getHeadNodes() {
 		List<@NonNull Node> headNodes2 = headNodes;
 		if (headNodes2 == null) {
 			headNodes = headNodes2 = computeHeadNodes();

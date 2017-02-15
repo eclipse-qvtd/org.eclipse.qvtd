@@ -22,7 +22,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -32,12 +31,12 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RootCompositionRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -56,19 +55,14 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 	 */
 	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<>();
 
-	public RootScheduledRegion2(@NonNull String name, @NonNull Region primaryRegion) {
-		super(name, primaryRegion);
-		ScheduleModel scheduleModel = primaryRegion.getMultiRegion().getScheduleModel();
+	public RootScheduledRegion2(@NonNull String name, @NonNull ScheduleModel scheduleModel) {
 		setScheduleModel(scheduleModel);
+		setName(name);
 		this.contentsAnalysis = new ContentsAnalysis(scheduleModel);
-		this.rootContainmentRegion = new RootCompositionRegionImpl(getMultiRegion());
+		this.rootContainmentRegion = QVTscheduleFactory.eINSTANCE.createRootCompositionRegion();
+		((RootCompositionRegionImpl)rootContainmentRegion).setFixmeScheduleModel(scheduleModel);
 		this.rootAnalysis = new RootMappingAnalysis(rootContainmentRegion);
 		this.completeModel = scheduleModel.getEnvironmentFactory().getCompleteModel();
-	}
-
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduledRegion(this);
 	}
 
 	private void computeInputModels() {

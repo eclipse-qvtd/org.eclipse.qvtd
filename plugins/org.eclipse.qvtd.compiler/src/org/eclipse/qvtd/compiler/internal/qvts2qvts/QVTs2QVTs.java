@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RootScheduledRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
@@ -265,7 +266,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
-					rootRegion = new RootScheduledRegion2(rootName, region);
+					rootRegion = new RootScheduledRegion2(rootName, RegionUtil.getScheduleModel(region));
 				}
 				region.setInvokingRegion(rootRegion);
 			}

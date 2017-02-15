@@ -486,7 +486,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Operation referredOperation = visitor.create(pOperationCallExp.getReferredOperation());
 			assert referredOperation != null;
 			if ((iSource == null) && (referredOperation instanceof Function)) {
-				ScheduleModel scheduler = getRegion().getMultiRegion().getScheduleModel();
+				ScheduleModel scheduler = getRegion().getScheduleModel();
 				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
 				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
 				iSource = PivotUtil.createVariableExp(thisVariable);
@@ -556,7 +556,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			VariableDeclaration pVariable = pVariableExp.getReferredVariable();
 			Node node = getNode(pVariable);
 			if (node == null) {
-				ScheduleModel scheduler = getRegion().getMultiRegion().getScheduleModel();
+				ScheduleModel scheduler = getRegion().getScheduleModel();
 				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
 				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
 				Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
@@ -865,7 +865,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (Iterables.size(recursionEdges) > 0) {
 			headCallingRegions.add(region);
 		}
-		for (@NonNull Node headNode : region.getHeadNodes()) {
+		for (@NonNull Node headNode : RegionUtil.getHeadNodes(region)) {
 			if (!headNode.isTrue() && !headNode.isDependency()) {
 				Node bestHeadNode = null;
 				Iterable<@NonNull Node> callingSources = headNode.getPassedBindingSources();

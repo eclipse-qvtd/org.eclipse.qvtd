@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
@@ -67,10 +66,6 @@ public class RootCompositionRegionImpl extends RegionImpl implements RootComposi
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitRootCompositionRegion(this);
 	}
 
-	public RootCompositionRegionImpl(@NonNull MultiRegion multiRegion) {
-		super(multiRegion);
-	}
-
 	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
@@ -82,7 +77,7 @@ public class RootCompositionRegionImpl extends RegionImpl implements RootComposi
 	public void createIncomingConnections() {}
 
 	@Override
-	public @NonNull List<@NonNull Node> getHeadNodes() {
+	public @NonNull List<Node> getHeadNodes() {
 		return QVTscheduleConstants.EMPTY_NODE_LIST;
 	}
 

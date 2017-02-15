@@ -25,7 +25,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -38,7 +40,13 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 {
 	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion,
 			@NonNull String namePrefix, @NonNull String symbolSuffix, @NonNull AbstractPartition partition) {
-		MicroMappingRegion partialRegion = new MicroMappingRegionImpl(fullRegion, namePrefix, symbolSuffix);
+		assert !(fullRegion instanceof MicroMappingRegion);
+		ScheduleModel scheduleModel = RegionUtil.getScheduleModel(fullRegion);
+		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
+		((MicroMappingRegionImpl)partialRegion).setFixmeScheduleModel(scheduleModel);
+		partialRegion.setMappingRegion(fullRegion);
+		partialRegion.setNamePrefix(namePrefix);
+		partialRegion.setSymbolSuffix(symbolSuffix);
 		PartitioningVisitor partitioningVisitor = new PartitioningVisitor(partialRegion, partition);
 		fullRegion.accept(partitioningVisitor);
 		return partitioningVisitor;

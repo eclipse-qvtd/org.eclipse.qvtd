@@ -14,15 +14,17 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Collection;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -34,10 +36,76 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Operation Region</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getDependencyNodes <em>Dependency Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getHeadNodes <em>Head Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getResultNode <em>Result Node</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class OperationRegionImpl extends RegionImpl implements OperationRegion {
+	/**
+	 * The cached value of the '{@link #getDependencyNodes() <em>Dependency Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDependencyNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> dependencyNodes;
+	/**
+	 * The cached value of the '{@link #getHeadNodes() <em>Head Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeadNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> headNodes;
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation operation;
+
+	/**
+	 * The cached value of the '{@link #getResultNode() <em>Result Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResultNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected Node resultNode;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,6 +126,243 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Node> getDependencyNodes() {
+		if (dependencyNodes == null) {
+			dependencyNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES);
+		}
+		return dependencyNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Node> getHeadNodes() {
+		if (headNodes == null) {
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.OPERATION_REGION__HEAD_NODES);
+		}
+		return headNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Operation getOperation() {
+		if (operation != null && operation.eIsProxy()) {
+			InternalEObject oldOperation = (InternalEObject)operation;
+			operation = (Operation)eResolveProxy(oldOperation);
+			if (operation != oldOperation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_REGION__OPERATION, oldOperation, operation));
+			}
+		}
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation basicGetOperation() {
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOperation(Operation newOperation) {
+		Operation oldOperation = operation;
+		operation = newOperation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__OPERATION, oldOperation, operation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Node getResultNode() {
+		if (resultNode != null && resultNode.eIsProxy()) {
+			InternalEObject oldResultNode = (InternalEObject)resultNode;
+			resultNode = (Node)eResolveProxy(oldResultNode);
+			if (resultNode != oldResultNode) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_REGION__RESULT_NODE, oldResultNode, resultNode));
+			}
+		}
+		return resultNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Node basicGetResultNode() {
+		return resultNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setResultNode(Node newResultNode) {
+		Node oldResultNode = resultNode;
+		resultNode = newResultNode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__RESULT_NODE, oldResultNode, resultNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+				return getDependencyNodes();
+			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+				return getHeadNodes();
+			case QVTschedulePackage.OPERATION_REGION__NAME:
+				return getName();
+			case QVTschedulePackage.OPERATION_REGION__OPERATION:
+				if (resolve) return getOperation();
+				return basicGetOperation();
+			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+				if (resolve) return getResultNode();
+				return basicGetResultNode();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+				getDependencyNodes().clear();
+				getDependencyNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+				getHeadNodes().clear();
+				getHeadNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.OPERATION_REGION__NAME:
+				setName((String)newValue);
+				return;
+			case QVTschedulePackage.OPERATION_REGION__OPERATION:
+				setOperation((Operation)newValue);
+				return;
+			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+				setResultNode((Node)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+				getDependencyNodes().clear();
+				return;
+			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+				getHeadNodes().clear();
+				return;
+			case QVTschedulePackage.OPERATION_REGION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case QVTschedulePackage.OPERATION_REGION__OPERATION:
+				setOperation((Operation)null);
+				return;
+			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+				setResultNode((Node)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+				return dependencyNodes != null && !dependencyNodes.isEmpty();
+			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+				return headNodes != null && !headNodes.isEmpty();
+			case QVTschedulePackage.OPERATION_REGION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.OPERATION_REGION__OPERATION:
+				return operation != null;
+			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+				return resultNode != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return super.toString();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
@@ -67,26 +372,14 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationRegion(this);
 	}
 
-	protected Operation operation;
-	protected String name;
-	private final @NonNull List<@NonNull Node> dependencyNodes = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<>();
-	private Node resultNode;
-
-	public OperationRegionImpl(@NonNull MultiRegion multiRegion, @NonNull String name, @NonNull Operation operation) {
-		super(multiRegion);
-		this.operation = operation;
-		this.name = name;
-	}
-
 	@Override
 	public void addDependencyNode(@NonNull Node dependencyNode) {
-		dependencyNodes.add(dependencyNode);
+		getDependencyNodes().add(dependencyNode);
 	}
 
 	@Override
 	public void addHeadNode(@NonNull Node headNode) {
-		headNodes.add(headNode);
+		getHeadNodes().add(headNode);
 	}
 
 	@Override
@@ -95,25 +388,6 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		s.appendString("o_");
 		s.appendName(name);
 		return s;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Node> getDependencyNodes() {
-		return dependencyNodes;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Node> getHeadNodes() {
-		return headNodes;
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return name;
-	}
-
-	public @NonNull Node getResultNode() {
-		return resultNode;
 	}
 
 	@Override
@@ -126,10 +400,5 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		s.setColor(QVTscheduleConstants.OPERATION_COLOR);
 		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		super.toGraph(s);
-	}
-
-	@Override
-	public void setResultNode(@NonNull Node node) {
-		this.resultNode = node;
 	}
 } //OperationRegionImpl

@@ -60,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -105,7 +106,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 		addProblem(RegionUtil.createRegionError(region, messageTemplate, bindings));
 	}
 
-	public @NonNull OperationRegion analyzeOperation(@NonNull MultiRegion multiRegion, @NonNull OperationCallExp operationCallExp) {
+	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleModel scheduleModel, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
 		LanguageExpression bodyExpression = operation.getBodyExpression();
 		assert  bodyExpression != null;
@@ -115,7 +116,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 			OperationDatum operationDatum = createOperationDatum(operationCallExp);
 			OperationRegion operationRegion = operationDatum2operationRegion.get(operationDatum);
 			if (operationRegion == null) {
-				operationRegion = createOperationRegion(multiRegion, operationCallExp, specification, operationDatum);
+				operationRegion = createOperationRegion(scheduleModel, operationCallExp, specification, operationDatum);
 				operationDatum2operationRegion.put(operationDatum, operationRegion);
 				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 					operationRegion.writeDebugGraphs(null);
@@ -162,12 +163,14 @@ public class QVTm2QVTs extends SchedulerConstants2
 		return parameterNode;
 	}
 
-	protected @NonNull OperationRegion createOperationRegion(@NonNull MultiRegion multiRegion, @NonNull OperationCallExp operationCallExp,
+	protected @NonNull OperationRegion createOperationRegion(@NonNull ScheduleModel scheduleModel, @NonNull OperationCallExp operationCallExp,
 			@NonNull ExpressionInOCL specification, @NonNull OperationDatum operationDatum) {
 		Map<@NonNull VariableDeclaration, @NonNull Node> parameter2node = new HashMap<>();
-		@NonNull
 		String operationName = ClassUtil.nonNullState(operationDatum.toString());
-		OperationRegion operationRegion = new OperationRegionImpl(multiRegion, operationName, ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
+		OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
+		((OperationRegionImpl)operationRegion).setFixmeScheduleModel(scheduleModel);
+		operationRegion.setOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
+		operationRegion.setName(operationName);
 		//
 		Variable selfVariable = specification.getOwnedContext();
 		OCLExpression source = operationCallExp.getOwnedSource();
@@ -308,7 +311,7 @@ public class QVTm2QVTs extends SchedulerConstants2
 		//	Extract salient characteristics from within each MappingAction.
 		//
 		for (@NonNull Mapping mapping : orderedMappings) {
-			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(multiRegion, mapping);
+			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(this, mapping);
 			mapping2mappingAnalysis.put(mapping, mappingRegion);
 		}
 		List<@NonNull MappingAnalysis> mappingAnalyses = new ArrayList<>(mapping2mappingAnalysis.values());

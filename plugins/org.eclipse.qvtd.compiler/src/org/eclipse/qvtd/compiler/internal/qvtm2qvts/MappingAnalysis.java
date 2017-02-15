@@ -48,9 +48,9 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -61,8 +61,9 @@ public class MappingAnalysis implements Nameable
 {
 	public final class MappingAnalysisRegion extends BasicMappingRegionImpl
 	{
-		public MappingAnalysisRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
-			super(multiRegion, mapping);
+		public MappingAnalysisRegion(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
+			setFixmeScheduleModel(scheduleModel);
+			setMapping(mapping);
 		}
 
 		@Override			// FIXME eliminate this klunky callback
@@ -71,8 +72,8 @@ public class MappingAnalysis implements Nameable
 		}
 	}
 
-	public static @NonNull MappingAnalysis createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
-		MappingAnalysis mappingAnalysis = new MappingAnalysis(multiRegion, mapping);
+	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
+		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleModel, mapping);
 		@SuppressWarnings("unused")String name = mappingAnalysis.getMappingRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
@@ -113,8 +114,8 @@ public class MappingAnalysis implements Nameable
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
-	private MappingAnalysis(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
-		this.mappingRegion = new MappingAnalysisRegion(multiRegion, mapping);
+	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
+		this.mappingRegion = new MappingAnalysisRegion(scheduleModel, mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
@@ -527,7 +528,7 @@ public class MappingAnalysis implements Nameable
 		analyzeComplexPredicates();
 		analyzeContainments();
 		//
-		List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
+		Iterable<@NonNull Node> headNodes = RegionUtil.getHeadNodes(mappingRegion);
 		mappingRegion.computeUtilities(headNodes);
 	}
 

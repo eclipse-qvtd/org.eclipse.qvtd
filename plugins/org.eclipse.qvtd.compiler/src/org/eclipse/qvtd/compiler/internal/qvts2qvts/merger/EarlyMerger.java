@@ -30,10 +30,10 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
 
 import com.google.common.collect.Sets;
@@ -46,8 +46,9 @@ public class EarlyMerger extends AbstractMerger
 {
 	public static class EarlyMergedMappingRegion extends NamedMappingRegionImpl
 	{
-		public EarlyMergedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
-			super(multiRegion, name);
+		public EarlyMergedMappingRegion(@NonNull ScheduleModel scheduleModel, @NonNull String name) {
+			setFixmeScheduleModel(scheduleModel);
+			setName(name);
 		}
 
 		@Override
@@ -64,7 +65,7 @@ public class EarlyMerger extends AbstractMerger
 
 		@Override
 		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new EarlyMergedMappingRegion(primaryRegion.getMultiRegion(), newName);
+			return new EarlyMergedMappingRegion(RegionUtil.getScheduleModel(primaryRegion), newName);
 		}
 	}
 
@@ -99,7 +100,7 @@ public class EarlyMerger extends AbstractMerger
 	 */
 	protected @NonNull Iterable<@NonNull Node> getHostNodes(@NonNull MappingRegion region) {
 		Set<@NonNull Node> hostNodes = new HashSet<>();
-		for (@NonNull Node node : region.getHeadNodes()) {
+		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
 			getHostNodesAccumulator(hostNodes, node);
 		}
 		return hostNodes;
@@ -150,7 +151,7 @@ public class EarlyMerger extends AbstractMerger
 	 * FIXME Is there any need for this restriction.
 	 */
 	protected boolean isPrimaryCandidate(@NonNull Region mappingRegion) {
-		List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
+		List<Node> headNodes = mappingRegion.getHeadNodes();
 		return headNodes.size() == 1;
 	}
 
@@ -160,7 +161,7 @@ public class EarlyMerger extends AbstractMerger
 	 */
 	protected boolean isSecondaryCandidate(@NonNull Region primaryRegion,
 			@NonNull Region secondaryRegion, @NonNull Set<@NonNull ClassDatumAnalysis> toOneReachableClasses) {
-		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
+		List<Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
 		if (secondaryHeadNodes.size() != 1) {
 			return false;
 		}

@@ -4389,13 +4389,58 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__REGION = REGION__REGION;
 
 	/**
+	 * The feature id for the '<em><b>Dependency Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__DEPENDENCY_NODES = REGION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__HEAD_NODES = REGION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__NAME = REGION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__OPERATION = REGION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Result Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__RESULT_NODE = REGION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Operation Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 0;
+	int OPERATION_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7339,6 +7384,61 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getOperationRegion();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getDependencyNodes <em>Dependency Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Dependency Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getDependencyNodes()
+	 * @see #getOperationRegion()
+	 * @generated
+	 */
+	EReference getOperationRegion_DependencyNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getHeadNodes <em>Head Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Head Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getHeadNodes()
+	 * @see #getOperationRegion()
+	 * @generated
+	 */
+	EReference getOperationRegion_HeadNodes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getName()
+	 * @see #getOperationRegion()
+	 * @generated
+	 */
+	EAttribute getOperationRegion_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operation</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOperation()
+	 * @see #getOperationRegion()
+	 * @generated
+	 */
+	EReference getOperationRegion_Operation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getResultNode <em>Result Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Result Node</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getResultNode()
+	 * @see #getOperationRegion()
+	 * @generated
+	 */
+	EReference getOperationRegion_ResultNode();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode <em>Pattern Typed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8474,6 +8574,46 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass OPERATION_REGION = eINSTANCE.getOperationRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Dependency Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REGION__DEPENDENCY_NODES = eINSTANCE.getOperationRegion_DependencyNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Head Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REGION__HEAD_NODES = eINSTANCE.getOperationRegion_HeadNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_REGION__NAME = eINSTANCE.getOperationRegion_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REGION__OPERATION = eINSTANCE.getOperationRegion_Operation();
+
+		/**
+		 * The meta object literal for the '<em><b>Result Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REGION__RESULT_NODE = eINSTANCE.getOperationRegion_ResultNode();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.

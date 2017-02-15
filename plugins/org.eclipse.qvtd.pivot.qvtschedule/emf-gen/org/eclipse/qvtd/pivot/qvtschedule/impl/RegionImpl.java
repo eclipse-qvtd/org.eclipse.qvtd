@@ -27,6 +27,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
@@ -54,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -312,8 +312,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	private MultiRegion multiRegion;
-
 	/**
 	 * Ordered list of regions that call this region
 	 */
@@ -354,17 +352,15 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
 
-	protected RegionImpl(@NonNull MultiRegion multiRegion) {
-		setMultiRegion(multiRegion);
-	}
+	private ScheduleModel scheduleModel;		// FIXME delete me
 
-	/*	protected void addBindingEdges(@NonNull Map<Node, Node> invokingBindings) {
-		for (Map.Entry<Node, Node> entry : invokingBindings.entrySet()) {
-			@SuppressWarnings("null")@NonNull Node invokingNode = entry.getValue();
-			@SuppressWarnings("null")@NonNull Node invokedNode = entry.getKey();
-			EdgeRole.BINDING.createEdge(this, invokingNode, invokedNode);
-		}
-	} */
+	// Provides a fallback access to the scheduleModel in case containment is incomplete
+	public void setFixmeScheduleModel(@NonNull ScheduleModel scheduleModel) {
+		ScheduleModel scheduleModel2 = getScheduleModel();
+		assert scheduleModel2 == null;		// Containment is complete; didn't need this call
+		this.scheduleModel = scheduleModel;
+		scheduleModel.getMultiRegion().addRegion(this);
+	}
 
 	@Override
 	public void addCallToChild(@NonNull Region region) {
@@ -865,7 +861,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			s.appendString(getSymbolNamePrefix());
 			s.appendName(bestNamingNode.getCompleteClass().getName());
 			List<@NonNull String> headNames = new ArrayList<>();
-			for (@NonNull Node headNode : getHeadNodes()) {
+			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 				String name = headNode.getCompleteClass().getName();
 				if (name != null) {
 					headNames.add(name);
@@ -877,7 +873,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 		if (s == null) {
-			for (@NonNull Node headNode : getHeadNodes()) {
+			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 				s = new SymbolNameBuilder();
 				s.appendString(getSymbolNamePrefix());
 				s.appendName(headNode.getCompleteClass().getName());
@@ -1119,7 +1115,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 */
 	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections() {
 		List<@NonNull NodeConnection> headConnections = null;
-		for (@NonNull Node headNode : getHeadNodes()) {
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 			if (headNode.isTrue()) { /* true nodes do not need connections. */ }
 			else if (headNode.isDependency()) {
 				createHeadConnection(headNode);	/** Dependency nodes have extra not-head connections. */
@@ -1524,7 +1520,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public @NonNull Iterable<@NonNull DatumConnection<?>> getIncomingConnections() {		// FIXME cache
 		List<@NonNull DatumConnection<?>> connections = new ArrayList<>();
-		for (@NonNull Node headNode : getHeadNodes()) {
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
 			if ((connection != null) && !connections.contains(connection)) {
 				connections.add(connection);
@@ -1552,7 +1548,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections() {		// FIXME cache
 		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node headNode : getHeadNodes()) {
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
 			if (connection != null) {
 				connections.add(connection);
@@ -1632,11 +1628,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 		return loopingConnections;
-	}
-
-	@Override
-	public @NonNull MultiRegion getMultiRegion() {
-		return ClassUtil.nonNullState(multiRegion);
 	}
 
 	@Override
@@ -1841,7 +1832,12 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public ScheduleModel getScheduleModel() {
-		return multiRegion.getScheduleModel();
+		for (EObject eObject = this; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ScheduleModel) {
+				return (ScheduleModel)eObject;
+			}
+		}
+		return scheduleModel;
 	}
 
 	@Override
@@ -2239,11 +2235,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 	} */
-
-	public void setMultiRegion(@NonNull MultiRegion multiRegion) {
-		this.multiRegion = multiRegion;
-		multiRegion.addRegion(this);
-	}
 
 	@Override
 	public void toCallGraph(@NonNull GraphStringBuilder s) {

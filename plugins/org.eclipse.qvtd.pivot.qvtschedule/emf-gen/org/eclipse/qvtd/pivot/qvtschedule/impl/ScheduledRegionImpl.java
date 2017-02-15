@@ -384,11 +384,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduledRegion(this);
 	}
 
-	protected ScheduledRegionImpl(@NonNull String name, @NonNull Region primaryRegion) {
-		super(primaryRegion.getMultiRegion());
-		setName(name);
-	}
-
 	/**
 	 * The per-class node connections that unite a set of sources via a shared connection.
 	 */
@@ -454,7 +449,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull List<@NonNull Node> getHeadNodes() {
+	public @NonNull List<Node> getHeadNodes() {
 		return QVTscheduleConstants.EMPTY_NODE_LIST;
 	}
 

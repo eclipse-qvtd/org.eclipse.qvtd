@@ -195,7 +195,7 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	int getFinalExecutionIndex();
 	int getFirstIndex();
 
-	@NonNull List<@NonNull Node> getHeadNodes();
+	List<Node> getHeadNodes();
 	@NonNull Iterable<@NonNull DatumConnection<?>> getIncomingConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections();
@@ -209,7 +209,6 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	int getInvocationIndex();
 	int getLastIndex();
 	@NonNull List<@NonNull DatumConnection<?>> getLoopingConnections();
-	@NonNull MultiRegion getMultiRegion();
 	/**
 	 * Return the nodes that are navigated by navigation from the region's guards.
 	 */

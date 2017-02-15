@@ -587,6 +587,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
+	public static @NonNull Iterable<@NonNull Node> getHeadNodes(@NonNull Region region) {
+		return ClassUtil.nullFree(region.getHeadNodes());
+	}
+
 	public static @NonNull Iterable<@NonNull Edge> getIncomingEdges(@NonNull Node node) {
 		return ClassUtil.nullFree(node.getIncomingEdges());
 	}
