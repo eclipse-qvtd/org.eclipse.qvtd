@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -561,6 +562,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull MappingRegion> getConsumingRegions(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		return ClassUtil.nullFree(classDatumAnalysis.getConsumingRegions());
+	}
+
+	public static @NonNull Iterable<@NonNull Node> getDependencyNodes(@NonNull OperationRegion operationRegion) {
+		return ClassUtil.nullFree(operationRegion.getDependencyNodes());
 	}
 
 	public static @NonNull Role getEdgeRole(@NonNull Edge edge) {

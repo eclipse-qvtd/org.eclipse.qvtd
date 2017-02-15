@@ -41,6 +41,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
@@ -103,15 +104,20 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	private final @NonNull RootMappingAnalysis rootAnalysis;
 
 	protected final @NonNull CompleteModel completeModel;
+	private final @NonNull Map<@NonNull Region, org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis> region2regionAnalysis = new HashMap<>();
 
 
 	/**
 	 * The input models that may introduce model elements for transformation.
 	 */
 	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<>();
+	private final @NonNull StandardLibraryHelper standardLibraryHelper;
+	//	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
+	//	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 
 	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull String rootName) {
 		super(environmentFactory);
+		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		this.problemHandler = problemHandler;
 		this.rootName = rootName;
 		this.rootContainmentRegion = QVTscheduleFactory.eINSTANCE.createLoadingRegion();
@@ -614,8 +620,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 		for (@NonNull Region region : orderedRegions) {
 			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
-			region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
-			region.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
+			RegionAnalysis regionAnalysis = RegionAnalysis.get(region);
+			regionAnalysis.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
 		//
 		//	Eliminate dependencies that are satisfied by the linear invocation indexes.
@@ -659,7 +665,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 
 		for (@NonNull Region region : orderedRegions) {
-			region.computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+			getRegionAnalysis(region).computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
 		/*	suspended - just an optimization - needs more hierarchical consideration
 		//
@@ -930,6 +936,19 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return contentsAnalysis.getNewNodes(classDatumAnalysis);
 	}
 
+	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
+		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
+		if (regionAnalysis == null) {
+			regionAnalysis = RegionAnalysis.get(/*this,*/ region);
+			region2regionAnalysis.put(region, regionAnalysis);
+		}
+		return regionAnalysis;
+	}
+
+	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
+		return standardLibraryHelper ;
+	}
+
 	private void lateMerge(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
@@ -945,8 +964,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			}
 			orderedRegions.add(orderedRegionIndex, newRegion);
 			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
-			newRegion.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
-			newRegion.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
+			RegionAnalysis regionAnalysis = RegionAnalysis.get(newRegion);
+			regionAnalysis.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
 	}
 

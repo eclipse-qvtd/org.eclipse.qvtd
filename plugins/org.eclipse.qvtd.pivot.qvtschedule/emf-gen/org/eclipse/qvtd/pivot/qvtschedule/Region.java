@@ -15,17 +15,12 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
@@ -146,16 +141,10 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	void setRegion(Region value);
 
 	void addCallToChild(@NonNull Region region);
-	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	boolean addIndex(int index);
 	void addIntermediateConnection(@NonNull NodeConnection connection);
 	void addRootConnection(@NonNull NodeConnection connection);
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
-	void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges);
-	void buildRealizedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges);
-	void checkIncomingConnections();
-	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges);
 
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.
@@ -181,11 +170,8 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	 * Return the regions the call this region.
 	 */
 	@NonNull Iterable<@NonNull Region> getCallingRegions();
-	@Nullable Iterable<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel);
-	@NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement);
 	@NonNull String getColor();
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
-	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel);
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
 
 	/**

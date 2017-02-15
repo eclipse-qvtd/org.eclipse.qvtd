@@ -106,7 +106,7 @@ public class RegionUtil extends QVTscheduleUtil
 		String name = property.getName();
 		assert name != null;
 		Region region = getRegion(sourceNode);
-		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(navigationCallExp), isMatched);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(navigationCallExp), isMatched);
 		node.addTypedElement(navigationCallExp);
 		return node;
 	}
@@ -196,7 +196,7 @@ public class RegionUtil extends QVTscheduleUtil
 	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
 		Role nodeRole = getNodeRole(Phase.CONSTANT);
 		if (typedElement != null) {
-			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getClassDatumAnalysis(typedElement), isMatched);
+			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getScheduleModel().getClassDatumAnalysis(typedElement), isMatched);
 			node.addTypedElement(typedElement);
 			return node;
 		}
@@ -221,7 +221,7 @@ public class RegionUtil extends QVTscheduleUtil
 	public static @NonNull Node createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
 		Role nodeRole = getNodeRole(nodePhase);
-		Node node = OperationNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement), isMatched);
+		Node node = OperationNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(typedElement), isMatched);
 		node.addTypedElement(typedElement);
 		return node;
 	}
@@ -305,7 +305,7 @@ public class RegionUtil extends QVTscheduleUtil
 		}
 		Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Phase.PREDICATED : Phase.LOADED;
 		Role stepNodeRole = getNodeRole(phase);
-		Node node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getClassDatumAnalysis(callExp), isMatched);
+		Node node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(callExp), isMatched);
 		node.addTypedElement(callExp);
 		return node;
 	}
@@ -328,7 +328,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		Role nodeRole = getNodeRole(Phase.OTHER);
-		return UnknownNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
+		return UnknownNodeImpl.create(nodeRole, region, name, region.getScheduleModel().getClassDatumAnalysis(typedElement));
 	}
 
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {

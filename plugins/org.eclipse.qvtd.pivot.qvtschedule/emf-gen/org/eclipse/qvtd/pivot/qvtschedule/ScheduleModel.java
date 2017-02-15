@@ -123,9 +123,6 @@ public interface ScheduleModel extends Model
 	@NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(@NonNull Node calledNode);
 	@NonNull EnvironmentFactory getEnvironmentFactory();
 	@NonNull Property getIterateProperty(@NonNull Type type);
-	//	@Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode);
-	//	@Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis);
-	//	@Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis();
 	@NonNull StandardLibrary getStandardLibrary();
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();

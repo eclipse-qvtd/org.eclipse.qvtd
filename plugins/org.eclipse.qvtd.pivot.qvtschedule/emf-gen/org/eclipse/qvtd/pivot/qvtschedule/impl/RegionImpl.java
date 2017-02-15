@@ -17,10 +17,8 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -35,22 +33,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -59,10 +53,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
@@ -323,16 +316,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	private final @NonNull List<@NonNull Region> callableChildren = new ArrayList<>();
 
 	/**
-	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
-	 */
-	private @Nullable Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges = null;
-
-	/**
-	 * The per-typed model realized navigable edges for which an execution may be attempted elsewhere before assignment here.
-	 */
-	private @Nullable Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges = null;
-
-	/**
 	 * The indexes in the overall schedule at which this region can be executed. The first index is the index at which ALL
 	 * invocations occur. Subsequent indexes are when a referenced value may become available enabling a deferred execution.
 	 */
@@ -365,42 +348,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public void addCallToChild(@NonNull Region region) {
 		callableChildren.add(region);
 		((RegionImpl)region).callableParents.add(this);
-	}
-
-	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
-		assert predicatedEdge.isPredicated();
-		assert predicatedEdge.getRegion() == this;
-		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
-		assert typedModel2checkedEdges2 != null;
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(predicatedEdge.getEdgeSource());
-		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
-		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
-		if (checkedEdges == null) {
-			checkedEdges = new HashSet<>();
-			typedModel2checkedEdges2.put(typedModel, checkedEdges);
-		}
-		checkedEdges.add(predicatedEdge);
-		QVTscheduleConstants.POLLED_PROPERTIES.println("    checked " + predicatedEdge.getProperty() +
-			" at " + getIndexRangeText() + " in " + typedModel + " for " + this);
-	}
-
-	@Override
-	public void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {
-		assert realizedEdge.isRealized();
-		assert realizedEdge.getRegion() == this;
-		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges2 = typedModel2enforcedEdges;
-		assert typedModel2enforcedEdges2 != null;
-		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(realizedEdge.getEdgeSource());
-		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
-		Set<@NonNull NavigableEdge> enforcedEdges = typedModel2enforcedEdges2.get(typedModel);
-		if (enforcedEdges == null) {
-			enforcedEdges = new HashSet<>();
-			typedModel2enforcedEdges2.put(typedModel, enforcedEdges);
-		}
-		enforcedEdges.add(realizedEdge);
-		QVTscheduleConstants.POLLED_PROPERTIES.println("    enforced " + realizedEdge.getProperty() +
-			" at " + getIndexRangeText() +
-			" in " + classDatumAnalysis.getTypedModel() + " for " + this);
 	}
 
 	@Override
@@ -462,54 +409,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return symbolName;
 	}
 
-	@Override
-	public void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges) {
-		for (@NonNull NavigableEdge predicatedEdge : getPredicatedNavigationEdges()) {
-			if (!predicatedEdge.isCast()) {
-				Property property = QVTscheduleUtil.getProperty(predicatedEdge);
-				Node predicatedNode = predicatedEdge.getEdgeSource();
-				ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(predicatedNode);
-				TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
-				Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2predicatedEdges = typedModel2property2predicatedEdges.get(typedModel);
-				if (property2predicatedEdges == null) {
-					property2predicatedEdges = new HashMap<>();
-					typedModel2property2predicatedEdges.put(typedModel, property2predicatedEdges);
-				}
-				List<@NonNull NavigableEdge> predicatedEdges = property2predicatedEdges.get(property);
-				if (predicatedEdges == null) {
-					predicatedEdges = new ArrayList<>();
-					property2predicatedEdges.put(property, predicatedEdges);
-				}
-				predicatedEdges.add(predicatedEdge);
-				QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
-			}
-		}
-		typedModel2checkedEdges = new HashMap<>();
-	}
-
-	@Override
-	public void buildRealizedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		for (@NonNull NavigableEdge realizedEdge : getRealizedNavigationEdges()) {
-			Property property = QVTscheduleUtil.getProperty(realizedEdge);
-			Node realizedNode = realizedEdge.getEdgeSource();
-			ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(realizedNode);
-			TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatumAnalysis);
-			Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
-			if (property2realizedEdges == null) {
-				property2realizedEdges = new HashMap<>();
-				typedModel2property2realizedEdges.put(typedModel, property2realizedEdges);
-			}
-			List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(property);
-			if (realizedEdges == null) {
-				realizedEdges = new ArrayList<>();
-				property2realizedEdges.put(property, realizedEdges);
-			}
-			realizedEdges.add(realizedEdge);
-			QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
-		}
-		typedModel2enforcedEdges = new HashMap<>();
-	}
-
 	/**
 	 * Return true if a navigable path from startNode following the edges of protoPath,
 	 * re-using edges and nodes where possible could be created. REturn false if such
@@ -532,243 +431,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		}
 		return true;
 	}
-
-	@Override
-	public void checkIncomingConnections() {
-		/*		for (@NonNull Node node : getNodes()) {
-			NodeConnection incomingConnection = node.getIncomingConnection();
-			int incomingConnectionsSize = incomingConnection != null ? 1 : 0;
-			if ((node.getNodeRole() == Nodes.COMPOSING) && node.getRegion().isRootCompositionRegion()) {
-				assert incomingConnectionsSize == 0;
-			}
-			else if (node.isTrue()) {
-				assert incomingConnectionsSize == 0;
-			}
-			else if (node.isHead()) {
-//				assert incomingConnectionsSize == 1;
-				if (incomingConnectionsSize != 1) {
-					System.out.println("Inconsistent other incoming connections for " + node + " in " + this);
-				}
-			}
-			else if (node.isAttributeNode()) {
-//				assert incomingConnectionsSize == 0;		// ?? should we connect these
-			}
-			else if (node.isComposed()) {
-				assert incomingConnectionsSize == 0;
-			}
-			else if (node.isNull()) {
-				assert incomingConnectionsSize == 0;
-			}
-			else if (node.isOperation()) {
-				assert incomingConnectionsSize == 0;
-			}
-			else if (node.isRealized()) {
-				assert incomingConnectionsSize == 0;
-			}
-			else if (node.isGuard()) {
-				;//assert incomingConnectionsSize == 0;
-			}
-			else if (node.isLoaded()) {
-				;//assert incomingConnectionsSize == 0;
-			}
-			else {
-				if (incomingConnectionsSize != 1) {
-					System.out.println("Inconsistent other incoming connections for " + node + " in " + this);
-				}
-			}
-		} */
-	}
-
-	@Override
-	public void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		//		CompleteModel completeModel = getScheduleModel().getEnvironmentFactory().getCompleteModel();
-		boolean doDebug = QVTscheduleConstants.POLLED_PROPERTIES.isActive();
-		if (doDebug) {
-			QVTscheduleConstants.POLLED_PROPERTIES.println("analyzing " + this + " (" + getIndexRangeText() + ")");
-		}
-		for (@NonNull NavigableEdge predicatedEdge : getPredicatedNavigationEdges()) {
-			if (!predicatedEdge.isCast()) {
-				Property property = predicatedEdge.getProperty();
-				if (doDebug) {
-					QVTscheduleConstants.POLLED_PROPERTIES.println("  analyzing " + predicatedEdge.getEdgeSource().getName() + "::" + property.getName() + " : " + predicatedEdge.getEdgeSource().getCompleteClass());
-				}
-				EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
-				if (edgeConnection != null) {
-					boolean isChecked = false;
-					for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-						Region usedRegion = usedEdge.getRegion();
-						usedRegion.addEnforcedEdge(usedEdge);
-						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {
-							addCheckedEdge(predicatedEdge);
-							isChecked = true;
-						}
-					}
-					if (isChecked) {
-						for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-							Region usedRegion = usedEdge.getRegion();
-							usedRegion.addEnforcedEdge(usedEdge);
-						}
-					}
-				}
-
-				Node laterNode = predicatedEdge.getEdgeSource();
-				Node predicatedSourceNode = predicatedEdge.getEdgeSource();
-				Node predicatedTargetNode = predicatedEdge.getEdgeTarget();
-				NodeConnection usedConnection = predicatedTargetNode.getIncomingUsedConnection();
-				if (usedConnection != null) {
-					for (@NonNull Node usedSourceNode : QVTscheduleUtil.getSourceEnds(usedConnection)) {
-						Region usedRegion = QVTscheduleUtil.getRegion(usedSourceNode);
-						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {			// FIXME =
-							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
-							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();
-							ClassDatumAnalysis classDatumAnalysis = laterNode.getClassDatumAnalysis();
-							TypedModel typedModel = classDatumAnalysis.getTypedModel();
-							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
-							assert property2realizedEdges != null;
-							Property oclContainerProperty = getStandardLibraryHelper().getOclContainerProperty();
-							if (property == oclContainerProperty) {
-								//								Node containerNode = predicatedEdge.getTarget();
-								//								Node containedNode = predicatedEdge.getSource();
-								//								CompleteClass containerType = containerNode.getCompleteClass();
-								//								CompleteClass containedType = containedNode.getCompleteClass();
-								for (@NonNull Property candidateProperty : property2realizedEdges.keySet()) {
-									if (candidateProperty.isIsComposite()) {
-										//										CompleteClass candidateContainerType = completeModel.getCompleteClass(candidateProperty.getOwningClass());
-										//										CompleteClass candidateContainedType = completeModel.getCompleteClass(candidateProperty.getType());
-										//									if (candidateContainerType.conformsTo(containerType) && containedType.conformsTo(candidateContainedType)) {
-										List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(candidateProperty);
-										assert realizedEdges != null;
-										for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-											// FIXME recheck for narrower types ??
-											Region earlierRegion = realizedEdge.getRegion();
-											//												String isNotHazardous;
-											//											if (this == earlierRegion) {
-											//												isNotHazardous = "same region";	// FIXME must handle recursion
-											//											}
-											//											else if (earlierRegion.getLatestIndex() < getEarliestIndex()) {
-											//												isNotHazardous = "later";// FIXME must handle any possible reads of any possible write
-											//											}
-											//											else {
-											Node realizedSourceNode = realizedEdge.getEdgeSource();
-											Node realizedTargetNode = realizedEdge.getEdgeTarget();
-											CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
-											CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
-											if (realizedSourceType.conformsTo(predicatedSourceType) && realizedTargetType.conformsTo(predicatedTargetType)) {
-												assert getFinalExecutionIndex() >= earlierRegion.getInvocationIndex();
-												//														isNotHazardous = null;
-											}
-											else {
-												//														isNotHazardous = "incompatible";
-											}
-											assert getFinalExecutionIndex() >= earlierRegion.getInvocationIndex();
-											//													isNotHazardous = null;
-											//											}
-											//												if (isNotHazardous == null) {
-											addCheckedEdge(predicatedEdge);
-											earlierRegion.addEnforcedEdge(realizedEdge);
-											//												}
-											//												else if (doDebug) {
-											//													QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    ignored " + this + "::" + laterNode.getName() + "(" + getEarliestIndex() + ".." + getLatestIndex() + ")" +
-											//															" " + isNotHazardous + " (" + earlierRegion.getEarliestIndex() + ".." + earlierRegion.getLatestIndex() + ")" + earlierRegion + "::" + realizedEdge.getSource().getName());
-											//												}
-											//										}
-										}
-									}
-								}
-							}
-							else {
-								assert property2realizedEdges != null : "No realized typed model for " + typedModel;
-								List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(property);
-								if (realizedEdges == null) {
-									System.err.println("No realized edges for " + property + " in " + typedModel);
-								}
-								else {
-									for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-										Region earlierRegion = realizedEdge.getRegion();
-										String checkIsHazardFreeBecause;
-										String enforceIsHazardFreeBecause;
-										Node realizedSourceNode = realizedEdge.getEdgeSource();
-										Node realizedTargetNode = realizedEdge.getEdgeTarget();
-										CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
-										CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
-										if (!realizedSourceType.conformsTo(predicatedSourceType) || !realizedTargetType.conformsTo(predicatedTargetType)) {
-											checkIsHazardFreeBecause = "incompatible";
-											enforceIsHazardFreeBecause = "incompatible";
-										}
-										else if (this == earlierRegion) {
-											checkIsHazardFreeBecause = null; 		// Same region requires inter-recursion check
-											enforceIsHazardFreeBecause = null; 		// Same region requires inter-recursion enforce to be available for check
-										}
-										else if (earlierRegion.getFinalExecutionIndex() < getInvocationIndex()) {
-											checkIsHazardFreeBecause = "later";
-											enforceIsHazardFreeBecause = null; 		// Enforce required for later check
-										}
-										else {
-											// The QVTi AS has insufficient precision to identify which of multiple references is hazardous
-											checkIsHazardFreeBecause = null;
-											enforceIsHazardFreeBecause = null;
-										}
-										if (checkIsHazardFreeBecause == null) {
-											addCheckedEdge(predicatedEdge);
-										}
-										else if (doDebug) {
-											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored check for " + this + "::" + laterNode.getName() + "(" + getIndexRangeText() + ")" +
-													" " + checkIsHazardFreeBecause + " (" + earlierRegion.getIndexRangeText() + ")" + earlierRegion + "::" + realizedEdge.getEdgeSource().getName());
-										}
-										if (enforceIsHazardFreeBecause == null) {
-											earlierRegion.addEnforcedEdge(realizedEdge);
-										}
-										else if (doDebug) {
-											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored enforce " + this + "::" + laterNode.getName() + "(" + getIndexRangeText() + ")" +
-													" " + enforceIsHazardFreeBecause + " (" + earlierRegion.getIndexRangeText() + ")" + earlierRegion + "::" + realizedEdge.getEdgeSource().getName());
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Recurse over the pattern of navigation edges from calledNode in a called mapping and callingNode in a calling mapping
-	 *  to populate called2binding with the pair-wise equivalent nodes. The callingNode may be null for a null navigation.
-	 *
-	private void computeCompatiblePattern(@NonNull Node calledNode, @Nullable Node callingNode,
-			@NonNull Map<@NonNull Node, @Nullable Node> calledNode2callingNode, @NonNull Map<@NonNull NavigationEdge, @Nullable NavigationEdge> calledEdge2callingEdge) {
-		Node oldCallingNode = calledNode2callingNode.get(calledNode);
-		if (oldCallingNode != null) {					// been here before
-			assert (oldCallingNode == callingNode) || (callingNode == null);
-			return;
-		}
-		if ((callingNode == null) && calledNode2callingNode.containsKey(calledNode)) {		// here before and consistently null
-			return;
-		}
-		calledNode2callingNode.put(calledNode, callingNode);
-		for (@NonNull NavigationEdge calledEdge : calledNode.getNavigationEdges()) {
-			Node nextCalledNode = calledEdge.getTarget();
-			if (!nextCalledNode.isRealized() && !nextCalledNode.isAttributeNode()) {
-				Property property = calledEdge.getProperty();
-				NavigationEdge callingEdge = callingNode != null ? callingNode.getNavigationEdge(property) : null;
-				if (!property.isIsImplicit()) {
-					calledEdge2callingEdge.put(calledEdge, callingEdge);
-				}
-				if (callingEdge != null) {
-					Node nextCallingNode = callingEdge.getTarget();
-					assert nextCallingNode.isNull() == nextCalledNode.isNull();
-					if (!nextCalledNode.isNull()) {
-						computeCompatiblePattern(nextCalledNode, nextCallingNode, calledNode2callingNode, calledEdge2callingEdge);
-					}
-				}
-				else {
-					computeCompatiblePattern(nextCalledNode, null, calledNode2callingNode, calledEdge2callingEdge);
-				}
-			}
-		}
-	} */
 
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		//		List<String> names = new ArrayList<>();
@@ -905,25 +567,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return toOneSubRegion;
 	}
 
-	/*	protected @Nullable Map<@NonNull Node, @NonNull Node> expandRecursion(@NonNull Node nextNode, @NonNull Node prevNode, @NonNull Map<@NonNull Node, @NonNull Node> bindings) {
-		Node oldPrevNode = bindings.put(nextNode, prevNode);
-		if (oldPrevNode != null) {
-			assert oldPrevNode == prevNode;
-			return bindings;
-		}
-		for (@NonNull NavigableEdge navigationEdge : prevNode.getNavigationEdges()) {
-			Node nextTarget = nextNode.getNavigationTarget(navigationEdge.getProperty());
-			if (nextTarget == null) {
-				return null;
-			}
-			Node prevTarget = navigationEdge.getEdgeTarget();
-			if (expandRecursion(nextTarget, prevTarget, bindings) == null) {
-				return null;
-			}
-		}
-		return bindings;
-	} */
-
 	@Override
 	public @NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node) {
 		List<@NonNull Node> ancestors = new ArrayList<>();
@@ -935,6 +578,16 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 		return ancestors;
+	}
+
+	private @NonNull NavigableEdge getBestEdge(@Nullable NavigableEdge bestEdge, @NonNull NavigableEdge candidateEdge) {
+		if (bestEdge == null) {
+			return candidateEdge;
+		}
+		if ((bestEdge.getProperty().isIsImplicit() && !candidateEdge.getProperty().isIsImplicit())) {
+			return candidateEdge;
+		}
+		return bestEdge;		// ??? containment
 	}
 
 	protected @Nullable List<@NonNull NavigableEdge> getBestPath(@Nullable List<@NonNull NavigableEdge> bestPath, @Nullable List<@NonNull NavigableEdge> candidatePath) {
@@ -950,16 +603,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			return candidatePath;
 		}
 		return bestPath;
-	}
-
-	private @NonNull NavigableEdge getBestEdge(@Nullable NavigableEdge bestEdge, @NonNull NavigableEdge candidateEdge) {
-		if (bestEdge == null) {
-			return candidateEdge;
-		}
-		if ((bestEdge.getProperty().isIsImplicit() && !candidateEdge.getProperty().isIsImplicit())) {
-			return candidateEdge;
-		}
-		return bestEdge;		// ??? containment
 	}
 
 	@Override
@@ -1000,29 +643,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return callingRegions;
 	}
 
-	/*	@Override
-	public final @NonNull Iterable<Edge> getCastEdges() {
-		@SuppressWarnings("null")
-		@NonNull Iterable<Edge> filter = Iterables.filter(edges, IsCastEdgePredicate.INSTANCE);
-		return filter;
-	} */
-
-	@Override
-	public @Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel) {
-		assert typedModel2checkedEdges != null;
-		return typedModel2checkedEdges.get(typedModel);
-	}
-
-	@Override
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement) {
-		return getScheduleModel().getClassDatumAnalysis(typedElement);
-	}
-
-	//	@Override
-	//	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Type type) {
-	//		return getScheduleModel().getClassDatumAnalysis(type);
-	//	}
-
 	@Override
 	public @NonNull String getColor() {
 		return "blue";
@@ -1033,16 +653,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return Iterables.filter(QVTscheduleUtil.getNodes(this), QVTscheduleUtil.IsComposedNodePredicate.INSTANCE);
 	}
 
-	/*	public final @NonNull Iterable<@NonNull Node> getComputedNodes() {
-		return Iterables.filter(nodes, IsComputedPredicate.INSTANCE);
-	} */
-
-	/*	public final @NonNull Iterable<? extends Edge> getConsumedOrderingEdges() {
-		@SuppressWarnings("null")
-		@NonNull Iterable<Edge> filter = Iterables.filter(edges, IsConsumedOrderingEdgePredicate.INSTANCE);
-		return filter;
-	} */
-
 	private int getCost(@NonNull List<@NonNull NavigableEdge> path) {
 		int cost = 0;
 		for (@NonNull NavigableEdge edge : path) {
@@ -1051,25 +661,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}		// ??? containment
 		}
 		return cost;
-	}
-
-	/*	public int getEarliestPassedConnectionSourceIndex() {
-		int earliestPassedConnectionSourceIndex = 0;
-		for (@NonNull NodeConnection passedConnection : getIncomingPassedConnections()) {
-			for (@NonNull Region sourceRegion : passedConnection.getSourceRegions()) {
-				int firstPassedConnectionSourceIndex = sourceRegion.getIndexes().get(0);
-				if (firstPassedConnectionSourceIndex > earliestPassedConnectionSourceIndex) { // Latest of multiple passed connections
-					earliestPassedConnectionSourceIndex = firstPassedConnectionSourceIndex;
-				}
-			}
-		}
-		return earliestPassedConnectionSourceIndex;
-	} */
-
-	@Override
-	public @Nullable Set<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel) {
-		assert typedModel2enforcedEdges != null;
-		return typedModel2enforcedEdges.get(typedModel);
 	}
 
 	@Override

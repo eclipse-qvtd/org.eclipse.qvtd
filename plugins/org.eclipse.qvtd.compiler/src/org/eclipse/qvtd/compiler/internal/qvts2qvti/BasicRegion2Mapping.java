@@ -69,6 +69,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -1161,7 +1162,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
 		DomainUsage anyUsage = region.getScheduleModel().getDomainAnalysis().getAnyUsage();
 		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtmTypedModel);
+			Iterable<@NonNull NavigableEdge> checkedEdges = RegionAnalysis.get(region).getCheckedEdges(qvtmTypedModel);
 			if (checkedEdges != null) {
 				for (NavigableEdge checkedEdge : checkedEdges) {
 					Property asProperty = RegionUtil.getProperty(checkedEdge);
@@ -1455,7 +1456,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Node sourceNode = edge.getEdgeSource();
 		Property asProperty = edge.getProperty();
 		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatumAnalysis(sourceNode));
-		Iterable<@NonNull NavigableEdge> enforcedEdges = region.getEnforcedEdges(typedModel);
+		Iterable<@NonNull NavigableEdge> enforcedEdges = RegionAnalysis.get(region).getEnforcedEdges(typedModel);
 		if (enforcedEdges != null) {
 			Property asOppositeProperty = asProperty.getOpposite();
 			for (@NonNull NavigableEdge enforcedEdge : enforcedEdges) {
