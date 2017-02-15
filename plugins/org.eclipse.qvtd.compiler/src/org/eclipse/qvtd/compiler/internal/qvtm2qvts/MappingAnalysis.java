@@ -414,7 +414,7 @@ public class MappingAnalysis implements Nameable
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, mappingRegion.getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, ((ScheduleModel2)mappingRegion.getScheduleModel()).getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				if (leftExp instanceof VariableExp) {
 					return leftExp;
@@ -443,7 +443,7 @@ public class MappingAnalysis implements Nameable
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, mappingRegion.getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, ((ScheduleModel2)mappingRegion.getScheduleModel()).getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				OCLExpression rightExp = callExp.getOwnedArguments().get(0);
 				if (leftExp instanceof VariableExp) {
@@ -474,7 +474,7 @@ public class MappingAnalysis implements Nameable
 					node = analyzeVariable(variable, ownedInit);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					DomainUsage domainUsage = mappingRegion.getScheduleModel().getDomainUsage(variable);
+					DomainUsage domainUsage = ((ScheduleModel2)mappingRegion.getScheduleModel()).getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
 						node = RegionUtil.createRealizedStepNode(mappingRegion, variable);

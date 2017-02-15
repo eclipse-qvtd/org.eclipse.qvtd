@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
@@ -594,16 +595,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(basicMappingRegion.getMapping());
 	}
 
-	public static @NonNull String getName(@NonNull Connection connection) {
-		return ClassUtil.nonNullState(connection.getName());
-	}
-
-	public static @NonNull String getName(@NonNull Node node) {
-		return ClassUtil.nonNullState(node.getName());
-	}
-
-	public static @NonNull String getName(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getName());
+	public static @NonNull String getName(@NonNull Nameable nameable) {
+		return ClassUtil.nonNullState(nameable.getName());
 	}
 
 	public static @NonNull Role getNodeRole(@NonNull Node node) {

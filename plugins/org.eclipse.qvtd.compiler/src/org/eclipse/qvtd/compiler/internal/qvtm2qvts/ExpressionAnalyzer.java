@@ -100,7 +100,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		}
 	}
 
-	protected final @NonNull ScheduleModel scheduleModel;
+	protected final @NonNull ScheduleModel2 scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
@@ -595,7 +595,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
 		Class oclInvalidType = scheduleModel.getStandardLibrary().getOclInvalidType();
-		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(oclInvalidType, scheduleModel.getDomainAnalysis().getPrimitiveTypeModel());
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(oclInvalidType, scheduleModel.getDomainAnalysis().getPrimitiveTypeModel());
 		Node errorNode = createErrorNode("«error»", classDatumAnalysis);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);
@@ -622,7 +622,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Type type = ownedVariable.getType();
 		assert type != null;
 		CompleteClass actualClass = initNode.getCompleteClass();
-		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis(ownedVariable);
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis(ownedVariable);
 		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatumAnalysis);
 		if (actualClass.conformsTo(requiredClass)) {
 			context.addVariableNode(ownedVariable, initNode);
@@ -938,7 +938,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		assert referredType != null;
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
-		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
 		String typeName = PrettyPrinter.printType(RegionUtil.getCompleteClass(classDatumAnalysis));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;

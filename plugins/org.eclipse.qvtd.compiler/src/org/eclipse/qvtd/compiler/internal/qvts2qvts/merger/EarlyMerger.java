@@ -160,7 +160,7 @@ public class EarlyMerger extends AbstractMerger
 	 * a non-null unconditional class within the primary region. It may be multiply-produced, e.g. recursed.
 	 */
 	protected boolean isSecondaryCandidate(@NonNull Region primaryRegion,
-			@NonNull Region secondaryRegion, @NonNull Set<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis> toOneReachableClasses) {
+			@NonNull Region secondaryRegion, @NonNull Set<@NonNull ClassDatumAnalysis> toOneReachableClasses) {
 		List<@NonNull Node> secondaryHeadNodes = RegionUtil.Internal.getHeadNodesList(secondaryRegion);
 		if (secondaryHeadNodes.size() != 1) {
 			return false;
@@ -270,7 +270,7 @@ public class EarlyMerger extends AbstractMerger
 		//	Find the classes that could be consumed by a secondary region head, and the number
 		//	of possible consuming contexts.
 		//
-		Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Integer> hostClass2count = new HashMap<>();
+		Map<@NonNull ClassDatumAnalysis, @NonNull Integer> hostClass2count = new HashMap<>();
 		for (@NonNull Node hostNode : getHostNodes(primaryRegion)) {
 			ClassDatumAnalysis hostClassDatumAnalysis = RegionUtil.getClassDatumAnalysis(hostNode);
 			Integer count = hostClass2count.get(hostClassDatumAnalysis);
@@ -280,7 +280,7 @@ public class EarlyMerger extends AbstractMerger
 		//	Find the secondary regions for single possibility host classes.
 		//
 		Set<@NonNull MappingRegion> secondaryRegions = new HashSet<>();
-		for (Map.Entry<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Integer> entry : hostClass2count.entrySet()) {
+		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull Integer> entry : hostClass2count.entrySet()) {
 			if (entry.getValue() == 1) {
 				ClassDatumAnalysis primaryClassDatumAnalysis = entry.getKey();
 				for (@NonNull MappingRegion secondaryRegion : primaryClassDatumAnalysis.getConsumingRegions()) {

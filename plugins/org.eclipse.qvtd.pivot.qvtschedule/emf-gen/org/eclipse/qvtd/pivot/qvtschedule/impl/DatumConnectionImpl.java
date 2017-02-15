@@ -40,7 +40,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
  * <!-- begin-user-doc -->
@@ -258,12 +257,6 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	 * The indexes in the overall schedule at which this connection propagates additional values.
 	 */
 	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
-
-	protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull SymbolNameBuilder symbolNameBuilder) {
-		setRegion(region);
-		setName(region.getScheduleModel().reserveSymbolName(symbolNameBuilder, this));
-		getSourceEnds().addAll(sourceEnds);
-	}
 
 	@Override
 	public boolean addIndex(int index) {

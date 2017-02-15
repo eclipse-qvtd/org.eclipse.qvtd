@@ -31,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -41,25 +40,25 @@ import com.google.common.collect.Sets;
  */
 public class ContentsAnalysis
 {
-	protected final @NonNull ScheduleModel scheduleModel;
+	protected final @NonNull ScheduleModel2 scheduleModel;
 
 	/**
 	 * The Speculation or Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2newNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2newNodes = new HashMap<>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2oldNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2oldNodes = new HashMap<>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
 
-	public ContentsAnalysis(@NonNull ScheduleModel scheduleModel) {
+	public ContentsAnalysis(@NonNull ScheduleModel2 scheduleModel) {
 		this.scheduleModel = scheduleModel;
 	}
 
@@ -86,7 +85,7 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = ((ScheduleModel2)scheduleModel).getElementalClassDatumAnalysis(newNode);
+		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getElementalClassDatumAnalysis(newNode);
 		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
 			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {

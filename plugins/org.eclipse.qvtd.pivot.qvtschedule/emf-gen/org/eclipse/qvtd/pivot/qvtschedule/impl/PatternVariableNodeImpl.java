@@ -19,11 +19,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,16 +64,9 @@ public class PatternVariableNodeImpl extends VariableNodeImpl implements Pattern
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitPatternVariableNode(this);
 	}
 
-	/*	public static @NonNull PatternNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
-	PatternNodeImpl node = new PatternNodeImpl();
-	node.initialize(nodeRole, region, name, classDatumAnalysis);
-	node.isMatched = isMatched;
-	return node;
-} */
-
-	public static @NonNull VariableNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable, boolean isMatched) {
+	public static @NonNull VariableNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull VariableDeclaration variable, boolean isMatched) {
 		PatternVariableNodeImpl node = new PatternVariableNodeImpl();
-		node.initialize(nodeRole, region, variable);
+		node.initialize(nodeRole, region, name, classDatum, variable);
 		node.isMatched = isMatched;
 		return node;
 	}
@@ -81,7 +76,7 @@ public class PatternVariableNodeImpl extends VariableNodeImpl implements Pattern
 
 	@Override
 	public @NonNull VariableNodeImpl createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, getVariable(), isMatched);
+		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatum(this), getVariable(), isMatched);
 	}
 
 	@Override

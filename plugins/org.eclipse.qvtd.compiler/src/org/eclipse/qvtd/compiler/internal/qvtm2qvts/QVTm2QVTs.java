@@ -201,7 +201,7 @@ public class QVTm2QVTs extends ScheduleModel2
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = getDomainAnalysis();
-		Map<org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
+		Map<@NonNull ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
 		for (List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;

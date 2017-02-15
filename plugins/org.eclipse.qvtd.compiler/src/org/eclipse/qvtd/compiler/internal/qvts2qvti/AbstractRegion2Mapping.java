@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -52,7 +53,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractRegion2Mapping
@@ -113,7 +113,7 @@ public abstract class AbstractRegion2Mapping
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
-			ScheduleModel scheduleModel = getRegion().getScheduleModel();
+			ScheduleModel2 scheduleModel = (ScheduleModel2) getRegion().getScheduleModel();
 			if (asProperty == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
 				return helper.createOperationCallExp(asSource, "oclContainer");
 			}
@@ -140,7 +140,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull CallExp createOclAsTypeCallExp(@NonNull OCLExpression asSource, @NonNull Type asType) {
-		ScheduleModel scheduleModel = getRegion().getScheduleModel();
+		ScheduleModel2 scheduleModel = RegionUtil.getScheduleModel(getRegion());
 		CompleteClass completeClass = scheduleModel.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
 		TypeExp asTypeExp = helper.createTypeExp(completeClass.getPrimaryClass());
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);

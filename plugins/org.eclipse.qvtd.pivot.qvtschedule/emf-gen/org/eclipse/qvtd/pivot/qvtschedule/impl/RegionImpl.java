@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -1008,10 +1007,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public @Nullable String getShape() {
 		return null;
-	}
-
-	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
-		return getScheduleModel().getStandardLibraryHelper();
 	}
 
 	@Override

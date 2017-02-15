@@ -5284,22 +5284,13 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULE_MODEL__OWNED_PACKAGES = PivotPackage.MODEL__OWNED_PACKAGES;
 
 	/**
-	 * The feature id for the '<em><b>Complete Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULE_MODEL__COMPLETE_MODEL = PivotPackage.MODEL_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Loading Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL__LOADING_REGION = PivotPackage.MODEL_FEATURE_COUNT + 1;
+	int SCHEDULE_MODEL__LOADING_REGION = PivotPackage.MODEL_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Scheduled Region</b></em>' containment reference.
@@ -5308,7 +5299,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL__SCHEDULED_REGION = PivotPackage.MODEL_FEATURE_COUNT + 2;
+	int SCHEDULE_MODEL__SCHEDULED_REGION = PivotPackage.MODEL_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Schedule Model</em>' class.
@@ -5317,7 +5308,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 3;
+	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6424,17 +6415,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getScheduleModel();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getCompleteModel <em>Complete Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Complete Model</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getCompleteModel()
-	 * @see #getScheduleModel()
-	 * @generated
-	 */
-	EReference getScheduleModel_CompleteModel();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getLoadingRegion <em>Loading Region</em>}'.
@@ -7618,14 +7598,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCHEDULE_MODEL = eINSTANCE.getScheduleModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Complete Model</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCHEDULE_MODEL__COMPLETE_MODEL = eINSTANCE.getScheduleModel_CompleteModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Loading Region</b></em>' reference feature.

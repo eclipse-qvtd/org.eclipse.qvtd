@@ -54,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -315,7 +314,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 					//			 && !rootScheduledRegion.isOnlyCastOrRecursed(predicatedNode)
 					//			 && !hasEdgeConnection(predicatedNode)
 					) {
-				NodeConnection predicatedConnection = invokingRegion2.getNodeConnection(sourceNodes, classDatumAnalysis.getClassDatum());
+				NodeConnection predicatedConnection = invokingRegion2.getNodeConnection(sourceNodes, classDatumAnalysis.getClassDatum(), classDatumAnalysis.getDomainUsage());
 				predicatedConnection.addUsedTargetNode(castTarget, false);
 				if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 					QVTscheduleConstants.CONNECTION_CREATION.println("  NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
@@ -361,7 +360,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Connect up the head
 		//
-		NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis.getClassDatum());
+		NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis.getClassDatum(), classDatumAnalysis.getDomainUsage());
 		if (headNode.isDependency()) {
 			headConnection.addUsedTargetNode(headNode, false);
 		}
@@ -391,8 +390,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			else {
 				NodeConnection headConnection = createHeadConnection(region, headNode);
 				if (headConnection == null) {
-					region.getScheduleModel().addRegionError(region, "createHeadConnections abandoned for " + headNode);
-					region.getScheduleModel().addRegionError(region, "createHeadConnections abandoned for " + headNode);
+					ScheduleModel2 scheduleModel = RegionUtil.getScheduleModel(region);
+					scheduleModel.addRegionError(region, "createHeadConnections abandoned for " + headNode);
+					scheduleModel.addRegionError(region, "createHeadConnections abandoned for " + headNode);
 					headConnection = createHeadConnection(region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
@@ -658,7 +658,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			scheduledRegion.writeDebugGraphs("7-pruned", true, true, false);
 		}
 
-		boolean noLateConsumerMerge = scheduledRegion.getScheduleModel().isNoLateConsumerMerge();
+		boolean noLateConsumerMerge = RegionUtil.getScheduleModel(scheduledRegion).isNoLateConsumerMerge();
 		if (!noLateConsumerMerge) {
 			lateMerge(scheduledRegion, orderedRegions, typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
@@ -971,7 +971,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected void splitRegions() {
 	}
 
-	public @NonNull ScheduledRegion transform(@NonNull ScheduleModel scheduleModel, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
+	public @NonNull ScheduledRegion transform(@NonNull ScheduleModel2 scheduleModel, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
 		this.contentsAnalysis = new ContentsAnalysis(scheduleModel);
 		((LoadingRegionImpl)rootContainmentRegion).setFixmeScheduleModel(scheduleModel);
 		//		for (@NonNull Region region : activeRegions) {

@@ -10,13 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import java.util.Set;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 
 public interface ScheduledRegion extends Region
 {
@@ -114,9 +113,9 @@ public interface ScheduledRegion extends Region
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property);
 	@NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections();
-	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum);
+	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage);
 	@NonNull Iterable<@NonNull NodeConnection> getNodeConnections();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
-	void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode);
+	//	void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

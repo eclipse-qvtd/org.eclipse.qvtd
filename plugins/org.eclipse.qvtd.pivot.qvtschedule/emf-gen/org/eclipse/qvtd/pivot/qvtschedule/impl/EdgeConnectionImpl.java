@@ -17,8 +17,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -36,11 +34,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import com.google.common.collect.Lists;
 
 /**
@@ -207,15 +203,6 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitEdgeConnection(this);
-	}
-
-	public EdgeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Property property) {
-		super(region, sourceEdges, symbolNameBuilder);
-		this.property = property;
-		assert !property.isIsImplicit();
-		for (@NonNull NavigableEdge sourceEdge : sourceEdges) {
-			sourceEdge.addOutgoingConnection(this);
-		}
 	}
 
 	@Override

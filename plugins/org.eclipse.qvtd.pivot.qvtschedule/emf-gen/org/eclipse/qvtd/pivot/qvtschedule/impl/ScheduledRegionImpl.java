@@ -16,7 +16,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,12 +38,12 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -401,6 +400,40 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		return s;
 	}
 
+	protected @NonNull EdgeConnection createEdgeConnection(@NonNull  Set<@NonNull NavigableEdge> sourceSet, @NonNull Property property, @NonNull SymbolNameBuilder s) {
+		assert !property.isIsImplicit();
+		EdgeConnection connection = QVTscheduleFactory.eINSTANCE.createEdgeConnection();
+
+		//		protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull String name) {
+		connection.setRegion(this);
+		connection.setName(getScheduleModel().reserveSymbolName(s, connection));
+		connection.getSourceEnds().addAll(sourceSet);
+		//		}
+
+		//		public EdgeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull String name, @NonNull Property property) {
+		//			super(region, sourceEdges, name);
+		connection.setProperty(property);
+		for (@NonNull NavigableEdge sourceEdge : sourceSet) {
+			sourceEdge.addOutgoingConnection(connection);
+		}
+		//		}
+		//		return new EdgeConnectionImpl(this, sourceSet, s, property);
+		return connection;
+	}
+
+	protected @NonNull NodeConnection createNodeConnection(@NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
+		NodeConnection connection = QVTscheduleFactory.eINSTANCE.createNodeConnection();
+		connection.setRegion(this);
+		connection.getSourceEnds().addAll(sourceSet);
+		connection.setName(getScheduleModel().reserveSymbolName(s, connection));
+		connection.setClassDatum(classDatum);
+		for (@NonNull Node sourceNode : sourceSet) {
+			//			assert !sourceNode.isConstant();
+			sourceNode.addOutgoingConnection(connection);
+		}
+		return connection;
+	}
+
 	@Override
 	public @NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatum classDatum) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
@@ -416,7 +449,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			s.appendName(owningClass.getName());
 			s.appendString("_");
 			s.appendName(property.getName());
-			connection = new NodeConnectionImpl(this, sourceSet, s, classDatum);
+			connection = createNodeConnection(sourceSet, classDatum, s);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
@@ -437,7 +470,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			s.appendName(property.getOwningClass().getName());
 			s.appendString("_");
 			s.appendName(property.getName());
-			connection = new EdgeConnectionImpl(this, sourceSet, s, property);
+			connection = createEdgeConnection(sourceSet, property, s);
 			edges2edgeConnection.put(sourceSet, connection);
 		}
 		return connection;
@@ -454,7 +487,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum) {
+	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
 		if (nodes2connection == null) {
 			nodes2connection = new HashMap<>();
@@ -463,13 +496,12 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
 		NodeConnection connection = nodes2connection.get(sourceSet);
 		if (connection == null) {
-			DomainUsage domainUsage = getScheduleModel().getDomainUsage(QVTscheduleUtil.getTypedModel(classDatum)); //classDatumAnalysis.getDomainUsage();
 			SymbolNameBuilder s = new SymbolNameBuilder();
 			s.appendString("j");
 			s.appendString(domainUsage.isInput() ? "i" : domainUsage.isOutput() ? "o" : "m");
 			s.appendString("_");
 			s.appendName(classDatum.getCompleteClass().getName());
-			connection = new NodeConnectionImpl(this, sourceSet, s, classDatum);
+			connection = createNodeConnection(sourceSet, classDatum, s);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
@@ -499,7 +531,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		return "s_";
 	}
 
-	@Override
+	/*	@Override
 	public void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(connection);
 		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatum2nodes2nodeConnections.get(classDatum);
@@ -521,7 +553,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			}
 		}
 		oldConnection.destroy();
-	}
+	} */
 
 
 	@Override

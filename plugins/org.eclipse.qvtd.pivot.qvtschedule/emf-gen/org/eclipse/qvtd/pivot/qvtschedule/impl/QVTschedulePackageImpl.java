@@ -439,7 +439,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -470,7 +470,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -902,7 +902,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getScheduleModel_CompleteModel() {
+	public EReference getScheduleModel_LoadingRegion() {
 		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -912,18 +912,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getScheduleModel_LoadingRegion() {
-		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getScheduleModel_ScheduledRegion() {
-		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(2);
+		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1821,7 +1811,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEAttribute(roleEClass, ROLE__SPECULATION);
 
 		scheduleModelEClass = createEClass(SCHEDULE_MODEL);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__COMPLETE_MODEL);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__LOADING_REGION);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__SCHEDULED_REGION);
 
@@ -2087,7 +2076,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEAttribute(getRole_Speculation(), ecorePackage.getEBoolean(), "speculation", null, 1, 1, Role.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(scheduleModelEClass, ScheduleModel.class, "ScheduleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScheduleModel_CompleteModel(), thePivotPackage.getCompleteModel(), null, "completeModel", null, 1, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_LoadingRegion(), this.getLoadingRegion(), null, "loadingRegion", null, 1, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_ScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_ScheduleModel(), "scheduledRegion", null, 0, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2139,12 +2127,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //QVTschedulePackageImpl

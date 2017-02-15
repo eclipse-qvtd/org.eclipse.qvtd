@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -58,8 +59,8 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 		return ClassUtil.nonNullState(variable);
 	}
 
-	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
-		initialize(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getScheduleModel().getClassDatum(variable));
+	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull VariableDeclaration variable) {
+		initialize(nodeRole, region, name, classDatum); //ClassUtil.nonNullState(variable.getName()), region.getScheduleModel().getClassDatum(variable));
 		this.variable = variable;
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;

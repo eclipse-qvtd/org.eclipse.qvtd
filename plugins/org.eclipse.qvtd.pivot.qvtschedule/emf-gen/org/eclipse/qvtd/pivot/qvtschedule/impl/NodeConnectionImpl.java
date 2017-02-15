@@ -16,8 +16,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -38,11 +36,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -221,15 +217,6 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	 * The regions other than the common, source and target regions through which the Connection is passed.
 	 */
 	private List<@NonNull Region> intermediateRegions = null;
-
-	public NodeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull Node> sourceNodes, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull ClassDatum classDatum) {
-		super(region, sourceNodes, symbolNameBuilder);
-		this.classDatum = classDatum;
-		for (@NonNull Node sourceNode : sourceNodes) {
-			//			assert !sourceNode.isConstant();
-			sourceNode.addOutgoingConnection(this);
-		}
-	}
 
 	@Override
 	public void addPassedTargetNode(@NonNull Node targetNode) {

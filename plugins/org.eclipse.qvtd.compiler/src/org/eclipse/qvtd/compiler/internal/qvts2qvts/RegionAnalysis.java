@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -203,7 +204,7 @@ public class RegionAnalysis implements Adapter
 							TypedModel typedModel = classDatum.getTypedModel();
 							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 							assert property2realizedEdges != null;
-							Property oclContainerProperty = ((RegionImpl)region).getStandardLibraryHelper().getOclContainerProperty();
+							Property oclContainerProperty = ((ScheduleModel2)((RegionImpl)region).getScheduleModel()).getStandardLibraryHelper().getOclContainerProperty();
 							if (property == oclContainerProperty) {
 								//								Node containerNode = predicatedEdge.getTarget();
 								//								Node containedNode = predicatedEdge.getSource();

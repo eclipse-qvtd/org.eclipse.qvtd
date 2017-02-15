@@ -12,18 +12,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteModel;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
@@ -31,31 +20,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  */
 public interface ScheduleModel extends Model
 {
-	/**
-	 * Returns the value of the '<em><b>Complete Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Complete Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Complete Model</em>' reference.
-	 * @see #setCompleteModel(CompleteModel)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_CompleteModel()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!completeModel'"
-	 * @generated
-	 */
-	CompleteModel getCompleteModel();
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getCompleteModel <em>Complete Model</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Complete Model</em>' reference.
-	 * @see #getCompleteModel()
-	 * @generated
-	 */
-	void setCompleteModel(CompleteModel value);
 	/**
 	 * Returns the value of the '<em><b>Loading Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -108,25 +72,7 @@ public interface ScheduleModel extends Model
 	 * @generated
 	 */
 	void setScheduledRegion(ScheduledRegion value);
-	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
-	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
-	@NonNull Property getCastProperty(@NonNull Type type);
-	@NonNull ClassDatum getClassDatum(org.eclipse.ocl.pivot.@NonNull Class asType, @NonNull TypedModel typedModel);
-	@NonNull ClassDatum getClassDatum(@NonNull TypedElement typedElement);
-	//	@NonNull Iterable<ClassDatumAnalysis> getClassDatumAnalyses();
-	//	@NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull ClassDatum classDatum);
-	//	@NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel);
-	//	@NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel);
-	//	@NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement);
-	@NonNull RootDomainUsageAnalysis getDomainAnalysis();
-	@NonNull DomainUsage getDomainUsage(@NonNull Element element);
-	@NonNull EnvironmentFactory getEnvironmentFactory();
-	@NonNull Property getIterateProperty(@NonNull Type type);
-	//	@NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis();
-	@NonNull StandardLibrary getStandardLibrary();
-	@NonNull StandardLibraryHelper getStandardLibraryHelper();
-	boolean isDirty(@NonNull Property property);
-	boolean isNoLateConsumerMerge();
+
 	@NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Symbolable symbolable);
 	void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix);
 	void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix);

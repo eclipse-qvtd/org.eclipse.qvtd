@@ -111,7 +111,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 
 	protected ScheduleModel2(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
-		setCompleteModel(environmentFactory.getCompleteModel());
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
@@ -131,9 +130,12 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		//
 	}
 
+	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		throw new UnsupportedOperationException();		// FIXME move to caller
+	}
+
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
 
-	@Override
 	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
 		return datumCaches.getAllPropertyDatums(classDatum);
 	}
@@ -147,7 +149,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return argumentProperty;
 	}
 
-	@Override
 	public @NonNull Property getCastProperty(@NonNull Type type) {
 		Property castProperty = type2castProperty.get(type);
 		if (castProperty == null) {
@@ -157,7 +158,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return castProperty;
 	}
 
-	@Override
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
 		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
 		assert asType != null;
@@ -175,7 +175,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return datumCaches.getClassDatum(typedModel, asType);
 	}
 
-	@Override
 	public @NonNull ClassDatum getClassDatum(org.eclipse.ocl.pivot.@NonNull Class asType, @NonNull TypedModel typedModel) {
 		return datumCaches.getClassDatum(typedModel, asType);
 	}
@@ -225,12 +224,10 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return datumCaches.getContainmentAnalysis();
 	}
 
-	@Override
 	public @NonNull RootDomainUsageAnalysis getDomainAnalysis() {
 		return domainAnalysis;
 	}
 
-	@Override
 	public @NonNull DomainUsage getDomainUsage(@NonNull Element element) {
 		DomainUsageAnalysis analysis = domainAnalysis;
 		Operation operation = PivotUtil.getContainingOperation(element);
@@ -252,7 +249,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return classDatumAnalysis;
 	}
 
-	@Override
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
@@ -261,7 +257,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return transformation.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
 	}
 
-	@Override
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
 		Property iterateProperty = type2iterateProperty.get(type);
 		if (iterateProperty == null) {
@@ -299,12 +294,10 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return datumCaches.getPropertyDatum(classDatum, property);
 	}
 
-	@Override
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
 	}
 
-	@Override
 	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
 		return standardLibraryHelper;
 	}
@@ -320,7 +313,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 	/**
 	 * Return true if a mapping may assign this property in an input model.
 	 */
-	@Override
 	public boolean isDirty(@NonNull Property property) {
 		return domainAnalysis.isDirty(property);
 	}
@@ -333,7 +325,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return schedulerOptions2.get(CompilerChain.SCHEDULER_NO_EARLY_MERGE) == Boolean.TRUE;
 	}
 
-	@Override
 	public boolean isNoLateConsumerMerge() {
 		Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions2 = schedulerOptions;
 		if (schedulerOptions2 == null) {

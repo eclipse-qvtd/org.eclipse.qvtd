@@ -145,7 +145,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Role/speculation"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ScheduleModel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/completeModel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/loadingRegion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/scheduledRegion"/>
     </genClasses>
