@@ -36,7 +36,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RootMappingAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduledRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -812,7 +811,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
-					rootRegion = new ScheduledRegion2(rootName, RegionUtil.getScheduleModel(region));
+					rootRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
+					rootRegion.setScheduleModel(RegionUtil.getScheduleModel(region));
+					rootRegion.setName(rootName);
 				}
 				region.setInvokingRegion(rootRegion);
 			}

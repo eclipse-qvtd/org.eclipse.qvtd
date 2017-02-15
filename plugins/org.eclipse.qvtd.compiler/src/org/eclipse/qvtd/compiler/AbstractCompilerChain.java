@@ -37,6 +37,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
@@ -52,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
@@ -66,7 +68,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		step2extension.put(QVTC_STEP, "qvtcas");
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
 		step2extension.put(QVTM_STEP, "qvtm.qvtcas");
-		step2extension.put(QVTS_STEP, "qvts.xmi");
+		step2extension.put(QVTS_STEP, "qvts");
 		step2extension.put(QVTI_STEP, "qvtias");
 		step2extension.put(JAVA_STEP, "java");
 		step2extension.put(CLASS_STEP, "class");
@@ -222,6 +224,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
+				//				Resource sResource = createResource();
 				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
@@ -229,11 +232,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, environmentFactory, rootName);
-				ScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
+				ScheduledRegion scheduledRegion = qvts2qvts.transform(multiRegion);
+				ScheduleModel scheduleModel = RegionUtil.getScheduleModel(scheduledRegion);
 				throwCompilerChainExceptionForErrors();
-				compiled(rootRegion);			// FIXME
-				//				saveResource(sResource, QVTS_STEP);
-				return rootRegion;
+				compiled(scheduleModel);			// FIXME
+				//				sResource.getContents().add(scheduleModel);
+				//				saveResource(sResource);
+				return scheduledRegion;
 			}
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);
