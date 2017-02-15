@@ -109,33 +109,6 @@ public interface ScheduleModel extends Model
 	 * @generated
 	 */
 	void setScheduledRegion(ScheduledRegion value);
-	/**
-	 * Returns the value of the '<em><b>Multi Region</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.MultiRegion#getScheduleModel <em>Schedule Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Multi Region</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Multi Region</em>' containment reference.
-	 * @see #setMultiRegion(MultiRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_MultiRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MultiRegion#getScheduleModel
-	 * @model opposite="scheduleModel" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!multiRegion'"
-	 * @generated
-	 */
-	MultiRegion getMultiRegion();
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMultiRegion <em>Multi Region</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Multi Region</em>' containment reference.
-	 * @see #getMultiRegion()
-	 * @generated
-	 */
-	void setMultiRegion(MultiRegion value);
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull Property getCastProperty(@NonNull Type type);

@@ -139,11 +139,6 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitMultiRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MultiRegion object) {
-		return visiting(object);
-	}
-
-	@Override
 	public R visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object) {
 		return visiting(object);
 	}

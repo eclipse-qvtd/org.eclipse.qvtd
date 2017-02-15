@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.merger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -30,9 +31,9 @@ public class AbstractMerger
 	 * Return true if any primaryRegion head coincides with a secondaryRegion head.
 	 */
 	protected boolean isSharedHead(@NonNull Region primaryRegion, @NonNull Region secondaryRegion) {
-		for (@NonNull Node primaryHead : primaryRegion.getHeadNodes()) {
+		for (@NonNull Node primaryHead : RegionUtil.getHeadNodes(primaryRegion)) {
 			ClassDatumAnalysis primaryClassDatumAnalysis = primaryHead.getClassDatumAnalysis();
-			for (@NonNull Node secondaryHead : secondaryRegion.getHeadNodes()) {
+			for (@NonNull Node secondaryHead : RegionUtil.getHeadNodes(secondaryRegion)) {
 				if (primaryClassDatumAnalysis == secondaryHead.getClassDatumAnalysis()) {
 					return true;
 				}

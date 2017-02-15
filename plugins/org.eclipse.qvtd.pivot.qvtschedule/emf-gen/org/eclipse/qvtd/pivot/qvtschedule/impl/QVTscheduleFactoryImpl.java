@@ -84,7 +84,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
 			case QVTschedulePackage.MAPPING_ACTION: return createMappingAction();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
-			case QVTschedulePackage.MULTI_REGION: return createMultiRegion();
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
 			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
@@ -299,17 +298,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull MicroMappingRegion createMicroMappingRegion() {
 		MicroMappingRegionImpl microMappingRegion = new MicroMappingRegionImpl();
 		return microMappingRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull MultiRegion createMultiRegion() {
-		MultiRegionImpl multiRegion = new MultiRegionImpl();
-		return multiRegion;
 	}
 
 	/**

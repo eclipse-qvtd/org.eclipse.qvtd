@@ -47,10 +47,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -69,9 +69,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
@@ -320,13 +319,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass multiRegionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass namedMappingRegionEClass = null;
 
 	/**
@@ -455,7 +447,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -486,7 +478,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -1017,6 +1009,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getScheduleModel_CompleteModel() {
 		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -1026,6 +1019,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getScheduleModel_LoadingRegion() {
 		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(1);
 	}
@@ -1038,16 +1032,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getScheduleModel_ScheduledRegion() {
 		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getScheduleModel_MultiRegion() {
-		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1245,6 +1229,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLoadingRegion() {
 		return loadingRegionEClass;
 	}
@@ -1337,26 +1322,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EAttribute getMicroMappingRegion_SymbolSuffix() {
 		return (EAttribute)microMappingRegionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getMultiRegion() {
-		return multiRegionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMultiRegion_ScheduleModel() {
-		return (EReference)multiRegionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1906,9 +1871,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__NAME_PREFIX);
 		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__SYMBOL_SUFFIX);
 
-		multiRegionEClass = createEClass(MULTI_REGION);
-		createEReference(multiRegionEClass, MULTI_REGION__SCHEDULE_MODEL);
-
 		namedMappingRegionEClass = createEClass(NAMED_MAPPING_REGION);
 		createEAttribute(namedMappingRegionEClass, NAMED_MAPPING_REGION__NAME);
 
@@ -1981,7 +1943,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__COMPLETE_MODEL);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__LOADING_REGION);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__SCHEDULED_REGION);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__MULTI_REGION);
 
 		scheduledRegionEClass = createEClass(SCHEDULED_REGION);
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__CONNECTIONS);
@@ -2076,7 +2037,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		mappingActionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		mappingRegionEClass.getESuperTypes().add(this.getRegion());
 		microMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
-		multiRegionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		namedMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		navigableEdgeEClass.getESuperTypes().add(this.getEdge());
 		navigableEdgeEClass.getESuperTypes().add(this.getConnectionEnd());
@@ -2189,9 +2149,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEAttribute(getMicroMappingRegion_NamePrefix(), ecorePackage.getEString(), "namePrefix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMicroMappingRegion_SymbolSuffix(), ecorePackage.getEString(), "symbolSuffix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(multiRegionEClass, MultiRegion.class, "MultiRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMultiRegion_ScheduleModel(), this.getScheduleModel(), this.getScheduleModel_MultiRegion(), "scheduleModel", null, 1, 1, MultiRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(namedMappingRegionEClass, NamedMappingRegion.class, "NamedMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedMappingRegion_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2264,7 +2221,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getScheduleModel_CompleteModel(), thePivotPackage.getCompleteModel(), null, "completeModel", null, 1, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_LoadingRegion(), this.getLoadingRegion(), null, "loadingRegion", null, 1, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_ScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_ScheduleModel(), "scheduledRegion", null, 0, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScheduleModel_MultiRegion(), this.getMultiRegion(), this.getMultiRegion_ScheduleModel(), "multiRegion", null, 0, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scheduledRegionEClass, ScheduledRegion.class, "ScheduledRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScheduledRegion_Connections(), this.getConnection(), this.getConnection_Region(), "connections", null, 0, -1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2314,12 +2270,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 } //QVTschedulePackageImpl

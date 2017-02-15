@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -39,7 +38,6 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -61,7 +59,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getCompleteModel <em>Complete Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getLoadingRegion <em>Loading Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getScheduledRegion <em>Scheduled Region</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getMultiRegion <em>Multi Region</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,16 +91,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @ordered
 	 */
 	protected ScheduledRegion scheduledRegion;
-	/**
-	 * The cached value of the '{@link #getMultiRegion() <em>Multi Region</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMultiRegion()
-	 * @generated
-	 * @ordered
-	 */
-	protected MultiRegion multiRegion;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -254,61 +241,12 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @generated
 	 */
 	@Override
-	public MultiRegion getMultiRegion() {
-		return multiRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMultiRegion(MultiRegion newMultiRegion, NotificationChain msgs) {
-		MultiRegion oldMultiRegion = multiRegion;
-		multiRegion = newMultiRegion;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION, oldMultiRegion, newMultiRegion);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMultiRegion(MultiRegion newMultiRegion) {
-		if (newMultiRegion != multiRegion) {
-			NotificationChain msgs = null;
-			if (multiRegion != null)
-				msgs = ((InternalEObject)multiRegion).eInverseRemove(this, QVTschedulePackage.MULTI_REGION__SCHEDULE_MODEL, MultiRegion.class, msgs);
-			if (newMultiRegion != null)
-				msgs = ((InternalEObject)newMultiRegion).eInverseAdd(this, QVTschedulePackage.MULTI_REGION__SCHEDULE_MODEL, MultiRegion.class, msgs);
-			msgs = basicSetMultiRegion(newMultiRegion, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION, newMultiRegion, newMultiRegion));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				if (scheduledRegion != null)
 					msgs = ((InternalEObject)scheduledRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION, null, msgs);
 				return basicSetScheduledRegion((ScheduledRegion)otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
-				if (multiRegion != null)
-					msgs = ((InternalEObject)multiRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION, null, msgs);
-				return basicSetMultiRegion((MultiRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -323,8 +261,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				return basicSetScheduledRegion(null, msgs);
-			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
-				return basicSetMultiRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -345,8 +281,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 				return basicGetLoadingRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				return getScheduledRegion();
-			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
-				return getMultiRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,9 +301,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				setScheduledRegion((ScheduledRegion)newValue);
-				return;
-			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
-				setMultiRegion((MultiRegion)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -392,9 +323,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				setScheduledRegion((ScheduledRegion)null);
 				return;
-			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
-				setMultiRegion((MultiRegion)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -413,8 +341,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 				return loadingRegion != null;
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				return scheduledRegion != null;
-			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
-				return multiRegion != null;
 		}
 		return super.eIsSet(featureID);
 	}

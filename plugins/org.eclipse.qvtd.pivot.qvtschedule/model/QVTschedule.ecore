@@ -159,13 +159,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolSuffix" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiRegion" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="The MultiRegion supervises the many Region instances that realize a transformation"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/multiRegion"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedMappingRegion" eSuperTypes="#//MappingRegion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -341,8 +334,6 @@
         eType="#//LoadingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
         containment="true" eOpposite="#//ScheduledRegion/scheduleModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="multiRegion" eType="#//MultiRegion"
-        containment="true" eOpposite="#//MultiRegion/scheduleModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"

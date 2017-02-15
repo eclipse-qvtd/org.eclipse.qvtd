@@ -49,7 +49,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -331,9 +330,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 */
 	private @Nullable NodeConnection createHeadConnection(@NonNull Region region, @NonNull Node headNode) {
 		ScheduledRegion invokingRegion2 = region.getInvokingRegion();
-		assert invokingRegion2 != null;
-		ScheduledRegion rootScheduledRegion = invokingRegion2;//.getRootScheduledRegion();
-		ScheduleModel scheduleModel = rootScheduledRegion.getScheduleModel();
 		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(headNode);
 		List<@NonNull Node> headSources = null;
 		//
@@ -957,11 +953,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected void splitRegions() {
 	}
 
-	public @NonNull ScheduledRegion transform(@NonNull MultiRegion multiRegion) throws CompilerChainException {
-		ScheduleModel scheduleModel = multiRegion.getScheduleModel();
+	public @NonNull ScheduledRegion transform(@NonNull ScheduleModel scheduleModel, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
 		this.contentsAnalysis = new ContentsAnalysis(scheduleModel);
 		((LoadingRegionImpl)rootContainmentRegion).setFixmeScheduleModel(scheduleModel);
-		Iterable<@NonNull ? extends Region> activeRegions = multiRegion.getActiveRegions();
 		//		for (@NonNull Region region : activeRegions) {
 		//			System.out.println("activeRegions " + region);
 		//		}

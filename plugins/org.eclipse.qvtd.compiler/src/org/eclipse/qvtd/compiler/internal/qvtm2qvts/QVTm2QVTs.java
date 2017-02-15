@@ -55,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -303,9 +302,7 @@ public class QVTm2QVTs extends ScheduleModel2
 		return mappingAnalysis.getMappingRegion();
 	}
 
-	public @NonNull MultiRegion transform() throws IOException {
-		MultiRegion multiRegion = QVTscheduleFactory.eINSTANCE.createMultiRegion();
-		multiRegion.setScheduleModel(this);
+	public @NonNull List<@NonNull Region> transform() throws IOException {
 		Iterable<@NonNull Mapping> orderedMappings = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
@@ -336,10 +333,10 @@ public class QVTm2QVTs extends ScheduleModel2
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}
-		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
-			activeRegions.add(operationRegion);
-		}
-		multiRegion.setActiveRegions(activeRegions);
-		return multiRegion;
+		//		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
+		//			activeRegions.add(operationRegion);
+		//		}
+		//		multiRegion.setActiveRegions(activeRegions);
+		return activeRegions;
 	}
 }

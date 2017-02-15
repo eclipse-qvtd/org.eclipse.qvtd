@@ -215,7 +215,7 @@ class Correlator
 	}
 
 	protected boolean correlateHeadNodes() {
-		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
+		List<Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
 		if (secondaryHeadNodes.size() != 1) {			// FIXME Surely consistent multiple heads are ok?
 			if (debugFailures) {
 				AbstractMerger.FAILURE.println("More than 1 secondary head nodes: " + secondaryHeadNodes.size());

@@ -285,7 +285,7 @@ public class EarlyMerger extends AbstractMerger
 				ClassDatumAnalysis primaryClassDatumAnalysis = entry.getKey();
 				for (@NonNull MappingRegion secondaryRegion : RegionUtil.getConsumingRegions(primaryClassDatumAnalysis)) {
 					if (secondaryRegion != primaryRegion) {
-						for (@NonNull Node secondaryHeadNode : secondaryRegion.getHeadNodes()) {
+						for (@NonNull Node secondaryHeadNode : RegionUtil.getHeadNodes(secondaryRegion)) {
 							if (secondaryHeadNode.getClassDatumAnalysis() == primaryClassDatumAnalysis) {
 								secondaryRegions.add(secondaryRegion);
 								break;

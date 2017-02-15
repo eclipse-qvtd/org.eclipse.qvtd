@@ -358,7 +358,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		ScheduleModel scheduleModel2 = getScheduleModel();
 		assert scheduleModel2 == null;		// Containment is complete; didn't need this call
 		this.scheduleModel = scheduleModel;
-		scheduleModel.getMultiRegion().addRegion(this);
+		//		scheduleModel.getMultiRegion().addRegion(this);
 	}
 
 	@Override

@@ -170,15 +170,6 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull MicroMappingRegion createMicroMappingRegion();
 
 	/**
-	 * Returns a new object of class '<em>Multi Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Multi Region</em>'.
-	 * @generated
-	 */
-	@NonNull MultiRegion createMultiRegion();
-
-	/**
 	 * Returns a new object of class '<em>Named Mapping Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

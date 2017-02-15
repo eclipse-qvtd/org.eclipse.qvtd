@@ -152,11 +152,6 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitMultiRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MultiRegion object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Object visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object) {
 		return visitMappingRegion(object);
 	}

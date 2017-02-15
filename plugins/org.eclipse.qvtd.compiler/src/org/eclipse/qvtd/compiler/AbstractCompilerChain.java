@@ -52,7 +52,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -228,11 +228,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
-				MultiRegion multiRegion = qvtm2qvts.transform();
+				List<@NonNull Region> activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, environmentFactory, rootName);
-				ScheduledRegion scheduledRegion = qvts2qvts.transform(multiRegion);
+				ScheduledRegion scheduledRegion = qvts2qvts.transform(qvtm2qvts, activeRegions);
 				ScheduleModel scheduleModel = RegionUtil.getScheduleModel(scheduledRegion);
 				throwCompilerChainExceptionForErrors();
 				compiled(scheduleModel);			// FIXME
