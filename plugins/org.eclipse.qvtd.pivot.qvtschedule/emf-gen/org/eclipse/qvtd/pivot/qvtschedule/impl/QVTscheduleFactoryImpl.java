@@ -81,6 +81,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.INPUT_NODE: return createInputNode();
 			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
 			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
+			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
 			case QVTschedulePackage.MAPPING_ACTION: return createMappingAction();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
 			case QVTschedulePackage.MULTI_REGION: return createMultiRegion();
@@ -96,7 +97,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
 			case QVTschedulePackage.ROLE: return createRole();
-			case QVTschedulePackage.ROOT_COMPOSITION_REGION: return createRootCompositionRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
 			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
@@ -274,6 +274,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull LoadingRegion createLoadingRegion() {
+		LoadingRegionImpl loadingRegion = new LoadingRegionImpl();
+		return loadingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
@@ -431,17 +442,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull Role createRole() {
 		RoleImpl role = new RoleImpl();
 		return role;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull RootCompositionRegion createRootCompositionRegion() {
-		RootCompositionRegionImpl rootCompositionRegion = new RootCompositionRegionImpl();
-		return rootCompositionRegion;
 	}
 
 	/**

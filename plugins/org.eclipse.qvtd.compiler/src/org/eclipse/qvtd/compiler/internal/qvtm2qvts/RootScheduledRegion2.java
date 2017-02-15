@@ -33,9 +33,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.RootCompositionRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -45,7 +45,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 {
 	private final @NonNull ContentsAnalysis contentsAnalysis;
 
-	private final @NonNull RootCompositionRegion rootContainmentRegion;
+	private final @NonNull LoadingRegion rootContainmentRegion;
 	private final @NonNull RootMappingAnalysis rootAnalysis;
 
 	protected final @NonNull CompleteModel completeModel;
@@ -59,8 +59,8 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 		setScheduleModel(scheduleModel);
 		setName(name);
 		this.contentsAnalysis = new ContentsAnalysis(scheduleModel);
-		this.rootContainmentRegion = QVTscheduleFactory.eINSTANCE.createRootCompositionRegion();
-		((RootCompositionRegionImpl)rootContainmentRegion).setFixmeScheduleModel(scheduleModel);
+		this.rootContainmentRegion = QVTscheduleFactory.eINSTANCE.createLoadingRegion();
+		((LoadingRegionImpl)rootContainmentRegion).setFixmeScheduleModel(scheduleModel);
 		this.rootAnalysis = new RootMappingAnalysis(rootContainmentRegion);
 		this.completeModel = scheduleModel.getEnvironmentFactory().getCompleteModel();
 	}
@@ -109,7 +109,7 @@ public class RootScheduledRegion2 extends ScheduledRegionImpl
 	 * Create a RootContainmentRegion that introduces model elements directly from the input model root, or from
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
-	private @NonNull RootCompositionRegion createRootContainmentRegion() {
+	private @NonNull LoadingRegion createRootContainmentRegion() {
 		rootContainmentRegion.setInvokingRegion(this);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootContainmentRegion.writeDebugGraphs(null);

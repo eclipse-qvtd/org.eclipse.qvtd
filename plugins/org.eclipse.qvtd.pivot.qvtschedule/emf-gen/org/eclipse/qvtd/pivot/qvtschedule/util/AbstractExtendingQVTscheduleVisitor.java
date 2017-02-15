@@ -127,6 +127,11 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
 		return visitElement(object);
 	}
@@ -219,11 +224,6 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	@Override
 	public R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
 		return visitElement(object);
-	}
-
-	@Override
-	public R visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object) {
-		return visitRegion(object);
 	}
 
 	@Override

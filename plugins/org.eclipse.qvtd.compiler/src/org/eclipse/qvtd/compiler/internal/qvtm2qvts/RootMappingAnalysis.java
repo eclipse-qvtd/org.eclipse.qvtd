@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 
 /**
@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
  */
 public class RootMappingAnalysis
 {
-	protected final @NonNull RootCompositionRegion rootCompositionRegion;
+	protected final @NonNull LoadingRegion rootCompositionRegion;
 
 	/**
 	 * The null node that is the 'container' of all root model elements.
@@ -50,7 +50,7 @@ public class RootMappingAnalysis
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
 
-	public RootMappingAnalysis(@NonNull RootCompositionRegion rootCompositionRegion) {
+	public RootMappingAnalysis(@NonNull LoadingRegion rootCompositionRegion) {
 		this.rootCompositionRegion = rootCompositionRegion;
 	}
 

@@ -21,9 +21,9 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootCompositionRegion()
+ * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion()
  * @model
  * @generated
  */
-public interface RootCompositionRegion extends Region {
+public interface LoadingRegion extends Region {
 } // RootCompositionRegion

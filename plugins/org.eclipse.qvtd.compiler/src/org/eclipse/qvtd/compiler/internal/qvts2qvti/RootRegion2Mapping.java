@@ -45,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
@@ -63,7 +63,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	//	private final @NonNull Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = new HashMap<@NonNull NodeConnection, @NonNull ConnectionVariable>();
 
-	public RootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull RootCompositionRegion region) {
+	public RootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull LoadingRegion region) {
 		super(visitor, region);
 		//
 		//	Create domains

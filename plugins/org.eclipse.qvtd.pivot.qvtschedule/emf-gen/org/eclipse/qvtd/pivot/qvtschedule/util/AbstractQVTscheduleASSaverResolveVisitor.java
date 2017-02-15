@@ -131,6 +131,11 @@ public abstract class AbstractQVTscheduleASSaverResolveVisitor
 	}
 
 	@Override
+	public @Nullable Object visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public @Nullable Object visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
 		return visitElement(object);
 	}
@@ -223,11 +228,6 @@ public abstract class AbstractQVTscheduleASSaverResolveVisitor
 	@Override
 	public @Nullable Object visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
 		return visitElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object) {
-		return visitRegion(object);
 	}
 
 	@Override

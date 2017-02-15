@@ -131,6 +131,11 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
 		return visitElement(object);
 	}
@@ -223,11 +228,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
 		return visitElement(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object) {
-		return visitRegion(object);
 	}
 
 	@Override

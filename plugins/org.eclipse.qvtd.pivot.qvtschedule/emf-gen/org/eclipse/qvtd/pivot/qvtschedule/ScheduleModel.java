@@ -32,6 +32,30 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 public interface ScheduleModel extends Model
 {
 	/**
+	 * Returns the value of the '<em><b>Loading Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Loading Region</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Loading Region</em>' reference.
+	 * @see #setLoadingRegion(LoadingRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_LoadingRegion()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!loadingRegion'"
+	 * @generated
+	 */
+	LoadingRegion getLoadingRegion();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getLoadingRegion <em>Loading Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Loading Region</em>' reference.
+	 * @see #getLoadingRegion()
+	 * @generated
+	 */
+	void setLoadingRegion(LoadingRegion value);
+	/**
 	 * Returns the value of the '<em><b>Scheduled Region</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getScheduleModel <em>Schedule Model</em>}'.
 	 * <!-- begin-user-doc -->

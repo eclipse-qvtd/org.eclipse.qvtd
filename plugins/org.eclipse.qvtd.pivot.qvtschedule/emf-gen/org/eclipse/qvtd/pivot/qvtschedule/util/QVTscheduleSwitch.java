@@ -283,6 +283,19 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.LOADING_REGION: {
+				LoadingRegion loadingRegion = (LoadingRegion)theEObject;
+				T result = caseLoadingRegion(loadingRegion);
+				if (result == null) result = caseRegion(loadingRegion);
+				if (result == null) result = caseElement(loadingRegion);
+				if (result == null) result = caseGraphNode(loadingRegion);
+				if (result == null) result = caseNameable(loadingRegion);
+				if (result == null) result = caseSymbolable(loadingRegion);
+				if (result == null) result = caseToDOTable(loadingRegion);
+				if (result == null) result = caseVisitable(loadingRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.MAPPING_ACTION: {
 				MappingAction mappingAction = (MappingAction)theEObject;
 				T result = caseMappingAction(mappingAction);
@@ -500,19 +513,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				T result = caseRole(role);
 				if (result == null) result = caseElement(role);
 				if (result == null) result = caseVisitable(role);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTschedulePackage.ROOT_COMPOSITION_REGION: {
-				RootCompositionRegion rootCompositionRegion = (RootCompositionRegion)theEObject;
-				T result = caseRootCompositionRegion(rootCompositionRegion);
-				if (result == null) result = caseRegion(rootCompositionRegion);
-				if (result == null) result = caseElement(rootCompositionRegion);
-				if (result == null) result = caseGraphNode(rootCompositionRegion);
-				if (result == null) result = caseNameable(rootCompositionRegion);
-				if (result == null) result = caseSymbolable(rootCompositionRegion);
-				if (result == null) result = caseToDOTable(rootCompositionRegion);
-				if (result == null) result = caseVisitable(rootCompositionRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -822,21 +822,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root Composition Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root Composition Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRootCompositionRegion(RootCompositionRegion object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Schedule Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1058,6 +1043,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIteratorNode(IteratorNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Loading Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Loading Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLoadingRegion(LoadingRegion object) {
 		return null;
 	}
 

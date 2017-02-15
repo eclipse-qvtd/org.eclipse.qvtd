@@ -143,6 +143,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull IteratorNode createIteratorNode();
 
 	/**
+	 * Returns a new object of class '<em>Loading Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loading Region</em>'.
+	 * @generated
+	 */
+	@NonNull LoadingRegion createLoadingRegion();
+
+	/**
 	 * Returns a new object of class '<em>Mapping Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -276,15 +285,6 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull Role createRole();
-
-	/**
-	 * Returns a new object of class '<em>Root Composition Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Root Composition Region</em>'.
-	 * @generated
-	 */
-	@NonNull RootCompositionRegion createRootCompositionRegion();
 
 	/**
 	 * Returns a new object of class '<em>Schedule Model</em>'.

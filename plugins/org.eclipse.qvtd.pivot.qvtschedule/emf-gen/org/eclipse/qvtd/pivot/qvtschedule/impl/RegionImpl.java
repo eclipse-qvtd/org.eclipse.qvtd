@@ -2017,11 +2017,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return false;
 	} */
 
-	@Override
-	public boolean isChildCompositionRegion() {
-		return false;
-	}
-
 	/**
 	 * Return true if the predicates of calledNode are not in conflict with the navigable paths from callingNode.
 	 * called2calling identifies already identified conflict free pairs that do not need re-assessment.
@@ -2050,12 +2045,12 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public boolean isOperationRegion() {
+	public boolean isLoadingRegion() {
 		return false;
 	}
 
 	@Override
-	public boolean isRootCompositionRegion() {
+	public boolean isOperationRegion() {
 		return false;
 	}
 
@@ -2331,10 +2326,10 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 
 	@Override
 	public void writeDebugGraphs(@Nullable String context) {
-		ScheduleModel scheduler = getScheduleModel();
+		ScheduleModel scheduleModel = getScheduleModel();
 		String suffix = context != null ? "-" + context : null;
-		scheduler.writeDOTfile(this, suffix);
-		scheduler.writeGraphMLfile(this, suffix);
+		scheduleModel.writeDOTfile(this, suffix);
+		scheduleModel.writeGraphMLfile(this, suffix);
 	}
 
 } //RegionImpl

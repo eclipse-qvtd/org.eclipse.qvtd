@@ -252,9 +252,8 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	 * Return the regions that this region uses and how many times.
 	 */
 	@NonNull List<@NonNull NodeConnection> getUsedConnections();
-	boolean isChildCompositionRegion();
+	boolean isLoadingRegion();
 	boolean isOperationRegion();
-	boolean isRootCompositionRegion();
 	void refineBindings(@NonNull Region bindingRegion);
 	void removeCallToChild(@NonNull Region region);
 	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);

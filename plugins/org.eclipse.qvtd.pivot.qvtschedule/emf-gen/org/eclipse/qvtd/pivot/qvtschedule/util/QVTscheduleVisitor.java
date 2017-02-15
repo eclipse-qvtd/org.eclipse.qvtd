@@ -43,6 +43,7 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitInputNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull InputNode object);
 	R visitIteratedEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IteratedEdge object);
 	R visitIteratorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IteratorNode object);
+	R visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object);
 	R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object);
 	R visitMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingRegion object);
 	R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object);
@@ -62,7 +63,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitRecursionEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RecursionEdge object);
 	R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object);
 	R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object);
-	R visitRootCompositionRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootCompositionRegion object);
 	R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object);
 	R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object);
 	R visitTrueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TrueNode object);

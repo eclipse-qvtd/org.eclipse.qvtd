@@ -141,6 +141,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="InputNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratedEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratorNode" eSuperTypes="#//VariableNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
@@ -333,8 +334,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RootCompositionRegion" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadingRegion" eType="#//LoadingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
         containment="true" eOpposite="#//ScheduledRegion/scheduleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiRegion" eType="#//MultiRegion"

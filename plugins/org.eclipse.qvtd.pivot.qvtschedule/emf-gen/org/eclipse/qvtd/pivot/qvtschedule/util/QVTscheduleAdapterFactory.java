@@ -160,6 +160,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createIteratorNodeAdapter();
 			}
 			@Override
+			public Adapter caseLoadingRegion(LoadingRegion object) {
+				return createLoadingRegionAdapter();
+			}
+			@Override
 			public Adapter caseMappingAction(MappingAction object) {
 				return createMappingActionAdapter();
 			}
@@ -234,10 +238,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRole(Role object) {
 				return createRoleAdapter();
-			}
-			@Override
-			public Adapter caseRootCompositionRegion(RootCompositionRegion object) {
-				return createRootCompositionRegionAdapter();
 			}
 			@Override
 			public Adapter caseScheduleModel(ScheduleModel object) {
@@ -520,20 +520,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion <em>Root Composition Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion
-	 * @generated
-	 */
-	public Adapter createRootCompositionRegionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel <em>Schedule Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -740,6 +726,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion <em>Loading Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion
+	 * @generated
+	 */
+	public Adapter createLoadingRegionAdapter() {
 		return null;
 	}
 

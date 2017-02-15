@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -56,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getLoadingRegion <em>Loading Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getScheduledRegion <em>Scheduled Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getMultiRegion <em>Multi Region</em>}</li>
  * </ul>
@@ -63,6 +65,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * @generated
  */
 public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
+	/**
+	 * The cached value of the '{@link #getLoadingRegion() <em>Loading Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLoadingRegion()
+	 * @generated
+	 * @ordered
+	 */
+	protected LoadingRegion loadingRegion;
 	/**
 	 * The cached value of the '{@link #getScheduledRegion() <em>Scheduled Region</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -99,6 +110,44 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.SCHEDULE_MODEL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LoadingRegion getLoadingRegion() {
+		if (loadingRegion != null && loadingRegion.eIsProxy()) {
+			InternalEObject oldLoadingRegion = (InternalEObject)loadingRegion;
+			loadingRegion = (LoadingRegion)eResolveProxy(oldLoadingRegion);
+			if (loadingRegion != oldLoadingRegion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION, oldLoadingRegion, loadingRegion));
+			}
+		}
+		return loadingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LoadingRegion basicGetLoadingRegion() {
+		return loadingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLoadingRegion(LoadingRegion newLoadingRegion) {
+		LoadingRegion oldLoadingRegion = loadingRegion;
+		loadingRegion = newLoadingRegion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION, oldLoadingRegion, loadingRegion));
 	}
 
 	/**
@@ -235,6 +284,9 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
+				if (resolve) return getLoadingRegion();
+				return basicGetLoadingRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				return getScheduledRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:
@@ -251,6 +303,9 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
+				setLoadingRegion((LoadingRegion)newValue);
+				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				setScheduledRegion((ScheduledRegion)newValue);
 				return;
@@ -269,6 +324,9 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
+				setLoadingRegion((LoadingRegion)null);
+				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				setScheduledRegion((ScheduledRegion)null);
 				return;
@@ -287,6 +345,8 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
+				return loadingRegion != null;
 			case QVTschedulePackage.SCHEDULE_MODEL__SCHEDULED_REGION:
 				return scheduledRegion != null;
 			case QVTschedulePackage.SCHEDULE_MODEL__MULTI_REGION:

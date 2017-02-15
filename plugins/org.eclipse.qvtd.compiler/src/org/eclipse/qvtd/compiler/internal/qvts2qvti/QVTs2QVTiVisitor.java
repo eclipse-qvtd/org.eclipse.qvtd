@@ -54,7 +54,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -186,8 +186,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 		//		assert !region.isConnectionRegion();
-		if (region.isRootCompositionRegion()) {
-			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion)region);
+		if (region.isLoadingRegion()) {
+			region2mapping = new RootRegion2Mapping(this, (LoadingRegion)region);
 		}
 		else {
 			region2mapping = new BasicRegion2Mapping(this, region);
@@ -358,6 +358,18 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	@Override
+	public @Nullable Element visitLoadingRegion(@NonNull LoadingRegion loadingRegion) {
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(loadingRegion);
+		Mapping mapping = region2mapping.getMapping();
+		//		for (@SuppressWarnings("null")@NonNull List<Node> headNodes : rootContainmentRegion.getHeadNodeGroups()) {
+		//			Node headNode = selectHeadNode(headNodes);
+		//			Variable headVariable = region2mapping.getGuardVariable(headNode);
+		//			getGuardPattern(mapping).getVariable().add(guardVariable);
+		//		}
+		return mapping;
+	}
+
+	@Override
 	public @Nullable Element visitMappingRegion(@NonNull MappingRegion mappingRegion) {
 		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mappingRegion);
 		return region2mapping.getMapping();
@@ -386,18 +398,6 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	@Override
 	public Element visitRegion(@NonNull Region region) {
 		return visiting(region);
-	}
-
-	@Override
-	public @Nullable Element visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(rootCompositionRegion);
-		Mapping mapping = region2mapping.getMapping();
-		//		for (@SuppressWarnings("null")@NonNull List<Node> headNodes : rootContainmentRegion.getHeadNodeGroups()) {
-		//			Node headNode = selectHeadNode(headNodes);
-		//			Variable headVariable = region2mapping.getGuardVariable(headNode);
-		//			getGuardPattern(mapping).getVariable().add(guardVariable);
-		//		}
-		return mapping;
 	}
 
 	@Override
