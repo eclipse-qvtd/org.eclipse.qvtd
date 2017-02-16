@@ -28,8 +28,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameAdapter;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
@@ -278,11 +278,23 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduleModel(this);
 	}
 
+	/**
+	 * Map reserving a unique symbol name per region or connection.
+	 */
+	private @Nullable SymbolNameAdapter symbolNameAdapter = null;
+
 	@Override
-	public @NonNull String reserveSymbolName(
-			@NonNull SymbolNameBuilder symbolNameBuilder,
-			@NonNull Symbolable symbolable) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
+	public @NonNull SymbolNameAdapter getSymbolNameAdapter() {
+		SymbolNameAdapter symbolNameAdapter2 = symbolNameAdapter;
+		if (symbolNameAdapter2 == null) {
+			symbolNameAdapter = symbolNameAdapter2 = SymbolNameAdapter.get(this);
+		}
+		return symbolNameAdapter2;
+	}
+
+	@Override
+	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object) {
+		return getSymbolNameAdapter().reserveSymbolName(symbolNameBuilder, object);
 	}
 
 	@Override

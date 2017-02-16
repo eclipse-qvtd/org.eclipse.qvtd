@@ -52,8 +52,7 @@ public class RegionAnalysis implements Adapter
 		return adapter;
 	}
 
-	//	protected @NonNull QVTs2QVTs qvts2qvts;
-	protected @NonNull Region region;
+	protected final @NonNull Region region;
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -65,9 +64,8 @@ public class RegionAnalysis implements Adapter
 	 */
 	private @Nullable Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges = null;
 
-	public RegionAnalysis(/*@NonNull QVTs2QVTs qvts2qvts,*/ @NonNull Region region) {
+	public RegionAnalysis(@NonNull Region region) {
 		region.eAdapters().add(this);
-		//		this.qvts2qvts = qvts2qvts;
 		this.region = region;
 	}
 

@@ -132,7 +132,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 
 	protected void resolveTransformation(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
 		QVTm2QVTs scheduleModel = (QVTm2QVTs) scheduledRegion.getScheduleModel();
-		SymbolNameReservation symbolNameReservation = scheduleModel.getSymbolNameReservation();
+		SymbolNameReservation symbolNameReservation = scheduleModel.getSymbolNameAdapter();
 		Transformation transformation = scheduleModel.getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, environmentFactory, transformation, symbolNameReservation);
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);

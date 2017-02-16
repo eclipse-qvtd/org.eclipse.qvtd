@@ -58,10 +58,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 public abstract class ScheduleModel2 extends ScheduleModelImpl
 {
@@ -99,11 +96,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 	 * Property used as an argument role identification.
 	 */
 	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<String, Property>();
-
-	/**
-	 * Map reserving a unique symbol name per region or connection.
-	 */
-	private @NonNull SymbolNameReservation symbolNameReservation = new SymbolNameReservation();
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
@@ -306,10 +298,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return transformation;
 	}
 
-	public @NonNull SymbolNameReservation getSymbolNameReservation() {
-		return symbolNameReservation;
-	}
-
 	/**
 	 * Return true if a mapping may assign this property in an input model.
 	 */
@@ -340,11 +328,6 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		DomainUsage usage = getDomainUsage(sourceVariable);
 		assert usage != null;
 		return !usage.isOutput();
-	}
-
-	@Override
-	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Symbolable symbolable) {
-		return symbolNameReservation.reserveSymbolName(symbolNameBuilder, symbolable);
 	}
 
 	@Override

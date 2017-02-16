@@ -98,6 +98,19 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @generated
 	 */
 	@Override
+	public void setSymbolName(String newSymbolName) {
+		String oldSymbolName = symbolName;
+		symbolName = newSymbolName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__SYMBOL_NAME, oldSymbolName, symbolName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ScheduledRegion getRegion() {
 		if (eContainerFeatureID() != QVTschedulePackage.CONNECTION__REGION) return null;
 		return (ScheduledRegion)eInternalContainer();
@@ -203,6 +216,9 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
+				setSymbolName((String)newValue);
+				return;
 			case QVTschedulePackage.CONNECTION__REGION:
 				setRegion((ScheduledRegion)newValue);
 				return;
@@ -218,6 +234,9 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
+				setSymbolName(SYMBOL_NAME_EDEFAULT);
+				return;
 			case QVTschedulePackage.CONNECTION__REGION:
 				setRegion((ScheduledRegion)null);
 				return;

@@ -22,7 +22,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -279,7 +278,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected @NonNull ContentsAnalysis getContentsAnalysis() {
 		ContentsAnalysis contentsAnalysis2 = contentsAnalysis;
 		if (contentsAnalysis2 == null) {
-			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis((ScheduleModel2)RegionUtil.getScheduleModel(scheduledRegion));
+			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(RegionUtil.getScheduleModel(scheduledRegion));
 			for (@NonNull Region region : allRegions) {
 				contentsAnalysis2.addRegion(region);
 			}

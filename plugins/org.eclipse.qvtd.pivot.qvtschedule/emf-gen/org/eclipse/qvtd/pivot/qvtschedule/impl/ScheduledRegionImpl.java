@@ -15,10 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -31,30 +28,21 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 
 /**
  * <!-- begin-user-doc -->
@@ -383,76 +371,11 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduledRegion(this);
 	}
 
-	/**
-	 * The per-class node connections that unite a set of sources via a shared connection.
-	 */
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatum2nodes2nodeConnections = new HashMap<>();
-
-	/**
-	 * The edge connections that unite a set of sources via a shared connection.
-	 */
-	private final @NonNull Map<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<>();
-
 	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendName(name);
 		return s;
-	}
-
-	protected @NonNull EdgeConnection createEdgeConnection(@NonNull  Set<@NonNull NavigableEdge> sourceSet, @NonNull Property property, @NonNull SymbolNameBuilder s) {
-		assert !property.isIsImplicit();
-		EdgeConnection connection = QVTscheduleFactory.eINSTANCE.createEdgeConnection();
-
-		//		protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull String name) {
-		connection.setRegion(this);
-		connection.setName(getScheduleModel().reserveSymbolName(s, connection));
-		connection.getSourceEnds().addAll(sourceSet);
-		//		}
-
-		//		public EdgeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull String name, @NonNull Property property) {
-		//			super(region, sourceEdges, name);
-		connection.setProperty(property);
-		for (@NonNull NavigableEdge sourceEdge : sourceSet) {
-			sourceEdge.addOutgoingConnection(connection);
-		}
-		//		}
-		//		return new EdgeConnectionImpl(this, sourceSet, s, property);
-		return connection;
-	}
-
-	protected @NonNull NodeConnection createNodeConnection(@NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
-		NodeConnection connection = QVTscheduleFactory.eINSTANCE.createNodeConnection();
-		connection.setRegion(this);
-		connection.getSourceEnds().addAll(sourceSet);
-		connection.setName(getScheduleModel().reserveSymbolName(s, connection));
-		connection.setClassDatum(classDatum);
-		for (@NonNull Node sourceNode : sourceSet) {
-			//			assert !sourceNode.isConstant();
-			sourceNode.addOutgoingConnection(connection);
-		}
-		return connection;
-	}
-
-	@Override
-	public @NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatum classDatum) {
-		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
-		if (nodes2connection == null) {
-			nodes2connection = new HashMap<>();
-			classDatum2nodes2nodeConnections.put(classDatum, nodes2connection);
-		}
-		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
-		NodeConnection connection = nodes2connection.get(sourceSet);
-		if (connection == null) {
-			SymbolNameBuilder s = new SymbolNameBuilder();
-			s.appendString("ja_");
-			s.appendName(owningClass.getName());
-			s.appendString("_");
-			s.appendName(property.getName());
-			connection = createNodeConnection(sourceSet, classDatum, s);
-			nodes2connection.put(sourceSet, connection);
-		}
-		return connection;
 	}
 
 	@Override
@@ -461,55 +384,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	}
 
 	@Override
-	public @NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
-		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
-		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
-		if (connection == null) {
-			SymbolNameBuilder s = new SymbolNameBuilder();
-			s.appendString("je_");
-			s.appendName(property.getOwningClass().getName());
-			s.appendString("_");
-			s.appendName(property.getName());
-			connection = createEdgeConnection(sourceSet, property, s);
-			edges2edgeConnection.put(sourceSet, connection);
-		}
-		return connection;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections() {
-		return Iterables.filter(getConnections(), EdgeConnection.class);
-	}
-
-	@Override
 	public @NonNull List<Node> getHeadNodes() {
 		return QVTscheduleConstants.EMPTY_NODE_LIST;
-	}
-
-	@Override
-	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage) {
-		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
-		if (nodes2connection == null) {
-			nodes2connection = new HashMap<>();
-			classDatum2nodes2nodeConnections.put(classDatum, nodes2connection);
-		}
-		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
-		NodeConnection connection = nodes2connection.get(sourceSet);
-		if (connection == null) {
-			SymbolNameBuilder s = new SymbolNameBuilder();
-			s.appendString("j");
-			s.appendString(domainUsage.isInput() ? "i" : domainUsage.isOutput() ? "o" : "m");
-			s.appendString("_");
-			s.appendName(classDatum.getCompleteClass().getName());
-			connection = createNodeConnection(sourceSet, classDatum, s);
-			nodes2connection.put(sourceSet, connection);
-		}
-		return connection;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull NodeConnection> getNodeConnections() {
-		return Iterables.filter(getConnections(), NodeConnection.class);
 	}
 
 	@Override
@@ -530,31 +406,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	protected @NonNull String getSymbolNamePrefix() {
 		return "s_";
 	}
-
-	/*	@Override
-	public void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode) {
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(connection);
-		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatum2nodes2nodeConnections.get(classDatum);
-		assert nodes2connections != null;
-		Set<@NonNull Node> newSourceNodes = new HashSet<>();
-		Iterables.addAll(newSourceNodes, QVTscheduleUtil.getSourceEnds(connection));
-		NodeConnection oldConnection = nodes2connections.remove(newSourceNodes);
-		assert oldConnection == connection;
-		newSourceNodes.removeAll(obsoleteSourceNodes);
-		newSourceNodes.add(newSourceNode);
-		NodeConnection newConnection = getNodeConnection(newSourceNodes, classDatum);
-		for (@NonNull Node targetNode : oldConnection.getTargetNodes()) {
-			ConnectionRole connectionRole = oldConnection.getConnectionRole(targetNode);
-			if (connectionRole.isPassed()) {
-				newConnection.addPassedTargetNode(targetNode);
-			}
-			else {
-				newConnection.addUsedTargetNode(targetNode, false);			// FIXME mandatory
-			}
-		}
-		oldConnection.destroy();
-	} */
-
 
 	@Override
 	public void toCallGraph(@NonNull GraphStringBuilder s) {
@@ -587,45 +438,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		}
 		s.popCluster();
 	}
-
-	/**
-	 * After cycles have been removed, split looped connection variables to isolate the unlooping base case, from the/each looping case.
-	 *
-	protected void splitConnectionVariables() {
-		for (@NonNull NodeConnection connection : getNodeConnections()) { //Lists.newArrayList(getNodeConnections())) {
-			if (connection.isPassed()) {
-				Set<@NonNull Region> loopRegions = null;
-				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
-					if (!sourceRegion.isChildCompositionRegion()) {
-						for (@NonNull Region targetRegion : connection.getTargetRegions()) {
-							if (sourceRegion == targetRegion) {
-								if (loopRegions == null) {
-									loopRegions = new HashSet<>();
-								}
-								loopRegions.add(sourceRegion);
-							}
-						}
-					}
-				}
-				if (loopRegions != null) {
-					ClassDatumAnalysis classDatumAnalysis = connection.getClassDatumAnalysis();
-					List<@NonNull Node> allSourceNodes = new ArrayList<>();
-					Iterables.addAll(allSourceNodes, connection.getSources());
-					for (@NonNull Region loopRegion : loopRegions) {
-						Node sourceNode = connection.getSource(loopRegion);
-						Node targetNode = connection.getTarget(loopRegion);
-						targetNode.removeIncomingConnection(connection);
-						connection.removeTarget(targetNode);
-						Set<@NonNull Node> selectedSourceNodes = new HashSet<>(allSourceNodes);
-						selectedSourceNodes.remove(sourceNode);
-						NodeConnection loopConection = getNodeConnection(selectedSourceNodes, classDatumAnalysis);
-						loopConection.addPassedTargetNode(targetNode);
-						RegionUtil.createRecursionEdge(sourceNode, targetNode, true);
-					}
-				}
-			}
-		}
-	} */
 
 	@Override
 	public void toRegionGraph(@NonNull GraphStringBuilder s) {

@@ -43,6 +43,9 @@ public class QVTscheduleConstants
 	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
 	public static final @NonNull String MIDDLE_DOMAIN_NAME = "middle";
 
+	public static final @NonNull String REGION_SYMBOL_NAME_PREFIX = "m_";
+	public static final @NonNull String REGION_SYMBOL_NAME_SUFFIX = "";
+
 	public static final @NonNull String EQUALS_NAME = "«equals»";
 	public static final @NonNull String IF_CONDITION_NAME = "«condition»";
 	public static final @NonNull String IF_ELSE_NAME = "«else»";

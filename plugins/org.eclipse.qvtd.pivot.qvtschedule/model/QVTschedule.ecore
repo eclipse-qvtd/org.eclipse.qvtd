@@ -300,7 +300,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrueNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownNode" eSuperTypes="#//Node"/>

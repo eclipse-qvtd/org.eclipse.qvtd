@@ -55,6 +55,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
@@ -151,6 +152,19 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 * @generated
 	 */
 	@Override
+	public void setSymbolName(String newSymbolName) {
+		String oldSymbolName = symbolName;
+		symbolName = newSymbolName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__SYMBOL_NAME, oldSymbolName, symbolName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.REGION__SYMBOL_NAME:
@@ -177,6 +191,9 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.REGION__SYMBOL_NAME:
+				setSymbolName((String)newValue);
+				return;
 			case QVTschedulePackage.REGION__EDGES:
 				getEdges().clear();
 				getEdges().addAll((Collection<? extends Edge>)newValue);
@@ -203,6 +220,9 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.REGION__SYMBOL_NAME:
+				setSymbolName(SYMBOL_NAME_EDEFAULT);
+				return;
 			case QVTschedulePackage.REGION__EDGES:
 				getEdges().clear();
 				return;
@@ -1130,6 +1150,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 */
 	@Override
 	public void setRegion(Region newRegion) {
+		assert symbolName != null;
 		Region oldRegion = region;
 		region = newRegion;
 		if (eNotificationRequired())
@@ -1137,11 +1158,11 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	protected @NonNull String getSymbolNamePrefix() {
-		return "m_";
+		return QVTscheduleConstants.REGION_SYMBOL_NAME_PREFIX;
 	}
 
 	protected @NonNull String getSymbolNameSuffix() {
-		return "";
+		return QVTscheduleConstants.REGION_SYMBOL_NAME_SUFFIX;
 	}
 
 	@Override
