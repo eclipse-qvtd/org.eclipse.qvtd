@@ -20,12 +20,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,8 +75,10 @@ public class PatternVariableNodeImpl extends VariableNodeImpl implements Pattern
 	private boolean isMatched;
 
 	@Override
-	public @NonNull VariableNodeImpl createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatum(this), getVariable(), isMatched);
+	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
+		PatternVariableNodeImpl node = (PatternVariableNodeImpl)super.createNode(nodeRole, region);
+		node.isMatched = isMatched;
+		return node;
 	}
 
 	@Override

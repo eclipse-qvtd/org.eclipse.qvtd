@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -596,6 +597,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
+		NodeImpl node = (NodeImpl)QVTscheduleFactory.eINSTANCE.create(eClass());
+		node.initialize(nodeRole, region, name, classDatum);
+		return node;
+	}
+
+	@Override
 	public void destroy() {
 		assert getRegion() != null;
 		//		region.removeNode(this);
@@ -955,6 +963,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum) {
+		//	public void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
+		//			assert name != null;
+		//			assert classDatum != null;
 		setNodeRole(nodeRole);
 		setRegion(region);
 		setName(name);

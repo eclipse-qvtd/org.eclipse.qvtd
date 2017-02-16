@@ -2890,13 +2890,22 @@ public interface QVTschedulePackage extends EPackage {
 	int VARIABLE_NODE__REGION = NODE__REGION;
 
 	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__VARIABLE = NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Variable Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+	int VARIABLE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3032,6 +3041,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_NODE__REGION = VARIABLE_NODE__REGION;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__VARIABLE = VARIABLE_NODE__VARIABLE;
 
 	/**
 	 * The number of structural features of the '<em>Iterator Node</em>' class.
@@ -4622,6 +4640,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_VARIABLE_NODE__REGION = VARIABLE_NODE__REGION;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__VARIABLE = VARIABLE_NODE__VARIABLE;
 
 	/**
 	 * The number of structural features of the '<em>Pattern Variable Node</em>' class.
@@ -6553,6 +6580,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getVariableNode();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.VariableNode#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.VariableNode#getVariable()
+	 * @see #getVariableNode()
+	 * @generated
+	 */
+	EReference getVariableNode_Variable();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage <em>Domain Usage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7724,6 +7762,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE_NODE = eINSTANCE.getVariableNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_NODE__VARIABLE = eINSTANCE.getVariableNode_Variable();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage <em>Domain Usage</em>}' class.

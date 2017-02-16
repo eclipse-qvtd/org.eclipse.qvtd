@@ -14,11 +14,17 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
@@ -193,6 +199,16 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitBasicMappingRegion(this);
 	}
 
+	/**
+	 * The node for each navigable VariableDeclaration.
+	 */
+	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> variable2node = new HashMap<>();
+
+	@Override
+	public void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node) {
+		variable2node.put(variable, node);
+	}
+
 	@Override
 	public void computeUtilities(@NonNull Iterable<@NonNull Node> headNodes) {
 		super.computeUtilities(headNodes);
@@ -206,5 +222,9 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public String getName() {
 		return QVTscheduleUtil.getMapping(this).getName();
+	}
+
+	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
+		return variable2node.get(typedElement);
 	}
 } //BasicMappingRegionImpl

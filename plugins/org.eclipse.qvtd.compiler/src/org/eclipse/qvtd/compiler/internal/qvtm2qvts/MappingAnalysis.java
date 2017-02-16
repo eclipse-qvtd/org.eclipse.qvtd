@@ -11,10 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -50,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -59,19 +58,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  */
 public class MappingAnalysis implements Nameable
 {
-	public final class MappingAnalysisRegion extends BasicMappingRegionImpl
-	{
-		public MappingAnalysisRegion(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
-			setFixmeScheduleModel(scheduleModel);
-			setMapping(mapping);
-		}
-
-		@Override			// FIXME eliminate this klunky callback
-		public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
-			MappingAnalysis.this.addVariableNode(typedElement, simpleNode);
-		}
-	}
-
 	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull Mapping mapping) {
 		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager.getScheduleModel(), mapping);
 		@SuppressWarnings("unused")String name = mappingAnalysis.getMappingRegion().getName();
@@ -105,17 +91,14 @@ public class MappingAnalysis implements Nameable
 	private final @NonNull List<@NonNull NavigationAssignment> navigationAssignments = new ArrayList<>();
 
 	/**
-	 * The node for each navigable VariableDeclaration.
-	 */
-	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> variable2node = new HashMap<>();
-
-	/**
 	 * The dependency heads to accommodate operation content.
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
 	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
-		this.mappingRegion = new MappingAnalysisRegion(scheduleModel, mapping);
+		this.mappingRegion = (BasicMappingRegionImpl) QVTscheduleFactory.eINSTANCE.createBasicMappingRegion();
+		mappingRegion.setFixmeScheduleModel(scheduleModel);
+		mappingRegion.setMapping(mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
@@ -135,11 +118,6 @@ public class MappingAnalysis implements Nameable
 				}
 			}
 		}
-	}
-
-	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
-		//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
-		variable2node.put(typedElement, simpleNode);
 	}
 
 	/**
@@ -225,10 +203,10 @@ public class MappingAnalysis implements Nameable
 	protected void analyzeGuardVariables() {
 		for (@NonNull GuardPattern guardPattern : guardPatterns) {
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
-				Node guardNode = getNode(guardVariable);
+				Node guardNode = mappingRegion.getNode(guardVariable);
 				assert guardNode == null;
 				guardNode = RegionUtil.createOldNode(mappingRegion, guardVariable);
-				assert guardNode == getNode(guardVariable);
+				assert guardNode == mappingRegion.getNode(guardVariable);
 			}
 		}
 	}
@@ -295,10 +273,10 @@ public class MappingAnalysis implements Nameable
 	protected void analyzeRealizedVariables() {
 		for (@NonNull BottomPattern bottomPattern : bottomPatterns) {
 			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
-				Node realizedNode = getNode(realizedVariable);
+				Node realizedNode = mappingRegion.getNode(realizedVariable);
 				assert realizedNode == null;
 				realizedNode = RegionUtil.createRealizedStepNode(mappingRegion, realizedVariable);
-				assert realizedNode == getNode(realizedVariable);
+				assert realizedNode == mappingRegion.getNode(realizedVariable);
 			}
 		}
 	}
@@ -361,7 +339,7 @@ public class MappingAnalysis implements Nameable
 			}
 		}
 		initNode.addTypedElement(variable);
-		addVariableNode(variable, initNode);
+		mappingRegion.addVariableNode(variable, initNode);
 		return initNode;
 	}
 
@@ -393,10 +371,6 @@ public class MappingAnalysis implements Nameable
 	@Override
 	public @NonNull String getName() {
 		return RegionUtil.getName(mappingRegion);
-	}
-
-	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
-		return variable2node.get(typedElement);
 	}
 
 	/**
@@ -465,7 +439,7 @@ public class MappingAnalysis implements Nameable
 	}
 
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
-		Node node = variable2node.get(variableDeclaration);
+		Node node = mappingRegion.getNode(variableDeclaration);
 		if (node == null) {
 			if (variableDeclaration instanceof Variable) {
 				Variable variable = (Variable)variableDeclaration;
@@ -500,7 +474,7 @@ public class MappingAnalysis implements Nameable
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
-		Node node = getNode(typedElement);
+		Node node = mappingRegion.getNode(typedElement);
 		if (node == null) {
 			node = RegionUtil.createUnknownNode(mappingRegion, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);

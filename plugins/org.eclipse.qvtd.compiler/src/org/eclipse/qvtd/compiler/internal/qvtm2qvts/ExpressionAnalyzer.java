@@ -624,7 +624,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(ownedVariable);
 		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatumAnalysis);
 		if (actualClass.conformsTo(requiredClass)) {
-			context.addVariableNode(ownedVariable, initNode);
+			context.getMappingRegion().addVariableNode(ownedVariable, initNode);
 			initNode.addTypedElement(ownedVariable);
 		}
 		else {

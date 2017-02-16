@@ -29,7 +29,6 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.MappingAnalysisRegion;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
@@ -37,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
@@ -223,7 +223,7 @@ public class UMLXCompilerTests extends LoadTestCase
 					"Forward2Reverse.umlx", "reverse",
 					"http://www.eclipse.org/qvtd/umlx/tests/forward2reverse/Forward2Reverse", false);//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
-			myQVT.assertRegionCount(MappingAnalysisRegion.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 5);

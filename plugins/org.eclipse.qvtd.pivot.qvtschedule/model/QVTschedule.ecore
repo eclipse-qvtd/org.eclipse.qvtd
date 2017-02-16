@@ -306,7 +306,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrueNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableNode" abstract="true" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableNode" abstract="true" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Phase">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing&#xA;certainty, allowing the earlier to be chosen by a merge.&#xA;&#xA;NEW = REALIZED || SPECULATION&#xA;OLD = CONSTANT || LOADED || PREDICATED || SPECULATED"/>

@@ -160,7 +160,9 @@
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//TrueNode"/>
     <genClasses ecoreClass="QVTschedule.ecore#//UnknownNode"/>
-    <genClasses ecoreClass="QVTschedule.ecore#//VariableNode"/>
+    <genClasses ecoreClass="QVTschedule.ecore#//VariableNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//VariableNode/variable"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//DomainUsage"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//GraphEdge"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//GraphNode"/>

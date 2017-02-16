@@ -98,6 +98,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ScheduleModel = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ScheduleModel", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ScheduledRegion = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ScheduledRegion", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedModel = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableDeclaration = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_Phase = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Phase");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_ClassDatum = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ClassDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_DatumConnection = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_DatumConnection);
@@ -879,6 +880,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _ScheduledRegion__scheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__SCHEDULE_MODEL, Types._ScheduledRegion, 3);
 
 		public static final @NonNull ExecutorProperty _Symbolable__symbolName = new EcoreExecutorProperty(QVTschedulePackage.Literals.SYMBOLABLE__SYMBOL_NAME, Types._Symbolable, 0);
+
+		public static final @NonNull ExecutorProperty _VariableNode__variable = new EcoreExecutorProperty(QVTschedulePackage.Literals.VARIABLE_NODE__VARIABLE, Types._VariableNode, 0);
 		static {
 			Init.initEnd();
 		}
@@ -3832,7 +3835,8 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,
 			QVTscheduleTables.Properties._Node__outgoingEdges,
-			QVTscheduleTables.Properties._Node__region
+			QVTscheduleTables.Properties._Node__region,
+			QVTscheduleTables.Properties._VariableNode__variable
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LoadingRegion = {
@@ -3979,7 +3983,8 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,
 			QVTscheduleTables.Properties._Node__outgoingEdges,
-			QVTscheduleTables.Properties._Node__region
+			QVTscheduleTables.Properties._Node__region,
+			QVTscheduleTables.Properties._VariableNode__variable
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Phase = {};
@@ -4083,7 +4088,8 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,
 			QVTscheduleTables.Properties._Node__outgoingEdges,
-			QVTscheduleTables.Properties._Node__region
+			QVTscheduleTables.Properties._Node__region,
+			QVTscheduleTables.Properties._VariableNode__variable
 		};
 
 		/**

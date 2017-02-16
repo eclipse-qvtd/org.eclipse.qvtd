@@ -397,7 +397,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {}
+	public void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node) {}
 
 	@Override
 	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
