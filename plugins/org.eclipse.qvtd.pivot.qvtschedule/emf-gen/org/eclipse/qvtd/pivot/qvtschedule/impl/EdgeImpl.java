@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -566,6 +567,13 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
+	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		EdgeImpl edge = (EdgeImpl)QVTscheduleFactory.eINSTANCE.create(eClass());
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
+	}
+
+	@Override
 	public void destroy() {
 		Node sourceNode2 = this.sourceNode;
 		Node targetNode2 = this.targetNode;
@@ -634,7 +642,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		return isMatched() ? null : "dashed";
 	}
 
-	protected void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	@Override
+	public void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		setRegion(QVTscheduleUtil.getRegion(sourceNode));
 		setEdgeRole(edgeRole);
 		setName(name);

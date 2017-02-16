@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
 public interface NavigableEdge extends Edge, ConnectionEnd
@@ -130,12 +129,6 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 */
 	void setOppositeEdge(NavigableEdge value);
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
-
-	/**
-	 * Create an edgeRole edge from sourceNode to targetNode with the same property as this edge.	 * @param edgeRole
-	 */
-	@Override
-	@NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
 
 	@Override
 	@NonNull NavigableEdge getForwardEdge();

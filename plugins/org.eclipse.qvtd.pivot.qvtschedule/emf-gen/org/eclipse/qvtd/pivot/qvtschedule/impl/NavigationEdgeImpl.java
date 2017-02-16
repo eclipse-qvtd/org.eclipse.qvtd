@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -181,36 +182,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNavigationEdge(this);
 	}
-	private static @NonNull NavigationEdgeImpl create(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		if ("outTransition".equals(source2targetProperty.getName())) {
-			edgeRole.toString();
-		}
-		NavigationEdgeImpl edge = new NavigationEdgeImpl();
-		edge.initialize(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
-		return edge;
-	}
-
-	/**
-	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
-	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
-	 */
-	public static @NonNull NavigableEdge createEdge(@NonNull Role edgeRole,
-			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		NavigationEdgeImpl forwardEdge = create(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
-		Property target2sourceProperty = source2targetProperty.getOpposite();
-		if ((target2sourceProperty != null) && !targetNode.isExplicitNull()) {
-			assert (targetNode.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial == Boolean.TRUE);
-			if (!source2targetProperty.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
-				NavigationEdgeImpl reverseEdge = create(edgeRole, targetNode, target2sourceProperty, sourceNode, isPartial);
-				forwardEdge.initializeOpposite(reverseEdge);
-			}
-		}
-		return forwardEdge;
-	}
 
 	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return createEdge(edgeRole, sourceNode, QVTscheduleUtil.getProperty(this), targetNode, isPartial);
+	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		NavigationEdge edge = (NavigationEdge)super.createEdge(edgeRole, sourceNode, targetNode);
+		edge.initializeProperty(QVTscheduleUtil.getProperty(this), isPartial());
+		return edge;
 	}
 
 	@Override
@@ -223,11 +200,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		}
 	}
 
-	public void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty,
-			@NonNull Node targetNode, @Nullable Boolean isPartial) {
-		super.initialize(edgeRole, sourceNode, source2targetProperty, targetNode);
+	private void initializeIsPartial(@Nullable Boolean isPartial) {
 		boolean isComputedPartial = false;
-		Type propertyTargetType = PivotUtil.getType(source2targetProperty);
+		Type propertyTargetType = PivotUtil.getType(QVTscheduleUtil.getProperty(this));
 		CompleteClass targetClass = targetNode.getCompleteClass();
 		if (!targetClass.conformsTo(propertyTargetType)) {
 			if (propertyTargetType instanceof CollectionType) {
@@ -242,6 +217,30 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		}
 		assert isPartial == isComputedPartial;
 		setPartial(isPartial);
+	}
+
+	@Override
+	public void initializeProperty(@NonNull Property property, @Nullable Boolean isPartial) {
+		setProperty(property);
+		Property target2sourceProperty = property.getOpposite();
+		if (target2sourceProperty != null)  {
+			Node targetNode2 = targetNode;
+			assert targetNode2 != null;
+			if (!targetNode2.isExplicitNull()) {
+				assert (targetNode2.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial() == Boolean.TRUE);
+				if (!property.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
+					Role edgeRole2 = edgeRole;
+					Node sourceNode2 = sourceNode;
+					assert (edgeRole2 != null) && (sourceNode2 != null);
+					NavigationEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
+					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
+					reverseEdge.setProperty(target2sourceProperty);
+					((NavigationEdgeImpl)reverseEdge).initializeIsPartial(isPartial());
+					initializeOpposite(reverseEdge);
+				}
+			}
+		}
+		initializeIsPartial(isPartial);
 	}
 
 	@Override

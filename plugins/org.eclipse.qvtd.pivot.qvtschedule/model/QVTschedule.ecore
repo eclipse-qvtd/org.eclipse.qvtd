@@ -226,7 +226,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//PropertyDatum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//ToDOTable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
         eType="#//Edge" containment="true" eOpposite="#//Edge/region"/>

@@ -42,33 +42,33 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
+import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
+import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.ExpressionEdgeImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.IteratedEdgeImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RegionUtil extends QVTscheduleUtil
@@ -90,12 +90,31 @@ public class RegionUtil extends QVTscheduleUtil
 		}
 		return true;
 	}
+
 	public static @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		Phase phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode)).getPhase();
 		assert phase != null;
 		Role edgeRole = getEdgeRole(phase);
-		return CastEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
+		CastEdge castEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
+		castEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
+		castEdge.initializeProperty(source2targetProperty);
+		return castEdge;
 	}
+
+	/**
+	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
+	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
+	 */
+	public static @NonNull NavigableEdge createEdge(@NonNull Role edgeRole,
+			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		CastEdge castEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
+		castEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
+		castEdge.initializeProperty(source2targetProperty);
+		return castEdge;
+	}
+
+
+
 	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Role nodeRole = getNodeRole(Phase.LOADED);
 		ComposedNode node = QVTscheduleFactory.eINSTANCE.createComposedNode();
@@ -176,7 +195,9 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
 		Role edgeRole = getEdgeRole(getPhase(getNodeRole(sourceNode)));
-		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
 	}
 
 	public static @NonNull Node createInputNode(@NonNull Region region, @NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -188,7 +209,9 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name,@NonNull Node targetNode) {
 		Role edgeRole = getEdgeRole(getPhase(getNodeRole(sourceNode)));
-		return IteratedEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+		IteratedEdge edge = QVTscheduleFactory.eINSTANCE.createIteratedEdge();
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
 	}
 
 	public static @NonNull VariableNode createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
@@ -226,7 +249,10 @@ public class RegionUtil extends QVTscheduleUtil
 		Phase phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode)).getPhase();
 		assert phase != null;
 		Role edgeRole = getEdgeRole(phase);
-		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
+		NavigationEdge edge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
+		edge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
+		edge.initializeProperty(source2targetProperty, isPartial);
+		return edge;
 	}
 
 	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
@@ -317,7 +343,9 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		Role edgeRole = getEdgeRole(getPhase(getNodeRole(sourceNode)));
-		return PredicateEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+		PredicateEdge edge = QVTscheduleFactory.eINSTANCE.createPredicateEdge();
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
 	}
 
 	public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -327,12 +355,17 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		Role edgeRole = getEdgeRole(Phase.REALIZED);
-		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
 	}
 
 	public static @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		Role edgeRole = getEdgeRole(Phase.REALIZED);
-		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
+		NavigationEdge forwardEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
+		forwardEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
+		forwardEdge.initializeProperty(source2targetProperty, isPartial);
+		return forwardEdge;
 	}
 
 	public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
@@ -347,7 +380,10 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Edge createRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {
 		Role edgeRole = getEdgeRole(Phase.OTHER);
-		return RecursionEdgeImpl.create(edgeRole, sourceNode, targetNode, isPrimary);
+		RecursionEdge edge = QVTscheduleFactory.eINSTANCE.createRecursionEdge();
+		edge.initialize(edgeRole, sourceNode, null, targetNode);
+		edge.setPrimary(isPrimary);
+		return edge;
 	}
 
 	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {

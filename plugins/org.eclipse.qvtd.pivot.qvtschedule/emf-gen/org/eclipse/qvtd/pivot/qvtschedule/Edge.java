@@ -189,7 +189,7 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	/**
 	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
 	 */
-	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial);
+	@NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
 
 	void destroy();
 
@@ -229,6 +229,8 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	 */
 	@Override
 	@NonNull Node getEdgeTarget();
+
+	void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 
 	/**
 	 * Return true if this edge is for an oclAsType cast.

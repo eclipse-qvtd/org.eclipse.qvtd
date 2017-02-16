@@ -861,6 +861,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__opposite = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE));
 		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__super = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 5, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER));
 
+		public static final @NonNull ExecutorProperty _RecursionEdge__primary = new EcoreExecutorProperty(QVTschedulePackage.Literals.RECURSION_EDGE__PRIMARY, Types._RecursionEdge, 0);
+
 		public static final @NonNull ExecutorProperty _Region__edges = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__EDGES, Types._Region, 0);
 		public static final @NonNull ExecutorProperty _Region__invokingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__INVOKING_REGION, Types._Region, 1);
 		public static final @NonNull ExecutorProperty _Region__nodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__NODES, Types._Region, 2);
@@ -4022,6 +4024,7 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorProperty @NonNull [] _RecursionEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
 			QVTscheduleTables.Properties._Edge__name,
+			QVTscheduleTables.Properties._RecursionEdge__primary,
 			QVTscheduleTables.Properties._Edge__region,
 			QVTscheduleTables.Properties._Edge__sourceNode,
 			QVTscheduleTables.Properties._Edge__targetNode

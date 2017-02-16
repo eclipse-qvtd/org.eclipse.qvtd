@@ -110,7 +110,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (edgeRole == null) {
 			return null;
 		}
-		return edge.createEdge(edgeRole, partialSourceNode, partialTargetNode, edge.isPartial());
+		return edge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (edgeRole == null) {
 			return null;
 		}
-		return navigableEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode, navigableEdge.isPartial());
+		return (NavigableEdge)navigableEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
 	}
 
 	@Override

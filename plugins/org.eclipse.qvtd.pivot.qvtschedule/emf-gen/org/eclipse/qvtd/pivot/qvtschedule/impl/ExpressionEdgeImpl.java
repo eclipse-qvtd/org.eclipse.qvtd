@@ -17,13 +17,9 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -61,17 +57,6 @@ public class ExpressionEdgeImpl extends EdgeImpl implements ExpressionEdge {
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitExpressionEdge(this);
-	}
-
-	public static @NonNull ExpressionEdgeImpl create(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		ExpressionEdgeImpl edge = new ExpressionEdgeImpl();
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
-		return edge;
-	}
-
-	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return create(edgeRole, sourceNode, getName(), targetNode);
 	}
 
 	@Override

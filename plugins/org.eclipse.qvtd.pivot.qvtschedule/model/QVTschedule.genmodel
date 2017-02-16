@@ -135,7 +135,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/opposite"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//PropertyDatum/super"/>
     </genClasses>
-    <genClasses ecoreClass="QVTschedule.ecore#//RecursionEdge"/>
+    <genClasses ecoreClass="QVTschedule.ecore#//RecursionEdge">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//RecursionEdge/primary"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Region">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Region/edges"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Region/invokingRegion"/>

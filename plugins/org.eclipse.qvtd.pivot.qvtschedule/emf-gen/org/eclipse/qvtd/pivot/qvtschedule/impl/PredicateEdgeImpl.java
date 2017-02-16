@@ -17,13 +17,9 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -61,17 +57,6 @@ public class PredicateEdgeImpl extends EdgeImpl implements PredicateEdge {
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitPredicateEdge(this);
-	}
-
-	public static @NonNull PredicateEdgeImpl create(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		PredicateEdgeImpl edge = new PredicateEdgeImpl();
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
-		return edge;
-	}
-
-	@Override
-	public @NonNull Edge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return create(edgeRole, sourceNode, getName(), targetNode);
 	}
 
 	@Override

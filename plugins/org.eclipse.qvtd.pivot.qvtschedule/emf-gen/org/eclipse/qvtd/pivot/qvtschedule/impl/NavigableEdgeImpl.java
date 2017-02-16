@@ -33,7 +33,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -66,7 +65,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 */
 	protected EdgeConnection incomingConnection;
 
-
 	/**
 	 * The cached value of the '{@link #getOppositeEdge() <em>Opposite Edge</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -76,7 +74,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @ordered
 	 */
 	protected NavigableEdge oppositeEdge;
-
 
 	/**
 	 * The cached value of the '{@link #getOutgoingConnections() <em>Outgoing Connections</em>}' reference list.
@@ -88,7 +85,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 */
 	protected EList<EdgeConnection> outgoingConnections;
 
-
 	/**
 	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -99,7 +95,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 */
 	protected Property property;
 
-
 	/**
 	 * The default value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -109,7 +104,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @ordered
 	 */
 	protected static final boolean SECONDARY_EDEFAULT = false;
-
 
 	/**
 	 * The cached value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
@@ -496,19 +490,14 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		}
 	}
 
-	protected void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
-		setProperty(source2targetProperty);
-	}
-
-	protected void initializeOpposite(@NonNull NavigableEdgeImpl oppositeEdge) {
+	protected void initializeOpposite(@NonNull NavigableEdge oppositeEdge) {
 		this.oppositeEdge = oppositeEdge;
-		oppositeEdge.oppositeEdge = this;
+		((NavigableEdgeImpl)oppositeEdge).oppositeEdge = this;
 		if (this.getProperty().isIsImplicit()) {
 			this.secondary = true;
 		}
 		else {
-			oppositeEdge.secondary = true;
+			((NavigableEdgeImpl)oppositeEdge).secondary = true;
 		}
 	}
 

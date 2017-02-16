@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -64,33 +65,34 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitCastEdge(this);
 	}
-	private static @NonNull CastEdgeImpl create(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		CastEdgeImpl edge = new CastEdgeImpl();
-		edge.initialize(edgeRole, sourceNode, source2targetProperty, targetNode);
-		return edge;
-	}
 
-	/**
-	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
-	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
-	 */
-	public static @NonNull NavigableEdge createEdge(@NonNull Role edgeRole,
-			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		CastEdgeImpl forwardEdge = create(edgeRole, sourceNode, source2targetProperty, targetNode);
-		Property target2sourceProperty = source2targetProperty.getOpposite();
-		if ((target2sourceProperty != null) && !targetNode.isExplicitNull()) {
-			assert (targetNode.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany();
-			if (!source2targetProperty.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
-				CastEdgeImpl reverseEdge = create(edgeRole, targetNode, target2sourceProperty, sourceNode);
-				forwardEdge.initializeOpposite(reverseEdge);
-			}
-		}
-		return forwardEdge;
+	@Override
+	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		CastEdge castEdge = (CastEdge) super.createEdge(edgeRole, sourceNode, targetNode);
+		castEdge.initializeProperty(QVTscheduleUtil.getProperty(this));
+		return castEdge;
 	}
 
 	@Override
-	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return createEdge(edgeRole, sourceNode, QVTscheduleUtil.getProperty(this), targetNode);
+	public void initializeProperty(@NonNull Property property) {
+		setProperty(property);
+		Property target2sourceProperty = property.getOpposite();
+		if (target2sourceProperty != null) {
+			Node targetNode2 = targetNode;
+			assert targetNode2 != null;
+			if (!targetNode2.isExplicitNull()) {
+				assert (targetNode2.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany();
+				if (!property.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
+					Role edgeRole2 = edgeRole;
+					Node sourceNode2 = sourceNode;
+					assert (edgeRole2 != null) && (sourceNode2 != null);
+					CastEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
+					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
+					reverseEdge.setProperty(target2sourceProperty);
+					initializeOpposite(reverseEdge);
+				}
+			}
+		}
 	}
 
 	@Override

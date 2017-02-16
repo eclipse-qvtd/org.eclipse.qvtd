@@ -5076,13 +5076,22 @@ public interface QVTschedulePackage extends EPackage {
 	int RECURSION_EDGE__TARGET_NODE = EDGE__TARGET_NODE;
 
 	/**
+	 * The feature id for the '<em><b>Primary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECURSION_EDGE__PRIMARY = EDGE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Recursion Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RECURSION_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 0;
+	int RECURSION_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7287,6 +7296,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getRecursionEdge();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge#isPrimary <em>Primary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge#isPrimary()
+	 * @see #getRecursionEdge()
+	 * @generated
+	 */
+	EAttribute getRecursionEdge_Primary();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Region <em>Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8398,6 +8418,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass RECURSION_EDGE = eINSTANCE.getRecursionEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RECURSION_EDGE__PRIMARY = eINSTANCE.getRecursionEdge_Primary();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl <em>Region</em>}' class.
