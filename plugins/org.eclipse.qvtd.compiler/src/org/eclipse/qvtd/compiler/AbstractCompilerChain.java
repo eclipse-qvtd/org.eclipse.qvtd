@@ -38,6 +38,7 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
@@ -53,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
@@ -224,7 +224,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				//				Resource sResource = createResource();
+				Resource sResource = createResource();
 				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
@@ -233,10 +233,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, qvtm2qvts, rootName);
 				ScheduledRegion scheduledRegion = qvts2qvts.transform(qvtm2qvts, activeRegions);
-				ScheduleModel scheduleModel = RegionUtil.getScheduleModel(scheduledRegion);
+				ScheduleManager scheduleManager = RegionUtil.getScheduleManager(scheduledRegion);
 				throwCompilerChainExceptionForErrors();
-				compiled(scheduleModel);			// FIXME
-				//				sResource.getContents().add(scheduleModel);
+				compiled(scheduleManager);			// FIXME
+				sResource.getContents().add(scheduleManager.getScheduleModel());
 				//				saveResource(sResource);
 				return scheduledRegion;
 			}

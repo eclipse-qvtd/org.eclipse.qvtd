@@ -360,7 +360,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		ScheduleModel scheduleModel2 = getScheduleModel();
 		assert scheduleModel2 == null;		// Containment is complete; didn't need this call
 		this.scheduleModel = scheduleModel;
-		//		scheduleModel.getMultiRegion().addRegion(this);
 	}
 
 	@Override
@@ -1041,7 +1040,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			SymbolNameBuilder s = new SymbolNameBuilder(0);
 			s.appendString(getSymbolNamePrefix());
 			s.appendString(computeSymbolName().toString());
-			s.appendString(getSymbolNameSuffix());
+			s.appendString(String.valueOf(getSymbolNameSuffix()));
 			symbolName = symbolName2 = getScheduleModel().reserveSymbolName(s, this);
 		}
 		return symbolName2;
@@ -1150,7 +1149,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 */
 	@Override
 	public void setRegion(Region newRegion) {
-		assert symbolName != null;
 		Region oldRegion = region;
 		region = newRegion;
 		if (eNotificationRequired())
@@ -1161,7 +1159,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return QVTscheduleConstants.REGION_SYMBOL_NAME_PREFIX;
 	}
 
-	protected @NonNull String getSymbolNameSuffix() {
+	protected String getSymbolNameSuffix() {
 		return QVTscheduleConstants.REGION_SYMBOL_NAME_SUFFIX;
 	}
 

@@ -16,10 +16,8 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -34,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl#getSymbolNameSuffix <em>Symbol Name Suffix</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,6 +56,25 @@ public class NamedMappingRegionImpl extends MappingRegionImpl implements NamedMa
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSymbolNameSuffix() <em>Symbol Name Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbolNameSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SYMBOL_NAME_SUFFIX_EDEFAULT = "";
+	/**
+	 * The cached value of the '{@link #getSymbolNameSuffix() <em>Symbol Name Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbolNameSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String symbolNameSuffix = SYMBOL_NAME_SUFFIX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,10 +124,35 @@ public class NamedMappingRegionImpl extends MappingRegionImpl implements NamedMa
 	 * @generated
 	 */
 	@Override
+	public String getSymbolNameSuffix() {
+		return symbolNameSuffix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSymbolNameSuffix(String newSymbolNameSuffix) {
+		String oldSymbolNameSuffix = symbolNameSuffix;
+		symbolNameSuffix = newSymbolNameSuffix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX, oldSymbolNameSuffix, symbolNameSuffix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.NAMED_MAPPING_REGION__NAME:
 				return getName();
+			case QVTschedulePackage.NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				return getSymbolNameSuffix();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -124,6 +167,9 @@ public class NamedMappingRegionImpl extends MappingRegionImpl implements NamedMa
 		switch (featureID) {
 			case QVTschedulePackage.NAMED_MAPPING_REGION__NAME:
 				setName((String)newValue);
+				return;
+			case QVTschedulePackage.NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				setSymbolNameSuffix((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,6 +186,9 @@ public class NamedMappingRegionImpl extends MappingRegionImpl implements NamedMa
 			case QVTschedulePackage.NAMED_MAPPING_REGION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case QVTschedulePackage.NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				setSymbolNameSuffix(SYMBOL_NAME_SUFFIX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -154,6 +203,8 @@ public class NamedMappingRegionImpl extends MappingRegionImpl implements NamedMa
 		switch (featureID) {
 			case QVTschedulePackage.NAMED_MAPPING_REGION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				return SYMBOL_NAME_SUFFIX_EDEFAULT == null ? symbolNameSuffix != null : !SYMBOL_NAME_SUFFIX_EDEFAULT.equals(symbolNameSuffix);
 		}
 		return super.eIsSet(featureID);
 	}

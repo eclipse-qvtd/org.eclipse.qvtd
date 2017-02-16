@@ -161,7 +161,7 @@ abstract class AbstractPartition
 
 	private void check(@NonNull MicroMappingRegion region) {
 		Set<@NonNull Node> reachableNodes = new HashSet<>();
-		for (@NonNull Node node : region.getHeadNodes()) {
+		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
 			gatherReachables(reachableNodes, node);
 		}
 		Set<@NonNull Node> allNodes = Sets.newHashSet(RegionUtil.getNodes(region));

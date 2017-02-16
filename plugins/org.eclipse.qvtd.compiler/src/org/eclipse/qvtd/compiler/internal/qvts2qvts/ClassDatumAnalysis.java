@@ -35,7 +35,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
@@ -58,12 +58,12 @@ public class ClassDatumAnalysis implements Adapter
 		ClassDatum classDatum = RegionUtil.getClassDatum(node);
 		ClassDatumAnalysis adapter = ClassUtil.getAdapter(ClassDatumAnalysis.class, classDatum);
 		if (adapter == null) {
-			adapter = ((ScheduleModel2)node.getRegion().getScheduleModel()).getClassDatumAnalysis(classDatum);
+			adapter = RegionUtil.getScheduleManager(RegionUtil.getRegion(node)).getClassDatumAnalysis(classDatum);
 		}
 		return adapter;
 	}
 
-	protected final @NonNull ScheduleModel2 scheduleModel;
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ClassDatum classDatum;
 	protected final @NonNull DomainUsage domainUsage;
 	protected final @NonNull ClassDatum elementalClassDatum;
@@ -82,12 +82,12 @@ public class ClassDatumAnalysis implements Adapter
 	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<>();
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<>();
 
-	public ClassDatumAnalysis(@NonNull ScheduleModel2 scheduleModel, @NonNull ClassDatum classDatum) {
-		this.scheduleModel = scheduleModel;
+	public ClassDatumAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum classDatum) {
+		this.scheduleManager = scheduleManager;
 		this.classDatum = classDatum;
 		classDatum.eAdapters().add(this);
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatum);
-		this.domainUsage = scheduleModel.getDomainUsage(typedModel);
+		this.domainUsage = scheduleManager.getDomainUsage(typedModel);
 		Type type = classDatum.getCompleteClass().getPrimaryClass();
 		Type elementType = type;
 		while (elementType instanceof CollectionType) {
@@ -97,7 +97,7 @@ public class ClassDatumAnalysis implements Adapter
 			elementalClassDatum = classDatum;
 		}
 		else {
-			elementalClassDatum = scheduleModel.getClassDatum((org.eclipse.ocl.pivot.Class)elementType, typedModel);
+			elementalClassDatum = scheduleManager.getClassDatum((org.eclipse.ocl.pivot.Class)elementType, typedModel);
 		}
 	}
 
@@ -156,7 +156,7 @@ public class ClassDatumAnalysis implements Adapter
 	public @Nullable List<Property> getMultiOpposites() {
 		List<@NonNull Property> multiOpposites2 = multiOpposites;
 		if (multiOpposites2 == null) {
-			EnvironmentFactory environmentFactory = scheduleModel.getEnvironmentFactory();
+			EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
 			CompleteClass completeClass = classDatum.getCompleteClass();
 			assert completeClass != null;
 			for (@NonNull Property property : completeClass.getProperties((FeatureFilter)null)) {
@@ -217,8 +217,8 @@ public class ClassDatumAnalysis implements Adapter
 		return requiredBy2;
 	}
 
-	public @NonNull ScheduleModel2 getScheduleModel() {
-		return scheduleModel;
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
 	}
 
 	public @Nullable Node getSingleProducer() {
@@ -236,7 +236,7 @@ public class ClassDatumAnalysis implements Adapter
 			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<>();
 			CompleteClass completeClass = getClassDatum().getCompleteClass();
 			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
-				superClassDatumAnalyses2.add(scheduleModel.getClassDatumAnalysis(completeSuperClass, ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
+				superClassDatumAnalyses2.add(scheduleManager.getClassDatumAnalysis(completeSuperClass, ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
 			}
 		}
 		return superClassDatumAnalyses2;

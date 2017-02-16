@@ -28,12 +28,12 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
 
 import com.google.common.collect.Sets;
@@ -46,14 +46,10 @@ public class EarlyMerger extends AbstractMerger
 {
 	public static class EarlyMergedMappingRegion extends NamedMappingRegionImpl
 	{
-		public EarlyMergedMappingRegion(@NonNull ScheduleModel scheduleModel, @NonNull String name) {
-			setFixmeScheduleModel(scheduleModel);
+		public EarlyMergedMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull String name) {
+			setFixmeScheduleModel(scheduleManager.getScheduleModel());
 			setName(name);
-		}
-
-		@Override
-		protected @NonNull String getSymbolNameSuffix() {
-			return "_e";
+			setSymbolNameSuffix("_e");
 		}
 	}
 
@@ -65,7 +61,7 @@ public class EarlyMerger extends AbstractMerger
 
 		@Override
 		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new EarlyMergedMappingRegion(RegionUtil.getScheduleModel(primaryRegion), newName);
+			return new EarlyMergedMappingRegion(RegionUtil.getScheduleManager(primaryRegion), newName);
 		}
 	}
 
@@ -221,7 +217,7 @@ public class EarlyMerger extends AbstractMerger
 			else {
 				outputRegions.add(mergedRegion);
 				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-					RegionUtil.getScheduleModel(mergedRegion).writeDebugGraphs(mergedRegion, null);
+					RegionUtil.getScheduleManager(mergedRegion).writeDebugGraphs(mergedRegion, null);
 				}
 			}
 			residualInputRegions.remove(candidateRegion);

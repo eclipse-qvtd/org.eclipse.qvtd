@@ -99,7 +99,7 @@ class BodyStage extends AbstractStage
 	 */
 	protected @NonNull Iterable<@NonNull Node> computeAllHeadNodes(@NonNull Iterable<@NonNull Node> requiredNodes) {
 		Set<@NonNull Node> nodeSet = Sets.newHashSet(visibleIteratorNodes);
-		for (@NonNull Node headNode : splitter.getRegion().getHeadNodes()) {
+		for (@NonNull Node headNode : RegionUtil.getHeadNodes(splitter.getRegion())) {
 			if (headNode.isSpeculated() || headNode.isPredicated()) {
 				nodeSet.add(headNode);
 			}

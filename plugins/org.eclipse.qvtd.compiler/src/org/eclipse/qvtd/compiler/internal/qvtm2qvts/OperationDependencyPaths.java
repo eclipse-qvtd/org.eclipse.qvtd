@@ -28,10 +28,10 @@ public interface OperationDependencyPaths
 	/**
 	 * Return the hidden paths as an ordered iterable.
 	 */
-	@NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> getHiddenPaths();
+	@NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> getHiddenPaths();
 
 	/**
 	 * Return the return paths as an ordered iterable.
 	 */
-	@NonNull Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> getReturnPaths();
+	@NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> getReturnPaths();
 }

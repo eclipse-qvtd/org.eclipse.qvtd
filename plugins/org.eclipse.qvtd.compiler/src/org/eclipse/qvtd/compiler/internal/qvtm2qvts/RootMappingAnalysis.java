@@ -54,7 +54,7 @@ public class RootMappingAnalysis
 	}
 
 	public @NonNull Node getIntroducerNode(@NonNull Node consumerNode) {
-		ScheduleModel2 scheduleModel = (ScheduleModel2)loadingRegion.getScheduleModel();
+		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(loadingRegion);
 		//
 		//	Identify the containment pattern.
 		//
@@ -66,18 +66,18 @@ public class RootMappingAnalysis
 			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;
 				parent2childProperty = property;
-				if (property == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
+				if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
 					containingClassDatumAnalysis = RegionUtil.getClassDatumAnalysis(edge.getEdgeSource());
 				}
 				break;
 			}
 		}
-		CompleteEnvironment completeEnvironment = scheduleModel.getEnvironmentFactory().getCompleteEnvironment();
+		CompleteEnvironment completeEnvironment = scheduleManager.getEnvironmentFactory().getCompleteEnvironment();
 		ClassDatumAnalysis consumedClassDatumAnalysis = /*getCastTarget(consumerNode)*/RegionUtil.getClassDatumAnalysis(consumerNode);
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
 		TypedModel typedModel = RegionUtil.getTypedModel(consumedClassDatumAnalysis);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
-		ClassDatumAnalysis childrenClassDatumAnalysis = scheduleModel.getClassDatumAnalysis(childCollectionType, typedModel);
+		ClassDatumAnalysis childrenClassDatumAnalysis = scheduleManager.getClassDatumAnalysis(childCollectionType, typedModel);
 		//
 		//	Create / re-use the appropriate containment pattern.
 		//
@@ -133,7 +133,7 @@ public class RootMappingAnalysis
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
-				containingClassDatumAnalysis = scheduleModel.getClassDatumAnalysis(owningClass, typedModel);
+				containingClassDatumAnalysis = scheduleManager.getClassDatumAnalysis(owningClass, typedModel);
 				Node containerNode = RegionUtil.createComposingNode(loadingRegion, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}

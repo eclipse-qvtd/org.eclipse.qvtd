@@ -809,9 +809,10 @@ public class QVTscheduleTables
 
 		public static final @NonNull ExecutorProperty _MicroMappingRegion__mappingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__MAPPING_REGION, Types._MicroMappingRegion, 0);
 		public static final @NonNull ExecutorProperty _MicroMappingRegion__namePrefix = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__NAME_PREFIX, Types._MicroMappingRegion, 1);
-		public static final @NonNull ExecutorProperty _MicroMappingRegion__symbolSuffix = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__SYMBOL_SUFFIX, Types._MicroMappingRegion, 2);
+		public static final @NonNull ExecutorProperty _MicroMappingRegion__symbolNameSuffix = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX, Types._MicroMappingRegion, 2);
 
 		public static final @NonNull ExecutorProperty _NamedMappingRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAMED_MAPPING_REGION__NAME, Types._NamedMappingRegion, 0);
+		public static final @NonNull ExecutorProperty _NamedMappingRegion__symbolNameSuffix = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX, Types._NamedMappingRegion, 1);
 
 		public static final @NonNull ExecutorProperty _NavigableEdge__incomingConnection = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION, Types._NavigableEdge, 0);
 		public static final @NonNull ExecutorProperty _NavigableEdge__oppositeEdge = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__OPPOSITE_EDGE, Types._NavigableEdge, 1);
@@ -3864,7 +3865,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Region__region,
 			QVTscheduleTables.Properties._Symbolable__symbolName,
-			QVTscheduleTables.Properties._MicroMappingRegion__symbolSuffix
+			QVTscheduleTables.Properties._MicroMappingRegion__symbolNameSuffix
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NamedMappingRegion = {
@@ -3873,7 +3874,8 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._NamedMappingRegion__name,
 			QVTscheduleTables.Properties._Region__nodes,
 			QVTscheduleTables.Properties._Region__region,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			QVTscheduleTables.Properties._Symbolable__symbolName,
+			QVTscheduleTables.Properties._NamedMappingRegion__symbolNameSuffix
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NavigableEdge = {

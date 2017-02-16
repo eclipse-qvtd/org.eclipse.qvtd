@@ -22,13 +22,13 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
 
@@ -52,14 +52,10 @@ public class LateConsumerMerger extends AbstractMerger
 {
 	public static class LateMergedMappingRegion extends NamedMappingRegionImpl
 	{
-		public LateMergedMappingRegion(@NonNull ScheduleModel scheduleModel, @NonNull String name) {
-			setFixmeScheduleModel(scheduleModel);
+		public LateMergedMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull String name) {
+			setFixmeScheduleModel(scheduleManager.getScheduleModel());
 			setName(name);
-		}
-
-		@Override
-		protected @NonNull String getSymbolNameSuffix() {
-			return "_lc";
+			setSymbolNameSuffix("_lc");
 		}
 	}
 
@@ -71,7 +67,7 @@ public class LateConsumerMerger extends AbstractMerger
 
 		@Override
 		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new LateMergedMappingRegion(RegionUtil.getScheduleModel(primaryRegion), newName);
+			return new LateMergedMappingRegion(RegionUtil.getScheduleManager(primaryRegion), newName);
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
@@ -250,7 +246,7 @@ public class LateConsumerMerger extends AbstractMerger
 		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduledRegion);
 		lateMerger.merge();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleModel(scheduledRegion).writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
+			RegionUtil.getScheduleManager(scheduledRegion).writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
 		}
 		return lateMerger.getMerges();
 	}
@@ -278,7 +274,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected @NonNull ContentsAnalysis getContentsAnalysis() {
 		ContentsAnalysis contentsAnalysis2 = contentsAnalysis;
 		if (contentsAnalysis2 == null) {
-			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(RegionUtil.getScheduleModel(scheduledRegion));
+			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(RegionUtil.getScheduleManager(scheduledRegion));
 			for (@NonNull Region region : allRegions) {
 				contentsAnalysis2.addRegion(region);
 			}
@@ -417,7 +413,7 @@ public class LateConsumerMerger extends AbstractMerger
 						mergedRegion.addIndex(index);
 					}
 				}
-				RegionUtil.getScheduleModel(mergedRegion).writeDebugGraphs(mergedRegion, null);
+				RegionUtil.getScheduleManager(mergedRegion).writeDebugGraphs(mergedRegion, null);
 			}
 		}
 	}

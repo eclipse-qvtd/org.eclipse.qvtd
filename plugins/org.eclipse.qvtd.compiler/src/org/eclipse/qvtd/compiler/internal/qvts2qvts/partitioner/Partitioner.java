@@ -368,7 +368,7 @@ public class Partitioner
 		AssignmentPartition realizedPartition = new AssignmentPartition(this, outputEdge);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleModel(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
 		}
 		return microMappingRegion;
 	}
@@ -377,7 +377,7 @@ public class Partitioner
 		RealizedPartition realizedPartition = new RealizedPartition(this);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_r0");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleModel(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
 		}
 		return microMappingRegion;
 	}
@@ -386,7 +386,7 @@ public class Partitioner
 		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
 		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p1");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleModel(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
 		}
 		return microMappingRegion;
 	}
@@ -395,7 +395,7 @@ public class Partitioner
 		SpeculationPartition speculationPartition = new SpeculationPartition(this);
 		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p0");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleModel(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
 		}
 		return microMappingRegion;
 	}

@@ -26,7 +26,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getMappingRegion <em>Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getNamePrefix <em>Name Prefix</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolSuffix <em>Symbol Suffix</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolNameSuffix <em>Symbol Name Suffix</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMicroMappingRegion()
@@ -90,29 +90,29 @@ public interface MicroMappingRegion extends MappingRegion {
 	void setNamePrefix(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Symbol Suffix</b></em>' attribute.
+	 * Returns the value of the '<em><b>Symbol Name Suffix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Symbol Suffix</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Symbol Name Suffix</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Symbol Suffix</em>' attribute.
-	 * @see #setSymbolSuffix(String)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMicroMappingRegion_SymbolSuffix()
+	 * @return the value of the '<em>Symbol Name Suffix</em>' attribute.
+	 * @see #setSymbolNameSuffix(String)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMicroMappingRegion_SymbolNameSuffix()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MicroMappingRegion!symbolSuffix'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MicroMappingRegion!symbolNameSuffix'"
 	 * @generated
 	 */
-	String getSymbolSuffix();
+	String getSymbolNameSuffix();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolSuffix <em>Symbol Suffix</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolNameSuffix <em>Symbol Name Suffix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Symbol Suffix</em>' attribute.
-	 * @see #getSymbolSuffix()
+	 * @param value the new value of the '<em>Symbol Name Suffix</em>' attribute.
+	 * @see #getSymbolNameSuffix()
 	 * @generated
 	 */
-	void setSymbolSuffix(String value);
+	void setSymbolNameSuffix(String value);
 } // MicroMappingRegion

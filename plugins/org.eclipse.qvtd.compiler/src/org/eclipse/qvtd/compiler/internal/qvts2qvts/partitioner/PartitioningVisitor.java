@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
@@ -27,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -41,12 +41,12 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion,
 			@NonNull String namePrefix, @NonNull String symbolSuffix, @NonNull AbstractPartition partition) {
 		assert !(fullRegion instanceof MicroMappingRegion);
-		ScheduleModel scheduleModel = RegionUtil.getScheduleModel(fullRegion);
+		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(fullRegion);
 		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
-		((MicroMappingRegionImpl)partialRegion).setFixmeScheduleModel(scheduleModel);
+		((MicroMappingRegionImpl)partialRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
 		partialRegion.setMappingRegion(fullRegion);
 		partialRegion.setNamePrefix(namePrefix);
-		partialRegion.setSymbolSuffix(symbolSuffix);
+		partialRegion.setSymbolNameSuffix(symbolSuffix);
 		PartitioningVisitor partitioningVisitor = new PartitioningVisitor(partialRegion, partition);
 		fullRegion.accept(partitioningVisitor);
 		return partitioningVisitor;

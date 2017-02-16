@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
@@ -50,7 +51,7 @@ class SplitterAnalysis
 		// Compute the head nodes of the region.
 		//
 		List<@NonNull Node> headNodes = new ArrayList<>();
-		for (@NonNull Node headNode : region.getHeadNodes()) {
+		for (@NonNull Node headNode : RegionUtil.getHeadNodes(region)) {
 			if (headNode.isMatched()) {			// Ignore extra heads
 				headNodes.add(headNode);
 			}

@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -92,7 +93,7 @@ public class Split
 	public void install() {
 		Region region = splitter.getRegion();
 		Iterable<@NonNull Node> newHeadNodes = stages.get(0).getHeadNodes();
-		Iterable<@NonNull Node> oldHeadNodes = Lists.newArrayList(region.getHeadNodes());
+		Iterable<@NonNull Node> oldHeadNodes = Lists.newArrayList(RegionUtil.getHeadNodes(region));
 		for (@NonNull Node headNode : oldHeadNodes) {
 			if (!Iterables.contains(newHeadNodes, headNode)) {
 				region.resetHead(headNode);

@@ -59,13 +59,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 
-public class QVTm2QVTs extends ScheduleModel2
+public class QVTm2QVTs extends ScheduleManager
 {
 	public static final @NonNull TracingOption DEBUG_GRAPHS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/debugGraphs");
 	public static final @NonNull TracingOption DUMP_CLASS_TO_CONSUMING_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvts/dump/class2consumingNodes");
@@ -92,7 +91,7 @@ public class QVTm2QVTs extends ScheduleModel2
 
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
-		super(environmentFactory, asTransformation, schedulerOptions);
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, asTransformation, schedulerOptions);
 		this.problemHandler = problemHandler;
 	}
 
@@ -105,7 +104,7 @@ public class QVTm2QVTs extends ScheduleModel2
 		addProblem(RegionUtil.createRegionError(region, messageTemplate, bindings));
 	}
 
-	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleModel2 scheduleModel, @NonNull OperationCallExp operationCallExp) {
+	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleManager scheduleManager, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
 		LanguageExpression bodyExpression = operation.getBodyExpression();
 		assert  bodyExpression != null;
@@ -115,10 +114,10 @@ public class QVTm2QVTs extends ScheduleModel2
 			OperationDatum operationDatum = createOperationDatum(operationCallExp);
 			OperationRegion operationRegion = operationDatum2operationRegion.get(operationDatum);
 			if (operationRegion == null) {
-				operationRegion = createOperationRegion(scheduleModel, operationCallExp, specification, operationDatum);
+				operationRegion = createOperationRegion(scheduleManager, operationCallExp, specification, operationDatum);
 				operationDatum2operationRegion.put(operationDatum, operationRegion);
 				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-					scheduleModel.writeDebugGraphs(operationRegion, null);
+					scheduleManager.writeDebugGraphs(operationRegion, null);
 				}
 			}
 			return operationRegion;
@@ -162,12 +161,12 @@ public class QVTm2QVTs extends ScheduleModel2
 		return parameterNode;
 	}
 
-	protected @NonNull OperationRegion createOperationRegion(@NonNull ScheduleModel scheduleModel, @NonNull OperationCallExp operationCallExp,
+	protected @NonNull OperationRegion createOperationRegion(@NonNull ScheduleManager scheduleManager, @NonNull OperationCallExp operationCallExp,
 			@NonNull ExpressionInOCL specification, @NonNull OperationDatum operationDatum) {
 		Map<@NonNull VariableDeclaration, @NonNull Node> parameter2node = new HashMap<>();
 		String operationName = ClassUtil.nonNullState(operationDatum.toString());
 		OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
-		((OperationRegionImpl)operationRegion).setFixmeScheduleModel(scheduleModel);
+		((OperationRegionImpl)operationRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
 		operationRegion.setOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
 		operationRegion.setName(operationName);
 		//

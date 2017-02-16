@@ -40,7 +40,7 @@ import com.google.common.collect.Sets;
  */
 public class ContentsAnalysis
 {
-	protected final @NonNull ScheduleModel2 scheduleModel;
+	protected final @NonNull ScheduleManager scheduleManager;
 
 	/**
 	 * The Speculation or Realized Nodes that produce each ClassDatum.
@@ -58,8 +58,8 @@ public class ContentsAnalysis
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
 
-	public ContentsAnalysis(@NonNull ScheduleModel2 scheduleModel) {
-		this.scheduleModel = scheduleModel;
+	public ContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
+		this.scheduleManager = scheduleManager;
 	}
 
 	private void addNewEdge(@NonNull NavigableEdge newEdge) {
@@ -85,7 +85,7 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = scheduleModel.getElementalClassDatumAnalysis(newNode);
+		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getElementalClassDatumAnalysis(newNode);
 		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
 			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {
@@ -148,7 +148,7 @@ public class ContentsAnalysis
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
 		//			return forwardPropertyDatum;
 		//		}
-		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = scheduleModel.getAllPropertyDatums(forwardClassDatum);
+		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = scheduleManager.getAllPropertyDatums(forwardClassDatum);
 		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
 			if ((propertyDatum.getProperty() == forwardProperty) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
 				return propertyDatum;
@@ -176,7 +176,7 @@ public class ContentsAnalysis
 		Property reverseProperty = forwardProperty.getOpposite();
 		classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeTarget());
 		ClassDatum reverseClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
-		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleModel.getAllPropertyDatums(reverseClassDatum);
+		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleManager.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
 			if ((propertyDatum.getProperty() == reverseProperty) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
 				return propertyDatum;
@@ -275,7 +275,7 @@ public class ContentsAnalysis
 		}
 		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
 		if (propertyDatum == null) {
-			if (property == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
+			if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
 				return getCompositeNewEdges(edge);
 			}
 			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging

@@ -34,7 +34,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -131,9 +132,9 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	}
 
 	protected void resolveTransformation(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
-		QVTm2QVTs scheduleModel = (QVTm2QVTs) scheduledRegion.getScheduleModel();
-		SymbolNameReservation symbolNameReservation = scheduleModel.getSymbolNameAdapter();
-		Transformation transformation = scheduleModel.getTransformation();
+		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(scheduledRegion);
+		SymbolNameReservation symbolNameReservation = scheduleManager.getScheduleModel().getSymbolNameAdapter();
+		Transformation transformation = scheduleManager.getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, environmentFactory, transformation, symbolNameReservation);
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
 		NamedElement qvtiChild = qvtiTransformation;

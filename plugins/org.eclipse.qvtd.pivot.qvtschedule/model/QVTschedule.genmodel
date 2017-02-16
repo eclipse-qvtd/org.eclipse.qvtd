@@ -80,10 +80,11 @@
     <genClasses ecoreClass="QVTschedule.ecore#//MicroMappingRegion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MicroMappingRegion/mappingRegion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//MicroMappingRegion/namePrefix"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//MicroMappingRegion/symbolSuffix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//MicroMappingRegion/symbolNameSuffix"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//NamedMappingRegion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//NamedMappingRegion/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//NamedMappingRegion/symbolNameSuffix"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//NavigableEdge">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//NavigableEdge/incomingConnection"/>

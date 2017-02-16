@@ -3395,13 +3395,13 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__NAME_PREFIX = MAPPING_REGION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Symbol Suffix</b></em>' attribute.
+	 * The feature id for the '<em><b>Symbol Name Suffix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MICRO_MAPPING_REGION__SYMBOL_SUFFIX = MAPPING_REGION_FEATURE_COUNT + 2;
+	int MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX = MAPPING_REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Micro Mapping Region</em>' class.
@@ -3540,13 +3540,22 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__NAME = MAPPING_REGION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Symbol Name Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX = MAPPING_REGION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Named Mapping Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_MAPPING_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 1;
+	int NAMED_MAPPING_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6733,15 +6742,15 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getMicroMappingRegion_NamePrefix();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolSuffix <em>Symbol Suffix</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolNameSuffix <em>Symbol Name Suffix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Symbol Suffix</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolSuffix()
+	 * @return the meta object for the attribute '<em>Symbol Name Suffix</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion#getSymbolNameSuffix()
 	 * @see #getMicroMappingRegion()
 	 * @generated
 	 */
-	EAttribute getMicroMappingRegion_SymbolSuffix();
+	EAttribute getMicroMappingRegion_SymbolNameSuffix();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion <em>Named Mapping Region</em>}'.
@@ -6763,6 +6772,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNamedMappingRegion_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion#getSymbolNameSuffix <em>Symbol Name Suffix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Symbol Name Suffix</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion#getSymbolNameSuffix()
+	 * @see #getNamedMappingRegion()
+	 * @generated
+	 */
+	EAttribute getNamedMappingRegion_SymbolNameSuffix();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge <em>Navigable Edge</em>}'.
@@ -7876,12 +7896,12 @@ public interface QVTschedulePackage extends EPackage {
 		EAttribute MICRO_MAPPING_REGION__NAME_PREFIX = eINSTANCE.getMicroMappingRegion_NamePrefix();
 
 		/**
-		 * The meta object literal for the '<em><b>Symbol Suffix</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Symbol Name Suffix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MICRO_MAPPING_REGION__SYMBOL_SUFFIX = eINSTANCE.getMicroMappingRegion_SymbolSuffix();
+		EAttribute MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX = eINSTANCE.getMicroMappingRegion_SymbolNameSuffix();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl <em>Named Mapping Region</em>}' class.
@@ -7900,6 +7920,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAMED_MAPPING_REGION__NAME = eINSTANCE.getNamedMappingRegion_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Symbol Name Suffix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX = eINSTANCE.getNamedMappingRegion_SymbolNameSuffix();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl <em>Navigable Edge</em>}' class.

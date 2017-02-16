@@ -69,7 +69,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -488,8 +488,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Operation referredOperation = visitor.create(pOperationCallExp.getReferredOperation());
 			assert referredOperation != null;
 			if ((iSource == null) && (referredOperation instanceof Function)) {
-				ScheduleModel2 scheduleModel = RegionUtil.getScheduleModel(getRegion());
-				StandardLibrary standardLibrary = scheduleModel.getStandardLibrary();
+				ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
+				StandardLibrary standardLibrary = scheduleManager.getStandardLibrary();
 				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
 				iSource = PivotUtil.createVariableExp(thisVariable);
 			}
@@ -558,8 +558,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			VariableDeclaration pVariable = pVariableExp.getReferredVariable();
 			Node node = getNode(pVariable);
 			if (node == null) {
-				ScheduleModel2 scheduleModel = RegionUtil.getScheduleModel(getRegion());
-				StandardLibrary standardLibrary = scheduleModel.getStandardLibrary();
+				ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
+				StandardLibrary standardLibrary = scheduleManager.getStandardLibrary();
 				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
 				Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
 				if (pVariableExp.getReferredVariable() == pThisVariable) {
@@ -1161,7 +1161,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		// mappings, but that incurs many typedModel accuracy issues.
 		//
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
-		DomainUsage anyUsage = RegionUtil.getScheduleModel(region).getDomainAnalysis().getAnyUsage();
+		DomainUsage anyUsage = RegionUtil.getScheduleManager(region).getDomainAnalysis().getAnyUsage();
 		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
 			Iterable<@NonNull NavigableEdge> checkedEdges = RegionAnalysis.get(region).getCheckedEdges(qvtmTypedModel);
 			if (checkedEdges != null) {

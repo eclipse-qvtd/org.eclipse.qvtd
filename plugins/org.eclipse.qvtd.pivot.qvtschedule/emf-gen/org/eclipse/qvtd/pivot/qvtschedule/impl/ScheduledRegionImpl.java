@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -40,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 

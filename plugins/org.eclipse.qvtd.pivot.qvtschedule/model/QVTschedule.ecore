@@ -112,11 +112,13 @@
         eType="#//MappingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="namePrefix" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolSuffix" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolNameSuffix" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedMappingRegion" eSuperTypes="#//MappingRegion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolNameSuffix" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NavigableEdge" abstract="true" eSuperTypes="#//Edge #//ConnectionEnd">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

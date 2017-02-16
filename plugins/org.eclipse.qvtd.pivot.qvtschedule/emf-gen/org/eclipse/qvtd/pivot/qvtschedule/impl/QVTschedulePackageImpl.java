@@ -1202,7 +1202,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMicroMappingRegion_SymbolSuffix() {
+	public EAttribute getMicroMappingRegion_SymbolNameSuffix() {
 		return (EAttribute)microMappingRegionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1224,6 +1224,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EAttribute getNamedMappingRegion_Name() {
 		return (EAttribute)namedMappingRegionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getNamedMappingRegion_SymbolNameSuffix() {
+		return (EAttribute)namedMappingRegionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1740,10 +1750,11 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		microMappingRegionEClass = createEClass(MICRO_MAPPING_REGION);
 		createEReference(microMappingRegionEClass, MICRO_MAPPING_REGION__MAPPING_REGION);
 		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__NAME_PREFIX);
-		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__SYMBOL_SUFFIX);
+		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX);
 
 		namedMappingRegionEClass = createEClass(NAMED_MAPPING_REGION);
 		createEAttribute(namedMappingRegionEClass, NAMED_MAPPING_REGION__NAME);
+		createEAttribute(namedMappingRegionEClass, NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX);
 
 		navigableEdgeEClass = createEClass(NAVIGABLE_EDGE);
 		createEReference(navigableEdgeEClass, NAVIGABLE_EDGE__INCOMING_CONNECTION);
@@ -2005,10 +2016,11 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(microMappingRegionEClass, MicroMappingRegion.class, "MicroMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMicroMappingRegion_MappingRegion(), this.getMappingRegion(), null, "mappingRegion", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMicroMappingRegion_NamePrefix(), ecorePackage.getEString(), "namePrefix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMicroMappingRegion_SymbolSuffix(), ecorePackage.getEString(), "symbolSuffix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMicroMappingRegion_SymbolNameSuffix(), ecorePackage.getEString(), "symbolNameSuffix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedMappingRegionEClass, NamedMappingRegion.class, "NamedMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedMappingRegion_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNamedMappingRegion_SymbolNameSuffix(), ecorePackage.getEString(), "symbolNameSuffix", "", 1, 1, NamedMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(navigableEdgeEClass, NavigableEdge.class, "NavigableEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNavigableEdge_IncomingConnection(), this.getEdgeConnection(), null, "incomingConnection", null, 0, 1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -17,8 +17,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
@@ -53,20 +54,22 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
 
-public abstract class ScheduleModel2 extends ScheduleModelImpl
+public abstract class ScheduleManager implements Adapter
 {
-	//public static final @NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
-	public static final @NonNull Set<@NonNull MappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
+	public static @NonNull ScheduleManager get(@NonNull ScheduleModel scheduleModel) {
+		ScheduleManager adapter = ClassUtil.getAdapter(ScheduleManager.class, scheduleModel);
+		return ClassUtil.nonNullState(adapter);
+	}
 
+	private final @NonNull ScheduleModel scheduleModel;
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
 	private @Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions;
@@ -103,8 +106,10 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 
 	private /*@LazyNonNull*/ List<@NonNull Mapping> orderedMappings;	// Only ordered to improve determinacy
 
-	protected ScheduleModel2(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+	protected ScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+		this.scheduleModel = scheduleModel;
+		scheduleModel.eAdapters().add(this);
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
@@ -288,6 +293,10 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return datumCaches.getPropertyDatum(classDatum, property);
 	}
 
+	public @NonNull ScheduleModel getScheduleModel() {
+		return scheduleModel;
+	}
+
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
 	}
@@ -296,8 +305,18 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		return standardLibraryHelper;
 	}
 
+	@Override
+	public Notifier getTarget() {
+		return scheduleModel;
+	}
+
 	public @NonNull Transformation getTransformation() {
 		return transformation;
+	}
+
+	@Override
+	public boolean isAdapterForType(Object type) {
+		return type == ScheduleManager.class;
 	}
 
 	/**
@@ -331,6 +350,12 @@ public abstract class ScheduleModel2 extends ScheduleModelImpl
 		assert usage != null;
 		return !usage.isOutput();
 	}
+
+	@Override
+	public void notifyChanged(Notification notification) {}
+
+	@Override
+	public void setTarget(Notifier newTarget) {}
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		URI baseURI = getGraphsBaseURI();

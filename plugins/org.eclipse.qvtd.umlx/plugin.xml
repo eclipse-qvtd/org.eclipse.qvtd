@@ -31,4 +31,8 @@
       	class="org.eclipse.qvtd.umlx.labels.UMLXNamedElementLabelGenerator"/>
   </extension>
 
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes extension="umlx" type="text" />
+  </extension>
+
 </plugin>

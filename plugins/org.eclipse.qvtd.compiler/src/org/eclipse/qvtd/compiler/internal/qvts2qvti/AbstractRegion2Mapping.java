@@ -40,7 +40,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleModel2;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -113,11 +113,11 @@ public abstract class AbstractRegion2Mapping
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
-			ScheduleModel2 scheduleModel = (ScheduleModel2) getRegion().getScheduleModel();
-			if (asProperty == scheduleModel.getStandardLibraryHelper().getOclContainerProperty()) {
+			ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
+			if (asProperty == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
 				return helper.createOperationCallExp(asSource, "oclContainer");
 			}
-			else if ((asType != null) && (asProperty == scheduleModel.getCastProperty(asType))) {
+			else if ((asType != null) && (asProperty == scheduleManager.getCastProperty(asType))) {
 				return createOclAsTypeCallExp(asSource, asType);
 			}
 			else {
@@ -140,8 +140,8 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull CallExp createOclAsTypeCallExp(@NonNull OCLExpression asSource, @NonNull Type asType) {
-		ScheduleModel2 scheduleModel = RegionUtil.getScheduleModel(getRegion());
-		CompleteClass completeClass = scheduleModel.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
+		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
+		CompleteClass completeClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
 		TypeExp asTypeExp = helper.createTypeExp(completeClass.getPrimaryClass());
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}

@@ -16,16 +16,13 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -38,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl#getMappingRegion <em>Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl#getNamePrefix <em>Name Prefix</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl#getSymbolSuffix <em>Symbol Suffix</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl#getSymbolNameSuffix <em>Symbol Name Suffix</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,23 +69,23 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 	 */
 	protected String namePrefix = NAME_PREFIX_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getSymbolSuffix() <em>Symbol Suffix</em>}' attribute.
+	 * The default value of the '{@link #getSymbolNameSuffix() <em>Symbol Name Suffix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSymbolSuffix()
+	 * @see #getSymbolNameSuffix()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SYMBOL_SUFFIX_EDEFAULT = null;
+	protected static final String SYMBOL_NAME_SUFFIX_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getSymbolSuffix() <em>Symbol Suffix</em>}' attribute.
+	 * The cached value of the '{@link #getSymbolNameSuffix() <em>Symbol Name Suffix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSymbolSuffix()
+	 * @see #getSymbolNameSuffix()
 	 * @generated
 	 * @ordered
 	 */
-	protected String symbolSuffix = SYMBOL_SUFFIX_EDEFAULT;
+	protected String symbolNameSuffix = SYMBOL_NAME_SUFFIX_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -177,21 +174,8 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 	 * @generated
 	 */
 	@Override
-	public String getSymbolSuffix() {
-		return symbolSuffix;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setSymbolSuffix(String newSymbolSuffix) {
-		String oldSymbolSuffix = symbolSuffix;
-		symbolSuffix = newSymbolSuffix;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_SUFFIX, oldSymbolSuffix, symbolSuffix));
+	public String getSymbolNameSuffix() {
+		return symbolNameSuffix;
 	}
 
 	/**
@@ -207,8 +191,8 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 				return basicGetMappingRegion();
 			case QVTschedulePackage.MICRO_MAPPING_REGION__NAME_PREFIX:
 				return getNamePrefix();
-			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_SUFFIX:
-				return getSymbolSuffix();
+			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				return getSymbolNameSuffix();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,8 +211,8 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 			case QVTschedulePackage.MICRO_MAPPING_REGION__NAME_PREFIX:
 				setNamePrefix((String)newValue);
 				return;
-			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_SUFFIX:
-				setSymbolSuffix((String)newValue);
+			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				setSymbolNameSuffix((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,8 +232,8 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 			case QVTschedulePackage.MICRO_MAPPING_REGION__NAME_PREFIX:
 				setNamePrefix(NAME_PREFIX_EDEFAULT);
 				return;
-			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_SUFFIX:
-				setSymbolSuffix(SYMBOL_SUFFIX_EDEFAULT);
+			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				setSymbolNameSuffix(SYMBOL_NAME_SUFFIX_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -267,8 +251,8 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 				return mappingRegion != null;
 			case QVTschedulePackage.MICRO_MAPPING_REGION__NAME_PREFIX:
 				return NAME_PREFIX_EDEFAULT == null ? namePrefix != null : !NAME_PREFIX_EDEFAULT.equals(namePrefix);
-			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_SUFFIX:
-				return SYMBOL_SUFFIX_EDEFAULT == null ? symbolSuffix != null : !SYMBOL_SUFFIX_EDEFAULT.equals(symbolSuffix);
+			case QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX:
+				return SYMBOL_NAME_SUFFIX_EDEFAULT == null ? symbolNameSuffix != null : !SYMBOL_NAME_SUFFIX_EDEFAULT.equals(symbolNameSuffix);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -293,8 +277,16 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 		return namePrefix + " " + mappingRegion.getName();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	protected @NonNull String getSymbolNameSuffix() {
-		return symbolSuffix;
+	public void setSymbolNameSuffix(String newSymbolNameSuffix) {
+		String oldSymbolNameSuffix = symbolNameSuffix;
+		symbolNameSuffix = newSymbolNameSuffix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX, oldSymbolNameSuffix, symbolNameSuffix));
 	}
 } //MicroMappingRegionImpl
