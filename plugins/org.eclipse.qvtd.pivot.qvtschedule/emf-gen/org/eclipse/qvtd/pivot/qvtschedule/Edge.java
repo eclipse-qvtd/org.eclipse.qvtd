@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 
 /**
@@ -326,6 +325,4 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	void setSource(@NonNull Node sourceNode);
 
 	void setTarget(@NonNull Node targetNode);
-
-	void toGraph(@NonNull GraphStringBuilder s);
 } // Edge

@@ -1178,11 +1178,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.appendNode(this);
-	}
-
-	@Override
 	public @NonNull String toString() {
 		Role nodeRole = getNodeRole();
 		StringBuilder s = new StringBuilder();

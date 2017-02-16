@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -336,6 +335,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 		return getConnectionRole().isMandatory();
 	}
 
+	@Override
 	public boolean isNode2Node() {
 		return (sourceEnds.size() == 1) && (targetEnd2role.size() == 1);
 	}
@@ -451,46 +451,6 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 				s.append(" " + intermediateRegion);
 			}
 			QVTscheduleConstants.CONNECTION_ROUTING.println(s.toString());
-		}
-	}
-
-	@Override
-	public void toCallGraph(@NonNull GraphStringBuilder s) {
-		if (isNode2Node()) {
-			s.appendNode(this);
-			//			@SuppressWarnings("null")@NonNull Node sourceNode = sourceEnds.iterator().next();
-			//			@SuppressWarnings("null")@NonNull Node targetNode = targetEnd2role.keySet().iterator().next();
-			//			s.appendEdge(sourceNode, this, targetNode);
-		}
-		else {
-			s.appendNode(this);
-			//			for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
-			//				s.appendEdge(source, this, this);
-			//			}
-			//			for (@SuppressWarnings("null")@NonNull Node target : getTargets()) {
-			//				@SuppressWarnings("null")@NonNull ConnectionRole role = targetEnd2role.get(target);
-			//				s.appendEdge(this, role, target);
-			//			}
-		}
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		if (isNode2Node()) {
-			Node sourceNode = QVTscheduleUtil.getSourceEnds(this).iterator().next();
-			Node targetNode = targetEnd2role.keySet().iterator().next();
-			s.appendEdge(sourceNode, this, targetNode);
-		}
-		else {
-			s.appendNode(this);
-			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(this)) {
-				s.appendEdge(source, this, this);
-			}
-			for (@NonNull Node target : getTargetNodes()) {
-				ConnectionRole role = targetEnd2role.get(target);
-				assert role != null;
-				s.appendEdge(this, role, target);
-			}
 		}
 	}
 } //NodeConnectionImpl

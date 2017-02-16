@@ -250,7 +250,7 @@ public class LateConsumerMerger extends AbstractMerger
 		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduledRegion);
 		lateMerger.merge();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduledRegion.writeDebugGraphs("8-late", true, true, false);
+			RegionUtil.getScheduleModel(scheduledRegion).writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
 		}
 		return lateMerger.getMerges();
 	}
@@ -417,7 +417,7 @@ public class LateConsumerMerger extends AbstractMerger
 						mergedRegion.addIndex(index);
 					}
 				}
-				mergedRegion.writeDebugGraphs(null);
+				RegionUtil.getScheduleModel(mergedRegion).writeDebugGraphs(mergedRegion, null);
 			}
 		}
 	}

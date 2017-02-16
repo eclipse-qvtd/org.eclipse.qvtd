@@ -153,7 +153,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
 		loadingRegion.setInvokingRegion(rootScheduledRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			loadingRegion.writeDebugGraphs(null);
+			scheduleModel.writeDebugGraphs(loadingRegion, null);
 		}
 		return loadingRegion;
 	}
@@ -169,7 +169,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			createIncomingConnections(region);
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			rootScheduledRegion.writeDebugGraphs("4-bindings", true, true, false);
+			scheduleModel.writeDebugGraphs(rootScheduledRegion, "4-bindings", true, true, false);
 		}
 		//		for (Region region : sortedCallableRegions) {
 		//			region.checkIncomingConnections();
@@ -633,7 +633,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		splitConnectionVariables();
 		//
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduledRegion.writeDebugGraphs("5-cycled", true, true, false);
+			scheduleModel.writeDebugGraphs(scheduledRegion, "5-cycled", true, true, false);
 		}
 	}
 
@@ -683,7 +683,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			}
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduledRegion.writeDebugGraphs("7-pruned", true, true, false);
+			scheduleModel.writeDebugGraphs(scheduledRegion, "7-pruned", true, true, false);
 		}
 
 		boolean noLateConsumerMerge = scheduleModel.isNoLateConsumerMerge();
@@ -1098,7 +1098,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		createSchedule1(rootRegion);
 		createSchedule2(rootRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			rootRegion.writeDebugGraphs("9-final", true, true, true);
+			scheduleModel.writeDebugGraphs(rootRegion, "9-final", true, true, true);
 		}
 		return rootRegion;
 	}

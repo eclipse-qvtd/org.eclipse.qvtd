@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.internal.ModelImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -295,40 +294,5 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object) {
 		return getSymbolNameAdapter().reserveSymbolName(symbolNameBuilder, object);
-	}
-
-	@Override
-	public void writeCallDOTfile(@NonNull ScheduledRegion region,
-			@NonNull String suffix) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public void writeCallGraphMLfile(@NonNull ScheduledRegion region,
-			@NonNull String suffix) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public void writeDOTfile(@NonNull Region region, @Nullable String suffix) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public void writeGraphMLfile(@NonNull Region region,
-			@Nullable String suffix) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public void writeRegionDOTfile(@NonNull ScheduledRegion region,
-			@NonNull String suffix) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
-	}
-
-	@Override
-	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region,
-			@NonNull String suffix) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
 	}
 } //ScheduleModelImpl

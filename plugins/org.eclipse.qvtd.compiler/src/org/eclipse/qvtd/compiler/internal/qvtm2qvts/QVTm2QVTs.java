@@ -105,7 +105,7 @@ public class QVTm2QVTs extends ScheduleModel2
 		addProblem(RegionUtil.createRegionError(region, messageTemplate, bindings));
 	}
 
-	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleModel scheduleModel, @NonNull OperationCallExp operationCallExp) {
+	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleModel2 scheduleModel, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
 		LanguageExpression bodyExpression = operation.getBodyExpression();
 		assert  bodyExpression != null;
@@ -118,7 +118,7 @@ public class QVTm2QVTs extends ScheduleModel2
 				operationRegion = createOperationRegion(scheduleModel, operationCallExp, specification, operationDatum);
 				operationDatum2operationRegion.put(operationDatum, operationRegion);
 				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-					operationRegion.writeDebugGraphs(null);
+					scheduleModel.writeDebugGraphs(operationRegion, null);
 				}
 			}
 			return operationRegion;
@@ -315,7 +315,7 @@ public class QVTm2QVTs extends ScheduleModel2
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			for (@NonNull MappingAnalysis mappingAnalysis : mappingAnalyses) {
-				mappingAnalysis.getMappingRegion().writeDebugGraphs(null);
+				writeDebugGraphs(mappingAnalysis.getMappingRegion(), null);
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();

@@ -69,6 +69,7 @@ public interface NodeConnection extends DatumConnection<Node>
 	@Override
 	@NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets();
 
+	boolean isNode2Node();
 	/**
 	 * Return true if this connection is for an available value.
 	 */

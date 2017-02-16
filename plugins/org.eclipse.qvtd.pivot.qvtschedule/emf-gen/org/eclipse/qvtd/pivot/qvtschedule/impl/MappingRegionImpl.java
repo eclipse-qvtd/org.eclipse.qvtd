@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -491,12 +490,5 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		boolean wasRemoved = getHeadNodes().remove(headNode);
 		assert wasRemoved;
 		headNode.resetHead();
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setColor("palegreen");
-		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
-		super.toGraph(s);
 	}
 } //MappingRegionImpl

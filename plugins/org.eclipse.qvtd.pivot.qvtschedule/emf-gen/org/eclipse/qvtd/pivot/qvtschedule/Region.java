@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
 
@@ -239,12 +238,7 @@ public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTa
 	@NonNull List<@NonNull NodeConnection> getUsedConnections();
 	boolean isLoadingRegion();
 	boolean isOperationRegion();
-	void refineBindings(@NonNull Region bindingRegion);
 	void removeCallToChild(@NonNull Region region);
 	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
-	void toCallGraph(@NonNull GraphStringBuilder s);
-	//	void toGraph(@NonNull GraphStringBuilder s);
-	void toRegionGraph(@NonNull GraphStringBuilder s);
-	void writeDebugGraphs(@Nullable String context);
 } // Region

@@ -530,53 +530,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		s.appendAttributedEdge(source, this, target);
 	}
 
-	protected void appendEdgeWithNode(@NonNull GraphStringBuilder s) {
-		final Node sourceNode = getEdgeSource();
-		final Node targetNode = getEdgeTarget();
-		s.appendEdge(sourceNode, this, targetNode);
-		/*		GraphEdge graphEdge1 = new GraphEdge()
-		{
-			@Override
-			public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-				s.setColor(getColor());
-				s.setPenwidth(getPenwidth());
-				s.appendAttributedEdge(source, this, target);
-			}
-
-			@Override
-			public @NonNull GraphNode getSource() {
-				return sourceNode;
-			}
-
-			@Override
-			public @NonNull GraphNode getTarget() {
-				return AbstractEdge.this;
-			}
-		};
-		GraphEdge graphEdge2 = new GraphEdge()
-		{
-			@Override
-			public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-				s.setColor(getColor());
-				s.setPenwidth(getPenwidth());
-				s.appendAttributedEdge(source, this, target);
-			}
-
-			@Override
-			public @NonNull GraphNode getSource() {
-				return AbstractEdge.this;
-			}
-
-			@Override
-			public @NonNull GraphNode getTarget() {
-				return targetNode;
-			}
-		};
-		s.appendNode(this);
-		s.appendEdge(graphEdge1.getSource(), graphEdge1, graphEdge1.getTarget());
-		s.appendEdge(graphEdge2.getSource(), graphEdge2, graphEdge2.getTarget()); */
-	}
-
 	/*	@Override
 	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 		String name = getName();
@@ -823,11 +776,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.appendEdge(getEdgeSource(), this, getEdgeTarget());
 	}
 
 	@Override

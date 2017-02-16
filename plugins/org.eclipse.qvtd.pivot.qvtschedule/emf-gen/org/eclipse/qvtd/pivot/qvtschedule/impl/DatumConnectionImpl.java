@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -501,7 +500,8 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	//		return isRegion2Region(getSourceRegion2count());
 	//	}
 
-	private boolean isRegion2Region(@NonNull Map<Region, Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles) {
+	@Override
+	public boolean isRegion2Region(@NonNull Map<@NonNull Region, @NonNull Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles) {
 		return (sourceRegion2count.size() == 1) && (targetRegion2roles.size() == 1) && (targetRegion2roles.values().iterator().next().size() == 1); //(targetEnd2role.size() == 1);
 	}
 
@@ -511,95 +511,6 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		}
 		else if (this.connectionRole != connectionRole) {
 			this.connectionRole = this.connectionRole.merge(connectionRole);
-		}
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.appendEdge(getEdgeSource(), this, getEdgeTarget());
-	}
-
-	@Override
-	public void toRegionGraph(@NonNull ScheduledRegion scheduledRegion, @NonNull GraphStringBuilder s) {
-		Map<@NonNull Region, @NonNull Integer> sourceRegion2count = new HashMap<>();
-		for (@NonNull Node source : getSourceNodes()) {
-			Region sourceRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getRegion(source));
-			if (sourceRegion != null) {
-				//				Integer count = sourceRegion2count.get(sourceRegion);
-				sourceRegion2count.put(sourceRegion, 1); //(count != null ? count.intValue() : 0) + 1);
-			}
-		}
-		Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles = new HashMap<>();
-		for (@NonNull ConnectionEnd target : targetEnd2role.keySet()) {
-			ConnectionRole role = targetEnd2role.get(target);
-			assert role != null;
-			Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getRegion(target));
-			if (targetRegion != null) {
-				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
-				if (roles == null) {
-					roles = new ArrayList<>();
-					targetRegion2roles.put(targetRegion, roles);
-				}
-				if (!roles.contains(role)) {
-					roles.add(role);
-				}
-			}
-		}
-		if (isRegion2Region(sourceRegion2count, targetRegion2roles)) {
-			Region sourceRegion = sourceRegion2count.keySet().iterator().next();
-			Region targetRegion = targetRegion2roles.keySet().iterator().next();
-			s.appendEdge(sourceRegion, this, targetRegion);
-		}
-		else {
-			s.appendNode(this);
-			for (@NonNull Region sourceRegion : sourceRegion2count.keySet()) {
-				Integer counts = sourceRegion2count.get(sourceRegion);
-				assert counts != null;
-				for (int i = counts; i > 0; i--) {
-					s.appendEdge(sourceRegion, this, this);
-				}
-			}
-			for (@NonNull Region targetRegion : targetRegion2roles.keySet()) {
-				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
-				assert roles != null;
-				for (@NonNull ConnectionRole role : roles) {
-					s.appendEdge(this, role, targetRegion);
-					//				GraphNode targetNode = /*targetRegion.isCyclicRegion() ? getTarget(targetRegion) :*/ targetRegion;
-					//				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
-					//					s.appendEdge(this, role, targetNode);
-				}
-			}
-			Node headNode = null;
-			if (sourceRegion2count.size() == 0) {
-				/*				@Nullable ConnectionEnd targetEnd = null;
-				for (@NonNull ConnectionEnd end : targetEnd2role.keySet()) {
-					if (end.getRegion() == scheduledRegion) {
-						assert targetEnd == null;
-						targetEnd = end;
-					}
-				}
-				if (targetEnd instanceof Node) {
-					Node node = (Node)targetEnd;
-					if (node.isHead()) {
-						headNode = node;
-						s.appendEdge(headNode, this, this);
-					}
-				} */
-				@Nullable ConnectionEnd sourceEnd = null;
-				for (@NonNull ConnectionEnd end : QVTscheduleUtil.getSourceEnds(this)) {
-					if (end.getRegion() == scheduledRegion) {
-						assert sourceEnd == null;
-						sourceEnd = end;
-					}
-				}
-				if (sourceEnd instanceof Node) {
-					Node node = (Node)sourceEnd;
-					if (node.isHead()) {
-						headNode = node;
-						s.appendEdge(headNode, this, this);
-					}
-				}
-			}
 		}
 	}
 

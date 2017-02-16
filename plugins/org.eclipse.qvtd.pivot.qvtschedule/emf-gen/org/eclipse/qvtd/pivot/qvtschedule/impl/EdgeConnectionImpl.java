@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -281,6 +280,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		return commonType;
 	} */
 
+	@Override
 	public boolean isEdge2Edge() {
 		return (sourceEnds.size() == 1) && (targetEnd2role.size() == 1);
 	}
@@ -337,46 +337,6 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		}
 		if (targetEnd2role.isEmpty()) {
 			destroy();
-		}
-	}
-
-	@Override
-	public void toCallGraph(@NonNull GraphStringBuilder s) {
-		/*		if (isNode2Node()) {
-			s.appendNode(this);
-//			@SuppressWarnings("null")@NonNull Node sourceNode = sourceNodes.iterator().next();
-//			@SuppressWarnings("null")@NonNull Node targetNode = targetNode2role.keySet().iterator().next();
-//			s.appendEdge(sourceNode, this, targetNode);
-		}
-		else {
-			s.appendNode(this);
-//			for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
-//				s.appendEdge(source, this, this);
-//			}
-//			for (@SuppressWarnings("null")@NonNull Node target : getTargets()) {
-//				@SuppressWarnings("null")@NonNull ConnectionRole role = targetNode2role.get(target);
-//				s.appendEdge(this, role, target);
-//			}
-		} */
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		if (isEdge2Edge()) {
-			NavigableEdge sourceEdge = sourceEnds.iterator().next();
-			NavigableEdge targetEdge = targetEnd2role.keySet().iterator().next();
-			s.appendEdge(sourceEdge.getEdgeTarget(), this, targetEdge.getEdgeTarget());
-		}
-		else {
-			s.appendNode(this);
-			for (@NonNull NavigableEdge source : QVTscheduleUtil.getSourceEnds(this)) {
-				s.appendEdge(source.getEdgeTarget(), this, this);
-			}
-			for (@NonNull NavigableEdge target : getTargetEdges()) {
-				ConnectionRole role = targetEnd2role.get(target);
-				assert role != null;
-				s.appendEdge(this, role, target.getEdgeTarget());
-			}
 		}
 	}
 } //EdgeConnectionImpl

@@ -116,5 +116,6 @@ public interface DatumConnection<CE extends ConnectionEnd> extends Connection, G
 	 */
 	boolean isPassed();
 	boolean isPassed(@NonNull Region targetRegion);
+	boolean isRegion2Region(@NonNull Map<@NonNull Region, @NonNull Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles);
 	void removeTargetRegion(@NonNull Region region);
 }

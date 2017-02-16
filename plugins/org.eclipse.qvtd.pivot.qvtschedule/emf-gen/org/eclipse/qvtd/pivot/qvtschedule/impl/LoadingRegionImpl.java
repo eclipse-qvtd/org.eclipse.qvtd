@@ -19,8 +19,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
@@ -91,20 +89,5 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public boolean isLoadingRegion() {
 		return true;
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setLabel(getName());
-		s.setColor("lightblue");
-		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
-		s.pushCluster();
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
-			s.appendNode(node);
-		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
-			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
-		}
-		s.popCluster();
 	}
 } //RootCompositionRegionImpl

@@ -47,4 +47,6 @@ public interface GraphStringBuilder
 	void setShape(@NonNull String shape);
 	void setStyle(@NonNull String style);
 	void setTaillabel(/*@NonNull*/ String string);
+	@Override
+	@NonNull String toString();
 }

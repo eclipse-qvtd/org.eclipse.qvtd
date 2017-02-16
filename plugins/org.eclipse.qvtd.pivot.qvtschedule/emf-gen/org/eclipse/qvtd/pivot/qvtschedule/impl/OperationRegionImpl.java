@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -24,12 +25,10 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
@@ -393,12 +392,5 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public boolean isOperationRegion() {
 		return true;
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setColor(QVTscheduleConstants.OPERATION_COLOR);
-		s.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
-		super.toGraph(s);
 	}
 } //OperationRegionImpl

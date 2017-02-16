@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameAdapter;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
@@ -76,11 +75,4 @@ public interface ScheduleModel extends Model
 
 	@NonNull SymbolNameAdapter getSymbolNameAdapter();
 	@NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object);
-
-	void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix);
-	void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix);
-	void writeDOTfile(@NonNull Region region, @Nullable String suffix);
-	void writeGraphMLfile(@NonNull Region region, @Nullable String suffix);
-	void writeRegionDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix);
-	void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix);
 }

@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.jdt.annotation.Nullable;
-
 /**
  * <!-- begin-model-doc -->
  * The MultiRegion supervises the many Region instances that realize a transformation
@@ -24,6 +22,4 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface MappingRegion extends Region
 {
-	@Override
-	void writeDebugGraphs(@Nullable String context);
 }

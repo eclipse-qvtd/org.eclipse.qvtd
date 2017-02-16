@@ -71,7 +71,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import com.google.common.collect.Iterables;
 
@@ -849,7 +848,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 					createExpressionEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
-					ScheduleModel scheduleModel = RegionUtil.getScheduleModel(context.getMappingRegion());
+					ScheduleModel2 scheduleModel = RegionUtil.getScheduleModel(context.getMappingRegion());
 					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) scheduleModel;		// FIXME cast
 					OperationRegion operationRegion = qvtm2qvts.analyzeOperation(scheduleModel, operationCallExp);
 					Iterable<@NonNull Node> referenceNodes = RegionUtil.getDependencyNodes(operationRegion);

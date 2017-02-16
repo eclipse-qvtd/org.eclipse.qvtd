@@ -31,7 +31,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -41,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 
@@ -405,75 +405,5 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	protected @NonNull String getSymbolNamePrefix() {
 		return "s_";
-	}
-
-	@Override
-	public void toCallGraph(@NonNull GraphStringBuilder s) {
-		s.setLabel(getName());
-		s.pushCluster();
-		for (@NonNull Region region : getCallableRegions()) {
-			region.toCallGraph(s);
-		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(this)) {
-			connection.toRegionGraph(this, s);
-		}
-		s.popCluster();
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setLabel(getName());
-		s.pushCluster();
-		for (@NonNull Region region : QVTscheduleUtil.getRegions(this)) {
-			region.toGraph(s);
-		}
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
-			s.appendNode(node);
-		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
-			s.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
-		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(this)) {
-			connection.toGraph(s);
-		}
-		s.popCluster();
-	}
-
-	@Override
-	public void toRegionGraph(@NonNull GraphStringBuilder s) {
-		s.setLabel(getName());
-		s.pushCluster();
-		for (@NonNull Region region : getCallableRegions()) {
-			//			region.toRegionGraph(s);
-			s.appendNode(region);
-			//			for (@SuppressWarnings("null")@NonNull Edge edge : region.getRecursionEdges()) {
-			//				s.appendEdge(edge.getSource().getRegion(), edge, edge.getTarget().getRegion());
-			//			}
-		}
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
-			s.appendNode(node);
-		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(this)) {
-			connection.toRegionGraph(this, s);
-		}
-		s.popCluster();
-	}
-
-	@Override
-	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
-		ScheduleModel scheduler = getScheduleModel();
-		if (doNodesGraph) {
-			writeDebugGraphs(context);
-		}
-		if (doRegionGraph) {
-			String suffix = "-r-" + context;
-			scheduler.writeRegionDOTfile(this, suffix);
-			scheduler.writeRegionGraphMLfile(this, suffix);
-		}
-		if (doCallGraph) {
-			String suffix = "-c-" + context;
-			scheduler.writeCallDOTfile(this, suffix);
-			scheduler.writeCallGraphMLfile(this, suffix);
-		}
 	}
 } //ScheduledRegionImpl

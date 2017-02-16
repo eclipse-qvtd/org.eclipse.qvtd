@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 /**
@@ -451,7 +450,6 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	 */
 	boolean isUnconditional();
 
-	//	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
 	void removeOutgoingConnection(@NonNull NodeConnection connection);
 
 	/**
@@ -467,6 +465,4 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	void setHead();
 
 	void setUtility(@NonNull Utility utility);
-
-	void toGraph(@NonNull GraphStringBuilder s);
 } // Node

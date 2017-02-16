@@ -221,7 +221,7 @@ public class EarlyMerger extends AbstractMerger
 			else {
 				outputRegions.add(mergedRegion);
 				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-					mergedRegion.writeDebugGraphs(null);
+					RegionUtil.getScheduleModel(mergedRegion).writeDebugGraphs(mergedRegion, null);
 				}
 			}
 			residualInputRegions.remove(candidateRegion);

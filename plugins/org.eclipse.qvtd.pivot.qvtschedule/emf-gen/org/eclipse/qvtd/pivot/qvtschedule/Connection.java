@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,7 +84,4 @@ public interface Connection extends Element, Nameable, Symbolable
 	 * Return a formatted label to accompany the edge, or null for no label.
 	 */
 	@Nullable String getLabel();
-	void toCallGraph(@NonNull GraphStringBuilder s);
-	void toRegionGraph(@NonNull ScheduledRegion scheduledRegion, @NonNull GraphStringBuilder s);
-	void toGraph(@NonNull GraphStringBuilder s);
 } // Connection

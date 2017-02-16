@@ -521,17 +521,4 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		@SuppressWarnings("unused")boolean wasRemoved = outgoingConnections2.remove(edgeConnection);
 		//			assert wasRemoved;   -- destroy subverts this
 	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		if (isSecondary()) {
-			// Let primary draw a bidirectional edge
-		}
-		else if ((incomingConnection == null) && (outgoingConnections == null)) {
-			super.toGraph(s);
-		}
-		else {
-			appendEdgeWithNode(s);
-		}
-	}
 } //NavigableEdgeImpl

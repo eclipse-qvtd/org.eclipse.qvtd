@@ -52,4 +52,5 @@ public interface EdgeConnection extends DatumConnection<NavigableEdge>
 	@NonNull Iterable<@NonNull NavigableEdge> getTargetEdges();
 	@Override
 	@NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets();
+	boolean isEdge2Edge();
 }

@@ -109,6 +109,4 @@ public interface ScheduledRegion extends Region
 
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
-
-	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

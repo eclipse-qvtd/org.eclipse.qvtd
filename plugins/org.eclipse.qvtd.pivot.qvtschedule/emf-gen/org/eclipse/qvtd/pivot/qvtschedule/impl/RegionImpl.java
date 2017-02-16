@@ -40,7 +40,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
@@ -58,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 
@@ -1213,7 +1213,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 *
 	 * Passed Bindings to the head that violate the head's predicates are removed, and in the case of a single caller
 	 * the passed binding is redirected direct to the caller to facilitate re-use of the calling context.
-	 */
+	 *
 	@Override
 	public void refineBindings(@NonNull Region bindingRegion) {
 		refineHeadBindings(bindingRegion);
@@ -1298,8 +1298,8 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 					}
 				}
 			}
-		} */
-	}
+		} * /
+	} */
 
 	/**
 	 * Refine the call bindings of a mapping so that:
@@ -1386,104 +1386,13 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	} */
 
 	@Override
-	public void toCallGraph(@NonNull GraphStringBuilder s) {
-		s.appendNode(this);
-		for (final @NonNull Region region : getCallableChildren()) {
-			GraphEdge graphEdge = new GraphEdge()
-			{
-				@Override
-				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-					s.appendAttributedEdge(source, this, target);
-				}
-
-				@Override
-				public @NonNull GraphNode getEdgeSource() {
-					return RegionImpl.this;
-				}
-
-				@Override
-				public @NonNull GraphNode getEdgeTarget() {
-					return region;
-				}
-			};
-			s.appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
-		}
-		for (final @NonNull NodeConnection connection : getRootConnections())
-		{
-			GraphEdge graphEdge1 = new GraphEdge() {
-				@Override
-				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-					s.appendAttributedEdge(source, this, target);
-				}
-
-				@Override
-				public @NonNull GraphNode getEdgeSource() {
-					return RegionImpl.this;
-				}
-
-				@Override
-				public @NonNull GraphNode getEdgeTarget() {
-					return connection;
-				}
-			};
-			s.appendEdge(graphEdge1.getEdgeSource(), graphEdge1, graphEdge1.getEdgeTarget());
-			for (final @NonNull Node targetNode : connection.getTargetNodes())
-			{
-				GraphEdge graphEdge = new GraphEdge() {
-					@Override
-					public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-						s.appendAttributedEdge(source, this, target);
-					}
-
-					@Override
-					public @NonNull GraphNode getEdgeSource() {
-						return connection;
-					}
-
-					@Override
-					public @NonNull GraphNode getEdgeTarget() {
-						return QVTscheduleUtil.getRegion(targetNode);
-					}
-				};
-				s.appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
-			}
-		}
-	}
-
-	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setLabel(getName());
-		s.pushCluster();
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
-			node.toGraph(s);
-			//			s.appendNode(node);
-		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(this)) {
-			edge.toGraph(s);
-			//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
-		}
-		s.popCluster();
-	}
-
-	@Override
-	public void toRegionGraph(@NonNull GraphStringBuilder s) {
-		s.appendNode(this);
-		for (@NonNull Edge edge : getRecursionEdges()) {
-			s.appendEdge(QVTscheduleUtil.getRegion(edge.getEdgeSource()), edge, QVTscheduleUtil.getRegion(edge.getEdgeTarget()));
-		}
+		ToGraphVisitor visitor = new ToGraphVisitor(s);
+		visitor.visit(this);
 	}
 
 	@Override
 	public @NonNull String toString() {
 		return symbolName != null ? (symbolName/* + " - " + getName()*/) : String.valueOf(getName());
 	}
-
-	@Override
-	public void writeDebugGraphs(@Nullable String context) {
-		ScheduleModel scheduleModel = getScheduleModel();
-		String suffix = context != null ? "-" + context : null;
-		scheduleModel.writeDOTfile(this, suffix);
-		scheduleModel.writeGraphMLfile(this, suffix);
-	}
-
 } //RegionImpl
