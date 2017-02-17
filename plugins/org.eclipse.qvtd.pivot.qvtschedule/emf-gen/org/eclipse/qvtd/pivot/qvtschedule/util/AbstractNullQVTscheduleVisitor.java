@@ -212,11 +212,6 @@ public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
-		return null;
-	}
-
-	@Override
 	public R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		return null;
 	}

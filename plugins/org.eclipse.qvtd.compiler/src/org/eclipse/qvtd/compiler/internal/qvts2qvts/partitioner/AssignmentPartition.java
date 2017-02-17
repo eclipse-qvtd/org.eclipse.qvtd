@@ -16,7 +16,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -51,7 +50,7 @@ class AssignmentPartition extends AbstractPartition
 	private void gatherSourceNavigations(@NonNull Node targetNode) {
 		if (!hasNode(targetNode)) {
 			Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
-			if (targetNodeRole.isRealized()) {
+			if (targetNodeRole == Role.REALIZED) {
 				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole)/*.asMatched()*/;
 			}
 			addNode(targetNode, targetNodeRole);
@@ -74,8 +73,8 @@ class AssignmentPartition extends AbstractPartition
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = RegionUtil.getEdgeRole(edge);
-		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
-			edgeRole = QVTscheduleUtil.getEdgeRole(Phase.PREDICATED);
+		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
+			edgeRole = Role.PREDICATED;
 		}
 		return edgeRole;
 	}

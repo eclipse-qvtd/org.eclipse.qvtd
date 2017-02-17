@@ -44,9 +44,8 @@ class RealizedPartition extends AbstractPartition
 			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getEdgeTarget();
-					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
-					if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
-						gatherSourceNavigations(targetNode, targetNodeRole);
+					if (!targetNode.isPredicated() && !targetNode.isRealized()) {
+						gatherSourceNavigations(targetNode, RegionUtil.getNodeRole(targetNode));
 					}
 				}
 			}
@@ -96,7 +95,7 @@ class RealizedPartition extends AbstractPartition
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = RegionUtil.getEdgeRole(edge);
-		if (edgeRole.isRealized()) {
+		if (edgeRole == Role.REALIZED) {
 			assert !partitioner.hasRealizedEdge(edge);
 		}
 		return edgeRole;

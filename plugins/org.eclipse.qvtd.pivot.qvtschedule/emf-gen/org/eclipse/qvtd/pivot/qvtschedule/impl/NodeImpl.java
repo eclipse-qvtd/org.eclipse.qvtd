@@ -126,14 +126,24 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getNodeRole() <em>Node Role</em>}' reference.
+	 * The default value of the '{@link #getNodeRole() <em>Node Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNodeRole()
 	 * @generated
 	 * @ordered
 	 */
-	protected Role nodeRole;
+	protected static final Role NODE_ROLE_EDEFAULT = Role.CONSTANT;
+
+	/**
+	 * The cached value of the '{@link #getNodeRole() <em>Node Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodeRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Role nodeRole = NODE_ROLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOutgoingConnections() <em>Outgoing Connections</em>}' reference list.
@@ -261,23 +271,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 */
 	@Override
 	public Role getNodeRole() {
-		if (nodeRole != null && nodeRole.eIsProxy()) {
-			InternalEObject oldNodeRole = (InternalEObject)nodeRole;
-			nodeRole = (Role)eResolveProxy(oldNodeRole);
-			if (nodeRole != oldNodeRole) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__NODE_ROLE, oldNodeRole, nodeRole));
-			}
-		}
-		return nodeRole;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Role basicGetNodeRole() {
 		return nodeRole;
 	}
 
@@ -289,7 +282,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void setNodeRole(Role newNodeRole) {
 		Role oldNodeRole = nodeRole;
-		nodeRole = newNodeRole;
+		nodeRole = newNodeRole == null ? NODE_ROLE_EDEFAULT : newNodeRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__NODE_ROLE, oldNodeRole, nodeRole));
 	}
@@ -418,8 +411,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__NAME:
 				return getName();
 			case QVTschedulePackage.NODE__NODE_ROLE:
-				if (resolve) return getNodeRole();
-				return basicGetNodeRole();
+				return getNodeRole();
 			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
 				return getOutgoingConnections();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
@@ -491,7 +483,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				setName(NAME_EDEFAULT);
 				return;
 			case QVTschedulePackage.NODE__NODE_ROLE:
-				setNodeRole((Role)null);
+				setNodeRole(NODE_ROLE_EDEFAULT);
 				return;
 			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
 				getOutgoingConnections().clear();
@@ -523,7 +515,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.NODE__NODE_ROLE:
-				return nodeRole != null;
+				return nodeRole != NODE_ROLE_EDEFAULT;
 			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
@@ -986,7 +978,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean isConstant() {
 		assert nodeRole != null;
-		return nodeRole.isConstant();
+		return nodeRole == Role.CONSTANT;
 	}
 
 	@Override
@@ -1027,7 +1019,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean isLoaded() {
 		assert nodeRole != null;
-		return nodeRole.isLoaded();
+		return nodeRole == Role.LOADED;
 	}
 
 	@Override
@@ -1060,20 +1052,20 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean isPredicated() {
 		assert nodeRole != null;
-		if (nodeRole.isSpeculated()) {
+		if (nodeRole == Role.SPECULATED) {
 			assert nodeRole != null;
-			return nodeRole.isPredicated();
+			return nodeRole == Role.PREDICATED;
 		}
 		else {
 			assert nodeRole != null;
-			return nodeRole.isPredicated();
+			return nodeRole == Role.PREDICATED;
 		}
 	}
 
 	@Override
 	public boolean isRealized() {
 		assert nodeRole != null;
-		return nodeRole.isRealized();
+		return nodeRole == Role.REALIZED;
 	}
 
 	@Override
@@ -1089,13 +1081,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean isSpeculated() {
 		assert nodeRole != null;
-		return nodeRole.isSpeculated();
+		return nodeRole == Role.SPECULATED;
 	}
 
 	@Override
 	public boolean isSpeculation() {
 		assert nodeRole != null;
-		return nodeRole.isSpeculation();
+		return nodeRole == Role.SPECULATION;
 	}
 
 	@Override
@@ -1191,7 +1183,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public @NonNull String toString() {
 		Role nodeRole = getNodeRole();
 		StringBuilder s = new StringBuilder();
-		s.append(nodeRole != null ? nodeRole.getPhase() : null);
+		s.append(nodeRole);
 		s.append("-");
 		s.append(getClass().getSimpleName().replace("Impl",  ""));
 		s.append("(");

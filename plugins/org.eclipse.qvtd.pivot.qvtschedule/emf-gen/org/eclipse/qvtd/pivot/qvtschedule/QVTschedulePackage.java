@@ -250,14 +250,14 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE_CONNECTION = 11;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl <em>Role</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 35;
+	int ROLE = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl <em>Mapping Action</em>}' class.
@@ -417,7 +417,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVariableNode()
 	 * @generated
 	 */
-	int VARIABLE_NODE = 41;
+	int VARIABLE_NODE = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl <em>Iterator Node</em>}' class.
@@ -865,7 +865,7 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -982,7 +982,7 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGABLE_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1144,7 +1144,7 @@ public interface QVTschedulePackage extends EPackage {
 	int CAST_EDGE__OWNED_EXTENSIONS = NAVIGABLE_EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1468,7 +1468,7 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1612,7 +1612,7 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSED_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2062,7 +2062,7 @@ public interface QVTschedulePackage extends EPackage {
 	int DEPENDENCY_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2332,7 +2332,7 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2440,7 +2440,7 @@ public interface QVTschedulePackage extends EPackage {
 	int EXPRESSION_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2593,7 +2593,7 @@ public interface QVTschedulePackage extends EPackage {
 	int INPUT_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2701,7 +2701,7 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATED_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2854,7 +2854,7 @@ public interface QVTschedulePackage extends EPackage {
 	int VARIABLE_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3007,7 +3007,7 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE__NAME = VARIABLE_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3639,7 +3639,7 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGATION_EDGE__OWNED_EXTENSIONS = NAVIGABLE_EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3982,7 +3982,7 @@ public interface QVTschedulePackage extends EPackage {
 	int NULL_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4145,7 +4145,7 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4470,7 +4470,7 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_TYPED_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4633,7 +4633,7 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__NAME = VARIABLE_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4769,7 +4769,7 @@ public interface QVTschedulePackage extends EPackage {
 	int PREDICATE_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5031,7 +5031,7 @@ public interface QVTschedulePackage extends EPackage {
 	int RECURSION_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' reference.
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5121,159 +5121,6 @@ public interface QVTschedulePackage extends EPackage {
 	int RECURSION_EDGE_OPERATION_COUNT = EDGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Phase</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__PHASE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__CONSTANT = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Loaded</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__LOADED = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>New</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__NEW = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Old</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__OLD = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__PREDICATED = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Realized</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__REALIZED = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Speculated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__SPECULATED = PivotPackage.ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Speculation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__SPECULATION = PivotPackage.ELEMENT_FEATURE_COUNT + 8;
-
-	/**
-	 * The number of structural features of the '<em>Role</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 9;
-
-	/**
-	 * The operation id for the '<em>All Owned Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
-
-	/**
-	 * The number of operations of the '<em>Role</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5281,7 +5128,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
 	 * @generated
 	 */
-	int SCHEDULE_MODEL = 36;
+	int SCHEDULE_MODEL = 35;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5426,7 +5273,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
 	 * @generated
 	 */
-	int SCHEDULED_REGION = 37;
+	int SCHEDULED_REGION = 36;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5589,7 +5436,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
 	 * @generated
 	 */
-	int SYMBOLABLE = 38;
+	int SYMBOLABLE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
@@ -5626,7 +5473,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTrueNode()
 	 * @generated
 	 */
-	int TRUE_NODE = 39;
+	int TRUE_NODE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5701,7 +5548,7 @@ public interface QVTschedulePackage extends EPackage {
 	int TRUE_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5780,7 +5627,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
 	 * @generated
 	 */
-	int UNKNOWN_NODE = 40;
+	int UNKNOWN_NODE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5855,7 +5702,7 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE__NAME = NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Node Role</b></em>' reference.
+	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5934,7 +5781,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDomainUsage()
 	 * @generated
 	 */
-	int DOMAIN_USAGE = 42;
+	int DOMAIN_USAGE = 41;
 
 	/**
 	 * The number of structural features of the '<em>Domain Usage</em>' class.
@@ -5962,7 +5809,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getGraphEdge()
 	 * @generated
 	 */
-	int GRAPH_EDGE = 43;
+	int GRAPH_EDGE = 42;
 
 	/**
 	 * The number of structural features of the '<em>Graph Edge</em>' class.
@@ -5990,7 +5837,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getGraphNode()
 	 * @generated
 	 */
-	int GRAPH_NODE = 44;
+	int GRAPH_NODE = 43;
 
 	/**
 	 * The number of structural features of the '<em>Graph Node</em>' class.
@@ -6018,7 +5865,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getToDOTable()
 	 * @generated
 	 */
-	int TO_DO_TABLE = 45;
+	int TO_DO_TABLE = 44;
 
 	/**
 	 * The number of structural features of the '<em>To DO Table</em>' class.
@@ -6037,17 +5884,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int TO_DO_TABLE_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Phase
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPhase()
-	 * @generated
-	 */
-	int PHASE = 46;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
@@ -6303,15 +6139,15 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getEdge();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Edge Role</em>'.
+	 * @return the meta object for the attribute '<em>Edge Role</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole()
 	 * @see #getEdge()
 	 * @generated
 	 */
-	EReference getEdge_EdgeRole();
+	EAttribute getEdge_EdgeRole();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getName <em>Name</em>}'.
@@ -6379,113 +6215,14 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getEdgeConnection_Property();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}'.
+	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Role</em>'.
+	 * @return the meta object for enum '<em>Role</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 	 * @generated
 	 */
-	EClass getRole();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#getPhase <em>Phase</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Phase</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#getPhase()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Phase();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isConstant <em>Constant</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constant</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isConstant()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Constant();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isLoaded <em>Loaded</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Loaded</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isLoaded()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Loaded();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isNew <em>New</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>New</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isNew()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_New();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isOld <em>Old</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Old</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isOld()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Old();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isPredicated <em>Predicated</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Predicated</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isPredicated()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Predicated();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isRealized <em>Realized</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Realized</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isRealized()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Realized();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isSpeculated <em>Speculated</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Speculated</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isSpeculated()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Speculated();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isSpeculation <em>Speculation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Speculation</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role#isSpeculation()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Speculation();
+	EEnum getRole();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel <em>Schedule Model</em>}'.
@@ -6986,15 +6723,15 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getNode_IncomingConnection();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Node Role</em>'.
+	 * @return the meta object for the attribute '<em>Node Role</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole()
 	 * @see #getNode()
 	 * @generated
 	 */
-	EReference getNode_NodeRole();
+	EAttribute getNode_NodeRole();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOutgoingConnections <em>Outgoing Connections</em>}'.
@@ -7361,16 +7098,6 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getRegion_Region();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Phase</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Phase
-	 * @generated
-	 */
-	EEnum getPhase();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7608,12 +7335,12 @@ public interface QVTschedulePackage extends EPackage {
 		EClass EDGE = eINSTANCE.getEdge();
 
 		/**
-		 * The meta object literal for the '<em><b>Edge Role</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Edge Role</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EDGE__EDGE_ROLE = eINSTANCE.getEdge_EdgeRole();
+		EAttribute EDGE__EDGE_ROLE = eINSTANCE.getEdge_EdgeRole();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -7666,86 +7393,14 @@ public interface QVTschedulePackage extends EPackage {
 		EReference EDGE_CONNECTION__PROPERTY = eINSTANCE.getEdgeConnection_Property();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl <em>Role</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.RoleImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 		 * @generated
 		 */
-		EClass ROLE = eINSTANCE.getRole();
-
-		/**
-		 * The meta object literal for the '<em><b>Phase</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__PHASE = eINSTANCE.getRole_Phase();
-
-		/**
-		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__CONSTANT = eINSTANCE.getRole_Constant();
-
-		/**
-		 * The meta object literal for the '<em><b>Loaded</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__LOADED = eINSTANCE.getRole_Loaded();
-
-		/**
-		 * The meta object literal for the '<em><b>New</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__NEW = eINSTANCE.getRole_New();
-
-		/**
-		 * The meta object literal for the '<em><b>Old</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__OLD = eINSTANCE.getRole_Old();
-
-		/**
-		 * The meta object literal for the '<em><b>Predicated</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__PREDICATED = eINSTANCE.getRole_Predicated();
-
-		/**
-		 * The meta object literal for the '<em><b>Realized</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__REALIZED = eINSTANCE.getRole_Realized();
-
-		/**
-		 * The meta object literal for the '<em><b>Speculated</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__SPECULATED = eINSTANCE.getRole_Speculated();
-
-		/**
-		 * The meta object literal for the '<em><b>Speculation</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__SPECULATION = eINSTANCE.getRole_Speculation();
+		EEnum ROLE = eINSTANCE.getRole();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
@@ -8170,12 +7825,12 @@ public interface QVTschedulePackage extends EPackage {
 		EReference NODE__INCOMING_CONNECTION = eINSTANCE.getNode_IncomingConnection();
 
 		/**
-		 * The meta object literal for the '<em><b>Node Role</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Node Role</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NODE__NODE_ROLE = eINSTANCE.getNode_NodeRole();
+		EAttribute NODE__NODE_ROLE = eINSTANCE.getNode_NodeRole();
 
 		/**
 		 * The meta object literal for the '<em><b>Outgoing Connections</b></em>' reference list feature.
@@ -8468,16 +8123,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference REGION__REGION = eINSTANCE.getRegion_Region();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Phase <em>Phase</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.Phase
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPhase()
-		 * @generated
-		 */
-		EEnum PHASE = eINSTANCE.getPhase();
 
 	}
 

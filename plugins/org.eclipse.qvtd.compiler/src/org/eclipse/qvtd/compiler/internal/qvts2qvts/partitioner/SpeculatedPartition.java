@@ -20,9 +20,7 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -175,12 +173,12 @@ class SpeculatedPartition extends AbstractPartition
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = RegionUtil.getEdgeRole(edge);
-		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
+		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
 			if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
 			}
 			else {
-				edgeRole = QVTscheduleConstants.getEdgeRole(Phase.PREDICATED);
+				edgeRole = Role.PREDICATED;
 			}
 		}
 		return edgeRole;
@@ -190,16 +188,14 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
 			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && !partitioner.isCorrolary(edge)) {
 				Node sourceNode = edge.getEdgeSource();
-				Role sourceNodeRole = RegionUtil.getNodeRole(sourceNode);
-				if (!sourceNodeRole.isRealized()) {
+				if (!sourceNode.isRealized()) {
 					Node targetNode = edge.getEdgeTarget();
-					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
-					if (!targetNodeRole.isRealized()) {
+					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, sourceNodeRole);
+							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
 						}
 						if (!hasNode(targetNode)) {
-							addNode(targetNode, targetNodeRole);
+							addNode(targetNode, RegionUtil.getNodeRole(targetNode));
 						}
 					}
 				}
@@ -242,16 +238,14 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && !partitioner.isCorrolary(edge)) {
 				Node sourceNode = edge.getEdgeSource();
-				Role sourceNodeRole = RegionUtil.getNodeRole(sourceNode);
-				if (!sourceNodeRole.isRealized()) {
+				if (!sourceNode.isRealized()) {
 					Node targetNode = edge.getEdgeTarget();
-					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
-					if (!targetNodeRole.isRealized()) {
+					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, sourceNodeRole);
+							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
 						}
 						if (!hasNode(targetNode)) {
-							addNode(targetNode, targetNodeRole);
+							addNode(targetNode, RegionUtil.getNodeRole(targetNode));
 						}
 					}
 				}
@@ -285,9 +279,8 @@ class SpeculatedPartition extends AbstractPartition
 			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getEdgeTarget();
-					Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
-					if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
-						gatherSourceNavigations(targetNode, targetNodeRole);
+					if (!targetNode.isPredicated() && !targetNode.isRealized()) {
+						gatherSourceNavigations(targetNode, RegionUtil.getNodeRole(targetNode));
 					}
 				}
 			}

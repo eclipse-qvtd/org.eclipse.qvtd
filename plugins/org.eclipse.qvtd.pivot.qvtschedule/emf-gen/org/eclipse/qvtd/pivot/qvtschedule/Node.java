@@ -128,14 +128,16 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	EList<Edge> getIncomingEdges();
 
 	/**
-	 * Returns the value of the '<em><b>Node Role</b></em>' reference.
+	 * Returns the value of the '<em><b>Node Role</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Role}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Node Role</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Node Role</em>' reference.
+	 * @return the value of the '<em>Node Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 	 * @see #setNodeRole(Role)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_NodeRole()
 	 * @model required="true"
@@ -145,10 +147,11 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	Role getNodeRole();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getNodeRole <em>Node Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Node Role</em>' reference.
+	 * @param value the new value of the '<em>Node Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 	 * @see #getNodeRole()
 	 * @generated
 	 */

@@ -14,194 +14,346 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.ocl.pivot.Element;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Role</b></em>'.
  * @extends Comparable<Role>
  * <!-- end-user-doc -->
- *
  * <!-- begin-model-doc -->
- * Role defines which of many possible roles an edge plays
+ * Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing
+ * certainty, allowing the earlier to be chosen by a merge.
+ *
+ * NEW = REALIZED || SPECULATION
+ * OLD = CONSTANT || LOADED || PREDICATED || SPECULATED
  * <!-- end-model-doc -->
- *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#getPhase <em>Phase</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isConstant <em>Constant</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isLoaded <em>Loaded</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isNew <em>New</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isOld <em>Old</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isPredicated <em>Predicated</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isRealized <em>Realized</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isSpeculated <em>Speculated</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Role#isSpeculation <em>Speculation</em>}</li>
- * </ul>
- *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole()
  * @model
  * @generated
  */
-public interface Role extends Element, Comparable<Role>
+public enum Role implements Enumerator, Comparable<Role>
 {
 	/**
-	 * Returns the value of the '<em><b>Phase</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Phase}.
+	 * The '<em><b>CONSTANT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Phase</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Phase</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Phase
-	 * @see #setPhase(Phase)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Phase()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Role!phase'"
+	 * @see #CONSTANT_VALUE
 	 * @generated
+	 * @ordered
 	 */
-	Phase getPhase();
+	CONSTANT(0, "CONSTANT", "CONSTANT"),
+	/**
+	 * The '<em><b>LOADED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LOADED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LOADED(0, "LOADED", "LOADED"),
+	/**
+	 * The '<em><b>REALIZED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #REALIZED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	REALIZED(0, "REALIZED", "REALIZED"),
+	/**
+	 * The '<em><b>PREDICATED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PREDICATED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PREDICATED(0, "PREDICATED", "PREDICATED"),
+	/**
+	 * The '<em><b>SPECULATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SPECULATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SPECULATION(0, "SPECULATION", "SPECULATION"),
+	/**
+	 * The '<em><b>SPECULATED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SPECULATED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SPECULATED(0, "SPECULATED", "SPECULATED"),
+	/**
+	 * The '<em><b>OTHER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OTHER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	OTHER(0, "OTHER", "OTHER");
+	/**
+	 * The '<em><b>CONSTANT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unequivocably known as compile time constant
+	 * <!-- end-model-doc -->
+	 * @see #CONSTANT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONSTANT_VALUE = 0;
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Role#getPhase <em>Phase</em>}' attribute.
+	 * The '<em><b>LOADED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Phase</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Phase
-	 * @see #getPhase()
+	 * <!-- begin-model-doc -->
+	 * Known once input models loaded
+	 * <!-- end-model-doc -->
+	 * @see #LOADED
+	 * @model
 	 * @generated
+	 * @ordered
 	 */
-	void setPhase(Phase value);
+	public static final int LOADED_VALUE = 0;
 
 	/**
-	 * Returns the value of the '<em><b>Constant</b></em>' attribute.
+	 * The '<em><b>REALIZED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constant</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constant</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Constant()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::CONSTANT\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_CONSTANT;\nreturn eq;'"
+	 * <!-- begin-model-doc -->
+	 * Known once a mapping has realized its results
+	 * <!-- end-model-doc -->
+	 * @see #REALIZED
+	 * @model
 	 * @generated
+	 * @ordered
 	 */
-	boolean isConstant();
+	public static final int REALIZED_VALUE = 0;
 
 	/**
-	 * Returns the value of the '<em><b>Loaded</b></em>' attribute.
+	 * The '<em><b>PREDICATED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Loaded</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Loaded</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Loaded()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::LOADED\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_LOADED;\nreturn eq;'"
+	 * <!-- begin-model-doc -->
+	 * Not known, awaiting matching
+	 * <!-- end-model-doc -->
+	 * @see #PREDICATED
+	 * @model
 	 * @generated
+	 * @ordered
 	 */
-	boolean isLoaded();
+	public static final int PREDICATED_VALUE = 0;
 
 	/**
-	 * Returns the value of the '<em><b>New</b></em>' attribute.
+	 * The '<em><b>SPECULATION</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>New</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>New</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_New()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::SPECULATION or phase = Phase::REALIZED\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase_0 = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase_0 = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase_0.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase_0 == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_SPECULATION;\n/*@NonInvalid\052/ boolean or;\nif (eq) {\n\tor = &lt;%org.eclipse.ocl.pivot.utilities.ValueUtil%&gt;.TRUE_VALUE;\n}\nelse {\n\tfinal /*@NonInvalid\052/ boolean eq_0 = BOXED_phase_0 == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_REALIZED;\n\tor = eq_0;\n}\nreturn or;'"
+	 * <!-- begin-model-doc -->
+	 * Awaiting other mappings to speculate
+	 * <!-- end-model-doc -->
+	 * @see #SPECULATION
+	 * @model
 	 * @generated
+	 * @ordered
 	 */
-	boolean isNew();
+	public static final int SPECULATION_VALUE = 0;
 
 	/**
-	 * Returns the value of the '<em><b>Old</b></em>' attribute.
+	 * The '<em><b>SPECULATED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Old</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Old</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Old()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::CONSTANT or phase = Phase::LOADED or phase = Phase::PREDICATED or phase = Phase::SPECULATED\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase_2 = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase_2 = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase_2.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase_2 == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_CONSTANT;\n/*@NonInvalid\052/ boolean or;\nif (eq) {\n\tor = &lt;%org.eclipse.ocl.pivot.utilities.ValueUtil%&gt;.TRUE_VALUE;\n}\nelse {\n\tfinal /*@NonInvalid\052/ boolean eq_0 = BOXED_phase_2 == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_LOADED;\n\tor = eq_0;\n}\n/*@NonInvalid\052/ boolean or_0;\nif (or) {\n\tor_0 = &lt;%org.eclipse.ocl.pivot.utilities.ValueUtil%&gt;.TRUE_VALUE;\n}\nelse {\n\tfinal /*@NonInvalid\052/ boolean eq_1 = BOXED_phase_2 == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_PREDICATED;\n\tor_0 = eq_1;\n}\n/*@NonInvalid\052/ boolean or_1;\nif (or_0) {\n\tor_1 = &lt;%org.eclipse.ocl.pivot.utilities.ValueUtil%&gt;.TRUE_VALUE;\n}\nelse {\n\tfinal /*@NonInvalid\052/ boolean eq_2 = BOXED_phase_2 == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_SPECULATED;\n\tor_1 = eq_2;\n}\nreturn or_1;'"
+	 * <!-- begin-model-doc -->
+	 * Known other mappings are speculating
+	 * <!-- end-model-doc -->
+	 * @see #SPECULATED
+	 * @model
 	 * @generated
+	 * @ordered
 	 */
-	boolean isOld();
+	public static final int SPECULATED_VALUE = 0;
 
 	/**
-	 * Returns the value of the '<em><b>Predicated</b></em>' attribute.
+	 * The '<em><b>OTHER</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Predicated</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Predicated</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Predicated()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::PREDICATED\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_PREDICATED;\nreturn eq;'"
+	 * <!-- begin-model-doc -->
+	 * Not known, nothing to do with mapping execution
+	 * <!-- end-model-doc -->
+	 * @see #OTHER
+	 * @model
 	 * @generated
+	 * @ordered
 	 */
-	boolean isPredicated();
+	public static final int OTHER_VALUE = 0;
 
 	/**
-	 * Returns the value of the '<em><b>Realized</b></em>' attribute.
+	 * An array of all the '<em><b>Role</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Realized</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Realized</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Realized()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::REALIZED\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_REALIZED;\nreturn eq;'"
 	 * @generated
 	 */
-	boolean isRealized();
+	private static final Role[] VALUES_ARRAY =
+			new Role[] {
+				CONSTANT,
+				LOADED,
+				REALIZED,
+				PREDICATED,
+				SPECULATION,
+				SPECULATED,
+				OTHER,
+	};
 
 	/**
-	 * Returns the value of the '<em><b>Speculated</b></em>' attribute.
+	 * A public read-only list of all the '<em><b>Role</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Speculated</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Speculated</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Speculated()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::SPECULATED\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_SPECULATED;\nreturn eq;'"
 	 * @generated
 	 */
-	boolean isSpeculated();
+	public static final List<Role> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the value of the '<em><b>Speculation</b></em>' attribute.
+	 * Returns the '<em><b>Role</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Speculation</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Speculation</em>' attribute.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRole_Speculation()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='/**\n * phase = Phase::SPECULATION\n \052/\n@SuppressWarnings(\"null\")\nfinal /*@NonInvalid\052/ org.eclipse.qvtd.pivot.qvtschedule.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; Phase phase = this.getPhase();\nfinal /*@NonInvalid\052/ org.eclipse.ocl.pivot.ids.@&lt;%org.eclipse.jdt.annotation.NonNull%&gt; EnumerationLiteralId BOXED_phase = &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ENUMid_Phase.getEnumerationLiteralId(&lt;%org.eclipse.ocl.pivot.utilities.ClassUtil%&gt;.nonNullState(phase.getName()));\nfinal /*@NonInvalid\052/ boolean eq = BOXED_phase == &lt;%org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables%&gt;.ELITid_SPECULATION;\nreturn eq;'"
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	boolean isSpeculation();
-} // Role
+	public static Role get(String literal) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			Role result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the '<em><b>Role</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
+	 * @generated
+	 */
+	public static Role getByName(String name) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			Role result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the '<em><b>Role</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
+	 * @generated
+	 */
+	public static Role get(int value) {
+		switch (value) {
+			case CONSTANT_VALUE: return CONSTANT;
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private Role(int value, String name, String literal) {
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getLiteral() {
+		return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+
+	public boolean isNew() {
+		return (this == REALIZED) || (this == SPECULATION);
+	}
+
+	public boolean isOld() {
+		return (this == CONSTANT) || (this == LOADED) || (this == PREDICATED) || (this == SPECULATED);
+	}
+}

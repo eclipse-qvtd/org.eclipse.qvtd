@@ -442,18 +442,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitRole(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
 	public R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		@Nullable P prologue = preVisit(object);
 		try {

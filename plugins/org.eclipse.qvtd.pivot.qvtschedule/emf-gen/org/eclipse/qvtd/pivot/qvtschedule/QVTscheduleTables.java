@@ -94,15 +94,13 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("Property", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyDatum = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("PropertyDatum", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Region = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Region", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Role = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Role", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ScheduleModel = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ScheduleModel", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ScheduledRegion = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ScheduledRegion", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedModel = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableDeclaration = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_Phase = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Phase");
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_Role = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Role");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_ClassDatum = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ClassDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_DatumConnection = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_DatumConnection);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Edge = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Edge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_MicroMappingRegion = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_MicroMappingRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_NavigableEdge = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_NavigableEdge);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Node = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Node);
@@ -111,12 +109,6 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Region = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Region);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_ScheduleModel = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ScheduleModel);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationLiteralId ELITid_CONSTANT = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.ENUMid_Phase.getEnumerationLiteralId("CONSTANT");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationLiteralId ELITid_LOADED = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.ENUMid_Phase.getEnumerationLiteralId("LOADED");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationLiteralId ELITid_PREDICATED = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.ENUMid_Phase.getEnumerationLiteralId("PREDICATED");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationLiteralId ELITid_REALIZED = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.ENUMid_Phase.getEnumerationLiteralId("REALIZED");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationLiteralId ELITid_SPECULATED = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.ENUMid_Phase.getEnumerationLiteralId("SPECULATED");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationLiteralId ELITid_SPECULATION = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.ENUMid_Phase.getEnumerationLiteralId("SPECULATION");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_AbstractDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_AbstractDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_ClassDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ClassDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Connection = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Connection);
@@ -192,12 +184,11 @@ public class QVTscheduleTables
 		public static final @NonNull EcoreExecutorType _OperationRegion = new EcoreExecutorType(QVTschedulePackage.Literals.OPERATION_REGION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _PatternTypedNode = new EcoreExecutorType(QVTschedulePackage.Literals.PATTERN_TYPED_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _PatternVariableNode = new EcoreExecutorType(QVTschedulePackage.Literals.PATTERN_VARIABLE_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorEnumeration _Phase = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.PHASE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _PredicateEdge = new EcoreExecutorType(QVTschedulePackage.Literals.PREDICATE_EDGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _PropertyDatum = new EcoreExecutorType(QVTschedulePackage.Literals.PROPERTY_DATUM, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _RecursionEdge = new EcoreExecutorType(QVTschedulePackage.Literals.RECURSION_EDGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Region = new EcoreExecutorType(QVTschedulePackage.Literals.REGION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Role = new EcoreExecutorType(QVTschedulePackage.Literals.ROLE, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorEnumeration _Role = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.ROLE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ScheduleModel = new EcoreExecutorType(QVTschedulePackage.Literals.SCHEDULE_MODEL, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ScheduledRegion = new EcoreExecutorType(QVTschedulePackage.Literals.SCHEDULED_REGION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Symbolable = new EcoreExecutorType(QVTschedulePackage.Literals.SYMBOLABLE, PACKAGE, 0 | ExecutorType.ABSTRACT);
@@ -241,7 +232,6 @@ public class QVTscheduleTables
 			_OperationRegion,
 			_PatternTypedNode,
 			_PatternVariableNode,
-			_Phase,
 			_PredicateEdge,
 			_PropertyDatum,
 			_RecursionEdge,
@@ -591,12 +581,6 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _PatternVariableNode__VariableNode = new ExecutorFragment(Types._PatternVariableNode, QVTscheduleTables.Types._VariableNode);
 		private static final @NonNull ExecutorFragment _PatternVariableNode__Visitable = new ExecutorFragment(Types._PatternVariableNode, PivotTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Phase__OclAny = new ExecutorFragment(Types._Phase, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Phase__OclElement = new ExecutorFragment(Types._Phase, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Phase__OclEnumeration = new ExecutorFragment(Types._Phase, OCLstdlibTables.Types._OclEnumeration);
-		private static final @NonNull ExecutorFragment _Phase__OclType = new ExecutorFragment(Types._Phase, OCLstdlibTables.Types._OclType);
-		private static final @NonNull ExecutorFragment _Phase__Phase = new ExecutorFragment(Types._Phase, QVTscheduleTables.Types._Phase);
-
 		private static final @NonNull ExecutorFragment _PredicateEdge__Edge = new ExecutorFragment(Types._PredicateEdge, QVTscheduleTables.Types._Edge);
 		private static final @NonNull ExecutorFragment _PredicateEdge__Element = new ExecutorFragment(Types._PredicateEdge, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _PredicateEdge__GraphEdge = new ExecutorFragment(Types._PredicateEdge, QVTscheduleTables.Types._GraphEdge);
@@ -632,11 +616,11 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _Region__ToDOTable = new ExecutorFragment(Types._Region, QVTscheduleTables.Types._ToDOTable);
 		private static final @NonNull ExecutorFragment _Region__Visitable = new ExecutorFragment(Types._Region, PivotTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Role__Element = new ExecutorFragment(Types._Role, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Role__OclAny = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Role__OclElement = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _Role__OclEnumeration = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclEnumeration);
+		private static final @NonNull ExecutorFragment _Role__OclType = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclType);
 		private static final @NonNull ExecutorFragment _Role__Role = new ExecutorFragment(Types._Role, QVTscheduleTables.Types._Role);
-		private static final @NonNull ExecutorFragment _Role__Visitable = new ExecutorFragment(Types._Role, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _ScheduleModel__Element = new ExecutorFragment(Types._ScheduleModel, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _ScheduleModel__Model = new ExecutorFragment(Types._ScheduleModel, PivotTables.Types._Model);
@@ -868,18 +852,6 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _Region__nodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__NODES, Types._Region, 2);
 		public static final @NonNull ExecutorProperty _Region__region = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__REGION, Types._Region, 3);
 		public static final @NonNull ExecutorProperty _Region__Region__region = new ExecutorPropertyWithImplementation("Region", Types._Region, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.REGION__REGION));
-
-		public static final @NonNull ExecutorProperty _Role__constant = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__CONSTANT, Types._Role, 0);
-		public static final @NonNull ExecutorProperty _Role__loaded = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__LOADED, Types._Role, 1);
-		public static final @NonNull ExecutorProperty _Role__new = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__NEW, Types._Role, 2);
-		public static final @NonNull ExecutorProperty _Role__old = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__OLD, Types._Role, 3);
-		public static final @NonNull ExecutorProperty _Role__phase = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__PHASE, Types._Role, 4);
-		public static final @NonNull ExecutorProperty _Role__predicated = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__PREDICATED, Types._Role, 5);
-		public static final @NonNull ExecutorProperty _Role__realized = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__REALIZED, Types._Role, 6);
-		public static final @NonNull ExecutorProperty _Role__speculated = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__SPECULATED, Types._Role, 7);
-		public static final @NonNull ExecutorProperty _Role__speculation = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROLE__SPECULATION, Types._Role, 8);
-		public static final @NonNull ExecutorProperty _Role__Edge__edgeRole = new ExecutorPropertyWithImplementation("Edge", Types._Role, 9, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.EDGE__EDGE_ROLE));
-		public static final @NonNull ExecutorProperty _Role__Node__nodeRole = new ExecutorPropertyWithImplementation("Node", Types._Role, 10, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE));
 
 		public static final @NonNull ExecutorProperty _ScheduleModel__loadingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__LOADING_REGION, Types._ScheduleModel, 0);
 		public static final @NonNull ExecutorProperty _ScheduleModel__scheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__SCHEDULED_REGION, Types._ScheduleModel, 1);
@@ -1359,16 +1331,6 @@ public class QVTscheduleTables
 		};
 		private static final int @NonNull [] __PatternVariableNode = { 1,1,4,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Phase =
-		{
-			Fragments._Phase__OclAny /* 0 */,
-			Fragments._Phase__OclElement /* 1 */,
-			Fragments._Phase__OclType /* 2 */,
-			Fragments._Phase__OclEnumeration /* 3 */,
-			Fragments._Phase__Phase /* 4 */
-		};
-		private static final int @NonNull [] __Phase = { 1,1,1,1,1 };
-
 		private static final @NonNull ExecutorFragment @NonNull [] _PredicateEdge =
 		{
 			Fragments._PredicateEdge__OclAny /* 0 */,
@@ -1424,8 +1386,8 @@ public class QVTscheduleTables
 		{
 			Fragments._Role__OclAny /* 0 */,
 			Fragments._Role__OclElement /* 1 */,
-			Fragments._Role__Visitable /* 2 */,
-			Fragments._Role__Element /* 3 */,
+			Fragments._Role__OclType /* 2 */,
+			Fragments._Role__OclEnumeration /* 3 */,
 			Fragments._Role__Role /* 4 */
 		};
 		private static final int @NonNull [] __Role = { 1,1,1,1,1 };
@@ -1555,7 +1517,6 @@ public class QVTscheduleTables
 			Types._OperationRegion.initFragments(_OperationRegion, __OperationRegion);
 			Types._PatternTypedNode.initFragments(_PatternTypedNode, __PatternTypedNode);
 			Types._PatternVariableNode.initFragments(_PatternVariableNode, __PatternVariableNode);
-			Types._Phase.initFragments(_Phase, __Phase);
 			Types._PredicateEdge.initFragments(_PredicateEdge, __PredicateEdge);
 			Types._PropertyDatum.initFragments(_PropertyDatum, __PropertyDatum);
 			Types._RecursionEdge.initFragments(_RecursionEdge, __RecursionEdge);
@@ -2805,40 +2766,6 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__VariableNode = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Phase__Phase = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Phase__OclAny = {
-			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
-			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
-			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
-			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
-			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
-			OCLstdlibTables.Operations._OclAny__toString /* toString() */
-		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Phase__OclElement = {
-			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */,
-			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[?]) */,
-			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
-			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
-			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
-			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
-		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Phase__OclEnumeration = {
-			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */
-		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Phase__OclType = {
-			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
-		};
-
 		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__PredicateEdge = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__Edge = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__Element = {
@@ -2983,10 +2910,6 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorOperation @NonNull [] _Region__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Role__Role = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__Element = {
-			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
-			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
-		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
@@ -3005,7 +2928,7 @@ public class QVTscheduleTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -3013,7 +2936,12 @@ public class QVTscheduleTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclEnumeration = {
+			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclType = {
+			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
+		};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__ScheduleModel = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__Element = {
@@ -3573,12 +3501,6 @@ public class QVTscheduleTables
 			Fragments._PatternVariableNode__VariableNode.initOperations(_PatternVariableNode__VariableNode);
 			Fragments._PatternVariableNode__Visitable.initOperations(_PatternVariableNode__Visitable);
 
-			Fragments._Phase__OclAny.initOperations(_Phase__OclAny);
-			Fragments._Phase__OclElement.initOperations(_Phase__OclElement);
-			Fragments._Phase__OclEnumeration.initOperations(_Phase__OclEnumeration);
-			Fragments._Phase__OclType.initOperations(_Phase__OclType);
-			Fragments._Phase__Phase.initOperations(_Phase__Phase);
-
 			Fragments._PredicateEdge__Edge.initOperations(_PredicateEdge__Edge);
 			Fragments._PredicateEdge__Element.initOperations(_PredicateEdge__Element);
 			Fragments._PredicateEdge__GraphEdge.initOperations(_PredicateEdge__GraphEdge);
@@ -3614,11 +3536,11 @@ public class QVTscheduleTables
 			Fragments._Region__ToDOTable.initOperations(_Region__ToDOTable);
 			Fragments._Region__Visitable.initOperations(_Region__Visitable);
 
-			Fragments._Role__Element.initOperations(_Role__Element);
 			Fragments._Role__OclAny.initOperations(_Role__OclAny);
 			Fragments._Role__OclElement.initOperations(_Role__OclElement);
+			Fragments._Role__OclEnumeration.initOperations(_Role__OclEnumeration);
+			Fragments._Role__OclType.initOperations(_Role__OclType);
 			Fragments._Role__Role.initOperations(_Role__Role);
-			Fragments._Role__Visitable.initOperations(_Role__Visitable);
 
 			Fragments._ScheduleModel__Element.initOperations(_ScheduleModel__Element);
 			Fragments._ScheduleModel__Model.initOperations(_ScheduleModel__Model);
@@ -4001,8 +3923,6 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._VariableNode__variable
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Phase = {};
-
 		private static final @NonNull ExecutorProperty @NonNull [] _PredicateEdge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
 			QVTscheduleTables.Properties._Edge__name,
@@ -4038,17 +3958,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Role = {
-			QVTscheduleTables.Properties._Role__constant,
-			QVTscheduleTables.Properties._Role__loaded,
-			QVTscheduleTables.Properties._Role__new,
-			QVTscheduleTables.Properties._Role__old,
-			QVTscheduleTables.Properties._Role__phase,
-			QVTscheduleTables.Properties._Role__predicated,
-			QVTscheduleTables.Properties._Role__realized,
-			QVTscheduleTables.Properties._Role__speculated,
-			QVTscheduleTables.Properties._Role__speculation
-		};
+		private static final @NonNull ExecutorProperty @NonNull [] _Role = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ScheduleModel = {
 			QVTscheduleTables.Properties._ScheduleModel__loadingRegion,
@@ -4145,7 +4055,6 @@ public class QVTscheduleTables
 			Fragments._OperationRegion__OperationRegion.initProperties(_OperationRegion);
 			Fragments._PatternTypedNode__PatternTypedNode.initProperties(_PatternTypedNode);
 			Fragments._PatternVariableNode__PatternVariableNode.initProperties(_PatternVariableNode);
-			Fragments._Phase__Phase.initProperties(_Phase);
 			Fragments._PredicateEdge__PredicateEdge.initProperties(_PredicateEdge);
 			Fragments._PropertyDatum__PropertyDatum.initProperties(_PropertyDatum);
 			Fragments._RecursionEdge__RecursionEdge.initProperties(_RecursionEdge);
@@ -4177,28 +4086,28 @@ public class QVTscheduleTables
 			FragmentProperties.init();
 		}
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__CONSTANT = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("CONSTANT"), Types._Phase, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__LOADED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("LOADED"), Types._Phase, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__REALIZED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("REALIZED"), Types._Phase, 2);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__PREDICATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("PREDICATED"), Types._Phase, 3);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__SPECULATION = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("SPECULATION"), Types._Phase, 4);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__SPECULATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("SPECULATED"), Types._Phase, 5);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Phase__OTHER = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.PHASE.getEEnumLiteral("OTHER"), Types._Phase, 6);
-		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _Phase = {
-			_Phase__CONSTANT,
-			_Phase__LOADED,
-			_Phase__REALIZED,
-			_Phase__PREDICATED,
-			_Phase__SPECULATION,
-			_Phase__SPECULATED,
-			_Phase__OTHER
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT"), Types._Role, 0);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__LOADED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("LOADED"), Types._Role, 1);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__REALIZED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("REALIZED"), Types._Role, 2);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__PREDICATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("PREDICATED"), Types._Role, 3);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATION = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATION"), Types._Role, 4);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATED"), Types._Role, 5);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__OTHER = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("OTHER"), Types._Role, 6);
+		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _Role = {
+			_Role__CONSTANT,
+			_Role__LOADED,
+			_Role__REALIZED,
+			_Role__PREDICATED,
+			_Role__SPECULATION,
+			_Role__SPECULATED,
+			_Role__OTHER
 		};
 
 		/**
 		 *	Install the enumeration literals in the enumerations.
 		 */
 		static {
-			Types._Phase.initLiterals(_Phase);
+			Types._Role.initLiterals(_Role);
 
 			Init.initEnd();
 		}

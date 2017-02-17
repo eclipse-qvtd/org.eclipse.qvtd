@@ -46,14 +46,16 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  */
 public interface Edge extends Element, GraphEdge, Nameable {
 	/**
-	 * Returns the value of the '<em><b>Edge Role</b></em>' reference.
+	 * Returns the value of the '<em><b>Edge Role</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Role}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Edge Role</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Edge Role</em>' reference.
+	 * @return the value of the '<em>Edge Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 	 * @see #setEdgeRole(Role)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_EdgeRole()
 	 * @model required="true"
@@ -63,10 +65,11 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	Role getEdgeRole();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Edge Role</em>' reference.
+	 * @param value the new value of the '<em>Edge Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Role
 	 * @see #getEdgeRole()
 	 * @generated
 	 */

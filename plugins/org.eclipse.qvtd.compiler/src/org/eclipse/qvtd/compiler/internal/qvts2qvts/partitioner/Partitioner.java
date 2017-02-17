@@ -42,7 +42,7 @@ public class Partitioner
 		List<@NonNull NavigationEdge> navigableEdges = new ArrayList<>();
 		for (@NonNull NavigationEdge edge : edges) {		// cf NavigationForestBuilder addEdge
 			if (edge.isSecondary()) {}
-			else if (edge.isRealized()) {
+			else if (edge == Role.REALIZED) {
 				if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
 					navigableEdges.add(edge);
 				}
@@ -65,7 +65,7 @@ public class Partitioner
 		List<@NonNull Node> traceNodes = new ArrayList<>();
 		for (@NonNull Node node : nodes) {
 			if (node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-				if (node.isRealized()) {
+				if (node == Role.REALIZED) {
 					traceNodes.add(node);
 				}
 			}
@@ -157,10 +157,10 @@ public class Partitioner
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
-		if (newEdgeRole.isPredicated()) {
+		if (newEdgeRole == Role.PREDICATED) {
 			alreadyPredicatedEdges.add(edge);
 		}
-		else if (newEdgeRole.isRealized()) {
+		else if (newEdgeRole == Role.REALIZED) {
 			alreadyRealizedEdges.add(edge);
 		}
 		List<@NonNull AbstractPartition> partitions = debugEdge2partitions.get(edge);// TODO Auto-generated method stub
@@ -220,9 +220,9 @@ public class Partitioner
 				/*				else if (RegionUtil.isRealizedIncludes(edge)) {
 					realizedEdges.add(edge);
 					Node sourceNode = edge.getSource();
-					if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode.isPredicated() || sourceNode.isRealized())) {
+					if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode == Role.PREDICATED || sourceNode == Role.REALIZED)) {
 						Node targetNode = edge.getTarget();
-						if (!realizedMiddleNodes.contains(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
+						if (!realizedMiddleNodes.contains(targetNode) && (targetNode == Role.PREDICATED || targetNode == Role.REALIZED)) {
 							realizedOutputEdges.add(edge);
 						}
 					}
@@ -259,7 +259,7 @@ public class Partitioner
 						//					for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 						//						Node targetNode = edge.getTarget();
 						//						NodeRole targetNodeRole = targetNode.getNodeRole();
-						//						if (!targetNodeRole.isPredicated() && !targetNodeRole.isRealized()) {
+						//						if (!targetNodeRole == Role.PREDICATED && !targetNodeRole == Role.REALIZED) {
 						//							tracedInputNodes.add(targetNode);
 						//						}
 						//					}

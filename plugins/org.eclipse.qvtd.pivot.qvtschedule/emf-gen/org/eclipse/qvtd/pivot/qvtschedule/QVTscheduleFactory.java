@@ -260,15 +260,6 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull RecursionEdge createRecursionEdge();
 
 	/**
-	 * Returns a new object of class '<em>Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role</em>'.
-	 * @generated
-	 */
-	@NonNull Role createRole();
-
-	/**
 	 * Returns a new object of class '<em>Schedule Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

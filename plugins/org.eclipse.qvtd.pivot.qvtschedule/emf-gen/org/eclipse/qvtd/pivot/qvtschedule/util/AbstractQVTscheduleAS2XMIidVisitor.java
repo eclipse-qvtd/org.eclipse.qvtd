@@ -216,11 +216,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		return visitModel(object);
 	}

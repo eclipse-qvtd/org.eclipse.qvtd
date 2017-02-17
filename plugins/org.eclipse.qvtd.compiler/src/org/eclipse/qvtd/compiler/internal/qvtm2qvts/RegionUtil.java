@@ -60,7 +60,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
@@ -92,9 +91,9 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		Phase phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode)).getPhase();
+		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
 		assert phase != null;
-		Role edgeRole = getEdgeRole(phase);
+		Role edgeRole = phase;
 		CastEdge castEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
 		castEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		castEdge.initializeProperty(source2targetProperty);
@@ -116,7 +115,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 
 	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Role nodeRole = getNodeRole(Phase.LOADED);
+		Role nodeRole = Role.LOADED;
 		ComposedNode node = QVTscheduleFactory.eINSTANCE.createComposedNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		return node;
@@ -180,35 +179,34 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createDependencyNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Role nodeRole = getNodeRole(Phase.PREDICATED);
+		Role nodeRole = Role.PREDICATED;
 		DependencyNode node = QVTscheduleFactory.eINSTANCE.createDependencyNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		return node;
 	}
 
 	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Role nodeRole = getNodeRole(Phase.OTHER);
+		Role nodeRole = Role.OTHER;
 		ErrorNode node = QVTscheduleFactory.eINSTANCE.createErrorNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		return node;
 	}
 
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		Role edgeRole = getEdgeRole(getPhase(getNodeRole(sourceNode)));
+		Role edgeRole = getNodeRole(sourceNode);
 		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
 		edge.initialize(edgeRole, sourceNode, name, targetNode);
 		return edge;
 	}
 
-	public static @NonNull Node createInputNode(@NonNull Region region, @NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Role nodeRole = getNodeRole(nodeRolePhase);
+	public static @NonNull Node createInputNode(@NonNull Region region, @NonNull Role nodeRole, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		InputNode node = QVTscheduleFactory.eINSTANCE.createInputNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		return node;
 	}
 
 	public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name,@NonNull Node targetNode) {
-		Role edgeRole = getEdgeRole(getPhase(getNodeRole(sourceNode)));
+		Role edgeRole = getNodeRole(sourceNode);
 		IteratedEdge edge = QVTscheduleFactory.eINSTANCE.createIteratedEdge();
 		edge.initialize(edgeRole, sourceNode, name, targetNode);
 		return edge;
@@ -217,7 +215,7 @@ public class RegionUtil extends QVTscheduleUtil
 	public static @NonNull VariableNode createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
 		Region region = getRegion(sourceNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Role nodeRole = getNodeRole(getPhase(getNodeRole(sourceNode)));
+		Role nodeRole = getNodeRole(sourceNode);
 		IteratorNode node = QVTscheduleFactory.eINSTANCE.createIteratorNode();
 		node.initialize(nodeRole, region, getName(iterator), scheduleManager.getClassDatum(iterator));
 		node.initializeVariable(region, iterator);
@@ -227,7 +225,7 @@ public class RegionUtil extends QVTscheduleUtil
 	public static @NonNull VariableNode createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
 		Region region = getRegion(inNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Role nodeRole = getNodeRole(getPhase(getNodeRole(inNode)));
+		Role nodeRole = getNodeRole(inNode);
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(letVariable), scheduleManager.getClassDatum(letVariable));
 		node.initializeVariable(region, letVariable);
@@ -237,7 +235,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull VariableNode createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Role nodeRole = getNodeRole(Phase.LOADED);
+		Role nodeRole = Role.LOADED;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
 		node.initializeVariable(region, stepVariable);
@@ -246,9 +244,9 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		Phase phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode)).getPhase();
+		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
 		assert phase != null;
-		Role edgeRole = getEdgeRole(phase);
+		Role edgeRole = phase;
 		NavigationEdge edge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		edge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		edge.initializeProperty(source2targetProperty, isPartial);
@@ -257,7 +255,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Role nodeRole = getNodeRole(Phase.CONSTANT);
+		Role nodeRole = Role.CONSTANT;
 		ClassDatum classDatum;
 		if (typedElement != null) {
 			classDatum = scheduleManager.getClassDatum(typedElement);
@@ -278,8 +276,8 @@ public class RegionUtil extends QVTscheduleUtil
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
 		boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
-		Phase phase = isEnforceable ? Phase.PREDICATED : Phase.LOADED;
-		Role nodeRole = getNodeRole(phase);
+		Role phase = isEnforceable ? Role.PREDICATED : Role.LOADED;
+		Role nodeRole = phase;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(variable), scheduleManager.getClassDatum(variable));
 		node.initializeVariable(region, variable);
@@ -288,7 +286,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-		Role nodeRole = getNodeRole(getPhase(getNodeRole(sourceNode)));
+		Role nodeRole = getNodeRole(sourceNode);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		node.setMatched(true);
@@ -297,8 +295,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
-		Role nodeRole = getNodeRole(nodePhase);
+		Role nodeRole = getOperationNodePhase(region, typedElement, argNodes);
 		OperationNode node = QVTscheduleFactory.eINSTANCE.createOperationNode();
 		node.initialize(nodeRole, region, name, scheduleManager.getClassDatum(typedElement));
 		node.setMatched(isMatched);
@@ -307,7 +304,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Role nodeRole = getNodeRole(Phase.PREDICATED);
+		Role nodeRole = Role.PREDICATED;
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		node.setMatched(true);
@@ -316,7 +313,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createOperationResultNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-		Role nodeRole = getNodeRole(getPhase(getNodeRole(sourceNode)));
+		Role nodeRole = getNodeRole(sourceNode);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		node.setMatched(false);
@@ -342,26 +339,26 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		Role edgeRole = getEdgeRole(getPhase(getNodeRole(sourceNode)));
+		Role edgeRole = getNodeRole(sourceNode);
 		PredicateEdge edge = QVTscheduleFactory.eINSTANCE.createPredicateEdge();
 		edge.initialize(edgeRole, sourceNode, name, targetNode);
 		return edge;
 	}
 
 	public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		Role nodeRole = getNodeRole(Phase.REALIZED);
+		Role nodeRole = Role.REALIZED;
 		return createPatternNode(nodeRole, sourceNode, source2targetProperty, sourceNode.isMatched());
 	}
 
 	public static @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		Role edgeRole = getEdgeRole(Phase.REALIZED);
+		Role edgeRole = Role.REALIZED;
 		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
 		edge.initialize(edgeRole, sourceNode, name, targetNode);
 		return edge;
 	}
 
 	public static @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		Role edgeRole = getEdgeRole(Phase.REALIZED);
+		Role edgeRole = Role.REALIZED;
 		NavigationEdge forwardEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		forwardEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		forwardEdge.initializeProperty(source2targetProperty, isPartial);
@@ -370,7 +367,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Role nodeRole = getNodeRole(Phase.REALIZED);
+		Role nodeRole = Role.REALIZED;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
 		node.initializeVariable(region, stepVariable);
@@ -379,7 +376,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Edge createRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {
-		Role edgeRole = getEdgeRole(Phase.OTHER);
+		Role edgeRole = Role.OTHER;
 		RecursionEdge edge = QVTscheduleFactory.eINSTANCE.createRecursionEdge();
 		edge.initialize(edgeRole, sourceNode, null, targetNode);
 		edge.setPrimary(isPrimary);
@@ -406,8 +403,8 @@ public class RegionUtil extends QVTscheduleUtil
 			Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
 			isDirty = scheduleManager.isDirty(referredProperty);
 		}
-		Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Phase.PREDICATED : Phase.LOADED;
-		Role stepNodeRole = getNodeRole(phase);
+		Role phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.PREDICATED : Role.LOADED;
+		Role stepNodeRole = phase;
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(stepNodeRole, region, name, scheduleManager.getClassDatum(callExp));
 		node.setMatched(isMatched);
@@ -428,7 +425,7 @@ public class RegionUtil extends QVTscheduleUtil
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
-		Role nodeRole = getNodeRole(Phase.CONSTANT);
+		Role nodeRole = Role.CONSTANT;
 		TrueNode node = QVTscheduleFactory.eINSTANCE.createTrueNode();
 		node.initialize(nodeRole, region, "«true»", classDatumAnalysis.getClassDatum());
 		node.setHead();
@@ -437,7 +434,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
-		Role nodeRole = getNodeRole(Phase.OTHER);
+		Role nodeRole = Role.OTHER;
 		UnknownNode node = QVTscheduleFactory.eINSTANCE.createUnknownNode();
 		node.initialize(nodeRole, region, name, scheduleManager.getClassDatum(typedElement));
 		return node;
@@ -475,7 +472,7 @@ public class RegionUtil extends QVTscheduleUtil
 		return ClassUtil.nonNullState(classDatumAnalysis.getElementalClassDatum());
 	}
 
-	public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+	public static @NonNull Role getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		boolean isLoaded = false;
 		boolean isPredicated = false;
 		boolean isRealized = false;
@@ -502,32 +499,32 @@ public class RegionUtil extends QVTscheduleUtil
 			}
 		}
 		if (isRealized) {
-			return Phase.REALIZED;
+			return Role.REALIZED;
 		}
 		else if (isPredicated) {
-			return Phase.PREDICATED;
+			return Role.PREDICATED;
 		}
 		else if (isLoaded) {
-			return Phase.LOADED;
+			return Role.LOADED;
 		}
 		else {
-			return Phase.CONSTANT;
+			return Role.CONSTANT;
 		}
 	}
 
 	private static @NonNull Role getPatternNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
-		Phase phase;
-		switch (getPhase(getNodeRole(sourceNode))) {
-			case REALIZED: phase = Phase.REALIZED; break;
-			case PREDICATED: phase = Phase.PREDICATED; break;
+		Role phase;
+		switch (getNodeRole(sourceNode)) {
+			case REALIZED: phase = Role.REALIZED; break;
+			case PREDICATED: phase = Role.PREDICATED; break;
 			case LOADED: {
 				boolean isDirty = getScheduleManager(getRegion(sourceNode)).isDirty(property);
-				phase = isDirty ? Phase.PREDICATED : Phase.LOADED; break;
+				phase = isDirty ? Role.PREDICATED : Role.LOADED; break;
 			}
-			case CONSTANT: phase = Phase.CONSTANT; break;
+			case CONSTANT: phase = Role.CONSTANT; break;
 			default: throw new UnsupportedOperationException();
 		}
-		return getNodeRole(phase);
+		return phase;
 	}
 
 	public static @NonNull ScheduleManager getScheduleManager(@NonNull Region region) {

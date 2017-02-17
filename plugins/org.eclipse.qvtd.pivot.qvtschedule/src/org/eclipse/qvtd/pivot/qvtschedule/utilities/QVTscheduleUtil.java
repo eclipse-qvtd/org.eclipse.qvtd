@@ -40,7 +40,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
@@ -237,7 +236,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isRealized();
+			return node == Role.REALIZED;
 		}
 	} */
 
@@ -420,20 +419,20 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static @NonNull Role asPhase(@NonNull Role nodeRole, @NonNull Phase phase) {
-		return getNodeRole(phase);
+	public static @NonNull Role asPhase(@NonNull Role nodeRole, @NonNull Role phase) {
+		return phase;
 	}
 
 	public static @NonNull Role asPredicated(@NonNull Role nodeRole) {
-		return asPhase(nodeRole, Phase.PREDICATED);
+		return asPhase(nodeRole, Role.PREDICATED);
 	}
 
 	public static @NonNull Role asSpeculated(@NonNull Role nodeRole) {
-		return asPhase(nodeRole, Phase.SPECULATED);
+		return asPhase(nodeRole, Role.SPECULATED);
 	}
 
 	public static @NonNull Role asSpeculation(@NonNull Role nodeRole) {
-		return asPhase(nodeRole, Phase.SPECULATION);
+		return asPhase(nodeRole, Role.SPECULATION);
 	}
 
 	/**
@@ -536,7 +535,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull String getColor(@NonNull Role role) {
-		switch (role.getPhase()) {
+		switch (role) {
 			case CONSTANT: return QVTscheduleConstants.CONSTANT_COLOR;
 			case LOADED: return QVTscheduleConstants.LOADED_COLOR;
 			case PREDICATED: return QVTscheduleConstants.PREDICATED_COLOR;
@@ -568,7 +567,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull String getFillColor(@NonNull Role nodeRole) {
-		switch (nodeRole.getPhase()) {
+		switch (nodeRole) {
 			case CONSTANT: return LIGHT_CONSTANT_COLOR;
 			case LOADED: return LIGHT_LOADED_COLOR;
 			case PREDICATED: return LIGHT_PREDICATED_COLOR;
@@ -619,9 +618,9 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(node.getOutgoingEdges());
 	}
 
-	public static @NonNull Phase getPhase(@NonNull Role role) {
-		return ClassUtil.nonNullState(role.getPhase());
-	}
+	//	public static @NonNull Phase getPhase(@NonNull Role role) {
+	//		return ClassUtil.nonNullState(role);
+	//	}
 
 	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
 		return ClassUtil.nonNullState(navigableEdge.getProperty());
@@ -679,69 +678,69 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return false;
 	}
 
-	public static <@NonNull R extends Role> R mergeToLessKnownPhase(R firstRole, R secondRole) {
-		if (firstRole.isRealized()) {
+	public static Role mergeToLessKnownPhase(Role firstRole, Role secondRole) {
+		if (firstRole == Role.REALIZED) {
 			return firstRole;
 		}
-		else if (secondRole.isRealized()) {
+		else if (secondRole == Role.REALIZED) {
 			return secondRole;
 		}
-		else if (firstRole.isPredicated()){
+		else if (firstRole == Role.PREDICATED){
 			return firstRole;
 		}
-		else if (secondRole.isPredicated()){
+		else if (secondRole == Role.PREDICATED){
 			return secondRole;
 		}
-		else if (firstRole.isLoaded()) {
+		else if (firstRole == Role.LOADED) {
 			return firstRole;
 		}
-		else if (secondRole.isLoaded()) {
+		else if (secondRole == Role.LOADED) {
 			return secondRole;
 		}
-		else if (firstRole.isConstant()) {
+		else if (firstRole == Role.CONSTANT) {
 			return firstRole;
 		}
-		else if (secondRole.isConstant()) {
+		else if (secondRole == Role.CONSTANT) {
 			return secondRole;
 		}
 		throw new UnsupportedOperationException();
 	}
 
-	public static <@NonNull R extends Role> R mergeToMoreKnownPhase(@NonNull R firstRole, @NonNull R secondRole) {
-		if (firstRole.isConstant()) {
+	public static Role mergeToMoreKnownPhase(@NonNull Role firstRole, @NonNull Role secondRole) {
+		if (firstRole == Role.CONSTANT) {
 			return firstRole;
 		}
-		else if (secondRole.isConstant()) {
+		else if (secondRole == Role.CONSTANT) {
 			return secondRole;
 		}
-		else if (firstRole.isLoaded()) {
+		else if (firstRole == Role.LOADED) {
 			return firstRole;
 		}
-		else if (secondRole.isLoaded()) {
+		else if (secondRole == Role.LOADED) {
 			return secondRole;
 		}
-		else if (firstRole.isRealized()) {
+		else if (firstRole == Role.REALIZED) {
 			return firstRole;
 		}
-		else if (secondRole.isRealized()) {
+		else if (secondRole == Role.REALIZED) {
 			return secondRole;
 		}
-		else if (firstRole.isSpeculated()) {
+		else if (firstRole == Role.SPECULATED) {
 			return firstRole;
 		}
-		else if (secondRole.isSpeculated()) {
+		else if (secondRole == Role.SPECULATED) {
 			return secondRole;
 		}
-		else if (firstRole.isSpeculation()) {
+		else if (firstRole == Role.SPECULATION) {
 			return firstRole;
 		}
-		else if (secondRole.isSpeculation()) {
+		else if (secondRole == Role.SPECULATION) {
 			return secondRole;
 		}
-		else if (firstRole.isPredicated()) {
+		else if (firstRole == Role.PREDICATED) {
 			return firstRole;
 		}
-		else if (secondRole.isPredicated()) {
+		else if (secondRole == Role.PREDICATED) {
 			return secondRole;
 		}
 		throw new UnsupportedOperationException();

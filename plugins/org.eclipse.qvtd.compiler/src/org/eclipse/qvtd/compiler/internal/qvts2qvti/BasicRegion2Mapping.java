@@ -344,13 +344,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isNavigation()) {
 					Role edgeRole = RegionUtil.getEdgeRole(edge);
-					if (edgeRole.isLoaded()) {
+					if (edgeRole == Role.LOADED) {
 						OCLExpression source = getExpression(edge.getEdgeSource());
 						if (source != null) {
 							return helper.createNavigationCallExp(source, RegionUtil.getProperty((NavigableEdge)edge));
 						}
 					}
-					else if (edgeRole.isPredicated()) {
+					else if (edgeRole == Role.PREDICATED) {
 						OCLExpression source = create(edge.getEdgeSource());
 						return helper.createNavigationCallExp(source, RegionUtil.getProperty((NavigableEdge)edge));
 					}

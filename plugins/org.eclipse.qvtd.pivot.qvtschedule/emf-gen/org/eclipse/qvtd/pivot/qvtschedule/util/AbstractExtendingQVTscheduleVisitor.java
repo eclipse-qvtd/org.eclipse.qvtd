@@ -212,11 +212,6 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		return visitModel(object);
 	}

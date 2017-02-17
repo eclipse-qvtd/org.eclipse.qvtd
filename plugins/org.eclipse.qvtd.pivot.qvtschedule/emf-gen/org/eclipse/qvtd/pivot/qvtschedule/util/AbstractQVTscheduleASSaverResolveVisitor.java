@@ -216,11 +216,6 @@ public abstract class AbstractQVTscheduleASSaverResolveVisitor
 	}
 
 	@Override
-	public @Nullable Object visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Object visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		return visitModel(object);
 	}

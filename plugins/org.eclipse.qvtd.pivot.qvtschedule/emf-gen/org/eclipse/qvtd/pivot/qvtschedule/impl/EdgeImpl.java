@@ -53,14 +53,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public abstract class EdgeImpl extends ElementImpl implements Edge {
 	/**
-	 * The cached value of the '{@link #getEdgeRole() <em>Edge Role</em>}' reference.
+	 * The default value of the '{@link #getEdgeRole() <em>Edge Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEdgeRole()
 	 * @generated
 	 * @ordered
 	 */
-	protected Role edgeRole;
+	protected static final Role EDGE_ROLE_EDEFAULT = Role.CONSTANT;
+
+	/**
+	 * The cached value of the '{@link #getEdgeRole() <em>Edge Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEdgeRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Role edgeRole = EDGE_ROLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -128,23 +138,6 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 */
 	@Override
 	public Role getEdgeRole() {
-		if (edgeRole != null && edgeRole.eIsProxy()) {
-			InternalEObject oldEdgeRole = (InternalEObject)edgeRole;
-			edgeRole = (Role)eResolveProxy(oldEdgeRole);
-			if (edgeRole != oldEdgeRole) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__EDGE_ROLE, oldEdgeRole, edgeRole));
-			}
-		}
-		return edgeRole;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Role basicGetEdgeRole() {
 		return edgeRole;
 	}
 
@@ -156,7 +149,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void setEdgeRole(Role newEdgeRole) {
 		Role oldEdgeRole = edgeRole;
-		edgeRole = newEdgeRole;
+		edgeRole = newEdgeRole == null ? EDGE_ROLE_EDEFAULT : newEdgeRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__EDGE_ROLE, oldEdgeRole, edgeRole));
 	}
@@ -416,8 +409,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
-				if (resolve) return getEdgeRole();
-				return basicGetEdgeRole();
+				return getEdgeRole();
 			case QVTschedulePackage.EDGE__NAME:
 				return getName();
 			case QVTschedulePackage.EDGE__REGION:
@@ -468,7 +460,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
-				setEdgeRole((Role)null);
+				setEdgeRole(EDGE_ROLE_EDEFAULT);
 				return;
 			case QVTschedulePackage.EDGE__NAME:
 				setName(NAME_EDEFAULT);
@@ -495,7 +487,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
-				return edgeRole != null;
+				return edgeRole != EDGE_ROLE_EDEFAULT;
 			case QVTschedulePackage.EDGE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.EDGE__REGION:
@@ -664,7 +656,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean isConstant() {
 		assert edgeRole != null;
-		return edgeRole.isConstant();
+		return edgeRole == Role.CONSTANT;
 	}
 
 	@Override
@@ -680,7 +672,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean isLoaded() {
 		assert edgeRole != null;
-		return edgeRole.isLoaded();
+		return edgeRole == Role.LOADED;
 	}
 
 	@Override
@@ -718,13 +710,13 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean isPredicated() {
 		assert edgeRole != null;
-		return edgeRole.isPredicated();
+		return edgeRole == Role.PREDICATED;
 	}
 
 	@Override
 	public boolean isRealized() {
 		assert edgeRole != null;
-		return edgeRole.isRealized();
+		return edgeRole == Role.REALIZED;
 	}
 
 	@Override
@@ -791,7 +783,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	public @NonNull String toString() {
 		Role edgeRole = getEdgeRole();
 		StringBuilder s = new StringBuilder();
-		s.append(edgeRole != null ? edgeRole.getPhase() : null);
+		s.append(edgeRole);
 		s.append("-");
 		s.append(getClass().getSimpleName().replace("Impl",  ""));
 		s.append("(");

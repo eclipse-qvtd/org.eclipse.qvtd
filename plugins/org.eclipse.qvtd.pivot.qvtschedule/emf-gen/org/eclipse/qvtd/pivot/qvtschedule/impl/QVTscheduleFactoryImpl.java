@@ -94,7 +94,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
-			case QVTschedulePackage.ROLE: return createRole();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
 			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
@@ -112,8 +111,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTschedulePackage.PHASE:
-				return createPhaseFromString(eDataType, initialValue);
+			case QVTschedulePackage.ROLE:
+				return createRoleFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -127,8 +126,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTschedulePackage.PHASE:
-				return convertPhaseToString(eDataType, instanceValue);
+			case QVTschedulePackage.ROLE:
+				return convertRoleToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -415,17 +414,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull Role createRole() {
-		RoleImpl role = new RoleImpl();
-		return role;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull ScheduleModel createScheduleModel() {
 		ScheduleModelImpl scheduleModel = new ScheduleModelImpl();
 		return scheduleModel;
@@ -469,8 +457,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Phase createPhaseFromString(EDataType eDataType, String initialValue) {
-		Phase result = Phase.get(initialValue);
+	public Role createRoleFromString(EDataType eDataType, String initialValue) {
+		Role result = Role.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -480,7 +468,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertPhaseToString(EDataType eDataType, Object instanceValue) {
+	public String convertRoleToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -208,11 +208,6 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Role object) {
-		return delegate.visitRole(object);
-	}
-
-	@Override
 	public R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		return delegate.visitScheduleModel(object);
 	}

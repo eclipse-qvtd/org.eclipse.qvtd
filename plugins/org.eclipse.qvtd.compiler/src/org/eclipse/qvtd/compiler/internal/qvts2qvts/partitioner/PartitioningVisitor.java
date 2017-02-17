@@ -170,7 +170,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 				if (edge.isNavigation() && edge.isRealized()) {
 					Role edgeRole = partition.getEdgeRole(edge);
-					if ((edgeRole != null) && edgeRole.isPredicated()) {
+					if ((edgeRole != null) && edgeRole == Role.PREDICATED) {
 						partialNode = RegionUtil.createStepNode(partialRegion, node, node.isMatched());
 						break;
 					}

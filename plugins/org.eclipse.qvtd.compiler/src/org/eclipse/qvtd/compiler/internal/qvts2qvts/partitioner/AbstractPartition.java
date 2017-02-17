@@ -73,26 +73,26 @@ abstract class AbstractPartition
 	}
 
 	private void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
-		switch (RegionUtil.getPhase(RegionUtil.getEdgeRole(edge)))
+		switch (RegionUtil.getEdgeRole(edge))
 		{
 			case CONSTANT: {
-				assert newEdgeRole.isConstant();
+				assert newEdgeRole == Role.CONSTANT;
 				break;
 			}
 			case LOADED: {
-				assert newEdgeRole.isLoaded();
+				assert newEdgeRole == Role.LOADED;
 				break;
 			}
 			case PREDICATED: {
-				assert newEdgeRole.isPredicated();
+				assert newEdgeRole == Role.PREDICATED;
 				break;
 			}
 			case REALIZED: {
 				if (!partitioner.hasRealizedEdge(edge)) {
-					assert newEdgeRole.isRealized();
+					assert newEdgeRole == Role.REALIZED;
 				}
 				else {
-					assert newEdgeRole.isPredicated();
+					assert newEdgeRole == Role.PREDICATED;
 				}
 				break;
 			}
@@ -105,31 +105,31 @@ abstract class AbstractPartition
 	}
 
 	protected void addNode(@NonNull Node node, @NonNull Role newNodeRole) {
-		switch (RegionUtil.getPhase(RegionUtil.getNodeRole(node)))
+		switch (RegionUtil.getNodeRole(node))
 		{
 			case CONSTANT: {
-				assert newNodeRole.isConstant();
+				assert newNodeRole == Role.CONSTANT;
 				if (node.isTrue()) {
 					partitioner.addTrueNode(node);
 				}
 				break;
 			}
 			case LOADED: {
-				assert newNodeRole.isLoaded();
+				assert newNodeRole == Role.LOADED;
 				break;
 			}
 			case PREDICATED: {
-				assert newNodeRole.isPredicated() || newNodeRole.isSpeculated();
+				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
 				partitioner.addPredicatedNode(node);
 				break;
 			}
 			case REALIZED: {
 				if (!partitioner.hasRealizedNode(node)) {
-					assert newNodeRole.isRealized() || newNodeRole.isSpeculation();
+					assert newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION;
 					partitioner.addRealizedNode(node);
 				}
 				else {
-					assert newNodeRole.isPredicated() || newNodeRole.isSpeculated();
+					assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
 				}
 				break;
 			}
@@ -255,7 +255,7 @@ abstract class AbstractPartition
 				}
 			}
 		}
-		//		else if (node.isPredicated()) {
+		//		else if (node == Role.PREDICATED) {
 		//			if (!partitioner.hasPredicatedNode(node)) {
 		//				return false;
 		//			}
@@ -276,7 +276,7 @@ abstract class AbstractPartition
 				}
 			}
 		}
-		else if (node.isPredicated()) {
+		else if (node == Role.PREDICATED) {
 			if (!partitioner.hasPredicatedNode(node)) {
 				return false;
 			}
@@ -297,7 +297,7 @@ abstract class AbstractPartition
 				}
 			}
 		}
-		else if (node.isRealized()) {
+		else if (node == Role.REALIZED) {
 			if (!partitioner.hasRealizedNode(node)) {
 				return false;
 			}
@@ -345,7 +345,7 @@ abstract class AbstractPartition
 					if (targetNodeRole != null) {
 						Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
 						if (edgeRole != null) {
-							if (edgeRole.isRealized()) {
+							if (edgeRole == Role.REALIZED) {
 								if (partitioner.hasRealizedEdge(edge)) {
 									edgeRole = null;
 								}
