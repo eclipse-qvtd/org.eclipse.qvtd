@@ -135,13 +135,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass connectionRoleEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass datumConnectionEClass = null;
 
 	/**
@@ -234,6 +227,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass toDOTableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum connectionRoleEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -431,7 +431,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -462,7 +462,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
 		return theQVTschedulePackage;
@@ -634,26 +634,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EClass getConnectionRole() {
-		return connectionRoleEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getConnectionRole_Node() {
-		return (EAttribute)connectionRoleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getDatumConnection() {
 		return datumConnectionEClass;
 	}
@@ -663,9 +643,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getDatumConnection_ConnectionRole() {
-		return (EReference)datumConnectionEClass.getEStructuralFeatures().get(0);
+	public EAttribute getDatumConnection_ConnectionRole() {
+		return (EAttribute)datumConnectionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -966,6 +945,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EClass getToDOTable() {
 		return toDOTableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getConnectionRole() {
+		return connectionRoleEEnum;
 	}
 
 	/**
@@ -1660,11 +1648,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		connectionEndEClass = createEClass(CONNECTION_END);
 
-		connectionRoleEClass = createEClass(CONNECTION_ROLE);
-		createEAttribute(connectionRoleEClass, CONNECTION_ROLE__NODE);
-
 		datumConnectionEClass = createEClass(DATUM_CONNECTION);
-		createEReference(datumConnectionEClass, DATUM_CONNECTION__CONNECTION_ROLE);
+		createEAttribute(datumConnectionEClass, DATUM_CONNECTION__CONNECTION_ROLE);
 		createEAttribute(datumConnectionEClass, DATUM_CONNECTION__NAME);
 		createEReference(datumConnectionEClass, DATUM_CONNECTION__SOURCE_ENDS);
 
@@ -1796,6 +1781,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		toDOTableEClass = createEClass(TO_DO_TABLE);
 
 		// Create enums
+		connectionRoleEEnum = createEEnum(CONNECTION_ROLE);
 		roleEEnum = createEEnum(ROLE);
 	}
 
@@ -1843,7 +1829,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		connectionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		connectionEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		connectionEClass.getESuperTypes().add(this.getSymbolable());
-		connectionRoleEClass.getESuperTypes().add(thePivotPackage.getElement());
 		datumConnectionEClass.getESuperTypes().add(this.getConnection());
 		datumConnectionEClass.getESuperTypes().add(this.getGraphEdge());
 		datumConnectionEClass.getESuperTypes().add(this.getGraphNode());
@@ -1919,11 +1904,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(connectionEndEClass, ConnectionEnd.class, "ConnectionEnd", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(connectionRoleEClass, ConnectionRole.class, "ConnectionRole", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConnectionRole_Node(), ecorePackage.getEBoolean(), "node", "false", 1, 1, ConnectionRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(datumConnectionEClass, DatumConnection.class, "DatumConnection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDatumConnection_ConnectionRole(), this.getConnectionRole(), null, "connectionRole", null, 1, 1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDatumConnection_ConnectionRole(), this.getConnectionRole(), "connectionRole", "UNDEFINED", 1, 1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDatumConnection_Name(), ecorePackage.getEString(), "name", null, 1, 1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(datumConnectionEClass_CE);
 		initEReference(getDatumConnection_SourceEnds(), g1, null, "sourceEnds", null, 0, -1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -2056,6 +2038,14 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(toDOTableEClass, ToDOTable.class, "ToDOTable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
+		initEEnum(connectionRoleEEnum, ConnectionRole.class, "ConnectionRole");
+		addEEnumLiteral(connectionRoleEEnum, ConnectionRole.MANDATORY_EDGE);
+		addEEnumLiteral(connectionRoleEEnum, ConnectionRole.MANDATORY_NODE);
+		addEEnumLiteral(connectionRoleEEnum, ConnectionRole.PASSED);
+		addEEnumLiteral(connectionRoleEEnum, ConnectionRole.PREFERRED_EDGE);
+		addEEnumLiteral(connectionRoleEEnum, ConnectionRole.PREFERRED_NODE);
+		addEEnumLiteral(connectionRoleEEnum, ConnectionRole.UNDEFINED);
+
 		initEEnum(roleEEnum, Role.class, "Role");
 		addEEnumLiteral(roleEEnum, Role.CONSTANT);
 		addEEnumLiteral(roleEEnum, Role.LOADED);
@@ -2080,12 +2070,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //QVTschedulePackageImpl

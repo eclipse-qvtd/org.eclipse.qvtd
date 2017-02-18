@@ -54,7 +54,7 @@ public interface NodeConnection extends DatumConnection<Node>
 	//	@Nullable Connection basicGetSuperConnection();
 
 	@Nullable Region getCommonRegion();
-	@NonNull ConnectionRole getConnectionRole(@NonNull Node targetNode);
+	//	@NonNull ConnectionRole getConnectionRole(@NonNull Node targetNode);
 
 	@NonNull List<@NonNull Region> getIntermediateRegions();
 	@Override

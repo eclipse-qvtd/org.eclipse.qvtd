@@ -76,11 +76,6 @@ public abstract class AbstractQVTscheduleAS2MonikerVisitor
 	}
 
 	@Override
-	public @Nullable Object visitConnectionRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ConnectionRole object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Object visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object) {
 		return visitConnection(object);
 	}

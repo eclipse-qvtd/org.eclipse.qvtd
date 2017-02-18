@@ -45,13 +45,6 @@
       <details key="documentation" value="A ConnectionEnd may be the Node/Edge at the end of a NodeConnection/EdgeConnection."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectionRole" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="ConnectionRole defines which of many possible roles a connection plays"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="node" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DatumConnection" abstract="true" eSuperTypes="#//Connection #//GraphEdge #//GraphNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
@@ -59,8 +52,8 @@
     <eTypeParameters name="CE">
       <eBounds eClassifier="#//ConnectionEnd"/>
     </eTypeParameters>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionRole" lowerBound="1"
-        eType="#//ConnectionRole"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionRole" lowerBound="1"
+        eType="#//ConnectionRole" defaultValueLiteral="UNDEFINED"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceEnds" ordered="false"
         upperBound="-1">
@@ -265,6 +258,38 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConnectionRole">
+    <eLiterals name="MANDATORY_EDGE">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A MANDATORY_EDGE connection 'passes' a used input edge that must be fully computed before use. This is typically for a&#xD;&#xA;collection, since it is not possible to determine when a last partial addition is the last, therefore all&#xD;&#xA;additions must occur before any access."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="MANDATORY_NODE" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A MANDATORY_NODE connection 'passes' a used input node that must be fully computed before use. This is typically for a&#xD;&#xA;collection, since it is not possible to determine when a last partial addition is the last, therefore all&#xD;&#xA;additions must occur before any access."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="PASSED" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A PASSED connection passes a required input. This is typically from an introducer/producer/join to&#xD;&#xA;a consumer's head. A value must actually be passed by the call."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="PREFERRED_EDGE" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A PREFERRED_EDGE connection 'passes' a used input edge that is beneficially but not necessarily computed before use.&#xD;&#xA;If not computed before use, run-time overheads are incurred to defer reads until writes have occurred."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="PREFERRED_NODE" value="4">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A PREFERRED_NODE connection 'passes' a used input node that is beneficially but not necessarily computed before use.&#xD;&#xA;If not computed before use, run-time overheads are incurred to defer reads until writes have occurred."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="UNDEFINED" value="5">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An UNDEFINED connection is the intial state of a connection that evolves by merging."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Role">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing&#xA;certainty, allowing the earlier to be chosen by a merge.&#xA;&#xA;NEW = REALIZED || SPECULATION&#xA;OLD = CONSTANT || LOADED || PREDICATED || SPECULATED"/>
@@ -274,32 +299,32 @@
         <details key="documentation" value="Unequivocably known as compile time constant"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="LOADED">
+    <eLiterals name="LOADED" value="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Known once input models loaded"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="REALIZED">
+    <eLiterals name="REALIZED" value="2">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Known once a mapping has realized its results"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="PREDICATED">
+    <eLiterals name="PREDICATED" value="3">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Not known, awaiting matching"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="SPECULATION">
+    <eLiterals name="SPECULATION" value="4">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Awaiting other mappings to speculate"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="SPECULATED">
+    <eLiterals name="SPECULATED" value="5">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Known other mappings are speculating"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="OTHER">
+    <eLiterals name="OTHER" value="6">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Not known, nothing to do with mapping execution"/>
       </eAnnotations>

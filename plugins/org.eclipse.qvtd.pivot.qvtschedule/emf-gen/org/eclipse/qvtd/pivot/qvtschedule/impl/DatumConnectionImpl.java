@@ -25,7 +25,6 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -57,14 +56,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends ConnectionImpl implements DatumConnection<CE> {
 	/**
-	 * The cached value of the '{@link #getConnectionRole() <em>Connection Role</em>}' reference.
+	 * The default value of the '{@link #getConnectionRole() <em>Connection Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getConnectionRole()
 	 * @generated
 	 * @ordered
 	 */
-	protected ConnectionRole connectionRole;
+	protected static final ConnectionRole CONNECTION_ROLE_EDEFAULT = ConnectionRole.UNDEFINED;
+
+	/**
+	 * The cached value of the '{@link #getConnectionRole() <em>Connection Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConnectionRole connectionRole = CONNECTION_ROLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -122,15 +131,20 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	 */
 	@Override
 	public ConnectionRole getConnectionRole() {
-		if (connectionRole != null && connectionRole.eIsProxy()) {
-			InternalEObject oldConnectionRole = (InternalEObject)connectionRole;
-			connectionRole = (ConnectionRole)eResolveProxy(oldConnectionRole);
-			if (connectionRole != oldConnectionRole) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
-			}
-		}
 		return connectionRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setConnectionRole(ConnectionRole newConnectionRole) {
+		ConnectionRole oldConnectionRole = connectionRole;
+		connectionRole = newConnectionRole == null ? CONNECTION_ROLE_EDEFAULT : newConnectionRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
 	}
 
 	/**
@@ -178,8 +192,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
-				if (resolve) return getConnectionRole();
-				return basicGetConnectionRole();
+				return getConnectionRole();
 			case QVTschedulePackage.DATUM_CONNECTION__NAME:
 				return getName();
 			case QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS:
@@ -220,7 +233,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
-				setConnectionRole((ConnectionRole)null);
+				setConnectionRole(CONNECTION_ROLE_EDEFAULT);
 				return;
 			case QVTschedulePackage.DATUM_CONNECTION__NAME:
 				setName(NAME_EDEFAULT);
@@ -241,7 +254,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE:
-				return connectionRole != null;
+				return connectionRole != CONNECTION_ROLE_EDEFAULT;
 			case QVTschedulePackage.DATUM_CONNECTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS:
@@ -275,22 +288,22 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-		s.setColor(getColor());
+		s.setColor(getConnectionRole().getColor());
 		/*		if (isRegion2Region()) {
 			String indexText = getIndexText();
 			if (indexText != null) {
 				s.setLabel(indexText);
 			}
 		} */
-		String style = getStyle();
+		String style = getConnectionRole().getStyle();
 		if (style != null) {
 			s.setStyle(style);
 		}
-		String arrowhead = getArrowhead();
+		String arrowhead = getConnectionRole().getArrowhead();
 		if (arrowhead != null) {
 			s.setArrowhead(arrowhead);
 		}
-		s.setPenwidth(getPenwidth());
+		s.setPenwidth(getConnectionRole().getPenwidth());
 		s.appendAttributedEdge(source, this, target);
 	}
 
@@ -307,26 +320,9 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		if (style != null) {
 			s.setStyle(style);
 		}
-		s.setColor(getColor());
-		s.setPenwidth(getPenwidth());
+		s.setColor(getConnectionRole().getColor());
+		s.setPenwidth(getConnectionRole().getPenwidth());
 		s.appendAttributedNode(nodeName);
-	}
-
-	protected @Nullable ConnectionRole basicGetConnectionRole() {
-		return connectionRole;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setConnectionRole(ConnectionRole newConnectionRole) {
-		ConnectionRole oldConnectionRole = connectionRole;
-		connectionRole = newConnectionRole;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATUM_CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
 	}
 
 	@Override
@@ -334,21 +330,11 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		setRegion(null);
 	}
 
-	@Override
-	public String getArrowhead() {
-		return getConnectionRole().getArrowhead();
-	}
-
-	@Override
-	public @NonNull String getColor() {
-		return getConnectionRole().getColor();
-	}
-
-	public @NonNull ConnectionRole getConnectionRole(@NonNull CE targetEnd) {
-		ConnectionRole connectionRole = targetEnd2role.get(targetEnd);
-		assert connectionRole != null;
-		return connectionRole;
-	}
+	/*	public @NonNull ConnectionRole getConnectionRole(@NonNull CE targetEnd) {
+		ConnectionRoleEnum connectionRoleEnum = targetEnd2role.get(targetEnd);
+		assert connectionRoleEnum != null;
+		return connectionRoleEnum.getConnectionRole();
+	} */
 
 	public @Nullable String getIndexText() {
 		StringBuilder s = null;
@@ -367,16 +353,6 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	@Override
 	public @NonNull List<@NonNull Integer> getIndexes() {
 		return indexes;
-	}
-
-	@Override
-	public @NonNull String getLabel() {
-		return QVTscheduleUtil.getName(this);
-	}
-
-	public @NonNull Integer getPenwidth() {
-		Integer penwidth = getConnectionRole().getPenwidth();
-		return /*connectionRole.isRealized() ? 2*penwidth :*/ penwidth;
 	}
 
 	public @NonNull String getShape() {
@@ -505,12 +481,13 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		return (sourceRegion2count.size() == 1) && (targetRegion2roles.size() == 1) && (targetRegion2roles.values().iterator().next().size() == 1); //(targetEnd2role.size() == 1);
 	}
 
-	protected void mergeRole(@NonNull ConnectionRole connectionRole) {
-		if (this.connectionRole == null) {
-			this.connectionRole = connectionRole;
+	protected void mergeRole(@NonNull ConnectionRole connectionRoleEnum) {
+		//		assert connectionRole != null;
+		if (getConnectionRole() == ConnectionRole.UNDEFINED) {
+			setConnectionRole(connectionRoleEnum);
 		}
-		else if (this.connectionRole != connectionRole) {
-			this.connectionRole = this.connectionRole.merge(connectionRole);
+		else if (getConnectionRole() != connectionRoleEnum) {
+			setConnectionRole(getConnectionRole().merge(connectionRoleEnum));
 		}
 	}
 
@@ -521,9 +498,9 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	public String toString2() {
 		StringBuilder s = new StringBuilder();
-		ConnectionRole connectionRole = basicGetConnectionRole();
+		ConnectionRole connectionRole = getConnectionRole();
 		if (connectionRole != null) {
-			s.append(connectionRole);
+			s.append(connectionRole.getStereotype());
 		}
 		s.append(getName());
 		s.append("(");
@@ -542,7 +519,8 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 				s.append(",");
 			}
 			ConnectionRole targetConnectionRole = targetEnd2role.get(targetEnd);
-			s.append(targetConnectionRole);
+			assert targetConnectionRole != null;
+			s.append(targetConnectionRole.getStereotype());
 			s.append(targetEnd.getDisplayName());
 			isFirst = false;
 		}

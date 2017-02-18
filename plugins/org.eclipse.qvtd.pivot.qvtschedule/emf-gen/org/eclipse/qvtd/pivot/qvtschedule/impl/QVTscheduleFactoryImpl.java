@@ -111,6 +111,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case QVTschedulePackage.CONNECTION_ROLE:
+				return createConnectionRoleFromString(eDataType, initialValue);
 			case QVTschedulePackage.ROLE:
 				return createRoleFromString(eDataType, initialValue);
 			default:
@@ -126,6 +128,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case QVTschedulePackage.CONNECTION_ROLE:
+				return convertConnectionRoleToString(eDataType, instanceValue);
 			case QVTschedulePackage.ROLE:
 				return convertRoleToString(eDataType, instanceValue);
 			default:
@@ -450,6 +454,26 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull UnknownNode createUnknownNode() {
 		UnknownNodeImpl unknownNode = new UnknownNodeImpl();
 		return unknownNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConnectionRole createConnectionRoleFromString(EDataType eDataType, String initialValue) {
+		ConnectionRole result = ConnectionRole.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertConnectionRoleToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

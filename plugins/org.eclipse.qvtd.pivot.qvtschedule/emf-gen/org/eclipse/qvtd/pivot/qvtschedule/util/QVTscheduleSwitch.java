@@ -159,14 +159,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.CONNECTION_ROLE: {
-				ConnectionRole connectionRole = (ConnectionRole)theEObject;
-				T result = caseConnectionRole(connectionRole);
-				if (result == null) result = caseElement(connectionRole);
-				if (result == null) result = caseVisitable(connectionRole);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.DATUM_CONNECTION: {
 				DatumConnection<?> datumConnection = (DatumConnection<?>)theEObject;
 				T result = caseDatumConnection(datumConnection);
@@ -689,21 +681,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnectionEnd(ConnectionEnd object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connection Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connection Role</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConnectionRole(ConnectionRole object) {
 		return null;
 	}
 

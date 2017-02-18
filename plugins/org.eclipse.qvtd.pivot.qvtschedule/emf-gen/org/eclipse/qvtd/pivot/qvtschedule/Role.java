@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * <!-- begin-model-doc -->
  * Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing
  * certainty, allowing the earlier to be chosen by a merge.
- *
+ * 
  * NEW = REALIZED || SPECULATION
  * OLD = CONSTANT || LOADED || PREDICATED || SPECULATED
  * <!-- end-model-doc -->
@@ -55,7 +55,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	LOADED(0, "LOADED", "LOADED"),
+	LOADED(1, "LOADED", "LOADED"),
 	/**
 	 * The '<em><b>REALIZED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -64,7 +64,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	REALIZED(0, "REALIZED", "REALIZED"),
+	REALIZED(2, "REALIZED", "REALIZED"),
 	/**
 	 * The '<em><b>PREDICATED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -73,7 +73,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	PREDICATED(0, "PREDICATED", "PREDICATED"),
+	PREDICATED(3, "PREDICATED", "PREDICATED"),
 	/**
 	 * The '<em><b>SPECULATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -82,7 +82,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	SPECULATION(0, "SPECULATION", "SPECULATION"),
+	SPECULATION(4, "SPECULATION", "SPECULATION"),
 	/**
 	 * The '<em><b>SPECULATED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -91,7 +91,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	SPECULATED(0, "SPECULATED", "SPECULATED"),
+	SPECULATED(5, "SPECULATED", "SPECULATED"),
 	/**
 	 * The '<em><b>OTHER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -100,7 +100,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	OTHER(0, "OTHER", "OTHER");
+	OTHER(6, "OTHER", "OTHER");
 	/**
 	 * The '<em><b>CONSTANT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -127,7 +127,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOADED_VALUE = 0;
+	public static final int LOADED_VALUE = 1;
 
 	/**
 	 * The '<em><b>REALIZED</b></em>' literal value.
@@ -141,7 +141,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REALIZED_VALUE = 0;
+	public static final int REALIZED_VALUE = 2;
 
 	/**
 	 * The '<em><b>PREDICATED</b></em>' literal value.
@@ -155,7 +155,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PREDICATED_VALUE = 0;
+	public static final int PREDICATED_VALUE = 3;
 
 	/**
 	 * The '<em><b>SPECULATION</b></em>' literal value.
@@ -169,7 +169,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SPECULATION_VALUE = 0;
+	public static final int SPECULATION_VALUE = 4;
 
 	/**
 	 * The '<em><b>SPECULATED</b></em>' literal value.
@@ -183,7 +183,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SPECULATED_VALUE = 0;
+	public static final int SPECULATED_VALUE = 5;
 
 	/**
 	 * The '<em><b>OTHER</b></em>' literal value.
@@ -197,7 +197,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OTHER_VALUE = 0;
+	public static final int OTHER_VALUE = 6;
 
 	/**
 	 * An array of all the '<em><b>Role</b></em>' enumerators.
@@ -207,14 +207,14 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	private static final Role[] VALUES_ARRAY =
 			new Role[] {
-				CONSTANT,
-				LOADED,
-				REALIZED,
-				PREDICATED,
-				SPECULATION,
-				SPECULATED,
-				OTHER,
-	};
+			CONSTANT,
+			LOADED,
+			REALIZED,
+			PREDICATED,
+			SPECULATION,
+			SPECULATED,
+			OTHER,
+		};
 
 	/**
 	 * A public read-only list of all the '<em><b>Role</b></em>' enumerators.
@@ -271,6 +271,12 @@ public enum Role implements Enumerator, Comparable<Role>
 	public static Role get(int value) {
 		switch (value) {
 			case CONSTANT_VALUE: return CONSTANT;
+			case LOADED_VALUE: return LOADED;
+			case REALIZED_VALUE: return REALIZED;
+			case PREDICATED_VALUE: return PREDICATED;
+			case SPECULATION_VALUE: return SPECULATION;
+			case SPECULATED_VALUE: return SPECULATED;
+			case OTHER_VALUE: return OTHER;
 		}
 		return null;
 	}
@@ -315,7 +321,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	@Override
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
@@ -325,7 +331,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	@Override
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
@@ -335,7 +341,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	@Override
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**

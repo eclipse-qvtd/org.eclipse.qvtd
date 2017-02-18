@@ -24,27 +24,30 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 public interface DatumConnection<CE extends ConnectionEnd> extends Connection, GraphEdge, GraphNode
 {
 	/**
-	 * Returns the value of the '<em><b>Connection Role</b></em>' reference.
+	 * Returns the value of the '<em><b>Connection Role</b></em>' attribute.
+	 * The default value is <code>"UNDEFINED"</code>.
+	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Connection Role</em>' reference isn't clear,
+	 * If the meaning of the '<em>Connection Role</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Connection Role</em>' reference.
+	 * @return the value of the '<em>Connection Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole
 	 * @see #setConnectionRole(ConnectionRole)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getDatumConnection_ConnectionRole()
-	 * @model required="true"
+	 * @model default="UNDEFINED" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!DatumConnection{CE}!connectionRole'"
 	 * @generated
 	 */
-	@Override
 	ConnectionRole getConnectionRole();
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getConnectionRole <em>Connection Role</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getConnectionRole <em>Connection Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Connection Role</em>' reference.
+	 * @param value the new value of the '<em>Connection Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole
 	 * @see #getConnectionRole()
 	 * @generated
 	 */

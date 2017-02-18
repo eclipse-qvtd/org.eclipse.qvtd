@@ -16,6 +16,14 @@
   <foreignModel>QVTschedule.ecore</foreignModel>
   <genPackages prefix="QVTschedule" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       ecorePackage="QVTschedule.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTschedule.ecore#//ConnectionRole">
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//ConnectionRole/MANDATORY_EDGE"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//ConnectionRole/MANDATORY_NODE"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//ConnectionRole/PASSED"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//ConnectionRole/PREFERRED_EDGE"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//ConnectionRole/PREFERRED_NODE"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//ConnectionRole/UNDEFINED"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTschedule.ecore#//Role">
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/CONSTANT"/>
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/LOADED"/>
@@ -45,12 +53,9 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//Connection/region"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ConnectionEnd"/>
-    <genClasses image="false" ecoreClass="QVTschedule.ecore#//ConnectionRole">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//ConnectionRole/node"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//DatumConnection">
       <genTypeParameters ecoreTypeParameter="QVTschedule.ecore#//DatumConnection/CE"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//DatumConnection/connectionRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//DatumConnection/connectionRole"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//DatumConnection/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//DatumConnection/sourceEnds"/>
     </genClasses>

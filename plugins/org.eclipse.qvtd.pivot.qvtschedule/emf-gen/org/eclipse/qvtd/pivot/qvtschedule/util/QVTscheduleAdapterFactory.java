@@ -116,10 +116,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createConnectionEndAdapter();
 			}
 			@Override
-			public Adapter caseConnectionRole(ConnectionRole object) {
-				return createConnectionRoleAdapter();
-			}
-			@Override
 			public <CE extends ConnectionEnd> Adapter caseDatumConnection(DatumConnection<CE> object) {
 				return createDatumConnectionAdapter();
 			}
@@ -406,20 +402,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConnectionEndAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole <em>Connection Role</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole
-	 * @generated
-	 */
-	public Adapter createConnectionRoleAdapter() {
 		return null;
 	}
 

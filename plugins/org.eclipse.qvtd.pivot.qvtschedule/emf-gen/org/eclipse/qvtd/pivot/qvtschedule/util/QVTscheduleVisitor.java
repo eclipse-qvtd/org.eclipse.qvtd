@@ -32,7 +32,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object);
 	R visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object);
 	R visitConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Connection object);
-	R visitConnectionRole(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ConnectionRole object);
 	R visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object);
 	R visitDependencyNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyNode object);
 	R visitEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Edge object);

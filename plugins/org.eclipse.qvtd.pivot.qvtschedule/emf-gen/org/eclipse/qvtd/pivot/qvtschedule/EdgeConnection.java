@@ -48,7 +48,7 @@ public interface EdgeConnection extends DatumConnection<NavigableEdge>
 	void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater);
 	@Override
 	@NonNull Iterable<@NonNull NavigableEdge> getSources();
-	@NonNull ConnectionRole getConnectionRole(@NonNull NavigableEdge targetEdge);
+	//	@NonNull ConnectionRole getConnectionRole(@NonNull NavigableEdge targetEdge);
 	@NonNull Iterable<@NonNull NavigableEdge> getTargetEdges();
 	@Override
 	@NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets();

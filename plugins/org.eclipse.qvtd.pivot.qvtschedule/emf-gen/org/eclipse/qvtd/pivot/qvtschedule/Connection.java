@@ -14,8 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
@@ -67,21 +65,4 @@ public interface Connection extends Element, Nameable, Symbolable
 	void setRegion(ScheduledRegion value);
 
 	void destroy();
-
-	/**
-	 * Return a non-standard style for the arrow head.
-	 */
-	@Nullable String getArrowhead();
-
-	/**
-	 * Return the color with which this edge is drawn.
-	 */
-	@NonNull String getColor();
-
-	ConnectionRole getConnectionRole();
-
-	/**
-	 * Return a formatted label to accompany the edge, or null for no label.
-	 */
-	@Nullable String getLabel();
 } // Connection

@@ -34,7 +34,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Lists;
 
@@ -211,9 +210,9 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 		//			mergeRole(Connections.PREFERRED_EDGE);
 		//			return;
 		//		}
-		mergeRole(mustBeLater ? QVTscheduleConstants.MANDATORY_EDGE : QVTscheduleConstants.PREFERRED_EDGE);
+		mergeRole(mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
 		assert !targetEnd2role.containsKey(targetEdge);
-		targetEnd2role.put(targetEdge, mustBeLater ? QVTscheduleConstants.MANDATORY_EDGE : QVTscheduleConstants.PREFERRED_EDGE);
+		targetEnd2role.put(targetEdge, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
 		targetEdge.setIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}

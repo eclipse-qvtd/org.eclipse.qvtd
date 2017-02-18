@@ -219,16 +219,16 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 
 	@Override
 	public void addPassedTargetNode(@NonNull Node targetNode) {
-		mergeRole(QVTscheduleConstants.PASSED);
+		mergeRole(ConnectionRole.PASSED);
 		assert !targetEnd2role.containsKey(targetNode);
-		targetEnd2role.put(targetNode, QVTscheduleConstants.PASSED);
+		targetEnd2role.put(targetNode, ConnectionRole.PASSED);
 		targetNode.setIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
 	@Override
 	public void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater) {
-		ConnectionRole newConnectionRole = mustBeLater ? QVTscheduleConstants.MANDATORY_NODE : QVTscheduleConstants.PREFERRED_NODE;
+		ConnectionRole newConnectionRole = mustBeLater ? ConnectionRole.MANDATORY_NODE : ConnectionRole.PREFERRED_NODE;
 		ConnectionRole oldConnectionRole = targetEnd2role.get(targetNode);
 		if ((oldConnectionRole != null) && (oldConnectionRole != newConnectionRole)) {
 			newConnectionRole = newConnectionRole.merge(oldConnectionRole);
