@@ -21,30 +21,30 @@ import org.eclipse.ocl.pivot.Property;
 public interface EdgeConnection extends DatumConnection<NavigableEdge>
 {
 	/**
-	 * Returns the value of the '<em><b>Property</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property</em>' reference.
-	 * @see #setProperty(Property)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_Property()
+	 * @return the value of the '<em>Referred Property</em>' reference.
+	 * @see #setReferredProperty(Property)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_ReferredProperty()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!property'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!referredProperty'"
 	 * @generated
 	 */
-	Property getProperty();
+	Property getReferredProperty();
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection#getProperty <em>Property</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection#getReferredProperty <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property</em>' reference.
-	 * @see #getProperty()
+	 * @param value the new value of the '<em>Referred Property</em>' reference.
+	 * @see #getReferredProperty()
 	 * @generated
 	 */
-	void setProperty(Property value);
+	void setReferredProperty(Property value);
 	void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater);
 	@Override
 	@NonNull Iterable<@NonNull NavigableEdge> getSources();

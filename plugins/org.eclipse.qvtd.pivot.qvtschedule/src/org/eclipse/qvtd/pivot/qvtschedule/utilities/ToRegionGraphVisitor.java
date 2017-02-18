@@ -42,10 +42,10 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @Nullable String visitDatumConnection(@NonNull DatumConnection<?> datumConnection) {
-		ScheduledRegion scheduledRegion = datumConnection.getRegion();
+		ScheduledRegion scheduledRegion = datumConnection.getOwningScheduledRegion();
 		Map<@NonNull Region, @NonNull Integer> sourceRegion2count = new HashMap<>();
 		for (@NonNull Node source : datumConnection.getSourceNodes()) {
-			Region sourceRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getRegion(source));
+			Region sourceRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(source));
 			if (sourceRegion != null) {
 				//				Integer count = sourceRegion2count.get(sourceRegion);
 				sourceRegion2count.put(sourceRegion, 1); //(count != null ? count.intValue() : 0) + 1);
@@ -55,7 +55,7 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		for (@NonNull ConnectionEnd target : datumConnection.getTargets().keySet()) {
 			ConnectionRole role = datumConnection.getTargets().get(target);
 			assert role != null;
-			Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getRegion(target));
+			Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 			if (targetRegion != null) {
 				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
 				if (roles == null) {
@@ -109,7 +109,7 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				} */
 				@Nullable ConnectionEnd sourceEnd = null;
 				for (@NonNull ConnectionEnd end : QVTscheduleUtil.getSourceEnds(datumConnection)) {
-					if (end.getRegion() == scheduledRegion) {
+					if (end.getOwningRegion() == scheduledRegion) {
 						assert sourceEnd == null;
 						sourceEnd = end;
 					}
@@ -130,7 +130,7 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	public @Nullable String visitRegion(@NonNull Region region) {
 		context.appendNode(region);
 		for (@NonNull Edge edge : region.getRecursionEdges()) {
-			context.appendEdge(QVTscheduleUtil.getRegion(edge.getEdgeSource()), edge, QVTscheduleUtil.getRegion(edge.getEdgeTarget()));
+			context.appendEdge(QVTscheduleUtil.getOwningRegion(edge.getEdgeSource()), edge, QVTscheduleUtil.getOwningRegion(edge.getEdgeTarget()));
 		}
 		return null;
 	}
@@ -146,10 +146,10 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 			//				s.appendEdge(edge.getSource().getRegion(), edge, edge.getTarget().getRegion());
 			//			}
 		}
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(scheduledRegion)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {
 			context.appendNode(node);
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(scheduledRegion)) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
 			connection.accept(this);
 		}
 		context.popCluster();

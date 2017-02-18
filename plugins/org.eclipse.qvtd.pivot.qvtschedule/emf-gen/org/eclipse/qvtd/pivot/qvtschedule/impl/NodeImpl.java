@@ -69,7 +69,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getNodeRole <em>Node Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingConnections <em>Outgoing Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getOwningRegion <em>Owning Region</em>}</li>
  * </ul>
  *
  * @generated
@@ -355,8 +355,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public Region getRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.NODE__REGION) return null;
+	public Region getOwningRegion() {
+		if (eContainerFeatureID() != QVTschedulePackage.NODE__OWNING_REGION) return null;
 		return (Region)eInternalContainer();
 	}
 
@@ -365,8 +365,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRegion(Region newRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRegion, QVTschedulePackage.NODE__REGION, msgs);
+	public NotificationChain basicSetOwningRegion(Region newOwningRegion, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, QVTschedulePackage.NODE__OWNING_REGION, msgs);
 		return msgs;
 	}
 
@@ -376,20 +376,20 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public void setRegion(Region newRegion) {
-		if (newRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.NODE__REGION && newRegion != null)) {
-			if (EcoreUtil.isAncestor(this, newRegion))
+	public void setOwningRegion(Region newOwningRegion) {
+		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.NODE__OWNING_REGION && newOwningRegion != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newRegion != null)
-				msgs = ((InternalEObject)newRegion).eInverseAdd(this, QVTschedulePackage.REGION__NODES, Region.class, msgs);
-			msgs = basicSetRegion(newRegion, msgs);
+			if (newOwningRegion != null)
+				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, QVTschedulePackage.REGION__OWNED_NODES, Region.class, msgs);
+			msgs = basicSetOwningRegion(newOwningRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__REGION, newRegion, newRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__OWNING_REGION, newOwningRegion, newOwningRegion));
 	}
 
 	/**
@@ -416,8 +416,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return getOutgoingConnections();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return getOutgoingEdges();
-			case QVTschedulePackage.NODE__REGION:
-				return getRegion();
+			case QVTschedulePackage.NODE__OWNING_REGION:
+				return getOwningRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -455,8 +455,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				getOutgoingEdges().clear();
 				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.NODE__REGION:
-				setRegion((Region)newValue);
+			case QVTschedulePackage.NODE__OWNING_REGION:
+				setOwningRegion((Region)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -491,8 +491,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				getOutgoingEdges().clear();
 				return;
-			case QVTschedulePackage.NODE__REGION:
-				setRegion((Region)null);
+			case QVTschedulePackage.NODE__OWNING_REGION:
+				setOwningRegion((Region)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -520,8 +520,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return outgoingEdges != null && !outgoingEdges.isEmpty();
-			case QVTschedulePackage.NODE__REGION:
-				return getRegion() != null;
+			case QVTschedulePackage.NODE__OWNING_REGION:
+				return getOwningRegion() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -547,7 +547,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public void addTypedElement(@NonNull TypedElement typedElement) {
 		if (!typedElements.contains(typedElement)) {
 			typedElements.add(typedElement);
-			Region region2 = getRegion();
+			Region region2 = getOwningRegion();
 			assert region2 != null;
 			//			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region2.isOperationRegion()) {	// FIXME this is not a sound diagnosis
 			//				boolean isMatched = RegionUtil.isMatched(typedElement);
@@ -597,7 +597,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public void destroy() {
-		assert getRegion() != null;
+		assert getOwningRegion() != null;
 		//		region.removeNode(this);
 		Connection incomingConnection2 = incomingConnection;
 		if (incomingConnection2 != null) {
@@ -622,7 +622,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void getAllAncestors(@NonNull Set<@NonNull Node> ancestors) {
 		if (ancestors.add(this)) {
-			Region region = QVTscheduleUtil.getRegion(this);
+			Region region = QVTscheduleUtil.getOwningRegion(this);
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
 				for (@NonNull Node passedBindingSource : headNode.getPassedBindingSources()) {
 					passedBindingSource.getAllAncestors(ancestors);
@@ -674,7 +674,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull String getDisplayName() {
-		Region region = getRegion();
+		Region region = getOwningRegion();
 		assert region != null;
 		return region.getName() + "::" + getName();
 	}
@@ -764,10 +764,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.NODE__REGION:
+			case QVTschedulePackage.NODE__OWNING_REGION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetRegion((Region)otherEnd, msgs);
+				return basicSetOwningRegion((Region)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -784,8 +784,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
 				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.NODE__REGION:
-				return basicSetRegion(null, msgs);
+			case QVTschedulePackage.NODE__OWNING_REGION:
+				return basicSetOwningRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -798,8 +798,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.NODE__REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__NODES, Region.class, msgs);
+			case QVTschedulePackage.NODE__OWNING_REGION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__OWNED_NODES, Region.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -901,7 +901,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	//	@Override
 	public ScheduleModel getScheduleModel() {
-		Region region = getRegion();
+		Region region = getOwningRegion();
 		assert region != null;
 		return region.getScheduleModel();
 	}
@@ -959,7 +959,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		assert name != null;
 		assert classDatum != null;
 		setNodeRole(nodeRole);
-		setRegion(region);
+		setOwningRegion(region);
 		setName(name);
 		setClassDatum(classDatum);
 		this.isDataType = classDatum.getCompleteClass().getPrimaryClass() instanceof DataType;

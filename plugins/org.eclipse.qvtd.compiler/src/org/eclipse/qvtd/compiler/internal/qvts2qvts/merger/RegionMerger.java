@@ -70,11 +70,11 @@ abstract class RegionMerger // implements Region
 		this.primaryRegion = primaryRegion;
 		//		assert !(primaryRegion instanceof MicroMappingRegion);
 		//
-		for (@NonNull Node primaryNode : RegionUtil.getNodes(primaryRegion)) {
+		for (@NonNull Node primaryNode : RegionUtil.getOwnedNodes(primaryRegion)) {
 			new NodeMerger(this, primaryNode);
 		}
 		//
-		for (@NonNull Edge primaryEdge : RegionUtil.getEdges(primaryRegion)) {
+		for (@NonNull Edge primaryEdge : RegionUtil.getOwnedEdges(primaryRegion)) {
 			if (!primaryEdge.isSecondary()) {
 				new EdgeMerger(this, primaryEdge);
 			}
@@ -117,7 +117,7 @@ abstract class RegionMerger // implements Region
 		secondaryRegions.add(secondaryRegion);
 		this.secondaryNode2primaryNode.putAll(secondaryNode2primaryNode);
 		//
-		for (@NonNull Node secondaryNode : RegionUtil.getNodes(secondaryRegion)) {
+		for (@NonNull Node secondaryNode : RegionUtil.getOwnedNodes(secondaryRegion)) {
 			Node primaryNode = secondaryNode2primaryNode.get(secondaryNode);
 			if (primaryNode != null) {
 				NodeMerger nodeMerger = oldNode2nodeMerger.get(primaryNode);
@@ -129,7 +129,7 @@ abstract class RegionMerger // implements Region
 			}
 		}
 		//
-		for (@NonNull Edge secondaryEdge : RegionUtil.getEdges(secondaryRegion)) {
+		for (@NonNull Edge secondaryEdge : RegionUtil.getOwnedEdges(secondaryRegion)) {
 			if (!secondaryEdge.isSecondary()) {
 				addSecondaryEdge(secondaryEdge);
 			}
@@ -148,13 +148,13 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void checkEdges(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Edge oldEdge : RegionUtil.getEdges(oldRegion)) {
-			assert oldEdge.getRegion() == oldRegion;
+		for (@NonNull Edge oldEdge : RegionUtil.getOwnedEdges(oldRegion)) {
+			assert oldEdge.getOwningRegion() == oldRegion;
 			if (!oldEdge.isRecursion() && !oldEdge.isSecondary()) {		// FIXME Remove this irregularity
 				EdgeMerger edgeMerger = oldEdge2edgeMerger.get(oldEdge);
 				if (edgeMerger != null) {
 					assert Iterables.contains(edgeMerger.getOldEdges(), oldEdge);
-					assert edgeMerger.getNewEdge().getRegion() == newRegion;
+					assert edgeMerger.getNewEdge().getOwningRegion() == newRegion;
 				}
 				else {
 					assert debugPrunedEdges.contains(oldEdge);
@@ -164,10 +164,10 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void checkNodes(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Node oldNode : RegionUtil.getNodes(oldRegion)) {
-			assert oldNode.getRegion() == oldRegion;
+		for (@NonNull Node oldNode : RegionUtil.getOwnedNodes(oldRegion)) {
+			assert oldNode.getOwningRegion() == oldRegion;
 			Node nodeMerger = getNodeMerger(oldNode).getNewNode();
-			assert nodeMerger.getRegion() == newRegion;
+			assert nodeMerger.getOwningRegion() == newRegion;
 		}
 	}
 

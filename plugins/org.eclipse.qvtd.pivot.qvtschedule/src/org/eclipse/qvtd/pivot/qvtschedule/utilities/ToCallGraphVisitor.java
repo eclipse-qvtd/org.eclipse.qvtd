@@ -135,7 +135,7 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 
 					@Override
 					public @NonNull GraphNode getEdgeTarget() {
-						return QVTscheduleUtil.getRegion(targetNode);
+						return QVTscheduleUtil.getOwningRegion(targetNode);
 					}
 				};
 				context.appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
@@ -151,7 +151,7 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 		for (@NonNull Region region : scheduledRegion.getCallableRegions()) {
 			region.accept(this);
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(scheduledRegion)) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
 			connection.accept(new ToRegionGraphVisitor(context));
 		}
 		context.popCluster();

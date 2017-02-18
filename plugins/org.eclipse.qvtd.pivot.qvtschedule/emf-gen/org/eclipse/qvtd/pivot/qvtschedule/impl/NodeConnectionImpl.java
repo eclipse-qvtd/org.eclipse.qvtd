@@ -243,7 +243,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	public @Nullable Node basicGetSource(@NonNull Region sourceRegion) {
 		Node sourceNode = null;
 		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(this)) {
-			if (node.getRegion() == sourceRegion) {
+			if (node.getOwningRegion() == sourceRegion) {
 				assert sourceNode == null;
 				sourceNode = node;
 			}
@@ -386,7 +386,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 			return true;
 		}
 		for (@NonNull Node targetNode : targetEnd2role.keySet()) {
-			if (targetNode.getRegion() == targetRegion) {
+			if (targetNode.getOwningRegion() == targetRegion) {
 				ConnectionRole role = targetEnd2role.get(targetNode);
 				assert role != null;
 				if (role.isPassed()) {
@@ -424,7 +424,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	@Override
 	public void removeTargetRegion(@NonNull Region targetRegion) {
 		for (@NonNull Node targetNode : Lists.newArrayList(getTargetNodes())) {
-			if (targetNode.getRegion() == targetRegion) {
+			if (targetNode.getOwningRegion() == targetRegion) {
 				targetNode.setIncomingConnection(null);
 				removeTarget(targetNode);
 			}

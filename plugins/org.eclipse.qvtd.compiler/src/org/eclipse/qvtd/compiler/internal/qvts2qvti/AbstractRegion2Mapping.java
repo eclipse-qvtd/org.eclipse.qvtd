@@ -90,7 +90,7 @@ public abstract class AbstractRegion2Mapping
 		assert name != null;
 		this.mapping = QVTimperativeUtil.createMapping(name);
 		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
-		for (@NonNull Node node : RegionUtil.getNodes(region)) {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			for (TypedElement typedElement : node.getTypedElements()) {
 				Node oldNode = qvtm2node.put(typedElement, node);
 				assert (oldNode == null) || (oldNode == node);

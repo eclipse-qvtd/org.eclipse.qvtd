@@ -71,23 +71,23 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
-			ScheduledRegion invokingRegion = RegionUtil.getInvokingRegion(primaryRegion);
+			ScheduledRegion invokingRegion = RegionUtil.getOwningScheduledRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
 			contentsAnalysis.removeRegion(primaryRegion);
 			for (@NonNull Region callableParent : callableParents) {
 				callableParent.replaceCallToChild(primaryRegion, mergedRegion);
 			}
-			primaryRegion.setInvokingRegion(invokingRegion);
+			primaryRegion.setOwningScheduledRegion(invokingRegion);
 			for (@NonNull Region secondaryRegion : secondaryRegions) {
 				contentsAnalysis.removeRegion(secondaryRegion);
-				assert invokingRegion == secondaryRegion.getInvokingRegion();
+				assert invokingRegion == secondaryRegion.getOwningScheduledRegion();
 				for (@NonNull Region callableParent : callableParents) {
 					callableParent.removeCallToChild(secondaryRegion);
 				}
-				secondaryRegion.setInvokingRegion(invokingRegion);
+				secondaryRegion.setOwningScheduledRegion(invokingRegion);
 			}
 			contentsAnalysis.addRegion(mergedRegion);
-			mergedRegion.setInvokingRegion(invokingRegion);
+			mergedRegion.setOwningScheduledRegion(invokingRegion);
 			for (@NonNull Node oldHeadNode : RegionUtil.getHeadNodes(primaryRegion)) {
 				NodeConnection incomingConnection = oldHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
@@ -133,9 +133,9 @@ public class LateConsumerMerger extends AbstractMerger
 					ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(secondaryEdge.getEdgeTarget());
 					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatumAnalysis);
 					if (realizedEdges != null) {
-						int firstIndex = secondaryEdge.getRegion().getFirstIndex();
+						int firstIndex = secondaryEdge.getOwningRegion().getFirstIndex();
 						for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-							Region region = realizedEdge.getRegion();
+							Region region = realizedEdge.getOwningRegion();
 							int lastIndex = region.getLastIndex();
 							if (lastIndex >= firstIndex) {
 								if (debugFailures) {

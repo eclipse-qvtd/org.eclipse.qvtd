@@ -27,7 +27,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.VariableNode#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.VariableNode#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getVariableNode()
@@ -37,31 +37,31 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 public interface VariableNode extends Node {
 
 	/**
-	 * Returns the value of the '<em><b>Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Variable</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Variable</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable</em>' reference.
-	 * @see #setVariable(VariableDeclaration)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getVariableNode_Variable()
+	 * @return the value of the '<em>Referred Variable</em>' reference.
+	 * @see #setReferredVariable(VariableDeclaration)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getVariableNode_ReferredVariable()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!VariableNode!variable'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!VariableNode!referredVariable'"
 	 * @generated
 	 */
-	VariableDeclaration getVariable();
+	VariableDeclaration getReferredVariable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.VariableNode#getVariable <em>Variable</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.VariableNode#getReferredVariable <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable</em>' reference.
-	 * @see #getVariable()
+	 * @param value the new value of the '<em>Referred Variable</em>' reference.
+	 * @see #getReferredVariable()
 	 * @generated
 	 */
-	void setVariable(VariableDeclaration value);
+	void setReferredVariable(VariableDeclaration value);
 
 	public void initializeVariable(@NonNull Region region, /*@NonNull*/ VariableDeclaration variable);
 } // VariableNode

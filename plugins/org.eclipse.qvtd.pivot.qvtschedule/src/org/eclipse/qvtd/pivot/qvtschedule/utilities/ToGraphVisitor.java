@@ -81,10 +81,10 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 		context.setColor("lightblue");
 		context.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		context.pushCluster();
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(loadingRegion)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(loadingRegion)) {
 			context.appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(loadingRegion)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(loadingRegion)) {
 			context.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		context.popCluster();
@@ -150,11 +150,11 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 	public @Nullable String visitRegion(@NonNull Region region) {
 		context.setLabel(region.getName());
 		context.pushCluster();
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			node.accept(this);
 			//			s.appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(region)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			edge.accept(this);
 			//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
@@ -166,16 +166,16 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 	public @Nullable String visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
 		context.setLabel(scheduledRegion.getName());
 		context.pushCluster();
-		for (@NonNull Region region : QVTscheduleUtil.getRegions(scheduledRegion)) {
+		for (@NonNull Region region : QVTscheduleUtil.getOwnedRegions(scheduledRegion)) {
 			region.accept(this);
 		}
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(scheduledRegion)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {
 			context.appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getEdges(scheduledRegion)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(scheduledRegion)) {
 			context.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getConnections(scheduledRegion)) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
 			connection.accept(this);
 		}
 		context.popCluster();

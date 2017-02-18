@@ -74,31 +74,30 @@ public interface OperationRegion extends Region
 	 */
 	void setName(String value);
 	/**
-	 * Returns the value of the '<em><b>Operation</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Operation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operation</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Operation</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operation</em>' reference.
-	 * @see #setOperation(Operation)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_Operation()
+	 * @return the value of the '<em>Referred Operation</em>' reference.
+	 * @see #setReferredOperation(Operation)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_ReferredOperation()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!operation'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!referredOperation'"
 	 * @generated
 	 */
-	Operation getOperation();
+	Operation getReferredOperation();
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOperation <em>Operation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getReferredOperation <em>Referred Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Operation</em>' reference.
-	 * @see #getOperation()
+	 * @param value the new value of the '<em>Referred Operation</em>' reference.
+	 * @see #getReferredOperation()
 	 * @generated
 	 */
-	void setOperation(Operation value);
-
+	void setReferredOperation(Operation value);
 	/**
 	 * Returns the value of the '<em><b>Result Node</b></em>' reference.
 	 * <!-- begin-user-doc -->

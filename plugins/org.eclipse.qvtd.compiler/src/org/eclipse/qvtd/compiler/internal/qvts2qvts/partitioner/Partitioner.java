@@ -91,7 +91,7 @@ public class Partitioner
 	}
 
 	private static void gatherCorrolaries(@NonNull Set<@NonNull Property> corrolaryProperties, @NonNull MappingRegion region) {
-		for (@NonNull Node node : RegionUtil.getNodes(region)) {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
@@ -189,7 +189,7 @@ public class Partitioner
 	}
 
 	private void analyzeEdges() {
-		for (@NonNull Edge edge : RegionUtil.getEdges(region)) {
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
 				if (edge.isPredicated()) {
 					predicatedEdges.add(edge);
@@ -240,7 +240,7 @@ public class Partitioner
 	}
 
 	private void analyzeNodes() {
-		for (@NonNull Node node : RegionUtil.getNodes(region)) {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if (node.isTrue()) {
 				trueNodes.add(node);
 			}
@@ -284,13 +284,13 @@ public class Partitioner
 	}
 
 	private void check() {
-		for (@NonNull Node node : RegionUtil.getNodes(region)) {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
 				problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
-		for (@NonNull Edge edge : RegionUtil.getEdges(region)) {
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
@@ -299,7 +299,7 @@ public class Partitioner
 			}
 		}
 		//
-		Set<@NonNull Node> deadNodes = computeDeadNodes(RegionUtil.getNodes(region));
+		Set<@NonNull Node> deadNodes = computeDeadNodes(RegionUtil.getOwnedNodes(region));
 		Set<@NonNull Edge> deadEdges = computeDeadEdges(deadNodes);
 		allPrimaryEdges.removeAll(deadEdges);
 		Set<@NonNull Edge> partitionedEdges = new HashSet<>(debugEdge2partitions.keySet());

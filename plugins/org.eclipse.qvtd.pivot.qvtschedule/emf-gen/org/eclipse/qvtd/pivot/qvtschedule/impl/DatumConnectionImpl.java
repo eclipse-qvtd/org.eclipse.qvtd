@@ -327,7 +327,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 
 	@Override
 	public void destroy() {
-		setRegion(null);
+		setOwningScheduledRegion(null);
 	}
 
 	/*	public @NonNull ConnectionRole getConnectionRole(@NonNull CE targetEnd) {
@@ -368,7 +368,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull CE getSource(@NonNull Region sourceRegion) {
 		@Nullable CE sourceEnd = null;
 		for (@NonNull CE end : QVTscheduleUtil.getSourceEnds(this)) {
-			if (end.getRegion() == sourceRegion) {
+			if (end.getOwningRegion() == sourceRegion) {
 				assert sourceEnd == null;
 				sourceEnd = end;
 			}
@@ -393,7 +393,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull Set<@NonNull Region> getSourceRegions() {
 		Set<@NonNull Region> sourceRegions = new HashSet<>();
 		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
-			Region sourceRegion = QVTscheduleUtil.getRegion(sourceEnd);
+			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
 			sourceRegions.add(sourceRegion);
 		}
 		return sourceRegions;
@@ -403,7 +403,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull ScheduledRegion scheduledRegion) {
 		Set<@NonNull Region> sourceRegions = new HashSet<>();
 		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
-			Region sourceRegion = QVTscheduleUtil.getRegion(sourceEnd);
+			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
 			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
 			if (sourceRegion != null) {
 				sourceRegions.add(sourceRegion);
@@ -435,7 +435,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull CE getTarget(@NonNull Region targetRegion) {
 		@Nullable CE targetEnd = null;
 		for (@NonNull CE end : targetEnd2role.keySet()) {
-			if (end.getRegion() == targetRegion) {
+			if (end.getOwningRegion() == targetRegion) {
 				assert targetEnd == null;
 				targetEnd = end;
 			}
@@ -448,7 +448,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull Set<@NonNull Region> getTargetRegions() {
 		Set<@NonNull Region> targetRegions = new HashSet<>();
 		for (@NonNull ConnectionEnd targetEnd : getTargets().keySet()) {
-			Region targetRegion = QVTscheduleUtil.getRegion(targetEnd);
+			Region targetRegion = QVTscheduleUtil.getOwningRegion(targetEnd);
 			targetRegions.add(targetRegion);
 		}
 		return targetRegions;
@@ -458,7 +458,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	public @NonNull Iterable<@NonNull Region> getTargetRegions(@NonNull ScheduledRegion scheduledRegion) {
 		Set<@NonNull Region> targetRegions = new HashSet<>();
 		for (@NonNull ConnectionEnd targetEnd : getTargets().keySet()) {
-			Region targetRegion = QVTscheduleUtil.getRegion(targetEnd);
+			Region targetRegion = QVTscheduleUtil.getOwningRegion(targetEnd);
 			targetRegion = scheduledRegion.getNormalizedRegion(targetRegion);
 			if (targetRegion != null) {
 				targetRegions.add(targetRegion);

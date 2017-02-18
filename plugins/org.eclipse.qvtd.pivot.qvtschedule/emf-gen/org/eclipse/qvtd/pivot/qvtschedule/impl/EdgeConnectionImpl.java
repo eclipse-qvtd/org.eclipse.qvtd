@@ -45,22 +45,21 @@ import com.google.common.collect.Lists;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> implements EdgeConnection {
 	/**
-	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProperty()
+	 * @see #getReferredProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected Property property;
-
+	protected Property referredProperty;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,16 +99,16 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	 * @generated
 	 */
 	@Override
-	public Property getProperty() {
-		if (property != null && property.eIsProxy()) {
-			InternalEObject oldProperty = (InternalEObject)property;
-			property = (Property)eResolveProxy(oldProperty);
-			if (property != oldProperty) {
+	public Property getReferredProperty() {
+		if (referredProperty != null && referredProperty.eIsProxy()) {
+			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
+			referredProperty = (Property)eResolveProxy(oldReferredProperty);
+			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE_CONNECTION__PROPERTY, oldProperty, property));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
 			}
 		}
-		return property;
+		return referredProperty;
 	}
 
 	/**
@@ -117,8 +116,8 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property basicGetProperty() {
-		return property;
+	public Property basicGetReferredProperty() {
+		return referredProperty;
 	}
 
 	/**
@@ -127,11 +126,11 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	 * @generated
 	 */
 	@Override
-	public void setProperty(Property newProperty) {
-		Property oldProperty = property;
-		property = newProperty;
+	public void setReferredProperty(Property newReferredProperty) {
+		Property oldReferredProperty = referredProperty;
+		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE_CONNECTION__PROPERTY, oldProperty, property));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -142,9 +141,9 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
-				if (resolve) return getProperty();
-				return basicGetProperty();
+			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+				if (resolve) return getReferredProperty();
+				return basicGetReferredProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,8 +156,8 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
-				setProperty((Property)newValue);
+			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+				setReferredProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -172,8 +171,8 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
-				setProperty((Property)null);
+			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+				setReferredProperty((Property)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -187,8 +186,8 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__PROPERTY:
-				return property != null;
+			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -329,7 +328,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	public void removeTargetRegion(@NonNull Region targetRegion) {
 		for (@NonNull NavigableEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
-			if (targetEdge.getRegion() == targetRegion) {
+			if (targetEdge.getOwningRegion() == targetRegion) {
 				targetEdge.setIncomingConnection(null);
 				removeTarget(targetEdge);
 			}

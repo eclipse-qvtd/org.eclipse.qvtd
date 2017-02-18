@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection()
@@ -36,33 +36,33 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 public interface Connection extends Element, Nameable, Symbolable
 {
 	/**
-	 * Returns the value of the '<em><b>Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getConnections <em>Connections</em>}'.
+	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedConnections <em>Owned Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Region</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Scheduled Region</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Region</em>' container reference.
-	 * @see #setRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_Region()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getConnections
-	 * @model opposite="connections" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!region'"
+	 * @return the value of the '<em>Owning Scheduled Region</em>' container reference.
+	 * @see #setOwningScheduledRegion(ScheduledRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_OwningScheduledRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedConnections
+	 * @model opposite="ownedConnections" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!owningScheduledRegion'"
 	 * @generated
 	 */
-	ScheduledRegion getRegion();
+	ScheduledRegion getOwningScheduledRegion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getRegion <em>Region</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningScheduledRegion <em>Owning Scheduled Region</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Region</em>' container reference.
-	 * @see #getRegion()
+	 * @param value the new value of the '<em>Owning Scheduled Region</em>' container reference.
+	 * @see #getOwningScheduledRegion()
 	 * @generated
 	 */
-	void setRegion(ScheduledRegion value);
+	void setOwningScheduledRegion(ScheduledRegion value);
 
 	void destroy();
 } // Connection

@@ -24,10 +24,10 @@ import org.eclipse.ocl.pivot.Property;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getProperty <em>Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getSuper <em>Super</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOwningClassDatum <em>Owning Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getSuperPropertyDatums <em>Super Property Datums</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum()
@@ -35,62 +35,6 @@ import org.eclipse.ocl.pivot.Property;
  * @generated
  */
 public interface PropertyDatum extends AbstractDatum {
-	/**
-	 * Returns the value of the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Property</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property</em>' reference.
-	 * @see #setProperty(Property)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_Property()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!property'"
-	 * @generated
-	 */
-	Property getProperty();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getProperty <em>Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property</em>' reference.
-	 * @see #getProperty()
-	 * @generated
-	 */
-	void setProperty(Property value);
-
-	/**
-	 * Returns the value of the '<em><b>Class Datum</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Class Datum</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Datum</em>' container reference.
-	 * @see #setClassDatum(ClassDatum)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_ClassDatum()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums
-	 * @model opposite="propertyDatums" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!classDatum'"
-	 * @generated
-	 */
-	ClassDatum getClassDatum();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Datum</em>' container reference.
-	 * @see #getClassDatum()
-	 * @generated
-	 */
-	void setClassDatum(ClassDatum value);
-
 	/**
 	 * Returns the value of the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -118,19 +62,75 @@ public interface PropertyDatum extends AbstractDatum {
 	void setOpposite(PropertyDatum value);
 
 	/**
-	 * Returns the value of the '<em><b>Super</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum}.
+	 * Returns the value of the '<em><b>Owning Class Datum</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums <em>Owning Property Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Super</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Owning Class Datum</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Super</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_Super()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!super'"
+	 * @return the value of the '<em>Owning Class Datum</em>' container reference.
+	 * @see #setOwningClassDatum(ClassDatum)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_OwningClassDatum()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums
+	 * @model opposite="owningPropertyDatums" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!owningClassDatum'"
 	 * @generated
 	 */
-	EList<PropertyDatum> getSuper();
+	ClassDatum getOwningClassDatum();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOwningClassDatum <em>Owning Class Datum</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Class Datum</em>' container reference.
+	 * @see #getOwningClassDatum()
+	 * @generated
+	 */
+	void setOwningClassDatum(ClassDatum value);
+
+	/**
+	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Property</em>' reference.
+	 * @see #setReferredProperty(Property)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_ReferredProperty()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!referredProperty'"
+	 * @generated
+	 */
+	Property getReferredProperty();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getReferredProperty <em>Referred Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Property</em>' reference.
+	 * @see #getReferredProperty()
+	 * @generated
+	 */
+	void setReferredProperty(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Super Property Datums</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super Property Datums</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super Property Datums</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_SuperPropertyDatums()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!superPropertyDatums'"
+	 * @generated
+	 */
+	EList<PropertyDatum> getSuperPropertyDatums();
 
 } // PropertyDatum

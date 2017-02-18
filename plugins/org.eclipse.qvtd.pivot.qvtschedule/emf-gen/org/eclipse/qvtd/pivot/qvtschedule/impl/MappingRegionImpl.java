@@ -187,7 +187,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
 		//
 		List<@NonNull Node> navigableNodes = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
 			if (node.isPattern() && node.isMatched() && node.isClass() && !node.isExplicitNull() && !node.isOperation()) {	// Excludes, null, attributes, constants, operations
 				if (node.isLoaded() || node.isPredicated() || node.isSpeculated()) {
 					navigableNodes.add(node);
@@ -296,7 +296,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		//	Check head node consistency
 		//
 		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
 			if (node.isTrue() || node.isDependency()) {
 				debugHeadNodes.add(node);
 				node.setHead();
@@ -422,7 +422,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		//		Set<@NonNull Node> dependencyNodes = computeDependencyNodes(headNodes);
 		Set<@NonNull Node> deadNodes = null;
 		//
-		for (@NonNull Node node : QVTscheduleUtil.getNodes(this)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
 			if (stronglyMatchedNodes.contains(node)) {
 				node.setUtility(Node.Utility.STRONGLY_MATCHED);
 				assert unconditionalNodes.contains(node);

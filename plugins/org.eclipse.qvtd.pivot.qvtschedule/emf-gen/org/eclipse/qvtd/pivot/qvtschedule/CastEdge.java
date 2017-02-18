@@ -27,7 +27,7 @@ import org.eclipse.ocl.pivot.Property;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getProperty <em>Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getPrimaryClass <em>Primary Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClass <em>Referred Class</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge()
@@ -53,31 +53,31 @@ public interface CastEdge extends NavigableEdge
 	Property getProperty();
 
 	/**
-	 * Returns the value of the '<em><b>Primary Class</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Primary Class</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Class</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Primary Class</em>' reference.
-	 * @see #setPrimaryClass(org.eclipse.ocl.pivot.Class)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge_PrimaryClass()
+	 * @return the value of the '<em>Referred Class</em>' reference.
+	 * @see #setReferredClass(org.eclipse.ocl.pivot.Class)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getCastEdge_ReferredClass()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CastEdge!primaryClass'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CastEdge!referredClass'"
 	 * @generated
 	 */
-	org.eclipse.ocl.pivot.Class getPrimaryClass();
+	org.eclipse.ocl.pivot.Class getReferredClass();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getPrimaryClass <em>Primary Class</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getReferredClass <em>Referred Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Primary Class</em>' reference.
-	 * @see #getPrimaryClass()
+	 * @param value the new value of the '<em>Referred Class</em>' reference.
+	 * @see #getReferredClass()
 	 * @generated
 	 */
-	void setPrimaryClass(org.eclipse.ocl.pivot.Class value);
+	void setReferredClass(org.eclipse.ocl.pivot.Class value);
 
 	void initializeProperty(@NonNull Property property);
 } // CastEdge

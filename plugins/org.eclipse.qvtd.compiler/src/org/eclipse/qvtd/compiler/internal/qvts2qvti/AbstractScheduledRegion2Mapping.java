@@ -76,7 +76,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 				mappingParameterBindings.add(helper.createLoopParameterBinding((GuardParameter) guardVariable, loopVariable));
 			}
 			for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
-				if (callingNode.getRegion() == region) {
+				if (callingNode.getOwningRegion() == region) {
 					OCLExpression sourceExpression = createSelectByKind(callingNode);
 					mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
 				}

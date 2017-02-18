@@ -42,22 +42,21 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl#getPrimaryClass <em>Primary Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl#getReferredClass <em>Referred Class</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	/**
-	 * The cached value of the '{@link #getPrimaryClass() <em>Primary Class</em>}' reference.
+	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPrimaryClass()
+	 * @see #getReferredClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.pivot.Class primaryClass;
-
+	protected org.eclipse.ocl.pivot.Class referredClass;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,53 +82,13 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.ocl.pivot.Class getPrimaryClass() {
-		if (primaryClass != null && primaryClass.eIsProxy()) {
-			InternalEObject oldPrimaryClass = (InternalEObject)primaryClass;
-			primaryClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldPrimaryClass);
-			if (primaryClass != oldPrimaryClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS, oldPrimaryClass, primaryClass));
-			}
-		}
-		return primaryClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.ocl.pivot.Class basicGetPrimaryClass() {
-		return primaryClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setPrimaryClass(org.eclipse.ocl.pivot.Class newPrimaryClass) {
-		org.eclipse.ocl.pivot.Class oldPrimaryClass = primaryClass;
-		primaryClass = newPrimaryClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS, oldPrimaryClass, primaryClass));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.CAST_EDGE__PROPERTY:
 				return getProperty();
-			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
-				if (resolve) return getPrimaryClass();
-				return basicGetPrimaryClass();
+			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+				if (resolve) return getReferredClass();
+				return basicGetReferredClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -142,8 +101,8 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
-				setPrimaryClass((org.eclipse.ocl.pivot.Class)newValue);
+			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -157,8 +116,8 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
-				setPrimaryClass((org.eclipse.ocl.pivot.Class)null);
+			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -174,8 +133,8 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		switch (featureID) {
 			case QVTschedulePackage.CAST_EDGE__PROPERTY:
 				return getProperty() != null;
-			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
-				return primaryClass != null;
+			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+				return referredClass != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -202,6 +161,46 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public Property getProperty() {
 		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public org.eclipse.ocl.pivot.Class getReferredClass() {
+		if (referredClass != null && referredClass.eIsProxy()) {
+			InternalEObject oldReferredClass = (InternalEObject)referredClass;
+			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
+			if (referredClass != oldReferredClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CAST_EDGE__REFERRED_CLASS, oldReferredClass, referredClass));
+			}
+		}
+		return referredClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.pivot.Class basicGetReferredClass() {
+		return referredClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferredClass(org.eclipse.ocl.pivot.Class newReferredClass) {
+		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
+		referredClass = newReferredClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CAST_EDGE__REFERRED_CLASS, oldReferredClass, referredClass));
 	}
 
 	@Override
@@ -244,7 +243,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 
 	private void setProperty(@NonNull Property property) {
 		this.property = property;
-		setPrimaryClass(PivotUtil.getClass(property));
+		setReferredClass(PivotUtil.getClass(property));
 	}
 
 	@Override

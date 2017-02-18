@@ -41,22 +41,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl#getMapping <em>Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMappingRegion {
-	/**
-	 * The cached value of the '{@link #getMapping() <em>Mapping</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMapping()
-	 * @generated
-	 * @ordered
-	 */
-	protected Mapping mapping;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -66,6 +57,16 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredMapping()
+	 * @generated
+	 * @ordered
+	 */
+	protected Mapping referredMapping;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,53 +93,13 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 * @generated
 	 */
 	@Override
-	public Mapping getMapping() {
-		if (mapping != null && mapping.eIsProxy()) {
-			InternalEObject oldMapping = (InternalEObject)mapping;
-			mapping = (Mapping)eResolveProxy(oldMapping);
-			if (mapping != oldMapping) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.BASIC_MAPPING_REGION__MAPPING, oldMapping, mapping));
-			}
-		}
-		return mapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Mapping basicGetMapping() {
-		return mapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMapping(Mapping newMapping) {
-		Mapping oldMapping = mapping;
-		mapping = newMapping;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BASIC_MAPPING_REGION__MAPPING, oldMapping, mapping));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__MAPPING:
-				if (resolve) return getMapping();
-				return basicGetMapping();
 			case QVTschedulePackage.BASIC_MAPPING_REGION__NAME:
 				return getName();
+			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
+				if (resolve) return getReferredMapping();
+				return basicGetReferredMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,8 +112,8 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__MAPPING:
-				setMapping((Mapping)newValue);
+			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
+				setReferredMapping((Mapping)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,8 +127,8 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__MAPPING:
-				setMapping((Mapping)null);
+			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
+				setReferredMapping((Mapping)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -181,10 +142,10 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__MAPPING:
-				return mapping != null;
 			case QVTschedulePackage.BASIC_MAPPING_REGION__NAME:
 				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
+			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
+				return referredMapping != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -221,7 +182,47 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 */
 	@Override
 	public String getName() {
-		return QVTscheduleUtil.getMapping(this).getName();
+		return QVTscheduleUtil.getReferredMapping(this).getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Mapping getReferredMapping() {
+		if (referredMapping != null && referredMapping.eIsProxy()) {
+			InternalEObject oldReferredMapping = (InternalEObject)referredMapping;
+			referredMapping = (Mapping)eResolveProxy(oldReferredMapping);
+			if (referredMapping != oldReferredMapping) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING, oldReferredMapping, referredMapping));
+			}
+		}
+		return referredMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Mapping basicGetReferredMapping() {
+		return referredMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferredMapping(Mapping newReferredMapping) {
+		Mapping oldReferredMapping = referredMapping;
+		referredMapping = newReferredMapping;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING, oldReferredMapping, referredMapping));
 	}
 
 	public @Nullable Node getNode(@NonNull TypedElement typedElement) {

@@ -26,8 +26,8 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion#getMapping <em>Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicMappingRegion()
@@ -35,32 +35,6 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
  * @generated
  */
 public interface BasicMappingRegion extends MappingRegion {
-
-	/**
-	 * Returns the value of the '<em><b>Mapping</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The property to navigate from source to target.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Mapping</em>' reference.
-	 * @see #setMapping(Mapping)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicMappingRegion_Mapping()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicMappingRegion!mapping'"
-	 * @generated
-	 */
-	Mapping getMapping();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion#getMapping <em>Mapping</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping</em>' reference.
-	 * @see #getMapping()
-	 * @generated
-	 */
-	void setMapping(Mapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -78,4 +52,30 @@ public interface BasicMappingRegion extends MappingRegion {
 	 */
 	@Override
 	String getName();
+
+	/**
+	 * Returns the value of the '<em><b>Referred Mapping</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The property to navigate from source to target.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Referred Mapping</em>' reference.
+	 * @see #setReferredMapping(Mapping)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicMappingRegion_ReferredMapping()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicMappingRegion!referredMapping'"
+	 * @generated
+	 */
+	Mapping getReferredMapping();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion#getReferredMapping <em>Referred Mapping</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Mapping</em>' reference.
+	 * @see #getReferredMapping()
+	 * @generated
+	 */
+	void setReferredMapping(Mapping value);
 } // BasicMappingRegion

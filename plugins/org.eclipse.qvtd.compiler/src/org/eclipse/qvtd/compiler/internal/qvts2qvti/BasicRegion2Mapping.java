@@ -823,7 +823,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 		} */
-		for (@NonNull Edge edge : RegionUtil.getEdges(region)) {
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
 			if (edge.isPredicate()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				ExpressionCreator inlineExpressionCreator = expressionCreator.getInlineExpressionCreator();
@@ -850,7 +850,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
 		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(guardNode);
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
-		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getClassDatum().getTypedModel()));
+		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getClassDatum().getReferredTypedModel()));
 		GuardParameter guardVariable = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		mapping.getOwnedMappingParameters().add(guardVariable);
 		VariableDeclaration oldVariable = node2variable.put(guardNode, guardVariable);
@@ -875,7 +875,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					bestHeadNode = headNode;
 				}
 				for (@NonNull Node callingSource : callingSources) {
-					headCallingRegions.add(RegionUtil.getRegion(callingSource));
+					headCallingRegions.add(RegionUtil.getOwningRegion(callingSource));
 				}
 				if (bestHeadNode != null) {
 					headNodes.add(bestHeadNode);
@@ -1294,7 +1294,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 				ClassDatum classDatum = newNode.getClassDatum();
-				TypedModel pTypedModel = classDatum.getTypedModel();
+				TypedModel pTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
 				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
@@ -1322,13 +1322,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
 			for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
 				for (@NonNull Node callingNode : calledGuardNode.getPassedBindingSources()) {
-					if (callingNode.getRegion() == region) {
+					if (callingNode.getOwningRegion() == region) {
 						Node oldNode = source2target.put(callingNode, calledGuardNode);
 						assert oldNode == null;
 					}
 				}
 				for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
-					if (callingNode.getRegion() == region) {
+					if (callingNode.getOwningRegion() == region) {
 						Node oldNode = source2target.put(callingNode, calledGuardNode);
 						assert oldNode == null;
 					}

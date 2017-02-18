@@ -167,7 +167,7 @@ public class QVTm2QVTs extends ScheduleManager
 		String operationName = ClassUtil.nonNullState(operationDatum.toString());
 		OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
 		((OperationRegionImpl)operationRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
-		operationRegion.setOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
+		operationRegion.setReferredOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
 		operationRegion.setName(operationName);
 		//
 		Variable selfVariable = specification.getOwnedContext();

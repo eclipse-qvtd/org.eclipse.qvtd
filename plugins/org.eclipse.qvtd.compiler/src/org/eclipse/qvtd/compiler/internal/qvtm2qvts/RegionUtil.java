@@ -133,7 +133,7 @@ public class RegionUtil extends QVTscheduleUtil
 		assert sourceNode.isClass() || (property.getOpposite() != null);	// FIXME review is this relevant?
 		String name = property.getName();
 		assert name != null;
-		Region region = getRegion(sourceNode);
+		Region region = getOwningRegion(sourceNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, name, scheduleManager.getClassDatum(navigationCallExp));
@@ -152,7 +152,7 @@ public class RegionUtil extends QVTscheduleUtil
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;
 		TypedModel typedModel = getTypedModel(getClassDatumAnalysis(targetNode));
-		Region region = getRegion(targetNode);
+		Region region = getOwningRegion(targetNode);
 		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(region);
 		ClassDatum classDatum = scheduleManager.getClassDatum(type, typedModel);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
@@ -164,7 +164,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createDependencyClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
 		assert parentNode.isClass();
-		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion(parentNode));
+		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getOwningRegion(parentNode));
 		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		assert property != null;
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
@@ -175,7 +175,7 @@ public class RegionUtil extends QVTscheduleUtil
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(classDatum);
 		String name = property.getName();
 		assert name != null;
-		return createDependencyNode(RegionUtil.getRegion(parentNode), name, classDatumAnalysis);
+		return createDependencyNode(RegionUtil.getOwningRegion(parentNode), name, classDatumAnalysis);
 	}
 
 	public static @NonNull Node createDependencyNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -213,7 +213,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull VariableNode createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		Region region = getRegion(sourceNode);
+		Region region = getOwningRegion(sourceNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		Role nodeRole = getNodeRole(sourceNode);
 		IteratorNode node = QVTscheduleFactory.eINSTANCE.createIteratorNode();
@@ -223,7 +223,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull VariableNode createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		Region region = getRegion(inNode);
+		Region region = getOwningRegion(inNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		Role nodeRole = getNodeRole(inNode);
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
@@ -321,13 +321,13 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createPatternNode(@NonNull Role nodeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isMatched) {
-		Region region = getRegion(sourceNode);
+		Region region = getOwningRegion(sourceNode);
 		assert sourceNode.isClass();
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
 		assert type != null;
 		Type elementType = PivotUtil.getElementalType(type);
-		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getTypedModel();
+		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getReferredTypedModel();
 		assert typedModel != null;
 		ClassDatum classDatum = scheduleManager.getClassDatum(type, typedModel);
 		String name = source2targetProperty.getName();
@@ -394,7 +394,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
-		Region region = getRegion(sourceNode);
+		Region region = getOwningRegion(sourceNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(callExp);
 		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
@@ -450,7 +450,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
 		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = new HashMap<>();
-		for (@NonNull Node node : RegionUtil.getNodes(region)) {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			CompleteClass completeClass = node.getCompleteClass();
 			List<@NonNull Node> mergedNodes = completeClass2nodes.get(completeClass);
 			if (mergedNodes == null) {
@@ -518,7 +518,7 @@ public class RegionUtil extends QVTscheduleUtil
 			case REALIZED: phase = Role.REALIZED; break;
 			case PREDICATED: phase = Role.PREDICATED; break;
 			case LOADED: {
-				boolean isDirty = getScheduleManager(getRegion(sourceNode)).isDirty(property);
+				boolean isDirty = getScheduleManager(getOwningRegion(sourceNode)).isDirty(property);
 				phase = isDirty ? Role.PREDICATED : Role.LOADED; break;
 			}
 			case CONSTANT: phase = Role.CONSTANT; break;
@@ -532,7 +532,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ClassUtil.nonNullState(classDatumAnalysis.getClassDatum().getTypedModel());
+		return ClassUtil.nonNullState(classDatumAnalysis.getClassDatum().getReferredTypedModel());
 	}
 
 	/**

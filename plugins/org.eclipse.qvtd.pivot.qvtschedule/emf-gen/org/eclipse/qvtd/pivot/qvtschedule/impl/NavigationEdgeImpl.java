@@ -45,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#isPartial <em>Partial</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,15 +71,14 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	protected boolean partial = PARTIAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProperty()
+	 * @see #getReferredProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected Property property;
-
+	protected Property referredProperty;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -128,16 +127,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @generated
 	 */
 	@Override
-	public Property getProperty() {
-		if (property != null && property.eIsProxy()) {
-			InternalEObject oldProperty = (InternalEObject)property;
-			property = (Property)eResolveProxy(oldProperty);
-			if (property != oldProperty) {
+	public Property getReferredProperty() {
+		if (referredProperty != null && referredProperty.eIsProxy()) {
+			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
+			referredProperty = (Property)eResolveProxy(oldReferredProperty);
+			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NAVIGATION_EDGE__PROPERTY, oldProperty, property));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NAVIGATION_EDGE__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
 			}
 		}
-		return property;
+		return referredProperty;
 	}
 
 	/**
@@ -145,8 +144,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property basicGetProperty() {
-		return property;
+	public Property basicGetReferredProperty() {
+		return referredProperty;
 	}
 
 	/**
@@ -155,11 +154,11 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @generated
 	 */
 	@Override
-	public void setProperty(Property newProperty) {
-		Property oldProperty = property;
-		property = newProperty;
+	public void setReferredProperty(Property newReferredProperty) {
+		Property oldReferredProperty = referredProperty;
+		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGATION_EDGE__PROPERTY, oldProperty, property));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGATION_EDGE__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -172,9 +171,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				return isPartial();
-			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
-				if (resolve) return getProperty();
-				return basicGetProperty();
+			case QVTschedulePackage.NAVIGATION_EDGE__REFERRED_PROPERTY:
+				if (resolve) return getReferredProperty();
+				return basicGetReferredProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,8 +189,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				setPartial((Boolean)newValue);
 				return;
-			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
-				setProperty((Property)newValue);
+			case QVTschedulePackage.NAVIGATION_EDGE__REFERRED_PROPERTY:
+				setReferredProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -208,8 +207,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				setPartial(PARTIAL_EDEFAULT);
 				return;
-			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
-				setProperty((Property)null);
+			case QVTschedulePackage.NAVIGATION_EDGE__REFERRED_PROPERTY:
+				setReferredProperty((Property)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -225,8 +224,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				return partial != PARTIAL_EDEFAULT;
-			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
-				return property != null;
+			case QVTschedulePackage.NAVIGATION_EDGE__REFERRED_PROPERTY:
+				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -263,6 +262,11 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		}
 	}
 
+	@Override
+	public Property getProperty() {
+		return getReferredProperty();
+	}
+
 	private void initializeIsPartial(@Nullable Boolean isPartial) {
 		boolean isComputedPartial = false;
 		Type propertyTargetType = PivotUtil.getType(QVTscheduleUtil.getProperty(this));
@@ -284,7 +288,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 
 	@Override
 	public void initializeProperty(@NonNull Property property, @Nullable Boolean isPartial) {
-		setProperty(property);
+		setReferredProperty(property);
 		Property target2sourceProperty = property.getOpposite();
 		if (target2sourceProperty != null)  {
 			Node targetNode2 = targetNode;
@@ -297,7 +301,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 					assert (edgeRole2 != null) && (sourceNode2 != null);
 					NavigationEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
-					reverseEdge.setProperty(target2sourceProperty);
+					reverseEdge.setReferredProperty(target2sourceProperty);
 					((NavigationEdgeImpl)reverseEdge).initializeIsPartial(isPartial());
 					initializeOpposite(reverseEdge);
 				}
@@ -316,4 +320,5 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		assert (sourceNode == null) || !sourceNode.isExplicitNull();
 		super.setSource(sourceNode);
 	}
+
 } //NavigationEdgeImpl

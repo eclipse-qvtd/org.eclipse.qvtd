@@ -164,7 +164,7 @@ abstract class AbstractPartition
 		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
 			gatherReachables(reachableNodes, node);
 		}
-		Set<@NonNull Node> allNodes = Sets.newHashSet(RegionUtil.getNodes(region));
+		Set<@NonNull Node> allNodes = Sets.newHashSet(RegionUtil.getOwnedNodes(region));
 		if (!reachableNodes.equals(allNodes)) {
 			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(reachableNodes);
 			CompilerUtil.removeAll(extraNodesSet, allNodes);
@@ -337,7 +337,7 @@ abstract class AbstractPartition
 	 * what form of edge is required.
 	 */
 	protected void resolveEdgeRoles() {
-		for (@NonNull Edge edge : RegionUtil.getEdges(partitioner.getRegion())) {
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(partitioner.getRegion())) {
 			if (!edge.isSecondary() && !hasEdge(edge)) {
 				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 				if (sourceNodeRole != null) {

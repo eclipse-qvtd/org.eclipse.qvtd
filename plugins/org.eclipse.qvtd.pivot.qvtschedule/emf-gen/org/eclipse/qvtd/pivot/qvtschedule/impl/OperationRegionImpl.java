@@ -42,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getDependencyNodes <em>Dependency Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getHeadNodes <em>Head Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getReferredOperation <em>Referred Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl#getResultNode <em>Result Node</em>}</li>
  * </ul>
  *
@@ -86,15 +86,14 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 */
 	protected String name = NAME_EDEFAULT;
 	/**
-	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
+	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperation()
+	 * @see #getReferredOperation()
 	 * @generated
 	 * @ordered
 	 */
-	protected Operation operation;
-
+	protected Operation referredOperation;
 	/**
 	 * The cached value of the '{@link #getResultNode() <em>Result Node</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -179,16 +178,16 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * @generated
 	 */
 	@Override
-	public Operation getOperation() {
-		if (operation != null && operation.eIsProxy()) {
-			InternalEObject oldOperation = (InternalEObject)operation;
-			operation = (Operation)eResolveProxy(oldOperation);
-			if (operation != oldOperation) {
+	public Operation getReferredOperation() {
+		if (referredOperation != null && referredOperation.eIsProxy()) {
+			InternalEObject oldReferredOperation = (InternalEObject)referredOperation;
+			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
+			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_REGION__OPERATION, oldOperation, operation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION, oldReferredOperation, referredOperation));
 			}
 		}
-		return operation;
+		return referredOperation;
 	}
 
 	/**
@@ -196,8 +195,8 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Operation basicGetOperation() {
-		return operation;
+	public Operation basicGetReferredOperation() {
+		return referredOperation;
 	}
 
 	/**
@@ -206,11 +205,11 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * @generated
 	 */
 	@Override
-	public void setOperation(Operation newOperation) {
-		Operation oldOperation = operation;
-		operation = newOperation;
+	public void setReferredOperation(Operation newReferredOperation) {
+		Operation oldReferredOperation = referredOperation;
+		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__OPERATION, oldOperation, operation));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -267,9 +266,9 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 				return getHeadNodes();
 			case QVTschedulePackage.OPERATION_REGION__NAME:
 				return getName();
-			case QVTschedulePackage.OPERATION_REGION__OPERATION:
-				if (resolve) return getOperation();
-				return basicGetOperation();
+			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+				if (resolve) return getReferredOperation();
+				return basicGetReferredOperation();
 			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
 				if (resolve) return getResultNode();
 				return basicGetResultNode();
@@ -297,8 +296,8 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			case QVTschedulePackage.OPERATION_REGION__NAME:
 				setName((String)newValue);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__OPERATION:
-				setOperation((Operation)newValue);
+			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+				setReferredOperation((Operation)newValue);
 				return;
 			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
 				setResultNode((Node)newValue);
@@ -324,8 +323,8 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			case QVTschedulePackage.OPERATION_REGION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__OPERATION:
-				setOperation((Operation)null);
+			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+				setReferredOperation((Operation)null);
 				return;
 			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
 				setResultNode((Node)null);
@@ -348,8 +347,8 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 				return headNodes != null && !headNodes.isEmpty();
 			case QVTschedulePackage.OPERATION_REGION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case QVTschedulePackage.OPERATION_REGION__OPERATION:
-				return operation != null;
+			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+				return referredOperation != null;
 			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
 				return resultNode != null;
 		}

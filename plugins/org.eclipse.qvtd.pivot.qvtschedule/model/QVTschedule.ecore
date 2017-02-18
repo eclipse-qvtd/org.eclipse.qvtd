@@ -8,22 +8,22 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="producedBy" upperBound="-1"
-        eType="#//MappingAction" eOpposite="#//MappingAction/productions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"
-        eType="#//MappingAction" derived="true" eOpposite="#//MappingAction/requisites"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="producedByActions" upperBound="-1"
+        eType="#//MappingAction" eOpposite="#//MappingAction/producedDatums"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredByActions" upperBound="-1"
+        eType="#//MappingAction" derived="true" eOpposite="#//MappingAction/requiredDatums"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicMappingRegion" eSuperTypes="#//MappingRegion">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CastEdge" eSuperTypes="#//NavigableEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
@@ -33,33 +33,33 @@
         <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryClass" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
         transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryClass" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningPropertyDatums" upperBound="-1"
+        eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/owningClassDatum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedClassDatums"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDatums" upperBound="-1"
-        eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/classDatums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
         eType="#//ClassDatum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
-        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/connections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
+        lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedConnections"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionEnd" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionEnd may be the Node/Edge at the end of a NodeConnection/EdgeConnection."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DatumConnection" abstract="true" eSuperTypes="#//Connection #//GraphEdge #//GraphNode">
+  <eClassifiers xsi:type="ecore:EClass" name="DatumConnection" abstract="true" eSuperTypes="#//Connection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
     </eAnnotations>
@@ -75,15 +75,15 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Edge" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphEdge ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="edgeRole" lowerBound="1"
         eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
-        eType="#//Region" eOpposite="#//Region/edges"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRegion" lowerBound="1"
+        eType="#//Region" eOpposite="#//Region/ownedEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceNode" lowerBound="1"
         eType="#//Node" eOpposite="#//Node/outgoingEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetNode" lowerBound="1"
@@ -93,7 +93,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An EdgeConnection supports an existence dependency between the region(s) that produce a navigation edge&#xD;&#xA;and the region(s) that consume it."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
     <eGenericSuperTypes eClassifier="#//DatumConnection">
       <eTypeArguments eClassifier="#//NavigableEdge"/>
@@ -106,14 +106,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="IteratorNode" eSuperTypes="#//VariableNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedMappingActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="producedDatums" upperBound="-1"
+        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedByActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="productions" upperBound="-1"
-        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedBy"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
-        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredBy"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/mappingActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredDatums" upperBound="-1"
+        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredByActions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion">
@@ -155,14 +155,14 @@
         <details key="documentation" value="True if this edge is a partial many-to-one relationship."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//ConnectionEnd #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//ConnectionEnd ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping&#xD;&#xA;or Composite Region."/>
     </eAnnotations>
@@ -182,8 +182,8 @@
         eType="#//NodeConnection"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" upperBound="-1"
         eType="#//Edge" eOpposite="#//Edge/sourceNode"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
-        eType="#//Region" eOpposite="#//Region/nodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRegion" lowerBound="1"
+        eType="#//Region" eOpposite="#//Region/ownedNodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -213,7 +213,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultNode" eType="#//Node"/>
   </eClassifiers>
@@ -227,48 +227,46 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
-        eType="#//ClassDatum" eOpposite="#//ClassDatum/propertyDatums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningClassDatum" lowerBound="1"
+        eType="#//ClassDatum" eOpposite="#//ClassDatum/owningPropertyDatums"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superPropertyDatums" upperBound="-1"
         eType="#//PropertyDatum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//ToDOTable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
-        eType="#//Edge" containment="true" eOpposite="#//Edge/region"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="invokingRegion" eType="#//ScheduledRegion"
-        eOpposite="#//ScheduledRegion/regions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-        eType="#//Node" containment="true" eOpposite="#//Node/region"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
-        eType="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEdges" upperBound="-1"
+        eType="#//Edge" containment="true" eOpposite="#//Edge/owningRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedNodes" upperBound="-1"
+        eType="#//Node" containment="true" eOpposite="#//Node/owningRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
+        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadingRegion" lowerBound="1"
         eType="#//LoadingRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
-        containment="true" eOpposite="#//ScheduledRegion/scheduleModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatums" upperBound="-1"
-        eType="#//ClassDatum" containment="true" eOpposite="#//ClassDatum/scheduleModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="otherMappingRegions" upperBound="-1"
-        eType="#//MappingRegion" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingActions" upperBound="-1"
-        eType="#//MappingAction" containment="true" eOpposite="#//MappingAction/scheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClassDatums" upperBound="-1"
+        eType="#//ClassDatum" containment="true" eOpposite="#//ClassDatum/owningScheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingActions" upperBound="-1"
+        eType="#//MappingAction" containment="true" eOpposite="#//MappingAction/owningScheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOtherMappingRegions"
+        upperBound="-1" eType="#//MappingRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScheduledRegion" eType="#//ScheduledRegion"
+        containment="true" eOpposite="#//ScheduledRegion/owningScheduleModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" eSuperTypes="#//Region">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
-        eType="#//Connection" containment="true" eOpposite="#//Connection/region"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="regions" upperBound="-1"
-        eType="#//Region" containment="true" eOpposite="#//Region/invokingRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/scheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
+        eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRegions" upperBound="-1"
+        eType="#//Region" containment="true" eOpposite="#//Region/owningScheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
@@ -277,7 +275,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="TrueNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableNode" abstract="true" eSuperTypes="#//Node">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConnectionRole">
@@ -353,11 +351,5 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainUsage" instanceClassName="org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage"
-      abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GraphEdge" instanceClassName="org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge"
-      abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GraphNode" instanceClassName="org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode"
-      abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ToDOTable" instanceClassName="org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable"
       abstract="true" interface="true"/>
 </ecore:EPackage>

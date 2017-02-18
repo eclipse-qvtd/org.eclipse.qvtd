@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +20,30 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 /**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Datum Connection</b></em>'.
+ * @extends GraphEdge, GraphNode
+ * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.
+ * Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence.
+ * <!-- end-model-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getConnectionRole <em>Connection Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getSourceEnds <em>Source Ends</em>}</li>
+ * </ul>
+ *
+ * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getDatumConnection()
+ * @model abstract="true"
  * @generated
  */
-public interface DatumConnection<CE extends ConnectionEnd> extends Connection, GraphEdge, GraphNode
-{
+public interface DatumConnection<CE extends ConnectionEnd> extends Connection, GraphEdge, GraphNode {
 	/**
 	 * Returns the value of the '<em><b>Connection Role</b></em>' attribute.
 	 * The default value is <code>"UNDEFINED"</code>.
@@ -42,6 +63,7 @@ public interface DatumConnection<CE extends ConnectionEnd> extends Connection, G
 	 * @generated
 	 */
 	ConnectionRole getConnectionRole();
+
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getConnectionRole <em>Connection Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -52,6 +74,7 @@ public interface DatumConnection<CE extends ConnectionEnd> extends Connection, G
 	 * @generated
 	 */
 	void setConnectionRole(ConnectionRole value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -69,6 +92,7 @@ public interface DatumConnection<CE extends ConnectionEnd> extends Connection, G
 	 */
 	@Override
 	String getName();
+
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -78,6 +102,7 @@ public interface DatumConnection<CE extends ConnectionEnd> extends Connection, G
 	 * @generated
 	 */
 	void setName(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Source Ends</b></em>' reference list.
 	 * <!-- begin-user-doc -->

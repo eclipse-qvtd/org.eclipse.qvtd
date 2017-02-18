@@ -25,9 +25,9 @@ import org.eclipse.ocl.pivot.CompleteClass;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPrimaryClass <em>Primary Class</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getScheduleModel <em>Schedule Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums <em>Owning Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredClass <em>Referred Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
@@ -64,79 +64,79 @@ public interface ClassDatum extends AbstractDatum {
 	void setCompleteClass(CompleteClass value);
 
 	/**
-	 * Returns the value of the '<em><b>Primary Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Primary Class</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Primary Class</em>' reference.
-	 * @see #setPrimaryClass(org.eclipse.ocl.pivot.Class)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_PrimaryClass()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!primaryClass'"
-	 * @generated
-	 */
-	org.eclipse.ocl.pivot.Class getPrimaryClass();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPrimaryClass <em>Primary Class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Primary Class</em>' reference.
-	 * @see #getPrimaryClass()
-	 * @generated
-	 */
-	void setPrimaryClass(org.eclipse.ocl.pivot.Class value);
-
-	/**
-	 * Returns the value of the '<em><b>Property Datums</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owning Property Datums</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOwningClassDatum <em>Owning Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property Datums</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owning Property Datums</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property Datums</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_PropertyDatums()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getClassDatum
-	 * @model opposite="classDatum" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!propertyDatums'"
+	 * @return the value of the '<em>Owning Property Datums</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_OwningPropertyDatums()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum#getOwningClassDatum
+	 * @model opposite="owningClassDatum" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!owningPropertyDatums'"
 	 * @generated
 	 */
-	EList<PropertyDatum> getPropertyDatums();
+	EList<PropertyDatum> getOwningPropertyDatums();
 
 	/**
-	 * Returns the value of the '<em><b>Schedule Model</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getClassDatums <em>Class Datums</em>}'.
+	 * Returns the value of the '<em><b>Owning Schedule Model</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedClassDatums <em>Owned Class Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Schedule Model</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Schedule Model</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Schedule Model</em>' container reference.
-	 * @see #setScheduleModel(ScheduleModel)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ScheduleModel()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getClassDatums
-	 * @model opposite="classDatums" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!scheduleModel'"
+	 * @return the value of the '<em>Owning Schedule Model</em>' container reference.
+	 * @see #setOwningScheduleModel(ScheduleModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_OwningScheduleModel()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedClassDatums
+	 * @model opposite="ownedClassDatums" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!owningScheduleModel'"
 	 * @generated
 	 */
-	ScheduleModel getScheduleModel();
+	ScheduleModel getOwningScheduleModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getScheduleModel <em>Schedule Model</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel <em>Owning Schedule Model</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Schedule Model</em>' container reference.
-	 * @see #getScheduleModel()
+	 * @param value the new value of the '<em>Owning Schedule Model</em>' container reference.
+	 * @see #getOwningScheduleModel()
 	 * @generated
 	 */
-	void setScheduleModel(ScheduleModel value);
+	void setOwningScheduleModel(ScheduleModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Referred Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Class</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Class</em>' reference.
+	 * @see #setReferredClass(org.eclipse.ocl.pivot.Class)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ReferredClass()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!referredClass'"
+	 * @generated
+	 */
+	org.eclipse.ocl.pivot.Class getReferredClass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredClass <em>Referred Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Class</em>' reference.
+	 * @see #getReferredClass()
+	 * @generated
+	 */
+	void setReferredClass(org.eclipse.ocl.pivot.Class value);
 
 	/**
 	 * Returns the value of the '<em><b>Super Class Datums</b></em>' reference list.

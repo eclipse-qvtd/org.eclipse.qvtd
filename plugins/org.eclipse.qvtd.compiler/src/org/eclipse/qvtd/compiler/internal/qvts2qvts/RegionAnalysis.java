@@ -69,11 +69,11 @@ public class RegionAnalysis implements Adapter
 
 	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
 		assert predicatedEdge.isPredicated();
-		assert predicatedEdge.getRegion() == region;
+		assert predicatedEdge.getOwningRegion() == region;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
 		assert typedModel2checkedEdges2 != null;
 		ClassDatum classDatum = RegionUtil.getClassDatum(predicatedEdge.getEdgeSource());
-		TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
+		TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
 		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
 		if (checkedEdges == null) {
 			checkedEdges = new HashSet<>();
@@ -86,11 +86,11 @@ public class RegionAnalysis implements Adapter
 
 	private void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {
 		assert realizedEdge.isRealized();
-		assert realizedEdge.getRegion() == region;
+		assert realizedEdge.getOwningRegion() == region;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges2 = typedModel2enforcedEdges;
 		assert typedModel2enforcedEdges2 != null;
 		ClassDatum classDatum = RegionUtil.getClassDatum(realizedEdge.getEdgeSource());
-		TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
+		TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
 		Set<@NonNull NavigableEdge> enforcedEdges = typedModel2enforcedEdges2.get(typedModel);
 		if (enforcedEdges == null) {
 			enforcedEdges = new HashSet<>();
@@ -116,7 +116,7 @@ public class RegionAnalysis implements Adapter
 				Property property = QVTscheduleUtil.getProperty(predicatedEdge);
 				Node predicatedNode = predicatedEdge.getEdgeSource();
 				ClassDatum classDatum = RegionUtil.getClassDatum(predicatedNode);
-				TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
+				TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
 				Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2predicatedEdges = typedModel2property2predicatedEdges.get(typedModel);
 				if (property2predicatedEdges == null) {
 					property2predicatedEdges = new HashMap<>();
@@ -138,7 +138,7 @@ public class RegionAnalysis implements Adapter
 			Property property = QVTscheduleUtil.getProperty(realizedEdge);
 			Node realizedNode = realizedEdge.getEdgeSource();
 			ClassDatum classDatum = RegionUtil.getClassDatum(realizedNode);
-			TypedModel typedModel = RegionUtil.getTypedModel(classDatum);
+			TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
 			Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 			if (property2realizedEdges == null) {
 				property2realizedEdges = new HashMap<>();
@@ -171,7 +171,7 @@ public class RegionAnalysis implements Adapter
 				if (edgeConnection != null) {
 					boolean isChecked = false;
 					for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-						Region usedRegion = QVTscheduleUtil.getRegion(usedEdge);
+						Region usedRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
 						get(usedRegion).addEnforcedEdge(usedEdge);
 						if (usedRegion.getFinalExecutionIndex() >= region.getInvocationIndex()) {
 							addCheckedEdge(predicatedEdge);
@@ -180,7 +180,7 @@ public class RegionAnalysis implements Adapter
 					}
 					if (isChecked) {
 						for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-							Region usedRegion = QVTscheduleUtil.getRegion(usedEdge);
+							Region usedRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
 							get(usedRegion).addEnforcedEdge(usedEdge);
 						}
 					}
@@ -192,12 +192,12 @@ public class RegionAnalysis implements Adapter
 				NodeConnection usedConnection = predicatedTargetNode.getIncomingUsedConnection();
 				if (usedConnection != null) {
 					for (@NonNull Node usedSourceNode : QVTscheduleUtil.getSourceEnds(usedConnection)) {
-						Region usedRegion = QVTscheduleUtil.getRegion(usedSourceNode);
+						Region usedRegion = QVTscheduleUtil.getOwningRegion(usedSourceNode);
 						if (usedRegion.getFinalExecutionIndex() >= region.getInvocationIndex()) {			// FIXME =
 							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
 							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();
 							ClassDatum classDatum = laterNode.getClassDatum();
-							TypedModel typedModel = classDatum.getTypedModel();
+							TypedModel typedModel = classDatum.getReferredTypedModel();
 							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 							assert property2realizedEdges != null;
 							Property oclContainerProperty = RegionUtil.getScheduleManager(region).getStandardLibraryHelper().getOclContainerProperty();
@@ -215,7 +215,7 @@ public class RegionAnalysis implements Adapter
 										assert realizedEdges != null;
 										for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 											// FIXME recheck for narrower types ??
-											Region earlierRegion = realizedEdge.getRegion();
+											Region earlierRegion = realizedEdge.getOwningRegion();
 											//												String isNotHazardous;
 											//											if (region == earlierRegion) {
 											//												isNotHazardous = "same region";	// FIXME must handle recursion
@@ -259,7 +259,7 @@ public class RegionAnalysis implements Adapter
 								}
 								else {
 									for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-										Region earlierRegion = QVTscheduleUtil.getRegion(realizedEdge);
+										Region earlierRegion = QVTscheduleUtil.getOwningRegion(realizedEdge);
 										String checkIsHazardFreeBecause;
 										String enforceIsHazardFreeBecause;
 										Node realizedSourceNode = realizedEdge.getEdgeSource();

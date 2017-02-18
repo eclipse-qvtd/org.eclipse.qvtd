@@ -122,7 +122,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
 		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
-		return RegionUtil.createTrueNode(RegionUtil.getRegion(sourceNode));
+		return RegionUtil.createTrueNode(RegionUtil.getOwningRegion(sourceNode));
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclAsType(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {

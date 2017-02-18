@@ -44,7 +44,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getEdgeRole <em>Edge Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getOwningRegion <em>Owning Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getSourceNode <em>Source Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getTargetNode <em>Target Node</em>}</li>
  * </ul>
@@ -183,8 +183,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @generated
 	 */
 	@Override
-	public Region getRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.EDGE__REGION) return null;
+	public Region getOwningRegion() {
+		if (eContainerFeatureID() != QVTschedulePackage.EDGE__OWNING_REGION) return null;
 		return (Region)eInternalContainer();
 	}
 
@@ -193,8 +193,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRegion(Region newRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRegion, QVTschedulePackage.EDGE__REGION, msgs);
+	public NotificationChain basicSetOwningRegion(Region newOwningRegion, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, QVTschedulePackage.EDGE__OWNING_REGION, msgs);
 		return msgs;
 	}
 
@@ -204,20 +204,20 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @generated
 	 */
 	@Override
-	public void setRegion(Region newRegion) {
-		if (newRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.EDGE__REGION && newRegion != null)) {
-			if (EcoreUtil.isAncestor(this, newRegion))
+	public void setOwningRegion(Region newOwningRegion) {
+		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.EDGE__OWNING_REGION && newOwningRegion != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newRegion != null)
-				msgs = ((InternalEObject)newRegion).eInverseAdd(this, QVTschedulePackage.REGION__EDGES, Region.class, msgs);
-			msgs = basicSetRegion(newRegion, msgs);
+			if (newOwningRegion != null)
+				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, QVTschedulePackage.REGION__OWNED_EDGES, Region.class, msgs);
+			msgs = basicSetOwningRegion(newOwningRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__REGION, newRegion, newRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__OWNING_REGION, newOwningRegion, newOwningRegion));
 	}
 
 	/**
@@ -352,10 +352,10 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__REGION:
+			case QVTschedulePackage.EDGE__OWNING_REGION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetRegion((Region)otherEnd, msgs);
+				return basicSetOwningRegion((Region)otherEnd, msgs);
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				if (sourceNode != null)
 					msgs = ((InternalEObject)sourceNode).eInverseRemove(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
@@ -376,8 +376,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__REGION:
-				return basicSetRegion(null, msgs);
+			case QVTschedulePackage.EDGE__OWNING_REGION:
+				return basicSetOwningRegion(null, msgs);
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				return basicSetSourceNode(null, msgs);
 			case QVTschedulePackage.EDGE__TARGET_NODE:
@@ -394,8 +394,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.EDGE__REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__EDGES, Region.class, msgs);
+			case QVTschedulePackage.EDGE__OWNING_REGION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__OWNED_EDGES, Region.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -412,8 +412,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 				return getEdgeRole();
 			case QVTschedulePackage.EDGE__NAME:
 				return getName();
-			case QVTschedulePackage.EDGE__REGION:
-				return getRegion();
+			case QVTschedulePackage.EDGE__OWNING_REGION:
+				return getOwningRegion();
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				if (resolve) return getSourceNode();
 				return basicGetSourceNode();
@@ -438,8 +438,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case QVTschedulePackage.EDGE__NAME:
 				setName((String)newValue);
 				return;
-			case QVTschedulePackage.EDGE__REGION:
-				setRegion((Region)newValue);
+			case QVTschedulePackage.EDGE__OWNING_REGION:
+				setOwningRegion((Region)newValue);
 				return;
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				setSourceNode((Node)newValue);
@@ -465,8 +465,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			case QVTschedulePackage.EDGE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.EDGE__REGION:
-				setRegion((Region)null);
+			case QVTschedulePackage.EDGE__OWNING_REGION:
+				setOwningRegion((Region)null);
 				return;
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				setSourceNode((Node)null);
@@ -490,8 +490,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 				return edgeRole != EDGE_ROLE_EDEFAULT;
 			case QVTschedulePackage.EDGE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case QVTschedulePackage.EDGE__REGION:
-				return getRegion() != null;
+			case QVTschedulePackage.EDGE__OWNING_REGION:
+				return getOwningRegion() != null;
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
 				return sourceNode != null;
 			case QVTschedulePackage.EDGE__TARGET_NODE:
@@ -547,8 +547,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		assert sourceNode2 != null;
 		assert targetNode2 != null;
 		assert sourceNode2 != targetNode2;
-		Region region = QVTscheduleUtil.getRegion(sourceNode2);
-		assert region == targetNode2.getRegion();
+		Region region = QVTscheduleUtil.getOwningRegion(sourceNode2);
+		assert region == targetNode2.getOwningRegion();
 		//		region.addEdge(this);
 		//		sourceNode2.addOutgoingEdge(this);
 		//		targetNode2.addIncomingEdge(this);
@@ -572,7 +572,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		if ((sourceNode2 != null) && (targetNode2 != null)) {
 			setTarget(null);
 			setSource(null);
-			setRegion(null);
+			setOwningRegion(null);
 		}
 	}
 
@@ -585,7 +585,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		}
 		//		this.sourceNode = null;
 		//		this.targetNode = null;
-		setRegion(null);
+		setOwningRegion(null);
 		setSourceNode(null);
 		setTargetNode(null);
 	}
@@ -636,7 +636,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		setRegion(QVTscheduleUtil.getRegion(sourceNode));
+		setOwningRegion(QVTscheduleUtil.getOwningRegion(sourceNode));
 		setEdgeRole(edgeRole);
 		setName(name);
 		setSource(sourceNode);

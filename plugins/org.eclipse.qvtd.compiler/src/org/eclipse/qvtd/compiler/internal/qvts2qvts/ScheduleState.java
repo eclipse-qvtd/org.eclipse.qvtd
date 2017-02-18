@@ -285,7 +285,7 @@ public abstract class ScheduleState extends ScheduleCache
 	 * returning true if unblocked.
 	 */
 	private boolean refreshRegionBlockage(@NonNull Region region) {
-		ScheduledRegion invokingRegion = RegionUtil.getInvokingRegion(region);
+		ScheduledRegion invokingRegion = RegionUtil.getOwningScheduledRegion(region);
 		if (blockedRegions.contains(invokingRegion) && !unblockedRegions.contains(invokingRegion)) {
 			if (!refreshRegionBlockage(invokingRegion)) {
 				return false;
@@ -456,7 +456,7 @@ public abstract class ScheduleState extends ScheduleCache
 	protected abstract void scheduleScheduledRegion(@NonNull ScheduledRegion scheduledRegion);
 
 	private void unblock(@NonNull Region region) {
-		assert !blockedRegions.contains(RegionUtil.getInvokingRegion(region));
+		assert !blockedRegions.contains(RegionUtil.getOwningScheduledRegion(region));
 		boolean wasRemoved0 = blockedRegions.remove(region);
 		assert wasRemoved0;
 		boolean wasRemoved1 = unblockedRegions.remove(region);

@@ -135,7 +135,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	private @NonNull NodeConnection createNodeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
 		NodeConnection connection = QVTscheduleFactory.eINSTANCE.createNodeConnection();
-		connection.setRegion(scheduledRegion);
+		connection.setOwningScheduledRegion(scheduledRegion);
 		connection.getSourceEnds().addAll(sourceSet);
 		connection.setName(scheduleManager.getScheduleModel().reserveSymbolName(s, connection));
 		connection.setClassDatum(classDatum);
@@ -151,7 +151,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
-		loadingRegion.setInvokingRegion(rootScheduledRegion);
+		loadingRegion.setOwningScheduledRegion(rootScheduledRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(loadingRegion, null);
 		}
@@ -221,7 +221,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		if (predicatedProperty.isIsImplicit()) {
 			return;			// unnavigable opposites are handled by the navigable property
 		}
-		ScheduledRegion invokingRegion2 = region.getInvokingRegion();
+		ScheduledRegion invokingRegion2 = region.getOwningScheduledRegion();
 		assert invokingRegion2 != null;
 		NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
 		Node castTarget = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
@@ -258,11 +258,11 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
 				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					edgeSourceRegions.add(QVTscheduleUtil.getRegion(realizedEdge));
+					edgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(realizedEdge));
 				}
 				if (sourceNodes != null) {
 					for (@NonNull Node sourceNode : sourceNodes) {
-						nodeSourceRegions.add(QVTscheduleUtil.getRegion(sourceNode));
+						nodeSourceRegions.add(QVTscheduleUtil.getOwningRegion(sourceNode));
 					}
 				}
 				//
@@ -280,7 +280,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 							if (!thoseEdges.contains(realizedEdge)) {
 								thoseEdges.add(realizedEdge);
 								assert conformantEdgeSourceRegions != null;
-								conformantEdgeSourceRegions.add(QVTscheduleUtil.getRegion(realizedEdge));
+								conformantEdgeSourceRegions.add(QVTscheduleUtil.getOwningRegion(realizedEdge));
 							}
 						}
 					}
@@ -293,7 +293,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 							edgeConnection.addUsedTargetEdge(castEdge, false);
 							if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 								for (@NonNull NavigableEdge thatEdge : thoseEdges) {
-									QVTscheduleConstants.CONNECTION_CREATION.println("    from " + thatEdge.getRegion() + "  : " + thatEdge);
+									QVTscheduleConstants.CONNECTION_CREATION.println("    from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
 								}
 							}
 						}
@@ -319,7 +319,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 					QVTscheduleConstants.CONNECTION_CREATION.println("  NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
 					for (@NonNull Node sourceNode : sourceNodes) {
-						QVTscheduleConstants.CONNECTION_CREATION.println("    from " + sourceNode.getRegion() + " : " + sourceNode);
+						QVTscheduleConstants.CONNECTION_CREATION.println("    from " + sourceNode.getOwningRegion() + " : " + sourceNode);
 					}
 				}
 			}
@@ -332,14 +332,14 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		EdgeConnection connection = QVTscheduleFactory.eINSTANCE.createEdgeConnection();
 
 		//		protected DatumConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull String name) {
-		connection.setRegion(scheduledRegion);
+		connection.setOwningScheduledRegion(scheduledRegion);
 		connection.setName(scheduleManager.getScheduleModel().reserveSymbolName(s, connection));
 		connection.getSourceEnds().addAll(sourceSet);
 		//		}
 
 		//		public EdgeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull String name, @NonNull Property property) {
 		//			super(region, sourceEdges, name);
-		connection.setProperty(property);
+		connection.setReferredProperty(property);
 		for (@NonNull NavigableEdge sourceEdge : sourceSet) {
 			sourceEdge.addOutgoingConnection(connection);
 		}
@@ -354,7 +354,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * surrounding all possible sources.
 	 */
 	private @Nullable NodeConnection createHeadConnection(@NonNull Region region, @NonNull Node headNode) {
-		ScheduledRegion invokingRegion2 = RegionUtil.getInvokingRegion(region);
+		ScheduledRegion invokingRegion2 = RegionUtil.getOwningScheduledRegion(region);
 		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(headNode);
 		List<@NonNull Node> headSources = null;
 		//
@@ -391,7 +391,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 			QVTscheduleConstants.CONNECTION_CREATION.println((headNode.isDependency() ? "  Extra NodeConnection " : "  Head NodeConnection \"") + headConnection + "\" to " + headNode);
 			for (@NonNull Node sourceNode : headSources) {
-				QVTscheduleConstants.CONNECTION_CREATION.println("    from " + sourceNode.getRegion() + " : " + sourceNode);
+				QVTscheduleConstants.CONNECTION_CREATION.println("    from " + sourceNode.getOwningRegion() + " : " + sourceNode);
 			}
 		}
 		return headConnection;
@@ -838,13 +838,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	public @NonNull ScheduledRegion createRootRegion(@NonNull Iterable<@NonNull ? extends Region> allRegions) {
 		ScheduledRegion rootRegion = null;
 		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
-			if (region.getInvokingRegion() == null) {
+			if (region.getOwningScheduledRegion() == null) {
 				if (rootRegion == null) {
 					rootRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
-					rootRegion.setScheduleModel(scheduleManager.getScheduleModel());
+					rootRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
 					rootRegion.setName(rootName);
 				}
-				region.setInvokingRegion(rootRegion);
+				region.setOwningScheduledRegion(rootRegion);
 			}
 		}
 		assert rootRegion != null;
@@ -862,7 +862,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Identify the content of each region.
 		//
-		for (@NonNull Region region : RegionUtil.getRegions(rootScheduledRegion)) {
+		for (@NonNull Region region : RegionUtil.getOwnedRegions(rootScheduledRegion)) {
 			contentsAnalysis.addRegion(region);
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
@@ -1069,7 +1069,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
 			for (@NonNull Region oldRegion : oldRegions) {
 				orderedRegions.remove(oldRegion);
-				oldRegion.setInvokingRegion(null);
+				oldRegion.setOwningScheduledRegion(null);
 			}
 			orderedRegions.add(orderedRegionIndex, newRegion);
 			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());

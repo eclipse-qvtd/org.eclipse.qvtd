@@ -34,22 +34,21 @@ import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.VariableNodeImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.VariableNodeImpl#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class VariableNodeImpl extends NodeImpl implements VariableNode {
 	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
+	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable()
+	 * @see #getReferredVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableDeclaration variable;
-
+	protected VariableDeclaration referredVariable;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,16 +74,16 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	 * @generated
 	 */
 	@Override
-	public VariableDeclaration getVariable() {
-		if (variable != null && variable.eIsProxy()) {
-			InternalEObject oldVariable = (InternalEObject)variable;
-			variable = (VariableDeclaration)eResolveProxy(oldVariable);
-			if (variable != oldVariable) {
+	public VariableDeclaration getReferredVariable() {
+		if (referredVariable != null && referredVariable.eIsProxy()) {
+			InternalEObject oldReferredVariable = (InternalEObject)referredVariable;
+			referredVariable = (VariableDeclaration)eResolveProxy(oldReferredVariable);
+			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.VARIABLE_NODE__VARIABLE, oldVariable, variable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
 			}
 		}
-		return variable;
+		return referredVariable;
 	}
 
 	/**
@@ -92,8 +91,8 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableDeclaration basicGetVariable() {
-		return variable;
+	public VariableDeclaration basicGetReferredVariable() {
+		return referredVariable;
 	}
 
 	/**
@@ -102,11 +101,11 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	 * @generated
 	 */
 	@Override
-	public void setVariable(VariableDeclaration newVariable) {
-		VariableDeclaration oldVariable = variable;
-		variable = newVariable;
+	public void setReferredVariable(VariableDeclaration newReferredVariable) {
+		VariableDeclaration oldReferredVariable = referredVariable;
+		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.VARIABLE_NODE__VARIABLE, oldVariable, variable));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -117,9 +116,9 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__VARIABLE:
-				if (resolve) return getVariable();
-				return basicGetVariable();
+			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+				if (resolve) return getReferredVariable();
+				return basicGetReferredVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -132,8 +131,8 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__VARIABLE:
-				setVariable((VariableDeclaration)newValue);
+			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+				setReferredVariable((VariableDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -147,8 +146,8 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__VARIABLE:
-				setVariable((VariableDeclaration)null);
+			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+				setReferredVariable((VariableDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -162,8 +161,8 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__VARIABLE:
-				return variable != null;
+			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+				return referredVariable != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -171,14 +170,14 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		VariableNodeImpl node = (VariableNodeImpl)super.createNode(nodeRole, region);
-		node.initializeVariable(region, getVariable());
+		node.initializeVariable(region, getReferredVariable());
 		return node;
 	}
 
 	@Override
 	public void initializeVariable(@NonNull Region region, /*@NonNull*/ VariableDeclaration variable) {
 		assert variable != null;
-		setVariable(variable);
+		setReferredVariable(variable);
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;
 		addTypedElement(variable);
@@ -188,6 +187,6 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public @NonNull String toString() {
 		Role nodeRole = getNodeRole();
-		return nodeRole + "-" + getClass().getSimpleName().replace("Impl",  "") + "(" + (variable != null ? variable.toString() : getName()) + ")";
+		return nodeRole + "-" + getClass().getSimpleName().replace("Impl",  "") + "(" + (referredVariable != null ? referredVariable.toString() : getName()) + ")";
 	}
 } //VariableNodeImpl

@@ -89,7 +89,7 @@ class BodyStage extends AbstractStage
 		checkAccumulate(accumulator, directlyRequiredNodes);
 		checkAccumulate(accumulator, indirectlyRequiredNodes);
 		checkAccumulate(accumulator, deadNodes);
-		checkAccumulated(accumulator, RegionUtil.getNodes(splitter.getRegion()));
+		checkAccumulated(accumulator, RegionUtil.getOwnedNodes(splitter.getRegion()));
 	}
 
 	/**

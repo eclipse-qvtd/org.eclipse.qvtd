@@ -124,10 +124,10 @@ public class DatumCaches
 
 	private MappingAction analyzeMapping(@NonNull Mapping mapping) {
 		MappingAction ma = QVTscheduleFactory.eINSTANCE.createMappingAction();
-		ma.setMapping(mapping);
-		ma.setScheduleModel(scheduleManager.getScheduleModel());
-		List<AbstractDatum> productions = ma.getProductions();
-		List<AbstractDatum> requisites = ma.getRequisites();
+		ma.setReferredMapping(mapping);
+		ma.setOwningScheduleModel(scheduleManager.getScheduleModel());
+		List<AbstractDatum> productions = ma.getProducedDatums();
+		List<AbstractDatum> requisites = ma.getRequiredDatums();
 		TreeIterator<EObject> it = mapping.eAllContents();
 		while (it.hasNext()) {
 			EObject eObj = it.next();
@@ -231,7 +231,7 @@ public class DatumCaches
 
 	private @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatumsInternal(@NonNull Set<@NonNull ClassDatum> classDatums, @NonNull Set<@NonNull PropertyDatum> propertyDatums, @NonNull ClassDatum cDatum) {
 		if (classDatums.add(cDatum)) {
-			propertyDatums.addAll(ClassUtil.nullFree(cDatum.getPropertyDatums()));
+			propertyDatums.addAll(ClassUtil.nullFree(cDatum.getOwningPropertyDatums()));
 		}
 		for (@NonNull ClassDatum superClassDatum : ClassUtil.nullFree(cDatum.getSuperClassDatums())) {
 			getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);
@@ -292,10 +292,10 @@ public class DatumCaches
 		ClassDatum classDatum = completeClass2classDatums.get(completeClass);
 		if (classDatum == null) {
 			classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
-			classDatum.setScheduleModel(scheduleManager.getScheduleModel());
+			classDatum.setOwningScheduleModel(scheduleManager.getScheduleModel());
 			classDatum.setCompleteClass(completeClass);
-			classDatum.setPrimaryClass(completeClass.getPrimaryClass());
-			classDatum.setTypedModel(typedModel);
+			classDatum.setReferredClass(completeClass.getPrimaryClass());
+			classDatum.setReferredTypedModel(typedModel);
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {
 				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
@@ -449,25 +449,25 @@ public class DatumCaches
 			return cachedPropertyDatum;
 		}
 		for (PropertyDatum propertyDatum : allPropertyDatums) {
-			if (propertyDatum.getProperty().equals(property)) {
+			if (propertyDatum.getReferredProperty().equals(property)) {
 				return propertyDatum;
 			}
 		}
 		// If not found we create it
-		TypedModel typedModel = classDatum.getTypedModel();
+		TypedModel typedModel = classDatum.getReferredTypedModel();
 		assert typedModel != null;
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
 		org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
 		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
-		propertyDatum.setTypedModel(typedModel);
-		propertyDatum.setProperty(property);
-		propertyDatum.setClassDatum(classDatum);
+		propertyDatum.setReferredTypedModel(typedModel);
+		propertyDatum.setReferredProperty(property);
+		propertyDatum.setOwningClassDatum(classDatum);
 		assert targetCompleteClass.conformsTo(hostCompleteClass);
 		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
 			if (superCompleteClass.conformsTo(hostCompleteClass)) {
 				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
-				propertyDatum.getSuper().add(superPropDatum);
+				propertyDatum.getSuperPropertyDatums().add(superPropDatum);
 			}
 		}
 		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);

@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Edge</b></em>'.
+ * @extends GraphEdge
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -35,16 +36,16 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion <em>Owning Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getSourceNode <em>Source Node</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getTargetNode <em>Target Node</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphEdge org.eclipse.ocl.pivot.Nameable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable"
  * @generated
  */
-public interface Edge extends Element, GraphEdge, Nameable {
+public interface Edge extends Element, Nameable, GraphEdge {
 	/**
 	 * Returns the value of the '<em><b>Edge Role</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Role}.
@@ -103,33 +104,33 @@ public interface Edge extends Element, GraphEdge, Nameable {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges <em>Edges</em>}'.
+	 * Returns the value of the '<em><b>Owning Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Region</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Region</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Region</em>' container reference.
-	 * @see #setRegion(Region)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_Region()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges
-	 * @model opposite="edges" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!region'"
+	 * @return the value of the '<em>Owning Region</em>' container reference.
+	 * @see #setOwningRegion(Region)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_OwningRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges
+	 * @model opposite="ownedEdges" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!owningRegion'"
 	 * @generated
 	 */
-	Region getRegion();
+	Region getOwningRegion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion <em>Owning Region</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Region</em>' container reference.
-	 * @see #getRegion()
+	 * @param value the new value of the '<em>Owning Region</em>' container reference.
+	 * @see #getOwningRegion()
 	 * @generated
 	 */
-	void setRegion(Region value);
+	void setOwningRegion(Region value);
 
 	/**
 	 * Returns the value of the '<em><b>Source Node</b></em>' reference.

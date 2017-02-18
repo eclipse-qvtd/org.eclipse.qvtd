@@ -70,11 +70,11 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//	Create domains
 		//
 		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
-		for (@NonNull Node node : RegionUtil.getNodes(region)) {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			ClassDatum classDatum = node.getClassDatum();
 			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
-				TypedModel qvtmTypedModel = classDatum.getTypedModel();
+				TypedModel qvtmTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
 				if (qvtiTypedModel != null) {
 					checkableTypedModels.add(qvtiTypedModel);

@@ -27,117 +27,90 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Region</b></em>'.
+ * @extends ToDOTable, GraphNode
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getEdges <em>Edges</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getNodes <em>Nodes</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.GraphNode org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable org.eclipse.qvtd.pivot.qvtschedule.ToDOTable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable"
  * @generated
  */
-public interface Region extends Element, GraphNode, Nameable, Symbolable, ToDOTable
+public interface Region extends Element, Nameable, Symbolable, ToDOTable, GraphNode
 {
 	/**
-	 * Returns the value of the '<em><b>Edges</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRegions <em>Owned Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Scheduled Region</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Scheduled Region</em>' container reference.
+	 * @see #setOwningScheduledRegion(ScheduledRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwningScheduledRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRegions
+	 * @model opposite="ownedRegions" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!owningScheduledRegion'"
+	 * @generated
+	 */
+	ScheduledRegion getOwningScheduledRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwningScheduledRegion <em>Owning Scheduled Region</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Scheduled Region</em>' container reference.
+	 * @see #getOwningScheduledRegion()
+	 * @generated
+	 */
+	void setOwningScheduledRegion(ScheduledRegion value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Edge}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion <em>Region</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion <em>Owning Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Edges</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Edges</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Edges</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_Edges()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getRegion
-	 * @model opposite="region" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!edges'"
+	 * @return the value of the '<em>Owned Edges</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwnedEdges()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion
+	 * @model opposite="owningRegion" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedEdges'"
 	 * @generated
 	 */
-	EList<Edge> getEdges();
+	EList<Edge> getOwnedEdges();
 
 	/**
-	 * Returns the value of the '<em><b>Invoking Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions <em>Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invoking Region</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Invoking Region</em>' container reference.
-	 * @see #setInvokingRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_InvokingRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getRegions
-	 * @model opposite="regions" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!invokingRegion'"
-	 * @generated
-	 */
-	ScheduledRegion getInvokingRegion();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getInvokingRegion <em>Invoking Region</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Invoking Region</em>' container reference.
-	 * @see #getInvokingRegion()
-	 * @generated
-	 */
-	void setInvokingRegion(ScheduledRegion value);
-
-	/**
-	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion <em>Region</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getOwningRegion <em>Owning Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Nodes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Nodes</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_Nodes()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getRegion
-	 * @model opposite="region" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!nodes'"
+	 * @return the value of the '<em>Owned Nodes</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwnedNodes()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getOwningRegion
+	 * @model opposite="owningRegion" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedNodes'"
 	 * @generated
 	 */
-	EList<Node> getNodes();
-
-	/**
-	 * Returns the value of the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Region</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Region</em>' reference.
-	 * @see #setRegion(Region)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_Region()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!region'"
-	 * @generated
-	 */
-	Region getRegion();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRegion <em>Region</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Region</em>' reference.
-	 * @see #getRegion()
-	 * @generated
-	 */
-	void setRegion(Region value);
+	EList<Node> getOwnedNodes();
 
 	void addCallToChild(@NonNull Region region);
 	boolean addIndex(int index);

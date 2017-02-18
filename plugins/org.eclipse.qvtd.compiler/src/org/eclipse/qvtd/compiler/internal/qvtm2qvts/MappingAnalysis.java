@@ -98,8 +98,8 @@ public class MappingAnalysis implements Nameable
 	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
 		this.mappingRegion = (BasicMappingRegionImpl) QVTscheduleFactory.eINSTANCE.createBasicMappingRegion();
 		mappingRegion.setFixmeScheduleModel(scheduleModel);
-		scheduleModel.getOtherMappingRegions().add(mappingRegion);
-		mappingRegion.setMapping(mapping);
+		scheduleModel.getOwnedOtherMappingRegions().add(mappingRegion);
+		mappingRegion.setReferredMapping(mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));

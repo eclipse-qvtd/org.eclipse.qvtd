@@ -78,7 +78,7 @@ public class ContentsAnalysis
 		}
 		if (!edges.contains(newEdge)) {
 			edges.add(newEdge);
-			for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
+			for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuperPropertyDatums())) {
 				addNewEdge(newEdge, superAbstractDatum);
 			}
 		}
@@ -150,21 +150,21 @@ public class ContentsAnalysis
 		//		}
 		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = scheduleManager.getAllPropertyDatums(forwardClassDatum);
 		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if ((propertyDatum.getProperty() == forwardProperty) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
+			if ((propertyDatum.getReferredProperty() == forwardProperty) && (propertyDatum.getOwningClassDatum() == forwardClassDatum)) {
 				return propertyDatum;
 			}
 		}
 		PropertyDatum bestPropertyDatum = null;
 		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if (propertyDatum.getProperty() == forwardProperty) {
+			if (propertyDatum.getReferredProperty() == forwardProperty) {
 				if (bestPropertyDatum == null) {
 					bestPropertyDatum = propertyDatum;
 				}
 				else {
-					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
+					CompleteClass completeClass = propertyDatum.getOwningClassDatum().getCompleteClass();
 					assert completeClass != null;
 					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
+					if (allSuperCompleteClasses.contains(bestPropertyDatum.getOwningClassDatum().getCompleteClass())) {
 						bestPropertyDatum = propertyDatum;
 					}
 				}
@@ -178,20 +178,20 @@ public class ContentsAnalysis
 		ClassDatum reverseClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
 		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleManager.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if ((propertyDatum.getProperty() == reverseProperty) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
+			if ((propertyDatum.getReferredProperty() == reverseProperty) && (propertyDatum.getOwningClassDatum() == reverseClassDatum)) {
 				return propertyDatum;
 			}
 		}
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if (propertyDatum.getProperty() == reverseProperty) {
+			if (propertyDatum.getReferredProperty() == reverseProperty) {
 				if (bestPropertyDatum == null) {
 					bestPropertyDatum = propertyDatum;
 				}
 				else {
-					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
+					CompleteClass completeClass = propertyDatum.getOwningClassDatum().getCompleteClass();
 					assert completeClass != null;
 					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
+					if (allSuperCompleteClasses.contains(bestPropertyDatum.getOwningClassDatum().getCompleteClass())) {
 						bestPropertyDatum = propertyDatum;
 					}
 				}
@@ -245,7 +245,7 @@ public class ContentsAnalysis
 	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeNewEdges(@NonNull NavigableEdge predicatedEdge) {
 		Set<@NonNull NavigableEdge> realizedEdges = null;
 		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : propertyDatum2newEdges.entrySet()) {
-			Property property = entry.getKey().getProperty();
+			Property property = entry.getKey().getReferredProperty();
 			if (property != null) {
 				@Nullable Property compositeProperty = null;
 				if (property.isIsComposite()) {
@@ -337,7 +337,7 @@ public class ContentsAnalysis
 		List<@NonNull NavigableEdge> edges = propertyDatum2newEdges.get(propertyDatum);
 		if (edges != null) {
 			if (edges.remove(newEdge)) {
-				for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
+				for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuperPropertyDatums())) {
 					removeNewEdge(newEdge, superAbstractDatum);
 				}
 			}

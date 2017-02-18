@@ -58,7 +58,7 @@ public class ClassDatumAnalysis implements Adapter
 		ClassDatum classDatum = RegionUtil.getClassDatum(node);
 		ClassDatumAnalysis adapter = ClassUtil.getAdapter(ClassDatumAnalysis.class, classDatum);
 		if (adapter == null) {
-			adapter = RegionUtil.getScheduleManager(RegionUtil.getRegion(node)).getClassDatumAnalysis(classDatum);
+			adapter = RegionUtil.getScheduleManager(RegionUtil.getOwningRegion(node)).getClassDatumAnalysis(classDatum);
 		}
 		return adapter;
 	}
@@ -86,7 +86,7 @@ public class ClassDatumAnalysis implements Adapter
 		this.scheduleManager = scheduleManager;
 		this.classDatum = classDatum;
 		classDatum.eAdapters().add(this);
-		TypedModel typedModel = QVTscheduleUtil.getTypedModel(classDatum);
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		this.domainUsage = scheduleManager.getDomainUsage(typedModel);
 		Type type = classDatum.getCompleteClass().getPrimaryClass();
 		Type elementType = type;
@@ -187,8 +187,8 @@ public class ClassDatumAnalysis implements Adapter
 		List<@NonNull Mapping> producedBy2 = producedBy;
 		if (producedBy2  == null) {
 			producedBy = producedBy2 = new ArrayList<>();
-			for (@NonNull MappingAction producingAction : ClassUtil.nullFree(classDatum.getProducedBy())) {
-				Mapping mapping = producingAction.getMapping();
+			for (@NonNull MappingAction producingAction : ClassUtil.nullFree(classDatum.getProducedByActions())) {
+				Mapping mapping = producingAction.getReferredMapping();
 				assert mapping != null;
 				producedBy2.add(mapping);
 			}
@@ -208,8 +208,8 @@ public class ClassDatumAnalysis implements Adapter
 		List<@NonNull Mapping> requiredBy2 = requiredBy;
 		if (requiredBy2  == null) {
 			requiredBy = requiredBy2 = new ArrayList<>();
-			for (@NonNull MappingAction consumingAction : ClassUtil.nullFree(classDatum.getRequiredBy())) {
-				Mapping mapping = consumingAction.getMapping();
+			for (@NonNull MappingAction consumingAction : ClassUtil.nullFree(classDatum.getRequiredByActions())) {
+				Mapping mapping = consumingAction.getReferredMapping();
 				assert mapping != null;
 				requiredBy2.add(mapping);
 			}

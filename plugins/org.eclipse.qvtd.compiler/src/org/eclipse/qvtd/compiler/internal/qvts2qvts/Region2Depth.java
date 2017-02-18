@@ -112,15 +112,15 @@ public class Region2Depth
 	}
 
 	public @NonNull Iterable<@NonNull Region> getParentRegions(@NonNull Region childRegion) {
-		ScheduledRegion childInvokingRegion = childRegion.getInvokingRegion();
+		ScheduledRegion childInvokingRegion = childRegion.getOwningScheduledRegion();
 		int childInvokingRegionDepth = childInvokingRegion != null ? getRegionDepth(childInvokingRegion) : 0;
 		List<@NonNull Region> parentRegions = region2parents.get(childRegion);
 		if (parentRegions == null) {
 			parentRegions = new ArrayList<>();
 			for (@NonNull DatumConnection<?> parentConnection : childRegion.getIncomingPassedConnections()) {
 				for (@NonNull Node source : parentConnection.getSourceNodes()) {
-					Region sourceRegion = RegionUtil.getRegion(source);
-					ScheduledRegion sourceInvokingRegion = sourceRegion.getInvokingRegion();
+					Region sourceRegion = RegionUtil.getOwningRegion(source);
+					ScheduledRegion sourceInvokingRegion = sourceRegion.getOwningScheduledRegion();
 					int sourceInvokingRegionDepth = sourceInvokingRegion != null ? getRegionDepth(sourceInvokingRegion) : 0;
 					Region parentRegion = sourceInvokingRegionDepth < childInvokingRegionDepth ? childInvokingRegion : sourceRegion;
 					//					if ((scheduledRegion == null)
