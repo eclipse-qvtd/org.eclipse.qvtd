@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.Property;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#isPartial <em>Partial</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getProperty <em>Property</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge()
@@ -63,6 +64,33 @@ public interface NavigationEdge extends NavigableEdge {
 	 * @generated
 	 */
 	void setPartial(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The property to navigate from source to target.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Property</em>' reference.
+	 * @see #setProperty(Property)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigationEdge_Property()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigationEdge!property'"
+	 * @generated
+	 */
+	@Override
+	Property getProperty();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getProperty <em>Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Property</em>' reference.
+	 * @see #getProperty()
+	 * @generated
+	 */
+	void setProperty(Property value);
 
 	void initializeProperty(@NonNull Property property, @Nullable Boolean isPartial);
 } // NavigationEdge

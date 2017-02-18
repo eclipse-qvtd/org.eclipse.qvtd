@@ -56,30 +56,6 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 */
 	EList<EdgeConnection> getOutgoingConnections();
 	/**
-	 * Returns the value of the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The property to navigate from source to target.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Property</em>' reference.
-	 * @see #setProperty(Property)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigableEdge_Property()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigableEdge!property'"
-	 * @generated
-	 */
-	Property getProperty();
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getProperty <em>Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property</em>' reference.
-	 * @see #getProperty()
-	 * @generated
-	 */
-	void setProperty(Property value);
-	/**
 	 * Returns the value of the '<em><b>Secondary</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -132,6 +108,8 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 
 	@Override
 	@NonNull NavigableEdge getForwardEdge();
+
+	Property getProperty();
 
 	void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 }

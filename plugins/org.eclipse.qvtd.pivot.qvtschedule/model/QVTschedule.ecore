@@ -25,13 +25,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CastEdge" eSuperTypes="#//NavigableEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CastEdge" eSuperTypes="#//NavigableEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The property to navigate from source to target."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryClass" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
-        derived="true"/>
+        transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryClass" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDatums" upperBound="-1"
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/classDatums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
         eType="#//ClassDatum"/>
   </eClassifiers>
@@ -98,6 +112,8 @@
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedBy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/mappingActions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region"/>
   <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion">
@@ -125,12 +141,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingConnections" upperBound="-1"
         eType="#//EdgeConnection"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The property to navigate from source to target."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="secondary" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -143,6 +153,12 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="True if this edge is a partial many-to-one relationship."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The property to navigate from source to target."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -238,6 +254,12 @@
         eType="#//LoadingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
         containment="true" eOpposite="#//ScheduledRegion/scheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatums" upperBound="-1"
+        eType="#//ClassDatum" containment="true" eOpposite="#//ClassDatum/scheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherMappingRegions" upperBound="-1"
+        eType="#//MappingRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingActions" upperBound="-1"
+        eType="#//MappingAction" containment="true" eOpposite="#//MappingAction/scheduleModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"

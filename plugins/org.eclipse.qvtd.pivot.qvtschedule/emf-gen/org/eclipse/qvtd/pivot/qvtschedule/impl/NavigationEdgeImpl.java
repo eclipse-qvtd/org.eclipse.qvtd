@@ -17,6 +17,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -44,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#isPartial <em>Partial</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl#getProperty <em>Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,6 +69,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @ordered
 	 */
 	protected boolean partial = PARTIAL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property property;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,10 +128,53 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 * @generated
 	 */
 	@Override
+	public Property getProperty() {
+		if (property != null && property.eIsProxy()) {
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (Property)eResolveProxy(oldProperty);
+			if (property != oldProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NAVIGATION_EDGE__PROPERTY, oldProperty, property));
+			}
+		}
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property basicGetProperty() {
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setProperty(Property newProperty) {
+		Property oldProperty = property;
+		property = newProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGATION_EDGE__PROPERTY, oldProperty, property));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				return isPartial();
+			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
+				if (resolve) return getProperty();
+				return basicGetProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,6 +189,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				setPartial((Boolean)newValue);
+				return;
+			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
+				setProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,6 +208,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				setPartial(PARTIAL_EDEFAULT);
 				return;
+			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
+				setProperty((Property)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -164,6 +225,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case QVTschedulePackage.NAVIGATION_EDGE__PARTIAL:
 				return partial != PARTIAL_EDEFAULT;
+			case QVTschedulePackage.NAVIGATION_EDGE__PROPERTY:
+				return property != null;
 		}
 		return super.eIsSet(featureID);
 	}

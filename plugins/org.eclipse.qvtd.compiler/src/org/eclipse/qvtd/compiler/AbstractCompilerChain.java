@@ -68,7 +68,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		step2extension.put(QVTC_STEP, "qvtcas");
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
 		step2extension.put(QVTM_STEP, "qvtm.qvtcas");
-		step2extension.put(QVTS_STEP, "qvts");
+		step2extension.put(QVTS_STEP, "qvtsas");
 		step2extension.put(QVTI_STEP, "qvtias");
 		step2extension.put(JAVA_STEP, "java");
 		step2extension.put(CLASS_STEP, "class");
@@ -237,7 +237,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				throwCompilerChainExceptionForErrors();
 				compiled(scheduleManager);			// FIXME
 				sResource.getContents().add(scheduleManager.getScheduleModel());
-				//				saveResource(sResource);
+				saveResource(sResource);
 				return scheduledRegion;
 			}
 			finally {

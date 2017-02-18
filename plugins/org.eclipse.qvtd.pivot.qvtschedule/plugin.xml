@@ -5,6 +5,10 @@
 -->
 
 <plugin>
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtsas"
+            class="org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleASResourceFactory"/>
+   </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTschedule -->
@@ -14,8 +18,35 @@
             genModel="model/QVTschedule.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTschedule -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtschedule"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTschedule -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvtschedule"
+            id="org.eclipse.qvtd.qvtschedule"
+            name="%_UI_QVTschedule_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2017/QVTschedule"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleASResourceFactory"
+     	extension="qvtschedule" contentType="org.eclipse.qvtd.qvtschedule"/>
+  </extension>
+
   <extension point="org.eclipse.team.core.fileTypes">
-    <fileTypes extension="qvts" type="text" />
+    <fileTypes extension="qvtsas" type="text" />
   </extension>
 
 </plugin>

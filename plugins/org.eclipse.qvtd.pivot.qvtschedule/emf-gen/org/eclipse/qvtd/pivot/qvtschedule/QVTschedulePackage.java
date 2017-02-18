@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotPackage;
 
 /**
@@ -44,7 +45,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "qvtschedule";
+	@NonNull String eNAME = "qvtschedule";
 
 	/**
 	 * The package namespace URI.
@@ -52,7 +53,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTschedule";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTschedule";
 
 	/**
 	 * The package namespace name.
@@ -60,7 +61,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "qvts";
+	@NonNull String eNS_PREFIX = "qvts";
+
+	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@NonNull String eCONTENT_TYPE = "org.eclipse.qvtd.qvtschedule";
 
 	/**
 	 * The singleton instance of the package.
@@ -1044,22 +1053,13 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGABLE_EDGE__OUTGOING_CONNECTIONS = EDGE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAVIGABLE_EDGE__PROPERTY = EDGE_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Secondary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGABLE_EDGE__SECONDARY = EDGE_FEATURE_COUNT + 4;
+	int NAVIGABLE_EDGE__SECONDARY = EDGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Navigable Edge</em>' class.
@@ -1068,7 +1068,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGABLE_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 5;
+	int NAVIGABLE_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1206,15 +1206,6 @@ public interface QVTschedulePackage extends EPackage {
 	int CAST_EDGE__OUTGOING_CONNECTIONS = NAVIGABLE_EDGE__OUTGOING_CONNECTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAST_EDGE__PROPERTY = NAVIGABLE_EDGE__PROPERTY;
-
-	/**
 	 * The feature id for the '<em><b>Secondary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1224,13 +1215,31 @@ public interface QVTschedulePackage extends EPackage {
 	int CAST_EDGE__SECONDARY = NAVIGABLE_EDGE__SECONDARY;
 
 	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__PROPERTY = NAVIGABLE_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Primary Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__PRIMARY_CLASS = NAVIGABLE_EDGE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Cast Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CAST_EDGE_FEATURE_COUNT = NAVIGABLE_EDGE_FEATURE_COUNT + 0;
+	int CAST_EDGE_FEATURE_COUNT = NAVIGABLE_EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1332,13 +1341,31 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM__COMPLETE_CLASS = ABSTRACT_DATUM_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Primary Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__PRIMARY_CLASS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Property Datums</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM__PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+	int CLASS_DATUM__PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Schedule Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__SCHEDULE_MODEL = ABSTRACT_DATUM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Super Class Datums</b></em>' reference list.
@@ -1347,7 +1374,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM__SUPER_CLASS_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+	int CLASS_DATUM__SUPER_CLASS_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Class Datum</em>' class.
@@ -1356,7 +1383,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 3;
+	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3187,13 +3214,22 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_ACTION__REQUISITES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Schedule Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__SCHEDULE_MODEL = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ACTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int MAPPING_ACTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3620,15 +3656,6 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGATION_EDGE__OUTGOING_CONNECTIONS = NAVIGABLE_EDGE__OUTGOING_CONNECTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAVIGATION_EDGE__PROPERTY = NAVIGABLE_EDGE__PROPERTY;
-
-	/**
 	 * The feature id for the '<em><b>Secondary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3647,13 +3674,22 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGATION_EDGE__PARTIAL = NAVIGABLE_EDGE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__PROPERTY = NAVIGABLE_EDGE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Navigation Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGATION_EDGE_FEATURE_COUNT = NAVIGABLE_EDGE_FEATURE_COUNT + 1;
+	int NAVIGATION_EDGE_FEATURE_COUNT = NAVIGABLE_EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5139,13 +5175,40 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULE_MODEL__SCHEDULED_REGION = PivotPackage.MODEL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Class Datums</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__CLASS_DATUMS = PivotPackage.MODEL_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Other Mapping Regions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OTHER_MAPPING_REGIONS = PivotPackage.MODEL_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__MAPPING_ACTIONS = PivotPackage.MODEL_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Schedule Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 2;
+	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5890,6 +5953,28 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getCastEdge();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getProperty()
+	 * @see #getCastEdge()
+	 * @generated
+	 */
+	EReference getCastEdge_Property();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getPrimaryClass <em>Primary Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Primary Class</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CastEdge#getPrimaryClass()
+	 * @see #getCastEdge()
+	 * @generated
+	 */
+	EReference getCastEdge_PrimaryClass();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum <em>Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5911,6 +5996,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getClassDatum_CompleteClass();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPrimaryClass <em>Primary Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Primary Class</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPrimaryClass()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_PrimaryClass();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5920,6 +6016,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassDatum_PropertyDatums();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getScheduleModel <em>Schedule Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getScheduleModel()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_ScheduleModel();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}'.
@@ -6153,6 +6260,39 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getScheduleModel_ScheduledRegion();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getClassDatums <em>Class Datums</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Class Datums</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getClassDatums()
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	EReference getScheduleModel_ClassDatums();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOtherMappingRegions <em>Other Mapping Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Other Mapping Regions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOtherMappingRegions()
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	EReference getScheduleModel_OtherMappingRegions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMappingActions <em>Mapping Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Mapping Actions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMappingActions()
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	EReference getScheduleModel_MappingActions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion <em>Scheduled Region</em>}'.
@@ -6428,6 +6568,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getMappingAction_Requisites();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getScheduleModel <em>Schedule Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getScheduleModel()
+	 * @see #getMappingAction()
+	 * @generated
+	 */
+	EReference getMappingAction_ScheduleModel();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion <em>Mapping Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6545,17 +6696,6 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getNavigableEdge_OutgoingConnections();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getProperty <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getProperty()
-	 * @see #getNavigableEdge()
-	 * @generated
-	 */
-	EReference getNavigableEdge_Property();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#isSecondary <em>Secondary</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6597,6 +6737,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNavigationEdge_Partial();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge#getProperty()
+	 * @see #getNavigationEdge()
+	 * @generated
+	 */
+	EReference getNavigationEdge_Property();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Node <em>Node</em>}'.
@@ -7099,6 +7250,22 @@ public interface QVTschedulePackage extends EPackage {
 		EClass CAST_EDGE = eINSTANCE.getCastEdge();
 
 		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CAST_EDGE__PROPERTY = eINSTANCE.getCastEdge_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CAST_EDGE__PRIMARY_CLASS = eINSTANCE.getCastEdge_PrimaryClass();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl <em>Class Datum</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7117,12 +7284,28 @@ public interface QVTschedulePackage extends EPackage {
 		EReference CLASS_DATUM__COMPLETE_CLASS = eINSTANCE.getClassDatum_CompleteClass();
 
 		/**
+		 * The meta object literal for the '<em><b>Primary Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__PRIMARY_CLASS = eINSTANCE.getClassDatum_PrimaryClass();
+
+		/**
 		 * The meta object literal for the '<em><b>Property Datums</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CLASS_DATUM__PROPERTY_DATUMS = eINSTANCE.getClassDatum_PropertyDatums();
+
+		/**
+		 * The meta object literal for the '<em><b>Schedule Model</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__SCHEDULE_MODEL = eINSTANCE.getClassDatum_ScheduleModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Class Datums</b></em>' reference list feature.
@@ -7317,6 +7500,30 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCHEDULE_MODEL__SCHEDULED_REGION = eINSTANCE.getScheduleModel_ScheduledRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Datums</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_MODEL__CLASS_DATUMS = eINSTANCE.getScheduleModel_ClassDatums();
+
+		/**
+		 * The meta object literal for the '<em><b>Other Mapping Regions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_MODEL__OTHER_MAPPING_REGIONS = eINSTANCE.getScheduleModel_OtherMappingRegions();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping Actions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_MODEL__MAPPING_ACTIONS = eINSTANCE.getScheduleModel_MappingActions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
@@ -7561,6 +7768,14 @@ public interface QVTschedulePackage extends EPackage {
 		EReference MAPPING_ACTION__REQUISITES = eINSTANCE.getMappingAction_Requisites();
 
 		/**
+		 * The meta object literal for the '<em><b>Schedule Model</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_ACTION__SCHEDULE_MODEL = eINSTANCE.getMappingAction_ScheduleModel();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7657,14 +7872,6 @@ public interface QVTschedulePackage extends EPackage {
 		EReference NAVIGABLE_EDGE__OUTGOING_CONNECTIONS = eINSTANCE.getNavigableEdge_OutgoingConnections();
 
 		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAVIGABLE_EDGE__PROPERTY = eINSTANCE.getNavigableEdge_Property();
-
-		/**
 		 * The meta object literal for the '<em><b>Secondary</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7697,6 +7904,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAVIGATION_EDGE__PARTIAL = eINSTANCE.getNavigationEdge_Partial();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGATION_EDGE__PROPERTY = eINSTANCE.getNavigationEdge_Property();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl <em>Node</em>}' class.

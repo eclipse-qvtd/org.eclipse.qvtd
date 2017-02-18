@@ -25,7 +25,9 @@ import org.eclipse.ocl.pivot.CompleteClass;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getCompleteClass <em>Complete Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPrimaryClass <em>Primary Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getScheduleModel <em>Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
@@ -45,7 +47,7 @@ public interface ClassDatum extends AbstractDatum {
 	 * @return the value of the '<em>Complete Class</em>' reference.
 	 * @see #setCompleteClass(CompleteClass)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_CompleteClass()
-	 * @model required="true" derived="true"
+	 * @model required="true" transient="true" derived="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!completeClass'"
 	 * @generated
 	 */
@@ -60,6 +62,33 @@ public interface ClassDatum extends AbstractDatum {
 	 * @generated
 	 */
 	void setCompleteClass(CompleteClass value);
+
+	/**
+	 * Returns the value of the '<em><b>Primary Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Primary Class</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Primary Class</em>' reference.
+	 * @see #setPrimaryClass(org.eclipse.ocl.pivot.Class)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_PrimaryClass()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!primaryClass'"
+	 * @generated
+	 */
+	org.eclipse.ocl.pivot.Class getPrimaryClass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getPrimaryClass <em>Primary Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Class</em>' reference.
+	 * @see #getPrimaryClass()
+	 * @generated
+	 */
+	void setPrimaryClass(org.eclipse.ocl.pivot.Class value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Datums</b></em>' containment reference list.
@@ -79,6 +108,35 @@ public interface ClassDatum extends AbstractDatum {
 	 * @generated
 	 */
 	EList<PropertyDatum> getPropertyDatums();
+
+	/**
+	 * Returns the value of the '<em><b>Schedule Model</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getClassDatums <em>Class Datums</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Schedule Model</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Schedule Model</em>' container reference.
+	 * @see #setScheduleModel(ScheduleModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ScheduleModel()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getClassDatums
+	 * @model opposite="classDatums" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!scheduleModel'"
+	 * @generated
+	 */
+	ScheduleModel getScheduleModel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getScheduleModel <em>Schedule Model</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Schedule Model</em>' container reference.
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	void setScheduleModel(ScheduleModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Super Class Datums</b></em>' reference list.

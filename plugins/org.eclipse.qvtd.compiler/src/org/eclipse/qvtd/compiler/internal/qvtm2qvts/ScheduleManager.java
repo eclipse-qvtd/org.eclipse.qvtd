@@ -114,8 +114,9 @@ public abstract class ScheduleManager implements Adapter
 		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
+		asTransformation.getModelParameter().add(domainAnalysis.getPrimitiveTypeModel());		// FIXME move to QVTm
 		domainAnalysis.analyzeTransformation(asTransformation);
-		this.datumCaches = new DatumCaches(domainAnalysis);
+		this.datumCaches = new DatumCaches(this);
 		datumCaches.analyzeTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();

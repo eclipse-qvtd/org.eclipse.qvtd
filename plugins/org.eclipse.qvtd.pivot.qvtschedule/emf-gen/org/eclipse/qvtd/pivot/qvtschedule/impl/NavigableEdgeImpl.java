@@ -48,7 +48,6 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOppositeEdge <em>Opposite Edge</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getOutgoingConnections <em>Outgoing Connections</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl#isSecondary <em>Secondary</em>}</li>
  * </ul>
  *
@@ -84,16 +83,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @ordered
 	 */
 	protected EList<EdgeConnection> outgoingConnections;
-
-	/**
-	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProperty()
-	 * @generated
-	 * @ordered
-	 */
-	protected Property property;
 
 	/**
 	 * The default value of the '{@link #isSecondary() <em>Secondary</em>}' attribute.
@@ -193,46 +182,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @generated
 	 */
 	@Override
-	public Property getProperty() {
-		if (property != null && property.eIsProxy()) {
-			InternalEObject oldProperty = (InternalEObject)property;
-			property = (Property)eResolveProxy(oldProperty);
-			if (property != oldProperty) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY, oldProperty, property));
-			}
-		}
-		return property;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Property basicGetProperty() {
-		return property;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setProperty(Property newProperty) {
-		Property oldProperty = property;
-		property = newProperty;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY, oldProperty, property));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public boolean isSecondary() {
 		return secondary;
 	}
@@ -306,9 +255,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				return basicGetOppositeEdge();
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				return getOutgoingConnections();
-			case QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY:
-				if (resolve) return getProperty();
-				return basicGetProperty();
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				return isSecondary();
 		}
@@ -334,9 +280,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				getOutgoingConnections().clear();
 				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY:
-				setProperty((Property)newValue);
-				return;
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				setSecondary((Boolean)newValue);
 				return;
@@ -361,9 +304,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				getOutgoingConnections().clear();
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY:
-				setProperty((Property)null);
-				return;
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				setSecondary(SECONDARY_EDEFAULT);
 				return;
@@ -385,8 +325,6 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 				return oppositeEdge != null;
 			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
-			case QVTschedulePackage.NAVIGABLE_EDGE__PROPERTY:
-				return property != null;
 			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
 				return secondary != SECONDARY_EDEFAULT;
 		}
@@ -449,7 +387,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	@Override
 	public @NonNull String getDisplayName() {
-		Property source2targetProperty2 = property;
+		Property source2targetProperty2 = getProperty();
 		if (source2targetProperty2 != null) {
 			org.eclipse.ocl.pivot.Class owningClass = source2targetProperty2.getOwningClass();
 			if (owningClass != null) {
@@ -477,8 +415,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	@Override
 	public @Nullable String getLabel() {
-		@Nullable
-		Property source2targetProperty2 = property;
+		Property source2targetProperty2 = getProperty();
 		if (source2targetProperty2 == null) {
 			return "null";
 		}

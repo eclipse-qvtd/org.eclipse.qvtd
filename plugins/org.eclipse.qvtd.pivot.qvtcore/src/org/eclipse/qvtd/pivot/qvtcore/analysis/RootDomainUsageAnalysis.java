@@ -410,6 +410,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		int enforceableMask = 0;
 		CompleteModel completeModel = context.getCompleteModel();
 		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
+			if (typedModel == primitiveTypeModel) {
+				continue;
+			}
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
 			@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);

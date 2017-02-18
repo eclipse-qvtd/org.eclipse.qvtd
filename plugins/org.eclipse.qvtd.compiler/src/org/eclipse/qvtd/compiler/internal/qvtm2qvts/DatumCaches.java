@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -68,6 +69,7 @@ import com.google.common.collect.Iterables;
  */
 public class DatumCaches
 {
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull ContainmentAnalysis containmentAnalysis;
 	protected final @NonNull CompleteModel completeModel;
@@ -76,10 +78,12 @@ public class DatumCaches
 	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> classDatum2property2propertyDatum = new HashMap<>();
 
-	public DatumCaches(@NonNull RootDomainUsageAnalysis domainAnalysis) {
-		this.domainUsageAnalysis = domainAnalysis;
-		this.containmentAnalysis = new ContainmentAnalysis(domainAnalysis.getEnvironmentFactory());
-		this.completeModel = domainAnalysis.getEnvironmentFactory().getCompleteModel();
+	public DatumCaches(@NonNull ScheduleManager scheduleManager) {
+		this.scheduleManager = scheduleManager;
+		this.domainUsageAnalysis = scheduleManager.getDomainAnalysis();
+		EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
+		this.containmentAnalysis = new ContainmentAnalysis(environmentFactory);
+		this.completeModel = environmentFactory.getCompleteModel();
 	}
 
 	private @NonNull Set<@NonNull PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, @NonNull CompleteClass context) {
@@ -121,7 +125,7 @@ public class DatumCaches
 	private MappingAction analyzeMapping(@NonNull Mapping mapping) {
 		MappingAction ma = QVTscheduleFactory.eINSTANCE.createMappingAction();
 		ma.setMapping(mapping);
-
+		ma.setScheduleModel(scheduleManager.getScheduleModel());
 		List<AbstractDatum> productions = ma.getProductions();
 		List<AbstractDatum> requisites = ma.getRequisites();
 		TreeIterator<EObject> it = mapping.eAllContents();
@@ -288,7 +292,9 @@ public class DatumCaches
 		ClassDatum classDatum = completeClass2classDatums.get(completeClass);
 		if (classDatum == null) {
 			classDatum = QVTscheduleFactory.eINSTANCE.createClassDatum();
+			classDatum.setScheduleModel(scheduleManager.getScheduleModel());
 			classDatum.setCompleteClass(completeClass);
+			classDatum.setPrimaryClass(completeClass.getPrimaryClass());
 			classDatum.setTypedModel(typedModel);
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -28,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -41,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl#getMapping <em>Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl#getProductions <em>Productions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl#getRequisites <em>Requisites</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingActionImpl#getScheduleModel <em>Schedule Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -166,6 +169,49 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public ScheduleModel getScheduleModel() {
+		if (eContainerFeatureID() != QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL) return null;
+		return (ScheduleModel)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScheduleModel(ScheduleModel newScheduleModel, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newScheduleModel, QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setScheduleModel(ScheduleModel newScheduleModel) {
+		if (newScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL && newScheduleModel != null)) {
+			if (EcoreUtil.isAncestor(this, newScheduleModel))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newScheduleModel != null)
+				msgs = ((InternalEObject)newScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__MAPPING_ACTIONS, ScheduleModel.class, msgs);
+			msgs = basicSetScheduleModel(newScheduleModel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL, newScheduleModel, newScheduleModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -174,6 +220,10 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProductions()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.MAPPING_ACTION__REQUISITES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRequisites()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetScheduleModel((ScheduleModel)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -190,8 +240,24 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 				return ((InternalEList<?>)getProductions()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.MAPPING_ACTION__REQUISITES:
 				return ((InternalEList<?>)getRequisites()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				return basicSetScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__MAPPING_ACTIONS, ScheduleModel.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -209,6 +275,8 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 				return getProductions();
 			case QVTschedulePackage.MAPPING_ACTION__REQUISITES:
 				return getRequisites();
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				return getScheduleModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -233,6 +301,9 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 				getRequisites().clear();
 				getRequisites().addAll((Collection<? extends AbstractDatum>)newValue);
 				return;
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				setScheduleModel((ScheduleModel)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -254,6 +325,9 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 			case QVTschedulePackage.MAPPING_ACTION__REQUISITES:
 				getRequisites().clear();
 				return;
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				setScheduleModel((ScheduleModel)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -272,6 +346,8 @@ public class MappingActionImpl extends ElementImpl implements MappingAction {
 				return productions != null && !productions.isEmpty();
 			case QVTschedulePackage.MAPPING_ACTION__REQUISITES:
 				return requisites != null && !requisites.isEmpty();
+			case QVTschedulePackage.MAPPING_ACTION__SCHEDULE_MODEL:
+				return getScheduleModel() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getMapping <em>Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getProductions <em>Productions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getRequisites <em>Requisites</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getScheduleModel <em>Schedule Model</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingAction()
@@ -99,5 +100,34 @@ public interface MappingAction extends Element {
 	 * @generated
 	 */
 	EList<AbstractDatum> getRequisites();
+
+	/**
+	 * Returns the value of the '<em><b>Schedule Model</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMappingActions <em>Mapping Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Schedule Model</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Schedule Model</em>' container reference.
+	 * @see #setScheduleModel(ScheduleModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingAction_ScheduleModel()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getMappingActions
+	 * @model opposite="mappingActions" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingAction!scheduleModel'"
+	 * @generated
+	 */
+	ScheduleModel getScheduleModel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getScheduleModel <em>Schedule Model</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Schedule Model</em>' container reference.
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	void setScheduleModel(ScheduleModel value);
 
 } // MappingAction

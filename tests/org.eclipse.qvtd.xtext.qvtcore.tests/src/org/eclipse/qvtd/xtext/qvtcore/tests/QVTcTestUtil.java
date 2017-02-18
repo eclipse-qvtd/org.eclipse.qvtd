@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 
 import com.google.inject.Guice;
@@ -24,11 +25,12 @@ public class QVTcTestUtil extends TestUtil
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTcoreSetup() {
-    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-    		QVTcoreStandaloneSetup.doSetup();
-    	}
-    	else {
-    		Guice.createInjector(new org.eclipse.qvtd.xtext.qvtcore.QVTcoreRuntimeModule());
-    	}
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			QVTcoreStandaloneSetup.doSetup();
+			QVTschedulePivotStandaloneSetup.doSetup();
+		}
+		else {
+			Guice.createInjector(new org.eclipse.qvtd.xtext.qvtcore.QVTcoreRuntimeModule());
+		}
 	}
 }

@@ -14,12 +14,16 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -33,10 +37,27 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Cast Edge</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl#getPrimaryClass <em>Primary Class</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
+	/**
+	 * The cached value of the '{@link #getPrimaryClass() <em>Primary Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.eclipse.ocl.pivot.Class primaryClass;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,6 +78,109 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public org.eclipse.ocl.pivot.Class getPrimaryClass() {
+		if (primaryClass != null && primaryClass.eIsProxy()) {
+			InternalEObject oldPrimaryClass = (InternalEObject)primaryClass;
+			primaryClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldPrimaryClass);
+			if (primaryClass != oldPrimaryClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS, oldPrimaryClass, primaryClass));
+			}
+		}
+		return primaryClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.pivot.Class basicGetPrimaryClass() {
+		return primaryClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setPrimaryClass(org.eclipse.ocl.pivot.Class newPrimaryClass) {
+		org.eclipse.ocl.pivot.Class oldPrimaryClass = primaryClass;
+		primaryClass = newPrimaryClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS, oldPrimaryClass, primaryClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.CAST_EDGE__PROPERTY:
+				return getProperty();
+			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
+				if (resolve) return getPrimaryClass();
+				return basicGetPrimaryClass();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
+				setPrimaryClass((org.eclipse.ocl.pivot.Class)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
+				setPrimaryClass((org.eclipse.ocl.pivot.Class)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.CAST_EDGE__PROPERTY:
+				return getProperty() != null;
+			case QVTschedulePackage.CAST_EDGE__PRIMARY_CLASS:
+				return primaryClass != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
@@ -66,11 +190,18 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitCastEdge(this);
 	}
 
+	private Property property;
+
 	@Override
 	public @NonNull NavigableEdge createEdge(@NonNull Role edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		CastEdge castEdge = (CastEdge) super.createEdge(edgeRole, sourceNode, targetNode);
 		castEdge.initializeProperty(QVTscheduleUtil.getProperty(this));
 		return castEdge;
+	}
+
+	@Override
+	public Property getProperty() {
+		return property;
 	}
 
 	@Override
@@ -86,7 +217,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 					Role edgeRole2 = edgeRole;
 					Node sourceNode2 = sourceNode;
 					assert (edgeRole2 != null) && (sourceNode2 != null);
-					CastEdge reverseEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
+					CastEdgeImpl reverseEdge = (CastEdgeImpl) QVTscheduleFactory.eINSTANCE.createCastEdge();
 					reverseEdge.initialize(edgeRole2, targetNode2, target2sourceProperty.getName(), sourceNode2);
 					reverseEdge.setProperty(target2sourceProperty);
 					initializeOpposite(reverseEdge);
@@ -109,6 +240,11 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	public void setEdgeRole(Role edgeRole) {
 		assert !edgeRole.isNew();
 		super.setEdgeRole(edgeRole);
+	}
+
+	private void setProperty(@NonNull Property property) {
+		this.property = property;
+		setPrimaryClass(PivotUtil.getClass(property));
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -40,7 +42,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getCompleteClass <em>Complete Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getPrimaryClass <em>Primary Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getPropertyDatums <em>Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getScheduleModel <em>Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getSuperClassDatums <em>Super Class Datums</em>}</li>
  * </ul>
  *
@@ -56,6 +60,16 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @ordered
 	 */
 	protected CompleteClass completeClass;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryClass() <em>Primary Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.eclipse.ocl.pivot.Class primaryClass;
 
 	/**
 	 * The cached value of the '{@link #getPropertyDatums() <em>Property Datums</em>}' containment reference list.
@@ -142,11 +156,94 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
+	public org.eclipse.ocl.pivot.Class getPrimaryClass() {
+		if (primaryClass != null && primaryClass.eIsProxy()) {
+			InternalEObject oldPrimaryClass = (InternalEObject)primaryClass;
+			primaryClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldPrimaryClass);
+			if (primaryClass != oldPrimaryClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CLASS_DATUM__PRIMARY_CLASS, oldPrimaryClass, primaryClass));
+			}
+		}
+		return primaryClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.pivot.Class basicGetPrimaryClass() {
+		return primaryClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setPrimaryClass(org.eclipse.ocl.pivot.Class newPrimaryClass) {
+		org.eclipse.ocl.pivot.Class oldPrimaryClass = primaryClass;
+		primaryClass = newPrimaryClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM__PRIMARY_CLASS, oldPrimaryClass, primaryClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<PropertyDatum> getPropertyDatums() {
 		if (propertyDatums == null) {
 			propertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS, QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM);
 		}
 		return propertyDatums;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ScheduleModel getScheduleModel() {
+		if (eContainerFeatureID() != QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL) return null;
+		return (ScheduleModel)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScheduleModel(ScheduleModel newScheduleModel, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newScheduleModel, QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setScheduleModel(ScheduleModel newScheduleModel) {
+		if (newScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL && newScheduleModel != null)) {
+			if (EcoreUtil.isAncestor(this, newScheduleModel))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newScheduleModel != null)
+				msgs = ((InternalEObject)newScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__CLASS_DATUMS, ScheduleModel.class, msgs);
+			msgs = basicSetScheduleModel(newScheduleModel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL, newScheduleModel, newScheduleModel));
 	}
 
 	/**
@@ -173,6 +270,10 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPropertyDatums()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetScheduleModel((ScheduleModel)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -187,8 +288,24 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return ((InternalEList<?>)getPropertyDatums()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				return basicSetScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__CLASS_DATUMS, ScheduleModel.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -202,8 +319,13 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				if (resolve) return getCompleteClass();
 				return basicGetCompleteClass();
+			case QVTschedulePackage.CLASS_DATUM__PRIMARY_CLASS:
+				if (resolve) return getPrimaryClass();
+				return basicGetPrimaryClass();
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return getPropertyDatums();
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				return getScheduleModel();
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				return getSuperClassDatums();
 		}
@@ -222,9 +344,15 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				setCompleteClass((CompleteClass)newValue);
 				return;
+			case QVTschedulePackage.CLASS_DATUM__PRIMARY_CLASS:
+				setPrimaryClass((org.eclipse.ocl.pivot.Class)newValue);
+				return;
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				getPropertyDatums().clear();
 				getPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
+				return;
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				setScheduleModel((ScheduleModel)newValue);
 				return;
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				getSuperClassDatums().clear();
@@ -245,8 +373,14 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				setCompleteClass((CompleteClass)null);
 				return;
+			case QVTschedulePackage.CLASS_DATUM__PRIMARY_CLASS:
+				setPrimaryClass((org.eclipse.ocl.pivot.Class)null);
+				return;
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				getPropertyDatums().clear();
+				return;
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				setScheduleModel((ScheduleModel)null);
 				return;
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				getSuperClassDatums().clear();
@@ -265,8 +399,12 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				return completeClass != null;
+			case QVTschedulePackage.CLASS_DATUM__PRIMARY_CLASS:
+				return primaryClass != null;
 			case QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return propertyDatums != null && !propertyDatums.isEmpty();
+			case QVTschedulePackage.CLASS_DATUM__SCHEDULE_MODEL:
+				return getScheduleModel() != null;
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				return superClassDatums != null && !superClassDatums.isEmpty();
 		}
