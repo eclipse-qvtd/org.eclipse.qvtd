@@ -128,7 +128,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDeclareStatementCSAccess().getGroup_0_2(), "rule__DeclareStatementCS__Group_0_2__0");
 					put(grammarAccess.getDeclareStatementCSAccess().getGroup_4(), "rule__DeclareStatementCS__Group_4__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup(), "rule__DirectionCS__Group__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_5(), "rule__DirectionCS__Group_5__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_3(), "rule__DirectionCS__Group_3__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_3_2(), "rule__DirectionCS__Group_3_2__0");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getGroup(), "rule__GuardParameterBindingCS__Group__0");
 					put(grammarAccess.getGuardParameterCSAccess().getGroup(), "rule__GuardParameterCS__Group__0");
 					put(grammarAccess.getImportCSAccess().getGroup(), "rule__ImportCS__Group__0");
@@ -344,8 +345,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getIsCheckedAssignment_1_0(), "rule__DirectionCS__IsCheckedAssignment_1_0");
 					put(grammarAccess.getDirectionCSAccess().getIsEnforcedAssignment_1_1(), "rule__DirectionCS__IsEnforcedAssignment_1_1");
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_2(), "rule__DirectionCS__NameAssignment_2");
-					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_4(), "rule__DirectionCS__ImportsAssignment_4");
-					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_5_1(), "rule__DirectionCS__ImportsAssignment_5_1");
+					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3_1(), "rule__DirectionCS__ImportsAssignment_3_1");
+					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3_2_1(), "rule__DirectionCS__ImportsAssignment_3_2_1");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getIsCheckAssignment_0(), "rule__GuardParameterBindingCS__IsCheckAssignment_0");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getReferredVariableAssignment_1(), "rule__GuardParameterBindingCS__ReferredVariableAssignment_1");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getValueAssignment_3(), "rule__GuardParameterBindingCS__ValueAssignment_3");

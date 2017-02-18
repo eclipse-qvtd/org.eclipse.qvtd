@@ -43,7 +43,7 @@ DeclareStatementCS:  ('observe' observedProperties+=PathNameCS (',' observedProp
 	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 	
 DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=UnrestrictedName?
-	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
+	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 ;
 
 GuardParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::GuardParameter|UnrestrictedName] 'consumes' value=[qvtimperative::ConnectionVariable|UnrestrictedName] ';';

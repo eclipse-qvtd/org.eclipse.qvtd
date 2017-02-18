@@ -208,7 +208,7 @@
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
-        isNullFree="true" lower="1" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.22">
+        isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.22">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>

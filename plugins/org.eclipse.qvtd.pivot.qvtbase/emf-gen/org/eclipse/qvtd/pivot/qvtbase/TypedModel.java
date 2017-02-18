@@ -75,7 +75,7 @@ public interface TypedModel extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Used Package</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_UsedPackage()
-	 * @model required="true" ordered="false"
+	 * @model ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!usedPackage'"
 	 * @generated
 	 */

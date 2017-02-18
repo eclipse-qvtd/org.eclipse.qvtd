@@ -266,7 +266,7 @@
         name="transformation" lowerBound="1" eType="#T-qvtbase-Transformation" transient="true"
         eOpposite="#F-qvtbase-Transformation-modelParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-usedPackage"
-        name="usedPackage" ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
+        name="usedPackage" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-dependsOn"
         name="dependsOn" ordered="false" upperBound="-1" eType="#T-qvtbase-TypedModel">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">

@@ -633,7 +633,11 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     DirectionCS returns DirectionCS
 	 *
 	 * Constraint:
-	 *     ((isChecked?='check' | isEnforced?='enforce')? name=UnrestrictedName? imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)
+	 *     (
+	 *         (isChecked?='check' | isEnforced?='enforce')?
+	 *         name=UnrestrictedName?
+	 *         (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?
+	 *     )
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

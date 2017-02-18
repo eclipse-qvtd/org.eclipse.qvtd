@@ -79,7 +79,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
         eType="#//Transformation" transient="true" eOpposite="#//Transformation/modelParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedPackage" ordered="false"
-        lowerBound="1" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" ordered="false"
         upperBound="-1" eType="#//TypedModel">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">

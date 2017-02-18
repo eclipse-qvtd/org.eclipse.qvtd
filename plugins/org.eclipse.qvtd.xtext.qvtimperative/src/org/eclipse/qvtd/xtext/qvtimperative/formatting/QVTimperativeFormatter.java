@@ -117,7 +117,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			DirectionCSElements a = f.getDirectionCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
-			c.setNoSpace().before(a.getCommaKeyword_5_0());
+			c.setNoSpace().before(a.getCommaKeyword_3_2_0());
 		}
 		{
 			GuardParameterBindingCSElements a = f.getGuardParameterBindingCSAccess();
