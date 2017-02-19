@@ -11,14 +11,14 @@
 		<property name="incubation.qualifier" value="" />
 
 		<!-- if the build.alias is non-empty then use it in preference -->
-		<condition property="package.qualifier" value="${incubation.qualifier}-${build.alias}">
+		<condition property="package.qualifier" value="${build.alias}">
 			<and>
 				<isset property="build.alias" />
 				<length string="${build.alias}" when="greater" length="0" />
 			</and>
 		</condition>
 		<!-- otherwise use the build.id if defined, if not then fall back to an empty string -->
-		<condition property="package.qualifier" value="${incubation.qualifier}-${build.id}" else="${incubation.qualifier}">
+		<condition property="package.qualifier" value="${build.id}" else="">
 			<and>
 				<isset property="build.id" />
 				<length string="${build.id}" when="greater" length="0" />
@@ -30,14 +30,14 @@
 		<property name="incubation.qualifier" value="" />
 
 		<!-- if the build.alias is non-empty then use it in preference -->
-		<condition property="category.qualifier" value="${incubation.qualifier}-${build.alias}">
+		<condition property="category.qualifier" value="${build.alias}">
 			<and>
 				<isset property="build.alias" />
 				<length string="${build.alias}" when="greater" length="0" />
 			</and>
 		</condition>
 		<!-- otherwise use the build.id if defined, if not then fall back to an empty string -->
-		<condition property="category.qualifier" value="${incubation.qualifier}-${build.id}" else="${incubation.qualifier}">
+		<condition property="category.qualifier" value="${build.id}" else="">
 			<and>
 				<isset property="build.id" />
 				<length string="${build.id}" when="greater" length="0" />
