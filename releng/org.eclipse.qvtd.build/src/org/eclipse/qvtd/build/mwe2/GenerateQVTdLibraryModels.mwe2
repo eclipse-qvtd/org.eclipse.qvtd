@@ -31,7 +31,7 @@ Workflow {
     component = GenerateOCLstdlibXtend { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelFile = "model/QVTbaseLibrary.oclstdlib"
-    	uri = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
+    	uri = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvtbase/model-gen/QVTbaseLibrary.ecore"
     	javaFolder = "/org.eclipse.qvtd.pivot.qvtbase/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase.model"
@@ -45,7 +45,7 @@ Workflow {
     		to = "org.eclipse.ocl.pivot.model.OCLstdlib"
     	}
     	generatedClassNameMap = {
-    		from = "http://www.eclipse.org/qvt/2015/QVTbase"
+    		from = "http://www.eclipse.org/qvt/2017/QVTbase"
     		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
     	}
     	excludedEClassifierName = "Model"

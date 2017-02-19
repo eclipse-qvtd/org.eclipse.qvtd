@@ -55,7 +55,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 /**
- * This is the http://www.eclipse.org/qvt/2015/QVTbaseLibrary Standard Library
+ * This is the http://www.eclipse.org/qvt/2017/QVTbaseLibrary Standard Library
  * auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib.
  * It facilitates efficient library loading without the overheads of model reading.
  * <p>
@@ -77,10 +77,10 @@ public class QVTbaseLibrary extends ASResourceImpl
 	/**
 	 *	The URI of this Standard Library.
 	 */
-	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary";
+	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary";
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2015/QVTbaseLibrary standard Library Resource. 
+	 * Return the default http://www.eclipse.org/qvt/2017/QVTbaseLibrary standard Library Resource. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
 	 * It cannot be unloaded or rather unloading has no effect.
@@ -88,14 +88,14 @@ public class QVTbaseLibrary extends ASResourceImpl
 	public static @NonNull QVTbaseLibrary getDefault() {
 		QVTbaseLibrary oclstdlib = INSTANCE;
 		if (oclstdlib == null) {
-			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbaseLibrary");
+			Contents contents = new Contents("http://www.eclipse.org/qvt/2017/QVTbaseLibrary");
 			oclstdlib = INSTANCE = new QVTbaseLibrary(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, contents.getModel());
 		}
 		return oclstdlib;
 	}
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2015/QVTbaseLibrary standard Library model. 
+	 * Return the default http://www.eclipse.org/qvt/2017/QVTbaseLibrary standard Library model. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered. 
 	 */
@@ -239,7 +239,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2015/QVTbaseLibrary", null);
+			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2017/QVTbaseLibrary", null);
 			installPackages();
 			installClassTypes();
 			installComments();

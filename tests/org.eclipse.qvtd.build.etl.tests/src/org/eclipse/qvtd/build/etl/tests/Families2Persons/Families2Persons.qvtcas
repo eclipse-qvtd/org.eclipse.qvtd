@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2017/QVTcore"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
     name="Families2Persons.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.examples.qvtcore/qvtcsrc/Families2Persons/Families2Persons.qvtc">
   <ownedImports name="fMM" importedNamespace="pivot:Package Families.ecore.oclas#P.Families"/>
   <ownedImports name="pMM" importedNamespace="pivot:Package Persons.ecore.oclas#P.Persons"/>

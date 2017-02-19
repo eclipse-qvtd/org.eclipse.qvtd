@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Families" nsURI="http://www.eclipse.org/qvt/2015/QVTcore/examples/Families"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Families" nsURI="http://www.eclipse.org/qvt/2017/QVTcore/examples/Families"
     nsPrefix="families">
   <eClassifiers xsi:type="ecore:EClass" name="Family">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" ordered="false"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
-  <uml:Model xmi:id="_lJEicNhqEeS_WecIsDb67A" name="qvtcorebase" URI="http://www.eclipse.org/qvt/2015/QVTcoreBase">
+  <uml:Model xmi:id="_lJEicNhqEeS_WecIsDb67A" name="qvtcorebase" URI="http://www.eclipse.org/qvt/2017/QVTcoreBase">
     <packagedElement xmi:type="uml:Interface" xmi:id="_lJEicdhqEeS_WecIsDb67A" name="AbstractMapping">
       <generalization xmi:id="_lJEicthqEeS_WecIsDb67A">
         <general xmi:type="uml:Class" href="qvtbase.uml#_lG-3y9hqEeS_WecIsDb67A"/>

@@ -421,7 +421,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object _1) {
 							final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_0 = (Transformation)_1;
 							if (symbol_0 == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::extends\'");
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::extends\'");
 							}
 							final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_1 = symbol_0.getExtends();
 							return symbol_1;
@@ -443,7 +443,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						 * rule
 						 */
 						if (_1_0 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::rule\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::rule\'");
 						}
 						final /*@Thrown*/ java.util.@NonNull List<Rule> rule = _1_0.getRule();
 						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Rule, rule);
@@ -508,7 +508,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				/*@Thrown*/ boolean result;
 				if (ne) {
 					if (overrides == null) {
-						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
+						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Rule::domain\'");
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ java.util.@NonNull List<Domain> domain = overrides.getDomain();

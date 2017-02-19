@@ -50,7 +50,7 @@ public interface QVTcorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/2015/QVTcore";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTcore";
 
 	/**
 	 * The package namespace name.

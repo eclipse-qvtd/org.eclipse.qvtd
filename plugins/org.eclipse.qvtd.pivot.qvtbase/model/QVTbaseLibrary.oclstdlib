@@ -1,6 +1,6 @@
 import qvtb : 'QVTbase.ecore#/';
 
-library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLibrary'
+library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2017/QVTbaseLibrary'
 {
 type Model : TypedModel {}
 type Transformation : Transformation {}

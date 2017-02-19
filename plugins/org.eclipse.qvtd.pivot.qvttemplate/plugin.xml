@@ -10,7 +10,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.eclipse.org/qvt/2015/QVTtemplate"
+            uri="http://www.eclipse.org/qvt/2017/QVTtemplate"
             class="org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
             genModel="model/QVTtemplate.genmodel"/>
    </extension>
@@ -31,7 +31,7 @@
             name="%_UI_QVTtemplate_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTtemplate"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2017/QVTtemplate"/>
             <parameter name="kind" value="xmi"/>
          </describer>
       </content-type>

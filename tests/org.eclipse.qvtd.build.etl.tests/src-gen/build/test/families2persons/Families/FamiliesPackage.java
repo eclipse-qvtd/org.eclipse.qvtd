@@ -48,7 +48,7 @@ public interface FamiliesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/2015/QVTcore/examples/Families";
+	String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTcore/examples/Families";
 
 	/**
 	 * The package namespace name.

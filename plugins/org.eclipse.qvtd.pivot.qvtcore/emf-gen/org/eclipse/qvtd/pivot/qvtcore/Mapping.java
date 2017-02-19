@@ -49,7 +49,7 @@ public interface Mapping extends Rule, Area {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getMapping_Context()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#getLocal
 	 * @model opposite="local" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Mapping!context'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Mapping!context'"
 	 * @generated
 	 */
 	Mapping getContext();
@@ -78,7 +78,7 @@ public interface Mapping extends Rule, Area {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getMapping_Specification()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#getRefinement
 	 * @model opposite="refinement" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Mapping!specification'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Mapping!specification'"
 	 * @generated
 	 */
 	EList<Mapping> getSpecification();
@@ -124,7 +124,7 @@ public interface Mapping extends Rule, Area {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getMapping_Local()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#getContext
 	 * @model opposite="context" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Mapping!local'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Mapping!local'"
 	 * @generated
 	 */
 	EList<Mapping> getLocal();

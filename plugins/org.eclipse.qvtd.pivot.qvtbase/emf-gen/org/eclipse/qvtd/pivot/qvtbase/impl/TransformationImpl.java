@@ -274,7 +274,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public Function getFunction(final String name) {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!getFunction(String)
+		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!Transformation!getFunction(String)
 	}
 
 	/**
@@ -557,7 +557,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				/*@Thrown*/ boolean result;
 				if (ne) {
 					if (symbol_0 == null) {
-						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
+						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::modelParameter\'");
 					}
 					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = symbol_0.getModelParameter();
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);

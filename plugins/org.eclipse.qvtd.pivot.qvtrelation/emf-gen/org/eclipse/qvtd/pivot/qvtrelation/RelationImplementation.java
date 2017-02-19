@@ -45,7 +45,7 @@ public interface RelationImplementation extends Element {
 	 * @see #setImpl(Operation)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationImplementation_Impl()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationImplementation!impl'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!RelationImplementation!impl'"
 	 * @generated
 	 */
 	Operation getImpl();
@@ -72,7 +72,7 @@ public interface RelationImplementation extends Element {
 	 * @see #setInDirectionOf(TypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationImplementation_InDirectionOf()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationImplementation!inDirectionOf'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!RelationImplementation!inDirectionOf'"
 	 * @generated
 	 */
 	TypedModel getInDirectionOf();
@@ -101,7 +101,7 @@ public interface RelationImplementation extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationImplementation_Relation()
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#getOperationalImpl
 	 * @model opposite="operationalImpl"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationImplementation!relation'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!RelationImplementation!relation'"
 	 * @generated
 	 */
 	Relation getRelation();

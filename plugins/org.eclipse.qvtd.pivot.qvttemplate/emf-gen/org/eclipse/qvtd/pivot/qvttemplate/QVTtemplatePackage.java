@@ -47,7 +47,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/2015/QVTtemplate";
+	String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTtemplate";
 
 	/**
 	 * The package namespace name.

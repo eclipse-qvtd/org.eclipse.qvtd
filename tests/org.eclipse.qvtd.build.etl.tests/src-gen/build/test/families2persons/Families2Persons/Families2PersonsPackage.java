@@ -48,7 +48,7 @@ public interface Families2PersonsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/2015/QVTcore/examples/Families2Persons";
+	String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTcore/examples/Families2Persons";
 
 	/**
 	 * The package namespace name.

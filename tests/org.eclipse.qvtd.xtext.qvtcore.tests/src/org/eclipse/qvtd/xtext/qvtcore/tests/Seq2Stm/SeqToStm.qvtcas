@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2017/QVTcore"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
     name="SeqToStm.qvtcas" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/Seq2Stm/SeqToStm.qvtcas">
   <ownedComments body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
   <ownedImports name="SeqMM" importedNamespace="pivot:Package SeqMM.ecore.oclas#P.SeqMM">
@@ -420,7 +420,7 @@
               name="MessageSequenceToTransitionSequence_stm_v" type="pivot:Class SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"/>
         </bottomPattern>
       </rule>
-      <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTbaseLibrary.oclas#T.qvtbaselibrary.Transformation"/>
+      <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2017/QVTbaseLibrary.oclas#T.qvtbaselibrary.Transformation"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

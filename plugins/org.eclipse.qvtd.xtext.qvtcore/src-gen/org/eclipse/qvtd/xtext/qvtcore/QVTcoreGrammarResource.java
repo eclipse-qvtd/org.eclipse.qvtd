@@ -92,14 +92,14 @@ public class QVTcoreGrammarResource extends AbstractGrammarResource
 
 	private static class _QVTcore
 	{
-		private static final @NonNull ReferencedMetamodel MM = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage.eINSTANCE, null); // http://www.eclipse.org/qvt/2015/QVTcoreCS
+		private static final @NonNull ReferencedMetamodel MM = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage.eINSTANCE, null); // http://www.eclipse.org/qvt/2017/QVTcoreCS
 		private static final @NonNull ReferencedMetamodel MM_base = createReferencedMetamodel(org.eclipse.ocl.xtext.basecs.BaseCSPackage.eINSTANCE, "base"); // http://www.eclipse.org/ocl/2015/BaseCS
 		private static final @NonNull ReferencedMetamodel MM_ecore = createReferencedMetamodel(org.eclipse.emf.ecore.EcorePackage.eINSTANCE, "ecore"); // http://www.eclipse.org/emf/2002/Ecore
 		private static final @NonNull ReferencedMetamodel MM_essentialocl = createReferencedMetamodel(org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.eINSTANCE, "essentialocl"); // http://www.eclipse.org/ocl/2015/EssentialOCLCS
 		private static final @NonNull ReferencedMetamodel MM_pivot = createReferencedMetamodel(org.eclipse.ocl.pivot.PivotPackage.eINSTANCE, "pivot"); // http://www.eclipse.org/ocl/2015/Pivot
-		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2015/QVTbase
+		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2017/QVTbase
 		private static final @NonNull ReferencedMetamodel MM_qvtbasecs = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage.eINSTANCE, "qvtbasecs"); // http://www.eclipse.org/ocl/2016/QVTbaseCS
-		private static final @NonNull ReferencedMetamodel MM_qvtcore = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage.eINSTANCE, "qvtcore"); // http://www.eclipse.org/qvt/2015/QVTcore
+		private static final @NonNull ReferencedMetamodel MM_qvtcore = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage.eINSTANCE, "qvtcore"); // http://www.eclipse.org/qvt/2017/QVTcore
 
 		private static final @NonNull ParserRule PR_BottomPatternCS = createParserRule("BottomPatternCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage.Literals.BOTTOM_PATTERN_CS));
 		private static final @NonNull ParserRule PR_DirectionCS = createParserRule("DirectionCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage.Literals.DIRECTION_CS));
@@ -197,7 +197,7 @@ public class QVTcoreGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ReferencedMetamodel MM_ecore = createReferencedMetamodel(org.eclipse.emf.ecore.EcorePackage.eINSTANCE, "ecore"); // http://www.eclipse.org/emf/2002/Ecore
 		private static final @NonNull ReferencedMetamodel MM_essentialocl = createReferencedMetamodel(org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.eINSTANCE, "essentialocl"); // http://www.eclipse.org/ocl/2015/EssentialOCLCS
 		private static final @NonNull ReferencedMetamodel MM_pivot = createReferencedMetamodel(org.eclipse.ocl.pivot.PivotPackage.eINSTANCE, "pivot"); // http://www.eclipse.org/ocl/2015/Pivot
-		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2015/QVTbase
+		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2017/QVTbase
 
 		private static final @NonNull TerminalRule TR_UNQUOTED_STRING = createTerminalRule("UNQUOTED_STRING", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 

@@ -46,7 +46,7 @@ public interface Predicate extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPredicate_ConditionExpression()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='predicate'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Predicate!conditionExpression'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!Predicate!conditionExpression'"
 	 * @generated
 	 */
 	OCLExpression getConditionExpression();
@@ -75,7 +75,7 @@ public interface Predicate extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPredicate_Pattern()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Pattern#getPredicate
 	 * @model opposite="predicate" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Predicate!pattern'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!Predicate!pattern'"
 	 * @generated
 	 */
 	Pattern getPattern();

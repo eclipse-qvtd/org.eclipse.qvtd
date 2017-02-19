@@ -1,6 +1,6 @@
 import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib';
 
-library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLibrary'
+library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2017/QVTbaseLibrary'
 {
 type Model : TypedModel {
 	operation allObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.runtime.library.model.AllObjectsOperation';

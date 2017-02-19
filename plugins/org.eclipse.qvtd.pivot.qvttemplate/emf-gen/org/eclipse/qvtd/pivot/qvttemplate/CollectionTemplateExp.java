@@ -49,7 +49,7 @@ public interface CollectionTemplateExp extends TemplateExp {
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getCollectionTemplateExp_Member()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='listContainer'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!CollectionTemplateExp!member'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!CollectionTemplateExp!member'"
 	 * @generated
 	 */
 	EList<OCLExpression> getMember();
@@ -66,7 +66,7 @@ public interface CollectionTemplateExp extends TemplateExp {
 	 * @see #setReferredCollectionType(CollectionType)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getCollectionTemplateExp_ReferredCollectionType()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!CollectionTemplateExp!referredCollectionType'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!CollectionTemplateExp!referredCollectionType'"
 	 * @generated
 	 */
 	CollectionType getReferredCollectionType();
@@ -93,7 +93,7 @@ public interface CollectionTemplateExp extends TemplateExp {
 	 * @see #setRest(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getCollectionTemplateExp_Rest()
 	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='matchingExp'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!CollectionTemplateExp!rest'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!CollectionTemplateExp!rest'"
 	 * @generated
 	 */
 	Variable getRest();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtcore" nsURI="http://www.eclipse.org/qvt/2015/QVTcore" nsPrefix="qvtc">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtcore" nsURI="http://www.eclipse.org/qvt/2017/QVTcore" nsPrefix="qvtc">
   <eClassifiers xsi:type="ecore:EClass" name="Area" abstract="true" interface="true"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="guardPattern" lowerBound="1"

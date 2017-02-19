@@ -73,7 +73,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	public static @NonNull QVTimperativeLibrary getDefault() {
 		QVTimperativeLibrary oclstdlib = INSTANCE;
 		if (oclstdlib == null) {
-			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbaseLibrary");
+			Contents contents = new Contents("http://www.eclipse.org/qvt/2017/QVTbaseLibrary");
 			oclstdlib = INSTANCE = new QVTimperativeLibrary(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, contents.getModel());
 		}
 		return oclstdlib;
@@ -225,7 +225,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2015/QVTbaseLibrary", null);
+			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2017/QVTbaseLibrary", null);
 			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
 			installPackages();
 			installClassTypes();

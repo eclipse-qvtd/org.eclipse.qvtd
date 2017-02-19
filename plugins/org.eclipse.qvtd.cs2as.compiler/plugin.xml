@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated cs2ascgmodel -->
       <package
-            uri="http://www.eclipse.org/qvt/2015/CS2AScg"
+            uri="http://www.eclipse.org/qvt/2017/CS2AScg"
             class="org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage"
             genModel="model/cs2ascgmodel.genmodel"/>
    </extension>

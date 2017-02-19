@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtr="http://www.eclipse.org/qvt/2015/QVTrelation" xmlns:qvtt="http://www.eclipse.org/qvt/2015/QVTtemplate"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/2015/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase" xmlns:qvtr="http://www.eclipse.org/qvt/2017/QVTrelation" xmlns:qvtt="http://www.eclipse.org/qvt/2017/QVTtemplate"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/2017/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
     name="SimplerRelToCorePivotizedBeautyfied.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.compiler/src/org/eclipse/qvtd/compiler/internal/qvtr2qvtc/qvtrsrc/SimplerRelToCorePivotizedBeautyfied.qvtr">
   <ownedImports name="pivotocl" importedNamespace="pivot:Package ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#P.pivot"/>
   <ownedImports name="qvtbase" importedNamespace="pivot:Package ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#P.qvtbase"/>

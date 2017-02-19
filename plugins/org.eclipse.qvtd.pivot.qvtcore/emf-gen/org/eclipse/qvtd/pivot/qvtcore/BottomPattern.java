@@ -52,7 +52,7 @@ public interface BottomPattern extends CorePattern {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getBottomPattern_Area()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Area#getBottomPattern
 	 * @model opposite="bottomPattern" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!BottomPattern!area'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!BottomPattern!area'"
 	 * @generated
 	 */
 	@Override
@@ -82,7 +82,7 @@ public interface BottomPattern extends CorePattern {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getBottomPattern_Assignment()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Assignment#getBottomPattern
 	 * @model opposite="bottomPattern" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!BottomPattern!assignment'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!BottomPattern!assignment'"
 	 * @generated
 	 */
 	EList<Assignment> getAssignment();
@@ -101,7 +101,7 @@ public interface BottomPattern extends CorePattern {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getBottomPattern_EnforcementOperation()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation#getBottomPattern
 	 * @model opposite="bottomPattern" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!BottomPattern!enforcementOperation'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!BottomPattern!enforcementOperation'"
 	 * @generated
 	 */
 	EList<EnforcementOperation> getEnforcementOperation();
@@ -118,7 +118,7 @@ public interface BottomPattern extends CorePattern {
 	 * @return the value of the '<em>Realized Variable</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getBottomPattern_RealizedVariable()
 	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!BottomPattern!realizedVariable'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!BottomPattern!realizedVariable'"
 	 * @generated
 	 */
 	EList<RealizedVariable> getRealizedVariable();
