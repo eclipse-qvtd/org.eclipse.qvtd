@@ -84,199 +84,199 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTscheduleSwitch<@Nullable Adapter> modelSwitch =
 			new QVTscheduleSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseAbstractDatum(AbstractDatum object) {
-			return createAbstractDatumAdapter();
-		}
-		@Override
-		public Adapter caseBasicMappingRegion(BasicMappingRegion object) {
-			return createBasicMappingRegionAdapter();
-		}
-		@Override
-		public Adapter caseCastEdge(CastEdge object) {
-			return createCastEdgeAdapter();
-		}
-		@Override
-		public Adapter caseClassDatum(ClassDatum object) {
-			return createClassDatumAdapter();
-		}
-		@Override
-		public Adapter caseComposedNode(ComposedNode object) {
-			return createComposedNodeAdapter();
-		}
-		@Override
-		public Adapter caseConnection(Connection object) {
-			return createConnectionAdapter();
-		}
-		@Override
-		public Adapter caseConnectionEnd(ConnectionEnd object) {
-			return createConnectionEndAdapter();
-		}
-		@Override
-		public <CE extends ConnectionEnd> Adapter caseDatumConnection(DatumConnection<CE> object) {
-			return createDatumConnectionAdapter();
-		}
-		@Override
-		public Adapter caseDependencyNode(DependencyNode object) {
-			return createDependencyNodeAdapter();
-		}
-		@Override
-		public Adapter caseEdge(Edge object) {
-			return createEdgeAdapter();
-		}
-		@Override
-		public Adapter caseEdgeConnection(EdgeConnection object) {
-			return createEdgeConnectionAdapter();
-		}
-		@Override
-		public Adapter caseErrorNode(ErrorNode object) {
-			return createErrorNodeAdapter();
-		}
-		@Override
-		public Adapter caseExpressionEdge(ExpressionEdge object) {
-			return createExpressionEdgeAdapter();
-		}
-		@Override
-		public Adapter caseInputNode(InputNode object) {
-			return createInputNodeAdapter();
-		}
-		@Override
-		public Adapter caseIteratedEdge(IteratedEdge object) {
-			return createIteratedEdgeAdapter();
-		}
-		@Override
-		public Adapter caseIteratorNode(IteratorNode object) {
-			return createIteratorNodeAdapter();
-		}
-		@Override
-		public Adapter caseLoadingRegion(LoadingRegion object) {
-			return createLoadingRegionAdapter();
-		}
-		@Override
-		public Adapter caseMappingAction(MappingAction object) {
-			return createMappingActionAdapter();
-		}
-		@Override
-		public Adapter caseMappingRegion(MappingRegion object) {
-			return createMappingRegionAdapter();
-		}
-		@Override
-		public Adapter caseMicroMappingRegion(MicroMappingRegion object) {
-			return createMicroMappingRegionAdapter();
-		}
-		@Override
-		public Adapter caseNamedMappingRegion(NamedMappingRegion object) {
-			return createNamedMappingRegionAdapter();
-		}
-		@Override
-		public Adapter caseNavigableEdge(NavigableEdge object) {
-			return createNavigableEdgeAdapter();
-		}
-		@Override
-		public Adapter caseNavigationEdge(NavigationEdge object) {
-			return createNavigationEdgeAdapter();
-		}
-		@Override
-		public Adapter caseNode(Node object) {
-			return createNodeAdapter();
-		}
-		@Override
-		public Adapter caseNodeConnection(NodeConnection object) {
-			return createNodeConnectionAdapter();
-		}
-		@Override
-		public Adapter caseNullNode(NullNode object) {
-			return createNullNodeAdapter();
-		}
-		@Override
-		public Adapter caseOperationNode(OperationNode object) {
-			return createOperationNodeAdapter();
-		}
-		@Override
-		public Adapter caseOperationRegion(OperationRegion object) {
-			return createOperationRegionAdapter();
-		}
-		@Override
-		public Adapter casePatternTypedNode(PatternTypedNode object) {
-			return createPatternTypedNodeAdapter();
-		}
-		@Override
-		public Adapter casePatternVariableNode(PatternVariableNode object) {
-			return createPatternVariableNodeAdapter();
-		}
-		@Override
-		public Adapter casePredicateEdge(PredicateEdge object) {
-			return createPredicateEdgeAdapter();
-		}
-		@Override
-		public Adapter casePropertyDatum(PropertyDatum object) {
-			return createPropertyDatumAdapter();
-		}
-		@Override
-		public Adapter caseRecursionEdge(RecursionEdge object) {
-			return createRecursionEdgeAdapter();
-		}
-		@Override
-		public Adapter caseRegion(Region object) {
-			return createRegionAdapter();
-		}
-		@Override
-		public Adapter caseScheduleModel(ScheduleModel object) {
-			return createScheduleModelAdapter();
-		}
-		@Override
-		public Adapter caseScheduledRegion(ScheduledRegion object) {
-			return createScheduledRegionAdapter();
-		}
-		@Override
-		public Adapter caseSymbolable(Symbolable object) {
-			return createSymbolableAdapter();
-		}
-		@Override
-		public Adapter caseTrueNode(TrueNode object) {
-			return createTrueNodeAdapter();
-		}
-		@Override
-		public Adapter caseUnknownNode(UnknownNode object) {
-			return createUnknownNodeAdapter();
-		}
-		@Override
-		public Adapter caseVariableNode(VariableNode object) {
-			return createVariableNodeAdapter();
-		}
-		@Override
-		public Adapter caseDomainUsage(DomainUsage object) {
-			return createDomainUsageAdapter();
-		}
-		@Override
-		public Adapter caseVisitable(Visitable object) {
-			return createVisitableAdapter();
-		}
-		@Override
-		public Adapter caseElement(Element object) {
-			return createElementAdapter();
-		}
-		@Override
-		public Adapter caseNameable(Nameable object) {
-			return createNameableAdapter();
-		}
-		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
-		@Override
-		public Adapter caseNamespace(Namespace object) {
-			return createNamespaceAdapter();
-		}
-		@Override
-		public Adapter caseModel(Model object) {
-			return createModelAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseAbstractDatum(AbstractDatum object) {
+				return createAbstractDatumAdapter();
+			}
+			@Override
+			public Adapter caseBasicMappingRegion(BasicMappingRegion object) {
+				return createBasicMappingRegionAdapter();
+			}
+			@Override
+			public Adapter caseCastEdge(CastEdge object) {
+				return createCastEdgeAdapter();
+			}
+			@Override
+			public Adapter caseClassDatum(ClassDatum object) {
+				return createClassDatumAdapter();
+			}
+			@Override
+			public Adapter caseComposedNode(ComposedNode object) {
+				return createComposedNodeAdapter();
+			}
+			@Override
+			public Adapter caseConnection(Connection object) {
+				return createConnectionAdapter();
+			}
+			@Override
+			public Adapter caseConnectionEnd(ConnectionEnd object) {
+				return createConnectionEndAdapter();
+			}
+			@Override
+			public <CE extends ConnectionEnd> Adapter caseDatumConnection(DatumConnection<CE> object) {
+				return createDatumConnectionAdapter();
+			}
+			@Override
+			public Adapter caseDependencyNode(DependencyNode object) {
+				return createDependencyNodeAdapter();
+			}
+			@Override
+			public Adapter caseEdge(Edge object) {
+				return createEdgeAdapter();
+			}
+			@Override
+			public Adapter caseEdgeConnection(EdgeConnection object) {
+				return createEdgeConnectionAdapter();
+			}
+			@Override
+			public Adapter caseErrorNode(ErrorNode object) {
+				return createErrorNodeAdapter();
+			}
+			@Override
+			public Adapter caseExpressionEdge(ExpressionEdge object) {
+				return createExpressionEdgeAdapter();
+			}
+			@Override
+			public Adapter caseInputNode(InputNode object) {
+				return createInputNodeAdapter();
+			}
+			@Override
+			public Adapter caseIteratedEdge(IteratedEdge object) {
+				return createIteratedEdgeAdapter();
+			}
+			@Override
+			public Adapter caseIteratorNode(IteratorNode object) {
+				return createIteratorNodeAdapter();
+			}
+			@Override
+			public Adapter caseLoadingRegion(LoadingRegion object) {
+				return createLoadingRegionAdapter();
+			}
+			@Override
+			public Adapter caseMappingAction(MappingAction object) {
+				return createMappingActionAdapter();
+			}
+			@Override
+			public Adapter caseMappingRegion(MappingRegion object) {
+				return createMappingRegionAdapter();
+			}
+			@Override
+			public Adapter caseMicroMappingRegion(MicroMappingRegion object) {
+				return createMicroMappingRegionAdapter();
+			}
+			@Override
+			public Adapter caseNamedMappingRegion(NamedMappingRegion object) {
+				return createNamedMappingRegionAdapter();
+			}
+			@Override
+			public Adapter caseNavigableEdge(NavigableEdge object) {
+				return createNavigableEdgeAdapter();
+			}
+			@Override
+			public Adapter caseNavigationEdge(NavigationEdge object) {
+				return createNavigationEdgeAdapter();
+			}
+			@Override
+			public Adapter caseNode(Node object) {
+				return createNodeAdapter();
+			}
+			@Override
+			public Adapter caseNodeConnection(NodeConnection object) {
+				return createNodeConnectionAdapter();
+			}
+			@Override
+			public Adapter caseNullNode(NullNode object) {
+				return createNullNodeAdapter();
+			}
+			@Override
+			public Adapter caseOperationNode(OperationNode object) {
+				return createOperationNodeAdapter();
+			}
+			@Override
+			public Adapter caseOperationRegion(OperationRegion object) {
+				return createOperationRegionAdapter();
+			}
+			@Override
+			public Adapter casePatternTypedNode(PatternTypedNode object) {
+				return createPatternTypedNodeAdapter();
+			}
+			@Override
+			public Adapter casePatternVariableNode(PatternVariableNode object) {
+				return createPatternVariableNodeAdapter();
+			}
+			@Override
+			public Adapter casePredicateEdge(PredicateEdge object) {
+				return createPredicateEdgeAdapter();
+			}
+			@Override
+			public Adapter casePropertyDatum(PropertyDatum object) {
+				return createPropertyDatumAdapter();
+			}
+			@Override
+			public Adapter caseRecursionEdge(RecursionEdge object) {
+				return createRecursionEdgeAdapter();
+			}
+			@Override
+			public Adapter caseRegion(Region object) {
+				return createRegionAdapter();
+			}
+			@Override
+			public Adapter caseScheduleModel(ScheduleModel object) {
+				return createScheduleModelAdapter();
+			}
+			@Override
+			public Adapter caseScheduledRegion(ScheduledRegion object) {
+				return createScheduledRegionAdapter();
+			}
+			@Override
+			public Adapter caseSymbolable(Symbolable object) {
+				return createSymbolableAdapter();
+			}
+			@Override
+			public Adapter caseTrueNode(TrueNode object) {
+				return createTrueNodeAdapter();
+			}
+			@Override
+			public Adapter caseUnknownNode(UnknownNode object) {
+				return createUnknownNodeAdapter();
+			}
+			@Override
+			public Adapter caseVariableNode(VariableNode object) {
+				return createVariableNodeAdapter();
+			}
+			@Override
+			public Adapter caseDomainUsage(DomainUsage object) {
+				return createDomainUsageAdapter();
+			}
+			@Override
+			public Adapter caseVisitable(Visitable object) {
+				return createVisitableAdapter();
+			}
+			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseNamespace(Namespace object) {
+				return createNamespaceAdapter();
+			}
+			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
