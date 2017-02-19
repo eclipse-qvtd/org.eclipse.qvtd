@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
@@ -119,7 +120,7 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link EvaluationStatusPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -139,6 +140,8 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 		isInited = true;
 
 		// Initialize simple dependencies
+		PivotPackage.eINSTANCE.eClass();
+		QVTbasePackage.eINSTANCE.eClass();
 		QVTimperativePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -150,7 +153,7 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 		// Mark meta-data to indicate it can't be changed
 		theEvaluationStatusPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(EvaluationStatusPackage.eNS_URI, theEvaluationStatusPackage);
 		return theEvaluationStatusPackage;
@@ -774,15 +777,15 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
+		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "ecore", "http://www.eclipse.org/emf/2002/Ecore",
-			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
-			 "qvti", "QVTimperative.ecore#/"
-		   });
+		(this,
+			source,
+			new String[] {
+				"ecore", "http://www.eclipse.org/emf/2002/Ecore",
+				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
+				"qvti", "QVTimperative.ecore#/"
+		});
 	}
 
 } //EvaluationStatusPackageImpl

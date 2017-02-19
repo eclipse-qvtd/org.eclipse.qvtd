@@ -287,7 +287,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		isInited = true;
 
 		// Initialize simple dependencies
+		BaseCSPackage.eINSTANCE.eClass();
 		EssentialOCLCSPackage.eINSTANCE.eClass();
+		PivotPackage.eINSTANCE.eClass();
+		QVTbasePackage.eINSTANCE.eClass();
 		QVTimperativePackage.eINSTANCE.eClass();
 		QVTbaseCSPackage.eINSTANCE.eClass();
 

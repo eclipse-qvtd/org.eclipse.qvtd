@@ -148,7 +148,7 @@
         <details key="originalName" value="OverridesRuleIsExtendedRule"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;overrides &lt;> null implies&#xA;let extendedRules = transformation->closure(_extends)->excluding(transformation).rule&#xA;in extendedRules->includes(overrides)&#xA;"/>
+        <details key="body" value="&#xA;overrides &lt;> null and transformation &lt;> null implies&#xA;let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)&#xA;in extendedRules->includes(overrides)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

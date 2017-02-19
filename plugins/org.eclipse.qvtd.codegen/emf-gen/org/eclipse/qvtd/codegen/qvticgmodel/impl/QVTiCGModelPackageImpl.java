@@ -222,7 +222,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTiCGModelPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -253,7 +253,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		// Mark meta-data to indicate it can't be changed
 		theQVTiCGModelPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTiCGModelPackage.eNS_URI, theQVTiCGModelPackage);
 		return theQVTiCGModelPackage;
@@ -1072,13 +1072,13 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";
+		String source = "http://www.eclipse.org/OCL/Import";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-				"ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
+		   });
 	}
 
 } //QVTiCGModelPackageImpl

@@ -380,10 +380,11 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let result : Boolean[?] = overrides <> null implies
+		 *       let result : Boolean[?] = overrides <> null and transformation <> null implies
 		 *         let
 		 *           extendedRules : Bag(qvtbase::Rule) = transformation->closure(extends)
-		 *           ->excluding(transformation).rule
+		 *           ->excluding(transformation)
+		 *           ?->collect(rule)
 		 *         in extendedRules->includes(overrides)
 		 *       in
 		 *         'Rule::OverridesRuleIsExtendedRule'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -401,12 +402,21 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overrides = this.getOverrides();
-				final /*@NonInvalid*/ boolean ne = overrides != null;
-				/*@Thrown*/ boolean result;
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overrides_0 = this.getOverrides();
+				final /*@NonInvalid*/ boolean ne = overrides_0 != null;
+				/*@NonInvalid*/ boolean and;
 				if (ne) {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation_0 = this.getTransformation();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Transformation, transformation_0);
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
+					final /*@NonInvalid*/ boolean ne_0 = transformation != null;
+					and = ne_0;
+				}
+				else {
+					and = ValueUtil.FALSE_VALUE;
+				}
+				/*@Thrown*/ boolean result;
+				if (and) {
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation_1 = this.getTransformation();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Transformation, transformation_1);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 					final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Transformation, QVTbaseTables.CLSSid_Transformation);
@@ -429,30 +439,29 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					};
 					final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Transformation, BODY_closure_0, oclAsSet, ACC_closure_0);
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue excluding = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(closure, transformation_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue excluding = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(closure, transformation_1);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue safe_null_sources = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(excluding, (Object)null);
 					/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTbaseTables.BAG_CLSSid_Rule);
-					@Nullable Iterator<Object> ITERATOR__1_0 = excluding.iterator();
+					@NonNull Iterator<Object> ITERATOR__1_0 = safe_null_sources.iterator();
 					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue extendedRules;
 					while (true) {
 						if (!ITERATOR__1_0.hasNext()) {
 							extendedRules = accumulator;
 							break;
 						}
-						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation _1_0 = (Transformation)ITERATOR__1_0.next();
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation _1_0 = (Transformation)ITERATOR__1_0.next();
 						/**
 						 * rule
 						 */
-						if (_1_0 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::rule\'");
-						}
-						final /*@Thrown*/ java.util.@NonNull List<Rule> rule = _1_0.getRule();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Rule, rule);
+						final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = _1_0.getRule();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Rule, rule);
 						//
 						for (Object value : BOXED_rule.flatten().getElements()) {
 							accumulator.add(value);
 						}
 					}
-					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(extendedRules, overrides).booleanValue();
+					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(extendedRules, overrides_0).booleanValue();
 					result = includes;
 				}
 				else {

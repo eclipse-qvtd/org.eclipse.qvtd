@@ -29,10 +29,10 @@ import org.eclipse.jdt.annotation.NonNull;
  *
  * @deprecated Explicit 'NonNull' functionality is obsolete with Java 8 @NonNull annotations.
  */
-@Deprecated
+ @Deprecated
 public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
-extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNonNullExtendingCGModelVisitor<R, C>
-implements QVTiCGModelVisitor<R>
+	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNonNullExtendingCGModelVisitor<R, C>
+	implements QVTiCGModelVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

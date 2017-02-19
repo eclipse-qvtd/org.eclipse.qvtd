@@ -295,6 +295,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		isInited = true;
 
 		// Initialize simple dependencies
+		PivotPackage.eINSTANCE.eClass();
 		QVTbasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects

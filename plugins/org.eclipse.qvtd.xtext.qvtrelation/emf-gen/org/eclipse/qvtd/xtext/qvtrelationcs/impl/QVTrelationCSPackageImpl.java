@@ -20,6 +20,7 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
@@ -243,7 +244,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTrelationCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -263,9 +264,13 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		isInited = true;
 
 		// Initialize simple dependencies
+		BaseCSPackage.eINSTANCE.eClass();
 		EssentialOCLCSPackage.eINSTANCE.eClass();
+		PivotPackage.eINSTANCE.eClass();
+		QVTbasePackage.eINSTANCE.eClass();
 		QVTbaseCSPackage.eINSTANCE.eClass();
 		QVTrelationPackage.eINSTANCE.eClass();
+		QVTtemplatePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theQVTrelationCSPackage.createPackageContents();
@@ -276,7 +281,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationCSPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationCSPackage.eNS_URI, theQVTrelationCSPackage);
 		return theQVTrelationCSPackage;

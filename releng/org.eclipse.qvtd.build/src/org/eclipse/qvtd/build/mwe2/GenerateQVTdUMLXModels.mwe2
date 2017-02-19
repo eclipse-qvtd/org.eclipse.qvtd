@@ -25,18 +25,18 @@ import org.eclipse.emf.ecore.resource.impl.*
  *	Generate the Schedule Model used by the QVT scheduling.
  */
 Workflow {
-	bean = ResourceSetImpl : resourceSet {}
-    bean = StandaloneSetup { resourceSet = resourceSet
+	bean = ResourceSetImpl : umlxResourceSet {}
+    bean = StandaloneSetup { resourceSet = umlxResourceSet
     	platformUri = ".."
     	scanClassPath = true
     }
     
-    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = umlxResourceSet }
 
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = umlxResourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.umlx/model/UMLX.genmodel"
     }
-    component = GenerateUMLXVisitors { resourceSet = resourceSet
+    component = GenerateUMLXVisitors { resourceSet = umlxResourceSet
     	projectName = "org.eclipse.qvtd.umlx"
     	genModelFile = "model/UMLX.genmodel"
     }

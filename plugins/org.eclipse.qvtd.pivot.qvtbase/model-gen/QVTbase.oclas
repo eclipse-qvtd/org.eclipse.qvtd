@@ -46,7 +46,7 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;domain->isUnique(name)&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="ciqvtbase.Rule.OverridesRuleIsExtendedRule" isCallable="true" name="OverridesRuleIsExtendedRule">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;overrides &lt;> null implies&#xA;let extendedRules = transformation->closure(_extends)->excluding(transformation).rule&#xA;in extendedRules->includes(overrides)&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;overrides &lt;> null and transformation &lt;> null implies&#xA;let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)&#xA;in extendedRules->includes(overrides)&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="ciqvtbase.Rule.OverridesRuleOverridesAllDomains" isCallable="true" name="OverridesRuleOverridesAllDomains">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;overrides &lt;> null implies&#xA;overrides.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>

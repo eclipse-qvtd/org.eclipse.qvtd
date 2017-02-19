@@ -107,8 +107,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 
 		//AddStatementCS:
-		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'add'
-		//	targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		//	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'add'
@@ -416,8 +416,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 
 		//DeclareStatementCS:
-		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isCheck?='check'? 'var'
-		//	name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		//	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isCheck?='check'? 'var'
@@ -853,9 +853,13 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 
 		//MappingCS:
-		//	{MappingCS} isStrict?='strict'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{'
-		//	ownedParameters+=MappingParameterCS* ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS*
-		//	ownedStatements+=ControlStatementCS* '}';
+		//	{MappingCS} isStrict?='strict'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
+		//	'{'
+		//	ownedParameters+=MappingParameterCS*
+		//	ownedStatements+=GuardStatementCS*
+		//	ownedStatements+=CommitStatementCS*
+		//	ownedStatements+=ControlStatementCS*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//{MappingCS} isStrict?='strict'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{'
@@ -942,8 +946,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 
 		//MappingCallCS:
-		//	{MappingCallCS} ('call' | isInstall?='install' | isInvoke?='invoke') ownedPathName=PathNameCS '{'
-		//	ownedBindings+=MappingParameterBindingCS* '}';
+		//	{MappingCallCS} ('call' | isInstall?='install' | isInvoke?='invoke') ownedPathName=PathNameCS
+		//	'{' ownedBindings+=MappingParameterBindingCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//{MappingCallCS} ('call' | isInstall?='install' | isInvoke?='invoke') ownedPathName=PathNameCS '{'
@@ -1013,8 +1017,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 
 		//MappingLoopCS:
-		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'for'
-		//	ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'for' ownedIterator=MappingIteratorCS
@@ -1194,14 +1199,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_9 = (Keyword)cGroup.eContents().get(9);
 
 		//NewStatementCS:
-		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isContained?='contained'? 'new' ':'
-		//	referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//	ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		//	isContained?='contained'? 'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
+		//	name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isContained?='contained'? 'new' ':'
-		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';'
+		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+		//(':=' ownedExpression=ExpCS)? ';'
 		public Group getGroup() { return cGroup; }
 
 		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
@@ -1343,7 +1348,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//QualifiedPackageCS qvtbasecs::QualifiedPackageCS:
 		//	'package' ownedPathName=ScopeNameCS? name=UnrestrictedName (':' nsPrefix=UnrestrictedName)? ('=' nsURI=URI)? ('{'
-		//	(ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}' | ';')
+		//	(ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))*
+		//	'}' | ';')
 		@Override public ParserRule getRule() { return rule; }
 
 		//'package' ownedPathName=ScopeNameCS? name=UnrestrictedName (':' nsPrefix=UnrestrictedName)? ('=' nsURI=URI)? ('{'
@@ -1457,9 +1463,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_9_1_2 = (Keyword)cGroup_9_1.eContents().get(2);
 
 		//QueryCS:
-		//	isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName '('
-		//	(ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')' ':' ownedType=TypeExpCS (';' |
-		//	'{' ownedExpression=ExpCS '}');
+		//	isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
+		//	'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
+		//	':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
 		@Override public ParserRule getRule() { return rule; }
 
 		//isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName '('
@@ -1616,8 +1622,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_8 = (Keyword)cGroup.eContents().get(8);
 
 		//SetStatementCS:
-		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
-		//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		//	isNotify?='notify'? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
 		//	referredProperty=[pivot::Property|UnrestrictedName] (':=' | isPartial?='+=') ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1894,15 +1900,36 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cVarKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
 
 		//QVTimperativeUnrestrictedName:
-		//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
-		//
-		//	| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
-		//	'transformation' | 'transient' | 'uses' | 'var';
+		//	'add'
+		//	| 'append'
+		//	| 'appendsTo'
+		//	| 'buffer'
+		//	| 'call'
+		//	| 'check'
+		//	| 'contained'
+		//	| 'enforce'
+		//	| 'for'
+		//	| 'imports'
+		//	//|	'in'
+		//	| 'install'
+		//	| 'invoke'
+		//	| 'iterates'
+		//	| 'map'
+		//	| 'new'
+		//	| 'notify'
+		//	| 'observe'
+		//	| 'package'
+		//	| 'query'
+		//	| 'set'
+		//	| 'strict'
+		//	| 'transformation'
+		//	| 'transient'
+		//	| 'uses'
+		//	| 'var';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
-		// |
-		//'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
+		//| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
 		//'transformation' | 'transient' | 'uses' | 'var'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -1990,7 +2017,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cQVTimperativeUnrestrictedNameParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 
 		//UnrestrictedName:
-		//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTimperativeUnrestrictedName;
+		//	EssentialOCLUnrestrictedName
+		//	| QVTbaseUnrestrictedName
+		//	| QVTimperativeUnrestrictedName;
 		@Override public ParserRule getRule() { return rule; }
 
 		//EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTimperativeUnrestrictedName
@@ -2138,8 +2167,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AddStatementCS:
-	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'add'
-	//	targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	//	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 	public AddStatementCSElements getAddStatementCSAccess() {
 		return pAddStatementCS;
 	}
@@ -2210,8 +2239,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DeclareStatementCS:
-	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isCheck?='check'? 'var'
-	//	name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	//	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 	public DeclareStatementCSElements getDeclareStatementCSAccess() {
 		return pDeclareStatementCS;
 	}
@@ -2285,9 +2314,13 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCS:
-	//	{MappingCS} isStrict?='strict'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{'
-	//	ownedParameters+=MappingParameterCS* ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS*
-	//	ownedStatements+=ControlStatementCS* '}';
+	//	{MappingCS} isStrict?='strict'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
+	//	'{'
+	//	ownedParameters+=MappingParameterCS*
+	//	ownedStatements+=GuardStatementCS*
+	//	ownedStatements+=CommitStatementCS*
+	//	ownedStatements+=ControlStatementCS*
+	//	'}';
 	public MappingCSElements getMappingCSAccess() {
 		return pMappingCS;
 	}
@@ -2297,8 +2330,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCallCS:
-	//	{MappingCallCS} ('call' | isInstall?='install' | isInvoke?='invoke') ownedPathName=PathNameCS '{'
-	//	ownedBindings+=MappingParameterBindingCS* '}';
+	//	{MappingCallCS} ('call' | isInstall?='install' | isInvoke?='invoke') ownedPathName=PathNameCS
+	//	'{' ownedBindings+=MappingParameterBindingCS* '}';
 	public MappingCallCSElements getMappingCallCSAccess() {
 		return pMappingCallCS;
 	}
@@ -2308,8 +2341,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingLoopCS:
-	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'for'
-	//	ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+
+	//	'}';
 	public MappingLoopCSElements getMappingLoopCSAccess() {
 		return pMappingLoopCS;
 	}
@@ -2349,9 +2383,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NewStatementCS:
-	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isContained?='contained'? 'new' ':'
-	//	referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-	//	ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	//	isContained?='contained'? 'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
+	//	name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
 	public NewStatementCSElements getNewStatementCSAccess() {
 		return pNewStatementCS;
 	}
@@ -2372,7 +2406,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//QualifiedPackageCS qvtbasecs::QualifiedPackageCS:
 	//	'package' ownedPathName=ScopeNameCS? name=UnrestrictedName (':' nsPrefix=UnrestrictedName)? ('=' nsURI=URI)? ('{'
-	//	(ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))* '}' | ';')
+	//	(ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))*
+	//	'}' | ';')
 	public QualifiedPackageCSElements getQualifiedPackageCSAccess() {
 		return pQualifiedPackageCS;
 	}
@@ -2382,9 +2417,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QueryCS:
-	//	isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName '('
-	//	(ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')' ':' ownedType=TypeExpCS (';' |
-	//	'{' ownedExpression=ExpCS '}');
+	//	isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
+	//	'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
+	//	':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
 	public QueryCSElements getQueryCSAccess() {
 		return pQueryCS;
 	}
@@ -2404,8 +2439,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SetStatementCS:
-	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
-	//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	//	isNotify?='notify'? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
 	//	referredProperty=[pivot::Property|UnrestrictedName] (':=' | isPartial?='+=') ownedExpression=ExpCS ';';
 	public SetStatementCSElements getSetStatementCSAccess() {
 		return pSetStatementCS;
@@ -2447,10 +2482,32 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QVTimperativeUnrestrictedName:
-	//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
-	//
-	//	| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
-	//	'transformation' | 'transient' | 'uses' | 'var';
+	//	'add'
+	//	| 'append'
+	//	| 'appendsTo'
+	//	| 'buffer'
+	//	| 'call'
+	//	| 'check'
+	//	| 'contained'
+	//	| 'enforce'
+	//	| 'for'
+	//	| 'imports'
+	//	//|	'in'
+	//	| 'install'
+	//	| 'invoke'
+	//	| 'iterates'
+	//	| 'map'
+	//	| 'new'
+	//	| 'notify'
+	//	| 'observe'
+	//	| 'package'
+	//	| 'query'
+	//	| 'set'
+	//	| 'strict'
+	//	| 'transformation'
+	//	| 'transient'
+	//	| 'uses'
+	//	| 'var';
 	public QVTimperativeUnrestrictedNameElements getQVTimperativeUnrestrictedNameAccess() {
 		return pQVTimperativeUnrestrictedName;
 	}
@@ -2460,7 +2517,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//UnrestrictedName:
-	//	EssentialOCLUnrestrictedName | QVTbaseUnrestrictedName | QVTimperativeUnrestrictedName;
+	//	EssentialOCLUnrestrictedName
+	//	| QVTbaseUnrestrictedName
+	//	| QVTimperativeUnrestrictedName;
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return pUnrestrictedName;
 	}
@@ -2470,14 +2529,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttributeCS base::AttributeCS:
-	//	(qualifiers+='static' qualifiers+='definition'? | qualifiers+='definition' qualifiers+='static'?)? 'attribute'
-	//	name=super::UnrestrictedName (':' ownedType=TypedMultiplicityRefCS)? ('=' default=SINGLE_QUOTED_STRING)? ('{'
-	//	((qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='id' | qualifiers+='!id' | qualifiers+='ordered' |
+	//	(qualifiers+='static' qualifiers+='definition'? | qualifiers+='definition' qualifiers+='static'?)?
+	//	'attribute' name=super::UnrestrictedName (':' ownedType=TypedMultiplicityRefCS)? ('=' default=SINGLE_QUOTED_STRING)?
+	//	('{' ((qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='id' | qualifiers+='!id' | qualifiers+='ordered' |
 	//	qualifiers+='!ordered' | qualifiers+='readonly' | qualifiers+='!readonly' | qualifiers+='transient' |
 	//	qualifiers+='!transient' | qualifiers+='unique' | qualifiers+='!unique' | qualifiers+='unsettable' |
-	//	qualifiers+='!unsettable' | qualifiers+='volatile' | qualifiers+='!volatile') ','?)+ '}')? ('{' ('initial'
-	//	super::UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' super::UnrestrictedName?
-	//	':' ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';')
+	//	qualifiers+='!unsettable' | qualifiers+='volatile' | qualifiers+='!volatile') ','?)+
+	//	'}')? ('{' ('initial' super::UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation'
+	//	super::UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';')
 	public QVTbaseGrammarAccess.AttributeCSElements getAttributeCSAccess() {
 		return gaQVTbase.getAttributeCSAccess();
 	}
@@ -2497,9 +2556,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DataTypeCS base::DataTypeCS:
-	//	isPrimitive?='primitive'? 'datatype' name=super::UnrestrictedName ownedSignature=TemplateSignatureCS? (':'
-	//	instanceClassName=SINGLE_QUOTED_STRING)? ('{' (isSerializable?='serializable' | '!serializable')? '}')? ('{'
-	//	/ *(ownedAnnotations+=AnnotationElementCS
+	//	isPrimitive?='primitive'? 'datatype' name=super::UnrestrictedName
+	//	ownedSignature=TemplateSignatureCS? (':' instanceClassName=SINGLE_QUOTED_STRING)? ('{' (isSerializable?='serializable'
+	//	| '!serializable')? '}')? ('{' / *(ownedAnnotations+=AnnotationElementCS
 	//	        | ownedConstraints+=InvariantConstraintCS)* * / '}' | ';')
 	public QVTbaseGrammarAccess.DataTypeCSElements getDataTypeCSAccess() {
 		return gaQVTbase.getDataTypeCSAccess();
@@ -2510,8 +2569,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumerationCS base::EnumerationCS:
-	//	'enum' name=super::UnrestrictedName ownedSignature=TemplateSignatureCS? (':' instanceClassName=SINGLE_QUOTED_STRING)?
-	//	('{' (isSerializable?='serializable' | '!serializable')? '}')? ('{' ownedLiterals+=EnumerationLiteralCS
+	//	'enum' name=super::UnrestrictedName
+	//	ownedSignature=TemplateSignatureCS? (':' instanceClassName=SINGLE_QUOTED_STRING)? ('{' (isSerializable?='serializable'
+	//	| '!serializable')? '}')? ('{' ownedLiterals+=EnumerationLiteralCS
 	//	/ *| ownedConstraints+=InvariantConstraintCS* / * '}' | ';')
 	public QVTbaseGrammarAccess.EnumerationCSElements getEnumerationCSAccess() {
 		return gaQVTbase.getEnumerationCSAccess();
@@ -2533,12 +2593,13 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OperationCS base::OperationCS:
-	//	(qualifiers+='static' qualifiers+='definition'? | qualifiers+='definition' qualifiers+='static'?)? 'operation'
-	//	ownedSignature=TemplateSignatureCS? name=super::UnrestrictedName '(' (ownedParameters+=ParameterCS (','
-	//	ownedParameters+=ParameterCS)*)? ')' (':' ownedType=TypedMultiplicityRefCS)? ('throws' ownedExceptions+=TypedRefCS
-	//	(',' ownedExceptions+=TypedRefCS)*)? ('{' ((qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='ordered' |
-	//	qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique') ','?)+ '}')? ('{' ('body'
-	//	super::UnrestrictedName? ':' ownedBodyExpressions+=SpecificationCS? ';')* '}' | ';')
+	//	(qualifiers+='static' qualifiers+='definition'? | qualifiers+='definition' qualifiers+='static'?)?
+	//	'operation' ownedSignature=TemplateSignatureCS? name=super::UnrestrictedName
+	//	'(' (ownedParameters+=ParameterCS (',' ownedParameters+=ParameterCS)*)? ')' (':' ownedType=TypedMultiplicityRefCS)?
+	//	('throws' ownedExceptions+=TypedRefCS (',' ownedExceptions+=TypedRefCS)*)? ('{' ((qualifiers+='derived' |
+	//	qualifiers+='!derived' | qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique' |
+	//	qualifiers+='!unique') ','?)+
+	//	'}')? ('{' ('body' super::UnrestrictedName? ':' ownedBodyExpressions+=SpecificationCS? ';')* '}' | ';')
 	public QVTbaseGrammarAccess.OperationCSElements getOperationCSAccess() {
 		return gaQVTbase.getOperationCSAccess();
 	}
@@ -2549,8 +2610,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ParameterCS base::ParameterCS:
 	//	name=super::UnrestrictedName (':' ownedType=TypedMultiplicityRefCS)? ('{' ((qualifiers+='ordered' |
-	//	qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique') ','?)+ '}')? ('{'
-	//	/ *ownedAnnotations+=AnnotationElementCS* * / '}')?
+	//	qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique') ','?)+
+	//	'}')? ('{' / *ownedAnnotations+=AnnotationElementCS* * / '}')?
 	public QVTbaseGrammarAccess.ParameterCSElements getParameterCSAccess() {
 		return gaQVTbase.getParameterCSAccess();
 	}
@@ -2560,16 +2621,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReferenceCS base::ReferenceCS:
-	//	(qualifiers+='static' qualifiers+='definition'? | qualifiers+='definition' qualifiers+='static'?)? 'property'
-	//	name=super::UnrestrictedName ('#' referredOpposite=[pivot::Property|super::UnrestrictedName])? (':'
+	//	(qualifiers+='static' qualifiers+='definition'? | qualifiers+='definition' qualifiers+='static'?)?
+	//	'property' name=super::UnrestrictedName ('#' referredOpposite=[pivot::Property|super::UnrestrictedName])? (':'
 	//	ownedType=TypedMultiplicityRefCS)? ('=' default=SINGLE_QUOTED_STRING)? ('{' ((qualifiers+='composes' |
 	//	qualifiers+='!composes' | qualifiers+='derived' | qualifiers+='!derived' | qualifiers+='ordered' |
 	//	qualifiers+='!ordered' | qualifiers+='readonly' | qualifiers+='!readonly' | qualifiers+='resolve' |
 	//	qualifiers+='!resolve' | qualifiers+='transient' | qualifiers+='!transient' | qualifiers+='unique' |
 	//	qualifiers+='!unique' | qualifiers+='unsettable' | qualifiers+='!unsettable' | qualifiers+='volatile' |
-	//	qualifiers+='!volatile') ','?)+ '}')? ('{' ('initial' super::UnrestrictedName? ':'
-	//	ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation' super::UnrestrictedName? ':'
-	//	ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';')
+	//	qualifiers+='!volatile') ','?)+
+	//	'}')? ('{' ('initial' super::UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';' | 'derivation'
+	//	super::UnrestrictedName? ':' ownedDefaultExpressions+=SpecificationCS? ';')* '}' | ';')
 	public QVTbaseGrammarAccess.ReferenceCSElements getReferenceCSAccess() {
 		return gaQVTbase.getReferenceCSAccess();
 	}
@@ -2589,9 +2650,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StructuredClassCS base::StructuredClassCS:
-	//	isAbstract?='abstract'? 'class' name=super::UnrestrictedName ownedSignature=TemplateSignatureCS? ('extends'
-	//	ownedSuperTypes+=TypedRefCS (',' ownedSuperTypes+=TypedRefCS)*)? (':' instanceClassName=SINGLE_QUOTED_STRING)? ('{'
-	//	isInterface?='interface'? '}')? ('{' (ownedOperations+=OperationCS | ownedProperties+=StructuralFeatureCS
+	//	isAbstract?='abstract'?
+	//	'class' name=super::UnrestrictedName
+	//	ownedSignature=TemplateSignatureCS? ('extends' ownedSuperTypes+=TypedRefCS (',' ownedSuperTypes+=TypedRefCS)*)? (':'
+	//	instanceClassName=SINGLE_QUOTED_STRING)? ('{' isInterface?='interface'?
+	//	'}')? ('{' (ownedOperations+=OperationCS
+	//	| ownedProperties+=StructuralFeatureCS
 	//	/ *| ownedConstraints+=InvariantConstraintCS* /)* '}' | ';')
 	public QVTbaseGrammarAccess.StructuredClassCSElements getStructuredClassCSAccess() {
 		return gaQVTbase.getStructuredClassCSAccess();
@@ -2632,9 +2696,34 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QVTbaseUnrestrictedName:
-	//	'abstract' | 'attribute' | 'body' | 'class' | 'composes' | 'datatype' | 'definition' | 'derived' | 'derivation' |
-	//	'enum' | 'extends' | 'id' | 'initial' | 'interface' | 'literal' | 'operation' | 'ordered' | 'primitive' | 'property'
-	//	| 'readonly' | 'resolve' | 'serializable' | 'static' | 'throws' | 'transient' | 'unique' | 'unsettable' | 'volatile';
+	//	'abstract'
+	//	| 'attribute'
+	//	| 'body'
+	//	| 'class'
+	//	| 'composes'
+	//	| 'datatype'
+	//	| 'definition'
+	//	| 'derived'
+	//	| 'derivation'
+	//	| 'enum'
+	//	| 'extends'
+	//	| 'id'
+	//	| 'initial'
+	//	| 'interface'
+	//	| 'literal'
+	//	| 'operation'
+	//	| 'ordered'
+	//	| 'primitive'
+	//	| 'property'
+	//	| 'readonly'
+	//	| 'resolve'
+	//	| 'serializable'
+	//	| 'static'
+	//	| 'throws'
+	//	| 'transient'
+	//	| 'unique'
+	//	| 'unsettable'
+	//	| 'volatile';
 	public QVTbaseGrammarAccess.QVTbaseUnrestrictedNameElements getQVTbaseUnrestrictedNameAccess() {
 		return gaQVTbase.getQVTbaseUnrestrictedNameAccess();
 	}
@@ -2653,8 +2742,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//|	'postcondition'
 	//|	'precondition'
 	//|	'reference'
-	// * /
-	//SIGNED ecore::EInt:
+	// * / SIGNED ecore::EInt:
 	//	'-'? INT
 	public QVTbaseGrammarAccess.SIGNEDElements getSIGNEDAccess() {
 		return gaQVTbase.getSIGNEDAccess();
@@ -2665,15 +2753,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal UNQUOTED_STRING: // Never forward parsed; just provides a placeholder
-	// '£$%^£$%^'
-	//	//  for reverse serialisation of embedded OCL
+	//	'£$%^£$%^' //  for reverse serialisation of embedded OCL
 	//;
 	public TerminalRule getUNQUOTED_STRINGRule() {
 		return gaQVTbase.getUNQUOTED_STRINGRule();
 	}
 
 	////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
-	// Model ContextCS:
+	//Model ContextCS:
 	//	ownedExpression=ExpCS
 	public EssentialOCLGrammarAccess.ModelElements getModelAccess() {
 		return gaEssentialOCL.getModelAccess();
@@ -2685,7 +2772,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
 	//EssentialOCLReservedKeyword:
-	//	'and' | 'else' | 'endif' | 'if' | 'implies' | 'in' | 'let' | 'not' | 'or' | 'then' | 'xor';
+	//	'and'
+	//	| 'else'
+	//	| 'endif'
+	//	| 'if'
+	//	| 'implies'
+	//	| 'in'
+	//	| 'let'
+	//	| 'not'
+	//	| 'or'
+	//	| 'then'
+	//	| 'xor';
 	public EssentialOCLGrammarAccess.EssentialOCLReservedKeywordElements getEssentialOCLReservedKeywordAccess() {
 		return gaEssentialOCL.getEssentialOCLReservedKeywordAccess();
 	}
@@ -2768,10 +2865,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Names
-	//
+	////  Names
 	////---------------------------------------------------------------------
-	//
 	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
 	//EssentialOCLUnrestrictedName:
 	//	Identifier;
@@ -2785,7 +2880,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
 	//EssentialOCLUnreservedName:
-	//	super::UnrestrictedName | CollectionTypeIdentifier | PrimitiveTypeIdentifier | 'Map' | 'Tuple';
+	//	super::UnrestrictedName
+	//	| CollectionTypeIdentifier
+	//	| PrimitiveTypeIdentifier
+	//	| 'Map'
+	//	| 'Tuple';
 	public EssentialOCLGrammarAccess.EssentialOCLUnreservedNameElements getEssentialOCLUnreservedNameAccess() {
 		return gaEssentialOCL.getEssentialOCLUnreservedNameAccess();
 	}
@@ -2826,11 +2925,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Types
-	//
+	////  Types
 	////---------------------------------------------------------------------
-	// PrimitiveTypeIdentifier:
-	//	'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' | 'OclAny' | 'OclInvalid' | 'OclVoid';
+	//PrimitiveTypeIdentifier:
+	//	'Boolean'
+	//	| 'Integer'
+	//	| 'Real'
+	//	| 'String'
+	//	| 'UnlimitedNatural'
+	//	| 'OclAny'
+	//	| 'OclInvalid'
+	//	| 'OclVoid';
 	public EssentialOCLGrammarAccess.PrimitiveTypeIdentifierElements getPrimitiveTypeIdentifierAccess() {
 		return gaEssentialOCL.getPrimitiveTypeIdentifierAccess();
 	}
@@ -2850,7 +2955,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CollectionTypeIdentifier:
-	//	'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet';
+	//	'Set'
+	//	| 'Bag'
+	//	| 'Sequence'
+	//	| 'Collection'
+	//	| 'OrderedSet';
 	public EssentialOCLGrammarAccess.CollectionTypeIdentifierElements getCollectionTypeIdentifierAccess() {
 		return gaEssentialOCL.getCollectionTypeIdentifierAccess();
 	}
@@ -2901,11 +3010,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Literals
-	//
+	////  Literals
 	////---------------------------------------------------------------------
-	// CollectionLiteralExpCS:
-	//	ownedType=CollectionTypeCS '{' (ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)? '}';
+	//CollectionLiteralExpCS:
+	//	ownedType=CollectionTypeCS
+	//	'{' (ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)?
+	//	'}';
 	public EssentialOCLGrammarAccess.CollectionLiteralExpCSElements getCollectionLiteralExpCSAccess() {
 		return gaEssentialOCL.getCollectionLiteralExpCSAccess();
 	}
@@ -2925,8 +3035,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CollectionPatternCS:
-	//	ownedType=CollectionTypeCS '{' (ownedParts+=PatternExpCS (',' ownedParts+=PatternExpCS)* ('++'
-	//	restVariableName=Identifier))? '}';
+	//	ownedType=CollectionTypeCS
+	//	'{' (ownedParts+=PatternExpCS (',' ownedParts+=PatternExpCS)* ('++' restVariableName=Identifier))?
+	//	'}';
 	public EssentialOCLGrammarAccess.CollectionPatternCSElements getCollectionPatternCSAccess() {
 		return gaEssentialOCL.getCollectionPatternCSAccess();
 	}
@@ -2987,8 +3098,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveLiteralExpCS:
-	//	NumberLiteralExpCS | StringLiteralExpCS | BooleanLiteralExpCS | UnlimitedNaturalLiteralExpCS | InvalidLiteralExpCS |
-	//	NullLiteralExpCS;
+	//	NumberLiteralExpCS
+	//	| StringLiteralExpCS
+	//	| BooleanLiteralExpCS
+	//	| UnlimitedNaturalLiteralExpCS
+	//	| InvalidLiteralExpCS
+	//	| NullLiteralExpCS;
 	public EssentialOCLGrammarAccess.PrimitiveLiteralExpCSElements getPrimitiveLiteralExpCSAccess() {
 		return gaEssentialOCL.getPrimitiveLiteralExpCSAccess();
 	}
@@ -3038,7 +3153,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BooleanLiteralExpCS:
-	//	symbol='true' | symbol='false';
+	//	symbol='true'
+	//	| symbol='false';
 	public EssentialOCLGrammarAccess.BooleanLiteralExpCSElements getBooleanLiteralExpCSAccess() {
 		return gaEssentialOCL.getBooleanLiteralExpCSAccess();
 	}
@@ -3078,7 +3194,10 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeLiteralCS base::TypedRefCS:
-	//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS
+	//	PrimitiveTypeCS
+	//	| CollectionTypeCS
+	//	| MapTypeCS
+	//	| TupleTypeCS
 	public EssentialOCLGrammarAccess.TypeLiteralCSElements getTypeLiteralCSAccess() {
 		return gaEssentialOCL.getTypeLiteralCSAccess();
 	}
@@ -3138,22 +3257,15 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Expressions
-	//
+	////  Expressions
 	////---------------------------------------------------------------------
-	//
 	//// An ExpCS permits a LetExpCS only in the final term to ensure
-	//
 	////  that let is right associative, whereas infix operators are left associative.
-	//
 	////   a = 64 / 16 / let b : Integer in 8 / let c : Integer in 4
-	// // is
-	//
+	//// is
 	////   a = (64 / 16) / (let b : Integer in 8 / (let c : Integer in 4 ))
-	//
 	/// * An expression elaborates a prefixed expression with zero or more binary operator and expression suffixes.
-	// * An optionally prefixed let expression is permitted except when suffixed with further expressions.* /
-	//ExpCS:
+	// * An optionally prefixed let expression is permitted except when suffixed with further expressions.* / ExpCS:
 	//	PrefixedPrimaryExpCS ({InfixExpCS.ownedLeft=current} name=BinaryOperatorName ownedRight=ExpCS)? | PrefixedLetExpCS;
 	public EssentialOCLGrammarAccess.ExpCSElements getExpCSAccess() {
 		return gaEssentialOCL.getExpCSAccess();
@@ -3187,8 +3299,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * A primary expression identifies the basic expressions from which more complex expressions may be constructed. * /
 	//PrimaryExpCS ExpCS:
-	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
-	//	CollectionLiteralExpCS | LambdaLiteralExpCS | TypeLiteralExpCS | NameExpCS
+	//	NestedExpCS
+	//	| IfExpCS
+	//	| SelfExpCS
+	//	| PrimitiveLiteralExpCS
+	//	| TupleLiteralExpCS
+	//	| MapLiteralExpCS
+	//	| CollectionLiteralExpCS
+	//	| LambdaLiteralExpCS
+	//	| TypeLiteralExpCS
+	//	| NameExpCS
 	public EssentialOCLGrammarAccess.PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return gaEssentialOCL.getPrimaryExpCSAccess();
 	}
@@ -3198,8 +3318,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * A name expression is a generalised rule for expressions that start with a name and which may be followed by square, round or
-	// * curly bracket clauses and optionally an @pre as well.* /
-	//NameExpCS:
+	// * curly bracket clauses and optionally an @pre as well.* / NameExpCS:
 	//	ownedPathName=PathNameCS ownedSquareBracketedClauses+=SquareBracketedClauseCS*
 	//	ownedRoundBracketedClause=RoundBracketedClauseCS? ownedCurlyBracketedClause=CurlyBracketedClauseCS? (isPre?='@'
 	//	'pre')?;
@@ -3246,8 +3365,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * A navigating argument is a generalized rule for the first argument in a round bracket clause. This is typically the first operation
-	// * parameter or an iterator. * /
-	//NavigatingArgCS:
+	// * parameter or an iterator. * / NavigatingArgCS:
 	//	ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)? | 'in'
 	//	ownedInitExpression=ExpCS)? | ':' ownedType=TypeExpCS;
 	public EssentialOCLGrammarAccess.NavigatingArgCSElements getNavigatingArgCSAccess() {
@@ -3259,7 +3377,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Type-less init is an illegal infix expression
-	//
 	/// * A navigating bar argument is a generalized rule for a bar-prefixed argument in a round bracket clause. This is typically the body of an iteration. * /
 	//NavigatingBarArgCS NavigatingArgCS:
 	//	prefix='|' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)?)?
@@ -3272,10 +3389,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Type-less init is an illegal infix expression
-	//
 	/// * A navigating comma argument is a generalized rule for non-first argument in a round bracket clause. These are typically non-first operation
-	// * parameters or a second iterator. * /
-	//NavigatingCommaArgCS NavigatingArgCS:
+	// * parameters or a second iterator. * / NavigatingCommaArgCS NavigatingArgCS:
 	//	prefix=',' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)? | 'in'
 	//	ownedInitExpression=ExpCS)?
 	public EssentialOCLGrammarAccess.NavigatingCommaArgCSElements getNavigatingCommaArgCSAccess() {
@@ -3287,7 +3402,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Type-less init is an illegal infix expression
-	//
 	/// * A navigating semi argument is a generalized rule for a semicolon prefixed argument in a round bracket clause. This is typically an iterate accumulator. * /
 	//NavigatingSemiArgCS NavigatingArgCS:
 	//	prefix=';' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)?)?
@@ -3300,7 +3414,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Type-less init is an illegal infix expression
-	// NavigatingArgExpCS ExpCS:
+	//NavigatingArgExpCS ExpCS:
 	//	ExpCS
 	public EssentialOCLGrammarAccess.NavigatingArgExpCSElements getNavigatingArgExpCSAccess() {
 		return gaEssentialOCL.getNavigatingArgExpCSAccess();
@@ -3311,9 +3425,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IfExpCS:
-	//	'if' ownedCondition=(ExpCS | PatternExpCS) 'then' ownedThenExpression=ExpCS //	ifThenExpressions+=IfThenExpCS
-	//
-	//	ownedIfThenExpressions+=ElseIfThenExpCS* 'else' ownedElseExpression=ExpCS 'endif';
+	//	'if' ownedCondition=(ExpCS | PatternExpCS)
+	//	'then' ownedThenExpression=ExpCS
+	//	//	ifThenExpressions+=IfThenExpCS
+	//	ownedIfThenExpressions+=ElseIfThenExpCS*
+	//	'else' ownedElseExpression=ExpCS
+	//	'endif';
 	public EssentialOCLGrammarAccess.IfExpCSElements getIfExpCSAccess() {
 		return gaEssentialOCL.getIfExpCSAccess();
 	}
@@ -3323,12 +3440,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////IfThenExpCS returns IfThenExpCS:
-	// //	'if' condition=ExpCS
-	// //	'then' thenExpression=ExpCS
-	// //;
-	// ElseIfThenExpCS
-	//IfThenExpCS:
-	//	'elseif' ownedCondition=ExpCS 'then' ownedThenExpression=ExpCS
+	////	'if' condition=ExpCS
+	////	'then' thenExpression=ExpCS
+	////;
+	//ElseIfThenExpCS IfThenExpCS:
+	//	'elseif' ownedCondition=ExpCS
+	//	'then' ownedThenExpression=ExpCS
 	public EssentialOCLGrammarAccess.ElseIfThenExpCSElements getElseIfThenExpCSAccess() {
 		return gaEssentialOCL.getElseIfThenExpCSAccess();
 	}
@@ -3338,7 +3455,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LetExpCS:
-	//	'let' ownedVariables+=LetVariableCS (',' ownedVariables+=LetVariableCS)* 'in' ownedInExpression=ExpCS;
+	//	'let' ownedVariables+=LetVariableCS (',' ownedVariables+=LetVariableCS)*
+	//	'in' ownedInExpression=ExpCS;
 	public EssentialOCLGrammarAccess.LetExpCSElements getLetExpCSAccess() {
 		return gaEssentialOCL.getLetExpCSAccess();
 	}
@@ -3554,8 +3672,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	// * lookahead conflicts in simple lexers between a dot within a floating point number and the dot-dot in a CollectionLiteralPartCS. A
 	// * practical implementation should give high priority to a successful parse of INT ('.' INT)? (('e' | 'E') ('+' | '-')? INT)? than
 	// * to the unsuccessful partial parse of INT '..'. The type of the INT terminal is String to allow the floating point syntax to be used.
-	// * /
-	//NUMBER_LITERAL BigNumber:
+	// * / NUMBER_LITERAL BigNumber:
 	//	INT
 	public BaseGrammarAccess.NUMBER_LITERALElements getNUMBER_LITERALAccess() {
 		return gaBase.getNUMBER_LITERALAccess();
@@ -3566,7 +3683,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// EssentialOCLTokenSource pieces this together ('.' INT)? (('e' | 'E') ('+' | '-')? INT)?;
-	// StringLiteral:
+	//StringLiteral:
 	//	SINGLE_QUOTED_STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
 		return gaBase.getStringLiteralAccess();

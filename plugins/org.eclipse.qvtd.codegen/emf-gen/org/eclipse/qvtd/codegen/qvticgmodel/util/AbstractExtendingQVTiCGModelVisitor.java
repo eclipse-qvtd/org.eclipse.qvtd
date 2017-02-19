@@ -27,8 +27,8 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTiCGModelVisitor<R, C>
-extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor<R, C>
-implements QVTiCGModelVisitor<R>
+	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor<R, C>
+	implements QVTiCGModelVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

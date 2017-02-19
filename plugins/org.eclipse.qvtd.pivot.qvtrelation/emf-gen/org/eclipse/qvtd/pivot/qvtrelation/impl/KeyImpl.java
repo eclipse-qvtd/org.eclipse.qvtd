@@ -227,8 +227,8 @@ public class KeyImpl extends ElementImpl implements Key {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let
-		 *         result : Boolean[1] = transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
+		 *       let result : Boolean[?] = transformation <> null implies
+		 *         transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
 		 *       in
 		 *         'Key::IdentifiesIsAUsedPackageClass'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -245,35 +245,43 @@ public class KeyImpl extends ElementImpl implements Key {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@Nullable RelationalTransformation transformation = this.getTransformation();
-				if (transformation == null) {
-					throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::modelParameter\'");
-				}
-				final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
-				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						collect = accumulator;
-						break;
+				final /*@NonInvalid*/ boolean ne = transformation != null;
+				/*@Thrown*/ boolean result;
+				if (ne) {
+					if (transformation == null) {
+						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::modelParameter\'");
+					}
+					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
+					/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							collect = accumulator;
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel _1 = (TypedModel)ITERATOR__1.next();
+						/**
+						 * usedPackage
+						 */
+						final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
+						//
+						for (Object value : BOXED_usedPackage.flatten().getElements()) {
+							accumulator.add(value);
+						}
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel _1 = (TypedModel)ITERATOR__1.next();
-					/**
-					 * usedPackage
-					 */
-					final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
-					//
-					for (Object value : BOXED_usedPackage.flatten().getElements()) {
-						accumulator.add(value);
-					}
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Package owningPackage = identifies.getOwningPackage();
+					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, owningPackage).booleanValue();
+					result = includes;
 				}
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Package owningPackage = identifies.getOwningPackage();
-				final /*@Thrown*/ boolean result = CollectionIncludesOperation.INSTANCE.evaluate(collect, owningPackage).booleanValue();
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {

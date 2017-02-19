@@ -17,12 +17,12 @@ module GenerateQVTdAll
  */
 Workflow {
   component = @GenerateQVTdASModels {}
-  component = @GenerateQVTdLibraryModels {}
-  component = @GenerateQVTdScheduleModels {}
-  component = @GenerateQVTdEvaluationStatusModels {}
   component = @GenerateQVTdUMLXModels {}
+  component = @GenerateQVTdLibraryModels {}
+  component = @GenerateQVTdEvaluationStatusModels {}
   component = @GenerateQVTdCSModels {}
   component = @GenerateQVTdCGModels {}
+  component = @GenerateQVTbaseEditor {}
   component = @GenerateQVTcoreEditor {}
   component = @GenerateQVTimperativeEditor {}
   component = @GenerateQVTrelationEditor {}

@@ -168,6 +168,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		isInited = true;
 
 		// Initialize simple dependencies
+		PivotPackage.eINSTANCE.eClass();
 		QVTbasePackage.eINSTANCE.eClass();
 		QVTtemplatePackage.eINSTANCE.eClass();
 

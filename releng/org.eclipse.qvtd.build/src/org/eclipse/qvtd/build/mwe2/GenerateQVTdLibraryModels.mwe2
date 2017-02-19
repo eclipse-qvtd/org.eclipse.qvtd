@@ -22,13 +22,13 @@ import org.eclipse.emf.ecore.resource.impl.*
  *	Generate the QVTbase and QVTimperative Library Models.
  */
 Workflow {
-	bean = ResourceSetImpl : resourceSet {}
-    bean = StandaloneSetup { resourceSet = resourceSet
+	bean = ResourceSetImpl : libResourceSet {}
+    bean = StandaloneSetup { resourceSet = libResourceSet
     	platformUri = "../../plugins"
 //    	scanClassPath = true
     }
-    bean = GenModelSetup { resourceSet = resourceSet }
-    component = GenerateOCLstdlibXtend { resourceSet = resourceSet
+    bean = GenModelSetup { resourceSet = libResourceSet }
+    component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelFile = "model/QVTbaseLibrary.oclstdlib"
     	uri = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
@@ -51,14 +51,14 @@ Workflow {
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
     }
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = libResourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.genmodel"
     }
-    component = Model2tablesGenerator { resourceSet = resourceSet
+    component = Model2tablesGenerator { resourceSet = libResourceSet
     	genModelFile = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.genmodel"
     	genOCLstdlib = true
     }
-    component = GenerateOCLstdlibXtend { resourceSet = resourceSet
+    component = GenerateOCLstdlibXtend { resourceSet = libResourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
     	modelFile = "model/QVTimperativeLibrary.oclstdlib"
     	uri = "http://www.eclipse.org/qvt/2016/QVTimperativeLibrary"
@@ -81,10 +81,10 @@ Workflow {
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
     }
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = libResourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"
     }
-    component = Model2tablesGenerator { resourceSet = resourceSet
+    component = Model2tablesGenerator { resourceSet = libResourceSet
     	genModelFile = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"
     	genOCLstdlib = true
     }

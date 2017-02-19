@@ -215,7 +215,10 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		isInited = true;
 
 		// Initialize simple dependencies
+		BaseCSPackage.eINSTANCE.eClass();
 		EssentialOCLCSPackage.eINSTANCE.eClass();
+		PivotPackage.eINSTANCE.eClass();
+		QVTbasePackage.eINSTANCE.eClass();
 		QVTcorePackage.eINSTANCE.eClass();
 		QVTbaseCSPackage.eINSTANCE.eClass();
 

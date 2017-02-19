@@ -32,12 +32,12 @@ public abstract class AbstractExtendingEvaluationStatusVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingEvaluationStatusVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAssociationStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull AssociationStatus object) {

@@ -34,7 +34,7 @@ public abstract class AbstractEvaluationStatusVisitor<R, C>
 
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractEvaluationStatusVisitor(C context) {
@@ -51,10 +51,10 @@ public abstract class AbstractEvaluationStatusVisitor<R, C>
 			return null;
 		}
 	}
-	
+
 	/**
 	 * A null-safe visitation of the specified visitable.
-	 * 
+	 *
 	 * @param v a visitable, or <code>null</code>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
@@ -62,10 +62,10 @@ public abstract class AbstractEvaluationStatusVisitor<R, C>
 	public @Nullable R safeVisit(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@Nullable EvaluationElement v) {
 		return (v == null) ? null : v.accept(this);
 	}
-	
+
 	/**
 	 * Perform a visit to the specified visitable.
-	 * 
+	 *
 	 * @param v a visitable, or <code>null</code>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it

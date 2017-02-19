@@ -201,6 +201,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		isInited = true;
 
 		// Initialize simple dependencies
+		PivotPackage.eINSTANCE.eClass();
 		QVTbasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
