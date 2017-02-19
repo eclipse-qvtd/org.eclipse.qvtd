@@ -23,12 +23,8 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion2;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-//import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.AbstractMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
@@ -36,6 +32,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -235,10 +234,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtc", "person", "Families2Persons.genmodel");
-			myQVT.assertRegionCount(BasicMappingRegion.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(MicroMappingRegion.class, 2);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 2);
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("family", "Families.xmi");
@@ -315,10 +314,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("Forward2Reverse.qvtc", "forward", "List2List.genmodel");
-			myQVT.assertRegionCount(BasicMappingRegion.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(MicroMappingRegion.class, 7);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);
 			//
 			myQVT.createGeneratedExecutor(txClassReverse);
 			myQVT.loadInput("reverse", "ThreeElementList.xmi");
@@ -394,10 +393,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		try {
 			//			myQVT.createGeneratedExecutor(hsv2hsl.class);
 			myQVT.buildTransformation("HSV2HSL.qvtc", "hsl", "HSV2HSL.genmodel");
-			myQVT.assertRegionCount(BasicMappingRegion.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-			myQVT.assertRegionCount(MicroMappingRegion.class, 2);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 2);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("hsl", "SolarizedHSL_CG.xmi", "SolarizedHSL_expected.xmi", HSV2HSLNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
@@ -468,10 +467,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT(testFolderName);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
-			myQVT.assertRegionCount(BasicMappingRegion.class, 2);
+			myQVT.assertRegionCount(BasicMappingRegion2.class, 2);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(MicroMappingRegion.class, 20);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 20);
 			myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
 			myQVT.loadInput("uml", "SimplerUMLPeople.xmi");
 			myQVT.executeTransformation();

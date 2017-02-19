@@ -20,10 +20,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 /**
  * ScheduleCache provides the immutable caches used during the schedule index allocation.
@@ -43,36 +43,36 @@ public abstract class ScheduleCache extends Region2Depth
 	/**
 	 * Cached list of all incoming connections per-region; excludes recursions.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull DatumConnection>> region2incomingConnections = new HashMap<@NonNull Region, @NonNull List<@NonNull DatumConnection>>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull DatumConnection<?>>> region2incomingConnections = new HashMap<>();
 
 	/**
 	 * Cached list of all recursive/looping connections per-region.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull DatumConnection>> region2loopingConnections = new HashMap<@NonNull Region, @NonNull List<@NonNull DatumConnection>>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull DatumConnection<?>>> region2loopingConnections = new HashMap<>();
 
 	/**
 	 * Cached list of all outgoing connections per-region; excludes recursions.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull DatumConnection>> region2outgoingConnections = new HashMap<@NonNull Region, @NonNull List<@NonNull DatumConnection>>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull DatumConnection<?>>> region2outgoingConnections = new HashMap<>();
 
 	/**
 	 * Cached list of all source regions per-connection and whether the source has unserviced content for the connection.
 	 */
-	private final @NonNull Map<@NonNull DatumConnection, @NonNull List<@NonNull Region>> connection2sourceRegions = new HashMap<@NonNull DatumConnection, @NonNull List<@NonNull Region>>();
+	private final @NonNull Map<@NonNull DatumConnection<?>, @NonNull List<@NonNull Region>> connection2sourceRegions = new HashMap<>();
 
 	/**
 	 * Cached list of all target regions per-connection and whether the connection has unserviced content for the target.
 	 */
-	private final @NonNull Map<@NonNull DatumConnection, @NonNull List<@NonNull Region>> connection2targetRegions = new HashMap<@NonNull DatumConnection, @NonNull List<@NonNull Region>>();
+	private final @NonNull Map<@NonNull DatumConnection<?>, @NonNull List<@NonNull Region>> connection2targetRegions = new HashMap<>();
 
 	/**
 	 * The regions that have no outgoing passed connections.
 	 */
-	private final @NonNull Set<@NonNull Region> unpassedRegions = new HashSet<@NonNull Region>();
+	private final @NonNull Set<@NonNull Region> unpassedRegions = new HashSet<>();
 
 	protected ScheduleCache(@NonNull RootScheduledRegion rootScheduledRegion) {
 		this.rootScheduledRegion = rootScheduledRegion;
-		this.callableRegions = analyzeRegions(rootScheduledRegion, new ArrayList<@NonNull Region>());
+		this.callableRegions = analyzeRegions(rootScheduledRegion, new ArrayList<>());
 		Collections.sort(this.callableRegions, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Region region : this.callableRegions) {
 			getRegionDepth(region);
@@ -96,10 +96,10 @@ public abstract class ScheduleCache extends Region2Depth
 	 * Initialize the incoming/looping/outgoing connection analyses of each region
 	 */
 	private void analyzeConnections(@NonNull Region region) {
-		List<@NonNull DatumConnection> incomingConnections = new ArrayList<@NonNull DatumConnection>();
-		List<@NonNull DatumConnection> loopingConnections = new ArrayList<@NonNull DatumConnection>();
-		List<@NonNull DatumConnection> outgoingConnections = new ArrayList<@NonNull DatumConnection>();
-		for (@NonNull DatumConnection connection : region.getIncomingConnections()) {
+		List<@NonNull DatumConnection<?>> incomingConnections = new ArrayList<>();
+		List<@NonNull DatumConnection<?>> loopingConnections = new ArrayList<>();
+		List<@NonNull DatumConnection<?>> outgoingConnections = new ArrayList<>();
+		for (@NonNull DatumConnection<?> connection : region.getIncomingConnections()) {
 			for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
 				if (region == sourceRegion) {
 					if (!loopingConnections.contains(connection)) {
@@ -113,7 +113,7 @@ public abstract class ScheduleCache extends Region2Depth
 				}
 			}
 		}
-		for (@NonNull DatumConnection connection : region.getNextConnections()) {
+		for (@NonNull DatumConnection<?> connection : region.getNextConnections()) {
 			for (@NonNull Region targetRegion : connection.getTargetRegions()) {
 				if (region == targetRegion) {
 					assert loopingConnections.contains(connection);
@@ -152,7 +152,7 @@ public abstract class ScheduleCache extends Region2Depth
 	 */
 	private void analyzeSourcesAndTargets(@NonNull Region region) {
 		boolean hasPassedConnection = false;
-		for (@NonNull DatumConnection connection : getOutgoingConnections(region)) {
+		for (@NonNull DatumConnection<?> connection : getOutgoingConnections(region)) {
 			if (connection.isPassed()) {
 				hasPassedConnection = true;
 				break;
@@ -161,10 +161,10 @@ public abstract class ScheduleCache extends Region2Depth
 		if (!hasPassedConnection) {
 			unpassedRegions.add(region);
 		}
-		for (@NonNull DatumConnection connection : getIncomingConnections(region)) {
+		for (@NonNull DatumConnection<?> connection : getIncomingConnections(region)) {
 			List<@NonNull Region> sourceRegions = connection2sourceRegions.get(connection);
 			if (sourceRegions == null) {
-				sourceRegions = new ArrayList<@NonNull Region>();
+				sourceRegions = new ArrayList<>();
 				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
 					if (!sourceRegions.contains(sourceRegion)) {
 						sourceRegions.add(sourceRegion);
@@ -174,7 +174,7 @@ public abstract class ScheduleCache extends Region2Depth
 			}
 			List<@NonNull Region> targetRegions = connection2targetRegions.get(connection);
 			if (targetRegions == null) {
-				targetRegions = new ArrayList<@NonNull Region>();
+				targetRegions = new ArrayList<>();
 				for (@NonNull Region targetRegion : connection.getTargetRegions()) {
 					if (!targetRegions.contains(targetRegion)) {
 						targetRegions.add(targetRegion);
@@ -185,35 +185,35 @@ public abstract class ScheduleCache extends Region2Depth
 		}
 	}
 
-	protected @NonNull Iterable<? extends @NonNull DatumConnection> getConnections() {
+	protected @NonNull Iterable<? extends @NonNull DatumConnection<?>> getConnections() {
 		return connection2targetRegions.keySet();
 	}
 
-	protected @NonNull Iterable<@NonNull DatumConnection> getIncomingConnections(@NonNull Region region) {
-		List<@NonNull DatumConnection> incomingConnections = region2incomingConnections.get(region);
+	protected @NonNull Iterable<@NonNull DatumConnection<?>> getIncomingConnections(@NonNull Region region) {
+		List<@NonNull DatumConnection<?>> incomingConnections = region2incomingConnections.get(region);
 		assert incomingConnections != null;
 		return incomingConnections;
 	}
 
-	protected @NonNull Iterable<@NonNull DatumConnection> getLoopingConnections(@NonNull Region region) {
-		List<@NonNull DatumConnection> loopingConnections = region2loopingConnections.get(region);
+	protected @NonNull Iterable<@NonNull DatumConnection<?>> getLoopingConnections(@NonNull Region region) {
+		List<@NonNull DatumConnection<?>> loopingConnections = region2loopingConnections.get(region);
 		assert loopingConnections != null;
 		return loopingConnections;
 	}
 
-	protected @NonNull Iterable<@NonNull DatumConnection> getOutgoingConnections(@NonNull Region region) {
-		List<@NonNull DatumConnection> outgoingConnections = region2outgoingConnections.get(region);
+	protected @NonNull Iterable<@NonNull DatumConnection<?>> getOutgoingConnections(@NonNull Region region) {
+		List<@NonNull DatumConnection<?>> outgoingConnections = region2outgoingConnections.get(region);
 		assert outgoingConnections != null;
 		return outgoingConnections;
 	}
 
-	protected @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull DatumConnection connection) {
+	protected @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull DatumConnection<?> connection) {
 		List<@NonNull Region> sourceRegions = connection2sourceRegions.get(connection);
 		assert sourceRegions != null;
 		return sourceRegions;
 	}
 
-	protected @NonNull Iterable<@NonNull Region> getTargetRegions(@NonNull DatumConnection connection) {
+	protected @NonNull Iterable<@NonNull Region> getTargetRegions(@NonNull DatumConnection<?> connection) {
 		List<@NonNull Region> targetRegions = connection2targetRegions.get(connection);
 		assert targetRegions != null;
 		return targetRegions;

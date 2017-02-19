@@ -22,15 +22,16 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -285,7 +286,7 @@ public class Partitioner
 	private void check() {
 		for (@NonNull Node node : region.getNodes()) {
 			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
-				problemHandler.addProblem(region.createError("Should have realized " + node));
+				problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
@@ -293,7 +294,7 @@ public class Partitioner
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					problemHandler.addProblem(region.createError("Should have realized " + edge));
+					problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
 				}
 			}
 		}
@@ -306,13 +307,13 @@ public class Partitioner
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				problemHandler.addProblem(region.createWarning("Extra " + edge));
+				problemHandler.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
 				if (!isCorrolary(edge)) {// && !isDead(edge)) {
-					problemHandler.addProblem(region.createWarning("Missing " + edge));
+					problemHandler.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
 		}

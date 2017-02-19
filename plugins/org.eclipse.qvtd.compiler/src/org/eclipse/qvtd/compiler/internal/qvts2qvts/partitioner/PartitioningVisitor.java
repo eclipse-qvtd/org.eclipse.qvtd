@@ -18,26 +18,27 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractVisitor;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 
 /**
  * The PartitioningVisitor performs the selective clone of a region, selecting and possibly reclassifying
  * nodes and retaining only edges between the selected nodes.
  */
-class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
+class PartitioningVisitor extends AbstractVisitor<Visitable2>
 {
 	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion,
 			@NonNull String namePrefix, @NonNull String symbolSuffix, @NonNull AbstractPartition partition) {
-		MicroMappingRegion partialRegion = new MicroMappingRegion(fullRegion, namePrefix, symbolSuffix);
+		MicroMappingRegion partialRegion = new MicroMappingRegionImpl(fullRegion, namePrefix, symbolSuffix);
 		PartitioningVisitor partitioningVisitor = new PartitioningVisitor(partialRegion, partition);
 		fullRegion.accept(partitioningVisitor);
 		return partitioningVisitor;
@@ -180,7 +181,7 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @Nullable Node visitVariableNode(@NonNull VariableNodeImpl variableNode) {
+	public @Nullable Node visitVariableNode(@NonNull VariableNode variableNode) {
 		NodeRole nodeRole = partition.getNodeRole(variableNode);
 		if (nodeRole == null) {
 			return null;

@@ -22,19 +22,33 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-public abstract class AbstractScheduledRegion extends AbstractRegion implements ScheduledRegion
+public abstract class AbstractScheduledRegion extends ScheduledRegionImpl implements ScheduledRegion
 {
 	/**
 	 * All regions within this scheduled region.
@@ -113,7 +127,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 		for (@NonNull Region region : orderedRegions) {
-			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
+			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
 			region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
 			region.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
 		}
@@ -123,8 +137,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		for (@NonNull Region region : orderedRegions) {
 			//			int earliestPassedConnectionSourceIndex = region.getEarliestPassedConnectionSourceIndex();
 			int earliestIndex = region.getIndexes().get(0);
-			List<@NonNull DatumConnection> redundantConnections = null;
-			for (@NonNull DatumConnection usedConnection : region.getIncomingConnections()) {
+			List<@NonNull DatumConnection<?>> redundantConnections = null;
+			for (@NonNull DatumConnection<?> usedConnection : region.getIncomingConnections()) {
 				if (!usedConnection.isPassed(region)) {
 					boolean isRedundant = true;
 					for (@NonNull Region sourceRegion : usedConnection.getSourceRegions()) {
@@ -144,7 +158,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				}
 			}
 			if (redundantConnections != null) {
-				for (@NonNull DatumConnection redundantConnection : redundantConnections) {
+				for (@NonNull DatumConnection<?> redundantConnection : redundantConnections) {
 					redundantConnection.removeTargetRegion(region);
 				}
 			}
@@ -317,7 +331,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			s.appendName(owningClass.getName());
 			s.appendString("_");
 			s.appendName(property.getName());
-			connection = new BasicNodeConnection(this, sourceSet, s, classDatumAnalysis);
+			connection = new NodeConnectionImpl(this, sourceSet, s, classDatumAnalysis);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
@@ -325,7 +339,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 
 	@Override
 	public @NonNull Iterable<@NonNull Region> getCallableRegions() {
-		return Iterables.filter(getRegions(), IsCallableRegionPredicate.INSTANCE);
+		return Iterables.filter(getRegions(), QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE);
 	}
 
 	@Override
@@ -343,14 +357,14 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			s.appendName(property.getOwningClass().getName());
 			s.appendString("_");
 			s.appendName(property.getName());
-			connection = new BasicEdgeConnection(this, sourceSet, s, property);
+			connection = new EdgeConnectionImpl(this, sourceSet, s, property);
 			edges2edgeConnection.put(sourceSet, connection);
 		}
 		return connection;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections() {
+	public @NonNull Iterable<EdgeConnection> getEdgeConnections() {
 		return Iterables.filter(connections, EdgeConnection.class);
 	}
 
@@ -370,7 +384,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			s.appendString(domainUsage.isInput() ? "i" : domainUsage.isOutput() ? "o" : "m");
 			s.appendString("_");
 			s.appendName(classDatumAnalysis.getCompleteClass().getName());
-			connection = new BasicNodeConnection(this, sourceSet, s, classDatumAnalysis);
+			connection = new NodeConnectionImpl(this, sourceSet, s, classDatumAnalysis);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
@@ -413,7 +427,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				orderedRegions.remove(oldRegion);
 			}
 			orderedRegions.add(orderedRegionIndex, newRegion);
-			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
+			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
 			newRegion.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
 			newRegion.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
 		}

@@ -32,27 +32,11 @@ import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.TracingOption;
-import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -63,11 +47,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Element>
 {
-	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvti/polledProperties");
-
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Transformation qvtpTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
@@ -128,7 +124,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		connection2commonRegion.put(connection, commonRegion);
 		List<Connection> connections = region2connections.get(commonRegion);
 		if (connections == null) {
-			connections = new ArrayList<Connection>();
+			connections = new ArrayList<>();
 			region2connections.put(commonRegion, connections);
 		}
 		connections.add(connection);
@@ -310,7 +306,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	public @NonNull Set<@NonNull String> getReservedNames() {
 		Set<@NonNull String> reservedNames2 = reservedNames;
 		if (reservedNames2 == null) {
-			reservedNames = reservedNames2 = new HashSet<@NonNull String>();
+			reservedNames = reservedNames2 = new HashSet<>();
 			org.eclipse.ocl.pivot.Package standardLibraryPackage = standardLibrary.getPackage();
 			gatherReservedPackageNames(reservedNames2, Collections.singletonList(standardLibraryPackage));
 			reservedNames2.add(ClassUtil.nonNull(qvtpTransformation.getName()));
@@ -345,23 +341,18 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	//	}
 
 	@Override
-	public @Nullable Element visiting(@NonNull Visitable visitable) {
+	public @Nullable Element visiting(@NonNull Visitable2 visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
-	}
-
-	@Override
-	public Element visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
-		return visiting(basicEdgeConnection);
-	}
-
-	@Override
-	public Element visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
-		return visiting(basicNodeConnection);
 	}
 
 	@Override
 	public Element visitEdge(@NonNull Edge edge) {
 		return visiting(edge);
+	}
+
+	@Override
+	public Element visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
+		return visiting(edgeConnection);
 	}
 
 	@Override
@@ -378,6 +369,11 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	@Override
 	public Element visitNode(@NonNull Node node) {
 		return visiting(node);
+	}
+
+	@Override
+	public Element visitNodeConnection(@NonNull NodeConnection nodeConnection) {
+		return visiting(nodeConnection);
 	}
 
 	@Override
@@ -406,7 +402,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	public @Nullable Element visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
 		//		String name = rootRegion.getName();
 		//
-		List<@NonNull Region> callableRegions = new ArrayList<@NonNull Region>();
+		List<@NonNull Region> callableRegions = new ArrayList<>();
 		for (@NonNull Region region : rootScheduledRegion.getRegions()) {
 			if (region.isOperationRegion()) {}
 			//			else if (region.isConnectionRegion()) {
@@ -417,7 +413,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			}
 		}
 
-		List<@NonNull Region> sortedRegions = AbstractRegion.EarliestRegionComparator.sort(callableRegions);
+		List<@NonNull Region> sortedRegions = QVTscheduleUtil.EarliestRegionComparator.sort(callableRegions);
 		for (@NonNull Region region : sortedRegions) {
 			//			if (!region.isConnectionRegion()) {
 			createRegion2Mapping(region);
@@ -430,7 +426,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		//		chainGraph.writeChainGraphMLfile(baseURI, "c");
 		//
 
-		/*		Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2realizedEdges = new HashMap<TypedModel, Map<Property, List<NavigationEdge>>>();
+		/*		Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 		for (@SuppressWarnings("null")@NonNull Region region : sortedRegions) {
 			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
 			region2Mapping.computeRealizations(typedModel2property2realizedEdges);
@@ -465,7 +461,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		rootPackage.getOwnedClasses().add(qvtiTransformation);
 		Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 		model.getOwnedPackages().add(rootPackage);
-		List<@NonNull Namespace> importedNamespaces = new ArrayList<@NonNull Namespace>();
+		List<@NonNull Namespace> importedNamespaces = new ArrayList<>();
 		for (@NonNull TypedModel typedModel : qvtpTypedModel2qvtiTypedModel.values()) {
 			for (Namespace importedNamespace : ClassUtil.nullFree(typedModel.getUsedPackage())) {
 				if (!importedNamespaces.contains(importedNamespace)) {
@@ -482,7 +478,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
-	public Element visitVariableNode(@NonNull VariableNodeImpl variableNode) {
+	public Element visitVariableNode(@NonNull VariableNode variableNode) {
 		return visitNode(variableNode);
 	}
 }

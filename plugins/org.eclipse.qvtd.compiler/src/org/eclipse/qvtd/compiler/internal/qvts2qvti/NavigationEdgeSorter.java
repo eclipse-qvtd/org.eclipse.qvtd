@@ -11,13 +11,14 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+
 import com.google.common.collect.Lists;
 
 /**
- * NavigationEdgeSorter supports ordering of alist of NavigatioEdges  into least-dependent first order thereby ensuring
+ * NavigationEdgeSorter supports ordering of a list of NavigationEdges  into least-dependent first order thereby ensuring
  * that unrealized variables are created and initualized for accessed realized attribute nodes before they are used.
  */
 public class NavigationEdgeSorter

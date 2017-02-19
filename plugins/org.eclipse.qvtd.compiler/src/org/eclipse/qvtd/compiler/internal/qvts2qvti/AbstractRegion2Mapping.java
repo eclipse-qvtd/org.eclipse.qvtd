@@ -39,10 +39,6 @@ import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -52,6 +48,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 
 public abstract class AbstractRegion2Mapping
 {
@@ -63,12 +63,12 @@ public abstract class AbstractRegion2Mapping
 	/**
 	 * Mapping from QVTp expression to Schedule Node.
 	 */
-	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtp2node = new HashMap<@NonNull TypedElement, @NonNull Node>();
+	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtp2node = new HashMap<>();
 
 	/**
 	 * Safe name for each node
 	 */
-	private final @NonNull Map<@NonNull Node, @NonNull String> node2name = new HashMap<@NonNull Node, @NonNull String>();
+	private final @NonNull Map<@NonNull Node, @NonNull String> node2name = new HashMap<>();
 
 	/**
 	 * Safe name for each node

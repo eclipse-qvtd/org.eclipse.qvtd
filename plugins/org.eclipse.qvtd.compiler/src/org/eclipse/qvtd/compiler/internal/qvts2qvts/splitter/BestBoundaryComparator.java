@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 
 /**
  * BestBoundaryComparator supports comparison of boundaries so that more easily realizeable cross-boundary iterations are sorted first.

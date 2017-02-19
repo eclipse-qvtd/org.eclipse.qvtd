@@ -29,15 +29,15 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion2;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
 import org.eclipse.qvtd.umlx.tests.forward2reverse.Forward2ReverseNormalizer;
@@ -223,10 +223,10 @@ public class UMLXCompilerTests extends LoadTestCase
 					"Forward2Reverse.umlx", "reverse",
 					"http://www.eclipse.org/qvtd/umlx/tests/forward2reverse/Forward2Reverse", false);//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
-			myQVT.assertRegionCount(BasicMappingRegion.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-			myQVT.assertRegionCount(MicroMappingRegion.class, 5);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 5);
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();

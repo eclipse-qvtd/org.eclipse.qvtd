@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.AbstractCompilerProblem;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 public class RegionProblem extends AbstractCompilerProblem
 {

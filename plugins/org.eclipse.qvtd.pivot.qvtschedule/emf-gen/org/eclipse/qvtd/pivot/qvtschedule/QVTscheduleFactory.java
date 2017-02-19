@@ -35,6 +35,15 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Cast Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cast Edge</em>'.
+	 * @generated
+	 */
+	@NonNull CastEdge createCastEdge();
+
+	/**
 	 * Returns a new object of class '<em>Class Datum</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,6 +51,33 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ClassDatum createClassDatum();
+
+	/**
+	 * Returns a new object of class '<em>Composed Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composed Node</em>'.
+	 * @generated
+	 */
+	ComposedNode createComposedNode();
+
+	/**
+	 * Returns a new object of class '<em>Dependency Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dependency Node</em>'.
+	 * @generated
+	 */
+	DependencyNode createDependencyNode();
+
+	/**
+	 * Returns a new object of class '<em>Edge Connection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Edge Connection</em>'.
+	 * @generated
+	 */
+	EdgeConnection createEdgeConnection();
 
 	/**
 	 * Returns a new object of class '<em>Edge Role</em>'.
@@ -53,6 +89,51 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull EdgeRole createEdgeRole();
 
 	/**
+	 * Returns a new object of class '<em>Error Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Error Node</em>'.
+	 * @generated
+	 */
+	ErrorNode createErrorNode();
+
+	/**
+	 * Returns a new object of class '<em>Expression Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression Edge</em>'.
+	 * @generated
+	 */
+	@NonNull ExpressionEdge createExpressionEdge();
+
+	/**
+	 * Returns a new object of class '<em>Input Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Input Node</em>'.
+	 * @generated
+	 */
+	InputNode createInputNode();
+
+	/**
+	 * Returns a new object of class '<em>Iterated Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterated Edge</em>'.
+	 * @generated
+	 */
+	@NonNull IteratedEdge createIteratedEdge();
+
+	/**
+	 * Returns a new object of class '<em>Iterator Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator Node</em>'.
+	 * @generated
+	 */
+	IteratorNode createIteratorNode();
+
+	/**
 	 * Returns a new object of class '<em>Mapping Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,6 +141,42 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull MappingAction createMappingAction();
+
+	/**
+	 * Returns a new object of class '<em>Micro Mapping Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Micro Mapping Region</em>'.
+	 * @generated
+	 */
+	MicroMappingRegion createMicroMappingRegion();
+
+	/**
+	 * Returns a new object of class '<em>Named Mapping Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Mapping Region</em>'.
+	 * @generated
+	 */
+	NamedMappingRegion createNamedMappingRegion();
+
+	/**
+	 * Returns a new object of class '<em>Navigation Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Navigation Edge</em>'.
+	 * @generated
+	 */
+	@NonNull NavigationEdge createNavigationEdge();
+
+	/**
+	 * Returns a new object of class '<em>Node Connection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Node Connection</em>'.
+	 * @generated
+	 */
+	NodeConnection createNodeConnection();
 
 	/**
 	 * Returns a new object of class '<em>Node Role</em>'.
@@ -71,6 +188,51 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull NodeRole createNodeRole();
 
 	/**
+	 * Returns a new object of class '<em>Null Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Node</em>'.
+	 * @generated
+	 */
+	NullNode createNullNode();
+
+	/**
+	 * Returns a new object of class '<em>Operation Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Node</em>'.
+	 * @generated
+	 */
+	OperationNode createOperationNode();
+
+	/**
+	 * Returns a new object of class '<em>Pattern Typed Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pattern Typed Node</em>'.
+	 * @generated
+	 */
+	PatternTypedNode createPatternTypedNode();
+
+	/**
+	 * Returns a new object of class '<em>Pattern Variable Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pattern Variable Node</em>'.
+	 * @generated
+	 */
+	PatternVariableNode createPatternVariableNode();
+
+	/**
+	 * Returns a new object of class '<em>Predicate Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Predicate Edge</em>'.
+	 * @generated
+	 */
+	@NonNull PredicateEdge createPredicateEdge();
+
+	/**
 	 * Returns a new object of class '<em>Property Datum</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +240,33 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull PropertyDatum createPropertyDatum();
+
+	/**
+	 * Returns a new object of class '<em>Recursion Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Recursion Edge</em>'.
+	 * @generated
+	 */
+	@NonNull RecursionEdge createRecursionEdge();
+
+	/**
+	 * Returns a new object of class '<em>True Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>True Node</em>'.
+	 * @generated
+	 */
+	TrueNode createTrueNode();
+
+	/**
+	 * Returns a new object of class '<em>Unknown Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Node</em>'.
+	 * @generated
+	 */
+	UnknownNode createUnknownNode();
 
 	/**
 	 * Returns the package supported by this factory.

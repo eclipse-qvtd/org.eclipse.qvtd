@@ -19,11 +19,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Connection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
+import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
@@ -53,7 +53,7 @@ public abstract class ScheduleState extends ScheduleCache
 	/**
 	 * Working state: Whether the source has unserviced content for each region's connection source.
 	 */
-	private final @NonNull Map<@NonNull DatumConnection, @NonNull Map<@NonNull Region, @NonNull Boolean>> connection2sourceRegion2hasContent = new HashMap<>();
+	private final @NonNull Map<@NonNull DatumConnection<?>, @NonNull Map<@NonNull Region, @NonNull Boolean>> connection2sourceRegion2hasContent = new HashMap<>();
 
 	/**
 	 * Working state: call stack to access current region.
@@ -68,7 +68,7 @@ public abstract class ScheduleState extends ScheduleCache
 	/**
 	 * Working state: connections that block a region.
 	 */
-	private final @NonNull Set<@NonNull DatumConnection> blockedConnections = new HashSet<>();
+	private final @NonNull Set<@NonNull DatumConnection<?>> blockedConnections = new HashSet<>();
 
 	/**
 	 * Working state: connections that block a region.
@@ -94,9 +94,9 @@ public abstract class ScheduleState extends ScheduleCache
 		}
 		for (@NonNull Region region : this.callableRegions) {
 			//			for (@NonNull DatumConnection connection : region.getIncomingConnections()) {
-			Iterable<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
+			Iterable<@NonNull DatumConnection<?>> incomingConnections = getIncomingConnections(region);
 			assert incomingConnections != null;
-			for (@NonNull DatumConnection connection : incomingConnections) {
+			for (@NonNull DatumConnection<?> connection : incomingConnections) {
 				//			if (connection.isOutput()) {
 				Map<@NonNull Region, @NonNull Boolean> sourceRegion2hasContent = connection2sourceRegion2hasContent.get(connection);
 				assert sourceRegion2hasContent != null;
@@ -137,7 +137,7 @@ public abstract class ScheduleState extends ScheduleCache
 	 */
 	private void analyzeInitialConnectionContent(@NonNull Region region) {
 		boolean hasMandatoryUsedConnection = false;
-		for (@NonNull DatumConnection connection : getIncomingConnections(region)) {
+		for (@NonNull DatumConnection<?> connection : getIncomingConnections(region)) {
 			if (connection.isMandatory()) {
 				hasMandatoryUsedConnection = true;
 			}
@@ -168,7 +168,7 @@ public abstract class ScheduleState extends ScheduleCache
 		return callableRegion2blockedConnectionCount.get(region);
 	}
 
-	protected @NonNull Iterable<? extends @NonNull DatumConnection> getBlockedConnections() {
+	protected @NonNull Iterable<? extends @NonNull DatumConnection<?>> getBlockedConnections() {
 		return blockedConnections;
 	}
 
@@ -180,7 +180,7 @@ public abstract class ScheduleState extends ScheduleCache
 		return orderedRegions;
 	}
 
-	private @NonNull Map<@NonNull Region, @NonNull Boolean> getSourceRegion2hasContent(@NonNull DatumConnection connection) {
+	private @NonNull Map<@NonNull Region, @NonNull Boolean> getSourceRegion2hasContent(@NonNull DatumConnection<?> connection) {
 		Map<@NonNull Region, @NonNull Boolean> sourceRegion2hasContent = connection2sourceRegion2hasContent.get(connection);
 		assert sourceRegion2hasContent != null;
 		return sourceRegion2hasContent;
@@ -190,11 +190,11 @@ public abstract class ScheduleState extends ScheduleCache
 		return unblockedRegions;
 	}
 
-	private boolean isBlocked(@NonNull DatumConnection connection) {
+	private boolean isBlocked(@NonNull DatumConnection<?> connection) {
 		return blockedConnections.contains(connection);
 	}
 
-	private void propagateIndexes(@NonNull DatumConnection connection) {
+	private void propagateIndexes(@NonNull DatumConnection<?> connection) {
 		List<@NonNull Integer> connectionIndexes = connection.getIndexes();
 		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
 			for (@NonNull Region region : getTargetRegions(connection)) {
@@ -206,8 +206,8 @@ public abstract class ScheduleState extends ScheduleCache
 					}
 				}
 				if (propagateThroughRegion) {
-					Iterable<@NonNull DatumConnection> outgoingConnections = getOutgoingConnections(region);
-					for (@NonNull DatumConnection targetConnection : outgoingConnections) {
+					Iterable<@NonNull DatumConnection<?>> outgoingConnections = getOutgoingConnections(region);
+					for (@NonNull DatumConnection<?> targetConnection : outgoingConnections) {
 						boolean propagateThroughConnection = false;
 						for (int connectionIndex : connectionIndexes) {
 							if (targetConnection.addIndex(connectionIndex)) {
@@ -227,7 +227,7 @@ public abstract class ScheduleState extends ScheduleCache
 	 * Update the state of connection following the scheduling of region.
 	 * Add any regions whose blockage should be reconsidered to nextRegions.
 	 */
-	private void refreshConnectionBlockage(@NonNull DatumConnection connection,
+	private void refreshConnectionBlockage(@NonNull DatumConnection<?> connection,
 			@NonNull Region region, @NonNull Set<@NonNull Region> nextRegions) {
 		//
 		//	Update the relevant source region state.
@@ -312,10 +312,10 @@ public abstract class ScheduleState extends ScheduleCache
 		}
 		boolean hasPassedBlock = false;
 		boolean hasMandatoryBlock = false;
-		Iterable<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
+		Iterable<@NonNull DatumConnection<?>> incomingConnections = getIncomingConnections(region);
 		assert incomingConnections != null;
 		int blockedConnectionCount = 0;
-		for (@NonNull DatumConnection connection : incomingConnections) {
+		for (@NonNull DatumConnection<?> connection : incomingConnections) {
 			if (isBlocked(connection)) {
 				blockedConnectionCount++;
 				if (connection.isPassed()) {
@@ -373,9 +373,9 @@ public abstract class ScheduleState extends ScheduleCache
 		//
 		//		List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(selectedRegion);
 		//		assert incomingConnections != null;
-		Iterable<@NonNull DatumConnection> loopingConnections = getLoopingConnections(region);
+		Iterable<@NonNull DatumConnection<?>> loopingConnections = getLoopingConnections(region);
 		assert loopingConnections != null;
-		Iterable<@NonNull DatumConnection> outgoingConnections = getOutgoingConnections(region);
+		Iterable<@NonNull DatumConnection<?>> outgoingConnections = getOutgoingConnections(region);
 		assert outgoingConnections != null;
 		//		for (@NonNull DatumConnection incomingConnection : incomingConnections) {
 		//			List<@NonNull Region> targetRegions = getTargetRegions(incomingConnection);
@@ -396,11 +396,11 @@ public abstract class ScheduleState extends ScheduleCache
 		//	Fill outgoingConnections wrt selectedRegion
 		//
 		Set<@NonNull Region> nextRegions = new HashSet<>();
-		for (@NonNull DatumConnection loopingConnection : loopingConnections) {
+		for (@NonNull DatumConnection<?> loopingConnection : loopingConnections) {
 			loopingConnection.addIndex(thisIndex);
 			//			refreshConnectionBlockage(outgoingConnection, selectedRegion, nextRegions);
 		}
-		for (@NonNull DatumConnection outgoingConnection : outgoingConnections) {
+		for (@NonNull DatumConnection<?> outgoingConnection : outgoingConnections) {
 			outgoingConnection.addIndex(thisIndex);
 			refreshConnectionBlockage(outgoingConnection, region, nextRegions);
 		}
@@ -448,7 +448,7 @@ public abstract class ScheduleState extends ScheduleCache
 		/**
 		 * Propagate the additional connection indexes to their outgoing connections.
 		 */
-		for (@NonNull DatumConnection connection : getConnections()) {
+		for (@NonNull DatumConnection<?> connection : getConnections()) {
 			propagateIndexes(connection);
 		}
 		buildCallTree();

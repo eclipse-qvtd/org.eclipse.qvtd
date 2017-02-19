@@ -35,14 +35,15 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion2;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 /**
  * QVTs2QVTi supervises the serialization of a QVTs schedule as a QVTi transformation.
@@ -131,7 +132,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	}
 
 	protected void resolveTransformation(@NonNull Model model, @NonNull RootScheduledRegion scheduledRegion) {
-		QVTp2QVTs scheduler = scheduledRegion.getScheduler();
+		QVTp2QVTs scheduler = ((RootScheduledRegion2)scheduledRegion).getScheduler();
 		SymbolNameReservation symbolNameReservation = scheduler.getSymbolNameReservation();
 		Transformation transformation = scheduler.getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, environmentFactory, transformation, symbolNameReservation);

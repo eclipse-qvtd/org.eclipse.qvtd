@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
  * A Group participates in a hierarchy of groups that determine the scheduling of a multi-head region.

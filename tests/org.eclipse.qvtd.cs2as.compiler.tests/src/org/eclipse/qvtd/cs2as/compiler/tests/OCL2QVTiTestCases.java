@@ -33,10 +33,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -55,6 +52,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -296,10 +296,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion.class, 19);
+		myQVT.assertRegionCount(BasicMappingRegion2.class, 19);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"example1.target.lookup.util.TargetLookupSolver",
 			"example1.target.lookup.util.TargetLookupResult",
@@ -371,10 +371,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		myQVT.loadEcoreFile("EnvExample2.ecore", example2.classes.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion.class, 3);
+		myQVT.assertRegionCount(BasicMappingRegion2.class, 3);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"example2.classes.lookup.util.ClassesLookupSolver",
 			"example2.classes.lookup.util.ClassesLookupResult",
@@ -440,10 +440,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion.class, 15);
+		myQVT.assertRegionCount(BasicMappingRegion2.class, 15);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 5);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 2);
-		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"example2.classes.lookup.util.ClassesLookupSolver",
 			"example2.classes.lookup.util.ClassesLookupResult",
@@ -533,10 +533,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion.class, 6);
+		myQVT.assertRegionCount(BasicMappingRegion2.class, 6);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 1);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -590,10 +590,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion.class, 7);
+		myQVT.assertRegionCount(BasicMappingRegion2.class, 7);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 1);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -633,10 +633,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion.class, 5);
+		myQVT.assertRegionCount(BasicMappingRegion2.class, 5);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"",
 			"",

@@ -11,13 +11,9 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -37,34 +33,41 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.CastEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ComposedNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.DependencyNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ErrorNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ExpressionEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.InputNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratedEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratorNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NavigationEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NullNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.OperationNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PatternTypedNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PatternVariableNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PredicateEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.RecursionEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.TrueNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.UnknownNodeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
+import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.ErrorNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.ExpressionEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.InputNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.IteratedEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.TrueNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.VariableNodeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RegionUtil extends QVTscheduleUtil
@@ -103,7 +106,7 @@ public class RegionUtil extends QVTscheduleUtil
 		assert sourceNode.isClass() || (property.getOpposite() != null);	// FIXME review is this relevant?
 		String name = property.getName();
 		assert name != null;
-		Region region = sourceNode.getRegion();
+		Region region = getRegion(sourceNode);
 		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(navigationCallExp), isMatched);
 		node.addTypedElement(navigationCallExp);
 		return node;
@@ -119,7 +122,7 @@ public class RegionUtil extends QVTscheduleUtil
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;
 		TypedModel typedModel = targetNode.getClassDatumAnalysis().getTypedModel();
-		Region region = targetNode.getRegion();
+		Region region = getRegion(targetNode);
 		ClassDatum classDatum = region.getSchedulerConstants().getClassDatum(type, typedModel);
 		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
 		ClassDatumAnalysis classDatumAnalysis = region.getSchedulerConstants().getClassDatumAnalysis(classDatum);
@@ -130,7 +133,7 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull Node createDependencyClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
 		assert parentNode.isClass();
-		SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
+		SchedulerConstants schedulerConstants = getRegion(parentNode).getSchedulerConstants();
 		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		assert property != null;
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
@@ -141,7 +144,7 @@ public class RegionUtil extends QVTscheduleUtil
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
 		String name = property.getName();
 		assert name != null;
-		return createDependencyNode(parentNode.getRegion(), name, classDatumAnalysis);
+		return createDependencyNode(RegionUtil.getRegion(parentNode), name, classDatumAnalysis);
 	}
 
 	public static @NonNull Node createDependencyNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -171,12 +174,12 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull VariableNodeImpl createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
 		NodeRole nodeRole = getNodeRole(getPhase(sourceNode.getNodeRole()));
-		return IteratorNodeImpl.create(nodeRole, sourceNode.getRegion(), iterator);
+		return IteratorNodeImpl.create(nodeRole, RegionUtil.getRegion(sourceNode), iterator);
 	}
 
 	public static @NonNull VariableNodeImpl createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
 		NodeRole nodeRole = getNodeRole(getPhase(inNode.getNodeRole()));
-		return PatternVariableNodeImpl.create(nodeRole, inNode.getRegion(), letVariable, inNode.isMatched());
+		return PatternVariableNodeImpl.create(nodeRole, getRegion(inNode), letVariable, inNode.isMatched());
 	}
 
 	public static @NonNull VariableNodeImpl createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
@@ -237,7 +240,7 @@ public class RegionUtil extends QVTscheduleUtil
 	}
 
 	public static @NonNull Node createPatternNode(@NonNull NodeRole nodeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isMatched) {
-		Region region = sourceNode.getRegion();
+		Region region = getRegion(sourceNode);
 		assert sourceNode.isClass();
 		SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
@@ -282,8 +285,18 @@ public class RegionUtil extends QVTscheduleUtil
 		return RecursionEdgeImpl.create(edgeRole, sourceNode, targetNode, isPrimary);
 	}
 
+	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		return new RegionProblem(CompilerProblem.Severity.ERROR, region, boundMessage);
+	}
+
+	public static @NonNull RegionProblem createRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		return new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage);
+	}
+
 	public static @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
-		Region region = sourceNode.getRegion();
+		Region region = getRegion(sourceNode);
 		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
 		boolean isDirty = false;
@@ -317,96 +330,6 @@ public class RegionUtil extends QVTscheduleUtil
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		NodeRole nodeRole = getNodeRole(Phase.OTHER);
 		return UnknownNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
-	}
-
-	/**
-	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
-	 */
-	public static @NonNull NavigableEdge getCastTarget(@NonNull NavigableEdge edge) {
-		@NonNull NavigableEdge sourceEdge = edge;
-		while (true) {
-			@Nullable NavigableEdge targetEdge = null;
-			for (@NonNull Edge nextEdge : sourceEdge.getEdgeTarget().getOutgoingEdges()) {
-				if (nextEdge.isRecursion()) {
-					continue;
-				}
-				if (!nextEdge.isCast()) {
-					return sourceEdge;
-				}
-				if (targetEdge != null) {			// FIXME multi-cast support
-					return sourceEdge;
-				}
-				targetEdge = (NavigableEdge) nextEdge;
-			}
-			if (targetEdge == null) {
-				return sourceEdge;
-			}
-			sourceEdge = targetEdge;
-		}
-	}
-
-	/**
-	 * Return the node unless it is subject to a cast chain in which case return the final cast.
-	 */
-	public static @NonNull Node getCastTarget(@NonNull Node node) {
-		@NonNull Node sourceNode = node;
-		while (true) {
-			@Nullable Node targetNode = null;
-			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
-				if (edge.isRecursion() || edge.isSecondary()) {
-					continue;
-				}
-				if (!edge.isCast()) {
-					return sourceNode;
-				}
-				if (targetNode != null) {			// FIXME multi-cast support
-					return sourceNode;
-				}
-				targetNode = edge.getEdgeTarget();
-			}
-			if (targetNode == null) {
-				return sourceNode;
-			}
-			sourceNode = targetNode;
-		}
-	}
-
-	/**
-	 * Return all nodes to which node is transitively cast or just node in the total absence of casts.
-	 * If includeUsedIntermediates is set, cast edge inputs that are used by non-cast edges are also returned.
-	 */
-	public static @NonNull Iterable<@NonNull Node> getCastTargets(@NonNull Node node, boolean includeUsedIntermediates) {
-		for (@NonNull Edge edge : node.getOutgoingEdges()) {
-			if (edge.isRecursion() || edge.isSecondary()) {
-				continue;
-			}
-			else if (edge.isCast()) {
-				Set<@NonNull Node> castTargets = new HashSet<>();
-				getCastTargets(node, includeUsedIntermediates, new HashSet<>(), castTargets);
-				return castTargets;
-			}
-		}
-		return Collections.singletonList(node);
-	}
-	private static void getCastTargets(@NonNull Node sourceNode, boolean includeUsedIntermediates, @NonNull Set<@NonNull Node> castSources, @NonNull Set<@NonNull Node> castTargets) {
-		if (castSources.add(sourceNode)) {
-			boolean hasCast = false;
-			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
-				if (edge.isRecursion() || edge.isSecondary()) {
-					continue;
-				}
-				else if (edge.isCast()) {
-					hasCast = true;
-					getCastTargets(edge.getEdgeTarget(), includeUsedIntermediates, castSources, castTargets);
-				}
-				else if (includeUsedIntermediates) {
-					castTargets.add(sourceNode);
-				}
-			}
-			if (!hasCast) {
-				castTargets.add(sourceNode);
-			}
-		}
 	}
 
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
@@ -471,7 +394,7 @@ public class RegionUtil extends QVTscheduleUtil
 			case REALIZED: phase = Phase.REALIZED; break;
 			case PREDICATED: phase = Phase.PREDICATED; break;
 			case LOADED: {
-				boolean isDirty = sourceNode.getRegion().getSchedulerConstants().isDirty(property);
+				boolean isDirty = getRegion(sourceNode).getSchedulerConstants().isDirty(property);
 				phase = isDirty ? Phase.PREDICATED : Phase.LOADED; break;
 			}
 			case CONSTANT: phase = Phase.CONSTANT; break;
@@ -480,44 +403,6 @@ public class RegionUtil extends QVTscheduleUtil
 		return getNodeRole(phase);
 	}
 
-	/**
-	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
-	 */
-	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatTarget = getCastTarget(thatEdge.getEdgeTarget());
-		Node thisTarget = getCastTarget(thisEdge.getEdgeTarget());
-		CompleteClass thatType = thatTarget.getCompleteClass();
-		CompleteClass thisType = thisTarget.getCompleteClass();
-		if (thatType.conformsTo(thisType)) {
-			return true;
-		}
-		if (thatTarget.isRealized()) {
-			return false;
-		}
-		if (thisType.conformsTo(thatType)) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
-	 */
-	public static boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatSource = thatEdge.getEdgeSource();
-		CompleteClass thatType = ClassUtil.nonNullState(thatSource.getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
-		CompleteClass thisType = ClassUtil.nonNullState(thisEdge.getEdgeSource().getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
-		if (thatType.conformsTo(thisType)) {
-			return true;
-		}
-		if (thatSource.isRealized()) {
-			return false;
-		}
-		if (thisType.conformsTo(thatType)) {
-			return true;
-		}
-		return false;
-	}
 	public static boolean isMatched(@NonNull TypedElement typedElement) {
 		boolean isMatched = false;
 		Type type = typedElement.getType();

@@ -19,17 +19,18 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NamedMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContentsAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -48,7 +49,7 @@ import com.google.common.collect.Lists;
  */
 public class LateConsumerMerger extends AbstractMerger
 {
-	public static class LateMergedMappingRegion extends NamedMappingRegion
+	public static class LateMergedMappingRegion extends NamedMappingRegionImpl
 	{
 		public LateMergedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
 			super(multiRegion, name);

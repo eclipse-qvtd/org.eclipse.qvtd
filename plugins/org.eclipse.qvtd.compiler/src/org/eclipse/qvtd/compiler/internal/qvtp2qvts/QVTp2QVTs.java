@@ -33,16 +33,19 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysisImpl2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
-public class QVTp2QVTs extends SchedulerConstants
+public class QVTp2QVTs extends SchedulerConstants2
 {
-	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/connectionCreation");
-	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/connectionRouting");
 	public static final @NonNull TracingOption DEBUG_GRAPHS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/debugGraphs");
 	public static final @NonNull TracingOption DUMP_CLASS_TO_CONSUMING_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2consumingNodes");
 	public static final @NonNull TracingOption DUMP_CLASS_TO_CONTAINING_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2containingProperty");
@@ -62,7 +65,7 @@ public class QVTp2QVTs extends SchedulerConstants
 	/**
 	 * The Region to which each mapping is allocated.
 	 */
-	private final @NonNull Map<@NonNull Mapping, @NonNull BasicMappingRegion> mapping2mappingRegion = new HashMap<>();
+	private final @NonNull Map<@NonNull Mapping, @NonNull BasicMappingRegion2> mapping2mappingRegion = new HashMap<>();
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
@@ -76,6 +79,11 @@ public class QVTp2QVTs extends SchedulerConstants
 		problemHandler.addProblem(problem);
 	}
 
+	@Override
+	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		addProblem(RegionUtil.createRegionError(region, messageTemplate, bindings));
+	}
+
 	public @NonNull OperationRegion analyzeOperation(@NonNull MultiRegion multiRegion, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
 		LanguageExpression bodyExpression = operation.getBodyExpression();
@@ -86,7 +94,7 @@ public class QVTp2QVTs extends SchedulerConstants
 			OperationDatum operationDatum = createOperationDatum(operationCallExp);
 			OperationRegion operationRegion = operationDatum2operationRegion.get(operationDatum);
 			if (operationRegion == null) {
-				operationRegion = new OperationRegion(multiRegion, operationDatum, specification, operationCallExp);
+				operationRegion = new OperationRegion2(multiRegion, operationDatum, specification, operationCallExp);
 				operationDatum2operationRegion.put(operationDatum, operationRegion);
 				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 					operationRegion.writeDebugGraphs(null);
@@ -116,7 +124,7 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	@Override
 	protected @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum) {
-		return new ClassDatumAnalysis(this, classDatum);
+		return new ClassDatumAnalysisImpl2(this, classDatum);
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {
@@ -126,18 +134,18 @@ public class QVTp2QVTs extends SchedulerConstants
 	}
 
 	public @NonNull MultiRegion transform() throws IOException {
-		MultiRegion multiRegion = new MultiRegion(this);
+		MultiRegion2 multiRegion = new MultiRegion2(this);
 		Iterable<@NonNull Mapping> orderedMappings = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
 		for (@NonNull Mapping mapping : orderedMappings) {
-			BasicMappingRegion mappingRegion = BasicMappingRegion.createMappingRegion(multiRegion, mapping);
+			BasicMappingRegion2 mappingRegion = BasicMappingRegion2.createMappingRegion(multiRegion, mapping);
 			mapping2mappingRegion.put(mapping, mappingRegion);
 		}
-		List<@NonNull BasicMappingRegion> mappingRegions = new ArrayList<>(mapping2mappingRegion.values());
+		List<@NonNull BasicMappingRegion2> mappingRegions = new ArrayList<>(mapping2mappingRegion.values());
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull BasicMappingRegion mappingRegion : mappingRegions) {
+		for (@NonNull BasicMappingRegion2 mappingRegion : mappingRegions) {
 			mappingRegion.registerConsumptionsAndProductions();
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
@@ -147,7 +155,7 @@ public class QVTp2QVTs extends SchedulerConstants
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull Mapping mapping : orderedMappings) {
-			BasicMappingRegion mappingRegion = mapping2mappingRegion.get(mapping);
+			BasicMappingRegion2 mappingRegion = mapping2mappingRegion.get(mapping);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();

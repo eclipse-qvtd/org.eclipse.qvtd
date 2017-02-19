@@ -19,7 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 /**
  * A RegionCycle identifies a Set or Regions that encompass a cyclic dependency.

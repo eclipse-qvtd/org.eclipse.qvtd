@@ -69,11 +69,32 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
+			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
+			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
+			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
 			case QVTschedulePackage.EDGE_ROLE: return createEdgeRole();
+			case QVTschedulePackage.ERROR_NODE: return createErrorNode();
+			case QVTschedulePackage.EXPRESSION_EDGE: return createExpressionEdge();
+			case QVTschedulePackage.INPUT_NODE: return createInputNode();
+			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
+			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
 			case QVTschedulePackage.MAPPING_ACTION: return createMappingAction();
+			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
+			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
+			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
+			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
 			case QVTschedulePackage.NODE_ROLE: return createNodeRole();
+			case QVTschedulePackage.NULL_NODE: return createNullNode();
+			case QVTschedulePackage.OPERATION_NODE: return createOperationNode();
+			case QVTschedulePackage.PATTERN_TYPED_NODE: return createPatternTypedNode();
+			case QVTschedulePackage.PATTERN_VARIABLE_NODE: return createPatternVariableNode();
+			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
+			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
+			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
+			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -115,9 +136,53 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull CastEdge createCastEdge() {
+		CastEdgeImpl castEdge = new CastEdgeImpl();
+		return castEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull ClassDatum createClassDatum() {
 		ClassDatumImpl classDatum = new ClassDatumImpl();
 		return classDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ComposedNode createComposedNode() {
+		ComposedNodeImpl composedNode = new ComposedNodeImpl();
+		return composedNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DependencyNode createDependencyNode() {
+		DependencyNodeImpl dependencyNode = new DependencyNodeImpl();
+		return dependencyNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EdgeConnection createEdgeConnection() {
+		EdgeConnectionImpl edgeConnection = new EdgeConnectionImpl();
+		return edgeConnection;
 	}
 
 	/**
@@ -137,9 +202,108 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public ErrorNode createErrorNode() {
+		ErrorNodeImpl errorNode = new ErrorNodeImpl();
+		return errorNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull ExpressionEdge createExpressionEdge() {
+		ExpressionEdgeImpl expressionEdge = new ExpressionEdgeImpl();
+		return expressionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public InputNode createInputNode() {
+		InputNodeImpl inputNode = new InputNodeImpl();
+		return inputNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull IteratedEdge createIteratedEdge() {
+		IteratedEdgeImpl iteratedEdge = new IteratedEdgeImpl();
+		return iteratedEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public IteratorNode createIteratorNode() {
+		IteratorNodeImpl iteratorNode = new IteratorNodeImpl();
+		return iteratorNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public MicroMappingRegion createMicroMappingRegion() {
+		MicroMappingRegionImpl microMappingRegion = new MicroMappingRegionImpl();
+		return microMappingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NamedMappingRegion createNamedMappingRegion() {
+		NamedMappingRegionImpl namedMappingRegion = new NamedMappingRegionImpl();
+		return namedMappingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull NavigationEdge createNavigationEdge() {
+		NavigationEdgeImpl navigationEdge = new NavigationEdgeImpl();
+		return navigationEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NodeConnection createNodeConnection() {
+		NodeConnectionImpl nodeConnection = new NodeConnectionImpl();
+		return nodeConnection;
 	}
 
 	/**
@@ -159,9 +323,97 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public NullNode createNullNode() {
+		NullNodeImpl nullNode = new NullNodeImpl();
+		return nullNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OperationNode createOperationNode() {
+		OperationNodeImpl operationNode = new OperationNodeImpl();
+		return operationNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PatternTypedNode createPatternTypedNode() {
+		PatternTypedNodeImpl patternTypedNode = new PatternTypedNodeImpl();
+		return patternTypedNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PatternVariableNode createPatternVariableNode() {
+		PatternVariableNodeImpl patternVariableNode = new PatternVariableNodeImpl();
+		return patternVariableNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull PredicateEdge createPredicateEdge() {
+		PredicateEdgeImpl predicateEdge = new PredicateEdgeImpl();
+		return predicateEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull PropertyDatum createPropertyDatum() {
 		PropertyDatumImpl propertyDatum = new PropertyDatumImpl();
 		return propertyDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull RecursionEdge createRecursionEdge() {
+		RecursionEdgeImpl recursionEdge = new RecursionEdgeImpl();
+		return recursionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TrueNode createTrueNode() {
+		TrueNodeImpl trueNode = new TrueNodeImpl();
+		return trueNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public UnknownNode createUnknownNode() {
+		UnknownNodeImpl unknownNode = new UnknownNodeImpl();
+		return unknownNode;
 	}
 
 	/**

@@ -19,11 +19,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 /**
@@ -35,24 +36,24 @@ public class Region2Depth
 	/**
 	 * The lazily computed depth of each region; 0 at root, +1 for each region invocation.
 	 */
-	private @NonNull Map<@NonNull Region, @Nullable Integer> region2depth = new HashMap<@NonNull Region, @Nullable Integer>();
+	private @NonNull Map<@NonNull Region, @Nullable Integer> region2depth = new HashMap<>();
 
 	/**
 	 * The lazily computed parents (invokers) of each region.
 	 */
-	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents = new HashMap<@NonNull Region, @NonNull List<@NonNull Region>>();
+	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents = new HashMap<>();
 
 	/**
 	 * The lazily computed children (invoked) of each region.
 	 */
-	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2children = new HashMap<@NonNull Region, @NonNull List<@NonNull Region>>();
+	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2children = new HashMap<>();
 
 	/**
 	 * The lazily computed parents closure (invokers) of each region all of whose depth is less than that of the region.
 	 * I.e. for regions in a cycle the ancestors depends on and is consistent with the choice of the shallowest node
 	 * in the cycle.
 	 */
-	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2properAncestors = new HashMap<@NonNull Region, @NonNull Set<@NonNull Region>>();
+	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2properAncestors = new HashMap<>();
 
 	public void addRegion(@NonNull Region region) {
 		region2children.clear();	// FIXME do intelligent update rather than recalculate
@@ -115,10 +116,10 @@ public class Region2Depth
 		int childInvokingRegionDepth = childInvokingRegion != null ? getRegionDepth(childInvokingRegion) : 0;
 		List<@NonNull Region> parentRegions = region2parents.get(childRegion);
 		if (parentRegions == null) {
-			parentRegions = new ArrayList<@NonNull Region>();
-			for (@NonNull DatumConnection parentConnection : childRegion.getIncomingPassedConnections()) {
+			parentRegions = new ArrayList<>();
+			for (@NonNull DatumConnection<?> parentConnection : childRegion.getIncomingPassedConnections()) {
 				for (@NonNull Node source : parentConnection.getSourceNodes()) {
-					Region sourceRegion = source.getRegion();
+					Region sourceRegion = RegionUtil.getRegion(source);
 					ScheduledRegion sourceInvokingRegion = sourceRegion.getInvokingRegion();
 					int sourceInvokingRegionDepth = sourceInvokingRegion != null ? getRegionDepth(sourceInvokingRegion) : 0;
 					Region parentRegion = sourceInvokingRegionDepth < childInvokingRegionDepth ? childInvokingRegion : sourceRegion;
@@ -142,7 +143,7 @@ public class Region2Depth
 	protected @NonNull Set<@NonNull Region> getProperAncestorRegions(@NonNull Region childRegion) {
 		Set<@NonNull Region> properAncestorRegions = region2properAncestors.get(childRegion);
 		if (properAncestorRegions == null) {
-			properAncestorRegions = new HashSet<@NonNull Region>();
+			properAncestorRegions = new HashSet<>();
 			int childDepth = getRegionDepth(childRegion);
 			for (@NonNull Region parentRegion : getParentRegions(childRegion)) {
 				int parentDepth = getRegionDepth(parentRegion);
@@ -186,9 +187,9 @@ public class Region2Depth
 	 * possible respecting ordering edges between the target nodes.
 	 */
 	public @NonNull <@NonNull E extends Edge> Iterable<@NonNull E> getSortedEdges(@NonNull Iterable<@NonNull E> edges) {
-		Map<@NonNull Node, @NonNull E> node2edge = new HashMap<@NonNull Node, @NonNull E>();
-		//		Map<Node, Node> before2after = new HashMap<Node, Node>();
-		List<@NonNull Node> orderedNodes = new ArrayList<@NonNull Node>();
+		Map<@NonNull Node, @NonNull E> node2edge = new HashMap<>();
+		//		Map<Node, Node> before2after = new HashMap<>();
+		List<@NonNull Node> orderedNodes = new ArrayList<>();
 		/*		for (E edge : edges) {
 			Node target = edge.getTarget();
 			Edge oldEdge = node2edge.put(target, edge);
@@ -198,7 +199,7 @@ public class Region2Depth
 			}
 		}
 		while (orderedNodes.size() < node2edge.size()) {
-			Set<Node> residualNodes = new HashSet<Node>(node2edge.keySet());
+			Set<Node> residualNodes = new HashSet<>(node2edge.keySet());
 			residualNodes.removeAll(orderedNodes);
 			residualNodes.removeAll(before2after.values());
 			if (residualNodes.size() == 1) {
@@ -207,7 +208,7 @@ public class Region2Depth
 				before2after.remove(residualNode);
 			}
 			else if (residualNodes.size() > 0) {
-				List<Node> sortedResidualNodes = new ArrayList<Node>(residualNodes);
+				List<Node> sortedResidualNodes = new ArrayList<>(residualNodes);
 				Collections.sort(sortedResidualNodes, NameUtil.NameableComparator.INSTANCE);
 				orderedNodes.addAll(sortedResidualNodes);
 				for (Node residualNode : residualNodes) {
@@ -216,7 +217,7 @@ public class Region2Depth
 			}
 			else {
 				// FIXME Choose least impact
-				List<Node> sortedResidualNodes = new ArrayList<Node>(before2after.keySet());
+				List<Node> sortedResidualNodes = new ArrayList<>(before2after.keySet());
 				Collections.sort(sortedResidualNodes, NameUtil.NameableComparator.INSTANCE);
 				Node arbitraryNode = sortedResidualNodes.get(0);
 				orderedNodes.add(arbitraryNode);
@@ -224,7 +225,7 @@ public class Region2Depth
 				System.out.println("Ordering loop broken by arbitrary choice of " + arbitraryNode);
 			}
 		} */
-		List<@NonNull E> orderedEdges = new ArrayList<@NonNull E>();
+		List<@NonNull E> orderedEdges = new ArrayList<>();
 		for (@NonNull Node orderedNode : orderedNodes) {
 			@Nullable E edge = node2edge.get(orderedNode);
 			assert edge != null;
@@ -278,9 +279,9 @@ public class Region2Depth
 	 * possible respecting ordering edges between the nodes.
 	 *
 	public @NonNull Iterable<Node> getSortedTargets(@NonNull Iterable<Node> nodes) {
-		Map<Node, Node> before2after = new HashMap<Node, Node>();
-		List<Node> allNodes = new ArrayList<Node>();
-		List<Node> orderedNodes = new ArrayList<Node>();
+		Map<Node, Node> before2after = new HashMap<>();
+		List<Node> allNodes = new ArrayList<>();
+		List<Node> orderedNodes = new ArrayList<>();
 		for (Node target : nodes) {
 			allNodes.add(target);
 			for (Edge orderingEdge : target.getOrderingEdges()) {
@@ -288,7 +289,7 @@ public class Region2Depth
 			}
 		}
 		while (orderedNodes.size() < allNodes.size()) {
-			Set<Node> residualNodes = new HashSet<Node>(allNodes);
+			Set<Node> residualNodes = new HashSet<>(allNodes);
 			residualNodes.removeAll(orderedNodes);
 			residualNodes.removeAll(before2after.values());
 			if (residualNodes.size() == 1) {
@@ -297,7 +298,7 @@ public class Region2Depth
 				before2after.remove(residualNode);
 			}
 			else if (residualNodes.size() > 0) {
-				List<Node> sortedResidualNodes = new ArrayList<Node>(residualNodes);
+				List<Node> sortedResidualNodes = new ArrayList<>(residualNodes);
 				Collections.sort(sortedResidualNodes, NodeComparator.INSTANCE);
 				orderedNodes.addAll(sortedResidualNodes);
 				for (Node residualNode : residualNodes) {
@@ -306,7 +307,7 @@ public class Region2Depth
 			}
 			else {
 				// FIXME Choose least impact
-				List<Node> sortedResidualNodes = new ArrayList<Node>(before2after.keySet());
+				List<Node> sortedResidualNodes = new ArrayList<>(before2after.keySet());
 				Collections.sort(sortedResidualNodes, NodeComparator.INSTANCE);
 				Node arbitraryNode = sortedResidualNodes.get(0);
 				orderedNodes.add(arbitraryNode);

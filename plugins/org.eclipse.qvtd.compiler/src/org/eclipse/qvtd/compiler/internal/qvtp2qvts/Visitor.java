@@ -11,21 +11,9 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
 
-public interface Visitor<R>
+public interface Visitor<R> extends Visitor2<R>
 {
-	R visiting(@NonNull Visitable visitable);
-
-	R visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection);
-	R visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection);
-	R visitEdge(@NonNull Edge edge);
-	R visitMappingRegion(@NonNull MappingRegion mappingRegion);
-	R visitNavigableEdge(@NonNull NavigableEdge navigableEdge);
-	R visitNode(@NonNull Node node);
-	R visitOperationRegion(@NonNull OperationRegion operationRegion);
-	R visitRegion(@NonNull Region region);
 	R visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion);
-	R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion);
-	R visitVariableNode(@NonNull VariableNodeImpl variableNode);
 }

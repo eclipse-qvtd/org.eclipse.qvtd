@@ -16,9 +16,9 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Symbolable;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 
 /**
  * CyclesAnalyzer provides the depth analysis of all regions using all connections to locate cycles.

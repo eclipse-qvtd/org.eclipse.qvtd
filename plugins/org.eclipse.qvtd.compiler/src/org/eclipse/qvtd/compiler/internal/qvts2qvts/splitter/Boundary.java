@@ -13,8 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 
 /**
  * A Boundary describes an edge between the reachable nodes of two head groups.

@@ -10,16 +10,43 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionRoleImpl;
 
 public class QVTscheduleConstants
 {
+	@SuppressWarnings("null")
+	public static final @NonNull String PLUGIN_ID = QVTschedulePackage.class.getPackage().getName();
+
+	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(PLUGIN_ID, "qvtp2qvts/connectionCreation");	// FIXME
+	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(PLUGIN_ID, "qvtp2qvts/connectionRouting");
+	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(PLUGIN_ID, "qvts2qvti/polledProperties");	// FIXME
+
+	public static final @NonNull String EQUALS_NAME = "«equals»";
+	public static final @NonNull String IF_CONDITION_NAME = "«condition»";
+	public static final @NonNull String IF_ELSE_NAME = "«else»";
+	public static final @NonNull String IF_THEN_NAME = "«then»";
+	public static final @NonNull String LOOP_BODY_NAME = "«body»";
+	public static final @NonNull String LOOP_ITERATOR_NAME = "«iterator»";
+
 	public static final @NonNull String BINDING_COLOR = "darkorange";
 	public static final @NonNull String CONSTANT_COLOR = "black";
 	public static final @NonNull String ERROR_COLOR = "red";
@@ -44,7 +71,14 @@ public class QVTscheduleConstants
 	public static final @NonNull Integer HEAD_WIDTH = 8;
 	public static final @NonNull Integer LINE_WIDTH = 2;
 
-
+	public static final @NonNull List<@NonNull Connection> EMPTY_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull EdgeConnection> EMPTY_EDGE_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Edge> EMPTY_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull NavigableEdge> EMPTY_NAVIGATION_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Node> EMPTY_NODE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull NodeConnection> EMPTY_NODE_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Region> EMPTY_REGION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
 
 	private static final @NonNull EdgeRole CONSTANT_EDGE = createEdgeRole(Phase.CONSTANT);
 	private static final @NonNull EdgeRole LOADED_EDGE = createEdgeRole(Phase.LOADED);

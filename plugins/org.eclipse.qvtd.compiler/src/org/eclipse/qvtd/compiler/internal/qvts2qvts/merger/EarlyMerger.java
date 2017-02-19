@@ -26,14 +26,16 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NamedMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysisImpl2;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
+
 import com.google.common.collect.Sets;
 
 /**
@@ -42,7 +44,7 @@ import com.google.common.collect.Sets;
  */
 public class EarlyMerger extends AbstractMerger
 {
-	public static class EarlyMergedMappingRegion extends NamedMappingRegion
+	public static class EarlyMergedMappingRegion extends NamedMappingRegionImpl
 	{
 		public EarlyMergedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
 			super(multiRegion, name);
@@ -279,7 +281,7 @@ public class EarlyMerger extends AbstractMerger
 		Set<@NonNull MappingRegion> secondaryRegions = new HashSet<>();
 		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull Integer> entry : hostClass2count.entrySet()) {
 			if (entry.getValue() == 1) {
-				ClassDatumAnalysis primaryClassDatumAnalysis = entry.getKey();
+				ClassDatumAnalysisImpl2 primaryClassDatumAnalysis = (ClassDatumAnalysisImpl2) entry.getKey();
 				for (@NonNull MappingRegion secondaryRegion : primaryClassDatumAnalysis.getConsumingRegions()) {
 					if (secondaryRegion != primaryRegion) {
 						for (@NonNull Node secondaryHeadNode : secondaryRegion.getHeadNodes()) {

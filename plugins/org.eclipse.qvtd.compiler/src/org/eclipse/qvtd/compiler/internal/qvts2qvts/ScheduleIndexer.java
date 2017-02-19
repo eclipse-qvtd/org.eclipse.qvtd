@@ -16,10 +16,10 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
@@ -74,7 +74,7 @@ public class ScheduleIndexer extends ScheduleState
 		Collections.sort(mandatoryBlockedRegionsList, NameUtil.NAMEABLE_COMPARATOR);
 		//		List<@NonNull Connection> partiallyBlockedConnectionsList = new ArrayList<@NonNull Connection>(partiallyBlockedConnections);
 		//		Collections.sort(partiallyBlockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
-		List<@NonNull DatumConnection> blockedConnectionsList = Lists.newArrayList(getBlockedConnections());
+		List<@NonNull DatumConnection<?>> blockedConnectionsList = Lists.newArrayList(getBlockedConnections());
 		Collections.sort(blockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
 		if (QVTp2QVTs.REGION_ORDER.isActive()) {
 			QVTp2QVTs.REGION_ORDER.println("      unblocked regions:");
@@ -141,7 +141,7 @@ public class ScheduleIndexer extends ScheduleState
 			//				Scheduler.REGION_ORDER.println("        " + connection);
 			//			}
 			QVTp2QVTs.REGION_ORDER.println("      blocked connections:");
-			for (@NonNull DatumConnection connection : blockedConnectionsList) {
+			for (@NonNull DatumConnection<?> connection : blockedConnectionsList) {
 				int all = 0;
 				int unblocked = 0;
 				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
@@ -202,7 +202,7 @@ public class ScheduleIndexer extends ScheduleState
 		//
 		//	Dynamically scheduled choice
 		//
-		for (@NonNull DatumConnection connection : blockedConnectionsList) {
+		for (@NonNull DatumConnection<?> connection : blockedConnectionsList) {
 			if (connection.isPassed()) {
 				int all = 0;
 				int unblocked = 0;

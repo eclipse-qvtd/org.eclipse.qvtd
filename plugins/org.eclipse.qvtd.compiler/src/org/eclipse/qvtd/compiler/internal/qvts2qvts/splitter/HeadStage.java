@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 import com.google.common.collect.Iterables;
 

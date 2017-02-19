@@ -19,13 +19,14 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeRole;
+import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 
 import com.google.common.collect.Lists;
@@ -169,12 +170,12 @@ abstract class AbstractPartition
 			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(reachableNodes);
 			CompilerUtil.removeAll(extraNodesSet, allNodes);
 			for (@NonNull Node node : extraNodesSet) {
-				partitioner.addProblem(region.createWarning("unexpected " + node));
+				partitioner.addProblem(RegionUtil.createRegionWarning(region, "unexpected " + node));
 			}
 			Set<@NonNull Node> missingNodesSet = Sets.newHashSet(allNodes);
 			missingNodesSet.removeAll(reachableNodes);
 			for (@NonNull Node node : missingNodesSet) {
-				partitioner.addProblem(region.createWarning("unreachable " + node));
+				partitioner.addProblem(RegionUtil.createRegionWarning(region, "unreachable " + node));
 			}
 		}
 	}

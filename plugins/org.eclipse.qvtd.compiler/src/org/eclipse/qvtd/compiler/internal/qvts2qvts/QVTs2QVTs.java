@@ -16,15 +16,16 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion2;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -48,7 +49,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
-					rootRegion = new RootScheduledRegion(rootName, region);
+					rootRegion = new RootScheduledRegion2(rootName, region);
 				}
 				rootRegion.addRegion(region);
 			}
@@ -119,7 +120,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			activeRegions = partitionedRegions;
 		}
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
-		rootRegion.createSchedule();
+		((RootScheduledRegion2)rootRegion).createSchedule();
 		createSchedule(rootRegion);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootRegion.writeDebugGraphs("9-final", true, true, true);

@@ -15,6 +15,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicMappingRegion" abstract="true"
+      eSuperTypes="#//MappingRegion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CastEdge" eSuperTypes="#//NavigableEdge"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
@@ -24,6 +27,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//ClassDatum"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDatumAnalysis" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//Visitable2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionEnd" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A ConnectionEnd may be the Node/Edge at the end of a NodeConnection/EdgeConnection."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionRole" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ConnectionRole defines which of many possible roles a connection plays"/>
@@ -31,11 +43,38 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="node" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatumConnection" abstract="true" eSuperTypes="#//Connection #//GraphEdge #//GraphNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
+    </eAnnotations>
+    <eTypeParameters name="CE">
+      <eBounds eClassifier="#//ConnectionEnd"/>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphEdge ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Visitable2">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeConnection">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An EdgeConnection supports an existence dependency between the region(s) that produce a navigation edge&#xD;&#xA;and the region(s) that consume it."/>
+    </eAnnotations>
+    <eGenericSuperTypes eClassifier="#//DatumConnection">
+      <eTypeArguments eClassifier="#//NavigableEdge"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EdgeRole" eSuperTypes="#//Role">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="EdgeRole defines which of many possible roles an edge plays"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionEdge" eSuperTypes="#//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratedEdge" eSuperTypes="#//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorNode" eSuperTypes="#//VariableNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
@@ -44,11 +83,44 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredBy"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiRegion" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The MultiRegion supervises the many Region instances that realize a transformation"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedMappingRegion" eSuperTypes="#//MappingRegion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigableEdge" abstract="true" eSuperTypes="#//Edge #//ConnectionEnd">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationEdge" eSuperTypes="#//NavigableEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//ConnectionEnd #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Visitable2">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping&#xD;&#xA;or Composite Region."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeConnection">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A NodeConnection supports a data connection from one or more source nodes to one or more target nodes.&#xD;&#xA;The data connection has a data type for the elemental value transfer through the connection.&#xD;&#xA;A passed connection may be realized by a simple transient point-to-point linkage or&#xD;&#xA;a full buffer that accumulates all possible values. A used connection is not actually realized; it just ensures that&#xD;&#xA;all source values exist before any target value consumes the value recomputed at the target."/>
+    </eAnnotations>
+    <eGenericSuperTypes eClassifier="#//DatumConnection">
+      <eTypeArguments eClassifier="#//Node"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeRole" eSuperTypes="#//Role">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="NodeRole defines which of many possible roles an node plays"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationRegion" abstract="true" eSuperTypes="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
@@ -58,6 +130,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//PropertyDatum"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RecursionEdge" eSuperTypes="#//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//GraphNode ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable #//Visitable2 #//ToDOTable"/>
   <eClassifiers xsi:type="ecore:EClass" name="Role" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Role defines which of many possible roles an edge plays"/>
@@ -118,6 +192,19 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootScheduledRegion" abstract="true"
+      eSuperTypes="#//ScheduledRegion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" abstract="true" eSuperTypes="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SchedulerConstants" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrueNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnknownNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableNode" abstract="true" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Visitable2" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Phase">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing&#xA;certainty, allowing the earlier to be chosen by a merge.&#xA;&#xA;NEW = REALIZED || SPECULATION&#xA;OLD = CONSTANT || LOADED || PREDICATED || SPECULATED"/>
@@ -158,4 +245,10 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphEdge" instanceClassName="org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphNode" instanceClassName="org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ToDOTable" instanceClassName="org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

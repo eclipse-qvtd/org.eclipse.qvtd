@@ -21,15 +21,15 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 import com.google.common.collect.Lists;
 
 /**
  * An AbstractGroup represents one or more mutually navigable head nodes and their reachable nodes within a
- * multi-headed Region. The abstract fuinctionality maintains the comptable realtionships between the groups.
+ * multi-headed Region. The abstract fuinctionality maintains the compatible relationships between the groups.
  */
 abstract class AbstractGroup implements Group
 {

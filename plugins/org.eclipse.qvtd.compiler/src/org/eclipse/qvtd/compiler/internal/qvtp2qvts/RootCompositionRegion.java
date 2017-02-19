@@ -19,12 +19,18 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Visitor2;
 
 public class RootCompositionRegion extends AbstractRegion
 {
@@ -50,8 +56,8 @@ public class RootCompositionRegion extends AbstractRegion
 	}
 
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitRootCompositionRegion(this);
+	public <R> R accept(@NonNull Visitor2<R> visitor) {
+		return ((Visitor<R>)visitor).visitRootCompositionRegion(this);
 	}
 
 	@Override
@@ -159,7 +165,7 @@ public class RootCompositionRegion extends AbstractRegion
 
 	@Override
 	public @NonNull List<@NonNull Node> getHeadNodes() {
-		return SchedulerConstants.EMPTY_NODE_LIST;
+		return QVTscheduleConstants.EMPTY_NODE_LIST;
 	}
 
 	private @NonNull Node getNullNode() {

@@ -11,11 +11,21 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Visitable2;
 
 public abstract class AbstractVisitor<R> implements Visitor<R>
 {
-	public <@NonNull T extends R> T create(@NonNull Class<T> returnClass, @NonNull Visitable visitable) {
+	public <@NonNull T extends R> T create(@NonNull Class<T> returnClass, @NonNull Visitable2 visitable) {
 		R result = visitable.accept(this);
 		if (result == null) {
 			throw new NullPointerException("null return from SplitterVisitor for " + visitable.getClass().getSimpleName());
@@ -28,23 +38,18 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visiting(@NonNull Visitable visitable) {
+	public R visiting(@NonNull Visitable2 visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
-	}
-
-	@Override
-	public R visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
-		return visiting(basicEdgeConnection);
-	}
-
-	@Override
-	public R visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
-		return visiting(basicNodeConnection);
 	}
 
 	@Override
 	public R visitEdge(@NonNull Edge edge) {
 		return visiting(edge);
+	}
+
+	@Override
+	public R visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
+		return visiting(edgeConnection);
 	}
 
 	@Override
@@ -60,6 +65,11 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	@Override
 	public R visitNode(@NonNull Node node) {
 		return visiting(node);
+	}
+
+	@Override
+	public R visitNodeConnection(@NonNull NodeConnection nodeConnection) {
+		return visiting(nodeConnection);
 	}
 
 	@Override
@@ -83,7 +93,7 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitVariableNode(@NonNull VariableNodeImpl variableNode) {
+	public R visitVariableNode(@NonNull VariableNode variableNode) {
 		return visitNode(variableNode);
 	}
 }
