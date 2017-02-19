@@ -21,14 +21,14 @@ public class CompileStepRow extends ParameterRow
 {
 	private Label state;
 
-	public CompileStepRow(@NonNull MainTab mainTab, @NonNull Group group, int style, @NonNull String parameterName, @NonNull String parameterPath) {
+	public CompileStepRow(@NonNull MainTab<?> mainTab, @NonNull Group group, int style, @NonNull String parameterName, @NonNull String parameterPath) {
 		super(mainTab, group, style, parameterName, parameterPath);
 	}
 
 	public void compiled(@Nullable Object object) {
 		state.setText("Ready");
 		state.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
-//		state.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
+		//		state.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
 	}
 
 	@Override

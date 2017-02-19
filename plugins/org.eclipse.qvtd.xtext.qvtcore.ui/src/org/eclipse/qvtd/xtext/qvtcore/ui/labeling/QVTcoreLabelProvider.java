@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Namespace;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -137,7 +138,10 @@ public class QVTcoreLabelProvider extends QVTbaseLabelProvider
 			return "";
 		}
 		StringBuilder s = new StringBuilder();
-		s.append(PrettyPrinter.printName(ele.getSlotExpression(), namespace));
+		OCLExpression slotExpression = ele.getSlotExpression();
+		if (slotExpression != null) {
+			s.append(PrettyPrinter.printName(slotExpression, namespace));
+		}
 		Property targetProperty = ele.getTargetProperty();
 		s.append(".");
 		if (targetProperty != null) {
@@ -162,7 +166,9 @@ public class QVTcoreLabelProvider extends QVTbaseLabelProvider
 		}
 		StringBuilder s = new StringBuilder();
 		Variable targetVariable = ele.getTargetVariable();
-		s.append(PrettyPrinter.printName(targetVariable, namespace));
+		if (targetVariable != null) {
+			s.append(PrettyPrinter.printName(targetVariable, namespace));
+		}
 		s.append(" : ");
 		if (targetVariable != null) {
 			Type type = targetVariable.getType();

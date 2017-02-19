@@ -702,7 +702,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		throw new UnsupportedOperationException();
 	}
 
-	public static Role mergeToMoreKnownPhase(@NonNull Role firstRole, @NonNull Role secondRole) {
+	public static @NonNull Role mergeToMoreKnownPhase(@NonNull Role firstRole, @NonNull Role secondRole) {
 		if (firstRole == Role.CONSTANT) {
 			return firstRole;
 		}

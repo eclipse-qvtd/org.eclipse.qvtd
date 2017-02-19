@@ -6,7 +6,7 @@ context Key
 --def: resolvedParts : Set(ocl::Property) = part->union(oppositePart.opposite)
 
 inv IdentifiesIsAUsedPackageClass:
-	transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
+	transformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
 
 inv OppositePartsHaveOpposites:
 	oppositePart->forAll(opposite <> null)

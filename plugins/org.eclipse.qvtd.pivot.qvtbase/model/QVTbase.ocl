@@ -24,8 +24,8 @@ context Rule
 inv DomainNameIsUnique:
 domain->isUnique(name)
 inv OverridesRuleIsExtendedRule:
-overrides <> null implies
-let extendedRules = transformation->closure(_extends)->excluding(transformation).rule
+overrides <> null and transformation <> null implies
+let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)
 in extendedRules->includes(overrides)
 inv OverridesRuleOverridesAllDomains:
 overrides <> null implies

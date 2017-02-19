@@ -114,7 +114,7 @@ public class ModificationMonitor implements Adapter
 			return;
 		}
 		Deque<@NonNull Notification> notifications2 = notifications;
-		assert notifications2 == null;
+		//		assert notifications2 != null;
 		if (notifications2 != null) {
 			notifications2.add(notification);
 			return;

@@ -19,9 +19,9 @@ import org.eclipse.ocl.examples.debug.vm.srclookup.VMSourcePathComputer;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 
 public class QVTiSourcePathComputer extends VMSourcePathComputer {
-		
+
 	public static final @NonNull String ID = "org.eclipse.qvtd.debug.srclookup.QVTiSourcePathComputer";  //$NON-NLS-1$
-	
+
 	@Override
 	public @NonNull String getId() {
 		return ID;
@@ -29,18 +29,19 @@ public class QVTiSourcePathComputer extends VMSourcePathComputer {
 
 	@Override
 	protected URI getModuleFile(@NonNull ILaunchConfiguration configuration) throws CoreException {
-//        String moduleFileName = configuration.getAttribute(LaunchConstants.MODULE, ""); //$NON-NLS-1$
+		//        String moduleFileName = configuration.getAttribute(LaunchConstants.MODULE, ""); //$NON-NLS-1$
+		@SuppressWarnings("unused")
 		String projectName = configuration.getAttribute(QVTiLaunchConstants.PROJECT_KEY, (String)null);
-        String moduleFileName = configuration.getAttribute(QVTiLaunchConstants.TX_KEY, ""); //$NON-NLS-1$
-        URI moduleUri = URI.createURI(moduleFileName);
-        return moduleUri;
-//        IFile moduleFile = getWorkspaceFile(moduleUri);
-//        if(moduleFile == null) {
-        	//IStatus errorStatus = MiscUtil.makeErrorStatus( 
-        		//	NLS.bind(Messages.QvtLaunchConfigurationDelegate_transformationFileNotFound, moduleFileName));
-        	//throw new CoreException(errorStatus);
-//        }
-        
-//        return moduleFile;
-    }
+		String moduleFileName = configuration.getAttribute(QVTiLaunchConstants.TX_KEY, ""); //$NON-NLS-1$
+		URI moduleUri = URI.createURI(moduleFileName);
+		return moduleUri;
+		//        IFile moduleFile = getWorkspaceFile(moduleUri);
+		//        if(moduleFile == null) {
+		//IStatus errorStatus = MiscUtil.makeErrorStatus(
+		//	NLS.bind(Messages.QvtLaunchConfigurationDelegate_transformationFileNotFound, moduleFileName));
+		//throw new CoreException(errorStatus);
+		//        }
+
+		//        return moduleFile;
+	}
 }

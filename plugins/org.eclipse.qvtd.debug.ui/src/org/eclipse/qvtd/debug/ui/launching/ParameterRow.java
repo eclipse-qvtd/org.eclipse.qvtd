@@ -25,25 +25,25 @@ import org.eclipse.swt.widgets.Text;
 
 public class ParameterRow extends Composite implements ModifyListener
 {
-	protected @NonNull MainTab mainTab;
+	protected @NonNull MainTab<?> mainTab;
 	protected @NonNull Label name;
 	protected @NonNull Text path;
 
-	public ParameterRow(@NonNull MainTab mainTab, @NonNull Group group, int style, @NonNull String parameterName, @NonNull String parameterPath) {
+	public ParameterRow(@NonNull MainTab<?> mainTab, @NonNull Group group, int style, @NonNull String parameterName, @NonNull String parameterPath) {
 		super(group, style);
 		this.mainTab = mainTab;
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		
+
 		createDerivedButtons();
-		
+
 		name = new Label(this, SWT.NONE);
 		name.setText(parameterName);
 		name.setSize(80,15);
-		
+
 		path = new Text(this, SWT.BORDER);
 		path.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		path.setText(parameterPath);
-		
+
 		Button browseWS = new Button(this, SWT.NONE);
 		browseWS.setText("Browse Workspace...");
 		Button browseFile = new Button(this, SWT.NONE);
