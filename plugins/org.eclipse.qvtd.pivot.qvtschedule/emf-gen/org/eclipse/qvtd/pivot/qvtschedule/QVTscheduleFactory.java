@@ -35,6 +35,15 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Basic Mapping Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Basic Mapping Region</em>'.
+	 * @generated
+	 */
+	@NonNull BasicMappingRegion createBasicMappingRegion();
+
+	/**
 	 * Returns a new object of class '<em>Cast Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,7 +167,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Multi Region</em>'.
 	 * @generated
 	 */
-	MultiRegion createMultiRegion();
+	@NonNull MultiRegion createMultiRegion();
 
 	/**
 	 * Returns a new object of class '<em>Named Mapping Region</em>'.
@@ -221,7 +230,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Operation Region</em>'.
 	 * @generated
 	 */
-	OperationRegion createOperationRegion();
+	@NonNull OperationRegion createOperationRegion();
 
 	/**
 	 * Returns a new object of class '<em>Pattern Typed Node</em>'.
@@ -275,7 +284,7 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Root Composition Region</em>'.
 	 * @generated
 	 */
-	RootCompositionRegion createRootCompositionRegion();
+	@NonNull RootCompositionRegion createRootCompositionRegion();
 
 	/**
 	 * Returns a new object of class '<em>True Node</em>'.

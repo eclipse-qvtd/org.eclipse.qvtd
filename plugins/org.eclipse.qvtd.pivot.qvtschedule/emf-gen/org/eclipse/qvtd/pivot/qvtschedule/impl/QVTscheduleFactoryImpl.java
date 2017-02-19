@@ -69,6 +69,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTschedulePackage.BASIC_MAPPING_REGION: return createBasicMappingRegion();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
@@ -131,6 +132,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull BasicMappingRegion createBasicMappingRegion() {
+		BasicMappingRegionImpl basicMappingRegion = new BasicMappingRegionImpl();
+		return basicMappingRegion;
 	}
 
 	/**
@@ -281,7 +293,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MultiRegion createMultiRegion() {
+	@Override
+	public @NonNull MultiRegion createMultiRegion() {
 		MultiRegionImpl multiRegion = new MultiRegionImpl();
 		return multiRegion;
 	}
@@ -357,7 +370,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperationRegion createOperationRegion() {
+	@Override
+	public @NonNull OperationRegion createOperationRegion() {
 		OperationRegionImpl operationRegion = new OperationRegionImpl();
 		return operationRegion;
 	}
@@ -422,7 +436,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RootCompositionRegion createRootCompositionRegion() {
+	@Override
+	public @NonNull RootCompositionRegion createRootCompositionRegion() {
 		RootCompositionRegionImpl rootCompositionRegion = new RootCompositionRegionImpl();
 		return rootCompositionRegion;
 	}

@@ -15,8 +15,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicMappingRegion" abstract="true"
-      eSuperTypes="#//MappingRegion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicMappingRegion" eSuperTypes="#//MappingRegion"/>
   <eClassifiers xsi:type="ecore:EClass" name="CastEdge" eSuperTypes="#//NavigableEdge"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"

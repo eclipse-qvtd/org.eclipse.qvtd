@@ -59,6 +59,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.InputNodeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.IteratedEdgeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl;
@@ -191,6 +192,18 @@ public class RegionUtil extends QVTscheduleUtil
 		assert phase != null;
 		EdgeRole edgeRole = getEdgeRole(phase);
 		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode, isPartial);
+	}
+
+	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
+		NodeRole nodeRole = getNodeRole(Phase.CONSTANT);
+		if (typedElement != null) {
+			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getClassDatumAnalysis(typedElement), isMatched);
+			node.addTypedElement(typedElement);
+			return node;
+		}
+		else {
+			return NullNodeImpl.create(nodeRole, region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis(), isMatched);
+		}
 	}
 
 	public static @NonNull VariableNodeImpl createOldNode(@NonNull Region region, @NonNull VariableDeclaration variable) {

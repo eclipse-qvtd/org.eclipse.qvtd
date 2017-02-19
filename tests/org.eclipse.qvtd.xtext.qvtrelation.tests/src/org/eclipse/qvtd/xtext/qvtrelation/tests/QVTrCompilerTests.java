@@ -30,15 +30,13 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion2;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingAnalysis.MappingAnalysisRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
@@ -319,7 +317,7 @@ public class QVTrCompilerTests extends LoadTestCase
 				"Forward2Reverse.qvtr", "reverse",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse", false);//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
-			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
+			myQVT.assertRegionCount(MappingAnalysisRegion.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 5);
@@ -399,7 +397,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
 				"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", false);//,
-			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
+			myQVT.assertRegionCount(MappingAnalysisRegion.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);
@@ -526,7 +524,7 @@ public class QVTrCompilerTests extends LoadTestCase
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm", false);//,
 			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 			//
-			myQVT.assertRegionCount(BasicMappingRegion2.class, 0);
+			myQVT.assertRegionCount(MappingAnalysisRegion.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);

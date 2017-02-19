@@ -64,7 +64,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.MultiRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -91,7 +90,7 @@ public class QVTp2QVTs extends SchedulerConstants2
 	/**
 	 * The Region to which each mapping is allocated.
 	 */
-	private final @NonNull Map<@NonNull Mapping, @NonNull BasicMappingRegion2> mapping2mappingRegion = new HashMap<>();
+	private final @NonNull Map<@NonNull Mapping, @NonNull MappingAnalysis> mapping2mappingAnalysis = new HashMap<>();
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
@@ -297,9 +296,9 @@ public class QVTp2QVTs extends SchedulerConstants2
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {
-		MappingRegion mappingRegion = mapping2mappingRegion.get(mapping);
-		assert mappingRegion != null;
-		return mappingRegion;
+		MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
+		assert mappingAnalysis != null;
+		return mappingAnalysis.getMappingRegion();
 	}
 
 	public @NonNull MultiRegion transform() throws IOException {
@@ -310,24 +309,24 @@ public class QVTp2QVTs extends SchedulerConstants2
 		//	Extract salient characteristics from within each MappingAction.
 		//
 		for (@NonNull Mapping mapping : orderedMappings) {
-			BasicMappingRegion2 mappingRegion = BasicMappingRegion2.createMappingRegion(multiRegion, mapping);
-			mapping2mappingRegion.put(mapping, mappingRegion);
+			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(multiRegion, mapping);
+			mapping2mappingAnalysis.put(mapping, mappingRegion);
 		}
-		List<@NonNull BasicMappingRegion2> mappingRegions = new ArrayList<>(mapping2mappingRegion.values());
-		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull BasicMappingRegion2 mappingRegion : mappingRegions) {
+		List<@NonNull MappingAnalysis> mappingAnalyses = new ArrayList<>(mapping2mappingAnalysis.values());
+		Collections.sort(mappingAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+		for (@NonNull MappingAnalysis mappingRegion : mappingAnalyses) {
 			mappingRegion.registerConsumptionsAndProductions(this);
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
-				mappingRegion.writeDebugGraphs(null);
+			for (@NonNull MappingAnalysis mappingAnalysis : mappingAnalyses) {
+				mappingAnalysis.getMappingRegion().writeDebugGraphs(null);
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull Mapping mapping : orderedMappings) {
-			BasicMappingRegion2 mappingRegion = mapping2mappingRegion.get(mapping);
-			assert mappingRegion != null;
-			orderedRegions.add(mappingRegion);
+			MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
+			assert mappingAnalysis != null;
+			orderedRegions.add(mappingAnalysis.getMappingRegion());
 			//			mappingRegion.resolveRecursion();
 		}
 		boolean noEarlyMerge = isNoEarlyMerge();

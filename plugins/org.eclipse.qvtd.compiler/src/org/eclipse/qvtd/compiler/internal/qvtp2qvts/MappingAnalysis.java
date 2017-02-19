@@ -29,8 +29,8 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysisImpl2;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -53,25 +53,33 @@ import org.eclipse.qvtd.pivot.qvtschedule.MultiRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
  * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTp mapping.
  */
-public class BasicMappingRegion2 extends BasicMappingRegionImpl
+public class MappingAnalysis implements Nameable
 {
-	public static @NonNull BasicMappingRegion2 createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
-		BasicMappingRegion2 mappingRegion = new BasicMappingRegion2(multiRegion, mapping);
-		@SuppressWarnings("unused")String name = mappingRegion.getName();
-		mappingRegion.initialize();
-		return mappingRegion;
+	public final class MappingAnalysisRegion extends BasicMappingRegionImpl
+	{
+		public MappingAnalysisRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
+			super(multiRegion, mapping);
+		}
+
+		@Override			// FIXME eliminate this klunky callback
+		public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
+			MappingAnalysis.this.addVariableNode(typedElement, simpleNode);
+		}
 	}
 
-	/**
-	 * The analyzed mapping.
-	 */
-	private final @NonNull Mapping mapping;
+	public static @NonNull MappingAnalysis createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
+		MappingAnalysis mappingAnalysis = new MappingAnalysis(multiRegion, mapping);
+		@SuppressWarnings("unused")String name = mappingAnalysis.getMappingRegion().getName();
+		mappingAnalysis.initialize();
+		return mappingAnalysis;
+	}
+
+	private final @NonNull BasicMappingRegionImpl mappingRegion;
 
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
@@ -79,7 +87,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 	 */
 	private final @NonNull Set<@NonNull Predicate> complexPredicates = new HashSet<>();
 
-	private final @NonNull ExpressionAnalyzer expressionAnalyzer = new ExpressionAnalyzer(this);
+	private final @NonNull ExpressionAnalyzer expressionAnalyzer;
 
 	/**
 	 * All the guard patterns. (domain and mapping).
@@ -106,10 +114,9 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
-	private BasicMappingRegion2(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
-		super(multiRegion);
-		this.mapping = mapping;
-		assert mapping != null;
+	private MappingAnalysis(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
+		this.mappingRegion = new MappingAnalysisRegion(multiRegion, mapping);
+		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
 		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
@@ -130,12 +137,6 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		}
 	}
 
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitBasicMappingRegion(this);
-	}
-
-	@Override
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
 		//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
 		variable2node.put(typedElement, simpleNode);
@@ -191,7 +192,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 			else { */
 			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
 			if (!resultNode.isTrue()) {
-				Node trueNode = RegionUtil.createTrueNode(this);
+				Node trueNode = RegionUtil.createTrueNode(mappingRegion);
 				RegionUtil.createPredicateEdge(resultNode, null, trueNode);
 			}
 			else {		// FIXME ?? do includes() here explicitly
@@ -202,7 +203,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 	}
 
 	protected void analyzeContainments() {
-		for (@NonNull Node node : getNewNodes()) {
+		for (@NonNull Node node : mappingRegion.getNewNodes()) {
 			boolean isContained = false;
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				Property property = edge.getProperty();
@@ -226,7 +227,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
 				Node guardNode = getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = RegionUtil.createOldNode(this, guardVariable);
+				guardNode = RegionUtil.createOldNode(mappingRegion, guardVariable);
 				assert guardNode == getNode(guardVariable);
 			}
 		}
@@ -296,7 +297,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
 				Node realizedNode = getNode(realizedVariable);
 				assert realizedNode == null;
-				realizedNode = RegionUtil.createRealizedStepNode(this, realizedVariable);
+				realizedNode = RegionUtil.createRealizedStepNode(mappingRegion, realizedVariable);
 				assert realizedNode == getNode(realizedVariable);
 			}
 		}
@@ -321,7 +322,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : RegionUtil.createNullNode(this, true, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : RegionUtil.createNullNode(mappingRegion, true, null);
 				//				assert sourceNode.isGuard();
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
@@ -343,7 +344,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		assert initNode != null;
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
-				Node stepNode = RegionUtil.createRealizedStepNode(this, variable);
+				Node stepNode = RegionUtil.createRealizedStepNode(mappingRegion, variable);
 				RegionUtil.createExpressionEdge(initNode, QVTscheduleConstants.EQUALS_NAME, stepNode);
 				initNode = stepNode;
 			}
@@ -354,7 +355,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 			//			}
 			else {
 				//				Node stepNode = RegionUtil.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
-				Node stepNode = RegionUtil.createLoadedStepNode(this, variable);
+				Node stepNode = RegionUtil.createLoadedStepNode(mappingRegion, variable);
 				RegionUtil.createExpressionEdge(initNode, QVTscheduleConstants.EQUALS_NAME, stepNode);
 				initNode = stepNode;
 			}
@@ -368,7 +369,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		if (dependencyHeadNodes == null) {
 			dependencyHeadNodes = new ArrayList<>();
 		}
-		Node dependencyHeadNode = RegionUtil.createDependencyNode(this, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatumAnalysis);
+		Node dependencyHeadNode = RegionUtil.createDependencyNode(mappingRegion, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatumAnalysis);
 		dependencyHeadNode.setHead();
 		dependencyHeadNodes.add(dependencyHeadNode);
 		return dependencyHeadNode;
@@ -385,13 +386,13 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		return null;
 	}
 
-	public @NonNull Mapping getMapping() {
-		return mapping;
+	public @NonNull MappingRegion getMappingRegion() {
+		return mappingRegion;
 	}
 
 	@Override
 	public @NonNull String getName() {
-		return String.valueOf(getMapping().getName());
+		return mappingRegion.getName();
 	}
 
 	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
@@ -413,7 +414,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, mappingRegion.getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				if (leftExp instanceof VariableExp) {
 					return leftExp;
@@ -442,7 +443,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, mappingRegion.getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				OCLExpression rightExp = callExp.getOwnedArguments().get(0);
 				if (leftExp instanceof VariableExp) {
@@ -473,13 +474,13 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 					node = analyzeVariable(variable, ownedInit);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					DomainUsage domainUsage = getSchedulerConstants().getDomainUsage(variable);
+					DomainUsage domainUsage = mappingRegion.getSchedulerConstants().getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
-						node = RegionUtil.createRealizedStepNode(this, variable);
+						node = RegionUtil.createRealizedStepNode(mappingRegion, variable);
 					}
 					else {
-						node = RegionUtil.createLoadedStepNode(this, variable);		// FIXME Predicated ??
+						node = RegionUtil.createLoadedStepNode(mappingRegion, variable);		// FIXME Predicated ??
 					}
 				}
 			}
@@ -501,7 +502,7 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
 		Node node = getNode(typedElement);
 		if (node == null) {
-			node = RegionUtil.createUnknownNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
+			node = RegionUtil.createUnknownNode(mappingRegion, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);
 		}
 		return node;
@@ -527,8 +528,8 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 		analyzeComplexPredicates();
 		analyzeContainments();
 		//
-		List<@NonNull Node> headNodes = getHeadNodes();
-		computeUtilities(headNodes);
+		List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
+		mappingRegion.computeUtilities(headNodes);
 	}
 
 	/**
@@ -550,9 +551,9 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 	}
 
 	public void registerConsumptionsAndProductions(@NonNull QVTp2QVTs qvtp2qts) {
-		for (@NonNull Node newNode : getNewNodes()) {
+		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
 			ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) newNode.getClassDatumAnalysis();
-			classDatumAnalysis.addProduction(this, newNode);
+			classDatumAnalysis.addProduction(mappingRegion, newNode);
 			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
 				MappingRegion consumingRegion = qvtp2qts.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
@@ -562,9 +563,9 @@ public class BasicMappingRegion2 extends BasicMappingRegionImpl
 				}
 			}
 		}
-		for (@NonNull Node predicatedNode : getOldNodes()) {
+		for (@NonNull Node predicatedNode : mappingRegion.getOldNodes()) {
 			ClassDatumAnalysisImpl2 classDatumAnalysis = (ClassDatumAnalysisImpl2) predicatedNode.getClassDatumAnalysis();
-			classDatumAnalysis.addConsumption(this, predicatedNode);
+			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
 			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
 				MappingRegion producingRegion = qvtp2qts.getMappingRegion(producingMapping);
 				assert producingRegion != null;

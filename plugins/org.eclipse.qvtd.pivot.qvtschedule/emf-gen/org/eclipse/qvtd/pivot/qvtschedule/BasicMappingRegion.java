@@ -22,7 +22,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicMappingRegion()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface BasicMappingRegion extends MappingRegion {

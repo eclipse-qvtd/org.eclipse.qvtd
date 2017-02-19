@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion2;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingAnalysis.MappingAnalysisRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -296,7 +296,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion2.class, 19);
+		myQVT.assertRegionCount(MappingAnalysisRegion.class, 19);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -371,7 +371,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		myQVT.loadEcoreFile("EnvExample2.ecore", example2.classes.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion2.class, 3);
+		myQVT.assertRegionCount(MappingAnalysisRegion.class, 3);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -440,7 +440,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion2.class, 15);
+		myQVT.assertRegionCount(MappingAnalysisRegion.class, 15);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 5);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -533,7 +533,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion2.class, 6);
+		myQVT.assertRegionCount(MappingAnalysisRegion.class, 6);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 1);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -590,7 +590,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion2.class, 7);
+		myQVT.assertRegionCount(MappingAnalysisRegion.class, 7);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 1);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -633,7 +633,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
-		myQVT.assertRegionCount(BasicMappingRegion2.class, 5);
+		myQVT.assertRegionCount(MappingAnalysisRegion.class, 5);
 		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
 		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);

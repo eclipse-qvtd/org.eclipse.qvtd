@@ -126,7 +126,7 @@ public class QVTscheduleTables
 		}
 
 		public static final @NonNull EcoreExecutorType _AbstractDatum = new EcoreExecutorType(QVTschedulePackage.Literals.ABSTRACT_DATUM, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _BasicMappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.BASIC_MAPPING_REGION, PACKAGE, 0 | ExecutorType.ABSTRACT);
+		public static final @NonNull EcoreExecutorType _BasicMappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.BASIC_MAPPING_REGION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _CastEdge = new EcoreExecutorType(QVTschedulePackage.Literals.CAST_EDGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ClassDatum = new EcoreExecutorType(QVTschedulePackage.Literals.CLASS_DATUM, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ClassDatumAnalysis = new EcoreExecutorType(QVTschedulePackage.Literals.CLASS_DATUM_ANALYSIS, PACKAGE, 0 | ExecutorType.ABSTRACT);

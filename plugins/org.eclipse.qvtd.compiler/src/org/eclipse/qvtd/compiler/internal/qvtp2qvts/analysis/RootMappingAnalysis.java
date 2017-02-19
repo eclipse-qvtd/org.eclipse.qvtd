@@ -26,7 +26,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RootCompositionRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SchedulerConstants;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A RootMappingAnalysis provides an analysis of what is introduced by the root mapping.
@@ -147,7 +146,7 @@ public class RootMappingAnalysis
 	protected @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = QVTscheduleUtil.createNullNode(rootCompositionRegion, true, null);
+			nullNode = nullNode2 = RegionUtil.createNullNode(rootCompositionRegion, true, null);
 		}
 		return nullNode2;
 	}

@@ -1726,7 +1726,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return null;
 	}
 
-	protected @NonNull StandardLibraryHelper getStandardLibraryHelper() {
+	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
 		return getSchedulerConstants().getStandardLibraryHelper();
 	}
 

@@ -23,7 +23,6 @@ import java.util.function.BinaryOperator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -35,8 +34,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Phase;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -408,18 +405,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull NodeRole asSpeculation(@NonNull NodeRole nodeRole) {
 		return asPhase(nodeRole, Phase.SPECULATION);
-	}
-
-	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
-		NodeRole nodeRole = getNodeRole(Phase.CONSTANT);
-		if (typedElement != null) {
-			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getClassDatumAnalysis(typedElement), isMatched);
-			node.addTypedElement(typedElement);
-			return node;
-		}
-		else {
-			return NullNodeImpl.create(nodeRole, region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis(), isMatched);
-		}
 	}
 
 	/**

@@ -77,7 +77,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 
-public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull Node, @NonNull BasicMappingRegion2>
+public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull Node, @NonNull MappingAnalysis>
 {
 	private static final @NonNull String @NonNull [] ifArgNames = new @NonNull String[]{QVTscheduleConstants.IF_CONDITION_NAME, QVTscheduleConstants.IF_THEN_NAME, QVTscheduleConstants.IF_ELSE_NAME};
 	private static final @NonNull String @NonNull [] mapArgNames = new @NonNull String[]{"«key»", "«value»"};
@@ -108,9 +108,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
 
-	protected ExpressionAnalyzer(@NonNull BasicMappingRegion2 context) {
+	protected ExpressionAnalyzer(@NonNull MappingAnalysis context) {
 		super(context);
-		this.scheduler = context.getSchedulerConstants();
+		this.scheduler = context.getMappingRegion().getSchedulerConstants();
 		this.environmentFactory = scheduler.getEnvironmentFactory();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
@@ -300,11 +300,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	}
 
 	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createDependencyNode(context, name, classDatumAnalysis);
+		return RegionUtil.createDependencyNode(context.getMappingRegion(), name, classDatumAnalysis);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createErrorNode(context, name, classDatumAnalysis);
+		return RegionUtil.createErrorNode(context.getMappingRegion(), name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
@@ -354,11 +354,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return RegionUtil.createNullNode(context, isUnconditional(), typedElement);
+		return RegionUtil.createNullNode(context.getMappingRegion(), isUnconditional(), typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return RegionUtil.createOperationNode(context, isUnconditional(), name, typedElement, argNodes);
+		return RegionUtil.createOperationNode(context.getMappingRegion(), isUnconditional(), name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -456,7 +456,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				CompleteClass propertyCompleteClass = context.getSchedulerConstants().getClassDatumAnalysis(source2targetProperty).getCompleteClass();
+				CompleteClass propertyCompleteClass = context.getMappingRegion().getSchedulerConstants().getClassDatumAnalysis(source2targetProperty).getCompleteClass();
 				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
 				if (valueCompleteClass == propertyCompleteClass) {
 					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -624,7 +624,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Type type = ownedVariable.getType();
 		assert type != null;
 		CompleteClass actualClass = initNode.getCompleteClass();
-		CompleteClass requiredClass = context.getClassDatumAnalysis(ownedVariable).getCompleteClass();
+		CompleteClass requiredClass = context.getMappingRegion().getClassDatumAnalysis(ownedVariable).getCompleteClass();
 		if (actualClass.conformsTo(requiredClass)) {
 			context.addVariableNode(ownedVariable, initNode);
 			initNode.addTypedElement(ownedVariable);
@@ -850,7 +850,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 					createExpressionEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
-					MultiRegion multiRegion = context.getMultiRegion();
+					MultiRegion multiRegion = context.getMappingRegion().getMultiRegion();
 					QVTp2QVTs qvtp2qvts = (QVTp2QVTs) multiRegion.getSchedulerConstants();		// FIXME cast
 					OperationRegion operationRegion = qvtp2qvts.analyzeOperation(multiRegion, operationCallExp);
 					List<@NonNull Node> referenceNodes = operationRegion.getDependencyNodes();
