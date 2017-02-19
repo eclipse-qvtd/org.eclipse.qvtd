@@ -14,26 +14,51 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Pattern Typed Node</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl#isMatched <em>Matched</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class PatternTypedNodeImpl extends NodeImpl implements PatternTypedNode {
+	/**
+	 * The default value of the '{@link #isMatched() <em>Matched</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMatched()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean MATCHED_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isMatched() <em>Matched</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMatched()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean matched = MATCHED_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,6 +79,92 @@ public class PatternTypedNodeImpl extends NodeImpl implements PatternTypedNode {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isMatched() {
+		return matched;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMatched(boolean newMatched) {
+		boolean oldMatched = matched;
+		matched = newMatched;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.PATTERN_TYPED_NODE__MATCHED, oldMatched, matched));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.PATTERN_TYPED_NODE__MATCHED:
+				return isMatched();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.PATTERN_TYPED_NODE__MATCHED:
+				setMatched((Boolean)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.PATTERN_TYPED_NODE__MATCHED:
+				setMatched(MATCHED_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.PATTERN_TYPED_NODE__MATCHED:
+				return matched != MATCHED_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return super.toString();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
@@ -63,23 +174,11 @@ public class PatternTypedNodeImpl extends NodeImpl implements PatternTypedNode {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitPatternTypedNode(this);
 	}
 
-	public static @NonNull PatternTypedNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
-		PatternTypedNodeImpl node = new PatternTypedNodeImpl();
-		node.initialize(nodeRole, region, name, classDatum);
-		node.isMatched = isMatched;
-		return node;
-	}
-
-	private boolean isMatched;
-
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		return create(nodeRole, region, QVTscheduleUtil.getName(this), QVTscheduleUtil.getClassDatum(this), isMatched);
-	}
-
-	@Override
-	public boolean isMatched() {
-		return isMatched;
+		PatternTypedNodeImpl node = (PatternTypedNodeImpl)super.createNode(nodeRole, region);
+		node.setMatched(matched);
+		return node;
 	}
 
 	@Override

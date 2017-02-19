@@ -962,16 +962,15 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return ClassUtil.nonNullState(utility);
 	}
 
-	protected void initialize(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum) {
-		//	public void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
-		//			assert name != null;
-		//			assert classDatum != null;
+	@Override
+	public void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum) {
+		assert name != null;
+		assert classDatum != null;
 		setNodeRole(nodeRole);
 		setRegion(region);
 		setName(name);
-		this.classDatum = classDatum;
+		setClassDatum(classDatum);
 		this.isDataType = classDatum.getCompleteClass().getPrimaryClass() instanceof DataType;
-		//		region.addNode(this);
 	}
 
 	@Override

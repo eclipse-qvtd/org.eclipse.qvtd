@@ -4018,13 +4018,22 @@ public interface QVTschedulePackage extends EPackage {
 	int NULL_NODE__REGION = NODE__REGION;
 
 	/**
+	 * The feature id for the '<em><b>Matched</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_NODE__MATCHED = NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Null Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NULL_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+	int NULL_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4172,13 +4181,22 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_NODE__REGION = NODE__REGION;
 
 	/**
+	 * The feature id for the '<em><b>Matched</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__MATCHED = NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Operation Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+	int OPERATION_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4488,13 +4506,22 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_TYPED_NODE__REGION = NODE__REGION;
 
 	/**
+	 * The feature id for the '<em><b>Matched</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__MATCHED = NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Pattern Typed Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_TYPED_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+	int PATTERN_TYPED_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4651,13 +4678,22 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__VARIABLE = VARIABLE_NODE__VARIABLE;
 
 	/**
+	 * The feature id for the '<em><b>Matched</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__MATCHED = VARIABLE_NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Pattern Variable Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_VARIABLE_NODE_FEATURE_COUNT = VARIABLE_NODE_FEATURE_COUNT + 0;
+	int PATTERN_VARIABLE_NODE_FEATURE_COUNT = VARIABLE_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7038,6 +7074,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getNullNode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NullNode#isMatched <em>Matched</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Matched</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NullNode#isMatched()
+	 * @see #getNullNode()
+	 * @generated
+	 */
+	EAttribute getNullNode_Matched();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationNode <em>Operation Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7046,6 +7093,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getOperationNode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationNode#isMatched <em>Matched</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Matched</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationNode#isMatched()
+	 * @see #getOperationNode()
+	 * @generated
+	 */
+	EAttribute getOperationNode_Matched();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion <em>Operation Region</em>}'.
@@ -7123,6 +7181,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getPatternTypedNode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode#isMatched <em>Matched</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Matched</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode#isMatched()
+	 * @see #getPatternTypedNode()
+	 * @generated
+	 */
+	EAttribute getPatternTypedNode_Matched();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode <em>Pattern Variable Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7131,6 +7200,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPatternVariableNode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode#isMatched <em>Matched</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Matched</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode#isMatched()
+	 * @see #getPatternVariableNode()
+	 * @generated
+	 */
+	EAttribute getPatternVariableNode_Matched();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge <em>Predicate Edge</em>}'.
@@ -8146,6 +8226,14 @@ public interface QVTschedulePackage extends EPackage {
 		EClass NULL_NODE = eINSTANCE.getNullNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Matched</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NULL_NODE__MATCHED = eINSTANCE.getNullNode_Matched();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl <em>Operation Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8154,6 +8242,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass OPERATION_NODE = eINSTANCE.getOperationNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Matched</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_NODE__MATCHED = eINSTANCE.getOperationNode_Matched();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl <em>Operation Region</em>}' class.
@@ -8216,6 +8312,14 @@ public interface QVTschedulePackage extends EPackage {
 		EClass PATTERN_TYPED_NODE = eINSTANCE.getPatternTypedNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Matched</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PATTERN_TYPED_NODE__MATCHED = eINSTANCE.getPatternTypedNode_Matched();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl <em>Pattern Variable Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8224,6 +8328,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PATTERN_VARIABLE_NODE = eINSTANCE.getPatternVariableNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Matched</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PATTERN_VARIABLE_NODE__MATCHED = eINSTANCE.getPatternVariableNode_Matched();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl <em>Predicate Edge</em>}' class.

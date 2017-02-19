@@ -1452,8 +1452,28 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getNullNode_Matched() {
+		return (EAttribute)nullNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getOperationNode() {
 		return operationNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getOperationNode_Matched() {
+		return (EAttribute)operationNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1532,8 +1552,28 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getPatternTypedNode_Matched() {
+		return (EAttribute)patternTypedNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPatternVariableNode() {
 		return patternVariableNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPatternVariableNode_Matched() {
+		return (EAttribute)patternVariableNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1790,8 +1830,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(nodeConnectionEClass, NODE_CONNECTION__CLASS_DATUM);
 
 		nullNodeEClass = createEClass(NULL_NODE);
+		createEAttribute(nullNodeEClass, NULL_NODE__MATCHED);
 
 		operationNodeEClass = createEClass(OPERATION_NODE);
+		createEAttribute(operationNodeEClass, OPERATION_NODE__MATCHED);
 
 		operationRegionEClass = createEClass(OPERATION_REGION);
 		createEReference(operationRegionEClass, OPERATION_REGION__DEPENDENCY_NODES);
@@ -1801,8 +1843,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(operationRegionEClass, OPERATION_REGION__RESULT_NODE);
 
 		patternTypedNodeEClass = createEClass(PATTERN_TYPED_NODE);
+		createEAttribute(patternTypedNodeEClass, PATTERN_TYPED_NODE__MATCHED);
 
 		patternVariableNodeEClass = createEClass(PATTERN_VARIABLE_NODE);
+		createEAttribute(patternVariableNodeEClass, PATTERN_VARIABLE_NODE__MATCHED);
 
 		predicateEdgeEClass = createEClass(PREDICATE_EDGE);
 
@@ -2057,8 +2101,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getNodeConnection_ClassDatum(), this.getClassDatum(), null, "classDatum", null, 1, 1, NodeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nullNodeEClass, NullNode.class, "NullNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNullNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, NullNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationNodeEClass, OperationNode.class, "OperationNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOperationNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, OperationNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationRegionEClass, OperationRegion.class, "OperationRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationRegion_DependencyNodes(), this.getNode(), null, "dependencyNodes", null, 0, -1, OperationRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2068,8 +2114,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getOperationRegion_ResultNode(), this.getNode(), null, "resultNode", null, 0, 1, OperationRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(patternTypedNodeEClass, PatternTypedNode.class, "PatternTypedNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPatternTypedNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, PatternTypedNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(patternVariableNodeEClass, PatternVariableNode.class, "PatternVariableNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPatternVariableNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, PatternVariableNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(predicateEdgeEClass, PredicateEdge.class, "PredicateEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

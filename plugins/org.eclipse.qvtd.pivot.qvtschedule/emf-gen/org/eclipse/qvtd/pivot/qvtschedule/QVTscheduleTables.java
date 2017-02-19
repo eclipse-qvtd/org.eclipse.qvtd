@@ -840,11 +840,19 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _NodeConnection__Node__incomingConnection = new ExecutorPropertyWithImplementation("Node", Types._NodeConnection, 1, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION));
 		public static final @NonNull ExecutorProperty _NodeConnection__Node__outgoingConnections = new ExecutorPropertyWithImplementation("Node", Types._NodeConnection, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS));
 
+		public static final @NonNull ExecutorProperty _NullNode__matched = new EcoreExecutorProperty(QVTschedulePackage.Literals.NULL_NODE__MATCHED, Types._NullNode, 0);
+
+		public static final @NonNull ExecutorProperty _OperationNode__matched = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_NODE__MATCHED, Types._OperationNode, 0);
+
 		public static final @NonNull ExecutorProperty _OperationRegion__dependencyNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES, Types._OperationRegion, 0);
 		public static final @NonNull ExecutorProperty _OperationRegion__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES, Types._OperationRegion, 1);
 		public static final @NonNull ExecutorProperty _OperationRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__NAME, Types._OperationRegion, 2);
 		public static final @NonNull ExecutorProperty _OperationRegion__operation = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__OPERATION, Types._OperationRegion, 3);
 		public static final @NonNull ExecutorProperty _OperationRegion__resultNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._OperationRegion, 4);
+
+		public static final @NonNull ExecutorProperty _PatternTypedNode__matched = new EcoreExecutorProperty(QVTschedulePackage.Literals.PATTERN_TYPED_NODE__MATCHED, Types._PatternTypedNode, 0);
+
+		public static final @NonNull ExecutorProperty _PatternVariableNode__matched = new EcoreExecutorProperty(QVTschedulePackage.Literals.PATTERN_VARIABLE_NODE__MATCHED, Types._PatternVariableNode, 0);
 
 		public static final @NonNull ExecutorProperty _PropertyDatum__classDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__CLASS_DATUM, Types._PropertyDatum, 0);
 		public static final @NonNull ExecutorProperty _PropertyDatum__opposite = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
@@ -3933,6 +3941,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__incomingConnection,
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._NullNode__matched,
 			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,
@@ -3944,6 +3953,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__incomingConnection,
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._OperationNode__matched,
 			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,
@@ -3968,6 +3978,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__incomingConnection,
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._PatternTypedNode__matched,
 			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,
@@ -3979,6 +3990,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__incomingConnection,
 			QVTscheduleTables.Properties._Node__incomingEdges,
+			QVTscheduleTables.Properties._PatternVariableNode__matched,
 			QVTscheduleTables.Properties._Node__name,
 			QVTscheduleTables.Properties._Node__nodeRole,
 			QVTscheduleTables.Properties._Node__outgoingConnections,

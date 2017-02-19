@@ -190,8 +190,14 @@
       <eTypeArguments eClassifier="#//Node"/>
     </eGenericSuperTypes>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NullNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationRegion" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencyNodes" upperBound="-1"
         eType="#//Node"/>
@@ -202,8 +208,14 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultNode" eType="#//Node"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"

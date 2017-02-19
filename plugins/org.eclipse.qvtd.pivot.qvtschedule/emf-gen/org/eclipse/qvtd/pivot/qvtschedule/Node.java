@@ -318,6 +318,8 @@ public interface Node extends Element, ConnectionEnd, GraphNode, Nameable
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 	@NonNull Utility getUtility();
 
+	void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);
+
 	/**
 	 * Return true if this node is a Class object.
 	 */

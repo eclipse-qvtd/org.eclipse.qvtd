@@ -17,13 +17,9 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -61,12 +57,6 @@ public class IteratorNodeImpl extends VariableNodeImpl implements IteratorNode {
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitIteratorNode(this);
-	}
-
-	public static @NonNull VariableNodeImpl create(@NonNull Role nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull VariableDeclaration variable) {
-		IteratorNodeImpl node = new IteratorNodeImpl();
-		node.initialize(nodeRole, region, name, classDatum, variable);
-		return node;
 	}
 
 	@Override
