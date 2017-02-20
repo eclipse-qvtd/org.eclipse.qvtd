@@ -316,7 +316,8 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 
 	@Override
 	public ElementCS visitCollectionTemplateExp(@NonNull CollectionTemplateExp asCollectionTemplateExp) {
-		CollectionTemplateCS csCollectionTemplate = context.refreshNamedElement(CollectionTemplateCS.class, QVTrelationCSPackage.Literals.COLLECTION_TEMPLATE_CS, asCollectionTemplateExp, asCollectionTemplateExp.getBindsTo().getName());
+		Variable bindsTo = asCollectionTemplateExp.getBindsTo();
+		CollectionTemplateCS csCollectionTemplate = context.refreshNamedElement(CollectionTemplateCS.class, QVTrelationCSPackage.Literals.COLLECTION_TEMPLATE_CS, asCollectionTemplateExp, bindsTo.isIsImplicit() ? null : bindsTo.getName());
 		csCollectionTemplate.setOwnedType(createTypeRefCS(asCollectionTemplateExp.getType()));
 		//
 		List<TemplateVariableCS> csTemplateVariables = new ArrayList<>();
@@ -423,7 +424,8 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 
 	@Override
 	public ElementCS visitObjectTemplateExp(@NonNull ObjectTemplateExp asObjectTemplateExp) {
-		ObjectTemplateCS csObjectTemplate = context.refreshNamedElement(ObjectTemplateCS.class, QVTrelationCSPackage.Literals.OBJECT_TEMPLATE_CS, asObjectTemplateExp, asObjectTemplateExp.getBindsTo().getName());
+		Variable bindsTo = asObjectTemplateExp.getBindsTo();
+		ObjectTemplateCS csObjectTemplate = context.refreshNamedElement(ObjectTemplateCS.class, QVTrelationCSPackage.Literals.OBJECT_TEMPLATE_CS, asObjectTemplateExp, bindsTo.isIsImplicit() ? null : bindsTo.getName());
 		Type asType = PivotUtil.getType(asObjectTemplateExp);
 		TypedRefCS csTypeRef = null;
 		@SuppressWarnings("null") @NonNull EClass eClass = asType.eClass();
