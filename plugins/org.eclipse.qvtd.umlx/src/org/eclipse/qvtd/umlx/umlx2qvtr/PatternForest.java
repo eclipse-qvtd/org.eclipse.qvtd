@@ -217,7 +217,10 @@ class PatternForest
 				for (@NonNull TreeEdge childEdge : childEdges) {
 					EStructuralFeature eStructuralFeature = childEdge.patternEdge.getReferredEStructuralFeature();
 					if ((eStructuralFeature == null) || ((eStructuralFeature instanceof EReference) && ((EReference)eStructuralFeature).isContainment())) {
-						((TreeClassNode)childEdge.child).setIsRealized();
+						TreeNode childNode = childEdge.child;
+						if (childNode instanceof TreeClassNode) {
+							((TreeClassNode)childNode).setIsRealized();
+						}
 					}
 				}
 			}
