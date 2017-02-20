@@ -60,16 +60,18 @@ public class HSV2HSLNormalizer implements ModelNormalizer
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass hslNodeClass = (EClass) ePackage.getEClassifier(HSLTreePackage.Literals.HSL_NODE.getName());
 		assert hslNodeClass != null;
-		@NonNull EReference hslNodeChildren = (EReference) hslNodeClass.getEStructuralFeature(HSLTreePackage.Literals.HSL_NODE__CHILDREN.getName());
+		EReference hslNodeChildren = (EReference) hslNodeClass.getEStructuralFeature(HSLTreePackage.Literals.HSL_NODE__CHILDREN.getName());
 		assert hslNodeChildren != null;
-		@NonNull EAttribute hslNodeName = (EAttribute) hslNodeClass.getEStructuralFeature(HSLTreePackage.Literals.HSL_NODE__NAME.getName());
+		EAttribute hslNodeName = (EAttribute) hslNodeClass.getEStructuralFeature(HSLTreePackage.Literals.HSL_NODE__NAME.getName());
 		assert hslNodeName != null;
 		HLSNodeComparator personComparator = new HLSNodeComparator(hslNodeName);
 		List<@NonNull EObject> allNodes = new ArrayList<@NonNull EObject>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (hslNodeClass.isInstance(eObject)) {
-				allNodes.add(eObject);
+				if (eObject != null) {
+					allNodes.add(eObject);
+				}
 			}
 		}
 		for (@NonNull EObject hslNode : allNodes) {

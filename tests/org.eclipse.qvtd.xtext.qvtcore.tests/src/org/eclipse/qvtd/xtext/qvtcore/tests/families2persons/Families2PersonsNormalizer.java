@@ -74,7 +74,7 @@ public class Families2PersonsNormalizer implements ModelNormalizer
 		assert maleClass != null;
 		EClass personClass = (EClass) ePackage.getEClassifier(PersonsPackage.Literals.PERSON.getName());
 		assert personClass != null;
-		@NonNull EAttribute personFullName = (EAttribute) personClass.getEStructuralFeature(PersonsPackage.Literals.PERSON__FULL_NAME.getName());
+		EAttribute personFullName = (EAttribute) personClass.getEStructuralFeature(PersonsPackage.Literals.PERSON__FULL_NAME.getName());
 		assert personFullName != null;
 		PersonComparator personComparator = new PersonComparator(femaleClass, personFullName);
 		ECollections.sort(resource.getContents(), personComparator);
