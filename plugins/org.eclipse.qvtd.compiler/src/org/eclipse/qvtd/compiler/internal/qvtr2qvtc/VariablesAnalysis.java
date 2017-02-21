@@ -423,11 +423,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		EObject eContainer = objectTemplateExp.eContainer();
 		if (eContainer instanceof PropertyTemplateItem) {
-			PropertyTemplateItem continingPropertyTemplateItem = (PropertyTemplateItem)eContainer;
-			Property property = continingPropertyTemplateItem.getReferredProperty();
+			PropertyTemplateItem containingPropertyTemplateItem = (PropertyTemplateItem)eContainer;
+			Property property = containingPropertyTemplateItem.getReferredProperty();
 			Property oppositeProperty = property != null ? property.getOpposite() : null;
 			if ((oppositeProperty != null) && ClassUtil.safeEquals(oppositeProperty.getName(), keyParameterName)) {
-				return continingPropertyTemplateItem.getValue();
+				return containingPropertyTemplateItem.getObjContainer();
 			}
 		}
 		return null;
