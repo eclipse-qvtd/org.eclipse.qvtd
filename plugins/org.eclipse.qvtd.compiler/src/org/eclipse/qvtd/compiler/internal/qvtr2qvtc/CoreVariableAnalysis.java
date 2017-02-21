@@ -53,4 +53,9 @@ public class CoreVariableAnalysis extends AbstractVariableAnalysis
 	public @Nullable Variable getRelationVariable() {
 		return null;
 	}
+
+	@Override
+	public @NonNull String toString() {
+		return String.valueOf(cVariable);
+	}
 }

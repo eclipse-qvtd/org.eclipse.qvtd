@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
@@ -31,8 +32,9 @@ public interface VariableAnalysis
 	/**
 	 * Add the NavigationAssignment "cVariable.cProperty := cExpression" to the cBottomPattern inverting the usage
 	 * of a Collection element assignment to "cExpression.cOppositeProperty := cVariable".
+	 * @throws CompilerChainException
 	 */
-	void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial);
+	void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException;
 
 	/**
 	 * Perform diagnostic checks at the end of the analysis.
@@ -46,8 +48,9 @@ public interface VariableAnalysis
 
 	/**
 	 * The core variable for this analysis.
+	 * @throws CompilerChainException
 	 */
-	@NonNull Variable getCoreVariable();
+	@NonNull Variable getCoreVariable() throws CompilerChainException;
 
 	/**
 	 * The relation variable for this analysis. Returns null if the core variable is an additional synthesized artefact.
