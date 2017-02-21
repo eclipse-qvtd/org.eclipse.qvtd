@@ -294,13 +294,40 @@ public interface QVTrelationPackage extends EPackage {
 	int KEY___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Identifies Is Not Abstract</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Validate Identifies Is AUsed Package Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate No Super Keys</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_NO_SUPER_KEYS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Validate Identifies Is Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_IDENTIFIES_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Opposite Parts Have Opposites</em>' operation.
@@ -309,7 +336,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
+	int KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Validate Opposite Parts Are Opposite Parts</em>' operation.
@@ -318,7 +345,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>Validate Parts Are Parts</em>' operation.
@@ -327,7 +354,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 3;
+	int KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Validate Parts Are Unique</em>' operation.
@@ -336,7 +363,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 4;
+	int KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Key</em>' class.
@@ -345,7 +372,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 5;
+	int KEY_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl <em>Relation</em>}' class.
@@ -1670,22 +1697,13 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Validate Keys Are Unique</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATIONAL_TRANSFORMATION___VALIDATE_KEYS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The operation id for the '<em>Validate Rules Are Relations</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 1;
+	int RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Relational Transformation</em>' class.
@@ -1694,7 +1712,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION_OPERATION_COUNT = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 2;
+	int RELATIONAL_TRANSFORMATION_OPERATION_COUNT = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.SharedVariableImpl <em>Shared Variable</em>}' class.
@@ -2159,6 +2177,16 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getKey_Transformation();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsNotAbstract(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Identifies Is Not Abstract</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Identifies Is Not Abstract</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsNotAbstract(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidateIdentifiesIsNotAbstract__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsAUsedPackageClass(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Identifies Is AUsed Package Class</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2167,6 +2195,26 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateNoSuperKeys(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Super Keys</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate No Super Keys</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validateNoSuperKeys(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidateNoSuperKeys__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Identifies Is Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Identifies Is Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateOppositePartsHaveOpposites(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Opposite Parts Have Opposites</em>}' operation.
@@ -2516,16 +2564,6 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getRelationalTransformation_OwnedKey();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateKeysAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Keys Are Unique</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Keys Are Unique</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateKeysAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateRulesAreRelations(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Rules Are Relations</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2630,12 +2668,36 @@ public interface QVTrelationPackage extends EPackage {
 		EReference KEY__TRANSFORMATION = eINSTANCE.getKey_Transformation();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Identifies Is Not Abstract</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateIdentifiesIsNotAbstract__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Identifies Is AUsed Package Class</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate No Super Keys</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_NO_SUPER_KEYS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateNoSuperKeys__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Identifies Is Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_IDENTIFIES_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Opposite Parts Have Opposites</b></em>' operation.
@@ -2914,14 +2976,6 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATIONAL_TRANSFORMATION__OWNED_KEY = eINSTANCE.getRelationalTransformation_OwnedKey();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Keys Are Unique</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RELATIONAL_TRANSFORMATION___VALIDATE_KEYS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Rules Are Relations</b></em>' operation.

@@ -5,8 +5,22 @@ package qvtrelation
 context Key
 --def: resolvedParts : Set(ocl::Property) = part->union(oppositePart.opposite)
 
+inv IdentifiesIsNotAbstract:			-- see Bugzilla 512532 discussion
+	not identifies.isAbstract
+
 inv IdentifiesIsAUsedPackageClass:
 	transformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
+
+inv NoSuperKeys:			-- see Bugzilla 512532 discussion
+	transformation<> null implies 
+	let superClasses = identifies.superClasses->closure(superClasses) in
+	let otherKeys = transformation.ownedKey->excluding(self) in
+	otherKeys.identifies->excludesAll(superClasses)
+
+inv IdentifiesIsUnique:
+	transformation<> null implies 
+	let otherKeys = transformation.ownedKey->excluding(self) in
+	otherKeys.identifies->excludes(identifies)
 
 inv OppositePartsHaveOpposites:
 	oppositePart->forAll(opposite <> null)
@@ -43,8 +57,8 @@ inv CompatibleTypeForValue:
 	valueExp.type.conformsTo(variable.type)
 
 context RelationalTransformation
-inv KeysAreUnique:
-	ownedKey->isUnique(identifies)
+--inv KeysAreUnique:
+--	ownedKey->isUnique(identifies)
 
 inv RulesAreRelations:
 	rule->forAll(oclIsKindOf(Relation))

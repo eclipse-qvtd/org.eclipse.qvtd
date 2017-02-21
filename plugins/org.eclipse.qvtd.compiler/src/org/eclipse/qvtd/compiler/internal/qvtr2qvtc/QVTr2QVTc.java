@@ -195,11 +195,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 */
 	private final @NonNull Map<@NonNull Key, @NonNull Function> key2function = new HashMap<>();
 
-	// Un-navigable opposites
-	//
-	//	The Key that identifies each Class.
-	// FIXME can there be two keys for the same Class?
-	//
+	/**
+	 * The Key that identifies each Class.
+	 * Multiple keys per class and derived keys are prohibited by WFRs. See Bug 512532 for rationale.
+	 */
 	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<>();
 
 	/**

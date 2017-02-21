@@ -142,7 +142,10 @@ public class QVTrSerializeTests extends LoadTestCase
 
 	public void testSerialize_Keys() throws Exception {
 		doSerializeRoundTripFromCS("models/Keys", new @NonNull String[] {
-			"The 'RelationalTransformation::KeysAreUnique' constraint is violated for 'transformation Keys(mm)'"
+			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies}'",
+			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies, QVTRelation::Key::part}'",
+			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name}'",
+			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::NamedElement {EMOF::NamedElement::name}'"
 		});
 	}
 
