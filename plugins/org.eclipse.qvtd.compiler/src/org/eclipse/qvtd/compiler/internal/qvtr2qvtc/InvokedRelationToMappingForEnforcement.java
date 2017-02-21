@@ -30,22 +30,22 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 /*public*/ class InvokedRelationToMappingForEnforcement extends AbstractQVTr2QVTcRelations
-{	
+{
 	protected class InvokedEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
 	{
-		protected class InvokedOtherRelationDomain2CoreDomain extends AbstractOtherRelationDomain2CoreDomain 
+		protected class InvokedOtherRelationDomain2CoreDomain extends AbstractOtherRelationDomain2CoreDomain
 		{
 			public InvokedOtherRelationDomain2CoreDomain(@NonNull RelationDomain rOtherDomain) {
 				super(rOtherDomain);
 			}
-			
-/*			// body of IROppositeDomainsToMappingForEnforcement
+
+			/*			// body of IROppositeDomainsToMappingForEnforcement
 			@Override
 			public void synthesize() throws CompilerChainException { // FIXME unify with TopLevel
 //				Set<@NonNull Variable> rOtherDomainVariables = new HashSet<@NonNull Variable>();
 //				gatherReferredVariables(rOtherDomainVariables, rOtherDomain); //ClassUtil.nullFree(rOtherDomainPattern.getBindsTo());
 //				assert rOtherDomainVariables.equals(Sets.newHashSet(getDomainVariables(rOtherDomain)));
-//				List<@NonNull Variable> rOtherRootVariables = getRootVariables(rOtherDomain); 
+//				List<@NonNull Variable> rOtherRootVariables = getRootVariables(rOtherDomain);
 				//
 //				Set<@NonNull Variable> rOtherGuardVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
 //				rOtherGuardVariables.retainAll(rWhenVariables);
@@ -66,13 +66,13 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 //				mapVariables(rMiddleBottomVariables, cMiddleBottomPattern);
 				//
 				super.synthesize();
-			} */	
+			} */
 		}
-		
+
 		private @NonNull Relation rInvokingRelation;
 		private @NonNull RelationCallExp rInvocation;
 
-		public InvokedEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation, @NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) {
+		public InvokedEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation, @NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
 			this.rInvocation = rInvocation;
 			this.rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
@@ -92,13 +92,13 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 			return rEnforcedBottomDomainVariables;
 		}
 
-//		@Override
-//		protected @NonNull Set<@NonNull Variable> getEnforcedDomainGuardVariables(@NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables) { // FIXME unify with TopLevel
-//			Set<@NonNull Variable> rEnforcedDomainGuardVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
-//			rEnforcedDomainGuardVariables.retainAll(rWhenVariables);
-//			rEnforcedDomainGuardVariables.addAll(rEnforcedRootVariables);
-//			return rEnforcedDomainGuardVariables;
-//		}
+		//		@Override
+		//		protected @NonNull Set<@NonNull Variable> getEnforcedDomainGuardVariables(@NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables) { // FIXME unify with TopLevel
+		//			Set<@NonNull Variable> rEnforcedDomainGuardVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
+		//			rEnforcedDomainGuardVariables.retainAll(rWhenVariables);
+		//			rEnforcedDomainGuardVariables.addAll(rEnforcedRootVariables);
+		//			return rEnforcedDomainGuardVariables;
+		//		}
 
 		// RInvokerToMGuard
 		@Override
@@ -124,12 +124,12 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 			}
 		}
 	}
-	
+
 	public InvokedRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert !rRelation.isIsTopLevel();
 	}
-	
+
 	/**
 	 * Each invocation of each enforced domain is synthesized as a separate mapping.
 	 */

@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -67,9 +68,10 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	/**
 	 * Add the NavigationAssignment "cVariable.cProperty := cExpression" to the cBottomPattern inverting the usage
 	 * of a Collection element assignment to "cExpression.cOppositeProperty := cVariable".
+	 * @throws CompilerChainException
 	 */
 	@Override
-	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) {
+	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
 		Key rKey2 = rKey;
 		if (isKeyed() && (rKey2 != null)) {
 			if (rKey2.getPart().contains(targetProperty)) {
@@ -137,7 +139,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		//				}
 		else if (isEnforcedBound) {
 			isGuard = variablesAnalysis.isInvoked && isRoot; //rKey != null;
-			cArea = rKey != null ? variablesAnalysis.cMapping : variablesAnalysis.cEnforcedDomain;
+			cArea = /*rKey != null ? variablesAnalysis.cMapping :*/ variablesAnalysis.cEnforcedDomain;
 		}
 		else if (cOtherBound != null) {
 			isGuard = isRoot;
@@ -168,7 +170,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	@Override
-	public @NonNull Variable getCoreVariable() {
+	public @NonNull Variable getCoreVariable() throws CompilerChainException {
 		Variable cVariable2 = cVariable;
 		if (cVariable2 == null) {
 			cVariable2 = synthesize();
@@ -186,8 +188,9 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		return cWhenDomain != null;
 	}
 
-	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) {
-		Function function = variablesAnalysis.qvtr2qvtc.getKeyFunction(ClassUtil.nonNull(rKey));
+	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) throws CompilerChainException {
+		Key rKey2 = ClassUtil.nonNull(rKey);
+		Function function = variablesAnalysis.qvtr2qvtc.getKeyFunction(rKey2);
 		List<@NonNull OCLExpression> asArguments = new ArrayList<@NonNull OCLExpression>();
 		if (rTemplateExp instanceof ObjectTemplateExp) {
 			ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)rTemplateExp;
@@ -204,7 +207,8 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
 				}
 				else {
-					asArguments.add(variablesAnalysis.createInvalidExpression());
+					throw new CompilerChainException("Missing ''{1}'' value for ''{0}'' key.", rKey2.getIdentifies().getName(), keyParameter.getName());
+					//					asArguments.add(variablesAnalysis.createInvalidExpression());
 				}
 			}
 		}
@@ -294,7 +298,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		this.cWhereDomain = cWhereDomain;
 	}
 
-	protected @NonNull Variable synthesize() {
+	protected @NonNull Variable synthesize() throws CompilerChainException {
 		Variable cVariable2 = cVariable;
 		if (cVariable2 == null) {
 			CorePattern cPattern = getCorePattern();
@@ -304,7 +308,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			Type type = ClassUtil.nonNullState(rVariable.getType());
 			if (isKeyed) {
 				cVariable2 = variablesAnalysis.createBottomVariable(name, type, true, null);
-				initializeKeyedVariable(cVariable2);
+				initializeKeyedVariable(cVariable2);			// FIXME can recurse - is stability guaranteed?
 				cPattern.getVariable().add(cVariable2);
 			}
 			else if (type instanceof DataType) {
@@ -337,7 +341,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(rVariable.toString());
 		if (cWhenDomain != null) {

@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -43,7 +44,7 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 	}
 
 	@Override
-	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) {
+	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
 		System.out.println("Unexpected " + getClass().getSimpleName() + ".addNavigationAssignment for " + this);
 	}
 
@@ -94,5 +95,10 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 	@Override
 	public void setWhere(@NonNull CoreDomain cWhereDomain) {
 		System.out.println("Unexpected " + getClass().getSimpleName() + ".setWhere for " + this);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return name;
 	}
 }

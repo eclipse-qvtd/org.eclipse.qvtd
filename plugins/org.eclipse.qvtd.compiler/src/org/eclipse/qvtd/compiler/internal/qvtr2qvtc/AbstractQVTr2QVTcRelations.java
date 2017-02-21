@@ -386,7 +386,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = new HashMap<>();
 		private final @NonNull Map<@NonNull Element, @NonNull Element> target2source = new HashMap<>();
 
-		public AbstractEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) {
+		public AbstractEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			this.rEnforcedDomain = rEnforcedDomain;
 			//
 			this.rEnforcedBoundVariables = new HashMap<>();

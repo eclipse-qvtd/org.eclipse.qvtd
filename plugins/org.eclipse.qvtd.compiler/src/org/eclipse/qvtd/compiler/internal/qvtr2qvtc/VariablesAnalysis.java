@@ -218,7 +218,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<>();
 
-	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass, boolean isInvoked) {
+	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass, boolean isInvoked) throws CompilerChainException {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.cEnforcedDomain = cEnforcedDomain;
@@ -246,8 +246,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	/**
 	 * Create a core Variable with a name and type in the middle guard pattern. The variable has no corresponding relation variable.
+	 * @throws CompilerChainException
 	 */
-	public @NonNull Variable addCoreGuardVariable(@NonNull String name, @NonNull Type type) {
+	public @NonNull Variable addCoreGuardVariable(@NonNull String name, @NonNull Type type) throws CompilerChainException {
 		CoreVariableAnalysis analysis = new CoreVariableAnalysis(this, name, type, null);
 		Variable cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
@@ -257,8 +258,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	/**
 	 * Create a core RealizedVariable with a name and type in the middle bottom pattern. The variable has no corresponding relation variable.
+	 * @throws CompilerChainException
 	 */
-	public @NonNull RealizedVariable addCoreRealizedVariable(@NonNull String name, @NonNull Type type) {
+	public @NonNull RealizedVariable addCoreRealizedVariable(@NonNull String name, @NonNull Type type) throws CompilerChainException {
 		CoreVariableAnalysis analysis = new CoreVariableAnalysis(this, name, type);
 		RealizedVariable cVariable = analysis.getCoreRealizedVariable();
 		addVariableAnalysis(analysis);
@@ -266,7 +268,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public @NonNull Variable addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) {
+	public @NonNull Variable addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) throws CompilerChainException {
 		CoreVariableAnalysis analysis = new CoreVariableAnalysis(this, name, ClassUtil.nonNullState(mMember.getType()), mMember);
 		Variable cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
@@ -274,11 +276,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public void addNavigationAssignment(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) {
+	public void addNavigationAssignment(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
 		getVariableAnalysis(rTargetVariable).addNavigationAssignment(targetProperty, cExpression, isPartial);
 	}
 
-	public void addNavigationPredicate(@NonNull CorePattern cCorePattern, @NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
+	public void addNavigationPredicate(@NonNull CorePattern cCorePattern, @NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) throws CompilerChainException {
 		Variable cTargetVariable = getCoreVariable(rTargetVariable);
 		NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cTargetVariable), targetProperty);
 		addConditionPredicate(cCorePattern, cNavigationExp, cExpression);
@@ -348,7 +350,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public void addVariableAnalysis(@NonNull VariableAnalysis analysis) {
+	public void addVariableAnalysis(@NonNull VariableAnalysis analysis) throws CompilerChainException {
 		Variable cVariable = analysis.getCoreVariable();
 		cVariable2analysis.put(cVariable, analysis);
 		Variable rVariable = analysis.getRelationVariable();
@@ -397,7 +399,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cThisVariable;
 	}
 
-	public @NonNull Variable getCoreVariable(@NonNull Variable rVariable) {			// doRVarToMVar
+	public @NonNull Variable getCoreVariable(@NonNull Variable rVariable) throws CompilerChainException {			// doRVarToMVar
 		return getVariableAnalysis(rVariable).getCoreVariable();
 	}
 
