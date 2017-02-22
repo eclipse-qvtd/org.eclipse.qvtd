@@ -68,6 +68,6 @@ public class ErrorNodeImpl extends NodeImpl implements ErrorNode {
 
 	@Override
 	public @NonNull String getShape() {
-		return "circle";
+		return "ellipse";
 	}
 } //ErrorNodeImpl
