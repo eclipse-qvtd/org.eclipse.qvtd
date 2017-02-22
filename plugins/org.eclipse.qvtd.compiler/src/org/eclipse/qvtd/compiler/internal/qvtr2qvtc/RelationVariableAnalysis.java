@@ -139,7 +139,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		//				}
 		else if (isEnforcedBound) {
 			isGuard = variablesAnalysis.isInvoked && isRoot; //rKey != null;
-			cArea = rKey != null ? variablesAnalysis.cMapping : variablesAnalysis.cEnforcedDomain;
+			cArea = /*rKey != null ? variablesAnalysis.cMapping :*/ variablesAnalysis.cEnforcedDomain;
 		}
 		else if (cOtherBound != null) {
 			isGuard = isRoot;
@@ -308,7 +308,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			Type type = ClassUtil.nonNullState(rVariable.getType());
 			if (isKeyed) {
 				cVariable2 = variablesAnalysis.createBottomVariable(name, type, true, null);
-				initializeKeyedVariable(cVariable2);
+				initializeKeyedVariable(cVariable2);			// FIXME can recurse - is stability guaranteed?
 				cPattern.getVariable().add(cVariable2);
 			}
 			else if (type instanceof DataType) {
