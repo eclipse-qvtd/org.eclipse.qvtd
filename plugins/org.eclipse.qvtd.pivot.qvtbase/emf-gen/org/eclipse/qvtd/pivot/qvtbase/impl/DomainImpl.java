@@ -662,7 +662,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		if ((typedModel != null) && !typedModel.eIsProxy()) {
 			return typedModel.getName();
 		}
-		return "null";
+		return String.valueOf(name);
 	}
 
 	/**
