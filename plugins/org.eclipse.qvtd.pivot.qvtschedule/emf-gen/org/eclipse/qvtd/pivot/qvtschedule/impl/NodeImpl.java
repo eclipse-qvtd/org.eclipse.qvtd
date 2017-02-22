@@ -598,7 +598,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void destroy() {
 		assert getOwningRegion() != null;
-		//		region.removeNode(this);
+		setOwningRegion(null);
 		Connection incomingConnection2 = incomingConnection;
 		if (incomingConnection2 != null) {
 			incomingConnection2.destroy();
