@@ -60,8 +60,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-
 import com.google.common.collect.Iterables;
 
 public class QVTm2QVTs extends ScheduleManager
@@ -180,7 +178,7 @@ public class QVTm2QVTs extends ScheduleManager
 		//
 		Node resultNode = RegionUtil.createStepNode("result", operationCallExp, dependencyNode, false);
 		operationRegion.setResultNode(resultNode);
-		RegionUtil.createExpressionEdge(dependencyNode, QVTscheduleConstants.EQUALS_NAME, resultNode);
+		RegionUtil.createEqualsEdge(dependencyNode, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();

@@ -462,12 +462,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 					if (navigationAssignment == null) {
 						Node stepNode = createNavigableDataTypeNode(sourceNode, source2targetProperty);
 						navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
-						createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, stepNode);
+						RegionUtil.createEqualsEdge(targetNode, stepNode);
 					}
 					else {
 						Node stepNode = createNavigableDataTypeNode(targetNode, navigationAssignment);
 						navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
-						createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, stepNode);
+						RegionUtil.createEqualsEdge(targetNode, stepNode);
 					}
 				}
 			}
@@ -475,7 +475,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		else {
 			//			if (!navigationEdge.isRealized() || targetNode.isRealized()) {
 			if (targetNode != navigationEdge.getEdgeTarget()) {
-				createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, navigationEdge.getEdgeTarget());
+				RegionUtil.createEqualsEdge(targetNode, navigationEdge.getEdgeTarget());
 			}
 		}
 		return navigationEdge;
@@ -487,7 +487,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getEdgeTarget();
 			if (target != targetNode) {
-				createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, target);
+				RegionUtil.createEqualsEdge(targetNode, target);
 			}
 		}
 		else {
@@ -529,11 +529,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			Node valueNode = navigationEdge.getEdgeTarget();
 			assert valueNode.isRealized();
 			Type type = source2targetProperty.getType();
+			Edge equalsEdge = RegionUtil.createEqualsEdge(targetNode, valueNode);
 			if (type instanceof DataType) {
-				createRealizedExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, valueNode);
-			}
-			else {
-				createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, valueNode);
+				assert equalsEdge.isRealized();			// ?? obsolete legacy check that never seems to be used
 			}
 			return navigationEdge;
 		}
