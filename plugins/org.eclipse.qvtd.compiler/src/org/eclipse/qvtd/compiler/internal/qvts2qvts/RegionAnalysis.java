@@ -266,9 +266,13 @@ public class RegionAnalysis implements Adapter
 										Node realizedTargetNode = realizedEdge.getEdgeTarget();
 										CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
 										CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
-										if (!realizedSourceType.conformsTo(predicatedSourceType) || !realizedTargetType.conformsTo(predicatedTargetType)) {
-											checkIsHazardFreeBecause = "incompatible";
-											enforceIsHazardFreeBecause = "incompatible";
+										if (!realizedSourceType.conformsTo(predicatedSourceType)) {
+											checkIsHazardFreeBecause = "incompatible-source";
+											enforceIsHazardFreeBecause = "incompatible-source";
+										}
+										else if (!RegionUtil.conformsToClassOrBehavioralClass(realizedTargetType, predicatedTargetType)) {
+											checkIsHazardFreeBecause = "incompatible-target";
+											enforceIsHazardFreeBecause = "incompatible-target";
 										}
 										else if (region == earlierRegion) {
 											checkIsHazardFreeBecause = null; 		// Same region requires inter-recursion check

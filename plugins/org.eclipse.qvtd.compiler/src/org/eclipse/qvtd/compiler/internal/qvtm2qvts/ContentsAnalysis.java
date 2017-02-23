@@ -292,7 +292,7 @@ public class ContentsAnalysis
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 			Node targetNode = realizedEdge.getEdgeTarget();
 			CompleteClass realizedClass = targetNode.getCompleteClass();
-			if (realizedClass.conformsTo(requiredClass) /*|| realizedClass.conformsTo(requiredClass.getBehavioralClass())*/) {
+			if (RegionUtil.conformsToClassOrBehavioralClass(realizedClass, requiredClass)) {
 				if (conformantRealizedEdges == null) {
 					conformantRealizedEdges = new ArrayList<>();
 				}

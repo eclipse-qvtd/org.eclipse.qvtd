@@ -197,6 +197,9 @@ public class RegionUtil extends QVTscheduleUtil
 		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
 		//		throw new UnsupportedOperationException();
 	}
+	public static @NonNull Edge createEqualsEdge2(@NonNull Node sourceNode, @NonNull Node targetNode) {
+		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
+	}
 
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
