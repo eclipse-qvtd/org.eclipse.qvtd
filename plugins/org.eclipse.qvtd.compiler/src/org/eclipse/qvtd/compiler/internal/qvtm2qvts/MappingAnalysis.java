@@ -51,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
  * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTm mapping.
@@ -324,7 +323,7 @@ public class MappingAnalysis implements Nameable
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = RegionUtil.createRealizedStepNode(mappingRegion, variable);
-				RegionUtil.createExpressionEdge(initNode, QVTscheduleConstants.EQUALS_NAME, stepNode);
+				RegionUtil.createEqualsEdge(initNode, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
@@ -335,7 +334,7 @@ public class MappingAnalysis implements Nameable
 			else {
 				//				Node stepNode = RegionUtil.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = RegionUtil.createLoadedStepNode(mappingRegion, variable);
-				RegionUtil.createExpressionEdge(initNode, QVTscheduleConstants.EQUALS_NAME, stepNode);
+				RegionUtil.createEqualsEdge(initNode, stepNode);
 				initNode = stepNode;
 			}
 		}

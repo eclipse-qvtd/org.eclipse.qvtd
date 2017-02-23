@@ -68,6 +68,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RegionUtil extends QVTscheduleUtil
@@ -190,6 +191,11 @@ public class RegionUtil extends QVTscheduleUtil
 		ErrorNode node = QVTscheduleFactory.eINSTANCE.createErrorNode();
 		node.initialize(nodeRole, region, name, classDatumAnalysis.getClassDatum());
 		return node;
+	}
+
+	public static @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
+		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
+		//		throw new UnsupportedOperationException();
 	}
 
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
