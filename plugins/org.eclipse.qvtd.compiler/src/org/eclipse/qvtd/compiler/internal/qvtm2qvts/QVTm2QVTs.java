@@ -178,7 +178,7 @@ public class QVTm2QVTs extends ScheduleManager
 		//
 		Node resultNode = RegionUtil.createStepNode("result", operationCallExp, dependencyNode, false);
 		operationRegion.setResultNode(resultNode);
-		RegionUtil.createEqualsEdge(dependencyNode, resultNode);
+		RegionUtil.createEqualsEdge2(dependencyNode, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();

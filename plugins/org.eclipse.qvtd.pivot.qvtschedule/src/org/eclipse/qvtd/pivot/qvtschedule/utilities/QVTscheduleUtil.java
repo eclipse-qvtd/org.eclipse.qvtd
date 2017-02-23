@@ -435,6 +435,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return asPhase(nodeRole, Role.SPECULATION);
 	}
 
+	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass firstType, @NonNull CompleteClass secondType) {
+		return firstType.conformsTo(secondType) || firstType.conformsTo(secondType.getBehavioralClass());
+	}
+
 	/**
 	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
 	 */
@@ -662,13 +666,13 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		Node thisTarget = getCastTarget(thisEdge.getEdgeTarget());
 		CompleteClass thatType = thatTarget.getCompleteClass();
 		CompleteClass thisType = thisTarget.getCompleteClass();
-		if (thatType.conformsTo(thisType)) {
+		if (conformsToClassOrBehavioralClass(thatType, thisType)) {
 			return true;
 		}
 		if (thatTarget.isRealized()) {
 			return false;
 		}
-		if (thisType.conformsTo(thatType)) {
+		if (conformsToClassOrBehavioralClass(thisType, thatType)) {
 			return true;
 		}
 		return false;
