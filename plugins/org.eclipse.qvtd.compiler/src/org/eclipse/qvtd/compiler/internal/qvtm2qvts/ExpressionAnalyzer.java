@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
@@ -74,7 +75,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import com.google.common.collect.Iterables;
 
-public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull Node, @NonNull MappingAnalysis>
+public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullable Node, @NonNull MappingAnalysis>
 {
 	private static final @NonNull String @NonNull [] ifArgNames = new @NonNull String[]{QVTscheduleConstants.IF_CONDITION_NAME, QVTscheduleConstants.IF_THEN_NAME, QVTscheduleConstants.IF_ELSE_NAME};
 	private static final @NonNull String @NonNull [] mapArgNames = new @NonNull String[]{"«key»", "«value»"};
@@ -101,6 +102,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull QVTcoreHelper helper;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
@@ -109,20 +111,22 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		super(context);
 		this.scheduleManager = RegionUtil.getScheduleManager(context.getMappingRegion());
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
+		this.helper = new QVTcoreHelper(environmentFactory);
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
 	}
 
 	public @NonNull Node analyze(/*@NonNull*/ Visitable element) {
 		Node accept = element.accept(this);
+		assert accept != null;
 		return accept;
 	}
 
-	private @NonNull Node analyzeOperationCallExp_includes(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
+	private @Nullable Node analyzeOperationCallExp_includes(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
 		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
-		return RegionUtil.createTrueNode(RegionUtil.getOwningRegion(sourceNode));
+		return null;
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclAsType(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
@@ -706,12 +710,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
 		assert slotNode.isClass();
 		Property property = QVTcoreUtil.getTargetProperty(asNavigationAssignment);
-		assert property != null;
-		OCLExpression value = asNavigationAssignment.getValue();
-		if (value != null) {
-			QVTcoreHelper helper = new QVTcoreHelper(environmentFactory);		// FIXME Re-use a helper
-			helper.rewriteSafeNavigations(value);
-		}
+		OCLExpression value = QVTcoreUtil.getValue(asNavigationAssignment);
+		helper.rewriteSafeNavigations(value);
 		Node targetNode = analyze(value);
 		NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 		Node valueNode = navigationEdge.getEdgeTarget();
@@ -776,7 +776,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	}
 
 	@Override
-	public @NonNull Node visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+	public @Nullable Node visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
 		if (isUnconditional()) {
 			boolean isMatched = RegionUtil.isMatched(operationCallExp);
 			if (!isMatched) {
@@ -939,6 +939,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		String typeName = PrettyPrinter.printType(RegionUtil.getCompleteClass(classDatumAnalysis));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;
+	}
+
+	@Override
+	public @Nullable Node visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+		return null;
 	}
 
 	@Override
