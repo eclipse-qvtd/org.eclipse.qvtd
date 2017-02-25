@@ -10,10 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
@@ -26,10 +31,18 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 
@@ -120,11 +133,72 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return mappingParameterBinding;
 	}
 
+	public @NonNull Mapping createMapping(@NonNull String name) {
+		Mapping mapping = QVTimperativeFactory.eINSTANCE.createMapping();
+		mapping.setName(name);
+		return mapping;
+	}
+
+	public @NonNull MappingCall createMappingCall(@NonNull Mapping mapping, @NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
+		MappingCall mappingCall = QVTimperativeFactory.eINSTANCE.createMappingCall();
+		mappingCall.setReferredMapping(mapping);
+		mappingCall.getOwnedMappingParameterBindings().addAll(mappingParameterBindings);
+		return mappingCall;
+	}
+
+	public @NonNull MappingLoop createMappingLoop(@NonNull OCLExpression source, @NonNull LoopVariable iterator, @NonNull MappingStatement mappingStatement) {
+		assert iterator.eContainer() == null;
+		MappingLoop ml = QVTimperativeFactory.eINSTANCE.createMappingLoop();
+		ml.setOwnedExpression(source);
+		ml.getOwnedIterators().add(iterator);
+		ml.getOwnedMappingStatements().add(mappingStatement);
+		return ml;
+	}
+
+	public @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type) {
+		NewStatement newStatement = QVTimperativeFactory.eINSTANCE.createNewStatement();
+		newStatement.setName(name);
+		newStatement.setReferredTypedModel(typedModel);
+		newStatement.setType(type);
+		newStatement.setIsRequired(true);
+		return newStatement;
+	}
+
+	public @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isPartial, boolean isNotify) {
+		SetStatement asSetAssignment = QVTimperativeFactory.eINSTANCE.createSetStatement();
+		if (asProperty.isIsImplicit()) {
+			asSetAssignment.setTargetProperty(asProperty.getOpposite());
+			asSetAssignment.setIsOpposite(true);
+		}
+		else {
+			asSetAssignment.setTargetProperty(asProperty);
+			asSetAssignment.setIsOpposite(false);
+		}
+		asSetAssignment.setTargetVariable(asVariable);
+		asSetAssignment.setOwnedExpression(asValueExpression);
+		asSetAssignment.setIsPartial(isPartial);
+		asSetAssignment.setIsNotify(isNotify);
+		assert isPartial == ((asSetAssignment.getTargetProperty().getType() instanceof CollectionType) && !(asValueExpression.getType() instanceof CollectionType));	// FIXME inadequate for nested types but good for initial debugging
+		return asSetAssignment;
+	}
+
 	public @NonNull SimpleParameterBinding createSimpleParameterBinding(@NonNull SimpleParameter variable, @NonNull OCLExpression value) {
 		SimpleParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createSimpleParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
 		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
 		return mappingParameterBinding;
+	}
+
+	public @NonNull ImperativeTransformation createTransformation(@NonNull String name) {
+		ImperativeTransformation transformation = QVTimperativeFactory.eINSTANCE.createImperativeTransformation();
+		transformation.setName(name);
+		return transformation;
+	}
+
+	public  @NonNull ImperativeTypedModel createTypedModel(@NonNull String name) {
+		ImperativeTypedModel typedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
+		typedModel.setName(name);
+		return typedModel;
 	}
 }

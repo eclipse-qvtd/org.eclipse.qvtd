@@ -801,7 +801,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Property property = RegionUtil.getProperty(edge);
 				OCLExpression targetVariableExp = createVariableExp(targetNode);
 				boolean isNotify = isHazardousWrite(edge);
-				SetStatement setStatement = QVTimperativeUtil.createSetStatement(slotVariable, property, targetVariableExp, edge.isPartial(), isNotify);
+				SetStatement setStatement = helper.createSetStatement(slotVariable, property, targetVariableExp, edge.isPartial(), isNotify);
 				mapping.getOwnedStatements().add(setStatement);
 			}
 		}
@@ -976,7 +976,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				for (Map.Entry<@NonNull LoopVariable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
 					@NonNull LoopVariable loopVariable = loopEntry.getKey();
 					@NonNull OCLExpression loopSource = loopEntry.getValue();
-					mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
+					mappingCallStatement = helper.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 				}
 			}
 			mappingStatements.add(mappingCallStatement);
@@ -1213,7 +1213,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 				if (valueExp != null) {
 					boolean isNotify = isHazardousWrite(edge);
-					SetStatement setStatement = QVTimperativeUtil.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
+					SetStatement setStatement = helper.createSetStatement(asVariable, property, valueExp, edge.isPartial(), isNotify);
 					//					addObservedProperties(setStatement);
 					mapping.getOwnedStatements().add(setStatement);
 				}
@@ -1296,7 +1296,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				ClassDatum classDatum = newNode.getClassDatum();
 				TypedModel pTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
-				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
+				NewStatement newStatement = helper.createNewStatement(getSafeName(newNode), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
 				newStatement.setIsContained(newNode.isContained());
 				mapping.getOwnedStatements().add(newStatement);

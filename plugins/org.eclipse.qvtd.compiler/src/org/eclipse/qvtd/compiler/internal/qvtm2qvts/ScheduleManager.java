@@ -52,7 +52,6 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -136,6 +135,12 @@ public abstract class ScheduleManager implements Adapter
 
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
 
+	protected @NonNull Property createProperty(@NonNull String name, @NonNull Type type, boolean isRequired) {
+		Property property = PivotUtil.createProperty(name, type);
+		property.setIsRequired(isRequired);
+		return property;
+	}
+
 	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
 		return datumCaches.getAllPropertyDatums(classDatum);
 	}
@@ -143,7 +148,7 @@ public abstract class ScheduleManager implements Adapter
 	public @NonNull Property getArgumentProperty(@NonNull String argumentName) {
 		Property argumentProperty = name2argumentProperty.get(argumentName);
 		if (argumentProperty == null) {
-			argumentProperty = QVTimperativeUtil.createProperty(argumentName, getStandardLibrary().getOclAnyType(), true);
+			argumentProperty = createProperty(argumentName, getStandardLibrary().getOclAnyType(), true);
 			name2argumentProperty.put(argumentName, argumentProperty);
 		}
 		return argumentProperty;
@@ -152,7 +157,7 @@ public abstract class ScheduleManager implements Adapter
 	public @NonNull Property getCastProperty(@NonNull Type type) {
 		Property castProperty = type2castProperty.get(type);
 		if (castProperty == null) {
-			castProperty = QVTimperativeUtil.createProperty("«cast»\\n" + type.toString(), type, true);
+			castProperty = createProperty("«cast»\\n" + type.toString(), type, true);
 			type2castProperty.put(type, castProperty);
 		}
 		return castProperty;
@@ -260,7 +265,7 @@ public abstract class ScheduleManager implements Adapter
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
 		Property iterateProperty = type2iterateProperty.get(type);
 		if (iterateProperty == null) {
-			iterateProperty = QVTimperativeUtil.createProperty("«iterate»", type, true);
+			iterateProperty = createProperty("«iterate»", type, true);
 			type2iterateProperty.put(type, iterateProperty);
 		}
 		return iterateProperty;

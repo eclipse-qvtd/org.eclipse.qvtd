@@ -50,9 +50,19 @@ import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+
+import com.google.common.collect.Iterables;
 
 public class QVTcoreUtil extends QVTbaseUtil
 {
+	public static class Internal extends QVTbaseUtil.Internal
+	{
+		public static @NonNull List<@NonNull Assignment> getOwnedAssignmentsList(@NonNull BottomPattern mBottomPattern) {
+			return ClassUtil.nullFree(mBottomPattern.getAssignment());
+		}
+	}
+
 	protected static class PatternVariableComparator implements Comparator<@NonNull Variable>
 	{
 		private final @NonNull Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs;
@@ -146,15 +156,19 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(area.getGuardPattern());
 	}
 
-	public static @NonNull List<@NonNull Assignment> getOwnedAssignments(@NonNull BottomPattern bottomPattern) {
+	public static @NonNull Iterable<@NonNull Assignment> getOwnedAssignments(@NonNull BottomPattern bottomPattern) {
 		return ClassUtil.nullFree(bottomPattern.getAssignment());
 	}
 
-	public static @NonNull List<@NonNull RealizedVariable> getOwnedRealizedVariables(@NonNull BottomPattern bottomPattern) {
+	public static @NonNull Iterable<@NonNull CoreDomain> getOwnedDomains(@NonNull Mapping mapping) {
+		return Iterables.filter(ClassUtil.nullFree(mapping.getDomain()), CoreDomain.class);
+	}
+
+	public static @NonNull Iterable<@NonNull RealizedVariable> getOwnedRealizedVariables(@NonNull BottomPattern bottomPattern) {
 		return ClassUtil.nullFree(bottomPattern.getRealizedVariable());
 	}
 
-	public static @NonNull List<@NonNull Variable> getOwnedVariables(@NonNull CorePattern corePattern) {
+	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull CorePattern corePattern) {
 		return ClassUtil.nullFree(corePattern.getVariable());
 	}
 
@@ -167,6 +181,14 @@ public class QVTcoreUtil extends QVTbaseUtil
 			return ClassUtil.nonNullState(referredProperty.getOpposite());
 		}
 		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
+	}
+
+	public static @NonNull Variable getTargetVariable(@NonNull VariableAssignment variableAssignment) {
+		return ClassUtil.nonNullState(variableAssignment.getTargetVariable());
+	}
+
+	public static @NonNull OCLExpression getValue(@NonNull Assignment asAssignment) {
+		return ClassUtil.nonNullState(asAssignment.getValue());
 	}
 
 	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {

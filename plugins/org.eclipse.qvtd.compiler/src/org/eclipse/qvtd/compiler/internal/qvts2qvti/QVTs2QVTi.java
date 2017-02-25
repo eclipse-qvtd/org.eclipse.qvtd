@@ -135,7 +135,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(scheduledRegion);
 		SymbolNameReservation symbolNameReservation = scheduleManager.getScheduleModel().getSymbolNameAdapter();
 		Transformation transformation = scheduleManager.getTransformation();
-		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, environmentFactory, transformation, symbolNameReservation);
+		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, this, transformation, symbolNameReservation);
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
 		NamedElement qvtiChild = qvtiTransformation;
 		for (org.eclipse.ocl.pivot.Package qvtmPackage = transformation.getOwningPackage(); qvtmPackage != null; qvtmPackage = qvtmPackage.getOwningPackage()) {

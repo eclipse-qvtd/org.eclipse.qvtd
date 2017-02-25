@@ -110,14 +110,14 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 				}
 				connectionExpression = sourceExpression;
 			} */
-			mappingParameterBindings.add(QVTimperativeUtil.createAppendParameterBinding((AppendParameter)calledConnectionVariable, callingConnectionVariable));
+			mappingParameterBindings.add(helper.createAppendParameterBinding((AppendParameter)calledConnectionVariable, callingConnectionVariable));
 		}
 		Collections.sort(mappingParameterBindings, QVTimperativeUtil.MappingParameterBindingComparator.INSTANCE);
 		MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingParameterBindings);
 		for (Map./*@NonNull*/Entry<@NonNull LoopVariable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
 			@NonNull LoopVariable loopVariable = loopEntry.getKey();
 			@NonNull OCLExpression loopSource = loopEntry.getValue();
-			mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
+			mappingCallStatement = helper.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 		}
 		return mappingCallStatement;
 	}
@@ -180,7 +180,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 				}
 				connectionExpression = sourceExpression;
 			} */
-			mappingParameterBindings.add(QVTimperativeUtil.createAppendParameterBinding((AppendParameter)calledConnectionVariable, callingConnectionVariable));
+			mappingParameterBindings.add(helper.createAppendParameterBinding((AppendParameter)calledConnectionVariable, callingConnectionVariable));
 		}
 		Collections.sort(mappingParameterBindings, QVTimperativeUtil.MappingParameterBindingComparator.INSTANCE);
 		MappingCall mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingParameterBindings);
