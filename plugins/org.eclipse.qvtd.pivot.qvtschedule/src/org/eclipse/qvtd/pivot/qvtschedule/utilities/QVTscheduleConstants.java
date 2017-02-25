@@ -49,6 +49,7 @@ public class QVTscheduleConstants
 	public static final @NonNull String IF_THEN_NAME = "«then»";
 	public static final @NonNull String LOOP_BODY_NAME = "«body»";
 	public static final @NonNull String LOOP_ITERATOR_NAME = "«iterator»";
+	public static final @NonNull String RETURN_NAME = "«return»";
 
 	public static final @NonNull String BINDING_COLOR = "darkorange";
 	public static final @NonNull String CONSTANT_COLOR = "black";

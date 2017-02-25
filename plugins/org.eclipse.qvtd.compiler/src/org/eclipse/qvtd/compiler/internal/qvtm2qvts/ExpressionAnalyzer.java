@@ -73,6 +73,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+
 import com.google.common.collect.Iterables;
 
 public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullable Node, @NonNull MappingAnalysis>
@@ -133,9 +134,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		//		if ((operationCallExp.getOwnedSource() instanceof CallExp) && sourceNode.refineClassDatumAnalysis(scheduler.getClassDatumAnalysis(operationCallExp))) {
 		//			return sourceNode;
 		//		}
-		Type type = operationCallExp.getType();
-		assert type != null;
-		CompleteClass requiredClass = environmentFactory.getCompleteModel().getCompleteClass(type);
+		Type castType = QVTcoreUtil.getType(operationCallExp);
+		CompleteClass requiredClass = environmentFactory.getCompleteModel().getCompleteClass(castType);
 		CompleteClass predicatedClass = sourceNode.getCompleteClass();
 		if (predicatedClass.conformsTo(requiredClass)) {
 			sourceNode.addTypedElement(operationCallExp);
@@ -149,8 +149,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				return targetNode;										// Re-use a pre-existing class
 			}
 		}
-		Type castType = type;
-		assert castType != null;
 		Property castProperty = scheduleManager.getCastProperty(castType);
 		Edge castEdge = sourceNode.getPredicateEdge(castProperty);
 		if (castEdge != null) {
@@ -200,8 +198,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			}
 		}
 		else {
-			String name = operationCallExp.getReferredOperation().getName();
-			assert name != null;
+			String name = QVTcoreUtil.getName(QVTcoreUtil.getReferredOperation(operationCallExp));
 			Node argumentNode = analyze(argument);
 			operationNode = findOperationNode(name, sourceNode, argumentNode);
 			if (operationNode == null) {
@@ -212,15 +209,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclContainer(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
-		Type castType = operationCallExp.getType();
-		assert castType != null;
+		//		Type castType = QVTcoreUtil.getType(operationCallExp);
 		Property oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
 		Edge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
 		if (oclContainerEdge != null) {
 			return oclContainerEdge.getEdgeTarget();
 		}
-		String name = operationCallExp.getReferredOperation().getName();
-		assert name != null;
+		String name = QVTcoreUtil.getName(QVTcoreUtil.getReferredOperation(operationCallExp));
 		Node oclContainerNode = createStepNode(name, operationCallExp, sourceNode);
 		oclContainerEdge = createNavigationEdge(sourceNode, oclContainerProperty, oclContainerNode, false);
 		return oclContainerNode;
@@ -285,7 +280,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		}
 		boolean isMatched = RegionUtil.isMatched(typedElement);
 		ExpressionAnalyzer nestedAnalyzer = isMatched ? this : getConditionalExpressionAnalyzer();
-		Node operationNode = nestedAnalyzer.createOperationNode(name, typedElement, sourceAndArgumentNodes);
+		String nodeName = RegionUtil.recoverVariableName(typedElement);
+		if (nodeName == null) {
+			nodeName = name;
+		}
+		Node operationNode = nestedAnalyzer.createOperationNode(nodeName, typedElement, sourceAndArgumentNodes);
 		for (int i = 0; i < sourceAndArgumentNodes.length; i++) {
 			nestedAnalyzer.createExpressionEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), argNames[i], operationNode);
 		}
@@ -296,8 +295,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		return RegionUtil.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
-	protected @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property, @NonNull NavigationCallExp navigationCallExp) {
-		return RegionUtil.createDataTypeNode(sourceNode, navigationCallExp);
+	protected @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
+		return RegionUtil.createDataTypeNode(name, sourceNode, navigationCallExp);
 	}
 
 	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -620,8 +619,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		Variable ownedVariable = letExp.getOwnedVariable();
 		Node initNode = analyze(ownedVariable.getOwnedInit());
 		assert initNode != null;
-		Type type = ownedVariable.getType();
-		assert type != null;
+		Type type = QVTcoreUtil.getType(ownedVariable);
 		CompleteClass actualClass = initNode.getCompleteClass();
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(ownedVariable);
 		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatumAnalysis);
@@ -652,18 +650,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		int i = 1;
 		for (@NonNull Variable iterator : ownedIterators) {
 			Node iteratorNode = createIteratorNode(iterator, sourceNode);
-			Type iteratorType = iterator.getType();
-			assert iteratorType != null;
+			@SuppressWarnings("unused")
+			Type iteratorType = QVTcoreUtil.getType(iterator);
 			//			Property iterateProperty = context.getScheduleModel().getIterateProperty(iteratorType);
 			createIteratedEdge(sourceNode, QVTscheduleConstants.LOOP_ITERATOR_NAME, iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
 		if (loopExp instanceof IterateExp) {
-			Variable accumulator = ((IterateExp)loopExp).getOwnedResult();
-			assert accumulator != null;
+			Variable accumulator = QVTcoreUtil.getOwnedResult((IterateExp)loopExp);
 			Node iteratorNode = createIteratorNode(accumulator, sourceNode);
-			Type iteratorType = accumulator.getType();
-			assert iteratorType != null;
+			@SuppressWarnings("unused")
+			Type iteratorType = QVTcoreUtil.getType(accumulator);
 			//			Property iterateProperty = context.getScheduleModel().getIterateProperty(iteratorType);
 			createIteratedEdge(sourceNode, QVTscheduleConstants.LOOP_ITERATOR_NAME, iteratorNode);
 			argNodes[i++] = iteratorNode;
@@ -676,8 +673,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		createExpressionEdge(bodyNode, QVTscheduleConstants.LOOP_BODY_NAME, accumulateNode);
 		i = 1;
 		for (@NonNull Variable iterator : ownedIterators) {
-			Node iteratorNode = argNodes[i++];
-			assert iteratorNode != null;
+			@NonNull Node iteratorNode = argNodes[i++];
 			createExpressionEdge(iteratorNode, "«" + iterator.getName() + "»", accumulateNode);
 		}
 		return accumulateNode;
@@ -697,8 +693,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 
 	@Override
 	public @NonNull Node visitMapLiteralPart(@NonNull MapLiteralPart mapLiteralPart) {
-		OCLExpression ownedValue = mapLiteralPart.getOwnedValue();
-		assert ownedValue != null;
+		OCLExpression ownedValue = QVTcoreUtil.getOwnedValue(mapLiteralPart);
 		Node keyNode = analyze(mapLiteralPart.getOwnedKey());
 		Node valueNode = analyze(ownedValue);
 		Node operationNode = createConnectedOperationNode("Part", mapArgNames, ownedValue, keyNode, valueNode);
@@ -734,9 +729,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	public @NonNull Node visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
 		assert !navigationCallExp.isIsSafe();
 		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-		assert referredProperty != null;
-		OCLExpression ownedSource = navigationCallExp.getOwnedSource();
-		assert ownedSource != null;
+		OCLExpression ownedSource = QVTcoreUtil.getOwnedSource(navigationCallExp);
 		Node sourceNode = analyze(ownedSource);
 		if (sourceNode.isClass()) {
 			if (!referredProperty.isIsMany()) {
@@ -745,18 +738,19 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 					return navigationEdge.getEdgeTarget();
 				}
 			}
-			Type type = referredProperty.getType();
-			assert type != null;
+			String name = RegionUtil.recoverVariableName(navigationCallExp);
+			if (name == null) {
+				name = QVTcoreUtil.getName(referredProperty);
+			}
+			Type type = QVTcoreUtil.getType(referredProperty);
 			Node targetNode;
 			if (type instanceof DataType) {
 				targetNode = sourceNode.getNavigationTarget(referredProperty);
 				if (targetNode == null) {
-					targetNode = createDataTypeNode(sourceNode, referredProperty, navigationCallExp);
+					targetNode = createDataTypeNode(name, sourceNode, navigationCallExp);
 				}
 			}
 			else {
-				String name = referredProperty.getName();
-				assert name != null;
 				targetNode = createStepNode(name, navigationCallExp, sourceNode);
 			}
 			getNavigationEdge(sourceNode, referredProperty, targetNode, null);
@@ -931,8 +925,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	@Override
 	public @NonNull Node visitTypeExp(@NonNull TypeExp typeExp) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(typeExp);
-		Type referredType = typeExp.getReferredType();
-		assert referredType != null;
+		Type referredType = QVTcoreUtil.getReferredType(typeExp);
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
@@ -948,8 +941,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 
 	@Override
 	public @NonNull Node visitVariableExp(@NonNull VariableExp variableExp) {
-		VariableDeclaration referredVariable = variableExp.getReferredVariable();
-		assert referredVariable != null;
+		VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable(variableExp);
 		return context.getReferenceNode(referredVariable);
 	}
 }

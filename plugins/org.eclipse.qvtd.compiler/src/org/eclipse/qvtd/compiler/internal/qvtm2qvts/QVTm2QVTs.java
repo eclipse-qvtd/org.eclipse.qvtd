@@ -53,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -60,6 +61,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+
 import com.google.common.collect.Iterables;
 
 public class QVTm2QVTs extends ScheduleManager
@@ -178,7 +181,7 @@ public class QVTm2QVTs extends ScheduleManager
 		//
 		Node resultNode = RegionUtil.createStepNode("result", operationCallExp, dependencyNode, false);
 		operationRegion.setResultNode(resultNode);
-		RegionUtil.createEqualsEdge2(dependencyNode, resultNode);
+		RegionUtil.createExpressionEdge(dependencyNode, QVTscheduleConstants.RETURN_NAME, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -264,7 +267,11 @@ public class QVTm2QVTs extends ScheduleManager
 							//							assert !dependencyNode2.isMatched();
 							Node nextNode;			// FIXME re-use shared paths
 							if (callExp instanceof NavigationCallExp) {
-								nextNode = RegionUtil.createDataTypeNode(dependencyNode2, (NavigationCallExp)callExp);
+								String name = RegionUtil.recoverVariableName(callExp);
+								if (name == null) {
+									name = QVTcoreUtil.getName(QVTcoreUtil.getReferredProperty((NavigationCallExp)callExp));
+								}
+								nextNode = RegionUtil.createDataTypeNode(name, dependencyNode2, (NavigationCallExp)callExp);
 							}
 							else {
 								nextNode = RegionUtil.createDataTypeNode(dependencyNode2, property);
