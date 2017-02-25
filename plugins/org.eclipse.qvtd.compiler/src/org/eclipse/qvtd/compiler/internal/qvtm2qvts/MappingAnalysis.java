@@ -168,15 +168,12 @@ public class MappingAnalysis implements Nameable
 				}
 			}
 			else { */
-			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
-			if (!resultNode.isTrue()) {
+			Node resultNode = conditionExpression.accept(expressionAnalyzer);
+			if ((resultNode != null) && !resultNode.isTrue()) {
 				Node trueNode = RegionUtil.createTrueNode(mappingRegion);
 				RegionUtil.createPredicateEdge(resultNode, null, trueNode);
 			}
-			else {		// FIXME ?? do includes() here explicitly
-				resultNode.destroy();
-			}
-			//			}
+			// FIXME ?? do includes() here explicitly
 		}
 	}
 
