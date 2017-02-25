@@ -33,6 +33,8 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -354,6 +356,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull OCLExpression getQueryExpression(@NonNull Function asFunction) {
 		return ClassUtil.nonNullState(asFunction.getQueryExpression());
+	}
+
+	public static @NonNull Type getReferredType(@NonNull TypeExp typeExp) {
+		return ClassUtil.nonNullState(typeExp.getReferredType());
 	}
 
 	public static @NonNull Variable getReferredVariable(@NonNull VariableExp asVariableExp) {

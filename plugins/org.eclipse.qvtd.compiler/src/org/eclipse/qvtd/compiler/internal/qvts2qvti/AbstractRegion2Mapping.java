@@ -49,7 +49,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -88,7 +87,7 @@ public abstract class AbstractRegion2Mapping
 		this.region = region;
 		String name = region.getSymbolName();
 		assert name != null;
-		this.mapping = QVTimperativeUtil.createMapping(name);
+		this.mapping = helper.createMapping(name);
 		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			for (TypedElement typedElement : node.getTypedElements()) {
@@ -280,6 +279,6 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
-		return QVTimperativeUtil.createMappingCall(getMapping(), mappingParameterBindings);
+		return helper.createMappingCall(getMapping(), mappingParameterBindings);
 	}
 }

@@ -45,16 +45,16 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -65,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
+	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Transformation qvtmTransformation;
@@ -85,15 +86,16 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
 
-	public QVTs2QVTiVisitor(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtmTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
+	public QVTs2QVTiVisitor(@NonNull ProblemHandler problemHandler, @NonNull QVTimperativeHelper helper, @NonNull Transformation qvtmTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		super(null);
-		this.environmentFactory = environmentFactory;
+		this.helper = helper;
+		this.environmentFactory = helper.getEnvironmentFactory();
 		this.problemHandler = problemHandler;
 		this.qvtmTransformation = qvtmTransformation;
 		this.symbolNameReservation = symbolNameReservation;
 		String transformationName = qvtmTransformation.getName();
 		assert transformationName != null;
-		qvtiTransformation = QVTimperativeUtil.createTransformation(transformationName);
+		qvtiTransformation = helper.createTransformation(transformationName);
 		createTypedModels();
 		//		analyzeConnections();
 	}
@@ -206,7 +208,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		for (TypedModel qvtmTypedModel : qvtmTransformation.getModelParameter()) {
 			String typedModelName = qvtmTypedModel.getName();
 			assert typedModelName != null;
-			ImperativeTypedModel qvtiTypedModel = QVTimperativeUtil.createTypedModel(typedModelName);
+			ImperativeTypedModel qvtiTypedModel = helper.createTypedModel(typedModelName);
 			qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());
 			if (QVTscheduleConstants.MIDDLE_DOMAIN_NAME.equals(typedModelName)) {
 				assert qvtiMiddleTypedModel  == null;
