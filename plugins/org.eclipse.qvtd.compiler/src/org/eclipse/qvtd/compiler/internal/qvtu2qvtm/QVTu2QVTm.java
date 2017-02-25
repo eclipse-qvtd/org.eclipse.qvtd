@@ -293,7 +293,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			return false;
 		}
 
-		protected void synthesize(@NonNull Area mArea) {
+		protected void synthesize(@NonNull Mapping mMapping, @NonNull Area mArea) {
 			GuardPattern mGuardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			mArea.setGuardPattern(mGuardPattern);
 			createVisitor.createAll(guardPredicates, mGuardPattern.getPredicate());
@@ -313,7 +313,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			synthesizeNavigationAssignments(QVTcoreUtil.Internal.getOwnedAssignmentsList(mBottomPattern));
 			if (variableName2mergedVariables != null) {
 				for (@NonNull MergedVariable mergedVariable : variableName2mergedVariables.values()) {		// FIXME Change to alphabetical sort
-					mergedVariable.synthesize(mArea);
+					mergedVariable.synthesize(mMapping, mArea);
 				}
 			}
 			//
@@ -334,17 +334,17 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 		}
 
-		private void synthesizeNavigationAssignment(@NonNull List<@NonNull NavigationAssignment> navigationAssignments, @NonNull List<Assignment> uAssignments) {
+		private void synthesizeNavigationAssignment(@NonNull Iterable<@NonNull NavigationAssignment> navigationAssignments, @NonNull List<Assignment> uAssignments) {
 			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
 				uAssignments.add(createVisitor.create(navigationAssignment));	// FIXME merge
 				// break;
 			}
 		}
 
-		private void synthesizeNavigationAssignments(@NonNull List</*@NoonNull*/ Assignment> uAssignments) {
+		private void synthesizeNavigationAssignments(@NonNull List</*@NonNull*/ Assignment> uAssignments) {
 			LinkedHashMap<@NonNull String, @NonNull List<@NonNull NavigationAssignment>> variableName_property2navigationAssignments2 = variableName_property2navigationAssignments;
 			if (variableName_property2navigationAssignments2 != null) {
-				for (@NonNull List<@NonNull NavigationAssignment> navigationAssignments : variableName_property2navigationAssignments2.values()) {		// FIXME Change to alphabetical sort
+				for (@NonNull Iterable<@NonNull NavigationAssignment> navigationAssignments : variableName_property2navigationAssignments2.values()) {		// FIXME Change to alphabetical sort
 					synthesizeNavigationAssignment(navigationAssignments, uAssignments);
 				}
 			}
@@ -454,7 +454,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			return uExampleDomain.isIsEnforceable();			// FIXME all domains ??
 		}
 
-		public @NonNull CoreDomain synthesize() {
+		public @NonNull CoreDomain synthesize(@NonNull Mapping mMapping) {
 			CoreDomain mDomain = QVTcoreFactory.eINSTANCE.createCoreDomain();
 			//			mDomain.setTypedModel(uTypedModel);
 			mDomain.setName(uTypedModel.getName());
@@ -478,7 +478,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 			mDomain.setIsCheckable(isCheckable);
 			mDomain.setIsEnforceable(isEnforceable);
-			synthesize(mDomain);
+			synthesize(mMapping, mDomain);
 			return mDomain;
 		}
 
@@ -615,12 +615,12 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		public void synthesize(@NonNull Mapping mMapping) {
 			String name = createVisitor.getContext().getMappingName(uMapping);
 			mMapping.setName(name);
-			super.synthesize(mMapping);
+			super.synthesize(mMapping, mMapping);
 			Transformation uTransformation = QVTbaseUtil.getContainingTransformation(uMapping);
 			for (@NonNull TypedModel uTypedModel : QVTbaseUtil.getModelParameters(uTransformation)) {
 				MergedDomain mergedDomain = uTypedModel2mergedDomain.get(uTypedModel);
 				if (mergedDomain != null) {
-					CoreDomain mDomain = mergedDomain.synthesize();
+					CoreDomain mDomain = mergedDomain.synthesize(mMapping);
 					mMapping.getDomain().add(mDomain);
 				}
 			}
@@ -692,7 +692,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 		}
 
-		public void synthesize(@NonNull Area mArea) {
+		public void synthesize(@NonNull Mapping mMapping, @NonNull Area mArea) {
 			List<@NonNull VariableAssignment> assignments2 = assignments;
 			List<@NonNull Variable> variables2 = variables;
 			if (variables2 != null) {
@@ -722,8 +722,14 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					createVisitor.createAll(uVariable.getOwnedComments(), mVariable.getOwnedComments());
 				}
 				if (assignments2 != null) {
-					final Variable finalMVariable = mVariable;
-					createVisitor.getContext().addUpdater(finalMVariable, new Updater()
+					//					final Variable finalMVariable = mVariable;
+					//					List<@NonNull VariableAssignment> mAssignments = new ArrayList<>();
+					createVisitor.createAll(assignments2, mMapping.getBottomPattern().getAssignment());
+					//					mArea.getBottomPattern().getAssignment().addAll(mAssignments);
+					//					for (@NonNull VariableAssignment uVariableAssignment : assignments2) {
+					//						createVisitor.getContext().addTrace(uVariableAssignment, finalMVariable);
+					//					}
+					/*					createVisitor.getContext().addUpdater(finalMVariable, new Updater()
 					{
 						@Override
 						public void update(@NonNull UpdateVisitor updateVisitor) {
@@ -733,7 +739,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 								createVisitor.createAll(uVariableAssignment.getOwnedComments(), finalMVariable.getOwnedComments());
 							}
 						}
-					});
+					}); */
 				}
 			}
 			else {

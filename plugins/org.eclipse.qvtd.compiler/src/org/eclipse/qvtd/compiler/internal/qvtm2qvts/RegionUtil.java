@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -24,14 +25,19 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
@@ -40,6 +46,8 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
@@ -127,13 +135,13 @@ public class RegionUtil extends QVTscheduleUtil
 		return createPatternNode(nodeRole, sourceNode, property, sourceNode.isMatched() && isMatched(property));
 	}
 
-	public static @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
+	public static @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
 		Property property = PivotUtil.getReferredProperty(navigationCallExp);
 		boolean isMatched = sourceNode.isMatched() && isMatched(property);
 		Role nodeRole = getPatternNodeRole(sourceNode, property);
 		assert sourceNode.isClass() || (property.getOpposite() != null);	// FIXME review is this relevant?
-		String name = property.getName();
-		assert name != null;
+		//		String name = property.getName();
+		//		assert name != null;
 		Region region = getOwningRegion(sourceNode);
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
@@ -193,11 +201,15 @@ public class RegionUtil extends QVTscheduleUtil
 		return node;
 	}
 
+	//
+	//	equals edges seem to be a legacy relic. They are used to equate two nodes that have been carelessly created as distinct. The difficulties
+	//	of ensuring that downstream code accommodates the duality far outweight the difficulties of creating a single node in the first place.
+	//
+	//	This method is not used by any tests, but one anticipated usage arises if a variable has multiple initializers,
+	//	in which case a hard inkitializer such as an operation call is preferred, and then other initializers are
+	//	checked as predicates using equals edges.
+	//
 	public static @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
-		//		throw new UnsupportedOperationException();
-	}
-	public static @NonNull Edge createEqualsEdge2(@NonNull Node sourceNode, @NonNull Node targetNode) {
 		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
 	}
 
@@ -637,5 +649,39 @@ public class RegionUtil extends QVTscheduleUtil
 		else {
 			return Node.Utility.DEAD;
 		}
+	}
+
+	/**
+	 * Return the variable name associated with oclExpression, or null if none found.
+	 * This enables the user's choice of name to be used for the expression node that implements it.
+	 */
+	public static @Nullable String recoverVariableName(@NonNull NamedElement namedElement) {
+		EObject eContainer = namedElement.eContainer();
+		EReference eContainmentFeature = namedElement.eContainmentFeature();
+		if ((eContainmentFeature == PivotPackage.Literals.VARIABLE__OWNED_INIT) && (eContainer instanceof Variable)) {
+			return ((Variable)eContainer).getName();
+		}
+		else if ((eContainmentFeature == QVTcorePackage.Literals.ASSIGNMENT__VALUE) && (eContainer instanceof VariableAssignment)) {
+			return ((VariableAssignment)eContainer).getTargetVariable().getName();
+		}
+		else if ((eContainmentFeature == PivotPackage.Literals.CALL_EXP__OWNED_SOURCE) && (eContainer instanceof OperationCallExp)) {
+			OperationCallExp operationCallExp = (OperationCallExp)eContainer;
+			if (PivotUtil.isSameOperation(operationCallExp.getReferredOperation().getOperationId(), OperationId.OCLANY_EQUALS)) {
+				OCLExpression argument = PivotUtil.getOwnedArgument(operationCallExp, 0);
+				if (argument instanceof VariableExp) {
+					return PivotUtil.getReferredVariable((VariableExp)argument).getName();
+				}
+			}
+		}
+		else if ((eContainmentFeature == PivotPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS) && (eContainer instanceof OperationCallExp)) {
+			OperationCallExp operationCallExp = (OperationCallExp)eContainer;
+			if (PivotUtil.isSameOperation(operationCallExp.getReferredOperation().getOperationId(), OperationId.OCLANY_EQUALS)) {
+				OCLExpression source = PivotUtil.getOwnedSource(operationCallExp);
+				if (source instanceof VariableExp) {
+					return PivotUtil.getReferredVariable((VariableExp)source).getName();
+				}
+			}
+		}
+		return null;
 	}
 }

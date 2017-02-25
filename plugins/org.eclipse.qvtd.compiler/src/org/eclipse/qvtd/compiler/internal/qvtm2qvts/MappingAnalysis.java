@@ -11,8 +11,10 @@
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,17 +33,17 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -90,6 +92,12 @@ public class MappingAnalysis implements Nameable
 	private final @NonNull List<@NonNull NavigationAssignment> navigationAssignments = new ArrayList<>();
 
 	/**
+	 * The variable initializers, simple predicate reference expression and variable assignment values that define a value for each variable.
+	 * Variable initializers are populated lazily since not all LetVariables may even exist for an eager population.
+	 */
+	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
+
+	/**
 	 * The dependency heads to accommodate operation content.
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
@@ -101,22 +109,44 @@ public class MappingAnalysis implements Nameable
 		mappingRegion.setReferredMapping(mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
-		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
-		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
-		for (Domain domain : mapping.getDomain()) {
-			if (domain instanceof CoreDomain) {
-				CoreDomain coreDomain = (CoreDomain)domain;
-				//
-				GuardPattern guardPattern = ClassUtil.nonNull(coreDomain.getGuardPattern());
-				BottomPattern bottomPattern = ClassUtil.nonNull(coreDomain.getBottomPattern());
-				guardPatterns.add(guardPattern);
-				bottomPatterns.add(bottomPattern);
-				for (@NonNull Assignment assignment : ClassUtil.nullFree(bottomPattern.getAssignment())) {
-					if (assignment instanceof NavigationAssignment) {
-						navigationAssignments.add((NavigationAssignment)assignment);
-					}
+		GuardPattern guardPattern = QVTcoreUtil.getGuardPattern(mapping);
+		BottomPattern bottomPattern = QVTcoreUtil.getBottomPattern(mapping);
+		guardPatterns.add(guardPattern);
+		bottomPatterns.add(bottomPattern);
+		for (@NonNull Assignment assignment : QVTcoreUtil.getOwnedAssignments(bottomPattern)) {
+			if (assignment instanceof NavigationAssignment) {
+				navigationAssignments.add((NavigationAssignment)assignment);
+			}
+			else if (assignment instanceof VariableAssignment) {
+				VariableAssignment variableAssignment = (VariableAssignment)assignment;
+				addExpression(QVTcoreUtil.getTargetVariable(variableAssignment), QVTcoreUtil.getValue(variableAssignment));
+			}
+		}
+		for (@NonNull CoreDomain coreDomain : QVTcoreUtil.getOwnedDomains(mapping)) {
+			guardPattern = QVTcoreUtil.getGuardPattern(coreDomain);
+			bottomPattern = QVTcoreUtil.getBottomPattern(coreDomain);
+			guardPatterns.add(guardPattern);
+			bottomPatterns.add(bottomPattern);
+			for (@NonNull Assignment assignment : QVTcoreUtil.getOwnedAssignments(bottomPattern)) {
+				if (assignment instanceof NavigationAssignment) {
+					navigationAssignments.add((NavigationAssignment)assignment);
+				}
+				else if (assignment instanceof VariableAssignment) {
+					VariableAssignment variableAssignment = (VariableAssignment)assignment;
+					addExpression(QVTcoreUtil.getTargetVariable(variableAssignment), QVTcoreUtil.getValue(variableAssignment));
 				}
 			}
+		}
+	}
+
+	protected void addExpression(@NonNull VariableDeclaration variable, @NonNull OCLExpression expression) {
+		List<@NonNull OCLExpression> initializers = variable2expressions.get(variable);
+		if (initializers == null) {
+			initializers = new ArrayList<>();
+			variable2expressions.put(variable, initializers);
+		}
+		if (!initializers.contains(expression)) {	// Shouldn't really happen but variable.ownedIInit is lazy
+			initializers.add(expression);
 		}
 	}
 
@@ -209,28 +239,6 @@ public class MappingAnalysis implements Nameable
 	}
 
 	/**
-	 * Analyze the initializers to form predicates / computations.
-	 */
-	protected void analyzeInitializers(@NonNull Iterable<@NonNull ? extends CorePattern> corePatterns) {
-		for (@NonNull CorePattern corePattern : corePatterns) {
-			for (@NonNull Variable variable : ClassUtil.nullFree(corePattern.getVariable())) {
-				OCLExpression ownedInit = variable.getOwnedInit();
-				if (ownedInit != null) {
-					analyzeVariable(variable, ownedInit);
-				}
-			}
-			if (corePattern instanceof BottomPattern) {
-				for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(((BottomPattern)corePattern).getRealizedVariable())) {
-					OCLExpression ownedInit = realizedVariable.getOwnedInit();
-					if (ownedInit != null) {
-						analyzeVariable(realizedVariable, ownedInit);
-					}
-				}
-			}
-		}
-	}
-
-	/**
 	 * Analyze the predicates to partition the guard variables into the distinct inputs that are not mutually
 	 * navigable as a consequence of predicate constraints.
 	 * @param bottomPatterns
@@ -248,7 +256,13 @@ public class MappingAnalysis implements Nameable
 					if (boundExpression instanceof VariableExp) {
 						OCLExpression referenceExpression = getPredicateComparisonReferenceExpression(conditionExpression);
 						assert referenceExpression != null;
-						analyzeSimplePredicate(((VariableExp)boundExpression).getReferredVariable(), referenceExpression);
+						VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable(((VariableExp)boundExpression));
+						if (referredVariable instanceof BottomVariable) {
+							addExpression(referredVariable, referenceExpression);
+						}
+						else {
+							analyzeSimplePredicate(referredVariable, referenceExpression);
+						}
 					}
 					else if (boundExpression instanceof NullLiteralExp) {
 						OCLExpression referenceExpression = getPredicateComparisonReferenceExpression(conditionExpression);
@@ -314,10 +328,31 @@ public class MappingAnalysis implements Nameable
 		}
 	}
 
-	private @NonNull Node analyzeVariable(@NonNull Variable variable, @NonNull OCLExpression ownedInit) {
-		Node initNode = ownedInit.accept(expressionAnalyzer);
-		assert initNode != null;
-		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
+	private @Nullable Node analyzeVariable(@NonNull Variable variable, @NonNull List<@NonNull OCLExpression> expressions) {
+		//
+		//	Use sonething hard to compute as the initializer that creates an initNode in the hope that other
+		//	initilalizers might be easier and optimized as simple navigation edges.
+		//
+		OCLExpression bestInitExpression = null;
+		for (@NonNull OCLExpression initExpression : expressions) {
+			if (initExpression instanceof OperationCallExp ) {
+				OperationCallExp operationCallExp = (OperationCallExp)initExpression;
+				OperationId operationId = operationCallExp.getReferredOperation().getOperationId();
+				if (!PivotUtil.isSameOperation(operationId, OperationId.OCLANY_EQUALS) && !PivotUtil.isSameOperation(operationId, OperationId.OCLANY_NOT_EQUALS)) {
+					bestInitExpression = initExpression;
+					break;
+				}
+			}
+		}
+		if (bestInitExpression == null) {
+			bestInitExpression = (expressions.size() > 0) ? expressions.get(0) : null;
+		}
+		if (bestInitExpression == null) {
+			return null;
+		}
+		Node bestInitNode = bestInitExpression.accept(expressionAnalyzer);
+		assert bestInitNode != null;
+		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = RegionUtil.createRealizedStepNode(mappingRegion, variable);
 				RegionUtil.createEqualsEdge(initNode, stepNode);
@@ -334,10 +369,18 @@ public class MappingAnalysis implements Nameable
 				RegionUtil.createEqualsEdge(initNode, stepNode);
 				initNode = stepNode;
 			}
+		} */
+		bestInitNode.addTypedElement(variable);
+		mappingRegion.addVariableNode(variable, bestInitNode);
+		for (@NonNull OCLExpression initExpression : expressions) {
+			if (initExpression != bestInitExpression) {
+				// FIXME if the extra init is a navigation we can add a navigation to the bestInitNode
+				Node initNode = bestInitExpression.accept(expressionAnalyzer);
+				assert initNode != null;
+				RegionUtil.createEqualsEdge(bestInitNode, initNode);
+			}
 		}
-		initNode.addTypedElement(variable);
-		mappingRegion.addVariableNode(variable, initNode);
-		return initNode;
+		return bestInitNode;
 	}
 
 	public @NonNull Node createDependencyHead(@NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -372,14 +415,14 @@ public class MappingAnalysis implements Nameable
 
 	/**
 	 * Return the boundExpression if conditionExpression is of the form
-	 * <br>"boundVariable = referenceExpression"
-	 * <br>"referenceExpression = boundVariable".
-	 * <br>"null = referenceExpression"
-	 * <br>"referenceExpression = null".
-	 * <br>"constant-expression = referenceExpression"
-	 * <br>"referenceExpression = constant-expression".
+	 * <br>"variable = referenceExpression" => VariableExp(variable)
+	 * <br>"referenceExpression = variable" => VariableExp(variable)
+	 * <br>"null = referenceExpression" => NullLiteralExp(null)
+	 * <br>"referenceExpression = null" => NullLiteralExp(null)
+	 * <br>"constant-expression = referenceExpression" => OCLExpression(constant)
+	 * <br>"referenceExpression = constant-expression" => OCLExpression(constant)
 	 *
-	 * Returns null otherwise.
+	 * <br>Returns null otherwise.
 	 */
 	private @Nullable OCLExpression getPredicateComparisonBoundExpression(@NonNull OCLExpression conditionExpression) {
 		if (conditionExpression instanceof OperationCallExp) {
@@ -442,7 +485,11 @@ public class MappingAnalysis implements Nameable
 				Variable variable = (Variable)variableDeclaration;
 				OCLExpression ownedInit = variable.getOwnedInit();
 				if (ownedInit != null) {
-					node = analyzeVariable(variable, ownedInit);
+					addExpression(variable, ownedInit);
+				}
+				List<@NonNull OCLExpression> expressions = variable2expressions.get(variable);
+				if (expressions != null) {
+					node = analyzeVariable(variable, expressions);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
 					DomainUsage domainUsage = RegionUtil.getScheduleManager(mappingRegion).getDomainUsage(variable);
@@ -489,10 +536,8 @@ public class MappingAnalysis implements Nameable
 		//
 		analyzeRealizedVariables();		// FIXME bottom variables too
 		//
-		// Create the initialization/predicate/computation nodes and edges
+		// Create the predicate/computation nodes and edges
 		//
-		analyzeInitializers(guardPatterns);
-		analyzeInitializers(bottomPatterns);
 		analyzePredicates(guardPatterns);
 		analyzePredicates(bottomPatterns);
 		analyzeAssignmentValues();

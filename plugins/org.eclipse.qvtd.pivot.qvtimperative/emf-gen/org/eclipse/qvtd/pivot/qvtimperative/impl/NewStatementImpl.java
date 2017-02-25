@@ -365,22 +365,6 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 */
 	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isContained: ");
-		result.append(isContained);
-		result.append(')');
-		return result.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
@@ -537,6 +521,11 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitNewStatement(this);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 } //NewStatementImpl

@@ -314,7 +314,7 @@ abstract class AbstractPartition
 
 	protected boolean resolveComputations(@NonNull Node targetNode) {
 		boolean gotIt = false;
-		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {		// Should be just one.
+		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
 			if (incomingEdge.isComputation() || (incomingEdge.isNavigation() && incomingEdge.isOld())) {
 				Set<@NonNull Node> sourceNodes = new HashSet<>();
 				if (isComputable(sourceNodes, incomingEdge)) {
@@ -364,7 +364,7 @@ abstract class AbstractPartition
 		for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 			if (!partitioner.hasRealizedEdge(edge)) {
 				Node targetNode = edge.getEdgeTarget();
-				if (targetNode.isDataType()) {
+				if (targetNode.isDataType() || targetNode.isOperation()) {
 					if (resolveComputations(targetNode)) {
 						if (!hasNode(targetNode)) {
 							addNode(targetNode, RegionUtil.getNodeRole(targetNode));

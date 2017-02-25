@@ -102,6 +102,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 
@@ -609,12 +610,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				TypedElement oldTypedElement = node.getTypedElements().iterator().next();
 				assert oldTypedElement != null;
 				if ((oldTypedElement instanceof Variable) && (((Variable)oldTypedElement).getOwnedInit() == null)) {
-					//					for (@NonNull Edge edge : node.getIncomingEdges()) {
-					//						if (edge.isArgument() || edge.isCast()) {
-					theVariable = createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
-					//							break;
-					//						}
-					//					}
+					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+						if (edge.isExpression() && QVTscheduleConstants.EQUALS_NAME.equals(edge.getName())) {
+							Node edgeSource = edge.getEdgeSource();
+							return create(edgeSource); //createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
+						}
+						else if (edge.isCast()) {
+							throw new UnsupportedOperationException();
+							//theVariable = createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
+						}
+					}
 				}
 				else {
 					return oldTypedElement.accept(this);
@@ -1282,17 +1287,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createRealizedVariables() {
 		for (@NonNull Node newNode : region.getNewNodes()) {
-			if (newNode.isPattern() && newNode.isClass()) {
+			if (/*newNode.isPattern() &&*/ newNode.isClass()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator();
 				OCLExpression constructor = null;
-				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(newNode)) {
-					if (edge.isExpression()) {
-						Node sourceNode = edge.getEdgeSource();
-						if (sourceNode.isOperation()) {
-							constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);
+				if (newNode.isOperation()) {
+					constructor = ((OperationCallExp)newNode.getTypedElements().iterator().next()).accept(expressionCreator);
+				}
+				/*				else {
+					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(newNode)) {
+						if (edge.isExpression()) {
+							Node sourceNode = edge.getEdgeSource();
+							if (sourceNode.isOperation()) {
+								constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);
+							}
 						}
 					}
-				}
+				} */
 				ClassDatum classDatum = newNode.getClassDatum();
 				TypedModel pTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
