@@ -438,7 +438,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			for (@NonNull Variable rVariable : rEnforcedBoundVariables.keySet()) {
 				Key rKey = qvtr2qvtc.getKeyForType(ClassUtil.nonNullState(rVariable.getType()));
-				variablesAnalysis.getVariableAnalysis(rVariable).setIsEnforcedBound(rEnforcedBoundVariables.get(rVariable), rKey);
+				variablesAnalysis.getVariableAnalysis(rVariable).setIsEnforcedBound(rEnforcedBoundVariables.get(rVariable), rEnforcedTypedModel, rKey);
 			}
 			for (@NonNull Variable rVariable : rEnforcedReferredVariables) {
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsEnforcedReferred();

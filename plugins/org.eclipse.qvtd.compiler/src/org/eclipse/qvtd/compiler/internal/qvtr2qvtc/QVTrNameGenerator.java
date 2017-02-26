@@ -34,7 +34,7 @@ public class QVTrNameGenerator
 
 	public @NonNull String createKeyFunctionName(@NonNull TypedModel rTypedModel, @NonNull Key rKey) {
 		org.eclipse.ocl.pivot.@NonNull Class identifiedClass = QVTrelationUtil.getIdentifies(rKey);
-		return  "Key_" + QVTrelationUtil.getName(rTypedModel) + "2" + QVTrelationUtil.getName(identifiedClass);
+		return  "Key_" + QVTrelationUtil.getName(rTypedModel) + "_" + QVTrelationUtil.getName(identifiedClass);
 	}
 
 	//	public @NonNull String createKey2InstanceClassName(org.eclipse.ocl.pivot.@NonNull Class identifiedClass) {

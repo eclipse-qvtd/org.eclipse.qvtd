@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 public class RelationVariableAnalysis extends AbstractVariableAnalysis
 {
 	protected final @NonNull Variable rVariable;
+	private @Nullable TypedModel rEnforcedTypedModel = null;
 	private @Nullable Key rKey = null;
 	private @Nullable TemplateExp rTemplateExp = null;
 	private boolean isEnforcedBound = false;
@@ -189,8 +191,9 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) throws CompilerChainException {
+		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(rEnforcedTypedModel);
 		Key rKey2 = ClassUtil.nonNull(rKey);
-		Function function = variablesAnalysis.qvtr2qvtc.getKeyFunction(rKey2);
+		Function function = variablesAnalysis.qvtr2qvtc.getKeyFunction(rEnforcedTypedModel2, rKey2);
 		List<@NonNull OCLExpression> asArguments = new ArrayList<@NonNull OCLExpression>();
 		if (rTemplateExp instanceof ObjectTemplateExp) {
 			ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)rTemplateExp;
@@ -248,13 +251,15 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	@Override
-	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @Nullable Key rKey) {
+	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
 		assert !isEnforcedBound;
 		assert this.cOtherBound == null;
+		assert this.rEnforcedTypedModel == null;
 		assert this.rKey == null;
 		assert this.rTemplateExp == null;
 		this.isEnforcedBound = true;
 		this.rTemplateExp = rTemplateExp;
+		this.rEnforcedTypedModel = rEnforcedTypedModel;
 		this.rKey = rKey;
 	}
 

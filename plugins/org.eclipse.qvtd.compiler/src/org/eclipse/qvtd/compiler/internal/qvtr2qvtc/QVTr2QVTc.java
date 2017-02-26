@@ -191,9 +191,9 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	//	private final @NonNull List<@NonNull Transformation> cTransformations = new ArrayList<@NonNull Transformation>();
 
 	/**
-	 * Mapping from each key to its corresponding identification constructor function.
+	 * Mapping from each key via the TYpedModel in which it is enforced to its corresponding identification constructor function.
 	 */
-	private final @NonNull Map<@NonNull Key, @NonNull Function> key2function = new HashMap<>();
+	private final @NonNull Map<@NonNull Key, @NonNull Map<@NonNull TypedModel, @NonNull Function>> key2typedModel2function = new HashMap<>();
 
 	/**
 	 * The Key that identifies each Class.
@@ -536,8 +536,26 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return getKeyForCompleteClass(completeClass);
 	}
 
-	/*public*/ @NonNull Function getKeyFunction(@NonNull Key key) {
-		return ClassUtil.nonNullState(key2function.get(key));
+	/*public*/ @NonNull Function getKeyFunction(@NonNull TypedModel rTypedModel, @NonNull Key rKey) throws CompilerChainException {
+		Map<@NonNull TypedModel, @NonNull Function> typedModel2function = key2typedModel2function.get(rKey);
+		if (typedModel2function == null) {
+			typedModel2function = new HashMap<>();
+			key2typedModel2function.put(rKey, typedModel2function);
+		}
+		Function cKeyFunction = typedModel2function.get(rTypedModel);
+		if (cKeyFunction == null) {
+			Iterable<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = QVTrelationUtil.getUsedClasses(rTypedModel);
+			org.eclipse.ocl.pivot.@NonNull Class identifiedClass = QVTrelationUtil.getIdentifies(rKey);
+			assert (Iterables.contains(usedClasses, identifiedClass));
+			QVTr2QVTc.SYNTHESIS.println("key " + rKey);
+			KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rTypedModel, rKey);
+			cKeyFunction = keyToMapping.transform();
+			getCoreTransformation(QVTrelationUtil.getContainingTransformation(rTypedModel)).getOwnedOperations().add(cKeyFunction);
+			//			}
+			typedModel2function.put(rTypedModel, cKeyFunction);
+			//		putTrace(traceClass, r);
+		}
+		return cKeyFunction;
 	}
 
 	public @NonNull Property getOclContainerProperty() {
@@ -643,31 +661,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		Variable rThis = QVTbaseUtil.getContextVariable(standardLibrary, rTransformation);
 		//			putGlobalTrace(cThis, rThis);
 		addTrace(rThis, cThis);
-		List<@NonNull Key> rKeys = new ArrayList<>();//Lists.newArrayList(QVTrelationUtil.getOwnedKey(rTransformation));
-		for (@Nullable Key rKey : new HashSet<>(completeClass2key.values())) {
-			if (rKey != null) {
-				rKeys.add(rKey);
-			}
-		}
-		Collections.sort(rKeys, QVTrelationUtil.KeyComparator.INSTANCE);
 		UniqueArrayList<@NonNull TypedModel> rEnforceableTypedModels = new UniqueArrayList<>();
 		for (@NonNull Relation rRelation : rRelations) {
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 				if (rDomain.isIsEnforceable()) {
 					rEnforceableTypedModels.add(QVTrelationUtil.getTypedModel(rDomain));
-				}
-			}
-		}
-		for (@NonNull TypedModel rTypedModel : rEnforceableTypedModels) {
-			Iterable<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = QVTrelationUtil.getUsedClasses(rTypedModel);
-			for (@NonNull Key rKey : rKeys) {
-				org.eclipse.ocl.pivot.@NonNull Class identifiedClass = QVTrelationUtil.getIdentifies(rKey);
-				if (Iterables.contains(usedClasses, identifiedClass)) {
-					QVTr2QVTc.SYNTHESIS.println("key " + rKey);
-					KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rTypedModel, rKey);
-					Function cKeyFunction = keyToMapping.transform();
-					putKeyFunction(rKey, cKeyFunction);
-					cTransformation.getOwnedOperations().add(cKeyFunction);
 				}
 			}
 		}
@@ -679,10 +677,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				topLevelRelationToMappingForEnforcement.transform();
 			}
 		}
-		//		}
-		//		for (@NonNull RelationalTransformation rTransformation : rTransformations) {
-		//			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(rTransformation.getRule()));
-		//			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Relation rRelation : rRelations) {
 			if (!rRelation.isIsTopLevel()) {
 				InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rRelation);
@@ -729,12 +723,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 		targets.add(coreElement);
 		//		}
-	}
-
-	/*public*/ void putKeyFunction(@NonNull Key rKey, @NonNull Function keyFunction) {
-		Function oldFunction = key2function.put(rKey, keyFunction);
-		assert oldFunction == null;
-		//		putTrace(traceClass, r);
 	}
 
 	/*public*/ void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {

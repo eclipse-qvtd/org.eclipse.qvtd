@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
@@ -66,7 +67,7 @@ public interface VariableAnalysis
 	 * Accumulate the definition of this variable by rTemplateExp in an enforced domain.
 	 * If rKey is non-null the enforcement correlates with rKey.
 	 */
-	void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @Nullable Key rKey);
+	void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey);
 
 	/**
 	 * Accumulate the references of this variable by an enforced domain.
