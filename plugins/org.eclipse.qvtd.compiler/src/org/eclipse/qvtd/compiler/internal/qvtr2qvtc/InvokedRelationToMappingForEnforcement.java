@@ -86,7 +86,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 		@Override
 		protected @NonNull Set<@NonNull Variable> getEnforcedBottomDomainVariables() { // FIXME unify with TopLevel
 			Set<@NonNull Variable> rEnforcedBottomDomainVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
-			rEnforcedBottomDomainVariables.removeAll(rWhenVariable2rDomain.keySet());
+			rEnforcedBottomDomainVariables.removeAll(rWhenVariable2rTypedModel.keySet());
 			rEnforcedBottomDomainVariables.removeAll(rSharedVariables);
 			rEnforcedBottomDomainVariables.removeAll(rEnforcedRootVariables);
 			return rEnforcedBottomDomainVariables;

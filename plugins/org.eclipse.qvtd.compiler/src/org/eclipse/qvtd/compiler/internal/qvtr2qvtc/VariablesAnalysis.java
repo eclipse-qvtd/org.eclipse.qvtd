@@ -38,6 +38,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -122,7 +123,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 		}
 	}
-	public static void gatherReferredVariablesWithDomains(@NonNull Map<@NonNull Variable, @Nullable RelationDomain> referredVariable2domain, @NonNull Element asRoot) {
+	public static void gatherReferredVariablesWithTypedModels(@NonNull Map<@NonNull Variable, @Nullable TypedModel> referredVariable2typedModel, @NonNull Element asRoot) {
 		for (EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
@@ -137,38 +138,38 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						assert argument < rootVariables.size();
 						Variable rootVariable = rootVariables.get(argument);
 						RelationDomain relationDomain = QVTrelationUtil.getRootVariableDomain(rootVariable);
-						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, (Variable)referredVariable, relationDomain);
+						gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (Variable)referredVariable, relationDomain.getTypedModel());
 					}
 					else {
-						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, (Variable)referredVariable, null);
+						gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (Variable)referredVariable, null);
 					}
 				}
 			}
 			else if (eObject instanceof Variable) {
-				gatherReferredVariablesWithDomainsAdd(referredVariable2domain, (Variable)eObject, null);
+				gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, (Variable)eObject, null);
 			}
 			else if (eObject instanceof TemplateExp) {
 				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();
 				if (bindsTo != null) {
-					gatherReferredVariablesWithDomainsAdd(referredVariable2domain, bindsTo, null);
+					gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, bindsTo, null);
 				}
 				if (eObject instanceof CollectionTemplateExp) {
 					Variable rest = ((CollectionTemplateExp)eObject).getRest();
 					if ((rest != null) && !rest.isIsImplicit()) {
-						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, rest, null);
+						gatherReferredVariablesWithTypedModelsAdd(referredVariable2typedModel, rest, null);
 					}
 				}
 			}
 		}
 	}
-	private static void gatherReferredVariablesWithDomainsAdd(@NonNull Map<@NonNull Variable, @Nullable RelationDomain> referredVariable2domain,
-			@NonNull Variable variable, @Nullable RelationDomain relationDomain) {
-		if (relationDomain != null) {
-			RelationDomain oldDomain = referredVariable2domain.put(variable, relationDomain);
-			assert (oldDomain == relationDomain) || (oldDomain == null);
+	private static void gatherReferredVariablesWithTypedModelsAdd(@NonNull Map<@NonNull Variable, @Nullable TypedModel> referredVariable2typedModel,
+			@NonNull Variable variable, @Nullable TypedModel rTypedModel) {
+		if (rTypedModel != null) {
+			TypedModel oldTypedModel = referredVariable2typedModel.put(variable, rTypedModel);
+			assert (oldTypedModel == rTypedModel) || (oldTypedModel == null);
 		}
-		else if (!referredVariable2domain.containsKey(variable)) {
-			referredVariable2domain.put(variable, null);
+		else if (!referredVariable2typedModel.containsKey(variable)) {
+			referredVariable2typedModel.put(variable, null);
 		}
 	}
 
