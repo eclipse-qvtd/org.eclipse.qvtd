@@ -197,9 +197,12 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	/**
 	 * The Key that identifies each Class.
-	 * Multiple keys per class and derived keys are prohibited by WFRs. See Bug 512532 for rationale.
+	 * Multiple keys per class are prohibited by WFRs. See Bug 512532 for rationale.
+	 * Singly-derived keys re-use the ancestral key, with a distinct key-class.
+	 * Multiply-derived keys are synthesized lazily.
+	 * A null value indicates that no key exists.
 	 */
-	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<>();
+	private final @NonNull Map<@NonNull CompleteClass, @Nullable Key> completeClass2key = new HashMap<>();
 
 	/**
 	 * Mapping from each relation to its corresponding trace class.
@@ -301,9 +304,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	protected void analyzeKey(@NonNull Key key) {
-		org.eclipse.ocl.pivot.Class identifies = key.getIdentifies();
-		assert identifies != null;
-		class2key.put(identifies, key);
+		CompleteClass identifies = getCompleteClass(QVTrelationUtil.getIdentifies(key));
+		completeClass2key.put(identifies, key);
 	}
 
 	protected void analyzeRootVariables(@NonNull Relation relation) {
@@ -325,7 +327,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	public @Nullable Property basicGetProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
 		/*@NonNull*/ String name = rNamedElement.getName();
 		assert (aClass != null) && (name != null);
-		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(aClass);
+		CompleteClass completeClass = getCompleteClass(aClass);
 		return completeClass.getProperty(name);
 	}
 
@@ -347,8 +349,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return new CreateVisitor(this);
 	}
 
-	public @NonNull String createKeyFunctionName(@NonNull Key rKey) {
-		return nameGenerator.createKeyFunctionName(rKey);
+	public @NonNull String createKeyFunctionName(@NonNull TypedModel rTypedModel, @NonNull Key rKey) {
+		return nameGenerator.createKeyFunctionName(rTypedModel, rKey);
 	}
 
 	public @NonNull String createKeyedVariableName(@NonNull Variable identifiedVariable) {
@@ -461,6 +463,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		reportDiagnostics(new Issues(), diagnostic);
 	}
 
+	public @NonNull CompleteClass getCompleteClass(@NonNull Type type) {
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(type);
+		return completeClass;
+	}
+
 	/*public*/ @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation rTransformation) {
 		return ClassUtil.nonNullState(rTransformation2cTransformation.get(rTransformation));
 	}
@@ -494,8 +501,39 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return rRelation1;
 	}
 
+	/**
+	 * Return the Key for completeClass, returning null if none, or an explicit key if defined,
+	 * or a synthesized key if singly/multiply inherited.
+	 */
+	public @Nullable Key getKeyForCompleteClass(@NonNull CompleteClass completeClass) {
+		Key key = completeClass2key.get(completeClass);
+		if ((key == null) && !completeClass2key.containsKey(completeClass)) {
+			Set<@NonNull Property> parts = null;
+			for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
+				Key superKey = getKeyForCompleteClass(superCompleteClass);
+				if (superKey != null) {
+					if (parts == null) {
+						parts = new HashSet<>();
+					}
+					for (@NonNull Property property : QVTrelationUtil.getOwnedParts(superKey)) {
+						parts.add(property);
+					}
+					for (@NonNull Property property : QVTrelationUtil.getOwnedOppositeParts(superKey)) {
+						parts.add(QVTrelationUtil.getOpposite(property));
+					}
+				}
+			}
+			if (parts != null) {
+				key = new QVTrelationHelper(environmentFactory).createKey(completeClass.getPrimaryClass(), parts);
+			}
+			completeClass2key.put(completeClass, key);
+		}
+		return key;
+	}
+
 	public @Nullable Key getKeyForType(@NonNull Type type) {
-		return class2key.get(type);
+		CompleteClass completeClass = getCompleteClass(type);
+		return getKeyForCompleteClass(completeClass);
 	}
 
 	/*public*/ @NonNull Function getKeyFunction(@NonNull Key key) {
@@ -541,7 +579,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, /*@NonNull*/ String name) throws CompilerChainException {
 		assert (aClass != null) && (name != null);
-		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(aClass);
+		CompleteClass completeClass = getCompleteClass(aClass);
 		Property p = completeClass.getProperty(name);
 		if (p != null)
 			return p;
@@ -605,8 +643,13 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		Variable rThis = QVTbaseUtil.getContextVariable(standardLibrary, rTransformation);
 		//			putGlobalTrace(cThis, rThis);
 		addTrace(rThis, cThis);
-		List<@NonNull Key> rKeys = Lists.newArrayList(QVTrelationUtil.getOwnedKey(rTransformation));
-		//			Collections.sort(keys, NameUtil.NAMEABLE_COMPARATOR);
+		List<@NonNull Key> rKeys = new ArrayList<>();//Lists.newArrayList(QVTrelationUtil.getOwnedKey(rTransformation));
+		for (@Nullable Key rKey : new HashSet<>(completeClass2key.values())) {
+			if (rKey != null) {
+				rKeys.add(rKey);
+			}
+		}
+		Collections.sort(rKeys, QVTrelationUtil.KeyComparator.INSTANCE);
 		UniqueArrayList<@NonNull TypedModel> rEnforceableTypedModels = new UniqueArrayList<>();
 		for (@NonNull Relation rRelation : rRelations) {
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
@@ -621,7 +664,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				org.eclipse.ocl.pivot.@NonNull Class identifiedClass = QVTrelationUtil.getIdentifies(rKey);
 				if (Iterables.contains(usedClasses, identifiedClass)) {
 					QVTr2QVTc.SYNTHESIS.println("key " + rKey);
-					KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rKey);
+					KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rTypedModel, rKey);
 					Function cKeyFunction = keyToMapping.transform();
 					putKeyFunction(rKey, cKeyFunction);
 					cTransformation.getOwnedOperations().add(cKeyFunction);

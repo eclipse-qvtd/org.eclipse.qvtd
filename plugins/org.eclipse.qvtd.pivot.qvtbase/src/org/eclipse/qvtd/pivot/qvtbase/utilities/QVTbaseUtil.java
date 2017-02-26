@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
@@ -340,6 +341,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull Iterable<@NonNull TypedModel> getModelParameters(@NonNull Transformation asTransformation) {
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
+	}
+
+	public static @NonNull Property getOpposite(@NonNull Property asProperty) {
+		return ClassUtil.nonNullState(asProperty.getOpposite());
 	}
 
 	public static @NonNull List<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {

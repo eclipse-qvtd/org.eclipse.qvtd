@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -73,6 +74,19 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			return ClassUtil.nullFree(rRelation.getVariable());
 		}
 	}
+
+	public static final class KeyComparator implements Comparator<@NonNull Key>
+	{
+		public static final @NonNull KeyComparator INSTANCE = new KeyComparator();
+
+		@Override
+		public int compare(@NonNull Key o1, @NonNull Key o2) {
+			String n1 = getName(getIdentifies(o1));
+			String n2 = getName(getIdentifies(o2));
+			return ClassUtil.safeCompareTo(n1, n2);
+		}
+	}
+
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
 
