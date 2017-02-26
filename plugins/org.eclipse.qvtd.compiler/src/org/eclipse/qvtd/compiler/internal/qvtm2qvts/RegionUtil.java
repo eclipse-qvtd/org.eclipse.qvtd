@@ -513,10 +513,10 @@ public class RegionUtil extends QVTscheduleUtil
 		if (typedElement instanceof OperationCallExp) {
 			Operation asOperation = ((OperationCallExp)typedElement).getReferredOperation();
 			if (QVTbaseUtil.isIdentification(asOperation)) {
-				DomainUsage usage = getScheduleManager(region).getDomainUsage(typedElement);
-				if (!usage.isInput()) {
-					isRealized = true;
-				}
+				//				DomainUsage usage = getScheduleManager(region).getDomainUsage(typedElement);
+				//				if (!usage.isInput()) {
+				isRealized = true;
+				//				}
 			}
 		}
 		if (isRealized) {
