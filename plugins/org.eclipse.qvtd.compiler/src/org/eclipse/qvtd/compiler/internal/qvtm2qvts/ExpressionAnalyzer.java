@@ -70,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -127,6 +128,18 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
 		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
+		if (sourceNode.isDataType()) {		// expecting a CollectionType
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(sourceNode)) {
+				if (edge instanceof NavigationEdge) {
+					NavigationEdge navigationEdge = (NavigationEdge)edge;
+					Property property = navigationEdge.getProperty();
+					Property oppositeProperty = property.getOpposite();
+					if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
+						createNavigationEdge(targetNode, oppositeProperty, RegionUtil.getSourceNode(navigationEdge), false);
+					}
+				}
+			}
+		}
 		return null;
 	}
 
