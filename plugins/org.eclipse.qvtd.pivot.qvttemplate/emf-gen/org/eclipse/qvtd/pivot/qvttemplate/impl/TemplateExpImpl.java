@@ -21,7 +21,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
@@ -320,12 +323,35 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ReferringElement.class) {
+			switch (baseOperationID) {
+				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return QVTtemplatePackage.TEMPLATE_EXP___GET_REFERRED_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case QVTtemplatePackage.TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP:
 				return validateWhereIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTtemplatePackage.TEMPLATE_EXP___GET_REFERRED_ELEMENT:
+				return getReferredElement();
 		}
 		return super.eInvoke(operationID, arguments);
+	}
+
+	@Override
+	public Element getReferredElement() {
+		return getBindsTo();
 	}
 } //TemplateExpImpl

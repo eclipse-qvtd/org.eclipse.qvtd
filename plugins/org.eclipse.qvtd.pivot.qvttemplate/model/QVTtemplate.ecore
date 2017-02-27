@@ -109,7 +109,7 @@
         name="referredClass" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-PropertyTemplateItem"
-      name="PropertyTemplateItem" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+      name="PropertyTemplateItem" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eOperations name="validateCompatibleClassForProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="CompatibleClassForProperty"/>
@@ -198,7 +198,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-TemplateExp" name="TemplateExp"
-      abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-LiteralExp">
+      abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-LiteralExp ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eOperations name="validateWhereIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="WhereIsBoolean"/>

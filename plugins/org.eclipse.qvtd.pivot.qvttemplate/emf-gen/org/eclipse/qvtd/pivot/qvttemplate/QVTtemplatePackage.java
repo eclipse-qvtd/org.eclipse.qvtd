@@ -246,13 +246,22 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___GET_REFERRED_ELEMENT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Validate Where Is Boolean</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
+	int TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Template Exp</em>' class.
@@ -261,7 +270,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 1;
+	int TEMPLATE_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.CollectionTemplateExpImpl <em>Collection Template Exp</em>}' class.
@@ -461,6 +470,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___GET_REFERRED_ELEMENT = TEMPLATE_EXP___GET_REFERRED_ELEMENT;
 
 	/**
 	 * The operation id for the '<em>Validate Where Is Boolean</em>' operation.
@@ -698,6 +716,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___GET_REFERRED_ELEMENT = TEMPLATE_EXP___GET_REFERRED_ELEMENT;
+
+	/**
 	 * The operation id for the '<em>Validate Where Is Boolean</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -853,13 +880,22 @@ public interface QVTtemplatePackage extends EPackage {
 	int PROPERTY_TEMPLATE_ITEM___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___GET_REFERRED_ELEMENT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Validate Compatible Class For Property</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Validate Compatible Type For Object Value</em>' operation.
@@ -868,7 +904,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Compatible Type For Collection Element Value</em>' operation.
@@ -877,7 +913,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Compatible Type For Collection Value</em>' operation.
@@ -886,7 +922,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 3;
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Property Template Item</em>' class.
@@ -895,7 +931,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 4;
+	int PROPERTY_TEMPLATE_ITEM_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 5;
 
 
 	/**

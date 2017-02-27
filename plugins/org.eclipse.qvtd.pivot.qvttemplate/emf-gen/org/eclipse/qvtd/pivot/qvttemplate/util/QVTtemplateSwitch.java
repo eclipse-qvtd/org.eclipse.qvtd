@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -89,6 +90,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				T result = caseCollectionTemplateExp(collectionTemplateExp);
 				if (result == null) result = caseTemplateExp(collectionTemplateExp);
 				if (result == null) result = caseLiteralExp(collectionTemplateExp);
+				if (result == null) result = caseReferringElement(collectionTemplateExp);
 				if (result == null) result = caseOCLExpression(collectionTemplateExp);
 				if (result == null) result = caseTypedElement(collectionTemplateExp);
 				if (result == null) result = caseNamedElement(collectionTemplateExp);
@@ -103,6 +105,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				T result = caseObjectTemplateExp(objectTemplateExp);
 				if (result == null) result = caseTemplateExp(objectTemplateExp);
 				if (result == null) result = caseLiteralExp(objectTemplateExp);
+				if (result == null) result = caseReferringElement(objectTemplateExp);
 				if (result == null) result = caseOCLExpression(objectTemplateExp);
 				if (result == null) result = caseTypedElement(objectTemplateExp);
 				if (result == null) result = caseNamedElement(objectTemplateExp);
@@ -116,6 +119,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				PropertyTemplateItem propertyTemplateItem = (PropertyTemplateItem)theEObject;
 				T result = casePropertyTemplateItem(propertyTemplateItem);
 				if (result == null) result = caseElement(propertyTemplateItem);
+				if (result == null) result = caseReferringElement(propertyTemplateItem);
 				if (result == null) result = caseVisitable(propertyTemplateItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -124,6 +128,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				TemplateExp templateExp = (TemplateExp)theEObject;
 				T result = caseTemplateExp(templateExp);
 				if (result == null) result = caseLiteralExp(templateExp);
+				if (result == null) result = caseReferringElement(templateExp);
 				if (result == null) result = caseOCLExpression(templateExp);
 				if (result == null) result = caseTypedElement(templateExp);
 				if (result == null) result = caseNamedElement(templateExp);
@@ -299,6 +304,21 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLiteralExp(LiteralExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferringElement(ReferringElement object) {
 		return null;
 	}
 

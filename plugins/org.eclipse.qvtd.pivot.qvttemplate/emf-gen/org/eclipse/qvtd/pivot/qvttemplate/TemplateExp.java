@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.Variable;
 
 /**
@@ -33,7 +34,7 @@ import org.eclipse.ocl.pivot.Variable;
  * @model abstract="true"
  * @generated
  */
-public interface TemplateExp extends LiteralExp {
+public interface TemplateExp extends LiteralExp, ReferringElement {
 	/**
 	 * Returns the value of the '<em><b>Binds To</b></em>' reference.
 	 * <!-- begin-user-doc -->

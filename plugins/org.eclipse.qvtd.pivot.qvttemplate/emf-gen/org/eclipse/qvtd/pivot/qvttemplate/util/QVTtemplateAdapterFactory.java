@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -127,6 +128,10 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLiteralExp(LiteralExp object) {
 				return createLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseReferringElement(ReferringElement object) {
+				return createReferringElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -299,6 +304,20 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.ReferringElement <em>Referring Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.ReferringElement
+	 * @generated
+	 */
+	public Adapter createReferringElementAdapter() {
 		return null;
 	}
 

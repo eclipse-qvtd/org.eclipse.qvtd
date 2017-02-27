@@ -23,8 +23,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -1041,6 +1044,22 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ReferringElement.class) {
+			switch (baseOperationID) {
+				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM___GET_REFERRED_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
@@ -1052,6 +1071,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				return validateCompatibleTypeForCollectionElementValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP:
 				return validateCompatibleTypeForCollectionValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM___GET_REFERRED_ELEMENT:
+				return getReferredElement();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
@@ -1065,5 +1086,10 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTtemplateVisitor<?>)visitor).visitPropertyTemplateItem(this);
+	}
+
+	@Override
+	public Element getReferredElement() {
+		return getReferredProperty();
 	}
 } //PropertyTemplateItemImpl

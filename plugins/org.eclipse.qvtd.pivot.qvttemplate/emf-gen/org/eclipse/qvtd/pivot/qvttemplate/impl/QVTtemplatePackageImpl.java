@@ -491,7 +491,9 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		collectionTemplateExpEClass.getESuperTypes().add(this.getTemplateExp());
 		objectTemplateExpEClass.getESuperTypes().add(this.getTemplateExp());
 		propertyTemplateItemEClass.getESuperTypes().add(thePivotPackage.getElement());
+		propertyTemplateItemEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		templateExpEClass.getESuperTypes().add(thePivotPackage.getLiteralExp());
+		templateExpEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(collectionTemplateExpEClass, CollectionTemplateExp.class, "CollectionTemplateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
