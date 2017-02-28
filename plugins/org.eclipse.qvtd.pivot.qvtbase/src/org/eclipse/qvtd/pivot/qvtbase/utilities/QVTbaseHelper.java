@@ -14,17 +14,12 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Comment;
-import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -40,12 +35,6 @@ public class QVTbaseHelper extends PivotHelper
 {
 	public QVTbaseHelper(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
-	}
-
-	public @NonNull Comment createComment(@NonNull String comment) {
-		Comment asComment = PivotFactory.eINSTANCE.createComment();
-		asComment.setBody(comment);
-		return asComment;
 	}
 
 	public @NonNull Function createFunction(@NonNull String name, @NonNull Type returnType, boolean returnIsRequired, @Nullable List<@NonNull FunctionParameter> asParameters) {
@@ -74,14 +63,6 @@ public class QVTbaseHelper extends PivotHelper
 		return asParameter;
 	}
 
-	public @NonNull LetVariable createLetVariable(@NonNull String name, @NonNull Type asType, boolean isRequired) {
-		LetVariable asVariable = PivotFactory.eINSTANCE.createLetVariable();
-		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
-		return asVariable;
-	}
-
 	public @NonNull Predicate createPredicate(@NonNull OCLExpression asConditionExpression) {
 		Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		asPredicate.setConditionExpression(asConditionExpression);
@@ -93,20 +74,5 @@ public class QVTbaseHelper extends PivotHelper
 		asTypedModel.setName(name);
 		Iterables.addAll(QVTbaseUtil.Internal.getUsedPackagesList(asTypedModel), usedPackages);
 		return asTypedModel;
-	}
-
-	@Override
-	public void setType(@NonNull TypedElement pivotElement, Type type, boolean isRequired) {
-		Type primaryType = type != null ? ((PivotMetamodelManager)environmentFactory.getMetamodelManager()).getPrimaryType(type) : null;
-		if (primaryType != pivotElement.getType()) {
-			pivotElement.setType(primaryType);
-		}
-		boolean wasRequired = pivotElement.isIsRequired();
-		if (wasRequired != isRequired) {
-			pivotElement.setIsRequired(isRequired);
-		}
-		if (primaryType != null) {
-			PivotUtil.debugWellContainedness(primaryType);
-		}
 	}
 }

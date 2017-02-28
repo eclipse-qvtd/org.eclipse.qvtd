@@ -17,25 +17,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -80,10 +74,6 @@ public class QVTbaseUtil extends PivotUtil
 
 		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
 			return ClassUtil.nullFree(asPattern.getPredicate());
-		}
-
-		public static @NonNull List<@NonNull Import> getOwnedImportsList(@NonNull Model asModel) {
-			return ClassUtil.nullFree(asModel.getOwnedImports());
 		}
 
 		public static @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackagesList(@NonNull TypedModel asTypedModel) {
@@ -343,10 +333,6 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
 	}
 
-	public static @NonNull Property getOpposite(@NonNull Property asProperty) {
-		return ClassUtil.nonNullState(asProperty.getOpposite());
-	}
-
 	public static @NonNull List<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {
 		return ClassUtil.nullFree(asTransformation.getOwnedOperations());
 	}
@@ -363,10 +349,7 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asFunction.getQueryExpression());
 	}
 
-	public static @NonNull Type getReferredType(@NonNull TypeExp typeExp) {
-		return ClassUtil.nonNullState(typeExp.getReferredType());
-	}
-
+	// Overrides to return Variable rather than VariableDeclaration. Is this sound? It is certainly helpful to guarantee an ownedInit.
 	public static @NonNull Variable getReferredVariable(@NonNull VariableExp asVariableExp) {
 		return (Variable) ClassUtil.nonNullState(asVariableExp.getReferredVariable());
 	}
@@ -504,25 +487,6 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
         throw new IOException("Failed to locate a transformation in '" + transformationURI + "'"); */
-	}
-
-	/**
-	 * Replace oldChild at its eContainer.eContainmentFeature by newChild.
-	 */
-	public static void replaceChild(@NonNull EObject oldChild, @NonNull EObject newChild) {
-		EObject eContainer = oldChild.eContainer();
-		EReference eContainmentFeature = oldChild.eContainmentFeature();
-		if (eContainmentFeature.isMany()) {
-			@SuppressWarnings("unchecked") EList<EObject> list = (EList<EObject>)eContainer.eGet(eContainmentFeature);
-			int index = list.indexOf(oldChild);
-			assert index >= 0;
-			PivotUtilInternal.resetContainer(oldChild);
-			list.add(index, newChild);
-		}
-		else {
-			PivotUtilInternal.resetContainer(oldChild);
-			eContainer.eSet(eContainmentFeature, newChild);
-		}
 	}
 
 	/**
