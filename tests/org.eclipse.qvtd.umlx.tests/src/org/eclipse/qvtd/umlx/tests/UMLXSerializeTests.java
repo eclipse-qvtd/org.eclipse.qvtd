@@ -332,6 +332,10 @@ public class UMLXSerializeTests extends LoadTestCase
 		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/models/", "Keys", true);
 	}
 
+	public void testUMLXRoundtrip_MiToSiSimple_qvtr() throws Exception {
+		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/mitosi/", "MiToSiSimple", true);
+	}
+
 	public void testUMLXRoundtrip_PN2SC_qvtr() throws Exception {
 		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/pn2sc/", "PetriNet2StateChart", true);
 	}

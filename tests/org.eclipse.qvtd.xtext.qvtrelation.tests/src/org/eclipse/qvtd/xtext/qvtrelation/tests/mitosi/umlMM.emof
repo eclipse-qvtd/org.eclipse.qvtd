@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml"
+    xmi:id="umlmmmi" name="umlmmmi" uri="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/uml">
+  <ownedType xmi:type="emof:Class" xmi:id="umlmmmi.Class" name="Class">
+    <ownedAttribute xmi:id="umlmmmi.Class.supers.1" name="containingPackage" type="umlmmmi.dummy"
+        opposite="umlmmmi.dummy.containsClass"/>
+    <ownedAttribute xmi:id="umlmmmi.Class.type" name="type" default="">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="umlmmmi.Class.supers" name="supers" lower="0" upper="*"
+        type="umlmmmi.Class" opposite="umlmmmi.Class.subs"/>
+    <ownedAttribute xmi:id="umlmmmi.Class.subs" name="subs" lower="0" upper="*" type="umlmmmi.Class"
+        opposite="umlmmmi.Class.supers"/>
+    <ownedAttribute xmi:id="umlmmmi.Class.name" name="name" isID="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="umlmmmi.dummy" name="Package">
+    <ownedAttribute xmi:id="umlmmmi.dummy.containsClass" name="containsClass" lower="0"
+        upper="*" type="umlmmmi.Class" isComposite="true" opposite="umlmmmi.Class.supers.1"/>
+    <ownedAttribute xmi:id="umlmmmi.Package.name" name="name" isID="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/MOF/2.0/emof.xml#String"/>
+    </ownedAttribute>
+  </ownedType>
+  <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+    <nsPrefix>umlmmmi</nsPrefix>
+  </xmi:Extension>
+</emof:Package>

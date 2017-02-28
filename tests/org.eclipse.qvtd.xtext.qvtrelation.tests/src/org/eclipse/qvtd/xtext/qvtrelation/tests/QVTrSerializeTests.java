@@ -149,6 +149,10 @@ public class QVTrSerializeTests extends LoadTestCase
 		});
 	}
 
+	public void testSerialize_MiToSiSimple() throws Exception {
+		doSerializeRoundTripFromCS("mitosi/MiToSiSimple", null);
+	}
+
 	public void testSerialize_PetriNet2StateChart() throws Exception {
 		doSerializeRoundTripFromCS("pn2sc/PetriNet2StateChart", null);
 	}

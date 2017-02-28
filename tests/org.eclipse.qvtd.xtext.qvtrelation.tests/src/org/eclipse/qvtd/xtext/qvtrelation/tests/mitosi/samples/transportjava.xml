@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<javammsi:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javammsi="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/java"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/java ../javaMM.emof#javammsi"
+    name="transport">
+  <containsClass extendedBy="#TwoWheeler #ThreeWheeler #FourWheeler" name="Vehicle"/>
+  <containsClass extends="#Vehicle" implements="#TwoStrokeEngine" name="TwoWheeler"/>
+  <containsClass extends="#Vehicle" implements="#TwoStrokeEngine" name="ThreeWheeler"/>
+  <containsClass extends="#Vehicle" implements="#FourStrokeEngine" name="FourWheeler"/>
+  <containsInterface extendedBy="#SteamEngine #ICEngine" name="Engine"/>
+  <containsInterface extends="#Engine" name="SteamEngine"/>
+  <containsInterface extends="#Engine" extendedBy="#TwoStrokeEngine #FourStrokeEngine" name="ICEngine"/>
+  <containsInterface implementedBy="#TwoWheeler #ThreeWheeler" extends="#ICEngine" name="TwoStrokeEngine"/>
+  <containsInterface implementedBy="#FourWheeler" extends="#ICEngine" name="FourStrokeEngine"/>
+</javammsi:Package>

@@ -63,8 +63,7 @@ public class LoadTests extends LoadTestCase
 		});
 	}
 
-	// FIXME
-	public void zztestLoad_ClassModelToClassModel_qvtr() throws IOException, InterruptedException {
+	public void testLoad_ClassModelToClassModel_qvtr() throws IOException, InterruptedException {
 		doLoad_ModelMorf("ClassModelToClassModel/ClassModelToClassModel", NO_MESSAGES);
 	}
 
@@ -93,14 +92,13 @@ public class LoadTests extends LoadTestCase
 		});
 	}
 
+	public void testLoad_MiToSiSimple_qvtr() throws IOException, InterruptedException {
+		//		doLoad_ModelMorf("MiToSi/mitosi");
+		doLoad_Concrete("mitosi/MiToSiSimple.qvtr", NO_MESSAGES);
+	}
 
 	public void testLoad_Packages_qvtr() throws IOException, InterruptedException {
 		doLoad_Concrete("models/Packages.qvtr", NO_MESSAGES);
-	}
-
-	public void testLoad_MiToSi_qvtr() throws IOException, InterruptedException {
-		//		doLoad_ModelMorf("MiToSi/mitosi");
-		doLoad_Concrete("mitosi/MiToSi.qvtr", NO_MESSAGES);
 	}
 
 	public void testLoad_RelToCore_qvtr() throws IOException, InterruptedException {
