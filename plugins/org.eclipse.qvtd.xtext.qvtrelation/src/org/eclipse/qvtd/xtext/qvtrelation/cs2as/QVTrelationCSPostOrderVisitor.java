@@ -262,12 +262,12 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		for (VarDeclarationIdCS csVarDeclarationId : csElement.getOwnedVarDeclarationIds()) {
 			pivotVariable = PivotUtil.getPivot(Variable.class, csVarDeclarationId);
 			if (pivotVariable != null) {
-				if (ownedType != null) {
-					context.refreshRequiredType(pivotVariable, ownedType);
-				}
-				else {
-					context.setType(pivotVariable, pivotType, isRequired == Boolean.TRUE);
-				}
+				//				if (ownedType != null) {
+				//					context.refreshRequiredType(pivotVariable, ownedType);
+				//				}
+				//				else {
+				context.setType(pivotVariable, pivotType, isRequired != Boolean.FALSE);
+				//				}
 				pivotVariable.setOwnedInit(null);
 			}
 		}

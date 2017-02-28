@@ -131,12 +131,18 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 		public BasicContinuation<?> execute() {
 			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement);
 			if (pivotElement != null) {
-				org.eclipse.ocl.pivot.Class type = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csElement.getOwnedType());
+				TypedRefCS csType = csElement.getOwnedType();
+				Boolean isRequired = null;
+				org.eclipse.ocl.pivot.Class type = null;
+				if (csType != null) {
+					type = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csType);
+					isRequired = context.isRequired(csType);
+				}
 				pivotElement.setReferredClass(type);
-				pivotElement.setType(type);
+				context.setType(pivotElement, type, isRequired != Boolean.FALSE);
 				Variable variable = pivotElement.getBindsTo();
 				if (variable != null) {
-					variable.setType(type);
+					context.setType(variable, type, isRequired != Boolean.FALSE);
 				}
 				assert pivotElement.getType() != null;
 			}
