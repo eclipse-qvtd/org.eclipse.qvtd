@@ -17,6 +17,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.IteratorVariable;
+import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
@@ -124,7 +126,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		}
 		CorePattern cPattern = getCorePattern();
 		boolean isRealized = isRealized();
-		assert (cVariable != null) && (cVariable.eContainer() == cPattern);
+		assert (cVariable != null) && ((cVariable.eContainer() == cPattern) || (cVariable instanceof IteratorVariable) || (cVariable instanceof LetVariable));
 		assert (cVariable instanceof RealizedVariable) == (isRealized && !(cVariable.getType() instanceof DataType));
 	}
 
@@ -311,7 +313,13 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			boolean isRealized = isRealized();
 			//
 			Type type = ClassUtil.nonNullState(rVariable.getType());
-			if (isKeyed) {
+			if (rVariable instanceof IteratorVariable) {
+				cVariable2 = variablesAnalysis.createIteratorVariable(name, type, rVariable.isIsRequired());
+			}
+			else if (rVariable instanceof LetVariable) {
+				cVariable2 = variablesAnalysis.createLetVariable(name, type, rVariable.isIsRequired());
+			}
+			else if (isKeyed) {
 				cVariable2 = variablesAnalysis.createBottomVariable(name, type, true, null);
 				initializeKeyedVariable(cVariable2);			// FIXME can recurse - is stability guaranteed?
 				cPattern.getVariable().add(cVariable2);

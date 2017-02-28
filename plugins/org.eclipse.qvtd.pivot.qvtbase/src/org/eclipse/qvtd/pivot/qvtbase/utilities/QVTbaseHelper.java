@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Comment;
+import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
@@ -73,6 +74,14 @@ public class QVTbaseHelper extends PivotHelper
 		return asParameter;
 	}
 
+	public @NonNull LetVariable createLetVariable(@NonNull String name, @NonNull Type asType, boolean isRequired) {
+		LetVariable asVariable = PivotFactory.eINSTANCE.createLetVariable();
+		asVariable.setName(name);
+		asVariable.setType(asType);
+		asVariable.setIsRequired(isRequired);
+		return asVariable;
+	}
+
 	public @NonNull Predicate createPredicate(@NonNull OCLExpression asConditionExpression) {
 		Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		asPredicate.setConditionExpression(asConditionExpression);
@@ -86,6 +95,7 @@ public class QVTbaseHelper extends PivotHelper
 		return asTypedModel;
 	}
 
+	@Override
 	public void setType(@NonNull TypedElement pivotElement, Type type, boolean isRequired) {
 		Type primaryType = type != null ? ((PivotMetamodelManager)environmentFactory.getMetamodelManager()).getPrimaryType(type) : null;
 		if (primaryType != pivotElement.getType()) {

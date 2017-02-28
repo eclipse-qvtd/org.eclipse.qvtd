@@ -25,6 +25,8 @@ import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.IteratorVariable;
+import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -356,6 +358,22 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					}
 				}
 				return super.get(oIn);
+			}
+
+			@Override
+			public EObject copy(EObject oIn) {
+				try {
+					if (oIn instanceof IteratorVariable) {
+						return variablesAnalysis.getCoreVariable((IteratorVariable)oIn);
+					}
+					else if (oIn instanceof LetVariable) {
+						return variablesAnalysis.getCoreVariable((LetVariable)oIn);
+					}
+				} catch (CompilerChainException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return super.copy(oIn);
 			}
 		}
 
@@ -1028,7 +1046,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		private void putTrace(@NonNull Element coreElement, @NonNull Element relationElement) {
 			Element oldRelationElement = target2source.put(coreElement, relationElement);
-			assert oldRelationElement == null;
+			assert (oldRelationElement == relationElement) || (oldRelationElement == null);
 			List<@NonNull Element> targets = source2targets.get(relationElement);
 			if (targets == null) {
 				targets = new ArrayList<>();
