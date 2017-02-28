@@ -178,7 +178,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asSetAssignment.setOwnedExpression(asValueExpression);
 		asSetAssignment.setIsPartial(isPartial);
 		asSetAssignment.setIsNotify(isNotify);
-		assert isPartial == ((asSetAssignment.getTargetProperty().getType() instanceof CollectionType) && !(asValueExpression.getType() instanceof CollectionType));	// FIXME inadequate for nested types but good for initial debugging
+		assert isPartial == ((QVTimperativeUtil.getTargetProperty(asSetAssignment).getType() instanceof CollectionType) && !(asValueExpression.getType() instanceof CollectionType));	// FIXME inadequate for nested types but good for initial debugging
 		return asSetAssignment;
 	}
 

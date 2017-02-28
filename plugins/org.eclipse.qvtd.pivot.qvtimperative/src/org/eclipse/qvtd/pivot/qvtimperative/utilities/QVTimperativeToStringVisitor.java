@@ -321,7 +321,10 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		append("set ");
 		appendName(asSetStatement.getTargetVariable());
 		append(".");
-		appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
+		if (asSetStatement.isIsOpposite()) {
+			append("~");
+		}
+		appendName(asSetStatement.getTargetProperty());
 		append(" := ");
 		safeVisit(asSetStatement.getOwnedExpression());
 		return null;

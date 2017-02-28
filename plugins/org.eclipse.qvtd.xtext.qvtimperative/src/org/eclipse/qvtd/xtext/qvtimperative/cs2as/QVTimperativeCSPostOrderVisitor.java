@@ -311,8 +311,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			setStatement.setIsOpposite(isImplicit);
 			ExpCS csInitializer = csElement.getOwnedExpression();
 			OCLExpression target = csInitializer != null ? context.visitLeft2Right(OCLExpression.class, csInitializer) : null;
-			setStatement.setTargetProperty(targetProperty);
-			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
 			setStatement.setOwnedExpression(target);
 			//				pAssignments.add(assignment);
 		}
