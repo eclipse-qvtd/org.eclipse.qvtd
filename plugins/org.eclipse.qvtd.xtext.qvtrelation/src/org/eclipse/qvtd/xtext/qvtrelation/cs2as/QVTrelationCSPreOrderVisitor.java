@@ -110,13 +110,12 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 				assert csCollectionTemplate.getOwnedMemberIdentifiers().contains(csElement);
 				VariableExp asVariableExp = (VariableExp)asElement;
 				Variable asVariable = (Variable)asVariableExp.getReferredVariable();
+				Type elementType = asCollectionType.getElementType();
+				boolean isNullFree = asCollectionType.isIsNullFree();
 				if ((asVariable != null) && asVariable.isIsImplicit()) {
-					Type elementType = asCollectionType.getElementType();
-					asVariable.setType(elementType);
-					asVariable.setTypeValue(null);
-					asVariable.setIsRequired(true);
-					asVariableExp.setType(elementType);
+					context.setType(asVariable, elementType, isNullFree);
 				}
+				context.setType(asVariableExp, elementType, isNullFree);
 			}
 			return null;
 		}
