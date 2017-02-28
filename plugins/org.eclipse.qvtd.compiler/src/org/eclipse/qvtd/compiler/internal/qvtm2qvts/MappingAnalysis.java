@@ -330,8 +330,8 @@ public class MappingAnalysis implements Nameable
 
 	private @Nullable Node analyzeVariable(@NonNull Variable variable, @NonNull List<@NonNull OCLExpression> expressions) {
 		//
-		//	Use sonething hard to compute as the initializer that creates an initNode in the hope that other
-		//	initilalizers might be easier and optimized as simple navigation edges.
+		//	Use something hard to compute as the initializer that creates an initNode in the hope that other
+		//	initializers might be easier and optimized as simple navigation edges.
 		//
 		OCLExpression bestInitExpression = null;
 		for (@NonNull OCLExpression initExpression : expressions) {

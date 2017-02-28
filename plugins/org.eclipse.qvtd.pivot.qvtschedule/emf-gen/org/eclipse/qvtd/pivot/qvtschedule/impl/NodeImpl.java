@@ -736,7 +736,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge instanceof NavigableEdge) {
 				NavigableEdge navigationEdge = (NavigableEdge)edge;
-				if (navigationEdge.getProperty() == source2targetProperty) {
+				if ((navigationEdge.getProperty() == source2targetProperty) && !navigationEdge.isPartial()) {
 					return navigationEdge.getEdgeTarget();
 				}
 			}
