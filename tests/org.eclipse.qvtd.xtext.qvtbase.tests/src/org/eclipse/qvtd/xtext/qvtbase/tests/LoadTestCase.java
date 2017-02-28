@@ -32,6 +32,8 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
  */
 public class LoadTestCase extends XtextTestCase
 {
+	public static final @NonNull String @NonNull [] NO_MESSAGES = new @NonNull String[] {};
+
 	public void doLoad_Concrete(@NonNull String inputName, @NonNull String @Nullable [] messages) throws IOException {
 		OCL ocl = QVTbase.newInstance(getProjectMap(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());

@@ -41,7 +41,7 @@ public class QVTrSerializeTests extends LoadTestCase
 		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtras");
 		doSerialize(inputURI, stem, referenceURI, null, true, true, null);
-		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtr", stem + ".serialized.qvtras", null);
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtr", stem + ".serialized.qvtras", NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
@@ -85,11 +85,11 @@ public class QVTrSerializeTests extends LoadTestCase
 	protected void doSerializeRoundTripFromCS_usingOCL2(@NonNull String stem, @NonNull String @Nullable [] messages) throws Exception {
 		OCL ocl1 = OCL.newInstance(getProjectMap());//, null);
 		OCL ocl2 = OCL.newInstance(getProjectMap());
-		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvtr", stem + ".qvtras", null);
+		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvtr", stem + ".qvtras", NO_MESSAGES);
 		URI inputURI = getProjectFileURI(stem + ".qvtras");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtras");
 		doSerialize(inputURI, stem, referenceURI, null, true, true, messages);
-		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtr", stem + ".serialized.qvtras", null);
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtr", stem + ".serialized.qvtras", NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);

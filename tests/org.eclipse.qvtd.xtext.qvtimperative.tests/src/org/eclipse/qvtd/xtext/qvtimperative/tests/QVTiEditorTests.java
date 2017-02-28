@@ -42,12 +42,12 @@ public class QVTiEditorTests extends LoadTestCase
 		super.setUp();
 	}
 	public void testLoad_HSV2HSL_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HSL/HSV2HSL.qvti", null);
+		doLoad_Concrete("HSV2HSL/HSV2HSL.qvti", NO_MESSAGES);
 	}
 
 
 	public void testLoad_Classescs2Classes_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("ClassesCS2AS/ClassesCS2AS.qvti", null);
+		doLoad_Concrete("ClassesCS2AS/ClassesCS2AS.qvti", NO_MESSAGES);
 	}
 
 	//	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
