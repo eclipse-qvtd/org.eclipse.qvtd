@@ -151,7 +151,7 @@ import com.google.common.collect.Iterables;
 						//						manyTraces = true;
 					}
 				}
-				else {
+				else if (!(m instanceof VariableExp)) {
 					createTraceProperty(rDomain, rc, collectionVariable.getName() + "_" + argIndex, elementType, collectionType.isIsNullFree());
 				}
 				argIndex++;
