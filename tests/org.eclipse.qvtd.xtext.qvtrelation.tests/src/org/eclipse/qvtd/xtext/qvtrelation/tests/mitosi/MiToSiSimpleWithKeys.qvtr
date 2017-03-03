@@ -1,0 +1,143 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *******************************************************************************/
+import ecoreMM : 'http://www.eclipse.org/emf/2002/Ecore'; 
+import umlmmmi : 'umlMM.emof'::umlmmmi; 
+import javammsi : 'javaMM.emof'::javammsi; 
+
+/*
+ * This variant of MiToSiSimple has gratuitous keys. These should not damage execution
+ * but at the time of writing they caused a scheduling failure.
+ */
+transformation MiToSiSimpleWithKeys(uml:{umlmmmi,ecoreMM}, java:javammsi)
+{
+	key umlmmmi::Class {containingPackage, name};
+	key javammsi::Class {containingPackage, name};
+	key javammsi::Interface {containingPackage, name};
+
+	/**
+	 * Return true if this class or a transitive super-class is marked as DomainRoot. 
+	 */
+	 query isClass(c : umlmmmi::Class) : Boolean {
+		c->closure(supers)->exists(type = 'DomainRoot')		
+	}
+
+	/**
+	 * Create a Package for each Package.
+	 */
+	top relation PackageToPackage
+	{
+		n : String;
+		domain uml p1:Package {
+			name = n
+		};	
+		enforce domain java p2:Package {
+			name = n
+		};
+	}
+
+	/**
+	 * Create a Class for each isClass() class.
+	 */
+	top relation ClassToClass
+	{
+		n : String;
+		domain uml c1:Class {
+			containingPackage = p1:Package{},
+			name = n
+		}
+		{isClass(c1)};		
+		enforce domain java c2:Class {
+			containingPackage = p2:Package{},
+			name = n
+		};
+		when {
+			PackageToPackage(p1, p2);
+		}
+	}
+
+	/**
+	 * Create an Interface for each non-isClass() class.
+	 */
+	top relation ClassToInterface
+	{
+		n : String;
+		domain uml c1:Class {
+			containingPackage = p1:Package{},
+			name = n
+		}
+		{not isClass(c1)};		
+		enforce domain java c2:Interface {
+			containingPackage = p2:Package{},
+			name = n
+		};
+		when {
+			PackageToPackage(p1, p2);
+		}
+	}
+
+	/**
+	 * Define a Class::extends relationship for each class with a super-class
+	 */
+	top relation ClassExtends
+	{
+		c1sup: umlmmmi::Class;
+		c2sup: javammsi::Class;
+		domain uml c1:Class {
+			supers = s1:Set(Class){c1sup ++ _}
+		};
+		enforce domain java c2:Class {
+			extends = s2:Set(Class){c2sup ++ _}
+		};
+		when {
+			ClassToClass(c1, c2);
+			ClassToClass(c1sup, c2sup);
+		}
+	}
+
+	/**
+	 * Define a Class::implements relationship for each class with a super-interface
+	 */
+	top relation ClassImplements
+	{
+		c1sup: umlmmmi::Class;
+		c2sup: javammsi::Interface;
+		domain uml c1:Class {
+			supers = s1:Set(Class){c1sup ++ _}
+		};
+		enforce domain java c2:Class {
+			implements = s2:Set(Interface){c2sup ++ _}
+		};
+		when {
+			ClassToClass(c1, c2);
+			ClassToInterface(c1sup, c2sup);
+		}
+	}
+
+	/**
+	 * Define a Interface::extends relationship for each interface with a super-interface
+	 */
+	top relation InterfaceExtends
+	{
+		c1sup: umlmmmi::Class;
+		c2sup: javammsi::Interface;
+		domain uml c1:Class {
+			supers = s1:Set(Class){c1sup ++ _}
+		};
+		enforce domain java c2:Interface {
+			extends = s2:Set(Interface){c2sup ++ _}
+		};
+		when {
+			ClassToInterface(c1, c2);
+			ClassToInterface(c1sup, c2sup);
+		}
+	}
+}
