@@ -1216,6 +1216,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			mapWhenPattern();
 			mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);
 			mapEnforcedDomainPatterns();
+			if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duploication/irregularity
+				for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
+					variablesAnalysis.addTraceNavigationAssignment(rMemberVariable, true);
+				}
+			}
 			mapRelationImplementation();
 		}
 
