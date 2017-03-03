@@ -210,6 +210,7 @@ public class RegionUtil extends QVTscheduleUtil
 	//	checked as predicates using equals edges.
 	//
 	public static @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
+		System.err.println("Unexpected " + QVTscheduleConstants.EQUALS_NAME + " edge from " + sourceNode + " to " + targetNode);
 		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
 	}
 
