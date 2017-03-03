@@ -55,12 +55,20 @@ public class QVTrelationValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.qvtd.pivot.qvtrelation";
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parts Includes Container' of 'Key'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int KEY__VALIDATE_PARTS_INCLUDES_CONTAINER = 1;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Identifies Is Not Abstract' of 'Key'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT = 1;
+	public static final int KEY__VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT = 2;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Identifies Is AUsed Package Class' of 'Key'.
@@ -68,7 +76,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS = 2;
+	public static final int KEY__VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS = 3;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate No Super Keys' of 'Key'.
@@ -76,7 +84,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_NO_SUPER_KEYS = 3;
+	public static final int KEY__VALIDATE_NO_SUPER_KEYS = 4;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Identifies Is Unique' of 'Key'.
@@ -84,7 +92,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_IDENTIFIES_IS_UNIQUE = 4;
+	public static final int KEY__VALIDATE_IDENTIFIES_IS_UNIQUE = 5;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Opposite Parts Have Opposites' of 'Key'.
@@ -92,7 +100,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES = 5;
+	public static final int KEY__VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Opposite Parts Are Opposite Parts' of 'Key'.
@@ -100,7 +108,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS = 6;
+	public static final int KEY__VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parts Are Parts' of 'Key'.
@@ -108,7 +116,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_PARTS_ARE_PARTS = 7;
+	public static final int KEY__VALIDATE_PARTS_ARE_PARTS = 8;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parts Are Unique' of 'Key'.
@@ -116,7 +124,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int KEY__VALIDATE_PARTS_ARE_UNIQUE = 8;
+	public static final int KEY__VALIDATE_PARTS_ARE_UNIQUE = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Domains Are Relation Domains' of 'Relation'.
@@ -124,7 +132,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION__VALIDATE_DOMAINS_ARE_RELATION_DOMAINS = 9;
+	public static final int RELATION__VALIDATE_DOMAINS_ARE_RELATION_DOMAINS = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Transformation Is Relational Transformation' of 'Relation'.
@@ -132,7 +140,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION__VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION = 10;
+	public static final int RELATION__VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Argument Count' of 'Relation Call Exp'.
@@ -140,7 +148,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_CALL_EXP__VALIDATE_MATCHING_ARGUMENT_COUNT = 11;
+	public static final int RELATION_CALL_EXP__VALIDATE_MATCHING_ARGUMENT_COUNT = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Relation Domain Assignments Are Unique' of 'Relation Domain'.
@@ -148,7 +156,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 12;
+	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Relation Domain Assignment'.
@@ -156,7 +164,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 13;
+	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rules Are Relations' of 'Relational Transformation'.
@@ -164,7 +172,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 14;
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 15;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -172,7 +180,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 14;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 15;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -281,6 +289,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(key, diagnostics, context);
+		if (result || diagnostics != null) result &= validateKey_validatePartsIncludesContainer(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validateKey_validateIdentifiesIsNotAbstract(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validateKey_validateIdentifiesIsAUsedPackageClass(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validateKey_validateNoSuperKeys(key, diagnostics, context);
@@ -290,6 +299,16 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateKey_validatePartsAreParts(key, diagnostics, context);
 		if (result || diagnostics != null) result &= validateKey_validatePartsAreUnique(key, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validatePartsIncludesContainer constraint of '<em>Key</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateKey_validatePartsIncludesContainer(Key key, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return key.validatePartsIncludesContainer(diagnostics, context);
 	}
 
 	/**

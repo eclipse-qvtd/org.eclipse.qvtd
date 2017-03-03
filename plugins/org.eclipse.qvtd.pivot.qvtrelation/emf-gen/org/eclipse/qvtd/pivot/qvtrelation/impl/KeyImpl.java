@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -219,6 +220,151 @@ public class KeyImpl extends ElementImpl implements Key {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.KEY__TRANSFORMATION, newTransformation, newTransformation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validatePartsIncludesContainer(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv PartsIncludesContainer:
+		 *   let severity : Integer[1] = 'Key::PartsIncludesContainer'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : Boolean[?] = part.opposite?->exists(isComposite) or
+		 *         oppositePart->exists(isComposite)
+		 *       in
+		 *         'Key::PartsIncludesContainer'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_PartsIncludesContainer);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_result;
+			try {
+				/*@Caught*/ @NonNull Object CAUGHT_exists;
+				try {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ java.util.@NonNull List<Property> part = this.getPart();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
+					/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Property);
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							collect = accumulator;
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (Property)ITERATOR__1.next();
+						/**
+						 * opposite
+						 */
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = _1.getOpposite();
+						//
+						accumulator.add(opposite);
+					}
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue safe_null_sources = (BagValue)CollectionExcludingOperation.INSTANCE.evaluate(collect, (Object)null);
+					/*@Thrown*/ java.lang.@Nullable Object accumulator_0 = ValueUtil.FALSE_VALUE;
+					@NonNull Iterator<Object> ITERATOR__1_0 = safe_null_sources.iterator();
+					/*@Thrown*/ boolean exists;
+					while (true) {
+						if (!ITERATOR__1_0.hasNext()) {
+							if (accumulator_0 == ValueUtil.FALSE_VALUE) {
+								exists = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator_0;
+							}
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1_0 = (Property)ITERATOR__1_0.next();
+						/**
+						 * isComposite
+						 */
+						final /*@NonInvalid*/ boolean isComposite = _1_0.isIsComposite();
+						//
+						if (isComposite == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
+							exists = ValueUtil.TRUE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (isComposite == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
+							;															// Carry on
+						}
+						else {															// Impossible badly typed result
+							accumulator_0 = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
+						}
+					}
+					CAUGHT_exists = exists;
+				}
+				catch (Exception e) {
+					CAUGHT_exists = ValueUtil.createInvalidValue(e);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_exists_0;
+				try {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+					/*@Thrown*/ java.lang.@Nullable Object accumulator_1 = ValueUtil.FALSE_VALUE;
+					@NonNull Iterator<Object> ITERATOR__1_1 = BOXED_oppositePart.iterator();
+					/*@Thrown*/ boolean exists_0;
+					while (true) {
+						if (!ITERATOR__1_1.hasNext()) {
+							if (accumulator_1 == ValueUtil.FALSE_VALUE) {
+								exists_0 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator_1;
+							}
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1_1 = (Property)ITERATOR__1_1.next();
+						/**
+						 * isComposite
+						 */
+						final /*@NonInvalid*/ boolean isComposite_0 = _1_1.isIsComposite();
+						//
+						if (isComposite_0 == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
+							exists_0 = ValueUtil.TRUE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (isComposite_0 == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
+							;															// Carry on
+						}
+						else {															// Impossible badly typed result
+							accumulator_1 = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
+						}
+					}
+					CAUGHT_exists_0 = exists_0;
+				}
+				catch (Exception e) {
+					CAUGHT_exists_0 = ValueUtil.createInvalidValue(e);
+				}
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_exists, CAUGHT_exists_0);
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_PartsIncludesContainer, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
 	}
 
 	/**
@@ -1020,6 +1166,8 @@ public class KeyImpl extends ElementImpl implements Key {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case QVTrelationPackage.KEY___VALIDATE_PARTS_INCLUDES_CONTAINER__DIAGNOSTICCHAIN_MAP:
+				return validatePartsIncludesContainer((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTrelationPackage.KEY___VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT__DIAGNOSTICCHAIN_MAP:
 				return validateIdentifiesIsNotAbstract((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTrelationPackage.KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP:

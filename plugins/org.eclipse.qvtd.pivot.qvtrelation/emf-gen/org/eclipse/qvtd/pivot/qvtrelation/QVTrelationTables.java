@@ -98,6 +98,7 @@ public class QVTrelationTables
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Key_c_c_OppositePartsHaveOpposites = "Key::OppositePartsHaveOpposites";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Key_c_c_PartsAreParts = "Key::PartsAreParts";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Key_c_c_PartsAreUnique = "Key::PartsAreUnique";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Key_c_c_PartsIncludesContainer = "Key::PartsIncludesContainer";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelationCallExp_c_c_MatchingArgumentCount = "RelationCallExp::MatchingArgumentCount";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelationDomainAssignment_c_c_CompatibleTypeForValue = "RelationDomainAssignment::CompatibleTypeForValue";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelationDomain_c_c_RelationDomainAssignmentsAreUnique = "RelationDomain::RelationDomainAssignmentsAreUnique";

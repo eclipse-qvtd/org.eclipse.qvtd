@@ -5,6 +5,9 @@ package qvtrelation
 context Key
 --def: resolvedParts : Set(ocl::Property) = part->union(oppositePart.opposite)
 
+inv PartsIncludesContainer:			-- see Bugzilla 512532 discussion
+	part.opposite?->exists(isComposite) or oppositePart->exists(isComposite)
+
 inv IdentifiesIsNotAbstract:			-- see Bugzilla 512532 discussion
 	not identifies.isAbstract
 
