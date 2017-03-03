@@ -37,6 +37,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateUtil;
 
@@ -168,6 +170,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull Relation rRelation) {
 		return ClassUtil.nullFree(rRelation.getVariable());
+	}
+
+	public static @NonNull ObjectTemplateExp getOwningObjectTemplateExp(@NonNull  PropertyTemplateItem rPropertyTemplateItem) {
+		return ClassUtil.nonNullState(rPropertyTemplateItem.getObjContainer());
 	}
 
 	public static @NonNull Relation getReferredRelation(@NonNull RelationCallExp rInvocation) {

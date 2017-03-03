@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -65,29 +64,53 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  */
 /*public*/ class VariablesAnalysis extends QVTcoreHelper
 {
+	//	public static void gatherBoundVariables(@NonNull Map<@NonNull Variable, @Nullable TemplateExp> boundVariables, @NonNull Iterable<@NonNull ? extends Element> asRoots) {
+	//		for (Element asRoot : asRoots) {
+	//			gatherBoundVariables(boundVariables, asRoot);
+	//		}
+	//	}
 	/**
-	 * Return all variables bound to a single variable within the composition tree of each of asRoots.
+	 * Return a Map from each bound variable to the TemplateExp for which it is the TempateExp.getBindsTo().
 	 */
-	public static void gatherBoundVariables(@NonNull Map<@NonNull Variable, @Nullable TemplateExp> boundVariables, @NonNull Iterable<@NonNull ? extends Element> asRoots) {
-		for (Element asRoot : asRoots) {
-			gatherBoundVariables(boundVariables, asRoot);
-		}
-	}
-	public static void gatherBoundVariables(@NonNull Map<@NonNull Variable, @Nullable TemplateExp> boundVariables, @NonNull Element asRoot) {
+	public static @NonNull Map<@NonNull Variable, @NonNull TemplateExp> gatherBoundVariables(@NonNull Element asRoot) {
+		Map<@NonNull Variable, @NonNull TemplateExp> boundVariables = new HashMap<>();
 		for (EObject eObject : new TreeIterable(asRoot, true)) {
 			if (eObject instanceof TemplateExp) {
-				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();				// ?? CollectionTemplateExp collection is not bound
-				if (bindsTo != null) {
-					boundVariables.put(bindsTo, (TemplateExp)eObject);
-				}
-				if (eObject instanceof CollectionTemplateExp) {						// ?? VariableExp members are bound
-					Variable rest = ((CollectionTemplateExp)eObject).getRest();		// ?? not bound
-					if ((rest != null) && !rest.isIsImplicit()) {
-						boundVariables.put(rest, null);
+				Variable bindsTo = QVTrelationUtil.getBindsTo((TemplateExp)eObject);
+				TemplateExp oldTemplateExp = boundVariables.put(bindsTo, (TemplateExp)eObject);
+				assert oldTemplateExp == null;
+			}
+		}
+		return boundVariables;
+	}
+
+	/**
+	 * Return a Map from each member variable to the CollectionTemplateExp's for which it is a CollectionTempateExp.member.referredVariable.
+	 */
+	public static @Nullable Map<@NonNull Variable, @NonNull List<@NonNull CollectionTemplateExp>> gatherMemberVariables(@NonNull Element asRoot) {
+		Map<@NonNull Variable, @NonNull List<@NonNull CollectionTemplateExp>> memberVariable2collectionTemplateExps = null;
+		for (EObject eObject : new TreeIterable(asRoot, true)) {
+			if (eObject instanceof CollectionTemplateExp) {
+				CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)eObject;
+				for (@NonNull OCLExpression member : QVTrelationUtil.getOwnedMembers(collectionTemplateExp)) {
+					if (member instanceof VariableExp) {
+						Variable memberVariable = QVTrelationUtil.getReferredVariable((VariableExp)member);
+						if (memberVariable2collectionTemplateExps == null) {
+							memberVariable2collectionTemplateExps = new HashMap<>();
+						}
+						List<@NonNull CollectionTemplateExp> collectionTemplateExps = memberVariable2collectionTemplateExps.get(memberVariable);
+						if (collectionTemplateExps == null) {
+							collectionTemplateExps = new ArrayList<>();
+							memberVariable2collectionTemplateExps.put(memberVariable, collectionTemplateExps);
+						}
+						if (!collectionTemplateExps.contains(collectionTemplateExp)) {
+							collectionTemplateExps.add(collectionTemplateExp);
+						}
 					}
 				}
 			}
 		}
+		return memberVariable2collectionTemplateExps;
 	}
 
 	/**
@@ -114,7 +137,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				if (bindsTo != null) {
 					referredVariables.add(bindsTo);
 				}
-				if (eObject instanceof CollectionTemplateExp) {
+				if (eObject instanceof CollectionTemplateExp) {				// Member variable are contained VariableExp's
 					Variable rest = ((CollectionTemplateExp)eObject).getRest();
 					if ((rest != null) && !rest.isIsImplicit()) {
 						referredVariables.add(rest);
@@ -173,6 +196,27 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
+	/**
+	 * Return a Map from each rest variable to the CollectionTemplateExp for which it is a CollectionTempateExp.rest.
+	 */
+	public static @Nullable Map<@NonNull Variable, @NonNull CollectionTemplateExp> gatherRestVariables(@NonNull Element asRoot) {
+		Map<@NonNull Variable, @NonNull CollectionTemplateExp> restVariable2collectionTemplateExp = null;
+		for (EObject eObject : new TreeIterable(asRoot, true)) {
+			if (eObject instanceof CollectionTemplateExp) {
+				CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)eObject;
+				Variable rest = collectionTemplateExp.getRest();
+				if (rest != null) {
+					if (restVariable2collectionTemplateExp == null) {
+						restVariable2collectionTemplateExp = new HashMap<>();
+					}
+					CollectionTemplateExp oldCollectionTemplateExp = restVariable2collectionTemplateExp.put(rest, collectionTemplateExp);
+					assert oldCollectionTemplateExp == null;
+				}
+			}
+		}
+		return restVariable2collectionTemplateExp;
+	}
+
 	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
 	/**
 	 * Return the variables that are used by more than one domain of the relation and so must be middle variables.
@@ -180,7 +224,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	public static @NonNull Set<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
 		Set<@NonNull Variable> rSomeDomainVariables = new HashSet<>();
 		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<>();
-		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 			Set<@NonNull Variable> rThisDomainVariables = new HashSet<>();
 			VariablesAnalysis.gatherReferredVariables(rThisDomainVariables, rDomain);
 			for (@NonNull Variable rVariable : rThisDomainVariables) {

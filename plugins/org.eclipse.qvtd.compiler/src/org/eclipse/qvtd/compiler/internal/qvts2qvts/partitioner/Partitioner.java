@@ -280,6 +280,11 @@ public class Partitioner
 					}
 				}
 			}
+			else if (node.isOperation()) {
+				if (node.isRealized()) {
+					realizedOutputNodes.add(node);
+				}
+			}
 		}
 	}
 

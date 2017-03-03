@@ -19,15 +19,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
+/**
+ * TopLevelRelationToMappingForEnforcement refines AbstractQVTr2QVTcRelations to support conversion of a top level relation.
+ */
 /*public*/ class TopLevelRelationToMappingForEnforcement extends AbstractQVTr2QVTcRelations
 {
+	/**
+	 * TopEnforceableRelationDomain2CoreMapping refines AbstractEnforceableRelationDomain2CoreMapping to support conversion of a top level enforced domain.
+	 */
 	protected class TopEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
 	{
+		/**
+		 * TopOtherRelationDomain2CoreDomain refines AbstractOtherRelationDomain2CoreDomain to support conversion of a top level not-enforced domain.
+		 */
 		protected class TopOtherRelationDomain2CoreDomain extends AbstractOtherRelationDomain2CoreDomain
 		{
 			public TopOtherRelationDomain2CoreDomain(@NonNull RelationDomain rOtherDomain) {
@@ -65,12 +73,15 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 			} */
 		}
 
-		private @NonNull List<@NonNull RealizedVariable> cEnforcedRootVariables;	// The mapping template expression variables (the realized variable enforced by the domain pattern)
-		// except when arguments
+		/**
+		 * The mapping template expression variables (the realized variables enforced by the domain pattern)
+		 *  excludes when arguments
+		 */
+		//		private @NonNull List<@NonNull RealizedVariable> cEnforcedRootVariables;
 
 		public TopEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
-			this.cEnforcedRootVariables = new ArrayList<>(rEnforcedRootVariables.size());
+			//			this.cEnforcedRootVariables = new ArrayList<>(rEnforcedRootVariables.size());
 			/*			for (@NonNull Variable rEnforcedRootVariable : rEnforcedRootVariables) {
 				if (!rWhenVariables.contains(rEnforcedRootVariable)) {
 					Variable realizedVariable = mapRealizedVariable(rEnforcedRootVariable);
@@ -109,7 +120,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		@Override
 		protected void synthesize() throws CompilerChainException {
 			super.synthesize();
-			cEnforcedBottomPattern.getRealizedVariable().addAll(cEnforcedRootVariables);	// FIXME redundant ??
+			//			cEnforcedBottomPattern.getRealizedVariable().addAll(cEnforcedRootVariables);	// FIXME redundant ??
 		}
 	}
 
@@ -119,7 +130,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 	}
 
 	/**
-	 * Return the list of mappings, one for each possible enforced domain.
+	 * Return the list of conversions, one for each possible enforced domain.
 	 */
 	@Override
 	protected @NonNull List<@NonNull TopEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException {
