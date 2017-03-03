@@ -500,10 +500,45 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.SYNTHESIS.setState(true);
 		MyQVT myQVT = new MyQVT("mitosi");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("mitosi", "MiToSiSimple.qvtr", "java",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/MiToSiSimple", false);
+			//
+			//			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 8);
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("uml", "transportuml.xml");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("java", "transportjava_CG.xml", "transportjava.xml", null);
+			//
+			//	        myQVT.createGeneratedExecutor(txClass);
+			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+			//	    	myQVT.executeTransformation();
+			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_MiToSiSimpleWithKeys_CG() throws Exception {
+		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		MyQVT myQVT = new MyQVT("mitosi");
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("mitosi", "MiToSiSimpleWithKeys.qvtr", "java",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/MiToSiSimpleWithKeys", false);
+			//			Class<? extends Transformer> txClass = MiToSiSimpleWithKeys.class;
 			//
 			//			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
 			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
