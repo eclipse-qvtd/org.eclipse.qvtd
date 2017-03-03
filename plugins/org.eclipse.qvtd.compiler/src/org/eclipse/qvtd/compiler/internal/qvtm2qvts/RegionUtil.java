@@ -366,6 +366,13 @@ public class RegionUtil extends QVTscheduleUtil
 		return edge;
 	}
 
+	public static @NonNull Node createPredicatedStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
+		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
+		node.initialize(Role.PREDICATED, region, getName(typedNode), getClassDatum(typedNode));
+		node.setMatched(isMatched);
+		return node;
+	}
+
 	public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		Role nodeRole = Role.REALIZED;
 		return createPatternNode(nodeRole, sourceNode, source2targetProperty, sourceNode.isMatched());
@@ -430,14 +437,6 @@ public class RegionUtil extends QVTscheduleUtil
 		node.initialize(stepNodeRole, region, name, scheduleManager.getClassDatum(callExp));
 		node.setMatched(isMatched);
 		node.addTypedElement(callExp);
-		return node;
-	}
-
-	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
-		Role stepNodeRole = getNodeRole(typedNode);
-		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(stepNodeRole, region, getName(typedNode), getClassDatum(typedNode));
-		node.setMatched(isMatched);
 		return node;
 	}
 

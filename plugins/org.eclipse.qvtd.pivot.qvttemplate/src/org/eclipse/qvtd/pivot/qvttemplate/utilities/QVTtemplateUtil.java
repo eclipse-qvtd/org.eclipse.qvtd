@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -70,5 +71,9 @@ public class QVTtemplateUtil extends QVTbaseUtil
 
 	public static @NonNull Property getReferredProperty(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
 		return ClassUtil.nonNullState(rPropertyTemplateItem.getReferredProperty());
+	}
+
+	public static @NonNull Variable getRest(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
+		return ClassUtil.nonNullState(rCollectionTemplateExp.getRest());
 	}
 }

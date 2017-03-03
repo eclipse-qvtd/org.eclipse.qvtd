@@ -47,6 +47,9 @@ public class ThisVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	@Override
+	public void setOtherReferred(@NonNull CoreDomain cOtherDomain) {}
+
+	@Override
 	public void setWhen(@NonNull CoreDomain cWhenDomain) {}
 
 	@Override
