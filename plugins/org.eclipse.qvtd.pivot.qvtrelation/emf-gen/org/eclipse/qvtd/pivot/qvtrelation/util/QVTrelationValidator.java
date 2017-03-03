@@ -388,6 +388,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_validateDomainsAreRelationDomains(relation, diagnostics, context);
@@ -543,6 +544,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateContextTypeIsTransformation(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateModelParameterIsUnique(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateNoExtendsCycle(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationalTransformation_validateRulesAreRelations(relationalTransformation, diagnostics, context);
 		return result;
 	}

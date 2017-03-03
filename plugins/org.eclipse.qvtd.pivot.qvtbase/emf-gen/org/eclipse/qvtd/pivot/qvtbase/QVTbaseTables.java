@@ -93,11 +93,13 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Function_c_c_ReturnTypeIsQueryType = "Function::ReturnTypeIsQueryType";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Predicate_c_c_ConditionIsBoolean = "Predicate::ConditionIsBoolean";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_DomainNameIsUnique = "Rule::DomainNameIsUnique";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_NoOverridesCycle = "Rule::NoOverridesCycle";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_OverridesRuleIsExtendedRule = "Rule::OverridesRuleIsExtendedRule";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_OverridesRuleOverridesAllDomains = "Rule::OverridesRuleOverridesAllDomains";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ContextTypeIsTransformation = "Transformation::ContextTypeIsTransformation";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ExtendedTypedModelIsExtended = "Transformation::ExtendedTypedModelIsExtended";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ModelParameterIsUnique = "Transformation::ModelParameterIsUnique";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_NoExtendsCycle = "Transformation::NoExtendsCycle";
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Domain = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Domain);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Rule = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Rule);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Domain = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Domain);

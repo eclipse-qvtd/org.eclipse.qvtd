@@ -1269,13 +1269,22 @@ public interface QVTbasePackage extends EPackage {
 	int RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate No Overrides Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+	int RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
@@ -1284,7 +1293,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
+	int RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Rule</em>' class.
@@ -1293,7 +1302,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
+	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -1657,13 +1666,22 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS_OPERATION_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Validate No Extends Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION___VALIDATE_NO_EXTENDS_CYCLE__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS_OPERATION_COUNT + 5;
+
+	/**
 	 * The number of operations of the '<em>Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 5;
+	int TRANSFORMATION_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
@@ -2079,6 +2097,16 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateNoOverridesCycle(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Overrides Cycle</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate No Overrides Cycle</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateNoOverridesCycle(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRule__ValidateNoOverridesCycle__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleIsExtendedRule(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overrides Rule Is Extended Rule</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2212,6 +2240,16 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#validateNoExtendsCycle(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Extends Cycle</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate No Extends Cycle</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#validateNoExtendsCycle(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel <em>Typed Model</em>}'.
@@ -2520,6 +2558,14 @@ public interface QVTbasePackage extends EPackage {
 		EOperation RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate No Overrides Cycle</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateNoOverridesCycle__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Overrides Rule Is Extended Rule</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2624,6 +2670,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate No Extends Cycle</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TRANSFORMATION___VALIDATE_NO_EXTENDS_CYCLE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
