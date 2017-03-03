@@ -65,6 +65,10 @@
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateDomainNameIsUnique/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateDomainNameIsUnique/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateNoOverridesCycle">
+        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateNoOverridesCycle/diagnostics"/>
+        <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateNoOverridesCycle/context"/>
+      </genOperations>
       <genOperations ecoreOperation="QVTbase.ecore#//Rule/validateOverridesRuleIsExtendedRule">
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridesRuleIsExtendedRule/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Rule/validateOverridesRuleIsExtendedRule/context"/>
@@ -97,6 +101,10 @@
       <genOperations ecoreOperation="QVTbase.ecore#//Transformation/validateModelParameterIsUnique">
         <genParameters ecoreParameter="QVTbase.ecore#//Transformation/validateModelParameterIsUnique/diagnostics"/>
         <genParameters ecoreParameter="QVTbase.ecore#//Transformation/validateModelParameterIsUnique/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTbase.ecore#//Transformation/validateNoExtendsCycle">
+        <genParameters ecoreParameter="QVTbase.ecore#//Transformation/validateNoExtendsCycle/diagnostics"/>
+        <genParameters ecoreParameter="QVTbase.ecore#//Transformation/validateNoExtendsCycle/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTbase.ecore#T-qvtbase-TypedModel">

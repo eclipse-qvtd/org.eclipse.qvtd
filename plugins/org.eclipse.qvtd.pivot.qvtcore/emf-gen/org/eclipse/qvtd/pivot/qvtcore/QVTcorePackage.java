@@ -1708,6 +1708,15 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate No Overrides Cycle</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

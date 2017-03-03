@@ -655,6 +655,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateContextTypeIsTransformation(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateModelParameterIsUnique(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateNoExtendsCycle(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTransformation_validateallRulesAreMappings(imperativeTransformation, diagnostics, context);
 		return result;
 	}
@@ -765,6 +766,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateNameIsNotNull(mapping, diagnostics, context);

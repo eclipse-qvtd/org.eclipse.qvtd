@@ -5,16 +5,18 @@ package qvtbase
 
 context Domain
 inv NameIsTypedModelName:
-typedModel <> null implies name = typedModel.name
+	typedModel <> null implies name = typedModel.name
+
 inv TypedModelIsTransformationModelParameter:
-oclContainer().oclIsKindOf(Transformation) and typedModel <> null implies
-oclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)
+	oclContainer().oclIsKindOf(Transformation) and typedModel <> null implies
+	oclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)
 
 context Function
 inv ParametersAreFunctionParameter:
-ownedParameters->forAll(oclIsKindOf(FunctionParameter))
+	ownedParameters->forAll(oclIsKindOf(FunctionParameter))
+
 inv ReturnTypeIsQueryType:
-queryExpression <> null implies type = queryExpression.type
+	queryExpression <> null implies type = queryExpression.type
 
 context Predicate
 inv ConditionIsBoolean:
@@ -22,24 +24,34 @@ conditionExpression.type = Boolean
 
 context Rule
 inv DomainNameIsUnique:
-domain->isUnique(name)
+	domain->isUnique(name)
+
+inv NoOverridesCycle:
+	overrides->closure(overrides)->excludes(self)
+
 inv OverridesRuleIsExtendedRule:
-overrides <> null and transformation <> null implies
-let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)
-in extendedRules->includes(overrides)
+	overrides <> null and transformation <> null implies
+	let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)
+	in extendedRules->includes(overrides)
+
 inv OverridesRuleOverridesAllDomains:
-overrides <> null implies
-overrides.domain->forAll(od | self.domain.name->includes(od.name))
+	overrides <> null implies
+	overrides.domain->forAll(od | self.domain.name->includes(od.name))
 
 context Transformation
 inv ContextTypeIsTransformation:
-ownedContext <> null implies ownedContext.type = self
+	ownedContext <> null implies ownedContext.type = self
+
 inv ExtendedTypedModelIsExtended:
-_extends <> null implies
-_extends.modelParameter->forAll(etm |
-	self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)
-)
+	_extends <> null implies
+	_extends.modelParameter->forAll(etm |
+		self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)
+	)
+	
 inv ModelParameterIsUnique:
-modelParameter->isUnique(name)
+	modelParameter->isUnique(name)
+
+inv NoExtendsCycle:
+	_extends->closure(_extends)->excludes(self)
 
 endpackage
