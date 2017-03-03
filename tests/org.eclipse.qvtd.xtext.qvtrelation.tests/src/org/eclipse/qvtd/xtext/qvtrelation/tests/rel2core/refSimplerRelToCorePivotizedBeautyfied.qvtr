@@ -41,7 +41,7 @@ transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, c
         r.domain->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
             if (vars->isEmpty())
             then
-                vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+                vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
             else
                 vars->intersection(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
             endif
@@ -56,7 +56,7 @@ transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, c
         r.domain->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
             if (vars->isEmpty())
             then
-                vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+                vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
             else
                 vars->intersection(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
             endif
@@ -65,7 +65,7 @@ transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, c
     
     -- Get variables occuring in an ocl expression
     -- Note: this function is not complete! It needs to be completed for other expressions
-    query getVarsOfExp(e:pivotocl::OCLExpression):Set(pivotocl::Variable)
+    query getVarsOfExp(e:pivotocl::OCLExpression[1]):Set(pivotocl::Variable)
     {
         -- Walk the expr tree of the OclExpression and
         -- collect the variables used in those expressions
@@ -413,7 +413,7 @@ transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, c
         mbVars: Set(pivotocl::Variable);
         mt: qvtbase::Transformation;
         oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(pivotocl::Variable) = Set{} | 
-            	vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+            	vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
             );
         predicatesWithVarBindings = filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
         predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
@@ -595,7 +595,7 @@ transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, c
         domainBottomUnSharedVars = (domainVars - whenVars - sharedDomainVars)->excluding(tev);
         domainTopVars = domainVars->intersection(whenVars)->including(tev);
         oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(pivotocl::Variable) = Set{} | 
-            	vars->union(d.pattern.bindsTo)
+            	vars->union(d.pattern.bindsTo->asSet())
             );
         predicatesWithVarBindings = filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
         predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
