@@ -1132,7 +1132,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		// RPredicateSetToMBPredicateSet
-		protected void mapWhereBottomPredicates(@NonNull Iterable<@NonNull Predicate> rWherePredicates) {
+		protected void mapWhereBottomPredicates(@NonNull Iterable<@NonNull Predicate> rWherePredicates) throws CompilerChainException {
 			for (@NonNull Predicate rWherePredicate : rWherePredicates) {
 				OCLExpression rExpression = QVTrelationUtil.getConditionExpression(rWherePredicate);
 				variablesAnalysis.addPredicate(cMiddleBottomPattern, mapExpression(rExpression));

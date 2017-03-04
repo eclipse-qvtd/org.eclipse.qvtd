@@ -23,6 +23,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.IteratorVariable;
+import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -283,8 +285,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	/**
 	 * Add the predicate "cLeftExpression = cRightExpression" to cCorePattern.
+	 * @throws CompilerChainException
 	 */
-	protected void addConditionPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cLeftExpression, @NonNull OCLExpression cRightExpression) {
+	protected void addConditionPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cLeftExpression, @NonNull OCLExpression cRightExpression) throws CompilerChainException {
 		OperationCallExp eTerm = createOperationCallExp(cLeftExpression, "=", cRightExpression);
 		addPredicate(cCorePattern, eTerm);
 	}
@@ -331,7 +334,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		addConditionPredicate(cCorePattern, cNavigationExp, cExpression);
 	}
 
-	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) {
+	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) throws CompilerChainException {
 		assert cMapping == QVTcoreUtil.getContainingMapping(cExpectedCorePattern);
 		QVTr2QVTc.SYNTHESIS.println("  addPredicate " + cExpression);
 		Set<@NonNull Variable> cReferredVariables = new HashSet<>();
@@ -500,7 +503,15 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		VariableAnalysis analysis = rVariable2analysis.get(relationVariable);
 		if (analysis == null) {
 			assert QVTbaseUtil.basicGetContainingTransformation(relationVariable) instanceof RelationalTransformation;
-			analysis = new RelationVariableAnalysis(this, relationVariable);
+			if (relationVariable instanceof IteratorVariable) {
+				analysis = new IteratorVariableAnalysis(this, (IteratorVariable)relationVariable);
+			}
+			else if (relationVariable instanceof LetVariable) {
+				analysis = new LetVariableAnalysis(this, (LetVariable)relationVariable);
+			}
+			else {
+				analysis = new RelationVariableAnalysis(this, relationVariable);
+			}
 			rVariable2analysis.put(relationVariable, analysis);
 		}
 		return analysis;
