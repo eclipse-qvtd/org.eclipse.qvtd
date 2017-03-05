@@ -533,9 +533,20 @@ public class Partitioner
 					regions.add(createSpeculationRegion());
 					regions.add(createSpeculatedRegion());
 				}
+				//
+				//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
+				//
 				for (@NonNull Edge outputEdge : realizedOutputEdges) {
 					if (!hasRealizedEdge(outputEdge)) {
 						regions.add(createAssignmentRegion(outputEdge, regions.size()));
+					}
+				}
+				//
+				//	Create an AssignmentRegion for each still to-be-realized edge to an output.
+				//
+				for (@NonNull Edge edge : realizedEdges) {
+					if (!hasRealizedEdge(edge)) {
+						regions.add(createAssignmentRegion(edge, regions.size()));
 					}
 				}
 				check();
