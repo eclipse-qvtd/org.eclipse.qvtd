@@ -47,6 +47,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -775,6 +776,12 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		if (e instanceof InvocationFailedException) {		// Normal case - premature access needs a retry later
 			throw (InvocationFailedException)e;
 		}
+		else if (e instanceof InvalidEvaluationException) {	// Real errors are fatal
+			if (debugExceptions) {
+				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+			}
+			throw (InvalidEvaluationException)e;
+		}
 		else if (e instanceof AssertionError) {				// Debug case - assertion errors are diagnostic not catastrophic
 			if (debugExceptions) {
 				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
@@ -806,8 +813,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				}
 			}
 		}
-		//		throw new RuntimeException(e);
-		return false;
+		if (e instanceof Exception) {
+			throw new InvalidEvaluationException((Exception)e);
+		}
+		throw new InvalidEvaluationException(new RuntimeException(e));
 	}
 
 	/*	protected void install(@NonNull InvocationConstructor constructor, int consumedConnections, @NonNull Connection @NonNull ... connections) {

@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
@@ -127,6 +128,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -255,6 +257,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.append(");\n");
 		}
+	}
+
+	@Override		// FIXME promote to OCL
+	protected void appendGuardFailure(@NonNull CGGuardExp cgGuardExp) {
+		js.append("throw new ");
+		js.appendClassReference(InvalidEvaluationException.class);
+		js.append("(");
+		js.appendString("Null " + cgGuardExp.getMessage());
+		js.append(");\n");
 	}
 
 	protected void appendModelIndex(@Nullable CGTypedModel cgTypedModel) {
@@ -1173,27 +1184,27 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgBody = cgMapping.getOwnedBody();
 		js.append(" {\n");
 		js.pushIndentation(null);
-		if (cgBody.isInvalid()) {
-			js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", ");
-			js.appendValueName(cgBody);
-			js.append(");\n");
+		//		if (cgBody.isInvalid()) {
+		//			js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", ");
+		//			js.appendValueName(cgBody);
+		//			js.append(");\n");
+		//		}
+		//		else {
+		//			js.append("try {\n");
+		//			js.pushIndentation(null);
+		if (!cgBody.isInlined()) {
+			cgBody.accept(this);
 		}
-		else {
-			js.append("try {\n");
-			js.pushIndentation(null);
-			if (!cgBody.isInlined()) {
-				cgBody.accept(this);
-			}
-			js.append("return ");
-			js.appendValueName(cgBody);
-			js.append(";\n");
-			js.popIndentation();
-			js.append("} catch (Throwable e) {\n");
-			js.pushIndentation(null);
-			js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
-			js.popIndentation();
-			js.append("}\n");
-		}
+		js.append("return ");
+		js.appendValueName(cgBody);
+		js.append(";\n");
+		//			js.popIndentation();
+		//			js.append("} catch (Throwable e) {\n");
+		//			js.pushIndentation(null);
+		//			js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
+		//			js.popIndentation();
+		//			js.append("}\n");
+		//		}
 		js.popIndentation();
 		js.append("}\n");
 	}
