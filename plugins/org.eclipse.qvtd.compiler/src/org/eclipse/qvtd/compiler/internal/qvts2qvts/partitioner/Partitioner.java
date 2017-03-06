@@ -38,77 +38,76 @@ import com.google.common.collect.Sets;
 
 public class Partitioner
 {
-	/*	private static @NonNull Iterable<@NonNull NavigationEdge> getNavigableEdges(@NonNull Iterable<@NonNull NavigationEdge> edges) {
-		List<@NonNull NavigationEdge> navigableEdges = new ArrayList<>();
-		for (@NonNull NavigationEdge edge : edges) {		// cf NavigationForestBuilder addEdge
-			if (edge.isSecondary()) {}
-			else if (edge == Role.REALIZED) {
-				if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-					navigableEdges.add(edge);
-				}
-			}
-			else if (!edge.isNavigable()) {}
-			else if (edge.isCast()) {}
-			else {
-				assert !edge.isExpression();
-				assert !edge.isComputation();
-				Node targetNode = edge.getTarget();
-				if (!targetNode.isNull()) {
-					navigableEdges.add(edge);
-				}
-			}
-		}
-		return navigableEdges;
-	} */
-
-	/*	private static @NonNull Iterable<@NonNull Node> getTraceNodes(@NonNull Iterable<@NonNull Node> nodes) {
-		List<@NonNull Node> traceNodes = new ArrayList<>();
-		for (@NonNull Node node : nodes) {
-			if (node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-				if (node == Role.REALIZED) {
-					traceNodes.add(node);
-				}
-			}
-		}
-		return traceNodes;
-	} */
-
 	public static @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
-		Set<@NonNull Property> corrolaryProperties = new HashSet<>();
-		for (@NonNull Region region : activeRegions) {
-			if (region instanceof MappingRegion) {
-				gatherCorrolaries(corrolaryProperties, (MappingRegion)region);
-			}
+		GlobalContext globalContext = new GlobalContext(problemHandler, activeRegions);
+		return globalContext.partition();
+	}
+
+	protected static class GlobalContext
+	{
+		protected final @NonNull ProblemHandler problemHandler;
+		protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
+
+		/**
+		 * The partitioner for each region.
+		 */
+		private final @NonNull Map<@NonNull MappingRegion, @NonNull Partitioner> region2partitioner = new HashMap<>();
+
+		/**
+		 * The partitioners in the original activeRegions order.
+		 */
+		private final @NonNull List<@NonNull Partitioner> partitioners = new ArrayList<>();
+
+		/**
+		 * All speculated-trace to realized node properties that are automatically assignable once their speculation
+		 * is validated.
+		 */
+		private final @NonNull Set<@NonNull Property> corrolaryProperties = new HashSet<>();
+
+		public GlobalContext(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
+			this.problemHandler = problemHandler;
+			this.activeRegions = activeRegions;
 		}
-		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
-		for (@NonNull Region region : activeRegions) {
-			if (region instanceof MappingRegion) {
-				Partitioner partitioner = new Partitioner(problemHandler, (MappingRegion)region, corrolaryProperties);
+
+		public void addCorrolary(@NonNull Property property) {
+			corrolaryProperties.add(property);
+		}
+
+		public void addProblem(@NonNull CompilerProblem problem) {
+			problemHandler.addProblem(problem);
+		}
+
+		public boolean isCorrolary(@NonNull Edge edge) {
+			if (!edge.isNavigation()) {
+				return false;
+			}
+			return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
+		}
+
+		public @NonNull Iterable<@NonNull MappingRegion> partition() {
+			for (@NonNull Region region : activeRegions) {
+				if (region instanceof MappingRegion) {
+					MappingRegion mappingRegion = (MappingRegion)region;
+					Partitioner partitioner = new Partitioner(this, mappingRegion);
+					region2partitioner.put(mappingRegion, partitioner);
+					partitioners.add(partitioner);
+				}
+			}
+			List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
+			for (@NonNull Partitioner partitioner : partitioners) {
 				Iterables.addAll(partitionedRegions, partitioner.partition());
 			}
-		}
-		return partitionedRegions;
-	}
-
-	private static void gatherCorrolaries(@NonNull Set<@NonNull Property> corrolaryProperties, @NonNull MappingRegion region) {
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
-			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
-				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
-						corrolaryProperties.add(RegionUtil.getProperty(edge));
-					}
-				}
-			}
+			return partitionedRegions;
 		}
 	}
 
-	protected final @NonNull ProblemHandler problemHandler;
+	protected final @NonNull GlobalContext globalContext;
 	protected final @NonNull MappingRegion region;
 
 	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
-	protected final @NonNull Set<@NonNull Property> corrolaryProperties;
+	//	protected final @NonNull Set<@NonNull Property> corrolaryProperties;
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
@@ -147,13 +146,14 @@ public class Partitioner
 
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
-	public Partitioner(@NonNull ProblemHandler problemHandler, @NonNull MappingRegion region, @NonNull Set<@NonNull Property> corrolaryProperties) {
+	public Partitioner(@NonNull GlobalContext globalContext, @NonNull MappingRegion region) {
 		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
-		this.problemHandler = problemHandler;
+		this.globalContext = globalContext;
 		this.region = region;
-		this.corrolaryProperties = corrolaryProperties;
+		//		this.corrolaryProperties = corrolaryProperties;
 		analyzeNodes();
 		analyzeEdges();
+		gatherCorrolaries();
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
@@ -177,7 +177,7 @@ public class Partitioner
 	}
 
 	public void addProblem(@NonNull CompilerProblem problem) {
-		problemHandler.addProblem(problem);
+		globalContext.addProblem(problem);
 	}
 
 	public boolean addRealizedNode(@NonNull Node node) {
@@ -291,7 +291,7 @@ public class Partitioner
 	private void check() {
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
-				problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
+				globalContext.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
@@ -299,7 +299,7 @@ public class Partitioner
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
+					globalContext.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
 				}
 			}
 		}
@@ -312,13 +312,13 @@ public class Partitioner
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				problemHandler.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
+				globalContext.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (!isCorrolary(edge)) {// && !isDead(edge)) {
-					problemHandler.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
+				if (!globalContext.isCorrolary(edge)) {// && !isDead(edge)) {
+					globalContext.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
 		}
@@ -405,6 +405,18 @@ public class Partitioner
 		return microMappingRegion;
 	}
 
+	private void gatherCorrolaries() {
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
+				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
+						globalContext.addCorrolary(RegionUtil.getProperty(edge));
+					}
+				}
+			}
+		}
+	}
+
 	public @NonNull Iterable<@NonNull Edge> getAlreadyPredicatedEdges() {
 		return alreadyPredicatedEdges;
 	}
@@ -470,11 +482,9 @@ public class Partitioner
 	}
 
 	public boolean isCorrolary(@NonNull Edge edge) {
-		if (!edge.isNavigation()) {
-			return false;
-		}
-		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
+		return globalContext.isCorrolary(edge);
 	}
+
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
 		if (node.isHead()) {
 			return false;
