@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.LetExp;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
@@ -123,7 +124,12 @@ public abstract class AbstractRegion2Mapping
 				throw new UnsupportedOperationException();
 			}
 		}
-		return helper.createNavigationCallExp(asSource, asProperty);
+		NavigationCallExp asNavigationCallExp = helper.createNavigationCallExp(asSource, asProperty);
+		if (!asSource.isIsRequired()) {
+			asNavigationCallExp.setIsSafe(true);
+			asNavigationCallExp.setIsRequired(false);
+		}
+		return asNavigationCallExp;
 	}
 
 	protected void createAppendParameters() {
