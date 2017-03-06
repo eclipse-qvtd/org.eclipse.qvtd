@@ -650,12 +650,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
-		//		this.expressionCreator = new ExpressionCreator();
-		//		this.inlineExpressionCreator = new InlineExpressionCreator();
 		@SuppressWarnings("unused")String name = region.getName();
-		if ("«edge2»\\nTransition2HyperEdge__sc".equals(name)) {
-			name = region.getName();
-		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createNavigablePredicates();				// BLUE/CYAN navigable nodes and edges
 		createExternalPredicates();					// BLUE/CYAN computations involving a true guard node
@@ -780,7 +775,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//		String string = initExpression.toString();
 		Type variableType = node.getCompleteClass().getPrimaryClass();
 		assert variableType != null;
-		boolean isRequired = true;
+		boolean isRequired = node.isMatched();
 		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
 			if (!typedElement.isIsRequired()) {
 				isRequired = false;
