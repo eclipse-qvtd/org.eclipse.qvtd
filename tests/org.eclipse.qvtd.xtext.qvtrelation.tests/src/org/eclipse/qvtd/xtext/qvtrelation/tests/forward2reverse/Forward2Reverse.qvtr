@@ -15,12 +15,12 @@ import listMM : 'DoublyLinkedList.ecore#/';
 
 package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 /**
- * Transform a hierarchical StateMachine into a flat StateMachine.
+ * Reverse the order of elements in a circular list.
  */
 	transformation Forward2Reverse(forward:listMM, reverse:listMM)
 	{
 		/**
-		 *  Map each hierarchical StateMachine to a flat StateMachine
+		 *  Map each list to a list
 		 */
 		top relation list2list {
 			listName : String;
@@ -47,7 +47,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::forward2reverse {
 		}
 	
 		/**
-		 *  Map each Leaf State to a Flat State in the corresponding StateMachine.
+		 *  Map each element to an element with reversed source/target linkage.
 		 */
 		top relation element2element {
 			elementName : String;
