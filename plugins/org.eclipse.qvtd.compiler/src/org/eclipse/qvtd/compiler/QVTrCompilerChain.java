@@ -80,6 +80,12 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			super(compilerChain, QVTC_STEP);
 		}
 
+		/**
+		 * A derived implementation with Xtext support can override to convert asURI to csURI.
+		 * @throws IOException
+		 */
+		protected void doQVTcSerializeAndLoad(@NonNull URI asURI, @NonNull URI csURI) throws IOException {}
+
 		public @NonNull Resource execute(@NonNull Resource rResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {

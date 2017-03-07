@@ -46,6 +46,7 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseNormalizer;
@@ -82,6 +83,17 @@ public class QVTrCompilerTests extends LoadTestCase
 						ScheduledRegion rootRegion = super.execute(pResource);
 						instrumentRegion(rootRegion);
 						return rootRegion;
+					}
+				};
+			}
+
+			@Override
+			protected @NonNull QVTr2QVTcCompilerStep createQVTr2QVTcCompilerStep() {
+				return new QVTr2QVTcCompilerStep(this)
+				{
+					@Override
+					protected void doQVTcSerializeAndLoad(@NonNull URI asURI, @NonNull URI csURI) throws IOException {
+						XtextCompilerUtil.doQVTcSerializeAndLoad(asURI, csURI);
 					}
 				};
 			}

@@ -20,3 +20,4 @@ Export-Package: org.eclipse.qvtd.codegen.qvti,
  org.eclipse.qvtd.codegen.qvticgmodel.impl,
  org.eclipse.qvtd.codegen.qvticgmodel.util,
  org.eclipse.qvtd.codegen.utilities
+Import-Package: com.google.common.collect
