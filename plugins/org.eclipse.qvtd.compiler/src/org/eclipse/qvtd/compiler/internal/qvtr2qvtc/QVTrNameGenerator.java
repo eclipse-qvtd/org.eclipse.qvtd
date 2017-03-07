@@ -25,6 +25,7 @@ public class QVTrNameGenerator
 	public static final @NonNull String IDENTIFIED_INSTANCE_VARIABLE_NAME = "identifiedInstance";
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";
+	public static final @NonNull String TRACECLASS_SUCCESS_PROPERTY_NAME = "_success";
 
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 
