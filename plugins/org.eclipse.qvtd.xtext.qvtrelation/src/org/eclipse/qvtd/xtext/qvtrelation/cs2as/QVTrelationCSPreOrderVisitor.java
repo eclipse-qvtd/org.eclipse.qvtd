@@ -30,6 +30,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -42,6 +43,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPreOrderVisitor;
 
@@ -267,6 +269,15 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	@Override
 	public Continuation<?> visitPropertyTemplateCS(@NonNull PropertyTemplateCS csElement) {
 		return new PropertyTemplateCompletion(context, csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitRelationCS(@NonNull RelationCS csElement) {
+		Relation pivotElement = PivotUtil.getPivot(Relation.class, csElement);
+		if (pivotElement != null) {
+			pivotElement.setOverrides(csElement.getOverrides());
+		}
+		return null;
 	}
 
 	@Override
