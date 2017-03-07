@@ -61,6 +61,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
+import com.google.common.collect.Iterables;
+
 /**
  * VariablesAnalysis manages all the variables in use by a Relation and its corresponding Mapping.
  */
@@ -241,7 +243,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull CoreDomain cEnforcedDomain;
 	protected final @NonNull Mapping cMapping;
-	protected final boolean isInvoked;
+	protected final boolean isInvokedAsWhen;
+	protected final boolean isInvokedAsWhere;
 	protected final @NonNull Transformation cTransformation;
 	protected final @NonNull BottomPattern cMiddleBottomPattern;
 	protected final @NonNull GuardPattern cMiddleGuardPattern;
@@ -265,12 +268,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<>();
 
-	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass, boolean isInvoked) throws CompilerChainException {
+	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass,
+			@Nullable Iterable<@NonNull RelationCallExp> whenInvocations, @Nullable Iterable<@NonNull RelationCallExp> whereInvocations) throws CompilerChainException {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.cEnforcedDomain = cEnforcedDomain;
 		this.cMapping = ClassUtil.nonNullState(QVTcoreUtil.getContainingMapping(cEnforcedDomain));
-		this.isInvoked = isInvoked;
+		this.isInvokedAsWhen = (whenInvocations != null) && !Iterables.isEmpty(whenInvocations);
+		this.isInvokedAsWhere = (whereInvocations != null) && !Iterables.isEmpty(whereInvocations);
 		this.cTransformation = ClassUtil.nonNullState(cMapping.getTransformation());
 		this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
 		this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
@@ -407,6 +412,21 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
+	/*	private void analyzeInvocations(@NonNull Iterable<@NonNull RelationCallExp> invocations) {
+		for (@NonNull RelationCallExp invocation : invocations) {
+			Pattern containingPattern = QVTrelationUtil.basicGetContainingPattern(invocation);
+			if (containingPattern != null) {
+				EReference eContainmentFeature = containingPattern.eContainmentFeature();
+				if (eContainmentFeature == QVTrelationPackage.Literals.RELATION__WHEN) {
+					isInvokedAsWhen = true;
+				}
+				else if (eContainmentFeature == QVTrelationPackage.Literals.RELATION__WHERE) {
+					isInvokedAsWhere = true;
+				}
+			}
+		}
+	} */
+
 	public void assertNewAssignment(@NonNull Iterable<@NonNull Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
 		//		if ("tr.action := sm".equals(newAssignment.toString())) {
 		//			newAssignment.toString();
@@ -516,6 +536,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		return analysis;
 	}
+
+	public boolean isInvokedAsWhen() {
+		return isInvokedAsWhen;
+	}
+
+
+	public boolean isInvokedAsWhere() {
+		return isInvokedAsWhere;
+	}
+
 
 	@Override
 	public String toString() {

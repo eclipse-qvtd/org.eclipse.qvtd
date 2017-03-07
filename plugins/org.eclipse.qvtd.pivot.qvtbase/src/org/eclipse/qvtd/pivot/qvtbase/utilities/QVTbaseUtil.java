@@ -99,6 +99,15 @@ public class QVTbaseUtil extends PivotUtil
 		return null;
 	}
 
+	public static @Nullable Pattern basicGetContainingPattern(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Pattern) {
+				return (Pattern) eObject;
+			}
+		}
+		return null;
+	}
+
 	public static @Nullable Rule basicGetContainingRule(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Rule) {
@@ -337,11 +346,7 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getOwnedOperations());
 	}
 
-	//	public static @NonNull List<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
-	//		return ClassUtil.nullFree(asPattern.getPredicate());
-	//	}
-
-	public static @NonNull Iterable<@NonNull Predicate> getPredicates(@NonNull Pattern asPattern) {
+	public static @NonNull List<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
 		return ClassUtil.nullFree(asPattern.getPredicate());
 	}
 

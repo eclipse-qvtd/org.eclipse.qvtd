@@ -80,7 +80,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		//		private @NonNull List<@NonNull RealizedVariable> cEnforcedRootVariables;
 
 		public TopEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
-			super(rEnforcedDomain, cMappingName);
+			super(rEnforcedDomain, cMappingName, qvtr2qvtc.getTraceClass(rRelation));
 			//			this.cEnforcedRootVariables = new ArrayList<>(rEnforcedRootVariables.size());
 			/*			for (@NonNull Variable rEnforcedRootVariable : rEnforcedRootVariables) {
 				if (!rWhenVariables.contains(rEnforcedRootVariable)) {

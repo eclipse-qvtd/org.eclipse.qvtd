@@ -330,7 +330,7 @@ public class QVTr2UMLX
 			//
 			Pattern qvtrWhen = qvtrRelation.getWhen();
 			if (qvtrWhen != null) {
-				for (@NonNull Predicate qvtrPredicate : QVTrelationUtil.getPredicates(qvtrWhen)) {
+				for (@NonNull Predicate qvtrPredicate : QVTrelationUtil.getOwnedPredicates(qvtrWhen)) {
 					QVTrelationUtil.getConditionExpression(qvtrPredicate).accept(this);
 				}
 			}
@@ -339,7 +339,7 @@ public class QVTr2UMLX
 			//
 			Pattern qvtrWhere = qvtrRelation.getWhere();
 			if (qvtrWhere != null) {
-				for (@NonNull Predicate qvtrPredicate : QVTrelationUtil.getPredicates(qvtrWhere)) {
+				for (@NonNull Predicate qvtrPredicate : QVTrelationUtil.getOwnedPredicates(qvtrWhere)) {
 					QVTrelationUtil.getConditionExpression(qvtrPredicate).accept(this);
 				}
 			}
@@ -353,10 +353,10 @@ public class QVTr2UMLX
 			Boolean isWhen = null;
 			Pattern qvtrWhen = qvtrRelation.getWhen();
 			Pattern qvtrWhere = qvtrRelation.getWhere();
-			if ((qvtrWhen != null) && Iterables.contains(QVTrelationUtil.getPredicates(qvtrWhen), qvtrPredicate)) {
+			if ((qvtrWhen != null) && Iterables.contains(QVTrelationUtil.getOwnedPredicates(qvtrWhen), qvtrPredicate)) {
 				isWhen = true;
 			}
-			else if ((qvtrWhere != null) && Iterables.contains(QVTrelationUtil.getPredicates(qvtrWhere), qvtrPredicate)) {
+			else if ((qvtrWhere != null) && Iterables.contains(QVTrelationUtil.getOwnedPredicates(qvtrWhere), qvtrPredicate)) {
 				isWhen = false;
 			}
 			RelDiagram relDiagram = context.getUMLXElement(RelDiagram.class, qvtrRelation);
