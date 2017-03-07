@@ -196,6 +196,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
 	protected final @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals;
+	protected boolean isGeneratedDebug = false;
 	protected boolean isIncremental = false;
 	protected boolean alwaysUseClasses = false;
 	protected boolean useGot = true;
@@ -207,6 +208,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		this.analyzer = codeGenerator.getAnalyzer();
 		this.cgPackage = cgPackage;
 		this.sortedGlobals = sortedGlobals;
+		this.isGeneratedDebug = codeGenerator.getOptions().isGeneratedDebug();
 		this.isIncremental = codeGenerator.getOptions().isIncremental();
 		this.alwaysUseClasses = isIncremental;
 		this.useGot = isIncremental;
@@ -1180,10 +1182,27 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
-	protected void doMappingBody(@NonNull CGMapping cgMapping, boolean hasMappingClass) {
+	protected void doMappingBody(@NonNull CGMapping cgMapping, @Nullable Iterable<@NonNull CGGuardVariable> cgGuardVariables) {
 		CGValuedElement cgBody = cgMapping.getOwnedBody();
 		js.append(" {\n");
 		js.pushIndentation(null);
+		if ((cgGuardVariables != null) && isGeneratedDebug) {
+			js.append("if (debugInvocations) {\n");
+			js.pushIndentation(null);
+			js.appendClassReference(AbstractTransformer.class);
+			js.append(".INVOCATIONS.println(\"invoke " + getMappingName(cgMapping) + "\"");
+			for (@NonNull CGGuardVariable cgGuardVariable : cgGuardVariables) {
+				if (!(cgGuardVariable instanceof ConnectionVariable)) {
+					js.append(" + ");
+					js.append("\", \"");
+					js.append(" + ");
+					js.append(getValueName(cgGuardVariable));
+				}
+			}
+			js.append(");\n");
+			js.popIndentation();
+			js.append("}\n");
+		}
 		//		if (cgBody.isInvalid()) {
 		//			js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", ");
 		//			js.appendValueName(cgBody);
@@ -1194,6 +1213,16 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//			js.pushIndentation(null);
 		if (!cgBody.isInlined()) {
 			cgBody.accept(this);
+		}
+		if ((cgGuardVariables != null) && isGeneratedDebug) {
+			js.append("if (debugInvocations) {\n");
+			js.pushIndentation(null);
+			js.appendClassReference(AbstractTransformer.class);
+			js.append(".INVOCATIONS.println((");
+			js.appendValueName(cgBody);
+			js.append(" ? \"done \"  : \"fail \") + \"" + getMappingName(cgMapping) + "\");\n");
+			js.popIndentation();
+			js.append("}\n");
 		}
 		js.append("return ");
 		js.appendValueName(cgBody);
@@ -2378,7 +2407,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("\n");
 					js.append("@Override\n");
 					js.append("public boolean execute() ");
-					doMappingBody(cgMapping, true);
+					doMappingBody(cgMapping, null);
 					if (isIncremental) {
 						js.append("\n");
 						doMappingGetBoundValue(cgMapping);
@@ -2401,7 +2430,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					}
 					js.append(") ");
 
-					doMappingBody(cgMapping, false);
+					doMappingBody(cgMapping, cgFreeVariables);
 				}
 			}
 			finally {

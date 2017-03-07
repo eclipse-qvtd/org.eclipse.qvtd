@@ -27,7 +27,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -116,6 +115,12 @@ public class QVTcCompilerTests extends LoadTestCase
 			return doBuild(testFileName, outputName, options, genModelFiles);
 		}
 
+		public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String testFileName, @NonNull String outputName, @NonNull String @NonNull... genModelFiles) throws Exception {
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions();
+			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
+			return doBuild(testFileName, outputName, options, genModelFiles);
+		}
+
 		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
 			return doCompile(testFileName, outputName, createCompilerChainOptions());
 		}
@@ -123,7 +128,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions() {
 			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createCompilerChainOptions();
 			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
-			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
+			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_GENERATED_DEBUG_KEY, true);
 			QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
 			return options;
 		}
@@ -233,7 +238,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("families2persons");
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtc", "person", "Families2Persons.genmodel");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation_486938("Families2Persons.qvtc", "person", "Families2Persons.genmodel"); // FIXME BUG 486938
 			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -453,6 +458,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		OperationDependencyAnalysis.REFINING.setState(true);
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		Scheduler.CONNECTION_ROUTING.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -466,22 +472,22 @@ public class QVTcCompilerTests extends LoadTestCase
 		String testFolderName = "uml2rdbms";
 		MyQVT myQVT = new MyQVT(testFolderName);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("SimpleUML2RDBMS.qvtcas", "rdbms", "SimpleUML2RDBMS.genmodel");
 			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 2);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 20);
-			myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
+			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("uml", "SimplerUMLPeople.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople_CG.xmi", "SimplerRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
 			//
-			myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
+			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("uml", "SimplerUMLPeople2.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople2_CG.xmi", "SimplerRDBMSPeople2_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
 			//
-			myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
+			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimpleRDBMSPeople_CG.xmi", "SimpleRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);

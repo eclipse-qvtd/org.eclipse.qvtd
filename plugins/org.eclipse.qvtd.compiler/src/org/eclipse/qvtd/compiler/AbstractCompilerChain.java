@@ -167,6 +167,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			if (javaExtraPrefix != null) {
 				options.setPackagePrefix(javaExtraPrefix);
 			}
+			Boolean javaIsGeneratedDebug = compilerChain.getOption(JAVA_STEP, JAVA_GENERATED_DEBUG_KEY);
+			options.setIsGeneratedDebug(javaIsGeneratedDebug == Boolean.TRUE);
 			Boolean javaIsIncremental = compilerChain.getOption(JAVA_STEP, JAVA_INCREMENTAL_KEY);
 			options.setIsIncremental(javaIsIncremental == Boolean.TRUE);
 			String javaCodeSource;
