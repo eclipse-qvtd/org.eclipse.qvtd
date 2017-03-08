@@ -19,9 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
-import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -30,84 +28,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-public class Partitioner
+/**
+ * The MappingPartitioner supervises the partitioning of a mapping region into micromappings that avoid
+ * #scheduling hazards. It collaborates with an overall TransformationPartitioner for global analyses.
+ */
+public class MappingPartitioner
 {
-	public static @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
-		GlobalContext globalContext = new GlobalContext(problemHandler, activeRegions);
-		return globalContext.partition();
-	}
-
-	protected static class GlobalContext
-	{
-		protected final @NonNull ProblemHandler problemHandler;
-		protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
-
-		/**
-		 * The partitioner for each region.
-		 */
-		private final @NonNull Map<@NonNull MappingRegion, @NonNull Partitioner> region2partitioner = new HashMap<>();
-
-		/**
-		 * The partitioners in the original activeRegions order.
-		 */
-		private final @NonNull List<@NonNull Partitioner> partitioners = new ArrayList<>();
-
-		/**
-		 * All speculated-trace to realized node properties that are automatically assignable once their speculation
-		 * is validated.
-		 */
-		private final @NonNull Set<@NonNull Property> corrolaryProperties = new HashSet<>();
-
-		public GlobalContext(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
-			this.problemHandler = problemHandler;
-			this.activeRegions = activeRegions;
-		}
-
-		public void addCorrolary(@NonNull Property property) {
-			corrolaryProperties.add(property);
-		}
-
-		public void addProblem(@NonNull CompilerProblem problem) {
-			problemHandler.addProblem(problem);
-		}
-
-		public boolean isCorrolary(@NonNull Edge edge) {
-			if (!edge.isNavigation()) {
-				return false;
-			}
-			return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
-		}
-
-		public @NonNull Iterable<@NonNull MappingRegion> partition() {
-			for (@NonNull Region region : activeRegions) {
-				if (region instanceof MappingRegion) {
-					MappingRegion mappingRegion = (MappingRegion)region;
-					Partitioner partitioner = new Partitioner(this, mappingRegion);
-					region2partitioner.put(mappingRegion, partitioner);
-					partitioners.add(partitioner);
-				}
-			}
-			List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
-			for (@NonNull Partitioner partitioner : partitioners) {
-				Iterables.addAll(partitionedRegions, partitioner.partition());
-			}
-			return partitionedRegions;
-		}
-	}
-
-	protected final @NonNull GlobalContext globalContext;
+	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	protected final @NonNull MappingRegion region;
 
 	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
-	//	protected final @NonNull Set<@NonNull Property> corrolaryProperties;
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
@@ -146,9 +83,9 @@ public class Partitioner
 
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
-	public Partitioner(@NonNull GlobalContext globalContext, @NonNull MappingRegion region) {
+	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull MappingRegion region) {
 		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
-		this.globalContext = globalContext;
+		this.transformationPartitioner = transformationPartitioner;
 		this.region = region;
 		//		this.corrolaryProperties = corrolaryProperties;
 		analyzeNodes();
@@ -177,7 +114,7 @@ public class Partitioner
 	}
 
 	public void addProblem(@NonNull CompilerProblem problem) {
-		globalContext.addProblem(problem);
+		transformationPartitioner.addProblem(problem);
 	}
 
 	public boolean addRealizedNode(@NonNull Node node) {
@@ -291,7 +228,7 @@ public class Partitioner
 	private void check() {
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
-				globalContext.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
+				transformationPartitioner.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
@@ -299,7 +236,7 @@ public class Partitioner
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					globalContext.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
+					transformationPartitioner.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
 				}
 			}
 		}
@@ -312,13 +249,13 @@ public class Partitioner
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				globalContext.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
+				transformationPartitioner.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (!globalContext.isCorrolary(edge)) {// && !isDead(edge)) {
-					globalContext.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
+				if (!transformationPartitioner.isCorrolary(edge)) {// && !isDead(edge)) {
+					transformationPartitioner.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
 		}
@@ -410,7 +347,7 @@ public class Partitioner
 			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
 				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
-						globalContext.addCorrolary(RegionUtil.getProperty(edge));
+						transformationPartitioner.addCorrolary(RegionUtil.getProperty(edge));
 					}
 				}
 			}
@@ -482,7 +419,7 @@ public class Partitioner
 	}
 
 	public boolean isCorrolary(@NonNull Edge edge) {
-		return globalContext.isCorrolary(edge);
+		return transformationPartitioner.isCorrolary(edge);
 	}
 
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {

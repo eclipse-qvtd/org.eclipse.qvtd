@@ -26,7 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  */
 class SpeculationPartition extends AbstractPartition
 {
-	public SpeculationPartition(@NonNull Partitioner partitioner) {
+	public SpeculationPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
 		@SuppressWarnings("unused") String name = partitioner.getRegion().getName();
 		//

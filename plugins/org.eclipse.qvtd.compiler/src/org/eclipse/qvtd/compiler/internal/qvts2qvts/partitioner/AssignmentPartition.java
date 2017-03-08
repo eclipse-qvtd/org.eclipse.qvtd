@@ -27,7 +27,7 @@ class AssignmentPartition extends AbstractPartition
 {
 	protected final @NonNull Edge realizedEdge;
 
-	public AssignmentPartition(@NonNull Partitioner partitioner, @NonNull Edge realizedEdge) {
+	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull Edge realizedEdge) {
 		super(partitioner);
 		this.realizedEdge = realizedEdge;
 		//
