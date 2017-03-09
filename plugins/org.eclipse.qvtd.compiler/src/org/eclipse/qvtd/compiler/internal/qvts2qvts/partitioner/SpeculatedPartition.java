@@ -212,7 +212,7 @@ class SpeculatedPartition extends AbstractPartition
 
 	protected void resolvePredicatedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
-			if (node.isMatched()) {
+			if (node.isMatched() && partitioner.isCyclic(node)) {
 				Role nodeRole = RegionUtil.getNodeRole(node);
 				if (node.isPattern() && node.isClass()) {
 					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);

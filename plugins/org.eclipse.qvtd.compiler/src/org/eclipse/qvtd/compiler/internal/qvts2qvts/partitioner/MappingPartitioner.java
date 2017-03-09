@@ -468,6 +468,10 @@ public class MappingPartitioner
 		return transformationPartitioner.isCorrolary(edge);
 	}
 
+	public boolean isCyclic(@NonNull Node node) {
+		return transformationPartitioner.getCycleAnalysis(node.getCompleteClass()) != null;
+	}
+
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
 		if (node.isHead()) {
 			return false;
@@ -515,7 +519,7 @@ public class MappingPartitioner
 			//			regions.add(createRealizedRegion());
 		}
 		else {
-			if (!hasLoadedNodes || !transformationPartitioner.isCyclic(this)) {
+			if (!hasLoadedNodes || (transformationPartitioner.getCycleAnalysis(this) == null)) {
 				regions.add(region);
 			}
 			else {
@@ -550,6 +554,6 @@ public class MappingPartitioner
 
 	@Override
 	public String toString() {
-		return region.toString();
+		return region.getName();
 	}
 }

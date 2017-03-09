@@ -31,17 +31,19 @@ class SpeculationPartition extends AbstractPartition
 		@SuppressWarnings("unused") String name = partitioner.getRegion().getName();
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
-		//	All traced loaded nodes are retained as is to be traced by the speculation.
-		//	NB. Unreachable loaded nodes are effectively predicates nd so are deferred.
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
 				Role speculationNodeRole = RegionUtil.asSpeculation(RegionUtil.getNodeRole(node));
 				addNode(node, speculationNodeRole);
-				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
-				}
 			}
+		}
+		//
+		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
+		//	NB. Unreachable loaded nodes are effectively predicates and so are deferred.
+		//
+		for (@NonNull Node node : RegionUtil.getHeadNodes(partitioner.getRegion())) {
+			addReachableOldAcyclicNodes(node);
 		}
 		//
 		//	Perform any required computations.
@@ -58,16 +60,14 @@ class SpeculationPartition extends AbstractPartition
 	}
 
 	/**
-	 * Add all nodes, including node, that are constant or loaded and reachable by to-one navigation from node.
+	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
 	 */
-	protected void addReachableConstantOrLoadedNodes(@NonNull Node node) {
-		if (/*node.isMatched() &&*/ (node.isConstant() || node.isLoaded())) {
-			if (!hasNode(node)) {
-				addNode(node, RegionUtil.getNodeRole(node));
-				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					if (edge.isConstant() || edge.isLoaded()) {
-						addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
-					}
+	protected void addReachableOldAcyclicNodes(@NonNull Node node) {
+		if (node.isOld() && !hasNode(node) && !partitioner.isCyclic(node)) {
+			addNode(node, RegionUtil.getNodeRole(node));
+			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+				if (edge.isOld()) {
+					addReachableOldAcyclicNodes(edge.getEdgeTarget());
 				}
 			}
 		}

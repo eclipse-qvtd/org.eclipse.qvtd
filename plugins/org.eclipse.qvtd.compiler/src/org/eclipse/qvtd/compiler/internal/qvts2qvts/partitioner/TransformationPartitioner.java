@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -74,7 +75,15 @@ public class TransformationPartitioner
 	 */
 	private final @NonNull Set<@NonNull Property> corrolaryProperties = new HashSet<>();
 
-	@Nullable Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2cycles = null;
+	/**
+	 * Mapping to the cycle analysis that identifies the cycle involvong each mapping partitioner.
+	 */
+	private @Nullable Map<@NonNull MappingPartitioner, @NonNull CycleAnalysis> mappingPartitioner2cycleAnalysis = null;
+
+	/**
+	 * Mapping to the cycle analysis that identifies the cycle involvong each trace class analysis.
+	 */
+	private @Nullable Map<@NonNull TraceClassAnalysis, @NonNull CycleAnalysis> traceClassAnalysis2cycleAnalysis = null;
 
 	public TransformationPartitioner(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		this.problemHandler = problemHandler;
@@ -112,28 +121,41 @@ public class TransformationPartitioner
 	/**
 	 * Return a map of the MappingPartitioners that form a cycle including each MappingPartitioner.
 	 */
-	private @NonNull Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> computeCycles() {
+	private void computeCycles() {
 		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2predecessors = computeTransitivePredecessors();
 		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2successors = computeTransitiveSuccessors();
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2cycles = new HashMap<>();
+		Map<@NonNull Set<@NonNull MappingPartitioner>, @NonNull CycleAnalysis> cycleElements2cycle = new HashMap<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			Set<@NonNull MappingPartitioner> cycles = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
-			cycles.retainAll(partitioner2successors.get(mappingPartitioner));
-			partitioner2cycles.put(mappingPartitioner, cycles);
-		}
-		if (CYCLES.isActive()) {
-			for (@NonNull MappingPartitioner partitioner : mappingPartitioners) {
-				StringBuilder s = new StringBuilder();
-				s.append(partitioner + ":");
-				Set<@NonNull MappingPartitioner> cycles = partitioner2cycles.get(partitioner);
-				assert cycles != null;
-				for (@NonNull MappingPartitioner cycle : cycles) {
-					s.append("\n\t" + cycle);
+			Set<@NonNull MappingPartitioner> cycleElements = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
+			cycleElements.retainAll(partitioner2successors.get(mappingPartitioner));
+			if (!cycleElements.isEmpty()) {
+				CycleAnalysis cycleAnalysis = cycleElements2cycle.get(cycleElements);
+				if (cycleAnalysis == null) {
+					cycleAnalysis = createCycleAnalysis(cycleElements);
+					cycleElements2cycle.put(cycleElements, cycleAnalysis);
 				}
-				CYCLES.println(s.toString());
 			}
 		}
-		return partitioner2cycles;
+		if (CYCLES.isActive()) {
+			Collection<@NonNull CycleAnalysis> cycleAnalyses = cycleElements2cycle.values();
+			if (cycleAnalyses.isEmpty()) {
+				CYCLES.println("No cycles");
+			}
+			else {
+				for (@NonNull CycleAnalysis cycleAnalysis : cycleAnalyses) {
+					StringBuilder s = new StringBuilder();
+					s.append("\n  MappingPartitioners:");
+					for (@NonNull MappingPartitioner mappingPartitioner : cycleAnalysis.getMappingPartitioners()) {
+						s.append("\n\t" + mappingPartitioner);
+					}
+					s.append("\n  TraceClassAnalyses:");
+					for (@NonNull TraceClassAnalysis traceClassAnalysis : cycleAnalysis.getTraceClassAnalyses()) {
+						s.append("\n\t" + traceClassAnalysis);
+					}
+					CYCLES.println(s.toString());
+				}
+			}
+		}
 	}
 
 	private void computeCyclicTraceClasses() {
@@ -156,7 +178,7 @@ public class TransformationPartitioner
 		}
 	} */
 
-		partitioner2cycles = computeCycles();
+		/*partitioner2cycles =*/ computeCycles();
 		//
 		//	Each MiddleAnalysis produced only by acyclic partitioners identifies an acyclic trace class
 		//
@@ -280,18 +302,64 @@ public class TransformationPartitioner
 		return partitioner2successors;
 	}
 
+	private @NonNull CycleAnalysis createCycleAnalysis(@NonNull Set<@NonNull MappingPartitioner> cyclicMappingPartitioners) {
+		Map<@NonNull MappingPartitioner, @NonNull CycleAnalysis> mappingPartitioner2cycleAnalysis2 = mappingPartitioner2cycleAnalysis;
+		if (mappingPartitioner2cycleAnalysis2 == null) {
+			mappingPartitioner2cycleAnalysis = mappingPartitioner2cycleAnalysis2 = new HashMap<>();
+		}
+		Map<@NonNull TraceClassAnalysis, @NonNull CycleAnalysis> traceClassAnalysis2cycleAnalysis2 = traceClassAnalysis2cycleAnalysis;
+		if (traceClassAnalysis2cycleAnalysis2 == null) {
+			traceClassAnalysis2cycleAnalysis = traceClassAnalysis2cycleAnalysis2 = new HashMap<>();
+		}
+		Set<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = new HashSet<>();
+		Set<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = new HashSet<>();
+		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
+			Iterables.addAll(consumedTraceClassAnalyses, cyclicMappingPartitioner.getConsumedTraceClassAnalyses());
+			Iterables.addAll(producedTraceClassAnalyses, cyclicMappingPartitioner.getProducedTraceClassAnalyses());
+		}
+		Set<@NonNull TraceClassAnalysis> cyclicTraceClassAnalyses = new HashSet<>(consumedTraceClassAnalyses);
+		cyclicTraceClassAnalyses.retainAll(producedTraceClassAnalyses);
+		CycleAnalysis cycleAnalysis = new CycleAnalysis(this, cyclicMappingPartitioners, cyclicTraceClassAnalyses);
+		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
+			CycleAnalysis oldCycleAnalysis = mappingPartitioner2cycleAnalysis2.put(cyclicMappingPartitioner, cycleAnalysis);
+			assert oldCycleAnalysis == null;
+		}
+		for (@NonNull TraceClassAnalysis cyclicTraceClassAnalysis : cyclicTraceClassAnalyses) {
+			CycleAnalysis oldCycleAnalysis = traceClassAnalysis2cycleAnalysis2.put(cyclicTraceClassAnalysis, cycleAnalysis);
+			assert oldCycleAnalysis == null;
+		}
+		return cycleAnalysis;
+	}
+
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull CompleteClass completeClass) {
+		TraceClassAnalysis traceClassAnalysis = class2middleAnalysis.get(completeClass);
+		if (traceClassAnalysis == null) {
+			return null;
+		}
+		return getCycleAnalysis(traceClassAnalysis);
+	}
+
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull MappingPartitioner mappingPartitioner) {
+		Map<@NonNull MappingPartitioner, @NonNull CycleAnalysis> mappingPartitioner2cycleAnalysis2 = mappingPartitioner2cycleAnalysis;
+		if (mappingPartitioner2cycleAnalysis2 == null) {
+			return null;
+		}
+		return mappingPartitioner2cycleAnalysis2.get(mappingPartitioner);
+	}
+
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+		Map<@NonNull TraceClassAnalysis, @NonNull CycleAnalysis> traceClassAnalysis2cycleAnalysis2 = traceClassAnalysis2cycleAnalysis;
+		if (traceClassAnalysis2cycleAnalysis2 == null) {
+			return null;
+		}
+		return traceClassAnalysis2cycleAnalysis2.get(traceClassAnalysis);
+	}
+
 	public boolean isCorrolary(@NonNull Edge edge) {
 		if (!edge.isNavigation()) {
 			return false;
 		}
 		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
-	}
-
-	public boolean isCyclic(@NonNull MappingPartitioner mappingPartitioner) {
-		assert partitioner2cycles != null;
-		Set<@NonNull MappingPartitioner> cycles = partitioner2cycles.get(mappingPartitioner);
-		assert cycles != null;
-		return !cycles.isEmpty();
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition() {
@@ -315,8 +383,15 @@ public class TransformationPartitioner
 		//	Perform per-mapping partitioning
 		//
 		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
+		Set<@NonNull CycleAnalysis> partitionedCycles = new HashSet<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			Iterables.addAll(partitionedRegions, mappingPartitioner.partition());
+			CycleAnalysis cycleAnalysis = getCycleAnalysis(mappingPartitioner);
+			if (cycleAnalysis == null) {
+				Iterables.addAll(partitionedRegions, mappingPartitioner.partition());
+			}
+			else if (partitionedCycles.add(cycleAnalysis)) {
+				Iterables.addAll(partitionedRegions, cycleAnalysis.partition(mappingPartitioners));
+			}
 		}
 		return partitionedRegions;
 	}

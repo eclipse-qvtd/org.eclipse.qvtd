@@ -61,4 +61,9 @@ public class TraceClassAnalysis
 	public @NonNull CompleteClass getTraceClass() {
 		return traceClass;
 	}
+
+	@Override
+	public String toString() {
+		return traceClass.toString();
+	}
 }

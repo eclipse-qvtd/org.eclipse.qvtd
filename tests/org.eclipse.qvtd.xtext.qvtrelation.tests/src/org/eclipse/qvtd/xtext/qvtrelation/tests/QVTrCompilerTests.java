@@ -34,6 +34,7 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -313,6 +314,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
+		TransformationPartitioner.CYCLES.setState(true);
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
