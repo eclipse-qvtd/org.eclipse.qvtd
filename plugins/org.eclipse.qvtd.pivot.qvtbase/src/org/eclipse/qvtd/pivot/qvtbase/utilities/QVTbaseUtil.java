@@ -133,12 +133,21 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static boolean containsAll(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
-		for (Object e : iterable2) {
-			if (!Iterables.contains(iterable1, e)) {
+		for (Object e : iterable1) {
+			if (!Iterables.contains(iterable2, e)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public static boolean containsAny(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
+		for (Object e : iterable1) {
+			if (Iterables.contains(iterable2, e)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

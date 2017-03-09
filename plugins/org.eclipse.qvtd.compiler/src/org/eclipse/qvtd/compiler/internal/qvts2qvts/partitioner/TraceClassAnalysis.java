@@ -33,9 +33,14 @@ public class TraceClassAnalysis
 	 */
 	private final @NonNull List<@NonNull MappingPartitioner> producers = new ArrayList<>();
 
+	private @NonNull List<@NonNull TraceClassAnalysis> subTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassAnalysis> superTraceClassAnalyses = new ArrayList<>();
+
 	public TraceClassAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull CompleteClass traceClass) {
 		this.transformationPartitioner = transformationPartitioner;
 		this.traceClass = traceClass;
+		subTraceClassAnalyses.add(this);
+		superTraceClassAnalyses.add(this);
 	}
 
 	public void addConsumer(@NonNull MappingPartitioner consumer) {
@@ -50,6 +55,18 @@ public class TraceClassAnalysis
 		}
 	}
 
+	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+		if (!subTraceClassAnalyses.contains(traceClassAnalysis)) {
+			subTraceClassAnalyses.add(traceClassAnalysis);
+		}
+	}
+
+	public void addSuperTraceClassAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+		if (!superTraceClassAnalyses.contains(traceClassAnalysis)) {
+			superTraceClassAnalyses.add(traceClassAnalysis);
+		}
+	}
+
 	public @NonNull Iterable<@NonNull MappingPartitioner> getConsumers() {
 		return consumers;
 	}
@@ -60,6 +77,23 @@ public class TraceClassAnalysis
 
 	public @NonNull CompleteClass getTraceClass() {
 		return traceClass;
+	}
+
+	public boolean isCyclic() {
+		for (@NonNull TraceClassAnalysis subTraceClassAnalysis : subTraceClassAnalyses) {
+			if (transformationPartitioner.getCycleAnalysis(subTraceClassAnalysis) != null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public @NonNull Iterable<@NonNull TraceClassAnalysis> getSubTraceClassAnalyses() {
+		return subTraceClassAnalyses;
+	}
+
+	public @NonNull Iterable<@NonNull TraceClassAnalysis> getSuperTraceClassAnalyses() {
+		return superTraceClassAnalyses;
 	}
 
 	@Override

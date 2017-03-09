@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -65,9 +64,9 @@ public class TransformationPartitioner
 	private final @NonNull List<@NonNull MappingPartitioner> mappingPartitioners = new ArrayList<>();
 
 	/**
-	 * The partitioners in the original activeRegions order.
+	 * The TraceClassAnalysis for each trace class.
 	 */
-	private final @NonNull Map<@NonNull CompleteClass, @NonNull TraceClassAnalysis> class2middleAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull CompleteClass, @NonNull TraceClassAnalysis> completeClass2traceClassAnalysis = new HashMap<>();
 
 	/**
 	 * All speculated-trace to realized node properties that are automatically assignable once their speculation
@@ -91,10 +90,10 @@ public class TransformationPartitioner
 	}
 
 	public @NonNull TraceClassAnalysis addConsumer(@NonNull CompleteClass completeClass, @NonNull MappingPartitioner consumer) {
-		TraceClassAnalysis middleAnalysis = class2middleAnalysis.get(completeClass);
+		TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(completeClass);
 		if (middleAnalysis == null) {
 			middleAnalysis = new TraceClassAnalysis(this, completeClass);
-			class2middleAnalysis.put(completeClass, middleAnalysis);
+			completeClass2traceClassAnalysis.put(completeClass, middleAnalysis);
 		}
 		middleAnalysis.addConsumer(consumer);
 		return middleAnalysis;
@@ -109,10 +108,10 @@ public class TransformationPartitioner
 	}
 
 	public @NonNull TraceClassAnalysis addProducer(@NonNull CompleteClass completeClass, @NonNull MappingPartitioner producer) {
-		TraceClassAnalysis middleAnalysis = class2middleAnalysis.get(completeClass);
+		TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(completeClass);
 		if (middleAnalysis == null) {
 			middleAnalysis = new TraceClassAnalysis(this, completeClass);
-			class2middleAnalysis.put(completeClass, middleAnalysis);
+			completeClass2traceClassAnalysis.put(completeClass, middleAnalysis);
 		}
 		middleAnalysis.addProducer(producer);
 		return middleAnalysis;
@@ -124,20 +123,56 @@ public class TransformationPartitioner
 	private void computeCycles() {
 		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2predecessors = computeTransitivePredecessors();
 		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2successors = computeTransitiveSuccessors();
-		Map<@NonNull Set<@NonNull MappingPartitioner>, @NonNull CycleAnalysis> cycleElements2cycle = new HashMap<>();
+		Set<@NonNull Set<@NonNull MappingPartitioner>> allCycleElements = new HashSet<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			Set<@NonNull MappingPartitioner> cycleElements = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
-			cycleElements.retainAll(partitioner2successors.get(mappingPartitioner));
-			if (!cycleElements.isEmpty()) {
-				CycleAnalysis cycleAnalysis = cycleElements2cycle.get(cycleElements);
-				if (cycleAnalysis == null) {
-					cycleAnalysis = createCycleAnalysis(cycleElements);
-					cycleElements2cycle.put(cycleElements, cycleAnalysis);
-				}
+			Set<@NonNull MappingPartitioner> newCycleElements = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
+			newCycleElements.retainAll(partitioner2successors.get(mappingPartitioner));
+			if (!newCycleElements.isEmpty()) {
+				allCycleElements.add(newCycleElements);
 			}
 		}
+		//
+		List<@NonNull Set<@NonNull MappingPartitioner>> prunedCycleElements = new ArrayList<>(allCycleElements);
+		for (int i = prunedCycleElements.size(); --i > 0; ) {
+			Set<@NonNull MappingPartitioner> iCycleElements = prunedCycleElements.get(i);
+			boolean pruneIt = false;
+			for (int j = i; --j >= 0; ) {
+				Set<@NonNull MappingPartitioner> jCycleElements = prunedCycleElements.get(j);
+				if (QVTbaseUtil.containsAny(jCycleElements, iCycleElements) && jCycleElements.addAll(iCycleElements)) {
+					pruneIt = true;
+				}
+			}
+			if (pruneIt) {
+				prunedCycleElements.remove(i);
+			}
+		}
+		//
+		/*		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
+			Set<@NonNull MappingPartitioner> newCycleElements = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
+			newCycleElements.retainAll(partitioner2successors.get(mappingPartitioner));
+			if (!newCycleElements.isEmpty() && !allCycleElements.contains(newCycleElements)) {
+				List<@NonNull Set<@NonNull MappingPartitioner>> redundantCycleElements = null;
+				for (@NonNull Set<@NonNull MappingPartitioner> oldCycleElements : allCycleElements) {
+					if (QVTbaseUtil.containsAny(oldCycleElements, newCycleElements)) {
+						if (redundantCycleElements == null) {
+							redundantCycleElements = new ArrayList<>();
+						}
+						redundantCycleElements.add(oldCycleElements);
+						newCycleElements.addAll(oldCycleElements);
+					}
+				}
+				if (redundantCycleElements != null) {
+					allCycleElements.removeAll(redundantCycleElements);
+				}
+				allCycleElements.add(newCycleElements);
+			}
+		} */
+		//
+		List<@NonNull CycleAnalysis> cycleAnalyses = new ArrayList<>();
+		for (@NonNull Set<@NonNull MappingPartitioner> cycleElements : prunedCycleElements) {
+			cycleAnalyses.add(createCycleAnalysis(cycleElements));
+		}
 		if (CYCLES.isActive()) {
-			Collection<@NonNull CycleAnalysis> cycleAnalyses = cycleElements2cycle.values();
 			if (cycleAnalyses.isEmpty()) {
 				CYCLES.println("No cycles");
 			}
@@ -186,27 +221,23 @@ public class TransformationPartitioner
 		for (@NonNull MappingPartitioner acyclicProducer : acyclicProducers) {
 			for (@NonNull Node realizedMiddleNode : acyclicProducer.getRealizedMiddleNodes()) {
 				CompleteClass traceClass = realizedMiddleNode.getCompleteClass();
-				TraceClassAnalysis middleAnalysis = class2middleAnalysis.get(traceClass);
+				TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(traceClass);
 				assert middleAnalysis != null;
 				if (QVTbaseUtil.containsAll(acyclicProducers, middleAnalysis.getProducers())) {
 					acylicAnalysis.add(middleAnalysis);
 				}
 			}
 		}
-
-
-
 	}
 
-	private void computeSuperProducers() {
-		//
-		//	Production of some traceClass, also produces all its super-classes.
-		//
-		for (@NonNull TraceClassAnalysis middleAnalysis : new ArrayList<>(class2middleAnalysis.values())) {	// FIXME why is this a CME hazard
-			CompleteClass traceClass = middleAnalysis.getTraceClass();
+	private void computeTraceClassInheritance() {
+		for (@NonNull TraceClassAnalysis subTraceClassAnalysis : completeClass2traceClassAnalysis.values()) {
+			CompleteClass traceClass = subTraceClassAnalysis.getTraceClass();
 			for (@NonNull CompleteClass superCompleteClass : traceClass.getProperSuperCompleteClasses()) {
-				for (@NonNull MappingPartitioner producer : middleAnalysis.getProducers()) {
-					addProducer(superCompleteClass, producer);
+				TraceClassAnalysis superTraceClassAnalysis = completeClass2traceClassAnalysis.get(superCompleteClass);
+				if (superTraceClassAnalysis != null) {
+					superTraceClassAnalysis.addSubTraceClassAnalysis(subTraceClassAnalysis);
+					subTraceClassAnalysis.addSuperTraceClassAnalysis(superTraceClassAnalysis);
 				}
 			}
 		}
@@ -228,15 +259,17 @@ public class TransformationPartitioner
 			Iterable<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = producer.getProducedTraceClassAnalyses();
 			if (producedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis producedTraceClass : producedTraceClassAnalyses) {
-					for (@NonNull MappingPartitioner consumer : producedTraceClass.getConsumers()) {
-						Set<@NonNull MappingPartitioner> consumerPredecessors = partitioner2predecessors.get(consumer);
-						assert consumerPredecessors != null;
-						boolean propagate = consumerPredecessors.add(producer);
-						if (consumerPredecessors.addAll(producerPredecessors)) {
-							propagate = true;
-						}
-						if (propagate) {
-							worklist.add(consumer);
+					for (@NonNull TraceClassAnalysis superProducedTraceClass : producedTraceClass.getSuperTraceClassAnalyses()) {
+						for (@NonNull MappingPartitioner consumer : superProducedTraceClass.getConsumers()) {
+							Set<@NonNull MappingPartitioner> consumerPredecessors = partitioner2predecessors.get(consumer);
+							assert consumerPredecessors != null;
+							boolean propagate = consumerPredecessors.add(producer);
+							if (consumerPredecessors.addAll(producerPredecessors)) {
+								propagate = true;
+							}
+							if (propagate && !worklist.contains(consumer)) {
+								worklist.add(consumer);
+							}
 						}
 					}
 				}
@@ -273,15 +306,17 @@ public class TransformationPartitioner
 			Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
-					for (@NonNull MappingPartitioner producer : consumedTraceClassAnalysis.getProducers()) {
-						Set<@NonNull MappingPartitioner> producerSuccessors = partitioner2successors.get(producer);
-						assert producerSuccessors != null;
-						boolean propagate = producerSuccessors.add(consumer);
-						if (producerSuccessors.addAll(consumerSuccessors)) {
-							propagate = true;
-						}
-						if (propagate) {
-							worklist.add(producer);
+					for (@NonNull TraceClassAnalysis subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
+						for (@NonNull MappingPartitioner producer : subConsumedTraceClass.getProducers()) {
+							Set<@NonNull MappingPartitioner> producerSuccessors = partitioner2successors.get(producer);
+							assert producerSuccessors != null;
+							boolean propagate = producerSuccessors.add(consumer);
+							if (producerSuccessors.addAll(consumerSuccessors)) {
+								propagate = true;
+							}
+							if (propagate && !worklist.contains(producer)) {
+								worklist.add(producer);
+							}
 						}
 					}
 				}
@@ -332,7 +367,7 @@ public class TransformationPartitioner
 	}
 
 	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull CompleteClass completeClass) {
-		TraceClassAnalysis traceClassAnalysis = class2middleAnalysis.get(completeClass);
+		TraceClassAnalysis traceClassAnalysis = completeClass2traceClassAnalysis.get(completeClass);
 		if (traceClassAnalysis == null) {
 			return null;
 		}
@@ -362,6 +397,14 @@ public class TransformationPartitioner
 		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
 	}
 
+	public boolean isCyclic(@NonNull CompleteClass traceClass) {
+		TraceClassAnalysis traceClassAnalysis = completeClass2traceClassAnalysis.get(traceClass);
+		if (traceClassAnalysis == null) {
+			return false;
+		}
+		return traceClassAnalysis.isCyclic();
+	}
+
 	public @NonNull Iterable<@NonNull MappingRegion> partition() {
 		//
 		//	Create the per-mapping partitioner and accumulate the local analyses
@@ -375,9 +418,9 @@ public class TransformationPartitioner
 			}
 		}
 		//
-		//	Perform gloabal analyses
+		//	Perform global analyses
 		//
-		computeSuperProducers();
+		computeTraceClassInheritance();
 		computeCyclicTraceClasses();
 		//
 		//	Perform per-mapping partitioning

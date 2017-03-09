@@ -32,6 +32,8 @@ public class CycleAnalysis
 		this.transformationPartitioner = transformationPartitioner;
 		this.mappingPartitioners = mappingPartitioners;
 		this.traceClassAnalyses = traceClassAnalyses;
+		assert !mappingPartitioners.isEmpty();
+		assert !traceClassAnalyses.isEmpty();
 	}
 
 	public @NonNull Iterable<@NonNull MappingPartitioner> getMappingPartitioners() {

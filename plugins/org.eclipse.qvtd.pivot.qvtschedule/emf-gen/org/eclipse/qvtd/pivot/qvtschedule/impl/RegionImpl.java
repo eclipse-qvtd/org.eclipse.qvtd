@@ -561,7 +561,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		}
 		if ((s == null) && (bestNamingNode != null)) {
 			s = new SymbolNameBuilder();
-			s.appendString(getSymbolNamePrefix());
+			//			s.appendString(getSymbolNamePrefix());
 			s.appendName(bestNamingNode.getCompleteClass().getName());
 			List<@NonNull String> headNames = new ArrayList<>();
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
@@ -578,7 +578,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		if (s == null) {
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 				s = new SymbolNameBuilder();
-				s.appendString(getSymbolNamePrefix());
+				//				s.appendString(getSymbolNamePrefix());
 				s.appendName(headNode.getCompleteClass().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigationEdges()) {

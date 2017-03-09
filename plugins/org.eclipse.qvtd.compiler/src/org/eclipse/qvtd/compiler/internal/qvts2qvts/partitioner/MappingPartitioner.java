@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
@@ -469,7 +470,8 @@ public class MappingPartitioner
 	}
 
 	public boolean isCyclic(@NonNull Node node) {
-		return transformationPartitioner.getCycleAnalysis(node.getCompleteClass()) != null;
+		CompleteClass traceClass = node.getCompleteClass();
+		return transformationPartitioner.isCyclic(traceClass);
 	}
 
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
