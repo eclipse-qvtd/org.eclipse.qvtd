@@ -39,8 +39,25 @@ import com.google.common.collect.Sets;
  */
 public class MappingPartitioner
 {
+	/**
+	 * The overall transforemation partitioner providing global analysis results.
+	 */
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
+
+	/**
+	 * The region to be partitioned.
+	 */
 	protected final @NonNull MappingRegion region;
+
+	/**
+	 * The TraceClassAnalysis instances that are consumed by this MappingPartitioner.
+	 */
+	private @Nullable List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = null;
+
+	/**
+	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
+	 */
+	private @Nullable List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = null;
 
 	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
@@ -93,6 +110,16 @@ public class MappingPartitioner
 		gatherCorrolaries();
 	}
 
+	private void addConsumptionOf(@NonNull Node node) {
+		predicatedMiddleNodes.add(node);
+		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(node.getCompleteClass(), this);
+		List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
+		if (consumedTraceClassAnalyses2 == null) {
+			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
+		}
+		consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
+	}
+
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
 		if (newEdgeRole == Role.PREDICATED) {
 			alreadyPredicatedEdges.add(edge);
@@ -115,6 +142,16 @@ public class MappingPartitioner
 
 	public void addProblem(@NonNull CompilerProblem problem) {
 		transformationPartitioner.addProblem(problem);
+	}
+
+	private void addProductionOf(@NonNull Node node) {
+		realizedMiddleNodes.add(node);
+		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addProducer(node.getCompleteClass(), this);
+		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+		if (producedTraceClassAnalyses2 == null) {
+			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
+		}
+		producedTraceClassAnalyses2.add(consumedTraceAnalysis);
 	}
 
 	public boolean addRealizedNode(@NonNull Node node) {
@@ -189,10 +226,10 @@ public class MappingPartitioner
 				}
 				else if (RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
 					if (node.isPredicated()) {
-						predicatedMiddleNodes.add(node);
+						addConsumptionOf(node);
 					}
 					else if (node.isRealized()) {
-						realizedMiddleNodes.add(node);
+						addProductionOf(node);
 						//					for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 						//						Node targetNode = edge.getTarget();
 						//						NodeRole targetNodeRole = targetNode.getNodeRole();
@@ -362,6 +399,11 @@ public class MappingPartitioner
 		return alreadyRealizedEdges;
 	}
 
+	public @Nullable Iterable<@NonNull TraceClassAnalysis> getConsumedTraceClassAnalyses() {
+		return consumedTraceClassAnalyses;
+	}
+
+
 	public @NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges() {
 		return navigableEdges;
 	}
@@ -376,6 +418,10 @@ public class MappingPartitioner
 
 	public @NonNull Iterable<@NonNull Node> getPredicatedOutputNodes() {
 		return predicatedOutputNodes;
+	}
+
+	public @Nullable Iterable<@NonNull TraceClassAnalysis> getProducedTraceClassAnalyses() {
+		return producedTraceClassAnalyses;
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {

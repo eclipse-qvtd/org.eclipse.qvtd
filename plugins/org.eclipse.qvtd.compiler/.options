@@ -60,6 +60,13 @@ org.eclipse.qvtd.compiler/qvts2qvts/merge/failure=false
 # Turn on tracing of the late merge correlation attempts
 org.eclipse.qvtd.compiler/qvts2qvts/merge/late=false
 
+# Turn on tracing of the cycles that need partitioning
+org.eclipse.qvtd.compiler/qvts2qvts/partition/cycles=false
+# Turn on tracing of the predecessors of each mapping
+org.eclipse.qvtd.compiler/qvts2qvts/partition/predecessors=false
+# Turn on tracing of the successors of each mapping
+org.eclipse.qvtd.compiler/qvts2qvts/partition/successors=false
+
 # Turn on tracing of the analysis for splitting of multi-headed regions
 #org.eclipse.qvtd.compiler/qvtm2qvts/split/analysis=false
 # Turn on tracing of the groups within multi-headed regions

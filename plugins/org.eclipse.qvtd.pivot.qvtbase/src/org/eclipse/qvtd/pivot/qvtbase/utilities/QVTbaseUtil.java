@@ -50,6 +50,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
+import com.google.common.collect.Iterables;
+
 public class QVTbaseUtil extends PivotUtil
 {
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
@@ -128,6 +130,15 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return null;
+	}
+
+	public static boolean containsAll(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
+		for (Object e : iterable2) {
+			if (!Iterables.contains(iterable1, e)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
