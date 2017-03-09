@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
@@ -72,6 +73,8 @@ public class TransformationPartitioner
 	 * is validated.
 	 */
 	private final @NonNull Set<@NonNull Property> corrolaryProperties = new HashSet<>();
+
+	@Nullable Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2cycles = null;
 
 	public TransformationPartitioner(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		this.problemHandler = problemHandler;
@@ -153,7 +156,7 @@ public class TransformationPartitioner
 		}
 	} */
 
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2cycles = computeCycles();
+		partitioner2cycles = computeCycles();
 		//
 		//	Each MiddleAnalysis produced only by acyclic partitioners identifies an acyclic trace class
 		//
@@ -282,6 +285,13 @@ public class TransformationPartitioner
 			return false;
 		}
 		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
+	}
+
+	public boolean isCyclic(@NonNull MappingPartitioner mappingPartitioner) {
+		assert partitioner2cycles != null;
+		Set<@NonNull MappingPartitioner> cycles = partitioner2cycles.get(mappingPartitioner);
+		assert cycles != null;
+		return !cycles.isEmpty();
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition() {

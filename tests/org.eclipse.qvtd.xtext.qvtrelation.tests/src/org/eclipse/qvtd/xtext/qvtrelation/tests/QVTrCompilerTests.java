@@ -319,10 +319,10 @@ public class QVTrCompilerTests extends LoadTestCase
 				"Forward2Reverse.qvtr", "reverse",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse", false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 2);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 5);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 4);
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();
@@ -399,10 +399,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
 				"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", false);//,
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 3);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("hier", "MiniModel.xmi");
@@ -594,10 +594,10 @@ public class QVTrCompilerTests extends LoadTestCase
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm", false);//,
 			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 			//
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 4);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("seqDgm", "Seq.xmi");
 			myQVT.executeTransformation();

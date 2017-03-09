@@ -223,10 +223,10 @@ public class UMLXCompilerTests extends LoadTestCase
 					"Forward2Reverse.umlx", "reverse",
 					"http://www.eclipse.org/qvtd/umlx/tests/forward2reverse/Forward2Reverse", false);//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 2);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 5);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 4);
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();

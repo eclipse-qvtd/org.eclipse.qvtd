@@ -515,7 +515,7 @@ public class MappingPartitioner
 			//			regions.add(createRealizedRegion());
 		}
 		else {
-			if (!hasLoadedNodes) {
+			if (!hasLoadedNodes || !transformationPartitioner.isCyclic(this)) {
 				regions.add(region);
 			}
 			else {
