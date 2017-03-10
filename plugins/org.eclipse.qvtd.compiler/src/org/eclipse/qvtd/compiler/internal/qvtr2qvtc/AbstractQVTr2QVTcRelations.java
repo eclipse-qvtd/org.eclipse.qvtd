@@ -1074,7 +1074,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		protected void mapRelationCallExpToPattern(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
 			// body of RWhenRelCallToMGuard
 			Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
-			Type invokedTraceClass/*tc*/ = qvtr2qvtc.getTraceClass(rInvokedRelation);		// ?? invocation
+			Type invokedTraceClass/*tc*/ = qvtr2qvtc.getTraceClass(rInvokedRelation);
+			Type invocationTraceClass/*tc*/ = rInvokedRelation.isIsTopLevel() ? invokedTraceClass : qvtr2qvtc.getTraceClass(rInvocation);
 			//
 			List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
 			/*						StringBuilder s = new StringBuilder();
@@ -1085,7 +1086,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			String vdId = s.toString(); */
 			String invokedName = "when_" + invokedTraceClass.getName()/* + vdId*/;
-			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(invokedName, invokedTraceClass);	// FIXME
+			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(invokedName, invocationTraceClass);
 			List<@NonNull Variable> rParameters = qvtr2qvtc.getRootVariables(rInvokedRelation);
 			int iSize = rArguments.size();
 			assert iSize == rParameters.size();

@@ -79,8 +79,8 @@ import com.google.common.collect.Iterables;
 			traceClass.setName(getUniqueTraceClassName(this, name));
 			qvtr2qvtc.putInvocationTrace(invocation, traceClass);
 			Relation2TraceClass superRelation2TraceClass = getRelation2TraceClass(relation);
-			traceClass.getSuperClasses().add(superRelation2TraceClass.getTraceClass());
-			name2property.putAll(superRelation2TraceClass.name2property);
+			//			traceClass.getSuperClasses().add(superRelation2TraceClass.getTraceClass());
+			//			name2property.putAll(superRelation2TraceClass.name2property);
 		}
 
 		private void createTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull TypedElement tv, boolean manyTraces) throws CompilerChainException {
@@ -248,6 +248,11 @@ import com.google.common.collect.Iterables;
 
 			for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(relation))  {
 				createTraceProperty(null, traceClass, rVariable, false);
+			}
+			if (invocation != null) {
+				for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(invocation.getReferredRelation()))  {
+					createTraceProperty(null, traceClass, rVariable, false);
+				}
 			}
 			if (testableRelations.contains(relation) ) {
 				Type booleanType = qvtr2qvtc.getStandardLibrary().getBooleanType();
