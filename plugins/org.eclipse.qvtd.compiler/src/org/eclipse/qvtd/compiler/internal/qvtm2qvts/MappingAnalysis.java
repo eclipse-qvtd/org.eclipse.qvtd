@@ -544,8 +544,9 @@ public class MappingAnalysis implements Nameable
 		analyzeComplexPredicates();
 		analyzeContainments();
 		//
-		Iterable<@NonNull Node> headNodes = RegionUtil.getHeadNodes(mappingRegion);
-		mappingRegion.computeUtilities(headNodes);
+		RegionHelper regionHelper = new RegionHelper(mappingRegion);
+		List<@NonNull Node> headNodes = regionHelper.initHeadNodes();
+		regionHelper.computeUtilities(headNodes);
 	}
 
 	/**

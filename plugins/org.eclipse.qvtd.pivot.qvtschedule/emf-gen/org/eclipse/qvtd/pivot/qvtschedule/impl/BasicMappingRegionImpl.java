@@ -170,11 +170,6 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 		variable2node.put(variable, node);
 	}
 
-	@Override
-	public void computeUtilities(@NonNull Iterable<@NonNull Node> headNodes) {
-		super.computeUtilities(headNodes);
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -20,12 +20,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -176,6 +176,7 @@ abstract class RegionMerger // implements Region
 		MappingRegion newRegion = createNewRegion(newName);
 		createNewNodes(newRegion);
 		createNewEdges();
+		RegionHelper.initHeadNodes(newRegion);
 		return newRegion;
 	}
 
