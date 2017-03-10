@@ -161,6 +161,19 @@ class SpeculatedPartition extends AbstractPartition
 		return super.isComputable(sourceNodes, edge);
 	}
 
+	/**
+	 * Return true if node is a corrolary of this mapping.
+	 */
+	private boolean isLocalCorrolary(@NonNull Node node) {
+		assert node.isRealized();
+		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			if (edge.isRealized() && edge.isNavigation() && partitioner.isCorrolary(edge)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	protected boolean resolveComputations(@NonNull Node targetNode) {
 		if (tracedInputNodes.contains(targetNode)) {
@@ -238,7 +251,7 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && !partitioner.isCorrolary(edge)) {
 				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isRealized()) {
+				if (!sourceNode.isRealized() || isLocalCorrolary(sourceNode)) {
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
