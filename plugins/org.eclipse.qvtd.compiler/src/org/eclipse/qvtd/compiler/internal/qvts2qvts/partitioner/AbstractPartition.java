@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -27,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -154,7 +154,7 @@ abstract class AbstractPartition
 	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		PartitioningVisitor partitioningVisitor = PartitioningVisitor.createPartialRegion(partitioner.getRegion(), namePrefix, symbolSuffix, this);
 		MicroMappingRegion microMappingRegion = partitioningVisitor.getRegion();
-		microMappingRegion.getHeadNodes();
+		RegionHelper.initHeadNodes(microMappingRegion);
 		check(microMappingRegion);
 		return microMappingRegion;
 	}

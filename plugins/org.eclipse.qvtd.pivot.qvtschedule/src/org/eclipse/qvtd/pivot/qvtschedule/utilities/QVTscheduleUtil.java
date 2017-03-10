@@ -13,10 +13,8 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 
@@ -91,102 +89,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		@Override
 		public @NonNull Node apply(@NonNull Edge edge) {
 			return edge.getEdgeTarget();
-		}
-	}
-	/**
-	 * HeadComparator supports sorting a list of Head candidates into a most suitable first order.
-	 */
-	public static final class HeadComparator implements Comparator<@NonNull Node>
-	{
-		private final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure;
-		private @Nullable Map<@NonNull Node, @NonNull Integer> node2implicity = null;
-
-		public HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure) {
-			this.targetFromSourceClosure = targetFromSourceClosure;
-		}
-
-		@Override
-		public int compare(@NonNull Node o1, @NonNull Node o2) {
-			//
-			//	Explicit head first
-			//
-			//			if (o1.isHead() != o2.isHead()) {
-			//				return o1.isHead() ? -1 : 1;
-			//			}
-			//
-			//	Speculated first
-			//
-			if (o1.isSpeculated() != o2.isSpeculated()) {
-				return o1.isSpeculated() ? -1 : 1;
-			}
-			//
-			//	Constant first - never happens
-			//
-			if (o1.isConstant() != o2.isConstant()) {
-				return o1.isConstant() ? -1 : 1;
-			}
-			//
-			//	Least reachable first
-			//
-			Set<@NonNull Node> set1 = targetFromSourceClosure.get(o1);
-			Set<@NonNull Node> set2 = targetFromSourceClosure.get(o2);
-			assert (set1 != null) && (set2 != null);
-			int l1 = set1.size();
-			int l2 = set2.size();
-			int diff = l1 - l2;
-			if (diff != 0) {
-				return diff;
-			}
-			//
-			//	Loaded first
-			//
-			if (o1.isLoaded() != o2.isLoaded()) {
-				return o1.isLoaded() ? -1 : 1;
-			}
-			//
-			//	Predicated first
-			//
-			if (o1.isPredicated() != o2.isPredicated()) {
-				return o1.isPredicated() ? -1 : 1;
-			}
-			//
-			//	Least implicit first (prefers middle to output)
-			//
-			int i1 = getImplicity(o1);
-			int i2 = getImplicity(o2);
-			diff = i1 - i2;
-			if (diff != 0) {
-				return diff;
-			}
-			//
-			//	Alphabetical
-			//
-			String n1 = o1.getName();
-			String n2 = o2.getName();
-			return n1.compareTo(n2);
-		}
-
-		/**
-		 * Return the number of outgoing implicit connection from node. A middle model node
-		 * has no implicit connections and so is a better candodate for a head than an output
-		 * model node which has implicit connections to the trace.
-		 */
-		private int getImplicity(@NonNull Node node) {
-			Map<@NonNull Node, @NonNull Integer> node2implicity2 = node2implicity;
-			if (node2implicity2 == null) {
-				node2implicity = node2implicity2 = new HashMap<>();
-			}
-			Integer implicity = node2implicity2.get(node);
-			if (implicity == null) {
-				implicity = 0;
-				for (@NonNull NavigableEdge e : node.getNavigationEdges()) {
-					if (e.getProperty().isIsImplicit()) {
-						implicity++;
-					}
-				}
-				node2implicity2.put(node, implicity);
-			}
-			return implicity;
 		}
 	}
 
