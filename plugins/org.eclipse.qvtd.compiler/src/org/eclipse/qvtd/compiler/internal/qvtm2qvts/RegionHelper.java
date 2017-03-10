@@ -25,7 +25,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -420,7 +419,7 @@ public class RegionHelper
 
 	public @NonNull List<@NonNull Node> initHeadNodes() {
 		List<@NonNull Node> headNodes = computeHeadNodes(mappingRegion);
-		((MappingRegionImpl)mappingRegion).getHeadNodes2().addAll(headNodes);
+		mappingRegion.getHeadNodes().addAll(headNodes);
 		return headNodes;
 	}
 

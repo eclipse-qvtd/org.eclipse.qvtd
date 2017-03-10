@@ -629,13 +629,22 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__OWNING_SCHEDULED_REGION = REGION__OWNING_SCHEDULED_REGION;
 
 	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__HEAD_NODES = REGION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 0;
+	int MAPPING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -745,6 +754,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int BASIC_MAPPING_REGION__OWNING_SCHEDULED_REGION = MAPPING_REGION__OWNING_SCHEDULED_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_MAPPING_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3295,6 +3313,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__OWNING_SCHEDULED_REGION = MAPPING_REGION__OWNING_SCHEDULED_REGION;
 
 	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Mapping Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3438,6 +3465,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MAPPING_REGION__OWNING_SCHEDULED_REGION = MAPPING_REGION__OWNING_SCHEDULED_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6400,6 +6436,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getMappingRegion();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getHeadNodes <em>Head Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Head Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getHeadNodes()
+	 * @see #getMappingRegion()
+	 * @generated
+	 */
+	EReference getMappingRegion_HeadNodes();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion <em>Micro Mapping Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7554,6 +7601,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPPING_REGION = eINSTANCE.getMappingRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Head Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_REGION__HEAD_NODES = eINSTANCE.getMappingRegion_HeadNodes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl <em>Micro Mapping Region</em>}' class.
