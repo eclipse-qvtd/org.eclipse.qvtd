@@ -446,6 +446,11 @@ public interface Node extends Element, ConnectionEnd, Nameable, GraphNode
 	boolean isSpeculation();
 
 	/**
+	 * Return true if this is a SuccessNode that provides predication/speculation status.
+	 */
+	boolean isSuccess();
+
+	/**
 	 * Return true if this is a TrueNode that terminates a complex predicate expression.
 	 */
 	boolean isTrue();

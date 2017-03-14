@@ -278,6 +278,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ScheduledRegion createScheduledRegion();
 
 	/**
+	 * Returns a new object of class '<em>Success Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Success Node</em>'.
+	 * @generated
+	 */
+	SuccessNode createSuccessNode();
+
+	/**
 	 * Returns a new object of class '<em>True Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

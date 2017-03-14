@@ -112,7 +112,6 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -1238,7 +1237,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			cgBody.accept(this);
 		}
 		//		if (cgGuardVariables != null)  {
-		for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
+		/*		for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
 			VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
 			if (asGuardVariable instanceof GuardParameter) {
 				GuardParameter asGuardParameter = (GuardParameter)asGuardVariable;
@@ -1262,7 +1261,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("}\n");
 				}
 			}
-		}
+		} */
 		//		}
 		if (cgGuardVariables != null)  {
 			if (isGeneratedDebug) {

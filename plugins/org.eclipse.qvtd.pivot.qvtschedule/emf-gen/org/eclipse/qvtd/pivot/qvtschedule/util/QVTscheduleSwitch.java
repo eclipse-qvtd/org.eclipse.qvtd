@@ -466,6 +466,17 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.SUCCESS_NODE: {
+				SuccessNode successNode = (SuccessNode)theEObject;
+				T result = caseSuccessNode(successNode);
+				if (result == null) result = caseNode(successNode);
+				if (result == null) result = caseElement(successNode);
+				if (result == null) result = caseConnectionEnd(successNode);
+				if (result == null) result = caseNameable(successNode);
+				if (result == null) result = caseVisitable(successNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.SYMBOLABLE: {
 				Symbolable symbolable = (Symbolable)theEObject;
 				T result = caseSymbolable(symbolable);
@@ -707,6 +718,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseScheduledRegion(ScheduledRegion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Success Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Success Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSuccessNode(SuccessNode object) {
 		return null;
 	}
 

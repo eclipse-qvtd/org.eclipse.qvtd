@@ -167,6 +167,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/ownedRegions"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/owningScheduleModel"/>
     </genClasses>
+    <genClasses ecoreClass="QVTschedule.ecore#//SuccessNode"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Symbolable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Symbolable/symbolName"/>
     </genClasses>

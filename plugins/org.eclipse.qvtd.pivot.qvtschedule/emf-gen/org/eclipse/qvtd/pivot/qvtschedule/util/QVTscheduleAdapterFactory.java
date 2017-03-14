@@ -229,6 +229,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createScheduledRegionAdapter();
 			}
 			@Override
+			public Adapter caseSuccessNode(SuccessNode object) {
+				return createSuccessNodeAdapter();
+			}
+			@Override
 			public Adapter caseSymbolable(Symbolable object) {
 				return createSymbolableAdapter();
 			}
@@ -471,6 +475,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScheduledRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.SuccessNode <em>Success Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.SuccessNode
+	 * @generated
+	 */
+	public Adapter createSuccessNodeAdapter() {
 		return null;
 	}
 

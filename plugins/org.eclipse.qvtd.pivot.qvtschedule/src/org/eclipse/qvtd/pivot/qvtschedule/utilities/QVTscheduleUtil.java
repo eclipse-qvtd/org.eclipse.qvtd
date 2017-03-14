@@ -626,7 +626,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return false;
 	}
 
-	public static Role mergeToLessKnownPhase(Role firstRole, Role secondRole) {
+	public static @NonNull Role mergeToLessKnownPhase(Role firstRole, Role secondRole) {
 		if (firstRole == Role.REALIZED) {
 			return firstRole;
 		}

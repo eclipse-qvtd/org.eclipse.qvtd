@@ -61,6 +61,7 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object);
 	R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object);
 	R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object);
+	R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object);
 	R visitTrueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TrueNode object);
 	R visitUnknownNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull UnknownNode object);
 	R visitVariableNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull VariableNode object);

@@ -268,6 +268,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegion"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuccessNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

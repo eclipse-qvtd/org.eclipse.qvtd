@@ -221,6 +221,11 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
+		return visitNode(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitTrueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TrueNode object) {
 		return visitNode(object);
 	}
