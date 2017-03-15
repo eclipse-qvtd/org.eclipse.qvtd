@@ -42,7 +42,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -107,58 +106,53 @@ public class DatumCaches
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
 		for (@NonNull Rule rule : QVTcoreUtil.getRule(transformation)) {
-			@SuppressWarnings("unused")
-			MappingAction mappingAction = analyzeMapping((Mapping) rule);
+			analyzeMapping((Mapping) rule);
 		}
 	}
 
-	private MappingAction analyzeMapping(@NonNull Mapping mapping) {
+	private void analyzeMapping(@NonNull Mapping mapping) {
 		MappingAction mappingAction = QVTscheduleFactory.eINSTANCE.createMappingAction();
 		mappingAction.setReferredMapping(mapping);
 		mappingAction.setOwningScheduleModel(scheduleManager.getScheduleModel());
 		List<@NonNull AbstractDatum> productions = QVTscheduleUtil.Internal.getProducedDatumsList(mappingAction);
 		List<@NonNull AbstractDatum> requisites = QVTscheduleUtil.Internal.getRequiredDatumsList(mappingAction);
-		for (@NonNull EObject eObj : new TreeIterable(mapping, true)) {
-			if (eObj instanceof GuardPattern) {
-				for (@NonNull Variable inputVar : QVTcoreUtil.getOwnedVariables((GuardPattern)eObj)) {
+		for (@NonNull EObject eObject : new TreeIterable(mapping, true)) {
+			if (eObject instanceof GuardPattern) {
+				for (@NonNull Variable inputVar : QVTcoreUtil.getOwnedVariables((GuardPattern)eObject)) {
 					TypedModel typedModel = getTypedModel(inputVar);
 					requisites.add(getClassDatum(typedModel, QVTcoreUtil.getClass(inputVar)));
 				}
 			}
-			if (eObj instanceof RealizedVariable) {
-				RealizedVariable outputVar = (RealizedVariable) eObj;
+			else if (eObject instanceof RealizedVariable) {
+				RealizedVariable outputVar = (RealizedVariable) eObject;
 				TypedModel typedModel = getTypedModel(outputVar);
 				productions.add(getClassDatum(typedModel, QVTcoreUtil.getClass(outputVar)));
 			}
-			else if (eObj instanceof OperationCallExp) {
-				OperationCallExp opCall = (OperationCallExp)eObj;
-				OCLExpression ownedSource = opCall.getOwnedSource();
-				assert ownedSource != null;
-				Type type = ownedSource.getType();
-				assert type != null;
+			else if (eObject instanceof OperationCallExp) {
+				OperationCallExp opCall = (OperationCallExp)eObject;
+				OCLExpression ownedSource = QVTcoreUtil.getOwnedSource(opCall);
+				Type type = QVTcoreUtil.getType(ownedSource);
 				CompleteClass context = completeModel.getCompleteClass(type);
 				requisites.addAll(getOperationPropertyDatums(opCall, context, new HashMap<>(), new HashMap<>()));
 			}
-			else if (eObj instanceof NavigationAssignment) {
-				productions.addAll(getAssignedPropertyDatums((NavigationAssignment)eObj));
+			else if (eObject instanceof NavigationAssignment) {
+				productions.addAll(getAssignedPropertyDatums((NavigationAssignment)eObject));
 			}
-			else if (eObj instanceof NavigationCallExp) {
-				NavigationCallExp navigationCallExp = (NavigationCallExp)eObj;
-				OCLExpression source = navigationCallExp.getOwnedSource();
-				assert source != null;
+			else if (eObject instanceof NavigationCallExp) {
+				NavigationCallExp navigationCallExp = (NavigationCallExp)eObject;
+				OCLExpression source = QVTcoreUtil.getOwnedSource(navigationCallExp);
 				TypedModel typedModel = getTypedModel(source);
-				Property property = PivotUtil.getReferredProperty(navigationCallExp);
+				Property property = QVTcoreUtil.getReferredProperty(navigationCallExp);
 				org.eclipse.ocl.pivot.Class context = QVTcoreUtil.getClass(source);
 				PropertyDatum propertyDatum = getPropertyDatum(typedModel, context, property);
 				requisites.add(propertyDatum);
 			}
 		}
-		return mappingAction;
 	}
 
 	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
 		org.eclipse.ocl.pivot.@NonNull Class aType = completeClass.getPrimaryClass();
-		Type elementType = PivotUtil.getElementalType(aType);
+		Type elementType = QVTcoreUtil.getElementalType(aType);
 		if (elementType instanceof DataType) {
 			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
 		}
@@ -195,8 +189,7 @@ public class DatumCaches
 			CallExp callExp = (CallExp) oclExp;
 			if (callExp instanceof OperationCallExp &&
 					isOclContainerOp(QVTcoreUtil.getReferredOperation(callExp))) {
-				OCLExpression ownedSource = callExp.getOwnedSource();
-				assert ownedSource != null;
+				OCLExpression ownedSource = QVTcoreUtil.getOwnedSource(callExp);
 				for (@NonNull CompleteClass oclContainerOpContext : computeContexts(ownedSource, variable2BoundContext)) {
 					Iterables.addAll(result, containmentAnalysis.getContainerClasses(oclContainerOpContext));
 				}
@@ -237,8 +230,7 @@ public class DatumCaches
 		result.add(targetDatum);
 		Property oppositeProp = targetProp.getOpposite();
 		if (oppositeProp != null) {
-			OCLExpression value = propAssign.getValue();
-			assert value != null;
+			OCLExpression value = QVTcoreUtil.getValue(propAssign);
 			DomainUsage valueUsage = getUsage(value);
 			if (valueUsage == null) {
 				getUsage(value);
@@ -286,10 +278,14 @@ public class DatumCaches
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {
 				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
-				for (@NonNull CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
-					if (superCompleteClass != completeClass) {		// FIXME Why is OclAny its own superClass ?
-						ClassDatum superClassDatum = getClassDatum(typedModel, superCompleteClass);
-						superClassDatums.add(superClassDatum);
+				for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
+					DomainUsage superUsage = getUsage(superCompleteClass.getPrimaryClass());
+					if (superUsage != null) {		// Ignore superClassDatum with differet typedModels (OclAny)
+						Iterable<@NonNull TypedModel> superTypedModels = superUsage.getTypedModels();
+						if ((Iterables.size(superTypedModels) == 1) && Iterables.contains(superTypedModels, typedModel)) {
+							ClassDatum superClassDatum = getClassDatum(typedModel, superCompleteClass);
+							superClassDatums.add(superClassDatum);
+						}
 					}
 				}
 			}
@@ -386,9 +382,8 @@ public class DatumCaches
 						updateVariableBindings((LetExp) eObject, variable2BoundContext);
 					} else if (eObject instanceof NavigationCallExp) {
 						NavigationCallExp navCallExp = (NavigationCallExp)eObject;
-						Property property = PivotUtil.getReferredProperty(navCallExp);
-						OCLExpression ownedSource = navCallExp.getOwnedSource();
-						assert ownedSource != null;
+						Property property = QVTcoreUtil.getReferredProperty(navCallExp);
+						OCLExpression ownedSource = QVTcoreUtil.getOwnedSource(navCallExp);
 						TypedModel typedModel = getTypedModel(ownedSource);
 						for (@NonNull CompleteClass newContext : getComputedContexts(navCallExp, variable2BoundContext)) {
 							PropertyDatum propertyDatum = getPropertyDatum(typedModel, newContext, property);
@@ -434,10 +429,9 @@ public class DatumCaches
 			}
 		}
 		// If not found we create it
-		TypedModel typedModel = classDatum.getReferredTypedModel();
-		assert typedModel != null;
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
-		org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
+		org.eclipse.ocl.pivot.Class owningClass = QVTcoreUtil.getOwningClass(property);
 		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setReferredTypedModel(typedModel);
@@ -485,7 +479,7 @@ public class DatumCaches
 	}
 
 	private @Nullable DomainUsage getUsage(@NonNull Element element) {
-		Operation operation = PivotUtil.getContainingOperation(element);
+		Operation operation = QVTcoreUtil.getContainingOperation(element);
 		if (operation != null) {
 			DomainUsageAnalysis analysis = domainUsageAnalysis.getAnalysis(operation);
 			return analysis.getUsage(element);
