@@ -172,6 +172,10 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(corePattern.getVariable());
 	}
 
+	public static @NonNull OCLExpression getSlotExpression(@NonNull NavigationAssignment asNavigationAssignment) {
+		return ClassUtil.nonNullState(asNavigationAssignment.getSlotExpression());
+	}
+
 	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
 		if (asNavigationAssignment instanceof PropertyAssignment) {
 			return ClassUtil.nonNullState(((PropertyAssignment)asNavigationAssignment).getTargetProperty());

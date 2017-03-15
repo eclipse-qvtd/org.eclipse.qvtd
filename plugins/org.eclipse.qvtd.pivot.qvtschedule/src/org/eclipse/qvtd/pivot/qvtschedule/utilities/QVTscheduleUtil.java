@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -34,10 +35,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
@@ -89,6 +92,17 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		@Override
 		public @NonNull Node apply(@NonNull Edge edge) {
 			return edge.getEdgeTarget();
+		}
+	}
+
+	public static class Internal
+	{
+		public static @NonNull List<@NonNull AbstractDatum> getProducedDatumsList(@NonNull MappingAction mappingAction) {
+			return ClassUtil.nullFree(mappingAction.getProducedDatums());
+		}
+
+		public static @NonNull List<@NonNull AbstractDatum> getRequiredDatumsList(@NonNull MappingAction mappingAction) {
+			return ClassUtil.nullFree(mappingAction.getRequiredDatums());
 		}
 	}
 
@@ -520,6 +534,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(scheduledRegion.getOwnedRegions());
 	}
 
+	public static @NonNull Iterable<@NonNull PropertyDatum> getOwningPropertyDatums(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nullFree(classDatum.getOwningPropertyDatums());
+	}
+
 	public static @NonNull ScheduledRegion getOwningScheduledRegion(@NonNull Region region) {
 		return ClassUtil.nonNullState(region.getOwningScheduledRegion());
 	}
@@ -536,12 +554,20 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(node.getOwningRegion());
 	}
 
+	public static @NonNull Iterable<@NonNull AbstractDatum> getProducedDatums(@NonNull MappingAction mappingAction) {
+		return ClassUtil.nullFree(mappingAction.getProducedDatums());
+	}
+
 	public static @NonNull Mapping getReferredMapping(@NonNull BasicMappingRegion basicMappingRegion) {
 		return ClassUtil.nonNullState(basicMappingRegion.getReferredMapping());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+	}
+
+	public static @NonNull Iterable<@NonNull AbstractDatum> getRequiredDatums(@NonNull MappingAction mappingAction) {
+		return ClassUtil.nullFree(mappingAction.getRequiredDatums());
 	}
 
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {
@@ -554,6 +580,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Node getSourceNode(@NonNull Edge edge) {
 		return ClassUtil.nonNullState(edge.getSourceNode());
+	}
+
+	public static @NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nullFree(classDatum.getSuperClassDatums());
 	}
 
 	public static @NonNull Node getTargetNode(@NonNull Edge edge) {
