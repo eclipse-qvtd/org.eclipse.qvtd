@@ -53,11 +53,13 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
 
@@ -117,6 +119,7 @@ public abstract class ScheduleManager implements Adapter
 		domainAnalysis.analyzeTransformation(asTransformation);
 		this.datumCaches = new DatumCaches(this);
 		datumCaches.analyzeTransformation(asTransformation);
+		analyzeCallTree();
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
 		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
@@ -131,6 +134,40 @@ public abstract class ScheduleManager implements Adapter
 
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
 		throw new UnsupportedOperationException();		// FIXME move to caller
+	}
+
+	private void analyzeCallTree() {
+		Map<@NonNull Mapping, @NonNull List<@NonNull Mapping>> consumer2producers = new HashMap<>();
+		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();
+		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
+		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
+			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+			DomainUsage usage = domainAnalysis.getUsage(typedModel);
+			if (usage.isMiddle()) {
+				middleClassDatums.add(classDatum);
+				if (s != null) {
+					s.append("middle: " + classDatum.getProducedByActions() + "\n");
+				}
+				for (@NonNull MappingAction consumerAction : QVTscheduleUtil.getRequiredByActions(classDatum)) {
+					Mapping consumer = QVTscheduleUtil.getReferredMapping(consumerAction);
+					List<@NonNull Mapping> producers = consumer2producers.get(consumer);
+					if (producers == null) {
+						producers = new ArrayList<>();
+						consumer2producers.put(consumer, producers);
+					}
+					for (@NonNull MappingAction producerAction : QVTscheduleUtil.getProducedByActions(classDatum)) {
+						Mapping producer = QVTscheduleUtil.getReferredMapping(producerAction);
+						if (!producers.contains(producer)) {
+							producers.add(producer);
+						}
+					}
+				}
+			}
+		}
+		if (s != null) {
+			s.append("consumer2producers: " + consumer2producers);
+			QVTm2QVTs.CALL_TREE.println(s.toString());
+		}
 	}
 
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);

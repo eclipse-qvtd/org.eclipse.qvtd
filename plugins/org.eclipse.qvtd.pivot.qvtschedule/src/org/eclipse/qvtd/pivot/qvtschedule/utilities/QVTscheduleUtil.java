@@ -518,6 +518,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(node.getOutgoingEdges());
 	}
 
+	public static @NonNull Iterable<@NonNull ClassDatum> getOwnedClassDatums(@NonNull ScheduleModel scheduleModel) {
+		return ClassUtil.nullFree(scheduleModel.getOwnedClassDatums());
+	}
+
 	public static @NonNull Iterable<@NonNull Connection> getOwnedConnections(@NonNull ScheduledRegion scheduledRegion) {
 		return ClassUtil.nullFree(scheduledRegion.getOwnedConnections());
 	}
@@ -554,8 +558,16 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(node.getOwningRegion());
 	}
 
+	public static @NonNull Iterable<@NonNull MappingAction> getProducedByActions(@NonNull AbstractDatum abstractDatum) {
+		return ClassUtil.nullFree(abstractDatum.getProducedByActions());
+	}
+
 	public static @NonNull Iterable<@NonNull AbstractDatum> getProducedDatums(@NonNull MappingAction mappingAction) {
 		return ClassUtil.nullFree(mappingAction.getProducedDatums());
+	}
+
+	public static @NonNull Mapping getReferredMapping(@NonNull MappingAction mappingAction) {
+		return ClassUtil.nonNullState(mappingAction.getReferredMapping());
 	}
 
 	public static @NonNull Mapping getReferredMapping(@NonNull BasicMappingRegion basicMappingRegion) {
@@ -564,6 +576,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+	}
+
+	public static @NonNull Iterable<@NonNull MappingAction> getRequiredByActions(@NonNull AbstractDatum abstractDatum) {
+		return ClassUtil.nullFree(abstractDatum.getRequiredByActions());
 	}
 
 	public static @NonNull Iterable<@NonNull AbstractDatum> getRequiredDatums(@NonNull MappingAction mappingAction) {

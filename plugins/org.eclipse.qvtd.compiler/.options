@@ -34,6 +34,8 @@ org.eclipse.qvtd.compiler/qvtm2qvts/dump/inputModel2domainUsage=false
 # Turn on dump of the possible containing properties for each class 
 org.eclipse.qvtd.compiler/qvtm2qvts/dump/property2consumingClass=false
 
+# Turn on tracing of the inter-region call tree
+org.eclipse.qvtd.compiler/qvtm2qvts/callTree=false
 # Turn on tracing of the region cycle resolution 
 org.eclipse.qvtd.compiler/qvtm2qvts/regionCycles=false
 # Turn on tracing of the region depth computation 
