@@ -42,10 +42,10 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 	 * Compile all *.java files on sourcePath to objectPath.
 	 * e.g. from ../xyzzy/src/a/b/c to ../xyzzy/bin
 	 */
-	public static void compileClasses(@NonNull String sourcePath, @NonNull String objectPath, @Nullable List<@NonNull String> classpathProjects) throws IOException {
+	public static @Nullable String compileClasses(@NonNull String sourcePath, @NonNull String objectPath, @Nullable List<@NonNull String> classpathProjects) throws IOException {
 		try {
 			List<@NonNull JavaFileObject> compilationUnits = gatherCompilationUnits(new File(sourcePath), null);
-			JavaFileUtil.compileClasses(compilationUnits, sourcePath, objectPath, classpathProjects);
+			return JavaFileUtil.compileClasses(compilationUnits, sourcePath, objectPath, classpathProjects);
 		}
 		catch (Throwable e) {
 			throw e;

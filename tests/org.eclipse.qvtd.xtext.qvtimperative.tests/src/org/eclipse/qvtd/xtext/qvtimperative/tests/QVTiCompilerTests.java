@@ -95,7 +95,8 @@ public class QVTiCompilerTests extends LoadTestCase
 			String javaCodeSource = cg.generateClassFile();
 			String string = explicitClassPath.toString();
 			assert string != null;
-			OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource);
+			String message = OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource);
+			assertNull(message);
 			@SuppressWarnings("unchecked")
 			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
 			return txClass;
