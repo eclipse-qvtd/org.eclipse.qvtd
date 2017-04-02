@@ -137,7 +137,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				}
 				saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 				Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.getOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-				GenModel genModel = t.saveGenModel(traceResource, traceURI, genModelURI, compilerChain.getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
+				GenModel genModel = t.saveGenModel(this, traceResource, traceURI, genModelURI, compilerChain.getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
 
 				if (classURI != null) {
 					String binProjectName = t.getProjectName(traceURI);

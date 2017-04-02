@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -72,6 +73,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -110,6 +112,18 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
 	public static final @NonNull TracingOption VARIABLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/variables");
+
+	public static final class GenPackageComparator implements Comparator<@NonNull GenPackage>
+	{
+		public static final @NonNull GenPackageComparator INSTANCE = new GenPackageComparator();
+
+		@Override
+		public int compare(@NonNull GenPackage o1, @NonNull GenPackage o2) {
+			String n1 = String.valueOf(o1.getNSURI());
+			String n2 = String.valueOf(o2.getNSURI());
+			return n1.compareTo(n2);
+		}
+	}
 
 	private static final class Generator extends org.eclipse.emf.codegen.ecore.generator.Generator
 	{
@@ -636,6 +650,28 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return ClassUtil.nonNullState(rTransformation2tracePackage.get(rTransformation));
 	}
 
+	private void getUsedGenPackageClosure(@NonNull ProblemHandler problemHandler, @NonNull Map<@NonNull String, @NonNull GenPackage> uri2genPackage, @NonNull Iterable<@NonNull ? extends GenPackage> genPackages) {
+		for (@NonNull GenPackage newGenPackage : genPackages) {
+			String nsURI = newGenPackage.getNSURI();
+			if (nsURI == null) {
+				problemHandler.addProblem(new CompilerChainException("Null nsURI for " + newGenPackage, newGenPackage));
+			}
+			else {
+				GenPackage oldGenPackage = uri2genPackage.put(nsURI, newGenPackage);
+				if (oldGenPackage != newGenPackage) {
+					if (oldGenPackage != null) {
+						problemHandler.addProblem(new CompilerChainException("Conflicting " + oldGenPackage + " ignored", oldGenPackage));
+					}
+					else {
+						GenModel newGenModel = newGenPackage.getGenModel();
+						Iterable<GenPackage> newUsedGenPackages = ClassUtil.nullFree(newGenModel.getUsedGenPackages());
+						getUsedGenPackageClosure(problemHandler, uri2genPackage, newUsedGenPackages);
+					}
+				}
+			}
+		}
+	}
+
 	protected void mapQueries(@NonNull RelationalTransformation rTransformation, @NonNull Transformation cTransformation) {
 		List<@NonNull Operation> cOperations = new ArrayList<>();
 		for (@NonNull Operation rOperation : QVTbaseUtil.getOwnedOperations(rTransformation)) {
@@ -796,7 +832,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		asResource.save(options);
 	}
 
-	public @NonNull GenModel saveGenModel(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
+	public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
 		URI trimFileExtension = traceURI.trimFileExtension();
 		String projectName = getProjectName(traceURI);
 		Resource genmodelResource = environmentFactory.getResourceSet().createResource(genModelURI);
@@ -806,8 +842,13 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		if (copyrightText != null) {
 			genModel.setCopyrightText(copyrightText);
 		}
+		Map<@NonNull String, @NonNull GenPackage> uri2genPackage = new HashMap<>();
+		List<@NonNull GenPackage> allUsedGenPackages = new ArrayList<>();
 		if (usedGenPackages != null) {
-			genModel.getUsedGenPackages().addAll(usedGenPackages);
+			getUsedGenPackageClosure(problemHandler, uri2genPackage, usedGenPackages);
+			allUsedGenPackages.addAll(uri2genPackage.values());
+			Collections.sort(allUsedGenPackages, GenPackageComparator.INSTANCE);
+			genModel.getUsedGenPackages().addAll(allUsedGenPackages);
 		}
 		genModel.setModelDirectory("/" + projectName + "/src-gen");
 		genModel.setModelPluginID(projectName);
@@ -866,8 +907,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					EPackage ePackage = (EPackage) asPackage.getESObject();
 					if (ePackage != null) {
 						GenPackage genPackage = null;
-						if (usedGenPackages != null) {
-							for (@NonNull GenPackage usedGenPackage : usedGenPackages) {
+						if (allUsedGenPackages != null) {
+							for (@NonNull GenPackage usedGenPackage : allUsedGenPackages) {
 								EPackage ecorePackage = usedGenPackage.getEcorePackage();
 								if ((ecorePackage != null) && ClassUtil.safeEquals(ecorePackage.getNsURI(), ePackage.getNsURI())) {
 									genPackage = usedGenPackage;

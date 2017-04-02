@@ -49,7 +49,9 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 /**
  * Merge the QVT Pivot files intp a single flat package for use by ModelMorf
@@ -59,7 +61,7 @@ public class QVTPivot2FlatQVTPivot
 
 	public static void main(String [ ] args) throws IOException {
 		ProjectMap projectMap = new ProjectMap(false);
-//		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
+		//		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
 		ResourceSet ecoreResourceSet = new ResourceSetImpl();
 		projectMap.initializeResourceSet(ecoreResourceSet);
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
@@ -81,18 +83,18 @@ public class QVTPivot2FlatQVTPivot
 			for (EObject eObject : ecoreResource.getContents()) {
 				if (eObject instanceof EPackage) {
 					EPackage ePackage = (EPackage)eObject;
-					for (EClassifier eClassifier : new ArrayList<EClassifier>(ePackage.getEClassifiers()))
-//						if (!"OppositePropertyCallExp".equals(eClassifier.getName()) || "pivot".equals(ePackage.getName())) {
-							flatPackage.getEClassifiers().add(eClassifier);
-//						}
+					for (EClassifier eClassifier : new ArrayList<>(ePackage.getEClassifiers()))
+						//						if (!"OppositePropertyCallExp".equals(eClassifier.getName()) || "pivot".equals(ePackage.getName())) {
+						flatPackage.getEClassifiers().add(eClassifier);
+					//						}
 				}
 			}
 		}
 		Resource flatResource = ecoreResourceSet.createResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.build/model-gen/FlatQVTpivot.ecore", true));
 		flatResource.getContents().add(flatPackage);
 		alphabeticize(flatResource);
-//		assignIDs(flatResource);
-		Map<String, Object> saveOptions = new HashMap<String, Object>();
+		//		assignIDs(flatResource);
+		Map<String, Object> saveOptions = new HashMap<>();
 		saveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
 		saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
 		saveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
@@ -101,9 +103,9 @@ public class QVTPivot2FlatQVTPivot
 		//	Create ModelMorf compatible FlatQVT.xml
 		//
 		Resource emofResource = ecoreResourceSet.createResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.build/model-gen/FlatQVTpivot.emof", true));
-//		emofResource.setURI(URI.createPlatformResourceURI("/org.eclipse.qvtd.build/model-gen/FlatQVTpivot.xml", true));
+		//		emofResource.setURI(URI.createPlatformResourceURI("/org.eclipse.qvtd.build/model-gen/FlatQVTpivot.xml", true));
 		emofResource.getContents().addAll(flatResource.getContents());
-		List<EReference> eReferences = new ArrayList<EReference>();
+		List<EReference> eReferences = new ArrayList<>();
 		for (TreeIterator<EObject> tit = emofResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof EPackage) {
@@ -120,9 +122,9 @@ public class QVTPivot2FlatQVTPivot
 					else if ("Integer".equals(eType.getName())) {
 						eTypedElement.setEType(EcorePackage.Literals.EINT);
 					}
-//					else if ("Real".equals(eType.getName())) {
-//						eTypedElement.setEType(EcorePackage.Literals.EDOUBLE);
-//					}
+					//					else if ("Real".equals(eType.getName())) {
+					//						eTypedElement.setEType(EcorePackage.Literals.EDOUBLE);
+					//					}
 					else if ("String".equals(eType.getName())) {
 						eTypedElement.setEType(EcorePackage.Literals.ESTRING);
 					}
@@ -172,11 +174,11 @@ public class QVTPivot2FlatQVTPivot
 			}
 		}
 
-//		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		//		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		emofResource.save(saveOptions);
-//		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
-//		OutputStream s = URIConverter.WriteableOutputStream();
-		Map<String, Object> emofSaveOptions = new HashMap<String, Object>();
+		//		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+		//		OutputStream s = URIConverter.WriteableOutputStream();
+		Map<String, Object> emofSaveOptions = new HashMap<>();
 		emofSaveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
 		emofSaveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
 		emofSaveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
@@ -195,7 +197,7 @@ public class QVTPivot2FlatQVTPivot
 		return;
 	}
 
-/*	public static void disorderNonCollections(Resource umlResource) {
+	/*	public static void disorderNonCollections(Resource umlResource) {
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
 			if (eObject instanceof Property) {
@@ -208,7 +210,7 @@ public class QVTPivot2FlatQVTPivot
 		}
 	} */
 
-/*	public static void nameAssociations(Resource umlResource) {
+	/*	public static void nameAssociations(Resource umlResource) {
 		List<List<? extends NamedElement>> listOfLists = new ArrayList<List<? extends NamedElement>>();
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
@@ -216,7 +218,7 @@ public class QVTPivot2FlatQVTPivot
 				Association association = (Association) eObject;
 				List<String> endNames = new ArrayList<String>();
 				for (Property end : association.getMemberEnds()) {
-					Type type = end.getClass_(); 
+					Type type = end.getClass_();
 					String name = (type != null ? (safeNameOf(type) + ".") : "") + safeNameOf(end);
 					endNames.add(name != null ? name : "$$null$$");
 				}
@@ -235,26 +237,26 @@ public class QVTPivot2FlatQVTPivot
 	} */
 
 	public static void alphabeticize(Resource ecoreResource) {
-		List<List<? extends ENamedElement>> listOfLists = new ArrayList<List<? extends ENamedElement>>();
+		List<List<@NonNull ? extends ENamedElement>> listOfLists = new ArrayList<>();
 		for (Iterator<EObject> it = ecoreResource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
 			if (eObject instanceof EPackage) {
 				EPackage ePackage = (EPackage) eObject;
-				listOfLists.add(ePackage.getESubpackages());
-				listOfLists.add(ePackage.getEClassifiers());
+				listOfLists.add(ClassUtil.nullFree(ePackage.getESubpackages()));
+				listOfLists.add(ClassUtil.nullFree(ePackage.getEClassifiers()));
 			}
 			else if (eObject instanceof EClass) {
 				EClass eClass = (EClass) eObject;
-				listOfLists.add(eClass.getESuperTypes());
-				listOfLists.add(eClass.getEStructuralFeatures());
-				listOfLists.add(eClass.getEOperations());
+				listOfLists.add(ClassUtil.nullFree(eClass.getESuperTypes()));
+				listOfLists.add(ClassUtil.nullFree(eClass.getEStructuralFeatures()));
+				listOfLists.add(ClassUtil.nullFree(eClass.getEOperations()));
 			}
 		}
-		for (List<? extends ENamedElement> list : listOfLists) {
+		for (List<@NonNull ? extends ENamedElement> list : listOfLists) {
 			sortList(list);
 		}
 	}
-	
+
 
 	public static String safeNameOf(Object object) {
 		if (object == null) {
@@ -272,10 +274,10 @@ public class QVTPivot2FlatQVTPivot
 		}
 		return name;
 	}
-	
+
 
 	public static void assignIDs(Resource umlResource) {
-/*		UMLSwitch<String> idAssigner = new UMLSwitch<String>() {
+		/*		UMLSwitch<String> idAssigner = new UMLSwitch<String>() {
 
 			@Override
 			public String caseComment(Comment object) {
@@ -319,7 +321,7 @@ public class QVTPivot2FlatQVTPivot
 			public String caseProperty(Property object) {
 				return safeNameOf(object.getOwner()) + "." + safeNameOf(object);
 			}
-			
+
 			@Override
 			public String casePackage(Package object) {
 				return object.getName();
@@ -342,7 +344,7 @@ public class QVTPivot2FlatQVTPivot
 				}
 				return safeNameOf(object);
 			}
-			
+
 		};
 		Map<String, EObject> assignedIds = new HashMap<String, EObject>();
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
@@ -361,8 +363,8 @@ public class QVTPivot2FlatQVTPivot
 		} */
 	}
 
-	protected static <T extends ENamedElement> void sortList(List<T> list) {
-		List<T> newList = new ArrayList<T>(list);
+	protected static <@NonNull T extends ENamedElement> void sortList(List<T> list) {
+		List<T> newList = new ArrayList<>(list);
 		Collections.sort(newList, new Comparator<T>()
 		{
 			@Override

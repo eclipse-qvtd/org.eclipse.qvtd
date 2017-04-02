@@ -241,6 +241,9 @@
             pattern="org.eclipse.qvtd.cs2as.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.atl"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.build.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"

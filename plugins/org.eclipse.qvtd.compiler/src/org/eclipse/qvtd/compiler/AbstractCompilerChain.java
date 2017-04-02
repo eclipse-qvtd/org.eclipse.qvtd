@@ -237,7 +237,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				ScheduledRegion scheduledRegion = qvts2qvts.transform(qvtm2qvts, activeRegions);
 				ScheduleManager scheduleManager = RegionUtil.getScheduleManager(scheduledRegion);
 				throwCompilerChainExceptionForErrors();
-				compiled(scheduleManager);			// FIXME
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				saveResource(sResource);
 				return scheduledRegion;

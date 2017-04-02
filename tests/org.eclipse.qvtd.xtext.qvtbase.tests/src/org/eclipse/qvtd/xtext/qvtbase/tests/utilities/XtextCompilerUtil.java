@@ -34,6 +34,9 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -95,6 +98,13 @@ public class XtextCompilerUtil extends CompilerUtil
 		QVTcore qvtc = QVTcore.newInstance(ProjectManager.NO_PROJECTS, null);
 		Resource cResource2 = QVTcoreUtil.loadTransformations(qvtc.getEnvironmentFactory(), serializedURI, false);
 		assertNoResourceErrors("Core Load", cResource2);
+	}
+
+	public static void doQVTiSerializeAndLoad(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
+		/*XtextResource csResource =*/ doSerialize(inputURI, serializedURI);
+		QVTimperative qvti = QVTimperative.newInstance(ProjectManager.NO_PROJECTS, null);
+		Resource iResource2 = QVTimperativeUtil.loadTransformations(ImperativeModel.class, qvti.getEnvironmentFactory(), serializedURI, false);
+		assertNoResourceErrors("IMperative Load", iResource2);
 	}
 
 	private static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {

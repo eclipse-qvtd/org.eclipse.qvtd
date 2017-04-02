@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation
+ *******************************************************************************/
+--import atlMM : 'platform:/plugin/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/0'; 
+--import atloclMM : 'platform:/plugin/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/1'; 
+--import atlprimsMM : 'platform:/plugin/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/2'; 
+import atlMM : 'platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/0'; 
+import atloclMM : 'platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/1'; 
+import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/2'; 
+--import atlMM : 'http://www.eclipse.org/gmt/2005/ATL'; 
+--import atloclMM : 'http://www.eclipse.org/gmt/2005/OCL'; 
+--import atlprimsMM : 'http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes'; 
+
+import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::pivot;                            -- HHR Use Pivot metamodels
+import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;               -- HHR Use Pivot metamodels
+import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;   -- HHR Use Pivot metamodels
+import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;   -- HHR Use Pivot metamodels
+
+package org::eclipse::qvtd::atl::atl2qvtr {
+/**
+ * Transform an ATL transformation to a QVTr transformation
+ */
+	transformation ATL2QVTr(atl:{atlMM,atloclMM,atlprimsMM}, qvtr:{qvtrelation,qvttemplate,qvtbase,pivotocl})
+	{
+		/**
+		 *  atl::Module <=> qvtr::RelationalTransformation
+		 */
+		top relation Model2RelationalTransformation {
+			txName : String;
+			enforce domain atl module : Module {
+				name = txName
+			};	   
+			enforce domain qvtr relModel : RelationModel {
+				name = null,
+				ownedPackages = : Package {
+					name = null,
+					ownedClasses = : RelationalTransformation {
+						name = txName
+					}
+				}
+			};
+		}
+	}
+}
