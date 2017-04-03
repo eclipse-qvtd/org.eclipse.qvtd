@@ -237,7 +237,7 @@ public class EarlyMerger extends AbstractMerger
 				if (secondary2primary != null) {
 					boolean doMerge = false;
 					if (!isSharedHead(primaryRegion, secondaryRegion)) {
-						doMerge = true;
+						doMerge = false;
 					}
 					else if (Correlator.correlate(primaryRegion, secondaryRegion, EarlyStrategy.INSTANCE, secondary2primary.getNode2Node()) != null) {
 						doMerge = true;
