@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtr="http://www.eclipse.org/qvt/2017/QVTrelation"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage">
+  <ownedPackages>
+    <ownedClasses xsi:type="qvtr:RelationalTransformation" name="Families2Persons"/>
+  </ownedPackages>
+</qvtr:RelationModel>
