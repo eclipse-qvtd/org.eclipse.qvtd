@@ -249,6 +249,7 @@ public class EarlyMerger extends AbstractMerger
 						regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
 						regionMerger.prune();
 						mergedRegion = regionMerger.create();
+						primaryRegion.getScheduleModel().getOwnedOtherMappingRegions().add(mergedRegion);
 						regionMerger.check(mergedRegion);
 						primaryRegion = mergedRegion;
 					}
