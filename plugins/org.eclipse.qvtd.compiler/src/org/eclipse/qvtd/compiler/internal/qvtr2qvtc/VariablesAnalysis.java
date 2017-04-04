@@ -331,7 +331,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	public void addNavigationPredicate(@NonNull CorePattern cCorePattern, @NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) throws CompilerChainException {
 		Variable cTargetVariable = getCoreVariable(rTargetVariable);
 		NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cTargetVariable), targetProperty);
-		addConditionPredicate(cCorePattern, cNavigationExp, cExpression);
+		if (cExpression instanceof VariableExp) {
+			addConditionPredicate(cCorePattern, cExpression, cNavigationExp);
+		}
+		else {
+			addConditionPredicate(cCorePattern, cNavigationExp, cExpression);
+		}
 	}
 
 	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) throws CompilerChainException {
