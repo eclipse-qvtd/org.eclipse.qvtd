@@ -456,7 +456,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		for (@NonNull Region region : sortedRegions) {
 			//			if (!region.isConnectionRegion()) {
 			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
-			region2Mapping.createStatements();
+			region2Mapping.createSchedulingStatements();
 			//			}
 		}
 		// Mappings are in schedule index order.

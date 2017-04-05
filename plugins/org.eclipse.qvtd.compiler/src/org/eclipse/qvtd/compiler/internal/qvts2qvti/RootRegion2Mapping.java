@@ -123,37 +123,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	}
 
 	@Override
-	protected @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode) {
-		throw new UnsupportedOperationException();
-		/*refactored code inlined at call point -- ?? ok, but needs usage analysis
-		OCLExpression initExpression = createObjectsOfKindExpression(resultNode);
-		List<@NonNull Edge> incomingEdges = resultNode.getIncomingEdges();
-		switch (incomingEdges.size()) {
-			case 0: break;
-			case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
-			default: assert false;
-		}
-		return initExpression; */
-		/*very old code
-		Variable resultVariable = node2variable.get(resultNode);
-		if (resultVariable == null) {
-			OCLExpression asSource = getRootsVariable(resultNode);
-			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();
-			CollectionType sourceCollectionType = (CollectionType) sourceCompleteClass.getPrimaryClass();
-			Type elementType = sourceCollectionType.getElementType();
-			assert elementType != null;
-			CompleteClass sourceElementClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
-			OCLExpression asTypeExp = createTypeExp(sourceElementClass);
-			OCLExpression selectExp = createOperationCallExp(asSource, getSelectByKindOperation(), asTypeExp);
-			resultVariable = PivotUtil.createVariable(resultNode.getName(), selectExp);
-			mapping.getBottomPattern().getVariable().add(resultVariable);
-			node2variable.put(resultNode, resultVariable);
-		}
-		return helper.createVariableExp(resultVariable); */
-	}
-
-	@Override
-	public void createStatements() {
+	public void createSchedulingStatements() {
 		//		BottomPattern bottomPattern = mapping.getBottomPattern();
 		createRootConnectionVariables();
 		/*		//
@@ -222,6 +192,36 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				ownedStatements.add(createCall(callableRegion, null));
 			}
 		}
+	}
+
+	@Override
+	protected @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode) {
+		throw new UnsupportedOperationException();
+		/*refactored code inlined at call point -- ?? ok, but needs usage analysis
+		OCLExpression initExpression = createObjectsOfKindExpression(resultNode);
+		List<@NonNull Edge> incomingEdges = resultNode.getIncomingEdges();
+		switch (incomingEdges.size()) {
+			case 0: break;
+			case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
+			default: assert false;
+		}
+		return initExpression; */
+		/*very old code
+		Variable resultVariable = node2variable.get(resultNode);
+		if (resultVariable == null) {
+			OCLExpression asSource = getRootsVariable(resultNode);
+			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();
+			CollectionType sourceCollectionType = (CollectionType) sourceCompleteClass.getPrimaryClass();
+			Type elementType = sourceCollectionType.getElementType();
+			assert elementType != null;
+			CompleteClass sourceElementClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
+			OCLExpression asTypeExp = createTypeExp(sourceElementClass);
+			OCLExpression selectExp = createOperationCallExp(asSource, getSelectByKindOperation(), asTypeExp);
+			resultVariable = PivotUtil.createVariable(resultNode.getName(), selectExp);
+			mapping.getBottomPattern().getVariable().add(resultVariable);
+			node2variable.put(resultNode, resultVariable);
+		}
+		return helper.createVariableExp(resultVariable); */
 	}
 
 	@Override

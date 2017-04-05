@@ -88,7 +88,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -651,6 +650,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
 		@SuppressWarnings("unused")String name = region.getName();
+		//
+		//	Create the 'local' statements.
+		//
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createNavigablePredicates();				// BLUE/CYAN navigable nodes and edges
 		createExternalPredicates();					// BLUE/CYAN computations involving a true guard node
@@ -659,6 +661,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createAddStatements();						// export to append nodes
 		createRealizedIncludesAssignments();
 		createObservedProperties();					// wrap observable clauses around hazardous accesses
+		//
+		//	The 'global' statements are created by createSchedulingStatements().
+		//
 	}
 
 	/*	@Override
@@ -792,6 +797,34 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return newVariable;
 	}
 
+	private void createCastPredicates(@NonNull Node sourceNode, @NonNull VariableDeclaration sourceVariable) {
+		for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+			if (edge.isCast() && edge.isUnconditional()) {
+				Node targetNode = RegionUtil.getTargetNode(edge);
+				Property castProperty = RegionUtil.getProperty(edge);
+				Type targetType = PivotUtil.getType(castProperty);
+				VariableExp sourceExpression = helper.createVariableExp(sourceVariable);
+				VariableDeclaration targetVariable = node2variable.get(targetNode);
+				if (targetVariable == null) {
+					boolean isRequired = sourceVariable.isIsRequired();
+					String safeName = getSafeName(PivotUtil.getName(sourceVariable));
+					DeclareStatement declareStatement = helper.createDeclareStatement(safeName, targetType, isRequired, sourceExpression);
+					declareStatement.setIsCheck(true);
+					mapping.getOwnedStatements().add(declareStatement);
+					targetVariable = declareStatement;
+					node2variable.put(targetNode, targetVariable);
+					createCastPredicates(targetNode, targetVariable);
+				}
+				else {
+					OCLExpression typeExpression = helper.createTypeExp(targetType);
+					OCLExpression conditionExpression = helper.createOperationCallExp(sourceExpression, "oclIsKindOf", typeExpression);
+					CheckStatement checkStatement = helper.createCheckStatement(conditionExpression);
+					mapping.getOwnedStatements().add(checkStatement);
+				}
+			}
+		}
+	}
+
 	private void createClassSetStatements(@NonNull Iterable<@NonNull List<@NonNull NavigableEdge>> classAssignments) {
 		for (@NonNull List<@NonNull NavigableEdge> edges : classAssignments) {
 			for (@NonNull NavigableEdge edge : edges) {
@@ -840,8 +873,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					assert targetExpression != null;
 					conditionExpression = helper.createOperationCallExp(conditionExpression, name, targetExpression);
 				}
-				CheckStatement asPredicate = QVTimperativeFactory.eINSTANCE.createCheckStatement();
-				asPredicate.setOwnedExpression(conditionExpression);
+				CheckStatement asPredicate = helper.createCheckStatement(conditionExpression);
 				mapping.getOwnedStatements().add(asPredicate);
 			}
 		}
@@ -1026,10 +1058,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (!targetNode.isExplicitNull()) {
 				VariableDeclaration nodeVariable = node2variable.get(targetNode);
 				assert nodeVariable == null;
-				/*DeclareStatement declareStatement =*/ createBottomVariable(targetNode, source2targetExp);
+				DeclareStatement declareStatement = createBottomVariable(targetNode, source2targetExp);
 				//				if (isHazardousRead(traversedEdge)) {
 				//					declareStatement.getObservedProperties().add(property);
 				//				}
+				createCastPredicates(targetNode, declareStatement);
 			}
 			else {
 				OCLExpression targetExp = helper.createNullLiteralExp();
@@ -1312,7 +1345,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	@Override
-	public void createStatements() {
+	public void createSchedulingStatements() {
 		Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
 		//		for (@SuppressWarnings("null")@NonNull Region calledRegion : getEarliestFirstCalledRegions()) {
 		for (@NonNull Region calledRegion : region.getCallableChildren()) {

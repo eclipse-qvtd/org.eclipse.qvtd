@@ -151,7 +151,7 @@ public abstract class AbstractRegion2Mapping
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}
 
-	public abstract void createStatements();
+	public abstract void createSchedulingStatements();
 
 	protected int getCollectionDepth(@NonNull Type type) {
 		if (type instanceof CollectionType) {
