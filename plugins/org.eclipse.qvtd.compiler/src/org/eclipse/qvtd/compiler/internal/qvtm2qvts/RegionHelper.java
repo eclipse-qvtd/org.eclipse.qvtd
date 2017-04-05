@@ -96,6 +96,14 @@ public class RegionHelper
 				return o1.isPredicated() ? -1 : 1;
 			}
 			//
+			//	Uncast next
+			//
+			boolean c1 = RegionUtil.getCastTarget(o1) != o1;
+			boolean c2 = RegionUtil.getCastTarget(o2) != o2;
+			if (c1 != c2) {
+				return !c1 ? -1 : 1;
+			}
+			//
 			//	Least implicit next (prefers middle to output)
 			//
 			int i1 = getImplicity(o1);
@@ -527,5 +535,10 @@ public class RegionHelper
 		return QVTscheduleConstants.IF_THEN_NAME.equals(edgeName)
 				|| QVTscheduleConstants.IF_ELSE_NAME.equals(edgeName)
 				|| QVTscheduleConstants.LOOP_BODY_NAME.equals(edgeName);
+	}
+
+	@Override
+	public String toString() {
+		return mappingRegion.toString();
 	}
 }
