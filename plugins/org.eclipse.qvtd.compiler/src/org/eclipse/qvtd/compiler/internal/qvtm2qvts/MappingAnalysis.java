@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -370,6 +372,16 @@ public class MappingAnalysis implements Nameable
 				initNode = stepNode;
 			}
 		} */
+		CompleteClass initCompleteClass = bestInitNode.getCompleteClass();
+		ScheduleManager scheduleManager = getScheduleManager();
+		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
+		CompleteClass variableCompleteClass = RegionUtil.getCompleteClass(variableClassDatum);
+		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
+			Node castNode = RegionUtil.createOldNode(mappingRegion, variable);
+			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
+			expressionAnalyzer.createCastEdge(bestInitNode, castProperty, castNode);
+			bestInitNode = castNode;
+		}
 		bestInitNode.addTypedElement(variable);
 		mappingRegion.addVariableNode(variable, bestInitNode);
 		for (@NonNull OCLExpression initExpression : expressions) {
@@ -514,6 +526,10 @@ public class MappingAnalysis implements Nameable
 		else {
 			return new GuardVariableNode(this, variable);
 		} */
+	}
+
+	protected @NonNull ScheduleManager getScheduleManager() {
+		return expressionAnalyzer.scheduleManager;
 	}
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
