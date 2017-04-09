@@ -50,6 +50,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
+import com.google.common.collect.Iterables;
+
 public class QVTbaseUtil extends PivotUtil
 {
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
@@ -70,6 +72,10 @@ public class QVTbaseUtil extends PivotUtil
 	{
 		public static @NonNull List<@NonNull TypedModel> getModelParameterList(@NonNull Transformation asTransformation) {
 			return ClassUtil.nullFree(asTransformation.getModelParameter());
+		}
+
+		public static @NonNull List<@NonNull Rule> getOverriddenList(@NonNull Rule asRule) {
+			return ClassUtil.nullFree(asRule.getOverridden());
 		}
 
 		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
@@ -99,6 +105,15 @@ public class QVTbaseUtil extends PivotUtil
 		return null;
 	}
 
+	public static @Nullable Pattern basicGetContainingPattern(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Pattern) {
+				return (Pattern) eObject;
+			}
+		}
+		return null;
+	}
+
 	public static @Nullable Rule basicGetContainingRule(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Rule) {
@@ -115,6 +130,24 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return null;
+	}
+
+	public static boolean containsAll(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
+		for (Object e : iterable1) {
+			if (!Iterables.contains(iterable2, e)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean containsAny(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
+		for (Object e : iterable1) {
+			if (Iterables.contains(iterable2, e)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -333,15 +366,11 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
 	}
 
-	public static @NonNull List<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {
+	public static @NonNull Iterable<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {
 		return ClassUtil.nullFree(asTransformation.getOwnedOperations());
 	}
 
-	//	public static @NonNull List<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
-	//		return ClassUtil.nullFree(asPattern.getPredicate());
-	//	}
-
-	public static @NonNull Iterable<@NonNull Predicate> getPredicates(@NonNull Pattern asPattern) {
+	public static @NonNull Iterable<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
 		return ClassUtil.nullFree(asPattern.getPredicate());
 	}
 

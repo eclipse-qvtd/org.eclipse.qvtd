@@ -157,44 +157,44 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			Area thisArea = getArea(getMapping());
 			if (thisArea != null) {
 				GuardPattern thisGuardPattern = QVTcoreUtil.getGuardPattern(thisArea);
-				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(thisGuardPattern));
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getOwnedPredicates(thisGuardPattern));
 				gatherVariables(QVTcoreUtil.getOwnedVariables(thisGuardPattern), MergedVariable.GUARD);
 				BottomPattern thisBottomPattern = QVTcoreUtil.getBottomPattern(thisArea);
 				gatherVariables(QVTcoreUtil.getOwnedVariables(thisBottomPattern), MergedVariable.BOTTOM);
 				gatherAssignments(QVTcoreUtil.getOwnedAssignments(thisBottomPattern), ASSIGNMENT);
-				Iterables.addAll(bottomPredicates, QVTbaseUtil.getPredicates(thisBottomPattern));
+				Iterables.addAll(bottomPredicates, QVTbaseUtil.getOwnedPredicates(thisBottomPattern));
 				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(thisBottomPattern), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area childArea : getChildAreas()) {
 				GuardPattern childGuardPattern = QVTcoreUtil.getGuardPattern(childArea);
-				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(childGuardPattern));
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getOwnedPredicates(childGuardPattern));
 				gatherVariables(QVTcoreUtil.getOwnedVariables(childGuardPattern), MergedVariable.GUARD);
 				BottomPattern childBottomPattern = QVTcoreUtil.getBottomPattern(childArea);
 				gatherVariables(QVTcoreUtil.getOwnedVariables(childBottomPattern), MergedVariable.BOTTOM);
 				gatherAssignments(QVTcoreUtil.getOwnedAssignments(childBottomPattern), ASSIGNMENT);
-				Iterables.addAll(bottomPredicates, QVTbaseUtil.getPredicates(childBottomPattern));
+				Iterables.addAll(bottomPredicates, QVTbaseUtil.getOwnedPredicates(childBottomPattern));
 				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(childBottomPattern), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area parentArea : getParentAreas()) {
 				assert (parentArea != thisArea);
 				GuardPattern parentGuardPattern = QVTcoreUtil.getGuardPattern(parentArea);
-				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(parentGuardPattern));
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getOwnedPredicates(parentGuardPattern));
 				gatherVariables(QVTcoreUtil.getOwnedVariables(parentGuardPattern), MergedVariable.GUARD);
 				BottomPattern parentBottomPattern = QVTcoreUtil.getBottomPattern(parentArea);
 				gatherVariables(QVTcoreUtil.getOwnedVariables(parentBottomPattern), MergedVariable.GUARD);			// Hoist
 				gatherAssignments(QVTcoreUtil.getOwnedAssignments(parentBottomPattern), PREDICATE);
-				Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(parentBottomPattern));									// Hoist
+				Iterables.addAll(guardPredicates, QVTbaseUtil.getOwnedPredicates(parentBottomPattern));									// Hoist
 				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(parentBottomPattern), MergedVariable.GUARD);	// Hoist
 			}
 			for (@NonNull Area siblingArea : getSiblingAreas()) {
 				if (siblingArea != thisArea) {
 					GuardPattern siblingGuardPattern = QVTcoreUtil.getGuardPattern(siblingArea);
-					Iterables.addAll(guardPredicates, QVTbaseUtil.getPredicates(siblingGuardPattern));
+					Iterables.addAll(guardPredicates, QVTbaseUtil.getOwnedPredicates(siblingGuardPattern));
 					gatherVariables(QVTcoreUtil.getOwnedVariables(siblingGuardPattern), MergedVariable.GUARD);
 					BottomPattern siblingBottomPattern = QVTcoreUtil.getBottomPattern(siblingArea);
 					gatherVariables(QVTcoreUtil.getOwnedVariables(siblingBottomPattern), MergedVariable.BOTTOM);		// FIXME legacy compatibility
 					gatherAssignments(QVTcoreUtil.getOwnedAssignments(siblingBottomPattern), ASSIGNMENT);
-					Iterables.addAll(bottomPredicates, QVTbaseUtil.getPredicates(siblingBottomPattern));		// FIXME legacy compatibility
+					Iterables.addAll(bottomPredicates, QVTbaseUtil.getOwnedPredicates(siblingBottomPattern));		// FIXME legacy compatibility
 					gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(siblingBottomPattern), MergedVariable.BOTTOM);
 				}
 			}

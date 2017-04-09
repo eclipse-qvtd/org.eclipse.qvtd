@@ -1086,7 +1086,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				Set<@NonNull Variable> rMiddleGuardDomainVariables = new HashSet<>(rWhenVariable2rTypedModel.keySet());
 				rMiddleGuardDomainVariables.removeAll(rAllVariables);
 				//
-				for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getPredicates(rWhenPattern)) {
+				for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getOwnedPredicates(rWhenPattern)) {
 					OCLExpression rConditionExpression = QVTrelationUtil.getConditionExpression(rWhenPredicate);
 					if (rConditionExpression instanceof RelationCallExp) {
 						// body of RWhenRelCallToMGuard
@@ -1292,7 +1292,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			VariablesAnalysis.gatherReferredVariablesWithTypedModels(rWhenVariable2rTypedModel, rWhenPattern);
 			// FIXME	assert rWhenPattern.getBindsTo().equals(rWhenVariables);
 			//			rWhenPattern.getBindsTo().addAll(rWhenVariables);
-			for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getPredicates(rWhenPattern)) {
+			for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getOwnedPredicates(rWhenPattern)) {
 				if (!(rWhenPredicate.getConditionExpression() instanceof RelationCallExp)) {		// FIXME Eliminate this redundant distinction
 					rWhenPredicates.add(rWhenPredicate);
 				}
@@ -1306,7 +1306,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			VariablesAnalysis.gatherReferredVariablesWithTypedModels(rWhereVariable2rTypedModel, rWherePattern);
 			// FIXME	assert rWherePattern.getBindsTo().equals(rWhereVariables);
 			//			rWherePattern.getBindsTo().addAll(rWhereVariables);
-			for (@NonNull Predicate rWherePredicate : QVTrelationUtil.getPredicates(rWherePattern)) {
+			for (@NonNull Predicate rWherePredicate : QVTrelationUtil.getOwnedPredicates(rWherePattern)) {
 				if (!(rWherePredicate.getConditionExpression() instanceof RelationCallExp)) {
 					rWherePredicates.add(rWherePredicate);
 				}
