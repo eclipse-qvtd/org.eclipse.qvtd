@@ -13,8 +13,10 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -49,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * RelationalTransformationToTracePackage performs the first part of the QVTr2QVTc transformation.
@@ -59,7 +62,7 @@ public class RelationalTransformationToTracePackage
 	/**
 	 * A Rule2TraceClass represents the mapping between a Relation or RelationCallExp and a TraceClass/Mapping
 	 */
-	protected abstract static class Rule2TraceClass
+	protected abstract static class Rule2TraceClass implements Comparable<@NonNull Rule2TraceClass>
 	{
 		protected final @NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage;
 
@@ -81,9 +84,64 @@ public class RelationalTransformationToTracePackage
 		protected final org.eclipse.ocl.pivot.@NonNull Class traceClass = ClassUtil.nonNullState(PivotFactory.eINSTANCE.createClass());
 		protected final @NonNull Map<@NonNull String, @NonNull Property> name2property = new HashMap<>();
 
+		/**
+		 * Each Rule2TraceClass which directly consumes this Rule2TraceClass.
+		 */
+		private final @NonNull List<@NonNull Rule2TraceClass> consumedByRule2traceClasses = new ArrayList<>();
+
+		/**
+		 * Each Rule2TraceClass which this Rule2TraceClass directly consumes.
+		 */
+		private final @NonNull List<@NonNull Rule2TraceClass> consumedRule2traceClasses = new ArrayList<>();
+
+		/**
+		 * Each Rule2TraceClass that transitively consumes this Rule2TraceClass.
+		 */
+		private @Nullable Set<@NonNull Rule2TraceClass> transitivelyConsumedByRule2traceClasses = null;
+
+		/**
+		 * Each Rule2TraceClass that is transitively consumed by this Rule2TraceClass.
+		 */
+		private @Nullable Set<@NonNull Rule2TraceClass> transitivelyConsumedRule2traceClasses = null;
+
+		/**
+		 * Each Rule2TraceClass that is both transitively consumed by and consumes this Rule2TraceClass.
+		 */
+		private @Nullable Set<@NonNull Rule2TraceClass> cyclicRule2traceClasses = null;
+
 		public Rule2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 			this.relationalTransformation2tracePackage = relationalTransformation2tracePackage;
 			this.relation = relation;
+			Pattern whenPattern = relation.getWhen();
+			if (whenPattern != null) {
+				for (@NonNull EObject whenExpression : new TreeIterable(whenPattern, false)) {
+					if (whenExpression instanceof RelationCallExp) {
+						whenInvocations.add((RelationCallExp)whenExpression);
+					}
+				}
+			}
+			Pattern wherePattern = relation.getWhere();
+			if (wherePattern != null) {
+				for (@NonNull EObject whereExpression : new TreeIterable(wherePattern, false)) {
+					if (whereExpression instanceof RelationCallExp) {
+						whereInvocations.add((RelationCallExp)whereExpression);
+					}
+				}
+			}
+		}
+
+		public void addConsumedBy(@NonNull Rule2TraceClass consumedByRule2traceClass) {
+			if (!consumedByRule2traceClasses.contains(consumedByRule2traceClass)) {
+				consumedByRule2traceClasses.add(consumedByRule2traceClass);
+			}
+			if (!consumedByRule2traceClass.consumedRule2traceClasses.contains(this)) {
+				consumedByRule2traceClass.consumedRule2traceClasses.add(this);
+			}
+		}
+
+		@Override
+		public int compareTo(@NonNull Rule2TraceClass that) {
+			return ClassUtil.safeCompareTo(this.traceClass.getName(), that.traceClass.getName());
 		}
 
 		private void createTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull TypedElement tv, boolean manyTraces) throws CompilerChainException {
@@ -159,8 +217,68 @@ public class RelationalTransformationToTracePackage
 			return manyTraces;
 		}
 
+		public @Nullable Iterable<@NonNull Rule2TraceClass> getConsumedByRule2traceClasses() {
+			return consumedByRule2traceClasses;
+		}
+
+		public @Nullable Iterable<@NonNull Rule2TraceClass> getConsumedRule2traceClasses() {
+			return consumedRule2traceClasses;
+		}
+
+		public @Nullable Iterable<@NonNull Rule2TraceClass> getCyclicRule2traceClasses() {
+			return cyclicRule2traceClasses;
+		}
+
+		public @NonNull Relation getRelation() {
+			return relation;
+		}
+
 		public org.eclipse.ocl.pivot.@NonNull Class getTraceClass() {
 			return traceClass;
+		}
+
+		public @NonNull Set<@NonNull Rule2TraceClass> getTransitivelyConsumedByRule2traceClasses() {
+			Set<@NonNull Rule2TraceClass> transitivelyConsumedByRule2traceClasses2 = transitivelyConsumedByRule2traceClasses;
+			if (transitivelyConsumedByRule2traceClasses2 == null) {
+				transitivelyConsumedByRule2traceClasses2 = getTransitivelyConsumedByRule2traceClasses(new HashSet<>());
+			}
+			return transitivelyConsumedByRule2traceClasses2;
+		}
+		private @NonNull Set<@NonNull Rule2TraceClass> getTransitivelyConsumedByRule2traceClasses(@NonNull Set<@NonNull Rule2TraceClass> accumulator) {
+			Set<@NonNull Rule2TraceClass> transitivelyConsumedByRule2traceClasses2 = this.transitivelyConsumedByRule2traceClasses;
+			if (transitivelyConsumedByRule2traceClasses2 != null) {
+				accumulator.addAll(transitivelyConsumedByRule2traceClasses2);
+			}
+			else {
+				for (@NonNull Rule2TraceClass consumedByRule2traceClass : consumedByRule2traceClasses) {
+					if (accumulator.add(consumedByRule2traceClass)) {
+						consumedByRule2traceClass.getTransitivelyConsumedByRule2traceClasses(accumulator);
+					}
+				}
+			}
+			return accumulator;
+		}
+
+		public @NonNull Set<@NonNull Rule2TraceClass> getTransitivelyConsumedRule2traceClasses() {
+			Set<@NonNull Rule2TraceClass> transitivelyConsumedRule2traceClasses2 = transitivelyConsumedRule2traceClasses;
+			if (transitivelyConsumedRule2traceClasses2 == null) {
+				transitivelyConsumedRule2traceClasses2 = getTransitivelyConsumedRule2traceClasses(new HashSet<>());
+			}
+			return transitivelyConsumedRule2traceClasses2;
+		}
+		private @NonNull Set<@NonNull Rule2TraceClass> getTransitivelyConsumedRule2traceClasses(@NonNull Set<@NonNull Rule2TraceClass> accumulator) {
+			Set<@NonNull Rule2TraceClass> transitivelyConsumedRule2traceClasses2 = this.transitivelyConsumedRule2traceClasses;
+			if (transitivelyConsumedRule2traceClasses2 != null) {
+				accumulator.addAll(transitivelyConsumedRule2traceClasses2);
+			}
+			else {
+				for (@NonNull Rule2TraceClass consumedRule2traceClass : consumedRule2traceClasses) {
+					if (accumulator.add(consumedRule2traceClass)) {
+						consumedRule2traceClass.getTransitivelyConsumedRule2traceClasses(accumulator);
+					}
+				}
+			}
+			return accumulator;
 		}
 
 		public @NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations() {
@@ -244,7 +362,46 @@ public class RelationalTransformationToTracePackage
 			return false;
 		}
 
+		public void installConsumesDependencies() throws CompilerChainException {
+			for (@NonNull RelationCallExp whenInvocation : whenInvocations) {
+				Relation whenInvokedRelation = QVTrelationUtil.getReferredRelation(whenInvocation);
+				if (whenInvokedRelation.isIsTopLevel()) {
+					Rule2TraceClass invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(whenInvokedRelation);
+					invokedRelation2TraceClass.addConsumedBy(this);
+				}
+				else {
+					Rule2TraceClass invocation2TraceClass = relationalTransformation2tracePackage.getInvocation2TraceClass(whenInvocation);
+					addConsumedBy(invocation2TraceClass);
+					invocation2TraceClass.addConsumedBy(this);
+				}
+			}
+			for (@NonNull RelationCallExp whereInvocation : whereInvocations) {
+				Relation whereInvokedRelation = QVTrelationUtil.getReferredRelation(whereInvocation);
+				if (whereInvokedRelation.isIsTopLevel()) {
+					Rule2TraceClass invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(whereInvokedRelation);
+					invokedRelation2TraceClass.addConsumedBy(this);
+				}
+				else {
+					Rule2TraceClass invocation2TraceClass = relationalTransformation2tracePackage.getInvocation2TraceClass(whereInvocation);
+					addConsumedBy(invocation2TraceClass);
+					invocation2TraceClass.addConsumedBy(this);
+				}
+			}
+		}
+
+		@Override
+		public String toString() {
+			return traceClass.getName();
+		}
+
 		public org.eclipse.ocl.pivot.@NonNull Class transform() throws CompilerChainException {
+			Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
+			if (overriddenRelation != null) {
+				Rule2TraceClass overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(overriddenRelation);
+				name2property.putAll(overriddenRelation2TraceClass.name2property);
+				traceClass.getSuperClasses().add(overriddenRelation2TraceClass.traceClass);
+			}
+
 			for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(relation))  {
 				createTraceProperty(null, traceClass, rVariable, false);
 			}
@@ -401,6 +558,119 @@ public class RelationalTransformationToTracePackage
 		this.tracePackage = createTracePackage();
 	}
 
+	/**
+	 * Build the inter-Rule2TraceClass dependencies.
+	 */
+	protected void createDependencies() throws CompilerChainException {
+		List<@NonNull Rule2TraceClass> rule2TraceClasses2 = new ArrayList<>(name2rule2traceClass.values());
+		Collections.sort(rule2TraceClasses2);
+		//
+		//	Establish the Rule2TraceClass directly consumes Rule2TraceClass dependencies
+		//
+		for (@NonNull Rule2TraceClass rule2TraceClass : rule2TraceClasses2) {
+			rule2TraceClass.installConsumesDependencies();
+		}
+		//
+		//	Identify the dependency cycles
+		//
+		//		for (@NonNull Rule2TraceClass rule2TraceClass : rule2TraceClasses2) {
+		//			rule2TraceClass.installDependencyCycles();
+		//		}
+		//
+		//	Display the dependencies
+		//
+		if (QVTr2QVTc.CALL_TREE.isActive()) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Rule2TraceClass rule2TraceClasses : rule2TraceClasses2) {
+				s.append("\n\t" + rule2TraceClasses.toString() + "(");
+				boolean isFirst = true;
+				List<@NonNull Rule2TraceClass> consumedRule2traceClasses = Lists.newArrayList(rule2TraceClasses.getConsumedRule2traceClasses());
+				Collections.sort(consumedRule2traceClasses);;
+				for (@NonNull Rule2TraceClass consumedRule2traceClass : consumedRule2traceClasses) {
+					if (!isFirst) {
+						s.append(",");
+					}
+					s.append(consumedRule2traceClass.toString());
+					isFirst = false;
+				}
+				s.append(")");
+			}
+			QVTr2QVTc.CALL_TREE.println("traceClass(directlyConsumedTraceClasses)" + s.toString());
+		}
+		if (QVTr2QVTc.CALL_TREE.isActive()) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Rule2TraceClass rule2TraceClasses : rule2TraceClasses2) {
+				s.append("\n\t" + rule2TraceClasses.toString() + "(");
+				boolean isFirst = true;
+				List<@NonNull Rule2TraceClass> consumedRule2traceClasses = new ArrayList<>(rule2TraceClasses.getTransitivelyConsumedRule2traceClasses());
+				Collections.sort(consumedRule2traceClasses);;
+				for (@NonNull Rule2TraceClass consumedRule2traceClass : consumedRule2traceClasses) {
+					if (!isFirst) {
+						s.append(",");
+					}
+					s.append(consumedRule2traceClass.toString());
+					isFirst = false;
+				}
+				s.append(")");
+			}
+			QVTr2QVTc.CALL_TREE.println("traceClass(transitivelyConsumedTraceClasses)" + s.toString());
+		}
+		if (QVTr2QVTc.CALL_TREE.isActive()) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Rule2TraceClass rule2TraceClasses : rule2TraceClasses2) {
+				s.append("\n\t" + rule2TraceClasses.toString() + "(");
+				boolean isFirst = true;
+				List<@NonNull Rule2TraceClass> consumedByRule2traceClasses = Lists.newArrayList(rule2TraceClasses.getConsumedByRule2traceClasses());
+				Collections.sort(consumedByRule2traceClasses);;
+				for (@NonNull Rule2TraceClass consumedByRule2traceClass : consumedByRule2traceClasses) {
+					if (!isFirst) {
+						s.append(",");
+					}
+					s.append(consumedByRule2traceClass.toString());
+					isFirst = false;
+				}
+				s.append(")");
+			}
+			QVTr2QVTc.CALL_TREE.println("traceClass(directlyConsumedByTraceClasses)" + s.toString());
+		}
+		if (QVTr2QVTc.CALL_TREE.isActive()) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Rule2TraceClass rule2TraceClasses : rule2TraceClasses2) {
+				s.append("\n\t" + rule2TraceClasses.toString() + "(");
+				boolean isFirst = true;
+				List<@NonNull Rule2TraceClass> consumedByRule2traceClasses = new ArrayList<>(rule2TraceClasses.getTransitivelyConsumedByRule2traceClasses());
+				Collections.sort(consumedByRule2traceClasses);;
+				for (@NonNull Rule2TraceClass consumedByRule2traceClass : consumedByRule2traceClasses) {
+					if (!isFirst) {
+						s.append(",");
+					}
+					s.append(consumedByRule2traceClass.toString());
+					isFirst = false;
+				}
+				s.append(")");
+			}
+			QVTr2QVTc.CALL_TREE.println("traceClass(transitivelyConsumedByTraceClasses)" + s.toString());
+		}
+		if (QVTr2QVTc.CALL_TREE.isActive()) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Rule2TraceClass rule2TraceClasses : rule2TraceClasses2) {
+				s.append("\n\t" + rule2TraceClasses.toString() + "(");
+				boolean isFirst = true;
+				List<@NonNull Rule2TraceClass> cyclicRule2traceClasses = Lists.newArrayList(rule2TraceClasses.getCyclicRule2traceClasses());
+				Collections.sort(cyclicRule2traceClasses);;
+				for (@NonNull Rule2TraceClass cyclicRule2traceClass : cyclicRule2traceClasses) {
+					if (!isFirst) {
+						s.append(",");
+					}
+					s.append(cyclicRule2traceClass.toString());
+					isFirst = false;
+				}
+				s.append(")");
+			}
+			QVTr2QVTc.CALL_TREE.println("traceClass(cyclicTraceClasses)" + s.toString());
+		}
+	}
+
 	protected void createRelation2TraceClass(@NonNull Relation rRelation) throws CompilerChainException {
 		Rule2TraceClass rule2traceClass = relation2rule2traceClass.get(rRelation);
 		assert rule2traceClass == null;
@@ -534,6 +804,10 @@ public class RelationalTransformationToTracePackage
 		//	 Create a Rule2TraceClass for each Relation and each where Invocation.
 		//
 		createRule2TraceClasses();
+		//
+		//	 Create the Rule2TraceClass to Rule2TraceClass dependencies.
+		//
+		createDependencies();
 		//
 		//	Create the trace package
 		//

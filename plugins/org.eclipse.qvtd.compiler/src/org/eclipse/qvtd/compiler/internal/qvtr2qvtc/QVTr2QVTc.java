@@ -110,6 +110,7 @@ import com.google.common.collect.Lists;
 
 public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
+	public static final @NonNull TracingOption CALL_TREE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/callTree");
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
 	public static final @NonNull TracingOption VARIABLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/variables");
 

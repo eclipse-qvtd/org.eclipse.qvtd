@@ -50,6 +50,8 @@ org.eclipse.qvtd.compiler/qvtm2qvts/regionTraversal=false
 # Turn on tracing of the polled properties computation 
 org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 
+# Turn on tracing of the QVTr realtions callTree 
+org.eclipse.qvtd.compiler/qvtr2qvtc/callTree=false
 # Turn on tracing of the QVTc synthesis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
 # Turn on tracing of the QVTr variables analysis 
