@@ -44,8 +44,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl#getAModule <em>AModule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl#getFunction <em>Function</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl#getHelper <em>Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl#getOpName <em>Op Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl#getRelTx <em>Rel Tx</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl#getTxName <em>Tx Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -102,6 +102,26 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	protected Helper helper;
 
 	/**
+	 * The default value of the '{@link #getOpName() <em>Op Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OP_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOpName() <em>Op Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String opName = OP_NAME_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getRelTx() <em>Rel Tx</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,26 +130,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected RelationalTransformation relTx;
-
-	/**
-	 * The default value of the '{@link #getTxName() <em>Tx Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTxName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TX_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTxName() <em>Tx Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTxName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String txName = TX_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,10 +155,9 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclFeatureDefinition getADef() {
 		if (aDef != null && aDef.eIsProxy()) {
-			InternalEObject oldADef = aDef;
+			InternalEObject oldADef = (InternalEObject)aDef;
 			aDef = (OclFeatureDefinition)eResolveProxy(oldADef);
 			if (aDef != oldADef) {
 				if (eNotificationRequired())
@@ -182,7 +181,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setADef(OclFeatureDefinition newADef) {
 		OclFeatureDefinition oldADef = aDef;
 		aDef = newADef;
@@ -195,10 +193,9 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Operation getAFeat() {
 		if (aFeat != null && aFeat.eIsProxy()) {
-			InternalEObject oldAFeat = aFeat;
+			InternalEObject oldAFeat = (InternalEObject)aFeat;
 			aFeat = (Operation)eResolveProxy(oldAFeat);
 			if (aFeat != oldAFeat) {
 				if (eNotificationRequired())
@@ -222,7 +219,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAFeat(Operation newAFeat) {
 		Operation oldAFeat = aFeat;
 		aFeat = newAFeat;
@@ -235,10 +231,9 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Module getAModule() {
 		if (aModule != null && aModule.eIsProxy()) {
-			InternalEObject oldAModule = aModule;
+			InternalEObject oldAModule = (InternalEObject)aModule;
 			aModule = (Module)eResolveProxy(oldAModule);
 			if (aModule != oldAModule) {
 				if (eNotificationRequired())
@@ -262,7 +257,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAModule(Module newAModule) {
 		Module oldAModule = aModule;
 		aModule = newAModule;
@@ -275,7 +269,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Function getFunction() {
 		if (function != null && function.eIsProxy()) {
 			InternalEObject oldFunction = (InternalEObject)function;
@@ -302,7 +295,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setFunction(Function newFunction) {
 		Function oldFunction = function;
 		function = newFunction;
@@ -315,10 +307,9 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Helper getHelper() {
 		if (helper != null && helper.eIsProxy()) {
-			InternalEObject oldHelper = helper;
+			InternalEObject oldHelper = (InternalEObject)helper;
 			helper = (Helper)eResolveProxy(oldHelper);
 			if (helper != oldHelper) {
 				if (eNotificationRequired())
@@ -342,7 +333,6 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setHelper(Helper newHelper) {
 		Helper oldHelper = helper;
 		helper = newHelper;
@@ -355,7 +345,27 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
+	public String getOpName() {
+		return opName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOpName(String newOpName) {
+		String oldOpName = opName;
+		opName = newOpName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.THELPER2_FUNCTION__OP_NAME, oldOpName, opName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public RelationalTransformation getRelTx() {
 		if (relTx != null && relTx.eIsProxy()) {
 			InternalEObject oldRelTx = (InternalEObject)relTx;
@@ -382,35 +392,11 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRelTx(RelationalTransformation newRelTx) {
 		RelationalTransformation oldRelTx = relTx;
 		relTx = newRelTx;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.THELPER2_FUNCTION__REL_TX, oldRelTx, relTx));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getTxName() {
-		return txName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTxName(String newTxName) {
-		String oldTxName = txName;
-		txName = newTxName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.THELPER2_FUNCTION__TX_NAME, oldTxName, txName));
 	}
 
 	/**
@@ -436,11 +422,11 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 			case PATL2QVTrPackage.THELPER2_FUNCTION__HELPER:
 				if (resolve) return getHelper();
 				return basicGetHelper();
+			case PATL2QVTrPackage.THELPER2_FUNCTION__OP_NAME:
+				return getOpName();
 			case PATL2QVTrPackage.THELPER2_FUNCTION__REL_TX:
 				if (resolve) return getRelTx();
 				return basicGetRelTx();
-			case PATL2QVTrPackage.THELPER2_FUNCTION__TX_NAME:
-				return getTxName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -468,11 +454,11 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 			case PATL2QVTrPackage.THELPER2_FUNCTION__HELPER:
 				setHelper((Helper)newValue);
 				return;
+			case PATL2QVTrPackage.THELPER2_FUNCTION__OP_NAME:
+				setOpName((String)newValue);
+				return;
 			case PATL2QVTrPackage.THELPER2_FUNCTION__REL_TX:
 				setRelTx((RelationalTransformation)newValue);
-				return;
-			case PATL2QVTrPackage.THELPER2_FUNCTION__TX_NAME:
-				setTxName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -501,11 +487,11 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 			case PATL2QVTrPackage.THELPER2_FUNCTION__HELPER:
 				setHelper((Helper)null);
 				return;
+			case PATL2QVTrPackage.THELPER2_FUNCTION__OP_NAME:
+				setOpName(OP_NAME_EDEFAULT);
+				return;
 			case PATL2QVTrPackage.THELPER2_FUNCTION__REL_TX:
 				setRelTx((RelationalTransformation)null);
-				return;
-			case PATL2QVTrPackage.THELPER2_FUNCTION__TX_NAME:
-				setTxName(TX_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -529,10 +515,10 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 				return function != null;
 			case PATL2QVTrPackage.THELPER2_FUNCTION__HELPER:
 				return helper != null;
+			case PATL2QVTrPackage.THELPER2_FUNCTION__OP_NAME:
+				return OP_NAME_EDEFAULT == null ? opName != null : !OP_NAME_EDEFAULT.equals(opName);
 			case PATL2QVTrPackage.THELPER2_FUNCTION__REL_TX:
 				return relTx != null;
-			case PATL2QVTrPackage.THELPER2_FUNCTION__TX_NAME:
-				return TX_NAME_EDEFAULT == null ? txName != null : !TX_NAME_EDEFAULT.equals(txName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -547,8 +533,8 @@ public class THelper2FunctionImpl extends MinimalEObjectImpl.Container implement
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (txName: ");
-		result.append(txName);
+		result.append(" (opName: ");
+		result.append(opName);
 		result.append(')');
 		return result.toString();
 	}

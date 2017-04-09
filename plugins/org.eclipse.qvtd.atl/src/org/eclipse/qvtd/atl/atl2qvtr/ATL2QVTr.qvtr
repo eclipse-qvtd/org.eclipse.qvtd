@@ -28,7 +28,51 @@ package org::eclipse::qvtd::atl::atl2qvtr {
  * Transform an ATL transformation to a QVTr transformation
  */
 	transformation ATL2QVTr(atl:{atlMM,atloclMM,atlprimsMM}, qvtr:{qvtrelation,qvttemplate,qvtbase,pivotocl})
-	{
+	{		
+		/**
+		 *  atl::Helper/OclFeatureDefinition/Operation <=> qvtr::Function
+		 */
+		top relation Helper2Function {
+			opName : String;
+			aModule : atlMM::Module;
+			relTx : qvtrelation::RelationalTransformation;
+			enforce domain atl helper : Helper {
+				module = aModule,
+				definition = aDef : OclFeatureDefinition {
+					feature = aFeat : Operation {
+						name = opName
+					}
+				}
+			};	   
+			enforce domain qvtr function : Function {
+				name = opName,
+				owningClass = relTx
+			};
+			when {
+				Model2RelationalTransformation(aModule, relTx);
+			}
+		}
+		
+		/**
+		 *  atl::MatchedRule <=> qvtr::Relation
+		 */
+		top relation MatchedRule2Relation {
+			ruleName : String;
+			aModule : atlMM::Module;
+			relTx : qvtrelation::RelationalTransformation;
+			enforce domain atl matchedRule : MatchedRule {
+				module = aModule,
+				name = ruleName
+			};	   
+			enforce domain qvtr rRule : Relation {
+				name = ruleName,
+				transformation = relTx
+			};
+			when {
+				Model2RelationalTransformation(aModule, relTx);
+			}
+		}
+		
 		/**
 		 *  atl::Module <=> qvtr::RelationModel/Package/RelationalTransformation
 		 */
@@ -46,30 +90,6 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 					}
 				}
 			};
-		}
-		
-		/**
-		 *  atl::Helper/OclFeatureDefinition/Operation <=> qvtr::Function
-		 */
-		top relation Helper2Function {
-			txName : String;
-			aModule : atlMM::Module;
-			relTx : qvtrelation::RelationalTransformation;
-			enforce domain atl helper : Helper {
-				module = aModule,
-				definition = aDef : OclFeatureDefinition {
-					feature = aFeat : Operation {
-						name = txName
-					}
-				}
-			};	   
-			enforce domain qvtr function : Function {
-				name = txName,
-				owningClass = relTx
-			};
-			when {
-				Model2RelationalTransformation(aModule, relTx);
-			}
 		}
 	}
 }

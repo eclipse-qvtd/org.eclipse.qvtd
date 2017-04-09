@@ -120,22 +120,22 @@ public interface PATL2QVTrPackage extends EPackage {
 	int THELPER2_FUNCTION__HELPER = 4;
 
 	/**
+	 * The feature id for the '<em><b>Op Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__OP_NAME = 5;
+
+	/**
 	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int THELPER2_FUNCTION__REL_TX = 5;
-
-	/**
-	 * The feature id for the '<em><b>Tx Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THELPER2_FUNCTION__TX_NAME = 6;
+	int THELPER2_FUNCTION__REL_TX = 6;
 
 	/**
 	 * The number of structural features of the '<em>THelper2 Function</em>' class.
@@ -156,6 +156,79 @@ public interface PATL2QVTrPackage extends EPackage {
 	int THELPER2_FUNCTION_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl <em>TMatched Rule2 Relation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTMatchedRule2Relation()
+	 * @generated
+	 */
+	int TMATCHED_RULE2_RELATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>AModule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION__AMODULE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Matched Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION__MATCHED_RULE = 1;
+
+	/**
+	 * The feature id for the '<em><b>RRule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION__RRULE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION__REL_TX = 3;
+
+	/**
+	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION__RULE_NAME = 4;
+
+	/**
+	 * The number of structural features of the '<em>TMatched Rule2 Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>TMatched Rule2 Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl <em>TModel2 Relational Transformation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,7 +236,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTModel2RelationalTransformation()
 	 * @generated
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION = 1;
+	int TMODEL2_RELATIONAL_TRANSFORMATION = 2;
 
 	/**
 	 * The feature id for the '<em><b>3</b></em>' reference.
@@ -295,6 +368,17 @@ public interface PATL2QVTrPackage extends EPackage {
 	EReference getTHelper2Function_Helper();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getOpName <em>Op Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Op Name</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getOpName()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EAttribute getTHelper2Function_OpName();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getRelTx <em>Rel Tx</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -306,15 +390,69 @@ public interface PATL2QVTrPackage extends EPackage {
 	EReference getTHelper2Function_RelTx();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getTxName <em>Tx Name</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation <em>TMatched Rule2 Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tx Name</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getTxName()
-	 * @see #getTHelper2Function()
+	 * @return the meta object for class '<em>TMatched Rule2 Relation</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation
 	 * @generated
 	 */
-	EAttribute getTHelper2Function_TxName();
+	EClass getTMatchedRule2Relation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getAModule <em>AModule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AModule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getAModule()
+	 * @see #getTMatchedRule2Relation()
+	 * @generated
+	 */
+	EReference getTMatchedRule2Relation_AModule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getMatchedRule <em>Matched Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Matched Rule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getMatchedRule()
+	 * @see #getTMatchedRule2Relation()
+	 * @generated
+	 */
+	EReference getTMatchedRule2Relation_MatchedRule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRRule <em>RRule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RRule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRRule()
+	 * @see #getTMatchedRule2Relation()
+	 * @generated
+	 */
+	EReference getTMatchedRule2Relation_RRule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRelTx <em>Rel Tx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rel Tx</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRelTx()
+	 * @see #getTMatchedRule2Relation()
+	 * @generated
+	 */
+	EReference getTMatchedRule2Relation_RelTx();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRuleName <em>Rule Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rule Name</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRuleName()
+	 * @see #getTMatchedRule2Relation()
+	 * @generated
+	 */
+	EAttribute getTMatchedRule2Relation_RuleName();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation <em>TModel2 Relational Transformation</em>}'.
@@ -455,6 +593,14 @@ public interface PATL2QVTrPackage extends EPackage {
 		EReference THELPER2_FUNCTION__HELPER = eINSTANCE.getTHelper2Function_Helper();
 
 		/**
+		 * The meta object literal for the '<em><b>Op Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute THELPER2_FUNCTION__OP_NAME = eINSTANCE.getTHelper2Function_OpName();
+
+		/**
 		 * The meta object literal for the '<em><b>Rel Tx</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -463,12 +609,54 @@ public interface PATL2QVTrPackage extends EPackage {
 		EReference THELPER2_FUNCTION__REL_TX = eINSTANCE.getTHelper2Function_RelTx();
 
 		/**
-		 * The meta object literal for the '<em><b>Tx Name</b></em>' attribute feature.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl <em>TMatched Rule2 Relation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTMatchedRule2Relation()
+		 * @generated
+		 */
+		EClass TMATCHED_RULE2_RELATION = eINSTANCE.getTMatchedRule2Relation();
+
+		/**
+		 * The meta object literal for the '<em><b>AModule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute THELPER2_FUNCTION__TX_NAME = eINSTANCE.getTHelper2Function_TxName();
+		EReference TMATCHED_RULE2_RELATION__AMODULE = eINSTANCE.getTMatchedRule2Relation_AModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Matched Rule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMATCHED_RULE2_RELATION__MATCHED_RULE = eINSTANCE.getTMatchedRule2Relation_MatchedRule();
+
+		/**
+		 * The meta object literal for the '<em><b>RRule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMATCHED_RULE2_RELATION__RRULE = eINSTANCE.getTMatchedRule2Relation_RRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Rel Tx</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMATCHED_RULE2_RELATION__REL_TX = eINSTANCE.getTMatchedRule2Relation_RelTx();
+
+		/**
+		 * The meta object literal for the '<em><b>Rule Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TMATCHED_RULE2_RELATION__RULE_NAME = eINSTANCE.getTMatchedRule2Relation_RuleName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl <em>TModel2 Relational Transformation</em>}' class.

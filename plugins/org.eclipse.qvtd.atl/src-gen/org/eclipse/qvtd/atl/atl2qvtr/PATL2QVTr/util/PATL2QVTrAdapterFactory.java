@@ -82,6 +82,10 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTHelper2FunctionAdapter();
 			}
 			@Override
+			public Adapter caseTMatchedRule2Relation(TMatchedRule2Relation object) {
+				return createTMatchedRule2RelationAdapter();
+			}
+			@Override
 			public Adapter caseTModel2RelationalTransformation(TModel2RelationalTransformation object) {
 				return createTModel2RelationalTransformationAdapter();
 			}
@@ -116,6 +120,20 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTHelper2FunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation <em>TMatched Rule2 Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation
+	 * @generated
+	 */
+	public Adapter createTMatchedRule2RelationAdapter() {
 		return null;
 	}
 

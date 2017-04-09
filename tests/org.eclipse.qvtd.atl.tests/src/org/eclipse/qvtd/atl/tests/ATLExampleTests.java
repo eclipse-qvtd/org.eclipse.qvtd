@@ -12,6 +12,7 @@ package org.eclipse.qvtd.atl.tests;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -36,8 +37,8 @@ public class ATLExampleTests extends TestCase
 
 	@Test
 	public void testATLExample_Families2Persons_CG() throws Exception {
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		doATLExampleTest_CG("Families2Persons");
 	}
 }

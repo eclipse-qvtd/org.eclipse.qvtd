@@ -39,6 +39,15 @@ public interface PATL2QVTrFactory extends EFactory {
 	THelper2Function createTHelper2Function();
 
 	/**
+	 * Returns a new object of class '<em>TMatched Rule2 Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TMatched Rule2 Relation</em>'.
+	 * @generated
+	 */
+	TMatchedRule2Relation createTMatchedRule2Relation();
+
+	/**
 	 * Returns a new object of class '<em>TModel2 Relational Transformation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

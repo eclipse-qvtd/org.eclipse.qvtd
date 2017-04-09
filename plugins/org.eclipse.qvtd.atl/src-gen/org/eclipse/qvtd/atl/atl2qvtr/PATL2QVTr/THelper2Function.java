@@ -36,8 +36,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getAModule <em>AModule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getFunction <em>Function</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getHelper <em>Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getOpName <em>Op Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getRelTx <em>Rel Tx</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getTxName <em>Tx Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTHelper2Function()
@@ -113,7 +113,6 @@ public interface THelper2Function extends EObject {
 	 * @see #setAModule(Module)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTHelper2Function_AModule()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='THelper2Function'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
@@ -186,6 +185,32 @@ public interface THelper2Function extends EObject {
 	void setHelper(Helper value);
 
 	/**
+	 * Returns the value of the '<em><b>Op Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Op Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Op Name</em>' attribute.
+	 * @see #setOpName(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTHelper2Function_OpName()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getOpName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getOpName <em>Op Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Op Name</em>' attribute.
+	 * @see #getOpName()
+	 * @generated
+	 */
+	void setOpName(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Rel Tx</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -197,7 +222,6 @@ public interface THelper2Function extends EObject {
 	 * @see #setRelTx(RelationalTransformation)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTHelper2Function_RelTx()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='THelper2Function'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
@@ -212,31 +236,5 @@ public interface THelper2Function extends EObject {
 	 * @generated
 	 */
 	void setRelTx(RelationalTransformation value);
-
-	/**
-	 * Returns the value of the '<em><b>Tx Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tx Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tx Name</em>' attribute.
-	 * @see #setTxName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTHelper2Function_TxName()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getTxName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getTxName <em>Tx Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tx Name</em>' attribute.
-	 * @see #getTxName()
-	 * @generated
-	 */
-	void setTxName(String value);
 
 } // THelper2Function

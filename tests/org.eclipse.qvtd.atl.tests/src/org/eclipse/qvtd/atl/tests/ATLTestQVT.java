@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.xtext.util.EmfFormatter;
 
@@ -232,6 +233,7 @@ public class ATLTestQVT extends QVTimperative
 	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile) throws IOException, InterruptedException {
 		URI modelURI = testFolderURI.appendSegment(modelFile);
 		ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("qvtras", new QVTrelationASResourceFactory());
 		Resource outputResource;
 		if (interpretedExecutor != null) {
 			outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
