@@ -1053,7 +1053,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 	}
 
-	public void transformToTracePackages() {
+	public void transformToTracePackages() throws CompilerChainException {
 		List<org.eclipse.ocl.pivot.@NonNull Package> rootTracePackages = null;
 		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
@@ -1071,14 +1071,14 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 	}
 
-	private @Nullable List<org.eclipse.ocl.pivot.@NonNull Package> transformToTracePackageHierarchy(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+	private @Nullable List<org.eclipse.ocl.pivot.@NonNull Package> transformToTracePackageHierarchy(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) throws CompilerChainException {
 		List<org.eclipse.ocl.pivot.@NonNull Package> nestingTracePackages = null;
 		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
 			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages = null;
 			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : ClassUtil.nullFree(relationPackage.getOwnedClasses())) {
 				if (relationClass instanceof RelationalTransformation) {
-					RelationalTransformationToTracePackage rTransformationToTracePackage = new RelationalTransformationToTracePackage(this);
-					org.eclipse.ocl.pivot.Package nestedTracePackage = rTransformationToTracePackage.doRelationalTransformationToTracePackage((RelationalTransformation)relationClass);
+					RelationalTransformationToTracePackage rTransformationToTracePackage = new RelationalTransformationToTracePackage(this, (RelationalTransformation)relationClass);
+					org.eclipse.ocl.pivot.Package nestedTracePackage = rTransformationToTracePackage.transform();
 					txTracePackages.add(nestedTracePackage);
 					if (nestedTracePackages == null) {
 						nestedTracePackages = new ArrayList<>();
