@@ -224,6 +224,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<>();
 
 	/**
+	 * Mapping from each relation to its corresponding trace class.
+	 */
+	private final @NonNull Map<@NonNull RelationCallExp, org.eclipse.ocl.pivot.@NonNull Class> invocation2traceClass = new HashMap<>();
+
+	/**
 	 * Map from each relation to all the expressions that call the relation from a when clause.
 	 */
 	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2whenInvocations = new HashMap<>();
@@ -778,6 +783,12 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 		targets.add(coreElement);
 		//		}
+	}
+
+	/*public*/ void putInvocationTrace(@NonNull RelationCallExp rInvocation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
+		org.eclipse.ocl.pivot.Class oldTraceClass = invocation2traceClass.put(rInvocation, traceClass);
+		assert oldTraceClass == null;
+		//		putTrace(traceClass, r);
 	}
 
 	/*public*/ void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
