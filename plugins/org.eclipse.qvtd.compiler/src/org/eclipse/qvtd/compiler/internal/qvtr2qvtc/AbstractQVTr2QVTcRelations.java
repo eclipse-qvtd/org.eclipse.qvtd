@@ -1332,6 +1332,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	protected abstract @NonNull List<@NonNull ? extends AbstractEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException;
 
+	protected @Nullable Iterable<@NonNull RelationCallExp> getWhenInvocations() {
+		return null;
+	}
+
+	protected @Nullable Iterable<@NonNull RelationCallExp> getWhereInvocations() {
+		return null;
+	}
+
 	@Override
 	public @NonNull String toString() {
 		return PivotUtil.getName(rTransformation) + "::" + rRelationName;

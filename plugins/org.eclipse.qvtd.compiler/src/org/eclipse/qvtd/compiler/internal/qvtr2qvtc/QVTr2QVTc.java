@@ -224,9 +224,14 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<>();
 
 	/**
-	 * Map from each relation to all the expressions that call the relation.
+	 * Map from each relation to all the expressions that call the relation from a when clause.
 	 */
-	private final @NonNull Map<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>> relation2invocations = new HashMap<>();
+	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2whenInvocations = new HashMap<>();
+
+	/**
+	 * Map from each relation to all the expressions that call the relation from a where clause.
+	 */
+	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2whereInvocations = new HashMap<>();
 
 	/**
 	 * Map from each relation invocation the relation whose where predicate contains the invocation.
@@ -298,21 +303,30 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	protected void analyzeInvocations(@NonNull Relation callingRelation) {
+		Pattern whenPattern = callingRelation.getWhen();
+		if (whenPattern != null) {
+			analyzeInvocations(callingRelation, whenPattern, relation2whenInvocations);
+		}
 		Pattern wherePattern = callingRelation.getWhere();
 		if (wherePattern != null) {
-			for (Predicate predicate : wherePattern.getPredicate()) {
-				OCLExpression predicateExpression = predicate.getConditionExpression();
-				if (predicateExpression instanceof RelationCallExp) {
-					RelationCallExp relationInvocation = (RelationCallExp) predicateExpression;
-					Relation calledRelation = ClassUtil.nonNullState(relationInvocation.getReferredRelation());
-					List<@NonNull RelationCallExp> relationInvocations = relation2invocations.get(calledRelation);
-					if (relationInvocations == null) {
-						relationInvocations = new ArrayList<>();
-						relation2invocations.put(calledRelation, relationInvocations);
-					}
-					relationInvocations.add(relationInvocation);
-					invocation2invokingRelation.put(relationInvocation, callingRelation);
+			analyzeInvocations(callingRelation, wherePattern, relation2whereInvocations);
+		}
+	}
+
+	protected void analyzeInvocations(@NonNull Relation callingRelation, @NonNull Pattern pattern,
+			@NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2invocations) {
+		for (@NonNull Predicate predicate : QVTrelationUtil.getOwnedPredicates(pattern)) {
+			OCLExpression predicateExpression = predicate.getConditionExpression();
+			if (predicateExpression instanceof RelationCallExp) {
+				RelationCallExp relationInvocation = (RelationCallExp) predicateExpression;
+				Relation calledRelation = ClassUtil.nonNullState(relationInvocation.getReferredRelation());
+				List<@NonNull RelationCallExp> relationInvocations = relation2invocations.get(calledRelation);
+				if (relationInvocations == null) {
+					relationInvocations = new ArrayList<>();
+					relation2invocations.put(calledRelation, relationInvocations);
 				}
+				relationInvocations.add(relationInvocation);
+				invocation2invokingRelation.put(relationInvocation, callingRelation);
 			}
 		}
 	}
@@ -625,11 +639,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return qvtcResource;
 	}
 
-	public @NonNull List<@NonNull RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation relation) {
-		List<@NonNull RelationCallExp> invocations = relation2invocations.get(relation);
-		return invocations != null ? invocations : Collections.emptyList();
-	}
-
 	public @NonNull List<@NonNull Variable> getRootVariables(@NonNull Relation relation) {
 		return ClassUtil.nonNullState(relation2rootVariables.get(relation));
 	}
@@ -648,6 +657,14 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	/*public*/ org.eclipse.ocl.pivot.@NonNull Package getTracePackage(@NonNull RelationalTransformation rTransformation) {
 		return ClassUtil.nonNullState(rTransformation2tracePackage.get(rTransformation));
+	}
+
+	public @Nullable Iterable<@NonNull RelationCallExp> getWhenInvocationsOf(@NonNull Relation relation) {
+		return relation2whenInvocations.get(relation);
+	}
+
+	public @Nullable Iterable<@NonNull RelationCallExp> getWhereInvocationsOf(@NonNull Relation relation) {
+		return relation2whereInvocations.get(relation);
 	}
 
 	private void getUsedGenPackageClosure(@NonNull ProblemHandler problemHandler, @NonNull Map<@NonNull String, @NonNull GenPackage> uri2genPackage, @NonNull Iterable<@NonNull ? extends GenPackage> genPackages) {
@@ -715,7 +732,9 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 		for (@NonNull Relation rRelation : rRelations) {
 			if (!rRelation.isIsTopLevel()) {
-				InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rRelation);
+				Iterable<@NonNull RelationCallExp> whenInvocations = relation2whenInvocations.get(rRelation);
+				Iterable<@NonNull RelationCallExp> whereInvocations = relation2whereInvocations.get(rRelation);
+				InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rRelation, whenInvocations, whereInvocations);
 				invokedRelationToMappingForEnforcement.transform();
 			}
 		}

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
@@ -112,7 +113,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 		// RInvokerToMGuard
 		@Override
 		protected void mapInvocation() throws CompilerChainException {
-			Type invokingTraceClass = qvtr2qvtc.getTraceClass(rInvokingRelation);
+			Type invokingTraceClass = qvtr2qvtc.getTraceClass(rInvokingRelation);		// ?? invocation
 			Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable("from_" + invokingTraceClass.getName(), invokingTraceClass);
 			Type cInvocationType = cInvocationVariable.getType();
 			assert cInvocationType == invokingTraceClass;			// FIXME
@@ -134,9 +135,15 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 		}
 	}
 
-	public InvokedRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	protected final @Nullable Iterable<@NonNull RelationCallExp> whenInvocations;
+	protected final @Nullable Iterable<@NonNull RelationCallExp> whereInvocations;
+
+	public InvokedRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation,
+			@Nullable Iterable<@NonNull RelationCallExp> whenInvocations, @Nullable Iterable<@NonNull RelationCallExp> whereInvocations) {
 		super(qvtr2qvtc, rRelation);
 		assert !rRelation.isIsTopLevel();
+		this.whenInvocations = whenInvocations;
+		this.whereInvocations = whereInvocations;
 	}
 
 	/**
@@ -145,18 +152,46 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 	@Override
 	protected @NonNull List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException {
 		List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<@NonNull InvokedEnforceableRelationDomain2CoreMapping>();
-		for (@NonNull RelationCallExp rInvocation : qvtr2qvtc.getRelationCallExpsForRelation(rRelation)) {
-			QVTr2QVTc.SYNTHESIS.println("invocation of " + rRelation + " from " + rInvocation);
-			@NonNull Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
-			@NonNull String rInvokingRelationName = ClassUtil.nonNullState(rInvokingRelation.getName());
-			for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
-				if (rDomain.isIsEnforceable()) {
-					RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
-					String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
-					enforceableRelationDomain2coreMappings.add(new InvokedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+		Iterable<@NonNull RelationCallExp> whenInvocations = qvtr2qvtc.getWhenInvocationsOf(rRelation);
+		if (whenInvocations != null) {
+			for (@NonNull RelationCallExp rInvocation : whenInvocations) {
+				QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation + " from " + rInvocation);
+				@NonNull Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
+				@NonNull String rInvokingRelationName = ClassUtil.nonNullState(rInvokingRelation.getName());
+				for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+					if (rDomain.isIsEnforceable()) {
+						RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
+						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
+						enforceableRelationDomain2coreMappings.add(new InvokedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+					}
+				}
+			}
+		}
+		Iterable<@NonNull RelationCallExp> whereInvocations = qvtr2qvtc.getWhereInvocationsOf(rRelation);
+		if (whereInvocations != null) {
+			for (@NonNull RelationCallExp rInvocation : whereInvocations) {
+				QVTr2QVTc.SYNTHESIS.println("invocation of where " + rRelation + " from " + rInvocation);
+				@NonNull Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
+				@NonNull String rInvokingRelationName = ClassUtil.nonNullState(rInvokingRelation.getName());
+				for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+					if (rDomain.isIsEnforceable()) {
+						RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
+						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
+						enforceableRelationDomain2coreMappings.add(new InvokedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+					}
 				}
 			}
 		}
 		return enforceableRelationDomain2coreMappings;
+	}
+
+	@Override
+	protected @Nullable Iterable<@NonNull RelationCallExp> getWhenInvocations() {
+		return whenInvocations;
+	}
+
+	@Override
+	protected @Nullable Iterable<@NonNull RelationCallExp> getWhereInvocations() {
+		return whereInvocations;
 	}
 }
