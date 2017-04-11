@@ -584,10 +584,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return cKeyFunction;
 	}
 
-	public @NonNull Iterable<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
-		return VariablesAnalysis.getMiddleDomainVariables(rRelation);
-	}
-
 	public @NonNull Property getOclContainerProperty() {
 		Property oclContainerProperty2 = oclContainerProperty;
 		if (oclContainerProperty2 == null) {

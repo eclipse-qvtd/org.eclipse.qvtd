@@ -40,7 +40,7 @@ interface Rule2TraceClass extends Comparable<@NonNull Rule2TraceClass>
 		@NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations();
 		@NonNull Iterable<@NonNull RelationCallExp> getWhereInvocations();
 		void installConsumesDependencies() throws CompilerChainException;
-		@NonNull Map<@NonNull String, @NonNull Property> getName2property();
-		org.eclipse.ocl.pivot.@NonNull Class transform() throws CompilerChainException;
+		@NonNull Map<@NonNull String, @NonNull Property> getName2Property();
+		void transform() throws CompilerChainException;
 	}
 }

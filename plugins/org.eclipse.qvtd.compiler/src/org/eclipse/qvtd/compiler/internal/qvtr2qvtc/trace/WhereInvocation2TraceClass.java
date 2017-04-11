@@ -26,7 +26,7 @@ class WhereInvocation2TraceClass extends AbstractInvocation2TraceClass
 		traceClass.setName(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
 		Rule2TraceClass.@NonNull Internal superRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(invokedRelation);
 		traceClass.getSuperClasses().add(superRelation2TraceClass.getTraceClass());
-		addAllProperties(superRelation2TraceClass);
+		//		addAllProperties(superRelation2TraceClass);
 	}
 
 	//		@Override

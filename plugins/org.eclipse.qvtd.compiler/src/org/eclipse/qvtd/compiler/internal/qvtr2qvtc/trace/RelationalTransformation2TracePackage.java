@@ -19,7 +19,6 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotFactory;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
@@ -284,10 +283,6 @@ public class RelationalTransformation2TracePackage
 
 	protected Rule2TraceClass.@NonNull Internal getInvocation2TraceClass(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
 		return ClassUtil.nonNullState(invocation2rule2traceClass.get(rInvocation));
-	}
-
-	protected @NonNull Iterable<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
-		return qvtr2qvtc.getMiddleDomainVariables(rRelation);
 	}
 
 	protected Rule2TraceClass.@NonNull Internal getRule2TraceClass(@NonNull Relation rRelation) throws CompilerChainException {
