@@ -43,11 +43,8 @@ import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
-import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.DataType;
-import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
@@ -76,6 +73,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -92,7 +90,6 @@ import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -262,11 +259,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 * The core TypedModel for each Relational TypedModel.
 	 */
 	private @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> relationalTypedModel2coreTypedModel = new HashMap<>();
-
-	/**
-	 * The lazily created named Trace Properties in each Trace Class.
-	 */
-	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> traceClass2name2traceProperty = new HashMap<>();
 
 	/**
 	 * The lazily created named Core mappings for each transformation.
@@ -592,6 +584,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return cKeyFunction;
 	}
 
+	public @NonNull Iterable<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
+		return VariablesAnalysis.getMiddleDomainVariables(rRelation);
+	}
+
 	public @NonNull Property getOclContainerProperty() {
 		Property oclContainerProperty2 = oclContainerProperty;
 		if (oclContainerProperty2 == null) {
@@ -786,19 +782,19 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		//		}
 	}
 
-	/*public*/ void putInvocationTrace(@NonNull RelationCallExp rInvocation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
+	public void putInvocationTrace(@NonNull RelationCallExp rInvocation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
 		org.eclipse.ocl.pivot.Class oldTraceClass = invocation2traceClass.put(rInvocation, traceClass);
 		assert oldTraceClass == null;
 		//		putTrace(traceClass, r);
 	}
 
-	/*public*/ void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
+	public void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
 		org.eclipse.ocl.pivot.Class oldTraceClass = relation2traceClass.put(rRelation, traceClass);
 		assert oldTraceClass == null;
 		//		putTrace(traceClass, r);
 	}
 
-	/*public*/ void putTracePackage(@NonNull RelationalTransformation rt, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
+	public void putTracePackage(@NonNull RelationalTransformation rt, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
 		org.eclipse.ocl.pivot.Package oldTracePackage = rTransformation2tracePackage.put(rt, tracePackage);
 		assert oldTracePackage == null;
 		//		putTrace(tracePackage, rt);
@@ -1089,7 +1085,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages = null;
 			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : ClassUtil.nullFree(relationPackage.getOwnedClasses())) {
 				if (relationClass instanceof RelationalTransformation) {
-					RelationalTransformationToTracePackage rTransformationToTracePackage = new RelationalTransformationToTracePackage(this, (RelationalTransformation)relationClass);
+					RelationalTransformation2TracePackage rTransformationToTracePackage = new RelationalTransformation2TracePackage(this, (RelationalTransformation)relationClass);
 					org.eclipse.ocl.pivot.Package nestedTracePackage = rTransformationToTracePackage.transform();
 					txTracePackages.add(nestedTracePackage);
 					if (nestedTracePackages == null) {
@@ -1123,53 +1119,5 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			}
 		}
 		return nestingTracePackages;
-	}
-
-	/**
-	 * Lazily create the name Property for a traceClass with a type. If manyTraces is set there may be many trace class instances referencing the same object through
-	 * the trace property and so the implicit opposite must be a Bag.
-	 */
-	/*public*/ @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) {
-		Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
-		if (name2traceProperty == null) {
-			name2traceProperty = new HashMap<>();
-			traceClass2name2traceProperty.put(traceClass, name2traceProperty);
-		}
-		Property traceProperty = name2traceProperty.get(name);
-		if (traceProperty == null) {
-			traceProperty = PivotFactory.eINSTANCE.createProperty();
-			traceProperty.setName(name);
-			traceProperty.setType(type);
-			traceProperty.setIsRequired(isRequired);
-			if (rDomain != null) {
-				Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
-				domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
-				Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
-				domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
-				domainDetail.getValues().add(rDomain.getName());
-				domainAnnotation.getOwnedDetails().add(domainDetail);
-				traceProperty.getOwnedAnnotations().add(domainAnnotation);
-			}
-			name2traceProperty.put(name, traceProperty);
-			traceProperty.setOwningClass(traceClass);
-			if (!(type instanceof DataType)) {
-				Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
-				oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
-				oppositeProperty.setType(manyTraces ? environmentFactory.getCompleteEnvironment().getBagType(traceClass, true, null, null) : traceClass);
-				oppositeProperty.setIsRequired(manyTraces);
-				//				oppositeProperty.setType(traceClass);
-				//				oppositeProperty.setIsRequired(false);
-				oppositeProperty.setIsImplicit(true);
-				oppositeProperty.setOwningClass((org.eclipse.ocl.pivot.@NonNull Class)type);
-				traceProperty.setOpposite(oppositeProperty);
-				oppositeProperty.setOpposite(traceProperty);
-				//				putTrace(oppositeProperty, type);
-			}
-			//			putTrace(traceProperty, traceClass);
-		}
-		else {
-			assert traceProperty.getType() == type;
-		}
-		return traceProperty;
 	}
 }

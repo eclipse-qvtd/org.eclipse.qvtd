@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation (inspired by Horacio Hoyos' prototype)
  ******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
+package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,10 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -35,10 +38,13 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -57,14 +63,14 @@ import com.google.common.collect.Lists;
  * RelationalTransformationToTracePackage performs the first part of the QVTr2QVTc transformation.
  * This involves synthesis of the QVTc middle model that defines the trace classes.
  */
-public class RelationalTransformationToTracePackage
+public class RelationalTransformation2TracePackage
 {
 	/**
 	 * A Rule2TraceClass represents the mapping between a Relation or RelationCallExp and a TraceClass/Mapping
 	 */
 	protected abstract static class Rule2TraceClass implements Comparable<@NonNull Rule2TraceClass>
 	{
-		protected final @NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage;
+		protected final @NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage;
 
 		/**
 		 * The relation to be mapped to a trace class and mapping.
@@ -109,7 +115,7 @@ public class RelationalTransformationToTracePackage
 		 */
 		private @Nullable Set<@NonNull Rule2TraceClass> cyclicRule2traceClasses = null;
 
-		public Rule2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
+		public Rule2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 			this.relationalTransformation2tracePackage = relationalTransformation2tracePackage;
 			this.relation = relation;
 			Pattern whenPattern = relation.getWhen();
@@ -158,7 +164,7 @@ public class RelationalTransformationToTracePackage
 				}
 			}
 			else {
-				traceProperty = relationalTransformation2tracePackage.qvtr2qvtc.whenTraceProperty(rDomain, rc, name, type, isRequired, manyTraces);
+				traceProperty = whenTraceProperty(rDomain, rc, name, type, isRequired, manyTraces);
 				name2property.put(name, traceProperty);
 			}
 		}
@@ -416,7 +422,7 @@ public class RelationalTransformationToTracePackage
 				traceClass.getSuperClasses().add(overriddenRelation2TraceClass.traceClass);
 			}
 
-			for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(relation))  {
+			for (@NonNull Variable rVariable : relationalTransformation2tracePackage.qvtr2qvtc.getMiddleDomainVariables(relation))  {
 				createTraceProperty(null, traceClass, rVariable, false);
 			}
 			/*			if (invocation != null) {
@@ -471,6 +477,59 @@ public class RelationalTransformationToTracePackage
 			CompilerUtil.normalizeNameables(ClassUtil.nullFree(traceClass.getOwnedProperties()));
 			return traceClass;
 		}
+
+		/**
+		 * The lazily created named Trace Properties in each Trace Class.
+		 */
+		private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> traceClass2name2traceProperty = new HashMap<>();
+
+		/**
+		 * Lazily create the name Property for a traceClass with a type. If manyTraces is set there may be many trace class instances referencing the same object through
+		 * the trace property and so the implicit opposite must be a Bag.
+		 */
+		public @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) {
+			Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
+			if (name2traceProperty == null) {
+				name2traceProperty = new HashMap<>();
+				traceClass2name2traceProperty.put(traceClass, name2traceProperty);
+			}
+			Property traceProperty = name2traceProperty.get(name);
+			if (traceProperty == null) {
+				traceProperty = PivotFactory.eINSTANCE.createProperty();
+				traceProperty.setName(name);
+				traceProperty.setType(type);
+				traceProperty.setIsRequired(isRequired);
+				if (rDomain != null) {
+					Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
+					domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
+					Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
+					domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
+					domainDetail.getValues().add(rDomain.getName());
+					domainAnnotation.getOwnedDetails().add(domainDetail);
+					traceProperty.getOwnedAnnotations().add(domainAnnotation);
+				}
+				name2traceProperty.put(name, traceProperty);
+				traceProperty.setOwningClass(traceClass);
+				if (!(type instanceof DataType)) {
+					Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
+					oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
+					oppositeProperty.setType(manyTraces ? relationalTransformation2tracePackage.qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(traceClass, true, null, null) : traceClass);
+					oppositeProperty.setIsRequired(manyTraces);
+					//				oppositeProperty.setType(traceClass);
+					//				oppositeProperty.setIsRequired(false);
+					oppositeProperty.setIsImplicit(true);
+					oppositeProperty.setOwningClass((org.eclipse.ocl.pivot.@NonNull Class)type);
+					traceProperty.setOpposite(oppositeProperty);
+					oppositeProperty.setOpposite(traceProperty);
+					//				putTrace(oppositeProperty, type);
+				}
+				//			putTrace(traceProperty, traceClass);
+			}
+			else {
+				assert traceProperty.getType() == type;
+			}
+			return traceProperty;
+		}
 	}
 
 	/**
@@ -478,7 +537,7 @@ public class RelationalTransformationToTracePackage
 	 */
 	protected static abstract class AbstractRelation2TraceClass extends Rule2TraceClass
 	{
-		protected AbstractRelation2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
+		protected AbstractRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 			super(relationalTransformation2tracePackage, relation);
 			String name = "T" + relation.getName();
 			traceClass.setName(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
@@ -513,7 +572,7 @@ public class RelationalTransformationToTracePackage
 	 */
 	protected static class NonTopRelation2TraceClass extends AbstractRelation2TraceClass
 	{
-		protected NonTopRelation2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
+		protected NonTopRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 			super(relationalTransformation2tracePackage, relation);
 			//			traceClass.setIsAbstract(true);
 		}
@@ -524,7 +583,7 @@ public class RelationalTransformationToTracePackage
 	 */
 	protected static class TopRelation2TraceClass extends AbstractRelation2TraceClass
 	{
-		protected TopRelation2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
+		protected TopRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 			super(relationalTransformation2tracePackage, relation);
 		}
 	}
@@ -536,7 +595,7 @@ public class RelationalTransformationToTracePackage
 	{
 		protected final @NonNull Relation invokingRelation;
 
-		protected AbstractInvocation2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage,
+		protected AbstractInvocation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage,
 				@NonNull Relation invokedRelation, @NonNull Relation invokingRelation) throws CompilerChainException {
 			super(relationalTransformation2tracePackage, invokedRelation);
 			this.invokingRelation = invokingRelation;
@@ -548,7 +607,7 @@ public class RelationalTransformationToTracePackage
 	 */
 	protected static class WhenInvocation2TraceClass extends AbstractInvocation2TraceClass
 	{
-		protected WhenInvocation2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage,
+		protected WhenInvocation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage,
 				@NonNull Relation invokedRelation, @NonNull Relation invokingRelation) throws CompilerChainException {
 			super(relationalTransformation2tracePackage, invokedRelation, invokingRelation);
 			String name = "T" + invokingRelation.getName() + "_when_" + invokedRelation.getName();
@@ -572,7 +631,7 @@ public class RelationalTransformationToTracePackage
 	 */
 	protected static class WhereInvocation2TraceClass extends AbstractInvocation2TraceClass
 	{
-		protected WhereInvocation2TraceClass(@NonNull RelationalTransformationToTracePackage relationalTransformation2tracePackage,
+		protected WhereInvocation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage,
 				@NonNull Relation invokedRelation, @NonNull Relation invokingRelation) throws CompilerChainException {
 			super(relationalTransformation2tracePackage, invokedRelation, invokingRelation);
 			String name = "T" + invokingRelation.getName() + "_where_" + invokedRelation.getName();
@@ -596,12 +655,12 @@ public class RelationalTransformationToTracePackage
 	/**
 	 * The "Speculatable" class to be added to the trace package.
 	 */
-//	private org.eclipse.ocl.pivot.@Nullable Class speculatableClass = null;
+	//	private org.eclipse.ocl.pivot.@Nullable Class speculatableClass = null;
 
 	/**
 	 * The "Speculation" class to be added to the trace package.
 	 */
-//	private org.eclipse.ocl.pivot.@Nullable Class speculationClass = null;
+	//	private org.eclipse.ocl.pivot.@Nullable Class speculationClass = null;
 
 	/**
 	 * Name to corresponding trace class
@@ -618,7 +677,7 @@ public class RelationalTransformationToTracePackage
 	 */
 	protected final @NonNull Map<@NonNull RelationCallExp, @Nullable Rule2TraceClass> invocation2rule2traceClass = new HashMap<>();
 
-	public RelationalTransformationToTracePackage(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationalTransformation rTransformation) {
+	public RelationalTransformation2TracePackage(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationalTransformation rTransformation) {
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.rTransformation = rTransformation;
 		this.tracePackage = createTracePackage();
