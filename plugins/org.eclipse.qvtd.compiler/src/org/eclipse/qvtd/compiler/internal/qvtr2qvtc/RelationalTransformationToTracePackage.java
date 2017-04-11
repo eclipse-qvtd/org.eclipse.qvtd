@@ -389,6 +389,20 @@ public class RelationalTransformationToTracePackage
 			}
 		}
 
+		//		public void installConsumedByDependencies() {
+		//			for (@NonNull Rule2TraceClass consumedRule2traceClass : getTransitivelyConsumedRule2traceClasses()) {
+		//				ClassUtil.nonNullState(consumedRule2traceClass.transitivelyConsumedByRule2traceClasses).add(this);
+		//			}
+		//		}
+
+		/*		public void installDependencyCycles() throws CompilerChainException {
+			Set<@NonNull Rule2TraceClass> cyclicRule2traceClasses2 = cyclicRule2traceClasses = new HashSet<>(getTransitivelyConsumedByRule2traceClasses());
+			cyclicRule2traceClasses2.retainAll(getTransitivelyConsumedRule2traceClasses());
+			if (!cyclicRule2traceClasses2.isEmpty()) {
+				traceClass.getSuperClasses().add(relationalTransformation2tracePackage.getSpeculatableClass());
+			}
+		} */
+
 		@Override
 		public String toString() {
 			return traceClass.getName();
@@ -405,6 +419,17 @@ public class RelationalTransformationToTracePackage
 			for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(relation))  {
 				createTraceProperty(null, traceClass, rVariable, false);
 			}
+			/*			if (invocation != null) {
+				for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(QVTrelationUtil.getReferredRelation(invocation)))  {
+					createTraceProperty(null, traceClass, rVariable, false);
+				}
+			} */
+			//			if (consumedByRule2traceClasses.size() > 0) {
+			//				Type booleanType = relationalTransformation2tracePackage.qvtr2qvtc.getStandardLibrary().getBooleanType();
+			//				createTraceProperty(null, traceClass, QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME, booleanType, true, false);
+			//				assert relationalTransformation2tracePackage.speculatableClass != null;
+			//				traceClass.getSuperClasses().add(relationalTransformation2tracePackage.speculatableClass);
+			//			}
 			//
 			//	Determine whether a navigation from the trace to an unambiguous left/right object can ever be possible.
 			//
@@ -458,6 +483,29 @@ public class RelationalTransformationToTracePackage
 			String name = "T" + relation.getName();
 			traceClass.setName(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
 		}
+
+		/*		@Override
+		public void installConsumesDependencies() throws CompilerChainException {
+			Iterable<@NonNull RelationCallExp> rWhenInvocations = relationalTransformation2tracePackage.qvtr2qvtc.getWhenInvocationsOf(relation);
+			if (rWhenInvocations != null) {
+				for (@NonNull RelationCallExp rWhenInvocation : rWhenInvocations) {
+					//					Rule2TraceClass invocation2TraceClass = relationalTransformation2tracePackage.getInvocation2TraceClass(rWhenInvocation);
+					Relation rInvokingRelation = QVTrelationUtil.getContainingRelation(rWhenInvocation);
+					Rule2TraceClass invokingRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(rInvokingRelation);
+					invokingRelation2TraceClass.addConsumer(this);		// invoker consumers the invoked result
+					//					addConsumer(invokingRelation2TraceClass);
+				}
+			}
+			Iterable<@NonNull RelationCallExp> rWhereInvocations = relationalTransformation2tracePackage.qvtr2qvtc.getWhereInvocationsOf(relation);
+			if (rWhereInvocations != null) {
+				for (@NonNull RelationCallExp rWhereInvocation : rWhereInvocations) {
+					//					Rule2TraceClass invocation2TraceClass = relationalTransformation2tracePackage.getInvocation2TraceClass(rWhenInvocation);
+					Relation rInvokingRelation = QVTrelationUtil.getContainingRelation(rWhereInvocation);
+					Rule2TraceClass invokingRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(rInvokingRelation);
+					addConsumer(invokingRelation2TraceClass);
+				}
+			}
+		} */
 	}
 
 	/**
@@ -509,6 +557,14 @@ public class RelationalTransformationToTracePackage
 			traceClass.getSuperClasses().add(superRelation2TraceClass.getTraceClass());
 			name2property.putAll(superRelation2TraceClass.name2property);
 		}
+
+		//		@Override
+		//		public void installConsumesDependencies() throws CompilerChainException {
+		//			Rule2TraceClass invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(relation);
+		//			Rule2TraceClass invokingRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(invokingRelation);
+		//			invokedRelation2TraceClass.addConsumer(this);
+		//			invokingRelation2TraceClass.addConsumer(this);
+		//		}
 	}
 
 	/**
@@ -536,6 +592,16 @@ public class RelationalTransformationToTracePackage
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull RelationalTransformation rTransformation;
 	private final org.eclipse.ocl.pivot.@NonNull Package tracePackage;
+
+	/**
+	 * The "Speculatable" class to be added to the trace package.
+	 */
+//	private org.eclipse.ocl.pivot.@Nullable Class speculatableClass = null;
+
+	/**
+	 * The "Speculation" class to be added to the trace package.
+	 */
+//	private org.eclipse.ocl.pivot.@Nullable Class speculationClass = null;
 
 	/**
 	 * Name to corresponding trace class
@@ -768,6 +834,50 @@ public class RelationalTransformationToTracePackage
 	protected @NonNull Rule2TraceClass getRule2TraceClass(@NonNull Relation rRelation) throws CompilerChainException {
 		return ClassUtil.nonNullState(relation2rule2traceClass.get(rRelation));
 	}
+
+	/*	protected org.eclipse.ocl.pivot.@NonNull Class getSpeculatableClass() {
+		org.eclipse.ocl.pivot.Class speculatableClass2 = speculatableClass;
+		if (speculatableClass2 == null) {
+			//			org.eclipse.ocl.pivot.Class speculationClass2 = getSpeculationClass();
+			org.eclipse.ocl.pivot.Class speculatableInterface = PivotUtil.createClass(Speculatable.class.getSimpleName());
+			speculatableInterface.setInstanceClassName(Speculatable.class.getName());
+			speculatableInterface.setIsAbstract(true);
+			speculatableInterface.setIsInterface(true);
+			tracePackage.getOwnedClasses().add(speculatableInterface);
+			speculatableClass2 = speculatableClass = PivotUtil.createClass("Abstract" + Speculatable.class.getSimpleName());
+			speculatableClass2.setIsAbstract(true);
+			speculatableClass2.setIsInterface(false);
+			speculatableClass2.getSuperClasses().add(speculatableInterface);
+			Type speculationClass = getSpeculationClass();
+			Type speculationsType = qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(speculationClass, true, null, null);
+			Property referredSpeculationsProperty = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_REFERRED_SPECULATIONS_PROPERTY_NAME, speculationsType);
+			referredSpeculationsProperty.setIsRequired(true);
+			referredSpeculationsProperty.setIsResolveProxies(false);
+			speculatableClass2.getOwnedProperties().add(referredSpeculationsProperty);
+			Property speculationProperty = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_SPECULATION_PROPERTY_NAME, speculationClass);
+			speculationProperty.setIsRequired(false);
+			speculationProperty.setIsResolveProxies(false);
+			speculatableClass2.getOwnedProperties().add(speculationProperty);
+			Type booleanType = qvtr2qvtc.getStandardLibrary().getBooleanType();
+			Property successProperty = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME, booleanType);
+			successProperty.setIsRequired(true);
+			speculatableClass2.getOwnedProperties().add(successProperty);
+			tracePackage.getOwnedClasses().add(speculatableClass2);
+		}
+		return speculatableClass2;
+	} */
+
+	/*	protected org.eclipse.ocl.pivot.@NonNull Class getSpeculationClass() {
+		org.eclipse.ocl.pivot.Class speculationClass2 = speculationClass;
+		if (speculationClass2 == null) {
+			speculationClass2 = speculationClass = PivotUtil.createClass(Speculation.class.getSimpleName());
+			speculationClass2.setInstanceClassName(Speculation.class.getName());
+			speculationClass2.setIsAbstract(true);
+			speculationClass2.setIsInterface(true);
+			tracePackage.getOwnedClasses().add(speculationClass2);
+		}
+		return speculationClass2;
+	} */
 
 	protected @NonNull String getUniqueTraceClassName(@NonNull Rule2TraceClass mapping2traceClass, @NonNull String name) {
 		String uniqueName = name;
