@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
@@ -87,7 +88,19 @@ public class RelationalTransformation2TracePackage
 		 */
 		private final @NonNull List<@NonNull RelationCallExp> whereInvocations = new ArrayList<>();
 
+		/**
+		 * The Class that realizes the middle model trace class.
+		 */
 		protected final org.eclipse.ocl.pivot.@NonNull Class traceClass = ClassUtil.nonNullState(PivotFactory.eINSTANCE.createClass());
+
+		/**
+		 * Lazily created null-free Bag of traceClass.
+		 */
+		private org.eclipse.ocl.pivot.@Nullable Class bagOfTraceClass = null;
+
+		/**
+		 * Map from trace property name to trace property.
+		 */
 		protected final @NonNull Map<@NonNull String, @NonNull Property> name2property = new HashMap<>();
 
 		/**
@@ -150,13 +163,17 @@ public class RelationalTransformation2TracePackage
 			return ClassUtil.safeCompareTo(this.traceClass.getName(), that.traceClass.getName());
 		}
 
-		private void createTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull TypedElement tv, boolean manyTraces) throws CompilerChainException {
+		private void createTraceProperty(@Nullable Domain rDomain, @NonNull TypedElement tv, boolean manyTraces) throws CompilerChainException {
 			String vn = QVTrelationUtil.getName(tv);
 			Type c = QVTrelationUtil.getType(tv);
-			createTraceProperty(rDomain, rc, vn, c, tv.isIsRequired(), manyTraces);
+			createTraceProperty(rDomain, vn, c, tv.isIsRequired(), manyTraces);
 		}
 
-		private void createTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) throws CompilerChainException {
+		/**
+		 * Lazily create the name Property for a traceClass with a type. If manyTraces is set there may be many trace class instances referencing the same object through
+		 * the trace property and so the implicit opposite must be a Bag.
+		 */
+		private void createTraceProperty(@Nullable Domain rDomain, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) throws CompilerChainException {
 			Property traceProperty = name2property.get(name);
 			if (traceProperty != null) {
 				if ((type != traceProperty.getType()) || isRequired != traceProperty.isIsRequired()) {
@@ -164,8 +181,35 @@ public class RelationalTransformation2TracePackage
 				}
 			}
 			else {
-				traceProperty = whenTraceProperty(rDomain, rc, name, type, isRequired, manyTraces);
+				traceProperty = PivotFactory.eINSTANCE.createProperty();
+				traceProperty.setName(name);
+				traceProperty.setType(type);
+				traceProperty.setIsRequired(isRequired);
+				if (rDomain != null) {
+					Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
+					domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
+					Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
+					domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
+					domainDetail.getValues().add(rDomain.getName());
+					domainAnnotation.getOwnedDetails().add(domainDetail);
+					traceProperty.getOwnedAnnotations().add(domainAnnotation);
+				}
 				name2property.put(name, traceProperty);
+				traceProperty.setOwningClass(traceClass);
+				if (!(type instanceof DataType)) {
+					Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
+					oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
+					oppositeProperty.setType(manyTraces ? getBagOfTraceClass() : traceClass);
+					oppositeProperty.setIsRequired(manyTraces);
+					//				oppositeProperty.setType(traceClass);
+					//				oppositeProperty.setIsRequired(false);
+					oppositeProperty.setIsImplicit(true);
+					oppositeProperty.setOwningClass((org.eclipse.ocl.pivot.@NonNull Class)type);
+					traceProperty.setOpposite(oppositeProperty);
+					oppositeProperty.setOpposite(traceProperty);
+					//				putTrace(oppositeProperty, type);
+				}
+				//			putTrace(traceProperty, traceClass);
 			}
 		}
 
@@ -174,7 +218,7 @@ public class RelationalTransformation2TracePackage
 		 * and so the implicit opposites must be Bags. Only very simple patterns with pedantically 1:1 relationships can avoid the Bags.
 		 * @throws CompilerChainException
 		 */
-		private boolean doSubTemplateToTraceClassProps(@NonNull Domain rDomain, @NonNull TemplateExp te, org.eclipse.ocl.pivot.@NonNull Class rc, boolean manyTraces) throws CompilerChainException {
+		private boolean doSubTemplateToTraceClassProps(@NonNull Domain rDomain, @NonNull TemplateExp te, boolean manyTraces) throws CompilerChainException {
 			Variable tv = QVTrelationUtil.getBindsTo(te);
 			if (te instanceof CollectionTemplateExp) {
 				CollectionTemplateExp cte = (CollectionTemplateExp) te;
@@ -184,12 +228,12 @@ public class RelationalTransformation2TracePackage
 				int argIndex = 0;
 				for (@NonNull OCLExpression m : QVTrelationUtil.getOwnedMembers(cte)) {
 					if (m instanceof TemplateExp) {
-						if (doSubTemplateToTraceClassProps(rDomain, (TemplateExp)m, rc, manyTraces)) {
+						if (doSubTemplateToTraceClassProps(rDomain, (TemplateExp)m, manyTraces)) {
 							//						manyTraces = true;
 						}
 					}
 					else if (!(m instanceof VariableExp)) {
-						createTraceProperty(rDomain, rc, collectionVariable.getName() + "_" + argIndex, elementType, collectionType.isIsNullFree(), false);
+						createTraceProperty(rDomain, collectionVariable.getName() + "_" + argIndex, elementType, collectionType.isIsNullFree(), false);
 					}
 					argIndex++;
 				}
@@ -197,7 +241,7 @@ public class RelationalTransformation2TracePackage
 				//			if (rv != null) {
 				//				createTraceProperty(rDomain, rc, rv, isMany);
 				//			}
-				createTraceProperty(rDomain, rc, tv, manyTraces);			// ?? not required for CollectionTemplateExp's
+				createTraceProperty(rDomain, tv, manyTraces);			// ?? not required for CollectionTemplateExp's
 			}
 			else if (te instanceof ObjectTemplateExp) {
 				ObjectTemplateExp ote = (ObjectTemplateExp) te;
@@ -213,14 +257,22 @@ public class RelationalTransformation2TracePackage
 						if ((oppositeProperty != null) && oppositeProperty.isIsMany()) {
 							nestedManyTraces = true;
 						}
-						if (doSubTemplateToTraceClassProps(rDomain, (TemplateExp)value, rc, nestedManyTraces)) {
+						if (doSubTemplateToTraceClassProps(rDomain, (TemplateExp)value, nestedManyTraces)) {
 							//						manyTraces = true;
 						}
 					}
 				}
-				createTraceProperty(rDomain, rc, tv, manyTraces);			// ?? not required for CollectionTemplateExp's
+				createTraceProperty(rDomain, tv, manyTraces);			// ?? not required for CollectionTemplateExp's
 			}
 			return manyTraces;
+		}
+
+		protected org.eclipse.ocl.pivot.@NonNull Class getBagOfTraceClass() {
+			Class bagOfTraceClass2 = bagOfTraceClass;
+			if (bagOfTraceClass2 == null) {
+				bagOfTraceClass = bagOfTraceClass2 = relationalTransformation2tracePackage.getBagType(traceClass);
+			}
+			return bagOfTraceClass2;
 		}
 
 		public @Nullable Iterable<@NonNull Rule2TraceClass> getConsumedByRule2traceClasses() {
@@ -422,8 +474,8 @@ public class RelationalTransformation2TracePackage
 				traceClass.getSuperClasses().add(overriddenRelation2TraceClass.traceClass);
 			}
 
-			for (@NonNull Variable rVariable : relationalTransformation2tracePackage.qvtr2qvtc.getMiddleDomainVariables(relation))  {
-				createTraceProperty(null, traceClass, rVariable, false);
+			for (@NonNull Variable rVariable : relationalTransformation2tracePackage.getMiddleDomainVariables(relation))  {
+				createTraceProperty(null, rVariable, false);
 			}
 			/*			if (invocation != null) {
 				for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(QVTrelationUtil.getReferredRelation(invocation)))  {
@@ -451,12 +503,12 @@ public class RelationalTransformation2TracePackage
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
 				for (@NonNull DomainPattern rDomainPattern : QVTrelationUtil.getOwnedPatterns(rDomain)) {
 					TemplateExp rTemplateExp = QVTrelationUtil.getOwnedTemplateExpression(rDomainPattern);
-					doSubTemplateToTraceClassProps(rDomain, rTemplateExp, traceClass, manyTraces);
+					doSubTemplateToTraceClassProps(rDomain, rTemplateExp, manyTraces);
 				}
 			}
 			Pattern rWhenPattern = relation.getWhen();
 			if (rWhenPattern != null) {
-				for (Predicate rWhenPredicate : QVTrelationUtil.getOwnedPredicates(rWhenPattern)) {
+				for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getOwnedPredicates(rWhenPattern)) {
 					OCLExpression rConditionExpression = QVTrelationUtil.getConditionExpression(rWhenPredicate);
 					if (rConditionExpression instanceof RelationCallExp) {
 						RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
@@ -467,7 +519,7 @@ public class RelationalTransformation2TracePackage
 								VariableDeclaration rVariable = ((VariableExp)rArgument).getReferredVariable();
 								assert rVariable != null;
 								RelationDomain rDomain = QVTrelationUtil.getRelationCallExpArgumentDomain(rInvocation, i);
-								createTraceProperty(rDomain, traceClass, rVariable, manyTraces);
+								createTraceProperty(rDomain, rVariable, manyTraces);
 								//							createTraceProperty(rDomain, rVariable.getType(), rVariable, isMany);			// ?? not required for CollectionTemplateExp's
 							}
 						}
@@ -476,59 +528,6 @@ public class RelationalTransformation2TracePackage
 			}
 			CompilerUtil.normalizeNameables(ClassUtil.nullFree(traceClass.getOwnedProperties()));
 			return traceClass;
-		}
-
-		/**
-		 * The lazily created named Trace Properties in each Trace Class.
-		 */
-		private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> traceClass2name2traceProperty = new HashMap<>();
-
-		/**
-		 * Lazily create the name Property for a traceClass with a type. If manyTraces is set there may be many trace class instances referencing the same object through
-		 * the trace property and so the implicit opposite must be a Bag.
-		 */
-		public @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) {
-			Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
-			if (name2traceProperty == null) {
-				name2traceProperty = new HashMap<>();
-				traceClass2name2traceProperty.put(traceClass, name2traceProperty);
-			}
-			Property traceProperty = name2traceProperty.get(name);
-			if (traceProperty == null) {
-				traceProperty = PivotFactory.eINSTANCE.createProperty();
-				traceProperty.setName(name);
-				traceProperty.setType(type);
-				traceProperty.setIsRequired(isRequired);
-				if (rDomain != null) {
-					Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
-					domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
-					Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
-					domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
-					domainDetail.getValues().add(rDomain.getName());
-					domainAnnotation.getOwnedDetails().add(domainDetail);
-					traceProperty.getOwnedAnnotations().add(domainAnnotation);
-				}
-				name2traceProperty.put(name, traceProperty);
-				traceProperty.setOwningClass(traceClass);
-				if (!(type instanceof DataType)) {
-					Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
-					oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
-					oppositeProperty.setType(manyTraces ? relationalTransformation2tracePackage.qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(traceClass, true, null, null) : traceClass);
-					oppositeProperty.setIsRequired(manyTraces);
-					//				oppositeProperty.setType(traceClass);
-					//				oppositeProperty.setIsRequired(false);
-					oppositeProperty.setIsImplicit(true);
-					oppositeProperty.setOwningClass((org.eclipse.ocl.pivot.@NonNull Class)type);
-					traceProperty.setOpposite(oppositeProperty);
-					oppositeProperty.setOpposite(traceProperty);
-					//				putTrace(oppositeProperty, type);
-				}
-				//			putTrace(traceProperty, traceClass);
-			}
-			else {
-				assert traceProperty.getType() == type;
-			}
-			return traceProperty;
 		}
 	}
 
@@ -886,8 +885,19 @@ public class RelationalTransformation2TracePackage
 		invocation2traceClass.transform();
 	}
 
+	/**
+	 * Return the type of a Bag of traceClass for use as the indeterminate opposite property of a trace property.
+	 */
+	protected org.eclipse.ocl.pivot.@NonNull Class getBagType(org.eclipse.ocl.pivot.@NonNull Class traceClass) {
+		return qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(traceClass, true, null, null);
+	}
+
 	protected @NonNull Rule2TraceClass getInvocation2TraceClass(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
 		return ClassUtil.nonNullState(invocation2rule2traceClass.get(rInvocation));
+	}
+
+	public @NonNull Iterable<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {
+		return qvtr2qvtc.getMiddleDomainVariables(rRelation);
 	}
 
 	protected @NonNull Rule2TraceClass getRule2TraceClass(@NonNull Relation rRelation) throws CompilerChainException {
