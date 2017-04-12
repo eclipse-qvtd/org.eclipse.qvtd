@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#get_3 <em>3</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#get_4 <em>4</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getModule <em>Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getRelModel <em>Rel Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getRelTx <em>Rel Tx</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getTxName <em>Tx Name</em>}</li>
  * </ul>
  *
@@ -62,7 +62,7 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * @generated
 	 * @ordered
 	 */
-	protected RelationalTransformation _4;
+	protected RelationModel _4;
 
 	/**
 	 * The cached value of the '{@link #getModule() <em>Module</em>}' reference.
@@ -75,14 +75,14 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	protected Module module;
 
 	/**
-	 * The cached value of the '{@link #getRelModel() <em>Rel Model</em>}' reference.
+	 * The cached value of the '{@link #getRelTx() <em>Rel Tx</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRelModel()
+	 * @see #getRelTx()
 	 * @generated
 	 * @ordered
 	 */
-	protected RelationModel relModel;
+	protected RelationalTransformation relTx;
 
 	/**
 	 * The default value of the '{@link #getTxName() <em>Tx Name</em>}' attribute.
@@ -128,7 +128,6 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.ocl.pivot.Package get_3() {
 		if (_3 != null && _3.eIsProxy()) {
 			InternalEObject old_3 = (InternalEObject)_3;
@@ -155,7 +154,6 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void set_3(org.eclipse.ocl.pivot.Package new_3) {
 		org.eclipse.ocl.pivot.Package old_3 = _3;
 		_3 = new_3;
@@ -168,11 +166,10 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public RelationalTransformation get_4() {
+	public RelationModel get_4() {
 		if (_4 != null && _4.eIsProxy()) {
 			InternalEObject old_4 = (InternalEObject)_4;
-			_4 = (RelationalTransformation)eResolveProxy(old_4);
+			_4 = (RelationModel)eResolveProxy(old_4);
 			if (_4 != old_4) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4, old_4, _4));
@@ -186,7 +183,7 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationalTransformation basicGet_4() {
+	public RelationModel basicGet_4() {
 		return _4;
 	}
 
@@ -195,9 +192,8 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void set_4(RelationalTransformation new_4) {
-		RelationalTransformation old_4 = _4;
+	public void set_4(RelationModel new_4) {
+		RelationModel old_4 = _4;
 		_4 = new_4;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4, old_4, _4));
@@ -208,10 +204,9 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Module getModule() {
 		if (module != null && module.eIsProxy()) {
-			InternalEObject oldModule = module;
+			InternalEObject oldModule = (InternalEObject)module;
 			module = (Module)eResolveProxy(oldModule);
 			if (module != oldModule) {
 				if (eNotificationRequired())
@@ -235,7 +230,6 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setModule(Module newModule) {
 		Module oldModule = module;
 		module = newModule;
@@ -248,17 +242,16 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public RelationModel getRelModel() {
-		if (relModel != null && relModel.eIsProxy()) {
-			InternalEObject oldRelModel = (InternalEObject)relModel;
-			relModel = (RelationModel)eResolveProxy(oldRelModel);
-			if (relModel != oldRelModel) {
+	public RelationalTransformation getRelTx() {
+		if (relTx != null && relTx.eIsProxy()) {
+			InternalEObject oldRelTx = (InternalEObject)relTx;
+			relTx = (RelationalTransformation)eResolveProxy(oldRelTx);
+			if (relTx != oldRelTx) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL, oldRelModel, relModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX, oldRelTx, relTx));
 			}
 		}
-		return relModel;
+		return relTx;
 	}
 
 	/**
@@ -266,8 +259,8 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationModel basicGetRelModel() {
-		return relModel;
+	public RelationalTransformation basicGetRelTx() {
+		return relTx;
 	}
 
 	/**
@@ -275,12 +268,11 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setRelModel(RelationModel newRelModel) {
-		RelationModel oldRelModel = relModel;
-		relModel = newRelModel;
+	public void setRelTx(RelationalTransformation newRelTx) {
+		RelationalTransformation oldRelTx = relTx;
+		relTx = newRelTx;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL, oldRelModel, relModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX, oldRelTx, relTx));
 	}
 
 	/**
@@ -288,7 +280,6 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getTxName() {
 		return txName;
 	}
@@ -298,7 +289,6 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTxName(String newTxName) {
 		String oldTxName = txName;
 		txName = newTxName;
@@ -323,9 +313,9 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				if (resolve) return getModule();
 				return basicGetModule();
-			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL:
-				if (resolve) return getRelModel();
-				return basicGetRelModel();
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX:
+				if (resolve) return getRelTx();
+				return basicGetRelTx();
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME:
 				return getTxName();
 		}
@@ -344,13 +334,13 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 				set_3((org.eclipse.ocl.pivot.Package)newValue);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4:
-				set_4((RelationalTransformation)newValue);
+				set_4((RelationModel)newValue);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				setModule((Module)newValue);
 				return;
-			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL:
-				setRelModel((RelationModel)newValue);
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX:
+				setRelTx((RelationalTransformation)newValue);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME:
 				setTxName((String)newValue);
@@ -371,13 +361,13 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 				set_3((org.eclipse.ocl.pivot.Package)null);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4:
-				set_4((RelationalTransformation)null);
+				set_4((RelationModel)null);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				setModule((Module)null);
 				return;
-			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL:
-				setRelModel((RelationModel)null);
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX:
+				setRelTx((RelationalTransformation)null);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME:
 				setTxName(TX_NAME_EDEFAULT);
@@ -400,8 +390,8 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 				return _4 != null;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				return module != null;
-			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL:
-				return relModel != null;
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX:
+				return relTx != null;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME:
 				return TX_NAME_EDEFAULT == null ? txName != null : !TX_NAME_EDEFAULT.equals(txName);
 		}

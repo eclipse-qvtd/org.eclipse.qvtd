@@ -64,6 +64,7 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case PATL2QVTrPackage.THELPER2_FUNCTION: return createTHelper2Function();
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION: return createTModel2RelationalTransformation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -75,7 +76,16 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
+	public THelper2Function createTHelper2Function() {
+		THelper2FunctionImpl tHelper2Function = new THelper2FunctionImpl();
+		return tHelper2Function;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TModel2RelationalTransformation createTModel2RelationalTransformation() {
 		TModel2RelationalTransformationImpl tModel2RelationalTransformation = new TModel2RelationalTransformationImpl();
 		return tModel2RelationalTransformation;
@@ -86,7 +96,6 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PATL2QVTrPackage getPATL2QVTrPackage() {
 		return (PATL2QVTrPackage)getEPackage();
 	}

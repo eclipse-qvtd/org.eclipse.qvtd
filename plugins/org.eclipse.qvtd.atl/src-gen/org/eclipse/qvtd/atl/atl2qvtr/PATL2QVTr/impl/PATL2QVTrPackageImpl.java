@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
 
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrFactory;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation;
 
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -42,6 +43,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
  * @generated
  */
 public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tHelper2FunctionEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,6 +134,86 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * @generated
 	 */
 	@Override
+	public EClass getTHelper2Function() {
+		return tHelper2FunctionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTHelper2Function_ADef() {
+		return (EReference)tHelper2FunctionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTHelper2Function_AFeat() {
+		return (EReference)tHelper2FunctionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTHelper2Function_AModule() {
+		return (EReference)tHelper2FunctionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTHelper2Function_Function() {
+		return (EReference)tHelper2FunctionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTHelper2Function_Helper() {
+		return (EReference)tHelper2FunctionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTHelper2Function_RelTx() {
+		return (EReference)tHelper2FunctionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTHelper2Function_TxName() {
+		return (EAttribute)tHelper2FunctionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTModel2RelationalTransformation() {
 		return tModel2RelationalTransformationEClass;
 	}
@@ -166,7 +254,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getTModel2RelationalTransformation_RelModel() {
+	public EReference getTModel2RelationalTransformation_RelTx() {
 		return (EReference)tModel2RelationalTransformationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -209,11 +297,20 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		isCreated = true;
 
 		// Create classes and their features
+		tHelper2FunctionEClass = createEClass(THELPER2_FUNCTION);
+		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__ADEF);
+		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__AFEAT);
+		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__AMODULE);
+		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__FUNCTION);
+		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__HELPER);
+		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__REL_TX);
+		createEAttribute(tHelper2FunctionEClass, THELPER2_FUNCTION__TX_NAME);
+
 		tModel2RelationalTransformationEClass = createEClass(TMODEL2_RELATIONAL_TRANSFORMATION);
 		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__3);
 		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__4);
 		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__MODULE);
-		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL);
+		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX);
 		createEAttribute(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME);
 	}
 
@@ -241,9 +338,11 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
-		QVTrelationPackage theQVTrelationPackage = (QVTrelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationPackage.eNS_URI);
+		OCLPackage theOCLPackage = (OCLPackage)EPackage.Registry.INSTANCE.getEPackage(OCLPackage.eNS_URI);
 		ATLPackage theATLPackage = (ATLPackage)EPackage.Registry.INSTANCE.getEPackage(ATLPackage.eNS_URI);
+		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
+		QVTrelationPackage theQVTrelationPackage = (QVTrelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationPackage.eNS_URI);
+		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -252,19 +351,88 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(tHelper2FunctionEClass, THelper2Function.class, "THelper2Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTHelper2Function_ADef(), theOCLPackage.getOclFeatureDefinition(), null, "aDef", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTHelper2Function_AFeat(), theOCLPackage.getOperation(), null, "aFeat", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTHelper2Function_AModule(), theATLPackage.getModule(), null, "aModule", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTHelper2Function_Function(), theQVTbasePackage.getFunction(), null, "function", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTHelper2Function_Helper(), theATLPackage.getHelper(), null, "helper", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTHelper2Function_RelTx(), theQVTrelationPackage.getRelationalTransformation(), null, "relTx", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTHelper2Function_TxName(), ecorePackage.getEString(), "txName", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(tModel2RelationalTransformationEClass, TModel2RelationalTransformation.class, "TModel2RelationalTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTModel2RelationalTransformation__3(), thePivotPackage.getPackage(), null, "_3", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTModel2RelationalTransformation__4(), theQVTrelationPackage.getRelationalTransformation(), null, "_4", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTModel2RelationalTransformation__4(), theQVTrelationPackage.getRelationModel(), null, "_4", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTModel2RelationalTransformation_Module(), theATLPackage.getModule(), null, "module", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTModel2RelationalTransformation_RelModel(), theQVTrelationPackage.getRelationModel(), null, "relModel", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTModel2RelationalTransformation_RelTx(), theQVTrelationPackage.getRelationalTransformation(), null, "relTx", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTModel2RelationalTransformation_TxName(), ecorePackage.getEString(), "txName", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 		// http://www.eclipse.org/qvt#Domains
 		createQvtDomainsAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEmofAnnotations() {
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		addAnnotation
+		(getTHelper2Function_ADef(),
+			source,
+			new String[] {
+				"body", "THelper2Function"
+		});
+		addAnnotation
+		(getTHelper2Function_AFeat(),
+			source,
+			new String[] {
+				"body", "THelper2Function"
+		});
+		addAnnotation
+		(getTHelper2Function_AModule(),
+			source,
+			new String[] {
+				"body", "THelper2Function"
+		});
+		addAnnotation
+		(getTHelper2Function_Function(),
+			source,
+			new String[] {
+				"body", "THelper2Function"
+		});
+		addAnnotation
+		(getTHelper2Function_Helper(),
+			source,
+			new String[] {
+				"body", "THelper2Function"
+		});
+		addAnnotation
+		(getTHelper2Function_RelTx(),
+			source,
+			new String[] {
+				"body", "THelper2Function"
+		});
+		addAnnotation
+		(getTModel2RelationalTransformation_Module(),
+			source,
+			new String[] {
+				"body", "TModel2RelationalTransformation"
+		});
+		addAnnotation
+		(getTModel2RelationalTransformation_RelTx(),
+			source,
+			new String[] {
+				"body", "TModel2RelationalTransformation"
+		});
 	}
 
 	/**
@@ -275,6 +443,42 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 */
 	protected void createQvtDomainsAnnotations() {
 		String source = "http://www.eclipse.org/qvt#Domains";
+		addAnnotation
+		(getTHelper2Function_ADef(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTHelper2Function_AFeat(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTHelper2Function_AModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTHelper2Function_Function(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTHelper2Function_Helper(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTHelper2Function_RelTx(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
 		addAnnotation
 		(getTModel2RelationalTransformation__3(),
 			source,
@@ -294,7 +498,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 				"referredDomain", "atl"
 		});
 		addAnnotation
-		(getTModel2RelationalTransformation_RelModel(),
+		(getTModel2RelationalTransformation_RelTx(),
 			source,
 			new String[] {
 				"referredDomain", "qvtr"

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtr="http://www.eclipse.org/qvt/2017/QVTrelation"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage">
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase"
+    xmlns:qvtr="http://www.eclipse.org/qvt/2017/QVTrelation" xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage">
   <ownedPackages>
-    <ownedClasses xsi:type="qvtr:RelationalTransformation" name="Families2Persons"/>
+    <ownedClasses xsi:type="qvtr:RelationalTransformation" name="Families2Persons">
+      <ownedOperations xsi:type="qvtb:Function" name="isFemale"/>
+    </ownedClasses>
   </ownedPackages>
 </qvtr:RelationModel>

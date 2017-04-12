@@ -78,6 +78,10 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	protected PATL2QVTrSwitch<@Nullable Adapter> modelSwitch =
 		new PATL2QVTrSwitch<@Nullable Adapter>() {
 			@Override
+			public Adapter caseTHelper2Function(THelper2Function object) {
+				return createTHelper2FunctionAdapter();
+			}
+			@Override
 			public Adapter caseTModel2RelationalTransformation(TModel2RelationalTransformation object) {
 				return createTModel2RelationalTransformationAdapter();
 			}
@@ -100,6 +104,20 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function <em>THelper2 Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function
+	 * @generated
+	 */
+	public Adapter createTHelper2FunctionAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation <em>TModel2 Relational Transformation</em>}'.

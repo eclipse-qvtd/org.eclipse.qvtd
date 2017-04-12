@@ -29,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#get_3 <em>3</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#get_4 <em>4</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getModule <em>Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelModel <em>Rel Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelTx <em>Rel Tx</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getTxName <em>Tx Name</em>}</li>
  * </ul>
  *
@@ -74,13 +74,13 @@ public interface TModel2RelationalTransformation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>4</em>' reference.
-	 * @see #set_4(RelationalTransformation)
+	 * @see #set_4(RelationModel)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTModel2RelationalTransformation__4()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationalTransformation get_4();
+	RelationModel get_4();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#get_4 <em>4</em>}' reference.
@@ -90,7 +90,7 @@ public interface TModel2RelationalTransformation extends EObject {
 	 * @see #get_4()
 	 * @generated
 	 */
-	void set_4(RelationalTransformation value);
+	void set_4(RelationModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Module</b></em>' reference.
@@ -104,6 +104,7 @@ public interface TModel2RelationalTransformation extends EObject {
 	 * @see #setModule(Module)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTModel2RelationalTransformation_Module()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TModel2RelationalTransformation'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
@@ -120,31 +121,32 @@ public interface TModel2RelationalTransformation extends EObject {
 	void setModule(Module value);
 
 	/**
-	 * Returns the value of the '<em><b>Rel Model</b></em>' reference.
+	 * Returns the value of the '<em><b>Rel Tx</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Rel Model</em>' reference isn't clear,
+	 * If the meaning of the '<em>Rel Tx</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rel Model</em>' reference.
-	 * @see #setRelModel(RelationModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTModel2RelationalTransformation_RelModel()
+	 * @return the value of the '<em>Rel Tx</em>' reference.
+	 * @see #setRelTx(RelationalTransformation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTModel2RelationalTransformation_RelTx()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TModel2RelationalTransformation'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationModel getRelModel();
+	RelationalTransformation getRelTx();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelModel <em>Rel Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelTx <em>Rel Tx</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rel Model</em>' reference.
-	 * @see #getRelModel()
+	 * @param value the new value of the '<em>Rel Tx</em>' reference.
+	 * @see #getRelTx()
 	 * @generated
 	 */
-	void setRelModel(RelationModel value);
+	void setRelTx(RelationalTransformation value);
 
 	/**
 	 * Returns the value of the '<em><b>Tx Name</b></em>' attribute.

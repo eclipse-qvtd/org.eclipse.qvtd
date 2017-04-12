@@ -30,6 +30,15 @@ public interface PATL2QVTrFactory extends EFactory {
 	PATL2QVTrFactory eINSTANCE = org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>THelper2 Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>THelper2 Function</em>'.
+	 * @generated
+	 */
+	THelper2Function createTHelper2Function();
+
+	/**
 	 * Returns a new object of class '<em>TModel2 Relational Transformation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

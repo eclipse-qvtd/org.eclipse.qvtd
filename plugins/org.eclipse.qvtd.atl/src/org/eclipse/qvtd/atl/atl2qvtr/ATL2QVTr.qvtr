@@ -30,22 +30,46 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 	transformation ATL2QVTr(atl:{atlMM,atloclMM,atlprimsMM}, qvtr:{qvtrelation,qvttemplate,qvtbase,pivotocl})
 	{
 		/**
-		 *  atl::Module <=> qvtr::RelationalTransformation
+		 *  atl::Module <=> qvtr::RelationModel/Package/RelationalTransformation
 		 */
 		top relation Model2RelationalTransformation {
 			txName : String;
 			enforce domain atl module : Module {
 				name = txName
 			};	   
-			enforce domain qvtr relModel : RelationModel {
-				name = null,
-				ownedPackages = : Package {
+			enforce domain qvtr relTx : RelationalTransformation {
+				name = txName,
+				owningPackage = : Package {
 					name = null,
-					ownedClasses = : RelationalTransformation {
-						name = txName
+					Model = : RelationModel {
+						name = null
 					}
 				}
 			};
+		}
+		
+		/**
+		 *  atl::Helper/OclFeatureDefinition/Operation <=> qvtr::Function
+		 */
+		top relation Helper2Function {
+			txName : String;
+			aModule : atlMM::Module;
+			relTx : qvtrelation::RelationalTransformation;
+			enforce domain atl helper : Helper {
+				module = aModule,
+				definition = aDef : OclFeatureDefinition {
+					feature = aFeat : Operation {
+						name = txName
+					}
+				}
+			};	   
+			enforce domain qvtr function : Function {
+				name = txName,
+				owningClass = relTx
+			};
+			when {
+				Model2RelationalTransformation(aModule, relTx);
+			}
 		}
 	}
 }

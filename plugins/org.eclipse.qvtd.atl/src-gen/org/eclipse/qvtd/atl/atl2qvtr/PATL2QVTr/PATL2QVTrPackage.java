@@ -65,6 +65,97 @@ public interface PATL2QVTrPackage extends EPackage {
 	PATL2QVTrPackage eINSTANCE = org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl <em>THelper2 Function</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTHelper2Function()
+	 * @generated
+	 */
+	int THELPER2_FUNCTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>ADef</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__ADEF = 0;
+
+	/**
+	 * The feature id for the '<em><b>AFeat</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__AFEAT = 1;
+
+	/**
+	 * The feature id for the '<em><b>AModule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__AMODULE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__FUNCTION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Helper</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__HELPER = 4;
+
+	/**
+	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__REL_TX = 5;
+
+	/**
+	 * The feature id for the '<em><b>Tx Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION__TX_NAME = 6;
+
+	/**
+	 * The number of structural features of the '<em>THelper2 Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION_FEATURE_COUNT = 7;
+
+	/**
+	 * The number of operations of the '<em>THelper2 Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THELPER2_FUNCTION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl <em>TModel2 Relational Transformation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +163,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTModel2RelationalTransformation()
 	 * @generated
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION = 0;
+	int TMODEL2_RELATIONAL_TRANSFORMATION = 1;
 
 	/**
 	 * The feature id for the '<em><b>3</b></em>' reference.
@@ -102,13 +193,13 @@ public interface PATL2QVTrPackage extends EPackage {
 	int TMODEL2_RELATIONAL_TRANSFORMATION__MODULE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Rel Model</b></em>' reference.
+	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL = 3;
+	int TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tx Name</b></em>' attribute.
@@ -137,6 +228,93 @@ public interface PATL2QVTrPackage extends EPackage {
 	 */
 	int TMODEL2_RELATIONAL_TRANSFORMATION_OPERATION_COUNT = 0;
 
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function <em>THelper2 Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>THelper2 Function</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function
+	 * @generated
+	 */
+	EClass getTHelper2Function();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getADef <em>ADef</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>ADef</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getADef()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EReference getTHelper2Function_ADef();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getAFeat <em>AFeat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AFeat</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getAFeat()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EReference getTHelper2Function_AFeat();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getAModule <em>AModule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AModule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getAModule()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EReference getTHelper2Function_AModule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getFunction <em>Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Function</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getFunction()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EReference getTHelper2Function_Function();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getHelper <em>Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Helper</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getHelper()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EReference getTHelper2Function_Helper();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getRelTx <em>Rel Tx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rel Tx</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getRelTx()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EReference getTHelper2Function_RelTx();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getTxName <em>Tx Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tx Name</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function#getTxName()
+	 * @see #getTHelper2Function()
+	 * @generated
+	 */
+	EAttribute getTHelper2Function_TxName();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation <em>TModel2 Relational Transformation</em>}'.
@@ -182,15 +360,15 @@ public interface PATL2QVTrPackage extends EPackage {
 	EReference getTModel2RelationalTransformation_Module();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelModel <em>Rel Model</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelTx <em>Rel Tx</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Rel Model</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelModel()
+	 * @return the meta object for the reference '<em>Rel Tx</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getRelTx()
 	 * @see #getTModel2RelationalTransformation()
 	 * @generated
 	 */
-	EReference getTModel2RelationalTransformation_RelModel();
+	EReference getTModel2RelationalTransformation_RelTx();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getTxName <em>Tx Name</em>}'.
@@ -227,6 +405,72 @@ public interface PATL2QVTrPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl <em>THelper2 Function</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTHelper2Function()
+		 * @generated
+		 */
+		EClass THELPER2_FUNCTION = eINSTANCE.getTHelper2Function();
+
+		/**
+		 * The meta object literal for the '<em><b>ADef</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THELPER2_FUNCTION__ADEF = eINSTANCE.getTHelper2Function_ADef();
+
+		/**
+		 * The meta object literal for the '<em><b>AFeat</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THELPER2_FUNCTION__AFEAT = eINSTANCE.getTHelper2Function_AFeat();
+
+		/**
+		 * The meta object literal for the '<em><b>AModule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THELPER2_FUNCTION__AMODULE = eINSTANCE.getTHelper2Function_AModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Function</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THELPER2_FUNCTION__FUNCTION = eINSTANCE.getTHelper2Function_Function();
+
+		/**
+		 * The meta object literal for the '<em><b>Helper</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THELPER2_FUNCTION__HELPER = eINSTANCE.getTHelper2Function_Helper();
+
+		/**
+		 * The meta object literal for the '<em><b>Rel Tx</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THELPER2_FUNCTION__REL_TX = eINSTANCE.getTHelper2Function_RelTx();
+
+		/**
+		 * The meta object literal for the '<em><b>Tx Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute THELPER2_FUNCTION__TX_NAME = eINSTANCE.getTHelper2Function_TxName();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl <em>TModel2 Relational Transformation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -261,12 +505,12 @@ public interface PATL2QVTrPackage extends EPackage {
 		EReference TMODEL2_RELATIONAL_TRANSFORMATION__MODULE = eINSTANCE.getTModel2RelationalTransformation_Module();
 
 		/**
-		 * The meta object literal for the '<em><b>Rel Model</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Rel Tx</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TMODEL2_RELATIONAL_TRANSFORMATION__REL_MODEL = eINSTANCE.getTModel2RelationalTransformation_RelModel();
+		EReference TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX = eINSTANCE.getTModel2RelationalTransformation_RelTx();
 
 		/**
 		 * The meta object literal for the '<em><b>Tx Name</b></em>' attribute feature.

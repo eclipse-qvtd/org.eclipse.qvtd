@@ -76,6 +76,12 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case PATL2QVTrPackage.THELPER2_FUNCTION: {
+				THelper2Function tHelper2Function = (THelper2Function)theEObject;
+				T result = caseTHelper2Function(tHelper2Function);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION: {
 				TModel2RelationalTransformation tModel2RelationalTransformation = (TModel2RelationalTransformation)theEObject;
 				T result = caseTModel2RelationalTransformation(tModel2RelationalTransformation);
@@ -84,6 +90,21 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>THelper2 Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>THelper2 Function</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTHelper2Function(THelper2Function object) {
+		return null;
 	}
 
 	/**
