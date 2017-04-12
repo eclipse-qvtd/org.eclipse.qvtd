@@ -70,7 +70,11 @@ public class QVTtemplateUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
-		return ClassUtil.nonNullState(rPropertyTemplateItem.getReferredProperty());
+		Property property = ClassUtil.nonNullState(rPropertyTemplateItem.getReferredProperty());
+		if (rPropertyTemplateItem.isIsOpposite()) {
+			property = getOpposite(property);
+		}
+		return property;
 	}
 
 	public static @NonNull Variable getRest(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
