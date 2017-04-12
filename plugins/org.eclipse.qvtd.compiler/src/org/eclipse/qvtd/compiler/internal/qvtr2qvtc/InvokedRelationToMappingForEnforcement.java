@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 	/**
 	 * InvokedEnforceableRelationDomain2CoreMapping refines AbstractEnforceableRelationDomain2CoreMapping to support conversion of an invoked enforced domain.
 	 */
-	protected class InvokedEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
+	protected abstract class InvokedEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
 	{
 		/**
 		 * InvokedOtherRelationDomain2CoreDomain refines AbstractOtherRelationDomain2CoreDomain to support conversion of an invoked not-enforced domain.
@@ -162,7 +162,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 					if (rDomain.isIsEnforceable()) {
 						RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
 						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
-						enforceableRelationDomain2coreMappings.add(new InvokedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+						enforceableRelationDomain2coreMappings.add(new WhenedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
 					}
 				}
 			}
@@ -177,7 +177,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 					if (rDomain.isIsEnforceable()) {
 						RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
 						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
-						enforceableRelationDomain2coreMappings.add(new InvokedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+						enforceableRelationDomain2coreMappings.add(new WheredEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
 					}
 				}
 			}
@@ -193,5 +193,31 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 	@Override
 	protected @Nullable Iterable<@NonNull RelationCallExp> getWhereInvocations() {
 		return whereInvocations;
+	}
+
+	protected final class WhenedEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
+	{
+		protected WhenedEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation,
+				@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
+			super(rInvocation, rEnforcedDomain, cMappingName);
+		}
+
+		@Override
+		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			return new VariablesAnalysis.WhenedVariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+		}
+	}
+
+	protected final class WheredEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
+	{
+		protected WheredEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation,
+				@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
+			super(rInvocation, rEnforcedDomain, cMappingName);
+		}
+
+		@Override
+		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			return new VariablesAnalysis.WheredVariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+		}
 	}
 }

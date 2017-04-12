@@ -238,10 +238,35 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return rMiddleDomainVariables;
 	}
 
+	public static class WhenedVariablesAnalysis extends VariablesAnalysis
+	{
+		public WhenedVariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain,
+				@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			super(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+		}
+
+		@Override
+		public boolean isWhened() {
+			return true;
+		}
+	}
+
+	public static class WheredVariablesAnalysis extends VariablesAnalysis
+	{
+		public WheredVariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain,
+				@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			super(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+		}
+
+		@Override
+		public boolean isWhered() {
+			return true;
+		}
+	}
+
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull CoreDomain cEnforcedDomain;
 	protected final @NonNull Mapping cMapping;
-	protected final boolean isInvoked;
 	protected final @NonNull Transformation cTransformation;
 	protected final @NonNull BottomPattern cMiddleBottomPattern;
 	protected final @NonNull GuardPattern cMiddleGuardPattern;
@@ -265,12 +290,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<>();
 
-	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass, boolean isInvoked) throws CompilerChainException {
+	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain,
+			@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.cEnforcedDomain = cEnforcedDomain;
 		this.cMapping = ClassUtil.nonNullState(QVTcoreUtil.getContainingMapping(cEnforcedDomain));
-		this.isInvoked = isInvoked;
 		this.cTransformation = ClassUtil.nonNullState(cMapping.getTransformation());
 		this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
 		this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
@@ -520,6 +545,27 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			rVariable2analysis.put(relationVariable, analysis);
 		}
 		return analysis;
+	}
+
+	/**
+	 * True if analysis of a relation invoked within a when or where clause.
+	 */
+	public boolean isInvoked() {
+		return isWhened() || isWhered();
+	}
+
+	/**
+	 * True if analysis of a relation invoked within a when clause.
+	 */
+	public boolean isWhened() {
+		return false;
+	}
+
+	/**
+	 * True if analysis of a relation invoked within a where clause.
+	 */
+	public boolean isWhered() {
+		return false;
 	}
 
 	@Override

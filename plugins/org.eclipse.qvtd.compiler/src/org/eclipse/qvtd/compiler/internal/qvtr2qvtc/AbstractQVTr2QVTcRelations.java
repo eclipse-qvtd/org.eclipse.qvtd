@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.InvokedRelationToMappingForEnforcement.InvokedEnforceableRelationDomain2CoreMapping;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -547,7 +546,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.cEnforcedGuardPattern = ClassUtil.nonNullState(cEnforcedDomain.getGuardPattern());
 			this.cEnforcedBottomPattern = ClassUtil.nonNullState(cEnforcedDomain.getBottomPattern());
 			//
-			this.variablesAnalysis = new VariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass, this instanceof InvokedEnforceableRelationDomain2CoreMapping);
+			this.variablesAnalysis = createVariablesAnalysis(rEnforcedDomain, traceClass);
 			this.cMiddleRealizedVariable = variablesAnalysis.getMiddleRealizedVariable();
 			//			putTrace(cMiddleRealizedVariable, cMiddleBottomPattern);
 			//
@@ -679,6 +678,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		protected abstract @NonNull AbstractOtherRelationDomain2CoreDomain createOtherDomain2CoreDomain(@NonNull RelationDomain rRelationDomain);
+
+		protected abstract @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException;
 
 		//		protected @NonNull CoreDomain getCoreDomain(@NonNull RelationDomain rDomain) {
 		//			return getCoreDomain(QVTrelationUtil.getTypedModel(rDomain));

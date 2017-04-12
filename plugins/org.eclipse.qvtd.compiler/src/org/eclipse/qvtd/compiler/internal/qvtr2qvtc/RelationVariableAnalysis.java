@@ -187,7 +187,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	private @NonNull Strategy computeStrategy() {
-		if ((cWhenDomain == null) && !(variablesAnalysis.isInvoked && isRoot) && isEnforcedBound && (rKey != null)) { // isKeyed()
+		if ((cWhenDomain == null) && !(variablesAnalysis.isInvoked() && isRoot) && isEnforcedBound && (rKey != null)) { // isKeyed()
 			assert rEnforcedTypedModel != null;
 			assert rKey != null;
 			//			assert rTemplateExp == null;
@@ -200,7 +200,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert cWhereDomain == null;
 			return Strategy.KEYED;
 		}
-		else if ((cWhenDomain == null) && !(variablesAnalysis.isInvoked && isRoot) && isEnforcedBound && (rKey == null)) { // isRealized()
+		else if ((cWhenDomain == null) && !(variablesAnalysis.isInvoked() && isRoot) && isEnforcedBound && (rKey == null)) { // isRealized()
 			assert rEnforcedTypedModel != null;
 			assert rKey == null;
 			assert rTemplateExp != null;
@@ -227,7 +227,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			return Strategy.ENFORCED_GUARD;
 		}
 		else if ((cWhenDomain != null)
-				|| (isEnforcedBound && variablesAnalysis.isInvoked && isRoot) //rKey != null;
+				|| (isEnforcedBound && variablesAnalysis.isInvoked() && isRoot) //rKey != null;
 				|| (!isEnforcedBound && (cOtherBound != null) && isRoot)
 				|| (!isEnforcedBound && (cOtherBound == null) && !(isEnforcedReferred && (cOtherReferred != null)) && (cOtherReferred == null) && (cPredicateArea == null) && isEnforcedReferred && (cOtherReferred == null))) {
 			assert rEnforcedTypedModel == null;
@@ -536,8 +536,11 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		if (cWhereDomain != null) {
 			s.append(" WHERE:" + cWhereDomain.getName());
 		}
-		if (variablesAnalysis.isInvoked) {
-			s.append(" INVOKED");
+		if (variablesAnalysis.isWhened()) {
+			s.append(" WHENED");
+		}
+		if (variablesAnalysis.isWhered()) {
+			s.append(" WHERED");
 		}
 		if (cPredicateArea != null) {
 			s.append(" PREDICATE:" + (cPredicateArea instanceof CoreDomain ? ((CoreDomain)cPredicateArea).getName() : null));
