@@ -36,7 +36,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			opName : String;
 			aModule : atlMM::Module;
 			relTx : qvtrelation::RelationalTransformation;
-			enforce domain atl helper : Helper {
+			/*enforce*/ domain atl helper : Helper {
 				module = aModule,
 				definition = aDef : OclFeatureDefinition {
 					feature = aFeat : Operation {
@@ -54,13 +54,57 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		}
 		
 		/**
+		 *  atl::InPattern <=> qvtr::RelationDomain (checkonly)
+		 */
+		top relation InPattern2RelationDomain {
+			aRule : atlMM::MatchedRule;
+			tmName : String;
+			rRule : qvtrelation::Relation;
+			/*enforce*/ domain atl aPattern : InPattern {
+				rule = aRule	   
+			};	   
+			enforce domain qvtr rDomain : RelationDomain {
+				rule = rRule,
+				isCheckable = true,
+				isEnforceable = false
+			};
+			when {
+				MatchedRule2Relation(aRule, rRule);
+			}
+			where {
+				InPattern2RelationDomain_guard(aPattern, rRule);
+			}
+		}
+		
+		/**
+		 *  atl::InPattern <=> qvtr::RelationDomain (checkonly)
+		 */
+		relation InPattern2RelationDomain_guard {
+			aExpression : atloclMM::OperationCallExp;
+			rExpression : pivotocl::OperationCallExp;
+			/*enforce*/ domain atl aPattern : InPattern {
+				filter = aExpression	   
+			};	   
+			enforce domain qvtr rRule : Relation {
+				when = w : Pattern{
+					predicate = p : Predicate{
+						conditionExpression = rExpression
+					}
+				}
+			};
+			when {
+				OperationCallExp2OperationCallExp(aExpression, rExpression);
+			}
+		}
+		
+		/**
 		 *  atl::MatchedRule <=> qvtr::Relation
 		 */
 		top relation MatchedRule2Relation {
 			ruleName : String;
 			aModule : atlMM::Module;
 			relTx : qvtrelation::RelationalTransformation;
-			enforce domain atl matchedRule : MatchedRule {
+			/*enforce*/ domain atl matchedRule : MatchedRule {
 				module = aModule,
 				name = ruleName
 			};	   
@@ -78,7 +122,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 */
 		top relation Model2RelationalTransformation {
 			txName : String;
-			enforce domain atl module : Module {
+			/*enforce*/ domain atl module : Module {
 				name = txName
 			};	   
 			enforce domain qvtr relTx : RelationalTransformation {
@@ -91,5 +135,58 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 				}
 			};
 		}
+		
+		/**
+		 *  atl::Module/atl::OclModel <=> qvtr::TypedModel (create)
+		 */
+		top relation OclModel2ModelParameter_create {
+			tmName : String;
+			relTx : qvtrelation::RelationalTransformation;
+			/*enforce*/ domain atl oclModel : OclModel {
+				name = tmName,
+				opposite(Module::inModels) = aModule : Module {}	   
+			};	   
+			enforce domain qvtr relTM : TypedModel {
+				name = tmName,
+				transformation = relTx
+			};
+			when {
+				Model2RelationalTransformation(aModule, relTx);
+			}
+		}
+		
+		/**
+		 *  atl::Module/atl::OclModel <=> qvtr::TypedModel (from)
+		 */
+		top relation OclModel2ModelParameter_from {
+			tmName : String;
+			relTx : qvtrelation::RelationalTransformation;
+			/*enforce*/ domain atl oclModel : OclModel {
+				name = tmName,
+				opposite(Module::outModels) = aModule : Module {}	   
+			};	   
+			enforce domain qvtr relTM : TypedModel {
+				name = tmName,
+				transformation = relTx
+			};
+			when {
+				Model2RelationalTransformation(aModule, relTx);
+			}
+		}
+		
+		
+-----------------------------------------------------------------------------------------------------
+-- Non-top OCL copy
+-----------------------------------------------------------------------------------------------------
+		/**
+		 *  atl::OperationCallExp <=> ocl::OperationCallExp
+		 */
+		relation OperationCallExp2OperationCallExp {
+			/*enforce*/ domain atl aExpression : OperationCallExp {
+			};	   
+			enforce domain qvtr rExpression : OperationCallExp {
+			};
+		}
 	}
+		
 }

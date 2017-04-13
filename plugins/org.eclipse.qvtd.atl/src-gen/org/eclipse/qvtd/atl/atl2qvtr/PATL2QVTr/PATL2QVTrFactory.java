@@ -39,6 +39,42 @@ public interface PATL2QVTrFactory extends EFactory {
 	THelper2Function createTHelper2Function();
 
 	/**
+	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TIn Pattern2 Relation Domain</em>'.
+	 * @generated
+	 */
+	TInPattern2RelationDomain createTInPattern2RelationDomain();
+
+	/**
+	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain guard</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TIn Pattern2 Relation Domain guard</em>'.
+	 * @generated
+	 */
+	TInPattern2RelationDomain_guard createTInPattern2RelationDomain_guard();
+
+	/**
+	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * @generated
+	 */
+	TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp();
+
+	/**
+	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
+	 * @generated
+	 */
+	TInPattern2RelationDomain_where_InPattern2RelationDomain_guard createTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
+
+	/**
 	 * Returns a new object of class '<em>TMatched Rule2 Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,6 +91,33 @@ public interface PATL2QVTrFactory extends EFactory {
 	 * @generated
 	 */
 	TModel2RelationalTransformation createTModel2RelationalTransformation();
+
+	/**
+	 * Returns a new object of class '<em>TOcl Model2 Model Parameter create</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TOcl Model2 Model Parameter create</em>'.
+	 * @generated
+	 */
+	TOclModel2ModelParameter_create createTOclModel2ModelParameter_create();
+
+	/**
+	 * Returns a new object of class '<em>TOcl Model2 Model Parameter from</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TOcl Model2 Model Parameter from</em>'.
+	 * @generated
+	 */
+	TOclModel2ModelParameter_from createTOclModel2ModelParameter_from();
+
+	/**
+	 * Returns a new object of class '<em>TOperation Call Exp2 Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TOperation Call Exp2 Operation Call Exp</em>'.
+	 * @generated
+	 */
+	TOperationCallExp2OperationCallExp createTOperationCallExp2OperationCallExp();
 
 	/**
 	 * Returns the package supported by this factory.

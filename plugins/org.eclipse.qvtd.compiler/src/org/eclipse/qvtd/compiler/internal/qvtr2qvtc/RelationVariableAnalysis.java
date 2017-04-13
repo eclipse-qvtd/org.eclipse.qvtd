@@ -200,7 +200,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert cWhereDomain == null;
 			return Strategy.KEYED;
 		}
-		else if ((cWhenDomain == null) && !(variablesAnalysis.isInvoked() && isRoot) && isEnforcedBound && (rKey == null)) { // isRealized()
+		else if ((cWhenDomain == null) && !(variablesAnalysis.isWhered() && isRoot) && isEnforcedBound && (rKey == null)) { // isRealized()
 			assert rEnforcedTypedModel != null;
 			assert rKey == null;
 			assert rTemplateExp != null;

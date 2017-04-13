@@ -156,6 +156,335 @@ public interface PATL2QVTrPackage extends EPackage {
 	int THELPER2_FUNCTION_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomainImpl <em>TIn Pattern2 Relation Domain</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomainImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN = 1;
+
+	/**
+	 * The feature id for the '<em><b>APattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN__APATTERN = 0;
+
+	/**
+	 * The feature id for the '<em><b>ARule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN__ARULE = 1;
+
+	/**
+	 * The feature id for the '<em><b>RDomain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN__RDOMAIN = 2;
+
+	/**
+	 * The feature id for the '<em><b>RRule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN__RRULE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Tm Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN__TM_NAME = 4;
+
+	/**
+	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>TIn Pattern2 Relation Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain guard</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD = 2;
+
+	/**
+	 * The feature id for the '<em><b>AExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>APattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = 1;
+
+	/**
+	 * The feature id for the '<em><b>P</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__P = 2;
+
+	/**
+	 * The feature id for the '<em><b>RExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION = 3;
+
+	/**
+	 * The feature id for the '<em><b>RRule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = 4;
+
+	/**
+	 * The feature id for the '<em><b>W</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__W = 5;
+
+	/**
+	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain guard</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>TIn Pattern2 Relation Domain guard</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl <em>TOperation Call Exp2 Operation Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOperationCallExp2OperationCallExp()
+	 * @generated
+	 */
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP = 9;
+
+	/**
+	 * The feature id for the '<em><b>AExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>RExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION = 1;
+
+	/**
+	 * The number of structural features of the '<em>TOperation Call Exp2 Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>TOperation Call Exp2 Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl <em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp()
+	 * @generated
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP = 3;
+
+	/**
+	 * The feature id for the '<em><b>AExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION = TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>RExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION = TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION;
+
+	/**
+	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP_FEATURE_COUNT = TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP_OPERATION_COUNT = TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD = 4;
+
+	/**
+	 * The feature id for the '<em><b>AExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION = TIN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>APattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = TIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN;
+
+	/**
+	 * The feature id for the '<em><b>P</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__P = TIN_PATTERN2_RELATION_DOMAIN_GUARD__P;
+
+	/**
+	 * The feature id for the '<em><b>RExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION = TIN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>RRule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = TIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE;
+
+	/**
+	 * The feature id for the '<em><b>W</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__W = TIN_PATTERN2_RELATION_DOMAIN_GUARD__W;
+
+	/**
+	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = TIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT = TIN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl <em>TMatched Rule2 Relation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,7 +492,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTMatchedRule2Relation()
 	 * @generated
 	 */
-	int TMATCHED_RULE2_RELATION = 1;
+	int TMATCHED_RULE2_RELATION = 5;
 
 	/**
 	 * The feature id for the '<em><b>AModule</b></em>' reference.
@@ -236,7 +565,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTModel2RelationalTransformation()
 	 * @generated
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION = 2;
+	int TMODEL2_RELATIONAL_TRANSFORMATION = 6;
 
 	/**
 	 * The feature id for the '<em><b>3</b></em>' reference.
@@ -300,6 +629,152 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @ordered
 	 */
 	int TMODEL2_RELATIONAL_TRANSFORMATION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_createImpl <em>TOcl Model2 Model Parameter create</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_createImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclModel2ModelParameter_create()
+	 * @generated
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE = 7;
+
+	/**
+	 * The feature id for the '<em><b>AModule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE__AMODULE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Ocl Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE__OCL_MODEL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Rel TM</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE__REL_TM = 2;
+
+	/**
+	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE__REL_TX = 3;
+
+	/**
+	 * The feature id for the '<em><b>Tm Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE__TM_NAME = 4;
+
+	/**
+	 * The number of structural features of the '<em>TOcl Model2 Model Parameter create</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>TOcl Model2 Model Parameter create</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_fromImpl <em>TOcl Model2 Model Parameter from</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_fromImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclModel2ModelParameter_from()
+	 * @generated
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM = 8;
+
+	/**
+	 * The feature id for the '<em><b>AModule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM__AMODULE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Ocl Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM__OCL_MODEL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Rel TM</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM__REL_TM = 2;
+
+	/**
+	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM__REL_TX = 3;
+
+	/**
+	 * The feature id for the '<em><b>Tm Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM__TM_NAME = 4;
+
+	/**
+	 * The number of structural features of the '<em>TOcl Model2 Model Parameter from</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>TOcl Model2 Model Parameter from</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM_OPERATION_COUNT = 0;
 
 
 	/**
@@ -388,6 +863,167 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTHelper2Function_RelTx();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain <em>TIn Pattern2 Relation Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TIn Pattern2 Relation Domain</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain
+	 * @generated
+	 */
+	EClass getTInPattern2RelationDomain();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getAPattern <em>APattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>APattern</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getAPattern()
+	 * @see #getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_APattern();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getARule <em>ARule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>ARule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getARule()
+	 * @see #getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_ARule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getRDomain <em>RDomain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RDomain</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getRDomain()
+	 * @see #getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_RDomain();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getRRule <em>RRule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RRule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getRRule()
+	 * @see #getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_RRule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getTmName <em>Tm Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tm Name</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getTmName()
+	 * @see #getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	EAttribute getTInPattern2RelationDomain_TmName();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard <em>TIn Pattern2 Relation Domain guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TIn Pattern2 Relation Domain guard</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard
+	 * @generated
+	 */
+	EClass getTInPattern2RelationDomain_guard();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getAExpression <em>AExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AExpression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getAExpression()
+	 * @see #getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_guard_AExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getAPattern <em>APattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>APattern</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getAPattern()
+	 * @see #getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_guard_APattern();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getP <em>P</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>P</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getP()
+	 * @see #getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_guard_P();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getRExpression <em>RExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RExpression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getRExpression()
+	 * @see #getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_guard_RExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getRRule <em>RRule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RRule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getRRule()
+	 * @see #getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_guard_RRule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getW <em>W</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>W</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getW()
+	 * @see #getTInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_guard_W();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp <em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp
+	 * @generated
+	 */
+	EClass getTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard
+	 * @generated
+	 */
+	EClass getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation <em>TMatched Rule2 Relation</em>}'.
@@ -520,6 +1156,168 @@ public interface PATL2QVTrPackage extends EPackage {
 	EAttribute getTModel2RelationalTransformation_TxName();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create <em>TOcl Model2 Model Parameter create</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TOcl Model2 Model Parameter create</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create
+	 * @generated
+	 */
+	EClass getTOclModel2ModelParameter_create();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getAModule <em>AModule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AModule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getAModule()
+	 * @see #getTOclModel2ModelParameter_create()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_create_AModule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getOclModel <em>Ocl Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ocl Model</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getOclModel()
+	 * @see #getTOclModel2ModelParameter_create()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_create_OclModel();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getRelTM <em>Rel TM</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rel TM</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getRelTM()
+	 * @see #getTOclModel2ModelParameter_create()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_create_RelTM();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getRelTx <em>Rel Tx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rel Tx</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getRelTx()
+	 * @see #getTOclModel2ModelParameter_create()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_create_RelTx();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getTmName <em>Tm Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tm Name</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create#getTmName()
+	 * @see #getTOclModel2ModelParameter_create()
+	 * @generated
+	 */
+	EAttribute getTOclModel2ModelParameter_create_TmName();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from <em>TOcl Model2 Model Parameter from</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TOcl Model2 Model Parameter from</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from
+	 * @generated
+	 */
+	EClass getTOclModel2ModelParameter_from();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getAModule <em>AModule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AModule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getAModule()
+	 * @see #getTOclModel2ModelParameter_from()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_from_AModule();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getOclModel <em>Ocl Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ocl Model</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getOclModel()
+	 * @see #getTOclModel2ModelParameter_from()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_from_OclModel();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getRelTM <em>Rel TM</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rel TM</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getRelTM()
+	 * @see #getTOclModel2ModelParameter_from()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_from_RelTM();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getRelTx <em>Rel Tx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rel Tx</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getRelTx()
+	 * @see #getTOclModel2ModelParameter_from()
+	 * @generated
+	 */
+	EReference getTOclModel2ModelParameter_from_RelTx();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getTmName <em>Tm Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tm Name</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from#getTmName()
+	 * @see #getTOclModel2ModelParameter_from()
+	 * @generated
+	 */
+	EAttribute getTOclModel2ModelParameter_from_TmName();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp <em>TOperation Call Exp2 Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TOperation Call Exp2 Operation Call Exp</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp
+	 * @generated
+	 */
+	EClass getTOperationCallExp2OperationCallExp();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#getAExpression <em>AExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AExpression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#getAExpression()
+	 * @see #getTOperationCallExp2OperationCallExp()
+	 * @generated
+	 */
+	EReference getTOperationCallExp2OperationCallExp_AExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#getRExpression <em>RExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RExpression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#getRExpression()
+	 * @see #getTOperationCallExp2OperationCallExp()
+	 * @generated
+	 */
+	EReference getTOperationCallExp2OperationCallExp_RExpression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -607,6 +1405,134 @@ public interface PATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference THELPER2_FUNCTION__REL_TX = eINSTANCE.getTHelper2Function_RelTx();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomainImpl <em>TIn Pattern2 Relation Domain</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomainImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain()
+		 * @generated
+		 */
+		EClass TIN_PATTERN2_RELATION_DOMAIN = eINSTANCE.getTInPattern2RelationDomain();
+
+		/**
+		 * The meta object literal for the '<em><b>APattern</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN__APATTERN = eINSTANCE.getTInPattern2RelationDomain_APattern();
+
+		/**
+		 * The meta object literal for the '<em><b>ARule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN__ARULE = eINSTANCE.getTInPattern2RelationDomain_ARule();
+
+		/**
+		 * The meta object literal for the '<em><b>RDomain</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN__RDOMAIN = eINSTANCE.getTInPattern2RelationDomain_RDomain();
+
+		/**
+		 * The meta object literal for the '<em><b>RRule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN__RRULE = eINSTANCE.getTInPattern2RelationDomain_RRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Tm Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TIN_PATTERN2_RELATION_DOMAIN__TM_NAME = eINSTANCE.getTInPattern2RelationDomain_TmName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain guard</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard()
+		 * @generated
+		 */
+		EClass TIN_PATTERN2_RELATION_DOMAIN_GUARD = eINSTANCE.getTInPattern2RelationDomain_guard();
+
+		/**
+		 * The meta object literal for the '<em><b>AExpression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION = eINSTANCE.getTInPattern2RelationDomain_guard_AExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>APattern</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = eINSTANCE.getTInPattern2RelationDomain_guard_APattern();
+
+		/**
+		 * The meta object literal for the '<em><b>P</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__P = eINSTANCE.getTInPattern2RelationDomain_guard_P();
+
+		/**
+		 * The meta object literal for the '<em><b>RExpression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION = eINSTANCE.getTInPattern2RelationDomain_guard_RExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>RRule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = eINSTANCE.getTInPattern2RelationDomain_guard_RRule();
+
+		/**
+		 * The meta object literal for the '<em><b>W</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__W = eINSTANCE.getTInPattern2RelationDomain_guard_W();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl <em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp()
+		 * @generated
+		 */
+		EClass TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP = eINSTANCE.getTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard()
+		 * @generated
+		 */
+		EClass TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD = eINSTANCE.getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl <em>TMatched Rule2 Relation</em>}' class.
@@ -707,6 +1633,132 @@ public interface PATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME = eINSTANCE.getTModel2RelationalTransformation_TxName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_createImpl <em>TOcl Model2 Model Parameter create</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_createImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclModel2ModelParameter_create()
+		 * @generated
+		 */
+		EClass TOCL_MODEL2_MODEL_PARAMETER_CREATE = eINSTANCE.getTOclModel2ModelParameter_create();
+
+		/**
+		 * The meta object literal for the '<em><b>AModule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_CREATE__AMODULE = eINSTANCE.getTOclModel2ModelParameter_create_AModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Ocl Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_CREATE__OCL_MODEL = eINSTANCE.getTOclModel2ModelParameter_create_OclModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Rel TM</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_CREATE__REL_TM = eINSTANCE.getTOclModel2ModelParameter_create_RelTM();
+
+		/**
+		 * The meta object literal for the '<em><b>Rel Tx</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_CREATE__REL_TX = eINSTANCE.getTOclModel2ModelParameter_create_RelTx();
+
+		/**
+		 * The meta object literal for the '<em><b>Tm Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOCL_MODEL2_MODEL_PARAMETER_CREATE__TM_NAME = eINSTANCE.getTOclModel2ModelParameter_create_TmName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_fromImpl <em>TOcl Model2 Model Parameter from</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_fromImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclModel2ModelParameter_from()
+		 * @generated
+		 */
+		EClass TOCL_MODEL2_MODEL_PARAMETER_FROM = eINSTANCE.getTOclModel2ModelParameter_from();
+
+		/**
+		 * The meta object literal for the '<em><b>AModule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_FROM__AMODULE = eINSTANCE.getTOclModel2ModelParameter_from_AModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Ocl Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_FROM__OCL_MODEL = eINSTANCE.getTOclModel2ModelParameter_from_OclModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Rel TM</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_FROM__REL_TM = eINSTANCE.getTOclModel2ModelParameter_from_RelTM();
+
+		/**
+		 * The meta object literal for the '<em><b>Rel Tx</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOCL_MODEL2_MODEL_PARAMETER_FROM__REL_TX = eINSTANCE.getTOclModel2ModelParameter_from_RelTx();
+
+		/**
+		 * The meta object literal for the '<em><b>Tm Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOCL_MODEL2_MODEL_PARAMETER_FROM__TM_NAME = eINSTANCE.getTOclModel2ModelParameter_from_TmName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl <em>TOperation Call Exp2 Operation Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOperationCallExp2OperationCallExp()
+		 * @generated
+		 */
+		EClass TOPERATION_CALL_EXP2_OPERATION_CALL_EXP = eINSTANCE.getTOperationCallExp2OperationCallExp();
+
+		/**
+		 * The meta object literal for the '<em><b>AExpression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION = eINSTANCE.getTOperationCallExp2OperationCallExp_AExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>RExpression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION = eINSTANCE.getTOperationCallExp2OperationCallExp_RExpression();
 
 	}
 

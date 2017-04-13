@@ -82,12 +82,40 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTHelper2FunctionAdapter();
 			}
 			@Override
+			public Adapter caseTInPattern2RelationDomain(TInPattern2RelationDomain object) {
+				return createTInPattern2RelationDomainAdapter();
+			}
+			@Override
+			public Adapter caseTInPattern2RelationDomain_guard(TInPattern2RelationDomain_guard object) {
+				return createTInPattern2RelationDomain_guardAdapter();
+			}
+			@Override
+			public Adapter caseTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp(TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp object) {
+				return createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseTInPattern2RelationDomain_where_InPattern2RelationDomain_guard(TInPattern2RelationDomain_where_InPattern2RelationDomain_guard object) {
+				return createTInPattern2RelationDomain_where_InPattern2RelationDomain_guardAdapter();
+			}
+			@Override
 			public Adapter caseTMatchedRule2Relation(TMatchedRule2Relation object) {
 				return createTMatchedRule2RelationAdapter();
 			}
 			@Override
 			public Adapter caseTModel2RelationalTransformation(TModel2RelationalTransformation object) {
 				return createTModel2RelationalTransformationAdapter();
+			}
+			@Override
+			public Adapter caseTOclModel2ModelParameter_create(TOclModel2ModelParameter_create object) {
+				return createTOclModel2ModelParameter_createAdapter();
+			}
+			@Override
+			public Adapter caseTOclModel2ModelParameter_from(TOclModel2ModelParameter_from object) {
+				return createTOclModel2ModelParameter_fromAdapter();
+			}
+			@Override
+			public Adapter caseTOperationCallExp2OperationCallExp(TOperationCallExp2OperationCallExp object) {
+				return createTOperationCallExp2OperationCallExpAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -124,6 +152,62 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain <em>TIn Pattern2 Relation Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain
+	 * @generated
+	 */
+	public Adapter createTInPattern2RelationDomainAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard <em>TIn Pattern2 Relation Domain guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard
+	 * @generated
+	 */
+	public Adapter createTInPattern2RelationDomain_guardAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp <em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp
+	 * @generated
+	 */
+	public Adapter createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard
+	 * @generated
+	 */
+	public Adapter createTInPattern2RelationDomain_where_InPattern2RelationDomain_guardAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation <em>TMatched Rule2 Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -148,6 +232,48 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTModel2RelationalTransformationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create <em>TOcl Model2 Model Parameter create</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create
+	 * @generated
+	 */
+	public Adapter createTOclModel2ModelParameter_createAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from <em>TOcl Model2 Model Parameter from</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from
+	 * @generated
+	 */
+	public Adapter createTOclModel2ModelParameter_fromAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp <em>TOperation Call Exp2 Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp
+	 * @generated
+	 */
+	public Adapter createTOperationCallExp2OperationCallExpAdapter() {
 		return null;
 	}
 

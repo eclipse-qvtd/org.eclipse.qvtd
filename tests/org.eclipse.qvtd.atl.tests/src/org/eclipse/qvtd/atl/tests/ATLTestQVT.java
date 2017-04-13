@@ -193,10 +193,10 @@ public class ATLTestQVT extends QVTimperative
 		}
 		else {
 			Transformer transformer = generatedExecutor.getTransformer();
-			transformer.run();						// FIXME BUG 511028
-			//			if (!transformer.run()) {
-			//				throw new Exception("Failed to execute");
-			//			}
+			//			transformer.run();						// FIXME BUG 511028
+			if (!transformer.run()) {
+				throw new Exception("Failed to execute");
+			}
 			return transformer;
 		}
 	}

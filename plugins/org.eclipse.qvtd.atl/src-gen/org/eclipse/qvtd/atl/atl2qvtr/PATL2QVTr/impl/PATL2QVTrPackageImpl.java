@@ -28,8 +28,15 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrFactory;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp;
 
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
@@ -56,6 +63,34 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass tInPattern2RelationDomainEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tInPattern2RelationDomain_guardEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tMatchedRule2RelationEClass = null;
 
 	/**
@@ -64,6 +99,27 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * @generated
 	 */
 	private EClass tModel2RelationalTransformationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tOclModel2ModelParameter_createEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tOclModel2ModelParameter_fromEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tOperationCallExp2OperationCallExpEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -213,6 +269,141 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTInPattern2RelationDomain() {
+		return tInPattern2RelationDomainEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_APattern() {
+		return (EReference)tInPattern2RelationDomainEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_ARule() {
+		return (EReference)tInPattern2RelationDomainEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_RDomain() {
+		return (EReference)tInPattern2RelationDomainEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_RRule() {
+		return (EReference)tInPattern2RelationDomainEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTInPattern2RelationDomain_TmName() {
+		return (EAttribute)tInPattern2RelationDomainEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTInPattern2RelationDomain_guard() {
+		return tInPattern2RelationDomain_guardEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_guard_AExpression() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_guard_APattern() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_guard_P() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_guard_RExpression() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_guard_RRule() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTInPattern2RelationDomain_guard_W() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp() {
+		return tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard() {
+		return tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTMatchedRule2Relation() {
 		return tMatchedRule2RelationEClass;
 	}
@@ -321,6 +512,141 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTOclModel2ModelParameter_create() {
+		return tOclModel2ModelParameter_createEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_create_AModule() {
+		return (EReference)tOclModel2ModelParameter_createEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_create_OclModel() {
+		return (EReference)tOclModel2ModelParameter_createEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_create_RelTM() {
+		return (EReference)tOclModel2ModelParameter_createEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_create_RelTx() {
+		return (EReference)tOclModel2ModelParameter_createEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTOclModel2ModelParameter_create_TmName() {
+		return (EAttribute)tOclModel2ModelParameter_createEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTOclModel2ModelParameter_from() {
+		return tOclModel2ModelParameter_fromEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_from_AModule() {
+		return (EReference)tOclModel2ModelParameter_fromEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_from_OclModel() {
+		return (EReference)tOclModel2ModelParameter_fromEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_from_RelTM() {
+		return (EReference)tOclModel2ModelParameter_fromEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOclModel2ModelParameter_from_RelTx() {
+		return (EReference)tOclModel2ModelParameter_fromEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTOclModel2ModelParameter_from_TmName() {
+		return (EAttribute)tOclModel2ModelParameter_fromEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTOperationCallExp2OperationCallExp() {
+		return tOperationCallExp2OperationCallExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOperationCallExp2OperationCallExp_AExpression() {
+		return (EReference)tOperationCallExp2OperationCallExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTOperationCallExp2OperationCallExp_RExpression() {
+		return (EReference)tOperationCallExp2OperationCallExpEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PATL2QVTrFactory getPATL2QVTrFactory() {
 		return (PATL2QVTrFactory)getEFactoryInstance();
 	}
@@ -353,6 +679,25 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		createEAttribute(tHelper2FunctionEClass, THELPER2_FUNCTION__OP_NAME);
 		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__REL_TX);
 
+		tInPattern2RelationDomainEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN);
+		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__APATTERN);
+		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__ARULE);
+		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__RDOMAIN);
+		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__RRULE);
+		createEAttribute(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__TM_NAME);
+
+		tInPattern2RelationDomain_guardEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN_GUARD);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__P);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__W);
+
+		tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP);
+
+		tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD);
+
 		tMatchedRule2RelationEClass = createEClass(TMATCHED_RULE2_RELATION);
 		createEReference(tMatchedRule2RelationEClass, TMATCHED_RULE2_RELATION__AMODULE);
 		createEReference(tMatchedRule2RelationEClass, TMATCHED_RULE2_RELATION__MATCHED_RULE);
@@ -366,6 +711,24 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__MODULE);
 		createEReference(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX);
 		createEAttribute(tModel2RelationalTransformationEClass, TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME);
+
+		tOclModel2ModelParameter_createEClass = createEClass(TOCL_MODEL2_MODEL_PARAMETER_CREATE);
+		createEReference(tOclModel2ModelParameter_createEClass, TOCL_MODEL2_MODEL_PARAMETER_CREATE__AMODULE);
+		createEReference(tOclModel2ModelParameter_createEClass, TOCL_MODEL2_MODEL_PARAMETER_CREATE__OCL_MODEL);
+		createEReference(tOclModel2ModelParameter_createEClass, TOCL_MODEL2_MODEL_PARAMETER_CREATE__REL_TM);
+		createEReference(tOclModel2ModelParameter_createEClass, TOCL_MODEL2_MODEL_PARAMETER_CREATE__REL_TX);
+		createEAttribute(tOclModel2ModelParameter_createEClass, TOCL_MODEL2_MODEL_PARAMETER_CREATE__TM_NAME);
+
+		tOclModel2ModelParameter_fromEClass = createEClass(TOCL_MODEL2_MODEL_PARAMETER_FROM);
+		createEReference(tOclModel2ModelParameter_fromEClass, TOCL_MODEL2_MODEL_PARAMETER_FROM__AMODULE);
+		createEReference(tOclModel2ModelParameter_fromEClass, TOCL_MODEL2_MODEL_PARAMETER_FROM__OCL_MODEL);
+		createEReference(tOclModel2ModelParameter_fromEClass, TOCL_MODEL2_MODEL_PARAMETER_FROM__REL_TM);
+		createEReference(tOclModel2ModelParameter_fromEClass, TOCL_MODEL2_MODEL_PARAMETER_FROM__REL_TX);
+		createEAttribute(tOclModel2ModelParameter_fromEClass, TOCL_MODEL2_MODEL_PARAMETER_FROM__TM_NAME);
+
+		tOperationCallExp2OperationCallExpEClass = createEClass(TOPERATION_CALL_EXP2_OPERATION_CALL_EXP);
+		createEReference(tOperationCallExp2OperationCallExpEClass, TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION);
+		createEReference(tOperationCallExp2OperationCallExpEClass, TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION);
 	}
 
 	/**
@@ -403,6 +766,8 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpEClass.getESuperTypes().add(this.getTOperationCallExp2OperationCallExp());
+		tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass.getESuperTypes().add(this.getTInPattern2RelationDomain_guard());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(tHelper2FunctionEClass, THelper2Function.class, "THelper2Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -413,6 +778,25 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		initEReference(getTHelper2Function_Helper(), theATLPackage.getHelper(), null, "helper", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTHelper2Function_OpName(), ecorePackage.getEString(), "opName", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTHelper2Function_RelTx(), theQVTrelationPackage.getRelationalTransformation(), null, "relTx", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tInPattern2RelationDomainEClass, TInPattern2RelationDomain.class, "TInPattern2RelationDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTInPattern2RelationDomain_APattern(), theATLPackage.getInPattern(), null, "aPattern", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_ARule(), theATLPackage.getMatchedRule(), null, "aRule", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_RDomain(), theQVTrelationPackage.getRelationDomain(), null, "rDomain", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_RRule(), theQVTrelationPackage.getRelation(), null, "rRule", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTInPattern2RelationDomain_TmName(), ecorePackage.getEString(), "tmName", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tInPattern2RelationDomain_guardEClass, TInPattern2RelationDomain_guard.class, "TInPattern2RelationDomain_guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTInPattern2RelationDomain_guard_AExpression(), theOCLPackage.getOperationCallExp(), null, "aExpression", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_guard_APattern(), theATLPackage.getInPattern(), null, "aPattern", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_guard_P(), theQVTbasePackage.getPredicate(), null, "p", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_guard_RExpression(), thePivotPackage.getOperationCallExp(), null, "rExpression", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_guard_RRule(), theQVTrelationPackage.getRelation(), null, "rRule", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_guard_W(), theQVTbasePackage.getPattern(), null, "w", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpEClass, TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp.class, "TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass, TInPattern2RelationDomain_where_InPattern2RelationDomain_guard.class, "TInPattern2RelationDomain_where_InPattern2RelationDomain_guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(tMatchedRule2RelationEClass, TMatchedRule2Relation.class, "TMatchedRule2Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTMatchedRule2Relation_AModule(), theATLPackage.getModule(), null, "aModule", null, 1, 1, TMatchedRule2Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -427,6 +811,24 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		initEReference(getTModel2RelationalTransformation_Module(), theATLPackage.getModule(), null, "module", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTModel2RelationalTransformation_RelTx(), theQVTrelationPackage.getRelationalTransformation(), null, "relTx", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTModel2RelationalTransformation_TxName(), ecorePackage.getEString(), "txName", null, 1, 1, TModel2RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tOclModel2ModelParameter_createEClass, TOclModel2ModelParameter_create.class, "TOclModel2ModelParameter_create", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTOclModel2ModelParameter_create_AModule(), theATLPackage.getModule(), null, "aModule", null, 1, 1, TOclModel2ModelParameter_create.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOclModel2ModelParameter_create_OclModel(), theOCLPackage.getOclModel(), null, "oclModel", null, 1, 1, TOclModel2ModelParameter_create.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOclModel2ModelParameter_create_RelTM(), theQVTbasePackage.getTypedModel(), null, "relTM", null, 1, 1, TOclModel2ModelParameter_create.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOclModel2ModelParameter_create_RelTx(), theQVTrelationPackage.getRelationalTransformation(), null, "relTx", null, 1, 1, TOclModel2ModelParameter_create.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTOclModel2ModelParameter_create_TmName(), ecorePackage.getEString(), "tmName", null, 1, 1, TOclModel2ModelParameter_create.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tOclModel2ModelParameter_fromEClass, TOclModel2ModelParameter_from.class, "TOclModel2ModelParameter_from", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTOclModel2ModelParameter_from_AModule(), theATLPackage.getModule(), null, "aModule", null, 1, 1, TOclModel2ModelParameter_from.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOclModel2ModelParameter_from_OclModel(), theOCLPackage.getOclModel(), null, "oclModel", null, 1, 1, TOclModel2ModelParameter_from.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOclModel2ModelParameter_from_RelTM(), theQVTbasePackage.getTypedModel(), null, "relTM", null, 1, 1, TOclModel2ModelParameter_from.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOclModel2ModelParameter_from_RelTx(), theQVTrelationPackage.getRelationalTransformation(), null, "relTx", null, 1, 1, TOclModel2ModelParameter_from.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTOclModel2ModelParameter_from_TmName(), ecorePackage.getEString(), "tmName", null, 1, 1, TOclModel2ModelParameter_from.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tOperationCallExp2OperationCallExpEClass, TOperationCallExp2OperationCallExp.class, "TOperationCallExp2OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTOperationCallExp2OperationCallExp_AExpression(), theOCLPackage.getOperationCallExp(), null, "aExpression", null, 1, 1, TOperationCallExp2OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTOperationCallExp2OperationCallExp_RExpression(), thePivotPackage.getOperationCallExp(), null, "rExpression", null, 1, 1, TOperationCallExp2OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -471,6 +873,24 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 			 "body", "THelper2Function"
 		   });	
 		addAnnotation
+		  (getTInPattern2RelationDomain_APattern(), 
+		   source, 
+		   new String[] {
+			 "body", "TInPattern2RelationDomain"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_ARule(), 
+		   source, 
+		   new String[] {
+			 "body", "TInPattern2RelationDomain"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_RDomain(), 
+		   source, 
+		   new String[] {
+			 "body", "TInPattern2RelationDomain"
+		   });	
+		addAnnotation
 		  (getTMatchedRule2Relation_MatchedRule(), 
 		   source, 
 		   new String[] {
@@ -493,6 +913,18 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		   source, 
 		   new String[] {
 			 "body", "TModel2RelationalTransformation"
+		   });	
+		addAnnotation
+		  (getTOperationCallExp2OperationCallExp_AExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "TOperationCallExp2OperationCallExp"
+		   });	
+		addAnnotation
+		  (getTOperationCallExp2OperationCallExp_RExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "TOperationCallExp2OperationCallExp"
 		   });
 	}
 
@@ -541,6 +973,66 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 			 "referredDomain", "qvtr"
 		   });	
 		addAnnotation
+		  (getTInPattern2RelationDomain_APattern(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_ARule(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_RDomain(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_RRule(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_guard_AExpression(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_guard_APattern(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_guard_P(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_guard_RExpression(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_guard_RRule(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_guard_W(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
 		  (getTMatchedRule2Relation_AModule(), 
 		   source, 
 		   new String[] {
@@ -584,6 +1076,66 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		   });	
 		addAnnotation
 		  (getTModel2RelationalTransformation_RelTx(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_create_AModule(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_create_OclModel(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_create_RelTM(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_create_RelTx(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_from_AModule(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_from_OclModel(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_from_RelTM(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTOclModel2ModelParameter_from_RelTx(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getTOperationCallExp2OperationCallExp_AExpression(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getTOperationCallExp2OperationCallExp_RExpression(), 
 		   source, 
 		   new String[] {
 			 "referredDomain", "qvtr"

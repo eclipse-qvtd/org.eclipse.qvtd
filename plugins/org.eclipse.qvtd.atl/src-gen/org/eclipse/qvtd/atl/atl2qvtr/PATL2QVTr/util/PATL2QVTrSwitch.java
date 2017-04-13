@@ -82,6 +82,32 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN: {
+				TInPattern2RelationDomain tInPattern2RelationDomain = (TInPattern2RelationDomain)theEObject;
+				T result = caseTInPattern2RelationDomain(tInPattern2RelationDomain);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD: {
+				TInPattern2RelationDomain_guard tInPattern2RelationDomain_guard = (TInPattern2RelationDomain_guard)theEObject;
+				T result = caseTInPattern2RelationDomain_guard(tInPattern2RelationDomain_guard);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP: {
+				TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp = (TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp)theEObject;
+				T result = caseTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp(tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp);
+				if (result == null) result = caseTOperationCallExp2OperationCallExp(tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD: {
+				TInPattern2RelationDomain_where_InPattern2RelationDomain_guard tInPattern2RelationDomain_where_InPattern2RelationDomain_guard = (TInPattern2RelationDomain_where_InPattern2RelationDomain_guard)theEObject;
+				T result = caseTInPattern2RelationDomain_where_InPattern2RelationDomain_guard(tInPattern2RelationDomain_where_InPattern2RelationDomain_guard);
+				if (result == null) result = caseTInPattern2RelationDomain_guard(tInPattern2RelationDomain_where_InPattern2RelationDomain_guard);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION: {
 				TMatchedRule2Relation tMatchedRule2Relation = (TMatchedRule2Relation)theEObject;
 				T result = caseTMatchedRule2Relation(tMatchedRule2Relation);
@@ -91,6 +117,24 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION: {
 				TModel2RelationalTransformation tModel2RelationalTransformation = (TModel2RelationalTransformation)theEObject;
 				T result = caseTModel2RelationalTransformation(tModel2RelationalTransformation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TOCL_MODEL2_MODEL_PARAMETER_CREATE: {
+				TOclModel2ModelParameter_create tOclModel2ModelParameter_create = (TOclModel2ModelParameter_create)theEObject;
+				T result = caseTOclModel2ModelParameter_create(tOclModel2ModelParameter_create);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TOCL_MODEL2_MODEL_PARAMETER_FROM: {
+				TOclModel2ModelParameter_from tOclModel2ModelParameter_from = (TOclModel2ModelParameter_from)theEObject;
+				T result = caseTOclModel2ModelParameter_from(tOclModel2ModelParameter_from);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP: {
+				TOperationCallExp2OperationCallExp tOperationCallExp2OperationCallExp = (TOperationCallExp2OperationCallExp)theEObject;
+				T result = caseTOperationCallExp2OperationCallExp(tOperationCallExp2OperationCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,6 +154,66 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTHelper2Function(THelper2Function object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTInPattern2RelationDomain(TInPattern2RelationDomain object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTInPattern2RelationDomain_guard(TInPattern2RelationDomain_guard object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp(TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTInPattern2RelationDomain_where_InPattern2RelationDomain_guard(TInPattern2RelationDomain_where_InPattern2RelationDomain_guard object) {
 		return null;
 	}
 
@@ -140,6 +244,51 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTModel2RelationalTransformation(TModel2RelationalTransformation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TOcl Model2 Model Parameter create</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TOcl Model2 Model Parameter create</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTOclModel2ModelParameter_create(TOclModel2ModelParameter_create object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TOcl Model2 Model Parameter from</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TOcl Model2 Model Parameter from</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTOclModel2ModelParameter_from(TOclModel2ModelParameter_from object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TOperation Call Exp2 Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TOperation Call Exp2 Operation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTOperationCallExp2OperationCallExp(TOperationCallExp2OperationCallExp object) {
 		return null;
 	}
 
