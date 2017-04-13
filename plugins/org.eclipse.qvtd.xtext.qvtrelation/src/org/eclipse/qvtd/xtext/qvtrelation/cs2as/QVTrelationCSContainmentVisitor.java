@@ -540,7 +540,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		pivotElement.setWhen(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhen()));
 		pivotElement.setWhere(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhere()));
 		pivotElement.setIsTopLevel(csElement.isIsTop());
-		pivotElement.setIsDefault(csElement.isIsDefault());
+		pivotElement.setIsAbstract(csElement.isIsAbstract());
 		return null;
 	}
 

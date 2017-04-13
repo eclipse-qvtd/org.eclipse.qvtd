@@ -595,7 +595,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *
 	 * Constraint:
 	 *     (
-	 *         isDefault?='default'?
+	 *         isAbstract?='abstract'?
 	 *         name=UnrestrictedName?
 	 *         ownedInPathName=PathNameCS?
 	 *         (refines+=[Mapping|UnrestrictedName] refines+=[Mapping|UnrestrictedName]*)?

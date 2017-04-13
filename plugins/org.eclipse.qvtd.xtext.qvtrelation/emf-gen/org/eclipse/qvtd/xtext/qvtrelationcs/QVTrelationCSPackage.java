@@ -2015,13 +2015,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int RELATION_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__IS_DEFAULT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int RELATION_CS__IS_ABSTRACT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Top</b></em>' attribute.
@@ -2966,15 +2966,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getRelationCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsAbstract <em>Is Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault()
+	 * @return the meta object for the attribute '<em>Is Abstract</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsAbstract()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EAttribute getRelationCS_IsDefault();
+	EAttribute getRelationCS_IsAbstract();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}'.
@@ -3664,12 +3664,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass RELATION_CS = eINSTANCE.getRelationCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RELATION_CS__IS_DEFAULT = eINSTANCE.getRelationCS_IsDefault();
+		EAttribute RELATION_CS__IS_ABSTRACT = eINSTANCE.getRelationCS_IsAbstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Top</b></em>' attribute feature.

@@ -400,7 +400,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Predicate_conditionExpression = createProperty(QVTbasePackage.Literals.PREDICATE__CONDITION_EXPRESSION, _OCLExpression);
 		private final @NonNull Property pr_Predicate_pattern = createProperty(QVTbasePackage.Literals.PREDICATE__PATTERN, _Pattern);
 		private final @NonNull Property pr_Rule_domain = createProperty(QVTbasePackage.Literals.RULE__DOMAIN, _OrderedSet_Domain_NullFree);
-		private final @NonNull Property pr_Rule_isDefault = createProperty(QVTbasePackage.Literals.RULE__IS_DEFAULT, _Boolean);
+		private final @NonNull Property pr_Rule_isAbstract = createProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, _Boolean);
 		private final @NonNull Property pr_Rule_overridden = createProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, _Set_Rule_NullFree);
 		private final @NonNull Property pr_Rule_overrides = createProperty(QVTbasePackage.Literals.RULE__OVERRIDES, _Rule);
 		private final @NonNull Property pr_Rule_transformation = createProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, _Transformation);
@@ -509,7 +509,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Domain_rule);
-			ownedProperties.add(property = pr_Rule_isDefault);
+			ownedProperties.add(property = pr_Rule_isAbstract);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Rule_overridden);
 			property.setIsResolveProxies(true);

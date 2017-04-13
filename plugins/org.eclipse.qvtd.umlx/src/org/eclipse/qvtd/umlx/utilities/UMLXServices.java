@@ -445,12 +445,15 @@ public class UMLXServices
 	public @NonNull String umlxRelLabel(EObject context) {
 		if (context instanceof RelDiagram) {
 			RelDiagram relDiagram = (RelDiagram)context;
-			if (((RelDiagram)context).isIsTop()) {
-				return "«top» " + String.valueOf(relDiagram.getName());
+			StringBuilder s = new StringBuilder();
+			if (relDiagram.isIsTop()) {
+				s.append("«top» ");
 			}
-			else {
-				return String.valueOf(relDiagram.getName());
+			if (relDiagram.isIsAbstract()) {
+				s.append("«abstract» ");
 			}
+			s.append(String.valueOf(relDiagram.getName()));
+			return s.toString();
 		}
 		else if (context instanceof RelDomainNode) {
 			TxTypedModelNode txTypedModelNode = ((RelDomainNode)context).getReferredTxTypedModelNode();

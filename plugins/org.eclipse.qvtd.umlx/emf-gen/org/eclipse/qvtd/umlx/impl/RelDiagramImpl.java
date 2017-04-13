@@ -57,6 +57,7 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedRelDomainNodes <em>Owned Rel Domain Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.impl.RelDiagramImpl#getOwnedRelInvocationNodes <em>Owned Rel Invocation Nodes</em>}</li>
@@ -66,6 +67,24 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * @generated
  */
 public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
+	/**
+	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ABSTRACT_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAbstract = IS_ABSTRACT_EDEFAULT;
 	/**
 	 * The default value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -120,6 +139,29 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	protected EClass eStaticClass() {
 		return UMLXPackage.Literals.REL_DIAGRAM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsAbstract() {
+		return isAbstract;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsAbstract(boolean newIsAbstract) {
+		boolean oldIsAbstract = isAbstract;
+		isAbstract = newIsAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_DIAGRAM__IS_ABSTRACT, oldIsAbstract, isAbstract));
 	}
 
 	/**
@@ -279,7 +321,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 		 *             else
 		 *               Tuple{
 		 *                 status = status, message = let
-		 *                   repeatedNames : Set(String) = allNames->select(n |
+		 *                   repeatedNames : Set(String[*|?]) = allNames->select(n |
 		 *                     allNames->count(n) > 1)
 		 *                   ->asSet()
 		 *                 in
@@ -435,21 +477,20 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 					}
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue repeatedNames = CollectionAsSetOperation.INSTANCE.evaluate(select_1);
 					/*@NonInvalid*/ java.lang.@NonNull String acc = UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c;
-					@NonNull Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
+					@Nullable Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
 					/*@Thrown*/ java.lang.@Nullable String iterate;
 					while (true) {
 						if (!ITERATOR_n_1.hasNext()) {
 							iterate = acc;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ java.lang.@NonNull String n_1 = (String)ITERATOR_n_1.next();
+						/*@NonInvalid*/ java.lang.@Nullable String n_1 = (String)ITERATOR_n_1.next();
 						/**
 						 * acc + ' \'' + n + '\''
 						 */
 						final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32_39);
-						final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
-						final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
+						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
+						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
 						//
 						acc = sum_1;
 					}
@@ -478,6 +519,8 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_ABSTRACT:
+				return isIsAbstract();
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				return isIsTop();
 			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:
@@ -499,6 +542,9 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_ABSTRACT:
+				setIsAbstract((Boolean)newValue);
+				return;
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				setIsTop((Boolean)newValue);
 				return;
@@ -525,6 +571,9 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_ABSTRACT:
+				setIsAbstract(IS_ABSTRACT_EDEFAULT);
+				return;
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
@@ -549,6 +598,8 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case UMLXPackage.REL_DIAGRAM__IS_ABSTRACT:
+				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case UMLXPackage.REL_DIAGRAM__IS_TOP:
 				return isTop != IS_TOP_EDEFAULT;
 			case UMLXPackage.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES:

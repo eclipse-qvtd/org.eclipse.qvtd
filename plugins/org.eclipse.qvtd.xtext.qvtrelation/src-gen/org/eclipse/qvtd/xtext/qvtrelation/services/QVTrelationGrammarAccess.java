@@ -1128,8 +1128,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cIsTopAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cIsTopTopKeyword_0_0 = (Keyword)cIsTopAssignment_0.eContents().get(0);
-		private final Assignment cIsDefaultAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Keyword cIsDefaultDefaultKeyword_1_0 = (Keyword)cIsDefaultAssignment_1.eContents().get(0);
+		private final Assignment cIsAbstractAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cIsAbstractAbstractKeyword_1_0 = (Keyword)cIsAbstractAssignment_1.eContents().get(0);
 		private final Keyword cRelationKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
@@ -1153,12 +1153,12 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 
 		//RelationCS:
-		//	isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName ('overrides'
+		//	isTop?='top'? isAbstract?='abstract'? 'relation' name=UnrestrictedName ('overrides'
 		//	overrides=[qvtrelation::Relation|UnrestrictedName])? '{' ownedVarDeclarations+=VarDeclarationCS*
 		//	(ownedDomains+=DomainCS | ownedDomains+=PrimitiveTypeDomainCS)+ ownedWhen=WhenCS? ownedWhere=WhereCS? '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName ('overrides'
+		//isTop?='top'? isAbstract?='abstract'? 'relation' name=UnrestrictedName ('overrides'
 		//overrides=[qvtrelation::Relation|UnrestrictedName])? '{' ownedVarDeclarations+=VarDeclarationCS*
 		//(ownedDomains+=DomainCS | ownedDomains+=PrimitiveTypeDomainCS)+ ownedWhen=WhenCS? ownedWhere=WhereCS? '}'
 		public Group getGroup() { return cGroup; }
@@ -1169,11 +1169,11 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//'top'
 		public Keyword getIsTopTopKeyword_0_0() { return cIsTopTopKeyword_0_0; }
 
-		//isDefault?='default'?
-		public Assignment getIsDefaultAssignment_1() { return cIsDefaultAssignment_1; }
+		//isAbstract?='abstract'?
+		public Assignment getIsAbstractAssignment_1() { return cIsAbstractAssignment_1; }
 
-		//'default'
-		public Keyword getIsDefaultDefaultKeyword_1_0() { return cIsDefaultDefaultKeyword_1_0; }
+		//'abstract'
+		public Keyword getIsAbstractAbstractKeyword_1_0() { return cIsAbstractAbstractKeyword_1_0; }
 
 		//'relation'
 		public Keyword getRelationKeyword_2() { return cRelationKeyword_2; }
@@ -1804,8 +1804,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	public class QVTrelationUnrestrictedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.QVTrelationUnrestrictedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cCheckonlyKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cDefaultKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cAbstractKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cCheckonlyKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cDefault_valuesKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cDomainKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cEnforceKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
@@ -1831,21 +1831,21 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		// //	InfixedExpCS
 		// //|	TemplateCS;
 		// QVTrelationUnrestrictedName:
-		//	'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
+		//	'abstract' | 'checkonly' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
 		//	'library' | 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
 		//	'transformation' | 'uses' | 'when' | 'where';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' | 'library' |
-		//'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
+		//'abstract' | 'checkonly' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' | 'library'
+		//| 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
 		//'transformation' | 'uses' | 'when' | 'where'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//'checkonly'
-		public Keyword getCheckonlyKeyword_0() { return cCheckonlyKeyword_0; }
+		//'abstract'
+		public Keyword getAbstractKeyword_0() { return cAbstractKeyword_0; }
 
-		//'default'
-		public Keyword getDefaultKeyword_1() { return cDefaultKeyword_1; }
+		//'checkonly'
+		public Keyword getCheckonlyKeyword_1() { return cCheckonlyKeyword_1; }
 
 		//'default_values'
 		public Keyword getDefault_valuesKeyword_2() { return cDefault_valuesKeyword_2; }
@@ -2231,7 +2231,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RelationCS:
-	//	isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName ('overrides'
+	//	isTop?='top'? isAbstract?='abstract'? 'relation' name=UnrestrictedName ('overrides'
 	//	overrides=[qvtrelation::Relation|UnrestrictedName])? '{' ownedVarDeclarations+=VarDeclarationCS*
 	//	(ownedDomains+=DomainCS | ownedDomains+=PrimitiveTypeDomainCS)+ ownedWhen=WhenCS? ownedWhere=WhereCS? '}';
 	public RelationCSElements getRelationCSAccess() {
@@ -2372,7 +2372,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	// //	InfixedExpCS
 	// //|	TemplateCS;
 	// QVTrelationUnrestrictedName:
-	//	'checkonly' | 'default' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
+	//	'abstract' | 'checkonly' | 'default_values' | 'domain' | 'enforce' | 'extends' | 'implementedby' | 'import' |
 	//	'library' | 'key' | 'opposite' | 'overrides' | 'package' | 'primitive' | 'query' | 'relation' | 'replace' | 'top' |
 	//	'transformation' | 'uses' | 'when' | 'where';
 	public QVTrelationUnrestrictedNameElements getQVTrelationUnrestrictedNameAccess() {

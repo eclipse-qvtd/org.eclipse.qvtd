@@ -382,7 +382,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQueryCSAccess().getOwnedTypeAssignment_7(), "rule__QueryCS__OwnedTypeAssignment_7");
 					put(grammarAccess.getQueryCSAccess().getOwnedExpressionAssignment_8_1_1(), "rule__QueryCS__OwnedExpressionAssignment_8_1_1");
 					put(grammarAccess.getRelationCSAccess().getIsTopAssignment_0(), "rule__RelationCS__IsTopAssignment_0");
-					put(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1(), "rule__RelationCS__IsDefaultAssignment_1");
+					put(grammarAccess.getRelationCSAccess().getIsAbstractAssignment_1(), "rule__RelationCS__IsAbstractAssignment_1");
 					put(grammarAccess.getRelationCSAccess().getNameAssignment_3(), "rule__RelationCS__NameAssignment_3");
 					put(grammarAccess.getRelationCSAccess().getOverridesAssignment_4_1(), "rule__RelationCS__OverridesAssignment_4_1");
 					put(grammarAccess.getRelationCSAccess().getOwnedVarDeclarationsAssignment_6(), "rule__RelationCS__OwnedVarDeclarationsAssignment_6");

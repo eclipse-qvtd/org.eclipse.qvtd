@@ -946,16 +946,16 @@ ruleMappingCS returns [EObject current=null]
     }
 )(
 (
-		lv_isDefault_1_0=	'default'
+		lv_isAbstract_1_0=	'abstract'
     {
-        newLeafNode(lv_isDefault_1_0, grammarAccess.getMappingCSAccess().getIsDefaultDefaultKeyword_1_0());
+        newLeafNode(lv_isAbstract_1_0, grammarAccess.getMappingCSAccess().getIsAbstractAbstractKeyword_1_0());
     }
 
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getMappingCSRule());
 	        }
-       		setWithLastConsumed($current, "isDefault", true, "default");
+       		setWithLastConsumed($current, "isAbstract", true, "abstract");
 	    }
 
 )
@@ -2160,87 +2160,94 @@ ruleQVTcoreUnrestrictedName returns [AntlrDatatypeRuleToken current=new AntlrDat
     }
     @after { leaveRule(); }:
 (
+	kw='abstract'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getAbstractKeyword_0());
+    }
+
+    |
 	kw='check'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getCheckKeyword_0());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getCheckKeyword_1());
     }
 
     |
 	kw='enforce'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getEnforceKeyword_1());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getEnforceKeyword_2());
     }
 
     |
 	kw='import'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getImportKeyword_2());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getImportKeyword_3());
     }
 
     |
 	kw='imports'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getImportsKeyword_3());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getImportsKeyword_4());
     }
 
     |
 	kw='map'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getMapKeyword_4());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getMapKeyword_5());
     }
 
     |
 	kw='package'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getPackageKeyword_5());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getPackageKeyword_6());
     }
 
     |
 	kw='query'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getQueryKeyword_6());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getQueryKeyword_7());
     }
 
     |
 	kw='realize'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getRealizeKeyword_7());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getRealizeKeyword_8());
     }
 
     |
 	kw='refines'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getRefinesKeyword_8());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getRefinesKeyword_9());
     }
 
     |
 	kw='transformation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getTransformationKeyword_9());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getTransformationKeyword_10());
     }
 
     |
 	kw='transient'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getTransientKeyword_10());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getTransientKeyword_11());
     }
 
     |
 	kw='uses'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getUsesKeyword_11());
+        newLeafNode(kw, grammarAccess.getQVTcoreUnrestrictedNameAccess().getUsesKeyword_12());
     }
 )
     ;

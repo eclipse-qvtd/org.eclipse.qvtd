@@ -1815,7 +1815,7 @@ relation RelationDomainToTraceClassVar
 
 -- copy an ocl expression
 -- For space reasons this relation is not expanded out here
-default relation RExpToMExp
+abstract relation RExpToMExp
 {
    domain relations re:OclExpression{};
    enforce domain core me:OclExpression{} /*implementedby CopyOclExpession(re, me)*/;

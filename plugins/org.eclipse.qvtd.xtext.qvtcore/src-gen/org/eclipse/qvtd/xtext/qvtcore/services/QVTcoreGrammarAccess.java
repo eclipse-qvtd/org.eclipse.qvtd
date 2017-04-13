@@ -623,8 +623,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtcore.QVTcore.MappingCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cMappingCSAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cIsDefaultAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Keyword cIsDefaultDefaultKeyword_1_0 = (Keyword)cIsDefaultAssignment_1.eContents().get(0);
+		private final Assignment cIsAbstractAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cIsAbstractAbstractKeyword_1_0 = (Keyword)cIsAbstractAssignment_1.eContents().get(0);
 		private final Keyword cMapKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
@@ -654,12 +654,12 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 
 		//MappingCS:
-		//	{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
+		//	{MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
 		//	refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
 		//	ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
+		//{MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
 		//refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
 		//ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}'
 		public Group getGroup() { return cGroup; }
@@ -667,11 +667,11 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//{MappingCS}
 		public Action getMappingCSAction_0() { return cMappingCSAction_0; }
 
-		//isDefault?='default'?
-		public Assignment getIsDefaultAssignment_1() { return cIsDefaultAssignment_1; }
+		//isAbstract?='abstract'?
+		public Assignment getIsAbstractAssignment_1() { return cIsAbstractAssignment_1; }
 
-		//'default'
-		public Keyword getIsDefaultDefaultKeyword_1_0() { return cIsDefaultDefaultKeyword_1_0; }
+		//'abstract'
+		public Keyword getIsAbstractAbstractKeyword_1_0() { return cIsAbstractAbstractKeyword_1_0; }
 
 		//'map'
 		public Keyword getMapKeyword_2() { return cMapKeyword_2; }
@@ -1393,66 +1393,68 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	public class QVTcoreUnrestrictedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtcore.QVTcore.QVTcoreUnrestrictedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cCheckKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cEnforceKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cImportKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cImportsKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cMapKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		private final Keyword cPackageKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final Keyword cQueryKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		private final Keyword cRealizeKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
-		private final Keyword cRefinesKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cTransformationKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cTransientKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cUsesKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cAbstractKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cCheckKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cEnforceKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cImportKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cImportsKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cMapKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cPackageKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cQueryKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cRealizeKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cRefinesKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cTransformationKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cTransientKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cUsesKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
 
 		//QVTcoreUnrestrictedName:
-		//	'check' //|	'default'
-		// | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
+		//	'abstract' | 'check' | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
 		//	'transformation' | 'transient' | 'uses' //|	'where'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 
-		//'check' //|	'default'
-		// | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
+		//'abstract' | 'check' | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
 		//'transformation' | 'transient' | 'uses'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//'abstract'
+		public Keyword getAbstractKeyword_0() { return cAbstractKeyword_0; }
+
 		//'check'
-		public Keyword getCheckKeyword_0() { return cCheckKeyword_0; }
+		public Keyword getCheckKeyword_1() { return cCheckKeyword_1; }
 
 		//'enforce'
-		public Keyword getEnforceKeyword_1() { return cEnforceKeyword_1; }
+		public Keyword getEnforceKeyword_2() { return cEnforceKeyword_2; }
 
 		//'import'
-		public Keyword getImportKeyword_2() { return cImportKeyword_2; }
+		public Keyword getImportKeyword_3() { return cImportKeyword_3; }
 
 		//'imports'
-		public Keyword getImportsKeyword_3() { return cImportsKeyword_3; }
+		public Keyword getImportsKeyword_4() { return cImportsKeyword_4; }
 
 		//'map'
-		public Keyword getMapKeyword_4() { return cMapKeyword_4; }
+		public Keyword getMapKeyword_5() { return cMapKeyword_5; }
 
 		//'package'
-		public Keyword getPackageKeyword_5() { return cPackageKeyword_5; }
+		public Keyword getPackageKeyword_6() { return cPackageKeyword_6; }
 
 		//'query'
-		public Keyword getQueryKeyword_6() { return cQueryKeyword_6; }
+		public Keyword getQueryKeyword_7() { return cQueryKeyword_7; }
 
 		//'realize'
-		public Keyword getRealizeKeyword_7() { return cRealizeKeyword_7; }
+		public Keyword getRealizeKeyword_8() { return cRealizeKeyword_8; }
 
 		//'refines'
-		public Keyword getRefinesKeyword_8() { return cRefinesKeyword_8; }
+		public Keyword getRefinesKeyword_9() { return cRefinesKeyword_9; }
 
 		//'transformation'
-		public Keyword getTransformationKeyword_9() { return cTransformationKeyword_9; }
+		public Keyword getTransformationKeyword_10() { return cTransformationKeyword_10; }
 
 		//'transient'
-		public Keyword getTransientKeyword_10() { return cTransientKeyword_10; }
+		public Keyword getTransientKeyword_11() { return cTransientKeyword_11; }
 
 		//'uses'
-		public Keyword getUsesKeyword_11() { return cUsesKeyword_11; }
+		public Keyword getUsesKeyword_12() { return cUsesKeyword_12; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -1652,7 +1654,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCS:
-	//	{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
+	//	{MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
 	//	refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? '{'
 	//	ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
 	public MappingCSElements getMappingCSAccess() {
@@ -1789,8 +1791,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QVTcoreUnrestrictedName:
-	//	'check' //|	'default'
-	// | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
+	//	'abstract' | 'check' | 'enforce' | 'import' | 'imports' | 'map' | 'package' | 'query' | 'realize' | 'refines' |
 	//	'transformation' | 'transient' | 'uses' //|	'where'
 	//;
 	public QVTcoreUnrestrictedNameElements getQVTcoreUnrestrictedNameAccess() {

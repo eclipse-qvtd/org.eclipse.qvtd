@@ -64,7 +64,7 @@ GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedTyp
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
 	
-MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)?
+MappingCS: {MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)?
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
 	'{' ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
 	
@@ -112,8 +112,8 @@ RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
 UnnamedDomainCS returns DomainCS: {DomainCS} ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 	
 QVTcoreUnrestrictedName:
-	'check'
-//|	'default'
+	'abstract'
+|	'check'
 |	'enforce'
 |	'import'
 |	'imports'

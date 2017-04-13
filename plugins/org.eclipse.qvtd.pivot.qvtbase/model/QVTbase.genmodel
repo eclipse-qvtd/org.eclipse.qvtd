@@ -57,7 +57,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="QVTbase.ecore#T-qvtbase-Rule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-domain"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#F-qvtbase-Rule-isDefault"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#F-qvtbase-Rule-isAbstract"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-overrides"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-transformation"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#F-qvtbase-Rule-overridden"/>

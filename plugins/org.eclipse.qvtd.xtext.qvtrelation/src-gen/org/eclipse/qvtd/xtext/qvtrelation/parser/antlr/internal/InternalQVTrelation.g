@@ -1750,16 +1750,16 @@ ruleRelationCS returns [EObject current=null]
 )
 )?(
 (
-		lv_isDefault_1_0=	'default'
+		lv_isAbstract_1_0=	'abstract'
     {
-        newLeafNode(lv_isDefault_1_0, grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0());
+        newLeafNode(lv_isAbstract_1_0, grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0());
     }
 
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getRelationCSRule());
 	        }
-       		setWithLastConsumed($current, "isDefault", true, "default");
+       		setWithLastConsumed($current, "isAbstract", true, "abstract");
 	    }
 
 )
@@ -2835,17 +2835,17 @@ ruleQVTrelationUnrestrictedName returns [AntlrDatatypeRuleToken current=new Antl
     }
     @after { leaveRule(); }:
 (
-	kw='checkonly'
+	kw='abstract'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_0());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getAbstractKeyword_0());
     }
 
     |
-	kw='default'
+	kw='checkonly'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getDefaultKeyword_1());
+        newLeafNode(kw, grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_1());
     }
 
     |

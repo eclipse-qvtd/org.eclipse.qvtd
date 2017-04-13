@@ -362,7 +362,7 @@ public class QVTbaseTables
 		public static final @NonNull ExecutorProperty _Predicate__pattern = new EcoreExecutorProperty(QVTbasePackage.Literals.PREDICATE__PATTERN, Types._Predicate, 1);
 
 		public static final @NonNull ExecutorProperty _Rule__domain = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__DOMAIN, Types._Rule, 0);
-		public static final @NonNull ExecutorProperty _Rule__isDefault = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__IS_DEFAULT, Types._Rule, 1);
+		public static final @NonNull ExecutorProperty _Rule__isAbstract = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, Types._Rule, 1);
 		public static final @NonNull ExecutorProperty _Rule__overridden = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, Types._Rule, 2);
 		public static final @NonNull ExecutorProperty _Rule__overrides = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDES, Types._Rule, 3);
 		public static final @NonNull ExecutorProperty _Rule__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, Types._Rule, 4);
@@ -1028,7 +1028,7 @@ public class QVTbaseTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Rule = {
 			QVTbaseTables.Properties._Rule__domain,
-			QVTbaseTables.Properties._Rule__isDefault,
+			QVTbaseTables.Properties._Rule__isAbstract,
 			QVTbaseTables.Properties._Rule__overridden,
 			QVTbaseTables.Properties._Rule__overrides,
 			QVTbaseTables.Properties._Rule__transformation

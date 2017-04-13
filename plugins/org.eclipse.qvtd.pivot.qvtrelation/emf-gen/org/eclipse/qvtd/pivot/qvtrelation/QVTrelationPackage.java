@@ -439,13 +439,13 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION__DOMAIN = QVTbasePackage.RULE__DOMAIN;
 
 	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__IS_DEFAULT = QVTbasePackage.RULE__IS_DEFAULT;
+	int RELATION__IS_ABSTRACT = QVTbasePackage.RULE__IS_ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Overrides</b></em>' reference.

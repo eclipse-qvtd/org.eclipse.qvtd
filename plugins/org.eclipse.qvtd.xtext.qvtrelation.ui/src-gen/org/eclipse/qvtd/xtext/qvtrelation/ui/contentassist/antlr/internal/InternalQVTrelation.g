@@ -3948,19 +3948,19 @@ rule__QVTrelationUnrestrictedName__Alternatives
     }
 :
 (
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_0()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getAbstractKeyword_0()); }
 
-	'checkonly'
+	'abstract'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_0()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getAbstractKeyword_0()); }
 )
 
     |(
-{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getDefaultKeyword_1()); }
+{ before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_1()); }
 
-	'default'
+	'checkonly'
 
-{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getDefaultKeyword_1()); }
+{ after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_1()); }
 )
 
     |(
@@ -10180,9 +10180,9 @@ rule__RelationCS__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1()); }
-(rule__RelationCS__IsDefaultAssignment_1)?
-{ after(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1()); }
+{ before(grammarAccess.getRelationCSAccess().getIsAbstractAssignment_1()); }
+(rule__RelationCS__IsAbstractAssignment_1)?
+{ after(grammarAccess.getRelationCSAccess().getIsAbstractAssignment_1()); }
 )
 
 ;
@@ -27085,22 +27085,22 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RelationCS__IsDefaultAssignment_1
+rule__RelationCS__IsAbstractAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ before(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0()); }
 (
-{ before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ before(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0()); }
 
-	'default'
+	'abstract'
 
-{ after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ after(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0()); }
 )
 
-{ after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0()); }
+{ after(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0()); }
 )
 
 ;

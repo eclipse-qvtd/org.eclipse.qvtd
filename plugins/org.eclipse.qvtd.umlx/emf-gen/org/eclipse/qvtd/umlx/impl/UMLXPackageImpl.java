@@ -277,7 +277,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getRelDiagram_IsTop() {
+	public EAttribute getRelDiagram_IsAbstract() {
 		return (EAttribute)relDiagramEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -287,8 +287,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDiagram_OwnedRelDomainNodes() {
-		return (EReference)relDiagramEClass.getEStructuralFeatures().get(1);
+	public EAttribute getRelDiagram_IsTop() {
+		return (EAttribute)relDiagramEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDiagram_OwnedRelInvocationNodes() {
+	public EReference getRelDiagram_OwnedRelDomainNodes() {
 		return (EReference)relDiagramEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -307,8 +307,18 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelDiagram_OwningTxDiagram() {
+	public EReference getRelDiagram_OwnedRelInvocationNodes() {
 		return (EReference)relDiagramEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelDiagram_OwningTxDiagram() {
+		return (EReference)relDiagramEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1101,6 +1111,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		// Create classes and their features
 		relDiagramEClass = createEClass(REL_DIAGRAM);
+		createEAttribute(relDiagramEClass, REL_DIAGRAM__IS_ABSTRACT);
 		createEAttribute(relDiagramEClass, REL_DIAGRAM__IS_TOP);
 		createEReference(relDiagramEClass, REL_DIAGRAM__OWNED_REL_DOMAIN_NODES);
 		createEReference(relDiagramEClass, REL_DIAGRAM__OWNED_REL_INVOCATION_NODES);
@@ -1256,6 +1267,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(relDiagramEClass, RelDiagram.class, "RelDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRelDiagram_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", "false", 1, 1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelDiagram_IsTop(), ecorePackage.getEBoolean(), "isTop", "false", 1, 1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelDiagram_OwnedRelDomainNodes(), this.getRelDomainNode(), this.getRelDomainNode_OwningRelDiagram(), "ownedRelDomainNodes", null, 0, -1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelDiagram_OwnedRelInvocationNodes(), this.getRelInvocationNode(), this.getRelInvocationNode_OwningRelDiagram(), "ownedRelInvocationNodes", null, 0, -1, RelDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

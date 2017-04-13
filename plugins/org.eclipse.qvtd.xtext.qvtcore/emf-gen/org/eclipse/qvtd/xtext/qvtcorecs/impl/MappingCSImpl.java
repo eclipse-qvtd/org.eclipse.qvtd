@@ -39,7 +39,7 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedComposedMappings <em>Owned Composed Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
@@ -51,24 +51,24 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	/**
-	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
+	 * @see #isIsAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+	protected static final boolean IS_ABSTRACT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * The cached value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
+	 * @see #isIsAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+	protected boolean isAbstract = IS_ABSTRACT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedComposedMappings() <em>Owned Composed Mappings</em>}' containment reference list.
@@ -145,8 +145,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isIsDefault() {
-		return isDefault;
+	public boolean isIsAbstract() {
+		return isAbstract;
 	}
 
 	/**
@@ -155,11 +155,11 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public void setIsDefault(boolean newIsDefault) {
-		boolean oldIsDefault = isDefault;
-		isDefault = newIsDefault;
+	public void setIsAbstract(boolean newIsAbstract) {
+		boolean oldIsAbstract = isAbstract;
+		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__IS_DEFAULT, oldIsDefault, isDefault));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT, oldIsAbstract, isAbstract));
 	}
 
 	/**
@@ -329,8 +329,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_DEFAULT:
-				return isIsDefault();
+			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+				return isIsAbstract();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				return getOwnedComposedMappings();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
@@ -354,8 +354,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_DEFAULT:
-				setIsDefault((Boolean)newValue);
+			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+				setIsAbstract((Boolean)newValue);
 				return;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				getOwnedComposedMappings().clear();
@@ -387,8 +387,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_DEFAULT:
-				setIsDefault(IS_DEFAULT_EDEFAULT);
+			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				getOwnedComposedMappings().clear();
@@ -417,8 +417,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_DEFAULT:
-				return isDefault != IS_DEFAULT_EDEFAULT;
+			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				return ownedComposedMappings != null && !ownedComposedMappings.isEmpty();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:

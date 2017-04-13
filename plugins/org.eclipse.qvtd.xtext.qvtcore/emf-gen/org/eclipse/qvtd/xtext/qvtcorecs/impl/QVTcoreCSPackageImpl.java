@@ -195,7 +195,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTcoreCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -231,7 +231,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		// Mark meta-data to indicate it can't be changed
 		theQVTcoreCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTcoreCSPackage.eNS_URI, theQVTcoreCSPackage);
 		return theQVTcoreCSPackage;
@@ -443,7 +443,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMappingCS_IsDefault() {
+	public EAttribute getMappingCS_IsAbstract() {
 		return (EAttribute)mappingCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -822,7 +822,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		createEReference(guardPatternCSEClass, GUARD_PATTERN_CS__OWNED_PREDICATES);
 
 		mappingCSEClass = createEClass(MAPPING_CS);
-		createEAttribute(mappingCSEClass, MAPPING_CS__IS_DEFAULT);
+		createEAttribute(mappingCSEClass, MAPPING_CS__IS_ABSTRACT);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_COMPOSED_MAPPINGS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_DOMAINS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
@@ -948,7 +948,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		initEReference(getGuardPatternCS_OwnedPredicates(), this.getPredicateCS(), null, "ownedPredicates", null, 0, -1, GuardPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMappingCS_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCS_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", "false", 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedComposedMappings(), this.getMappingCS(), null, "ownedComposedMappings", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMappingCS_OwnedDomains(), this.getDomainCS(), null, "ownedDomains", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

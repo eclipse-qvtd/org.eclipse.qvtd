@@ -447,7 +447,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		String defaultName = asMapping.getContext() != null ? null : "«null»";
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping, defaultName);
 		csMapping.setPivot(asMapping);
-		csMapping.setIsDefault(asMapping.isIsDefault());
+		csMapping.setIsAbstract(asMapping.isIsAbstract());
 		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreCSPackage.Literals.DOMAIN_CS, asMapping);

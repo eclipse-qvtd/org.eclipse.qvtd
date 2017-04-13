@@ -41,7 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//GuardPatternCS/ownedPredicates"/>
     </genClasses>
     <genClasses ecoreClass="QVTcoreCS.ecore#//MappingCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//MappingCS/isDefault"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//MappingCS/isAbstract"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedComposedMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedDomains"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedInPathName"/>

@@ -85,7 +85,7 @@ QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName
       	  ':' ownedType=TypeExpCS
             (';' | '{' ownedExpression=ExpCS '}');
 
-RelationCS: isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName
+RelationCS: isTop?='top'? isAbstract?='abstract'? 'relation' name=UnrestrictedName
    			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
                '{'
                ownedVarDeclarations+=VarDeclarationCS*
@@ -140,8 +140,8 @@ TypedRefCS returns base::TypedRefCS:
 //|	TemplateCS;
 	
 QVTrelationUnrestrictedName:
-    'checkonly'
-|   'default'
+    'abstract'
+|   'checkonly'
 |   'default_values'
 |   'domain'
 |   'enforce'

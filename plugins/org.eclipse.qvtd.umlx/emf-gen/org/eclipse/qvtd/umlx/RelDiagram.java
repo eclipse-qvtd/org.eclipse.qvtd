@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#getOwnedRelDomainNodes <em>Owned Rel Domain Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.umlx.RelDiagram#getOwnedRelInvocationNodes <em>Owned Rel Invocation Nodes</em>}</li>
@@ -34,6 +35,32 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface RelDiagram extends UMLXNamedElement {
+
+	/**
+	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Abstract</em>' attribute.
+	 * @see #setIsAbstract(boolean)
+	 * @see org.eclipse.qvtd.umlx.UMLXPackage#getRelDiagram_IsAbstract()
+	 * @generated
+	 */
+	boolean isIsAbstract();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsAbstract <em>Is Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Abstract</em>' attribute.
+	 * @see #isIsAbstract()
+	 * @generated
+	 */
+	void setIsAbstract(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Top</b></em>' attribute.

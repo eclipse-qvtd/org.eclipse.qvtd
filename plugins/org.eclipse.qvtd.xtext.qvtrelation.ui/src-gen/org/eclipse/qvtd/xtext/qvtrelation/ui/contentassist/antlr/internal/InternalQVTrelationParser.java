@@ -33,9 +33,8 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalQVTrelationParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_SINGLE_QUOTED_STRING", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_UNQUOTED_STRING", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_DOUBLE_QUOTED_STRING", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "';'", "'replace'", "'checkonly'", "'default'", "'default_values'", "'domain'", "'enforce'", "'extends'", "'implementedby'", "'import'", "'library'", "'key'", "'opposite'", "'overrides'", "'package'", "'primitive'", "'query'", "'relation'", "'top'", "'transformation'", "'uses'", "'when'", "'where'", "'!serializable'", "'abstract'", "'attribute'", "'body'", "'class'", "'composes'", "'datatype'", "'definition'", "'derived'", "'derivation'", "'enum'", "'id'", "'initial'", "'interface'", "'literal'", "'operation'", "'ordered'", "'property'", "'readonly'", "'resolve'", "'serializable'", "'static'", "'throws'", "'transient'", "'unique'", "'unsettable'", "'volatile'", "'-'", "'not'", "'*'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'|?'", "'?'", "':'", "'{'", "'}'", "'++'", "','", "'('", "')'", "'::'", "'#'", "'..'", "'Lambda'", "'<-'", "'invalid'", "'null'", "'pre'", "'['", "']'", "'in'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'&&'", "'!derived'", "'!id'", "'!ordered'", "'!readonly'", "'!transient'", "'!unique'", "'!unsettable'", "'!volatile'", "'!composes'", "'!resolve'", "'true'", "'false'", "'@'", "'|'", "'|1'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_SINGLE_QUOTED_STRING", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_UNQUOTED_STRING", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_DOUBLE_QUOTED_STRING", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "';'", "'replace'", "'abstract'", "'checkonly'", "'default_values'", "'domain'", "'enforce'", "'extends'", "'implementedby'", "'import'", "'library'", "'key'", "'opposite'", "'overrides'", "'package'", "'primitive'", "'query'", "'relation'", "'top'", "'transformation'", "'uses'", "'when'", "'where'", "'!serializable'", "'attribute'", "'body'", "'class'", "'composes'", "'datatype'", "'definition'", "'derived'", "'derivation'", "'enum'", "'id'", "'initial'", "'interface'", "'literal'", "'operation'", "'ordered'", "'property'", "'readonly'", "'resolve'", "'serializable'", "'static'", "'throws'", "'transient'", "'unique'", "'unsettable'", "'volatile'", "'-'", "'not'", "'*'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'|?'", "'?'", "':'", "'{'", "'}'", "'++'", "','", "'('", "')'", "'::'", "'#'", "'..'", "'Lambda'", "'<-'", "'invalid'", "'null'", "'pre'", "'['", "']'", "'in'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'&&'", "'!derived'", "'!id'", "'!ordered'", "'!readonly'", "'!transient'", "'!unique'", "'!unsettable'", "'!volatile'", "'!composes'", "'!resolve'", "'true'", "'false'", "'@'", "'|'", "'|1'"
     };
-    public static final int T__143=143;
     public static final int T__50=50;
     public static final int T__140=140;
     public static final int T__142=142;
@@ -10824,7 +10823,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==104) ) {
+            if ( (LA3_0==103) ) {
                 alt3=1;
             }
             else if ( (LA3_0==17) ) {
@@ -10917,7 +10916,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( (LA4_0==31) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==32||LA4_0==36||LA4_0==41||LA4_0==44||LA4_0==46||LA4_0==50) ) {
+            else if ( (LA4_0==19||LA4_0==32||LA4_0==36||LA4_0==43||LA4_0==45||LA4_0==49) ) {
                 alt4=2;
             }
             else {
@@ -11014,7 +11013,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==32||LA5_0==41||LA5_0==44||LA5_0==46||LA5_0==50) ) {
+            if ( (LA5_0==19||LA5_0==32||LA5_0==43||LA5_0==45||LA5_0==49) ) {
                 alt5=1;
             }
             else if ( (LA5_0==36) ) {
@@ -11249,7 +11248,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:3691:1: ( ( ( rule__DomainCS__IsCheckonlyAssignment_0_0 ) ) | ( ( rule__DomainCS__IsEnforceAssignment_0_1 ) ) | ( 'replace' ) )
             int alt8=3;
             switch ( input.LA(1) ) {
-            case 19:
+            case 20:
                 {
                 alt8=1;
                 }
@@ -11378,16 +11377,16 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( ((LA9_0>=RULE_SIMPLE_ID && LA9_0<=RULE_ESCAPED_ID)||(LA9_0>=18 && LA9_0<=28)||(LA9_0>=30 && LA9_0<=39)||(LA9_0>=41 && LA9_0<=66)) ) {
+            if ( ((LA9_0>=RULE_SIMPLE_ID && LA9_0<=RULE_ESCAPED_ID)||(LA9_0>=18 && LA9_0<=28)||(LA9_0>=30 && LA9_0<=39)||(LA9_0>=41 && LA9_0<=65)) ) {
                 alt9=1;
             }
             else if ( (LA9_0==29) ) {
                 int LA9_2 = input.LA(2);
 
-                if ( (LA9_2==105||LA9_2==107) ) {
+                if ( (LA9_2==104||LA9_2==106) ) {
                     alt9=1;
                 }
-                else if ( (LA9_2==108) ) {
+                else if ( (LA9_2==107) ) {
                     alt9=2;
                 }
                 else {
@@ -11492,16 +11491,16 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( ((LA10_0>=RULE_SIMPLE_ID && LA10_0<=RULE_ESCAPED_ID)||(LA10_0>=18 && LA10_0<=28)||(LA10_0>=30 && LA10_0<=39)||(LA10_0>=41 && LA10_0<=66)) ) {
+            if ( ((LA10_0>=RULE_SIMPLE_ID && LA10_0<=RULE_ESCAPED_ID)||(LA10_0>=18 && LA10_0<=28)||(LA10_0>=30 && LA10_0<=39)||(LA10_0>=41 && LA10_0<=65)) ) {
                 alt10=1;
             }
             else if ( (LA10_0==29) ) {
                 int LA10_2 = input.LA(2);
 
-                if ( (LA10_2==EOF||LA10_2==105||LA10_2==107) ) {
+                if ( (LA10_2==EOF||LA10_2==104||LA10_2==106) ) {
                     alt10=1;
                 }
-                else if ( (LA10_2==108) ) {
+                else if ( (LA10_2==107) ) {
                     alt10=2;
                 }
                 else {
@@ -11606,10 +11605,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( ((LA11_0>=RULE_SIMPLE_ID && LA11_0<=RULE_ESCAPED_ID)||(LA11_0>=18 && LA11_0<=39)||(LA11_0>=41 && LA11_0<=66)) ) {
+            if ( ((LA11_0>=RULE_SIMPLE_ID && LA11_0<=RULE_ESCAPED_ID)||(LA11_0>=18 && LA11_0<=39)||(LA11_0>=41 && LA11_0<=65)) ) {
                 alt11=1;
             }
-            else if ( (LA11_0==104) ) {
+            else if ( (LA11_0==103) ) {
                 alt11=2;
             }
             else {
@@ -11706,16 +11705,16 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( ((LA12_0>=RULE_SIMPLE_ID && LA12_0<=RULE_ESCAPED_ID)||(LA12_0>=18 && LA12_0<=28)||(LA12_0>=30 && LA12_0<=39)||(LA12_0>=41 && LA12_0<=66)) ) {
+            if ( ((LA12_0>=RULE_SIMPLE_ID && LA12_0<=RULE_ESCAPED_ID)||(LA12_0>=18 && LA12_0<=28)||(LA12_0>=30 && LA12_0<=39)||(LA12_0>=41 && LA12_0<=65)) ) {
                 alt12=1;
             }
             else if ( (LA12_0==29) ) {
                 int LA12_2 = input.LA(2);
 
-                if ( (LA12_2==108) ) {
+                if ( (LA12_2==107) ) {
                     alt12=2;
                 }
-                else if ( (LA12_2==76) ) {
+                else if ( (LA12_2==75) ) {
                     alt12=1;
                 }
                 else {
@@ -11823,7 +11822,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( (LA13_0==17) ) {
                 alt13=1;
             }
-            else if ( (LA13_0==104) ) {
+            else if ( (LA13_0==103) ) {
                 alt13=2;
             }
             else {
@@ -11910,7 +11909,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( ((LA14_0>=18 && LA14_0<=19)||(LA14_0>=22 && LA14_0<=23)) ) {
+            if ( (LA14_0==18||LA14_0==20||(LA14_0>=22 && LA14_0<=23)) ) {
                 alt14=1;
             }
             else if ( (LA14_0==32) ) {
@@ -12084,10 +12083,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( (LA16_0==20||(LA16_0>=34 && LA16_0<=35)) ) {
+            if ( (LA16_0==19||(LA16_0>=34 && LA16_0<=35)) ) {
                 alt16=1;
             }
-            else if ( (LA16_0==33||LA16_0==63) ) {
+            else if ( (LA16_0==33||LA16_0==62) ) {
                 alt16=2;
             }
             else {
@@ -12257,6 +12256,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:3921:1: ( ( ( rule__TypedRefCS__Group_0__0 ) ) | ( ( rule__TypedRefCS__Group_1__0 ) ) | ( ( rule__TypedRefCS__Group_2__0 ) ) )
             int alt18=3;
             switch ( input.LA(1) ) {
+            case 87:
             case 88:
             case 89:
             case 90:
@@ -12264,16 +12264,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             case 92:
             case 93:
             case 94:
-            case 95:
                 {
                 alt18=1;
                 }
                 break;
+            case 95:
             case 96:
             case 97:
             case 98:
             case 99:
-            case 100:
                 {
                 alt18=2;
                 }
@@ -12327,7 +12326,6 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             case 63:
             case 64:
             case 65:
-            case 66:
                 {
                 alt18=3;
                 }
@@ -12446,13 +12444,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__QVTrelationUnrestrictedName__Alternatives"
-    // InternalQVTrelation.g:3945:1: rule__QVTrelationUnrestrictedName__Alternatives : ( ( 'checkonly' ) | ( 'default' ) | ( 'default_values' ) | ( 'domain' ) | ( 'enforce' ) | ( 'extends' ) | ( 'implementedby' ) | ( 'import' ) | ( 'library' ) | ( 'key' ) | ( 'opposite' ) | ( 'overrides' ) | ( 'package' ) | ( 'primitive' ) | ( 'query' ) | ( 'relation' ) | ( 'replace' ) | ( 'top' ) | ( 'transformation' ) | ( 'uses' ) | ( 'when' ) | ( 'where' ) );
+    // InternalQVTrelation.g:3945:1: rule__QVTrelationUnrestrictedName__Alternatives : ( ( 'abstract' ) | ( 'checkonly' ) | ( 'default_values' ) | ( 'domain' ) | ( 'enforce' ) | ( 'extends' ) | ( 'implementedby' ) | ( 'import' ) | ( 'library' ) | ( 'key' ) | ( 'opposite' ) | ( 'overrides' ) | ( 'package' ) | ( 'primitive' ) | ( 'query' ) | ( 'relation' ) | ( 'replace' ) | ( 'top' ) | ( 'transformation' ) | ( 'uses' ) | ( 'when' ) | ( 'where' ) );
     public final void rule__QVTrelationUnrestrictedName__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:3949:1: ( ( 'checkonly' ) | ( 'default' ) | ( 'default_values' ) | ( 'domain' ) | ( 'enforce' ) | ( 'extends' ) | ( 'implementedby' ) | ( 'import' ) | ( 'library' ) | ( 'key' ) | ( 'opposite' ) | ( 'overrides' ) | ( 'package' ) | ( 'primitive' ) | ( 'query' ) | ( 'relation' ) | ( 'replace' ) | ( 'top' ) | ( 'transformation' ) | ( 'uses' ) | ( 'when' ) | ( 'where' ) )
+            // InternalQVTrelation.g:3949:1: ( ( 'abstract' ) | ( 'checkonly' ) | ( 'default_values' ) | ( 'domain' ) | ( 'enforce' ) | ( 'extends' ) | ( 'implementedby' ) | ( 'import' ) | ( 'library' ) | ( 'key' ) | ( 'opposite' ) | ( 'overrides' ) | ( 'package' ) | ( 'primitive' ) | ( 'query' ) | ( 'relation' ) | ( 'replace' ) | ( 'top' ) | ( 'transformation' ) | ( 'uses' ) | ( 'when' ) | ( 'where' ) )
             int alt19=22;
             switch ( input.LA(1) ) {
             case 19:
@@ -12575,17 +12573,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
             switch (alt19) {
                 case 1 :
-                    // InternalQVTrelation.g:3950:1: ( 'checkonly' )
+                    // InternalQVTrelation.g:3950:1: ( 'abstract' )
                     {
-                    // InternalQVTrelation.g:3950:1: ( 'checkonly' )
-                    // InternalQVTrelation.g:3951:1: 'checkonly'
+                    // InternalQVTrelation.g:3950:1: ( 'abstract' )
+                    // InternalQVTrelation.g:3951:1: 'abstract'
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_0());
+                       before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getAbstractKeyword_0());
                     }
                     match(input,19,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_0());
+                       after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getAbstractKeyword_0());
                     }
 
                     }
@@ -12594,17 +12592,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // InternalQVTrelation.g:3958:6: ( 'default' )
+                    // InternalQVTrelation.g:3958:6: ( 'checkonly' )
                     {
-                    // InternalQVTrelation.g:3958:6: ( 'default' )
-                    // InternalQVTrelation.g:3959:1: 'default'
+                    // InternalQVTrelation.g:3958:6: ( 'checkonly' )
+                    // InternalQVTrelation.g:3959:1: 'checkonly'
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getDefaultKeyword_1());
+                       before(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_1());
                     }
                     match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getDefaultKeyword_1());
+                       after(grammarAccess.getQVTrelationUnrestrictedNameAccess().getCheckonlyKeyword_1());
                     }
 
                     }
@@ -13025,6 +13023,25 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 alt20=1;
                 }
                 break;
+            case 19:
+                {
+                int LA20_2 = input.LA(2);
+
+                if ( (synpred43_InternalQVTrelation()) ) {
+                    alt20=2;
+                }
+                else if ( (true) ) {
+                    alt20=3;
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return ;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 20, 2, input);
+
+                    throw nvae;
+                }
+                }
+                break;
             case 41:
             case 42:
             case 43:
@@ -13050,31 +13067,11 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             case 63:
             case 64:
             case 65:
-            case 66:
                 {
                 alt20=2;
                 }
                 break;
             case 24:
-                {
-                int LA20_3 = input.LA(2);
-
-                if ( (synpred43_InternalQVTrelation()) ) {
-                    alt20=2;
-                }
-                else if ( (true) ) {
-                    alt20=3;
-                }
-                else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 20, 3, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 32:
                 {
                 int LA20_4 = input.LA(2);
 
@@ -13093,8 +13090,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 }
                 }
                 break;
+            case 32:
+                {
+                int LA20_5 = input.LA(2);
+
+                if ( (synpred43_InternalQVTrelation()) ) {
+                    alt20=2;
+                }
+                else if ( (true) ) {
+                    alt20=3;
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return ;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 20, 5, input);
+
+                    throw nvae;
+                }
+                }
+                break;
             case 18:
-            case 19:
             case 20:
             case 21:
             case 22:
@@ -13223,10 +13238,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==61) ) {
+            if ( (LA21_0==60) ) {
                 alt21=1;
             }
-            else if ( (LA21_0==47) ) {
+            else if ( (LA21_0==46) ) {
                 alt21=2;
             }
             else {
@@ -13322,82 +13337,82 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4185:1: ( ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_0 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_1 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_2 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_3 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_4 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_5 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_6 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_7 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_8 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_9 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_10 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_11 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_12 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_13 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_14 ) ) | ( ( rule__AttributeCS__QualifiersAssignment_5_1_0_15 ) ) )
             int alt22=16;
             switch ( input.LA(1) ) {
-            case 48:
+            case 47:
                 {
                 alt22=1;
                 }
                 break;
-            case 129:
+            case 128:
                 {
                 alt22=2;
                 }
                 break;
-            case 51:
+            case 50:
                 {
                 alt22=3;
                 }
                 break;
-            case 130:
+            case 129:
                 {
                 alt22=4;
                 }
                 break;
-            case 56:
+            case 55:
                 {
                 alt22=5;
                 }
                 break;
-            case 131:
+            case 130:
                 {
                 alt22=6;
                 }
                 break;
-            case 58:
+            case 57:
                 {
                 alt22=7;
                 }
                 break;
-            case 132:
+            case 131:
                 {
                 alt22=8;
                 }
                 break;
-            case 63:
+            case 62:
                 {
                 alt22=9;
                 }
                 break;
-            case 133:
+            case 132:
                 {
                 alt22=10;
                 }
                 break;
-            case 64:
+            case 63:
                 {
                 alt22=11;
                 }
                 break;
-            case 134:
+            case 133:
                 {
                 alt22=12;
                 }
                 break;
-            case 65:
+            case 64:
                 {
                 alt22=13;
                 }
                 break;
-            case 135:
+            case 134:
                 {
                 alt22=14;
                 }
                 break;
-            case 66:
+            case 65:
                 {
                 alt22=15;
                 }
                 break;
-            case 136:
+            case 135:
                 {
                 alt22=16;
                 }
@@ -13903,7 +13918,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( (LA23_0==104) ) {
+            if ( (LA23_0==103) ) {
                 alt23=1;
             }
             else if ( (LA23_0==17) ) {
@@ -13993,10 +14008,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==52) ) {
+            if ( (LA24_0==51) ) {
                 alt24=1;
             }
-            else if ( (LA24_0==49) ) {
+            else if ( (LA24_0==48) ) {
                 alt24=2;
             }
             else {
@@ -14092,19 +14107,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4337:1: ( ( ruleStructuredClassCS ) | ( ruleDataTypeCS ) | ( ruleEnumerationCS ) )
             int alt25=3;
             switch ( input.LA(1) ) {
-            case 41:
-            case 44:
+            case 19:
+            case 43:
                 {
                 alt25=1;
                 }
                 break;
             case 32:
-            case 46:
+            case 45:
                 {
                 alt25=2;
                 }
                 break;
-            case 50:
+            case 49:
                 {
                 alt25=3;
                 }
@@ -14215,7 +14230,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt26=2;
             int LA26_0 = input.LA(1);
 
-            if ( (LA26_0==60) ) {
+            if ( (LA26_0==59) ) {
                 alt26=1;
             }
             else if ( (LA26_0==40) ) {
@@ -14305,7 +14320,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt27=2;
             int LA27_0 = input.LA(1);
 
-            if ( (LA27_0==104) ) {
+            if ( (LA27_0==103) ) {
                 alt27=1;
             }
             else if ( (LA27_0==17) ) {
@@ -14395,7 +14410,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt28=2;
             int LA28_0 = input.LA(1);
 
-            if ( (LA28_0==60) ) {
+            if ( (LA28_0==59) ) {
                 alt28=1;
             }
             else if ( (LA28_0==40) ) {
@@ -14485,7 +14500,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt29=2;
             int LA29_0 = input.LA(1);
 
-            if ( (LA29_0==104) ) {
+            if ( (LA29_0==103) ) {
                 alt29=1;
             }
             else if ( (LA29_0==17) ) {
@@ -14575,7 +14590,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt30=2;
             int LA30_0 = input.LA(1);
 
-            if ( (LA30_0==54) ) {
+            if ( (LA30_0==53) ) {
                 alt30=1;
             }
             else if ( ((LA30_0>=RULE_SIMPLE_ID && LA30_0<=RULE_ESCAPED_ID)) ) {
@@ -14675,7 +14690,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt31=2;
             int LA31_0 = input.LA(1);
 
-            if ( (LA31_0==104) ) {
+            if ( (LA31_0==103) ) {
                 alt31=1;
             }
             else if ( (LA31_0==17) ) {
@@ -14765,10 +14780,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt32=2;
             int LA32_0 = input.LA(1);
 
-            if ( (LA32_0==61) ) {
+            if ( (LA32_0==60) ) {
                 alt32=1;
             }
-            else if ( (LA32_0==47) ) {
+            else if ( (LA32_0==46) ) {
                 alt32=2;
             }
             else {
@@ -14864,32 +14879,32 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4529:1: ( ( ( rule__OperationCS__QualifiersAssignment_9_1_0_0 ) ) | ( ( rule__OperationCS__QualifiersAssignment_9_1_0_1 ) ) | ( ( rule__OperationCS__QualifiersAssignment_9_1_0_2 ) ) | ( ( rule__OperationCS__QualifiersAssignment_9_1_0_3 ) ) | ( ( rule__OperationCS__QualifiersAssignment_9_1_0_4 ) ) | ( ( rule__OperationCS__QualifiersAssignment_9_1_0_5 ) ) )
             int alt33=6;
             switch ( input.LA(1) ) {
-            case 48:
+            case 47:
                 {
                 alt33=1;
                 }
                 break;
-            case 129:
+            case 128:
                 {
                 alt33=2;
                 }
                 break;
-            case 56:
+            case 55:
                 {
                 alt33=3;
                 }
                 break;
-            case 131:
+            case 130:
                 {
                 alt33=4;
                 }
                 break;
-            case 64:
+            case 63:
                 {
                 alt33=5;
                 }
                 break;
-            case 134:
+            case 133:
                 {
                 alt33=6;
                 }
@@ -15105,7 +15120,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt34=2;
             int LA34_0 = input.LA(1);
 
-            if ( (LA34_0==104) ) {
+            if ( (LA34_0==103) ) {
                 alt34=1;
             }
             else if ( (LA34_0==17) ) {
@@ -15194,22 +15209,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4599:1: ( ( ( rule__ParameterCS__QualifiersAssignment_2_1_0_0 ) ) | ( ( rule__ParameterCS__QualifiersAssignment_2_1_0_1 ) ) | ( ( rule__ParameterCS__QualifiersAssignment_2_1_0_2 ) ) | ( ( rule__ParameterCS__QualifiersAssignment_2_1_0_3 ) ) )
             int alt35=4;
             switch ( input.LA(1) ) {
-            case 56:
+            case 55:
                 {
                 alt35=1;
                 }
                 break;
-            case 131:
+            case 130:
                 {
                 alt35=2;
                 }
                 break;
-            case 64:
+            case 63:
                 {
                 alt35=3;
                 }
                 break;
-            case 134:
+            case 133:
                 {
                 alt35=4;
                 }
@@ -15367,10 +15382,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt36=2;
             int LA36_0 = input.LA(1);
 
-            if ( (LA36_0==61) ) {
+            if ( (LA36_0==60) ) {
                 alt36=1;
             }
-            else if ( (LA36_0==47) ) {
+            else if ( (LA36_0==46) ) {
                 alt36=2;
             }
             else {
@@ -15466,92 +15481,92 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4655:1: ( ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_0 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_1 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_2 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_3 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_4 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_5 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_6 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_7 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_8 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_9 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_10 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_11 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_12 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_13 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_14 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_15 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_16 ) ) | ( ( rule__ReferenceCS__QualifiersAssignment_6_1_0_17 ) ) )
             int alt37=18;
             switch ( input.LA(1) ) {
-            case 45:
+            case 44:
                 {
                 alt37=1;
                 }
                 break;
-            case 137:
+            case 136:
                 {
                 alt37=2;
                 }
                 break;
-            case 48:
+            case 47:
                 {
                 alt37=3;
                 }
                 break;
-            case 129:
+            case 128:
                 {
                 alt37=4;
                 }
                 break;
-            case 56:
+            case 55:
                 {
                 alt37=5;
                 }
                 break;
-            case 131:
+            case 130:
                 {
                 alt37=6;
                 }
                 break;
-            case 58:
+            case 57:
                 {
                 alt37=7;
                 }
                 break;
-            case 132:
+            case 131:
                 {
                 alt37=8;
                 }
                 break;
-            case 59:
+            case 58:
                 {
                 alt37=9;
                 }
                 break;
-            case 138:
+            case 137:
                 {
                 alt37=10;
                 }
                 break;
-            case 63:
+            case 62:
                 {
                 alt37=11;
                 }
                 break;
-            case 133:
+            case 132:
                 {
                 alt37=12;
                 }
                 break;
-            case 64:
+            case 63:
                 {
                 alt37=13;
                 }
                 break;
-            case 134:
+            case 133:
                 {
                 alt37=14;
                 }
                 break;
-            case 65:
+            case 64:
                 {
                 alt37=15;
                 }
                 break;
-            case 135:
+            case 134:
                 {
                 alt37=16;
                 }
                 break;
-            case 66:
+            case 65:
                 {
                 alt37=17;
                 }
                 break;
-            case 136:
+            case 135:
                 {
                 alt37=18;
                 }
@@ -16115,7 +16130,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt38=2;
             int LA38_0 = input.LA(1);
 
-            if ( (LA38_0==104) ) {
+            if ( (LA38_0==103) ) {
                 alt38=1;
             }
             else if ( (LA38_0==17) ) {
@@ -16205,10 +16220,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( (LA39_0==52) ) {
+            if ( (LA39_0==51) ) {
                 alt39=1;
             }
-            else if ( (LA39_0==49) ) {
+            else if ( (LA39_0==48) ) {
                 alt39=2;
             }
             else {
@@ -16305,7 +16320,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt40=2;
             int LA40_0 = input.LA(1);
 
-            if ( ((LA40_0>=RULE_INT && LA40_0<=RULE_ESCAPED_ID)||(LA40_0>=18 && LA40_0<=39)||(LA40_0>=41 && LA40_0<=69)||(LA40_0>=86 && LA40_0<=100)||LA40_0==108||LA40_0==113||(LA40_0>=115 && LA40_0<=116)||LA40_0==121||(LA40_0>=126 && LA40_0<=127)||(LA40_0>=139 && LA40_0<=140)) ) {
+            if ( ((LA40_0>=RULE_INT && LA40_0<=RULE_ESCAPED_ID)||(LA40_0>=18 && LA40_0<=39)||(LA40_0>=41 && LA40_0<=68)||(LA40_0>=85 && LA40_0<=99)||LA40_0==107||LA40_0==112||(LA40_0>=114 && LA40_0<=115)||LA40_0==120||(LA40_0>=125 && LA40_0<=126)||(LA40_0>=138 && LA40_0<=139)) ) {
                 alt40=1;
             }
             else if ( (LA40_0==RULE_UNQUOTED_STRING) ) {
@@ -16405,7 +16420,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt41=2;
             int LA41_0 = input.LA(1);
 
-            if ( (LA41_0==104) ) {
+            if ( (LA41_0==103) ) {
                 alt41=1;
             }
             else if ( (LA41_0==17) ) {
@@ -16494,17 +16509,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4865:1: ( ( ( rule__StructuredClassCS__OwnedOperationsAssignment_7_0_1_0 ) ) | ( ( rule__StructuredClassCS__OwnedPropertiesAssignment_7_0_1_1 ) ) )
             int alt42=2;
             switch ( input.LA(1) ) {
-            case 61:
+            case 60:
                 {
                 switch ( input.LA(2) ) {
-                case 47:
+                case 46:
                     {
                     int LA42_5 = input.LA(3);
 
-                    if ( (LA42_5==42||LA42_5==57) ) {
+                    if ( (LA42_5==41||LA42_5==56) ) {
                         alt42=2;
                     }
-                    else if ( (LA42_5==55) ) {
+                    else if ( (LA42_5==54) ) {
                         alt42=1;
                     }
                     else {
@@ -16516,13 +16531,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     }
                     break;
-                case 42:
-                case 57:
+                case 41:
+                case 56:
                     {
                     alt42=2;
                     }
                     break;
-                case 55:
+                case 54:
                     {
                     alt42=1;
                     }
@@ -16537,17 +16552,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 }
                 break;
-            case 47:
+            case 46:
                 {
                 switch ( input.LA(2) ) {
-                case 61:
+                case 60:
                     {
                     int LA42_6 = input.LA(3);
 
-                    if ( (LA42_6==42||LA42_6==57) ) {
+                    if ( (LA42_6==41||LA42_6==56) ) {
                         alt42=2;
                     }
-                    else if ( (LA42_6==55) ) {
+                    else if ( (LA42_6==54) ) {
                         alt42=1;
                     }
                     else {
@@ -16559,13 +16574,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     }
                     break;
-                case 55:
+                case 54:
                     {
                     alt42=1;
                     }
                     break;
-                case 42:
-                case 57:
+                case 41:
+                case 56:
                     {
                     alt42=2;
                     }
@@ -16580,13 +16595,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 }
                 break;
-            case 55:
+            case 54:
                 {
                 alt42=1;
                 }
                 break;
-            case 42:
-            case 57:
+            case 41:
+            case 56:
                 {
                 alt42=2;
                 }
@@ -16685,17 +16700,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4887:1: ( ( ruleAttributeCS ) | ( ruleReferenceCS ) )
             int alt43=2;
             switch ( input.LA(1) ) {
-            case 61:
+            case 60:
                 {
                 switch ( input.LA(2) ) {
-                case 47:
+                case 46:
                     {
                     int LA43_5 = input.LA(3);
 
-                    if ( (LA43_5==42) ) {
+                    if ( (LA43_5==41) ) {
                         alt43=1;
                     }
-                    else if ( (LA43_5==57) ) {
+                    else if ( (LA43_5==56) ) {
                         alt43=2;
                     }
                     else {
@@ -16707,12 +16722,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     }
                     break;
-                case 57:
+                case 56:
                     {
                     alt43=2;
                     }
                     break;
-                case 42:
+                case 41:
                     {
                     alt43=1;
                     }
@@ -16727,17 +16742,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 }
                 break;
-            case 47:
+            case 46:
                 {
                 switch ( input.LA(2) ) {
-                case 61:
+                case 60:
                     {
                     int LA43_6 = input.LA(3);
 
-                    if ( (LA43_6==57) ) {
+                    if ( (LA43_6==56) ) {
                         alt43=2;
                     }
-                    else if ( (LA43_6==42) ) {
+                    else if ( (LA43_6==41) ) {
                         alt43=1;
                     }
                     else {
@@ -16749,12 +16764,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     }
                     break;
-                case 57:
+                case 56:
                     {
                     alt43=2;
                     }
                     break;
-                case 42:
+                case 41:
                     {
                     alt43=1;
                     }
@@ -16769,12 +16784,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 }
                 break;
-            case 42:
+            case 41:
                 {
                 alt43=1;
                 }
                 break;
-            case 57:
+            case 56:
                 {
                 alt43=2;
                 }
@@ -16861,52 +16876,52 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:4909:1: ( ( 'abstract' ) | ( 'attribute' ) | ( 'body' ) | ( 'class' ) | ( 'composes' ) | ( 'datatype' ) | ( 'definition' ) | ( 'derived' ) | ( 'derivation' ) | ( 'enum' ) | ( 'extends' ) | ( 'id' ) | ( 'initial' ) | ( 'interface' ) | ( 'literal' ) | ( 'operation' ) | ( 'ordered' ) | ( 'primitive' ) | ( 'property' ) | ( 'readonly' ) | ( 'resolve' ) | ( 'serializable' ) | ( 'static' ) | ( 'throws' ) | ( 'transient' ) | ( 'unique' ) | ( 'unsettable' ) | ( 'volatile' ) )
             int alt44=28;
             switch ( input.LA(1) ) {
-            case 41:
+            case 19:
                 {
                 alt44=1;
                 }
                 break;
-            case 42:
+            case 41:
                 {
                 alt44=2;
                 }
                 break;
-            case 43:
+            case 42:
                 {
                 alt44=3;
                 }
                 break;
-            case 44:
+            case 43:
                 {
                 alt44=4;
                 }
                 break;
-            case 45:
+            case 44:
                 {
                 alt44=5;
                 }
                 break;
-            case 46:
+            case 45:
                 {
                 alt44=6;
                 }
                 break;
-            case 47:
+            case 46:
                 {
                 alt44=7;
                 }
                 break;
-            case 48:
+            case 47:
                 {
                 alt44=8;
                 }
                 break;
-            case 49:
+            case 48:
                 {
                 alt44=9;
                 }
                 break;
-            case 50:
+            case 49:
                 {
                 alt44=10;
                 }
@@ -16916,32 +16931,32 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 alt44=11;
                 }
                 break;
-            case 51:
+            case 50:
                 {
                 alt44=12;
                 }
                 break;
-            case 52:
+            case 51:
                 {
                 alt44=13;
                 }
                 break;
-            case 53:
+            case 52:
                 {
                 alt44=14;
                 }
                 break;
-            case 54:
+            case 53:
                 {
                 alt44=15;
                 }
                 break;
-            case 55:
+            case 54:
                 {
                 alt44=16;
                 }
                 break;
-            case 56:
+            case 55:
                 {
                 alt44=17;
                 }
@@ -16951,52 +16966,52 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 alt44=18;
                 }
                 break;
-            case 57:
+            case 56:
                 {
                 alt44=19;
                 }
                 break;
-            case 58:
+            case 57:
                 {
                 alt44=20;
                 }
                 break;
-            case 59:
+            case 58:
                 {
                 alt44=21;
                 }
                 break;
-            case 60:
+            case 59:
                 {
                 alt44=22;
                 }
                 break;
-            case 61:
+            case 60:
                 {
                 alt44=23;
                 }
                 break;
-            case 62:
+            case 61:
                 {
                 alt44=24;
                 }
                 break;
-            case 63:
+            case 62:
                 {
                 alt44=25;
                 }
                 break;
-            case 64:
+            case 63:
                 {
                 alt44=26;
                 }
                 break;
-            case 65:
+            case 64:
                 {
                 alt44=27;
                 }
                 break;
-            case 66:
+            case 65:
                 {
                 alt44=28;
                 }
@@ -17019,7 +17034,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAbstractKeyword_0());
                     }
-                    match(input,41,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,19,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAbstractKeyword_0());
                     }
@@ -17038,7 +17053,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAttributeKeyword_1());
                     }
-                    match(input,42,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,41,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getAttributeKeyword_1());
                     }
@@ -17057,7 +17072,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getBodyKeyword_2());
                     }
-                    match(input,43,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,42,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getBodyKeyword_2());
                     }
@@ -17076,7 +17091,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getClassKeyword_3());
                     }
-                    match(input,44,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,43,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getClassKeyword_3());
                     }
@@ -17095,7 +17110,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getComposesKeyword_4());
                     }
-                    match(input,45,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,44,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getComposesKeyword_4());
                     }
@@ -17114,7 +17129,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDatatypeKeyword_5());
                     }
-                    match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,45,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDatatypeKeyword_5());
                     }
@@ -17133,7 +17148,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDefinitionKeyword_6());
                     }
-                    match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDefinitionKeyword_6());
                     }
@@ -17152,7 +17167,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDerivedKeyword_7());
                     }
-                    match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDerivedKeyword_7());
                     }
@@ -17171,7 +17186,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDerivationKeyword_8());
                     }
-                    match(input,49,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getDerivationKeyword_8());
                     }
@@ -17190,7 +17205,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getEnumKeyword_9());
                     }
-                    match(input,50,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,49,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getEnumKeyword_9());
                     }
@@ -17228,7 +17243,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getIdKeyword_11());
                     }
-                    match(input,51,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,50,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getIdKeyword_11());
                     }
@@ -17247,7 +17262,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getInitialKeyword_12());
                     }
-                    match(input,52,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,51,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getInitialKeyword_12());
                     }
@@ -17266,7 +17281,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getInterfaceKeyword_13());
                     }
-                    match(input,53,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,52,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getInterfaceKeyword_13());
                     }
@@ -17285,7 +17300,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getLiteralKeyword_14());
                     }
-                    match(input,54,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,53,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getLiteralKeyword_14());
                     }
@@ -17304,7 +17319,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getOperationKeyword_15());
                     }
-                    match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,54,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getOperationKeyword_15());
                     }
@@ -17323,7 +17338,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getOrderedKeyword_16());
                     }
-                    match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getOrderedKeyword_16());
                     }
@@ -17361,7 +17376,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getPropertyKeyword_18());
                     }
-                    match(input,57,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getPropertyKeyword_18());
                     }
@@ -17380,7 +17395,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getReadonlyKeyword_19());
                     }
-                    match(input,58,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,57,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getReadonlyKeyword_19());
                     }
@@ -17399,7 +17414,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getResolveKeyword_20());
                     }
-                    match(input,59,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,58,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getResolveKeyword_20());
                     }
@@ -17418,7 +17433,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getSerializableKeyword_21());
                     }
-                    match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,59,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getSerializableKeyword_21());
                     }
@@ -17437,7 +17452,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getStaticKeyword_22());
                     }
-                    match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getStaticKeyword_22());
                     }
@@ -17456,7 +17471,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getThrowsKeyword_23());
                     }
-                    match(input,62,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getThrowsKeyword_23());
                     }
@@ -17475,7 +17490,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getTransientKeyword_24());
                     }
-                    match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,62,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getTransientKeyword_24());
                     }
@@ -17494,7 +17509,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getUniqueKeyword_25());
                     }
-                    match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getUniqueKeyword_25());
                     }
@@ -17513,7 +17528,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getUnsettableKeyword_26());
                     }
-                    match(input,65,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getUnsettableKeyword_26());
                     }
@@ -17532,7 +17547,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getQVTbaseUnrestrictedNameAccess().getVolatileKeyword_27());
                     }
-                    match(input,66,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,65,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getQVTbaseUnrestrictedNameAccess().getVolatileKeyword_27());
                     }
@@ -17570,10 +17585,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt45=2;
             int LA45_0 = input.LA(1);
 
-            if ( (LA45_0==67) ) {
+            if ( (LA45_0==66) ) {
                 alt45=1;
             }
-            else if ( (LA45_0==68) ) {
+            else if ( (LA45_0==67) ) {
                 alt45=2;
             }
             else {
@@ -17593,7 +17608,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLUnaryOperatorNameAccess().getHyphenMinusKeyword_0());
                     }
-                    match(input,67,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,66,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLUnaryOperatorNameAccess().getHyphenMinusKeyword_0());
                     }
@@ -17612,7 +17627,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLUnaryOperatorNameAccess().getNotKeyword_1());
                     }
-                    match(input,68,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,67,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLUnaryOperatorNameAccess().getNotKeyword_1());
                     }
@@ -17649,72 +17664,72 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:5170:1: ( ( '*' ) | ( '/' ) | ( '+' ) | ( '-' ) | ( '>' ) | ( '<' ) | ( '>=' ) | ( '<=' ) | ( '=' ) | ( '<>' ) | ( 'and' ) | ( 'or' ) | ( 'xor' ) | ( 'implies' ) )
             int alt46=14;
             switch ( input.LA(1) ) {
-            case 69:
+            case 68:
                 {
                 alt46=1;
                 }
                 break;
-            case 70:
+            case 69:
                 {
                 alt46=2;
                 }
                 break;
-            case 71:
+            case 70:
                 {
                 alt46=3;
                 }
                 break;
-            case 67:
+            case 66:
                 {
                 alt46=4;
                 }
                 break;
-            case 72:
+            case 71:
                 {
                 alt46=5;
                 }
                 break;
-            case 73:
+            case 72:
                 {
                 alt46=6;
                 }
                 break;
-            case 74:
+            case 73:
                 {
                 alt46=7;
                 }
                 break;
-            case 75:
+            case 74:
                 {
                 alt46=8;
                 }
                 break;
-            case 76:
+            case 75:
                 {
                 alt46=9;
                 }
                 break;
-            case 77:
+            case 76:
                 {
                 alt46=10;
                 }
                 break;
-            case 78:
+            case 77:
                 {
                 alt46=11;
                 }
                 break;
-            case 79:
+            case 78:
                 {
                 alt46=12;
                 }
                 break;
-            case 80:
+            case 79:
                 {
                 alt46=13;
                 }
                 break;
-            case 81:
+            case 80:
                 {
                 alt46=14;
                 }
@@ -17737,7 +17752,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getAsteriskKeyword_0());
                     }
-                    match(input,69,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,68,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getAsteriskKeyword_0());
                     }
@@ -17756,7 +17771,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getSolidusKeyword_1());
                     }
-                    match(input,70,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,69,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getSolidusKeyword_1());
                     }
@@ -17775,7 +17790,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getPlusSignKeyword_2());
                     }
-                    match(input,71,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,70,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getPlusSignKeyword_2());
                     }
@@ -17794,7 +17809,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getHyphenMinusKeyword_3());
                     }
-                    match(input,67,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,66,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getHyphenMinusKeyword_3());
                     }
@@ -17813,7 +17828,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getGreaterThanSignKeyword_4());
                     }
-                    match(input,72,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,71,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getGreaterThanSignKeyword_4());
                     }
@@ -17832,7 +17847,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getLessThanSignKeyword_5());
                     }
-                    match(input,73,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,72,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getLessThanSignKeyword_5());
                     }
@@ -17851,7 +17866,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getGreaterThanSignEqualsSignKeyword_6());
                     }
-                    match(input,74,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,73,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getGreaterThanSignEqualsSignKeyword_6());
                     }
@@ -17870,7 +17885,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getLessThanSignEqualsSignKeyword_7());
                     }
-                    match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,74,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getLessThanSignEqualsSignKeyword_7());
                     }
@@ -17889,7 +17904,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getEqualsSignKeyword_8());
                     }
-                    match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getEqualsSignKeyword_8());
                     }
@@ -17908,7 +17923,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getLessThanSignGreaterThanSignKeyword_9());
                     }
-                    match(input,77,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getLessThanSignGreaterThanSignKeyword_9());
                     }
@@ -17927,7 +17942,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getAndKeyword_10());
                     }
-                    match(input,78,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,77,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getAndKeyword_10());
                     }
@@ -17946,7 +17961,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getOrKeyword_11());
                     }
-                    match(input,79,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,78,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getOrKeyword_11());
                     }
@@ -17965,7 +17980,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getXorKeyword_12());
                     }
-                    match(input,80,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,79,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getXorKeyword_12());
                     }
@@ -17984,7 +17999,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getImpliesKeyword_13());
                     }
-                    match(input,81,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,80,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLInfixOperatorNameAccess().getImpliesKeyword_13());
                     }
@@ -18021,22 +18036,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:5292:1: ( ( '.' ) | ( '->' ) | ( '?.' ) | ( '?->' ) )
             int alt47=4;
             switch ( input.LA(1) ) {
-            case 82:
+            case 81:
                 {
                 alt47=1;
                 }
                 break;
-            case 83:
+            case 82:
                 {
                 alt47=2;
                 }
                 break;
-            case 84:
+            case 83:
                 {
                 alt47=3;
                 }
                 break;
-            case 85:
+            case 84:
                 {
                 alt47=4;
                 }
@@ -18059,7 +18074,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getFullStopKeyword_0());
                     }
-                    match(input,82,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,81,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getFullStopKeyword_0());
                     }
@@ -18078,7 +18093,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getHyphenMinusGreaterThanSignKeyword_1());
                     }
-                    match(input,83,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,82,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getHyphenMinusGreaterThanSignKeyword_1());
                     }
@@ -18097,7 +18112,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getQuestionMarkFullStopKeyword_2());
                     }
-                    match(input,84,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,83,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getQuestionMarkFullStopKeyword_2());
                     }
@@ -18116,7 +18131,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getQuestionMarkHyphenMinusGreaterThanSignKeyword_3());
                     }
-                    match(input,85,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,84,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLNavigationOperatorNameAccess().getQuestionMarkHyphenMinusGreaterThanSignKeyword_3());
                     }
@@ -18154,10 +18169,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt48=2;
             int LA48_0 = input.LA(1);
 
-            if ( (LA48_0==67||(LA48_0>=69 && LA48_0<=81)) ) {
+            if ( (LA48_0==66||(LA48_0>=68 && LA48_0<=80)) ) {
                 alt48=1;
             }
-            else if ( ((LA48_0>=82 && LA48_0<=85)) ) {
+            else if ( ((LA48_0>=81 && LA48_0<=84)) ) {
                 alt48=2;
             }
             else {
@@ -18290,20 +18305,20 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             case 63:
             case 64:
             case 65:
-            case 66:
                 {
                 alt49=1;
                 }
                 break;
+            case 95:
             case 96:
             case 97:
             case 98:
             case 99:
-            case 100:
                 {
                 alt49=2;
                 }
                 break;
+            case 87:
             case 88:
             case 89:
             case 90:
@@ -18311,17 +18326,16 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             case 92:
             case 93:
             case 94:
-            case 95:
                 {
                 alt49=3;
                 }
                 break;
-            case 86:
+            case 85:
                 {
                 alt49=4;
                 }
                 break;
-            case 87:
+            case 86:
                 {
                 alt49=5;
                 }
@@ -18413,7 +18427,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLUnreservedNameAccess().getMapKeyword_3());
                     }
-                    match(input,86,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,85,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLUnreservedNameAccess().getMapKeyword_3());
                     }
@@ -18432,7 +18446,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEssentialOCLUnreservedNameAccess().getTupleKeyword_4());
                     }
-                    match(input,87,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,86,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEssentialOCLUnreservedNameAccess().getTupleKeyword_4());
                     }
@@ -18470,7 +18484,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt50=2;
             int LA50_0 = input.LA(1);
 
-            if ( ((LA50_0>=RULE_SIMPLE_ID && LA50_0<=RULE_ESCAPED_ID)||(LA50_0>=18 && LA50_0<=39)||(LA50_0>=41 && LA50_0<=66)) ) {
+            if ( ((LA50_0>=RULE_SIMPLE_ID && LA50_0<=RULE_ESCAPED_ID)||(LA50_0>=18 && LA50_0<=39)||(LA50_0>=41 && LA50_0<=65)) ) {
                 alt50=1;
             }
             else if ( (LA50_0==RULE_SINGLE_QUOTED_STRING) ) {
@@ -18569,42 +18583,42 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:5422:1: ( ( 'Boolean' ) | ( 'Integer' ) | ( 'Real' ) | ( 'String' ) | ( 'UnlimitedNatural' ) | ( 'OclAny' ) | ( 'OclInvalid' ) | ( 'OclVoid' ) )
             int alt51=8;
             switch ( input.LA(1) ) {
-            case 88:
+            case 87:
                 {
                 alt51=1;
                 }
                 break;
-            case 89:
+            case 88:
                 {
                 alt51=2;
                 }
                 break;
-            case 90:
+            case 89:
                 {
                 alt51=3;
                 }
                 break;
-            case 91:
+            case 90:
                 {
                 alt51=4;
                 }
                 break;
-            case 92:
+            case 91:
                 {
                 alt51=5;
                 }
                 break;
-            case 93:
+            case 92:
                 {
                 alt51=6;
                 }
                 break;
-            case 94:
+            case 93:
                 {
                 alt51=7;
                 }
                 break;
-            case 95:
+            case 94:
                 {
                 alt51=8;
                 }
@@ -18627,7 +18641,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getBooleanKeyword_0());
                     }
-                    match(input,88,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,87,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getBooleanKeyword_0());
                     }
@@ -18646,7 +18660,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getIntegerKeyword_1());
                     }
-                    match(input,89,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,88,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getIntegerKeyword_1());
                     }
@@ -18665,7 +18679,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getRealKeyword_2());
                     }
-                    match(input,90,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,89,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getRealKeyword_2());
                     }
@@ -18684,7 +18698,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getStringKeyword_3());
                     }
-                    match(input,91,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,90,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getStringKeyword_3());
                     }
@@ -18703,7 +18717,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getUnlimitedNaturalKeyword_4());
                     }
-                    match(input,92,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,91,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getUnlimitedNaturalKeyword_4());
                     }
@@ -18722,7 +18736,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclAnyKeyword_5());
                     }
-                    match(input,93,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,92,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclAnyKeyword_5());
                     }
@@ -18741,7 +18755,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclInvalidKeyword_6());
                     }
-                    match(input,94,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,93,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclInvalidKeyword_6());
                     }
@@ -18760,7 +18774,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclVoidKeyword_7());
                     }
-                    match(input,95,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,94,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclVoidKeyword_7());
                     }
@@ -18797,27 +18811,27 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:5496:1: ( ( 'Set' ) | ( 'Bag' ) | ( 'Sequence' ) | ( 'Collection' ) | ( 'OrderedSet' ) )
             int alt52=5;
             switch ( input.LA(1) ) {
-            case 96:
+            case 95:
                 {
                 alt52=1;
                 }
                 break;
-            case 97:
+            case 96:
                 {
                 alt52=2;
                 }
                 break;
-            case 98:
+            case 97:
                 {
                 alt52=3;
                 }
                 break;
-            case 99:
+            case 98:
                 {
                 alt52=4;
                 }
                 break;
-            case 100:
+            case 99:
                 {
                 alt52=5;
                 }
@@ -18840,7 +18854,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getCollectionTypeIdentifierAccess().getSetKeyword_0());
                     }
-                    match(input,96,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,95,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getCollectionTypeIdentifierAccess().getSetKeyword_0());
                     }
@@ -18859,7 +18873,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getCollectionTypeIdentifierAccess().getBagKeyword_1());
                     }
-                    match(input,97,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,96,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getCollectionTypeIdentifierAccess().getBagKeyword_1());
                     }
@@ -18878,7 +18892,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getCollectionTypeIdentifierAccess().getSequenceKeyword_2());
                     }
-                    match(input,98,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,97,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getCollectionTypeIdentifierAccess().getSequenceKeyword_2());
                     }
@@ -18897,7 +18911,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getCollectionTypeIdentifierAccess().getCollectionKeyword_3());
                     }
-                    match(input,99,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,98,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getCollectionTypeIdentifierAccess().getCollectionKeyword_3());
                     }
@@ -18916,7 +18930,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getCollectionTypeIdentifierAccess().getOrderedSetKeyword_4());
                     }
-                    match(input,100,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,99,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getCollectionTypeIdentifierAccess().getOrderedSetKeyword_4());
                     }
@@ -19040,7 +19054,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt54=2;
             int LA54_0 = input.LA(1);
 
-            if ( ((LA54_0>=RULE_SIMPLE_ID && LA54_0<=RULE_ESCAPED_ID)||(LA54_0>=18 && LA54_0<=39)||(LA54_0>=41 && LA54_0<=66)) ) {
+            if ( ((LA54_0>=RULE_SIMPLE_ID && LA54_0<=RULE_ESCAPED_ID)||(LA54_0>=18 && LA54_0<=39)||(LA54_0>=41 && LA54_0<=65)) ) {
                 alt54=1;
             }
             else if ( (LA54_0==RULE_SINGLE_QUOTED_STRING) ) {
@@ -19223,23 +19237,23 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 alt56=2;
                 }
                 break;
+            case 138:
             case 139:
-            case 140:
                 {
                 alt56=3;
                 }
                 break;
-            case 69:
+            case 68:
                 {
                 alt56=4;
                 }
                 break;
-            case 115:
+            case 114:
                 {
                 alt56=5;
                 }
                 break;
-            case 116:
+            case 115:
                 {
                 alt56=6;
                 }
@@ -19419,10 +19433,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt57=2;
             int LA57_0 = input.LA(1);
 
-            if ( (LA57_0==139) ) {
+            if ( (LA57_0==138) ) {
                 alt57=1;
             }
-            else if ( (LA57_0==140) ) {
+            else if ( (LA57_0==139) ) {
                 alt57=2;
             }
             else {
@@ -19518,6 +19532,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:5680:1: ( ( rulePrimitiveTypeCS ) | ( ruleCollectionTypeCS ) | ( ruleMapTypeCS ) | ( ruleTupleTypeCS ) )
             int alt58=4;
             switch ( input.LA(1) ) {
+            case 87:
             case 88:
             case 89:
             case 90:
@@ -19525,26 +19540,25 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             case 92:
             case 93:
             case 94:
-            case 95:
                 {
                 alt58=1;
                 }
                 break;
+            case 95:
             case 96:
             case 97:
             case 98:
             case 99:
-            case 100:
                 {
                 alt58=2;
                 }
                 break;
-            case 86:
+            case 85:
                 {
                 alt58=3;
                 }
                 break;
-            case 87:
+            case 86:
                 {
                 alt58=4;
                 }
@@ -19855,10 +19869,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt61=2;
             int LA61_0 = input.LA(1);
 
-            if ( ((LA61_0>=67 && LA61_0<=68)) ) {
+            if ( ((LA61_0>=66 && LA61_0<=67)) ) {
                 alt61=1;
             }
-            else if ( (LA61_0==126) ) {
+            else if ( (LA61_0==125) ) {
                 alt61=2;
             }
             else {
@@ -19949,10 +19963,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt62=2;
             int LA62_0 = input.LA(1);
 
-            if ( ((LA62_0>=67 && LA62_0<=68)) ) {
+            if ( ((LA62_0>=66 && LA62_0<=67)) ) {
                 alt62=1;
             }
-            else if ( ((LA62_0>=RULE_INT && LA62_0<=RULE_ESCAPED_ID)||(LA62_0>=18 && LA62_0<=39)||(LA62_0>=41 && LA62_0<=66)||LA62_0==69||(LA62_0>=86 && LA62_0<=100)||LA62_0==108||LA62_0==113||(LA62_0>=115 && LA62_0<=116)||LA62_0==121||LA62_0==127||(LA62_0>=139 && LA62_0<=140)) ) {
+            else if ( ((LA62_0>=RULE_INT && LA62_0<=RULE_ESCAPED_ID)||(LA62_0>=18 && LA62_0<=39)||(LA62_0>=41 && LA62_0<=65)||LA62_0==68||(LA62_0>=85 && LA62_0<=99)||LA62_0==107||LA62_0==112||(LA62_0>=114 && LA62_0<=115)||LA62_0==120||LA62_0==126||(LA62_0>=138 && LA62_0<=139)) ) {
                 alt62=2;
             }
             else {
@@ -20301,10 +20315,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt64=2;
             int LA64_0 = input.LA(1);
 
-            if ( ((LA64_0>=RULE_INT && LA64_0<=RULE_ESCAPED_ID)||(LA64_0>=18 && LA64_0<=39)||(LA64_0>=41 && LA64_0<=69)||(LA64_0>=86 && LA64_0<=100)||LA64_0==108||LA64_0==113||(LA64_0>=115 && LA64_0<=116)||LA64_0==121||(LA64_0>=126 && LA64_0<=127)||(LA64_0>=139 && LA64_0<=140)) ) {
+            if ( ((LA64_0>=RULE_INT && LA64_0<=RULE_ESCAPED_ID)||(LA64_0>=18 && LA64_0<=39)||(LA64_0>=41 && LA64_0<=68)||(LA64_0>=85 && LA64_0<=99)||LA64_0==107||LA64_0==112||(LA64_0>=114 && LA64_0<=115)||LA64_0==120||(LA64_0>=125 && LA64_0<=126)||(LA64_0>=138 && LA64_0<=139)) ) {
                 alt64=1;
             }
-            else if ( (LA64_0==103) ) {
+            else if ( (LA64_0==102) ) {
                 alt64=2;
             }
             else {
@@ -20401,10 +20415,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt65=2;
             int LA65_0 = input.LA(1);
 
-            if ( (LA65_0==103) ) {
+            if ( (LA65_0==102) ) {
                 alt65=1;
             }
-            else if ( (LA65_0==120) ) {
+            else if ( (LA65_0==119) ) {
                 alt65=2;
             }
             else {
@@ -20501,10 +20515,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt66=2;
             int LA66_0 = input.LA(1);
 
-            if ( (LA66_0==103) ) {
+            if ( (LA66_0==102) ) {
                 alt66=1;
             }
-            else if ( (LA66_0==120) ) {
+            else if ( (LA66_0==119) ) {
                 alt66=2;
             }
             else {
@@ -20678,7 +20692,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( (LA68_0==RULE_INT) ) {
                 alt68=1;
             }
-            else if ( (LA68_0==69||LA68_0==71||LA68_0==102) ) {
+            else if ( (LA68_0==68||LA68_0==70||LA68_0==101) ) {
                 alt68=2;
             }
             else {
@@ -20763,10 +20777,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt69=2;
             int LA69_0 = input.LA(1);
 
-            if ( (LA69_0==101) ) {
+            if ( (LA69_0==100) ) {
                 alt69=1;
             }
-            else if ( (LA69_0==143) ) {
+            else if ( (LA69_0==142) ) {
                 alt69=2;
             }
             else {
@@ -20786,7 +20800,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicityCSAccess().getVerticalLineQuestionMarkKeyword_2_0());
                     }
-                    match(input,101,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,100,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicityCSAccess().getVerticalLineQuestionMarkKeyword_2_0());
                     }
@@ -20852,17 +20866,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:6012:1: ( ( '*' ) | ( '+' ) | ( '?' ) )
             int alt70=3;
             switch ( input.LA(1) ) {
-            case 69:
+            case 68:
                 {
                 alt70=1;
                 }
                 break;
-            case 71:
+            case 70:
                 {
                 alt70=2;
                 }
                 break;
-            case 102:
+            case 101:
                 {
                 alt70=3;
                 }
@@ -20885,7 +20899,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAsteriskKeyword_0_0());
                     }
-                    match(input,69,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,68,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAsteriskKeyword_0_0());
                     }
@@ -20904,7 +20918,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsPlusSignKeyword_0_1());
                     }
-                    match(input,71,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,70,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsPlusSignKeyword_0_1());
                     }
@@ -20923,7 +20937,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsQuestionMarkKeyword_0_2());
                     }
-                    match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,101,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsQuestionMarkKeyword_0_2());
                     }
@@ -20961,10 +20975,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt71=2;
             int LA71_0 = input.LA(1);
 
-            if ( ((LA71_0>=RULE_SIMPLE_ID && LA71_0<=RULE_ESCAPED_ID)||(LA71_0>=18 && LA71_0<=39)||(LA71_0>=41 && LA71_0<=66)||(LA71_0>=88 && LA71_0<=100)) ) {
+            if ( ((LA71_0>=RULE_SIMPLE_ID && LA71_0<=RULE_ESCAPED_ID)||(LA71_0>=18 && LA71_0<=39)||(LA71_0>=41 && LA71_0<=65)||(LA71_0>=87 && LA71_0<=99)) ) {
                 alt71=1;
             }
-            else if ( (LA71_0==102) ) {
+            else if ( (LA71_0==101) ) {
                 alt71=2;
             }
             else {
@@ -21132,7 +21146,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( (LA73_0==RULE_INT) ) {
                 alt73=1;
             }
-            else if ( (LA73_0==69) ) {
+            else if ( (LA73_0==68) ) {
                 alt73=2;
             }
             else {
@@ -21171,7 +21185,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getUPPERAccess().getAsteriskKeyword_1());
                     }
-                    match(input,69,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,68,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getUPPERAccess().getAsteriskKeyword_1());
                     }
@@ -21729,7 +21743,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt77=2;
             int LA77_0 = input.LA(1);
 
-            if ( (LA77_0==103) ) {
+            if ( (LA77_0==102) ) {
                 alt77=1;
             }
             switch (alt77) {
@@ -21829,7 +21843,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt78=2;
             int LA78_0 = input.LA(1);
 
-            if ( (LA78_0==76) ) {
+            if ( (LA78_0==75) ) {
                 alt78=1;
             }
             switch (alt78) {
@@ -22009,7 +22023,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPackageCSAccess().getColonKeyword_3_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedPackageCSAccess().getColonKeyword_3_0());
             }
@@ -22172,7 +22186,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPackageCSAccess().getEqualsSignKeyword_4_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedPackageCSAccess().getEqualsSignKeyword_4_0());
             }
@@ -22335,7 +22349,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPackageCSAccess().getLeftCurlyBracketKeyword_5_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedPackageCSAccess().getLeftCurlyBracketKeyword_5_0_0());
             }
@@ -22420,7 +22434,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt79=2;
                 int LA79_0 = input.LA(1);
 
-                if ( ((LA79_0>=31 && LA79_0<=32)||LA79_0==36||LA79_0==41||LA79_0==44||LA79_0==46||LA79_0==50) ) {
+                if ( (LA79_0==19||(LA79_0>=31 && LA79_0<=32)||LA79_0==36||LA79_0==43||LA79_0==45||LA79_0==49) ) {
                     alt79=1;
                 }
 
@@ -22516,7 +22530,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPackageCSAccess().getRightCurlyBracketKeyword_5_0_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedPackageCSAccess().getRightCurlyBracketKeyword_5_0_2());
             }
@@ -22599,7 +22613,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt80=2;
             int LA80_0 = input.LA(1);
 
-            if ( ((LA80_0>=RULE_SIMPLE_ID && LA80_0<=RULE_ESCAPED_ID)||(LA80_0>=18 && LA80_0<=39)||(LA80_0>=41 && LA80_0<=66)) ) {
+            if ( ((LA80_0>=RULE_SIMPLE_ID && LA80_0<=RULE_ESCAPED_ID)||(LA80_0>=18 && LA80_0<=39)||(LA80_0>=41 && LA80_0<=65)) ) {
                 alt80=1;
             }
             switch (alt80) {
@@ -22695,7 +22709,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTemplateCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTemplateCSAccess().getColonKeyword_1());
             }
@@ -22863,7 +22877,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTemplateCSAccess().getLeftCurlyBracketKeyword_3());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTemplateCSAccess().getLeftCurlyBracketKeyword_3());
             }
@@ -22946,7 +22960,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt81=2;
             int LA81_0 = input.LA(1);
 
-            if ( ((LA81_0>=RULE_SIMPLE_ID && LA81_0<=RULE_ESCAPED_ID)||(LA81_0>=18 && LA81_0<=39)||(LA81_0>=41 && LA81_0<=66)||LA81_0==103) ) {
+            if ( ((LA81_0>=RULE_SIMPLE_ID && LA81_0<=RULE_ESCAPED_ID)||(LA81_0>=18 && LA81_0<=39)||(LA81_0>=41 && LA81_0<=65)||LA81_0==102) ) {
                 alt81=1;
             }
             switch (alt81) {
@@ -23037,7 +23051,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_5());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_5());
             }
@@ -23211,7 +23225,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt82=2;
                 int LA82_0 = input.LA(1);
 
-                if ( (LA82_0==107) ) {
+                if ( (LA82_0==106) ) {
                     alt82=1;
                 }
 
@@ -23312,7 +23326,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTemplateCSAccess().getPlusSignPlusSignKeyword_4_2());
             }
-            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTemplateCSAccess().getPlusSignPlusSignKeyword_4_2());
             }
@@ -23475,7 +23489,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTemplateCSAccess().getCommaKeyword_4_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTemplateCSAccess().getCommaKeyword_4_1_0());
             }
@@ -23727,7 +23741,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefaultValueCSAccess().getEqualsSignKeyword_1());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDefaultValueCSAccess().getEqualsSignKeyword_1());
             }
@@ -23973,7 +23987,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt83=2;
             int LA83_0 = input.LA(1);
 
-            if ( ((LA83_0>=18 && LA83_0<=19)||LA83_0==23) ) {
+            if ( (LA83_0==18||LA83_0==20||LA83_0==23) ) {
                 alt83=1;
             }
             switch (alt83) {
@@ -24332,7 +24346,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt84=2;
                 int LA84_0 = input.LA(1);
 
-                if ( (LA84_0==107) ) {
+                if ( (LA84_0==106) ) {
                     alt84=1;
                 }
 
@@ -24707,7 +24721,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDomainCSAccess().getCommaKeyword_4_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDomainCSAccess().getCommaKeyword_4_0());
             }
@@ -25112,7 +25126,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDomainCSAccess().getLeftCurlyBracketKeyword_6_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDomainCSAccess().getLeftCurlyBracketKeyword_6_1());
             }
@@ -25223,7 +25237,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt87=2;
                 int LA87_0 = input.LA(1);
 
-                if ( ((LA87_0>=RULE_SIMPLE_ID && LA87_0<=RULE_ESCAPED_ID)||(LA87_0>=18 && LA87_0<=39)||(LA87_0>=41 && LA87_0<=66)) ) {
+                if ( ((LA87_0>=RULE_SIMPLE_ID && LA87_0<=RULE_ESCAPED_ID)||(LA87_0>=18 && LA87_0<=39)||(LA87_0>=41 && LA87_0<=65)) ) {
                     alt87=1;
                 }
 
@@ -25322,7 +25336,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDomainCSAccess().getRightCurlyBracketKeyword_6_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDomainCSAccess().getRightCurlyBracketKeyword_6_3());
             }
@@ -25569,7 +25583,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getLeftCurlyBracketKeyword_2());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getLeftCurlyBracketKeyword_2());
             }
@@ -25743,7 +25757,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt88=2;
                 int LA88_0 = input.LA(1);
 
-                if ( (LA88_0==107) ) {
+                if ( (LA88_0==106) ) {
                     alt88=1;
                 }
 
@@ -25844,7 +25858,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getRightCurlyBracketKeyword_5());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getRightCurlyBracketKeyword_5());
             }
@@ -26076,7 +26090,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_3_1_1());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_3_1_1());
             }
@@ -26239,7 +26253,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_3_1_3());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_3_1_3());
             }
@@ -26318,7 +26332,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getCommaKeyword_4_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getCommaKeyword_4_0());
             }
@@ -26560,7 +26574,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_4_1_1_1());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getLeftParenthesisKeyword_4_1_1_1());
             }
@@ -26723,7 +26737,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_4_1_1_3());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyDeclCSAccess().getRightParenthesisKeyword_4_1_1_3());
             }
@@ -26891,7 +26905,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelDeclCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getModelDeclCSAccess().getColonKeyword_1());
             }
@@ -27154,7 +27168,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_2_1_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getModelDeclCSAccess().getLeftCurlyBracketKeyword_2_1_0());
             }
@@ -27328,7 +27342,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt90=2;
                 int LA90_0 = input.LA(1);
 
-                if ( (LA90_0==107) ) {
+                if ( (LA90_0==106) ) {
                     alt90=1;
                 }
 
@@ -27424,7 +27438,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_2_1_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getModelDeclCSAccess().getRightCurlyBracketKeyword_2_1_3());
             }
@@ -27503,7 +27517,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelDeclCSAccess().getCommaKeyword_2_1_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getModelDeclCSAccess().getCommaKeyword_2_1_2_0());
             }
@@ -27930,7 +27944,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelDeclCSAccess().getCommaKeyword_3_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getModelDeclCSAccess().getCommaKeyword_3_2_0());
             }
@@ -28097,7 +28111,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt92=2;
             int LA92_0 = input.LA(1);
 
-            if ( ((LA92_0>=RULE_SIMPLE_ID && LA92_0<=RULE_ESCAPED_ID)||(LA92_0>=18 && LA92_0<=39)||(LA92_0>=41 && LA92_0<=66)) ) {
+            if ( ((LA92_0>=RULE_SIMPLE_ID && LA92_0<=RULE_ESCAPED_ID)||(LA92_0>=18 && LA92_0<=39)||(LA92_0>=41 && LA92_0<=65)) ) {
                 alt92=1;
             }
             switch (alt92) {
@@ -28193,7 +28207,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectTemplateCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectTemplateCSAccess().getColonKeyword_1());
             }
@@ -28361,7 +28375,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectTemplateCSAccess().getLeftCurlyBracketKeyword_3());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectTemplateCSAccess().getLeftCurlyBracketKeyword_3());
             }
@@ -28444,7 +28458,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt93=2;
             int LA93_0 = input.LA(1);
 
-            if ( ((LA93_0>=RULE_SIMPLE_ID && LA93_0<=RULE_ESCAPED_ID)||(LA93_0>=18 && LA93_0<=39)||(LA93_0>=41 && LA93_0<=66)) ) {
+            if ( ((LA93_0>=RULE_SIMPLE_ID && LA93_0<=RULE_ESCAPED_ID)||(LA93_0>=18 && LA93_0<=39)||(LA93_0>=41 && LA93_0<=65)) ) {
                 alt93=1;
             }
             switch (alt93) {
@@ -28535,7 +28549,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectTemplateCSAccess().getRightCurlyBracketKeyword_5());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectTemplateCSAccess().getRightCurlyBracketKeyword_5());
             }
@@ -28704,7 +28718,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt94=2;
                 int LA94_0 = input.LA(1);
 
-                if ( (LA94_0==107) ) {
+                if ( (LA94_0==106) ) {
                     alt94=1;
                 }
 
@@ -28805,7 +28819,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectTemplateCSAccess().getCommaKeyword_4_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectTemplateCSAccess().getCommaKeyword_4_1_0());
             }
@@ -29057,7 +29071,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParamDeclarationCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParamDeclarationCSAccess().getColonKeyword_1());
             }
@@ -29636,7 +29650,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt95=2;
                 int LA95_0 = input.LA(1);
 
-                if ( (LA95_0==107) ) {
+                if ( (LA95_0==106) ) {
                     alt95=1;
                 }
 
@@ -29811,7 +29825,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrimitiveTypeDomainCSAccess().getCommaKeyword_3_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPrimitiveTypeDomainCSAccess().getCommaKeyword_3_0());
             }
@@ -30063,7 +30077,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPrimitiveTypeDomainPatternCSAccess().getColonKeyword_1());
             }
@@ -30315,7 +30329,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyTemplateCSAccess().getEqualsSignKeyword_1());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPropertyTemplateCSAccess().getEqualsSignKeyword_1());
             }
@@ -30557,7 +30571,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyTemplateCSAccess().getLeftParenthesisKeyword_0_1_1());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPropertyTemplateCSAccess().getLeftParenthesisKeyword_0_1_1());
             }
@@ -30720,7 +30734,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyTemplateCSAccess().getRightParenthesisKeyword_0_1_3());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPropertyTemplateCSAccess().getRightParenthesisKeyword_0_1_3());
             }
@@ -30803,7 +30817,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt96=2;
             int LA96_0 = input.LA(1);
 
-            if ( (LA96_0==63) ) {
+            if ( (LA96_0==62) ) {
                 alt96=1;
             }
             switch (alt96) {
@@ -31067,7 +31081,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getLeftParenthesisKeyword_3());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getLeftParenthesisKeyword_3());
             }
@@ -31150,7 +31164,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt97=2;
             int LA97_0 = input.LA(1);
 
-            if ( ((LA97_0>=RULE_SIMPLE_ID && LA97_0<=RULE_ESCAPED_ID)||(LA97_0>=18 && LA97_0<=39)||(LA97_0>=41 && LA97_0<=66)) ) {
+            if ( ((LA97_0>=RULE_SIMPLE_ID && LA97_0<=RULE_ESCAPED_ID)||(LA97_0>=18 && LA97_0<=39)||(LA97_0>=41 && LA97_0<=65)) ) {
                 alt97=1;
             }
             switch (alt97) {
@@ -31246,7 +31260,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getRightParenthesisKeyword_5());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getRightParenthesisKeyword_5());
             }
@@ -31325,7 +31339,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getColonKeyword_6());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getColonKeyword_6());
             }
@@ -31667,7 +31681,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt98=2;
                 int LA98_0 = input.LA(1);
 
-                if ( (LA98_0==107) ) {
+                if ( (LA98_0==106) ) {
                     alt98=1;
                 }
 
@@ -31768,7 +31782,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getCommaKeyword_4_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getCommaKeyword_4_1_0());
             }
@@ -31931,7 +31945,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getLeftCurlyBracketKeyword_8_1_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getLeftCurlyBracketKeyword_8_1_0());
             }
@@ -32094,7 +32108,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getRightCurlyBracketKeyword_8_1_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getRightCurlyBracketKeyword_8_1_2());
             }
@@ -32258,34 +32272,34 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Group__1__Impl"
-    // InternalQVTrelation.g:10177:1: rule__RelationCS__Group__1__Impl : ( ( rule__RelationCS__IsDefaultAssignment_1 )? ) ;
+    // InternalQVTrelation.g:10177:1: rule__RelationCS__Group__1__Impl : ( ( rule__RelationCS__IsAbstractAssignment_1 )? ) ;
     public final void rule__RelationCS__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:10181:1: ( ( ( rule__RelationCS__IsDefaultAssignment_1 )? ) )
-            // InternalQVTrelation.g:10182:1: ( ( rule__RelationCS__IsDefaultAssignment_1 )? )
+            // InternalQVTrelation.g:10181:1: ( ( ( rule__RelationCS__IsAbstractAssignment_1 )? ) )
+            // InternalQVTrelation.g:10182:1: ( ( rule__RelationCS__IsAbstractAssignment_1 )? )
             {
-            // InternalQVTrelation.g:10182:1: ( ( rule__RelationCS__IsDefaultAssignment_1 )? )
-            // InternalQVTrelation.g:10183:1: ( rule__RelationCS__IsDefaultAssignment_1 )?
+            // InternalQVTrelation.g:10182:1: ( ( rule__RelationCS__IsAbstractAssignment_1 )? )
+            // InternalQVTrelation.g:10183:1: ( rule__RelationCS__IsAbstractAssignment_1 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1());
+               before(grammarAccess.getRelationCSAccess().getIsAbstractAssignment_1());
             }
-            // InternalQVTrelation.g:10184:1: ( rule__RelationCS__IsDefaultAssignment_1 )?
+            // InternalQVTrelation.g:10184:1: ( rule__RelationCS__IsAbstractAssignment_1 )?
             int alt100=2;
             int LA100_0 = input.LA(1);
 
-            if ( (LA100_0==20) ) {
+            if ( (LA100_0==19) ) {
                 alt100=1;
             }
             switch (alt100) {
                 case 1 :
-                    // InternalQVTrelation.g:10184:2: rule__RelationCS__IsDefaultAssignment_1
+                    // InternalQVTrelation.g:10184:2: rule__RelationCS__IsAbstractAssignment_1
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
-                    rule__RelationCS__IsDefaultAssignment_1();
+                    rule__RelationCS__IsAbstractAssignment_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -32296,7 +32310,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getIsDefaultAssignment_1());
+               after(grammarAccess.getRelationCSAccess().getIsAbstractAssignment_1());
             }
 
             }
@@ -32641,7 +32655,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRelationCSAccess().getLeftCurlyBracketKeyword_5());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRelationCSAccess().getLeftCurlyBracketKeyword_5());
             }
@@ -32725,11 +32739,11 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             do {
                 int alt102=2;
                 switch ( input.LA(1) ) {
-                case 19:
+                case 20:
                     {
                     int LA102_1 = input.LA(2);
 
-                    if ( (LA102_1==17||LA102_1==76||LA102_1==103||LA102_1==107) ) {
+                    if ( (LA102_1==17||LA102_1==75||LA102_1==102||LA102_1==106) ) {
                         alt102=1;
                     }
 
@@ -32740,7 +32754,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     {
                     int LA102_2 = input.LA(2);
 
-                    if ( (LA102_2==17||LA102_2==76||LA102_2==103||LA102_2==107) ) {
+                    if ( (LA102_2==17||LA102_2==75||LA102_2==102||LA102_2==106) ) {
                         alt102=1;
                     }
 
@@ -32751,7 +32765,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     {
                     int LA102_3 = input.LA(2);
 
-                    if ( (LA102_3==17||LA102_3==76||LA102_3==103||LA102_3==107) ) {
+                    if ( (LA102_3==17||LA102_3==75||LA102_3==102||LA102_3==106) ) {
                         alt102=1;
                     }
 
@@ -32762,7 +32776,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     {
                     int LA102_4 = input.LA(2);
 
-                    if ( (LA102_4==17||LA102_4==76||LA102_4==103||LA102_4==107) ) {
+                    if ( (LA102_4==17||LA102_4==75||LA102_4==102||LA102_4==106) ) {
                         alt102=1;
                     }
 
@@ -32773,7 +32787,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     {
                     int LA102_5 = input.LA(2);
 
-                    if ( (LA102_5==17||LA102_5==76||LA102_5==103||LA102_5==107) ) {
+                    if ( (LA102_5==17||LA102_5==75||LA102_5==102||LA102_5==106) ) {
                         alt102=1;
                     }
 
@@ -32782,7 +32796,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     break;
                 case RULE_SIMPLE_ID:
                 case RULE_ESCAPED_ID:
-                case 20:
+                case 19:
                 case 21:
                 case 24:
                 case 25:
@@ -32824,7 +32838,6 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 case 63:
                 case 64:
                 case 65:
-                case 66:
                     {
                     alt102=1;
                     }
@@ -32960,7 +32973,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt103=2;
                 int LA103_0 = input.LA(1);
 
-                if ( ((LA103_0>=18 && LA103_0<=19)||(LA103_0>=22 && LA103_0<=23)||LA103_0==32) ) {
+                if ( (LA103_0==18||LA103_0==20||(LA103_0>=22 && LA103_0<=23)||LA103_0==32) ) {
                     alt103=1;
                 }
 
@@ -33259,7 +33272,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRelationCSAccess().getRightCurlyBracketKeyword_10());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRelationCSAccess().getRightCurlyBracketKeyword_10());
             }
@@ -33590,7 +33603,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getScopeNameCSAccess().getColonColonKeyword_1());
             }
-            match(input,110,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getScopeNameCSAccess().getColonColonKeyword_1());
             }
@@ -33849,7 +33862,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getScopeNameCSAccess().getColonColonKeyword_2_1());
             }
-            match(input,110,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getScopeNameCSAccess().getColonColonKeyword_2_1());
             }
@@ -34016,7 +34029,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt107=2;
             int LA107_0 = input.LA(1);
 
-            if ( (LA107_0==104) ) {
+            if ( (LA107_0==103) ) {
                 alt107=1;
             }
             switch (alt107) {
@@ -34112,7 +34125,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateCSAccess().getLeftCurlyBracketKeyword_1_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTemplateCSAccess().getLeftCurlyBracketKeyword_1_0());
             }
@@ -34275,7 +34288,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateCSAccess().getRightCurlyBracketKeyword_1_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTemplateCSAccess().getRightCurlyBracketKeyword_1_2());
             }
@@ -34618,7 +34631,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getLeftParenthesisKeyword_3());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTransformationCSAccess().getLeftParenthesisKeyword_3());
             }
@@ -34792,7 +34805,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt109=2;
                 int LA109_0 = input.LA(1);
 
-                if ( (LA109_0==107) ) {
+                if ( (LA109_0==106) ) {
                     alt109=1;
                 }
 
@@ -34893,7 +34906,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getRightParenthesisKeyword_6());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTransformationCSAccess().getRightParenthesisKeyword_6());
             }
@@ -35072,7 +35085,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getLeftCurlyBracketKeyword_8());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTransformationCSAccess().getLeftCurlyBracketKeyword_8());
             }
@@ -35264,7 +35277,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt112=2;
                 int LA112_0 = input.LA(1);
 
-                if ( (LA112_0==20||(LA112_0>=33 && LA112_0<=35)||LA112_0==63) ) {
+                if ( (LA112_0==19||(LA112_0>=33 && LA112_0<=35)||LA112_0==62) ) {
                     alt112=1;
                 }
 
@@ -35360,7 +35373,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_11());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_11());
             }
@@ -35439,7 +35452,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getCommaKeyword_5_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTransformationCSAccess().getCommaKeyword_5_0());
             }
@@ -35771,7 +35784,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt113=2;
                 int LA113_0 = input.LA(1);
 
-                if ( (LA113_0==107) ) {
+                if ( (LA113_0==106) ) {
                     alt113=1;
                 }
 
@@ -35872,7 +35885,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getCommaKeyword_7_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTransformationCSAccess().getCommaKeyword_7_2_0());
             }
@@ -36303,7 +36316,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt115=2;
             int LA115_0 = input.LA(1);
 
-            if ( (LA115_0==110) ) {
+            if ( (LA115_0==109) ) {
                 alt115=1;
             }
             switch (alt115) {
@@ -36557,7 +36570,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitCSAccess().getColonKeyword_1_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitCSAccess().getColonKeyword_1_1());
             }
@@ -36636,7 +36649,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitCSAccess().getColonColonKeyword_3_0());
             }
-            match(input,110,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitCSAccess().getColonColonKeyword_3_0());
             }
@@ -36894,7 +36907,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt116=2;
                 int LA116_0 = input.LA(1);
 
-                if ( (LA116_0==107) ) {
+                if ( (LA116_0==106) ) {
                     alt116=1;
                 }
 
@@ -36999,7 +37012,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt117=2;
             int LA117_0 = input.LA(1);
 
-            if ( (LA117_0==103) ) {
+            if ( (LA117_0==102) ) {
                 alt117=1;
             }
             switch (alt117) {
@@ -37099,7 +37112,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt118=2;
             int LA118_0 = input.LA(1);
 
-            if ( (LA118_0==76) ) {
+            if ( (LA118_0==75) ) {
                 alt118=1;
             }
             switch (alt118) {
@@ -37269,7 +37282,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVarDeclarationCSAccess().getCommaKeyword_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVarDeclarationCSAccess().getCommaKeyword_1_0());
             }
@@ -37432,7 +37445,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVarDeclarationCSAccess().getColonKeyword_2_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVarDeclarationCSAccess().getColonKeyword_2_0());
             }
@@ -37595,7 +37608,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVarDeclarationCSAccess().getEqualsSignKeyword_3_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVarDeclarationCSAccess().getEqualsSignKeyword_3_0());
             }
@@ -37916,7 +37929,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWhenCSAccess().getLeftCurlyBracketKeyword_2());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWhenCSAccess().getLeftCurlyBracketKeyword_2());
             }
@@ -38001,7 +38014,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt119=2;
                 int LA119_0 = input.LA(1);
 
-                if ( ((LA119_0>=RULE_INT && LA119_0<=RULE_ESCAPED_ID)||(LA119_0>=18 && LA119_0<=39)||(LA119_0>=41 && LA119_0<=69)||(LA119_0>=86 && LA119_0<=100)||LA119_0==108||LA119_0==113||(LA119_0>=115 && LA119_0<=116)||LA119_0==121||(LA119_0>=126 && LA119_0<=127)||(LA119_0>=139 && LA119_0<=140)) ) {
+                if ( ((LA119_0>=RULE_INT && LA119_0<=RULE_ESCAPED_ID)||(LA119_0>=18 && LA119_0<=39)||(LA119_0>=41 && LA119_0<=68)||(LA119_0>=85 && LA119_0<=99)||LA119_0==107||LA119_0==112||(LA119_0>=114 && LA119_0<=115)||LA119_0==120||(LA119_0>=125 && LA119_0<=126)||(LA119_0>=138 && LA119_0<=139)) ) {
                     alt119=1;
                 }
 
@@ -38097,7 +38110,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWhenCSAccess().getRightCurlyBracketKeyword_4());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWhenCSAccess().getRightCurlyBracketKeyword_4());
             }
@@ -38334,7 +38347,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWhereCSAccess().getLeftCurlyBracketKeyword_2());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWhereCSAccess().getLeftCurlyBracketKeyword_2());
             }
@@ -38419,7 +38432,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt120=2;
                 int LA120_0 = input.LA(1);
 
-                if ( ((LA120_0>=RULE_INT && LA120_0<=RULE_ESCAPED_ID)||(LA120_0>=18 && LA120_0<=39)||(LA120_0>=41 && LA120_0<=69)||(LA120_0>=86 && LA120_0<=100)||LA120_0==108||LA120_0==113||(LA120_0>=115 && LA120_0<=116)||LA120_0==121||(LA120_0>=126 && LA120_0<=127)||(LA120_0>=139 && LA120_0<=140)) ) {
+                if ( ((LA120_0>=RULE_INT && LA120_0<=RULE_ESCAPED_ID)||(LA120_0>=18 && LA120_0<=39)||(LA120_0>=41 && LA120_0<=68)||(LA120_0>=85 && LA120_0<=99)||LA120_0==107||LA120_0==112||(LA120_0>=114 && LA120_0<=115)||LA120_0==120||(LA120_0>=125 && LA120_0<=126)||(LA120_0>=138 && LA120_0<=139)) ) {
                     alt120=1;
                 }
 
@@ -38515,7 +38528,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWhereCSAccess().getRightCurlyBracketKeyword_4());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWhereCSAccess().getRightCurlyBracketKeyword_4());
             }
@@ -39120,7 +39133,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt124=2;
             int LA124_0 = input.LA(1);
 
-            if ( (LA124_0==47||LA124_0==61) ) {
+            if ( (LA124_0==46||LA124_0==60) ) {
                 alt124=1;
             }
             switch (alt124) {
@@ -39216,7 +39229,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getAttributeKeyword_1());
             }
-            match(input,42,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,41,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getAttributeKeyword_1());
             }
@@ -39388,7 +39401,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt125=2;
             int LA125_0 = input.LA(1);
 
-            if ( (LA125_0==103) ) {
+            if ( (LA125_0==102) ) {
                 alt125=1;
             }
             switch (alt125) {
@@ -39488,7 +39501,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt126=2;
             int LA126_0 = input.LA(1);
 
-            if ( (LA126_0==76) ) {
+            if ( (LA126_0==75) ) {
                 alt126=1;
             }
             switch (alt126) {
@@ -39588,10 +39601,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt127=2;
             int LA127_0 = input.LA(1);
 
-            if ( (LA127_0==104) ) {
+            if ( (LA127_0==103) ) {
                 int LA127_1 = input.LA(2);
 
-                if ( (LA127_1==48||LA127_1==51||LA127_1==56||LA127_1==58||(LA127_1>=63 && LA127_1<=66)||(LA127_1>=129 && LA127_1<=136)) ) {
+                if ( (LA127_1==47||LA127_1==50||LA127_1==55||LA127_1==57||(LA127_1>=62 && LA127_1<=65)||(LA127_1>=128 && LA127_1<=135)) ) {
                     alt127=1;
                 }
             }
@@ -39860,7 +39873,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt128=2;
             int LA128_0 = input.LA(1);
 
-            if ( (LA128_0==47) ) {
+            if ( (LA128_0==46) ) {
                 alt128=1;
             }
             switch (alt128) {
@@ -40044,7 +40057,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt129=2;
             int LA129_0 = input.LA(1);
 
-            if ( (LA129_0==61) ) {
+            if ( (LA129_0==60) ) {
                 alt129=1;
             }
             switch (alt129) {
@@ -40140,7 +40153,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getColonKeyword_3_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getColonKeyword_3_0());
             }
@@ -40303,7 +40316,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getEqualsSignKeyword_4_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getEqualsSignKeyword_4_0());
             }
@@ -40466,7 +40479,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_5_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_5_0());
             }
@@ -40577,7 +40590,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt130=2;
                 int LA130_0 = input.LA(1);
 
-                if ( (LA130_0==48||LA130_0==51||LA130_0==56||LA130_0==58||(LA130_0>=63 && LA130_0<=66)||(LA130_0>=129 && LA130_0<=136)) ) {
+                if ( (LA130_0==47||LA130_0==50||LA130_0==55||LA130_0==57||(LA130_0>=62 && LA130_0<=65)||(LA130_0>=128 && LA130_0<=135)) ) {
                     alt130=1;
                 }
 
@@ -40676,7 +40689,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_5_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_5_2());
             }
@@ -40843,14 +40856,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt131=2;
             int LA131_0 = input.LA(1);
 
-            if ( (LA131_0==107) ) {
+            if ( (LA131_0==106) ) {
                 alt131=1;
             }
             switch (alt131) {
                 case 1 :
                     // InternalQVTrelation.g:13220:2: ','
                     {
-                    match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
                     }
                     break;
@@ -40935,7 +40948,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_6_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_6_0_0());
             }
@@ -41020,7 +41033,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt132=2;
                 int LA132_0 = input.LA(1);
 
-                if ( (LA132_0==49||LA132_0==52) ) {
+                if ( (LA132_0==48||LA132_0==51) ) {
                     alt132=1;
                 }
 
@@ -41116,7 +41129,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_6_0_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_6_0_2());
             }
@@ -41195,7 +41208,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0());
             }
-            match(input,52,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,51,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0());
             }
@@ -41278,7 +41291,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt133=2;
             int LA133_0 = input.LA(1);
 
-            if ( ((LA133_0>=RULE_SIMPLE_ID && LA133_0<=RULE_ESCAPED_ID)||(LA133_0>=18 && LA133_0<=39)||(LA133_0>=41 && LA133_0<=66)) ) {
+            if ( ((LA133_0>=RULE_SIMPLE_ID && LA133_0<=RULE_ESCAPED_ID)||(LA133_0>=18 && LA133_0<=39)||(LA133_0>=41 && LA133_0<=65)) ) {
                 alt133=1;
             }
             switch (alt133) {
@@ -41374,7 +41387,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2());
             }
@@ -41457,7 +41470,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt134=2;
             int LA134_0 = input.LA(1);
 
-            if ( ((LA134_0>=RULE_INT && LA134_0<=RULE_UNQUOTED_STRING)||(LA134_0>=18 && LA134_0<=39)||(LA134_0>=41 && LA134_0<=69)||(LA134_0>=86 && LA134_0<=100)||LA134_0==108||LA134_0==113||(LA134_0>=115 && LA134_0<=116)||LA134_0==121||(LA134_0>=126 && LA134_0<=127)||(LA134_0>=139 && LA134_0<=140)) ) {
+            if ( ((LA134_0>=RULE_INT && LA134_0<=RULE_UNQUOTED_STRING)||(LA134_0>=18 && LA134_0<=39)||(LA134_0>=41 && LA134_0<=68)||(LA134_0>=85 && LA134_0<=99)||LA134_0==107||LA134_0==112||(LA134_0>=114 && LA134_0<=115)||LA134_0==120||(LA134_0>=125 && LA134_0<=126)||(LA134_0>=138 && LA134_0<=139)) ) {
                 alt134=1;
             }
             switch (alt134) {
@@ -41627,7 +41640,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0());
             }
-            match(input,49,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0());
             }
@@ -41710,7 +41723,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt135=2;
             int LA135_0 = input.LA(1);
 
-            if ( ((LA135_0>=RULE_SIMPLE_ID && LA135_0<=RULE_ESCAPED_ID)||(LA135_0>=18 && LA135_0<=39)||(LA135_0>=41 && LA135_0<=66)) ) {
+            if ( ((LA135_0>=RULE_SIMPLE_ID && LA135_0<=RULE_ESCAPED_ID)||(LA135_0>=18 && LA135_0<=39)||(LA135_0>=41 && LA135_0<=65)) ) {
                 alt135=1;
             }
             switch (alt135) {
@@ -41806,7 +41819,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2());
             }
@@ -41889,7 +41902,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt136=2;
             int LA136_0 = input.LA(1);
 
-            if ( ((LA136_0>=RULE_INT && LA136_0<=RULE_UNQUOTED_STRING)||(LA136_0>=18 && LA136_0<=39)||(LA136_0>=41 && LA136_0<=69)||(LA136_0>=86 && LA136_0<=100)||LA136_0==108||LA136_0==113||(LA136_0>=115 && LA136_0<=116)||LA136_0==121||(LA136_0>=126 && LA136_0<=127)||(LA136_0>=139 && LA136_0<=140)) ) {
+            if ( ((LA136_0>=RULE_INT && LA136_0<=RULE_UNQUOTED_STRING)||(LA136_0>=18 && LA136_0<=39)||(LA136_0>=41 && LA136_0<=68)||(LA136_0>=85 && LA136_0<=99)||LA136_0==107||LA136_0==112||(LA136_0>=114 && LA136_0<=115)||LA136_0==120||(LA136_0>=125 && LA136_0<=126)||(LA136_0>=138 && LA136_0<=139)) ) {
                 alt136=1;
             }
             switch (alt136) {
@@ -42159,7 +42172,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getDatatypeKeyword_1());
             }
-            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,45,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getDatatypeKeyword_1());
             }
@@ -42331,7 +42344,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt138=2;
             int LA138_0 = input.LA(1);
 
-            if ( (LA138_0==108) ) {
+            if ( (LA138_0==107) ) {
                 alt138=1;
             }
             switch (alt138) {
@@ -42431,7 +42444,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt139=2;
             int LA139_0 = input.LA(1);
 
-            if ( (LA139_0==103) ) {
+            if ( (LA139_0==102) ) {
                 alt139=1;
             }
             switch (alt139) {
@@ -42531,16 +42544,16 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt140=2;
             int LA140_0 = input.LA(1);
 
-            if ( (LA140_0==104) ) {
+            if ( (LA140_0==103) ) {
                 int LA140_1 = input.LA(2);
 
-                if ( (LA140_1==40||LA140_1==60) ) {
+                if ( (LA140_1==40||LA140_1==59) ) {
                     alt140=1;
                 }
-                else if ( (LA140_1==105) ) {
+                else if ( (LA140_1==104) ) {
                     int LA140_4 = input.LA(3);
 
-                    if ( (LA140_4==17||LA140_4==104) ) {
+                    if ( (LA140_4==17||LA140_4==103) ) {
                         alt140=1;
                     }
                 }
@@ -42722,7 +42735,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getColonKeyword_4_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getColonKeyword_4_0());
             }
@@ -42885,7 +42898,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_5_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_5_0());
             }
@@ -42968,7 +42981,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt141=2;
             int LA141_0 = input.LA(1);
 
-            if ( (LA141_0==40||LA141_0==60) ) {
+            if ( (LA141_0==40||LA141_0==59) ) {
                 alt141=1;
             }
             switch (alt141) {
@@ -43059,7 +43072,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_5_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_5_2());
             }
@@ -43138,7 +43151,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_6_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_6_0_0());
             }
@@ -43212,7 +43225,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_6_0_1());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_6_0_1());
             }
@@ -43291,7 +43304,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getEnumKeyword_0());
             }
-            match(input,50,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,49,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getEnumKeyword_0());
             }
@@ -43463,7 +43476,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt142=2;
             int LA142_0 = input.LA(1);
 
-            if ( (LA142_0==108) ) {
+            if ( (LA142_0==107) ) {
                 alt142=1;
             }
             switch (alt142) {
@@ -43563,7 +43576,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt143=2;
             int LA143_0 = input.LA(1);
 
-            if ( (LA143_0==103) ) {
+            if ( (LA143_0==102) ) {
                 alt143=1;
             }
             switch (alt143) {
@@ -43663,17 +43676,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt144=2;
             int LA144_0 = input.LA(1);
 
-            if ( (LA144_0==104) ) {
+            if ( (LA144_0==103) ) {
                 int LA144_1 = input.LA(2);
 
-                if ( (LA144_1==105) ) {
+                if ( (LA144_1==104) ) {
                     int LA144_3 = input.LA(3);
 
-                    if ( (LA144_3==17||LA144_3==104) ) {
+                    if ( (LA144_3==17||LA144_3==103) ) {
                         alt144=1;
                     }
                 }
-                else if ( (LA144_1==40||LA144_1==60) ) {
+                else if ( (LA144_1==40||LA144_1==59) ) {
                     alt144=1;
                 }
             }
@@ -43854,7 +43867,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getColonKeyword_3_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getColonKeyword_3_0());
             }
@@ -44017,7 +44030,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_4_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_4_0());
             }
@@ -44100,7 +44113,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt145=2;
             int LA145_0 = input.LA(1);
 
-            if ( (LA145_0==40||LA145_0==60) ) {
+            if ( (LA145_0==40||LA145_0==59) ) {
                 alt145=1;
             }
             switch (alt145) {
@@ -44191,7 +44204,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_4_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_4_2());
             }
@@ -44270,7 +44283,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_5_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_5_0_0());
             }
@@ -44355,7 +44368,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt146=2;
                 int LA146_0 = input.LA(1);
 
-                if ( ((LA146_0>=RULE_SIMPLE_ID && LA146_0<=RULE_ESCAPED_ID)||LA146_0==54) ) {
+                if ( ((LA146_0>=RULE_SIMPLE_ID && LA146_0<=RULE_ESCAPED_ID)||LA146_0==53) ) {
                     alt146=1;
                 }
 
@@ -44451,7 +44464,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_5_0_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_5_0_2());
             }
@@ -44623,7 +44636,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt147=2;
             int LA147_0 = input.LA(1);
 
-            if ( (LA147_0==76) ) {
+            if ( (LA147_0==75) ) {
                 alt147=1;
             }
             switch (alt147) {
@@ -44803,7 +44816,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getLiteralKeyword_0_0_0());
             }
-            match(input,54,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,53,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationLiteralCSAccess().getLiteralKeyword_0_0_0());
             }
@@ -44966,7 +44979,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getEqualsSignKeyword_1_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationLiteralCSAccess().getEqualsSignKeyword_1_0());
             }
@@ -45129,7 +45142,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getLeftCurlyBracketKeyword_2_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationLiteralCSAccess().getLeftCurlyBracketKeyword_2_0_0());
             }
@@ -45203,7 +45216,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getRightCurlyBracketKeyword_2_0_1());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationLiteralCSAccess().getRightCurlyBracketKeyword_2_0_1());
             }
@@ -45286,7 +45299,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt148=2;
             int LA148_0 = input.LA(1);
 
-            if ( (LA148_0==47||LA148_0==61) ) {
+            if ( (LA148_0==46||LA148_0==60) ) {
                 alt148=1;
             }
             switch (alt148) {
@@ -45382,7 +45395,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOperationKeyword_1());
             }
-            match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,54,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getOperationKeyword_1());
             }
@@ -45465,7 +45478,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt149=2;
             int LA149_0 = input.LA(1);
 
-            if ( (LA149_0==108) ) {
+            if ( (LA149_0==107) ) {
                 alt149=1;
             }
             switch (alt149) {
@@ -45650,7 +45663,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getLeftParenthesisKeyword_4());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getLeftParenthesisKeyword_4());
             }
@@ -45733,7 +45746,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt150=2;
             int LA150_0 = input.LA(1);
 
-            if ( ((LA150_0>=RULE_SIMPLE_ID && LA150_0<=RULE_ESCAPED_ID)||(LA150_0>=18 && LA150_0<=39)||(LA150_0>=41 && LA150_0<=66)) ) {
+            if ( ((LA150_0>=RULE_SIMPLE_ID && LA150_0<=RULE_ESCAPED_ID)||(LA150_0>=18 && LA150_0<=39)||(LA150_0>=41 && LA150_0<=65)) ) {
                 alt150=1;
             }
             switch (alt150) {
@@ -45829,7 +45842,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getRightParenthesisKeyword_6());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getRightParenthesisKeyword_6());
             }
@@ -45912,7 +45925,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt151=2;
             int LA151_0 = input.LA(1);
 
-            if ( (LA151_0==103) ) {
+            if ( (LA151_0==102) ) {
                 alt151=1;
             }
             switch (alt151) {
@@ -46012,7 +46025,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt152=2;
             int LA152_0 = input.LA(1);
 
-            if ( (LA152_0==62) ) {
+            if ( (LA152_0==61) ) {
                 alt152=1;
             }
             switch (alt152) {
@@ -46112,10 +46125,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt153=2;
             int LA153_0 = input.LA(1);
 
-            if ( (LA153_0==104) ) {
+            if ( (LA153_0==103) ) {
                 int LA153_1 = input.LA(2);
 
-                if ( (LA153_1==48||LA153_1==56||LA153_1==64||LA153_1==129||LA153_1==131||LA153_1==134) ) {
+                if ( (LA153_1==47||LA153_1==55||LA153_1==63||LA153_1==128||LA153_1==130||LA153_1==133) ) {
                     alt153=1;
                 }
             }
@@ -46384,7 +46397,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt154=2;
             int LA154_0 = input.LA(1);
 
-            if ( (LA154_0==47) ) {
+            if ( (LA154_0==46) ) {
                 alt154=1;
             }
             switch (alt154) {
@@ -46568,7 +46581,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt155=2;
             int LA155_0 = input.LA(1);
 
-            if ( (LA155_0==61) ) {
+            if ( (LA155_0==60) ) {
                 alt155=1;
             }
             switch (alt155) {
@@ -46754,7 +46767,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt156=2;
                 int LA156_0 = input.LA(1);
 
-                if ( (LA156_0==107) ) {
+                if ( (LA156_0==106) ) {
                     alt156=1;
                 }
 
@@ -46855,7 +46868,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getCommaKeyword_5_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getCommaKeyword_5_1_0());
             }
@@ -47018,7 +47031,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getColonKeyword_7_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getColonKeyword_7_0());
             }
@@ -47181,7 +47194,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getThrowsKeyword_8_0());
             }
-            match(input,62,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getThrowsKeyword_8_0());
             }
@@ -47350,7 +47363,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt157=2;
                 int LA157_0 = input.LA(1);
 
-                if ( (LA157_0==107) ) {
+                if ( (LA157_0==106) ) {
                     alt157=1;
                 }
 
@@ -47451,7 +47464,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getCommaKeyword_8_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getCommaKeyword_8_2_0());
             }
@@ -47614,7 +47627,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getLeftCurlyBracketKeyword_9_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getLeftCurlyBracketKeyword_9_0());
             }
@@ -47725,7 +47738,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt158=2;
                 int LA158_0 = input.LA(1);
 
-                if ( (LA158_0==48||LA158_0==56||LA158_0==64||LA158_0==129||LA158_0==131||LA158_0==134) ) {
+                if ( (LA158_0==47||LA158_0==55||LA158_0==63||LA158_0==128||LA158_0==130||LA158_0==133) ) {
                     alt158=1;
                 }
 
@@ -47824,7 +47837,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getRightCurlyBracketKeyword_9_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getRightCurlyBracketKeyword_9_2());
             }
@@ -47991,14 +48004,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt159=2;
             int LA159_0 = input.LA(1);
 
-            if ( (LA159_0==107) ) {
+            if ( (LA159_0==106) ) {
                 alt159=1;
             }
             switch (alt159) {
                 case 1 :
                     // InternalQVTrelation.g:15781:2: ','
                     {
-                    match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
                     }
                     break;
@@ -48083,7 +48096,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getLeftCurlyBracketKeyword_10_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getLeftCurlyBracketKeyword_10_0_0());
             }
@@ -48168,7 +48181,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt160=2;
                 int LA160_0 = input.LA(1);
 
-                if ( (LA160_0==43) ) {
+                if ( (LA160_0==42) ) {
                     alt160=1;
                 }
 
@@ -48264,7 +48277,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getRightCurlyBracketKeyword_10_0_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getRightCurlyBracketKeyword_10_0_2());
             }
@@ -48343,7 +48356,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getBodyKeyword_10_0_1_0());
             }
-            match(input,43,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,42,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getBodyKeyword_10_0_1_0());
             }
@@ -48426,7 +48439,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt161=2;
             int LA161_0 = input.LA(1);
 
-            if ( ((LA161_0>=RULE_SIMPLE_ID && LA161_0<=RULE_ESCAPED_ID)||(LA161_0>=18 && LA161_0<=39)||(LA161_0>=41 && LA161_0<=66)) ) {
+            if ( ((LA161_0>=RULE_SIMPLE_ID && LA161_0<=RULE_ESCAPED_ID)||(LA161_0>=18 && LA161_0<=39)||(LA161_0>=41 && LA161_0<=65)) ) {
                 alt161=1;
             }
             switch (alt161) {
@@ -48522,7 +48535,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getColonKeyword_10_0_1_2());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getColonKeyword_10_0_1_2());
             }
@@ -48605,7 +48618,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt162=2;
             int LA162_0 = input.LA(1);
 
-            if ( ((LA162_0>=RULE_INT && LA162_0<=RULE_UNQUOTED_STRING)||(LA162_0>=18 && LA162_0<=39)||(LA162_0>=41 && LA162_0<=69)||(LA162_0>=86 && LA162_0<=100)||LA162_0==108||LA162_0==113||(LA162_0>=115 && LA162_0<=116)||LA162_0==121||(LA162_0>=126 && LA162_0<=127)||(LA162_0>=139 && LA162_0<=140)) ) {
+            if ( ((LA162_0>=RULE_INT && LA162_0<=RULE_UNQUOTED_STRING)||(LA162_0>=18 && LA162_0<=39)||(LA162_0>=41 && LA162_0<=68)||(LA162_0>=85 && LA162_0<=99)||LA162_0==107||LA162_0==112||(LA162_0>=114 && LA162_0<=115)||LA162_0==120||(LA162_0>=125 && LA162_0<=126)||(LA162_0>=138 && LA162_0<=139)) ) {
                 alt162=1;
             }
             switch (alt162) {
@@ -48868,7 +48881,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt163=2;
             int LA163_0 = input.LA(1);
 
-            if ( (LA163_0==103) ) {
+            if ( (LA163_0==102) ) {
                 alt163=1;
             }
             switch (alt163) {
@@ -48968,10 +48981,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt164=2;
             int LA164_0 = input.LA(1);
 
-            if ( (LA164_0==104) ) {
+            if ( (LA164_0==103) ) {
                 int LA164_1 = input.LA(2);
 
-                if ( (LA164_1==56||LA164_1==64||LA164_1==131||LA164_1==134) ) {
+                if ( (LA164_1==55||LA164_1==63||LA164_1==130||LA164_1==133) ) {
                     alt164=1;
                 }
             }
@@ -49067,7 +49080,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt165=2;
             int LA165_0 = input.LA(1);
 
-            if ( (LA165_0==104) ) {
+            if ( (LA165_0==103) ) {
                 alt165=1;
             }
             switch (alt165) {
@@ -49163,7 +49176,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getColonKeyword_1_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getColonKeyword_1_0());
             }
@@ -49326,7 +49339,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getLeftCurlyBracketKeyword_2_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getLeftCurlyBracketKeyword_2_0());
             }
@@ -49437,7 +49450,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt166=2;
                 int LA166_0 = input.LA(1);
 
-                if ( (LA166_0==56||LA166_0==64||LA166_0==131||LA166_0==134) ) {
+                if ( (LA166_0==55||LA166_0==63||LA166_0==130||LA166_0==133) ) {
                     alt166=1;
                 }
 
@@ -49536,7 +49549,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getRightCurlyBracketKeyword_2_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getRightCurlyBracketKeyword_2_2());
             }
@@ -49703,14 +49716,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt167=2;
             int LA167_0 = input.LA(1);
 
-            if ( (LA167_0==107) ) {
+            if ( (LA167_0==106) ) {
                 alt167=1;
             }
             switch (alt167) {
                 case 1 :
                     // InternalQVTrelation.g:16389:2: ','
                     {
-                    match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
                     }
                     break;
@@ -49795,7 +49808,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getLeftCurlyBracketKeyword_3_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getLeftCurlyBracketKeyword_3_0());
             }
@@ -49869,7 +49882,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getRightCurlyBracketKeyword_3_1());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getRightCurlyBracketKeyword_3_1());
             }
@@ -49952,7 +49965,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt168=2;
             int LA168_0 = input.LA(1);
 
-            if ( (LA168_0==47||LA168_0==61) ) {
+            if ( (LA168_0==46||LA168_0==60) ) {
                 alt168=1;
             }
             switch (alt168) {
@@ -50048,7 +50061,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getPropertyKeyword_1());
             }
-            match(input,57,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getPropertyKeyword_1());
             }
@@ -50220,7 +50233,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt169=2;
             int LA169_0 = input.LA(1);
 
-            if ( (LA169_0==111) ) {
+            if ( (LA169_0==110) ) {
                 alt169=1;
             }
             switch (alt169) {
@@ -50320,7 +50333,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt170=2;
             int LA170_0 = input.LA(1);
 
-            if ( (LA170_0==103) ) {
+            if ( (LA170_0==102) ) {
                 alt170=1;
             }
             switch (alt170) {
@@ -50420,7 +50433,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt171=2;
             int LA171_0 = input.LA(1);
 
-            if ( (LA171_0==76) ) {
+            if ( (LA171_0==75) ) {
                 alt171=1;
             }
             switch (alt171) {
@@ -50520,10 +50533,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt172=2;
             int LA172_0 = input.LA(1);
 
-            if ( (LA172_0==104) ) {
+            if ( (LA172_0==103) ) {
                 int LA172_1 = input.LA(2);
 
-                if ( (LA172_1==45||LA172_1==48||LA172_1==56||(LA172_1>=58 && LA172_1<=59)||(LA172_1>=63 && LA172_1<=66)||LA172_1==129||(LA172_1>=131 && LA172_1<=138)) ) {
+                if ( (LA172_1==44||LA172_1==47||LA172_1==55||(LA172_1>=57 && LA172_1<=58)||(LA172_1>=62 && LA172_1<=65)||LA172_1==128||(LA172_1>=130 && LA172_1<=137)) ) {
                     alt172=1;
                 }
             }
@@ -50792,7 +50805,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt173=2;
             int LA173_0 = input.LA(1);
 
-            if ( (LA173_0==47) ) {
+            if ( (LA173_0==46) ) {
                 alt173=1;
             }
             switch (alt173) {
@@ -50976,7 +50989,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt174=2;
             int LA174_0 = input.LA(1);
 
-            if ( (LA174_0==61) ) {
+            if ( (LA174_0==60) ) {
                 alt174=1;
             }
             switch (alt174) {
@@ -51072,7 +51085,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getNumberSignKeyword_3_0());
             }
-            match(input,111,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,110,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getNumberSignKeyword_3_0());
             }
@@ -51235,7 +51248,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getColonKeyword_4_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getColonKeyword_4_0());
             }
@@ -51398,7 +51411,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getEqualsSignKeyword_5_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getEqualsSignKeyword_5_0());
             }
@@ -51561,7 +51574,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getLeftCurlyBracketKeyword_6_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getLeftCurlyBracketKeyword_6_0());
             }
@@ -51672,7 +51685,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt175=2;
                 int LA175_0 = input.LA(1);
 
-                if ( (LA175_0==45||LA175_0==48||LA175_0==56||(LA175_0>=58 && LA175_0<=59)||(LA175_0>=63 && LA175_0<=66)||LA175_0==129||(LA175_0>=131 && LA175_0<=138)) ) {
+                if ( (LA175_0==44||LA175_0==47||LA175_0==55||(LA175_0>=57 && LA175_0<=58)||(LA175_0>=62 && LA175_0<=65)||LA175_0==128||(LA175_0>=130 && LA175_0<=137)) ) {
                     alt175=1;
                 }
 
@@ -51771,7 +51784,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getRightCurlyBracketKeyword_6_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getRightCurlyBracketKeyword_6_2());
             }
@@ -51938,14 +51951,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt176=2;
             int LA176_0 = input.LA(1);
 
-            if ( (LA176_0==107) ) {
+            if ( (LA176_0==106) ) {
                 alt176=1;
             }
             switch (alt176) {
                 case 1 :
                     // InternalQVTrelation.g:17180:2: ','
                     {
-                    match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
                     }
                     break;
@@ -52030,7 +52043,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getLeftCurlyBracketKeyword_7_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getLeftCurlyBracketKeyword_7_0_0());
             }
@@ -52115,7 +52128,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt177=2;
                 int LA177_0 = input.LA(1);
 
-                if ( (LA177_0==49||LA177_0==52) ) {
+                if ( (LA177_0==48||LA177_0==51) ) {
                     alt177=1;
                 }
 
@@ -52211,7 +52224,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getRightCurlyBracketKeyword_7_0_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getRightCurlyBracketKeyword_7_0_2());
             }
@@ -52290,7 +52303,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getInitialKeyword_7_0_1_0_0());
             }
-            match(input,52,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,51,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getInitialKeyword_7_0_1_0_0());
             }
@@ -52373,7 +52386,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt178=2;
             int LA178_0 = input.LA(1);
 
-            if ( ((LA178_0>=RULE_SIMPLE_ID && LA178_0<=RULE_ESCAPED_ID)||(LA178_0>=18 && LA178_0<=39)||(LA178_0>=41 && LA178_0<=66)) ) {
+            if ( ((LA178_0>=RULE_SIMPLE_ID && LA178_0<=RULE_ESCAPED_ID)||(LA178_0>=18 && LA178_0<=39)||(LA178_0>=41 && LA178_0<=65)) ) {
                 alt178=1;
             }
             switch (alt178) {
@@ -52469,7 +52482,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_0_2());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_0_2());
             }
@@ -52552,7 +52565,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt179=2;
             int LA179_0 = input.LA(1);
 
-            if ( ((LA179_0>=RULE_INT && LA179_0<=RULE_UNQUOTED_STRING)||(LA179_0>=18 && LA179_0<=39)||(LA179_0>=41 && LA179_0<=69)||(LA179_0>=86 && LA179_0<=100)||LA179_0==108||LA179_0==113||(LA179_0>=115 && LA179_0<=116)||LA179_0==121||(LA179_0>=126 && LA179_0<=127)||(LA179_0>=139 && LA179_0<=140)) ) {
+            if ( ((LA179_0>=RULE_INT && LA179_0<=RULE_UNQUOTED_STRING)||(LA179_0>=18 && LA179_0<=39)||(LA179_0>=41 && LA179_0<=68)||(LA179_0>=85 && LA179_0<=99)||LA179_0==107||LA179_0==112||(LA179_0>=114 && LA179_0<=115)||LA179_0==120||(LA179_0>=125 && LA179_0<=126)||(LA179_0>=138 && LA179_0<=139)) ) {
                 alt179=1;
             }
             switch (alt179) {
@@ -52722,7 +52735,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getDerivationKeyword_7_0_1_1_0());
             }
-            match(input,49,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getDerivationKeyword_7_0_1_1_0());
             }
@@ -52805,7 +52818,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt180=2;
             int LA180_0 = input.LA(1);
 
-            if ( ((LA180_0>=RULE_SIMPLE_ID && LA180_0<=RULE_ESCAPED_ID)||(LA180_0>=18 && LA180_0<=39)||(LA180_0>=41 && LA180_0<=66)) ) {
+            if ( ((LA180_0>=RULE_SIMPLE_ID && LA180_0<=RULE_ESCAPED_ID)||(LA180_0>=18 && LA180_0<=39)||(LA180_0>=41 && LA180_0<=65)) ) {
                 alt180=1;
             }
             switch (alt180) {
@@ -52901,7 +52914,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_1_2());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_1_2());
             }
@@ -52984,7 +52997,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt181=2;
             int LA181_0 = input.LA(1);
 
-            if ( ((LA181_0>=RULE_INT && LA181_0<=RULE_UNQUOTED_STRING)||(LA181_0>=18 && LA181_0<=39)||(LA181_0>=41 && LA181_0<=69)||(LA181_0>=86 && LA181_0<=100)||LA181_0==108||LA181_0==113||(LA181_0>=115 && LA181_0<=116)||LA181_0==121||(LA181_0>=126 && LA181_0<=127)||(LA181_0>=139 && LA181_0<=140)) ) {
+            if ( ((LA181_0>=RULE_INT && LA181_0<=RULE_UNQUOTED_STRING)||(LA181_0>=18 && LA181_0<=39)||(LA181_0>=41 && LA181_0<=68)||(LA181_0>=85 && LA181_0<=99)||LA181_0==107||LA181_0==112||(LA181_0>=114 && LA181_0<=115)||LA181_0==120||(LA181_0>=125 && LA181_0<=126)||(LA181_0>=138 && LA181_0<=139)) ) {
                 alt181=1;
             }
             switch (alt181) {
@@ -53158,7 +53171,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt182=2;
             int LA182_0 = input.LA(1);
 
-            if ( (LA182_0==41) ) {
+            if ( (LA182_0==19) ) {
                 alt182=1;
             }
             switch (alt182) {
@@ -53254,7 +53267,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getClassKeyword_1());
             }
-            match(input,44,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,43,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getClassKeyword_1());
             }
@@ -53426,7 +53439,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt183=2;
             int LA183_0 = input.LA(1);
 
-            if ( (LA183_0==108) ) {
+            if ( (LA183_0==107) ) {
                 alt183=1;
             }
             switch (alt183) {
@@ -53626,7 +53639,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt185=2;
             int LA185_0 = input.LA(1);
 
-            if ( (LA185_0==103) ) {
+            if ( (LA185_0==102) ) {
                 alt185=1;
             }
             switch (alt185) {
@@ -53726,17 +53739,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt186=2;
             int LA186_0 = input.LA(1);
 
-            if ( (LA186_0==104) ) {
+            if ( (LA186_0==103) ) {
                 int LA186_1 = input.LA(2);
 
-                if ( (LA186_1==105) ) {
+                if ( (LA186_1==104) ) {
                     int LA186_3 = input.LA(3);
 
-                    if ( (LA186_3==17||LA186_3==104) ) {
+                    if ( (LA186_3==17||LA186_3==103) ) {
                         alt186=1;
                     }
                 }
-                else if ( (LA186_1==53) ) {
+                else if ( (LA186_1==52) ) {
                     alt186=1;
                 }
             }
@@ -54086,7 +54099,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt187=2;
                 int LA187_0 = input.LA(1);
 
-                if ( (LA187_0==107) ) {
+                if ( (LA187_0==106) ) {
                     alt187=1;
                 }
 
@@ -54187,7 +54200,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getCommaKeyword_4_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getCommaKeyword_4_2_0());
             }
@@ -54350,7 +54363,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getColonKeyword_5_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getColonKeyword_5_0());
             }
@@ -54513,7 +54526,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_6_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_6_0());
             }
@@ -54596,7 +54609,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt188=2;
             int LA188_0 = input.LA(1);
 
-            if ( (LA188_0==53) ) {
+            if ( (LA188_0==52) ) {
                 alt188=1;
             }
             switch (alt188) {
@@ -54687,7 +54700,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_6_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_6_2());
             }
@@ -54766,7 +54779,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_7_0_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_7_0_0());
             }
@@ -54851,7 +54864,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt189=2;
                 int LA189_0 = input.LA(1);
 
-                if ( (LA189_0==42||LA189_0==47||LA189_0==55||LA189_0==57||LA189_0==61) ) {
+                if ( (LA189_0==41||LA189_0==46||LA189_0==54||LA189_0==56||LA189_0==60) ) {
                     alt189=1;
                 }
 
@@ -54947,7 +54960,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_7_0_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_7_0_2());
             }
@@ -55108,7 +55121,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt190=2;
             int LA190_0 = input.LA(1);
 
-            if ( (LA190_0==118) ) {
+            if ( (LA190_0==117) ) {
                 alt190=1;
             }
             switch (alt190) {
@@ -55208,14 +55221,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt191=2;
             int LA191_0 = input.LA(1);
 
-            if ( (LA191_0==67) ) {
+            if ( (LA191_0==66) ) {
                 alt191=1;
             }
             switch (alt191) {
                 case 1 :
                     // InternalQVTrelation.g:18353:2: '-'
                     {
-                    match(input,67,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    match(input,66,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
                     }
                     break;
@@ -55464,10 +55477,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt192=2;
                 int LA192_0 = input.LA(1);
 
-                if ( (LA192_0==110) ) {
+                if ( (LA192_0==109) ) {
                     int LA192_2 = input.LA(2);
 
-                    if ( ((LA192_2>=RULE_SIMPLE_ID && LA192_2<=RULE_ESCAPED_ID)||(LA192_2>=18 && LA192_2<=39)||(LA192_2>=41 && LA192_2<=66)||(LA192_2>=86 && LA192_2<=100)) ) {
+                    if ( ((LA192_2>=RULE_SIMPLE_ID && LA192_2<=RULE_ESCAPED_ID)||(LA192_2>=18 && LA192_2<=39)||(LA192_2>=41 && LA192_2<=65)||(LA192_2>=85 && LA192_2<=99)) ) {
                         alt192=1;
                     }
 
@@ -55571,7 +55584,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIPathNameCSAccess().getColonColonKeyword_1_0());
             }
-            match(input,110,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getURIPathNameCSAccess().getColonColonKeyword_1_0());
             }
@@ -55985,7 +55998,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt193=2;
             int LA193_0 = input.LA(1);
 
-            if ( (LA193_0==108) ) {
+            if ( (LA193_0==107) ) {
                 alt193=1;
             }
             switch (alt193) {
@@ -56081,7 +56094,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTypeCSAccess().getLeftParenthesisKeyword_1_0());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTypeCSAccess().getLeftParenthesisKeyword_1_0());
             }
@@ -56253,7 +56266,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt194=2;
             int LA194_0 = input.LA(1);
 
-            if ( (LA194_0==118) ) {
+            if ( (LA194_0==117) ) {
                 alt194=1;
             }
             switch (alt194) {
@@ -56344,7 +56357,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTypeCSAccess().getRightParenthesisKeyword_1_3());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionTypeCSAccess().getRightParenthesisKeyword_1_3());
             }
@@ -56511,7 +56524,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt195=2;
             int LA195_0 = input.LA(1);
 
-            if ( (LA195_0==108) ) {
+            if ( (LA195_0==107) ) {
                 alt195=1;
             }
             switch (alt195) {
@@ -56607,7 +56620,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getLeftParenthesisKeyword_1_0());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapTypeCSAccess().getLeftParenthesisKeyword_1_0());
             }
@@ -56775,7 +56788,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getCommaKeyword_1_2());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapTypeCSAccess().getCommaKeyword_1_2());
             }
@@ -56938,7 +56951,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getRightParenthesisKeyword_1_4());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapTypeCSAccess().getRightParenthesisKeyword_1_4());
             }
@@ -57105,7 +57118,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt196=2;
             int LA196_0 = input.LA(1);
 
-            if ( (LA196_0==108) ) {
+            if ( (LA196_0==107) ) {
                 alt196=1;
             }
             switch (alt196) {
@@ -57201,7 +57214,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0());
             }
@@ -57284,7 +57297,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt197=2;
             int LA197_0 = input.LA(1);
 
-            if ( ((LA197_0>=RULE_SIMPLE_ID && LA197_0<=RULE_ESCAPED_ID)||(LA197_0>=18 && LA197_0<=39)||(LA197_0>=41 && LA197_0<=66)) ) {
+            if ( ((LA197_0>=RULE_SIMPLE_ID && LA197_0<=RULE_ESCAPED_ID)||(LA197_0>=18 && LA197_0<=39)||(LA197_0>=41 && LA197_0<=65)) ) {
                 alt197=1;
             }
             switch (alt197) {
@@ -57375,7 +57388,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2());
             }
@@ -57544,7 +57557,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt198=2;
                 int LA198_0 = input.LA(1);
 
-                if ( (LA198_0==107) ) {
+                if ( (LA198_0==106) ) {
                     alt198=1;
                 }
 
@@ -57645,7 +57658,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getCommaKeyword_1_1_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleTypeCSAccess().getCommaKeyword_1_1_1_0());
             }
@@ -57897,7 +57910,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTuplePartCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTuplePartCSAccess().getColonKeyword_1());
             }
@@ -58149,7 +58162,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
@@ -58232,7 +58245,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt199=2;
             int LA199_0 = input.LA(1);
 
-            if ( ((LA199_0>=RULE_INT && LA199_0<=RULE_ESCAPED_ID)||(LA199_0>=18 && LA199_0<=39)||(LA199_0>=41 && LA199_0<=69)||(LA199_0>=86 && LA199_0<=100)||LA199_0==103||LA199_0==108||LA199_0==113||(LA199_0>=115 && LA199_0<=116)||LA199_0==121||(LA199_0>=126 && LA199_0<=127)||(LA199_0>=139 && LA199_0<=140)) ) {
+            if ( ((LA199_0>=RULE_INT && LA199_0<=RULE_ESCAPED_ID)||(LA199_0>=18 && LA199_0<=39)||(LA199_0>=41 && LA199_0<=68)||(LA199_0>=85 && LA199_0<=99)||LA199_0==102||LA199_0==107||LA199_0==112||(LA199_0>=114 && LA199_0<=115)||LA199_0==120||(LA199_0>=125 && LA199_0<=126)||(LA199_0>=138 && LA199_0<=139)) ) {
                 alt199=1;
             }
             switch (alt199) {
@@ -58323,7 +58336,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
             }
@@ -58492,7 +58505,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt200=2;
                 int LA200_0 = input.LA(1);
 
-                if ( (LA200_0==107) ) {
+                if ( (LA200_0==106) ) {
                     alt200=1;
                 }
 
@@ -58593,7 +58606,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpCSAccess().getCommaKeyword_2_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionLiteralExpCSAccess().getCommaKeyword_2_1_0());
             }
@@ -58844,7 +58857,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt201=2;
             int LA201_0 = input.LA(1);
 
-            if ( (LA201_0==112) ) {
+            if ( (LA201_0==111) ) {
                 alt201=1;
             }
             switch (alt201) {
@@ -58940,7 +58953,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralPartCSAccess().getFullStopFullStopKeyword_0_1_0());
             }
-            match(input,112,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,111,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionLiteralPartCSAccess().getFullStopFullStopKeyword_0_1_0());
             }
@@ -59192,7 +59205,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getLeftCurlyBracketKeyword_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionPatternCSAccess().getLeftCurlyBracketKeyword_1());
             }
@@ -59275,7 +59288,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt202=2;
             int LA202_0 = input.LA(1);
 
-            if ( ((LA202_0>=RULE_SIMPLE_ID && LA202_0<=RULE_ESCAPED_ID)||(LA202_0>=18 && LA202_0<=39)||(LA202_0>=41 && LA202_0<=66)||LA202_0==103) ) {
+            if ( ((LA202_0>=RULE_SIMPLE_ID && LA202_0<=RULE_ESCAPED_ID)||(LA202_0>=18 && LA202_0<=39)||(LA202_0>=41 && LA202_0<=65)||LA202_0==102) ) {
                 alt202=1;
             }
             switch (alt202) {
@@ -59366,7 +59379,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getRightCurlyBracketKeyword_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionPatternCSAccess().getRightCurlyBracketKeyword_3());
             }
@@ -59540,7 +59553,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt203=2;
                 int LA203_0 = input.LA(1);
 
-                if ( (LA203_0==107) ) {
+                if ( (LA203_0==106) ) {
                     alt203=1;
                 }
 
@@ -59725,7 +59738,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getCommaKeyword_2_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionPatternCSAccess().getCommaKeyword_2_1_0());
             }
@@ -59888,7 +59901,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getPlusSignPlusSignKeyword_2_2_0());
             }
-            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCollectionPatternCSAccess().getPlusSignPlusSignKeyword_2_2_0());
             }
@@ -60140,7 +60153,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_0_1());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_0_1());
             }
@@ -60307,7 +60320,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt204=2;
             int LA204_0 = input.LA(1);
 
-            if ( ((LA204_0>=RULE_SIMPLE_ID && LA204_0<=RULE_ESCAPED_ID)||(LA204_0>=18 && LA204_0<=39)||(LA204_0>=41 && LA204_0<=66)) ) {
+            if ( ((LA204_0>=RULE_SIMPLE_ID && LA204_0<=RULE_ESCAPED_ID)||(LA204_0>=18 && LA204_0<=39)||(LA204_0>=41 && LA204_0<=65)) ) {
                 alt204=1;
             }
             switch (alt204) {
@@ -60403,7 +60416,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPatternExpCSAccess().getColonKeyword_1());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPatternExpCSAccess().getColonKeyword_1());
             }
@@ -60566,7 +60579,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLambdaLiteralExpCSAccess().getLambdaKeyword_0());
             }
-            match(input,113,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,112,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLambdaLiteralExpCSAccess().getLambdaKeyword_0());
             }
@@ -60645,7 +60658,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLambdaLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLambdaLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
@@ -60808,7 +60821,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLambdaLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLambdaLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
             }
@@ -60976,7 +60989,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
@@ -61059,7 +61072,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt205=2;
             int LA205_0 = input.LA(1);
 
-            if ( ((LA205_0>=RULE_INT && LA205_0<=RULE_ESCAPED_ID)||(LA205_0>=18 && LA205_0<=39)||(LA205_0>=41 && LA205_0<=69)||(LA205_0>=86 && LA205_0<=100)||LA205_0==108||LA205_0==113||(LA205_0>=115 && LA205_0<=116)||LA205_0==121||(LA205_0>=126 && LA205_0<=127)||(LA205_0>=139 && LA205_0<=140)) ) {
+            if ( ((LA205_0>=RULE_INT && LA205_0<=RULE_ESCAPED_ID)||(LA205_0>=18 && LA205_0<=39)||(LA205_0>=41 && LA205_0<=68)||(LA205_0>=85 && LA205_0<=99)||LA205_0==107||LA205_0==112||(LA205_0>=114 && LA205_0<=115)||LA205_0==120||(LA205_0>=125 && LA205_0<=126)||(LA205_0>=138 && LA205_0<=139)) ) {
                 alt205=1;
             }
             switch (alt205) {
@@ -61150,7 +61163,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
             }
@@ -61319,7 +61332,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt206=2;
                 int LA206_0 = input.LA(1);
 
-                if ( (LA206_0==107) ) {
+                if ( (LA206_0==106) ) {
                     alt206=1;
                 }
 
@@ -61420,7 +61433,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralExpCSAccess().getCommaKeyword_2_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapLiteralExpCSAccess().getCommaKeyword_2_1_0());
             }
@@ -61672,7 +61685,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralPartCSAccess().getLessThanSignHyphenMinusKeyword_1());
             }
-            match(input,114,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,113,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapLiteralPartCSAccess().getLessThanSignHyphenMinusKeyword_1());
             }
@@ -61835,7 +61848,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpCSAccess().getTupleKeyword_0());
             }
-            match(input,87,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,86,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleLiteralExpCSAccess().getTupleKeyword_0());
             }
@@ -61914,7 +61927,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
             }
@@ -62088,7 +62101,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt207=2;
                 int LA207_0 = input.LA(1);
 
-                if ( (LA207_0==107) ) {
+                if ( (LA207_0==106) ) {
                     alt207=1;
                 }
 
@@ -62184,7 +62197,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpCSAccess().getRightCurlyBracketKeyword_4());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleLiteralExpCSAccess().getRightCurlyBracketKeyword_4());
             }
@@ -62263,7 +62276,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpCSAccess().getCommaKeyword_3_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleLiteralExpCSAccess().getCommaKeyword_3_0());
             }
@@ -62519,7 +62532,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt208=2;
             int LA208_0 = input.LA(1);
 
-            if ( (LA208_0==103) ) {
+            if ( (LA208_0==102) ) {
                 alt208=1;
             }
             switch (alt208) {
@@ -62615,7 +62628,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartCSAccess().getEqualsSignKeyword_2());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleLiteralPartCSAccess().getEqualsSignKeyword_2());
             }
@@ -62778,7 +62791,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartCSAccess().getColonKeyword_1_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleLiteralPartCSAccess().getColonKeyword_1_0());
             }
@@ -63015,7 +63028,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnlimitedNaturalLiteralExpCSAccess().getAsteriskKeyword_1());
             }
-            match(input,69,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,68,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnlimitedNaturalLiteralExpCSAccess().getAsteriskKeyword_1());
             }
@@ -63168,7 +63181,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInvalidLiteralExpCSAccess().getInvalidKeyword_1());
             }
-            match(input,115,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,114,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInvalidLiteralExpCSAccess().getInvalidKeyword_1());
             }
@@ -63321,7 +63334,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNullLiteralExpCSAccess().getNullKeyword_1());
             }
-            match(input,116,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,115,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNullLiteralExpCSAccess().getNullKeyword_1());
             }
@@ -63482,7 +63495,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt209=2;
             int LA209_0 = input.LA(1);
 
-            if ( (LA209_0==118) ) {
+            if ( (LA209_0==117) ) {
                 alt209=1;
             }
             switch (alt209) {
@@ -63938,7 +63951,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeNameExpCSAccess().getLeftCurlyBracketKeyword_1_1_0());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTypeNameExpCSAccess().getLeftCurlyBracketKeyword_1_1_0());
             }
@@ -64101,7 +64114,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeNameExpCSAccess().getRightCurlyBracketKeyword_1_1_2());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTypeNameExpCSAccess().getRightCurlyBracketKeyword_1_1_2());
             }
@@ -64262,7 +64275,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt212=2;
             int LA212_0 = input.LA(1);
 
-            if ( (LA212_0==118) ) {
+            if ( (LA212_0==117) ) {
                 alt212=1;
             }
             switch (alt212) {
@@ -64440,7 +64453,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt213=2;
             int LA213_0 = input.LA(1);
 
-            if ( (LA213_0==67||(LA213_0>=69 && LA213_0<=85)) ) {
+            if ( (LA213_0==66||(LA213_0>=68 && LA213_0<=84)) ) {
                 alt213=1;
             }
             switch (alt213) {
@@ -65387,7 +65400,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt214=2;
                 int LA214_0 = input.LA(1);
 
-                if ( (LA214_0==118) ) {
+                if ( (LA214_0==117) ) {
                     alt214=1;
                 }
 
@@ -65492,7 +65505,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt215=2;
             int LA215_0 = input.LA(1);
 
-            if ( (LA215_0==108) ) {
+            if ( (LA215_0==107) ) {
                 alt215=1;
             }
             switch (alt215) {
@@ -65592,7 +65605,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt216=2;
             int LA216_0 = input.LA(1);
 
-            if ( (LA216_0==104) ) {
+            if ( (LA216_0==103) ) {
                 alt216=1;
             }
             switch (alt216) {
@@ -65687,7 +65700,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt217=2;
             int LA217_0 = input.LA(1);
 
-            if ( (LA217_0==141) ) {
+            if ( (LA217_0==140) ) {
                 alt217=1;
             }
             switch (alt217) {
@@ -65867,7 +65880,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getPreKeyword_4_1());
             }
-            match(input,117,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,116,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNameExpCSAccess().getPreKeyword_4_1());
             }
@@ -66025,7 +66038,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCurlyBracketedClauseCSAccess().getLeftCurlyBracketKeyword_1());
             }
-            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCurlyBracketedClauseCSAccess().getLeftCurlyBracketKeyword_1());
             }
@@ -66108,7 +66121,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt218=2;
             int LA218_0 = input.LA(1);
 
-            if ( ((LA218_0>=RULE_SINGLE_QUOTED_STRING && LA218_0<=RULE_ESCAPED_ID)||(LA218_0>=18 && LA218_0<=39)||(LA218_0>=41 && LA218_0<=66)) ) {
+            if ( ((LA218_0>=RULE_SINGLE_QUOTED_STRING && LA218_0<=RULE_ESCAPED_ID)||(LA218_0>=18 && LA218_0<=39)||(LA218_0>=41 && LA218_0<=65)) ) {
                 alt218=1;
             }
             switch (alt218) {
@@ -66199,7 +66212,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCurlyBracketedClauseCSAccess().getRightCurlyBracketKeyword_3());
             }
-            match(input,105,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,104,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCurlyBracketedClauseCSAccess().getRightCurlyBracketKeyword_3());
             }
@@ -66368,7 +66381,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt219=2;
                 int LA219_0 = input.LA(1);
 
-                if ( (LA219_0==107) ) {
+                if ( (LA219_0==106) ) {
                     alt219=1;
                 }
 
@@ -66469,7 +66482,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCurlyBracketedClauseCSAccess().getCommaKeyword_2_1_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCurlyBracketedClauseCSAccess().getCommaKeyword_2_1_0());
             }
@@ -66711,7 +66724,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getLeftParenthesisKeyword_1());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRoundBracketedClauseCSAccess().getLeftParenthesisKeyword_1());
             }
@@ -66794,7 +66807,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt220=2;
             int LA220_0 = input.LA(1);
 
-            if ( ((LA220_0>=RULE_INT && LA220_0<=RULE_ESCAPED_ID)||(LA220_0>=18 && LA220_0<=39)||(LA220_0>=41 && LA220_0<=69)||(LA220_0>=86 && LA220_0<=100)||LA220_0==103||LA220_0==108||LA220_0==113||(LA220_0>=115 && LA220_0<=116)||LA220_0==121||(LA220_0>=126 && LA220_0<=127)||(LA220_0>=139 && LA220_0<=140)) ) {
+            if ( ((LA220_0>=RULE_INT && LA220_0<=RULE_ESCAPED_ID)||(LA220_0>=18 && LA220_0<=39)||(LA220_0>=41 && LA220_0<=68)||(LA220_0>=85 && LA220_0<=99)||LA220_0==102||LA220_0==107||LA220_0==112||(LA220_0>=114 && LA220_0<=115)||LA220_0==120||(LA220_0>=125 && LA220_0<=126)||(LA220_0>=138 && LA220_0<=139)) ) {
                 alt220=1;
             }
             switch (alt220) {
@@ -66885,7 +66898,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getRightParenthesisKeyword_3());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRoundBracketedClauseCSAccess().getRightParenthesisKeyword_3());
             }
@@ -67059,7 +67072,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt221=2;
                 int LA221_0 = input.LA(1);
 
-                if ( (LA221_0==107) ) {
+                if ( (LA221_0==106) ) {
                     alt221=1;
                 }
 
@@ -67261,7 +67274,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt223=2;
                 int LA223_0 = input.LA(1);
 
-                if ( (LA223_0==142) ) {
+                if ( (LA223_0==141) ) {
                     alt223=1;
                 }
 
@@ -67452,7 +67465,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt224=2;
                 int LA224_0 = input.LA(1);
 
-                if ( (LA224_0==107) ) {
+                if ( (LA224_0==106) ) {
                     alt224=1;
                 }
 
@@ -67643,7 +67656,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt225=2;
                 int LA225_0 = input.LA(1);
 
-                if ( (LA225_0==107) ) {
+                if ( (LA225_0==106) ) {
                     alt225=1;
                 }
 
@@ -67744,7 +67757,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketedClauseCSAccess().getLeftSquareBracketKeyword_0());
             }
-            match(input,118,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,117,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketedClauseCSAccess().getLeftSquareBracketKeyword_0());
             }
@@ -67918,7 +67931,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt226=2;
                 int LA226_0 = input.LA(1);
 
-                if ( (LA226_0==107) ) {
+                if ( (LA226_0==106) ) {
                     alt226=1;
                 }
 
@@ -68014,7 +68027,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketedClauseCSAccess().getRightSquareBracketKeyword_3());
             }
-            match(input,119,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,118,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketedClauseCSAccess().getRightSquareBracketKeyword_3());
             }
@@ -68093,7 +68106,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketedClauseCSAccess().getCommaKeyword_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketedClauseCSAccess().getCommaKeyword_2_0());
             }
@@ -68344,7 +68357,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt227=2;
             int LA227_0 = input.LA(1);
 
-            if ( (LA227_0==103||LA227_0==120) ) {
+            if ( (LA227_0==102||LA227_0==119) ) {
                 alt227=1;
             }
             switch (alt227) {
@@ -68440,7 +68453,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getColonKeyword_0_1_0_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingArgCSAccess().getColonKeyword_0_1_0_0());
             }
@@ -68607,7 +68620,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt228=2;
             int LA228_0 = input.LA(1);
 
-            if ( (LA228_0==76) ) {
+            if ( (LA228_0==75) ) {
                 alt228=1;
             }
             switch (alt228) {
@@ -68703,7 +68716,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getEqualsSignKeyword_0_1_0_2_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingArgCSAccess().getEqualsSignKeyword_0_1_0_2_0());
             }
@@ -68866,7 +68879,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getInKeyword_0_1_1_0());
             }
-            match(input,120,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,119,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingArgCSAccess().getInKeyword_0_1_1_0());
             }
@@ -69029,7 +69042,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getColonKeyword_1_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingArgCSAccess().getColonKeyword_1_0());
             }
@@ -69369,7 +69382,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt229=2;
             int LA229_0 = input.LA(1);
 
-            if ( (LA229_0==103) ) {
+            if ( (LA229_0==102) ) {
                 alt229=1;
             }
             switch (alt229) {
@@ -69465,7 +69478,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getColonKeyword_2_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingBarArgCSAccess().getColonKeyword_2_0());
             }
@@ -69632,7 +69645,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt230=2;
             int LA230_0 = input.LA(1);
 
-            if ( (LA230_0==76) ) {
+            if ( (LA230_0==75) ) {
                 alt230=1;
             }
             switch (alt230) {
@@ -69728,7 +69741,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getEqualsSignKeyword_2_2_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingBarArgCSAccess().getEqualsSignKeyword_2_2_0());
             }
@@ -70068,7 +70081,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt231=2;
             int LA231_0 = input.LA(1);
 
-            if ( (LA231_0==103||LA231_0==120) ) {
+            if ( (LA231_0==102||LA231_0==119) ) {
                 alt231=1;
             }
             switch (alt231) {
@@ -70164,7 +70177,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getColonKeyword_2_0_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingCommaArgCSAccess().getColonKeyword_2_0_0());
             }
@@ -70331,7 +70344,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt232=2;
             int LA232_0 = input.LA(1);
 
-            if ( (LA232_0==76) ) {
+            if ( (LA232_0==75) ) {
                 alt232=1;
             }
             switch (alt232) {
@@ -70427,7 +70440,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getEqualsSignKeyword_2_0_2_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingCommaArgCSAccess().getEqualsSignKeyword_2_0_2_0());
             }
@@ -70590,7 +70603,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getInKeyword_2_1_0());
             }
-            match(input,120,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,119,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingCommaArgCSAccess().getInKeyword_2_1_0());
             }
@@ -70930,7 +70943,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt233=2;
             int LA233_0 = input.LA(1);
 
-            if ( (LA233_0==103) ) {
+            if ( (LA233_0==102) ) {
                 alt233=1;
             }
             switch (alt233) {
@@ -71026,7 +71039,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getColonKeyword_2_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingSemiArgCSAccess().getColonKeyword_2_0());
             }
@@ -71193,7 +71206,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt234=2;
             int LA234_0 = input.LA(1);
 
-            if ( (LA234_0==76) ) {
+            if ( (LA234_0==75) ) {
                 alt234=1;
             }
             switch (alt234) {
@@ -71289,7 +71302,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getEqualsSignKeyword_2_2_0());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingSemiArgCSAccess().getEqualsSignKeyword_2_2_0());
             }
@@ -71452,7 +71465,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getIfKeyword_0());
             }
-            match(input,121,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,120,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpCSAccess().getIfKeyword_0());
             }
@@ -71620,7 +71633,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getThenKeyword_2());
             }
-            match(input,122,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,121,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpCSAccess().getThenKeyword_2());
             }
@@ -71794,7 +71807,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt235=2;
                 int LA235_0 = input.LA(1);
 
-                if ( (LA235_0==125) ) {
+                if ( (LA235_0==124) ) {
                     alt235=1;
                 }
 
@@ -71895,7 +71908,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getElseKeyword_5());
             }
-            match(input,123,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,122,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpCSAccess().getElseKeyword_5());
             }
@@ -72058,7 +72071,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getEndifKeyword_7());
             }
-            match(input,124,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,123,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpCSAccess().getEndifKeyword_7());
             }
@@ -72137,7 +72150,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getElseIfThenExpCSAccess().getElseifKeyword_0());
             }
-            match(input,125,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,124,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getElseIfThenExpCSAccess().getElseifKeyword_0());
             }
@@ -72305,7 +72318,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getElseIfThenExpCSAccess().getThenKeyword_2());
             }
-            match(input,122,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,121,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getElseIfThenExpCSAccess().getThenKeyword_2());
             }
@@ -72468,7 +72481,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpCSAccess().getLetKeyword_0());
             }
-            match(input,126,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,125,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetExpCSAccess().getLetKeyword_0());
             }
@@ -72642,7 +72655,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt236=2;
                 int LA236_0 = input.LA(1);
 
-                if ( (LA236_0==107) ) {
+                if ( (LA236_0==106) ) {
                     alt236=1;
                 }
 
@@ -72743,7 +72756,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpCSAccess().getInKeyword_3());
             }
-            match(input,120,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,119,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetExpCSAccess().getInKeyword_3());
             }
@@ -72906,7 +72919,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpCSAccess().getCommaKeyword_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetExpCSAccess().getCommaKeyword_2_0());
             }
@@ -73162,7 +73175,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt237=2;
             int LA237_0 = input.LA(1);
 
-            if ( (LA237_0==108) ) {
+            if ( (LA237_0==107) ) {
                 alt237=1;
             }
             switch (alt237) {
@@ -73262,7 +73275,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt238=2;
             int LA238_0 = input.LA(1);
 
-            if ( (LA238_0==103) ) {
+            if ( (LA238_0==102) ) {
                 alt238=1;
             }
             switch (alt238) {
@@ -73358,7 +73371,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableCSAccess().getEqualsSignKeyword_3());
             }
-            match(input,76,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,75,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetVariableCSAccess().getEqualsSignKeyword_3());
             }
@@ -73521,7 +73534,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableCSAccess().getColonKeyword_2_0());
             }
-            match(input,103,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetVariableCSAccess().getColonKeyword_2_0());
             }
@@ -73684,7 +73697,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNestedExpCSAccess().getLeftParenthesisKeyword_0());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNestedExpCSAccess().getLeftParenthesisKeyword_0());
             }
@@ -73847,7 +73860,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNestedExpCSAccess().getRightParenthesisKeyword_2());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNestedExpCSAccess().getRightParenthesisKeyword_2());
             }
@@ -74000,7 +74013,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSelfExpCSAccess().getSelfKeyword_1());
             }
-            match(input,127,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,126,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSelfExpCSAccess().getSelfKeyword_1());
             }
@@ -74167,7 +74180,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt239=2;
             int LA239_0 = input.LA(1);
 
-            if ( (LA239_0==112) ) {
+            if ( (LA239_0==111) ) {
                 alt239=1;
             }
             switch (alt239) {
@@ -74263,7 +74276,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityBoundsCSAccess().getFullStopFullStopKeyword_1_0());
             }
-            match(input,112,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,111,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMultiplicityBoundsCSAccess().getFullStopFullStopKeyword_1_0());
             }
@@ -74426,7 +74439,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityCSAccess().getLeftSquareBracketKeyword_0());
             }
-            match(input,118,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,117,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMultiplicityCSAccess().getLeftSquareBracketKeyword_0());
             }
@@ -74598,7 +74611,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             int alt240=2;
             int LA240_0 = input.LA(1);
 
-            if ( (LA240_0==101||LA240_0==143) ) {
+            if ( (LA240_0==100||LA240_0==142) ) {
                 alt240=1;
             }
             switch (alt240) {
@@ -74689,7 +74702,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityCSAccess().getRightSquareBracketKeyword_3());
             }
-            match(input,119,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,118,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMultiplicityCSAccess().getRightSquareBracketKeyword_3());
             }
@@ -74858,7 +74871,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt241=2;
                 int LA241_0 = input.LA(1);
 
-                if ( (LA241_0==110) ) {
+                if ( (LA241_0==109) ) {
                     alt241=1;
                 }
 
@@ -74959,7 +74972,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathNameCSAccess().getColonColonKeyword_1_0());
             }
-            match(input,110,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPathNameCSAccess().getColonColonKeyword_1_0());
             }
@@ -75122,7 +75135,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateSignatureCSAccess().getLeftParenthesisKeyword_0());
             }
-            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTemplateSignatureCSAccess().getLeftParenthesisKeyword_0());
             }
@@ -75296,7 +75309,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt242=2;
                 int LA242_0 = input.LA(1);
 
-                if ( (LA242_0==107) ) {
+                if ( (LA242_0==106) ) {
                     alt242=1;
                 }
 
@@ -75392,7 +75405,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateSignatureCSAccess().getRightParenthesisKeyword_3());
             }
-            match(input,109,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,108,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTemplateSignatureCSAccess().getRightParenthesisKeyword_3());
             }
@@ -75471,7 +75484,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateSignatureCSAccess().getCommaKeyword_2_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTemplateSignatureCSAccess().getCommaKeyword_2_0());
             }
@@ -75987,7 +76000,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                 int alt244=2;
                 int LA244_0 = input.LA(1);
 
-                if ( (LA244_0==128) ) {
+                if ( (LA244_0==127) ) {
                     alt244=1;
                 }
 
@@ -76088,7 +76101,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeParameterCSAccess().getAmpersandAmpersandKeyword_1_2_0());
             }
-            match(input,128,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,127,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTypeParameterCSAccess().getAmpersandAmpersandKeyword_1_2_0());
             }
@@ -76330,7 +76343,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWildcardTypeRefCSAccess().getQuestionMarkKeyword_1());
             }
-            match(input,102,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,101,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWildcardTypeRefCSAccess().getQuestionMarkKeyword_1());
             }
@@ -77385,7 +77398,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDomainCSAccess().getIsCheckonlyCheckonlyKeyword_0_0_0());
             }
-            match(input,19,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDomainCSAccess().getIsCheckonlyCheckonlyKeyword_0_0_0());
             }
@@ -79051,7 +79064,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQueryCSAccess().getIsTransientTransientKeyword_0_0());
             }
-            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,62,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQueryCSAccess().getIsTransientTransientKeyword_0_0());
             }
@@ -79360,37 +79373,37 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__RelationCS__IsTopAssignment_0"
 
 
-    // $ANTLR start "rule__RelationCS__IsDefaultAssignment_1"
-    // InternalQVTrelation.g:27088:1: rule__RelationCS__IsDefaultAssignment_1 : ( ( 'default' ) ) ;
-    public final void rule__RelationCS__IsDefaultAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__IsAbstractAssignment_1"
+    // InternalQVTrelation.g:27088:1: rule__RelationCS__IsAbstractAssignment_1 : ( ( 'abstract' ) ) ;
+    public final void rule__RelationCS__IsAbstractAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:27092:1: ( ( ( 'default' ) ) )
-            // InternalQVTrelation.g:27093:1: ( ( 'default' ) )
+            // InternalQVTrelation.g:27092:1: ( ( ( 'abstract' ) ) )
+            // InternalQVTrelation.g:27093:1: ( ( 'abstract' ) )
             {
-            // InternalQVTrelation.g:27093:1: ( ( 'default' ) )
-            // InternalQVTrelation.g:27094:1: ( 'default' )
+            // InternalQVTrelation.g:27093:1: ( ( 'abstract' ) )
+            // InternalQVTrelation.g:27094:1: ( 'abstract' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0());
+               before(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0());
             }
-            // InternalQVTrelation.g:27095:1: ( 'default' )
-            // InternalQVTrelation.g:27096:1: 'default'
+            // InternalQVTrelation.g:27095:1: ( 'abstract' )
+            // InternalQVTrelation.g:27096:1: 'abstract'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0());
+               before(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0());
             }
-            match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,19,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0());
+               after(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0());
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getIsDefaultDefaultKeyword_1_0());
+               after(grammarAccess.getRelationCSAccess().getIsAbstractAbstractKeyword_1_0());
             }
 
             }
@@ -79410,7 +79423,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__IsDefaultAssignment_1"
+    // $ANTLR end "rule__RelationCS__IsAbstractAssignment_1"
 
 
     // $ANTLR start "rule__RelationCS__NameAssignment_3"
@@ -80416,7 +80429,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitCSAccess().getIsAllAsteriskKeyword_3_1_0());
             }
-            match(input,69,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,68,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitCSAccess().getIsAllAsteriskKeyword_3_1_0());
             }
@@ -80964,7 +80977,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_0_0_0());
             }
-            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_0_0_0());
             }
@@ -81017,7 +81030,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
             }
-            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
             }
@@ -81070,7 +81083,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
             }
-            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
             }
@@ -81123,7 +81136,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_1_1_0());
             }
-            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_1_1_0());
             }
@@ -81307,7 +81320,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_0_0());
             }
-            match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_0_0());
             }
@@ -81360,7 +81373,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_1_0());
             }
-            match(input,129,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,128,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_1_0());
             }
@@ -81413,7 +81426,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_2_0());
             }
-            match(input,51,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,50,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_2_0());
             }
@@ -81466,7 +81479,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_3_0());
             }
-            match(input,130,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,129,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_3_0());
             }
@@ -81519,7 +81532,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_4_0());
             }
-            match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_4_0());
             }
@@ -81572,7 +81585,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_5_0());
             }
-            match(input,131,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,130,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_5_0());
             }
@@ -81625,7 +81638,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_6_0());
             }
-            match(input,58,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,57,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_6_0());
             }
@@ -81678,7 +81691,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_7_0());
             }
-            match(input,132,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,131,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_7_0());
             }
@@ -81731,7 +81744,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_8_0());
             }
-            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,62,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_8_0());
             }
@@ -81784,7 +81797,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_9_0());
             }
-            match(input,133,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,132,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_9_0());
             }
@@ -81837,7 +81850,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_10_0());
             }
-            match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_10_0());
             }
@@ -81890,7 +81903,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_11_0());
             }
-            match(input,134,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,133,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_11_0());
             }
@@ -81943,7 +81956,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_12_0());
             }
-            match(input,65,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_12_0());
             }
@@ -81996,7 +82009,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_13_0());
             }
-            match(input,135,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,134,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_13_0());
             }
@@ -82049,7 +82062,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_14_0());
             }
-            match(input,66,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,65,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_14_0());
             }
@@ -82102,7 +82115,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_15_0());
             }
-            match(input,136,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,135,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_15_0());
             }
@@ -82429,7 +82442,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getIsSerializableSerializableKeyword_5_1_0_0());
             }
-            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,59,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDataTypeCSAccess().getIsSerializableSerializableKeyword_5_1_0_0());
             }
@@ -82613,7 +82626,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getIsSerializableSerializableKeyword_4_1_0_0());
             }
-            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,59,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumerationCSAccess().getIsSerializableSerializableKeyword_4_1_0_0());
             }
@@ -82846,7 +82859,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_0_0_0());
             }
-            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_0_0_0());
             }
@@ -82899,7 +82912,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
             }
-            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
             }
@@ -82952,7 +82965,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
             }
-            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
             }
@@ -83005,7 +83018,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_1_1_0());
             }
-            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_1_1_0());
             }
@@ -83373,7 +83386,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_0_0());
             }
-            match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_0_0());
             }
@@ -83426,7 +83439,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_1_0());
             }
-            match(input,129,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,128,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_1_0());
             }
@@ -83479,7 +83492,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_2_0());
             }
-            match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_2_0());
             }
@@ -83532,7 +83545,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_3_0());
             }
-            match(input,131,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,130,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_3_0());
             }
@@ -83585,7 +83598,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_4_0());
             }
-            match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_4_0());
             }
@@ -83638,7 +83651,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_5_0());
             }
-            match(input,134,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,133,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_5_0());
             }
@@ -83826,7 +83839,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_0_0());
             }
-            match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_0_0());
             }
@@ -83879,7 +83892,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_1_0());
             }
-            match(input,131,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,130,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_1_0());
             }
@@ -83932,7 +83945,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_2_0());
             }
-            match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_2_0());
             }
@@ -83985,7 +83998,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_3_0());
             }
-            match(input,134,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,133,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_3_0());
             }
@@ -84038,7 +84051,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_0_0_0());
             }
-            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_0_0_0());
             }
@@ -84091,7 +84104,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
             }
-            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
             }
@@ -84144,7 +84157,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
             }
-            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,46,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
             }
@@ -84197,7 +84210,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_1_1_0());
             }
-            match(input,61,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,60,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_1_1_0());
             }
@@ -84438,7 +84451,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_0_0());
             }
-            match(input,45,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,44,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_0_0());
             }
@@ -84491,7 +84504,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_1_0());
             }
-            match(input,137,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,136,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_1_0());
             }
@@ -84544,7 +84557,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_2_0());
             }
-            match(input,48,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,47,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_2_0());
             }
@@ -84597,7 +84610,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_3_0());
             }
-            match(input,129,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,128,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_3_0());
             }
@@ -84650,7 +84663,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_4_0());
             }
-            match(input,56,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,55,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_4_0());
             }
@@ -84703,7 +84716,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_5_0());
             }
-            match(input,131,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,130,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_5_0());
             }
@@ -84756,7 +84769,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_6_0());
             }
-            match(input,58,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,57,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_6_0());
             }
@@ -84809,7 +84822,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_7_0());
             }
-            match(input,132,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,131,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_7_0());
             }
@@ -84862,7 +84875,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_8_0());
             }
-            match(input,59,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,58,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_8_0());
             }
@@ -84915,7 +84928,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_9_0());
             }
-            match(input,138,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,137,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_9_0());
             }
@@ -84968,7 +84981,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_10_0());
             }
-            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,62,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_10_0());
             }
@@ -85021,7 +85034,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_11_0());
             }
-            match(input,133,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,132,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_11_0());
             }
@@ -85074,7 +85087,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_12_0());
             }
-            match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,63,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_12_0());
             }
@@ -85127,7 +85140,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_13_0());
             }
-            match(input,134,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,133,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_13_0());
             }
@@ -85180,7 +85193,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_14_0());
             }
-            match(input,65,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,64,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_14_0());
             }
@@ -85233,7 +85246,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_15_0());
             }
-            match(input,135,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,134,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_15_0());
             }
@@ -85286,7 +85299,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_16_0());
             }
-            match(input,66,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,65,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_16_0());
             }
@@ -85339,7 +85352,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_17_0());
             }
-            match(input,136,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,135,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_17_0());
             }
@@ -85568,7 +85581,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getIsAbstractAbstractKeyword_0_0());
             }
-            match(input,41,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,19,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getIsAbstractAbstractKeyword_0_0());
             }
@@ -85842,7 +85855,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getIsInterfaceInterfaceKeyword_6_1_0());
             }
-            match(input,53,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,52,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStructuredClassCSAccess().getIsInterfaceInterfaceKeyword_6_1_0());
             }
@@ -86414,7 +86427,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getNameMapKeyword_0_0());
             }
-            match(input,86,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,85,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMapTypeCSAccess().getNameMapKeyword_0_0());
             }
@@ -86557,7 +86570,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getNameTupleKeyword_0_0());
             }
-            match(input,87,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,86,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleTypeCSAccess().getNameTupleKeyword_0_0());
             }
@@ -88068,7 +88081,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolTrueKeyword_0_0());
             }
-            match(input,139,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,138,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolTrueKeyword_0_0());
             }
@@ -88121,7 +88134,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolFalseKeyword_1_0());
             }
-            match(input,140,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,139,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolFalseKeyword_1_0());
             }
@@ -88894,7 +88907,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getIsPreCommercialAtKeyword_4_0_0());
             }
-            match(input,141,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,140,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNameExpCSAccess().getIsPreCommercialAtKeyword_4_0_0());
             }
@@ -89622,7 +89635,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0());
             }
-            match(input,142,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,141,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0());
             }
@@ -89810,7 +89823,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0());
             }
-            match(input,107,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,106,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0());
             }
@@ -90957,7 +90970,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityCSAccess().getIsNullFree1Keyword_2_1_0());
             }
-            match(input,143,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            match(input,142,FollowSets000.FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getMultiplicityCSAccess().getIsNullFree1Keyword_2_1_0());
             }
@@ -92036,63 +92049,62 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     protected DFA123 dfa123 = new DFA123(this);
     protected DFA210 dfa210 = new DFA210(this);
     protected DFA211 dfa211 = new DFA211(this);
-    static final String dfa_1s = "\65\uffff";
-    static final String dfa_2s = "\1\6\62\147\2\uffff";
-    static final String dfa_3s = "\1\147\62\153\2\uffff";
-    static final String dfa_4s = "\63\uffff\1\1\1\2";
-    static final String dfa_5s = "\65\uffff}>";
+    static final String dfa_1s = "\64\uffff";
+    static final String dfa_2s = "\1\6\61\146\2\uffff";
+    static final String dfa_3s = "\1\146\61\152\2\uffff";
+    static final String dfa_4s = "\62\uffff\1\1\1\2";
+    static final String dfa_5s = "\64\uffff}>";
     static final String[] dfa_6s = {
-            "\1\1\1\2\12\uffff\1\55\1\37\1\40\1\41\1\42\1\43\1\15\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\24\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\44\uffff\1\63",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
-            "\1\63\2\uffff\2\64",
+            "\1\1\1\2\12\uffff\1\54\1\3\1\37\1\40\1\41\1\42\1\15\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\24\1\52\1\53\1\55\1\56\1\57\1\60\1\61\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\44\uffff\1\62",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
+            "\1\62\2\uffff\2\63",
             "",
             ""
     };
@@ -92121,7 +92133,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "3643:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );";
         }
     }
-    static final String dfa_7s = "\1\uffff\62\64\2\uffff";
+    static final String dfa_7s = "\1\uffff\61\63\2\uffff";
     static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
 
     class DFA7 extends DFA {
@@ -92141,14 +92153,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "3665:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );";
         }
     }
-    static final String dfa_8s = "\66\uffff";
-    static final String dfa_9s = "\1\6\63\0\2\uffff";
-    static final String dfa_10s = "\1\147\63\0\2\uffff";
-    static final String dfa_11s = "\64\uffff\1\1\1\2";
-    static final String dfa_12s = "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40\1\41\1\42\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61\1\62\2\uffff}>";
+    static final String dfa_8s = "\65\uffff";
+    static final String dfa_9s = "\1\6\62\0\2\uffff";
+    static final String dfa_10s = "\1\146\62\0\2\uffff";
+    static final String dfa_11s = "\63\uffff\1\1\1\2";
+    static final String dfa_12s = "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40\1\41\1\42\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61\2\uffff}>";
     static final String[] dfa_13s = {
-            "\1\1\1\2\12\uffff\1\55\1\37\1\40\1\41\1\42\1\43\1\15\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\24\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\44\uffff\1\63",
-            "\1\uffff",
+            "\1\1\1\2\12\uffff\1\54\1\3\1\37\1\40\1\41\1\42\1\15\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\24\1\52\1\53\1\55\1\56\1\57\1\60\1\61\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\44\uffff\1\62",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
@@ -92237,9 +92248,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_1);
@@ -92252,9 +92263,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_2 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_2);
@@ -92267,9 +92278,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_3 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_3);
@@ -92282,9 +92293,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_4 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_4);
@@ -92297,9 +92308,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_5 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_5);
@@ -92312,9 +92323,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_6 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_6);
@@ -92327,9 +92338,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_7 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_7);
@@ -92342,9 +92353,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_8 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_8);
@@ -92357,9 +92368,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_9 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_9);
@@ -92372,9 +92383,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_10 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_10);
@@ -92387,9 +92398,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_11 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_11);
@@ -92402,9 +92413,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_12 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_12);
@@ -92417,9 +92428,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_13 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_13);
@@ -92432,9 +92443,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_14 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_14);
@@ -92447,9 +92458,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_15 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_15);
@@ -92462,9 +92473,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_16 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_16);
@@ -92477,9 +92488,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_17 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_17);
@@ -92492,9 +92503,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_18 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_18);
@@ -92507,9 +92518,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_19 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_19);
@@ -92522,9 +92533,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_20 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_20);
@@ -92537,9 +92548,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_21 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_21);
@@ -92552,9 +92563,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_22 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_22);
@@ -92567,9 +92578,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_23 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_23);
@@ -92582,9 +92593,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_24 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_24);
@@ -92597,9 +92608,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_25 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_25);
@@ -92612,9 +92623,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_26 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_26);
@@ -92627,9 +92638,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_27 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_27);
@@ -92642,9 +92653,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_28 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_28);
@@ -92657,9 +92668,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_29 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_29);
@@ -92672,9 +92683,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_30 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_30);
@@ -92687,9 +92698,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_31 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_31);
@@ -92702,9 +92713,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_32 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_32);
@@ -92717,9 +92728,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_33 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_33);
@@ -92732,9 +92743,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_34 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_34);
@@ -92747,9 +92758,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_35 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_35);
@@ -92762,9 +92773,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_36 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_36);
@@ -92777,9 +92788,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_37 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_37);
@@ -92792,9 +92803,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_38 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_38);
@@ -92807,9 +92818,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_39 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_39);
@@ -92822,9 +92833,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_40 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_40);
@@ -92837,9 +92848,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_41 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_41);
@@ -92852,9 +92863,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_42 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_42);
@@ -92867,9 +92878,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_43 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_43);
@@ -92882,9 +92893,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_44 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_44);
@@ -92897,9 +92908,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_45 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_45);
@@ -92912,9 +92923,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_46 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_46);
@@ -92927,9 +92938,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_47 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_47);
@@ -92942,9 +92953,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_48 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_48);
@@ -92957,9 +92968,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_49 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_49);
@@ -92972,27 +92983,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index15_50 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
+                        if ( (synpred16_InternalQVTrelation()) ) {s = 51;}
 
-                        else if ( (true) ) {s = 53;}
+                        else if ( (true) ) {s = 52;}
 
 
                         input.seek(index15_50);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 50 :
-                        int LA15_51 = input.LA(1);
-
-
-                        int index15_51 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred16_InternalQVTrelation()) ) {s = 52;}
-
-                        else if ( (true) ) {s = 53;}
-
-
-                        input.seek(index15_51);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -93003,63 +92999,62 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             throw nvae;
         }
     }
-    static final String dfa_14s = "\2\uffff\62\1\1\uffff";
-    static final String dfa_15s = "\1\4\1\uffff\62\103\1\uffff";
-    static final String dfa_16s = "\1\u008c\1\uffff\62\u008d\1\uffff";
-    static final String dfa_17s = "\1\uffff\1\1\62\uffff\1\2";
+    static final String dfa_14s = "\2\uffff\61\1\1\uffff";
+    static final String dfa_15s = "\1\4\1\uffff\61\102\1\uffff";
+    static final String dfa_16s = "\1\u008b\1\uffff\61\u008c\1\uffff";
+    static final String dfa_17s = "\1\uffff\1\1\61\uffff\1\2";
     static final String[] dfa_18s = {
-            "\2\1\1\2\1\3\12\uffff\1\56\1\40\1\41\1\42\1\43\1\44\1\16\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\25\1\54\1\55\1\57\1\60\1\61\1\62\1\63\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\3\1\20\uffff\17\1\2\uffff\1\64\4\uffff\1\1\4\uffff\1\1\1\uffff\2\1\4\uffff\1\1\4\uffff\2\1\13\uffff\2\1",
+            "\2\1\1\2\1\3\12\uffff\1\55\1\4\1\40\1\41\1\42\1\43\1\16\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\25\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\3\1\20\uffff\17\1\2\uffff\1\63\4\uffff\1\1\4\uffff\1\1\1\uffff\2\1\4\uffff\1\1\4\uffff\2\1\13\uffff\2\1",
             "",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\7\uffff\1\1\26\uffff\1\1",
             ""
     };
     static final short[] dfa_14 = DFA.unpackEncodedString(dfa_14s);
@@ -93086,58 +93081,57 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
     }
     static final String[] dfa_19s = {
-            "\2\1\1\2\1\3\12\uffff\1\56\1\40\1\41\1\42\1\43\1\44\1\16\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\25\1\54\1\55\1\57\1\60\1\61\1\62\1\63\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\3\1\20\uffff\17\1\2\uffff\1\64\4\uffff\1\1\4\uffff\1\1\1\uffff\2\1\4\uffff\1\1\4\uffff\2\1\13\uffff\2\1",
+            "\2\1\1\2\1\3\12\uffff\1\55\1\4\1\40\1\41\1\42\1\43\1\16\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\25\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\3\1\20\uffff\17\1\2\uffff\1\63\4\uffff\1\1\4\uffff\1\1\1\uffff\2\1\4\uffff\1\1\4\uffff\2\1\13\uffff\2\1",
             "",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\2\1\1\uffff\2\1\1\uffff\1\1\1\uffff\1\1\5\uffff\1\1\26\uffff\1\1",
             ""
     };
     static final short[][] dfa_19 = unpackEncodedStringArray(dfa_19s);
@@ -93177,14 +93171,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "5586:1: rule__ShadowPartCS__OwnedInitExpressionAlternatives_0_2_0 : ( ( ruleExpCS ) | ( rulePatternExpCS ) );";
         }
     }
-    static final String dfa_20s = "\103\uffff";
-    static final String dfa_21s = "\1\6\72\uffff\5\0\3\uffff";
-    static final String dfa_22s = "\1\144\72\uffff\5\0\3\uffff";
-    static final String dfa_23s = "\1\uffff\1\1\61\uffff\1\2\16\uffff\1\3";
-    static final String dfa_24s = "\73\uffff\1\0\1\1\1\2\1\3\1\4\3\uffff}>";
+    static final String dfa_20s = "\102\uffff";
+    static final String dfa_21s = "\1\6\71\uffff\5\0\3\uffff";
+    static final String dfa_22s = "\1\143\71\uffff\5\0\3\uffff";
+    static final String dfa_23s = "\1\uffff\1\1\60\uffff\1\2\16\uffff\1\3";
+    static final String dfa_24s = "\72\uffff\1\0\1\1\1\2\1\3\1\4\3\uffff}>";
     static final String[] dfa_25s = {
-            "\2\1\12\uffff\26\1\1\uffff\32\1\23\uffff\12\63\1\73\1\74\1\75\1\76\1\77",
-            "",
+            "\2\1\12\uffff\26\1\1\uffff\31\1\23\uffff\12\62\1\72\1\73\1\74\1\75\1\76",
             "",
             "",
             "",
@@ -93280,78 +93273,78 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         	int _s = s;
             switch ( s ) {
                     case 0 :
+                        int LA59_58 = input.LA(1);
+
+
+                        int index59_58 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred178_InternalQVTrelation()) ) {s = 50;}
+
+                        else if ( (true) ) {s = 65;}
+
+
+                        input.seek(index59_58);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 :
                         int LA59_59 = input.LA(1);
 
 
                         int index59_59 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred178_InternalQVTrelation()) ) {s = 51;}
+                        if ( (synpred178_InternalQVTrelation()) ) {s = 50;}
 
-                        else if ( (true) ) {s = 66;}
+                        else if ( (true) ) {s = 65;}
 
 
                         input.seek(index59_59);
                         if ( s>=0 ) return s;
                         break;
-                    case 1 :
+                    case 2 :
                         int LA59_60 = input.LA(1);
 
 
                         int index59_60 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred178_InternalQVTrelation()) ) {s = 51;}
+                        if ( (synpred178_InternalQVTrelation()) ) {s = 50;}
 
-                        else if ( (true) ) {s = 66;}
+                        else if ( (true) ) {s = 65;}
 
 
                         input.seek(index59_60);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 :
+                    case 3 :
                         int LA59_61 = input.LA(1);
 
 
                         int index59_61 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred178_InternalQVTrelation()) ) {s = 51;}
+                        if ( (synpred178_InternalQVTrelation()) ) {s = 50;}
 
-                        else if ( (true) ) {s = 66;}
+                        else if ( (true) ) {s = 65;}
 
 
                         input.seek(index59_61);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 :
+                    case 4 :
                         int LA59_62 = input.LA(1);
 
 
                         int index59_62 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred178_InternalQVTrelation()) ) {s = 51;}
+                        if ( (synpred178_InternalQVTrelation()) ) {s = 50;}
 
-                        else if ( (true) ) {s = 66;}
+                        else if ( (true) ) {s = 65;}
 
 
                         input.seek(index59_62);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 :
-                        int LA59_63 = input.LA(1);
-
-
-                        int index59_63 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred178_InternalQVTrelation()) ) {s = 51;}
-
-                        else if ( (true) ) {s = 66;}
-
-
-                        input.seek(index59_63);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -93362,16 +93355,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             throw nvae;
         }
     }
-    static final String dfa_26s = "\120\uffff";
-    static final String dfa_27s = "\1\4\2\0\115\uffff";
-    static final String dfa_28s = "\1\u008c\2\0\115\uffff";
-    static final String dfa_29s = "\3\uffff\1\1\113\uffff\1\2";
-    static final String dfa_30s = "\1\uffff\1\0\1\1\115\uffff}>";
+    static final String dfa_26s = "\117\uffff";
+    static final String dfa_27s = "\1\4\2\0\114\uffff";
+    static final String dfa_28s = "\1\u008b\2\0\114\uffff";
+    static final String dfa_29s = "\3\uffff\1\1\112\uffff\1\2";
+    static final String dfa_30s = "\1\uffff\1\0\1\1\114\uffff}>";
     static final String[] dfa_31s = {
-            "\4\3\12\uffff\26\3\1\uffff\32\3\1\1\1\2\1\3\20\uffff\17\3\7\uffff\1\3\4\uffff\1\3\1\uffff\2\3\4\uffff\1\3\4\uffff\1\117\1\3\13\uffff\2\3",
+            "\4\3\12\uffff\26\3\1\uffff\31\3\1\1\1\2\1\3\20\uffff\17\3\7\uffff\1\3\4\uffff\1\3\1\uffff\2\3\4\uffff\1\3\4\uffff\1\116\1\3\13\uffff\2\3",
             "\1\uffff",
             "\1\uffff",
-            "",
             "",
             "",
             "",
@@ -93486,7 +93478,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         s = -1;
                         if ( (synpred179_InternalQVTrelation()) ) {s = 3;}
 
-                        else if ( (true) ) {s = 79;}
+                        else if ( (true) ) {s = 78;}
 
 
                         input.seek(index60_1);
@@ -93501,7 +93493,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         s = -1;
                         if ( (synpred179_InternalQVTrelation()) ) {s = 3;}
 
-                        else if ( (true) ) {s = 79;}
+                        else if ( (true) ) {s = 78;}
 
 
                         input.seek(index60_2);
@@ -93515,12 +93507,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             throw nvae;
         }
     }
-    static final String dfa_32s = "\1\4\12\uffff\7\0\76\uffff";
-    static final String dfa_33s = "\1\u008c\12\uffff\7\0\76\uffff";
-    static final String dfa_34s = "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\61\uffff\1\5\1\6\1\7";
-    static final String dfa_35s = "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\76\uffff}>";
+    static final String dfa_32s = "\1\4\12\uffff\7\0\75\uffff";
+    static final String dfa_33s = "\1\u008b\12\uffff\7\0\75\uffff";
+    static final String dfa_34s = "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\60\uffff\1\5\1\6\1\7";
+    static final String dfa_35s = "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\75\uffff}>";
     static final String[] dfa_36s = {
-            "\2\4\2\33\12\uffff\26\33\1\uffff\32\33\2\uffff\1\4\20\uffff\1\14\1\13\10\23\1\15\1\16\1\17\1\20\1\21\7\uffff\1\1\4\uffff\1\22\1\uffff\2\4\4\uffff\1\2\5\uffff\1\3\13\uffff\2\4",
+            "\2\4\2\33\12\uffff\26\33\1\uffff\31\33\2\uffff\1\4\20\uffff\1\14\1\13\10\23\1\15\1\16\1\17\1\20\1\21\7\uffff\1\1\4\uffff\1\22\1\uffff\2\4\4\uffff\1\2\5\uffff\1\3\13\uffff\2\4",
             "",
             "",
             "",
@@ -93538,7 +93530,6 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
-            "",
             "",
             "",
             "",
@@ -93634,7 +93625,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_11 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred186_InternalQVTrelation()) ) {s = 77;}
+                        if ( (synpred186_InternalQVTrelation()) ) {s = 76;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93649,7 +93640,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_12 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred187_InternalQVTrelation()) ) {s = 78;}
+                        if ( (synpred187_InternalQVTrelation()) ) {s = 77;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93664,7 +93655,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_13 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred188_InternalQVTrelation()) ) {s = 79;}
+                        if ( (synpred188_InternalQVTrelation()) ) {s = 78;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93679,7 +93670,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_14 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred188_InternalQVTrelation()) ) {s = 79;}
+                        if ( (synpred188_InternalQVTrelation()) ) {s = 78;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93694,7 +93685,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_15 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred188_InternalQVTrelation()) ) {s = 79;}
+                        if ( (synpred188_InternalQVTrelation()) ) {s = 78;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93709,7 +93700,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_16 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred188_InternalQVTrelation()) ) {s = 79;}
+                        if ( (synpred188_InternalQVTrelation()) ) {s = 78;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93724,7 +93715,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                         int index63_17 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred188_InternalQVTrelation()) ) {s = 79;}
+                        if ( (synpred188_InternalQVTrelation()) ) {s = 78;}
 
                         else if ( (synpred190_InternalQVTrelation()) ) {s = 19;}
 
@@ -93741,58 +93732,57 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
     }
     static final String[] dfa_37s = {
-            "\2\1\1\2\1\3\12\uffff\1\56\1\40\1\41\1\42\1\43\1\44\1\16\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\25\1\54\1\55\1\57\1\60\1\61\1\62\1\63\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\3\1\20\uffff\17\1\2\uffff\1\64\4\uffff\1\1\4\uffff\1\1\1\uffff\2\1\4\uffff\1\1\4\uffff\2\1\13\uffff\2\1",
+            "\2\1\1\2\1\3\12\uffff\1\55\1\4\1\40\1\41\1\42\1\43\1\16\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\25\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\3\1\20\uffff\17\1\2\uffff\1\63\4\uffff\1\1\4\uffff\1\1\1\uffff\2\1\4\uffff\1\1\4\uffff\2\1\13\uffff\2\1",
             "",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
-            "\1\1\1\uffff\21\1\21\uffff\1\64\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
+            "\1\1\1\uffff\21\1\21\uffff\1\63\1\1\3\uffff\1\1\1\uffff\1\1\7\uffff\1\1\3\uffff\1\1\22\uffff\1\1",
             ""
     };
     static final short[][] dfa_37 = unpackEncodedStringArray(dfa_37s);
@@ -93814,60 +93804,59 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "5940:1: rule__IfExpCS__OwnedConditionAlternatives_1_0 : ( ( ruleExpCS ) | ( rulePatternExpCS ) );";
         }
     }
-    static final String dfa_38s = "\1\6\62\21\2\uffff";
-    static final String dfa_39s = "\1\102\62\156\2\uffff";
+    static final String dfa_38s = "\1\6\61\21\2\uffff";
+    static final String dfa_39s = "\1\101\61\155\2\uffff";
     static final String[] dfa_40s = {
-            "\1\1\1\2\12\uffff\1\55\1\37\1\40\1\41\1\42\1\43\1\15\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\24\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
-            "\1\64\72\uffff\1\64\32\uffff\2\64\5\uffff\1\63",
+            "\1\1\1\2\12\uffff\1\54\1\3\1\37\1\40\1\41\1\42\1\15\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\24\1\52\1\53\1\55\1\56\1\57\1\60\1\61\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
+            "\1\63\71\uffff\1\63\32\uffff\2\63\5\uffff\1\62",
             "",
             ""
     };
@@ -93892,65 +93881,64 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "6223:1: ( rule__QualifiedPackageCS__OwnedPathNameAssignment_1 )?";
         }
     }
-    static final String dfa_41s = "\1\1\2\uffff\62\65\1\uffff";
-    static final String dfa_42s = "\1\153\1\uffff\1\6\62\147\1\uffff";
-    static final String dfa_43s = "\1\155\1\uffff\1\102\62\155\1\uffff";
-    static final String dfa_44s = "\1\uffff\1\2\63\uffff\1\1";
-    static final String dfa_45s = "\66\uffff}>";
+    static final String dfa_41s = "\1\1\2\uffff\61\64\1\uffff";
+    static final String dfa_42s = "\1\152\1\uffff\1\6\61\146\1\uffff";
+    static final String dfa_43s = "\1\154\1\uffff\1\101\61\154\1\uffff";
+    static final String dfa_44s = "\1\uffff\1\2\62\uffff\1\1";
+    static final String dfa_45s = "\65\uffff}>";
     static final String[] dfa_46s = {
             "\1\2\1\uffff\1\1",
             "",
-            "\1\3\1\4\12\uffff\1\57\1\41\1\42\1\43\1\44\1\45\1\17\1\46\1\47\1\50\1\51\1\52\1\53\1\54\1\26\1\55\1\56\1\60\1\61\1\62\1\63\1\64\1\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\20\1\21\1\22\1\23\1\24\1\25\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
-            "\1\1\3\uffff\1\65\1\uffff\1\65",
+            "\1\3\1\4\12\uffff\1\56\1\5\1\41\1\42\1\43\1\44\1\17\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\26\1\54\1\55\1\57\1\60\1\61\1\62\1\63\1\uffff\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\20\1\21\1\22\1\23\1\24\1\25\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
+            "\1\1\3\uffff\1\64\1\uffff\1\64",
             ""
     };
     static final short[] dfa_41 = DFA.unpackEncodedString(dfa_41s);
@@ -93977,63 +93965,62 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "()* loopback of 8539:1: ( rule__ModelDeclCS__Group_3_2__0 )*";
         }
     }
-    static final String dfa_47s = "\1\1\64\uffff";
-    static final String dfa_48s = "\1\6\1\uffff\62\21\1\uffff";
-    static final String dfa_49s = "\1\144\1\uffff\62\156\1\uffff";
-    static final String dfa_50s = "\1\uffff\1\2\62\uffff\1\1";
+    static final String dfa_47s = "\1\1\63\uffff";
+    static final String dfa_48s = "\1\6\1\uffff\61\21\1\uffff";
+    static final String dfa_49s = "\1\143\1\uffff\61\155\1\uffff";
+    static final String dfa_50s = "\1\uffff\1\2\61\uffff\1\1";
     static final String[] dfa_51s = {
-            "\1\2\1\3\12\uffff\1\56\1\40\1\41\1\42\1\43\1\44\1\16\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\25\1\54\1\55\1\57\1\60\1\61\1\62\1\63\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\23\uffff\17\64",
+            "\1\2\1\3\12\uffff\1\55\1\4\1\40\1\41\1\42\1\43\1\16\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\25\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\17\1\20\1\21\1\22\1\23\1\24\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\23\uffff\17\63",
             "",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
-            "\1\1\72\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\64",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
+            "\1\1\71\uffff\1\1\32\uffff\2\1\3\uffff\1\1\1\uffff\1\63",
             ""
     };
     static final short[] dfa_47 = DFA.unpackEncodedString(dfa_47s);
@@ -94059,59 +94046,58 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "()* loopback of 10630:1: ( rule__ScopeNameCS__Group_2__0 )*";
         }
     }
-    static final String dfa_52s = "\1\6\62\154\2\uffff";
+    static final String dfa_52s = "\1\6\61\153\2\uffff";
     static final String[] dfa_53s = {
-            "\1\1\1\2\12\uffff\1\55\1\37\1\40\1\41\1\42\1\43\1\15\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\24\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
-            "\1\64\1\uffff\1\63",
+            "\1\1\1\2\12\uffff\1\54\1\3\1\37\1\40\1\41\1\42\1\15\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\24\1\52\1\53\1\55\1\56\1\57\1\60\1\61\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
+            "\1\63\1\uffff\1\62",
             "",
             ""
     };
@@ -94135,60 +94121,59 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             return "10916:1: ( rule__TransformationCS__OwnedPathNameAssignment_1 )?";
         }
     }
-    static final String dfa_54s = "\1\5\62\21\2\uffff";
-    static final String dfa_55s = "\63\uffff\1\2\1\1";
+    static final String dfa_54s = "\1\5\61\21\2\uffff";
+    static final String dfa_55s = "\62\uffff\1\2\1\1";
     static final String[] dfa_56s = {
-            "\1\63\1\1\1\2\12\uffff\1\55\1\37\1\40\1\41\1\42\1\43\1\15\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\24\1\53\1\54\1\56\1\57\1\60\1\61\1\62\1\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
-            "\1\63\125\uffff\1\64\6\uffff\1\63",
+            "\1\62\1\1\1\2\12\uffff\1\54\1\3\1\37\1\40\1\41\1\42\1\15\1\43\1\44\1\45\1\46\1\47\1\50\1\51\1\24\1\52\1\53\1\55\1\56\1\57\1\60\1\61\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
+            "\1\62\124\uffff\1\63\6\uffff\1\62",
             "",
             ""
     };
@@ -94215,19 +94200,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     }
     static final String dfa_57s = "\16\uffff";
     static final String dfa_58s = "\1\2\15\uffff";
-    static final String dfa_59s = "\1\21\1\4\1\uffff\4\145\1\4\2\167\1\0\2\145\1\uffff";
-    static final String dfa_60s = "\1\u0080\1\146\1\uffff\4\u008f\1\105\2\167\1\0\2\u008f\1\uffff";
+    static final String dfa_59s = "\1\21\1\4\1\uffff\4\144\1\4\2\166\1\0\2\144\1\uffff";
+    static final String dfa_60s = "\1\177\1\145\1\uffff\4\u008e\1\104\2\166\1\0\2\u008e\1\uffff";
     static final String dfa_61s = "\2\uffff\1\2\12\uffff\1\1";
     static final String dfa_62s = "\12\uffff\1\0\3\uffff}>";
     static final String[] dfa_63s = {
-            "\1\2\54\uffff\1\2\15\uffff\1\2\32\uffff\2\2\2\uffff\1\2\1\uffff\1\2\10\uffff\1\1\11\uffff\1\2",
-            "\1\3\100\uffff\1\4\1\uffff\1\5\36\uffff\1\6",
+            "\1\2\53\uffff\1\2\15\uffff\1\2\32\uffff\2\2\2\uffff\1\2\1\uffff\1\2\10\uffff\1\1\11\uffff\1\2",
+            "\1\3\77\uffff\1\4\1\uffff\1\5\36\uffff\1\6",
             "",
             "\1\10\12\uffff\1\7\6\uffff\1\12\27\uffff\1\11",
             "\1\10\21\uffff\1\12\27\uffff\1\11",
             "\1\10\21\uffff\1\12\27\uffff\1\11",
             "\1\10\21\uffff\1\12\27\uffff\1\11",
-            "\1\13\100\uffff\1\14",
+            "\1\13\77\uffff\1\14",
             "\1\12",
             "\1\12",
             "\1\uffff",
@@ -94378,11 +94363,11 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     static final String dfa_64s = "\15\uffff";
     static final String dfa_65s = "\1\2\14\uffff";
     static final String dfa_66s = "\1\21\1\0\13\uffff";
-    static final String dfa_67s = "\1\u008e\1\0\13\uffff";
+    static final String dfa_67s = "\1\u008d\1\0\13\uffff";
     static final String dfa_68s = "\2\uffff\1\2\11\uffff\1\1";
     static final String dfa_69s = "\1\uffff\1\0\13\uffff}>";
     static final String[] dfa_70s = {
-            "\1\2\72\uffff\1\2\33\uffff\1\1\3\2\1\uffff\1\2\10\uffff\1\2\3\uffff\1\2\23\uffff\1\2",
+            "\1\2\71\uffff\1\2\33\uffff\1\1\3\2\1\uffff\1\2\10\uffff\1\2\3\uffff\1\2\23\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -94502,126 +94487,126 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000001080000000L});
         public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000004000002L});
         public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000001080000002L});
-        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000000000000007L});
-        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000020000L,0x0000018000001000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000000000000003L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000020000L,0x000000C000000800L});
         public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0004521180000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0004521180000002L});
-        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000008000000000L});
-        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x0000001F00000000L});
-        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
-        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000028000000007L});
-        public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
-        public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000002L,0x0000080000000000L});
-        public static final BitSet FOLLOW_18 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000008000000007L});
-        public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
-        public static final BitSet FOLLOW_20 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0xC21A101FFFC0003FL,0x0000000000001800L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0002281180080000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0002281180080002L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x0000000F80000000L});
+        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000008000000000L});
+        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000014000000003L});
+        public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000060000000000L});
+        public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000002L,0x0000040000000000L});
+        public static final BitSet FOLLOW_18 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000004000000003L});
+        public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
+        public static final BitSet FOLLOW_20 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x610D080FFFE0001FL,0x0000000000000C00L});
         public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000020000L});
         public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000002220000L,0x0000080000000000L});
-        public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_25 = new BitSet(new long[]{0xFFFFFEFFFFFC00C2L,0x0000000000000007L});
-        public static final BitSet FOLLOW_26 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x821A101FFFC0003FL,0x0000000000001800L});
-        public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x00000A0000000000L});
-        public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000100000000000L});
-        public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000000L,0x0000200000000000L});
-        public static final BitSet FOLLOW_30 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000010000000007L});
+        public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000002220000L,0x0000040000000000L});
+        public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_25 = new BitSet(new long[]{0xFFFFFEFFFFFC00C2L,0x0000000000000003L});
+        public static final BitSet FOLLOW_26 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x410D080FFFE0001FL,0x0000000000000C00L});
+        public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000050000000000L});
+        public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+        public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000000L,0x0000100000000000L});
+        public static final BitSet FOLLOW_30 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000008000000003L});
         public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
-        public static final BitSet FOLLOW_33 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000020000000007L});
-        public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000000020000L,0x0000080000000000L});
-        public static final BitSet FOLLOW_35 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0xC21A109FFFC0003FL,0x0000000000001800L});
+        public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+        public static final BitSet FOLLOW_33 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000010000000003L});
+        public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000000020000L,0x0000040000000000L});
+        public static final BitSet FOLLOW_35 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x610D084FFFE0001FL,0x0000000000000C00L});
         public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000200000000L});
-        public static final BitSet FOLLOW_37 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000200000000007L});
-        public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000020000L,0x0000010000000000L});
-        public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000400100000L});
-        public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000040000000L,0x0000010000000000L});
-        public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x000000C000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-        public static final BitSet FOLLOW_43 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000001FFFC00007L});
-        public static final BitSet FOLLOW_44 = new BitSet(new long[]{0xFFFFFEFFFFFC00C2L,0x0000001FFFC00007L});
-        public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000280000000000L});
-        public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000001000000L,0x0000010000000000L});
-        public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x8000000E10100000L,0x0000020000000000L});
+        public static final BitSet FOLLOW_37 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000100000000003L});
+        public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000020000L,0x0000008000000000L});
+        public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000400080000L});
+        public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000040000000L,0x0000008000000000L});
+        public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x000000C000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000000L,0x0000200000000000L});
+        public static final BitSet FOLLOW_43 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000000FFFE00003L});
+        public static final BitSet FOLLOW_44 = new BitSet(new long[]{0xFFFFFEFFFFFC00C2L,0x0000000FFFE00003L});
+        public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000140000000000L});
+        public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000001000000L,0x0000008000000000L});
+        public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x4000000E10080000L,0x0000010000000000L});
         public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000010000002L});
-        public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x8000000E00100002L});
-        public static final BitSet FOLLOW_50 = new BitSet(new long[]{0xFFFFFEFFFFFC00E0L,0x0000000000000007L});
-        public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000020000L,0x0000400000000000L});
-        public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-        public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000020000L,0x0000088000001000L});
+        public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x4000000E00080002L});
+        public static final BitSet FOLLOW_50 = new BitSet(new long[]{0xFFFFFEFFFFFC00E0L,0x0000000000000003L});
+        public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000020000L,0x0000200000000000L});
+        public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
+        public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000020000L,0x0000044000000800L});
         public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000004000000000L});
-        public static final BitSet FOLLOW_55 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0xC21A121FFFC0003FL,0x0000000000001800L});
-        public static final BitSet FOLLOW_56 = new BitSet(new long[]{0xFFFFFEFFFFFC00F2L,0xC21A101FFFC0003FL,0x0000000000001800L});
+        public static final BitSet FOLLOW_55 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x610D090FFFE0001FL,0x0000000000000C00L});
+        public static final BitSet FOLLOW_56 = new BitSet(new long[]{0xFFFFFEFFFFFC00F2L,0x610D080FFFE0001FL,0x0000000000000C00L});
         public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000008000000000L});
-        public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000000000000L,0x0040000000000000L});
-        public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000040000000000L});
-        public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000800000000000L});
-        public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x2000000000000000L});
-        public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x8509000000000000L,0x0000000000000007L,0x00000000000001FEL});
-        public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x8509000000000002L,0x0000000000000007L,0x00000000000001FEL});
-        public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0012000000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0012000000000002L});
-        public static final BitSet FOLLOW_66 = new BitSet(new long[]{0xFFFFFEFFFFFE01F0L,0xC21A101FFFC0003FL,0x0000000000001800L});
-        public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0000400100000000L});
-        public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0000000000020000L,0x0000118000000000L});
-        public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x1000010000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x00400000000000C0L,0x0000020000000000L});
-        public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x00400000000000C2L});
-        public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0000000000020000L,0x0000010000001000L});
-        public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0000000000000010L,0x0000000000000008L});
-        public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0080000000000000L});
-        public static final BitSet FOLLOW_75 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000100000000007L});
-        public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x4000000000020000L,0x0000018000000000L});
-        public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0101000000000000L,0x0000000000000001L,0x000000000000004AL});
-        public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0101000000000002L,0x0000000000000001L,0x000000000000004AL});
-        public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000080000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000080000000002L});
-        public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000000L,0x0000018000000000L});
-        public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0100000000000000L,0x0000000000000001L,0x0000000000000048L});
-        public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0100000000000002L,0x0000000000000001L,0x0000000000000048L});
-        public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0200000000000000L});
-        public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000020000L,0x0000818000001000L});
-        public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x8D01200000000000L,0x0000000000000007L,0x00000000000007FAL});
-        public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x8D01200000000002L,0x0000000000000007L,0x00000000000007FAL});
-        public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000120000000000L});
-        public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000001020000L,0x0000118000000000L});
-        public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0020000000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x2280840000000000L,0x0000020000000000L});
-        public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x2280840000000002L});
-        public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000002L,0x0000400000000000L});
-        public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000000000L,0x0040200000000000L});
-        public static final BitSet FOLLOW_95 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0xC21A129FFFC0003FL,0x0000000000001800L});
-        public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000000000L,0x0001000000000000L});
+        public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000000000000L,0x0020000000000000L});
+        public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000020000000000L});
+        public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000400000000000L});
+        public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x1000000000000000L});
+        public static final BitSet FOLLOW_62 = new BitSet(new long[]{0xC284800000000000L,0x0000000000000003L,0x00000000000000FFL});
+        public static final BitSet FOLLOW_63 = new BitSet(new long[]{0xC284800000000002L,0x0000000000000003L,0x00000000000000FFL});
+        public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0009000000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0009000000000002L});
+        public static final BitSet FOLLOW_66 = new BitSet(new long[]{0xFFFFFEFFFFFE01F0L,0x610D080FFFE0001FL,0x0000000000000C00L});
+        public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0000200100000000L});
+        public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0000000000020000L,0x000008C000000000L});
+        public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0800010000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x00200000000000C0L,0x0000010000000000L});
+        public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x00200000000000C2L});
+        public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0000000000020000L,0x0000008000000800L});
+        public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0000000000000010L,0x0000000000000004L});
+        public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0040000000000000L});
+        public static final BitSet FOLLOW_75 = new BitSet(new long[]{0xFFFFFEFFFFFC00C0L,0x0000080000000003L});
+        public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x2000000000020000L,0x000000C000000000L});
+        public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x8080800000000000L,0x0000000000000000L,0x0000000000000025L});
+        public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x8080800000000002L,0x0000000000000000L,0x0000000000000025L});
+        public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000040000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000040000000002L});
+        public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000000L,0x000000C000000000L});
+        public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x8080000000000000L,0x0000000000000000L,0x0000000000000024L});
+        public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x8080000000000002L,0x0000000000000000L,0x0000000000000024L});
+        public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0100000000000000L});
+        public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000020000L,0x000040C000000800L});
+        public static final BitSet FOLLOW_86 = new BitSet(new long[]{0xC680900000000000L,0x0000000000000003L,0x00000000000003FDL});
+        public static final BitSet FOLLOW_87 = new BitSet(new long[]{0xC680900000000002L,0x0000000000000003L,0x00000000000003FDL});
+        public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000080000080000L});
+        public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000001020000L,0x000008C000000000L});
+        public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0010000000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x1140420000000000L,0x0000010000000000L});
+        public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x1140420000000002L});
+        public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000002L,0x0000200000000000L});
+        public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000000000L,0x0020100000000000L});
+        public static final BitSet FOLLOW_95 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x610D094FFFE0001FL,0x0000000000000C00L});
+        public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L});
         public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x00000000000000C0L});
-        public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000000L,0x0004000000000000L});
-        public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000000000000000L,0x0000008000001000L});
-        public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
-        public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000030L,0x0018000000000020L,0x0000000000001800L});
-        public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000000L,0x00000000003FFFE8L});
-        public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000018L});
-        public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000000000000L,0x0040110000000000L,0x0000000000002000L});
-        public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000000002L,0x0040000000000000L});
-        public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000000000L,0x0020000000000000L});
-        public static final BitSet FOLLOW_107 = new BitSet(new long[]{0xFFFFFEFFFFFC00E0L,0x0000020000000007L});
-        public static final BitSet FOLLOW_108 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0xC21A309FFFC0003FL,0x0000000000001800L});
-        public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0000000000020000L,0x0000080000000000L,0x0000000000004000L});
-        public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000004000L});
-        public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0000000000000000L,0x0080080000000000L});
-        public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0000000000000000L,0x0100008000000000L});
-        public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000000000L,0x0400000000000000L});
-        public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000000000000L,0x2800000000000000L});
-        public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000000000000002L,0x2000000000000000L});
-        public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L});
-        public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000000000L,0x0100080000000000L});
-        public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000000000L,0x0000108000001000L});
-        public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L});
-        public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000010L,0x0000000000000020L});
-        public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000000000000010L,0x00000040000000A0L});
-        public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000000000000000L,0x0080002000000000L,0x0000000000008000L});
+        public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
+        public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000800L});
+        public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000000000L,0x0004000000000000L});
+        public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000030L,0x000C000000000010L,0x0000000000000C00L});
+        public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000000L,0x00000000001FFFF4L});
+        public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000000000L,0x000000000000000CL});
+        public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000000000000L,0x0020088000000000L,0x0000000000001000L});
+        public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
+        public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000000000L,0x0010000000000000L});
+        public static final BitSet FOLLOW_107 = new BitSet(new long[]{0xFFFFFEFFFFFC00E0L,0x0000010000000003L});
+        public static final BitSet FOLLOW_108 = new BitSet(new long[]{0xFFFFFEFFFFFC00F0L,0x610D184FFFE0001FL,0x0000000000000C00L});
+        public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0000000000020000L,0x0000040000000000L,0x0000000000002000L});
+        public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000002000L});
+        public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0000000000000000L,0x0040040000000000L});
+        public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0000000000000000L,0x0080004000000000L});
+        public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000000000L,0x0200000000000000L});
+        public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000000000000L,0x1400000000000000L});
+        public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000000000000002L,0x1000000000000000L});
+        public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000000000000L,0x0800000000000000L});
+        public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000000000L,0x0080040000000000L});
+        public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000000000L,0x0000084000000800L});
+        public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000000L,0x4000000000000000L});
+        public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000010L,0x0000000000000010L});
+        public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000000000000010L,0x0000002000000050L});
+        public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000000000000000L,0x0040001000000000L,0x0000000000004000L});
         public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000001L});
-        public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000001L});
-        public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+        public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L});
+        public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0000000000000002L,0x8000000000000000L});
+        public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L});
     }
 
 

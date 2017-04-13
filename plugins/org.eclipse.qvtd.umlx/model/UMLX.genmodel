@@ -25,6 +25,7 @@
   <genPackages prefix="UMLX" basePackage="org.eclipse.qvtd" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.umlx" ecorePackage="UMLX.ecore#/">
     <genClasses ecoreClass="UMLX.ecore#//RelDiagram">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelDiagram/isAbstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelDiagram/isTop"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDiagram/ownedRelDomainNodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDiagram/ownedRelInvocationNodes"/>

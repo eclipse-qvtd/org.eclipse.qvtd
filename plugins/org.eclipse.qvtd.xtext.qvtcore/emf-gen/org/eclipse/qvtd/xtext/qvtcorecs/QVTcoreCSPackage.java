@@ -776,13 +776,13 @@ public interface QVTcoreCSPackage extends EPackage {
 	int MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__IS_DEFAULT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int MAPPING_CS__IS_ABSTRACT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Composed Mappings</b></em>' containment reference list.
@@ -2150,15 +2150,15 @@ public interface QVTcoreCSPackage extends EPackage {
 	EClass getMappingCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#isIsDefault <em>Is Default</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#isIsAbstract <em>Is Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#isIsDefault()
+	 * @return the meta object for the attribute '<em>Is Abstract</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#isIsAbstract()
 	 * @see #getMappingCS()
 	 * @generated
 	 */
-	EAttribute getMappingCS_IsDefault();
+	EAttribute getMappingCS_IsAbstract();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedComposedMappings <em>Owned Composed Mappings</em>}'.
@@ -2699,12 +2699,12 @@ public interface QVTcoreCSPackage extends EPackage {
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MAPPING_CS__IS_DEFAULT = eINSTANCE.getMappingCS_IsDefault();
+		EAttribute MAPPING_CS__IS_ABSTRACT = eINSTANCE.getMappingCS_IsAbstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Composed Mappings</b></em>' containment reference list feature.

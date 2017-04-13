@@ -285,13 +285,22 @@ public interface UMLXPackage extends EPackage {
 	int REL_DIAGRAM__NAME = UMLX_NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REL_DIAGRAM__IS_ABSTRACT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Is Top</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__IS_TOP = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int REL_DIAGRAM__IS_TOP = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rel Domain Nodes</b></em>' containment reference list.
@@ -300,7 +309,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__OWNED_REL_DOMAIN_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int REL_DIAGRAM__OWNED_REL_DOMAIN_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rel Invocation Nodes</b></em>' containment reference list.
@@ -309,7 +318,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__OWNED_REL_INVOCATION_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REL_DIAGRAM__OWNED_REL_INVOCATION_NODES = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owning Tx Diagram</b></em>' container reference.
@@ -318,7 +327,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM__OWNING_TX_DIAGRAM = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int REL_DIAGRAM__OWNING_TX_DIAGRAM = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Rel Diagram</em>' class.
@@ -327,7 +336,7 @@ public interface UMLXPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REL_DIAGRAM_FEATURE_COUNT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int REL_DIAGRAM_FEATURE_COUNT = UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.umlx.impl.RelNodeImpl <em>Rel Node</em>}' class.
@@ -1407,6 +1416,17 @@ public interface UMLXPackage extends EPackage {
 	EClass getRelDiagram();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsAbstract <em>Is Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Abstract</em>'.
+	 * @see org.eclipse.qvtd.umlx.RelDiagram#isIsAbstract()
+	 * @see #getRelDiagram()
+	 * @generated
+	 */
+	EAttribute getRelDiagram_IsAbstract();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.umlx.RelDiagram#isIsTop <em>Is Top</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2299,6 +2319,14 @@ public interface UMLXPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REL_DIAGRAM = eINSTANCE.getRelDiagram();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REL_DIAGRAM__IS_ABSTRACT = eINSTANCE.getRelDiagram_IsAbstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Top</b></em>' attribute feature.

@@ -289,6 +289,7 @@ public class QVTr2UMLX
 		@Override
 		public @Nullable UMLXElement visitRelation(@NonNull Relation qvtrRelation) {
 			context.install(qvtrRelation, relDiagram);
+			relDiagram.setIsAbstract(qvtrRelation.isIsAbstract());
 			relDiagram.setIsTop(qvtrRelation.isIsTopLevel());
 			relDiagram.setName(qvtrRelation.getName());
 			//

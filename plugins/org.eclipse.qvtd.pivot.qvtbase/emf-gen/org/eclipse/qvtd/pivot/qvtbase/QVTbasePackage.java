@@ -1197,13 +1197,13 @@ public interface QVTbasePackage extends EPackage {
 	int RULE__DOMAIN = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__IS_DEFAULT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int RULE__IS_ABSTRACT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Overrides</b></em>' reference.
@@ -2043,15 +2043,15 @@ public interface QVTbasePackage extends EPackage {
 	EReference getRule_Domain();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault <em>Is Default</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#isIsAbstract <em>Is Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault()
+	 * @return the meta object for the attribute '<em>Is Abstract</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#isIsAbstract()
 	 * @see #getRule()
 	 * @generated
 	 */
-	EAttribute getRule_IsDefault();
+	EAttribute getRule_IsAbstract();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}'.
@@ -2518,12 +2518,12 @@ public interface QVTbasePackage extends EPackage {
 		EReference RULE__DOMAIN = eINSTANCE.getRule_Domain();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RULE__IS_DEFAULT = eINSTANCE.getRule_IsDefault();
+		EAttribute RULE__IS_ABSTRACT = eINSTANCE.getRule_IsAbstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.

@@ -55,7 +55,7 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overrides &lt;> null implies&#xA;&#x9;overrides.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.Rule.domain" isComposite="true" name="domain" opposite="#p.qvtbase.Domain.rule" type="#//@ownedPackages.2/@ownedClasses.13"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.isDefault" defaultValueString="false" name="isDefault" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Rule.isAbstract" defaultValueString="false" name="isAbstract" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overridden" name="overridden" opposite="#p.qvtbase.Rule.overrides" type="#//@ownedPackages.2/@ownedClasses.19"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overrides" isRequired="false" name="overrides" opposite="#p.qvtbase.Rule.overridden" type="#T.qvtbase.Rule"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.transformation" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation"

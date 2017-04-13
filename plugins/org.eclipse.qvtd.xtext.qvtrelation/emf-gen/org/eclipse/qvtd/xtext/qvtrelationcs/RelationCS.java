@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
@@ -38,31 +38,31 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  */
 public interface RelationCS extends NamedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Default</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Default</em>' attribute.
-	 * @see #setIsDefault(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsDefault()
+	 * @return the value of the '<em>Is Abstract</em>' attribute.
+	 * @see #setIsAbstract(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsAbstract()
 	 * @model default="false"
 	 * @generated
 	 */
-	boolean isIsDefault();
+	boolean isIsAbstract();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsAbstract <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Default</em>' attribute.
-	 * @see #isIsDefault()
+	 * @param value the new value of the '<em>Is Abstract</em>' attribute.
+	 * @see #isIsAbstract()
 	 * @generated
 	 */
-	void setIsDefault(boolean value);
+	void setIsAbstract(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Top</b></em>' attribute.

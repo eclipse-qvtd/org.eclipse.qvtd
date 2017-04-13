@@ -17,6 +17,8 @@
       <details key="NameIsRequired" value="name &lt;> null"/>
       <details key="RelPatternNodeNamesAreUnique" value="let allNames = ownedRelDomainNodes.ownedRelPatternNodes->select(not isExpression())->select(not isAnon).name in&#xA;&#x9;&#x9;Tuple{status : Boolean = allNames->isUnique(n | n),&#xA;&#x9;&#x9;&#x9;message : String = let repeatedNames = allNames->select(n | allNames->count(n) > 1)->asSet() in&#xA;&#x9;&#x9;&#x9;repeatedNames->iterate(n; acc:String = 'RelDiagram::RelPatternNodeNamesAreUnique:' | acc + ' \'' + n + '\'') + ' are not unique for ' + name&#xA;&#x9;&#x9;}.status"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRelDomainNodes" upperBound="-1"

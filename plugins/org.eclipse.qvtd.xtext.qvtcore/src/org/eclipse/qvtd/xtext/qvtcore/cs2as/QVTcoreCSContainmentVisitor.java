@@ -289,7 +289,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getOwnedComposedMappings());
-		pivotElement.setIsDefault(csElement.isIsDefault());
+		pivotElement.setIsAbstract(csElement.isIsAbstract());
 		return null;
 	}
 
