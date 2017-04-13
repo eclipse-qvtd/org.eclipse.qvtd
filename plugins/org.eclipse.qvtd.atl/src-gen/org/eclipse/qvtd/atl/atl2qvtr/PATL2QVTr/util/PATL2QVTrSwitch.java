@@ -94,10 +94,10 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP: {
-				TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp = (TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp)theEObject;
-				T result = caseTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp(tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp);
-				if (result == null) result = caseTOperationCallExp2OperationCallExp(tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp);
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION: {
+				TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression = (TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression)theEObject;
+				T result = caseTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression(tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression);
+				if (result == null) result = caseTOclExpression2OCLExpression(tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -117,6 +117,12 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION: {
 				TModel2RelationalTransformation tModel2RelationalTransformation = (TModel2RelationalTransformation)theEObject;
 				T result = caseTModel2RelationalTransformation(tModel2RelationalTransformation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PATL2QVTrPackage.TOCL_EXPRESSION2_OCL_EXPRESSION: {
+				TOclExpression2OCLExpression tOclExpression2OCLExpression = (TOclExpression2OCLExpression)theEObject;
+				T result = caseTOclExpression2OCLExpression(tOclExpression2OCLExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -188,17 +194,17 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp(TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp object) {
+	public T caseTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression(TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression object) {
 		return null;
 	}
 
@@ -244,6 +250,21 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTModel2RelationalTransformation(TModel2RelationalTransformation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TOcl Expression2 OCL Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TOcl Expression2 OCL Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTOclExpression2OCLExpression(TOclExpression2OCLExpression object) {
 		return null;
 	}
 

@@ -13,13 +13,13 @@ package org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</b></em>'.
+ * A representation of the model object '<em><b>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp()
+ * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression()
  * @model
  * @generated
  */
-public interface TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp extends TOperationCallExp2OperationCallExp {
-} // TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp
+public interface TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression extends TOclExpression2OCLExpression {
+} // TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression

@@ -57,13 +57,13 @@ public interface PATL2QVTrFactory extends EFactory {
 	TInPattern2RelationDomain_guard createTInPattern2RelationDomain_guard();
 
 	/**
-	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>'.
+	 * @return a new object of class '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
 	 * @generated
 	 */
-	TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp();
+	TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression();
 
 	/**
 	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
@@ -91,6 +91,15 @@ public interface PATL2QVTrFactory extends EFactory {
 	 * @generated
 	 */
 	TModel2RelationalTransformation createTModel2RelationalTransformation();
+
+	/**
+	 * Returns a new object of class '<em>TOcl Expression2 OCL Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TOcl Expression2 OCL Expression</em>'.
+	 * @generated
+	 */
+	TOclExpression2OCLExpression createTOclExpression2OCLExpression();
 
 	/**
 	 * Returns a new object of class '<em>TOcl Model2 Model Parameter create</em>'.

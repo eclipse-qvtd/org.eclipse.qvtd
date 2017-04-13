@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase"
-    xmlns:qvtr="http://www.eclipse.org/qvt/2017/QVTrelation" xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage">
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase" xmlns:qvtr="http://www.eclipse.org/qvt/2017/QVTrelation" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage">
   <ownedPackages>
     <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="T.null.Families2Persons" name="Families2Persons">
+      <modelParameter xmi:id="qT.null.Families2Persons.IN" name="IN"/>
+      <modelParameter xmi:id="qT.null.Families2Persons.OUT" name="OUT"/>
       <ownedOperations xsi:type="qvtb:Function" xmi:id="o.null.Families2Persons.isFemale" name="isFemale"/>
-      <rule xsi:type="qvtr:Relation" name="Member2Female"/>
-      <rule xsi:type="qvtr:Relation" name="Member2Male"/>
+      <rule xsi:type="qvtr:Relation" name="Member2Female">
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.null.Families2Persons.Member2Female.null" isCheckable="true" isEnforceable="false"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp"/>
+          </predicate>
+        </when>
+      </rule>
+      <rule xsi:type="qvtr:Relation" name="Member2Male">
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.null.Families2Persons.Member2Male.null" isCheckable="true" isEnforceable="false"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp"/>
+          </predicate>
+        </when>
+      </rule>
     </ownedClasses>
   </ownedPackages>
 </qvtr:RelationModel>

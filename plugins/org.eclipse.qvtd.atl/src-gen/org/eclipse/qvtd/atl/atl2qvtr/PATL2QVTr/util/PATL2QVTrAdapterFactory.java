@@ -90,8 +90,8 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTInPattern2RelationDomain_guardAdapter();
 			}
 			@Override
-			public Adapter caseTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp(TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp object) {
-				return createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpAdapter();
+			public Adapter caseTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression(TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression object) {
+				return createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionAdapter();
 			}
 			@Override
 			public Adapter caseTInPattern2RelationDomain_where_InPattern2RelationDomain_guard(TInPattern2RelationDomain_where_InPattern2RelationDomain_guard object) {
@@ -104,6 +104,10 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTModel2RelationalTransformation(TModel2RelationalTransformation object) {
 				return createTModel2RelationalTransformationAdapter();
+			}
+			@Override
+			public Adapter caseTOclExpression2OCLExpression(TOclExpression2OCLExpression object) {
+				return createTOclExpression2OCLExpressionAdapter();
 			}
 			@Override
 			public Adapter caseTOclModel2ModelParameter_create(TOclModel2ModelParameter_create object) {
@@ -180,16 +184,16 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp <em>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression <em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression
 	 * @generated
 	 */
-	public Adapter createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpAdapter() {
+	public Adapter createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionAdapter() {
 		return null;
 	}
 
@@ -232,6 +236,20 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTModel2RelationalTransformationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclExpression2OCLExpression <em>TOcl Expression2 OCL Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclExpression2OCLExpression
+	 * @generated
+	 */
+	public Adapter createTOclExpression2OCLExpressionAdapter() {
 		return null;
 	}
 

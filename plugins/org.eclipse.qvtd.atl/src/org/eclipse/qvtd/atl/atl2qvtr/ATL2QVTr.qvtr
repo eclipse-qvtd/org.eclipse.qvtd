@@ -93,7 +93,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 				}
 			};
 			when {
-				OperationCallExp2OperationCallExp(aExpression, rExpression);
+				OclExpression2OCLExpression(aExpression, rExpression);
 			}
 		}
 		
@@ -179,9 +179,19 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 -- Non-top OCL copy
 -----------------------------------------------------------------------------------------------------
 		/**
+		 *  atl::OclExpression <=> ocl::OCLExpression
+		 */
+		relation OclExpression2OCLExpression {
+			/*enforce*/ domain atl aExpression : OclExpression {
+			};	   
+			enforce domain qvtr rExpression : OCLExpression {
+			};
+		}
+		
+		/**
 		 *  atl::OperationCallExp <=> ocl::OperationCallExp
 		 */
-		relation OperationCallExp2OperationCallExp {
+		relation OperationCallExp2OperationCallExp overrides OclExpression2OCLExpression {
 			/*enforce*/ domain atl aExpression : OperationCallExp {
 			};	   
 			enforce domain qvtr rExpression : OperationCallExp {

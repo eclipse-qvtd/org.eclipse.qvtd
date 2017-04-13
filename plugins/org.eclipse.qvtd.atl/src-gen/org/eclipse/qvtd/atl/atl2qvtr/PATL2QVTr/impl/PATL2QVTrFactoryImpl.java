@@ -67,10 +67,11 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 			case PATL2QVTrPackage.THELPER2_FUNCTION: return createTHelper2Function();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN: return createTInPattern2RelationDomain();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD: return createTInPattern2RelationDomain_guard();
-			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP: return createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp();
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION: return createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD: return createTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION: return createTMatchedRule2Relation();
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION: return createTModel2RelationalTransformation();
+			case PATL2QVTrPackage.TOCL_EXPRESSION2_OCL_EXPRESSION: return createTOclExpression2OCLExpression();
 			case PATL2QVTrPackage.TOCL_MODEL2_MODEL_PARAMETER_CREATE: return createTOclModel2ModelParameter_create();
 			case PATL2QVTrPackage.TOCL_MODEL2_MODEL_PARAMETER_FROM: return createTOclModel2ModelParameter_from();
 			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP: return createTOperationCallExp2OperationCallExp();
@@ -114,9 +115,9 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp createTInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp() {
-		TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp = new TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl();
-		return tInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp;
+	public TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression() {
+		TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression = new TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl();
+		return tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression;
 	}
 
 	/**
@@ -147,6 +148,16 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	public TModel2RelationalTransformation createTModel2RelationalTransformation() {
 		TModel2RelationalTransformationImpl tModel2RelationalTransformation = new TModel2RelationalTransformationImpl();
 		return tModel2RelationalTransformation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TOclExpression2OCLExpression createTOclExpression2OCLExpression() {
+		TOclExpression2OCLExpressionImpl tOclExpression2OCLExpression = new TOclExpression2OCLExpressionImpl();
+		return tOclExpression2OCLExpression;
 	}
 
 	/**

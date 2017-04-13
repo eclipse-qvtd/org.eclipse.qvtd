@@ -13,22 +13,22 @@ package org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
-import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>TIn Pattern2 Relation Domain guard when Operation Call Exp2 Operation Call Exp</b></em>'.
+ * An implementation of the model object '<em><b>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl extends TOperationCallExp2OperationCallExpImpl implements TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExp {
+public class TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl extends TOclExpression2OCLExpressionImpl implements TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl() {
+	protected TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl() {
 		super();
 	}
 
@@ -39,7 +39,7 @@ public class TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCall
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return PATL2QVTrPackage.Literals.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OPERATION_CALL_EXP2_OPERATION_CALL_EXP;
+		return PATL2QVTrPackage.Literals.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION;
 	}
 
-} //TInPattern2RelationDomain_guard_when_OperationCallExp2OperationCallExpImpl
+} //TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl
