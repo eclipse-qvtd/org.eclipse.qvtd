@@ -922,12 +922,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					// body of RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
 					//					Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
 					//RDomainToMComposedMappingGuardrEnforcedDomain
+					Variable rPartVariable = QVTrelationUtil.getReferredVariable((VariableExp)rPartValue);
 					for (@NonNull TemplateExp rTemplateExpression : rEnforcedRootTemplateExpressions) {
 						if (rTemplateExpression instanceof ObjectTemplateExp) {
 							// check
-							Variable rReferredVariable = QVTrelationUtil.getReferredVariable((VariableExp) rPartValue);
-							if (isVarBoundToSomeOtherTemplate((ObjectTemplateExp) rTemplateExpression, rEnforcedObjectTemplateExpression, rReferredVariable)) {
-								Variable cReferredVariable = variablesAnalysis.getCoreVariable(rReferredVariable);
+							if (isVarBoundToSomeOtherTemplate((ObjectTemplateExp) rTemplateExpression, rEnforcedObjectTemplateExpression, rPartVariable)) {
+								Variable cReferredVariable = variablesAnalysis.getCoreVariable(rPartVariable);
 								Property cTargetProperty = qvtr2qvtc.getProperty(cReferredVariable.getType(), cReferredVariable);
 								NavigationCallExp cPropertyCallExp = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), cTargetProperty);
 								variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cPropertyCallExp, createVariableExp(cReferredVariable));
@@ -936,6 +936,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						}
 					}
 					variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, mapExpression(rPartValue), null);
+					if (!rAllOtherReferredVariables.contains(rPartVariable)) {						// Avoid duplicate assignment
+						variablesAnalysis.addTraceNavigationAssignment(rPartVariable, false);
+					}
 				}
 				else {
 					// body of RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
