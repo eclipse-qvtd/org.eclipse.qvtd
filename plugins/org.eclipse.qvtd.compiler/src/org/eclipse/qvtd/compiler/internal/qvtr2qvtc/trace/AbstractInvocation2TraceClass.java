@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -25,14 +24,30 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 abstract class AbstractInvocation2TraceClass extends AbstractRule2TraceClass
 {
 	protected final @NonNull Relation invokingRelation;
+	protected final boolean isDerived;
 	protected final Rule2TraceClass.@NonNull Internal invokedRelation2TraceClass;
 
 	protected AbstractInvocation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage,
-			@NonNull Relation invokedRelation, @NonNull Relation invokingRelation) throws CompilerChainException {
-		super(relationalTransformation2tracePackage, invokedRelation);
+			@NonNull Relation invokedRelation, @NonNull Relation invokingRelation, boolean isDerived, @NonNull String traceClassName) {
+		super(relationalTransformation2tracePackage, invokedRelation, traceClassName);
 		this.invokingRelation = invokingRelation;
+		this.isDerived = isDerived;
 		this.invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(invokedRelation);
 	}
+
+	@Override
+	public void analyzeInheritance() {
+		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
+		if (!isDerived && (overriddenRelation != null)) {
+			Rule2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(overriddenRelation);
+			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceInterface());
+		}
+		Rule2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(relation);
+		traceClass.getSuperClasses().add(invokedRelation2TraceClass.getTraceClass());
+	}
+
+	@Override
+	public void analyzeProperties() throws CompilerChainException {}
 
 	@Override
 	public @NonNull Map<@NonNull String, @NonNull Property> getName2Property() {
@@ -53,11 +68,6 @@ abstract class AbstractInvocation2TraceClass extends AbstractRule2TraceClass
 	public void installConsumesDependencies() throws CompilerChainException {}
 
 	@Override
-	public void transform() throws CompilerChainException {
-		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
-		if (overriddenRelation != null) {
-			Rule2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(overriddenRelation);
-			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceClass());
-		}
+	public void synthesize() throws CompilerChainException {
 	}
 }

@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 
 /**
@@ -30,9 +31,15 @@ interface Rule2TraceClass extends Comparable<@NonNull Rule2TraceClass>
 	{
 		void addConsumedBy(Rule2TraceClass.@NonNull Internal consumedByRule2traceClass);
 		void addConsumedInternal(Rule2TraceClass.@NonNull Internal consumedRule2traceClass);
+		void analyzeInheritance();
+		void analyzeProperties() throws CompilerChainException;
+		org.eclipse.ocl.pivot.@Nullable Class basicGetTraceInterface();
 		@Nullable Iterable<Rule2TraceClass.@NonNull Internal> getConsumedByRule2traceClasses();
 		@Nullable Iterable<Rule2TraceClass.@NonNull Internal> getConsumedRule2traceClasses();
 		@Nullable Iterable<Rule2TraceClass.@NonNull Internal> getCyclicRule2traceClasses();
+		@NonNull Map<@NonNull String, @NonNull Property> getName2Property();
+		@NonNull Relation getRelation();
+		org.eclipse.ocl.pivot.@NonNull Class getTraceInterface();
 		@NonNull Set<Rule2TraceClass.@NonNull Internal> getTransitivelyConsumedByRule2traceClasses();
 		@NonNull Set<Rule2TraceClass.@NonNull Internal> getTransitivelyConsumedByRule2traceClasses(@NonNull Set<Rule2TraceClass.@NonNull Internal> accumulator);
 		@NonNull Set<Rule2TraceClass.@NonNull Internal> getTransitivelyConsumedRule2traceClasses();
@@ -40,7 +47,6 @@ interface Rule2TraceClass extends Comparable<@NonNull Rule2TraceClass>
 		@NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations();
 		@NonNull Iterable<@NonNull RelationCallExp> getWhereInvocations();
 		void installConsumesDependencies() throws CompilerChainException;
-		@NonNull Map<@NonNull String, @NonNull Property> getName2Property();
-		void transform() throws CompilerChainException;
+		void synthesize() throws CompilerChainException;
 	}
 }

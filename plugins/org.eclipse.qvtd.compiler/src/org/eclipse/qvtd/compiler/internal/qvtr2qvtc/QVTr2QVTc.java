@@ -224,7 +224,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	/**
 	 * Mapping from each relation to its corresponding trace class.
 	 */
-	private final @NonNull Map<@NonNull RelationCallExp, org.eclipse.ocl.pivot.@NonNull Class> invocation2traceClass = new HashMap<>();
+	//	private final @NonNull Map<@NonNull RelationCallExp, @NonNull List<org.eclipse.ocl.pivot.@NonNull Class>> invocation2traceClasses = new HashMap<>();
 
 	/**
 	 * Map from each relation to all the expressions that call the relation from a when clause.
@@ -270,6 +270,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 */
 	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<>();
 
+	/**
+	 * Closure of all overriding relations for each relation, or null if not overridden.
+	 */
+	private @NonNull Map<@NonNull Relation, @Nullable Set<@NonNull Relation>> relation2overridingRelations = new HashMap<>();
+
 	private @Nullable Property oclContainerProperty = null;
 
 	public QVTr2QVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {
@@ -293,11 +298,26 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				Relation relation = (Relation)eo;
 				analyzeInvocations(relation);
 				analyzeRootVariables(relation);
+				for (Relation anOverriddenRelation = relation; anOverriddenRelation != null; anOverriddenRelation = QVTrelationUtil.basicGetOverrides(anOverriddenRelation)) {
+					if ((anOverriddenRelation != relation) && !addOverridingRelation(anOverriddenRelation, relation)) {
+						break;
+					}
+				}
 			}
 			if (eo instanceof Import) {
 				this.coreModel.getOwnedImports().add((Import) EcoreUtil.copy(eo));
 			}
 		}
+	}
+
+	private boolean addOverridingRelation(@NonNull Relation overriddenRelation, @NonNull Relation overridingRelation) {
+		assert overridingRelation != overriddenRelation;
+		Set<@NonNull Relation> overridingRelations = relation2overridingRelations.get(overriddenRelation);
+		if (overridingRelations == null) {
+			overridingRelations = new HashSet<>();
+			relation2overridingRelations.put(overriddenRelation, overridingRelations);
+		}
+		return overridingRelations.add(overridingRelation);
 	}
 
 	protected void analyzeInvocations(@NonNull Relation callingRelation) {
@@ -433,10 +453,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		//qvtcSource.getContents().addAll(traceData.getRootOutputELements());
 	}
 
-	public void execute() throws CompilerChainException {
+	/*	public void execute() throws CompilerChainException {
+		prepare();
 		transformToTracePackages();
 		transformToCoreTransformations();
-	}
+	} */
 
 	public void generateModels(@NonNull GenModel genModel) {
 		((PivotMetamodelManager)environmentFactory.getMetamodelManager()).addGenModel(genModel);
@@ -584,6 +605,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return cKeyFunction;
 	}
 
+	public @NonNull QVTrNameGenerator getNameGenerator() {
+		return nameGenerator;
+	}
+
 	public @NonNull Property getOclContainerProperty() {
 		Property oclContainerProperty2 = oclContainerProperty;
 		if (oclContainerProperty2 == null) {
@@ -593,6 +618,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			oclContainerProperty = oclContainerProperty2;
 		}
 		return oclContainerProperty2 ;
+	}
+
+	public @NonNull Iterable<@NonNull Relation> getOverridingRelations(@NonNull Relation overriddenRelation) {
+		Set<@NonNull Relation> overridingRelations = relation2overridingRelations.get(overriddenRelation);
+		return overridingRelations != null ? overridingRelations : Collections.emptyList();
 	}
 
 	public Predicate getPredicateForRelationCallExp(RelationCallExp ri) {
@@ -778,11 +808,16 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		//		}
 	}
 
-	public void putInvocationTrace(@NonNull RelationCallExp rInvocation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
-		org.eclipse.ocl.pivot.Class oldTraceClass = invocation2traceClass.put(rInvocation, traceClass);
-		assert oldTraceClass == null;
+	/*	public void putInvocationTrace(@NonNull RelationCallExp rInvocation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
+		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = invocation2traceClasses.get(rInvocation);
+		if (traceClasses == null) {
+			traceClasses = new ArrayList<>();
+			invocation2traceClasses.put(rInvocation, traceClasses);
+		}
+		assert !traceClasses.contains(traceClass);
+		traceClasses.add(traceClass);
 		//		putTrace(traceClass, r);
-	}
+	} */
 
 	public void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {
 		org.eclipse.ocl.pivot.Class oldTraceClass = relation2traceClass.put(rRelation, traceClass);

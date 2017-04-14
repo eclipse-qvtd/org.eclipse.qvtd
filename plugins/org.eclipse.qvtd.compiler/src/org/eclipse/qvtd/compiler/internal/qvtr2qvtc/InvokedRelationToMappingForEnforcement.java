@@ -23,12 +23,13 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * InvokedRelationToMappingForEnforcement refines AbstractQVTr2QVTcRelations to support conversion of an invoked relation.
@@ -79,13 +80,13 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 			} */
 		}
 
+		private @NonNull Iterable<@NonNull OCLExpression> rArguments;
 		private @NonNull Relation rInvokingRelation;
-		private @NonNull RelationCallExp rInvocation;
 
-		public InvokedEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation, @NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
+		public InvokedEnforceableRelationDomain2CoreMapping(@NonNull Iterable<@NonNull OCLExpression> rArguments, @NonNull Relation rInvokingRelation, @NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
-			this.rInvocation = rInvocation;
-			this.rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
+			this.rArguments = rArguments;
+			this.rInvokingRelation = rInvokingRelation;
 		}
 
 		@Override
@@ -117,20 +118,23 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 			Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable("from_" + invokingTraceClass.getName(), invokingTraceClass);
 			Type cInvocationType = cInvocationVariable.getType();
 			assert cInvocationType == invokingTraceClass;			// FIXME
-			List<@NonNull OCLExpression> rArguments = ClassUtil.nullFree(rInvocation.getArgument());
 			List<@NonNull Variable> rParameters = qvtr2qvtc.getRootVariables(rRelation);
-			int iSize = rArguments.size();
+			int iSize = Iterables.size(rArguments);
 			assert iSize == rParameters.size();
-			for (int i = 0; i < iSize; i++) {
+			int i = 0;
+			for (OCLExpression rArgument : rArguments) {
+				if (i >= iSize) {
+					break;
+				}
 				Variable rParameter = rParameters.get(i);
-				OCLExpression rArgument = rArguments.get(i);
 				VariableExp rArgumentVariableExp = (VariableExp)rArgument;
 				// RInvokerToMGuardPredicate
-				Variable rArgumentVariable = (Variable) ClassUtil.nonNullState(rArgumentVariableExp.getReferredVariable());
+				Variable rArgumentVariable = QVTrelationUtil.getReferredVariable(rArgumentVariableExp);
 				Variable cParameter = variablesAnalysis.getCoreVariable(rParameter);
 				Property cProperty = qvtr2qvtc.getProperty(cInvocationType, rArgumentVariable);
 				NavigationCallExp cInvocationValue = createNavigationCallExp(createVariableExp(cInvocationVariable), cProperty);
 				variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cInvocationValue, createVariableExp(cParameter));
+				i++;
 			}
 		}
 	}
@@ -157,12 +161,17 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 			for (@NonNull RelationCallExp rInvocation : whenInvocations) {
 				QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation + " from " + rInvocation);
 				@NonNull Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
-				@NonNull String rInvokingRelationName = ClassUtil.nonNullState(rInvokingRelation.getName());
-				for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+				Iterable<@NonNull OCLExpression> rArguments = QVTrelationUtil.getOwnedArguments(rInvocation);
+				@NonNull Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
+				@NonNull String rInvokingRelationName = QVTrelationUtil.getName(rInvokingRelation);
+				for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 					if (rDomain.isIsEnforceable()) {
-						RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
-						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
-						enforceableRelationDomain2coreMappings.add(new WhenedEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rDomain.getName();
+						enforceableRelationDomain2coreMappings.add(new WhenedEnforceableRelationDomain2CoreMapping(rArguments, rInvokingRelation, rDomain, coreMappingName));
+						for (@NonNull Relation rOverridingInvokedRelation : qvtr2qvtc.getOverridingRelations(rInvokedRelation)) {
+							coreMappingName = QVTrelationUtil.getName(rOverridingInvokedRelation) + '_' + rInvokingRelationName + '_' + rDomain.getName();
+							enforceableRelationDomain2coreMappings.add(new WhenedEnforceableRelationDomain2CoreMapping(rArguments, rInvokingRelation, rDomain, coreMappingName));
+						}
 					}
 				}
 			}
@@ -172,12 +181,17 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 			for (@NonNull RelationCallExp rInvocation : whereInvocations) {
 				QVTr2QVTc.SYNTHESIS.println("invocation of where " + rRelation + " from " + rInvocation);
 				@NonNull Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
-				@NonNull String rInvokingRelationName = ClassUtil.nonNullState(rInvokingRelation.getName());
-				for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+				Iterable<@NonNull OCLExpression> rArguments = QVTrelationUtil.getOwnedArguments(rInvocation);
+				@NonNull Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
+				@NonNull String rInvokingRelationName = QVTrelationUtil.getName(rInvokingRelation);
+				for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 					if (rDomain.isIsEnforceable()) {
-						RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
-						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rEnforcedDomain.getName();
-						enforceableRelationDomain2coreMappings.add(new WheredEnforceableRelationDomain2CoreMapping(rInvocation, rEnforcedDomain, coreMappingName));
+						String coreMappingName = rRelationName + '_' + rInvokingRelationName + '_' + rDomain.getName();
+						enforceableRelationDomain2coreMappings.add(new WheredEnforceableRelationDomain2CoreMapping(rArguments, rInvokingRelation, rDomain, coreMappingName));
+						for (@NonNull Relation rOverridingInvokedRelation : qvtr2qvtc.getOverridingRelations(rInvokedRelation)) {
+							coreMappingName = QVTrelationUtil.getName(rOverridingInvokedRelation) + '_' + rInvokingRelationName + '_' + rDomain.getName();
+							enforceableRelationDomain2coreMappings.add(new WheredEnforceableRelationDomain2CoreMapping(rArguments, rInvokingRelation, rDomain, coreMappingName));
+						}
 					}
 				}
 			}
@@ -197,9 +211,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 	protected final class WhenedEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
 	{
-		protected WhenedEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation,
+		protected WhenedEnforceableRelationDomain2CoreMapping(@NonNull Iterable<@NonNull OCLExpression> rArguments, @NonNull Relation rInvokingRelation,
 				@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
-			super(rInvocation, rEnforcedDomain, cMappingName);
+			super(rArguments, rInvokingRelation, rEnforcedDomain, cMappingName);
 		}
 
 		@Override
@@ -210,9 +224,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 	protected final class WheredEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
 	{
-		protected WheredEnforceableRelationDomain2CoreMapping(@NonNull RelationCallExp rInvocation,
+		protected WheredEnforceableRelationDomain2CoreMapping(@NonNull Iterable<@NonNull OCLExpression> rArguments, @NonNull Relation rInvokingRelation,
 				@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
-			super(rInvocation, rEnforcedDomain, cMappingName);
+			super(rArguments, rInvokingRelation, rEnforcedDomain, cMappingName);
 		}
 
 		@Override

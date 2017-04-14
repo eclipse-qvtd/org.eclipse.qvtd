@@ -53,4 +53,16 @@ public class QVTrNameGenerator
 	public @NonNull String createTraceClassName(@NonNull Relation relation) {
 		return "T" + QVTrelationUtil.getName(relation);
 	}
+
+	public @NonNull String createTraceInterfaceName(org.eclipse.ocl.pivot.@NonNull Class traceClass) {
+		return "Q" + traceClass.getName().substring(1);
+	}
+
+	public @NonNull String createWhenTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
+		return "T" + invokingRelation.getName() + "_when_" + invokedRelation.getName();
+	}
+
+	public @NonNull String createWhereTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
+		return "T" + invokingRelation.getName() + "_where_" + invokedRelation.getName();
+	}
 }

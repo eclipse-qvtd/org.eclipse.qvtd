@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -121,9 +120,8 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableDeclaration2TraceProperty> variable2variableDeclaration2traceProperty = new HashMap<>();
 
 	protected AbstractRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
-		super(relationalTransformation2tracePackage, relation);
-		String name = "T" + relation.getName();
-		traceClass.setName(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
+		super(relationalTransformation2tracePackage, relation, relationalTransformation2tracePackage.getNameGenerator().createTraceClassName(relation));
+		traceClass.setIsAbstract(relation.isIsAbstract());
 		Pattern whenPattern = relation.getWhen();
 		if (whenPattern != null) {
 			for (@NonNull EObject whenExpression : new TreeIterable(whenPattern, false)) {
@@ -146,6 +144,15 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 		name2property.putAll(superRelation2TraceClass.getName2Property());
 	}
 
+	@Override
+	public void analyzeInheritance() {
+		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
+		if (overriddenRelation != null) {
+			Rule2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(overriddenRelation);
+			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceInterface());
+		}
+	}
+
 	/**
 	 * Traverse a Pattern hierarchy to prepare/refine a trace property for each invocation argument variable.
 	 */
@@ -164,6 +171,69 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 					}
 				}
 			}
+		}
+	}
+
+	@Override
+	public void analyzeProperties() throws CompilerChainException {
+		//
+		//	Determine whether a navigation from the trace to an unambiguous left/right object can ever be possible.
+		//
+		boolean manyTraces = hasManyRootMatches() || hasCollectionMemberMatches() || hasMultiObjectMatches();
+		if (!manyTraces) {
+			for (@NonNull Variable rVariable : QVTrelationUtil.getOwnedVariables(relation)) {
+				if (hasManyVariableMatches(rVariable)) {
+					manyTraces = true;
+					break;
+				}
+			}
+		}
+		//
+		//	Determine the trace variables and whether they have a to-one opposite
+		//
+		//
+		//	Implicit/iterator variables do not have unit trace opposites.
+		//
+		for (@NonNull Variable rVariable : QVTrelationUtil.getOwnedVariables(relation)) {
+			if (!(rVariable instanceof IteratorVariable) && !(rVariable instanceof TemplateVariable) && !rVariable.isIsImplicit()) {
+				getVariableDeclaration2TraceProperty(null, rVariable, false);
+			}
+		}
+		//
+		//	Prepare a trace property for each root variable.
+		//
+		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			TypedModel rTypedModel = rDomain.getTypedModel();
+			for (@NonNull DomainPattern rDomainPattern : QVTrelationUtil.getOwnedPatterns(rDomain)) {
+				TemplateExp rTemplateExp = QVTrelationUtil.getOwnedTemplateExpression(rDomainPattern);
+				Variable bindsTo = QVTrelationUtil.getBindsTo(rTemplateExp);
+				getVariableDeclaration2TraceProperty(rTypedModel, bindsTo, !manyTraces);
+			}
+		}
+		//
+		//	Traverse the domain patterns to prepare a trace property for each bound variable.
+		//
+		// FIXME to handle the obscure case of a diamond traversal in which the second path discovers that
+		//  unitOpposites apply, we should preferentially descend unit paths, deferring non-unit paths til later.
+		//
+		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			for (@NonNull DomainPattern rDomainPattern : QVTrelationUtil.getOwnedPatterns(rDomain)) {
+				TemplateExp rTemplateExp = QVTrelationUtil.getOwnedTemplateExpression(rDomainPattern);
+				TypedModel rTypedModel = QVTrelationUtil.getTypedModel(rDomain);
+				analyzeTemplateVariables(rTemplateExp, rTypedModel, !manyTraces);
+			}
+		}
+		//
+		//	Prepare a trace property for each invocation argument variable - typically just narrowing
+		//	an indeterminate typed model to a specific one.
+		//
+		Pattern rWhenPattern = relation.getWhen();
+		if (rWhenPattern != null) {
+			analyzePredicateVariables(rWhenPattern);
+		}
+		Pattern rWherePattern = relation.getWhere();
+		if (rWherePattern != null) {
+			analyzePredicateVariables(rWherePattern);
 		}
 	}
 
@@ -393,9 +463,10 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 				invokedRelation2TraceClass.addConsumedBy(this);
 			}
 			else {
-				Rule2TraceClass.@NonNull Internal invocation2TraceClass = relationalTransformation2tracePackage.getInvocation2TraceClass(whenInvocation);
-				addConsumedBy(invocation2TraceClass);
-				invocation2TraceClass.addConsumedBy(this);
+				for (Rule2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whenInvocation)) {
+					addConsumedBy(invocation2TraceClass);
+					invocation2TraceClass.addConsumedBy(this);
+				}
 			}
 		}
 		for (@NonNull RelationCallExp whereInvocation : whereInvocations) {
@@ -405,80 +476,16 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 				invokedRelation2TraceClass.addConsumedBy(this);
 			}
 			else {
-				Rule2TraceClass.@NonNull Internal invocation2TraceClass = relationalTransformation2tracePackage.getInvocation2TraceClass(whereInvocation);
-				addConsumedBy(invocation2TraceClass);
-				invocation2TraceClass.addConsumedBy(this);
+				for (Rule2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whereInvocation)) {
+					addConsumedBy(invocation2TraceClass);
+					invocation2TraceClass.addConsumedBy(this);
+				}
 			}
 		}
 	}
 
 	@Override
-	public void transform() throws CompilerChainException {
-		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
-		if (overriddenRelation != null) {
-			Rule2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(overriddenRelation);
-			addAllProperties(overriddenRelation2TraceClass);
-			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceClass());
-		}
-		//
-		//	Determine whether a navigation from the trace to an unambiguous left/right object can ever be possible.
-		//
-		boolean manyTraces = hasManyRootMatches() || hasCollectionMemberMatches() || hasMultiObjectMatches();
-		if (!manyTraces) {
-			for (@NonNull Variable rVariable : QVTrelationUtil.getOwnedVariables(relation)) {
-				if (hasManyVariableMatches(rVariable)) {
-					manyTraces = true;
-					break;
-				}
-			}
-		}
-		//
-		//	Determine the trace variables and whether they have a to-one opposite
-		//
-		//
-		//	Implicit/iterator variables do not have unit trace opposites.
-		//
-		for (@NonNull Variable rVariable : QVTrelationUtil.getOwnedVariables(relation)) {
-			if (!(rVariable instanceof IteratorVariable) && !(rVariable instanceof TemplateVariable) && !rVariable.isIsImplicit()) {
-				getVariableDeclaration2TraceProperty(null, rVariable, false);
-			}
-		}
-		//
-		//	Prepare a trace property for each root variable.
-		//
-		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			TypedModel rTypedModel = rDomain.getTypedModel();
-			for (@NonNull DomainPattern rDomainPattern : QVTrelationUtil.getOwnedPatterns(rDomain)) {
-				TemplateExp rTemplateExp = QVTrelationUtil.getOwnedTemplateExpression(rDomainPattern);
-				Variable bindsTo = QVTrelationUtil.getBindsTo(rTemplateExp);
-				getVariableDeclaration2TraceProperty(rTypedModel, bindsTo, !manyTraces);
-			}
-		}
-		//
-		//	Traverse the domain patterns to prepare a trace property for each bound variable.
-		//
-		// FIXME to handle the obscure case of a diamond traversal in which the second path discovers that
-		//  unitOpposites apply, we should preferentially descend unit paths, deferring non-unit paths til later.
-		//
-		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			for (@NonNull DomainPattern rDomainPattern : QVTrelationUtil.getOwnedPatterns(rDomain)) {
-				TemplateExp rTemplateExp = QVTrelationUtil.getOwnedTemplateExpression(rDomainPattern);
-				TypedModel rTypedModel = QVTrelationUtil.getTypedModel(rDomain);
-				analyzeTemplateVariables(rTemplateExp, rTypedModel, !manyTraces);
-			}
-		}
-		//
-		//	Prepare a trace property for each invocation argument variable - typically just narrowing
-		//	an indeterminate typed model to a specific one.
-		//
-		Pattern rWhenPattern = relation.getWhen();
-		if (rWhenPattern != null) {
-			analyzePredicateVariables(rWhenPattern);
-		}
-		Pattern rWherePattern = relation.getWhere();
-		if (rWherePattern != null) {
-			analyzePredicateVariables(rWherePattern);
-		}
+	public void synthesize() throws CompilerChainException {
 		//
 		//	Create a trace property for each prepared trace property.
 		//

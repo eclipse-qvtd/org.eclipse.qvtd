@@ -17,8 +17,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
@@ -36,7 +37,12 @@ abstract class AbstractRule2TraceClass implements Rule2TraceClass.Internal
 	/**
 	 * The Class that realizes the middle model trace class.
 	 */
-	protected final org.eclipse.ocl.pivot.@NonNull Class traceClass = ClassUtil.nonNullState(PivotFactory.eINSTANCE.createClass());
+	protected final org.eclipse.ocl.pivot.@NonNull Class traceClass;
+
+	/**
+	 * The Class that realizes an interface to a hierarchy of derived middle model trace class.
+	 */
+	private org.eclipse.ocl.pivot.@Nullable Class traceInterface = null;
 
 	/**
 	 * Each Rule2TraceClass which directly consumes this Rule2TraceClass.
@@ -63,9 +69,10 @@ abstract class AbstractRule2TraceClass implements Rule2TraceClass.Internal
 	 */
 	private @Nullable Set<Rule2TraceClass.@NonNull Internal> cyclicRule2traceClasses = null;
 
-	public AbstractRule2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
+	public AbstractRule2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation, @NonNull String traceClassName) {
 		this.relationalTransformation2tracePackage = relationalTransformation2tracePackage;
 		this.relation = relation;
+		traceClass = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, traceClassName));
 	}
 
 	@Override
@@ -81,6 +88,11 @@ abstract class AbstractRule2TraceClass implements Rule2TraceClass.Internal
 		if (!consumedRule2traceClasses.contains(consumedRule2traceClass)) {
 			consumedRule2traceClasses.add(consumedRule2traceClass);
 		}
+	}
+
+	@Override
+	public @Nullable Class basicGetTraceInterface() {
+		return traceInterface;
 	}
 
 	@Override
@@ -103,6 +115,7 @@ abstract class AbstractRule2TraceClass implements Rule2TraceClass.Internal
 		return cyclicRule2traceClasses;
 	}
 
+	@Override
 	public @NonNull Relation getRelation() {
 		return relation;
 	}
@@ -110,6 +123,19 @@ abstract class AbstractRule2TraceClass implements Rule2TraceClass.Internal
 	@Override
 	public org.eclipse.ocl.pivot.@NonNull Class getTraceClass() {
 		return traceClass;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getTraceInterface() {
+		org.eclipse.ocl.pivot.Class traceInterface2 = traceInterface;
+		if (traceInterface2 == null) {
+			String name = relationalTransformation2tracePackage.getNameGenerator().createTraceInterfaceName(traceClass);
+			traceInterface = traceInterface2 = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
+			traceInterface2.setIsAbstract(true);
+			traceInterface2.setIsInterface(true);
+			traceClass.getSuperClasses().add(traceInterface2);
+		}
+		return traceInterface2;
 	}
 
 	@Override

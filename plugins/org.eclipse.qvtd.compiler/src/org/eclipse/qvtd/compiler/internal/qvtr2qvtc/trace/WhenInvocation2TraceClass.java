@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
@@ -19,14 +18,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  */
 class WhenInvocation2TraceClass extends AbstractInvocation2TraceClass
 {
-	protected WhenInvocation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage,
-			@NonNull Relation invokedRelation, @NonNull Relation invokingRelation) throws CompilerChainException {
-		super(relationalTransformation2tracePackage, invokedRelation, invokingRelation);
-		String name = "T" + invokingRelation.getName() + "_when_" + invokedRelation.getName();
-		traceClass.setName(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
-		Rule2TraceClass.@NonNull Internal superRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(invokedRelation);
-		traceClass.getSuperClasses().add(superRelation2TraceClass.getTraceClass());
-		//		addAllProperties(superRelation2TraceClass);
+	protected WhenInvocation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation invokedRelation, @NonNull Relation invokingRelation, boolean isDerived) {
+		super(relationalTransformation2tracePackage, invokedRelation, invokingRelation, isDerived, relationalTransformation2tracePackage.getNameGenerator().createWhenTraceClassName(invokingRelation, invokedRelation));
 	}
 
 	//		@Override
