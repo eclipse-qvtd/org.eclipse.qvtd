@@ -229,6 +229,7 @@ public class UMLXCompilerTests extends LoadTestCase
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
+		boolean exceptionThrown = true;
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
@@ -258,11 +259,12 @@ public class UMLXCompilerTests extends LoadTestCase
 			myQVT.loadInput("forward", "ThreeElementList.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "ThreeElementList_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			exceptionThrown = false;
 		}
 		finally {
 			myQVT.dispose();
-			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage");
-			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage");
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage", exceptionThrown);
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage", exceptionThrown);
 		}
 	}
 }

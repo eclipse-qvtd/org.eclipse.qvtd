@@ -352,11 +352,23 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected abstract void loadGenModels(@NonNull String @NonNull... genModelFiles);
 
-	public void removeRegisteredPackage(@NonNull String ePackageClassName) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException {
-		Class<?> ePackageClass = Class.forName(ePackageClassName);
-		Field eNsURIField = ePackageClass.getField("eNS_URI");
-		String nsURI = String.valueOf(eNsURIField.get(null));
-		EPackage.Registry.INSTANCE.remove(nsURI);
+	public void removeRegisteredPackage(@NonNull String ePackageClassName, boolean exceptionThrown) throws Exception {
+		if (exceptionThrown) {		// Don't compound an earlier failure
+			try {
+				Class<?> ePackageClass = Class.forName(ePackageClassName);
+				Field eNsURIField = ePackageClass.getField("eNS_URI");
+				String nsURI = String.valueOf(eNsURIField.get(null));
+				EPackage.Registry.INSTANCE.remove(nsURI);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			Class<?> ePackageClass = Class.forName(ePackageClassName);
+			Field eNsURIField = ePackageClass.getField("eNS_URI");
+			String nsURI = String.valueOf(eNsURIField.get(null));
+			EPackage.Registry.INSTANCE.remove(nsURI);
+		}
 	}
 
 	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {

@@ -327,6 +327,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		QVTr2QVTc.SYNTHESIS.setState(true);
+		boolean exceptionThrown = true;
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
@@ -356,11 +357,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.loadInput("forward", "ThreeElementList.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "ThreeElementList_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			exceptionThrown = false;
 		}
 		finally {
 			myQVT.dispose();
-			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage");
-			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage");
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage", exceptionThrown);
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage", exceptionThrown);
 		}
 	}
 
