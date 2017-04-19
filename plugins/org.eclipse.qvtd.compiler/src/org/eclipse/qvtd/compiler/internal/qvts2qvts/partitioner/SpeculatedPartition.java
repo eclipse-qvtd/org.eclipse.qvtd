@@ -254,12 +254,30 @@ class SpeculatedPartition extends AbstractPartition
 	}
 
 	protected void resolveRealizedMiddleNodes() {
+		Node traceNode = partitioner.getTraceNode();
+		if (traceNode != null) {
+			if (traceNode.isMatched() && traceNode.isClass()) {
+				Role nodeRole = RegionUtil.getNodeRole(traceNode);
+				//				assert nodeRole.isMatched();
+				assert traceNode.isPattern();//
+				nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
+				//				}
+				if (!hasNode(traceNode)) {
+					addNode(traceNode, nodeRole);
+				}
+				for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+					if (partitioner.hasRealizedEdge(edge)) {
+						tracedInputNodes.add(edge.getEdgeTarget());
+					}
+				}
+			}
+		}
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			if (node.isMatched() && node.isClass()) {
+			if ((node != traceNode) && node.isMatched() && node.isClass()) {
 				Role nodeRole = RegionUtil.getNodeRole(node);
 				//				assert nodeRole.isMatched();
 				assert node.isPattern();//
-				nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
+				//				nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
 				//				}
 				if (!hasNode(node)) {
 					addNode(node, nodeRole);

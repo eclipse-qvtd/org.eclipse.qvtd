@@ -34,7 +34,9 @@ class SpeculationPartition extends AbstractPartition
 		//	All traced loaded nodes are retained as is to be traced by the speculation.
 		//	NB. Unreachable loaded nodes are effectively predicates nd so are deferred.
 		//
-		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
+		//		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
+		Node node = partitioner.getTraceNode();
+		if (node != null) {
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
 				Role speculationNodeRole = RegionUtil.asSpeculation(RegionUtil.getNodeRole(node));
 				addNode(node, speculationNodeRole);

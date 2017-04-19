@@ -218,7 +218,7 @@ public class RegionHelper
 		return dependencyNodes;
 	} */
 
-	protected @NonNull List<@NonNull Node> computeHeadNodes(@NonNull MappingRegion mappingRegion) {
+	protected @NonNull List<@NonNull Node> computeHeadNodes() {
 		//
 		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
 		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
@@ -265,6 +265,28 @@ public class RegionHelper
 			//				targetClosure.add(computationEdge.getSource());
 			//			}
 		}
+		List<@NonNull Node> headNodes = computeHeadNodes(targetFromSourceClosure);
+		//
+		//	Check head node consistency
+		//
+		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (node.isTrue() || node.isDependency()) {
+				debugHeadNodes.add(node);
+				node.setHead();
+				assert !headNodes.contains(node);
+				headNodes.add(node);
+			}
+			else if (node.isHead()) {
+				debugHeadNodes.add(node);
+			}
+		}
+		assert debugHeadNodes.equals(new HashSet<>(headNodes));
+		return headNodes;
+	}
+
+	public @NonNull List<@NonNull Node> computeHeadNodes(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure) {
+		Iterable <@NonNull Node> navigableNodes = targetFromSourceClosure.keySet();
 		//
 		//	Ripple the local target-from-source closure to compute the overall target-from-source closure.
 		//
@@ -329,22 +351,6 @@ public class RegionHelper
 			assert !headNodes.contains(headNode);
 			headNodes.add(headNode);
 		}
-		//
-		//	Check head node consistency
-		//
-		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (node.isTrue() || node.isDependency()) {
-				debugHeadNodes.add(node);
-				node.setHead();
-				assert !headNodes.contains(node);
-				headNodes.add(node);
-			}
-			else if (node.isHead()) {
-				debugHeadNodes.add(node);
-			}
-		}
-		assert debugHeadNodes.equals(new HashSet<>(headNodes));
 		//
 		return headNodes;
 	}
@@ -525,7 +531,7 @@ public class RegionHelper
 	}
 
 	public @NonNull List<@NonNull Node> initHeadNodes() {
-		List<@NonNull Node> headNodes = computeHeadNodes(mappingRegion);
+		List<@NonNull Node> headNodes = computeHeadNodes();
 		((MappingRegionImpl)mappingRegion).getHeadNodes2().addAll(headNodes);
 		return headNodes;
 	}

@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -91,12 +92,16 @@ public class Partitioner
 	}
 
 	private static void gatherCorrolaries(@NonNull Set<@NonNull Property> corrolaryProperties, @NonNull MappingRegion region) {
+		List<@NonNull Node> middleNodes = new ArrayList<>();
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
-				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
-						corrolaryProperties.add(RegionUtil.getProperty(edge));
-					}
+				middleNodes.add(node);
+			}
+		}
+		for (@NonNull Node node : middleNodes) {
+			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+				if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
+					corrolaryProperties.add(RegionUtil.getProperty(edge));
 				}
 			}
 		}
@@ -117,6 +122,7 @@ public class Partitioner
 	private final @NonNull Set<@NonNull NavigableEdge> navigableEdges = new HashSet<>();
 	private final @NonNull Set<@NonNull Edge> realizedEdges = new HashSet<>();
 	private final @NonNull List<@NonNull Edge> realizedOutputEdges = new ArrayList<>();
+	private final @Nullable Node traceNode;
 	private final @NonNull List<@NonNull Node> trueNodes = new ArrayList<>();
 	private boolean hasLoadedNodes = false;
 
@@ -153,6 +159,7 @@ public class Partitioner
 		this.region = region;
 		this.corrolaryProperties = corrolaryProperties;
 		analyzeNodes();
+		this.traceNode = analyzeTraceNode();
 		analyzeEdges();
 	}
 
@@ -285,6 +292,39 @@ public class Partitioner
 					realizedOutputNodes.add(node);
 				}
 			}
+		}
+	}
+
+	private @Nullable Node analyzeTraceNode() {
+		if (realizedMiddleNodes.size() == 0) {
+			return null;
+		}
+		if (realizedMiddleNodes.size() == 1) {
+			return realizedMiddleNodes.get(0);
+		}
+		//
+		//	Compute the Set of all source nodes from which each target can be reached by transitive to-one navigation.
+		//
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure = new HashMap<>();
+		for (@NonNull Node targetNode : realizedMiddleNodes) {
+			targetFromSourceClosure.put(targetNode, Sets.newHashSet(targetNode));
+		}
+		for (@NonNull Node sourceNode : realizedMiddleNodes) {
+			for (@NonNull NavigableEdge navigationEdge : sourceNode.getRealizedNavigationEdges()) {
+				Node targetNode = navigationEdge.getEdgeTarget();
+				Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
+				if (sourceClosure != null) {
+					sourceClosure.add(sourceNode);
+				}
+			}
+		}
+		RegionHelper regionHelper = new RegionHelper(region);
+		List<@NonNull Node> headNodes = regionHelper.computeHeadNodes(targetFromSourceClosure);
+		if (headNodes.size() == 0) {
+			return null;
+		}
+		else {
+			return headNodes.get(0);
 		}
 	}
 
@@ -443,6 +483,10 @@ public class Partitioner
 
 	public @NonNull MappingRegion getRegion() {
 		return region;
+	}
+
+	public @Nullable Node getTraceNode() {
+		return traceNode;
 	}
 
 	public @NonNull Iterable<@NonNull Node> getTrueNodes() {
