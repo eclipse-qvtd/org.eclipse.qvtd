@@ -65,6 +65,98 @@ public interface PATL2QVTrPackage extends EPackage {
 	PATL2QVTrPackage eINSTANCE = org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl <em>SIn Pattern2 Relation Domain guard</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	int SIN_PATTERN2_RELATION_DOMAIN_GUARD = 0;
+
+	/**
+	 * The feature id for the '<em><b>APattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = 0;
+
+	/**
+	 * The feature id for the '<em><b>RRule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = 1;
+
+	/**
+	 * The number of structural features of the '<em>SIn Pattern2 Relation Domain guard</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>SIn Pattern2 Relation Domain guard</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl <em>SOcl Expression2 OCL Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSOclExpression2OCLExpression()
+	 * @generated
+	 */
+	int SOCL_EXPRESSION2_OCL_EXPRESSION = 1;
+
+	/**
+	 * The feature id for the '<em><b>AExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>RExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = 1;
+
+	/**
+	 * The number of structural features of the '<em>SOcl Expression2 OCL Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCL_EXPRESSION2_OCL_EXPRESSION_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>SOcl Expression2 OCL Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCL_EXPRESSION2_OCL_EXPRESSION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl <em>THelper2 Function</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +164,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTHelper2Function()
 	 * @generated
 	 */
-	int THELPER2_FUNCTION = 0;
+	int THELPER2_FUNCTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>ADef</b></em>' reference.
@@ -163,7 +255,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain()
 	 * @generated
 	 */
-	int TIN_PATTERN2_RELATION_DOMAIN = 1;
+	int TIN_PATTERN2_RELATION_DOMAIN = 3;
 
 	/**
 	 * The feature id for the '<em><b>APattern</b></em>' reference.
@@ -211,13 +303,22 @@ public interface PATL2QVTrPackage extends EPackage {
 	int TIN_PATTERN2_RELATION_DOMAIN__TM_NAME = 4;
 
 	/**
+	 * The feature id for the '<em><b>Where In Pattern2 Relation Domain guard</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD = 5;
+
+	/**
 	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_FEATURE_COUNT = 5;
+	int TIN_PATTERN2_RELATION_DOMAIN_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>TIn Pattern2 Relation Domain</em>' class.
@@ -236,7 +337,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard()
 	 * @generated
 	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD = 2;
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD = 4;
 
 	/**
 	 * The feature id for the '<em><b>AExpression</b></em>' reference.
@@ -293,13 +394,22 @@ public interface PATL2QVTrPackage extends EPackage {
 	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__W = 5;
 
 	/**
+	 * The feature id for the '<em><b>When Ocl Expression2 OCL Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION = 6;
+
+	/**
 	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain guard</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = 6;
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>TIn Pattern2 Relation Domain guard</em>' class.
@@ -309,180 +419,6 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclExpression2OCLExpressionImpl <em>TOcl Expression2 OCL Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclExpression2OCLExpressionImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclExpression2OCLExpression()
-	 * @generated
-	 */
-	int TOCL_EXPRESSION2_OCL_EXPRESSION = 7;
-
-	/**
-	 * The feature id for the '<em><b>AExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = 0;
-
-	/**
-	 * The feature id for the '<em><b>RExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = 1;
-
-	/**
-	 * The number of structural features of the '<em>TOcl Expression2 OCL Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOCL_EXPRESSION2_OCL_EXPRESSION_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>TOcl Expression2 OCL Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOCL_EXPRESSION2_OCL_EXPRESSION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl <em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression()
-	 * @generated
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION = 3;
-
-	/**
-	 * The feature id for the '<em><b>AExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = TOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>RExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = TOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION;
-
-	/**
-	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION_FEATURE_COUNT = TOCL_EXPRESSION2_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION_OPERATION_COUNT = TOCL_EXPRESSION2_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard()
-	 * @generated
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD = 4;
-
-	/**
-	 * The feature id for the '<em><b>AExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION = TIN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>APattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = TIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN;
-
-	/**
-	 * The feature id for the '<em><b>P</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__P = TIN_PATTERN2_RELATION_DOMAIN_GUARD__P;
-
-	/**
-	 * The feature id for the '<em><b>RExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION = TIN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>RRule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = TIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE;
-
-	/**
-	 * The feature id for the '<em><b>W</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD__W = TIN_PATTERN2_RELATION_DOMAIN_GUARD__W;
-
-	/**
-	 * The number of structural features of the '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = TIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT = TIN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl <em>TMatched Rule2 Relation</em>}' class.
@@ -629,6 +565,52 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @ordered
 	 */
 	int TMODEL2_RELATIONAL_TRANSFORMATION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclExpression2OCLExpressionImpl <em>TOcl Expression2 OCL Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclExpression2OCLExpressionImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclExpression2OCLExpression()
+	 * @generated
+	 */
+	int TOCL_EXPRESSION2_OCL_EXPRESSION = 7;
+
+	/**
+	 * The feature id for the '<em><b>AExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>RExpression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = 1;
+
+	/**
+	 * The number of structural features of the '<em>TOcl Expression2 OCL Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_EXPRESSION2_OCL_EXPRESSION_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>TOcl Expression2 OCL Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOCL_EXPRESSION2_OCL_EXPRESSION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOclModel2ModelParameter_createImpl <em>TOcl Model2 Model Parameter create</em>}' class.
@@ -824,6 +806,70 @@ public interface PATL2QVTrPackage extends EPackage {
 
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard <em>SIn Pattern2 Relation Domain guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SIn Pattern2 Relation Domain guard</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard
+	 * @generated
+	 */
+	EClass getSInPattern2RelationDomain_guard();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getAPattern <em>APattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>APattern</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getAPattern()
+	 * @see #getSInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getSInPattern2RelationDomain_guard_APattern();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getRRule <em>RRule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RRule</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getRRule()
+	 * @see #getSInPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	EReference getSInPattern2RelationDomain_guard_RRule();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression <em>SOcl Expression2 OCL Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SOcl Expression2 OCL Expression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression
+	 * @generated
+	 */
+	EClass getSOclExpression2OCLExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getAExpression <em>AExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>AExpression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getAExpression()
+	 * @see #getSOclExpression2OCLExpression()
+	 * @generated
+	 */
+	EReference getSOclExpression2OCLExpression_AExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getRExpression <em>RExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>RExpression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getRExpression()
+	 * @see #getSOclExpression2OCLExpression()
+	 * @generated
+	 */
+	EReference getSOclExpression2OCLExpression_RExpression();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function <em>THelper2 Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -976,6 +1022,17 @@ public interface PATL2QVTrPackage extends EPackage {
 	EAttribute getTInPattern2RelationDomain_TmName();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getWhere_InPattern2RelationDomain_guard <em>Where In Pattern2 Relation Domain guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Where In Pattern2 Relation Domain guard</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getWhere_InPattern2RelationDomain_guard()
+	 * @see #getTInPattern2RelationDomain()
+	 * @generated
+	 */
+	EReference getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard <em>TIn Pattern2 Relation Domain guard</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1052,24 +1109,15 @@ public interface PATL2QVTrPackage extends EPackage {
 	EReference getTInPattern2RelationDomain_guard_W();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression <em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getWhen_OclExpression2OCLExpression <em>When Ocl Expression2 OCL Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression
+	 * @return the meta object for the reference '<em>When Ocl Expression2 OCL Expression</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getWhen_OclExpression2OCLExpression()
+	 * @see #getTInPattern2RelationDomain_guard()
 	 * @generated
 	 */
-	EClass getTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard
-	 * @generated
-	 */
-	EClass getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
+	EReference getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation <em>TMatched Rule2 Relation</em>}'.
@@ -1419,6 +1467,58 @@ public interface PATL2QVTrPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl <em>SIn Pattern2 Relation Domain guard</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSInPattern2RelationDomain_guard()
+		 * @generated
+		 */
+		EClass SIN_PATTERN2_RELATION_DOMAIN_GUARD = eINSTANCE.getSInPattern2RelationDomain_guard();
+
+		/**
+		 * The meta object literal for the '<em><b>APattern</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = eINSTANCE.getSInPattern2RelationDomain_guard_APattern();
+
+		/**
+		 * The meta object literal for the '<em><b>RRule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = eINSTANCE.getSInPattern2RelationDomain_guard_RRule();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl <em>SOcl Expression2 OCL Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSOclExpression2OCLExpression()
+		 * @generated
+		 */
+		EClass SOCL_EXPRESSION2_OCL_EXPRESSION = eINSTANCE.getSOclExpression2OCLExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>AExpression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = eINSTANCE.getSOclExpression2OCLExpression_AExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>RExpression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = eINSTANCE.getSOclExpression2OCLExpression_RExpression();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl <em>THelper2 Function</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1535,6 +1635,14 @@ public interface PATL2QVTrPackage extends EPackage {
 		EAttribute TIN_PATTERN2_RELATION_DOMAIN__TM_NAME = eINSTANCE.getTInPattern2RelationDomain_TmName();
 
 		/**
+		 * The meta object literal for the '<em><b>Where In Pattern2 Relation Domain guard</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD = eINSTANCE.getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain guard</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1593,24 +1701,12 @@ public interface PATL2QVTrPackage extends EPackage {
 		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__W = eINSTANCE.getTInPattern2RelationDomain_guard_W();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl <em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>}' class.
+		 * The meta object literal for the '<em><b>When Ocl Expression2 OCL Expression</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression()
 		 * @generated
 		 */
-		EClass TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION = eINSTANCE.getTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl <em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard()
-		 * @generated
-		 */
-		EClass TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD = eINSTANCE.getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
+		EReference TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION = eINSTANCE.getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl <em>TMatched Rule2 Relation</em>}' class.

@@ -23,6 +23,7 @@ import org.eclipse.m2m.atl.common.ATL.InPattern;
 import org.eclipse.m2m.atl.common.OCL.OperationCallExp;
 
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard;
 
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -44,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl#getRExpression <em>RExpression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl#getRRule <em>RRule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl#getW <em>W</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TInPattern2RelationDomain_guardImpl#getWhen_OclExpression2OCLExpression <em>When Ocl Expression2 OCL Expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -108,6 +110,16 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * @ordered
 	 */
 	protected Pattern w;
+
+	/**
+	 * The cached value of the '{@link #getWhen_OclExpression2OCLExpression() <em>When Ocl Expression2 OCL Expression</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWhen_OclExpression2OCLExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected SOclExpression2OCLExpression when_OclExpression2OCLExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -361,6 +373,27 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public SOclExpression2OCLExpression getWhen_OclExpression2OCLExpression() {
+		return when_OclExpression2OCLExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWhen_OclExpression2OCLExpression(SOclExpression2OCLExpression newWhen_OclExpression2OCLExpression) {
+		SOclExpression2OCLExpression oldWhen_OclExpression2OCLExpression = when_OclExpression2OCLExpression;
+		when_OclExpression2OCLExpression = newWhen_OclExpression2OCLExpression;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION, oldWhen_OclExpression2OCLExpression, when_OclExpression2OCLExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -382,6 +415,8 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__W:
 				if (resolve) return getW();
 				return basicGetW();
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION:
+				return getWhen_OclExpression2OCLExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -411,6 +446,9 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 				return;
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__W:
 				setW((Pattern)newValue);
+				return;
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION:
+				setWhen_OclExpression2OCLExpression((SOclExpression2OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -442,6 +480,9 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__W:
 				setW((Pattern)null);
 				return;
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION:
+				setWhen_OclExpression2OCLExpression((SOclExpression2OCLExpression)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -466,6 +507,8 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 				return rRule != null;
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__W:
 				return w != null;
+			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION:
+				return when_OclExpression2OCLExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

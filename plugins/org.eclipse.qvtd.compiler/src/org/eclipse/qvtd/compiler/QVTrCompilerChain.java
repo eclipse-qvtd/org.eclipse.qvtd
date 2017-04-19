@@ -110,7 +110,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					saveOptions = XMIUtil.createSaveOptions();
 				}
 				t.saveTrace(traceResource, traceURI, genModelURI, traceOptions, saveOptions);
-				assertNoResourceErrors("Trace save", traceResource);
+				assertNoResourceSetErrors("Trace save", traceResource);
 				compiled(TRACE_STEP, cResource);
 				//
 				t.transformToCoreTransformations();
@@ -119,7 +119,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					saveOptions = XMIUtil.createSaveOptions();
 				}
 				t.saveCore(cResource, saveOptions);
-				assertNoResourceErrors("Core save", cResource);
+				assertNoResourceSetErrors("Core save", cResource);
 				compiled(QVTC_STEP, cResource);
 
 				if (getOption(DEBUG_KEY) == Boolean.TRUE) {

@@ -30,6 +30,24 @@ public interface PATL2QVTrFactory extends EFactory {
 	PATL2QVTrFactory eINSTANCE = org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>SIn Pattern2 Relation Domain guard</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SIn Pattern2 Relation Domain guard</em>'.
+	 * @generated
+	 */
+	SInPattern2RelationDomain_guard createSInPattern2RelationDomain_guard();
+
+	/**
+	 * Returns a new object of class '<em>SOcl Expression2 OCL Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SOcl Expression2 OCL Expression</em>'.
+	 * @generated
+	 */
+	SOclExpression2OCLExpression createSOclExpression2OCLExpression();
+
+	/**
 	 * Returns a new object of class '<em>THelper2 Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,24 +73,6 @@ public interface PATL2QVTrFactory extends EFactory {
 	 * @generated
 	 */
 	TInPattern2RelationDomain_guard createTInPattern2RelationDomain_guard();
-
-	/**
-	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TIn Pattern2 Relation Domain guard when Ocl Expression2 OCL Expression</em>'.
-	 * @generated
-	 */
-	TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression();
-
-	/**
-	 * Returns a new object of class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TIn Pattern2 Relation Domain where In Pattern2 Relation Domain guard</em>'.
-	 * @generated
-	 */
-	TInPattern2RelationDomain_where_InPattern2RelationDomain_guard createTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
 
 	/**
 	 * Returns a new object of class '<em>TMatched Rule2 Relation</em>'.

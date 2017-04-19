@@ -561,7 +561,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		if (saveOptions != null) {
 			asResource.save(saveOptions);
 		}
-		assertNoResourceErrors(stepKey, asResource);
+		assertNoResourceSetErrors(stepKey, asResource);
 		if (getOption(stepKey, CompilerChain.VALIDATE_KEY) == Boolean.TRUE) {
 			assertNoValidationErrors(stepKey, asResource);
 		}

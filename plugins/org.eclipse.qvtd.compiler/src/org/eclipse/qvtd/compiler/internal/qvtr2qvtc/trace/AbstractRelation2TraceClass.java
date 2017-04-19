@@ -13,8 +13,11 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,6 +26,7 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.IteratorVariable;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -32,9 +36,11 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcUtil;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -55,47 +61,53 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import com.google.common.collect.Iterables;
 
 /**
- * A AbstractRelation2TraceClass represents the mapping between a QVTr Relation and the abstract trace class for an invoked QVTc Mapping.
+ * An AbstractRelation2TraceClass represents the mapping between a QVTr Relation and the future trace class for an invoked QVTc Mapping.
  * Derived classes adjust the behaviour for a top/non-top relation.
  */
-abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
+abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 {
+	protected final @NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage;
+
 	/**
-	 * VariableDeclaration2TraceProperty accumulates the requirements on the trace property for a pattern variable.
-	 *
-	 * Its relation TypedModel may be initially null (unknown) and set non-null once encounterted as a template binding.
-	 *
-	 * Its unitOpposite may evolve to true if any mechanism for unit usage is encountered.
+	 * The relation to be mapped to a trace class and mapping.
 	 */
-	class VariableDeclaration2TraceProperty
-	{
-		/**
-		 * The typed model within which the variable's reference is located. null for unknown or primitive.
-		 */
-		@Nullable TypedModel rTypedModel;
+	protected final @NonNull Relation relation;
 
-		/**
-		 * The variable whose value is persisted by the trace property.
-		 */
-		@NonNull VariableDeclaration variable;
+	/**
+	 * The Class that realizes the middle model trace class.
+	 */
+	protected final org.eclipse.ocl.pivot.@NonNull Class traceClass;
 
-		/**
-		 * True if there is known to be at most one instance of the trace class for each value of the trace variable.
-		 * False if there might be more than one.
-		 */
-		boolean unitOpposite;
+	/**
+	 * The Class that realizes a signature interface to for a static invocation of this trace class.
+	 */
+	private org.eclipse.ocl.pivot.@Nullable Class signatureClass = null;
 
-		VariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
-			this.rTypedModel = rTypedModel;
-			this.variable = variable;
-			this.unitOpposite = unitOpposite;
-		}
+	/**
+	 * Each Relation2TraceClass which directly consumes this Relation2TraceClass.
+	 */
+	private final @NonNull List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = new ArrayList<>();
 
-		@Override
-		public String toString() {
-			return String.valueOf(rTypedModel) + " - " + variable + " - " + (unitOpposite ? "SINGLE" : "MULTIPLE");
-		}
-	}
+	/**
+	 * Each Relation2TraceClass which this Relation2TraceClass directly consumes.
+	 */
+	private final @NonNull List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = new ArrayList<>();
+
+	/**
+	 * Each Relation2TraceClass that transitively consumes this Relation2TraceClass.
+	 */
+	private @Nullable Set<@NonNull Relation2TraceClass> transitivelyConsumedByRelation2TraceClasses = null;
+
+	/**
+	 * Each Relation2TraceClass that is transitively consumed by this Relation2TraceClass.
+	 */
+	private @Nullable Set<@NonNull Relation2TraceClass> transitivelyConsumedRelation2TraceClasses = null;
+
+	/**
+	 * Each Relation2TraceClass that is both transitively consumed by and consumes this Relation2TraceClass.
+	 */
+	private @Nullable Set<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses = null;
+
 
 	/**
 	 * RelationCallExp invocations within the when pattern.
@@ -108,19 +120,22 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 	private final @NonNull List<@NonNull RelationCallExp> whereInvocations = new ArrayList<>();
 
 	/**
-	 * Map from trace property name to trace property.
+	 * Name to corresponding future trace property
 	 */
-	protected final @NonNull Map<@NonNull String, @NonNull Property> name2property = new HashMap<>();
+	protected final @NonNull Map<@NonNull String, @NonNull Element2TraceProperty> name2element2traceProperty = new HashMap<>();
 
 	/**
 	 * Lazily created null-free Bag of traceClass.
 	 */
 	private org.eclipse.ocl.pivot.@Nullable Class bagOfTraceClass = null;
 
-	private @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableDeclaration2TraceProperty> variable2variableDeclaration2traceProperty = new HashMap<>();
+	private @NonNull Map<@NonNull NamedElement, @NonNull Element2TraceProperty> element2element2traceProperty = new HashMap<>();
 
 	protected AbstractRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
-		super(relationalTransformation2tracePackage, relation, relationalTransformation2tracePackage.getNameGenerator().createTraceClassName(relation));
+		this.relationalTransformation2tracePackage = relationalTransformation2tracePackage;
+		this.relation = relation;
+		String traceClassName = relationalTransformation2tracePackage.getNameGenerator().createTraceClassName(relation);
+		this.traceClass = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, traceClassName));
 		traceClass.setIsAbstract(relation.isIsAbstract());
 		Pattern whenPattern = relation.getWhen();
 		if (whenPattern != null) {
@@ -140,17 +155,28 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 		}
 	}
 
-	protected void addAllProperties(Rule2TraceClass.@NonNull Internal superRelation2TraceClass) {
-		name2property.putAll(superRelation2TraceClass.getName2Property());
+	@Override
+	public void addConsumedBy(@NonNull Relation2TraceClass consumedByRelation2TraceClass) {
+		if (!consumedByRelation2TraceClasses.contains(consumedByRelation2TraceClass)) {
+			consumedByRelation2TraceClasses.add(consumedByRelation2TraceClass);
+		}
+		consumedByRelation2TraceClass.addConsumedInternal(this);
+	}
+
+	@Override
+	public void addConsumedInternal(@NonNull Relation2TraceClass consumedRelation2TraceClass) {
+		if (!consumedRelation2TraceClasses.contains(consumedRelation2TraceClass)) {
+			consumedRelation2TraceClasses.add(consumedRelation2TraceClass);
+		}
 	}
 
 	@Override
 	public void analyzeInheritance() {
-		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
-		if (overriddenRelation != null) {
-			Rule2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(overriddenRelation);
-			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceInterface());
-		}
+		//		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
+		//		if (overriddenRelation != null) {
+		//			Relation2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(overriddenRelation);
+		//			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceInterface());
+		//		}
 	}
 
 	/**
@@ -242,7 +268,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 	 */
 	private void analyzeTemplateVariables(@NonNull TemplateExp templateExp, @NonNull TypedModel rTypedModel, boolean isOneToOne) {
 		Variable templateVariable = QVTrelationUtil.getBindsTo(templateExp);
-		if (variable2variableDeclaration2traceProperty.containsKey(templateVariable)) {
+		if (element2element2traceProperty.containsKey(templateVariable)) {
 			if (templateExp instanceof ObjectTemplateExp) {
 				for (@NonNull PropertyTemplateItem rPropertyTemplateItem : QVTrelationUtil.getOwnedParts((ObjectTemplateExp)templateExp)) {
 					boolean isNestedOneToOne = false;
@@ -290,53 +316,68 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 		}
 	}
 
-	/**
-	 * Lazily create the name Property for a traceClass with a type. If unitOpposite is not set there may be many trace class instances referencing the same object through
-	 * the trace property and so the implicit opposite must be a Bag.
-	 */
-	private void createTraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) throws CompilerChainException {
-		String domainName = rTypedModel != null ? rTypedModel.getName() : null;
-		String name = QVTrelationUtil.getName(variable);
-		org.eclipse.ocl.pivot.@NonNull Class type = QVTrelationUtil.getClass(variable);
-		boolean isRequired = variable.isIsRequired();
-		Property traceProperty = name2property.get(name);
-		if (traceProperty != null) {
-			if ((type != traceProperty.getType()) || isRequired != traceProperty.isIsRequired()) {
-				throw new CompilerChainException("Inconsistent redefined property '" + name + "' for " + relation);
-			}
-		}
-		else {
-			traceProperty = PivotFactory.eINSTANCE.createProperty();
-			traceProperty.setName(name);
-			traceProperty.setType(type);
-			traceProperty.setIsRequired(isRequired);
-			if (domainName != null) {
-				Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
-				domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
-				Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
-				domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
-				domainDetail.getValues().add(domainName);
-				domainAnnotation.getOwnedDetails().add(domainDetail);
-				traceProperty.getOwnedAnnotations().add(domainAnnotation);
-			}
-			name2property.put(name, traceProperty);
-			traceProperty.setOwningClass(traceClass);
-			if (!(type instanceof DataType)) {
-				Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
-				oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
-				oppositeProperty.setType(unitOpposite ? traceClass : getBagOfTraceClass());
-				oppositeProperty.setIsRequired(!unitOpposite);
-				oppositeProperty.setIsImplicit(true);
-				oppositeProperty.setOwningClass(type);
-				traceProperty.setOpposite(oppositeProperty);
-				oppositeProperty.setOpposite(traceProperty);
-				//				putTrace(oppositeProperty, type);
-			}
-			//			putTrace(traceProperty, traceClass);
-		}
+	@Override
+	public @Nullable Class basicGetSignatureClass() {
+		return signatureClass;
 	}
 
-	protected org.eclipse.ocl.pivot.@NonNull Class getBagOfTraceClass() {
+	@Override
+	public @Nullable Property basicGetSignatureProperty(@NonNull NamedElement rNamedElement) {
+		Element2TraceProperty variableDeclaration2TraceProperty = element2element2traceProperty.get(rNamedElement);
+		if (variableDeclaration2TraceProperty == null) {
+			return null;
+		}
+		return variableDeclaration2TraceProperty.getSignatureProperty();
+	}
+
+	@Override
+	public @Nullable Property basicGetTraceProperty(@NonNull NamedElement rNamedElement) {
+		Element2TraceProperty element2TraceProperty = element2element2traceProperty.get(rNamedElement);
+		if (element2TraceProperty == null) {
+			return null;
+		}
+		return element2TraceProperty.getTraceProperty();
+	}
+
+	@Override
+	public int compareTo(@NonNull Relation2TraceClass that) {
+		return ClassUtil.safeCompareTo(this.traceClass.getName(), that.getTraceClass().getName());
+	}
+
+	public @NonNull Property createTraceProperty(@Nullable TypedModel rTypedModel, org.eclipse.ocl.pivot.@NonNull Class owningClass,
+			@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired, boolean unitOpposite) {
+		String domainName = rTypedModel != null ? rTypedModel.getName() : null;
+		Property traceProperty = PivotFactory.eINSTANCE.createProperty();
+		traceProperty.setName(name);
+		traceProperty.setType(type);
+		traceProperty.setIsRequired(isRequired);
+		if (domainName != null) {
+			Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
+			domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
+			Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
+			domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
+			domainDetail.getValues().add(domainName);
+			domainAnnotation.getOwnedDetails().add(domainDetail);
+			traceProperty.getOwnedAnnotations().add(domainAnnotation);
+		}
+		traceProperty.setOwningClass(owningClass);
+		if (!(type instanceof DataType)) {
+			Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
+			oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
+			oppositeProperty.setType(unitOpposite ? traceClass : getBagOfTraceClass());
+			oppositeProperty.setIsRequired(!unitOpposite);
+			oppositeProperty.setIsImplicit(true);
+			oppositeProperty.setOwningClass(type);
+			traceProperty.setOpposite(oppositeProperty);
+			oppositeProperty.setOpposite(traceProperty);
+			//				putTrace(oppositeProperty, type);
+		}
+		//			putTrace(traceProperty, traceClass);
+		return traceProperty;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getBagOfTraceClass() {
 		Class bagOfTraceClass2 = bagOfTraceClass;
 		if (bagOfTraceClass2 == null) {
 			bagOfTraceClass = bagOfTraceClass2 = relationalTransformation2tracePackage.getBagType(traceClass);
@@ -345,28 +386,119 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 	}
 
 	@Override
-	public @NonNull Map<@NonNull String, @NonNull Property> getName2Property() {
-		return name2property;
+	public @Nullable Iterable<@NonNull Relation2TraceClass> getConsumedByRelation2TraceClasses() {
+		return consumedByRelation2TraceClasses;
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull Relation2TraceClass> getConsumedRelation2TraceClasses() {
+		return consumedRelation2TraceClasses;
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull Relation2TraceClass> getCyclicRelation2TraceClasses() {
+		return cyclicRelation2TraceClasses;
+	}
+
+	private Invocation2TraceProperty getInvocation2TraceProperty(@NonNull String name, @NonNull RelationCallExp rInvocation) {
+		Invocation2TraceProperty invocation2TraceProperty = new Invocation2TraceProperty(this, name, rInvocation);
+		invocation2TraceProperty.getTraceProperty();
+		Element2TraceProperty oldInvocation2TraceProperty = element2element2traceProperty.put(rInvocation, invocation2TraceProperty);
+		assert oldInvocation2TraceProperty ==  null;
+		return invocation2TraceProperty;
+	}
+
+	@Override
+	public @NonNull QVTrNameGenerator getNameGenerator() {
+		return relationalTransformation2tracePackage.getNameGenerator();
+	}
+
+	@Override
+	public @NonNull Relation getRelation() {
+		return relation;
+	}
+
+	@Override
+	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage() {
+		return relationalTransformation2tracePackage;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass() {
+		org.eclipse.ocl.pivot.Class signatureClass2 = signatureClass;
+		if (signatureClass2 == null) {
+			String name = relationalTransformation2tracePackage.getNameGenerator().createSignatureClassName(traceClass);
+			signatureClass = signatureClass2 = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
+		}
+		return signatureClass2;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getTraceClass() {
+		return traceClass;
+	}
+
+	@Override
+	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses() {
+		Set<@NonNull Relation2TraceClass> transitivelyConsumedByRelation2TraceClasses2 = transitivelyConsumedByRelation2TraceClasses;
+		if (transitivelyConsumedByRelation2TraceClasses2 == null) {
+			transitivelyConsumedByRelation2TraceClasses2 = getTransitivelyConsumedByRelation2TraceClasses(new HashSet<>());
+		}
+		return transitivelyConsumedByRelation2TraceClasses2;
+	}
+	@Override
+	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator) {
+		Set<@NonNull Relation2TraceClass> transitivelyConsumedByRelation2TraceClasses2 = this.transitivelyConsumedByRelation2TraceClasses;
+		if (transitivelyConsumedByRelation2TraceClasses2 != null) {
+			accumulator.addAll(transitivelyConsumedByRelation2TraceClasses2);
+		}
+		else {
+			for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRelation2TraceClasses) {
+				if (accumulator.add(consumedByRelation2TraceClass)) {
+					consumedByRelation2TraceClass.getTransitivelyConsumedByRelation2TraceClasses(accumulator);
+				}
+			}
+		}
+		return accumulator;
+	}
+
+	@Override
+	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses() {
+		Set<@NonNull Relation2TraceClass> transitivelyConsumedRelation2TraceClasses2 = transitivelyConsumedRelation2TraceClasses;
+		if (transitivelyConsumedRelation2TraceClasses2 == null) {
+			transitivelyConsumedRelation2TraceClasses2 = getTransitivelyConsumedRelation2TraceClasses(new HashSet<>());
+		}
+		return transitivelyConsumedRelation2TraceClasses2;
+	}
+	@Override
+	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator) {
+		Set<@NonNull Relation2TraceClass> transitivelyConsumedRelation2TraceClasses2 = this.transitivelyConsumedRelation2TraceClasses;
+		if (transitivelyConsumedRelation2TraceClasses2 != null) {
+			accumulator.addAll(transitivelyConsumedRelation2TraceClasses2);
+		}
+		else {
+			for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
+				if (accumulator.add(consumedRelation2TraceClass)) {
+					consumedRelation2TraceClass.getTransitivelyConsumedRelation2TraceClasses(accumulator);
+				}
+			}
+		}
+		return accumulator;
+	}
+
+	@Override
+	public @NonNull String getUniqueTracePropertyName(@NonNull Element2TraceProperty variableDeclaration2TraceProperty, @NonNull String name) {
+		return relationalTransformation2tracePackage.getNameGenerator().getUniqueName(name2element2traceProperty, name, variableDeclaration2TraceProperty);
 	}
 
 	private @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean isNestedOneToOne) {
-		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(variable);
+		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = (VariableDeclaration2TraceProperty) element2element2traceProperty.get(variable);
 		if (variableDeclaration2TraceProperty != null) {
-			if (rTypedModel != null) {
-				if (variableDeclaration2TraceProperty.rTypedModel == null) {
-					variableDeclaration2TraceProperty.rTypedModel = rTypedModel;
-				}
-				else {
-					assert variableDeclaration2TraceProperty.rTypedModel == rTypedModel;
-				}
-			}
-			if (isNestedOneToOne && !variableDeclaration2TraceProperty.unitOpposite) {
-				variableDeclaration2TraceProperty.unitOpposite = true;
-			}
+			variableDeclaration2TraceProperty.refineTraceProperty(rTypedModel, isNestedOneToOne);
 		}
 		else {
-			variableDeclaration2TraceProperty = new VariableDeclaration2TraceProperty(rTypedModel, variable, isNestedOneToOne);
-			variable2variableDeclaration2traceProperty.put(variable, variableDeclaration2TraceProperty);
+			variableDeclaration2TraceProperty = new VariableDeclaration2TraceProperty(this, rTypedModel, variable, isNestedOneToOne);
+			element2element2traceProperty.put(variable, variableDeclaration2TraceProperty);
 		}
 		return variableDeclaration2TraceProperty;
 	}
@@ -454,16 +586,30 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 		return false;
 	}
 
+	//		public void installConsumedByDependencies() {
+	//			for (@NonNull Relation2TraceClass consumedRelation2TraceClass : getTransitivelyConsumedRelation2TraceClasses()) {
+	//				ClassUtil.nonNullState(consumedRelation2TraceClass.transitivelyConsumedByRelation2TraceClasses).add(this);
+	//			}
+	//		}
+
+	/*		public void installDependencyCycles() throws CompilerChainException {
+		Set<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses2 = cyclicRelation2TraceClasses = new HashSet<>(getTransitivelyConsumedByRelation2TraceClasses());
+		cyclicRelation2TraceClasses2.retainAll(getTransitivelyConsumedRelation2TraceClasses());
+		if (!cyclicRelation2TraceClasses2.isEmpty()) {
+			traceClass.getSuperClasses().add(relationalTransformation2tracePackage.getSpeculatableClass());
+		}
+	} */
+
 	@Override
 	public void installConsumesDependencies() throws CompilerChainException {
-		for (@NonNull RelationCallExp whenInvocation : whenInvocations) {
+		/*		for (@NonNull RelationCallExp whenInvocation : whenInvocations) {
 			Relation whenInvokedRelation = QVTrelationUtil.getReferredRelation(whenInvocation);
 			if (whenInvokedRelation.isIsTopLevel()) {
-				Rule2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(whenInvokedRelation);
+				Relation2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(whenInvokedRelation);
 				invokedRelation2TraceClass.addConsumedBy(this);
 			}
 			else {
-				for (Rule2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whenInvocation)) {
+				for (Relation2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whenInvocation)) {
 					addConsumedBy(invocation2TraceClass);
 					invocation2TraceClass.addConsumedBy(this);
 				}
@@ -472,29 +618,55 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 		for (@NonNull RelationCallExp whereInvocation : whereInvocations) {
 			Relation whereInvokedRelation = QVTrelationUtil.getReferredRelation(whereInvocation);
 			if (whereInvokedRelation.isIsTopLevel()) {
-				Rule2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRule2TraceClass(whereInvokedRelation);
+				Relation2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(whereInvokedRelation);
 				invokedRelation2TraceClass.addConsumedBy(this);
 			}
 			else {
-				for (Rule2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whereInvocation)) {
+				for (Relation2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whereInvocation)) {
 					addConsumedBy(invocation2TraceClass);
 					invocation2TraceClass.addConsumedBy(this);
 				}
 			}
-		}
+		} */
 	}
 
 	@Override
-	public void synthesize() throws CompilerChainException {
+	public void synthesize() {
 		//
 		//	Create a trace property for each prepared trace property.
 		//
-		for (@NonNull VariableDeclaration traceVariable : variable2variableDeclaration2traceProperty.keySet()) {
-			VariableDeclaration2TraceProperty vd2tp = variable2variableDeclaration2traceProperty.get(traceVariable);
+		for (@NonNull NamedElement traceVariable : element2element2traceProperty.keySet()) {
+			Element2TraceProperty vd2tp = element2element2traceProperty.get(traceVariable);
 			assert vd2tp != null;
-			createTraceProperty(vd2tp.rTypedModel, vd2tp.variable, vd2tp.unitOpposite);
+			vd2tp.getTraceProperty();
 		}
-		CompilerUtil.normalizeNameables(ClassUtil.nullFree(traceClass.getOwnedProperties()));
+		for (@NonNull RelationCallExp whenInvocation : getWhenInvocations()) {
+			Relation invokedRelation = QVTrelationUtil.getReferredRelation(whenInvocation);
+			if (!invokedRelation.isIsTopLevel()) {
+				String name = getNameGenerator().createWhenInvocationPropertyName(invokedRelation);
+				getInvocation2TraceProperty(name, whenInvocation);
+			}
+		}
+		for (@NonNull RelationCallExp whereInvocation : getWhereInvocations()) {
+			Relation invokedRelation = QVTrelationUtil.getReferredRelation(whereInvocation);
+			if (!invokedRelation.isIsTopLevel()) {
+				String name = getNameGenerator().createWhereInvocationPropertyName(invokedRelation);
+				getInvocation2TraceProperty(name, whereInvocation);
+			}
+		}
+		CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(traceClass));
+		org.eclipse.ocl.pivot.Class signatureClass = basicGetSignatureClass();
+		if (signatureClass != null) {
+			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+				TypedModel rTypedModel = rDomain.getTypedModel();
+				for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(rDomain)) {
+					Element2TraceProperty rootVariableDeclaration2TraceProperty = element2element2traceProperty.get(rootVariable);
+					assert rootVariableDeclaration2TraceProperty != null;
+					rootVariableDeclaration2TraceProperty.getSignatureProperty();
+				}
+			}
+			CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(signatureClass));
+		}
 		/*		assert QVTrelationUtil.Internal.getOwnedPropertiesList(traceClass).size() == variable2variableDeclaration2traceProperty.size();
 				for (@NonNull Property property : QVTrelationUtil.getOwnedProperties(traceClass)) {
 			Property oppositeProperty = property.getOpposite();
@@ -521,5 +693,10 @@ abstract class AbstractRelation2TraceClass extends AbstractRule2TraceClass
 				//				assert property.isIsMany();
 			}
 		} */
+	}
+
+	@Override
+	public String toString() {
+		return traceClass.getName();
 	}
 }

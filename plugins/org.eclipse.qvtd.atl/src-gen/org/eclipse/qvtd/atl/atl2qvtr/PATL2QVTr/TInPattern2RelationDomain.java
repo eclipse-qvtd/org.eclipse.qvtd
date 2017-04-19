@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getRDomain <em>RDomain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getRRule <em>RRule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getTmName <em>Tm Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getWhere_InPattern2RelationDomain_guard <em>Where In Pattern2 Relation Domain guard</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain()
@@ -175,5 +176,31 @@ public interface TInPattern2RelationDomain extends EObject {
 	 * @generated
 	 */
 	void setTmName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Where In Pattern2 Relation Domain guard</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Where In Pattern2 Relation Domain guard</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Where In Pattern2 Relation Domain guard</em>' reference.
+	 * @see #setWhere_InPattern2RelationDomain_guard(SInPattern2RelationDomain_guard)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard()
+	 * @model resolveProxies="false" transient="true"
+	 * @generated
+	 */
+	SInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getWhere_InPattern2RelationDomain_guard <em>Where In Pattern2 Relation Domain guard</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Where In Pattern2 Relation Domain guard</em>' reference.
+	 * @see #getWhere_InPattern2RelationDomain_guard()
+	 * @generated
+	 */
+	void setWhere_InPattern2RelationDomain_guard(SInPattern2RelationDomain_guard value);
 
 } // TInPattern2RelationDomain

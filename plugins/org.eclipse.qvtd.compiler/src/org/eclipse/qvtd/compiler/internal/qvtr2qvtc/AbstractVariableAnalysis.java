@@ -46,7 +46,7 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 
 	@Override
 	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".addNavigationAssignment for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".addNavigationAssignment for " + this);
 	}
 
 	@Override
@@ -54,18 +54,18 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 
 	@Override
 	public boolean hasWhenDomain() {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".hasWhenDomain for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".hasWhenDomain for " + this);
 		return false;
 	}
 
 	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedBound for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedBound for " + this);
 	}
 
 	@Override
 	public void setIsEnforcedReferred() {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedReferred for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedReferred for " + this);
 	}
 
 	@Override
@@ -75,27 +75,27 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 
 	@Override
 	public void setOtherBound(@NonNull CoreDomain otherDomain) {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setOtherBound for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setOtherBound for " + this);
 	}
 
 	@Override
 	public void setOtherReferred(@NonNull CoreDomain cOtherDomain) {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setOtherReferred for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setOtherReferred for " + this);
 	}
 
 	@Override
 	public void setPredicate(@NonNull Area cPredicateArea) {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setPredicate for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setPredicate for " + this);
 	}
 
 	@Override
 	public void setWhen(@NonNull CoreDomain cWhenDomain) {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setWhen for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setWhen for " + this);
 	}
 
 	@Override
 	public void setWhere(@NonNull CoreDomain cWhereDomain) {
-		System.out.println("Unexpected " + getClass().getSimpleName() + ".setWhere for " + this);
+		System.err.println("Unexpected " + getClass().getSimpleName() + ".setWhere for " + this);
 	}
 
 	@Override

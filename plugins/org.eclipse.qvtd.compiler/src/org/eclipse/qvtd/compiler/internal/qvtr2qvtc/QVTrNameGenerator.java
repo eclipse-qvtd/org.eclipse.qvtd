@@ -10,11 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
@@ -50,19 +54,56 @@ public class QVTrNameGenerator
 		return QVTrelationUtil.getName(identifiedVariable) + "_key";
 	}
 
+	public @NonNull String createSignatureClassName(org.eclipse.ocl.pivot.@NonNull Class signatureClass) {
+		return "S" + signatureClass.getName().substring(1);
+	}
+
 	public @NonNull String createTraceClassName(@NonNull Relation relation) {
 		return "T" + QVTrelationUtil.getName(relation);
 	}
 
-	public @NonNull String createTraceInterfaceName(org.eclipse.ocl.pivot.@NonNull Class traceClass) {
-		return "Q" + traceClass.getName().substring(1);
+	public @NonNull String createTracePropertyName(@NonNull VariableDeclaration variable) {
+		return "t_" + QVTrelationUtil.getName(variable);
 	}
 
-	public @NonNull String createWhenTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
-		return "T" + invokingRelation.getName() + "_when_" + invokedRelation.getName();
+	public @NonNull String createWhenInvocationPropertyName(@NonNull Relation relation) {
+		return "when_" + QVTrelationUtil.getName(relation);
 	}
 
-	public @NonNull String createWhereTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
-		return "T" + invokingRelation.getName() + "_where_" + invokedRelation.getName();
+	public @NonNull String createWhereInvocationPropertyName(@NonNull Relation relation) {
+		return "where_" + QVTrelationUtil.getName(relation);
+	}
+
+	public @NonNull String createWhenMappingClassName(@NonNull RelationDomain rInvokedDomain) {
+		Relation invokedRelation = QVTrelationUtil.getContainingRelation(rInvokedDomain);
+		return "when_" + invokedRelation.getName() + '_' + rInvokedDomain.getName();
+	}
+
+	//	public @NonNull String createWhenTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
+	//		return "T" + invokingRelation.getName() + "_when_" + invokedRelation.getName();
+	//	}
+
+	public @NonNull String createWhereMappingClassName(@NonNull RelationDomain rInvokedDomain) {
+		Relation invokedRelation = QVTrelationUtil.getContainingRelation(rInvokedDomain);
+		return "where_" + invokedRelation.getName() + '_' + rInvokedDomain.getName();
+	}
+
+	//	public @NonNull String createWhereTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
+	//		return "T" + invokingRelation.getName() + "_where_" + invokedRelation.getName();
+	//	} */
+
+	/**
+	 * Return a uniqueName for object within the name2object domain.
+	 * Returns name if not already in use otherwise a numerically suffixed variant of name.
+	 * In either case a new entry is added to name2object for the the returned name mapped to object.
+	 */
+	public <T> @NonNull String getUniqueName(@NonNull Map<@NonNull String, @NonNull T> name2object, @NonNull String name, @NonNull T object) {
+		String uniqueName = name;
+		int suffix = 0;
+		while (name2object.get(uniqueName) != null) {
+			uniqueName = name + ++suffix;
+		}
+		name2object.put(uniqueName, object);
+		return uniqueName;
 	}
 }

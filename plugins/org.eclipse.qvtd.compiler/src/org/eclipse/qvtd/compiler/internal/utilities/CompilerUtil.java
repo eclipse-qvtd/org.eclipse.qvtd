@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -54,6 +55,16 @@ public class CompilerUtil
 		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
 		if (message != null)
 			assert false : message;
+	}
+
+	public static void assertNoResourceSetErrors(@NonNull String prefix, @NonNull Resource resource) {
+		ResourceSet resourceSet = resource.getResourceSet();
+		assert resourceSet != null : prefix + " no ResourceSet for " + resource;
+		for (Resource aResource : resourceSet.getResources()) {
+			if (aResource != null) {
+				assertNoResourceErrors(prefix, aResource);
+			}
+		}
 	}
 
 	public static void assertNoUnresolvedProxies(String message, Resource resource) {

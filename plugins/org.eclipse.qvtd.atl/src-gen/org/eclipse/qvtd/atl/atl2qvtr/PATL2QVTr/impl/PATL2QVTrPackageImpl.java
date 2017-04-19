@@ -27,11 +27,11 @@ import org.eclipse.ocl.pivot.PivotPackage;
 
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrFactory;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard;
-import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression;
-import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_where_InPattern2RelationDomain_guard;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclExpression2OCLExpression;
@@ -57,6 +57,20 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass sInPattern2RelationDomain_guardEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sOclExpression2OCLExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tHelper2FunctionEClass = null;
 
 	/**
@@ -72,20 +86,6 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * @generated
 	 */
 	private EClass tInPattern2RelationDomain_guardEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,11 +185,16 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		QVTrelationPackage.eINSTANCE.eClass();
 		QVTtemplatePackage.eINSTANCE.eClass();
 
+		// Obtain or create and register interdependencies
+		PATL2QVTrPackageImpl thePATL2QVTrPackage_1 = (PATL2QVTrPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PATL2QVTrPackage.eNS_URI) instanceof PATL2QVTrPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PATL2QVTrPackage.eNS_URI) : PATL2QVTrPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		thePATL2QVTrPackage.createPackageContents();
+		thePATL2QVTrPackage_1.createPackageContents();
 
 		// Initialize created meta-data
 		thePATL2QVTrPackage.initializePackageContents();
+		thePATL2QVTrPackage_1.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		thePATL2QVTrPackage.freeze();
@@ -198,6 +203,60 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(PATL2QVTrPackage.eNS_URI, thePATL2QVTrPackage);
 		return thePATL2QVTrPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSInPattern2RelationDomain_guard() {
+		return sInPattern2RelationDomain_guardEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSInPattern2RelationDomain_guard_APattern() {
+		return (EReference)sInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSInPattern2RelationDomain_guard_RRule() {
+		return (EReference)sInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSOclExpression2OCLExpression() {
+		return sOclExpression2OCLExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSOclExpression2OCLExpression_AExpression() {
+		return (EReference)sOclExpression2OCLExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSOclExpression2OCLExpression_RExpression() {
+		return (EReference)sOclExpression2OCLExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -331,6 +390,15 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard() {
+		return (EReference)tInPattern2RelationDomainEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTInPattern2RelationDomain_guard() {
 		return tInPattern2RelationDomain_guardEClass;
 	}
@@ -394,17 +462,8 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression() {
-		return tInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTInPattern2RelationDomain_where_InPattern2RelationDomain_guard() {
-		return tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass;
+	public EReference getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression() {
+		return (EReference)tInPattern2RelationDomain_guardEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -705,6 +764,14 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		isCreated = true;
 
 		// Create classes and their features
+		sInPattern2RelationDomain_guardEClass = createEClass(SIN_PATTERN2_RELATION_DOMAIN_GUARD);
+		createEReference(sInPattern2RelationDomain_guardEClass, SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN);
+		createEReference(sInPattern2RelationDomain_guardEClass, SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE);
+
+		sOclExpression2OCLExpressionEClass = createEClass(SOCL_EXPRESSION2_OCL_EXPRESSION);
+		createEReference(sOclExpression2OCLExpressionEClass, SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION);
+		createEReference(sOclExpression2OCLExpressionEClass, SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION);
+
 		tHelper2FunctionEClass = createEClass(THELPER2_FUNCTION);
 		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__ADEF);
 		createEReference(tHelper2FunctionEClass, THELPER2_FUNCTION__AFEAT);
@@ -720,6 +787,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__RDOMAIN);
 		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__RRULE);
 		createEAttribute(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__TM_NAME);
+		createEReference(tInPattern2RelationDomainEClass, TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD);
 
 		tInPattern2RelationDomain_guardEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN_GUARD);
 		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__AEXPRESSION);
@@ -728,10 +796,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__REXPRESSION);
 		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE);
 		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__W);
-
-		tInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION);
-
-		tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass = createEClass(TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD);
+		createEReference(tInPattern2RelationDomain_guardEClass, TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION);
 
 		tMatchedRule2RelationEClass = createEClass(TMATCHED_RULE2_RELATION);
 		createEReference(tMatchedRule2RelationEClass, TMATCHED_RULE2_RELATION__AMODULE);
@@ -794,6 +859,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		PATL2QVTrPackage thePATL2QVTrPackage_1 = (PATL2QVTrPackage)EPackage.Registry.INSTANCE.getEPackage(PATL2QVTrPackage.eNS_URI);
 		OCLPackage theOCLPackage = (OCLPackage)EPackage.Registry.INSTANCE.getEPackage(OCLPackage.eNS_URI);
 		ATLPackage theATLPackage = (ATLPackage)EPackage.Registry.INSTANCE.getEPackage(ATLPackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
@@ -805,10 +871,16 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		tInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionEClass.getESuperTypes().add(this.getTOclExpression2OCLExpression());
-		tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass.getESuperTypes().add(this.getTInPattern2RelationDomain_guard());
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(sInPattern2RelationDomain_guardEClass, SInPattern2RelationDomain_guard.class, "SInPattern2RelationDomain_guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSInPattern2RelationDomain_guard_APattern(), thePATL2QVTrPackage_1.getSInPattern2RelationDomain_guard(), null, "aPattern", null, 1, 1, SInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSInPattern2RelationDomain_guard_RRule(), thePATL2QVTrPackage_1.getSInPattern2RelationDomain_guard(), null, "rRule", null, 1, 1, SInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sOclExpression2OCLExpressionEClass, SOclExpression2OCLExpression.class, "SOclExpression2OCLExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSOclExpression2OCLExpression_AExpression(), thePATL2QVTrPackage_1.getSOclExpression2OCLExpression(), null, "aExpression", null, 1, 1, SOclExpression2OCLExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSOclExpression2OCLExpression_RExpression(), thePATL2QVTrPackage_1.getSOclExpression2OCLExpression(), null, "rExpression", null, 1, 1, SOclExpression2OCLExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(tHelper2FunctionEClass, THelper2Function.class, "THelper2Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTHelper2Function_ADef(), theOCLPackage.getOclFeatureDefinition(), null, "aDef", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTHelper2Function_AFeat(), theOCLPackage.getOperation(), null, "aFeat", null, 1, 1, THelper2Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -824,6 +896,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		initEReference(getTInPattern2RelationDomain_RDomain(), theQVTrelationPackage.getRelationDomain(), null, "rDomain", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTInPattern2RelationDomain_RRule(), theQVTrelationPackage.getRelation(), null, "rRule", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTInPattern2RelationDomain_TmName(), ecorePackage.getEString(), "tmName", null, 1, 1, TInPattern2RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard(), thePATL2QVTrPackage_1.getSInPattern2RelationDomain_guard(), null, "where_InPattern2RelationDomain_guard", null, 0, 1, TInPattern2RelationDomain.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tInPattern2RelationDomain_guardEClass, TInPattern2RelationDomain_guard.class, "TInPattern2RelationDomain_guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTInPattern2RelationDomain_guard_AExpression(), theOCLPackage.getOperationCallExp(), null, "aExpression", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -832,10 +905,7 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		initEReference(getTInPattern2RelationDomain_guard_RExpression(), thePivotPackage.getOperationCallExp(), null, "rExpression", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTInPattern2RelationDomain_guard_RRule(), theQVTrelationPackage.getRelation(), null, "rRule", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTInPattern2RelationDomain_guard_W(), theQVTbasePackage.getPattern(), null, "w", null, 1, 1, TInPattern2RelationDomain_guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(tInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionEClass, TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression.class, "TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(tInPattern2RelationDomain_where_InPattern2RelationDomain_guardEClass, TInPattern2RelationDomain_where_InPattern2RelationDomain_guard.class, "TInPattern2RelationDomain_where_InPattern2RelationDomain_guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression(), thePATL2QVTrPackage_1.getSOclExpression2OCLExpression(), null, "when_OclExpression2OCLExpression", null, 0, 1, TInPattern2RelationDomain_guard.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tMatchedRule2RelationEClass, TMatchedRule2Relation.class, "TMatchedRule2Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTMatchedRule2Relation_AModule(), theATLPackage.getModule(), null, "aModule", null, 1, 1, TMatchedRule2Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -877,110 +947,10 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
 		// http://www.eclipse.org/qvt#Domains
 		createQvtDomainsAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
-		addAnnotation
-		  (getTHelper2Function_ADef(), 
-		   source, 
-		   new String[] {
-			 "body", "THelper2Function"
-		   });	
-		addAnnotation
-		  (getTHelper2Function_AFeat(), 
-		   source, 
-		   new String[] {
-			 "body", "THelper2Function"
-		   });	
-		addAnnotation
-		  (getTHelper2Function_Function(), 
-		   source, 
-		   new String[] {
-			 "body", "THelper2Function"
-		   });	
-		addAnnotation
-		  (getTHelper2Function_Helper(), 
-		   source, 
-		   new String[] {
-			 "body", "THelper2Function"
-		   });	
-		addAnnotation
-		  (getTInPattern2RelationDomain_APattern(), 
-		   source, 
-		   new String[] {
-			 "body", "TInPattern2RelationDomain"
-		   });	
-		addAnnotation
-		  (getTInPattern2RelationDomain_ARule(), 
-		   source, 
-		   new String[] {
-			 "body", "TInPattern2RelationDomain"
-		   });	
-		addAnnotation
-		  (getTInPattern2RelationDomain_RDomain(), 
-		   source, 
-		   new String[] {
-			 "body", "TInPattern2RelationDomain"
-		   });	
-		addAnnotation
-		  (getTMatchedRule2Relation_MatchedRule(), 
-		   source, 
-		   new String[] {
-			 "body", "TMatchedRule2Relation"
-		   });	
-		addAnnotation
-		  (getTMatchedRule2Relation_RRule(), 
-		   source, 
-		   new String[] {
-			 "body", "TMatchedRule2Relation"
-		   });	
-		addAnnotation
-		  (getTModel2RelationalTransformation_Module(), 
-		   source, 
-		   new String[] {
-			 "body", "TModel2RelationalTransformation"
-		   });	
-		addAnnotation
-		  (getTModel2RelationalTransformation_RelTx(), 
-		   source, 
-		   new String[] {
-			 "body", "TModel2RelationalTransformation"
-		   });	
-		addAnnotation
-		  (getTOclExpression2OCLExpression_AExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "TOclExpression2OCLExpression"
-		   });	
-		addAnnotation
-		  (getTOclExpression2OCLExpression_RExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "TOclExpression2OCLExpression"
-		   });	
-		addAnnotation
-		  (getTOperationCallExp2OperationCallExp_AExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "TOperationCallExp2OperationCallExp"
-		   });	
-		addAnnotation
-		  (getTOperationCallExp2OperationCallExp_RExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "TOperationCallExp2OperationCallExp"
-		   });
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 
 	/**
@@ -991,6 +961,30 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 	 */
 	protected void createQvtDomainsAnnotations() {
 		String source = "http://www.eclipse.org/qvt#Domains";	
+		addAnnotation
+		  (getSInPattern2RelationDomain_guard_APattern(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getSInPattern2RelationDomain_guard_RRule(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
+		addAnnotation
+		  (getSOclExpression2OCLExpression_AExpression(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "atl"
+		   });	
+		addAnnotation
+		  (getSOclExpression2OCLExpression_RExpression(), 
+		   source, 
+		   new String[] {
+			 "referredDomain", "qvtr"
+		   });	
 		addAnnotation
 		  (getTHelper2Function_ADef(), 
 		   source, 
@@ -1206,6 +1200,106 @@ public class PATL2QVTrPackageImpl extends EPackageImpl implements PATL2QVTrPacka
 		   source, 
 		   new String[] {
 			 "referredDomain", "qvtr"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEmofAnnotations() {
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		addAnnotation
+		  (getTHelper2Function_ADef(), 
+		   source, 
+		   new String[] {
+			 "body", "THelper2Function"
+		   });	
+		addAnnotation
+		  (getTHelper2Function_AFeat(), 
+		   source, 
+		   new String[] {
+			 "body", "THelper2Function"
+		   });	
+		addAnnotation
+		  (getTHelper2Function_Function(), 
+		   source, 
+		   new String[] {
+			 "body", "THelper2Function"
+		   });	
+		addAnnotation
+		  (getTHelper2Function_Helper(), 
+		   source, 
+		   new String[] {
+			 "body", "THelper2Function"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_APattern(), 
+		   source, 
+		   new String[] {
+			 "body", "TInPattern2RelationDomain"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_ARule(), 
+		   source, 
+		   new String[] {
+			 "body", "TInPattern2RelationDomain"
+		   });	
+		addAnnotation
+		  (getTInPattern2RelationDomain_RDomain(), 
+		   source, 
+		   new String[] {
+			 "body", "TInPattern2RelationDomain"
+		   });	
+		addAnnotation
+		  (getTMatchedRule2Relation_MatchedRule(), 
+		   source, 
+		   new String[] {
+			 "body", "TMatchedRule2Relation"
+		   });	
+		addAnnotation
+		  (getTMatchedRule2Relation_RRule(), 
+		   source, 
+		   new String[] {
+			 "body", "TMatchedRule2Relation"
+		   });	
+		addAnnotation
+		  (getTModel2RelationalTransformation_Module(), 
+		   source, 
+		   new String[] {
+			 "body", "TModel2RelationalTransformation"
+		   });	
+		addAnnotation
+		  (getTModel2RelationalTransformation_RelTx(), 
+		   source, 
+		   new String[] {
+			 "body", "TModel2RelationalTransformation"
+		   });	
+		addAnnotation
+		  (getTOclExpression2OCLExpression_AExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "TOclExpression2OCLExpression"
+		   });	
+		addAnnotation
+		  (getTOclExpression2OCLExpression_RExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "TOclExpression2OCLExpression"
+		   });	
+		addAnnotation
+		  (getTOperationCallExp2OperationCallExp_AExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "TOperationCallExp2OperationCallExp"
+		   });	
+		addAnnotation
+		  (getTOperationCallExp2OperationCallExp_RExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "TOperationCallExp2OperationCallExp"
 		   });
 	}
 

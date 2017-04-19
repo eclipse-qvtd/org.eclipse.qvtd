@@ -414,7 +414,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
 		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
-		Property cTargetProperty = qvtr2qvtc.basicGetProperty(cMiddleRealizedVariable.getType(), cVariable);
+		Property cTargetProperty = qvtr2qvtc.basicGetProperty(cMiddleRealizedVariable.getType(), rVariable);
 		assert isOptional || (cTargetProperty != null);
 		if (cTargetProperty != null) {
 			assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
@@ -425,6 +425,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			assertNewAssignment(QVTcoreUtil.getOwnedAssignments(cMiddleBottomPattern), cAssignment);
 			cMiddleBottomPattern.getAssignment().add(cAssignment);
 		}
+		return cVariable;
+	}
+
+	public @NonNull Variable addTraceNavigationAssignment(@NonNull Property cTargetProperty, @NonNull Variable cVariable) throws CompilerChainException {
+		assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
+		VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable);
+		OCLExpression cExpression = createVariableExp(cVariable);
+		NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cTargetProperty, cExpression, false);
+		QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
+		assertNewAssignment(QVTcoreUtil.getOwnedAssignments(cMiddleBottomPattern), cAssignment);
+		cMiddleBottomPattern.getAssignment().add(cAssignment);
 		return cVariable;
 	}
 
@@ -479,6 +490,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	public @NonNull Variable getCoreVariable(@NonNull Variable rVariable) throws CompilerChainException {			// doRVarToMVar
 		return getVariableAnalysis(rVariable).getCoreVariable();
+	}
+
+	protected @NonNull VariableAnalysis getCoreVariableAnalysis(@NonNull Variable coreVariable) {
+		return ClassUtil.nonNullState(cVariable2analysis.get(coreVariable));
 	}
 
 	public @NonNull BottomPattern getMiddleBottomPattern() {

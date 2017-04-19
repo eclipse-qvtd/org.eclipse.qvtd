@@ -64,11 +64,11 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD: return createSInPattern2RelationDomain_guard();
+			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION: return createSOclExpression2OCLExpression();
 			case PATL2QVTrPackage.THELPER2_FUNCTION: return createTHelper2Function();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN: return createTInPattern2RelationDomain();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD: return createTInPattern2RelationDomain_guard();
-			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD_WHEN_OCL_EXPRESSION2_OCL_EXPRESSION: return createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression();
-			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD: return createTInPattern2RelationDomain_where_InPattern2RelationDomain_guard();
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION: return createTMatchedRule2Relation();
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION: return createTModel2RelationalTransformation();
 			case PATL2QVTrPackage.TOCL_EXPRESSION2_OCL_EXPRESSION: return createTOclExpression2OCLExpression();
@@ -78,6 +78,26 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SInPattern2RelationDomain_guard createSInPattern2RelationDomain_guard() {
+		SInPattern2RelationDomain_guardImpl sInPattern2RelationDomain_guard = new SInPattern2RelationDomain_guardImpl();
+		return sInPattern2RelationDomain_guard;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SOclExpression2OCLExpression createSOclExpression2OCLExpression() {
+		SOclExpression2OCLExpressionImpl sOclExpression2OCLExpression = new SOclExpression2OCLExpressionImpl();
+		return sOclExpression2OCLExpression;
 	}
 
 	/**
@@ -108,26 +128,6 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	public TInPattern2RelationDomain_guard createTInPattern2RelationDomain_guard() {
 		TInPattern2RelationDomain_guardImpl tInPattern2RelationDomain_guard = new TInPattern2RelationDomain_guardImpl();
 		return tInPattern2RelationDomain_guard;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TInPattern2RelationDomain_guard_when_OclExpression2OCLExpression createTInPattern2RelationDomain_guard_when_OclExpression2OCLExpression() {
-		TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression = new TInPattern2RelationDomain_guard_when_OclExpression2OCLExpressionImpl();
-		return tInPattern2RelationDomain_guard_when_OclExpression2OCLExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TInPattern2RelationDomain_where_InPattern2RelationDomain_guard createTInPattern2RelationDomain_where_InPattern2RelationDomain_guard() {
-		TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl tInPattern2RelationDomain_where_InPattern2RelationDomain_guard = new TInPattern2RelationDomain_where_InPattern2RelationDomain_guardImpl();
-		return tInPattern2RelationDomain_where_InPattern2RelationDomain_guard;
 	}
 
 	/**

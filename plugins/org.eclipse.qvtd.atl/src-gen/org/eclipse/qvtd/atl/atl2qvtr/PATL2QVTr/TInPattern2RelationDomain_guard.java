@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getRExpression <em>RExpression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getRRule <em>RRule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getW <em>W</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getWhen_OclExpression2OCLExpression <em>When Ocl Expression2 OCL Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_guard()
@@ -204,5 +205,31 @@ public interface TInPattern2RelationDomain_guard extends EObject {
 	 * @generated
 	 */
 	void setW(Pattern value);
+
+	/**
+	 * Returns the value of the '<em><b>When Ocl Expression2 OCL Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>When Ocl Expression2 OCL Expression</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>When Ocl Expression2 OCL Expression</em>' reference.
+	 * @see #setWhen_OclExpression2OCLExpression(SOclExpression2OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression()
+	 * @model resolveProxies="false" transient="true"
+	 * @generated
+	 */
+	SOclExpression2OCLExpression getWhen_OclExpression2OCLExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getWhen_OclExpression2OCLExpression <em>When Ocl Expression2 OCL Expression</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>When Ocl Expression2 OCL Expression</em>' reference.
+	 * @see #getWhen_OclExpression2OCLExpression()
+	 * @generated
+	 */
+	void setWhen_OclExpression2OCLExpression(SOclExpression2OCLExpression value);
 
 } // TInPattern2RelationDomain_guard

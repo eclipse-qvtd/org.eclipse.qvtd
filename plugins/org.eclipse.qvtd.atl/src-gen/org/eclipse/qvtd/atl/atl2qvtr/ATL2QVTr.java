@@ -19,12 +19,10 @@ import org.eclipse.m2m.atl.common.ATL.InPattern;
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
 import org.eclipse.m2m.atl.common.ATL.Module;
 import org.eclipse.m2m.atl.common.OCL.OCLPackage;
-import org.eclipse.m2m.atl.common.OCL.OclExpression;
 import org.eclipse.m2m.atl.common.OCL.OclFeature;
 import org.eclipse.m2m.atl.common.OCL.OclFeatureDefinition;
 import org.eclipse.m2m.atl.common.OCL.OclModel;
 import org.eclipse.m2m.atl.common.OCL.Operation;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -39,15 +37,11 @@ import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrFactory;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain;
-import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation;
-import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclExpression2OCLExpression;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_create;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOclModel2ModelParameter_from;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -87,33 +81,23 @@ public class ATL2QVTr extends AbstractTransformer
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_InPattern = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_ATL.getClassId("InPattern", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MatchedRule = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_ATL.getClassId("MatchedRule", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Module = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_ATL.getClassId("Module", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = PACKid_$metamodel$.getClassId("OCLExpression", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclExpression = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("OclExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclFeature = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("OclFeature", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclFeatureDefinition = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("OclFeatureDefinition", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclModel = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("OclModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Operation = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("Operation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationCallExp = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("OperationCallExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationCallExp_0 = PACKid_$metamodel$.getClassId("OperationCallExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = PACKid_$metamodel$.getClassId("Package", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTbase.getClassId("Pattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Predicate = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTbase.getClassId("Predicate", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Relation = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTrelation.getClassId("Relation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationDomain = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTrelation.getClassId("RelationDomain", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationModel = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTrelation.getClassId("RelationModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationalTransformation = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTrelation.getClassId("RelationalTransformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_THelper2Function = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("THelper2Function", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TInPattern2RelationDomain = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TInPattern2RelationDomain", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TInPattern2RelationDomain_guard = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TInPattern2RelationDomain_guard", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TMatchedRule2Relation = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TMatchedRule2Relation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TModel2RelationalTransformation = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TModel2RelationalTransformation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TOclExpression2OCLExpression = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TOclExpression2OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TOclModel2ModelParameter_create = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TOclModel2ModelParameter_create", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TOclModel2ModelParameter_from = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TOclModel2ModelParameter_from", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OclModel = TypeId.ORDERED_SET.getSpecializedId(CLSSid_OclModel);
-	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_aExpression_0 = CLSSid_TOclExpression2OCLExpression.getPropertyId("aExpression");
-	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_aPattern_0 = CLSSid_TInPattern2RelationDomain.getPropertyId("aPattern");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_aRule = CLSSid_TInPattern2RelationDomain.getPropertyId("aRule");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_inModels = CLSSid_Module.getPropertyId("inModels");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_matchedRule = CLSSid_TMatchedRule2Relation.getPropertyId("matchedRule");
@@ -124,21 +108,17 @@ public class ATL2QVTr extends AbstractTransformer
 	/*
 	 * Property-source to Property-target unnavigable navigation caches
 	 */
-	protected final @NonNull Map<InPattern,TInPattern2RelationDomain> OPPOSITE_OF_TInPattern2RelationDomain_aPattern = new HashMap<InPattern,TInPattern2RelationDomain>();
 	protected final @NonNull Map<MatchedRule,TInPattern2RelationDomain> OPPOSITE_OF_TInPattern2RelationDomain_aRule = new HashMap<MatchedRule,TInPattern2RelationDomain>();
 	protected final @NonNull Map<MatchedRule,TMatchedRule2Relation> OPPOSITE_OF_TMatchedRule2Relation_matchedRule = new HashMap<MatchedRule,TMatchedRule2Relation>();
 	protected final @NonNull Map<Module,TModel2RelationalTransformation> OPPOSITE_OF_TModel2RelationalTransformation_module = new HashMap<Module,TModel2RelationalTransformation>();
-	protected final @NonNull Map<OclExpression,TOclExpression2OCLExpression> OPPOSITE_OF_TOclExpression2OCLExpression_aExpression = new HashMap<OclExpression,TOclExpression2OCLExpression>();
 
 	/*
 	 * Array of the source PropertyIds of each Property for which unnavigable opposite property navigation may occur.
 	 */
 	private static final @NonNull PropertyId @NonNull [] oppositeIndex2propertyId = new @NonNull PropertyId[]{
 		PROPid_module,		// 0 => module
-		PROPid_aExpression_0,		// 1 => aExpression
-		PROPid_matchedRule,		// 2 => matchedRule
-		PROPid_aRule,		// 3 => aRule
-		PROPid_aPattern_0		// 4 => aPattern
+		PROPid_matchedRule,		// 1 => matchedRule
+		PROPid_aRule		// 2 => aRule
 	};
 
 	/*
@@ -149,8 +129,7 @@ public class ATL2QVTr extends AbstractTransformer
 		CLSSid_InPattern,                     // 1 => InPattern
 		CLSSid_MatchedRule,                   // 2 => MatchedRule
 		CLSSid_Module,                        // 3 => Module
-		CLSSid_OclExpression,                 // 4 => OclExpression
-		CLSSid_OclModel                       // 5 => OclModel
+		CLSSid_OclModel                       // 4 => OclModel
 	};
 
 	/*
@@ -164,8 +143,7 @@ public class ATL2QVTr extends AbstractTransformer
 		{1},                          // 1 : InPattern -> {InPattern}
 		{2},                          // 2 : MatchedRule -> {MatchedRule}
 		{3},                          // 3 : Module -> {Module}
-		{4},                          // 4 : OclExpression -> {OclExpression}
-		{5}                           // 5 : OclModel -> {OclModel}
+		{4}                           // 4 : OclModel -> {OclModel}
 	};
 
 
@@ -179,9 +157,8 @@ public class ATL2QVTr extends AbstractTransformer
 		final @NonNull Connection ji_InPattern = models[1/*atl*/].getConnection(1/*ATL::InPattern*/);
 		final @NonNull Connection ji_MatchedRule = models[1/*atl*/].getConnection(2/*ATL::MatchedRule*/);
 		final @NonNull Connection ji_Module = models[1/*atl*/].getConnection(3/*ATL::Module*/);
-		final @NonNull Connection ji_OclExpression = models[1/*atl*/].getConnection(4/*OCL::OclExpression*/);
-		final @NonNull Connection ji_OclModel = models[1/*atl*/].getConnection(5/*OCL::OclModel*/);
-		return MAP___root__(ji_Helper, ji_InPattern, ji_MatchedRule, ji_Module, ji_OclExpression, ji_OclModel) && invocationManager.flush();
+		final @NonNull Connection ji_OclModel = models[1/*atl*/].getConnection(4/*OCL::OclModel*/);
+		return MAP___root__(ji_Helper, ji_InPattern, ji_MatchedRule, ji_Module, ji_OclModel) && invocationManager.flush();
 	}
 
 	/**
@@ -192,14 +169,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * append ji_InPattern  : ATL::InPattern[1];
 	 * append ji_MatchedRule  : ATL::MatchedRule[1];
 	 * append ji_Module  : ATL::Module[1];
-	 * append ji_OclExpression  : OCL::OclExpression[1];
 	 * append ji_OclModel  : OCL::OclModel[1];
-	 * ::jm_THelper2Function : PATL2QVTr::THelper2Function[1]::jm_TInPattern2RelationDomain : PATL2QVTr::TInPattern2RelationDomain[1]::jm_TInPattern2RelationDomain__guard : PATL2QVTr::TInPattern2RelationDomain_guard[1]::jm_TMatchedRule2Relation : PATL2QVTr::TMatchedRule2Relation[1]::jm_TOclModel2ModelParameter__create : PATL2QVTr::TOclModel2ModelParameter_create[1]::jm_TOclModel2ModelParameter__from : PATL2QVTr::TOclModel2ModelParameter_from[1]install m_TModel2RelationalTransformation__3__4_module_relTx_r0 {
+	 * ::jm_THelper2Function : PATL2QVTr::THelper2Function[1]::jm_TInPattern2RelationDomain : PATL2QVTr::TInPattern2RelationDomain[1]::jm_TMatchedRule2Relation : PATL2QVTr::TMatchedRule2Relation[1]::jm_TOclModel2ModelParameter__create : PATL2QVTr::TOclModel2ModelParameter_create[1]::jm_TOclModel2ModelParameter__from : PATL2QVTr::TOclModel2ModelParameter_from[1]install m_TModel2RelationalTransformation__3__4_module_relTx_r0 {
 	 * module consumes append ji_Module  : ATL::Module[1];
-	 * ;
-	 * }
-	 *   install m_TOclExpression2OCLExpression_aExpression_p0 {
-	 * aExpression consumes append ji_OclExpression  : OCL::OclExpression[1];
 	 * ;
 	 * }
 	 *   install m_THelper2Function_aDef_aFeat_aModule_helper_opName_p0 {
@@ -209,14 +181,6 @@ public class ATL2QVTr extends AbstractTransformer
 	 * }
 	 *   install m_THelper2Function_function_relTx_lc {
 	 * trace consumes ::jm_THelper2Function : PATL2QVTr::THelper2Function[1];
-	 * }
-	 *   install m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0 {
-	 * aPattern consumes append ji_InPattern  : ATL::InPattern[1];
-	 * ;
-	 * jm_TInPattern2RelationDomain__guard appendsTo jm_TInPattern2RelationDomain__guard;
-	 * }
-	 *   install m_TOclExpression2OCLExpression_rExpression_p1 {
-	 * from_TInPattern2RelationDomain_guard consumes ::jm_TInPattern2RelationDomain__guard : PATL2QVTr::TInPattern2RelationDomain_guard[1];
 	 * }
 	 *   install m_TInPattern2RelationDomain_aPattern_aRule_p0 {
 	 * aPattern consumes append ji_InPattern  : ATL::InPattern[1];
@@ -241,12 +205,6 @@ public class ATL2QVTr extends AbstractTransformer
 	 *   install m_TMatchedRule2Relation_relTx_p2 {
 	 * trace consumes ::jm_TMatchedRule2Relation : PATL2QVTr::TMatchedRule2Relation[1];
 	 * }
-	 *   install m_TInPattern2RelationDomain__guard_p_rRule_w_p1 {
-	 * trace consumes ::jm_TInPattern2RelationDomain__guard : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * }
-	 *   install m_TInPattern2RelationDomain__guard_rExpression_p2 {
-	 * trace consumes ::jm_TInPattern2RelationDomain__guard : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * }
 	 *   install m_TOclModel2ModelParameter__create_aModule_oclModel__p0 {
 	 * jm_TOclModel2ModelParameter__create appendsTo jm_TOclModel2ModelParameter__create;
 	 * oclModel consumes append ji_OclModel  : OCL::OclModel[1];
@@ -270,14 +228,13 @@ public class ATL2QVTr extends AbstractTransformer
 	 * trace consumes ::jm_TOclModel2ModelParameter__from : PATL2QVTr::TOclModel2ModelParameter_from[1];
 	 * }
 	 */
-	protected boolean MAP___root__(final @NonNull Connection ji_Helper, final @NonNull Connection ji_InPattern, final @NonNull Connection ji_MatchedRule, final @NonNull Connection ji_Module, final @NonNull Connection ji_OclExpression, final @NonNull Connection ji_OclModel)  {
+	protected boolean MAP___root__(final @NonNull Connection ji_Helper, final @NonNull Connection ji_InPattern, final @NonNull Connection ji_MatchedRule, final @NonNull Connection ji_Module, final @NonNull Connection ji_OclModel)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP___root__" + ", " + ji_Helper + ", " + ji_InPattern + ", " + ji_MatchedRule + ", " + ji_Module + ", " + ji_OclExpression + ", " + ji_OclModel);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP___root__" + ", " + ji_Helper + ", " + ji_InPattern + ", " + ji_MatchedRule + ", " + ji_Module + ", " + ji_OclModel);
 		}
 		// connection variables
 		final @NonNull Connection jm_THelper2Function_1 = createConnection("jm_THelper2Function", CLSSid_THelper2Function, false);
 		final @NonNull Connection jm_TInPattern2RelationDomain_1 = createConnection("jm_TInPattern2RelationDomain", CLSSid_TInPattern2RelationDomain, false);
-		final @NonNull Connection jm_TInPattern2RelationDomain__guard_1 = createConnection("jm_TInPattern2RelationDomain__guard", CLSSid_TInPattern2RelationDomain_guard, false);
 		final @NonNull Connection jm_TMatchedRule2Relation_1 = createConnection("jm_TMatchedRule2Relation", CLSSid_TMatchedRule2Relation, false);
 		final @NonNull Connection jm_TOclModel2ModelParameter__create_1 = createConnection("jm_TOclModel2ModelParameter__create", CLSSid_TOclModel2ModelParameter_create, false);
 		final @NonNull Connection jm_TOclModel2ModelParameter__from_1 = createConnection("jm_TOclModel2ModelParameter__from", CLSSid_TOclModel2ModelParameter_from, false);
@@ -285,62 +242,47 @@ public class ATL2QVTr extends AbstractTransformer
 		for (@NonNull Module module_0 : ji_Module.typedIterable(Module.class)) {
 			MAP_m_TModel2RelationalTransformation__3__4_module_relTx_r0(module_0);
 		}
-		for (@NonNull OclExpression aExpression_0 : ji_OclExpression.typedIterable(OclExpression.class)) {
-			MAP_m_TOclExpression2OCLExpression_aExpression_p0(aExpression_0);
-		}
 		for (@NonNull Helper helper_0 : ji_Helper.typedIterable(Helper.class)) {
 			MAP_m_THelper2Function_aDef_aFeat_aModule_helper_opName_p0(helper_0, jm_THelper2Function_1);
 		}
-		for (@NonNull THelper2Function trace_9 : jm_THelper2Function_1.typedIterable(THelper2Function.class)) {
-			MAP_m_THelper2Function_function_relTx_lc(trace_9);
+		for (@NonNull THelper2Function trace_7 : jm_THelper2Function_1.typedIterable(THelper2Function.class)) {
+			MAP_m_THelper2Function_function_relTx_lc(trace_7);
 		}
-		for (@NonNull InPattern aPattern_1 : ji_InPattern.typedIterable(InPattern.class)) {
-			MAP_m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0(aPattern_1, jm_TInPattern2RelationDomain__guard_1);
-		}
-		for (@NonNull TInPattern2RelationDomain_guard from_TInPattern2RelationDomain_guard_0 : jm_TInPattern2RelationDomain__guard_1.typedIterable(TInPattern2RelationDomain_guard.class)) {
-			MAP_m_TOclExpression2OCLExpression_rExpression_p1(from_TInPattern2RelationDomain_guard_0);
-		}
-		for (@NonNull InPattern aPattern_2 : ji_InPattern.typedIterable(InPattern.class)) {
-			MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0(aPattern_2, jm_TInPattern2RelationDomain_1);
+		for (@NonNull InPattern aPattern_0 : ji_InPattern.typedIterable(InPattern.class)) {
+			MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0(aPattern_0, jm_TInPattern2RelationDomain_1);
 		}
 		for (@NonNull MatchedRule matchedRule_0 : ji_MatchedRule.typedIterable(MatchedRule.class)) {
 			MAP_m_TMatchedRule2Relation_aModule_matchedRule_ruleName_p0(jm_TMatchedRule2Relation_1, matchedRule_0);
 		}
-		for (@NonNull TInPattern2RelationDomain trace_10 : jm_TInPattern2RelationDomain_1.typedIterable(TInPattern2RelationDomain.class)) {
-			MAP_m_TInPattern2RelationDomain_rDomain_p1(trace_10);
+		for (@NonNull TInPattern2RelationDomain trace_8 : jm_TInPattern2RelationDomain_1.typedIterable(TInPattern2RelationDomain.class)) {
+			MAP_m_TInPattern2RelationDomain_rDomain_p1(trace_8);
 		}
-		for (@NonNull TMatchedRule2Relation trace_11 : jm_TMatchedRule2Relation_1.typedIterable(TMatchedRule2Relation.class)) {
-			MAP_m_TMatchedRule2Relation_rRule_p1(trace_11);
+		for (@NonNull TMatchedRule2Relation trace_9 : jm_TMatchedRule2Relation_1.typedIterable(TMatchedRule2Relation.class)) {
+			MAP_m_TMatchedRule2Relation_rRule_p1(trace_9);
 		}
 		for (@NonNull MatchedRule aRule_0 : ji_MatchedRule.typedIterable(MatchedRule.class)) {
 			MAP_m_TInPattern2RelationDomain_rRule_p2(aRule_0);
 		}
-		for (@NonNull TMatchedRule2Relation trace_12 : jm_TMatchedRule2Relation_1.typedIterable(TMatchedRule2Relation.class)) {
-			MAP_m_TMatchedRule2Relation_relTx_p2(trace_12);
-		}
-		for (@NonNull TInPattern2RelationDomain_guard trace_13 : jm_TInPattern2RelationDomain__guard_1.typedIterable(TInPattern2RelationDomain_guard.class)) {
-			MAP_m_TInPattern2RelationDomain__guard_p_rRule_w_p1(trace_13);
-		}
-		for (@NonNull TInPattern2RelationDomain_guard trace_14 : jm_TInPattern2RelationDomain__guard_1.typedIterable(TInPattern2RelationDomain_guard.class)) {
-			MAP_m_TInPattern2RelationDomain__guard_rExpression_p2(trace_14);
+		for (@NonNull TMatchedRule2Relation trace_10 : jm_TMatchedRule2Relation_1.typedIterable(TMatchedRule2Relation.class)) {
+			MAP_m_TMatchedRule2Relation_relTx_p2(trace_10);
 		}
 		for (@NonNull OclModel oclModel_1 : ji_OclModel.typedIterable(OclModel.class)) {
 			MAP_m_TOclModel2ModelParameter__create_aModule_oclModel__p0(jm_TOclModel2ModelParameter__create_1, oclModel_1);
 		}
-		for (@NonNull TOclModel2ModelParameter_create trace_15 : jm_TOclModel2ModelParameter__create_1.typedIterable(TOclModel2ModelParameter_create.class)) {
-			MAP_m_TOclModel2ModelParameter__create_relTM_p1(trace_15);
+		for (@NonNull TOclModel2ModelParameter_create trace_11 : jm_TOclModel2ModelParameter__create_1.typedIterable(TOclModel2ModelParameter_create.class)) {
+			MAP_m_TOclModel2ModelParameter__create_relTM_p1(trace_11);
 		}
 		for (@NonNull OclModel oclModel_2 : ji_OclModel.typedIterable(OclModel.class)) {
 			MAP_m_TOclModel2ModelParameter__from_aModule_oclModel_tm_p0(jm_TOclModel2ModelParameter__from_1, oclModel_2);
 		}
-		for (@NonNull TOclModel2ModelParameter_from trace_16 : jm_TOclModel2ModelParameter__from_1.typedIterable(TOclModel2ModelParameter_from.class)) {
-			MAP_m_TOclModel2ModelParameter__from_relTM_p1(trace_16);
+		for (@NonNull TOclModel2ModelParameter_from trace_12 : jm_TOclModel2ModelParameter__from_1.typedIterable(TOclModel2ModelParameter_from.class)) {
+			MAP_m_TOclModel2ModelParameter__from_relTM_p1(trace_12);
 		}
-		for (@NonNull TOclModel2ModelParameter_create trace_17 : jm_TOclModel2ModelParameter__create_1.typedIterable(TOclModel2ModelParameter_create.class)) {
-			MAP_m_TOclModel2ModelParameter__create_relTx_p2(trace_17);
+		for (@NonNull TOclModel2ModelParameter_create trace_13 : jm_TOclModel2ModelParameter__create_1.typedIterable(TOclModel2ModelParameter_create.class)) {
+			MAP_m_TOclModel2ModelParameter__create_relTx_p2(trace_13);
 		}
-		for (@NonNull TOclModel2ModelParameter_from trace_18 : jm_TOclModel2ModelParameter__from_1.typedIterable(TOclModel2ModelParameter_from.class)) {
-			MAP_m_TOclModel2ModelParameter__from_relTx_p2(trace_18);
+		for (@NonNull TOclModel2ModelParameter_from trace_14 : jm_TOclModel2ModelParameter__from_1.typedIterable(TOclModel2ModelParameter_from.class)) {
+			MAP_m_TOclModel2ModelParameter__from_relTx_p2(trace_14);
 		}
 		final /*@Thrown*/ @Nullable Boolean __root__ = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
@@ -360,12 +302,12 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle trace : PATL2QVTr::TModel2RelationalTransformation[1];
 	 * set _3.name := null;
 	 * set _4.name := null;
-	 * set relTx.owningPackage := _3;
+	 * set _3.Model := _4;
 	 * set trace._3 := _3;
 	 * set trace._4 := _4;
 	 * set trace.module := module;
 	 * set trace.relTx := relTx;
-	 * set _3.Model := _4;
+	 * set relTx.owningPackage := _3;
 	 * set relTx.name := txName;
 	 * set trace.txName := txName;
 	 *
@@ -383,50 +325,25 @@ public class ATL2QVTr extends AbstractTransformer
 		models[2/*qvtr*/].add(_4, false);
 		final @NonNull RelationalTransformation relTx = QVTrelationFactory.eINSTANCE.createRelationalTransformation();
 		models[2/*qvtr*/].add(relTx, true);
-		final @SuppressWarnings("null")@NonNull TModel2RelationalTransformation trace_9 = PATL2QVTrFactory.eINSTANCE.createTModel2RelationalTransformation();
-		models[0/*middle*/].add(trace_9, false);
+		final @SuppressWarnings("null")@NonNull TModel2RelationalTransformation trace_7 = PATL2QVTrFactory.eINSTANCE.createTModel2RelationalTransformation();
+		models[0/*middle*/].add(trace_7, false);
 		// mapping statements
 		_3.setName(null);
 		_4.setName(null);
-		relTx.setOwningPackage(_3);
-		trace_9.set_3(_3);
-		trace_9.set_4(_4);
-		OPPOSITE_OF_TModel2RelationalTransformation_module.put(module, trace_9);
-		trace_9.setModule(module);
-		trace_9.setRelTx(relTx);
 		_4.getOwnedPackages().add(_3);
+		trace_7.set_3(_3);
+		trace_7.set_4(_4);
+		OPPOSITE_OF_TModel2RelationalTransformation_module.put(module, trace_7);
+		trace_7.setModule(module);
+		trace_7.setRelTx(relTx);
+		relTx.setOwningPackage(_3);
 		relTx.setName(name);
-		trace_9.setTxName(name);
+		trace_7.setTxName(name);
 		final /*@Thrown*/ @Nullable Boolean m_TModel2RelationalTransformation__3__4_module_relTx_r0 = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((m_TModel2RelationalTransformation__3__4_module_relTx_r0 ? "done "  : "fail ") + "MAP_m_TModel2RelationalTransformation__3__4_module_relTx_r0");
 		}
 		return m_TModel2RelationalTransformation__3__4_module_relTx_r0;
-	}
-
-	/**
-	 *
-	 * map m_TOclExpression2OCLExpression_aExpression_p0 in ATL2QVTr {
-	 * guard:atl aExpression  : OCL::OclExpression[1];
-	 * new:middle trace : PATL2QVTr::TOclExpression2OCLExpression[1];
-	 * set trace.aExpression := aExpression;
-	 *
-	 */
-	protected boolean MAP_m_TOclExpression2OCLExpression_aExpression_p0(final /*@NonInvalid*/ @NonNull OclExpression aExpression)  {
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclExpression2OCLExpression_aExpression_p0" + ", " + aExpression);
-		}
-		// creations
-		final @SuppressWarnings("null")@NonNull TOclExpression2OCLExpression trace_9 = PATL2QVTrFactory.eINSTANCE.createTOclExpression2OCLExpression();
-		models[0/*middle*/].add(trace_9, false);
-		// mapping statements
-		OPPOSITE_OF_TOclExpression2OCLExpression_aExpression.put(aExpression, trace_9);
-		trace_9.setAExpression(aExpression);
-		final /*@Thrown*/ @Nullable Boolean m_TOclExpression2OCLExpression_aExpression_p0 = ValueUtil.TRUE_VALUE;
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((m_TOclExpression2OCLExpression_aExpression_p0 ? "done "  : "fail ") + "MAP_m_TOclExpression2OCLExpression_aExpression_p0");
-		}
-		return m_TOclExpression2OCLExpression_aExpression_p0;
 	}
 
 	/**
@@ -470,15 +387,15 @@ public class ATL2QVTr extends AbstractTransformer
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull String name = symbol_2.getName();
 				// creations
-				final @SuppressWarnings("null")@NonNull THelper2Function trace_9 = PATL2QVTrFactory.eINSTANCE.createTHelper2Function();
-				models[0/*middle*/].add(trace_9, false);
+				final @SuppressWarnings("null")@NonNull THelper2Function trace_7 = PATL2QVTrFactory.eINSTANCE.createTHelper2Function();
+				models[0/*middle*/].add(trace_7, false);
 				// mapping statements
-				trace_9.setHelper(helper);
-				trace_9.setADef(definition);
-				trace_9.setAModule(module_0);
-				trace_9.setAFeat(symbol_2);
-				trace_9.setOpName(name);
-				jm_THelper2Function.appendElement(trace_9);
+				trace_7.setHelper(helper);
+				trace_7.setADef(definition);
+				trace_7.setAModule(module_0);
+				trace_7.setAFeat(symbol_2);
+				trace_7.setOpName(name);
+				jm_THelper2Function.appendElement(trace_7);
 				final /*@Thrown*/ @Nullable Boolean m_THelper2Function_aDef_aFeat_aModule_helper_opName_p0 = ValueUtil.TRUE_VALUE;
 				symbol_10 = m_THelper2Function_aDef_aFeat_aModule_helper_opName_p0;
 			}
@@ -507,8 +424,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:qvtr function : qvtbase::Function[1];
 	 * set trace.function := function;
 	 * set function.name := opName;
-	 * set function.owningClass := relTx;
 	 * set trace.relTx := relTx;
+	 * set function.owningClass := relTx;
 	 *
 	 */
 	protected boolean MAP_m_THelper2Function_function_relTx_lc(final /*@NonInvalid*/ @NonNull THelper2Function trace)  {
@@ -534,8 +451,8 @@ public class ATL2QVTr extends AbstractTransformer
 			// mapping statements
 			trace.setFunction(function);
 			function.setName(opName);
-			function.setOwningClass(relTx);
 			trace.setRelTx(relTx);
+			function.setOwningClass(relTx);
 			final /*@Thrown*/ @Nullable Boolean m_THelper2Function_function_relTx_lc = ValueUtil.TRUE_VALUE;
 			raw_when_TModel2RelationalTransformation = m_THelper2Function_function_relTx_lc;
 		}
@@ -550,89 +467,6 @@ public class ATL2QVTr extends AbstractTransformer
 
 	/**
 	 *
-	 * map m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0 in ATL2QVTr {
-	 * guard:atl aPattern  : ATL::InPattern[1];
-	 * append jm_TInPattern2RelationDomain__guard  : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * check var aExpression : OCL::OperationCallExp[1] := aPattern.filter;
-	 * new:middle trace : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * set trace.aPattern := aPattern;
-	 * set trace.aExpression := aExpression;
-	 * add jm_TInPattern2RelationDomain__guard += trace;
-	 *
-	 */
-	protected boolean MAP_m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0(final /*@NonInvalid*/ @NonNull InPattern aPattern, final @NonNull Connection jm_TInPattern2RelationDomain__guard)  {
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0" + ", " + aPattern + ", " + jm_TInPattern2RelationDomain__guard);
-		}
-		final /*@NonInvalid*/ @Nullable OclExpression temp1_aExpression = aPattern.getFilter();
-		final /*@NonInvalid*/ boolean symbol_0 = temp1_aExpression instanceof org.eclipse.m2m.atl.common.OCL.OperationCallExp;
-		/*@Thrown*/ @Nullable Boolean symbol_6;
-		if (symbol_0) {
-			final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@Nullable OperationCallExp symbol_1 = (org.eclipse.m2m.atl.common.OCL.OperationCallExp)temp1_aExpression;
-			if (symbol_1 == null) {
-				throw new InvalidEvaluationException("Null where non-null value required");
-			}
-			// creations
-			final @SuppressWarnings("null")@NonNull TInPattern2RelationDomain_guard trace_9 = PATL2QVTrFactory.eINSTANCE.createTInPattern2RelationDomain_guard();
-			models[0/*middle*/].add(trace_9, false);
-			// mapping statements
-			trace_9.setAPattern(aPattern);
-			trace_9.setAExpression(symbol_1);
-			jm_TInPattern2RelationDomain__guard.appendElement(trace_9);
-			final /*@Thrown*/ @Nullable Boolean m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0 = ValueUtil.TRUE_VALUE;
-			symbol_6 = m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0;
-		}
-		else {
-			symbol_6 = ValueUtil.FALSE_VALUE;
-		}
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((symbol_6 ? "done "  : "fail ") + "MAP_m_TInPattern2RelationDomain__guard_aExpression_aPatt_p0");
-		}
-		return symbol_6;
-	}
-
-	/**
-	 *
-	 * map m_TOclExpression2OCLExpression_rExpression_p1 in ATL2QVTr {
-	 * guard:middle from_TInPattern2RelationDomain_guard  : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * var aExpression : OCL::OclExpression[1] := from_TInPattern2RelationDomain_guard.aExpression;
-	 * var trace : PATL2QVTr::TOclExpression2OCLExpression[1] := aExpression.TOclExpression2OCLExpression;
-	 * new:qvtr rExpression : OCLExpression[1];
-	 * set trace.rExpression := rExpression;
-	 *
-	 */
-	protected boolean MAP_m_TOclExpression2OCLExpression_rExpression_p1(final /*@NonInvalid*/ @NonNull TInPattern2RelationDomain_guard from_TInPattern2RelationDomain_guard)  {
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclExpression2OCLExpression_rExpression_p1" + ", " + from_TInPattern2RelationDomain_guard);
-		}
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull OperationCallExp aExpression_0 = from_TInPattern2RelationDomain_guard.getAExpression();
-		final /*@NonInvalid*/ @Nullable TOclExpression2OCLExpression TOclExpression2OCLExpression = OPPOSITE_OF_TOclExpression2OCLExpression_aExpression.get(aExpression_0);
-		final /*@NonInvalid*/ boolean symbol_0 = TOclExpression2OCLExpression != null;
-		/*@Thrown*/ @Nullable Boolean raw_trace;
-		if (symbol_0) {
-			if (TOclExpression2OCLExpression == null) {
-				throw new InvalidEvaluationException("Null where non-null value required");
-			}
-			// creations
-			final @SuppressWarnings("null")@NonNull OCLExpression rExpression = PivotFactory.eINSTANCE.createOCLExpression();
-			models[2/*qvtr*/].add(rExpression, false);
-			// mapping statements
-			TOclExpression2OCLExpression.setRExpression(rExpression);
-			final /*@Thrown*/ @Nullable Boolean m_TOclExpression2OCLExpression_rExpression_p1 = ValueUtil.TRUE_VALUE;
-			raw_trace = m_TOclExpression2OCLExpression_rExpression_p1;
-		}
-		else {
-			raw_trace = ValueUtil.FALSE_VALUE;
-		}
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((raw_trace ? "done "  : "fail ") + "MAP_m_TOclExpression2OCLExpression_rExpression_p1");
-		}
-		return raw_trace;
-	}
-
-	/**
-	 *
 	 * map m_TInPattern2RelationDomain_aPattern_aRule_p0 in ATL2QVTr {
 	 * guard:atl aPattern  : ATL::InPattern[1];
 	 * append jm_TInPattern2RelationDomain  : PATL2QVTr::TInPattern2RelationDomain[1];
@@ -643,21 +477,20 @@ public class ATL2QVTr extends AbstractTransformer
 	 * add jm_TInPattern2RelationDomain += trace;
 	 *
 	 */
-	protected boolean MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0(final /*@NonInvalid*/ @NonNull InPattern aPattern_0, final @NonNull Connection jm_TInPattern2RelationDomain)  {
+	protected boolean MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0(final /*@NonInvalid*/ @NonNull InPattern aPattern, final @NonNull Connection jm_TInPattern2RelationDomain)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0" + ", " + aPattern_0 + ", " + jm_TInPattern2RelationDomain);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0" + ", " + aPattern + ", " + jm_TInPattern2RelationDomain);
 		}
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull MatchedRule rule = aPattern_0.getRule();
+		final /*@NonInvalid*/ @NonNull MatchedRule rule = aPattern.getRule();
 		// creations
-		final @SuppressWarnings("null")@NonNull TInPattern2RelationDomain trace_9 = PATL2QVTrFactory.eINSTANCE.createTInPattern2RelationDomain();
-		models[0/*middle*/].add(trace_9, false);
+		final @SuppressWarnings("null")@NonNull TInPattern2RelationDomain trace_7 = PATL2QVTrFactory.eINSTANCE.createTInPattern2RelationDomain();
+		models[0/*middle*/].add(trace_7, false);
 		// mapping statements
-		OPPOSITE_OF_TInPattern2RelationDomain_aPattern.put(aPattern_0, trace_9);
-		trace_9.setAPattern(aPattern_0);
-		OPPOSITE_OF_TInPattern2RelationDomain_aRule.put(rule, trace_9);
-		trace_9.setARule(rule);
-		jm_TInPattern2RelationDomain.appendElement(trace_9);
+		trace_7.setAPattern(aPattern);
+		OPPOSITE_OF_TInPattern2RelationDomain_aRule.put(rule, trace_7);
+		trace_7.setARule(rule);
+		jm_TInPattern2RelationDomain.appendElement(trace_7);
 		final /*@Thrown*/ @Nullable Boolean m_TInPattern2RelationDomain_aPattern_aRule_p0 = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((m_TInPattern2RelationDomain_aPattern_aRule_p0 ? "done "  : "fail ") + "MAP_m_TInPattern2RelationDomain_aPattern_aRule_p0");
@@ -693,14 +526,14 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull String name = matchedRule.getName();
 			// creations
-			final @SuppressWarnings("null")@NonNull TMatchedRule2Relation trace_9 = PATL2QVTrFactory.eINSTANCE.createTMatchedRule2Relation();
-			models[0/*middle*/].add(trace_9, false);
+			final @SuppressWarnings("null")@NonNull TMatchedRule2Relation trace_7 = PATL2QVTrFactory.eINSTANCE.createTMatchedRule2Relation();
+			models[0/*middle*/].add(trace_7, false);
 			// mapping statements
-			OPPOSITE_OF_TMatchedRule2Relation_matchedRule.put(matchedRule, trace_9);
-			trace_9.setMatchedRule(matchedRule);
-			trace_9.setRuleName(name);
-			trace_9.setAModule(module_0);
-			jm_TMatchedRule2Relation.appendElement(trace_9);
+			OPPOSITE_OF_TMatchedRule2Relation_matchedRule.put(matchedRule, trace_7);
+			trace_7.setMatchedRule(matchedRule);
+			trace_7.setRuleName(name);
+			trace_7.setAModule(module_0);
+			jm_TMatchedRule2Relation.appendElement(trace_7);
 			final /*@Thrown*/ @Nullable Boolean m_TMatchedRule2Relation_aModule_matchedRule_ruleName_p0 = ValueUtil.TRUE_VALUE;
 			raw_aModule = m_TMatchedRule2Relation_aModule_matchedRule_ruleName_p0;
 		}
@@ -864,8 +697,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var rRule : qvtrelation::Relation[1] := trace.rRule;
 	 * var when_TModel2RelationalTransformation : PATL2QVTr::TModel2RelationalTransformation[1] := aModule.TModel2RelationalTransformation;
 	 * var relTx : qvtrelation::RelationalTransformation[1] := when_TModel2RelationalTransformation.relTx;
-	 * set trace.relTx := relTx;
 	 * set rRule.transformation := relTx;
+	 * set trace.relTx := relTx;
 	 *
 	 */
 	protected boolean MAP_m_TMatchedRule2Relation_relTx_p2(final /*@NonInvalid*/ @NonNull TMatchedRule2Relation trace_2)  {
@@ -886,8 +719,8 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@Thrown*/ @NonNull RelationalTransformation relTx = TModel2RelationalTransformation.getRelTx();
 			// mapping statements
-			trace_2.setRelTx(relTx);
 			rRule.setTransformation(relTx);
+			trace_2.setRelTx(relTx);
 			final /*@Thrown*/ @Nullable Boolean m_TMatchedRule2Relation_relTx_p2 = ValueUtil.TRUE_VALUE;
 			raw_when_TModel2RelationalTransformation = m_TMatchedRule2Relation_relTx_p2;
 		}
@@ -898,139 +731,6 @@ public class ATL2QVTr extends AbstractTransformer
 			AbstractTransformer.INVOCATIONS.println((raw_when_TModel2RelationalTransformation ? "done "  : "fail ") + "MAP_m_TMatchedRule2Relation_relTx_p2");
 		}
 		return raw_when_TModel2RelationalTransformation;
-	}
-
-	/**
-	 *
-	 * map m_TInPattern2RelationDomain__guard_p_rRule_w_p1 in ATL2QVTr {
-	 * guard:middle trace  : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * var aExpression : OCL::OperationCallExp[1] := trace.aExpression;
-	 * var aPattern : ATL::InPattern[1] := trace.aPattern;
-	 * var from_TInPattern2RelationDomain : PATL2QVTr::TInPattern2RelationDomain[1] := aPattern.TInPattern2RelationDomain;
-	 * var when_TOclExpression2OCLExpression : PATL2QVTr::TOclExpression2OCLExpression[1] := aExpression.TOclExpression2OCLExpression;
-	 * var rRule : qvtrelation::Relation[1] := from_TInPattern2RelationDomain.rRule;
-	 * check aExpression = aPattern.filter;
-	 * new:qvtr p : qvtbase::Predicate[1];
-	 * contained new:qvtr w : qvtbase::Pattern[1];
-	 * set trace.p := p;
-	 * set trace.w := w;
-	 * set w.predicate := p;
-	 * set rRule.when := w;
-	 * set trace.rRule := rRule;
-	 *
-	 */
-	protected boolean MAP_m_TInPattern2RelationDomain__guard_p_rRule_w_p1(final /*@NonInvalid*/ @NonNull TInPattern2RelationDomain_guard trace_3)  {
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TInPattern2RelationDomain__guard_p_rRule_w_p1" + ", " + trace_3);
-		}
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull OperationCallExp aExpression_0 = trace_3.getAExpression();
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull InPattern aPattern_1 = trace_3.getAPattern();
-		final /*@NonInvalid*/ @Nullable TInPattern2RelationDomain TInPattern2RelationDomain = OPPOSITE_OF_TInPattern2RelationDomain_aPattern.get(aPattern_1);
-		final /*@NonInvalid*/ boolean symbol_0 = TInPattern2RelationDomain != null;
-		/*@Thrown*/ @Nullable Boolean raw_from_TInPattern2RelationDomain;
-		if (symbol_0) {
-			if (TInPattern2RelationDomain == null) {
-				throw new InvalidEvaluationException("Null where non-null value required");
-			}
-			final /*@NonInvalid*/ @Nullable TOclExpression2OCLExpression TOclExpression2OCLExpression = OPPOSITE_OF_TOclExpression2OCLExpression_aExpression.get(aExpression_0);
-			final /*@NonInvalid*/ boolean symbol_1 = TOclExpression2OCLExpression != null;
-			/*@Thrown*/ @Nullable Boolean raw_when_TOclExpression2OCLExpression;
-			if (symbol_1) {
-				if (TOclExpression2OCLExpression == null) {
-					throw new InvalidEvaluationException("Null where non-null value required");
-				}
-				@SuppressWarnings("null")
-				final /*@Thrown*/ @NonNull Relation rRule = TInPattern2RelationDomain.getRRule();
-				final /*@NonInvalid*/ @Nullable OclExpression filter = aPattern_1.getFilter();
-				final /*@NonInvalid*/ boolean symbol_2 = aExpression_0.equals(filter);
-				/*@Thrown*/ @Nullable Boolean symbol_9;
-				if (symbol_2) {
-					// creations
-					final @NonNull Predicate p = QVTbaseFactory.eINSTANCE.createPredicate();
-					models[2/*qvtr*/].add(p, false);
-					final @NonNull Pattern w = QVTbaseFactory.eINSTANCE.createPattern();
-					models[2/*qvtr*/].add(w, true);
-					// mapping statements
-					trace_3.setP(p);
-					trace_3.setW(w);
-					w.getPredicate().add(p);
-					rRule.setWhen(w);
-					trace_3.setRRule(rRule);
-					final /*@Thrown*/ @Nullable Boolean m_TInPattern2RelationDomain__guard_p_rRule_w_p1 = ValueUtil.TRUE_VALUE;
-					symbol_9 = m_TInPattern2RelationDomain__guard_p_rRule_w_p1;
-				}
-				else {
-					symbol_9 = ValueUtil.FALSE_VALUE;
-				}
-				raw_when_TOclExpression2OCLExpression = symbol_9;
-			}
-			else {
-				raw_when_TOclExpression2OCLExpression = ValueUtil.FALSE_VALUE;
-			}
-			raw_from_TInPattern2RelationDomain = raw_when_TOclExpression2OCLExpression;
-		}
-		else {
-			raw_from_TInPattern2RelationDomain = ValueUtil.FALSE_VALUE;
-		}
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((raw_from_TInPattern2RelationDomain ? "done "  : "fail ") + "MAP_m_TInPattern2RelationDomain__guard_p_rRule_w_p1");
-		}
-		return raw_from_TInPattern2RelationDomain;
-	}
-
-	/**
-	 *
-	 * map m_TInPattern2RelationDomain__guard_rExpression_p2 in ATL2QVTr {
-	 * guard:middle trace  : PATL2QVTr::TInPattern2RelationDomain_guard[1];
-	 * var aExpression : OCL::OperationCallExp[1] := trace.aExpression;
-	 * var p : qvtbase::Predicate[1] := trace.p;
-	 * var when_TOclExpression2OCLExpression : PATL2QVTr::TOclExpression2OCLExpression[1] := aExpression.TOclExpression2OCLExpression;
-	 * check var rExpression : OperationCallExp[1] := when_TOclExpression2OCLExpression.rExpression;
-	 * set p.conditionExpression := rExpression;
-	 * set trace.rExpression := rExpression;
-	 *
-	 */
-	protected boolean MAP_m_TInPattern2RelationDomain__guard_rExpression_p2(final /*@NonInvalid*/ @NonNull TInPattern2RelationDomain_guard trace_4)  {
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TInPattern2RelationDomain__guard_rExpression_p2" + ", " + trace_4);
-		}
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull OperationCallExp aExpression_0 = trace_4.getAExpression();
-		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Predicate p = trace_4.getP();
-		final /*@NonInvalid*/ @Nullable TOclExpression2OCLExpression TOclExpression2OCLExpression = OPPOSITE_OF_TOclExpression2OCLExpression_aExpression.get(aExpression_0);
-		final /*@NonInvalid*/ boolean symbol_0 = TOclExpression2OCLExpression != null;
-		/*@Thrown*/ @Nullable Boolean raw_when_TOclExpression2OCLExpression;
-		if (symbol_0) {
-			if (TOclExpression2OCLExpression == null) {
-				throw new InvalidEvaluationException("Null where non-null value required");
-			}
-			@SuppressWarnings("null")
-			final /*@Thrown*/ @NonNull OCLExpression temp1_rExpression = TOclExpression2OCLExpression.getRExpression();
-			final /*@NonInvalid*/ boolean symbol_1 = temp1_rExpression instanceof org.eclipse.ocl.pivot.OperationCallExp;
-			/*@Thrown*/ @Nullable Boolean symbol_6;
-			if (symbol_1) {
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OperationCallExp symbol_2 = (org.eclipse.ocl.pivot.OperationCallExp)temp1_rExpression;
-				// mapping statements
-				p.setConditionExpression(symbol_2);
-				trace_4.setRExpression(symbol_2);
-				final /*@Thrown*/ @Nullable Boolean m_TInPattern2RelationDomain__guard_rExpression_p2 = ValueUtil.TRUE_VALUE;
-				symbol_6 = m_TInPattern2RelationDomain__guard_rExpression_p2;
-			}
-			else {
-				symbol_6 = ValueUtil.FALSE_VALUE;
-			}
-			raw_when_TOclExpression2OCLExpression = symbol_6;
-		}
-		else {
-			raw_when_TOclExpression2OCLExpression = ValueUtil.FALSE_VALUE;
-		}
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((raw_when_TOclExpression2OCLExpression ? "done "  : "fail ") + "MAP_m_TInPattern2RelationDomain__guard_rExpression_p2");
-		}
-		return raw_when_TOclExpression2OCLExpression;
 	}
 
 	/**
@@ -1062,13 +762,13 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull String name = oclModel.getName();
 			// creations
-			final @SuppressWarnings("null")@NonNull TOclModel2ModelParameter_create trace_9 = PATL2QVTrFactory.eINSTANCE.createTOclModel2ModelParameter_create();
-			models[0/*middle*/].add(trace_9, false);
+			final @SuppressWarnings("null")@NonNull TOclModel2ModelParameter_create trace_7 = PATL2QVTrFactory.eINSTANCE.createTOclModel2ModelParameter_create();
+			models[0/*middle*/].add(trace_7, false);
 			// mapping statements
-			trace_9.setOclModel(oclModel);
-			trace_9.setTmName(name);
-			trace_9.setAModule(Module);
-			jm_TOclModel2ModelParameter__create.appendElement(trace_9);
+			trace_7.setOclModel(oclModel);
+			trace_7.setTmName(name);
+			trace_7.setAModule(Module);
+			jm_TOclModel2ModelParameter__create.appendElement(trace_7);
 			final /*@Thrown*/ @Nullable Boolean m_TOclModel2ModelParameter__create_aModule_oclModel__p0 = ValueUtil.TRUE_VALUE;
 			raw_aModule = m_TOclModel2ModelParameter__create_aModule_oclModel__p0;
 		}
@@ -1093,14 +793,14 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set relTM.name := tmName;
 	 *
 	 */
-	protected boolean MAP_m_TOclModel2ModelParameter__create_relTM_p1(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_create trace_5)  {
+	protected boolean MAP_m_TOclModel2ModelParameter__create_relTM_p1(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_create trace_3)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__create_relTM_p1" + ", " + trace_5);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__create_relTM_p1" + ", " + trace_3);
 		}
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Module aModule = trace_5.getAModule();
+		final /*@NonInvalid*/ @NonNull Module aModule = trace_3.getAModule();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull String tmName = trace_5.getTmName();
+		final /*@NonInvalid*/ @NonNull String tmName = trace_3.getTmName();
 		final /*@NonInvalid*/ @Nullable TModel2RelationalTransformation TModel2RelationalTransformation = OPPOSITE_OF_TModel2RelationalTransformation_module.get(aModule);
 		final /*@NonInvalid*/ boolean symbol_0 = TModel2RelationalTransformation != null;
 		/*@Thrown*/ @Nullable Boolean raw_when_TModel2RelationalTransformation;
@@ -1112,7 +812,7 @@ public class ATL2QVTr extends AbstractTransformer
 			final @NonNull TypedModel relTM = QVTbaseFactory.eINSTANCE.createTypedModel();
 			models[2/*qvtr*/].add(relTM, true);
 			// mapping statements
-			trace_5.setRelTM(relTM);
+			trace_3.setRelTM(relTM);
 			relTM.setName(tmName);
 			final /*@Thrown*/ @Nullable Boolean m_TOclModel2ModelParameter__create_relTM_p1 = ValueUtil.TRUE_VALUE;
 			raw_when_TModel2RelationalTransformation = m_TOclModel2ModelParameter__create_relTM_p1;
@@ -1155,13 +855,13 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull String name = oclModel_0.getName();
 			// creations
-			final @SuppressWarnings("null")@NonNull TOclModel2ModelParameter_from trace_9 = PATL2QVTrFactory.eINSTANCE.createTOclModel2ModelParameter_from();
-			models[0/*middle*/].add(trace_9, false);
+			final @SuppressWarnings("null")@NonNull TOclModel2ModelParameter_from trace_7 = PATL2QVTrFactory.eINSTANCE.createTOclModel2ModelParameter_from();
+			models[0/*middle*/].add(trace_7, false);
 			// mapping statements
-			trace_9.setOclModel(oclModel_0);
-			trace_9.setTmName(name);
-			trace_9.setAModule(Module);
-			jm_TOclModel2ModelParameter__from.appendElement(trace_9);
+			trace_7.setOclModel(oclModel_0);
+			trace_7.setTmName(name);
+			trace_7.setAModule(Module);
+			jm_TOclModel2ModelParameter__from.appendElement(trace_7);
 			final /*@Thrown*/ @Nullable Boolean m_TOclModel2ModelParameter__from_aModule_oclModel_tm_p0 = ValueUtil.TRUE_VALUE;
 			raw_aModule = m_TOclModel2ModelParameter__from_aModule_oclModel_tm_p0;
 		}
@@ -1186,14 +886,14 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set relTM.name := tmName;
 	 *
 	 */
-	protected boolean MAP_m_TOclModel2ModelParameter__from_relTM_p1(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_from trace_6)  {
+	protected boolean MAP_m_TOclModel2ModelParameter__from_relTM_p1(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_from trace_4)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__from_relTM_p1" + ", " + trace_6);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__from_relTM_p1" + ", " + trace_4);
 		}
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Module aModule = trace_6.getAModule();
+		final /*@NonInvalid*/ @NonNull Module aModule = trace_4.getAModule();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull String tmName = trace_6.getTmName();
+		final /*@NonInvalid*/ @NonNull String tmName = trace_4.getTmName();
 		final /*@NonInvalid*/ @Nullable TModel2RelationalTransformation TModel2RelationalTransformation = OPPOSITE_OF_TModel2RelationalTransformation_module.get(aModule);
 		final /*@NonInvalid*/ boolean symbol_0 = TModel2RelationalTransformation != null;
 		/*@Thrown*/ @Nullable Boolean raw_when_TModel2RelationalTransformation;
@@ -1205,7 +905,7 @@ public class ATL2QVTr extends AbstractTransformer
 			final @NonNull TypedModel relTM = QVTbaseFactory.eINSTANCE.createTypedModel();
 			models[2/*qvtr*/].add(relTM, true);
 			// mapping statements
-			trace_6.setRelTM(relTM);
+			trace_4.setRelTM(relTM);
 			relTM.setName(tmName);
 			final /*@Thrown*/ @Nullable Boolean m_TOclModel2ModelParameter__from_relTM_p1 = ValueUtil.TRUE_VALUE;
 			raw_when_TModel2RelationalTransformation = m_TOclModel2ModelParameter__from_relTM_p1;
@@ -1227,18 +927,18 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var relTM : qvtbase::TypedModel[1] := trace.relTM;
 	 * var when_TModel2RelationalTransformation : PATL2QVTr::TModel2RelationalTransformation[1] := aModule.TModel2RelationalTransformation;
 	 * var relTx : qvtrelation::RelationalTransformation[1] := when_TModel2RelationalTransformation.relTx;
-	 * set trace.relTx := relTx;
 	 * set relTM.transformation := relTx;
+	 * set trace.relTx := relTx;
 	 *
 	 */
-	protected boolean MAP_m_TOclModel2ModelParameter__create_relTx_p2(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_create trace_7)  {
+	protected boolean MAP_m_TOclModel2ModelParameter__create_relTx_p2(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_create trace_5)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__create_relTx_p2" + ", " + trace_7);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__create_relTx_p2" + ", " + trace_5);
 		}
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Module aModule = trace_7.getAModule();
+		final /*@NonInvalid*/ @NonNull Module aModule = trace_5.getAModule();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull TypedModel relTM = trace_7.getRelTM();
+		final /*@NonInvalid*/ @NonNull TypedModel relTM = trace_5.getRelTM();
 		final /*@NonInvalid*/ @Nullable TModel2RelationalTransformation TModel2RelationalTransformation = OPPOSITE_OF_TModel2RelationalTransformation_module.get(aModule);
 		final /*@NonInvalid*/ boolean symbol_0 = TModel2RelationalTransformation != null;
 		/*@Thrown*/ @Nullable Boolean raw_when_TModel2RelationalTransformation;
@@ -1249,8 +949,8 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@Thrown*/ @NonNull RelationalTransformation relTx = TModel2RelationalTransformation.getRelTx();
 			// mapping statements
-			trace_7.setRelTx(relTx);
 			relTM.setTransformation(relTx);
+			trace_5.setRelTx(relTx);
 			final /*@Thrown*/ @Nullable Boolean m_TOclModel2ModelParameter__create_relTx_p2 = ValueUtil.TRUE_VALUE;
 			raw_when_TModel2RelationalTransformation = m_TOclModel2ModelParameter__create_relTx_p2;
 		}
@@ -1271,18 +971,18 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var relTM : qvtbase::TypedModel[1] := trace.relTM;
 	 * var when_TModel2RelationalTransformation : PATL2QVTr::TModel2RelationalTransformation[1] := aModule.TModel2RelationalTransformation;
 	 * var relTx : qvtrelation::RelationalTransformation[1] := when_TModel2RelationalTransformation.relTx;
-	 * set relTM.transformation := relTx;
 	 * set trace.relTx := relTx;
+	 * set relTM.transformation := relTx;
 	 *
 	 */
-	protected boolean MAP_m_TOclModel2ModelParameter__from_relTx_p2(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_from trace_8)  {
+	protected boolean MAP_m_TOclModel2ModelParameter__from_relTx_p2(final /*@NonInvalid*/ @NonNull TOclModel2ModelParameter_from trace_6)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__from_relTx_p2" + ", " + trace_8);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP_m_TOclModel2ModelParameter__from_relTx_p2" + ", " + trace_6);
 		}
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Module aModule = trace_8.getAModule();
+		final /*@NonInvalid*/ @NonNull Module aModule = trace_6.getAModule();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull TypedModel relTM = trace_8.getRelTM();
+		final /*@NonInvalid*/ @NonNull TypedModel relTM = trace_6.getRelTM();
 		final /*@NonInvalid*/ @Nullable TModel2RelationalTransformation TModel2RelationalTransformation = OPPOSITE_OF_TModel2RelationalTransformation_module.get(aModule);
 		final /*@NonInvalid*/ boolean symbol_0 = TModel2RelationalTransformation != null;
 		/*@Thrown*/ @Nullable Boolean raw_when_TModel2RelationalTransformation;
@@ -1293,8 +993,8 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@Thrown*/ @NonNull RelationalTransformation relTx = TModel2RelationalTransformation.getRelTx();
 			// mapping statements
+			trace_6.setRelTx(relTx);
 			relTM.setTransformation(relTx);
-			trace_8.setRelTx(relTx);
 			final /*@Thrown*/ @Nullable Boolean m_TOclModel2ModelParameter__from_relTx_p2 = ValueUtil.TRUE_VALUE;
 			raw_when_TModel2RelationalTransformation = m_TOclModel2ModelParameter__from_relTx_p2;
 		}

@@ -418,7 +418,7 @@ public class RegionHelper
 						}
 					}
 					else {
-						System.out.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
+						System.err.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
 					}
 				}
 				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
@@ -438,7 +438,7 @@ public class RegionHelper
 						}
 					}
 					else {
-						System.out.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
+						System.err.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
 					}
 				}
 			}
