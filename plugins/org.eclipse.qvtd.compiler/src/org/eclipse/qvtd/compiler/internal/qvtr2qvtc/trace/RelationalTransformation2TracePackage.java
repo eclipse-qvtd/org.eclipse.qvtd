@@ -19,10 +19,10 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
@@ -99,20 +99,16 @@ public class RelationalTransformation2TracePackage
 		}
 	}
 
-	public Property basicGetSignatureProperty(@NonNull Type aClass, @NonNull NamedElement rNamedElement) {
-		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
-		if (relation2TraceClass == null) {
-			return null;
-		}
-		return relation2TraceClass.basicGetSignatureProperty(rNamedElement);
+	public org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass(@NonNull Relation rRelation) {
+		return getRelation2TraceClass(rRelation).basicGetSignatureClass();
 	}
 
-	public Property basicGetTraceProperty(@NonNull Type aClass, @NonNull NamedElement rNamedElement) {
+	public @Nullable Property basicGetTraceProperty(@NonNull Type aClass, @NonNull VariableDeclaration rVariable) {
 		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
 		if (relation2TraceClass == null) {
 			return null;
 		}
-		return relation2TraceClass.basicGetTraceProperty(rNamedElement);
+		return relation2TraceClass.basicGetTraceProperty(rVariable);
 	}
 
 	/**
@@ -390,6 +386,12 @@ public class RelationalTransformation2TracePackage
 		return getRelation2TraceClass(rRelation).getSignatureClass();
 	}
 
+	public @NonNull Property getSignatureProperty(org.eclipse.ocl.pivot.@NonNull Class aClass, @NonNull VariableDeclaration rVariable) {
+		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
+		assert relation2TraceClass != null;
+		return relation2TraceClass.getSignatureProperty(rVariable);
+	}
+
 	//	public @NonNull Property getSignatureProperty(@NonNull RelationCallExp rInvocation) {
 	//		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(QVTrelationUtil.getContainingRelation(rInvocation));
 	//		return ClassUtil.nonNullState(relation2TraceClass.basicGetSignatureProperty(rInvocation));
@@ -401,7 +403,7 @@ public class RelationalTransformation2TracePackage
 
 	public @NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation) {
 		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(QVTrelationUtil.getContainingRelation(rInvocation));
-		return ClassUtil.nonNullState(relation2TraceClass.basicGetTraceProperty(rInvocation));
+		return relation2TraceClass.getTraceProperty(rInvocation);
 	}
 
 	protected @NonNull String getUniqueTraceClassName(@NonNull Relation2TraceClass mapping2traceClass, @NonNull String name) {

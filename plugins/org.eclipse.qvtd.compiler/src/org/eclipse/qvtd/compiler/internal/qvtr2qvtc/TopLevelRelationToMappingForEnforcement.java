@@ -10,16 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -123,6 +125,15 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 			return rEnforcedDomainGuardVariables;
 		} */
 
+		public @NonNull AbstractEnforceableRelationDomain2CoreMapping getTopRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
+			return ClassUtil.nonNullState(topTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
+		}
+
+		@Override
+		protected @NonNull AbstractEnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings) {
+			return relation2Mappings.getTopRelationDomain2CoreMapping(rEnforcedTypedModel);
+		}
+
 		@Override
 		protected void synthesize() throws CompilerChainException {
 			super.synthesize();
@@ -130,24 +141,42 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		}
 	}
 
+	/**
+	 * The per-typed model top relation conversions.
+	 */
+	protected @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> topTypedModel2relationDomain2coreMapping = new HashMap<>();
+
 	public TopLevelRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert rRelation.isIsTopLevel();
+	}
+
+	private void addTopRelationDomain2coreMapping(@NonNull AbstractEnforceableRelationDomain2CoreMapping relationDomain2coreMapping) {
+		RelationDomain rDomain = relationDomain2coreMapping.rEnforcedDomain;
+		TypedModel rTypedModel = QVTrelationUtil.getTypedModel(rDomain);
+		AbstractEnforceableRelationDomain2CoreMapping old = topTypedModel2relationDomain2coreMapping.put(rTypedModel, relationDomain2coreMapping);
+		assert old == null;
 	}
 
 	/**
 	 * Return the list of conversions, one for each possible enforced domain.
 	 */
 	@Override
-	protected @NonNull List<@NonNull TopEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException {
-		List<@NonNull TopEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<>();
+	public void analyze() throws CompilerChainException {
 		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 			if (rDomain.isIsEnforceable()) {
 				String rEnforcedDomainName = PivotUtil.getName(rDomain);
 				String coreMappingName = rRelationName + '_' + rEnforcedDomainName;
-				enforceableRelationDomain2coreMappings.add(new TopEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
+				addTopRelationDomain2coreMapping(new TopEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 			}
 		}
-		return enforceableRelationDomain2coreMappings;
+	}
+
+	@Override
+	public void synthesize() throws CompilerChainException {
+		for (@NonNull AbstractEnforceableRelationDomain2CoreMapping enforceableRelationDomain2coreMapping : topTypedModel2relationDomain2coreMapping.values()) {
+			enforceableRelationDomain2coreMapping.synthesize();
+			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
+		}
 	}
 }

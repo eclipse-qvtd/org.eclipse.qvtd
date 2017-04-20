@@ -414,7 +414,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
 		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
-		Property cTargetProperty = qvtr2qvtc.basicGetProperty(cMiddleRealizedVariable.getType(), rVariable);
+		Property cTargetProperty = qvtr2qvtc.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable), rVariable);
 		assert isOptional || (cTargetProperty != null);
 		if (cTargetProperty != null) {
 			assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));

@@ -42,6 +42,11 @@ class VariableDeclaration2TraceProperty extends Element2TraceProperty
 	 */
 	private boolean unitOpposite;
 
+	/**
+	 * The lazily created signature property.
+	 */
+	private @Nullable Property signatureProperty;
+
 	public VariableDeclaration2TraceProperty(@NonNull Relation2TraceClass relation2traceClass, @Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
 		super(relation2traceClass, relation2traceClass.getNameGenerator().createTracePropertyName(variable), QVTrelationUtil.getClass(variable), variable.isIsRequired());
 		this.rTypedModel = rTypedModel;
@@ -53,11 +58,8 @@ class VariableDeclaration2TraceProperty extends Element2TraceProperty
 	 * Create the name Property for a traceClass with a type. If unitOpposite is not set there may be many trace class instances referencing the same object through
 	 * the trace property and so the implicit opposite must be a Bag.
 	 */
-	@Override
 	protected @NonNull Property createSignatureProperty() {
-		//		throw new UnsupportedOperationException();
-		return ((AbstractRelation2TraceClass) relation2traceClass).createTraceProperty(rTypedModel, relation2traceClass.getSignatureClass(), name, type, isRequired, false);
-		//		createTraceProperty(rTypedModel, signatureClass, rootVariableDeclaration2TraceProperty.getName(), QVTrelationUtil.getClass(rootVariable), rootVariable.isIsRequired(), false);
+		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(rTypedModel, relation2traceClass.getSignatureClass(), name, type, isRequired, unitOpposite);
 	}
 
 	/**
@@ -66,7 +68,15 @@ class VariableDeclaration2TraceProperty extends Element2TraceProperty
 	 */
 	@Override
 	protected @NonNull Property createTraceProperty() {
-		return ((AbstractRelation2TraceClass) relation2traceClass).createTraceProperty(rTypedModel, relation2traceClass.getTraceClass(), name, type, isRequired, unitOpposite);
+		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(rTypedModel, relation2traceClass.getTraceClass(), name, type, isRequired, unitOpposite);
+	}
+
+	public @NonNull Property getSignatureProperty() {
+		Property signatureProperty2 = signatureProperty;
+		if (signatureProperty2 == null) {
+			signatureProperty = signatureProperty2 = createSignatureProperty();
+		}
+		return signatureProperty2;
 	}
 
 	public void refineTraceProperty(@Nullable TypedModel rTypedModel, boolean isNestedOneToOne) {

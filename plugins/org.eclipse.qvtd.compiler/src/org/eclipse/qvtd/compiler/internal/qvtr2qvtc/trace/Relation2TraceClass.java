@@ -14,8 +14,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -31,8 +31,7 @@ interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
 	void analyzeInheritance();
 	void analyzeProperties() throws CompilerChainException;
 	org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass();
-	@Nullable Property basicGetSignatureProperty(@NonNull NamedElement rNamedElement);
-	@Nullable Property basicGetTraceProperty(@NonNull NamedElement rNamedElement);
+	@Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable);
 	org.eclipse.ocl.pivot.@NonNull Class getBagOfTraceClass();
 	@Nullable Iterable<@NonNull Relation2TraceClass> getConsumedByRelation2TraceClasses();
 	@Nullable Iterable<@NonNull Relation2TraceClass> getConsumedRelation2TraceClasses();
@@ -41,7 +40,9 @@ interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
 	@NonNull Relation getRelation();
 	@NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage();
 	org.eclipse.ocl.pivot.@NonNull Class getSignatureClass();
+	@NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable);
 	org.eclipse.ocl.pivot.@NonNull Class getTraceClass();
+	@NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation);
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses();
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses();

@@ -326,7 +326,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
-		QVTr2QVTc.SYNTHESIS.setState(true);
+		//		QVTr2QVTc.SYNTHESIS.setState(true);
 		boolean exceptionThrown = true;
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {

@@ -48,7 +48,6 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -58,6 +57,7 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -175,6 +175,56 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 	}
 
+	public static final class RelationComparator implements Comparator<@NonNull Relation>
+	{
+		private @NonNull Map<@NonNull Relation, @NonNull Set<@NonNull Relation>> relation2overrides = new HashMap<>();
+
+		@Override
+		public int compare(@NonNull Relation r1, @NonNull Relation r2) {
+			//
+			//	Top level first
+			//
+			boolean t1 = r1.isIsTopLevel();
+			boolean t2 = r2.isIsTopLevel();
+			if (t1 != t2) {
+				return t1 ? -1 : 1;
+			}
+			//
+			//	Overriding last
+			//
+			Set<@NonNull Relation> o1 = getOverrides(r1);
+			Set<@NonNull Relation> o2 = getOverrides(r2);
+			if (o1.contains(r2)) {
+				assert !o2.contains(r1);
+				return 1;
+			}
+			else if (o2.contains(r1)) {
+				return -1;
+			}
+			//
+			//	Alphabetical
+			//
+			String n1 = NameUtil.getSafeName(r1);
+			String n2 = NameUtil.getSafeName(r2);
+			return ClassUtil.safeCompareTo(n1, n2);
+		}
+
+		private @NonNull Set<@NonNull Relation> getOverrides(@NonNull Relation relation) {
+			Set<@NonNull Relation> overrides = relation2overrides.get(relation);
+			if (overrides == null) {
+				overrides = new HashSet<>();
+				for (Relation override = relation; override != null; override = QVTrelationUtil.basicGetOverrides(override)) {
+					if (!overrides.add(override)) {
+						System.err.println("Cyclic override for " + relation + " at " + override);
+						break;
+					}
+				}
+				relation2overrides.put(relation, overrides);
+			}
+			return overrides;
+		}
+	}
+
 	protected static class UpdateVisitor extends AbstractUpdateVisitor<@NonNull QVTr2QVTc>
 	{
 		public UpdateVisitor(@NonNull QVTr2QVTc context) {
@@ -278,6 +328,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 */
 	private @NonNull Map<@NonNull Relation, @Nullable Set<@NonNull Relation>> relation2overridingRelations = new HashMap<>();
 
+	/**
+	 * The per-relation conversions.
+	 */
+	private @NonNull Map<@NonNull Relation, @NonNull AbstractQVTr2QVTcRelations> relation2relation2mappings = new HashMap<>();
+
 	private @Nullable Property oclContainerProperty = null;
 
 	public QVTr2QVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {
@@ -378,13 +433,16 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		relation2rootVariables.put(relation, rootVariables);
 	}
 
-	public @Nullable Property basicGetProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
-		Property traceProperty = getRelationalTransformation2TracePackage().basicGetTraceProperty(aClass, rNamedElement);
+	public org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass(@NonNull Relation rRelation) {
+		return getRelationalTransformation2TracePackage().basicGetSignatureClass(rRelation);
+	}
+
+	public @Nullable Property basicGetTraceProperty(@NonNull Type aClass, @NonNull VariableDeclaration rVariable) throws CompilerChainException {
+		Property traceProperty = getRelationalTransformation2TracePackage().basicGetTraceProperty(aClass, rVariable);
 		if (traceProperty != null) {
 			return traceProperty;
 		}
-		/*@NonNull*/ String name = rNamedElement.getName();
-		assert (aClass != null) && (name != null);
+		String name = QVTrelationUtil.getName(rVariable);
 		CompleteClass completeClass = getCompleteClass(aClass);
 		return completeClass.getProperty(name);
 	}
@@ -708,16 +766,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 * Return the trace property of aClass whose name corresponds to rNamedElement.
 	 * @throws CompilerChainException if no such property
 	 */
-	protected @NonNull Property getSignatureProperty(@NonNull Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
-		Property property = getRelationalTransformation2TracePackage().basicGetSignatureProperty(aClass, rNamedElement);
-		if (property != null) {
-			return property;
-		}
-		property = getProperty(aClass, rNamedElement.getName());		// FIXME above should be non-null to ensure uniquely named property is in use
-		if (rNamedElement instanceof Property) {
-			assert rNamedElement == property;
-		}
-		return property;
+	protected @NonNull Property getSignatureProperty(org.eclipse.ocl.pivot.@NonNull Class aClass, @NonNull VariableDeclaration rVariable) throws CompilerChainException {
+		return getRelationalTransformation2TracePackage().getSignatureProperty(aClass, rVariable);
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
@@ -736,14 +786,14 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 * Return the trace property of aClass whose name corresponds to rNamedElement.
 	 * @throws CompilerChainException if no such property
 	 */
-	protected @NonNull Property getTraceProperty(@NonNull Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
-		Property property = getRelationalTransformation2TracePackage().basicGetTraceProperty(aClass, rNamedElement);
+	protected @NonNull Property getTraceProperty(@NonNull Type aClass, @NonNull VariableDeclaration rVariable) throws CompilerChainException {
+		Property property = getRelationalTransformation2TracePackage().basicGetTraceProperty(aClass, rVariable);
 		if (property != null) {
 			return property;
 		}
-		property = getProperty(aClass, rNamedElement.getName());		// FIXME above should be non-null to ensure uniquely named property is in use
-		if (rNamedElement instanceof Property) {
-			assert rNamedElement == property;
+		property = getProperty(aClass, rVariable.getName());		// FIXME above should be non-null to ensure uniquely named property is in use
+		if (rVariable instanceof Property) {
+			assert rVariable == property;
 		}
 		return property;
 	}
@@ -794,7 +844,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 */
 	protected void mapTransformation(@NonNull RelationalTransformation rTransformation, @NonNull Transformation cTransformation) throws CompilerChainException {
 		List<@NonNull Relation> rRelations = Lists.newArrayList(QVTrelationUtil.getOwnedRelations(rTransformation));
-		Collections.sort(rRelations, NameUtil.NAMEABLE_COMPARATOR);
+		Collections.sort(rRelations, new RelationComparator());
 		Variable cThis = QVTbaseUtil.getContextVariable(standardLibrary, cTransformation);
 		Variable rThis = QVTbaseUtil.getContextVariable(standardLibrary, rTransformation);
 		//			putGlobalTrace(cThis, rThis);
@@ -809,24 +859,33 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 		mapQueries(rTransformation, cTransformation);
 		for (@NonNull Relation rRelation : rRelations) {
+			AbstractQVTr2QVTcRelations relation2mappings;
 			if (rRelation.isIsTopLevel()) {
 				QVTr2QVTc.SYNTHESIS.println("topLevel " + rRelation);
-				TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this, rRelation);
-				topLevelRelationToMappingForEnforcement.transform();
+				relation2mappings = new TopLevelRelationToMappingForEnforcement(this, rRelation);
 			}
+			else {
+				relation2mappings = new InvokedRelationToMappingForEnforcement(this, rRelation);
+			}
+			relation2mappings.analyze();
+			relation2relation2mappings.put(rRelation, relation2mappings);
 		}
 		for (@NonNull Relation rRelation : rRelations) {
-			if (!rRelation.isIsTopLevel()) {
-				InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rRelation);
-				invokedRelationToMappingForEnforcement.transform();
-				//				for (@NonNull Relation rOverridingRelation : getOverridingRelations(rRelation)) {
-				//					invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rOverridingRelation);
-				//					invokedRelationToMappingForEnforcement.transform();
-				//				}
-			}
+			AbstractQVTr2QVTcRelations relation2mappings = relation2relation2mappings.get(rRelation);
+			assert relation2mappings != null;
+			relation2mappings.synthesize();
 		}
 		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedOperationsList(cTransformation));
 		CompilerUtil.normalizeNameables(QVTbaseUtil.getRule(cTransformation));
+	}
+
+	public void addRelation2Mappings(@NonNull AbstractQVTr2QVTcRelations relation2mappings) {
+		Relation rRelation = relation2mappings.getRelation();
+		relation2relation2mappings.put(rRelation, relation2mappings);
+	}
+
+	public @NonNull AbstractQVTr2QVTcRelations getRelation2Mappings(@NonNull Relation rRelation) {
+		return ClassUtil.nonNullState(relation2relation2mappings.get(rRelation));
 	}
 
 	// Create the top rules, and search the input model for the appropriate types, when possible?

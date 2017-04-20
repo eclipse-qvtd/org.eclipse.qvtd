@@ -63,7 +63,7 @@ public class QVTrNameGenerator
 	}
 
 	public @NonNull String createTracePropertyName(@NonNull VariableDeclaration variable) {
-		return "t_" + QVTrelationUtil.getName(variable);
+		return /*"t_" +*/ QVTrelationUtil.getName(variable);
 	}
 
 	public @NonNull String createWhenInvocationPropertyName(@NonNull Relation relation) {

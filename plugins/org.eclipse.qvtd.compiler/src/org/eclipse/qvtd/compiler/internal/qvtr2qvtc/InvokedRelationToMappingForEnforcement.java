@@ -10,9 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -20,7 +21,10 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -95,6 +99,21 @@ import com.google.common.collect.Iterables;
 			return rEnforcedBottomDomainVariables;
 		}
 
+		private @NonNull VariableDeclaration getOverriddenParameter(@NonNull Relation rOverride, @NonNull Variable rParameter) {
+			if (rOverride == rRelation) {
+				return rParameter;
+			}
+			RelationDomain rootVariableDomain = QVTrelationUtil.getRootVariableDomain(rParameter);
+			List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rootVariableDomain);
+			int index = rootVariables.indexOf(rParameter);
+			assert index >= 0;
+			TypedModel rTypedModel = QVTrelationUtil.getTypedModel(rootVariableDomain);
+			RelationDomain overriddenRootVariableDomain = QVTrelationUtil.getRelationDomain(rOverride, rTypedModel);
+			List<@NonNull Variable> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRootVariableDomain);
+			assert index <= overriddenRootVariables.size();
+			return overriddenRootVariables.get(index);
+		}
+
 		//		@Override
 		//		protected @NonNull Set<@NonNull Variable> getEnforcedDomainGuardVariables(@NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables) { // FIXME unify with TopLevel
 		//			Set<@NonNull Variable> rEnforcedDomainGuardVariables = new HashSet<@NonNull Variable>(rEnforcedReferredVariables);
@@ -106,10 +125,22 @@ import com.google.common.collect.Iterables;
 		// RInvokerToMGuard
 		@Override
 		protected void mapIncomingInvocation() throws CompilerChainException {
-			Type invokingTraceClass = qvtr2qvtc.getSignatureClass(rRelation);		// ?? invocation
-			Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable("from_" + invokingTraceClass.getName(), invokingTraceClass);
-			Type cInvocationType = QVTrelationUtil.getType(cInvocationVariable);
-			assert cInvocationType == invokingTraceClass;			// FIXME
+			Type invokingSignatureClass = null;		// ?? invocation
+			Relation rOverride = rRelation;
+			for (; rOverride != null; rOverride = QVTrelationUtil.basicGetOverrides(rOverride)) {
+				invokingSignatureClass = qvtr2qvtc.basicGetSignatureClass(rOverride);
+				if (invokingSignatureClass != null) {
+					//				qvtr2qvtc.get
+					break;
+				}
+			}
+			assert rOverride != null;
+			if (invokingSignatureClass == null) {
+				invokingSignatureClass = qvtr2qvtc.getSignatureClass(rRelation);		// ?? invocation
+			}
+			Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable("from_" + invokingSignatureClass.getName(), invokingSignatureClass);
+			org.eclipse.ocl.pivot.Class cInvocationType = QVTrelationUtil.getClass(cInvocationVariable);
+			assert cInvocationType == invokingSignatureClass;			// FIXME
 			//			List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
 			List<@NonNull Variable> rParameters = qvtr2qvtc.getRootVariables(rRelation);
 			//			int iSize = rArguments.size();
@@ -122,53 +153,99 @@ import com.google.common.collect.Iterables;
 				// RInvokerToMGuardPredicate
 				//				Variable rArgumentVariable = QVTrelationUtil.getReferredVariable(rArgumentVariableExp);
 				Variable cParameter = variablesAnalysis.getCoreVariable(rParameter);
-				Property cProperty = qvtr2qvtc.getSignatureProperty(cInvocationType, rParameter);
+				Property cProperty = qvtr2qvtc.getSignatureProperty(cInvocationType, getOverriddenParameter(rOverride, rParameter));
 				NavigationCallExp cInvocationValue = createNavigationCallExp(createVariableExp(cInvocationVariable), cProperty);
 				variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cInvocationValue, createVariableExp(cParameter));
 			}
 		}
 	}
 
+	/**
+	 * The per-typed model when invocation conversions.
+	 */
+	private @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> whenTypedModel2relationDomain2coreMapping = new HashMap<>();
+
+	/**
+	 * The per-typed model where invocation conversions.
+	 */
+	private @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> whereTypedModel2relationDomain2coreMapping = new HashMap<>();
+
 	public InvokedRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert !rRelation.isIsTopLevel();
+	}
+
+	private void addWhenRelationDomain2coreMapping(@NonNull AbstractEnforceableRelationDomain2CoreMapping relationDomain2coreMapping) {
+		RelationDomain rDomain = relationDomain2coreMapping.rEnforcedDomain;
+		TypedModel rTypedModel = QVTrelationUtil.getTypedModel(rDomain);
+		AbstractEnforceableRelationDomain2CoreMapping old = whenTypedModel2relationDomain2coreMapping.put(rTypedModel, relationDomain2coreMapping);
+		assert old == null;
+	}
+
+	private void addWhereRelationDomain2coreMapping(@NonNull AbstractEnforceableRelationDomain2CoreMapping relationDomain2coreMapping) {
+		RelationDomain rDomain = relationDomain2coreMapping.rEnforcedDomain;
+		TypedModel rTypedModel = QVTrelationUtil.getTypedModel(rDomain);
+		AbstractEnforceableRelationDomain2CoreMapping old = whereTypedModel2relationDomain2coreMapping.put(rTypedModel, relationDomain2coreMapping);
+		assert old == null;
 	}
 
 	/**
 	 * Each invocation of each enforced domain is synthesized as a separate mapping.
 	 */
 	@Override
-	protected @NonNull List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException {
-		List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<>();
-		Iterable<@NonNull RelationCallExp> incomingWhenInvocations = qvtr2qvtc.getIncomingWhenInvocationsOf(rRelation);
-		if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {
-			//			for (@NonNull RelationCallExp rInvocation : incomingWhenInvocations) {
+	public void analyze() throws CompilerChainException {
+		boolean hasWhenInvocation = false;
+		boolean hasWhereInvocation = false;
+		for (@NonNull Relation rOverride : rAllOverrides) {
+			Iterable<@NonNull RelationCallExp> incomingWhenInvocations = qvtr2qvtc.getIncomingWhenInvocationsOf(rOverride);
+			if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {
+				hasWhenInvocation = true;
+			}
+			Iterable<@NonNull RelationCallExp> incomingWhereInvocations = qvtr2qvtc.getIncomingWhereInvocationsOf(rOverride);
+			if ((incomingWhereInvocations != null) && !Iterables.isEmpty(incomingWhereInvocations)) {
+				hasWhereInvocation = true;
+			}
+		}
+		if (hasWhenInvocation) {
 			QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 				if (rDomain.isIsEnforceable()) {
-					//						Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
 					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhenMappingClassName(rDomain);
-					WhenedEnforceableRelationDomain2CoreMapping enforceableRelationDomain2CoreMapping = new WhenedEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName);
-					enforceableRelationDomain2coreMappings.add(enforceableRelationDomain2CoreMapping);
+					addWhenRelationDomain2coreMapping(new WhenedEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}
 			}
-			//			}
 		}
-		Iterable<@NonNull RelationCallExp> incomingWhereInvocations = qvtr2qvtc.getIncomingWhereInvocationsOf(rRelation);
-		if ((incomingWhereInvocations != null) && !Iterables.isEmpty(incomingWhereInvocations)) {
-			//			for (@NonNull RelationCallExp rInvocation : incomingWhereInvocations) {
+		if (hasWhereInvocation) {
 			QVTr2QVTc.SYNTHESIS.println("invocation of where " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 				if (rDomain.isIsEnforceable()) {
-					//						Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
 					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhereMappingClassName(rDomain);
-					WheredEnforceableRelationDomain2CoreMapping enforceableRelationDomain2CoreMapping = new WheredEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName);
-					enforceableRelationDomain2coreMappings.add(enforceableRelationDomain2CoreMapping);
+					addWhereRelationDomain2coreMapping(new WheredEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}
 			}
-			//			}
 		}
-		return enforceableRelationDomain2coreMappings;
+	}
+
+	@Override
+	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getWhenRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
+		return ClassUtil.nonNullState(whenTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
+	}
+
+	@Override
+	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getWhereRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
+		return ClassUtil.nonNullState(whereTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
+	}
+
+	@Override
+	public void synthesize() throws CompilerChainException {
+		for (@NonNull AbstractEnforceableRelationDomain2CoreMapping enforceableRelationDomain2coreMapping : whenTypedModel2relationDomain2coreMapping.values()) {
+			enforceableRelationDomain2coreMapping.synthesize();
+			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
+		}
+		for (@NonNull AbstractEnforceableRelationDomain2CoreMapping enforceableRelationDomain2coreMapping : whereTypedModel2relationDomain2coreMapping.values()) {
+			enforceableRelationDomain2coreMapping.synthesize();
+			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
+		}
 	}
 
 	protected final class WhenedEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
@@ -181,6 +258,11 @@ import com.google.common.collect.Iterables;
 		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
 			return new VariablesAnalysis.WhenedVariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
 		}
+
+		@Override
+		protected @NonNull AbstractEnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings) {
+			return relation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
+		}
 	}
 
 	protected final class WheredEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
@@ -192,6 +274,11 @@ import com.google.common.collect.Iterables;
 		@Override
 		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
 			return new VariablesAnalysis.WheredVariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+		}
+
+		@Override
+		protected @NonNull AbstractEnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings) {
+			return relation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
 		}
 	}
 }

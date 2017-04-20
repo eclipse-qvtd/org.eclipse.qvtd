@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.IteratorVariable;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -129,7 +128,8 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	 */
 	private org.eclipse.ocl.pivot.@Nullable Class bagOfTraceClass = null;
 
-	private @NonNull Map<@NonNull NamedElement, @NonNull Element2TraceProperty> element2element2traceProperty = new HashMap<>();
+	private @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableDeclaration2TraceProperty> variable2variableDeclaration2traceProperty = new HashMap<>();
+	private @NonNull Map<@NonNull RelationCallExp, @NonNull Invocation2TraceProperty> invocation2invocation2traceProperty = new HashMap<>();
 
 	protected AbstractRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 		this.relationalTransformation2tracePackage = relationalTransformation2tracePackage;
@@ -268,7 +268,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	 */
 	private void analyzeTemplateVariables(@NonNull TemplateExp templateExp, @NonNull TypedModel rTypedModel, boolean isOneToOne) {
 		Variable templateVariable = QVTrelationUtil.getBindsTo(templateExp);
-		if (element2element2traceProperty.containsKey(templateVariable)) {
+		if (variable2variableDeclaration2traceProperty.containsKey(templateVariable)) {
 			if (templateExp instanceof ObjectTemplateExp) {
 				for (@NonNull PropertyTemplateItem rPropertyTemplateItem : QVTrelationUtil.getOwnedParts((ObjectTemplateExp)templateExp)) {
 					boolean isNestedOneToOne = false;
@@ -322,21 +322,12 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	}
 
 	@Override
-	public @Nullable Property basicGetSignatureProperty(@NonNull NamedElement rNamedElement) {
-		Element2TraceProperty variableDeclaration2TraceProperty = element2element2traceProperty.get(rNamedElement);
-		if (variableDeclaration2TraceProperty == null) {
+	public @Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable) {
+		VariableDeclaration2TraceProperty variableDeclaration2traceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
+		if (variableDeclaration2traceProperty == null) {
 			return null;
 		}
-		return variableDeclaration2TraceProperty.getSignatureProperty();
-	}
-
-	@Override
-	public @Nullable Property basicGetTraceProperty(@NonNull NamedElement rNamedElement) {
-		Element2TraceProperty element2TraceProperty = element2element2traceProperty.get(rNamedElement);
-		if (element2TraceProperty == null) {
-			return null;
-		}
-		return element2TraceProperty.getTraceProperty();
+		return variableDeclaration2traceProperty.getTraceProperty();
 	}
 
 	@Override
@@ -344,7 +335,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		return ClassUtil.safeCompareTo(this.traceClass.getName(), that.getTraceClass().getName());
 	}
 
-	public @NonNull Property createTraceProperty(@Nullable TypedModel rTypedModel, org.eclipse.ocl.pivot.@NonNull Class owningClass,
+	public @NonNull Property createProperty(@Nullable TypedModel rTypedModel, org.eclipse.ocl.pivot.@NonNull Class owningClass,
 			@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired, boolean unitOpposite) {
 		String domainName = rTypedModel != null ? rTypedModel.getName() : null;
 		Property traceProperty = PivotFactory.eINSTANCE.createProperty();
@@ -403,7 +394,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	private Invocation2TraceProperty getInvocation2TraceProperty(@NonNull String name, @NonNull RelationCallExp rInvocation) {
 		Invocation2TraceProperty invocation2TraceProperty = new Invocation2TraceProperty(this, name, rInvocation);
 		invocation2TraceProperty.getTraceProperty();
-		Element2TraceProperty oldInvocation2TraceProperty = element2element2traceProperty.put(rInvocation, invocation2TraceProperty);
+		Invocation2TraceProperty oldInvocation2TraceProperty = invocation2invocation2traceProperty.put(rInvocation, invocation2TraceProperty);
 		assert oldInvocation2TraceProperty ==  null;
 		return invocation2TraceProperty;
 	}
@@ -434,8 +425,22 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	}
 
 	@Override
+	public @NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable) {
+		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
+		assert variableDeclaration2TraceProperty != null;
+		return variableDeclaration2TraceProperty.getSignatureProperty();
+	}
+
+	@Override
 	public org.eclipse.ocl.pivot.@NonNull Class getTraceClass() {
 		return traceClass;
+	}
+
+	@Override
+	public @NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation) {
+		Invocation2TraceProperty invocation2TraceProperty = invocation2invocation2traceProperty.get(rInvocation);
+		assert invocation2TraceProperty != null;
+		return invocation2TraceProperty.getTraceProperty();
 	}
 
 	@Override
@@ -492,13 +497,13 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	}
 
 	private @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean isNestedOneToOne) {
-		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = (VariableDeclaration2TraceProperty) element2element2traceProperty.get(variable);
+		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(variable);
 		if (variableDeclaration2TraceProperty != null) {
 			variableDeclaration2TraceProperty.refineTraceProperty(rTypedModel, isNestedOneToOne);
 		}
 		else {
 			variableDeclaration2TraceProperty = new VariableDeclaration2TraceProperty(this, rTypedModel, variable, isNestedOneToOne);
-			element2element2traceProperty.put(variable, variableDeclaration2TraceProperty);
+			variable2variableDeclaration2traceProperty.put(variable, variableDeclaration2TraceProperty);
 		}
 		return variableDeclaration2TraceProperty;
 	}
@@ -635,8 +640,13 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		//
 		//	Create a trace property for each prepared trace property.
 		//
-		for (@NonNull NamedElement traceVariable : element2element2traceProperty.keySet()) {
-			Element2TraceProperty vd2tp = element2element2traceProperty.get(traceVariable);
+		for (@NonNull VariableDeclaration traceVariable : variable2variableDeclaration2traceProperty.keySet()) {
+			VariableDeclaration2TraceProperty vd2tp = variable2variableDeclaration2traceProperty.get(traceVariable);
+			assert vd2tp != null;
+			vd2tp.getTraceProperty();
+		}
+		for (@NonNull RelationCallExp traceVariable : invocation2invocation2traceProperty.keySet()) {
+			Invocation2TraceProperty vd2tp = invocation2invocation2traceProperty.get(traceVariable);
 			assert vd2tp != null;
 			vd2tp.getTraceProperty();
 		}
@@ -658,9 +668,8 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		org.eclipse.ocl.pivot.Class signatureClass = basicGetSignatureClass();
 		if (signatureClass != null) {
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				TypedModel rTypedModel = rDomain.getTypedModel();
 				for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(rDomain)) {
-					Element2TraceProperty rootVariableDeclaration2TraceProperty = element2element2traceProperty.get(rootVariable);
+					VariableDeclaration2TraceProperty rootVariableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rootVariable);
 					assert rootVariableDeclaration2TraceProperty != null;
 					rootVariableDeclaration2TraceProperty.getSignatureProperty();
 				}
