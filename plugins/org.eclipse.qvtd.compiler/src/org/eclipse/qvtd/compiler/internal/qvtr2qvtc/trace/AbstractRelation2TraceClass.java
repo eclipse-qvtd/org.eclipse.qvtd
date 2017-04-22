@@ -363,7 +363,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		traceProperty.setOwningClass(owningClass);
 		if (!(type instanceof DataType)) {
 			Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
-			oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
+			oppositeProperty.setName(owningClass.getName());
 			oppositeProperty.setType(unitOpposite ? traceClass : getBagOfTraceClass());
 			oppositeProperty.setIsRequired(!unitOpposite);
 			oppositeProperty.setIsImplicit(true);
