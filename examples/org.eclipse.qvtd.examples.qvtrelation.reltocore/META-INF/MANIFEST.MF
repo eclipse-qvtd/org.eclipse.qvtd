@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: QVTrelation RelToCore Example
+Bundle-Name: QVTrelation RelToCore Example (Incubation)
 Bundle-SymbolicName: org.eclipse.qvtd.examples.qvtrelation.reltocore
 Bundle-Version: 0.14.0.qualifier
 Export-Package: org.eclipse.qvtd.examples.qvtrelation.reltocore
