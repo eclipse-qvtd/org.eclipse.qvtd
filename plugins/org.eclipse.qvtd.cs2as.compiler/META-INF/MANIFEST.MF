@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.cs2as.compiler;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.14.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -12,8 +12,8 @@ Export-Package: org.eclipse.qvtd.cs2as.compiler,
  org.eclipse.qvtd.cs2as.compiler.cgmodel.util,
  org.eclipse.qvtd.cs2as.compiler.internal;x-friends:="org.eclipse.qvtd.cs2as.compiler.tests,org.eclipse.qvtd.cs2as.build"
 Require-Bundle: org.eclipse.ocl.xtext.completeocl;bundle-version="[1.3.0,1.4.0)",
- org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[1.0.0,2.0.0)",
- org.eclipse.qvtd.compiler;bundle-version="[1.0.0,2.0.0)"
+ org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[0.14.0,1.0.0)",
+ org.eclipse.qvtd.compiler;bundle-version="[0.14.0,1.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.commons.logging,
