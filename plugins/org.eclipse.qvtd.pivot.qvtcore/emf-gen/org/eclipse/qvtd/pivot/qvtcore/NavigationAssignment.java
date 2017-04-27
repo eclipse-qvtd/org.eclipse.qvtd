@@ -46,7 +46,7 @@ public interface NavigationAssignment extends Assignment {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getNavigationAssignment_SlotExpression()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='slotAssignment'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!NavigationAssignment!slotExpression'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!NavigationAssignment!slotExpression'"
 	 * @generated
 	 */
 	OCLExpression getSlotExpression();

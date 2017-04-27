@@ -75,7 +75,7 @@ public class QVTPivot2FlatQVTPivot
 		//
 		EPackage flatPackage = EcoreFactory.eINSTANCE.createEPackage();
 		flatPackage.setName("flatqvt");
-		flatPackage.setNsURI("http://www.eclipse.org/qvt/2017/FlatQVT");
+		flatPackage.setNsURI("http://www.eclipse.org/qvt/2015/FlatQVT");
 		flatPackage.setNsPrefix("flatqvt");
 		for (Resource ecoreResource : ecoreResourceSet.getResources()) {
 			for (EObject eObject : ecoreResource.getContents()) {

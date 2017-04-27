@@ -49,7 +49,7 @@ public interface TypedModel extends NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_Transformation()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#getModelParameter
 	 * @model opposite="modelParameter" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!TypedModel!transformation'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!transformation'"
 	 * @generated
 	 */
 	Transformation getTransformation();
@@ -76,7 +76,7 @@ public interface TypedModel extends NamedElement {
 	 * @return the value of the '<em>Used Package</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_UsedPackage()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!TypedModel!usedPackage'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!usedPackage'"
 	 * @generated
 	 */
 	@NonNull EList<org.eclipse.ocl.pivot.Package> getUsedPackage();
@@ -94,7 +94,7 @@ public interface TypedModel extends NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_DependsOn()
 	 * @model ordered="false"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='dependent'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!TypedModel!dependsOn'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!dependsOn'"
 	 * @generated
 	 */
 	@NonNull EList<TypedModel> getDependsOn();
@@ -111,7 +111,7 @@ public interface TypedModel extends NamedElement {
 	 * @see #setOwnedContext(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_OwnedContext()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!TypedModel!ownedContext'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!ownedContext'"
 	 * @generated
 	 */
 	Variable getOwnedContext();

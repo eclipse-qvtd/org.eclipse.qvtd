@@ -47,7 +47,7 @@ public interface TemplateExp extends LiteralExp, ReferringElement {
 	 * @see #setBindsTo(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getTemplateExp_BindsTo()
 	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='templateExp'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!TemplateExp!bindsTo'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!TemplateExp!bindsTo'"
 	 * @generated
 	 */
 	Variable getBindsTo();
@@ -75,7 +75,7 @@ public interface TemplateExp extends LiteralExp, ReferringElement {
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getTemplateExp_Where()
 	 * @model containment="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owner'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!TemplateExp!where'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!TemplateExp!where'"
 	 * @generated
 	 */
 	OCLExpression getWhere();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:persons="http://www.eclipse.org/qvt/2017/QVTcore/examples/Persons"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTcore/examples/Persons java://build.test.families2persons.Persons.PersonsPackage">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:persons="http://www.eclipse.org/qvt/2015/QVTcore/examples/Persons"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/2015/QVTcore/examples/Persons java://build.test.families2persons.Persons.PersonsPackage">
   <persons:Female fullName="Brenda Dunn"/>
   <persons:Female fullName="Debra Green"/>
   <persons:Male fullName="Randy Jenkins"/>

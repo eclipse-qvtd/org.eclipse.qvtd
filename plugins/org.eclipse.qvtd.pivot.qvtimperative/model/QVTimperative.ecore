@@ -6,7 +6,7 @@
     <details key="documentation" value="The Package for an Imperative QVT transformation.&#xA;&#xA;An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:&#xA;&#xA;A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.&#xA;&#xA;A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.&#xA;&#xA;A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.&#xA;&#xA;All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.&#xA;&#xA;All writes to multi-valued properties must be guaranteed to occur before any read of the property."/>
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
-    <details key="qvtb" value="http://www.eclipse.org/qvt/2017/QVTbase"/>
+    <details key="qvtb" value="http://www.eclipse.org/qvt/2015/QVTbase"/>
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
     <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>

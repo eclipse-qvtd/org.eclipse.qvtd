@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="http://www.eclipse.org/qvt/2017/QVTcore/examples/Families" xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTcore/examples/Families ../Families.ecore">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="http://www.eclipse.org/qvt/2015/QVTcore/examples/Families" xsi:schemaLocation="http://www.eclipse.org/qvt/2015/QVTcore/examples/Families ../Families.ecore">
 <Family lastName="Wood">
     <father firstName="Russell"/>
     <mother firstName="Alice"/>

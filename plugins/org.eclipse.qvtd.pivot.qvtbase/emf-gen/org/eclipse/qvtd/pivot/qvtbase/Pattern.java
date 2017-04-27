@@ -47,7 +47,7 @@ public interface Pattern extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPattern_Predicate()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Predicate#getPattern
 	 * @model opposite="pattern" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!Pattern!predicate'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Pattern!predicate'"
 	 * @generated
 	 */
 	@NonNull EList<Predicate> getPredicate();
@@ -64,7 +64,7 @@ public interface Pattern extends Element {
 	 * @return the value of the '<em>Binds To</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getPattern_BindsTo()
 	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTbase!Pattern!bindsTo'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Pattern!bindsTo'"
 	 * @generated
 	 */
 	@NonNull EList<Variable> getBindsTo();

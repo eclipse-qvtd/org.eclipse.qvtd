@@ -2,7 +2,7 @@
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib" name="QVTbaseLibrary.oclstdlib">
   <ownedImports importedNamespace="pivot:Package ../model/QVTbase.ecore.oclas#P.qvtbase" name="qvtb"/>
-  <ownedPackages xsi:type="pivot:Library" xmi:id="P.qvtbaselibrary" URI="http://www.eclipse.org/qvt/2017/QVTbaseLibrary" name="qvtbaselibrary"
+  <ownedPackages xsi:type="pivot:Library" xmi:id="P.qvtbaselibrary" URI="http://www.eclipse.org/qvt/2015/QVTbaseLibrary" name="qvtbaselibrary"
       nsPrefix="qvtbaselib">
     <ownedClasses xmi:id="T.qvtbaselibrary.Model" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
     <ownedClasses xmi:id="T.qvtbaselibrary.Transformation" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>

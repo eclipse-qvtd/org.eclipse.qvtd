@@ -50,7 +50,7 @@ public interface Relation extends Rule {
 	 * @see #setIsTopLevel(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_IsTopLevel()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!Relation!isTopLevel'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Relation!isTopLevel'"
 	 * @generated
 	 */
 	boolean isIsTopLevel();
@@ -79,7 +79,7 @@ public interface Relation extends Rule {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_OperationalImpl()
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation#getRelation
 	 * @model opposite="relation" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!Relation!operationalImpl'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Relation!operationalImpl'"
 	 * @generated
 	 */
 	EList<RelationImplementation> getOperationalImpl();
@@ -96,7 +96,7 @@ public interface Relation extends Rule {
 	 * @return the value of the '<em>Variable</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_Variable()
 	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!Relation!variable'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Relation!variable'"
 	 * @generated
 	 */
 	EList<Variable> getVariable();
@@ -114,7 +114,7 @@ public interface Relation extends Rule {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_When()
 	 * @model containment="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='whenOwner'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!Relation!when'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Relation!when'"
 	 * @generated
 	 */
 	Pattern getWhen();
@@ -142,7 +142,7 @@ public interface Relation extends Rule {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_Where()
 	 * @model containment="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='whereOwner'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!Relation!where'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Relation!where'"
 	 * @generated
 	 */
 	Pattern getWhere();

@@ -10,7 +10,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.eclipse.org/qvt/2017/QVTcoreCS"
+            uri="http://www.eclipse.org/qvt/2015/QVTcoreCS"
             class="org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage"
             genModel="model/QVTcoreCS.genmodel"/>
    </extension>

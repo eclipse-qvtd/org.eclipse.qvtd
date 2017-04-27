@@ -48,7 +48,7 @@ public interface Area extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getArea_GuardPattern()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.GuardPattern#getArea
 	 * @model opposite="area" containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Area!guardPattern'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Area!guardPattern'"
 	 * @generated
 	 */
 	GuardPattern getGuardPattern();
@@ -77,7 +77,7 @@ public interface Area extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getArea_BottomPattern()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomPattern#getArea
 	 * @model opposite="area" containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Area!bottomPattern'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Area!bottomPattern'"
 	 * @generated
 	 */
 	BottomPattern getBottomPattern();

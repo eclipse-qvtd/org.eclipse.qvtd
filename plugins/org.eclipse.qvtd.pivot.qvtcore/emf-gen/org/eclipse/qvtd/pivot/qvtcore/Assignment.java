@@ -51,7 +51,7 @@ public interface Assignment extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_BottomPattern()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomPattern#getAssignment
 	 * @model opposite="assignment" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Assignment!bottomPattern'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!bottomPattern'"
 	 * @generated
 	 */
 	BottomPattern getBottomPattern();
@@ -79,7 +79,7 @@ public interface Assignment extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_Value()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='valueAssignment'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Assignment!value'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!value'"
 	 * @generated
 	 */
 	OCLExpression getValue();
@@ -109,7 +109,7 @@ public interface Assignment extends Element {
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_IsDefault()
 	 * @model default="false" unsettable="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Assignment!isDefault'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!isDefault'"
 	 * @generated
 	 */
 	boolean isIsDefault();
@@ -164,7 +164,7 @@ public interface Assignment extends Element {
 	 * @see #setIsPartial(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getAssignment_IsPartial()
 	 * @model default="false" unsettable="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!Assignment!isPartial'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!Assignment!isPartial'"
 	 * @generated
 	 */
 	boolean isIsPartial();

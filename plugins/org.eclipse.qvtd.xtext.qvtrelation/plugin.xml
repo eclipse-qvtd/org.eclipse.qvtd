@@ -8,7 +8,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.eclipse.org/qvt/2017/QVTrelationCS"
+            uri="http://www.eclipse.org/qvt/2015/QVTrelationCS"
             class="org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage"
             genModel="model/QVTrelationCS.genmodel"/>
    </extension>

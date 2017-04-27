@@ -49,7 +49,7 @@ public interface EnforcementOperation extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.EnforcementMode
 	 * @see #setEnforcementMode(EnforcementMode)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getEnforcementOperation_EnforcementMode()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!EnforcementOperation!enforcementMode'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!EnforcementOperation!enforcementMode'"
 	 * @generated
 	 */
 	EnforcementMode getEnforcementMode();
@@ -79,7 +79,7 @@ public interface EnforcementOperation extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getEnforcementOperation_BottomPattern()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomPattern#getEnforcementOperation
 	 * @model opposite="enforcementOperation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!EnforcementOperation!bottomPattern'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!EnforcementOperation!bottomPattern'"
 	 * @generated
 	 */
 	BottomPattern getBottomPattern();
@@ -106,7 +106,7 @@ public interface EnforcementOperation extends Element {
 	 * @see #setOperationCallExp(OperationCallExp)
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getEnforcementOperation_OperationCallExp()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!EnforcementOperation!operationCallExp'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!EnforcementOperation!operationCallExp'"
 	 * @generated
 	 */
 	OperationCallExp getOperationCallExp();

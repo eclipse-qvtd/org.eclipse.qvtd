@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtb="http://www.eclipse.org/qvt/2017/QVTbase"
-    xmlns:qvtg="http://www.eclipse.org/qvt/2017/DependencyGraph" xsi:schemaLocation="http://www.eclipse.org/qvt/2017/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2017/DependencyGraph java://org.eclipse.qvtd.pivot.dependencies.DependencyGraphPackage">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase"
+    xmlns:qvtg="http://www.eclipse.org/qvt/2015/DependencyGraph" xsi:schemaLocation="http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/DependencyGraph java://org.eclipse.qvtd.pivot.dependencies.DependencyGraphPackage">
   <qvtb:TypedModel name="$primitive$"/>
   <qvtg:DependencyGraph>
     <datums xsi:type="qvtg:ClassDatum" sub="/1/@datums.1 /1/@datums.7 /1/@datums.18 /1/@datums.20 /1/@datums.22">

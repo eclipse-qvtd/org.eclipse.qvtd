@@ -297,7 +297,7 @@ public class KeyImpl extends ElementImpl implements Key {
 				/*@Thrown*/ boolean result;
 				if (ne) {
 					if (transformation == null) {
-						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTbase\'::Transformation::modelParameter\'");
+						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 					}
 					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
@@ -411,7 +411,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					final @NonNull  ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY_superClasses_2, BOXED_superClasses_0, ACC_superClasses_2);
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue superClasses = ClassUtil.nonNullState((SetValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2));
 					if (transformation == null) {
-						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTrelation\'::RelationalTransformation::ownedKey\'");
+						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = transformation.getOwnedKey();
@@ -491,7 +491,7 @@ public class KeyImpl extends ElementImpl implements Key {
 				/*@Thrown*/ boolean result;
 				if (ne) {
 					if (transformation == null) {
-						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2017/QVTrelation\'::RelationalTransformation::ownedKey\'");
+						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = transformation.getOwnedKey();

@@ -64,7 +64,7 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = qvtbMergeResourceSet }
     component = ConstraintMerger { resourceSet = qvtbMergeResourceSet skipOnErrors = true
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
-    	libraryURI = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
     	ecoreURI = "model/QVTbase.ecore"
     	oclURI = "model/QVTbase.ocl"
     	invariantPrefix = "validate"
@@ -79,7 +79,7 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = qvtcMergeResourceSet }
     component = ConstraintMerger { resourceSet = qvtcMergeResourceSet skipOnErrors = true
     	projectName = "org.eclipse.qvtd.pivot.qvtcore"
-    	libraryURI = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
     	ecoreURI = "model/QVTcore.ecore"
     	oclURI = "model/QVTcore.ocl"
     	invariantPrefix = "validate"
@@ -94,7 +94,7 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = qvtiMergeResourceSet }
     component = ConstraintMerger { resourceSet = qvtiMergeResourceSet skipOnErrors = true
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
-    	libraryURI = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
     	ecoreURI = "model/QVTimperative.ecore"
     	oclURI = "model/QVTimperative.ocl"
     	invariantPrefix = "validate"
@@ -109,7 +109,7 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = qvttMergeResourceSet }
     component = ConstraintMerger { resourceSet = qvttMergeResourceSet skipOnErrors = true
     	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
-    	libraryURI = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
     	ecoreURI = "model/QVTtemplate.ecore"
     	oclURI = "model/QVTtemplate.ocl"
     	invariantPrefix = "validate"
@@ -124,7 +124,7 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = qvtrMergeResourceSet }
     component = ConstraintMerger { resourceSet = qvtrMergeResourceSet skipOnErrors = true
     	projectName = "org.eclipse.qvtd.pivot.qvtrelation"
-    	libraryURI = "http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
     	ecoreURI = "model/QVTrelation.ecore"
     	oclURI = "model/QVTrelation.ocl"
     	invariantPrefix = "validate"
@@ -150,7 +150,7 @@ Workflow {
     component = GenerateOCLmetamodelXtend { //resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelFile = "model/QVTbase.ecore"
-    	uri = "http://www.eclipse.org/qvt/2017/QVTbase"
+    	uri = "http://www.eclipse.org/qvt/2015/QVTbase"
     	javaFolder = "emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase.model"
     	javaClassName = "QVTbaseMetamodel"
@@ -163,7 +163,7 @@ Workflow {
     		to = "org.eclipse.ocl.pivot.model.OCLstdlib"
     	}
 //    	generatedClassNameMap = {
-//    		from = "http://www.eclipse.org/qvt/2017/QVTbase"
+//    		from = "http://www.eclipse.org/qvt/2015/QVTbase"
 //    		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
 //    	}
     }

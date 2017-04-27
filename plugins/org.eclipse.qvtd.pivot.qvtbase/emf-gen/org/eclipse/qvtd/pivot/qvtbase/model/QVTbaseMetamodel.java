@@ -45,7 +45,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 /**
- * This is the pivot representation of the http://www.eclipse.org/qvt/2017/QVTbase metamodel
+ * This is the pivot representation of the http://www.eclipse.org/qvt/2015/QVTbase metamodel
  * auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.
  * It facilitates efficient model loading without the overheads of model reading.
  */
@@ -60,7 +60,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	/**
 	 *	The URI of this Metamodel.
 	 */
-	public static final @NonNull String PIVOT_URI = "http://www.eclipse.org/qvt/2017/QVTbase";
+	public static final @NonNull String PIVOT_URI = "http://www.eclipse.org/qvt/2015/QVTbase";
 
 	public static @NonNull Package create(@NonNull StandardLibraryInternal standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 		QVTbaseMetamodel resource = new QVTbaseMetamodel(ClassUtil.nonNullEMF(URI.createURI(PIVOT_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION)));
@@ -72,7 +72,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	}
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2017/QVTbase metamodel Resource using the default OCL Standard Library. 
+	 * Return the default http://www.eclipse.org/qvt/2015/QVTbase metamodel Resource using the default OCL Standard Library. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
 	 *  is used as the default when no overriding copy is registered. 
 	 */
@@ -87,7 +87,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	}
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2017/QVTbase metamodel Model using the default OCL Standard Library. 
+	 * Return the default http://www.eclipse.org/qvt/2015/QVTbase metamodel Model using the default OCL Standard Library. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
 	 *  is used as the default when no overriding copy is registered. 
 	 */
@@ -119,10 +119,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 
 		protected Contents(@NonNull Package standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
-			root = createModel("http://www.eclipse.org/qvt/2017/QVTbase");
+			root = createModel("http://www.eclipse.org/qvt/2015/QVTbase");
 			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL);
 			((PivotObjectImpl)pivot).setESObject(PivotPackage.eINSTANCE);
-			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2017/QVTbase", null);
+			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null);
 			((PivotObjectImpl)qvtbase).setESObject(QVTbasePackage.eINSTANCE);
 			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
 			((PivotObjectImpl)orphanage).setESObject(null);

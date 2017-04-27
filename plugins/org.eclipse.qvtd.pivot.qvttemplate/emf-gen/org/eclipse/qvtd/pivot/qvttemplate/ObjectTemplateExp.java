@@ -46,7 +46,7 @@ public interface ObjectTemplateExp extends TemplateExp {
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getObjectTemplateExp_Part()
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getObjContainer
 	 * @model opposite="objContainer" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!ObjectTemplateExp!part'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!ObjectTemplateExp!part'"
 	 * @generated
 	 */
 	EList<PropertyTemplateItem> getPart();
@@ -63,7 +63,7 @@ public interface ObjectTemplateExp extends TemplateExp {
 	 * @see #setReferredClass(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getObjectTemplateExp_ReferredClass()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTtemplate!ObjectTemplateExp!referredClass'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!ObjectTemplateExp!referredClass'"
 	 * @generated
 	 */
 	org.eclipse.ocl.pivot.Class getReferredClass();

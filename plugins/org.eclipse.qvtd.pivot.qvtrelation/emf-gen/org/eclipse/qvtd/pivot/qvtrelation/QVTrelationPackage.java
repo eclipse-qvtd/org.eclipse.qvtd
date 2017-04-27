@@ -49,7 +49,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/2017/QVTrelation";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvt/2015/QVTrelation";
 
 	/**
 	 * The package namespace name.

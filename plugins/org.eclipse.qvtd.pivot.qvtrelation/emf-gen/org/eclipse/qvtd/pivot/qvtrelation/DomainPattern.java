@@ -42,7 +42,7 @@ public interface DomainPattern extends Pattern {
 	 * @see #setTemplateExpression(TemplateExp)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getDomainPattern_TemplateExpression()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!DomainPattern!templateExpression'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!DomainPattern!templateExpression'"
 	 * @generated
 	 */
 	TemplateExp getTemplateExpression();

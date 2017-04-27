@@ -46,7 +46,7 @@ public interface RelationalTransformation extends Transformation {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationalTransformation_OwnedKey()
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#getTransformation
 	 * @model opposite="transformation" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTrelation!RelationalTransformation!ownedKey'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationalTransformation!ownedKey'"
 	 * @generated
 	 */
 	EList<Key> getOwnedKey();

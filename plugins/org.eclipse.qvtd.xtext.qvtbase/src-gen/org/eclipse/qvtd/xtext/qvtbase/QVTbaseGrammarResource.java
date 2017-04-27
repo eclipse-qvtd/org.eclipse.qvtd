@@ -95,7 +95,7 @@ public class QVTbaseGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ReferencedMetamodel MM_ecore = createReferencedMetamodel(org.eclipse.emf.ecore.EcorePackage.eINSTANCE, "ecore"); // http://www.eclipse.org/emf/2002/Ecore
 		private static final @NonNull ReferencedMetamodel MM_essentialocl = createReferencedMetamodel(org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.eINSTANCE, "essentialocl"); // http://www.eclipse.org/ocl/2015/EssentialOCLCS
 		private static final @NonNull ReferencedMetamodel MM_pivot = createReferencedMetamodel(org.eclipse.ocl.pivot.PivotPackage.eINSTANCE, "pivot"); // http://www.eclipse.org/ocl/2015/Pivot
-		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2017/QVTbase
+		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2015/QVTbase
 
 		private static final @NonNull TerminalRule TR_UNQUOTED_STRING = createTerminalRule("UNQUOTED_STRING", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 

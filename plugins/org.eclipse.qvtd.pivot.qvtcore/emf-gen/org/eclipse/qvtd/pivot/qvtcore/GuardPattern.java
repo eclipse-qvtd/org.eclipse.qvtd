@@ -49,7 +49,7 @@ public interface GuardPattern extends CorePattern {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getGuardPattern_Area()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Area#getGuardPattern
 	 * @model opposite="guardPattern" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!GuardPattern!area'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!GuardPattern!area'"
 	 * @generated
 	 */
 	@Override

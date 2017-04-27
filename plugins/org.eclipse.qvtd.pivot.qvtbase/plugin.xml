@@ -9,7 +9,7 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <package uri="http://www.eclipse.org/qvt/2017/QVTbase"
+      <package uri="http://www.eclipse.org/qvt/2015/QVTbase"
             class="org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage"
             genModel="model/QVTbase.genmodel"/>
    </extension>
@@ -30,7 +30,7 @@
             name="%_UI_QVTbase_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/2017/QVTbase"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTbase"/>
             <parameter name="kind" value="xmi"/>
          </describer>
       </content-type>
@@ -38,7 +38,7 @@
 
    <extension point="org.eclipse.ocl.pivot.standard_library"
          id="qvtbaselibrary" name="QVTbase Library">
-     <library uri="http://www.eclipse.org/qvt/2017/QVTbaseLibrary"
+     <library uri="http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
      	class="org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary$Loader"/>
    </extension>
 

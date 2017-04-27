@@ -48,7 +48,7 @@ public interface OppositePropertyAssignment extends NavigationAssignment {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getOppositePropertyAssignment_TargetProperty()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='assignment'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTcore!OppositePropertyAssignment!targetProperty'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!OppositePropertyAssignment!targetProperty'"
 	 * @generated
 	 */
 	Property getTargetProperty();
