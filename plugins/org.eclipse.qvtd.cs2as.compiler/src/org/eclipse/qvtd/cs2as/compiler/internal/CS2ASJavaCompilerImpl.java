@@ -56,6 +56,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompiler;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
@@ -446,7 +447,10 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
 		String qualifiedClassName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
-		OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);
+		String problem = OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);
+		if (problem != null) {
+			throw new CompilerChainException(problem);
+		}
 		@SuppressWarnings("unchecked")
 		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
 		return txClass;
