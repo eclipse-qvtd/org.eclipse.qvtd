@@ -59,9 +59,6 @@ public class StatementComparator implements Comparator<@NonNull Statement>
 			return isOk ? -1 : 1;
 		}
 		isOk = (o2 instanceof CheckStatement);
-		if (isOk != (o1 instanceof CheckStatement)) {
-			toString();
-		}
 		Map<@NonNull Statement, @NonNull Set<@NonNull VariableDeclaration>> statement2referencedVariables2 = statement2referencedVariables;
 		if (statement2referencedVariables2 == null) {
 			statement2referencedVariables2 = statement2referencedVariables = computeReferencedVariableClosure();

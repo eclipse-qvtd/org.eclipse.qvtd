@@ -904,9 +904,6 @@ public class OperationDependencyAnalysis
 
 		@Override
 		public @Nullable BasicDependencyPaths visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
-			if ("1_.getEmployees()".equals(operationCallExp.toString())) {
-				toString();
-			}
 			Operation referredOperation = operationCallExp.getReferredOperation();
 			assert referredOperation != null;
 			//
