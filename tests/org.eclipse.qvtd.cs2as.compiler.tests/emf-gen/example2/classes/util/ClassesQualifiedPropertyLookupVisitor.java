@@ -63,9 +63,9 @@ public class ClassesQualifiedPropertyLookupVisitor
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Property> ownedProperties = element_0.getOwnedProperties();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Property> ownedProperties = element_0.getOwnedProperties();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedProperties);
+			final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedProperties);
 			return addElements;
 		}
 

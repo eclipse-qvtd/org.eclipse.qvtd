@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import example1.target.NamedElement;
 import example1.target.Namespace;
 import example1.target.TRoot;
@@ -157,6 +158,9 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(ePackage instanceof TargetPackageImpl ? ePackage : new TargetPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		OCLstdlibPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);

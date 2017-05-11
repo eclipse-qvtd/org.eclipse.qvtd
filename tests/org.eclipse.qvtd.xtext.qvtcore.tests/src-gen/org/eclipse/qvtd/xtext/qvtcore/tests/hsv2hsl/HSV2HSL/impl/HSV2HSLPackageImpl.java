@@ -74,7 +74,7 @@ public class HSV2HSLPackageImpl extends EPackageImpl implements HSV2HSLPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link HSV2HSLPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -110,7 +110,7 @@ public class HSV2HSLPackageImpl extends EPackageImpl implements HSV2HSLPackage {
 		// Mark meta-data to indicate it can't be changed
 		theHSV2HSLPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(HSV2HSLPackage.eNS_URI, theHSV2HSLPackage);
 		return theHSV2HSLPackage;
@@ -297,21 +297,21 @@ public class HSV2HSLPackageImpl extends EPackageImpl implements HSV2HSLPackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getHSVNode2HSLNode_Hsv(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getHSVNode2HSLNode_Hsv(), 
+		   source, 
+		   new String[] {
+			 "body", "middle",
+			 "upper", "1"
+		   });	
 		addAnnotation
-		(getHSVNode2HSLNode_Hsl(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getHSVNode2HSLNode_Hsl(), 
+		   source, 
+		   new String[] {
+			 "body", "middle",
+			 "upper", "1"
+		   });
 	}
 
 } //HSV2HLSPackageImpl

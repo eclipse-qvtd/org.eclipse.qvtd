@@ -62,9 +62,9 @@ public class ClassesQualifiedPackageLookupVisitor
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedPackages);
+			final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedPackages);
 			return addElements;
 		}
 

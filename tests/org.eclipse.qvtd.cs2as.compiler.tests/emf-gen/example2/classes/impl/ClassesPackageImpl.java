@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import example2.classes.ClassesFactory;
 import example2.classes.ClassesPackage;
 import example2.classes.Element;
@@ -194,6 +195,9 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(ePackage instanceof ClassesPackageImpl ? ePackage : new ClassesPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		OCLstdlibPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);

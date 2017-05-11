@@ -98,10 +98,10 @@ public class ClassesUnqualifiedOperationLookupVisitor
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations = element_0.getOwnedOperations();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations = element_0.getOwnedOperations();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedOperations);
-			final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
+			final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedOperations);
+			final /*@NonInvalid*/ boolean hasFinalResult_0 = inner.hasFinalResult();
 			/*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_2;
 			if (hasFinalResult_0) {
 				symbol_2 = inner;
@@ -141,7 +141,7 @@ public class ClassesUnqualifiedOperationLookupVisitor
 					}
 					/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class _1_0 = (example2.classes.Class)ITERATOR__1_0.next();
 					/**
-					 * _'null' : OrderedSet(classes::Operation)[*|1]
+					 * _'null' : OrderedSet(classes::Operation)
 					 */
 					if (_1_0 == null) {
 						throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::Class::ownedOperations\'");
@@ -163,7 +163,7 @@ public class ClassesUnqualifiedOperationLookupVisitor
 					symbol_1 = inner_0;
 				}
 				else {
-					final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedOperationLookupVisitor.this.parentEnv(element_0);
+					final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedOperationLookupVisitor.this.parentEnv(element_0);
 					symbol_1 = parentEnv_0;
 				}
 				symbol_2 = symbol_1;

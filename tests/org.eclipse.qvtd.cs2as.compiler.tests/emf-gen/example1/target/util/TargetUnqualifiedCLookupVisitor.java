@@ -90,8 +90,8 @@ public class TargetUnqualifiedCLookupVisitor
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_0 = (/*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element_0.getOwnsC();
-			final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsC = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownsC);
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element_0.getOwnsC();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsC = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownsC);
 			final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownsC, child_0).booleanValue();
 			/*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_1;
 			if (includes) {
@@ -125,13 +125,13 @@ public class TargetUnqualifiedCLookupVisitor
 					symbol_0 = inner;
 				}
 				else {
-					final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = TargetUnqualifiedCLookupVisitor.this.parentEnv(element_0);
+					final /*@NonInvalid*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = TargetUnqualifiedCLookupVisitor.this.parentEnv(element_0);
 					symbol_0 = parentEnv_0;
 				}
 				symbol_1 = symbol_0;
 			}
 			else {
-				final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_1 = TargetUnqualifiedCLookupVisitor.this.parentEnv(element_0);
+				final /*@NonInvalid*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_1 = TargetUnqualifiedCLookupVisitor.this.parentEnv(element_0);
 				symbol_1 = parentEnv_1;
 			}
 			return symbol_1;

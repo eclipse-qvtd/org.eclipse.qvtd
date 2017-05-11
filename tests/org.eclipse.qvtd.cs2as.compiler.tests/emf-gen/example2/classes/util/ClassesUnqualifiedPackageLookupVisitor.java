@@ -83,16 +83,16 @@ public class ClassesUnqualifiedPackageLookupVisitor
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
-			final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
-			/*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+			final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
+			final /*@NonInvalid*/ boolean hasFinalResult_0 = inner.hasFinalResult();
+			/*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
 			if (hasFinalResult_0) {
 				symbol_0 = inner;
 			}
 			else {
-				final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedPackageLookupVisitor.this.parentEnv(element_0);
+				final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedPackageLookupVisitor.this.parentEnv(element_0);
 				symbol_0 = parentEnv_0;
 			}
 			return symbol_0;
@@ -116,16 +116,16 @@ public class ClassesUnqualifiedPackageLookupVisitor
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_1 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_1.getOwnedPackages();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_1.getOwnedPackages();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
-			final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
-			/*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+			final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
+			final /*@NonInvalid*/ boolean hasFinalResult_0 = inner.hasFinalResult();
+			/*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
 			if (hasFinalResult_0) {
 				symbol_0 = inner;
 			}
 			else {
-				final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedPackageLookupVisitor.this.parentEnv(element_1);
+				final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedPackageLookupVisitor.this.parentEnv(element_1);
 				symbol_0 = parentEnv_0;
 			}
 			return symbol_0;

@@ -63,9 +63,9 @@ public class TargetQualifiedBLookupVisitor
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A1 element_0 = (/*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A1)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<B> ownsB = element_0.getOwnsB();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<B> ownsB = element_0.getOwnsB();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownsB);
+			final /*@NonInvalid*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownsB);
 			return addElements;
 		}
 

@@ -83,12 +83,12 @@ public class TargetUnqualifiedA2LookupVisitor
 		@Override
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull TRoot element_0 = (/*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull TRoot)sourceAndArgumentValues[0];
-			final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = TargetUnqualifiedA2LookupVisitor.this.parentEnv(element_0);
+			final /*@NonInvalid*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = TargetUnqualifiedA2LookupVisitor.this.parentEnv(element_0);
 			if (parentEnv_0 == null) {
 				throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
 			}
 			@SuppressWarnings("null")
-			final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<A> ownedA = element_0.getOwnedA();
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<A> ownedA = element_0.getOwnedA();
 			@SuppressWarnings("null")
 			final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = parentEnv_0.addElements(ownedA);
 			return addElements;

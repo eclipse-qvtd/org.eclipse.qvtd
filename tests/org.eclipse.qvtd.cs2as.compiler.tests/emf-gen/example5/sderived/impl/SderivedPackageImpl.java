@@ -17,6 +17,7 @@ import example5.sbase.SbasePackage;
 import example5.sderived.SderivedFactory;
 import example5.sderived.SderivedPackage;
 
+import example5.tbase.TbasePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -101,6 +102,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 
 		// Initialize simple dependencies
 		SbasePackage.eINSTANCE.eClass();
+		TbasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSderivedPackage.createPackageContents();
