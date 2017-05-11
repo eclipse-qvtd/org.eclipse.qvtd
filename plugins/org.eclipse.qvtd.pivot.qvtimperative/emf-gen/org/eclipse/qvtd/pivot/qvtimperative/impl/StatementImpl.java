@@ -74,7 +74,7 @@ public abstract class StatementImpl extends NamedElementImpl implements Statemen
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
 		/*@NonInvalid*/ java.lang.@NonNull String s = QVTimperativeTables.STR_;
 		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
-		/*@Thrown*/ java.lang.@Nullable String iterate;
+		/*@NonInvalid*/ java.lang.@Nullable String iterate;
 		while (true) {
 			if (!ITERATOR_n.hasNext()) {
 				iterate = s;

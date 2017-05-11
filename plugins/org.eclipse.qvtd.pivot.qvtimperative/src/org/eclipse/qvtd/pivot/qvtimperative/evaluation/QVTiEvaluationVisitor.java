@@ -255,8 +255,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public Object visitAppendParameter(@NonNull AppendParameter object) {
 		CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
-		executor.replace(object, accumulator, false);
-		return true;
+		return executor.replace(object, accumulator, false);
 	}
 
 	@Override
@@ -313,8 +312,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		else {
 			connection = interval.createConnection(name, object.getTypeId(), object.isIsStrict());
 		}
-		executor.replace(object, connection, false);
-		return true;
+		return executor.replace(object, connection, false);
 	}
 
 	@Override
@@ -349,8 +347,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				}
 			}
 		}
-		executor.replace(asStatement, initValue, false);
-		return true;
+		return executor.replace(asStatement, initValue, false);
 	}
 
 	@Override
@@ -437,7 +434,9 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (iterators.size() > 0) {
 				LoopVariable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
-					executor.replace(iterator, object, false);
+					if (!executor.replace(iterator, object, false)) {
+						return false;
+					}
 					for (@NonNull MappingStatement mappingStatement : ClassUtil.nullFree(mappingLoop.getOwnedMappingStatements())) {
 						context.pushEvaluationEnvironment(mappingStatement, mappingLoop);
 						try {

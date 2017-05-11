@@ -129,7 +129,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_MappingCall_c_c_NotBothInstallAndInvoke = "MappingCall::NotBothInstallAndInvoke";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_MappingCall_c_c_UniqueCallBindings = "MappingCall::UniqueCallBindings";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_MappingParameterBinding_c_c_ParameterIsMappingParameter = "MappingParameterBinding::ParameterIsMappingParameter";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_LocalVariabelNamesAreUnique = "Mapping::LocalVariabelNamesAreUnique";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_LocalVariableNamesAreUnique = "Mapping::LocalVariableNamesAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_MappingParameterNamesAreUnique = "Mapping::MappingParameterNamesAreUnique";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_NameIsNotNull = "Mapping::NameIsNotNull";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_NewStatement_c_c_CompatibleTypeForValue = "NewStatement::CompatibleTypeForValue";

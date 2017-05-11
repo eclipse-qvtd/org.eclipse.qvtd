@@ -564,49 +564,42 @@ public class KeyImpl extends ElementImpl implements Key {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
-				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-				/*@Thrown*/ java.lang.@Nullable Boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
-						}
-						else {
-							throw (InvalidValueException)accumulator;
-						}
-						break;
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+			/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+			while (true) {
+				if (!ITERATOR__1.hasNext()) {
+					if (accumulator == ValueUtil.TRUE_VALUE) {
+						result = ValueUtil.TRUE_VALUE;
 					}
-					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (Property)ITERATOR__1.next();
-					/**
-					 * opposite <> null
-					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = _1.getOpposite();
-					final /*@NonInvalid*/ boolean ne = opposite != null;
-					//
-					if (ne == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
-						break;														// Stop immediately
+					else {
+						throw (InvalidValueException)accumulator;
 					}
-					else if (ne == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-						;															// Carry on
-					}
-					else {															// Impossible badly typed result
-						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-					}
+					break;
 				}
-				CAUGHT_result = result;
+				@SuppressWarnings("null")
+				/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (Property)ITERATOR__1.next();
+				/**
+				 * opposite <> null
+				 */
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = _1.getOpposite();
+				final /*@NonInvalid*/ boolean ne = opposite != null;
+				//
+				if (ne == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+					result = ValueUtil.FALSE_VALUE;
+					break;														// Stop immediately
+				}
+				else if (ne == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+					;															// Carry on
+				}
+				else {															// Impossible badly typed result
+					accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+				}
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_OppositePartsHaveOpposites, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_OppositePartsHaveOpposites, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

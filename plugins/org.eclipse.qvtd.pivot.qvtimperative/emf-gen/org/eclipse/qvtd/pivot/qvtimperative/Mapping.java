@@ -117,6 +117,6 @@ public interface Mapping extends Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateLocalVariabelNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateLocalVariableNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Mapping

@@ -158,12 +158,12 @@ public class QVTimperativeValidator extends EObjectValidator {
 	public static final int MAPPING__VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE = 10;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Local Variabel Names Are Unique' of 'Mapping'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Local Variable Names Are Unique' of 'Mapping'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_LOCAL_VARIABEL_NAMES_ARE_UNIQUE = 11;
+	public static final int MAPPING__VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Call Bindings' of 'Mapping Call'.
@@ -321,7 +321,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return QVTimperativePackage.eINSTANCE;
+	  return QVTimperativePackage.eINSTANCE;
 	}
 
 	/**
@@ -771,7 +771,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateNameIsNotNull(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateMappingParameterNamesAreUnique(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validateMapping_validateLocalVariabelNamesAreUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateLocalVariableNamesAreUnique(mapping, diagnostics, context);
 		return result;
 	}
 
@@ -796,13 +796,13 @@ public class QVTimperativeValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the validateLocalVariabelNamesAreUnique constraint of '<em>Mapping</em>'.
+	 * Validates the validateLocalVariableNamesAreUnique constraint of '<em>Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateMapping_validateLocalVariabelNamesAreUnique(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return mapping.validateLocalVariabelNamesAreUnique(diagnostics, context);
+	public boolean validateMapping_validateLocalVariableNamesAreUnique(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return mapping.validateLocalVariableNamesAreUnique(diagnostics, context);
 	}
 
 	/**

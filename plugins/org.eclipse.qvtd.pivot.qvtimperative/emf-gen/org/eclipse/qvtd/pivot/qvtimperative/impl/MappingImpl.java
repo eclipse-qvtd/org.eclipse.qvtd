@@ -282,12 +282,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public boolean validateLocalVariabelNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateLocalVariableNamesAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
-		 * inv LocalVariabelNamesAreUnique:
+		 * inv LocalVariableNamesAreUnique:
 		 *   let
-		 *     severity : Integer[1] = 'Mapping::LocalVariabelNamesAreUnique'.getSeverity()
+		 *     severity : Integer[1] = 'Mapping::LocalVariableNamesAreUnique'.getSeverity()
 		 *   in
 		 *     if severity <= 0
 		 *     then true
@@ -297,12 +297,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		 *           ownedStatements->selectByKind(VariableStatement))
 		 *         ->isUnique(name)
 		 *       in
-		 *         'Mapping::LocalVariabelNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *         'Mapping::LocalVariableNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_LocalVariabelNamesAreUnique);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_LocalVariableNamesAreUnique);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -348,7 +348,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			catch (Exception e) {
 				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_LocalVariabelNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_LocalVariableNamesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -489,8 +489,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return validateNameIsNotNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTimperativePackage.MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP:
 				return validateMappingParameterNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.MAPPING___VALIDATE_LOCAL_VARIABEL_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP:
-				return validateLocalVariabelNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTimperativePackage.MAPPING___VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP:
+				return validateLocalVariableNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

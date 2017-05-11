@@ -274,19 +274,27 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 					MappingParameter boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
 					Object boundValue = boundValues[index++];
 					if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
-						replace(boundVariable, boundValue, false);
+						if (!replace(boundVariable, boundValue, false)) {
+							return false;
+						}
 					}
 					else if (binding instanceof GuardParameterBinding) {
 						//						if (boundValue instanceof Connection) {
 						//							boundValue = ((Connection)boundValue).
 						//						}
-						replace(boundVariable, boundValue, ((GuardParameterBinding)binding).isIsCheck());
+						if (!replace(boundVariable, boundValue, ((GuardParameterBinding)binding).isIsCheck())) {
+							return false;
+						}
 					}
 					else if (binding instanceof LoopParameterBinding) {
-						replace(boundVariable, boundValue, ((LoopParameterBinding)binding).isIsCheck());
+						if (!replace(boundVariable, boundValue, ((LoopParameterBinding)binding).isIsCheck())) {
+							return false;
+						}
 					}
 					else if (binding instanceof SimpleParameterBinding) {
-						replace(boundVariable, boundValue, ((SimpleParameterBinding)binding).isIsCheck());
+						if (!replace(boundVariable, boundValue, ((SimpleParameterBinding)binding).isIsCheck())) {
+							return false;
+						}
 					}
 					else {
 						assert false;
@@ -320,7 +328,8 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			if (debugExceptions) {
 				AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
 			}
-			return false;
+			throw e;
+			//			return false;
 		}
 	}
 
@@ -362,7 +371,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			assert typedModel != null;
 			Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
 			// Add the realize variable binding to the environment
-			replace(newStatement, element, false);
+			if (!replace(newStatement, element, false)) {
+				return null;
+			}
 			modelsManager.addModelElement(typedModel, element);
 			return element;
 		}
@@ -459,10 +470,11 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	}
 
 	@Override
-	public void replace(@NonNull TypedElement asVariable, @Nullable Object value, boolean checkType) {
+	public boolean replace(@NonNull TypedElement asVariable, @Nullable Object value, boolean checkType) {
 		if (value == null) {
 			if (asVariable.isIsRequired()) {
-				throw new InvalidValueException("Attempted to assign null value to " + asVariable);
+				//				throw new InvalidValueException("Attempted to assign null value to " + asVariable);
+				return false;
 			}
 		}
 		else if (checkType) {
@@ -471,10 +483,12 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			//			Type valueType = valueType1;
 			Type variableType = ClassUtil.nonNullState(asVariable.getType());
 			if (!valueType.conformsTo(getStandardLibrary(), variableType)) {
-				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);
+				//				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);
+				return false;
 			}
 		}
 		super.replace(asVariable, value);
+		return true;
 	}
 
 	//	@Override

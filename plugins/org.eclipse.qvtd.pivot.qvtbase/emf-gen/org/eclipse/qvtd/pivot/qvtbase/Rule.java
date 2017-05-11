@@ -68,7 +68,7 @@ public interface Rule extends NamedElement {
 	 * @see #setIsAbstract(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_IsAbstract()
 	 * @model default="false" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!isDefault'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!isAbstract'"
 	 * @generated
 	 */
 	boolean isIsAbstract();

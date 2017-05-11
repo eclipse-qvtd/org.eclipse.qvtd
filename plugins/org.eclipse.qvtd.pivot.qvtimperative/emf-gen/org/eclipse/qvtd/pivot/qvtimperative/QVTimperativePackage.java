@@ -3542,13 +3542,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Validate Local Variabel Names Are Unique</em>' operation.
+	 * The operation id for the '<em>Validate Local Variable Names Are Unique</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING___VALIDATE_LOCAL_VARIABEL_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 2;
+	int MAPPING___VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Mapping</em>' class.
@@ -5116,14 +5116,14 @@ public interface QVTimperativePackage extends EPackage {
 	EOperation getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateLocalVariabelNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Local Variabel Names Are Unique</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateLocalVariableNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Local Variable Names Are Unique</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Local Variabel Names Are Unique</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateLocalVariabelNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Local Variable Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateLocalVariableNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map();
+	EOperation getMapping__ValidateLocalVariableNamesAreUnique__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall <em>Mapping Call</em>}'.
@@ -6092,12 +6092,12 @@ public interface QVTimperativePackage extends EPackage {
 		EOperation MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Local Variabel Names Are Unique</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Local Variable Names Are Unique</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation MAPPING___VALIDATE_LOCAL_VARIABEL_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map();
+		EOperation MAPPING___VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateLocalVariableNamesAreUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.

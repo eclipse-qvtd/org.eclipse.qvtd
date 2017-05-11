@@ -43,6 +43,6 @@ public interface QVTiExecutor extends ExecutorInternal
 	void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey);
 	@Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor);
 	void loadModel(@NonNull String inName, @NonNull URI inURI, @Nullable String contentType);
-	void replace(@NonNull TypedElement referredVariable, @Nullable Object value, boolean checkType);
+	boolean replace(@NonNull TypedElement referredVariable, @Nullable Object value, boolean checkType);
 	void saveModels();
 }
