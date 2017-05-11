@@ -34,7 +34,7 @@ inv NotBothCheckedAndEnforced: not (isChecked and isEnforced)
 context Mapping
 inv NameIsNotNull : name <> null
 inv MappingParameterNamesAreUnique: ownedMappingParameters->isUnique(name)
-inv LocalVariabelNamesAreUnique: ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)
+inv LocalVariableNamesAreUnique: ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)
 -- FIXME statment ordering
 
 context MappingCall

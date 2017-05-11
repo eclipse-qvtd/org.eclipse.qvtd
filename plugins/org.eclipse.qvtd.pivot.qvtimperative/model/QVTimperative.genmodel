@@ -105,9 +105,9 @@
         <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateMappingParameterNamesAreUnique/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateMappingParameterNamesAreUnique/context"/>
       </genOperations>
-      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/validateLocalVariabelNamesAreUnique">
-        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateLocalVariabelNamesAreUnique/diagnostics"/>
-        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateLocalVariabelNamesAreUnique/context"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/validateLocalVariableNamesAreUnique">
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateLocalVariableNamesAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateLocalVariableNamesAreUnique/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-MappingCall">

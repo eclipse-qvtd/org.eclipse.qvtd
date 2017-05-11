@@ -364,9 +364,9 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eOperations name="validateLocalVariabelNamesAreUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="validateLocalVariableNamesAreUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="LocalVariabelNamesAreUnique"/>
+        <details key="originalName" value="LocalVariableNamesAreUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)&#xA;"/>
