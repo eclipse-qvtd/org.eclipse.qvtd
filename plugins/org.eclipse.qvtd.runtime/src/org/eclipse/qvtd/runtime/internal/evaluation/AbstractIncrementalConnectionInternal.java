@@ -185,7 +185,7 @@ public abstract class AbstractIncrementalConnectionInternal extends AbstractConn
 		return new Iterable<T>()
 		{
 			@Override
-			public Iterator<@NonNull T> iterator() {
+			public @NonNull Iterator<@NonNull T> iterator() {
 				return new ValueIterator<T>();
 			}
 		};

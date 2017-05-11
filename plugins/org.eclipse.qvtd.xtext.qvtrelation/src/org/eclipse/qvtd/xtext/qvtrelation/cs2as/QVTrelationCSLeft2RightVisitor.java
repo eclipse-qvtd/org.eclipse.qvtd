@@ -95,7 +95,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		}
 
 		@Override
-		public Iterator<NamedElement> iterator() {
+		public @NonNull Iterator<NamedElement> iterator() {
 			return new SingletonIterator<NamedElement>(invocation);
 		}
 	}
