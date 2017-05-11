@@ -188,7 +188,7 @@ public interface TInPattern2RelationDomain extends EObject {
 	 * @return the value of the '<em>Where In Pattern2 Relation Domain guard</em>' reference.
 	 * @see #setWhere_InPattern2RelationDomain_guard(SInPattern2RelationDomain_guard)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard()
-	 * @model resolveProxies="false" transient="true"
+	 * @model
 	 * @generated
 	 */
 	SInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard();

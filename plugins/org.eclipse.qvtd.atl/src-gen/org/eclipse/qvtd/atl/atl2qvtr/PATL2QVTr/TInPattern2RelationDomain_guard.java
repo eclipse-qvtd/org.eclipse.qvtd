@@ -217,7 +217,7 @@ public interface TInPattern2RelationDomain_guard extends EObject {
 	 * @return the value of the '<em>When Ocl Expression2 OCL Expression</em>' reference.
 	 * @see #setWhen_OclExpression2OCLExpression(SOclExpression2OCLExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression()
-	 * @model resolveProxies="false" transient="true"
+	 * @model
 	 * @generated
 	 */
 	SOclExpression2OCLExpression getWhen_OclExpression2OCLExpression();

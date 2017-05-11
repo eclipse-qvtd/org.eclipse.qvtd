@@ -315,6 +315,23 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 	 * @generated
 	 */
 	public SInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard() {
+		if (where_InPattern2RelationDomain_guard != null && where_InPattern2RelationDomain_guard.eIsProxy()) {
+			InternalEObject oldWhere_InPattern2RelationDomain_guard = (InternalEObject)where_InPattern2RelationDomain_guard;
+			where_InPattern2RelationDomain_guard = (SInPattern2RelationDomain_guard)eResolveProxy(oldWhere_InPattern2RelationDomain_guard);
+			if (where_InPattern2RelationDomain_guard != oldWhere_InPattern2RelationDomain_guard) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD, oldWhere_InPattern2RelationDomain_guard, where_InPattern2RelationDomain_guard));
+			}
+		}
+		return where_InPattern2RelationDomain_guard;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SInPattern2RelationDomain_guard basicGetWhere_InPattern2RelationDomain_guard() {
 		return where_InPattern2RelationDomain_guard;
 	}
 
@@ -353,7 +370,8 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__TM_NAME:
 				return getTmName();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD:
-				return getWhere_InPattern2RelationDomain_guard();
+				if (resolve) return getWhere_InPattern2RelationDomain_guard();
+				return basicGetWhere_InPattern2RelationDomain_guard();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

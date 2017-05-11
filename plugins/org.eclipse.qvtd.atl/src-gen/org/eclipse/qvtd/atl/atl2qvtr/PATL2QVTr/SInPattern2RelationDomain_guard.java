@@ -12,6 +12,10 @@ package org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.m2m.atl.common.ATL.InPattern;
+
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>SIn Pattern2 Relation Domain guard</b></em>'.
@@ -39,13 +43,14 @@ public interface SInPattern2RelationDomain_guard extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>APattern</em>' reference.
-	 * @see #setAPattern(SInPattern2RelationDomain_guard)
+	 * @see #setAPattern(InPattern)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getSInPattern2RelationDomain_guard_APattern()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='SInPattern2RelationDomain_guard' unique='false' upper='*'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	SInPattern2RelationDomain_guard getAPattern();
+	InPattern getAPattern();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getAPattern <em>APattern</em>}' reference.
@@ -55,7 +60,7 @@ public interface SInPattern2RelationDomain_guard extends EObject {
 	 * @see #getAPattern()
 	 * @generated
 	 */
-	void setAPattern(SInPattern2RelationDomain_guard value);
+	void setAPattern(InPattern value);
 
 	/**
 	 * Returns the value of the '<em><b>RRule</b></em>' reference.
@@ -66,13 +71,14 @@ public interface SInPattern2RelationDomain_guard extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>RRule</em>' reference.
-	 * @see #setRRule(SInPattern2RelationDomain_guard)
+	 * @see #setRRule(Relation)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getSInPattern2RelationDomain_guard_RRule()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='SInPattern2RelationDomain_guard' unique='false' upper='*'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	SInPattern2RelationDomain_guard getRRule();
+	Relation getRRule();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getRRule <em>RRule</em>}' reference.
@@ -82,6 +88,6 @@ public interface SInPattern2RelationDomain_guard extends EObject {
 	 * @see #getRRule()
 	 * @generated
 	 */
-	void setRRule(SInPattern2RelationDomain_guard value);
+	void setRRule(Relation value);
 
 } // SInPattern2RelationDomain_guard

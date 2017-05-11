@@ -12,6 +12,10 @@ package org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.m2m.atl.common.OCL.OclExpression;
+
+import org.eclipse.ocl.pivot.OCLExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>SOcl Expression2 OCL Expression</b></em>'.
@@ -39,13 +43,14 @@ public interface SOclExpression2OCLExpression extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>AExpression</em>' reference.
-	 * @see #setAExpression(SOclExpression2OCLExpression)
+	 * @see #setAExpression(OclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getSOclExpression2OCLExpression_AExpression()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='SOclExpression2OCLExpression'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	SOclExpression2OCLExpression getAExpression();
+	OclExpression getAExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getAExpression <em>AExpression</em>}' reference.
@@ -55,7 +60,7 @@ public interface SOclExpression2OCLExpression extends EObject {
 	 * @see #getAExpression()
 	 * @generated
 	 */
-	void setAExpression(SOclExpression2OCLExpression value);
+	void setAExpression(OclExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>RExpression</b></em>' reference.
@@ -66,13 +71,14 @@ public interface SOclExpression2OCLExpression extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>RExpression</em>' reference.
-	 * @see #setRExpression(SOclExpression2OCLExpression)
+	 * @see #setRExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getSOclExpression2OCLExpression_RExpression()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='SOclExpression2OCLExpression'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	SOclExpression2OCLExpression getRExpression();
+	OCLExpression getRExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getRExpression <em>RExpression</em>}' reference.
@@ -82,6 +88,6 @@ public interface SOclExpression2OCLExpression extends EObject {
 	 * @see #getRExpression()
 	 * @generated
 	 */
-	void setRExpression(SOclExpression2OCLExpression value);
+	void setRExpression(OCLExpression value);
 
 } // SOclExpression2OCLExpression

@@ -18,6 +18,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.m2m.atl.common.OCL.OclExpression;
+
+import org.eclipse.ocl.pivot.OCLExpression;
+
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression;
 
@@ -44,7 +48,7 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 * @ordered
 	 */
-	protected SOclExpression2OCLExpression aExpression;
+	protected OclExpression aExpression;
 
 	/**
 	 * The cached value of the '{@link #getRExpression() <em>RExpression</em>}' reference.
@@ -54,7 +58,7 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 * @ordered
 	 */
-	protected SOclExpression2OCLExpression rExpression;
+	protected OCLExpression rExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,10 +84,10 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SOclExpression2OCLExpression getAExpression() {
+	public OclExpression getAExpression() {
 		if (aExpression != null && aExpression.eIsProxy()) {
 			InternalEObject oldAExpression = (InternalEObject)aExpression;
-			aExpression = (SOclExpression2OCLExpression)eResolveProxy(oldAExpression);
+			aExpression = (OclExpression)eResolveProxy(oldAExpression);
 			if (aExpression != oldAExpression) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION, oldAExpression, aExpression));
@@ -97,7 +101,7 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SOclExpression2OCLExpression basicGetAExpression() {
+	public OclExpression basicGetAExpression() {
 		return aExpression;
 	}
 
@@ -106,8 +110,8 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAExpression(SOclExpression2OCLExpression newAExpression) {
-		SOclExpression2OCLExpression oldAExpression = aExpression;
+	public void setAExpression(OclExpression newAExpression) {
+		OclExpression oldAExpression = aExpression;
 		aExpression = newAExpression;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION, oldAExpression, aExpression));
@@ -118,10 +122,10 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SOclExpression2OCLExpression getRExpression() {
+	public OCLExpression getRExpression() {
 		if (rExpression != null && rExpression.eIsProxy()) {
 			InternalEObject oldRExpression = (InternalEObject)rExpression;
-			rExpression = (SOclExpression2OCLExpression)eResolveProxy(oldRExpression);
+			rExpression = (OCLExpression)eResolveProxy(oldRExpression);
 			if (rExpression != oldRExpression) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION, oldRExpression, rExpression));
@@ -135,7 +139,7 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SOclExpression2OCLExpression basicGetRExpression() {
+	public OCLExpression basicGetRExpression() {
 		return rExpression;
 	}
 
@@ -144,8 +148,8 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRExpression(SOclExpression2OCLExpression newRExpression) {
-		SOclExpression2OCLExpression oldRExpression = rExpression;
+	public void setRExpression(OCLExpression newRExpression) {
+		OCLExpression oldRExpression = rExpression;
 		rExpression = newRExpression;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION, oldRExpression, rExpression));
@@ -178,10 +182,10 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION:
-				setAExpression((SOclExpression2OCLExpression)newValue);
+				setAExpression((OclExpression)newValue);
 				return;
 			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION:
-				setRExpression((SOclExpression2OCLExpression)newValue);
+				setRExpression((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,10 +200,10 @@ public class SOclExpression2OCLExpressionImpl extends MinimalEObjectImpl.Contain
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION:
-				setAExpression((SOclExpression2OCLExpression)null);
+				setAExpression((OclExpression)null);
 				return;
 			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION:
-				setRExpression((SOclExpression2OCLExpression)null);
+				setRExpression((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);

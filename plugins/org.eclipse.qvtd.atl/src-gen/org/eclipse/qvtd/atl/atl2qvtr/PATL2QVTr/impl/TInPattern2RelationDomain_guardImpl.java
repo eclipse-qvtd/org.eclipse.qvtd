@@ -374,6 +374,23 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * @generated
 	 */
 	public SOclExpression2OCLExpression getWhen_OclExpression2OCLExpression() {
+		if (when_OclExpression2OCLExpression != null && when_OclExpression2OCLExpression.eIsProxy()) {
+			InternalEObject oldWhen_OclExpression2OCLExpression = (InternalEObject)when_OclExpression2OCLExpression;
+			when_OclExpression2OCLExpression = (SOclExpression2OCLExpression)eResolveProxy(oldWhen_OclExpression2OCLExpression);
+			if (when_OclExpression2OCLExpression != oldWhen_OclExpression2OCLExpression) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION, oldWhen_OclExpression2OCLExpression, when_OclExpression2OCLExpression));
+			}
+		}
+		return when_OclExpression2OCLExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SOclExpression2OCLExpression basicGetWhen_OclExpression2OCLExpression() {
 		return when_OclExpression2OCLExpression;
 	}
 
@@ -416,7 +433,8 @@ public class TInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 				if (resolve) return getW();
 				return basicGetW();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD__WHEN_OCL_EXPRESSION2_OCL_EXPRESSION:
-				return getWhen_OclExpression2OCLExpression();
+				if (resolve) return getWhen_OclExpression2OCLExpression();
+				return basicGetWhen_OclExpression2OCLExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

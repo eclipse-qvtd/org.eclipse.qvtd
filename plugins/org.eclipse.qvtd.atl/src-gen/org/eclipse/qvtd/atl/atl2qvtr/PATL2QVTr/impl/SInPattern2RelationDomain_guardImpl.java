@@ -18,8 +18,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.m2m.atl.common.ATL.InPattern;
+
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard;
+
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +48,7 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * @generated
 	 * @ordered
 	 */
-	protected SInPattern2RelationDomain_guard aPattern;
+	protected InPattern aPattern;
 
 	/**
 	 * The cached value of the '{@link #getRRule() <em>RRule</em>}' reference.
@@ -54,7 +58,7 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * @generated
 	 * @ordered
 	 */
-	protected SInPattern2RelationDomain_guard rRule;
+	protected Relation rRule;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,10 +84,10 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SInPattern2RelationDomain_guard getAPattern() {
+	public InPattern getAPattern() {
 		if (aPattern != null && aPattern.eIsProxy()) {
 			InternalEObject oldAPattern = (InternalEObject)aPattern;
-			aPattern = (SInPattern2RelationDomain_guard)eResolveProxy(oldAPattern);
+			aPattern = (InPattern)eResolveProxy(oldAPattern);
 			if (aPattern != oldAPattern) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN, oldAPattern, aPattern));
@@ -97,7 +101,7 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SInPattern2RelationDomain_guard basicGetAPattern() {
+	public InPattern basicGetAPattern() {
 		return aPattern;
 	}
 
@@ -106,8 +110,8 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAPattern(SInPattern2RelationDomain_guard newAPattern) {
-		SInPattern2RelationDomain_guard oldAPattern = aPattern;
+	public void setAPattern(InPattern newAPattern) {
+		InPattern oldAPattern = aPattern;
 		aPattern = newAPattern;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN, oldAPattern, aPattern));
@@ -118,10 +122,10 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SInPattern2RelationDomain_guard getRRule() {
+	public Relation getRRule() {
 		if (rRule != null && rRule.eIsProxy()) {
 			InternalEObject oldRRule = (InternalEObject)rRule;
-			rRule = (SInPattern2RelationDomain_guard)eResolveProxy(oldRRule);
+			rRule = (Relation)eResolveProxy(oldRRule);
 			if (rRule != oldRRule) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE, oldRRule, rRule));
@@ -135,7 +139,7 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SInPattern2RelationDomain_guard basicGetRRule() {
+	public Relation basicGetRRule() {
 		return rRule;
 	}
 
@@ -144,8 +148,8 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRRule(SInPattern2RelationDomain_guard newRRule) {
-		SInPattern2RelationDomain_guard oldRRule = rRule;
+	public void setRRule(Relation newRRule) {
+		Relation oldRRule = rRule;
 		rRule = newRRule;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE, oldRRule, rRule));
@@ -178,10 +182,10 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN:
-				setAPattern((SInPattern2RelationDomain_guard)newValue);
+				setAPattern((InPattern)newValue);
 				return;
 			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE:
-				setRRule((SInPattern2RelationDomain_guard)newValue);
+				setRRule((Relation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,10 +200,10 @@ public class SInPattern2RelationDomain_guardImpl extends MinimalEObjectImpl.Cont
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN:
-				setAPattern((SInPattern2RelationDomain_guard)null);
+				setAPattern((InPattern)null);
 				return;
 			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE:
-				setRRule((SInPattern2RelationDomain_guard)null);
+				setRRule((Relation)null);
 				return;
 		}
 		super.eUnset(featureID);
