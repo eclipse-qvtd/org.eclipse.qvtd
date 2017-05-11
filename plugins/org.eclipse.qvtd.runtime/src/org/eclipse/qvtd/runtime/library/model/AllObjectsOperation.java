@@ -36,7 +36,8 @@ public class AllObjectsOperation extends AbstractUnaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Iterable<@NonNull ? extends Object> results = typedModelInstance.getAllObjects();
-		return new IterableAsSetValue<Object>((CollectionTypeId)returnTypeId, results);
+		@SuppressWarnings("null")
+		Iterable<@Nullable Object> results = (Iterable<@Nullable Object>) typedModelInstance.getAllObjects();
+		return new IterableAsSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

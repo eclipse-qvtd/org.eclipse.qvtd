@@ -40,6 +40,6 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
 		Iterable<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfKind(type);
-		return new IterableAsSetValue<Object>((CollectionTypeId)returnTypeId, Lists.newArrayList(results));
+		return new IterableAsSetValue((CollectionTypeId)returnTypeId, Lists.newArrayList(results));
 	}
 }

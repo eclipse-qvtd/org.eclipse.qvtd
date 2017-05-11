@@ -38,7 +38,8 @@ public class RootObjectsOperation extends AbstractUnaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Collection<@NonNull ? extends Object> results = typedModelInstance.getRootObjects();
+		@SuppressWarnings("null")
+		Collection<@Nullable ? extends Object> results = (Collection<@Nullable ? extends Object>)typedModelInstance.getRootObjects();
 		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

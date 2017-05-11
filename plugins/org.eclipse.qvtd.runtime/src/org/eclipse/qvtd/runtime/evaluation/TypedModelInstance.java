@@ -28,7 +28,7 @@ public interface TypedModelInstance
 	 * @deprecated
 	 */
 	@Deprecated
-	@NonNull Iterable<@NonNull ? extends Object> getAllObjects();
+	@NonNull Iterable<@NonNull Object> getAllObjects();
 
 	@Nullable String getName();
 

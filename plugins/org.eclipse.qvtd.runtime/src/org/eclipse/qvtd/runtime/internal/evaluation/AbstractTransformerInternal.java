@@ -446,14 +446,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	private static class UnenforcedSetAccumulator extends SetValueImpl implements SetValue.Accumulator
 	{
 		public UnenforcedSetAccumulator(@NonNull CollectionTypeId typeId) {
-			super(typeId, new ArrayList<Object>());
+			super(typeId, new ArrayList<>());
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public boolean add(@Nullable Object value) {
-			assert !((Collection<Object>)elements).contains(value);
-			return ((Collection<Object>)elements).add(value);
+			assert !elements.contains(value);
+			return elements.add(value);
 		}
 	}
 

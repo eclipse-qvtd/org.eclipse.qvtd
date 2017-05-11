@@ -37,18 +37,18 @@ import com.google.common.collect.Iterables;
  * This wrapper makes an Iterable appear to be a SetValue. It only has enough functionality to
  * allow a ModelObjectsOfKindOperation return to satisfy the SetValue return.
  */
-class IterableAsSetValue<T> extends ValueImpl implements SetValue
+class IterableAsSetValue extends ValueImpl implements SetValue
 {
 	protected final @NonNull CollectionTypeId typeId;
-	protected final @NonNull Iterable<@NonNull ? extends T> iterable;
+	protected final @NonNull Iterable<@Nullable Object> iterable;
 
-	public IterableAsSetValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<@NonNull ? extends T> iterable) {
+	public IterableAsSetValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<@Nullable Object> iterable) {
 		this.typeId = typeId;
 		this.iterable = iterable;
 	}
 
 	@Override
-	public @NonNull Collection<? extends Object> asCollection() {
+	public @NonNull Collection<@Nullable Object> asCollection() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -58,7 +58,7 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
-	public @Nullable List<?> asEcoreObject(@NonNull IdResolver idResolver, @Nullable Class<?> instanceClass) {
+	public @Nullable List<@Nullable Object> asEcoreObject(@NonNull IdResolver idResolver, @Nullable Class<?> instanceClass) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -85,7 +85,6 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	@Override
 	public boolean equals(Object obj) {
 		throw new UnsupportedOperationException();
-		//		return iterable.equals(obj);
 	}
 
 	@Override
@@ -119,7 +118,7 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
-	public @NonNull Collection<? extends Object> getElements() {
+	public @NonNull Collection<@Nullable Object> getElements() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -184,10 +183,9 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public @NonNull Iterator<@Nullable Object> iterator() {
-		return (@NonNull Iterator<@Nullable Object>) iterable.iterator();
+		return iterable.iterator();
 	}
 
 	@Override
@@ -196,7 +194,7 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
-	public @NonNull Iterable<? extends Object> iterable() {
+	public @NonNull Iterable<@Nullable Object> iterable() {
 		return iterable;
 	}
 
@@ -206,7 +204,7 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
-	public @Nullable Set<TupleValue> product(@NonNull CollectionValue c, @NonNull TupleTypeId tupleTypeId) {
+	public @Nullable Set<@NonNull TupleValue> product(@NonNull CollectionValue c, @NonNull TupleTypeId tupleTypeId) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -216,7 +214,7 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
-	public @NonNull OrderedCollectionValue sort(@NonNull Comparator<Object> comparator) {
+	public @NonNull OrderedCollectionValue sort(@NonNull Comparator<@Nullable Object> comparator) {
 		throw new UnsupportedOperationException();
 	}
 

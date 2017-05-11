@@ -2198,108 +2198,105 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGFunction(@NonNull CGFunction cgFunction) {
-		JavaLocalContext<@NonNull ?> localContext2 = globalContext.getLocalContext(cgFunction);
-		if (localContext2 != null) {
-			localContext = localContext2;
-			//			localContext.
-			try {
-				List<CGParameter> cgParameters = cgFunction.getParameters();
-				//
-				js.appendCommentWithOCL(null, cgFunction.getAst());
-				CGShadowExp cgShadowExp = useClassToCreateObject(cgFunction);
-				String functionName = getFunctionName(cgFunction);
-				if (cgShadowExp != null) {
-					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-					String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
-					//					Type
-					js.append("protected class ");
-					js.append(functionName);
-					js.append(" extends ");
-					js.appendClassReference(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
-					js.pushClassBody(functionName);
-					js.append("protected final ");
-					js.appendTypeDeclaration(cgFunction);
-					js.append(" " + instanceName + ";\n");
-					js.append("\n");
-					doFunctionConstructor(cgFunction, cgShadowExp, instanceName);
-					js.append("\n");
-					doFunctionGetInstance(cgFunction, instanceName);
-					js.append("\n");
-					doFunctionIsEqual(cgShadowExp, instanceName);
-					js.popClassBody(false);
-				}
-				else if (useCache(cgFunction)) {
-					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-					String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
-					CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
-					js.append("protected class ");
-					js.append(functionName);
-					js.append(" extends ");
-					js.appendClassReference(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
-					js.pushClassBody(functionName);
-					js.append("protected final ");
-					js.appendIsRequired(true);
-					js.append(" ");
-					js.appendClassReference(cgClass);
-					js.append(" self;\n");
-					for (@NonNull CGParameter cgParameter : ClassUtil.nullFree(cgFunction.getParameters())) {
-						js.append("protected ");
-						//						js.appendDeclaration(cgParameter);
-						//						js.appendTypeDeclaration(cgParameter);
-						boolean isPrimitive = js.isPrimitive(cgParameter);
-						boolean isRequired = !isPrimitive && !cgParameter.isAssertedNonNull() && cgParameter.isNonNull() && !(cgParameter instanceof CGUnboxExp)/*|| cgElement.isRequired()*/;	// FIXME Ugh!
-						js.appendIsCaught(cgParameter.isNonInvalid(), cgParameter.isCaught());
-						js.append(" ");
-						js.appendClassReference(isPrimitive ? null : isRequired ? true : null, cgParameter);
-						js.append(" ");
-						js.appendValueName(cgParameter);
-						js.append(";\n");
-					}
-					//		CGValuedElement body = getExpression(cgFunction.getBody());
-					//ElementId elementId = cgFunction.getTypeId().getElementId();
-
-					js.append("protected final ");
-					CGValuedElement cgBody = cgFunction.getBody();
-					js.appendTypeDeclaration(cgBody != null ? cgBody : cgFunction);
-					js.append(" " + instanceName + ";\n");
-					js.append("\n");
-					doFunctionConstructor(cgFunction, instanceName);
-					js.append("\n");
-					doFunctionGetInstance(cgFunction, instanceName);
-					js.append("\n");
-					doFunctionIsEqual(cgFunction, instanceName);
-					js.popClassBody(false);
-				}
-				else {
-					//
+		pushStaticFrameStack(cgFunction);
+		//			localContext.
+		try {
+			List<CGParameter> cgParameters = cgFunction.getParameters();
+			//
+			js.appendCommentWithOCL(null, cgFunction.getAst());
+			CGShadowExp cgShadowExp = useClassToCreateObject(cgFunction);
+			String functionName = getFunctionName(cgFunction);
+			if (cgShadowExp != null) {
+				JavaLocalContext<@NonNull ?> functionContext = globalContext.getLocalContext(cgFunction);
+				String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
+				//					Type
+				js.append("protected class ");
+				js.append(functionName);
+				js.append(" extends ");
+				js.appendClassReference(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
+				js.pushClassBody(functionName);
+				js.append("protected final ");
+				js.appendTypeDeclaration(cgFunction);
+				js.append(" " + instanceName + ";\n");
+				js.append("\n");
+				doFunctionConstructor(cgFunction, cgShadowExp, instanceName);
+				js.append("\n");
+				doFunctionGetInstance(cgFunction, instanceName);
+				js.append("\n");
+				doFunctionIsEqual(cgShadowExp, instanceName);
+				js.popClassBody(false);
+			}
+			else if (useCache(cgFunction)) {
+				JavaLocalContext<@NonNull ?> functionContext = globalContext.getLocalContext(cgFunction);
+				String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
+				CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
+				js.append("protected class ");
+				js.append(functionName);
+				js.append(" extends ");
+				js.appendClassReference(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
+				js.pushClassBody(functionName);
+				js.append("protected final ");
+				js.appendIsRequired(true);
+				js.append(" ");
+				js.appendClassReference(cgClass);
+				js.append(" self;\n");
+				for (@NonNull CGParameter cgParameter : ClassUtil.nullFree(cgFunction.getParameters())) {
 					js.append("protected ");
-					js.appendIsRequired(cgFunction.isRequired());
-					//		js.append(" ");
-					//		js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
+					//						js.appendDeclaration(cgParameter);
+					//						js.appendTypeDeclaration(cgParameter);
+					boolean isPrimitive = js.isPrimitive(cgParameter);
+					boolean isRequired = !isPrimitive && !cgParameter.isAssertedNonNull() && cgParameter.isNonNull() && !(cgParameter instanceof CGUnboxExp)/*|| cgElement.isRequired()*/;	// FIXME Ugh!
+					js.appendIsCaught(cgParameter.isNonInvalid(), cgParameter.isCaught());
 					js.append(" ");
-					ElementId elementId = cgFunction.getTypeId().getElementId();
-					if (elementId != null) {
-						TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
-						js.appendClassReference(javaTypeDescriptor);
-					}
+					js.appendClassReference(isPrimitive ? null : isRequired ? true : null, cgParameter);
 					js.append(" ");
-					js.append(cgFunction.getName());
-					js.append("(");
-					boolean isFirst = true;
-					for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-						if (!isFirst) {
-							js.append(", ");
-						}
-						js.appendDeclaration(cgParameter);
-						isFirst = false;
-					}
-					js.append(")");
-					return doFunctionBody(cgFunction);
+					js.appendValueName(cgParameter);
+					js.append(";\n");
 				}
+				//		CGValuedElement body = getExpression(cgFunction.getBody());
+				//ElementId elementId = cgFunction.getTypeId().getElementId();
+
+				js.append("protected final ");
+				CGValuedElement cgBody = cgFunction.getBody();
+				js.appendTypeDeclaration(cgBody != null ? cgBody : cgFunction);
+				js.append(" " + instanceName + ";\n");
+				js.append("\n");
+				doFunctionConstructor(cgFunction, instanceName);
+				js.append("\n");
+				doFunctionGetInstance(cgFunction, instanceName);
+				js.append("\n");
+				doFunctionIsEqual(cgFunction, instanceName);
+				js.popClassBody(false);
 			}
-			finally {
-				localContext = null;
+			else {
+				//
+				js.append("protected ");
+				js.appendIsRequired(cgFunction.isRequired());
+				//		js.append(" ");
+				//		js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
+				js.append(" ");
+				ElementId elementId = cgFunction.getTypeId().getElementId();
+				if (elementId != null) {
+					TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
+					js.appendClassReference(javaTypeDescriptor);
+				}
+				js.append(" ");
+				js.append(cgFunction.getName());
+				js.append("(");
+				boolean isFirst = true;
+				for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
+					if (!isFirst) {
+						js.append(", ");
+					}
+					js.appendDeclaration(cgParameter);
+					isFirst = false;
+				}
+				js.append(")");
+				return doFunctionBody(cgFunction);
 			}
+		}
+		finally {
+			popStaticFrameStack();
 		}
 		return true;
 	}
@@ -2359,7 +2356,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(")");
 		if (isIdentifiedInstance) {
 			js.append(")");
-			JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+			JavaLocalContext<@NonNull ?> functionContext = globalContext.getLocalContext(cgFunction);
 			String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
 			//			js.append(".getInstance()");
 			js.append(".");
@@ -2381,61 +2378,58 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
-		JavaLocalContext<@NonNull ?> localContext2 = globalContext.getLocalContext(cgMapping);
-		if (localContext2 != null) {
-			localContext = localContext2;
-			try {
-				List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
-				//
-				js.appendCommentWithOCL(null, cgMapping.getAst());
-				String mappingName = getMappingName(cgMapping);
-				if (useClass(cgMapping) /*&& (cgFreeVariables.size() > 0)*/) {
-					js.append("protected class ");
-					js.append(mappingName);
-					js.append(" extends ");
-					js.appendClassReference(isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
-					js.pushClassBody(mappingName);
-					boolean needsNewLine = doMappingFields(cgMapping);
-					if (needsNewLine) {
-						js.append("\n");
-					}
-					doMappingConstructor(cgMapping);
-					if (isIncremental) {
-						js.append("\n");
-						doMappingDestroy(cgMapping);
-					}
+		pushStaticFrameStack(cgMapping);
+		try {
+			List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
+			//
+			js.appendCommentWithOCL(null, cgMapping.getAst());
+			String mappingName = getMappingName(cgMapping);
+			if (useClass(cgMapping) /*&& (cgFreeVariables.size() > 0)*/) {
+				js.append("protected class ");
+				js.append(mappingName);
+				js.append(" extends ");
+				js.appendClassReference(isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
+				js.pushClassBody(mappingName);
+				boolean needsNewLine = doMappingFields(cgMapping);
+				if (needsNewLine) {
 					js.append("\n");
-					js.append("@Override\n");
-					js.append("public boolean execute() ");
-					doMappingBody(cgMapping, null);
-					if (isIncremental) {
-						js.append("\n");
-						doMappingGetBoundValue(cgMapping);
-						js.append("\n");
-						doMappingGetBoundValues(cgMapping);
-					}
-					js.append("\n");
-					doIsEqual(cgFreeVariables);
-					js.popClassBody(false);
 				}
-				else {
-					js.append("protected boolean " + mappingName + "(");
-					boolean isFirst = true;
-					for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
-						if (!isFirst) {
-							js.append(", ");
-						}
-						doMappingConnectionVariable(cgFreeVariable);
-						isFirst = false;
+				doMappingConstructor(cgMapping);
+				if (isIncremental) {
+					js.append("\n");
+					doMappingDestroy(cgMapping);
+				}
+				js.append("\n");
+				js.append("@Override\n");
+				js.append("public boolean execute() ");
+				doMappingBody(cgMapping, null);
+				if (isIncremental) {
+					js.append("\n");
+					doMappingGetBoundValue(cgMapping);
+					js.append("\n");
+					doMappingGetBoundValues(cgMapping);
+				}
+				js.append("\n");
+				doIsEqual(cgFreeVariables);
+				js.popClassBody(false);
+			}
+			else {
+				js.append("protected boolean " + mappingName + "(");
+				boolean isFirst = true;
+				for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+					if (!isFirst) {
+						js.append(", ");
 					}
-					js.append(") ");
+					doMappingConnectionVariable(cgFreeVariable);
+					isFirst = false;
+				}
+				js.append(") ");
 
-					doMappingBody(cgMapping, cgFreeVariables);
-				}
+				doMappingBody(cgMapping, cgFreeVariables);
 			}
-			finally {
-				localContext = null;
-			}
+		}
+		finally {
+			popStaticFrameStack();
 		}
 		return true;
 	}
