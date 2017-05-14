@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.atl.tests;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -25,7 +25,8 @@ public class ATLExampleTests extends TestCase
 	protected void doATLExampleTest_CG(@NonNull String testName) throws Exception {
 		ATLTestQVT myQVT = new ATLTestQVT(testName.toLowerCase());
 		try {
-			myQVT.createGeneratedExecutor(ATL2QVTr.class);
+			Class<?> txClass = Class.forName("org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr");		// FIXME Use direct reference once generation works redliably
+			myQVT.createGeneratedExecutor((Class<? extends Transformer>)txClass);
 			myQVT.loadInput("atl", testName + ".atl");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("qvtr", testName + "_CG.qvtras", testName + "_expected.qvtras");
