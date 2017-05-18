@@ -599,6 +599,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         name=UnrestrictedName?
 	 *         ownedInPathName=PathNameCS?
 	 *         (refines+=[Mapping|UnrestrictedName] refines+=[Mapping|UnrestrictedName]*)?
+	 *         overrides=[Mapping|UnrestrictedName]?
 	 *         ownedDomains+=NamedDomainCS*
 	 *         ownedMiddle=UnnamedDomainCS?
 	 *         ownedComposedMappings+=MappingCS*

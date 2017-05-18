@@ -137,7 +137,8 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getGroup_4(), "rule__MappingCS__Group_4__0");
 					put(grammarAccess.getMappingCSAccess().getGroup_5(), "rule__MappingCS__Group_5__0");
 					put(grammarAccess.getMappingCSAccess().getGroup_5_2(), "rule__MappingCS__Group_5_2__0");
-					put(grammarAccess.getMappingCSAccess().getGroup_8(), "rule__MappingCS__Group_8__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_6(), "rule__MappingCS__Group_6__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_9(), "rule__MappingCS__Group_9__0");
 					put(grammarAccess.getNamedDomainCSAccess().getGroup(), "rule__NamedDomainCS__Group__0");
 					put(grammarAccess.getQualifiedPackageCSAccess().getGroup(), "rule__QualifiedPackageCS__Group__0");
 					put(grammarAccess.getQualifiedPackageCSAccess().getGroup_3(), "rule__QualifiedPackageCS__Group_3__0");
@@ -348,9 +349,10 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_4_1(), "rule__MappingCS__OwnedInPathNameAssignment_4_1");
 					put(grammarAccess.getMappingCSAccess().getRefinesAssignment_5_1(), "rule__MappingCS__RefinesAssignment_5_1");
 					put(grammarAccess.getMappingCSAccess().getRefinesAssignment_5_2_1(), "rule__MappingCS__RefinesAssignment_5_2_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_7(), "rule__MappingCS__OwnedDomainsAssignment_7");
-					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_8_1(), "rule__MappingCS__OwnedMiddleAssignment_8_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsAssignment_9(), "rule__MappingCS__OwnedComposedMappingsAssignment_9");
+					put(grammarAccess.getMappingCSAccess().getOverridesAssignment_6_1(), "rule__MappingCS__OverridesAssignment_6_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_8(), "rule__MappingCS__OwnedDomainsAssignment_8");
+					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_9_1(), "rule__MappingCS__OwnedMiddleAssignment_9_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsAssignment_10(), "rule__MappingCS__OwnedComposedMappingsAssignment_10");
 					put(grammarAccess.getNamedDomainCSAccess().getIsCheckAssignment_0(), "rule__NamedDomainCS__IsCheckAssignment_0");
 					put(grammarAccess.getNamedDomainCSAccess().getIsEnforceAssignment_1(), "rule__NamedDomainCS__IsEnforceAssignment_1");
 					put(grammarAccess.getNamedDomainCSAccess().getDirectionAssignment_2(), "rule__NamedDomainCS__DirectionAssignment_2");

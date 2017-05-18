@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedMiddle <em>Owned Middle</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getRefines <em>Refines</em>}</li>
  * </ul>
  *
@@ -147,6 +148,32 @@ public interface MappingCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setOwnedMiddle(DomainCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Overrides</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Overrides</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Overrides</em>' reference.
+	 * @see #setOverrides(Mapping)
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getMappingCS_Overrides()
+	 * @model
+	 * @generated
+	 */
+	Mapping getOverrides();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverrides <em>Overrides</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Overrides</em>' reference.
+	 * @see #getOverrides()
+	 * @generated
+	 */
+	void setOverrides(Mapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Refines</b></em>' reference list.

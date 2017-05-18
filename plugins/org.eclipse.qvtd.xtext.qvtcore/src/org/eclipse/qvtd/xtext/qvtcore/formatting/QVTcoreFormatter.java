@@ -205,14 +205,14 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 		{
 			MappingCSElements a = f.getMappingCSAccess();
 			c.setLinewrap(2).before(a.getMapKeyword_2());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
-			setBraces(c, a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
-			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_7(), a.getOwnedDomainsAssignment_7());
-			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_7(), a.getGroup_8());
-			c.setLinewrap(1,2,2).before(a.getGroup_8());
-			c.setLinewrap(2).between(a.getGroup_8(), a.getOwnedComposedMappingsAssignment_9());
-			c.setLinewrap(1,2,2).before(a.getOwnedComposedMappingsAssignment_9());
-			c.setLinewrap(2).between(a.getOwnedComposedMappingsAssignment_9(), a.getOwnedComposedMappingsAssignment_9());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
+			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
+			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_8(), a.getOwnedDomainsAssignment_8());
+			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_8(), a.getGroup_9());
+			c.setLinewrap(1,2,2).before(a.getGroup_9());
+			c.setLinewrap(2).between(a.getGroup_9(), a.getOwnedComposedMappingsAssignment_10());
+			c.setLinewrap(1,2,2).before(a.getOwnedComposedMappingsAssignment_10());
+			c.setLinewrap(2).between(a.getOwnedComposedMappingsAssignment_10(), a.getOwnedComposedMappingsAssignment_10());
 		}
 		{
 			ScopeNameCSElements a = f.getScopeNameCSAccess();

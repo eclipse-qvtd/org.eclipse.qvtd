@@ -821,13 +821,22 @@ public interface QVTcoreCSPackage extends EPackage {
 	int MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Overrides</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__OVERRIDES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__REFINES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int MAPPING_CS__REFINES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -836,7 +845,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
+	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
@@ -2205,6 +2214,17 @@ public interface QVTcoreCSPackage extends EPackage {
 	EReference getMappingCS_OwnedMiddle();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverrides <em>Overrides</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Overrides</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverrides()
+	 * @see #getMappingCS()
+	 * @generated
+	 */
+	EReference getMappingCS_Overrides();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getRefines <em>Refines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2737,6 +2757,14 @@ public interface QVTcoreCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CS__OWNED_MIDDLE = eINSTANCE.getMappingCS_OwnedMiddle();
+
+		/**
+		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CS__OVERRIDES = eINSTANCE.getMappingCS_Overrides();
 
 		/**
 		 * The meta object literal for the '<em><b>Refines</b></em>' reference list feature.

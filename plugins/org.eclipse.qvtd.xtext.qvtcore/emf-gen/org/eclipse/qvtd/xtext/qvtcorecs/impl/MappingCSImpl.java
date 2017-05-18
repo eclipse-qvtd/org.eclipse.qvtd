@@ -44,6 +44,7 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedMiddle <em>Owned Middle</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  *
@@ -109,6 +110,16 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected DomainCS ownedMiddle;
+
+	/**
+	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverrides()
+	 * @generated
+	 * @ordered
+	 */
+	protected Mapping overrides;
 
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference list.
@@ -284,6 +295,46 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
+	public Mapping getOverrides() {
+		if (overrides != null && overrides.eIsProxy()) {
+			InternalEObject oldOverrides = (InternalEObject)overrides;
+			overrides = (Mapping)eResolveProxy(oldOverrides);
+			if (overrides != oldOverrides) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSPackage.MAPPING_CS__OVERRIDES, oldOverrides, overrides));
+			}
+		}
+		return overrides;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Mapping basicGetOverrides() {
+		return overrides;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOverrides(Mapping newOverrides) {
+		Mapping oldOverrides = overrides;
+		overrides = newOverrides;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__OVERRIDES, oldOverrides, overrides));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Mapping> getRefines() {
 		if (refines == null) {
 			refines = new EObjectResolvingEList<Mapping>(Mapping.class, this, QVTcoreCSPackage.MAPPING_CS__REFINES);
@@ -339,6 +390,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return getOwnedInPathName();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				return getOwnedMiddle();
+			case QVTcoreCSPackage.MAPPING_CS__OVERRIDES:
+				if (resolve) return getOverrides();
+				return basicGetOverrides();
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				return getRefines();
 		}
@@ -371,6 +425,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				setOwnedMiddle((DomainCS)newValue);
 				return;
+			case QVTcoreCSPackage.MAPPING_CS__OVERRIDES:
+				setOverrides((Mapping)newValue);
+				return;
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				getRefines().clear();
 				getRefines().addAll((Collection<? extends Mapping>)newValue);
@@ -402,6 +459,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				setOwnedMiddle((DomainCS)null);
 				return;
+			case QVTcoreCSPackage.MAPPING_CS__OVERRIDES:
+				setOverrides((Mapping)null);
+				return;
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				getRefines().clear();
 				return;
@@ -427,6 +487,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return ownedInPathName != null;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				return ownedMiddle != null;
+			case QVTcoreCSPackage.MAPPING_CS__OVERRIDES:
+				return overrides != null;
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				return refines != null && !refines.isEmpty();
 		}
