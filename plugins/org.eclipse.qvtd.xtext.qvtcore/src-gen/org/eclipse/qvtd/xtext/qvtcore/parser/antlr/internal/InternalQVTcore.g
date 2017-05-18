@@ -1062,7 +1062,7 @@ ruleMappingCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOverridesMappingCrossReference_6_1_0());
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();

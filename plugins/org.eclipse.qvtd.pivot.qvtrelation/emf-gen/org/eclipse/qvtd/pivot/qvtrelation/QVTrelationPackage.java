@@ -448,7 +448,16 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION__IS_ABSTRACT = QVTbasePackage.RULE__IS_ABSTRACT;
 
 	/**
-	 * The feature id for the '<em><b>Overrides</b></em>' reference.
+	 * The feature id for the '<em><b>Overridden</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION__OVERRIDDEN = QVTbasePackage.RULE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Overrides</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -464,15 +473,6 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION__TRANSFORMATION = QVTbasePackage.RULE__TRANSFORMATION;
-
-	/**
-	 * The feature id for the '<em><b>Overridden</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION__OVERRIDDEN = QVTbasePackage.RULE__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Is Top Level</b></em>' attribute.
@@ -565,22 +565,13 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
+	 * The operation id for the '<em>Validate Overriding Rule Overrides All Domains</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP;
+	int RELATION___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Validate Domains Are Relation Domains</em>' operation.

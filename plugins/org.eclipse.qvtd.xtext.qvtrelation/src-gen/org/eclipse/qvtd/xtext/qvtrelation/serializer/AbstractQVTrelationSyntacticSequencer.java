@@ -642,7 +642,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
-	 *     qualifiers+='!derived' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!derived' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='!id'
@@ -660,7 +659,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!id' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!id' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!id' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!id' (ambiguity) qualifiers+='!id'
@@ -678,7 +676,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!id' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!id' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!id' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!ordered' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!ordered' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='!id'
@@ -696,7 +693,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!readonly' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!readonly' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='!id'
@@ -714,7 +710,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!transient' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!transient' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='!id'
@@ -732,7 +727,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!unique' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!unique' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='!id'
@@ -750,7 +744,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!unsettable' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!unsettable' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='!id'
@@ -768,7 +761,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!volatile' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!volatile' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='!id'
@@ -786,7 +778,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='derived' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='derived' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='!id'
@@ -804,7 +795,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='id' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='id' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='id' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='id' (ambiguity) qualifiers+='!id'
@@ -822,7 +812,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='id' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='id' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='id' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='ordered' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='ordered' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='!id'
@@ -840,7 +829,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='readonly' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='readonly' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='!id'
@@ -858,7 +846,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='transient' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='transient' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='!id'
@@ -876,7 +863,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='unique' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='unique' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='!id'
@@ -894,7 +880,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='unsettable' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='unsettable' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='!id'
@@ -912,7 +897,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='volatile' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='volatile' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='volatile' (ambiguity) qualifiers+='!derived'
 	 *     qualifiers+='volatile' (ambiguity) qualifiers+='!id'
@@ -1668,11 +1652,8 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (('{' '}') | ';') (rule end)
 	 *     name=UnrestrictedName (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     name=UnrestrictedName (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     ownedSignature=TemplateSignatureCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_DataTypeCS___LeftCurlyBracketKeyword_5_0_SerializableKeyword_5_1_1_q_RightCurlyBracketKeyword_5_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1710,13 +1691,10 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) '{' ownedLiterals+=EnumerationLiteralCS
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (('{' '}') | ';') (rule end)
 	 *     name=UnrestrictedName (ambiguity) '{' ownedLiterals+=EnumerationLiteralCS
 	 *     name=UnrestrictedName (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     name=UnrestrictedName (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) '{' ownedLiterals+=EnumerationLiteralCS
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     ownedSignature=TemplateSignatureCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_EnumerationCS___LeftCurlyBracketKeyword_4_0_SerializableKeyword_4_1_1_q_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -2386,7 +2364,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *         (';' ('initial' UnrestrictedName? ':' ';')* 'derivation' UnrestrictedName? ':')*
 	 *         ownedDefaultExpressions+=SpecificationCS
 	 *     )
-	 *     qualifiers+='!composes' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!composes' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!composes' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!composes' (ambiguity) qualifiers+='!derived'
@@ -2406,7 +2383,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!composes' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!composes' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!composes' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!derived' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!derived' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='!derived'
@@ -2426,7 +2402,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!derived' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!ordered' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!ordered' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='!derived'
@@ -2446,7 +2421,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!ordered' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!readonly' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!readonly' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='!derived'
@@ -2466,7 +2440,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!readonly' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!resolve' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!resolve' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!resolve' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!resolve' (ambiguity) qualifiers+='!derived'
@@ -2486,7 +2459,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!resolve' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!resolve' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!resolve' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!transient' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!transient' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='!derived'
@@ -2506,7 +2478,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!transient' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!unique' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!unique' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='!derived'
@@ -2526,7 +2497,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!unique' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!unsettable' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!unsettable' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='!derived'
@@ -2546,7 +2516,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!unsettable' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='!volatile' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='!volatile' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='!derived'
@@ -2566,7 +2535,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='!volatile' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='composes' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='composes' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='composes' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='composes' (ambiguity) qualifiers+='!derived'
@@ -2586,7 +2554,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='composes' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='composes' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='composes' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='derived' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='derived' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='!derived'
@@ -2606,7 +2573,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='derived' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='ordered' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='ordered' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='!derived'
@@ -2626,7 +2592,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='ordered' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='readonly' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='readonly' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='!derived'
@@ -2646,7 +2611,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='readonly' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='resolve' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='resolve' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='resolve' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='resolve' (ambiguity) qualifiers+='!derived'
@@ -2666,7 +2630,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='resolve' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='resolve' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='resolve' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='transient' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='transient' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='!derived'
@@ -2686,7 +2649,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='transient' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='unique' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='unique' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='!derived'
@@ -2706,7 +2668,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='unique' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='unsettable' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='unsettable' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='!derived'
@@ -2726,7 +2687,6 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='unique'
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='unsettable'
 	 *     qualifiers+='unsettable' (ambiguity) qualifiers+='volatile'
-	 *     qualifiers+='volatile' (ambiguity) '}' (';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')) (rule end)
 	 *     qualifiers+='volatile' (ambiguity) '}' (('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';') (rule end)
 	 *     qualifiers+='volatile' (ambiguity) qualifiers+='!composes'
 	 *     qualifiers+='volatile' (ambiguity) qualifiers+='!derived'
@@ -3570,19 +3530,15 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) '{' ownedOperations+=OperationCS
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) '{' ownedProperties+=StructuralFeatureCS
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (('{' '}') | ';') (rule end)
 	 *     name=UnrestrictedName (ambiguity) '{' ownedOperations+=OperationCS
 	 *     name=UnrestrictedName (ambiguity) '{' ownedProperties+=StructuralFeatureCS
 	 *     name=UnrestrictedName (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     name=UnrestrictedName (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) '{' ownedOperations+=OperationCS
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) '{' ownedProperties+=StructuralFeatureCS
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     ownedSignature=TemplateSignatureCS (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSuperTypes+=TypedRefCS (ambiguity) '{' ownedOperations+=OperationCS
 	 *     ownedSuperTypes+=TypedRefCS (ambiguity) '{' ownedProperties+=StructuralFeatureCS
 	 *     ownedSuperTypes+=TypedRefCS (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     ownedSuperTypes+=TypedRefCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

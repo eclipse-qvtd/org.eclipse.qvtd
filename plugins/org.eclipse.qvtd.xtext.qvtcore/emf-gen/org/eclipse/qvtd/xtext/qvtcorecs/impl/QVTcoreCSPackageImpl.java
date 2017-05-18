@@ -453,7 +453,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedComposedMappings() {
+	public EReference getMappingCS_Overridden() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -463,7 +463,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedDomains() {
+	public EReference getMappingCS_OwnedComposedMappings() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -473,7 +473,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedInPathName() {
+	public EReference getMappingCS_OwnedDomains() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -483,7 +483,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedMiddle() {
+	public EReference getMappingCS_OwnedInPathName() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -493,7 +493,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_Overrides() {
+	public EReference getMappingCS_OwnedMiddle() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -833,11 +833,11 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 
 		mappingCSEClass = createEClass(MAPPING_CS);
 		createEAttribute(mappingCSEClass, MAPPING_CS__IS_ABSTRACT);
+		createEReference(mappingCSEClass, MAPPING_CS__OVERRIDDEN);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_COMPOSED_MAPPINGS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_DOMAINS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MIDDLE);
-		createEReference(mappingCSEClass, MAPPING_CS__OVERRIDES);
 		createEReference(mappingCSEClass, MAPPING_CS__REFINES);
 
 		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
@@ -960,11 +960,11 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingCS_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", "false", 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_Overridden(), theQVTcorePackage.getMapping(), null, "overridden", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedComposedMappings(), this.getMappingCS(), null, "ownedComposedMappings", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMappingCS_OwnedDomains(), this.getDomainCS(), null, "ownedDomains", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedMiddle(), this.getDomainCS(), null, "ownedMiddle", null, 1, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCS_Overrides(), theQVTcorePackage.getMapping(), null, "overrides", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_Refines(), theQVTcorePackage.getMapping(), null, "refines", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

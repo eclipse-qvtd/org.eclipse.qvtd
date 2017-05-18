@@ -33410,26 +33410,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Group_4__1__Impl"
-    // InternalQVTrelation.g:10531:1: rule__RelationCS__Group_4__1__Impl : ( ( rule__RelationCS__OverridesAssignment_4_1 ) ) ;
+    // InternalQVTrelation.g:10531:1: rule__RelationCS__Group_4__1__Impl : ( ( rule__RelationCS__OverriddenAssignment_4_1 ) ) ;
     public final void rule__RelationCS__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTrelation.g:10535:1: ( ( ( rule__RelationCS__OverridesAssignment_4_1 ) ) )
-            // InternalQVTrelation.g:10536:1: ( ( rule__RelationCS__OverridesAssignment_4_1 ) )
+            // InternalQVTrelation.g:10535:1: ( ( ( rule__RelationCS__OverriddenAssignment_4_1 ) ) )
+            // InternalQVTrelation.g:10536:1: ( ( rule__RelationCS__OverriddenAssignment_4_1 ) )
             {
-            // InternalQVTrelation.g:10536:1: ( ( rule__RelationCS__OverridesAssignment_4_1 ) )
-            // InternalQVTrelation.g:10537:1: ( rule__RelationCS__OverridesAssignment_4_1 )
+            // InternalQVTrelation.g:10536:1: ( ( rule__RelationCS__OverriddenAssignment_4_1 ) )
+            // InternalQVTrelation.g:10537:1: ( rule__RelationCS__OverriddenAssignment_4_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getOverridesAssignment_4_1());
+               before(grammarAccess.getRelationCSAccess().getOverriddenAssignment_4_1());
             }
-            // InternalQVTrelation.g:10538:1: ( rule__RelationCS__OverridesAssignment_4_1 )
-            // InternalQVTrelation.g:10538:2: rule__RelationCS__OverridesAssignment_4_1
+            // InternalQVTrelation.g:10538:1: ( rule__RelationCS__OverriddenAssignment_4_1 )
+            // InternalQVTrelation.g:10538:2: rule__RelationCS__OverriddenAssignment_4_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
-            rule__RelationCS__OverridesAssignment_4_1();
+            rule__RelationCS__OverriddenAssignment_4_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -33437,7 +33437,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getOverridesAssignment_4_1());
+               after(grammarAccess.getRelationCSAccess().getOverriddenAssignment_4_1());
             }
 
             }
@@ -79471,9 +79471,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__RelationCS__NameAssignment_3"
 
 
-    // $ANTLR start "rule__RelationCS__OverridesAssignment_4_1"
-    // InternalQVTrelation.g:27126:1: rule__RelationCS__OverridesAssignment_4_1 : ( ( ruleUnrestrictedName ) ) ;
-    public final void rule__RelationCS__OverridesAssignment_4_1() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__OverriddenAssignment_4_1"
+    // InternalQVTrelation.g:27126:1: rule__RelationCS__OverriddenAssignment_4_1 : ( ( ruleUnrestrictedName ) ) ;
+    public final void rule__RelationCS__OverriddenAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
@@ -79485,13 +79485,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:27132:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_4_1_0());
+               before(grammarAccess.getRelationCSAccess().getOverriddenRelationCrossReference_4_1_0());
             }
             // InternalQVTrelation.g:27133:1: ( ruleUnrestrictedName )
             // InternalQVTrelation.g:27134:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getOverridesRelationUnrestrictedNameParserRuleCall_4_1_0_1());
+               before(grammarAccess.getRelationCSAccess().getOverriddenRelationUnrestrictedNameParserRuleCall_4_1_0_1());
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleUnrestrictedName();
@@ -79499,13 +79499,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getOverridesRelationUnrestrictedNameParserRuleCall_4_1_0_1());
+               after(grammarAccess.getRelationCSAccess().getOverriddenRelationUnrestrictedNameParserRuleCall_4_1_0_1());
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_4_1_0());
+               after(grammarAccess.getRelationCSAccess().getOverriddenRelationCrossReference_4_1_0());
             }
 
             }
@@ -79525,7 +79525,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__OverridesAssignment_4_1"
+    // $ANTLR end "rule__RelationCS__OverriddenAssignment_4_1"
 
 
     // $ANTLR start "rule__RelationCS__OwnedVarDeclarationsAssignment_6"

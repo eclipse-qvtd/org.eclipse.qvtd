@@ -42,16 +42,16 @@
         eType="#//Domain" containment="true" eOpposite="#//Domain/rule"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Boolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="#//Rule"
-        eOpposite="#//Rule/overridden"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"
-        transient="true" resolveProxies="false" eOpposite="#//Transformation/rule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="overridden" ordered="false"
-        upperBound="-1" eType="#//Rule" eOpposite="#//Rule/overrides">
+        eType="#//Rule" eOpposite="#//Rule/overrides">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="overriden"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" upperBound="-1"
+        eType="#//Rule" eOpposite="#//Rule/overridden"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"
+        transient="true" resolveProxies="false" eOpposite="#//Transformation/rule"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
     <eOperations name="getFunction" lowerBound="1" eType="#//Function">

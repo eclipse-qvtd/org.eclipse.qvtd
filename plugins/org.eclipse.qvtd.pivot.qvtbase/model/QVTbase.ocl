@@ -27,16 +27,16 @@ inv DomainNameIsUnique:
 	domain->isUnique(name)
 
 inv NoOverridesCycle:
-	overrides->closure(overrides)->excludes(self)
+	overridden->closure(overridden)->excludes(self)
 
-inv OverridesRuleIsExtendedRule:
-	overrides <> null and transformation <> null implies
-	let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)
-	in extendedRules->includes(overrides)
+--inv OverridesRuleIsExtendedRule:
+--	overrides <> null and transformation <> null implies
+--	let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)
+--	in extendedRules->includes(overrides)
 
-inv OverridesRuleOverridesAllDomains:
-	overrides <> null implies
-	overrides.domain->forAll(od | self.domain.name->includes(od.name))
+inv OverridingRuleOverridesAllDomains:
+	overridden <> null implies
+	overridden.domain->forAll(od | self.domain.name->includes(od.name))
 
 context Transformation
 inv ContextTypeIsTransformation:

@@ -455,6 +455,10 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setOwnedMiddle(csDomain);
+		Rule asOverridden = asMapping.getOverridden();
+		if (asOverridden instanceof Mapping) {
+			csMapping.setOverridden((Mapping)asOverridden);
+		}
 		context.refreshList(csMapping.getOwnedComposedMappings(), context.visitDeclarations(MappingCS.class, asMapping.getLocal(), null));
 		PivotUtilInternal.refreshList(csMapping.getRefines(), asMapping.getSpecification());
 		return csMapping;

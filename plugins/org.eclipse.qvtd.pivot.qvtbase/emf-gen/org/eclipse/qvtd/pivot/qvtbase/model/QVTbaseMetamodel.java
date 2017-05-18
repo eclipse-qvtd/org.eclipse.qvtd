@@ -194,8 +194,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull CollectionType _Collection_TypedModel = createCollectionType(_Collection, _TypedModel);
 		private final @NonNull CollectionType _Collection_Variable = createCollectionType(_Collection, _Variable);
 		private final @NonNull CollectionType _OrderedCollection_Domain = createCollectionType(_OrderedCollection, _Domain);
+		private final @NonNull CollectionType _OrderedCollection_Rule = createCollectionType(_OrderedCollection, _Rule);
 		private final @NonNull CollectionType _OrderedCollection_TypedModel = createCollectionType(_OrderedCollection, _TypedModel);
 		private final @NonNull OrderedSetType _OrderedSet_Domain_NullFree = createOrderedSetType(_OrderedSet, _Domain);
+		private final @NonNull OrderedSetType _OrderedSet_Rule_NullFree = createOrderedSetType(_OrderedSet, _Rule);
 		private final @NonNull OrderedSetType _OrderedSet_TypedModel_NullFree = createOrderedSetType(_OrderedSet, _TypedModel);
 		private final @NonNull SetType _Set_Annotation_NullFree = createSetType(_Set, _Annotation);
 		private final @NonNull SetType _Set_Package_NullFree = createSetType(_Set, _Package);
@@ -304,6 +306,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _OrderedCollection_Domain);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain);
+			ownedClasses.add(type = _OrderedCollection_Rule);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Rule);
 			ownedClasses.add(type = _OrderedCollection_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel);
@@ -312,6 +317,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OrderedCollection_Domain);
 			superClasses.add(_UniqueCollection_Domain);
+			ownedClasses.add(type = _OrderedSet_Rule_NullFree);
+			type.setIsNullFree(true);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OrderedCollection_Rule);
+			superClasses.add(_UniqueCollection_Rule);
 			ownedClasses.add(type = _OrderedSet_TypedModel_NullFree);
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
@@ -401,8 +411,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Predicate_pattern = createProperty(QVTbasePackage.Literals.PREDICATE__PATTERN, _Pattern);
 		private final @NonNull Property pr_Rule_domain = createProperty(QVTbasePackage.Literals.RULE__DOMAIN, _OrderedSet_Domain_NullFree);
 		private final @NonNull Property pr_Rule_isAbstract = createProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, _Boolean);
-		private final @NonNull Property pr_Rule_overridden = createProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, _Set_Rule_NullFree);
-		private final @NonNull Property pr_Rule_overrides = createProperty(QVTbasePackage.Literals.RULE__OVERRIDES, _Rule);
+		private final @NonNull Property pr_Rule_overridden = createProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, _Rule);
+		private final @NonNull Property pr_Rule_overrides = createProperty(QVTbasePackage.Literals.RULE__OVERRIDES, _OrderedSet_Rule_NullFree);
 		private final @NonNull Property pr_Rule_transformation = createProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, _Transformation);
 		private final @NonNull Property pr_Transformation_extends = createProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, _Transformation);
 		private final @NonNull Property pr_Transformation_modelParameter = createProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, _OrderedSet_TypedModel_NullFree);
@@ -512,10 +522,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_Rule_isAbstract);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Rule_overridden);
+			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Rule_overrides);
 			ownedProperties.add(property = pr_Rule_overrides);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Rule_overridden);
 			ownedProperties.add(property = pr_Rule_transformation);
@@ -603,10 +613,14 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _Variable)));
 			_OrderedCollection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Domain)));
+			_OrderedCollection_Rule.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_OrderedCollection_T, _Rule)));
 			_OrderedCollection_TypedModel.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedCollection_T, _TypedModel)));
 			_OrderedSet_Domain_NullFree.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedSet_T, _Domain)));
+			_OrderedSet_Rule_NullFree.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_OrderedSet_T, _Rule)));
 			_OrderedSet_TypedModel_NullFree.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedSet_T, _TypedModel)));
 			_Set_Annotation_NullFree.getOwnedBindings().add(createTemplateBinding(

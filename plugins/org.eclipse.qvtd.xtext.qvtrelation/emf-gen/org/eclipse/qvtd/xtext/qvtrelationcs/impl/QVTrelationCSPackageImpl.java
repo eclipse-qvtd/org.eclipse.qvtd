@@ -244,7 +244,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTrelationCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -281,7 +281,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationCSPackage.eNS_URI, theQVTrelationCSPackage);
 		return theQVTrelationCSPackage;
@@ -783,7 +783,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationCS_Overrides() {
+	public EReference getRelationCS_Overridden() {
 		return (EReference)relationCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1102,7 +1102,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		relationCSEClass = createEClass(RELATION_CS);
 		createEAttribute(relationCSEClass, RELATION_CS__IS_ABSTRACT);
 		createEAttribute(relationCSEClass, RELATION_CS__IS_TOP);
-		createEReference(relationCSEClass, RELATION_CS__OVERRIDES);
+		createEReference(relationCSEClass, RELATION_CS__OVERRIDDEN);
 		createEReference(relationCSEClass, RELATION_CS__OWNED_VAR_DECLARATIONS);
 		createEReference(relationCSEClass, RELATION_CS__OWNED_DOMAINS);
 		createEReference(relationCSEClass, RELATION_CS__OWNED_WHEN);
@@ -1261,7 +1261,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEClass(relationCSEClass, RelationCS.class, "RelationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelationCS_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", "false", 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelationCS_IsTop(), ecorePackage.getEBoolean(), "isTop", "false", 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_Overrides(), theQVTrelationPackage.getRelation(), null, "overrides", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_Overridden(), theQVTrelationPackage.getRelation(), null, "overridden", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCS_OwnedVarDeclarations(), this.getVarDeclarationCS(), null, "ownedVarDeclarations", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCS_OwnedDomains(), this.getAbstractDomainCS(), null, "ownedDomains", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCS_OwnedWhen(), this.getPatternCS(), null, "ownedWhen", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

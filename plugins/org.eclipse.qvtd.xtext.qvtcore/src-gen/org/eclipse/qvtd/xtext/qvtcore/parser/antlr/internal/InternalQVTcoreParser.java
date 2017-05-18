@@ -3267,7 +3267,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOverridesMappingCrossReference_6_1_0());
+                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0());
 
                     }
                     pushFollow(FollowSets000.FOLLOW_28);

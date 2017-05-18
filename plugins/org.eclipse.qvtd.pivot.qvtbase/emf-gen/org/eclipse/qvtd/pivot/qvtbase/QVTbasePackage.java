@@ -1206,13 +1206,22 @@ public interface QVTbasePackage extends EPackage {
 	int RULE__IS_ABSTRACT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Overrides</b></em>' reference.
+	 * The feature id for the '<em><b>Overridden</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__OVERRIDES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int RULE__OVERRIDDEN = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Overrides</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__OVERRIDES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
@@ -1221,16 +1230,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__TRANSFORMATION = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Overridden</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__OVERRIDDEN = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int RULE__TRANSFORMATION = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Rule</em>' class.
@@ -1278,22 +1278,13 @@ public interface QVTbasePackage extends EPackage {
 	int RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
+	 * The operation id for the '<em>Validate Overriding Rule Overrides All Domains</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
+	int RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Rule</em>' class.
@@ -1302,7 +1293,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 4;
+	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -2054,10 +2045,10 @@ public interface QVTbasePackage extends EPackage {
 	EAttribute getRule_IsAbstract();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Overrides</em>'.
+	 * @return the meta object for the reference list '<em>Overrides</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides()
 	 * @see #getRule()
 	 * @generated
@@ -2076,10 +2067,10 @@ public interface QVTbasePackage extends EPackage {
 	EReference getRule_Transformation();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden <em>Overridden</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden <em>Overridden</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Overridden</em>'.
+	 * @return the meta object for the reference '<em>Overridden</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden()
 	 * @see #getRule()
 	 * @generated
@@ -2107,24 +2098,14 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getRule__ValidateNoOverridesCycle__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleIsExtendedRule(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overrides Rule Is Extended Rule</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridingRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overriding Rule Overrides All Domains</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleIsExtendedRule(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Overriding Rule Overrides All Domains</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridingRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overrides Rule Overrides All Domains</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map();
+	EOperation getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation <em>Transformation</em>}'.
@@ -2526,7 +2507,7 @@ public interface QVTbasePackage extends EPackage {
 		EAttribute RULE__IS_ABSTRACT = eINSTANCE.getRule_IsAbstract();
 
 		/**
-		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Overrides</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2542,7 +2523,7 @@ public interface QVTbasePackage extends EPackage {
 		EReference RULE__TRANSFORMATION = eINSTANCE.getRule_Transformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Overridden</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Overridden</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2566,20 +2547,12 @@ public interface QVTbasePackage extends EPackage {
 		EOperation RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateNoOverridesCycle__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Overrides Rule Is Extended Rule</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Overriding Rule Overrides All Domains</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Overrides Rule Overrides All Domains</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map();
+		EOperation RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.

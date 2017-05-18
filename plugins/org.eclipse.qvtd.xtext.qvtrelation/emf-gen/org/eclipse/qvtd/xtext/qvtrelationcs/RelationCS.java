@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhen <em>Owned When</em>}</li>
@@ -92,30 +92,30 @@ public interface RelationCS extends NamedElementCS {
 	void setIsTop(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Overrides</b></em>' reference.
+	 * Returns the value of the '<em><b>Overridden</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Overrides</em>' reference isn't clear,
+	 * If the meaning of the '<em>Overridden</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Overrides</em>' reference.
-	 * @see #setOverrides(Relation)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_Overrides()
+	 * @return the value of the '<em>Overridden</em>' reference.
+	 * @see #setOverridden(Relation)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_Overridden()
 	 * @model
 	 * @generated
 	 */
-	Relation getOverrides();
+	Relation getOverridden();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverridden <em>Overridden</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Overrides</em>' reference.
-	 * @see #getOverrides()
+	 * @param value the new value of the '<em>Overridden</em>' reference.
+	 * @see #getOverridden()
 	 * @generated
 	 */
-	void setOverrides(Relation value);
+	void setOverridden(Relation value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Var Declarations</b></em>' containment reference list.

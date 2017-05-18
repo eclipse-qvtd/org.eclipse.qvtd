@@ -644,9 +644,9 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefinesMappingUnrestrictedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cRefinesMappingCrossReference_5_2_1_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cOverridesKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Assignment cOverridesAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final CrossReference cOverridesMappingCrossReference_6_1_0 = (CrossReference)cOverridesAssignment_6_1.eContents().get(0);
-		private final RuleCall cOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1 = (RuleCall)cOverridesMappingCrossReference_6_1_0.eContents().get(1);
+		private final Assignment cOverriddenAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final CrossReference cOverriddenMappingCrossReference_6_1_0 = (CrossReference)cOverriddenAssignment_6_1.eContents().get(0);
+		private final RuleCall cOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1 = (RuleCall)cOverriddenMappingCrossReference_6_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		private final Assignment cOwnedDomainsAssignment_8 = (Assignment)cGroup.eContents().get(8);
 		private final RuleCall cOwnedDomainsNamedDomainCSParserRuleCall_8_0 = (RuleCall)cOwnedDomainsAssignment_8.eContents().get(0);
@@ -661,13 +661,13 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//MappingCS:
 		//	{MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
 		//	refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? ('overrides'
-		//	overrides=[qvtcore::Mapping|UnrestrictedName])? '{' ownedDomains+=NamedDomainCS* ('where'
+		//	overridden=[qvtcore::Mapping|UnrestrictedName])? '{' ownedDomains+=NamedDomainCS* ('where'
 		//	ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//{MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
 		//refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? ('overrides'
-		//overrides=[qvtcore::Mapping|UnrestrictedName])? '{' ownedDomains+=NamedDomainCS* ('where'
+		//overridden=[qvtcore::Mapping|UnrestrictedName])? '{' ownedDomains+=NamedDomainCS* ('where'
 		//ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}'
 		public Group getGroup() { return cGroup; }
 
@@ -731,20 +731,20 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getRefinesMappingUnrestrictedNameParserRuleCall_5_2_1_0_1() { return cRefinesMappingUnrestrictedNameParserRuleCall_5_2_1_0_1; }
 
-		//('overrides' overrides=[qvtcore::Mapping|UnrestrictedName])?
+		//('overrides' overridden=[qvtcore::Mapping|UnrestrictedName])?
 		public Group getGroup_6() { return cGroup_6; }
 
 		//'overrides'
 		public Keyword getOverridesKeyword_6_0() { return cOverridesKeyword_6_0; }
 
-		//overrides=[qvtcore::Mapping|UnrestrictedName]
-		public Assignment getOverridesAssignment_6_1() { return cOverridesAssignment_6_1; }
+		//overridden=[qvtcore::Mapping|UnrestrictedName]
+		public Assignment getOverriddenAssignment_6_1() { return cOverriddenAssignment_6_1; }
 
 		//[qvtcore::Mapping|UnrestrictedName]
-		public CrossReference getOverridesMappingCrossReference_6_1_0() { return cOverridesMappingCrossReference_6_1_0; }
+		public CrossReference getOverriddenMappingCrossReference_6_1_0() { return cOverriddenMappingCrossReference_6_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1() { return cOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1; }
+		public RuleCall getOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1() { return cOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1; }
 
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
@@ -1678,7 +1678,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//MappingCS:
 	//	{MappingCS} isAbstract?='abstract'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)? ('refines'
 	//	refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)? ('overrides'
-	//	overrides=[qvtcore::Mapping|UnrestrictedName])? '{' ownedDomains+=NamedDomainCS* ('where'
+	//	overridden=[qvtcore::Mapping|UnrestrictedName])? '{' ownedDomains+=NamedDomainCS* ('where'
 	//	ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
 	public MappingCSElements getMappingCSAccess() {
 		return pMappingCS;

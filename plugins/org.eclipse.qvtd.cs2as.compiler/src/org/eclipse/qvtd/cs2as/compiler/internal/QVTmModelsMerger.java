@@ -257,7 +257,7 @@ public class QVTmModelsMerger {
 		predicate.setConditionExpression(createOclIsKindOfOperationCall(envF, inputVar, refiningType));
 		mappingToRefactor.getGuardPattern().getPredicate().add(predicate);
 		// And set the refinement
-		refiningMapping.setOverrides(mappingToRefactor);
+		refiningMapping.setOverridden(mappingToRefactor);
 	}
 
 	private static Variable getInputVariable(Mapping mapping) {

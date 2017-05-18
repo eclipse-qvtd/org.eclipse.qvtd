@@ -148,7 +148,7 @@
         <details key="originalName" value="NoOverridesCycle"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;overrides->closure(overrides)->excludes(self)&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;overridden->closure(overridden)->excludes(self)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -158,27 +158,12 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eOperations name="validateOverridesRuleIsExtendedRule" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="validateOverridingRuleOverridesAllDomains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="OverridesRuleIsExtendedRule"/>
+        <details key="originalName" value="OverridingRuleOverridesAllDomains"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;overrides &lt;> null and transformation &lt;> null implies&#xA;&#x9;let extendedRules = transformation->closure(_extends)->excluding(transformation)?->collect(rule)&#xA;&#x9;in extendedRules->includes(overrides)&#xA;&#xA;"/>
-      </eAnnotations>
-      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
-      <eParameters name="context">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
-    <eOperations name="validateOverridesRuleOverridesAllDomains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="OverridesRuleOverridesAllDomains"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;overrides &lt;> null implies&#xA;&#x9;overrides.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;overridden &lt;> null implies&#xA;&#x9;overridden.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -194,14 +179,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Rule-isAbstract"
         name="isAbstract" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overridden"
+        name="overridden" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overrides"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overrides"
-        name="overrides" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overridden"/>
+        name="overrides" upperBound="-1" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overridden"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-transformation"
         name="transformation" eType="#T-qvtbase-Transformation" transient="true" resolveProxies="false"
         eOpposite="#F-qvtbase-Transformation-rule"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overridden"
-        name="overridden" ordered="false" upperBound="-1" eType="#T-qvtbase-Rule"
-        eOpposite="#F-qvtbase-Rule-overrides"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Transformation" name="Transformation"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">

@@ -8538,9 +8538,9 @@ rule__MappingCS__Group_6__1__Impl
     }
 :
 (
-{ before(grammarAccess.getMappingCSAccess().getOverridesAssignment_6_1()); }
-(rule__MappingCS__OverridesAssignment_6_1)
-{ after(grammarAccess.getMappingCSAccess().getOverridesAssignment_6_1()); }
+{ before(grammarAccess.getMappingCSAccess().getOverriddenAssignment_6_1()); }
+(rule__MappingCS__OverriddenAssignment_6_1)
+{ after(grammarAccess.getMappingCSAccess().getOverriddenAssignment_6_1()); }
 )
 
 ;
@@ -25350,18 +25350,18 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MappingCS__OverridesAssignment_6_1
+rule__MappingCS__OverriddenAssignment_6_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMappingCSAccess().getOverridesMappingCrossReference_6_1_0()); }
+{ before(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0()); }
 (
-{ before(grammarAccess.getMappingCSAccess().getOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1()); }
-	ruleUnrestrictedName{ after(grammarAccess.getMappingCSAccess().getOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1()); }
+{ before(grammarAccess.getMappingCSAccess().getOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1()); }
+	ruleUnrestrictedName{ after(grammarAccess.getMappingCSAccess().getOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1()); }
 )
-{ after(grammarAccess.getMappingCSAccess().getOverridesMappingCrossReference_6_1_0()); }
+{ after(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0()); }
 )
 
 ;

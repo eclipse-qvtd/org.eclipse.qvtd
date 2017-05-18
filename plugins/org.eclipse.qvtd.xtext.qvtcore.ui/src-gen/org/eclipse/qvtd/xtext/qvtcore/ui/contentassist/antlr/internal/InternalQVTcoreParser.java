@@ -27847,26 +27847,26 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingCS__Group_6__1__Impl"
-    // InternalQVTcore.g:8535:1: rule__MappingCS__Group_6__1__Impl : ( ( rule__MappingCS__OverridesAssignment_6_1 ) ) ;
+    // InternalQVTcore.g:8535:1: rule__MappingCS__Group_6__1__Impl : ( ( rule__MappingCS__OverriddenAssignment_6_1 ) ) ;
     public final void rule__MappingCS__Group_6__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
         try {
-            // InternalQVTcore.g:8539:1: ( ( ( rule__MappingCS__OverridesAssignment_6_1 ) ) )
-            // InternalQVTcore.g:8540:1: ( ( rule__MappingCS__OverridesAssignment_6_1 ) )
+            // InternalQVTcore.g:8539:1: ( ( ( rule__MappingCS__OverriddenAssignment_6_1 ) ) )
+            // InternalQVTcore.g:8540:1: ( ( rule__MappingCS__OverriddenAssignment_6_1 ) )
             {
-            // InternalQVTcore.g:8540:1: ( ( rule__MappingCS__OverridesAssignment_6_1 ) )
-            // InternalQVTcore.g:8541:1: ( rule__MappingCS__OverridesAssignment_6_1 )
+            // InternalQVTcore.g:8540:1: ( ( rule__MappingCS__OverriddenAssignment_6_1 ) )
+            // InternalQVTcore.g:8541:1: ( rule__MappingCS__OverriddenAssignment_6_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMappingCSAccess().getOverridesAssignment_6_1());
+               before(grammarAccess.getMappingCSAccess().getOverriddenAssignment_6_1());
             }
-            // InternalQVTcore.g:8542:1: ( rule__MappingCS__OverridesAssignment_6_1 )
-            // InternalQVTcore.g:8542:2: rule__MappingCS__OverridesAssignment_6_1
+            // InternalQVTcore.g:8542:1: ( rule__MappingCS__OverriddenAssignment_6_1 )
+            // InternalQVTcore.g:8542:2: rule__MappingCS__OverriddenAssignment_6_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
-            rule__MappingCS__OverridesAssignment_6_1();
+            rule__MappingCS__OverriddenAssignment_6_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27874,7 +27874,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMappingCSAccess().getOverridesAssignment_6_1());
+               after(grammarAccess.getMappingCSAccess().getOverriddenAssignment_6_1());
             }
 
             }
@@ -74524,9 +74524,9 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__MappingCS__RefinesAssignment_5_2_1"
 
 
-    // $ANTLR start "rule__MappingCS__OverridesAssignment_6_1"
-    // InternalQVTcore.g:25353:1: rule__MappingCS__OverridesAssignment_6_1 : ( ( ruleUnrestrictedName ) ) ;
-    public final void rule__MappingCS__OverridesAssignment_6_1() throws RecognitionException {
+    // $ANTLR start "rule__MappingCS__OverriddenAssignment_6_1"
+    // InternalQVTcore.g:25353:1: rule__MappingCS__OverriddenAssignment_6_1 : ( ( ruleUnrestrictedName ) ) ;
+    public final void rule__MappingCS__OverriddenAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
 
@@ -74538,13 +74538,13 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             // InternalQVTcore.g:25359:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMappingCSAccess().getOverridesMappingCrossReference_6_1_0());
+               before(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0());
             }
             // InternalQVTcore.g:25360:1: ( ruleUnrestrictedName )
             // InternalQVTcore.g:25361:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMappingCSAccess().getOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1());
+               before(grammarAccess.getMappingCSAccess().getOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1());
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleUnrestrictedName();
@@ -74552,13 +74552,13 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMappingCSAccess().getOverridesMappingUnrestrictedNameParserRuleCall_6_1_0_1());
+               after(grammarAccess.getMappingCSAccess().getOverriddenMappingUnrestrictedNameParserRuleCall_6_1_0_1());
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMappingCSAccess().getOverridesMappingCrossReference_6_1_0());
+               after(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0());
             }
 
             }
@@ -74578,7 +74578,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__MappingCS__OverridesAssignment_6_1"
+    // $ANTLR end "rule__MappingCS__OverriddenAssignment_6_1"
 
 
     // $ANTLR start "rule__MappingCS__OwnedDomainsAssignment_8"

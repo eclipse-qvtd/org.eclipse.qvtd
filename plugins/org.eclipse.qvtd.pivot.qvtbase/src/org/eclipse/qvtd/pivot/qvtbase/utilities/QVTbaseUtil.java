@@ -74,8 +74,8 @@ public class QVTbaseUtil extends PivotUtil
 			return ClassUtil.nullFree(asTransformation.getModelParameter());
 		}
 
-		public static @NonNull List<@NonNull Rule> getOverriddenList(@NonNull Rule asRule) {
-			return ClassUtil.nullFree(asRule.getOverridden());
+		public static @NonNull List<@NonNull Rule> getOverridesList(@NonNull Rule asRule) {
+			return ClassUtil.nullFree(asRule.getOverrides());
 		}
 
 		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {

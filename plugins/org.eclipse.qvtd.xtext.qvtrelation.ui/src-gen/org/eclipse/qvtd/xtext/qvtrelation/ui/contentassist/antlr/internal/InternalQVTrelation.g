@@ -10534,9 +10534,9 @@ rule__RelationCS__Group_4__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRelationCSAccess().getOverridesAssignment_4_1()); }
-(rule__RelationCS__OverridesAssignment_4_1)
-{ after(grammarAccess.getRelationCSAccess().getOverridesAssignment_4_1()); }
+{ before(grammarAccess.getRelationCSAccess().getOverriddenAssignment_4_1()); }
+(rule__RelationCS__OverriddenAssignment_4_1)
+{ after(grammarAccess.getRelationCSAccess().getOverriddenAssignment_4_1()); }
 )
 
 ;
@@ -27123,18 +27123,18 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RelationCS__OverridesAssignment_4_1
+rule__RelationCS__OverriddenAssignment_4_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_4_1_0()); }
+{ before(grammarAccess.getRelationCSAccess().getOverriddenRelationCrossReference_4_1_0()); }
 (
-{ before(grammarAccess.getRelationCSAccess().getOverridesRelationUnrestrictedNameParserRuleCall_4_1_0_1()); }
-	ruleUnrestrictedName{ after(grammarAccess.getRelationCSAccess().getOverridesRelationUnrestrictedNameParserRuleCall_4_1_0_1()); }
+{ before(grammarAccess.getRelationCSAccess().getOverriddenRelationUnrestrictedNameParserRuleCall_4_1_0_1()); }
+	ruleUnrestrictedName{ after(grammarAccess.getRelationCSAccess().getOverriddenRelationUnrestrictedNameParserRuleCall_4_1_0_1()); }
 )
-{ after(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_4_1_0()); }
+{ after(grammarAccess.getRelationCSAccess().getOverriddenRelationCrossReference_4_1_0()); }
 )
 
 ;

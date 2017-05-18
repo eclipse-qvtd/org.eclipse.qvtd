@@ -1800,7 +1800,7 @@ ruleRelationCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_4_1_0());
+	        newCompositeNode(grammarAccess.getRelationCSAccess().getOverriddenRelationCrossReference_4_1_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();

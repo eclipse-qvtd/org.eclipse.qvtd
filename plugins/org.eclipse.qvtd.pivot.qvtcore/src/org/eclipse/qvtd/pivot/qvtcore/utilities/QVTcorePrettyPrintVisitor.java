@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -137,6 +138,23 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 		context.appendName(pMapping);
 		context.append(" in ");
 		context.appendName(pMapping.getTransformation());
+		List<Mapping> asRefines = pMapping.getSpecification();
+		if (asRefines.size() > 0) {
+			context.append(" refines ");
+			boolean isFirst = true;
+			for (Mapping asRefine : asRefines) {
+				if (!isFirst) {
+					context.append(",");
+				}
+				context.appendName(asRefine);
+				isFirst = false;
+			}
+		}
+		Rule asOverridden = pMapping.getOverridden();
+		if (asOverridden != null) {
+			context.append(" overrides ");
+			context.appendName(asOverridden);
+		}
 		context.append(" {");
 		context.push("", "");
 		for (Domain pDomain : pMapping.getDomain()) {

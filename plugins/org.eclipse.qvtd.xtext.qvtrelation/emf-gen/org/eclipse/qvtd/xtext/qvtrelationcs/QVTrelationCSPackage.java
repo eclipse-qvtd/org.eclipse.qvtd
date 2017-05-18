@@ -2033,13 +2033,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int RELATION_CS__IS_TOP = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Overrides</b></em>' reference.
+	 * The feature id for the '<em><b>Overridden</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__OVERRIDES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int RELATION_CS__OVERRIDDEN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Var Declarations</b></em>' containment reference list.
@@ -2988,15 +2988,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EAttribute getRelationCS_IsTop();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverridden <em>Overridden</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Overrides</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides()
+	 * @return the meta object for the reference '<em>Overridden</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverridden()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EReference getRelationCS_Overrides();
+	EReference getRelationCS_Overridden();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}'.
@@ -3680,12 +3680,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EAttribute RELATION_CS__IS_TOP = eINSTANCE.getRelationCS_IsTop();
 
 		/**
-		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Overridden</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_CS__OVERRIDES = eINSTANCE.getRelationCS_Overrides();
+		EReference RELATION_CS__OVERRIDDEN = eINSTANCE.getRelationCS_Overridden();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Var Declarations</b></em>' containment reference list feature.

@@ -5087,7 +5087,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        newCompositeNode(grammarAccess.getRelationCSAccess().getOverridesRelationCrossReference_4_1_0());
+                      	        newCompositeNode(grammarAccess.getRelationCSAccess().getOverriddenRelationCrossReference_4_1_0());
 
                     }
                     pushFollow(FollowSets000.FOLLOW_13);

@@ -785,13 +785,22 @@ public interface QVTcoreCSPackage extends EPackage {
 	int MAPPING_CS__IS_ABSTRACT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__OVERRIDDEN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owned Composed Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_COMPOSED_MAPPINGS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CS__OWNED_COMPOSED_MAPPINGS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
@@ -800,7 +809,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
@@ -809,7 +818,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.
@@ -818,16 +827,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Overrides</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CS__OVERRIDES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference list.
@@ -2170,6 +2170,17 @@ public interface QVTcoreCSPackage extends EPackage {
 	EAttribute getMappingCS_IsAbstract();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverridden <em>Overridden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Overridden</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverridden()
+	 * @see #getMappingCS()
+	 * @generated
+	 */
+	EReference getMappingCS_Overridden();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedComposedMappings <em>Owned Composed Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2212,17 +2223,6 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCS_OwnedMiddle();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverrides <em>Overrides</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Overrides</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverrides()
-	 * @see #getMappingCS()
-	 * @generated
-	 */
-	EReference getMappingCS_Overrides();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getRefines <em>Refines</em>}'.
@@ -2727,6 +2727,14 @@ public interface QVTcoreCSPackage extends EPackage {
 		EAttribute MAPPING_CS__IS_ABSTRACT = eINSTANCE.getMappingCS_IsAbstract();
 
 		/**
+		 * The meta object literal for the '<em><b>Overridden</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CS__OVERRIDDEN = eINSTANCE.getMappingCS_Overridden();
+
+		/**
 		 * The meta object literal for the '<em><b>Owned Composed Mappings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2757,14 +2765,6 @@ public interface QVTcoreCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CS__OWNED_MIDDLE = eINSTANCE.getMappingCS_OwnedMiddle();
-
-		/**
-		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CS__OVERRIDES = eINSTANCE.getMappingCS_Overrides();
 
 		/**
 		 * The meta object literal for the '<em><b>Refines</b></em>' reference list feature.

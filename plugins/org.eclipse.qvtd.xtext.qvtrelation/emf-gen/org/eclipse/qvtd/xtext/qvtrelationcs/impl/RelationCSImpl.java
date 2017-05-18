@@ -41,7 +41,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsTop <em>Is Top</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOverrides <em>Overrides</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedWhen <em>Owned When</em>}</li>
@@ -92,14 +92,14 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	protected boolean isTop = IS_TOP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference.
+	 * The cached value of the '{@link #getOverridden() <em>Overridden</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOverrides()
+	 * @see #getOverridden()
 	 * @generated
 	 * @ordered
 	 */
-	protected Relation overrides;
+	protected Relation overridden;
 
 	/**
 	 * The cached value of the '{@link #getOwnedVarDeclarations() <em>Owned Var Declarations</em>}' containment reference list.
@@ -212,16 +212,16 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public Relation getOverrides() {
-		if (overrides != null && overrides.eIsProxy()) {
-			InternalEObject oldOverrides = (InternalEObject)overrides;
-			overrides = (Relation)eResolveProxy(oldOverrides);
-			if (overrides != oldOverrides) {
+	public Relation getOverridden() {
+		if (overridden != null && overridden.eIsProxy()) {
+			InternalEObject oldOverridden = (InternalEObject)overridden;
+			overridden = (Relation)eResolveProxy(oldOverridden);
+			if (overridden != oldOverridden) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.RELATION_CS__OVERRIDES, oldOverrides, overrides));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.RELATION_CS__OVERRIDDEN, oldOverridden, overridden));
 			}
 		}
-		return overrides;
+		return overridden;
 	}
 
 	/**
@@ -229,8 +229,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Relation basicGetOverrides() {
-		return overrides;
+	public Relation basicGetOverridden() {
+		return overridden;
 	}
 
 	/**
@@ -239,11 +239,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public void setOverrides(Relation newOverrides) {
-		Relation oldOverrides = overrides;
-		overrides = newOverrides;
+	public void setOverridden(Relation newOverridden) {
+		Relation oldOverridden = overridden;
+		overridden = newOverridden;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__OVERRIDES, oldOverrides, overrides));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__OVERRIDDEN, oldOverridden, overridden));
 	}
 
 	/**
@@ -404,9 +404,9 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 				return isIsAbstract();
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				return isIsTop();
-			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
-				if (resolve) return getOverrides();
-				return basicGetOverrides();
+			case QVTrelationCSPackage.RELATION_CS__OVERRIDDEN:
+				if (resolve) return getOverridden();
+				return basicGetOverridden();
 			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
 				return getOwnedVarDeclarations();
 			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:
@@ -434,8 +434,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				setIsTop((Boolean)newValue);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
-				setOverrides((Relation)newValue);
+			case QVTrelationCSPackage.RELATION_CS__OVERRIDDEN:
+				setOverridden((Relation)newValue);
 				return;
 			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
 				getOwnedVarDeclarations().clear();
@@ -469,8 +469,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
-				setOverrides((Relation)null);
+			case QVTrelationCSPackage.RELATION_CS__OVERRIDDEN:
+				setOverridden((Relation)null);
 				return;
 			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
 				getOwnedVarDeclarations().clear();
@@ -500,8 +500,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				return isTop != IS_TOP_EDEFAULT;
-			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
-				return overrides != null;
+			case QVTrelationCSPackage.RELATION_CS__OVERRIDDEN:
+				return overridden != null;
 			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
 				return ownedVarDeclarations != null && !ownedVarDeclarations.isEmpty();
 			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:

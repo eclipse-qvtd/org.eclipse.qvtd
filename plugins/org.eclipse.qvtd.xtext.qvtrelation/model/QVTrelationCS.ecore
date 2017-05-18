@@ -95,7 +95,7 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#T-qvtrelation-Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overridden" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#T-qvtrelation-Relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVarDeclarations" upperBound="-1"
         eType="#//VarDeclarationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDomains" upperBound="-1"

@@ -78,7 +78,7 @@
     <genClasses ecoreClass="QVTrelationCS.ecore#//RelationCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCS.ecore#//RelationCS/isAbstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCS.ecore#//RelationCS/isTop"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//RelationCS/overrides"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//RelationCS/overridden"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//RelationCS/ownedVarDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//RelationCS/ownedDomains"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//RelationCS/ownedWhen"/>

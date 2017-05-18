@@ -86,7 +86,7 @@ QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName
             (';' | '{' ownedExpression=ExpCS '}');
 
 RelationCS: isTop?='top'? isAbstract?='abstract'? 'relation' name=UnrestrictedName
-   			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
+   			 ('overrides' overridden=[qvtrelation::Relation|UnrestrictedName])?
                '{'
                ownedVarDeclarations+=VarDeclarationCS*
                (ownedDomains+=DomainCS | ownedDomains+=PrimitiveTypeDomainCS)+ 

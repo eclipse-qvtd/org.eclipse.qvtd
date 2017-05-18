@@ -589,8 +589,8 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *         ownedType=CollectionTypeCS
 	 *         (
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS)
-	 *             ownedMemberIdentifiers+=TemplateCS?
-	 *             (ownedMemberIdentifiers+=ElementTemplateCS? ownedMemberIdentifiers+=TemplateCS?)*
+	 *             ownedMemberIdentifiers+=ElementTemplateCS?
+	 *             (ownedMemberIdentifiers+=TemplateCS? ownedMemberIdentifiers+=ElementTemplateCS?)*
 	 *             ownedRestIdentifier=ElementTemplateCS
 	 *         )?
 	 *         ownedGuardExpression=ExpCS?
@@ -650,7 +650,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTrelationCSPackage.Literals.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1(), semanticObject.getPropertyId());
+		feeder.accept(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1(), semanticObject.eGet(QVTrelationCSPackage.Literals.DEFAULT_VALUE_CS__PROPERTY_ID, false));
 		feeder.accept(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0(), semanticObject.getOwnedInitExpression());
 		feeder.finish();
 	}
@@ -706,7 +706,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTrelationCSPackage.Literals.ELEMENT_TEMPLATE_CS__IDENTIFIER));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1(), semanticObject.getIdentifier());
+		feeder.accept(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1(), semanticObject.eGet(QVTrelationCSPackage.Literals.ELEMENT_TEMPLATE_CS__IDENTIFIER, false));
 		feeder.finish();
 	}
 
@@ -928,7 +928,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *         isTop?='top'?
 	 *         isAbstract?='abstract'?
 	 *         name=UnrestrictedName
-	 *         overrides=[Relation|UnrestrictedName]?
+	 *         overridden=[Relation|UnrestrictedName]?
 	 *         ownedVarDeclarations+=VarDeclarationCS*
 	 *         (ownedDomains+=DomainCS | ownedDomains+=PrimitiveTypeDomainCS)+
 	 *         ownedWhen=WhenCS?

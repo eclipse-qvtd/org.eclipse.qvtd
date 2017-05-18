@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
-import org.eclipse.ocl.pivot.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -46,7 +45,6 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -66,9 +64,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#isIsAbstract <em>Is Abstract</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
  * </ul>
  *
  * @generated
@@ -105,24 +103,24 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	protected boolean isAbstract = IS_ABSTRACT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOverrides()
-	 * @generated
-	 * @ordered
-	 */
-	protected Rule overrides;
-
-	/**
-	 * The cached value of the '{@link #getOverridden() <em>Overridden</em>}' reference list.
+	 * The cached value of the '{@link #getOverridden() <em>Overridden</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOverridden()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Rule> overridden;
+	protected Rule overridden;
+
+	/**
+	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverrides()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Rule> overrides;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,60 +183,11 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 */
 	@Override
-	public Rule getOverrides() {
-		if (overrides != null && overrides.eIsProxy()) {
-			InternalEObject oldOverrides = (InternalEObject)overrides;
-			overrides = (Rule)eResolveProxy(oldOverrides);
-			if (overrides != oldOverrides) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTbasePackage.RULE__OVERRIDES, oldOverrides, overrides));
-			}
+	public EList<Rule> getOverrides() {
+		if (overrides == null) {
+			overrides = new EObjectWithInverseResolvingEList<Rule>(Rule.class, this, QVTbasePackage.RULE__OVERRIDES, QVTbasePackage.RULE__OVERRIDDEN);
 		}
 		return overrides;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Rule basicGetOverrides() {
-		return overrides;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOverrides(Rule newOverrides, NotificationChain msgs) {
-		Rule oldOverrides = overrides;
-		overrides = newOverrides;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDES, oldOverrides, newOverrides);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOverrides(Rule newOverrides) {
-		if (newOverrides != overrides) {
-			NotificationChain msgs = null;
-			if (overrides != null)
-				msgs = ((InternalEObject)overrides).eInverseRemove(this, QVTbasePackage.RULE__OVERRIDDEN, Rule.class, msgs);
-			if (newOverrides != null)
-				msgs = ((InternalEObject)newOverrides).eInverseAdd(this, QVTbasePackage.RULE__OVERRIDDEN, Rule.class, msgs);
-			msgs = basicSetOverrides(newOverrides, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDES, newOverrides, newOverrides));
 	}
 
 	/**
@@ -290,11 +239,60 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 */
 	@Override
-	public EList<Rule> getOverridden() {
-		if (overridden == null) {
-			overridden = new EObjectWithInverseResolvingEList<Rule>(Rule.class, this, QVTbasePackage.RULE__OVERRIDDEN, QVTbasePackage.RULE__OVERRIDES);
+	public Rule getOverridden() {
+		if (overridden != null && overridden.eIsProxy()) {
+			InternalEObject oldOverridden = (InternalEObject)overridden;
+			overridden = (Rule)eResolveProxy(oldOverridden);
+			if (overridden != oldOverridden) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTbasePackage.RULE__OVERRIDDEN, oldOverridden, overridden));
+			}
 		}
 		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Rule basicGetOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOverridden(Rule newOverridden, NotificationChain msgs) {
+		Rule oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDDEN, oldOverridden, newOverridden);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOverridden(Rule newOverridden) {
+		if (newOverridden != overridden) {
+			NotificationChain msgs = null;
+			if (overridden != null)
+				msgs = ((InternalEObject)overridden).eInverseRemove(this, QVTbasePackage.RULE__OVERRIDES, Rule.class, msgs);
+			if (newOverridden != null)
+				msgs = ((InternalEObject)newOverridden).eInverseAdd(this, QVTbasePackage.RULE__OVERRIDES, Rule.class, msgs);
+			msgs = basicSetOverridden(newOverridden, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__OVERRIDDEN, newOverridden, newOverridden));
 	}
 
 	/**
@@ -381,7 +379,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *     then true
 		 *     else
 		 *       let
-		 *         result : Boolean[1] = overrides->closure(overrides)
+		 *         result : Boolean[1] = overridden->closure(overridden)
 		 *         ->excludes(self)
 		 *       in
 		 *         'Rule::NoOverridesCycle'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -399,8 +397,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overrides = this.getOverrides();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule, overrides);
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden = this.getOverridden();
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule, overridden);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Rule, QVTbaseTables.CLSSid_Rule);
@@ -409,16 +407,16 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				 */
 				final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
 					/**
-					 * overrides
+					 * overridden
 					 */
 					@Override
 					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object _1) {
 						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule symbol_0 = (Rule)_1;
 						if (symbol_0 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::overrides\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::overridden\'");
 						}
-						final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overrides_0 = symbol_0.getOverrides();
-						return overrides_0;
+						final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden_0 = symbol_0.getOverridden();
+						return overridden_0;
 					}
 				};
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Rule, BODY_closure_0, oclAsSet, ACC_closure_0);
@@ -441,140 +439,26 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 */
 	@Override
-	public boolean validateOverridesRuleIsExtendedRule(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+	public boolean validateOverridingRuleOverridesAllDomains(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
-		 * inv OverridesRuleIsExtendedRule:
+		 * inv OverridingRuleOverridesAllDomains:
 		 *   let
-		 *     severity : Integer[1] = 'Rule::OverridesRuleIsExtendedRule'.getSeverity()
+		 *     severity : Integer[1] = 'Rule::OverridingRuleOverridesAllDomains'.getSeverity()
 		 *   in
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let result : Boolean[?] = overrides <> null and transformation <> null implies
-		 *         let
-		 *           extendedRules : Bag(qvtbase::Rule) = transformation->closure(extends)
-		 *           ->excluding(transformation)
-		 *           ?->collect(rule)
-		 *         in extendedRules->includes(overrides)
-		 *       in
-		 *         'Rule::OverridesRuleIsExtendedRule'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_OverridesRuleIsExtendedRule);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_2;
-		if (le) {
-			symbol_2 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overrides_0 = this.getOverrides();
-				final /*@NonInvalid*/ boolean ne = overrides_0 != null;
-				/*@NonInvalid*/ boolean and;
-				if (ne) {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
-					final /*@NonInvalid*/ boolean ne_0 = transformation != null;
-					and = ne_0;
-				}
-				else {
-					and = ValueUtil.FALSE_VALUE;
-				}
-				/*@Thrown*/ boolean result;
-				if (and) {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation_1 = this.getTransformation();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Transformation, transformation_1);
-					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
-					final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Transformation, QVTbaseTables.CLSSid_Transformation);
-					/**
-					 * Implementation of the iterator body.
-					 */
-					final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
-						/**
-						 * extends
-						 */
-						@Override
-						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object _1) {
-							final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_0 = (Transformation)_1;
-							if (symbol_0 == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::extends\'");
-							}
-							final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_1 = symbol_0.getExtends();
-							return symbol_1;
-						}
-					};
-					final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Transformation, BODY_closure_0, oclAsSet, ACC_closure_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue excluding = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(closure, transformation_1);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue safe_null_sources = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(excluding, (Object)null);
-					/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTbaseTables.BAG_CLSSid_Rule);
-					@NonNull Iterator<Object> ITERATOR__1_0 = safe_null_sources.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue extendedRules;
-					while (true) {
-						if (!ITERATOR__1_0.hasNext()) {
-							extendedRules = accumulator;
-							break;
-						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation _1_0 = (Transformation)ITERATOR__1_0.next();
-						/**
-						 * rule
-						 */
-						final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = _1_0.getRule();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Rule, rule);
-						//
-						for (Object value : BOXED_rule.flatten().getElements()) {
-							accumulator.add(value);
-						}
-					}
-					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(extendedRules, overrides_0).booleanValue();
-					result = includes;
-				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
-				}
-				CAUGHT_result = result;
-			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridesRuleIsExtendedRule, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
-			symbol_2 = logDiagnostic;
-		}
-		return Boolean.TRUE == symbol_2;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean validateOverridesRuleOverridesAllDomains(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv OverridesRuleOverridesAllDomains:
-		 *   let
-		 *     severity : Integer[1] = 'Rule::OverridesRuleOverridesAllDomains'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = overrides <> null implies
-		 *         overrides.domain->forAll(od |
+		 *       let result : Boolean[?] = overridden <> null implies
+		 *         overridden.domain->forAll(od |
 		 *           self.domain.name->includes(od.name))
 		 *       in
-		 *         'Rule::OverridesRuleOverridesAllDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *         'Rule::OverridingRuleOverridesAllDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_OverridesRuleOverridesAllDomains);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_OverridingRuleOverridesAllDomains);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -583,15 +467,15 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overrides = this.getOverrides();
-				final /*@NonInvalid*/ boolean ne = overrides != null;
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden = this.getOverridden();
+				final /*@NonInvalid*/ boolean ne = overridden != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
-					if (overrides == null) {
+					if (overridden == null) {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
 					}
 					@SuppressWarnings("null")
-					final /*@Thrown*/ java.util.@NonNull List<Domain> domain = overrides.getDomain();
+					final /*@Thrown*/ java.util.@NonNull List<Domain> domain = overridden.getDomain();
 					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
 					/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 					@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
@@ -665,7 +549,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			catch (Exception e) {
 				CAUGHT_result = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridesRuleOverridesAllDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Rule_c_c_OverridingRuleOverridesAllDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
@@ -692,16 +576,16 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case QVTbasePackage.RULE__DOMAIN:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDomain()).basicAdd(otherEnd, msgs);
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				if (overridden != null)
+					msgs = ((InternalEObject)overridden).eInverseRemove(this, QVTbasePackage.RULE__OVERRIDES, Rule.class, msgs);
+				return basicSetOverridden((Rule)otherEnd, msgs);
 			case QVTbasePackage.RULE__OVERRIDES:
-				if (overrides != null)
-					msgs = ((InternalEObject)overrides).eInverseRemove(this, QVTbasePackage.RULE__OVERRIDDEN, Rule.class, msgs);
-				return basicSetOverrides((Rule)otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOverrides()).basicAdd(otherEnd, msgs);
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetTransformation((Transformation)otherEnd, msgs);
-			case QVTbasePackage.RULE__OVERRIDDEN:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOverridden()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -716,12 +600,12 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case QVTbasePackage.RULE__DOMAIN:
 				return ((InternalEList<?>)getDomain()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				return basicSetOverridden(null, msgs);
 			case QVTbasePackage.RULE__OVERRIDES:
-				return basicSetOverrides(null, msgs);
+				return ((InternalEList<?>)getOverrides()).basicRemove(otherEnd, msgs);
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				return basicSetTransformation(null, msgs);
-			case QVTbasePackage.RULE__OVERRIDDEN:
-				return ((InternalEList<?>)getOverridden()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -752,13 +636,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return getDomain();
 			case QVTbasePackage.RULE__IS_ABSTRACT:
 				return isIsAbstract();
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				if (resolve) return getOverridden();
+				return basicGetOverridden();
 			case QVTbasePackage.RULE__OVERRIDES:
-				if (resolve) return getOverrides();
-				return basicGetOverrides();
+				return getOverrides();
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				return getTransformation();
-			case QVTbasePackage.RULE__OVERRIDDEN:
-				return getOverridden();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -779,15 +663,15 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				setOverridden((Rule)newValue);
+				return;
 			case QVTbasePackage.RULE__OVERRIDES:
-				setOverrides((Rule)newValue);
+				getOverrides().clear();
+				getOverrides().addAll((Collection<? extends Rule>)newValue);
 				return;
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				setTransformation((Transformation)newValue);
-				return;
-			case QVTbasePackage.RULE__OVERRIDDEN:
-				getOverridden().clear();
-				getOverridden().addAll((Collection<? extends Rule>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -807,14 +691,14 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				setOverridden((Rule)null);
+				return;
 			case QVTbasePackage.RULE__OVERRIDES:
-				setOverrides((Rule)null);
+				getOverrides().clear();
 				return;
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				setTransformation((Transformation)null);
-				return;
-			case QVTbasePackage.RULE__OVERRIDDEN:
-				getOverridden().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -832,12 +716,12 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return domain != null && !domain.isEmpty();
 			case QVTbasePackage.RULE__IS_ABSTRACT:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
+			case QVTbasePackage.RULE__OVERRIDDEN:
+				return overridden != null;
 			case QVTbasePackage.RULE__OVERRIDES:
-				return overrides != null;
+				return overrides != null && !overrides.isEmpty();
 			case QVTbasePackage.RULE__TRANSFORMATION:
 				return getTransformation() != null;
-			case QVTbasePackage.RULE__OVERRIDDEN:
-				return overridden != null && !overridden.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -855,10 +739,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return validateDomainNameIsUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTbasePackage.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP:
 				return validateNoOverridesCycle((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP:
-				return validateOverridesRuleIsExtendedRule((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP:
-				return validateOverridesRuleOverridesAllDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTbasePackage.RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP:
+				return validateOverridingRuleOverridesAllDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

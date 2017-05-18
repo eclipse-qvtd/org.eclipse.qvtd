@@ -349,7 +349,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_4_1(), "rule__MappingCS__OwnedInPathNameAssignment_4_1");
 					put(grammarAccess.getMappingCSAccess().getRefinesAssignment_5_1(), "rule__MappingCS__RefinesAssignment_5_1");
 					put(grammarAccess.getMappingCSAccess().getRefinesAssignment_5_2_1(), "rule__MappingCS__RefinesAssignment_5_2_1");
-					put(grammarAccess.getMappingCSAccess().getOverridesAssignment_6_1(), "rule__MappingCS__OverridesAssignment_6_1");
+					put(grammarAccess.getMappingCSAccess().getOverriddenAssignment_6_1(), "rule__MappingCS__OverriddenAssignment_6_1");
 					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_8(), "rule__MappingCS__OwnedDomainsAssignment_8");
 					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_9_1(), "rule__MappingCS__OwnedMiddleAssignment_9_1");
 					put(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsAssignment_10(), "rule__MappingCS__OwnedComposedMappingsAssignment_10");
