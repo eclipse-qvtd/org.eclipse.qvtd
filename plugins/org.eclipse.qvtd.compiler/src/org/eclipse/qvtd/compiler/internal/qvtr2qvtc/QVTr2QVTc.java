@@ -477,8 +477,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 * Create the name Mapping for a cTransformation.
 	 */
 	/*public*/ @NonNull Mapping createMapping(@NonNull Relation relation, @NonNull String name) {
-		RelationalTransformation rt = (RelationalTransformation) relation.getTransformation();
-		assert rt != null;
+		RelationalTransformation rt = QVTrelationUtil.getTransformation(relation);
 		@NonNull Transformation cTransformation = getCoreTransformation(rt);
 		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(cTransformation);
 		if (name2mapping == null) {
@@ -486,15 +485,13 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			transformation2name2mapping.put(cTransformation, name2mapping);
 		}
 		Mapping coreMapping = name2mapping.get(name);
-		assert (coreMapping == null);// {
+		assert (coreMapping == null);
 		coreMapping = helper.createMapping(name);
 		putGlobalTrace(coreMapping, relation);
 		coreMapping.setTransformation(cTransformation);
 		name2mapping.put(name, coreMapping);
-		//		}
 		return coreMapping;
 	}
-
 
 	public @NonNull RealizedVariable createRealizedVariable(@NonNull TypedElement typedElement) {
 		return createRealizedVariable(QVTrelationUtil.getName(typedElement), QVTrelationUtil.getType(typedElement));

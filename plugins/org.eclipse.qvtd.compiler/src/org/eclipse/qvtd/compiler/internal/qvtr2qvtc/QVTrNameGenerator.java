@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -52,6 +53,13 @@ public class QVTrNameGenerator
 
 	public @NonNull String createKeyedVariableName(@NonNull Variable identifiedVariable) {
 		return QVTrelationUtil.getName(identifiedVariable) + "_key";
+	}
+
+	public @NonNull String createMappingName(@NonNull RelationDomain rDomain) {
+		Relation rRelation = QVTrelationUtil.getContainingRelation(rDomain);
+		String rRelationName = PivotUtil.getName(rRelation);
+		String rEnforcedDomainName = PivotUtil.getName(rDomain);
+		return rRelationName + '_' + rEnforcedDomainName;
 	}
 
 	public @NonNull String createSignatureClassName(org.eclipse.ocl.pivot.@NonNull Class signatureClass) {

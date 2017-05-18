@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -165,8 +164,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 	public void analyze() throws CompilerChainException {
 		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 			if (rDomain.isIsEnforceable()) {
-				String rEnforcedDomainName = PivotUtil.getName(rDomain);
-				String coreMappingName = rRelationName + '_' + rEnforcedDomainName;
+				String coreMappingName = qvtr2qvtc.getNameGenerator().createMappingName(rDomain);
 				addTopRelationDomain2coreMapping(new TopEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 			}
 		}
