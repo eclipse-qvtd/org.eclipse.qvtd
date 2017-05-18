@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -175,6 +176,15 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		for (@NonNull AbstractEnforceableRelationDomain2CoreMapping enforceableRelationDomain2coreMapping : topTypedModel2relationDomain2coreMapping.values()) {
 			enforceableRelationDomain2coreMapping.synthesize();
 			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
+			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
+			if (rOverriddenRelation != null) {
+				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
+				Mapping coreOverridingMapping = enforceableRelationDomain2coreMapping.getCoreMapping();
+				AbstractQVTr2QVTcRelations overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
+				AbstractEnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getTopRelationDomain2CoreMapping(rEnforcedTypedModel);
+				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
+				coreOverridingMapping.setOverridden(coreOverriddenMapping);
+			}
 		}
 	}
 }

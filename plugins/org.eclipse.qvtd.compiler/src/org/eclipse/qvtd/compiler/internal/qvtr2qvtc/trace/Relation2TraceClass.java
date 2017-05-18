@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 
 /**
- * A Relation2TraceClass represents the mapping between a Relation or RelationCallExp and a TraceClass/Mapping
+ * A Relation2TraceClass represents the mapping between a Relation and a TraceClass/Mapping
  */
 interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
 {

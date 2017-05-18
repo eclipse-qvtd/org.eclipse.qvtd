@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 /**
  * VariableDeclaration2TraceProperty accumulates the requirements on the trace property for a pattern variable.
  *
- * Its relation TypedModel may be initially null (unknown) and set non-null once encounterted as a template binding.
+ * Its relation TypedModel may be initially null (unknown) and set non-null once encountered as a template binding.
  *
  * Its unitOpposite may evolve to true if any mechanism for unit usage is encountered.
  */

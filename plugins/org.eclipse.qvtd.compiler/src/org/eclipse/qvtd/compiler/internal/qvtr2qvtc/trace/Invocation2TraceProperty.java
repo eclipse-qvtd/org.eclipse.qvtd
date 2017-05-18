@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 class Invocation2TraceProperty extends Element2TraceProperty
 {
 	/**
-	 * The invocation whose usa is persisted by the signature property.
+	 * The invocation whose use is persisted by the signature property.
 	 */
 	//		final @NonNull RelationCallExp invocation;
 

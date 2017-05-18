@@ -101,8 +101,8 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return null;
 	}
 
-	public static @Nullable Relation basicGetOverrides(@NonNull Relation relation) {
-		return (Relation) relation.getOverrides();
+	public static @Nullable Relation basicGetOverridden(@NonNull Relation relation) {
+		return (Relation) relation.getOverridden();
 	}
 
 	public static @NonNull Variable getBindsTo(@NonNull TemplateExp rTemplateExp) {

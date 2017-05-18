@@ -1261,7 +1261,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * @throws CompilerChainException
 		 */
 		protected void synthesize() throws CompilerChainException {
-			Relation rOverride = QVTrelationUtil.basicGetOverrides(rRelation);
+			Relation rOverride = QVTrelationUtil.basicGetOverridden(rRelation);
 			if (rOverride != null) {
 				AbstractQVTr2QVTcRelations overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverride);
 				AbstractEnforceableRelationDomain2CoreMapping overridenDomain2Mapping = mapOverrides(overriddenRelation2Mappings);
@@ -1292,6 +1292,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 			}
 			mapRelationImplementation();
+			//			Rule rOverrides = rRelation.getOverrides();
+			//			if (rOverrides != null) {
+			//				AbstractQVTr2QVTcRelations overridesRelation2mapping = qvtr2qvtc.getRelation2Mappings(rOverride)relation2relation2mapping.get(rOverrides);
+			//				if (overridesRelation2mapping != null) {
+			//					Mapping cMapping = relation2mapping.get
+			//				}
+			//			}
 		}
 
 		@Override
@@ -1416,7 +1423,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	private void gatherOverrides(@NonNull Relation rOverriding) {
 		if (rAllOverrides.add(rOverriding)) {
-			Relation rOverridden = QVTrelationUtil.basicGetOverrides(rOverriding);
+			Relation rOverridden = QVTrelationUtil.basicGetOverridden(rOverriding);
 			if (rOverridden != null) {
 				gatherOverrides(rOverridden);
 			}
