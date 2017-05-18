@@ -46,6 +46,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMiddle" lowerBound="1"
         eType="#//DomainCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#T-qvtcore-Mapping"/>
   </eClassifiers>
