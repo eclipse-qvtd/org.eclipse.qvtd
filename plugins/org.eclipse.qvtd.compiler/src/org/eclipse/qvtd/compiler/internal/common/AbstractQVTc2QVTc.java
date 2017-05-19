@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -509,6 +510,10 @@ public abstract class AbstractQVTc2QVTc
 			updateAllChildren(mOut.getDomain());
 			updateAllChildren(mOut.getLocal());
 			updateAllReferences(mIn.getSpecification(), mOut.getSpecification());
+			Rule overriddenIn = mIn.getOverridden();
+			if (overriddenIn != null) {
+				mOut.setOverridden(context.equivalentTarget(overriddenIn));
+			}
 			return mIn;
 		}
 

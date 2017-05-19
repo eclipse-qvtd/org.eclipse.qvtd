@@ -1261,12 +1261,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * @throws CompilerChainException
 		 */
 		protected void synthesize() throws CompilerChainException {
-			Relation rOverride = QVTrelationUtil.basicGetOverridden(rRelation);
-			if (rOverride != null) {
-				AbstractQVTr2QVTcRelations overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverride);
-				AbstractEnforceableRelationDomain2CoreMapping overridenDomain2Mapping = mapOverrides(overriddenRelation2Mappings);
-				cMapping.getSpecification().add(overridenDomain2Mapping.getCoreMapping());
-			}
+			//			Relation rOverride = QVTrelationUtil.basicGetOverridden(rRelation);
+			//			if (rOverride != null) {
+			//				AbstractQVTr2QVTcRelations overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverride);
+			//				AbstractEnforceableRelationDomain2CoreMapping overridenDomain2Mapping = mapOverrides(overriddenRelation2Mappings);
+			//				cMapping.getSpecification().add(overridenDomain2Mapping.getCoreMapping());
+			//			}
 			Set<@NonNull Variable> rEnforcedBottomDomainVariables = getEnforcedBottomDomainVariables();
 			//
 			Set<@NonNull Predicate> rWhereBottomPredicates = selectPredicatesThatReferToVariables(rWherePredicates, rEnforcedBottomDomainVariables);
