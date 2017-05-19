@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -202,7 +203,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
 		Property referredProperty = ClassUtil.nonNullState(asSetStatement.getTargetProperty());
-		return asSetStatement.isIsOpposite() ? ClassUtil.nonNullState(referredProperty.getOpposite()) : referredProperty;
+		if (asSetStatement.isIsOpposite()) {
+			if (referredProperty.eIsProxy() ) {
+				throw new IllegalStateException("Unresolved target property proxy '" + EcoreUtil.getURI(referredProperty) + "' at '" + EcoreUtil.getURI(asSetStatement) + "'");
+			}
+			return ClassUtil.nonNullState(referredProperty.getOpposite());
+		}
+		else {
+			return referredProperty;
+		}
 	}
 
 	public static boolean isObserver(@NonNull Mapping asMapping) {

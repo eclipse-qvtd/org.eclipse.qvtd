@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -182,6 +183,9 @@ public class QVTcoreUtil extends QVTbaseUtil
 		}
 		else if (asNavigationAssignment instanceof OppositePropertyAssignment) {
 			Property referredProperty = ClassUtil.nonNullState(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
+			if (referredProperty.eIsProxy() ) {
+				throw new IllegalStateException("Unresolved target property proxy '" + EcoreUtil.getURI(referredProperty) + "' at '" + EcoreUtil.getURI(asNavigationAssignment) + "'");
+			}
 			return ClassUtil.nonNullState(referredProperty.getOpposite());
 		}
 		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
