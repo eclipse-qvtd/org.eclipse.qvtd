@@ -272,7 +272,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	}
 
 	@Override
-	public Continuation<?> visitRelationCS(@NonNull RelationCS csElement) {
+	public @Nullable Continuation<?> visitRelationCS(@NonNull RelationCS csElement) {
 		Relation pivotElement = PivotUtil.getPivot(Relation.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setOverridden(csElement.getOverridden());

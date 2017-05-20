@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -216,6 +217,10 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 			if (asPredicates.size() > 1) {
 				ClassUtil.sort(asPredicates, PredicateComparator.INSTANCE);
 			}
+		}
+		List<Rule> asOverrides = object.getOverrides();
+		if (asOverrides.size() > 1) {
+			ClassUtil.sort(asOverrides, NameUtil.NAMEABLE_COMPARATOR);
 		}
 		return null;
 	}
