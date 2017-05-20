@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -34,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterImpl#getSuccessProperty <em>Success Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -48,6 +50,16 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	 * @ordered
 	 */
 	protected ImperativeTypedModel referredTypedModel;
+
+	/**
+	 * The cached value of the '{@link #getSuccessProperty() <em>Success Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuccessProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property successProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,11 +126,54 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	 * @generated
 	 */
 	@Override
+	public Property getSuccessProperty() {
+		if (successProperty != null && successProperty.eIsProxy()) {
+			InternalEObject oldSuccessProperty = (InternalEObject)successProperty;
+			successProperty = (Property)eResolveProxy(oldSuccessProperty);
+			if (successProperty != oldSuccessProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY, oldSuccessProperty, successProperty));
+			}
+		}
+		return successProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property basicGetSuccessProperty() {
+		return successProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSuccessProperty(Property newSuccessProperty) {
+		Property oldSuccessProperty = successProperty;
+		successProperty = newSuccessProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY, oldSuccessProperty, successProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
+			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+				if (resolve) return getSuccessProperty();
+				return basicGetSuccessProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -133,6 +188,9 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 		switch (featureID) {
 			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
+				return;
+			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+				setSuccessProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,6 +207,9 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
+			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+				setSuccessProperty((Property)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -163,6 +224,8 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 		switch (featureID) {
 			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
+			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+				return successProperty != null;
 		}
 		return super.eIsSet(featureID);
 	}

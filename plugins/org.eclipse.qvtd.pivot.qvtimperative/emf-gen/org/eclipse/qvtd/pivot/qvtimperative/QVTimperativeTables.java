@@ -647,6 +647,7 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _DeclareStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__OWNED_EXPRESSION, Types._DeclareStatement, 1);
 
 		public static final @NonNull ExecutorProperty _GuardParameter__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL, Types._GuardParameter, 0);
+		public static final @NonNull ExecutorProperty _GuardParameter__successProperty = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__SUCCESS_PROPERTY, Types._GuardParameter, 1);
 
 		public static final @NonNull ExecutorProperty _GuardParameterBinding__isCheck = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__IS_CHECK, Types._GuardParameterBinding, 0);
 		public static final @NonNull ExecutorProperty _GuardParameterBinding__value = new EcoreExecutorProperty(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__VALUE, Types._GuardParameterBinding, 1);
@@ -2618,7 +2619,8 @@ public class QVTimperativeTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardParameter = {
 			QVTimperativeTables.Properties._MappingParameter__owningMapping,
-			QVTimperativeTables.Properties._GuardParameter__referredTypedModel
+			QVTimperativeTables.Properties._GuardParameter__referredTypedModel,
+			QVTimperativeTables.Properties._GuardParameter__successProperty
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardParameterBinding = {

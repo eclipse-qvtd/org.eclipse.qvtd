@@ -2199,13 +2199,22 @@ public interface QVTimperativePackage extends EPackage {
 	int GUARD_PARAMETER__REFERRED_TYPED_MODEL = MAPPING_PARAMETER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Success Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER__SUCCESS_PROPERTY = MAPPING_PARAMETER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Guard Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PARAMETER_FEATURE_COUNT = MAPPING_PARAMETER_FEATURE_COUNT + 1;
+	int GUARD_PARAMETER_FEATURE_COUNT = MAPPING_PARAMETER_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4875,6 +4884,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getGuardParameter_ReferredTypedModel();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter#getSuccessProperty <em>Success Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Success Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.GuardParameter#getSuccessProperty()
+	 * @see #getGuardParameter()
+	 * @generated
+	 */
+	EReference getGuardParameter_SuccessProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding <em>Guard Parameter Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5892,6 +5912,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference GUARD_PARAMETER__REFERRED_TYPED_MODEL = eINSTANCE.getGuardParameter_ReferredTypedModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Success Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GUARD_PARAMETER__SUCCESS_PROPERTY = eINSTANCE.getGuardParameter_SuccessProperty();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterBindingImpl <em>Guard Parameter Binding</em>}' class.

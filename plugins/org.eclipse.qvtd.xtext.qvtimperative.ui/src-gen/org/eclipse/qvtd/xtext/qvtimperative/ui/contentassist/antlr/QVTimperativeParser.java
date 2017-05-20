@@ -132,6 +132,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getGroup_3_2(), "rule__DirectionCS__Group_3_2__0");
 					put(grammarAccess.getGuardParameterBindingCSAccess().getGroup(), "rule__GuardParameterBindingCS__Group__0");
 					put(grammarAccess.getGuardParameterCSAccess().getGroup(), "rule__GuardParameterCS__Group__0");
+					put(grammarAccess.getGuardParameterCSAccess().getGroup_6(), "rule__GuardParameterCS__Group_6__0");
 					put(grammarAccess.getImportCSAccess().getGroup(), "rule__ImportCS__Group__0");
 					put(grammarAccess.getImportCSAccess().getGroup_1(), "rule__ImportCS__Group_1__0");
 					put(grammarAccess.getImportCSAccess().getGroup_3(), "rule__ImportCS__Group_3__0");
@@ -353,6 +354,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGuardParameterCSAccess().getReferredTypedModelAssignment_2(), "rule__GuardParameterCS__ReferredTypedModelAssignment_2");
 					put(grammarAccess.getGuardParameterCSAccess().getNameAssignment_3(), "rule__GuardParameterCS__NameAssignment_3");
 					put(grammarAccess.getGuardParameterCSAccess().getOwnedTypeAssignment_5(), "rule__GuardParameterCS__OwnedTypeAssignment_5");
+					put(grammarAccess.getGuardParameterCSAccess().getSuccessPropertyAssignment_6_1(), "rule__GuardParameterCS__SuccessPropertyAssignment_6_1");
 					put(grammarAccess.getImportCSAccess().getNameAssignment_1_0(), "rule__ImportCS__NameAssignment_1_0");
 					put(grammarAccess.getImportCSAccess().getOwnedPathNameAssignment_2(), "rule__ImportCS__OwnedPathNameAssignment_2");
 					put(grammarAccess.getImportCSAccess().getIsAllAssignment_3_0(), "rule__ImportCS__IsAllAssignment_3_0");

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 
 /**
@@ -26,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS#getReferredTypedModel <em>Referred Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS#getSuccessProperty <em>Success Property</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getGuardParameterCS()
@@ -58,5 +60,31 @@ public interface GuardParameterCS extends MappingParameterCS {
 	 * @generated
 	 */
 	void setReferredTypedModel(ImperativeTypedModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Success Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Success Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Success Property</em>' reference.
+	 * @see #setSuccessProperty(Property)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getGuardParameterCS_SuccessProperty()
+	 * @model
+	 * @generated
+	 */
+	Property getSuccessProperty();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS#getSuccessProperty <em>Success Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Success Property</em>' reference.
+	 * @see #getSuccessProperty()
+	 * @generated
+	 */
+	void setSuccessProperty(Property value);
 
 } // GuardParameterCS

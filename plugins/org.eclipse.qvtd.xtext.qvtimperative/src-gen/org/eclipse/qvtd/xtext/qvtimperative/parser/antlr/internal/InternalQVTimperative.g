@@ -1128,9 +1128,31 @@ ruleGuardParameterCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_6=';'
+)(	otherlv_6='success'
     {
-    	newLeafNode(otherlv_6, grammarAccess.getGuardParameterCSAccess().getSemicolonKeyword_6());
+    	newLeafNode(otherlv_6, grammarAccess.getGuardParameterCSAccess().getSuccessKeyword_6_0());
+    }
+(
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getGuardParameterCSRule());
+	        }
+        }
+		{
+	        newCompositeNode(grammarAccess.getGuardParameterCSAccess().getSuccessPropertyPropertyCrossReference_6_1_0());
+	    }
+		ruleUnrestrictedName		{
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?	otherlv_8=';'
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getGuardParameterCSAccess().getSemicolonKeyword_7());
     }
 )
 ;
@@ -3223,31 +3245,38 @@ ruleQVTimperativeUnrestrictedName returns [AntlrDatatypeRuleToken current=new An
     }
 
     |
+	kw='success'
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getSuccessKeyword_21());
+    }
+
+    |
 	kw='transformation'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransformationKeyword_21());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransformationKeyword_22());
     }
 
     |
 	kw='transient'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransientKeyword_22());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getTransientKeyword_23());
     }
 
     |
 	kw='uses'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getUsesKeyword_23());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getUsesKeyword_24());
     }
 
     |
 	kw='var'
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getVarKeyword_24());
+        newLeafNode(kw, grammarAccess.getQVTimperativeUnrestrictedNameAccess().getVarKeyword_25());
     }
 )
     ;

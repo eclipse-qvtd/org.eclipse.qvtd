@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -41,6 +42,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterCSImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterCSImpl#getSuccessProperty <em>Success Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,6 +57,16 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	 * @ordered
 	 */
 	protected ImperativeTypedModel referredTypedModel;
+
+	/**
+	 * The cached value of the '{@link #getSuccessProperty() <em>Success Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuccessProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property successProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,11 +133,54 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	 * @generated
 	 */
 	@Override
+	public Property getSuccessProperty() {
+		if (successProperty != null && successProperty.eIsProxy()) {
+			InternalEObject oldSuccessProperty = (InternalEObject)successProperty;
+			successProperty = (Property)eResolveProxy(oldSuccessProperty);
+			if (successProperty != oldSuccessProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.GUARD_PARAMETER_CS__SUCCESS_PROPERTY, oldSuccessProperty, successProperty));
+			}
+		}
+		return successProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property basicGetSuccessProperty() {
+		return successProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSuccessProperty(Property newSuccessProperty) {
+		Property oldSuccessProperty = successProperty;
+		successProperty = newSuccessProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.GUARD_PARAMETER_CS__SUCCESS_PROPERTY, oldSuccessProperty, successProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__SUCCESS_PROPERTY:
+				if (resolve) return getSuccessProperty();
+				return basicGetSuccessProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -140,6 +195,9 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 		switch (featureID) {
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
+				return;
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__SUCCESS_PROPERTY:
+				setSuccessProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,6 +214,9 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__SUCCESS_PROPERTY:
+				setSuccessProperty((Property)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -170,6 +231,8 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 		switch (featureID) {
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__SUCCESS_PROPERTY:
+				return successProperty != null;
 		}
 		return super.eIsSet(featureID);
 	}

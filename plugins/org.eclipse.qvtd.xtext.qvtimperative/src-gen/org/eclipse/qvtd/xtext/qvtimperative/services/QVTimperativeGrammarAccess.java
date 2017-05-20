@@ -641,15 +641,20 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cOwnedTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_5_0 = (RuleCall)cOwnedTypeAssignment_5.eContents().get(0);
-		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cSuccessKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cSuccessPropertyAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final CrossReference cSuccessPropertyPropertyCrossReference_6_1_0 = (CrossReference)cSuccessPropertyAssignment_6_1.eContents().get(0);
+		private final RuleCall cSuccessPropertyPropertyUnrestrictedNameParserRuleCall_6_1_0_1 = (RuleCall)cSuccessPropertyPropertyCrossReference_6_1_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 
 		//GuardParameterCS:
 		//	'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//	ownedType=TypeExpCS ';';
+		//	ownedType=TypeExpCS ('success' successProperty=[pivot::Property|UnrestrictedName])? ';';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//ownedType=TypeExpCS ';'
+		//ownedType=TypeExpCS ('success' successProperty=[pivot::Property|UnrestrictedName])? ';'
 		public Group getGroup() { return cGroup; }
 
 		//'guard'
@@ -682,8 +687,23 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_5_0() { return cOwnedTypeTypeExpCSParserRuleCall_5_0; }
 
+		//('success' successProperty=[pivot::Property|UnrestrictedName])?
+		public Group getGroup_6() { return cGroup_6; }
+
+		//'success'
+		public Keyword getSuccessKeyword_6_0() { return cSuccessKeyword_6_0; }
+
+		//successProperty=[pivot::Property|UnrestrictedName]
+		public Assignment getSuccessPropertyAssignment_6_1() { return cSuccessPropertyAssignment_6_1; }
+
+		//[pivot::Property|UnrestrictedName]
+		public CrossReference getSuccessPropertyPropertyCrossReference_6_1_0() { return cSuccessPropertyPropertyCrossReference_6_1_0; }
+
+		//UnrestrictedName
+		public RuleCall getSuccessPropertyPropertyUnrestrictedNameParserRuleCall_6_1_0_1() { return cSuccessPropertyPropertyUnrestrictedNameParserRuleCall_6_1_0_1; }
+
 		//';'
-		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
 	public class GuardStatementCSElements extends AbstractParserRuleElementFinder {
@@ -1888,22 +1908,23 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cQueryKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
 		private final Keyword cSetKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
 		private final Keyword cStrictKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
-		private final Keyword cTransformationKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
-		private final Keyword cTransientKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
-		private final Keyword cUsesKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
-		private final Keyword cVarKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
+		private final Keyword cSuccessKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
+		private final Keyword cTransformationKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
+		private final Keyword cTransientKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
+		private final Keyword cUsesKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
+		private final Keyword cVarKeyword_25 = (Keyword)cAlternatives.eContents().get(25);
 
 		//QVTimperativeUnrestrictedName:
 		//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
 		//
 		//	| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
-		//	'transformation' | 'transient' | 'uses' | 'var';
+		//	'success' | 'transformation' | 'transient' | 'uses' | 'var';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
 		// |
 		//'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
-		//'transformation' | 'transient' | 'uses' | 'var'
+		//'success' | 'transformation' | 'transient' | 'uses' | 'var'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'add'
@@ -1969,17 +1990,20 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//'strict'
 		public Keyword getStrictKeyword_20() { return cStrictKeyword_20; }
 
+		//'success'
+		public Keyword getSuccessKeyword_21() { return cSuccessKeyword_21; }
+
 		//'transformation'
-		public Keyword getTransformationKeyword_21() { return cTransformationKeyword_21; }
+		public Keyword getTransformationKeyword_22() { return cTransformationKeyword_22; }
 
 		//'transient'
-		public Keyword getTransientKeyword_22() { return cTransientKeyword_22; }
+		public Keyword getTransientKeyword_23() { return cTransientKeyword_23; }
 
 		//'uses'
-		public Keyword getUsesKeyword_23() { return cUsesKeyword_23; }
+		public Keyword getUsesKeyword_24() { return cUsesKeyword_24; }
 
 		//'var'
-		public Keyword getVarKeyword_24() { return cVarKeyword_24; }
+		public Keyword getVarKeyword_25() { return cVarKeyword_25; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -2244,7 +2268,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//GuardParameterCS:
 	//	'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-	//	ownedType=TypeExpCS ';';
+	//	ownedType=TypeExpCS ('success' successProperty=[pivot::Property|UnrestrictedName])? ';';
 	public GuardParameterCSElements getGuardParameterCSAccess() {
 		return pGuardParameterCS;
 	}
@@ -2450,7 +2474,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//	'add' | 'append' | 'appendsTo' | 'buffer' | 'call' | 'check' | 'contained' | 'enforce' | 'for' | 'imports' //|	'in'
 	//
 	//	| 'install' | 'invoke' | 'iterates' | 'map' | 'new' | 'notify' | 'observe' | 'package' | 'query' | 'set' | 'strict' |
-	//	'transformation' | 'transient' | 'uses' | 'var';
+	//	'success' | 'transformation' | 'transient' | 'uses' | 'var';
 	public QVTimperativeUnrestrictedNameElements getQVTimperativeUnrestrictedNameAccess() {
 		return pQVTimperativeUnrestrictedName;
 	}

@@ -663,22 +663,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     MappingParameterCS returns GuardParameterCS
 	 *
 	 * Constraint:
-	 *     (referredTypedModel=[ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
+	 *     (
+	 *         referredTypedModel=[ImperativeTypedModel|UnrestrictedName]
+	 *         name=UnrestrictedName
+	 *         ownedType=TypeExpCS
+	 *         successProperty=[Property|UnrestrictedName]?
+	 *     )
 	 */
 	protected void sequence_GuardParameterCS(ISerializationContext context, GuardParameterCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL));
-			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
-			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGuardParameterCSAccess().getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.eGet(QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL, false));
-		feeder.accept(grammarAccess.getGuardParameterCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getGuardParameterCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 
 

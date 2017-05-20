@@ -1514,13 +1514,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL = MAPPING_PARAMETER_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Success Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER_CS__SUCCESS_PROPERTY = MAPPING_PARAMETER_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Guard Parameter CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PARAMETER_CS_FEATURE_COUNT = MAPPING_PARAMETER_CS_FEATURE_COUNT + 1;
+	int GUARD_PARAMETER_CS_FEATURE_COUNT = MAPPING_PARAMETER_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.LoopParameterBindingCSImpl <em>Loop Parameter Binding CS</em>}' class.
@@ -3319,6 +3328,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getGuardParameterCS_ReferredTypedModel();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS#getSuccessProperty <em>Success Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Success Property</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS#getSuccessProperty()
+	 * @see #getGuardParameterCS()
+	 * @generated
+	 */
+	EReference getGuardParameterCS_SuccessProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS <em>Loop Parameter Binding CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4156,6 +4176,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL = eINSTANCE.getGuardParameterCS_ReferredTypedModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Success Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GUARD_PARAMETER_CS__SUCCESS_PROPERTY = eINSTANCE.getGuardParameterCS_SuccessProperty();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.LoopParameterBindingCSImpl <em>Loop Parameter Binding CS</em>}' class.
