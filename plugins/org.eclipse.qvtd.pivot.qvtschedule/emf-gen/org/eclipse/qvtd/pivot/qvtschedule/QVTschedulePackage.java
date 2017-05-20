@@ -1314,13 +1314,13 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM__COMPLETE_CLASS = ABSTRACT_DATUM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owning Property Datums</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Property Datums</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM__OWNING_PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+	int CLASS_DATUM__OWNED_PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -5840,15 +5840,15 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getClassDatum_CompleteClass();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums <em>Owning Property Datums</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums <em>Owned Property Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owning Property Datums</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums()
+	 * @return the meta object for the containment reference list '<em>Owned Property Datums</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums()
 	 * @see #getClassDatum()
 	 * @generated
 	 */
-	EReference getClassDatum_OwningPropertyDatums();
+	EReference getClassDatum_OwnedPropertyDatums();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel <em>Owning Schedule Model</em>}'.
@@ -7084,12 +7084,12 @@ public interface QVTschedulePackage extends EPackage {
 		EReference CLASS_DATUM__COMPLETE_CLASS = eINSTANCE.getClassDatum_CompleteClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Owning Property Datums</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Property Datums</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_DATUM__OWNING_PROPERTY_DATUMS = eINSTANCE.getClassDatum_OwningPropertyDatums();
+		EReference CLASS_DATUM__OWNED_PROPERTY_DATUMS = eINSTANCE.getClassDatum_OwnedPropertyDatums();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Schedule Model</b></em>' container reference feature.

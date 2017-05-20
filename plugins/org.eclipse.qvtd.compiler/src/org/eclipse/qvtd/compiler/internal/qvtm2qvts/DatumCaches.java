@@ -211,7 +211,7 @@ public class DatumCaches
 
 	private @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatumsInternal(@NonNull Set<@NonNull ClassDatum> classDatums, @NonNull Set<@NonNull PropertyDatum> propertyDatums, @NonNull ClassDatum cDatum) {
 		if (classDatums.add(cDatum)) {
-			Iterables.addAll(propertyDatums, QVTscheduleUtil.getOwningPropertyDatums(cDatum));
+			Iterables.addAll(propertyDatums, QVTscheduleUtil.getOwnedPropertyDatums(cDatum));
 		}
 		for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(cDatum)) {
 			getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);

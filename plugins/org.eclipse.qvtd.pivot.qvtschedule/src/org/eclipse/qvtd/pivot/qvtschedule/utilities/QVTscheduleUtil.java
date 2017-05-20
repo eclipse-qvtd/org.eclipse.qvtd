@@ -534,20 +534,16 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(region.getOwnedNodes());
 	}
 
+	public static @NonNull Iterable<@NonNull PropertyDatum> getOwnedPropertyDatums(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nullFree(classDatum.getOwnedPropertyDatums());
+	}
+
 	public static @NonNull Iterable<@NonNull Region> getOwnedRegions(@NonNull ScheduledRegion scheduledRegion) {
 		return ClassUtil.nullFree(scheduledRegion.getOwnedRegions());
 	}
 
-	public static @NonNull Iterable<@NonNull PropertyDatum> getOwningPropertyDatums(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nullFree(classDatum.getOwningPropertyDatums());
-	}
-
 	public static @NonNull ScheduledRegion getOwningScheduledRegion(@NonNull Region region) {
 		return ClassUtil.nonNullState(region.getOwningScheduledRegion());
-	}
-
-	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
-		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}
 
 	public static @NonNull Region getOwningRegion(@NonNull ConnectionEnd connectionEnd) {
@@ -564,6 +560,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull AbstractDatum> getProducedDatums(@NonNull MappingAction mappingAction) {
 		return ClassUtil.nullFree(mappingAction.getProducedDatums());
+	}
+
+	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
+		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}
 
 	public static @NonNull Mapping getReferredMapping(@NonNull MappingAction mappingAction) {

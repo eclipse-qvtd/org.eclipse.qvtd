@@ -171,7 +171,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningClassDatum != null)
-				msgs = ((InternalEObject)newOwningClassDatum).eInverseAdd(this, QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS, ClassDatum.class, msgs);
+				msgs = ((InternalEObject)newOwningClassDatum).eInverseAdd(this, QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS, ClassDatum.class, msgs);
 			msgs = basicSetOwningClassDatum(newOwningClassDatum, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -271,7 +271,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case QVTschedulePackage.PROPERTY_DATUM__OWNING_CLASS_DATUM:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS, ClassDatum.class, msgs);
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS, ClassDatum.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

@@ -42,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getCompleteClass <em>Complete Class</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwningPropertyDatums <em>Owning Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwnedPropertyDatums <em>Owned Property Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getReferredClass <em>Referred Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getSuperClassDatums <em>Super Class Datums</em>}</li>
@@ -62,14 +62,14 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	protected CompleteClass completeClass;
 
 	/**
-	 * The cached value of the '{@link #getOwningPropertyDatums() <em>Owning Property Datums</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedPropertyDatums() <em>Owned Property Datums</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwningPropertyDatums()
+	 * @see #getOwnedPropertyDatums()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PropertyDatum> owningPropertyDatums;
+	protected EList<PropertyDatum> ownedPropertyDatums;
 
 	/**
 	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
@@ -156,11 +156,11 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public EList<PropertyDatum> getOwningPropertyDatums() {
-		if (owningPropertyDatums == null) {
-			owningPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS, QVTschedulePackage.PROPERTY_DATUM__OWNING_CLASS_DATUM);
+	public EList<PropertyDatum> getOwnedPropertyDatums() {
+		if (ownedPropertyDatums == null) {
+			ownedPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS, QVTschedulePackage.PROPERTY_DATUM__OWNING_CLASS_DATUM);
 		}
-		return owningPropertyDatums;
+		return ownedPropertyDatums;
 	}
 
 	/**
@@ -268,8 +268,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwningPropertyDatums()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyDatums()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -286,8 +286,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS:
-				return ((InternalEList<?>)getOwningPropertyDatums()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+				return ((InternalEList<?>)getOwnedPropertyDatums()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
@@ -319,8 +319,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				if (resolve) return getCompleteClass();
 				return basicGetCompleteClass();
-			case QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS:
-				return getOwningPropertyDatums();
+			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+				return getOwnedPropertyDatums();
 			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
 				return getOwningScheduleModel();
 			case QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS:
@@ -344,9 +344,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				setCompleteClass((CompleteClass)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS:
-				getOwningPropertyDatums().clear();
-				getOwningPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
+			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+				getOwnedPropertyDatums().clear();
+				getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
 				return;
 			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
 				setOwningScheduleModel((ScheduleModel)newValue);
@@ -373,8 +373,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				setCompleteClass((CompleteClass)null);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS:
-				getOwningPropertyDatums().clear();
+			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+				getOwnedPropertyDatums().clear();
 				return;
 			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
 				setOwningScheduleModel((ScheduleModel)null);
@@ -399,8 +399,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
 				return completeClass != null;
-			case QVTschedulePackage.CLASS_DATUM__OWNING_PROPERTY_DATUMS:
-				return owningPropertyDatums != null && !owningPropertyDatums.isEmpty();
+			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+				return ownedPropertyDatums != null && !ownedPropertyDatums.isEmpty();
 			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
 				return getOwningScheduleModel() != null;
 			case QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS:

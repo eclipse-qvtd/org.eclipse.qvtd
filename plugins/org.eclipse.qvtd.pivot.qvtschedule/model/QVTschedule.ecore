@@ -40,7 +40,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
         transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningPropertyDatums" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPropertyDatums" upperBound="-1"
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/owningClassDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedClassDatums"/>
@@ -229,7 +229,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningClassDatum" lowerBound="1"
-        eType="#//ClassDatum" eOpposite="#//ClassDatum/owningPropertyDatums"/>
+        eType="#//ClassDatum" eOpposite="#//ClassDatum/ownedPropertyDatums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superPropertyDatums" upperBound="-1"

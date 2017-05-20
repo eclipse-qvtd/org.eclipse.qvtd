@@ -63,7 +63,7 @@ public interface PropertyDatum extends AbstractDatum {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Class Datum</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums <em>Owning Property Datums</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums <em>Owned Property Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owning Class Datum</em>' container reference isn't clear,
@@ -73,8 +73,8 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @return the value of the '<em>Owning Class Datum</em>' container reference.
 	 * @see #setOwningClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_OwningClassDatum()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningPropertyDatums
-	 * @model opposite="owningPropertyDatums" required="true" transient="false"
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwnedPropertyDatums
+	 * @model opposite="ownedPropertyDatums" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!owningClassDatum'"
 	 * @generated
 	 */
