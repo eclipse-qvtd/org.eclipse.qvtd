@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -311,14 +312,16 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public @Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
+		boolean success = false;
 		try {
 			for (Statement statement : mapping.getOwnedStatements()) {
 				Object result = statement.accept(undecoratedVisitor);
 				if (result != Boolean.TRUE) {
-					return false;
+					return success;
 				}
 			}
-			return true;
+			success = true;
+			return success;
 		}
 		catch (InvocationFailedException e) {
 			throw e;
@@ -329,7 +332,20 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 				AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
 			}
 			throw e;
-			//			return false;
+			//			return success;
+		}
+		finally {
+			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(mapping)) {
+				if (mappingParameter instanceof GuardParameter) {
+					Property successProperty = ((GuardParameter)mappingParameter).getSuccessProperty();
+					if (successProperty != null) {
+						Object guardVariable = getValueOf(mappingParameter);
+						if (guardVariable != null) {
+							successProperty.initValue(guardVariable, success);
+						}
+					}
+				}
+			}
 		}
 	}
 

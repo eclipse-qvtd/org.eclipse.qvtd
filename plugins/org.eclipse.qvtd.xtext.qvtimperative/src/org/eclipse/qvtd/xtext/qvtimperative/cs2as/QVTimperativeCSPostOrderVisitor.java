@@ -221,6 +221,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		GuardParameter asGuardParameter = PivotUtil.getPivot(GuardParameter.class, csElement);
 		if (asGuardParameter != null) {
 			asGuardParameter.setReferredTypedModel(csElement.getReferredTypedModel());
+			asGuardParameter.setSuccessProperty(csElement.getSuccessProperty());
 		}
 		return null;
 	}

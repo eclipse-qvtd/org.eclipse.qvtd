@@ -447,15 +447,15 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitGuardParameter(@NonNull GuardParameter asVariable) {
-		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
-		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
+	public ElementCS visitGuardParameter(@NonNull GuardParameter asGuardParameter) {
+		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asGuardParameter);
 		assert containingMapping != null;
-		GuardParameterCS csUnrealizedVariable = context.refreshNamedElement(GuardParameterCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS, asVariable);
-		csUnrealizedVariable.setPivot(asVariable);
-		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
-		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null));
-		return csUnrealizedVariable;
+		GuardParameterCS csGuardParameter = context.refreshNamedElement(GuardParameterCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS, asGuardParameter);
+		csGuardParameter.setPivot(asGuardParameter);
+		csGuardParameter.setReferredTypedModel(asGuardParameter.getReferredTypedModel());
+		csGuardParameter.setSuccessProperty(asGuardParameter.getSuccessProperty());
+		csGuardParameter.setOwnedType(createTypeRefCS(asGuardParameter.getType(), null));
+		return csGuardParameter;
 	}
 
 	@Override

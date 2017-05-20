@@ -196,4 +196,20 @@ public class QVTiCGUtil extends CGUtil
 		}
 		return cgRootMapping;
 	}
+
+	public static @Nullable CGGuardVariable getTraceParameter(@NonNull CGMapping cgMapping) {
+		CGGuardVariable cgTraceParameter = null;
+		for (@NonNull CGGuardVariable cgGuardVariable : getOwnedGuardVariables(cgMapping)) {
+			VariableDeclaration asGuardVariable = getAST(cgGuardVariable);
+			if (asGuardVariable instanceof GuardParameter) {
+				GuardParameter asGuardParameter = (GuardParameter)asGuardVariable;
+				Property successProperty = asGuardParameter.getSuccessProperty();
+				if (successProperty != null) {
+					assert cgTraceParameter == null;
+					cgTraceParameter = cgGuardVariable;
+				}
+			}
+		}
+		return cgTraceParameter;
+	}
 }

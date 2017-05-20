@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
@@ -132,12 +133,16 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(asParameter.getReferredTypedModel());
 		context.append(" ");
 		context.appendName(asParameter);
-		context.append(" ");
 		Type type = asParameter.getType();
 		if (type != null) {
 			context.append(" : ");
 			//			context.appendQualifiedType(type);
 			context.appendTypedMultiplicity(asParameter);
+		}
+		Property successProperty = asParameter.getSuccessProperty();
+		if (successProperty != null) {
+			context.append(" success ");
+			context.appendName(successProperty);
 		}
 		context.append(";\n");
 		return null;
