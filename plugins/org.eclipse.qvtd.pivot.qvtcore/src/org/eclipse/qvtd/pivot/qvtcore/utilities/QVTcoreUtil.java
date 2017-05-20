@@ -52,7 +52,6 @@ import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-
 import com.google.common.collect.Iterables;
 
 public class QVTcoreUtil extends QVTbaseUtil
@@ -85,6 +84,10 @@ public class QVTcoreUtil extends QVTbaseUtil
 			String n2 = o2.getName();
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
+	}
+
+	public static @Nullable Mapping basicGetOverridden(@NonNull Mapping asMapping) {
+		return (Mapping) asMapping.getOverridden();
 	}
 
 	public static @Nullable TypedModel basicGetTypedModel(@Nullable Area area) {

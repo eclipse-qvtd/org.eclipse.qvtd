@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -134,10 +135,11 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 
 	@Override
 	public Object visitMapping(@NonNull Mapping pMapping) {
+		Transformation pTransformation = pMapping.getTransformation();
 		context.append("map ");
 		context.appendName(pMapping);
 		context.append(" in ");
-		context.appendName(pMapping.getTransformation());
+		context.appendName(pTransformation);
 		List<Mapping> asRefines = pMapping.getSpecification();
 		if (asRefines.size() > 0) {
 			context.append(" refines ");
@@ -153,6 +155,11 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 		Rule asOverridden = pMapping.getOverridden();
 		if (asOverridden != null) {
 			context.append(" overrides ");
+			Transformation overriddenTransformation = QVTcoreUtil.getContainingTransformation(asOverridden);
+			if (overriddenTransformation != pTransformation) {
+				context.appendQualifiedType(overriddenTransformation);
+				context.append("::");
+			}
 			context.appendName(asOverridden);
 		}
 		context.append(" {");

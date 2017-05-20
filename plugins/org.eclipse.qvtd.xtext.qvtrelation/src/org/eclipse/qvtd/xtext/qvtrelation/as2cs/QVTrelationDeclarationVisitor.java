@@ -514,7 +514,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		csRelation.setPivot(asRelation);
 		csRelation.setIsAbstract(asRelation.isIsAbstract());
 		csRelation.setIsTop(asRelation.isIsTopLevel());
-		csRelation.setOverridden((Relation) asRelation.getOverridden());
+		csRelation.setOverridden(QVTrelationUtil.basicGetOverridden(asRelation));
 		context.refreshList(csRelation.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asRelation.getDomain(), null));
 		List<@NonNull Variable> asSharedVariables = new ArrayList<>();
 		for (Variable asVariable : asRelation.getVariable()) {

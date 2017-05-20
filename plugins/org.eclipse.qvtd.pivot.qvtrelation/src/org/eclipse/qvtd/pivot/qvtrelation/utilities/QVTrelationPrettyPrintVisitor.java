@@ -15,9 +15,9 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -65,10 +65,20 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 	@Override
 	public Object visitRelation(@NonNull Relation object) {
 		context.appendName(object);
+		Rule asOverridden = object.getOverridden();
+		if (asOverridden != null) {
+			context.append(" overrides ");
+			RelationalTransformation overriddenTransformation = QVTrelationUtil.getContainingTransformation(asOverridden);
+			if (overriddenTransformation != QVTrelationUtil.getContainingTransformation(object)) {
+				context.appendQualifiedType(overriddenTransformation);
+				context.append("::");
+			}
+			context.appendName(asOverridden);
+		}
 		context.push("(", "");
 		String prefix = null;
-		for (Domain domain : object.getDomain()) {
-			for (Variable variable : ((RelationDomain)domain).getRootVariable()) {
+		for (@NonNull RelationDomain domain : QVTrelationUtil.getOwnedDomains(object)) {
+			for (@NonNull VariableDeclaration variable : QVTrelationUtil.getRootVariables(domain)) {
 				if (prefix != null) {
 					context.next(null, prefix, " ");
 				}
