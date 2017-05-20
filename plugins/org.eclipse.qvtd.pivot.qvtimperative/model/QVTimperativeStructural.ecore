@@ -105,6 +105,11 @@
         <details key="documentation" value="The TypedModel that contains the passed value."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="successProperty" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The TypedModel that contains the passed value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GuardParameterBinding" eSuperTypes="#//MappingParameterBinding">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

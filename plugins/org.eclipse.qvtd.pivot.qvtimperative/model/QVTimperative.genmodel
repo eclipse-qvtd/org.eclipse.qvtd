@@ -61,6 +61,7 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-GuardParameter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-GuardParameter-referredTypedModel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-GuardParameter-successProperty"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-GuardParameterBinding">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-GuardParameterBinding-value"/>

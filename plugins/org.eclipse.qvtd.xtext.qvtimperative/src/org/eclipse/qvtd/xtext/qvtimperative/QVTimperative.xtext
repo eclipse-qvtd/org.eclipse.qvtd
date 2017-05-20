@@ -48,7 +48,9 @@ DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=Unre
 
 GuardParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::GuardParameter|UnrestrictedName] 'consumes' value=[qvtimperative::ConnectionVariable|UnrestrictedName] ';';
 
-GuardParameterCS: 'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+GuardParameterCS: 'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS
+	('success' successProperty=[pivot::Property|UnrestrictedName])? ';'
+;
 
 GuardStatementCS returns StatementCS: BufferStatementCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
 
@@ -133,6 +135,7 @@ QVTimperativeUnrestrictedName:
 |	'query'
 |	'set'
 |	'strict'
+|	'success'
 |	'transformation'
 |	'transient'
 |	'uses'

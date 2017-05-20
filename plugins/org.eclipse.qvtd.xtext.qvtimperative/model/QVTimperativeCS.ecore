@@ -48,6 +48,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="GuardParameterCS" eSuperTypes="#//MappingParameterCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#T-qvtimperative-ImperativeTypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="successProperty" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoopParameterBindingCS" eSuperTypes="#//MappingParameterBindingCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#T-qvtimperative-LoopVariable"/>
