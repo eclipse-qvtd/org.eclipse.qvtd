@@ -21,7 +21,6 @@ import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -68,11 +67,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
 		Resource rResource = umlx2qvtrCompilerStep.execute(txURI);
-		Resource cResource = qvtr2qvtcCompilerStep.execute(rResource);
-		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
-		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
-		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
-		return qvtm2qvti(pResource);
+		return compileQVTrAS(rResource, enforcedOutputName);
 	}
 
 	protected @NonNull UMLX2QVTrCompilerStep createUMLX2QVTrCompilerStep() {

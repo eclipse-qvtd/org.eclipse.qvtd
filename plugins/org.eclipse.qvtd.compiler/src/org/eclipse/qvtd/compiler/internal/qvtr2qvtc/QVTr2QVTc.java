@@ -21,16 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
-import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descriptor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
-import org.eclipse.emf.common.util.BasicMonitor;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -42,7 +36,6 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
@@ -59,7 +52,6 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -72,7 +64,6 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
-import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -121,56 +112,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 	}
 
-	private static final class Generator extends org.eclipse.emf.codegen.ecore.generator.Generator
-	{
-		private final @NonNull Collection<GeneratorAdapterFactory> adapterFactories = new ArrayList<>();
-
-		public Generator() {
-			// Replacement for EMF to fix BUG 485764, BUG 485089
-			addAdapterFactoryDescriptor(QVTdGenModelGeneratorAdapterFactory.DESCRIPTOR);
-			// OCLinEcore embedded support
-			addAdapterFactoryDescriptor(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
-		}
-
-		private void addAdapterFactoryDescriptor(Descriptor descriptor) {
-			GeneratorAdapterFactory adapterFactory = descriptor.createAdapterFactory();
-			adapterFactories.add(adapterFactory);
-			adapterFactory.setGenerator(this);
-		}
-
-		@Override
-		protected Collection<GeneratorAdapterFactory> getAdapterFactories( Object object) {
-			return adapterFactories;
-		}
-	}
-
 	protected static class CreateVisitor extends AbstractCreateVisitor<@NonNull QVTr2QVTc>
 	{
 		public CreateVisitor(@NonNull QVTr2QVTc context) {
 			super(context);
-		}
-	}
-
-	private class Issues {
-
-		public void addError(QVTr2QVTc qvTrToQVTc, String message,
-				Object object, Object object2, Throwable throwable,
-				List<Object> data) {
-			System.err.println(message);
-		}
-
-		public void addWarning(QVTr2QVTc qvTrToQVTc, String message,
-				Object object, Object object2, Throwable throwable,
-				List<Object> data) {
-			System.out.println(message);
-		}
-
-		public void addError(QVTr2QVTc qvTrToQVTc, String string) {
-			System.err.println(string);
-		}
-
-		public void addWarning(QVTr2QVTc qvTrToQVTc, String string) {
-			System.out.println(string);
 		}
 	}
 
@@ -228,6 +173,16 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	{
 		public UpdateVisitor(@NonNull QVTr2QVTc context) {
 			super(context);
+		}
+	}
+
+	public static @NonNull String getProjectName(@NonNull URI traceURI) {
+		URI trimFileExtension = traceURI.trimFileExtension();
+		if (trimFileExtension.isPlatform()) {
+			return trimFileExtension.segment(1);
+		}
+		else {
+			return trimFileExtension.segment(0);
 		}
 	}
 
@@ -525,57 +480,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		transformToCoreTransformations();
 	} */
 
-	public void generateModels(@NonNull GenModel genModel) {
-		((PivotMetamodelManager)environmentFactory.getMetamodelManager()).addGenModel(genModel);
-		//**		ResourceUtils.checkResourceSet(resourceSet);
-		// genModel.setCanGenerate(true);
-		// validate();
-
-
-
-		genModel.setValidateModel(true); // The more checks the better
-		//		genModel.setCodeFormatting(true); // Normalize layout
-		genModel.setForceOverwrite(false); // Don't overwrite read-only
-		// files
-		genModel.setCanGenerate(true);
-		// genModel.setFacadeHelperClass(null); // Non-null gives JDT
-		// default NPEs
-		//		genModel.setFacadeHelperClass(ASTFacadeHelper.class.getName()); // Bug 308069
-		// genModel.setValidateModel(true);
-		//		genModel.setBundleManifest(false); // New manifests should be
-		//											// generated manually
-		//		genModel.setUpdateClasspath(false); // New class-paths should be
-		//											// generated manually
-		//		if (genModel.getComplianceLevel().compareTo(GenJDKLevel.JDK50_LITERAL) < 0) {
-		//			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
-		//		}
-		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
-		Diagnostic diagnostic = genModel.diagnose();
-		reportDiagnostics(new Issues(), diagnostic);
-
-		/*
-		 * JavaModelManager.getJavaModelManager().initializePreferences();
-		 * new
-		 * JavaCorePreferenceInitializer().initializeDefaultPreferences();
-		 *
-		 * GenJDKLevel genSDKcomplianceLevel =
-		 * genModel.getComplianceLevel(); String complianceLevel =
-		 * JavaCore.VERSION_1_5; switch (genSDKcomplianceLevel) { case
-		 * JDK60_LITERAL: complianceLevel = JavaCore.VERSION_1_6; case
-		 * JDK14_LITERAL: complianceLevel = JavaCore.VERSION_1_4; default:
-		 * complianceLevel = JavaCore.VERSION_1_5; } // Hashtable<?,?>
-		 * defaultOptions = JavaCore.getDefaultOptions(); //
-		 * JavaCore.setComplianceOptions(complianceLevel, defaultOptions);
-		 * // JavaCore.setOptions(defaultOptions);
-		 */
-
-		Generator generator = new Generator();
-		generator.setInput(genModel);
-		Monitor monitor = /*showProgress ? new LoggerMonitor(log) :*/ new BasicMonitor();
-		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
-		reportDiagnostics(new Issues(), diagnostic);
-	}
-
 	public @NonNull CompleteClass getCompleteClass(@NonNull Type type) {
 		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(type);
 		return completeClass;
@@ -714,16 +618,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	public Predicate getPredicateForRelationCallExp(RelationCallExp ri) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public @NonNull String getProjectName(@NonNull URI traceURI) {
-		URI trimFileExtension = traceURI.trimFileExtension();
-		if (trimFileExtension.isPlatform()) {
-			return trimFileExtension.segment(1);
-		}
-		else {
-			return trimFileExtension.segment(0);
-		}
 	}
 
 	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, /*@NonNull*/ String name) throws CompilerChainException {
@@ -947,43 +841,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	public void putTypedModel(@NonNull TypedModel relationTypedModel, @NonNull TypedModel coreTypedModel) {
 		TypedModel oldTypedModel = relationalTypedModel2coreTypedModel.put(relationTypedModel, coreTypedModel);
 		assert oldTypedModel == null;
-	}
-
-	protected void reportDiagnostics(Issues issues, Diagnostic diagnostic) {
-		int severity = diagnostic.getSeverity();
-		if (severity != Diagnostic.OK) {
-			List<Diagnostic> children = diagnostic.getChildren();
-			if (children.size() > 0) {
-				for (Diagnostic child : children) {
-					severity = child.getSeverity();
-					@SuppressWarnings("unchecked") List<Object> data = (List<Object>) child.getData();
-					Throwable throwable = null;
-					String message;
-					if ((data.size() == 1) && (data.get(0) instanceof Throwable)) {
-						throwable = (Throwable) data.get(0);
-						data = null;
-						message = child.getMessage();
-					}
-					else {
-						message = child.toString();
-					}
-					if (severity == Diagnostic.ERROR) {
-						issues.addError(this, message, null, null, throwable, data);
-					}
-					else if (severity == Diagnostic.WARNING) {
-						issues.addWarning(this, message, null, null, throwable, data);
-					}
-				}
-			}
-			else {
-				if (severity == Diagnostic.ERROR) {
-					issues.addError(this, diagnostic.toString());
-				}
-				else if (severity == Diagnostic.WARNING) {
-					issues.addWarning(this, diagnostic.toString());
-				}
-			}
-		}
 	}
 
 	public void saveCore(@NonNull Resource asResource, @NonNull Map<?, ?> options) throws IOException {
