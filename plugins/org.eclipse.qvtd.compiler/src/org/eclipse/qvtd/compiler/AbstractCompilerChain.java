@@ -105,7 +105,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			else {
 				classpathProjects = null;
 			}
-			JavaSourceFileObject.compileClass(javaResult.qualifiedClassName, javaResult.code, javaResult.classPath, classpathProjects);
+			String problemMessage = JavaSourceFileObject.compileClass(javaResult.qualifiedClassName, javaResult.code, javaResult.classPath, classpathProjects);
+			if (problemMessage != null) {
+				throw new CompilerChainException(problemMessage);
+			}
 			File explicitClassPath = new File(javaResult.classPath);
 			@SuppressWarnings("unchecked")
 			Class<? extends Transformer> txClass = (Class<? extends Transformer>) JavaSourceFileObject.loadExplicitClass(explicitClassPath, javaResult.qualifiedClassName);

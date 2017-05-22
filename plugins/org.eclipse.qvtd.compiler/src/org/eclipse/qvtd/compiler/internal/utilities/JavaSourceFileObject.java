@@ -33,9 +33,9 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
  */
 public final class JavaSourceFileObject extends SimpleJavaFileObject
 {
-	public static void compileClass(@NonNull String sourcePath, @NonNull String javaCodeSource, @NonNull String objectPath, @Nullable List<@NonNull String> classpathProjects) throws IOException {
+	public static @Nullable String compileClass(@NonNull String sourcePath, @NonNull String javaCodeSource, @NonNull String objectPath, @Nullable List<@NonNull String> classpathProjects) throws IOException {
 		List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(new OCL2JavaFileObject(sourcePath, javaCodeSource));
-		JavaFileUtil.compileClasses(compilationUnits, sourcePath, objectPath, classpathProjects);
+		return JavaFileUtil.compileClasses(compilationUnits, sourcePath, objectPath, classpathProjects);
 	}
 
 	/**
