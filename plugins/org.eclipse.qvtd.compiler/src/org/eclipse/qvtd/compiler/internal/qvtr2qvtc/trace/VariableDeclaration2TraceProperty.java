@@ -59,7 +59,7 @@ class VariableDeclaration2TraceProperty extends Element2TraceProperty
 	 * the trace property and so the implicit opposite must be a Bag.
 	 */
 	protected @NonNull Property createSignatureProperty() {
-		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(rTypedModel, relation2traceClass.getSignatureClass(), name, type, isRequired, unitOpposite);
+		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(rTypedModel, relation2traceClass.getTraceClass(), name, type, isRequired, unitOpposite);
 	}
 
 	/**

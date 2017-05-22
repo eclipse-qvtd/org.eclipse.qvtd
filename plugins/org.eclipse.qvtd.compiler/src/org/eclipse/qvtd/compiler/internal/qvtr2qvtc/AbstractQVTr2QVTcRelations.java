@@ -1033,7 +1033,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			return eOut;
 		}
 
-		protected void mapIncomingInvocation() throws CompilerChainException {}
+		//		protected void mapIncomingInvocation() throws CompilerChainException {}
 
 		// IROppositeDomainsToMappingForEnforcement
 		protected void mapOtherDomainPatterns() throws CompilerChainException {
@@ -1123,7 +1123,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							}
 						}
 						else {
-							Type invokedSignatureClass = qvtr2qvtc.getSignatureClass(rInvokedRelation);
+							Type invokedSignatureClass = qvtr2qvtc.getTraceClass(rInvokedRelation);
 							String invokedName = "when_" + invokedSignatureClass.getName()/* + vdId*/;
 							Variable cInvocationVariable = variablesAnalysis.addCoreRealizedVariable(invokedName, invokedSignatureClass);	// FIXME
 							Property cInvocationProperty = qvtr2qvtc.getTraceProperty(rInvocation);
@@ -1133,7 +1133,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 								VariableExp rArgument = (VariableExp) rArguments.get(i);
 								Variable rParameter = rParameters.get(i);
 								Variable cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
-								Property cCalledProperty = qvtr2qvtc.getSignatureProperty(QVTrelationUtil.getClass(cInvocationVariable), rParameter);
+								Property cCalledProperty = qvtr2qvtc.getTraceProperty(QVTrelationUtil.getClass(cInvocationVariable), rParameter);
 								signatureVariableAnalysis.addNavigationAssignment(cCalledProperty, createVariableExp(cArgumentVariable), false);
 							}
 
@@ -1199,7 +1199,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					if (rConditionExpression instanceof RelationCallExp) {
 						RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
 						Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
-						Type invokedSignatureClass/*tc*/ = qvtr2qvtc.getSignatureClass(rInvokedRelation);
+						Type invokedSignatureClass/*tc*/ = qvtr2qvtc.getTraceClass(rInvokedRelation);
 						List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
 						String invokedName = "where_" + invokedSignatureClass.getName()/* + vdId*/;
 						Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreRealizedVariable(invokedName, invokedSignatureClass);	// FIXME
@@ -1213,7 +1213,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							VariableExp rArgument = (VariableExp) rArguments.get(i);
 							Variable rParameter = rParameters.get(i);
 							Variable cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
-							Property cCalledProperty = qvtr2qvtc.getSignatureProperty(QVTrelationUtil.getClass(cInvocationVariable), rParameter);
+							Property cCalledProperty = qvtr2qvtc.getTraceProperty(QVTrelationUtil.getClass(cInvocationVariable), rParameter);
 							signatureVariableAnalysis.addNavigationAssignment(cCalledProperty, createVariableExp(cArgumentVariable), false);
 						}
 					}
@@ -1280,7 +1280,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			//			mapVariables(rMiddleBottomDomainVariables, cMiddleBottomPattern);
 			mapOtherDomainPatterns();
 			// Invoked here so the variables are instantiated
-			mapIncomingInvocation();			// Only for Invoked rather than Top relation
+			//			mapIncomingInvocation();			// Only for Invoked rather than Top relation
 			mapOtherDomainVariables(rAllOtherReferredVariables);
 			mapWhenPattern();
 			mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);

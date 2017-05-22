@@ -12,16 +12,12 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.NavigationCallExp;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -100,7 +96,7 @@ import com.google.common.collect.Iterables;
 			return rEnforcedBottomDomainVariables;
 		}
 
-		private @NonNull VariableDeclaration getOverriddenParameter(@NonNull Relation rOverride, @NonNull Variable rParameter) {
+		/*		private @NonNull VariableDeclaration getOverriddenParameter(@NonNull Relation rOverride, @NonNull Variable rParameter) {
 			if (rOverride == rRelation) {
 				return rParameter;
 			}
@@ -113,7 +109,7 @@ import com.google.common.collect.Iterables;
 			List<@NonNull Variable> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRootVariableDomain);
 			assert index <= overriddenRootVariables.size();
 			return overriddenRootVariables.get(index);
-		}
+		} */
 
 		//		@Override
 		//		protected @NonNull Set<@NonNull Variable> getEnforcedDomainGuardVariables(@NonNull Set<@NonNull Variable> rEnforcedBottomDomainVariables) { // FIXME unify with TopLevel
@@ -124,7 +120,7 @@ import com.google.common.collect.Iterables;
 		//		}
 
 		// RInvokerToMGuard
-		@Override
+		/*		@Override
 		protected void mapIncomingInvocation() throws CompilerChainException {
 			Type invokingSignatureClass = null;		// ?? invocation
 			Relation rOverride = rRelation;
@@ -137,9 +133,9 @@ import com.google.common.collect.Iterables;
 			}
 			assert rOverride != null;
 			if (invokingSignatureClass == null) {
-				invokingSignatureClass = qvtr2qvtc.getSignatureClass(rRelation);		// ?? invocation
+				invokingSignatureClass = qvtr2qvtc.getTraceClass(rRelation);		// ?? invocation
 			}
-			Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable("from_" + invokingSignatureClass.getName(), invokingSignatureClass);
+			Variable cInvocationVariable/*vd* / = variablesAnalysis.addCoreGuardVariable("from_" + invokingSignatureClass.getName(), invokingSignatureClass);
 			org.eclipse.ocl.pivot.Class cInvocationType = QVTrelationUtil.getClass(cInvocationVariable);
 			assert cInvocationType == invokingSignatureClass;			// FIXME
 			//			List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
@@ -154,11 +150,11 @@ import com.google.common.collect.Iterables;
 				// RInvokerToMGuardPredicate
 				//				Variable rArgumentVariable = QVTrelationUtil.getReferredVariable(rArgumentVariableExp);
 				Variable cParameter = variablesAnalysis.getCoreVariable(rParameter);
-				Property cProperty = qvtr2qvtc.getSignatureProperty(cInvocationType, getOverriddenParameter(rOverride, rParameter));
+				Property cProperty = qvtr2qvtc.getTraceProperty(cInvocationType, getOverriddenParameter(rOverride, rParameter));
 				NavigationCallExp cInvocationValue = createNavigationCallExp(createVariableExp(cInvocationVariable), cProperty);
 				variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cInvocationValue, createVariableExp(cParameter));
 			}
-		}
+		} */
 	}
 
 	/**
