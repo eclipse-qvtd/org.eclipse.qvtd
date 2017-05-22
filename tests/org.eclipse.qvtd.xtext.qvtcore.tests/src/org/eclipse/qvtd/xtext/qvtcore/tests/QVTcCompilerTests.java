@@ -104,7 +104,19 @@ public class QVTcCompilerTests extends LoadTestCase
 		private final @NonNull Map<@NonNull Class<? extends Region>, @NonNull Integer> regionClass2count = new HashMap<>();
 
 		public MyQVT(@NonNull String testFolderName) {
-			super(TESTS_BASE_URI, PROJECT_NAME, testFolderName);
+			this(TESTS_BASE_URI, PROJECT_NAME, testFolderName, "samples");
+		}
+
+		public MyQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName, @Nullable String samplesFolderName) {
+			super(testsBaseURI, projectName, testFolderName, samplesFolderName);
+			/*			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
+			getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
+				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE); */
 		}
 
 		public void assertRegionCount(@NonNull Class<? extends Region> regionClass, @NonNull Integer count) {
@@ -494,6 +506,45 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimpleRDBMSPeople_CG.xmi", "SimpleRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTcCompiler_SimpleUML2RDBMS_example_CG() throws Exception {
+		//		OperationDependencyAnalysis.CALL.setState(true);
+		//		OperationDependencyAnalysis.CREATE.setState(true);
+		//		OperationDependencyAnalysis.FINISH.setState(true);
+		//		OperationDependencyAnalysis.PENDING.setState(true);
+		//		OperationDependencyAnalysis.REFINING.setState(true);
+		//		OperationDependencyAnalysis.RETURN.setState(true);
+		//		OperationDependencyAnalysis.START.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//		Scheduler.CONNECTION_ROUTING.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		Scheduler.REGION_CYCLES.setState(true);
+		//		Scheduler.REGION_DEPTH.setState(true);
+		//		Scheduler.REGION_ORDER.setState(true);
+		//		Scheduler.REGION_TRAVERSAL.setState(true);
+		Splitter.RESULT.setState(true);
+		Splitter.STAGES.setState(true);
+		Splitter.RESULT.setState(true);
+		URI testsBaseURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/bin/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/", true);
+		String projectName = "org.eclipse.qvtd.examples.qvtcore.uml2rdbms";
+		MyQVT myQVT = new MyQVT(testsBaseURI, projectName, null, null);
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("SimpleUML2RDBMS.qvtc", "rdbms", "SimpleUML2RDBMS.genmodel");
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 20);
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("uml", "in/SimpleUMLPeople.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("rdbms", "out/SimpleRDBMSPeople_CG.xmi", "out/SimpleRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
