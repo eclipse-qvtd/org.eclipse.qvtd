@@ -104,7 +104,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected final @NonNull URI testsBaseURI;
 	protected final @NonNull String projectName;
-	protected final @NonNull String testFolderName;
+	//	protected final @NonNull String testFolderName;
 	protected final @NonNull URI testFolderURI;
 	protected final @NonNull URI samplesBaseUri;
 	protected AbstractCompilerChain compilerChain = null;
@@ -112,17 +112,23 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private QVTiTransformationExecutor generatedExecutor = null;
 	private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 
-	public AbstractTestQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @NonNull String testFolderName) {
+	public AbstractTestQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName) {
+		this(testsBaseURI, projectName, testFolderName, "samples");
+	}
+
+	public AbstractTestQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName, @Nullable String samplesFolderName) {
 		super(new QVTiEnvironmentFactory(LoadTestCase.getProjectMap(), null));
-		this.testsBaseURI = testsBaseURI;
+		this.testsBaseURI = testsBaseURI.toString().endsWith("/") ? testsBaseURI :  testsBaseURI.appendSegment("");
 		this.projectName = projectName;
-		this.testFolderName = testFolderName;
-		this.testFolderURI = testsBaseURI.appendSegment(testFolderName);
-		this.samplesBaseUri = testFolderURI.appendSegment("samples");
+		//		this.testFolderName = testFolderName;
+		URI testFolderURI = testFolderName != null ? testsBaseURI.appendSegment(testFolderName) : testsBaseURI;
+		this.testFolderURI = testFolderURI.toString().endsWith("/") ? testFolderURI :  testFolderURI.appendSegment("");
+		URI samplesBaseUri = samplesFolderName != null ? testFolderURI.appendSegment(samplesFolderName) : testFolderURI;
+		this.samplesBaseUri = samplesBaseUri.toString().endsWith("/") ? samplesBaseUri :  samplesBaseUri.appendSegment("");
 	}
 
 	protected void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
+		URI referenceModelURI = URI.createURI(expectedFile).resolve(samplesBaseUri);
 		Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
 		assert referenceResource != null;
 		if (normalizer != null) {
@@ -336,7 +342,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @Nullable Resource loadInput(@NonNull String modelName, @NonNull String modelFile) {
-		URI modelURI = samplesBaseUri.appendSegment(modelFile);
+		URI modelURI = URI.createURI(modelFile).resolve(samplesBaseUri);
 		if (interpretedExecutor != null) {
 			return interpretedExecutor.loadModel(modelName, modelURI);
 		}
@@ -372,7 +378,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-		URI modelURI = samplesBaseUri.appendSegment(modelFile);
+		URI modelURI = URI.createURI(modelFile).resolve(samplesBaseUri);
 		ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
 		Resource outputResource;
 		if (interpretedExecutor != null) {

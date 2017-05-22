@@ -62,8 +62,6 @@ public class QVTrCompilerTests extends LoadTestCase
 {
 	private static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.xtext.qvtrelation.tests";
 	private static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
-	private static URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME +"/test-gen", true);
-	private static URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin", true);
 
 	protected static class MyQVT extends AbstractTestQVT
 	{
@@ -103,7 +101,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		private final @NonNull Map<@NonNull Class<? extends Region>, @NonNull Integer> regionClass2count = new HashMap<>();
 
 		public MyQVT(@NonNull String testFolderName, @NonNull EPackage... eInstances) {
-			super(TESTS_BASE_URI, PROJECT_NAME, testFolderName);
+			this(TESTS_BASE_URI, PROJECT_NAME, testFolderName, "samples", eInstances);
+		}
+
+		public MyQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName, @Nullable String samplesFolderName, @NonNull EPackage... eInstances) {
+			super(testsBaseURI, projectName, testFolderName, samplesFolderName);
 			installEPackages(eInstances);
 			//
 			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
@@ -130,9 +132,9 @@ public class QVTrCompilerTests extends LoadTestCase
 			assertEquals("Region " + regionClass.getSimpleName() + " count:", count != 0 ? count : null, regionClass2count.get(regionClass));
 		}
 
-		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String testFileName, @NonNull String outputName,
+		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String modelsSubPackageName, @NonNull String testFileName, @NonNull String outputName,
 				@NonNull String middleNsURI, boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
-			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions(testName, isIncremental);
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions(modelsSubPackageName, isIncremental);
 			return doBuild(testFileName, outputName, options, genModelFiles);
 		}
 
@@ -140,17 +142,19 @@ public class QVTrCompilerTests extends LoadTestCase
 			return doCompile(testFileName, outputName, createCompilerChainOptions(basePrefix));
 		}
 
-		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(String testName, boolean isIncremental) {
+		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(String modelsSubPackageName, boolean isIncremental) {
+			URI testsJavaSrcURI = URI.createPlatformResourceURI("/" + projectName +"/test-gen", true);
+			URI testsJavaBinURI = URI.createPlatformResourceURI("/" + projectName + "/bin", true);
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, PROJECT_NAME + "." + testName);
+			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, projectName + "." + modelsSubPackageName);
 			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
 			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
 			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, testsJavaSrcURI);
 			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_INCREMENTAL_KEY, isIncremental);
 			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_GENERATED_DEBUG_KEY, true);
-			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
+			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, testsJavaBinURI);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 			return options;
@@ -433,6 +437,38 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.loadInput("hier", "LargerModel.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("flat", "LargerModel_CG.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Exception {
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.VARIABLES.setState(true);
+		URI testsBaseURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/bin/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/", true);
+		String projectName = "org.eclipse.qvtd.examples.qvtrelation.hstm2fstm";
+		MyQVT myQVT = new MyQVT(testsBaseURI, projectName, null, null);
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("models",
+				//				"/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
+				"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
+				"http://www.eclipse.org/qvtd/examples/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", false);//,
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("hier", "in/hier.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "out/generated_CG.xmi", "out/expected.xmi", FlatStateMachineNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();

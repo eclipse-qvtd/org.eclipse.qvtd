@@ -65,9 +65,10 @@ import org.junit.Test;
 public class QVTcCompilerTests extends LoadTestCase
 {
 	private static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.xtext.qvtcore.tests";
-	protected static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests", true);
-	protected static final @NonNull URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
-	protected static final @NonNull URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin", true);
+	//	protected static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests", true);
+	public static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
+	//	protected static final @NonNull URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
+	//	protected static final @NonNull URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin", true);
 
 	protected static class MyQVT extends AbstractTestQVT
 	{
@@ -126,10 +127,12 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 
 		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions() {
+			URI testsJavaSrcURI = URI.createPlatformResourceURI("/" + projectName +"/test-gen", true);
+			URI testsJavaBinURI = URI.createPlatformResourceURI("/" + projectName + "/bin", true);
 			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createCompilerChainOptions();
-			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, testsJavaSrcURI);
 			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_GENERATED_DEBUG_KEY, true);
-			QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
+			QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, testsJavaBinURI);
 			return options;
 		}
 
