@@ -33,11 +33,13 @@ public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 {
 	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
 		CompilerChain.QVTR_STEP,
+		CompilerChain.TRACE_STEP,
 		CompilerChain.QVTC_STEP,
 		CompilerChain.QVTU_STEP,
 		CompilerChain.QVTM_STEP,
 		CompilerChain.QVTS_STEP,
 		CompilerChain.QVTI_STEP,
+		CompilerChain.GENMODEL_STEP,
 		CompilerChain.JAVA_STEP,
 		CompilerChain.CLASS_STEP
 	};
