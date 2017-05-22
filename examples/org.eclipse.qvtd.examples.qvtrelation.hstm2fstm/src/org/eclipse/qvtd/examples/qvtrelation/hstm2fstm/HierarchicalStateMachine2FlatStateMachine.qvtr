@@ -26,7 +26,7 @@ transformation org::eclipse::qvtd::examples::qvtrelation::hstm2fstm::Hierarchica
 	/**
 	 * Return the leafStates of a given hierarchicalState.
 	 */
-	query getLeafStates(hierarchicalState : hierMM::State) : Set(hierMM::State) {
+	query getLeafStates(hierarchicalState : hierMM::State[1]) : Set(hierMM::State) {
 		hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())
 	}
 
@@ -66,8 +66,6 @@ transformation org::eclipse::qvtd::examples::qvtrelation::hstm2fstm::Hierarchica
 	 */
 	top relation HierachicalTransition2FlatTransition
 	{
-		leafFromStates : Set(hierMM::State) = hierarchicalFromState->closure(nestedStates)->select(nestedStates->isEmpty());
-		leafToStates : Set(hierMM::State) = hierarchicalToState->closure(nestedStates)->select(nestedStates->isEmpty());
 		leafFromState : hierMM::State;
 		leafToState : hierMM::State;
 		domain hier hierarchicalTransition : Transition {
@@ -86,8 +84,8 @@ transformation org::eclipse::qvtd::examples::qvtrelation::hstm2fstm::Hierarchica
 			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
 			LeafState2FlatState(leafFromState, flatFromState);
 			LeafState2FlatState(leafToState, flatToState);
-			leafFromStates->includes(leafFromState);
-			leafToStates->includes(leafToState);
+			this.getLeafStates(hierarchicalFromState)->includes(leafFromState);
+			this.getLeafStates(hierarchicalToState)->includes(leafToState);
 		}
-	}   
+	}
 }

@@ -4,9 +4,9 @@ import SimpleUML2RDBMS : 'SimpleUML2RDBMS.ecore#/';
 
 transformation org::eclipse::qvtd::examples::qvtcore::uml2rdbms::umlRdbms
 {
-	uml imports simpleuml;
-	rdbms imports simplerdbms;
-	imports simpleuml2rdbms;
+	uml imports SimpleUML;
+	rdbms imports SimpleRDBMS;
+	imports SimpleUML2RDBMS;
 }
 /*
  * -- Package and Schema mapping
@@ -24,15 +24,15 @@ transformation org::eclipse::qvtd::examples::qvtcore::uml2rdbms::umlRdbms
 map packageToSchema in umlRdbms
 {
 	uml() {
-		p : Package
+		p : SimpleUML::Package[1]
 	|}
 
 	enforce rdbms() {
-		realize s : Schema
+		realize s : SimpleRDBMS::Schema[1]
 	|}
 
 	where() {
-		realize p2s : SimpleUML2RDBMS::PackageToSchema
+		realize p2s : SimpleUML2RDBMS::PackageToSchema[1]
 	|
 		p2s.umlPackage := p;
 		p2s.schema := s;
@@ -63,23 +63,23 @@ map packageToSchema in umlRdbms
 
 map primitiveToName in umlRdbms
 {
-	uml(p : Package
+	uml(p : SimpleUML::Package[1]
 	|) {
-		prim : PrimitiveDataType
+		prim : SimpleUML::PrimitiveDataType[1]
 	|
 		prim.namespace = p;
 	}
 	check enforce rdbms() {
-		sqlType : String
+		sqlType : String[1]
 	|}
 
-	where(p2s : SimpleUML2RDBMS::PackageToSchema
+	where(p2s : SimpleUML2RDBMS::PackageToSchema[1]
 	|
 		p2s.umlPackage = p;) {
-		realize p2n : SimpleUML2RDBMS::PrimitiveToName
+		realize p2n : SimpleUML2RDBMS::PrimitiveToName[1]
 	|
 		p2n.owner := p2s;
-		p2n._primitive := prim;
+		p2n.primitive := prim;
 		p2n.typeName := sqlType;
 	}
 }
@@ -94,7 +94,7 @@ map integerToNumber in umlRdbms refines primitiveToName
 	}
 
 	where() {
-		realize p2n : SimpleUML2RDBMS::IntegerToNumber
+		realize p2n : SimpleUML2RDBMS::IntegerToNumber[1]
 	|}
 
 	map
@@ -116,7 +116,7 @@ map booleanToBoolean in umlRdbms refines primitiveToName
 	}
 
 	where() {
-		realize p2n : SimpleUML2RDBMS::BooleanToBoolean
+		realize p2n : SimpleUML2RDBMS::BooleanToBoolean[1]
 	|}
 
 	map
@@ -138,7 +138,7 @@ map stringToVarchar in umlRdbms refines primitiveToName
 	}
 
 	where() {
-		realize p2n : SimpleUML2RDBMS::StringToVarchar
+		realize p2n : SimpleUML2RDBMS::StringToVarchar[1]
 	|}
 
 	map
@@ -185,28 +185,28 @@ map flattening in umlRdbms
 
 map classToTable in umlRdbms
 {
-	check enforce uml(p : Package
+	check enforce uml(p : SimpleUML::Package[1]
 	|) {
-		realize c : Class
+		realize c : SimpleUML::Class[1]
 	|
 		c.kind := 'persistent';
 		c.namespace := p;
 	}
 
-	check enforce rdbms(s : Schema
+	check enforce rdbms(s : SimpleRDBMS::Schema[1]
 	|) {
-		realize t : Table
+		realize t : SimpleRDBMS::Table[1]
 	|
 		default t.kind := 'base';
 		t.schema := s;
 		t.kind <> 'meta';
 	}
 
-	where(p2s : SimpleUML2RDBMS::PackageToSchema
+	where(p2s : SimpleUML2RDBMS::PackageToSchema[1]
 	|
 		p2s.umlPackage = p;
 		p2s.schema = s;) {
-		realize c2t : SimpleUML2RDBMS::ClassToTable
+		realize c2t : SimpleUML2RDBMS::ClassToTable[1]
 	|
 		c2t.owner := p2s;
 		c2t.umlClass := c;
@@ -227,15 +227,14 @@ map classToTable in umlRdbms
 	map
 	{
 		check enforce rdbms() {
-			realize pk : Key,
-			realize pc : Column
+			realize pk : SimpleRDBMS::Key[1],
+			realize pc : SimpleRDBMS::Column[1]
 		|
 			pk.owner := t;
 			pk.kind := 'primary';
 			pc.owner := t;
 			default pc.keys := OrderedSet(SimpleRDBMS::Key){pk};
 			default pc.type := 'NUMBER';
-			pc.keys->includes(pk);
 		}
 
 		where() {
@@ -269,38 +268,37 @@ map classToTable in umlRdbms
 
 map associationToForeignKey in umlRdbms refines flattening
 {
-	check enforce uml(p : Package,
-		sc : Class,
-		dc : Class
+	check enforce uml(p : SimpleUML::Package[1],
+		sc : SimpleUML::Class[1],
+		dc : SimpleUML::Class[1]
 	|
 		sc.namespace = p;) {
-		realize a : Association
+		realize a : SimpleUML::Association[1]
 	|
 		default a.source := sc;
 		default a.destination := dc;
 		default a.namespace := p;
 	}
-	check enforce rdbms(s : Schema,
-		st : Table,
-		dt : Table,
-		rk : Key
+	check enforce rdbms(s : SimpleRDBMS::Schema[1],
+		st : SimpleRDBMS::Table[1],
+		dt : SimpleRDBMS::Table[1],
+		rk : SimpleRDBMS::Key[1]
 	|
 		st.schema = s;
 		rk.owner = dt;
 		rk.kind = 'primary';) {
-		realize fk : ForeignKey,
-		realize fc : Column
+		realize fk : SimpleRDBMS::ForeignKey[1],
+		realize fc : SimpleRDBMS::Column[1]
 	|
 		fk.owner := st;
 		fc.owner := st;
 		fk.refersTo := rk;
 		default fc.foreignKeys := OrderedSet(SimpleRDBMS::ForeignKey){fk};
-		fc.foreignKeys->includes(fk);
 	}
 
-	where(p2s : SimpleUML2RDBMS::PackageToSchema,
-		sc2t : SimpleUML2RDBMS::ClassToTable,
-		dc2t : SimpleUML2RDBMS::ClassToTable
+	where(p2s : SimpleUML2RDBMS::PackageToSchema[1],
+		sc2t : SimpleUML2RDBMS::ClassToTable[1],
+		dc2t : SimpleUML2RDBMS::ClassToTable[1]
 	|
 		sc2t.owner = p2s;
 		p2s.umlPackage = p;
@@ -309,7 +307,7 @@ map associationToForeignKey in umlRdbms refines flattening
 		dc2t.table = dt;
 		sc2t.umlClass = sc;
 		dc2t.umlClass = dc;) {
-		realize a2f : SimpleUML2RDBMS::AssociationToForeignKey
+		realize a2f : SimpleUML2RDBMS::AssociationToForeignKey[1]
 	|
 		a2f.owner := sc2t;
 		a2f.referenced := dc2t;
@@ -370,18 +368,18 @@ map associationToForeignKey in umlRdbms refines flattening
 
 map attributes in umlRdbms refines flattening
 {
-	check enforce uml(c : Class
+	check enforce uml(c : SimpleUML::Class[1]
 	|) {
-		realize a : Attribute
+		realize a : SimpleUML::Attribute[1]
 	|
 		default a.owner := c;
 	}
 
-	where(fao : SimpleUML2RDBMS::FromAttributeOwner
+	where(fao : SimpleUML2RDBMS::FromAttributeOwner[1]
 	|) {
-		realize fa : SimpleUML2RDBMS::FromAttribute
+		realize fa : SimpleUML2RDBMS::FromAttribute[1]
 	|
-		fa._attribute := a;
+		fa.attribute := a;
 		fa.owner := fao;
 	}
 
@@ -398,7 +396,7 @@ map attributes in umlRdbms refines flattening
 map classAttributes in umlRdbms refines attributes
 {
 
-	where(fao : SimpleUML2RDBMS::ClassToTable
+	where(fao : SimpleUML2RDBMS::ClassToTable[1]
 	|
 		fao.umlClass = c;) {}
 
@@ -414,15 +412,15 @@ map classAttributes in umlRdbms refines attributes
 
 map primitiveAttribute in umlRdbms refines attributes
 {
-	check enforce uml(t : PrimitiveDataType
+	check enforce uml(t : SimpleUML::PrimitiveDataType[1]
 	|) {
 		a.type := t;
 	}
 
-	where(p2n : SimpleUML2RDBMS::PrimitiveToName
+	where(p2n : SimpleUML2RDBMS::PrimitiveToName[1]
 	|
-		p2n._primitive = t;) {
-		realize fa : SimpleUML2RDBMS::AttributeToColumn
+		p2n.primitive = t;) {
+		realize fa : SimpleUML2RDBMS::AttributeToColumn[1]
 	|
 		fa.type := p2n;
 	}
@@ -438,13 +436,13 @@ map primitiveAttribute in umlRdbms refines attributes
 
 map complexAttributeAttributes in umlRdbms refines attributes
 {
-	check uml(ca : Attribute
+	check uml(ca : SimpleUML::Attribute[1]
 	|
 		ca.type = c;) {}
 
-	where(fao : SimpleUML2RDBMS::NonLeafAttribute
+	where(fao : SimpleUML2RDBMS::NonLeafAttribute[1]
 	|
-		fao._attribute = ca;) {}
+		fao.attribute = ca;) {}
 
 	map
 	{
@@ -457,13 +455,13 @@ map complexAttributeAttributes in umlRdbms refines attributes
 
 map complexAttribute in umlRdbms refines attributes
 {
-	check uml(t : Class
+	check uml(t : SimpleUML::Class[1]
 	|) {
 		a.type = t;
 	}
 
 	where() {
-		realize fa : SimpleUML2RDBMS::NonLeafAttribute
+		realize fa : SimpleUML2RDBMS::NonLeafAttribute[1]
 	|}
 
 	map
@@ -504,19 +502,19 @@ map complexAttributeComplexAttributes in umlRdbms refines complexAttributeAttrib
 
 map attributeColumns in umlRdbms
 {
-	check enforce rdbms(t : Table
+	check enforce rdbms(t : SimpleRDBMS::Table[1]
 	|) {
-		realize c : Column
+		realize c : SimpleRDBMS::Column[1]
 	|
 		c.owner := t;
 		c.keys->size() = 0;
 		c.foreignKeys->size() = 0;
 	}
 
-	where(c2t : SimpleUML2RDBMS::ClassToTable
+	where(c2t : SimpleUML2RDBMS::ClassToTable[1]
 	|
 		c2t.table = t;) {
-		realize a2c : SimpleUML2RDBMS::AttributeToColumn
+		realize a2c : SimpleUML2RDBMS::AttributeToColumn[1]
 	|
 		a2c.column := c;
 		default a2c.owner := c2t;
@@ -526,9 +524,9 @@ map attributeColumns in umlRdbms
 	map
 	{
 
-		where(p2n : SimpleUML2RDBMS::PrimitiveToName
+		where(p2n : SimpleUML2RDBMS::PrimitiveToName[1]
 		|) {
-			ct : String
+			ct : String[1]
 		|
 			a2c.type := p2n;
 			ct := c.type;
