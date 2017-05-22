@@ -5,9 +5,10 @@ Bundle-Vendor: %providerName
 Bundle-SymbolicName: org.eclipse.qvtd.umlx.tests;singleton:=true
 Bundle-Version: 0.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.qvtd.compiler,
- org.eclipse.qvtd.umlx,
- org.eclipse.qvtd.xtext.qvtcore.tests,
- org.eclipse.qvtd.xtext.qvtrelation.tests
+Require-Bundle: org.eclipse.qvtd.compiler;bundle-version="[0.14.0,1.0.0)",
+ org.eclipse.qvtd.umlx;bundle-version="[0.14.0,1.0.0)",
+ org.eclipse.qvtd.xtext.qvtcore.tests;bundle-version="[0.14.0,1.0.0)",
+ org.eclipse.qvtd.xtext.qvtrelation.tests;bundle-version="[0.14.0,1.0.0)",
+ org.eclipse.qvtd.examples.umlx.hstm2fstm;bundle-version="[0.14.0,1.0.0)"
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.umlx.tests

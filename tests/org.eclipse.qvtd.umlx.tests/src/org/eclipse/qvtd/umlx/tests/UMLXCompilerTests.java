@@ -60,8 +60,6 @@ public class UMLXCompilerTests extends LoadTestCase
 {
 	private static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.umlx.tests";
 	private static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
-	private static URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME +"/test-gen", true);
-	private static URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin", true);
 
 	protected static class MyQVT extends AbstractTestQVT
 	{
@@ -101,9 +99,22 @@ public class UMLXCompilerTests extends LoadTestCase
 		private final @NonNull Map<@NonNull Class<? extends Region>, @NonNull Integer> regionClass2count = new HashMap<>();
 
 		public MyQVT(@NonNull String testFolderName, @NonNull EPackage... eInstances) {
-			super(TESTS_BASE_URI, PROJECT_NAME, testFolderName);
-			installEPackages(eInstances);
+			this(TESTS_BASE_URI, PROJECT_NAME, testFolderName, "samples", eInstances);
 		}
+
+		public MyQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName, @Nullable String samplesFolderName, @NonNull EPackage... eInstances) {
+			super(testsBaseURI, projectName, testFolderName, samplesFolderName);
+			installEPackages(eInstances);
+			/*			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
+			getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
+				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE); */
+		}
+
 
 		public void addUsedGenPackage(@NonNull String resourcePath, @Nullable String fragment) {
 			if (usedGenPackages == null) {
@@ -130,16 +141,18 @@ public class UMLXCompilerTests extends LoadTestCase
 			return doCompile(testFileName, outputName, createCompilerChainOptions(basePrefix));
 		}
 
-		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(String testName, boolean isIncremental) {
+		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(String modelsSubPackageName, boolean isIncremental) {
+			URI testsJavaSrcURI = URI.createPlatformResourceURI("/" + projectName +"/test-gen", true);
+			URI testsJavaBinURI = URI.createPlatformResourceURI("/" + projectName + "/bin", true);
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, PROJECT_NAME + "." + testName);
+			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, projectName + "." + modelsSubPackageName);
 			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
 			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
 			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, testsJavaSrcURI);
 			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_INCREMENTAL_KEY, isIncremental);
-			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
+			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, testsJavaBinURI);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 			return options;
@@ -265,6 +278,40 @@ public class UMLXCompilerTests extends LoadTestCase
 			myQVT.dispose();
 			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage", exceptionThrown);
 			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage", exceptionThrown);
+		}
+	}
+
+	@Test
+	public void testUMLXCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Exception {
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.VARIABLES.setState(true);
+		//		boolean exceptionThrown = true;
+		URI testsBaseURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.umlx.hstm2fstm/bin/org/eclipse/qvtd/examples/umlx/hstm2fstm/", true);
+		String projectName = "org.eclipse.qvtd.examples.umlx.hstm2fstm";
+		MyQVT myQVT = new MyQVT(testsBaseURI, projectName, null, null);
+		//		MyQVT myQVT = new MyQVT("forward2reverse");
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("models",
+					"HierarchicalStateMachine2FlatStateMachine.umlx", "flat",
+					"http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", false);//,
+			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
+			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 7);
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("hier", "in/hier.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "out/generated_CG.xmi", "out/expected.xmi", null);//FlatStateMachineNormalizer.INSTANCE);
+			//			exceptionThrown = false;
+		}
+		finally {
+			myQVT.dispose();
 		}
 	}
 }
