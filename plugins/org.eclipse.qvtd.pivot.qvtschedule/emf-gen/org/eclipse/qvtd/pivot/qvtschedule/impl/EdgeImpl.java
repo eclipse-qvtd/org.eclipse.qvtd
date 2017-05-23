@@ -785,7 +785,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		StringBuilder s = new StringBuilder();
 		s.append(edgeRole);
 		s.append("-");
-		s.append(getClass().getSimpleName().replace("Impl",  ""));
+		s.append(eClass().getName());
 		s.append("(");
 		s.append(String.valueOf(sourceNode));
 		s.append("=>");

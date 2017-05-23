@@ -14,11 +14,11 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -27,10 +27,26 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Mapping Region</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getHeadNodes <em>Head Nodes</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public abstract class MappingRegionImpl extends RegionImpl implements MappingRegion {
+	/**
+	 * The cached value of the '{@link #getHeadNodes() <em>Head Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeadNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> headNodes;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,53 +67,81 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	}
 
 	/**
-	 * The subsets of guardVariables from which all guardVariables are to-one navigable.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> headNodes = null;
+	@Override
+	public EList<Node> getHeadNodes() {
+		if (headNodes == null) {
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.MAPPING_REGION__HEAD_NODES);
+		}
+		return headNodes;
+	}
 
-	/*	@Override
-	public void addEdge(@NonNull Edge edge) {
-		assert stronglyMatchedNodes == null;
-		assert unconditionalNodes == null;
-		assert conditionalNodes == null;
-		assert (basicGetSymbolName() == null) || !edge.isNavigation();
-		super.addEdge(edge);
-	} */
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+				return getHeadNodes();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-	/*	protected void addHeadNode(@NonNull Node headNode) {
-		assert basicGetSymbolName() == null;
-		if (headNodes != null) { assert !headNodes.contains(headNode); }
-		getHeadNodes().add(headNode);
-	} */
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+				getHeadNodes().clear();
+				getHeadNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-	/*	@Override
-	public void addNode(@NonNull Node node) {
-		assert stronglyMatchedNodes == null;
-		assert unconditionalNodes == null;
-		assert conditionalNodes == null;
-		assert basicGetSymbolName() == null;
-		super.addNode(node);
-	} */
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+				getHeadNodes().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+				return headNodes != null && !headNodes.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 	@Override
 	public @NonNull String getColor() {
 		return "green";
-	}
-
-	@Override
-	public final @NonNull List<Node> getHeadNodes() {
-		List<@NonNull Node> headNodes2 = headNodes;
-		assert headNodes2 != null;
-		//			headNodes = headNodes2 = new ArrayList<>(); //computeHeadNodes();
-		//		}
-		return headNodes2;
-	}
-
-	public final @NonNull List<Node> getHeadNodes2() {
-		List<@NonNull Node> headNodes2 = headNodes;
-		assert headNodes2 == null;
-		headNodes = headNodes2 = new ArrayList<>();
-		return headNodes2;
 	}
 
 	@Override

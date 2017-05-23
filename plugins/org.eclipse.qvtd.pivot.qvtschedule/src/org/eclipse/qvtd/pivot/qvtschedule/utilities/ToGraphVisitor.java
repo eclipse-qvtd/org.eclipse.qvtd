@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
-/** This code is recued but has never worked properly */
+/** This code is rescued but has never worked properly */
 public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder>
 {
 	public ToGraphVisitor(@NonNull GraphStringBuilder context) {

@@ -187,6 +187,13 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public @NonNull String toString() {
 		Role nodeRole = getNodeRole();
-		return nodeRole + "-" + getClass().getSimpleName().replace("Impl",  "") + "(" + (referredVariable != null ? referredVariable.toString() : getName()) + ")";
+		StringBuilder s = new StringBuilder();
+		s.append(nodeRole);
+		s.append("-");
+		s.append(eClass().getName());
+		s.append("(");
+		s.append(referredVariable != null ? referredVariable.toString() : getName());
+		s.append(")");
+		return s.toString();
 	}
 } //VariableNodeImpl

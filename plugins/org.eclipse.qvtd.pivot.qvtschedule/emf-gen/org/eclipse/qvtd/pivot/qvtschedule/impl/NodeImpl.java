@@ -1190,7 +1190,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		StringBuilder s = new StringBuilder();
 		s.append(nodeRole);
 		s.append("-");
-		s.append(getClass().getSimpleName().replace("Impl",  ""));
+		s.append(eClass().getName());
 		s.append("(");
 		s.append(getName());
 		s.append(" : ");

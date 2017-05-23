@@ -26,7 +26,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -218,7 +217,7 @@ public class RegionHelper
 		return dependencyNodes;
 	} */
 
-	protected @NonNull List<@NonNull Node> computeHeadNodes() {
+	protected @NonNull List<@NonNull Node> computeHeadNodes(@NonNull MappingRegion mappingRegion) {
 		//
 		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
 		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
@@ -244,7 +243,7 @@ public class RegionHelper
 			//			assert !navigableNode.isRealized();									// FIXME avoid even considering these nodes
 			//			Type type = navigableNode.getCompleteClass().getPrimaryClass();
 			//			assert !(type instanceof CollectionType);
-			//				System.err.println("No head created for CollectionType " + type + " in " + this);
+			//				System.out.println("No head created for CollectionType " + type + " in " + this);
 			//				continue;
 			//			}
 			//			Set<@NonNull Node> sourceClosure = new HashSet<>();
@@ -424,7 +423,7 @@ public class RegionHelper
 						}
 					}
 					else {
-						System.err.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
+						System.out.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
 					}
 				}
 				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
@@ -444,7 +443,7 @@ public class RegionHelper
 						}
 					}
 					else {
-						System.err.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
+						System.out.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
 					}
 				}
 			}
@@ -483,7 +482,7 @@ public class RegionHelper
 				node.setUtility(Node.Utility.DEPENDENCY);
 			}
 			else {
-				System.err.println("Dead node in " + this + " : " + node);
+				System.out.println("Dead node in " + this + " : " + node);
 				if (deadNodes == null) {
 					deadNodes = new HashSet<>();
 				}
@@ -531,8 +530,8 @@ public class RegionHelper
 	}
 
 	public @NonNull List<@NonNull Node> initHeadNodes() {
-		List<@NonNull Node> headNodes = computeHeadNodes();
-		((MappingRegionImpl)mappingRegion).getHeadNodes2().addAll(headNodes);
+		List<@NonNull Node> headNodes = computeHeadNodes(mappingRegion);
+		mappingRegion.getHeadNodes().addAll(headNodes);
 		return headNodes;
 	}
 

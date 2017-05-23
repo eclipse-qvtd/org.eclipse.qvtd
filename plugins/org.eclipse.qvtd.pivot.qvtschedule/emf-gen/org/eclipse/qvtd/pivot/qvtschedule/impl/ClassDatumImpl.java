@@ -423,7 +423,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 
 	@Override
 	public String toString() {
-		return completeClass.toString();
+		return completeClass.getName();
 	}
 
 } //ClassDatumImpl

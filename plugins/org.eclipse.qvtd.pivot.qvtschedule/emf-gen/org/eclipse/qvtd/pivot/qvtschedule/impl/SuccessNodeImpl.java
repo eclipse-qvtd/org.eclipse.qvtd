@@ -63,6 +63,11 @@ public class SuccessNodeImpl extends NodeImpl implements SuccessNode {
 	}
 
 	@Override
+	public boolean isMatched() {
+		return true;
+	}
+
+	@Override
 	public boolean isSuccess() {
 		return true;
 	}

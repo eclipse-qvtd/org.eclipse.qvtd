@@ -87,7 +87,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingAction/referredMapping"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingAction/requiredDatums"/>
     </genClasses>
-    <genClasses ecoreClass="QVTschedule.ecore#//MappingRegion"/>
+    <genClasses ecoreClass="QVTschedule.ecore#//MappingRegion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingRegion/headNodes"/>
+    </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//MicroMappingRegion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MicroMappingRegion/mappingRegion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//MicroMappingRegion/namePrefix"/>
