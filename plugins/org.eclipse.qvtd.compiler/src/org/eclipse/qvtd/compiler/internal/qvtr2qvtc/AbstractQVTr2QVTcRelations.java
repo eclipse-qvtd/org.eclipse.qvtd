@@ -40,7 +40,6 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -51,14 +50,12 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -70,18 +67,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * for each distinct enforcement of that relation and a further nested AbstractOtherRelationDomain2CoreDomain for each
  * other domain of the distinct enforcement.
  */
-/*public*/ abstract class AbstractQVTr2QVTcRelations extends QVTcoreHelper
+/*public*/ abstract class AbstractQVTr2QVTcRelations extends AbstractRelation2Mappings
 {
-	protected static interface EnforceableRelationDomain2CoreMapping
-	{
-		@NonNull Mapping getCoreMapping();
-	}
-
-	protected static interface OtherRelationDomain2CoreDomain
-	{
-		void synthesize() throws CompilerChainException;
-	}
-
 	/**
 	 * The AbstractEnforceableRelationDomain2CoreMapping supervises the conversion of the enforced
 	 * domains while enforcing a relation for a particular enforced domain.
@@ -1081,7 +1068,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		//			return whenRealizedVariable(cEnforcedBottomPattern, rVariable);
 		//		}
 
-		protected abstract @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings);
+		protected abstract @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings);
 
 		/**
 		 * Transform a rule implemented by a black box into an enforcement operation
@@ -1287,33 +1274,23 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			//
 			//			Set<@NonNull Variable> rEnforcedDomainGuardVariables = getEnforcedDomainGuardVariables(rEnforcedBottomDomainVariables);
 			// Relation Calls
-			boolean isAbstract = rRelation.isIsAbstract();
-			if (isAbstract) {
-				toString();
-			}
-			if (!isAbstract) {
-				mapWhereBottomPredicates(rWhereBottomPredicates);
-			}
+			mapWhereBottomPredicates(rWhereBottomPredicates);
 			//			mapVariables(rEnforcedDomainGuardVariables, cEnforcedGuardPattern);
 			//			mapVariables(rMiddleBottomDomainVariables, cMiddleBottomPattern);
 			mapOtherDomainPatterns();
 			// Invoked here so the variables are instantiated
 			//			mapIncomingInvocation();			// Only for Invoked rather than Top relation
-			if (!isAbstract) {
-				mapOtherDomainVariables(rAllOtherReferredVariables);
-				mapWhenPattern();
-				mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);
-			}
+			mapOtherDomainVariables(rAllOtherReferredVariables);
+			mapWhenPattern();
+			mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);
 			mapEnforcedDomainPatterns();
-			if (!isAbstract) {
-				mapWherePattern();
-				if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duplication/irregularity
-					for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
-						variablesAnalysis.addTraceNavigationAssignment(rMemberVariable, true);
-					}
+			mapWherePattern();
+			if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duplication/irregularity
+				for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
+					variablesAnalysis.addTraceNavigationAssignment(rMemberVariable, true);
 				}
-				mapRelationImplementation();
 			}
+			mapRelationImplementation();
 			//			Rule rOverrides = rRelation.getOverrides();
 			//			if (rOverrides != null) {
 			//				AbstractQVTr2QVTcRelations overridesRelation2mapping = qvtr2qvtc.getRelation2Mappings(rOverride)relation2relation2mapping.get(rOverrides);
@@ -1328,27 +1305,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			return rRelationName + "::" + rEnforcedDomainName + " => " + cMapping.getName() + "::" + cEnforcedDomain.getName();
 		}
 	}
-
-	/**
-	 * The overall QVTr2QVTc transformation
-	 */
-	protected @NonNull final QVTr2QVTc qvtr2qvtc;
-
-	// Relations
-	/**
-	 * r: The relation being transformed
-	 */
-	protected final @NonNull Relation rRelation;
-
-	/**
-	 * The transformation containing the rRelation. i.e. rRelation.getOwningTransformation()
-	 */
-	protected final @NonNull RelationalTransformation rTransformation;
-
-	/**
-	 * The name of the rRelation. i.e. rRelation.getName()
-	 */
-	protected final @NonNull String rRelationName;
 
 	/**
 	 *  All variables that are defined or referenced in any way within the relation's containment tree.
@@ -1386,24 +1342,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	protected final @NonNull Set<@NonNull Relation> rAllOverrides = new HashSet<>();
 
-	// Core
-	/**
-	 * mt: The transformation containing the result mapping
-	 */
-	protected final @NonNull Transformation cTransformation;
-
 	protected AbstractQVTr2QVTcRelations(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
-		super(qvtr2qvtc.getEnvironmentFactory());
-		this.qvtr2qvtc = qvtr2qvtc;
-		this.rRelation = rRelation;
-		this.rTransformation = QVTrelationUtil.getTransformation(rRelation);
-		this.rRelationName = PivotUtil.getName(rRelation);
-		boolean isAbstract = rRelation.isIsAbstract();
+		super(qvtr2qvtc, rRelation);
+		assert !rRelation.isIsAbstract();
 		//
 		this.rWhenVariable2rTypedModel = new HashMap<>();
 		this.rWhenPredicates = new HashSet<>();
 		Pattern rWhenPattern = rRelation.getWhen();
-		if (!isAbstract && (rWhenPattern != null)) {
+		if (rWhenPattern != null) {
 			VariablesAnalysis.gatherReferredVariablesWithTypedModels(rWhenVariable2rTypedModel, rWhenPattern);
 			// FIXME	assert rWhenPattern.getBindsTo().equals(rWhenVariables);
 			//			rWhenPattern.getBindsTo().addAll(rWhenVariables);
@@ -1417,7 +1363,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.rWhereVariable2rTypedModel = new HashMap<>();
 		this.rWherePredicates = new HashSet<>();
 		Pattern rWherePattern = rRelation.getWhere();
-		if (!isAbstract && (rWherePattern != null)) {
+		if (rWherePattern != null) {
 			VariablesAnalysis.gatherReferredVariablesWithTypedModels(rWhereVariable2rTypedModel, rWherePattern);
 			// FIXME	assert rWherePattern.getBindsTo().equals(rWhereVariables);
 			//			rWherePattern.getBindsTo().addAll(rWhereVariables);
@@ -1429,27 +1375,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		//
 		this.rAllVariables = new HashSet<>();
-		if (!isAbstract) {
-			VariablesAnalysis.gatherReferredVariables(rAllVariables, QVTrelationUtil.getOwnedDomains(rRelation));
-			if (rWhenPattern != null) {
-				VariablesAnalysis.gatherReferredVariables(rAllVariables, rWhenPattern);
-			}
-			if (rWherePattern != null) {
-				VariablesAnalysis.gatherReferredVariables(rAllVariables, rWherePattern);
-			}
-			this.rSharedVariables = VariablesAnalysis.getMiddleDomainVariables(rRelation);
+		VariablesAnalysis.gatherReferredVariables(rAllVariables, QVTrelationUtil.getOwnedDomains(rRelation));
+		if (rWhenPattern != null) {
+			VariablesAnalysis.gatherReferredVariables(rAllVariables, rWhenPattern);
 		}
-		else {
-			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
-				rAllVariables.addAll(QVTrelationUtil.getRootVariables(rDomain));
-			}
-			this.rSharedVariables = new HashSet<>();
+		if (rWherePattern != null) {
+			VariablesAnalysis.gatherReferredVariables(rAllVariables, rWherePattern);
 		}
+		this.rSharedVariables = VariablesAnalysis.getMiddleDomainVariables(rRelation);
 		//
 		//
 		gatherOverrides(rRelation);
-		//
-		this.cTransformation = qvtr2qvtc.getCoreTransformation(rTransformation);
 	}
 
 	private void gatherOverrides(@NonNull Relation rOverriding) {
@@ -1464,15 +1400,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		};
 	}
 
-	/**
-	 * Create an AbstractEnforceableRelationDomain2CoreMapping for each Core Mapping that is to be synthesized.
-	 */
-	public abstract void analyze() throws CompilerChainException;
-
-	public @NonNull Relation getRelation() {
-		return rRelation;
-	}
-
+	@Override
 	public @NonNull EnforceableRelationDomain2CoreMapping getTopRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
 		throw new IllegalStateException();
 	}
@@ -1481,22 +1409,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return null;
 	}
 
-	public @NonNull EnforceableRelationDomain2CoreMapping getWhenRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
-		throw new IllegalStateException();
-	}
-
 	protected @Nullable Iterable<@NonNull RelationCallExp> getWhereInvocations() {
 		return null;
-	}
-
-	public @NonNull EnforceableRelationDomain2CoreMapping getWhereRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
-		throw new IllegalStateException();
-	}
-
-	public abstract void synthesize() throws CompilerChainException;
-
-	@Override
-	public @NonNull String toString() {
-		return PivotUtil.getName(rTransformation) + "::" + rRelationName;
 	}
 }

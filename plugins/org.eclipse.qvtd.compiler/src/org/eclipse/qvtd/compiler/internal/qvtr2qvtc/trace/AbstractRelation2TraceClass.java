@@ -142,7 +142,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		this.relation = relation;
 		String traceClassName = relationalTransformation2tracePackage.getNameGenerator().createTraceClassName(relation);
 		this.traceClass = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, traceClassName));
-		traceClass.setIsAbstract(relation.isIsAbstract());
+		//		traceClass.setIsAbstract(relation.isIsAbstract());
 		Pattern whenPattern = relation.getWhen();
 		if (whenPattern != null) {
 			for (@NonNull EObject whenExpression : new TreeIterable(whenPattern, false)) {

@@ -242,7 +242,7 @@ import com.google.common.collect.Iterables;
 			if (rOverriddenRelation != null) {
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
 				Mapping coreOverridingMapping = enforceableRelationDomain2coreMapping.getCoreMapping();
-				AbstractQVTr2QVTcRelations overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
+				Relation2Mappings overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);
@@ -255,7 +255,7 @@ import com.google.common.collect.Iterables;
 			if (rOverriddenRelation != null) {
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
 				Mapping coreOverridingMapping = enforceableRelationDomain2coreMapping.getCoreMapping();
-				AbstractQVTr2QVTcRelations overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
+				Relation2Mappings overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);
@@ -275,7 +275,7 @@ import com.google.common.collect.Iterables;
 		}
 
 		@Override
-		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings) {
+		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
 			return relation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
 		}
 	}
@@ -292,7 +292,7 @@ import com.google.common.collect.Iterables;
 		}
 
 		@Override
-		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings) {
+		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
 			return relation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
 		}
 	}

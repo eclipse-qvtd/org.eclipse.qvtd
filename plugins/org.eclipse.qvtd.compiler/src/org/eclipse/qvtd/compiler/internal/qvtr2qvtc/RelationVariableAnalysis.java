@@ -211,9 +211,6 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert !isRoot;
 			//			assert cWhenDomain == null;
 			//			assert cWhereDomain == null;
-			if (QVTrelationUtil.getContainingRelation(rVariable).isIsAbstract()) {
-				toString();
-			}
 			return Strategy.REALIZED_BOTTOM;
 		}
 		else if (rEnforcedTypedModel != null) {

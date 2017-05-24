@@ -285,7 +285,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	/**
 	 * The per-relation conversions.
 	 */
-	private @NonNull Map<@NonNull Relation, @NonNull AbstractQVTr2QVTcRelations> relation2relation2mapping = new HashMap<>();
+	private @NonNull Map<@NonNull Relation, @NonNull Relation2Mappings> relation2relation2mapping = new HashMap<>();
 
 	private @Nullable Property oclContainerProperty = null;
 
@@ -749,12 +749,12 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		//		}
 		mapQueries(rTransformation, cTransformation);
 		for (@NonNull Relation rRelation : rRelations) {
-			boolean isAbstract = rRelation.isIsAbstract();
-			if (isAbstract) {
-				toString();
+			Relation2Mappings relation2mappings;
+			if (rRelation.isIsAbstract()) {
+				QVTr2QVTc.SYNTHESIS.println("abstract " + rRelation);
+				relation2mappings = new Relation2AbstractMappings(this, rRelation);
 			}
-			AbstractQVTr2QVTcRelations relation2mappings;
-			if (rRelation.isIsTopLevel()) {
+			else if (rRelation.isIsTopLevel()) {
 				QVTr2QVTc.SYNTHESIS.println("topLevel " + rRelation);
 				relation2mappings = new TopLevelRelationToMappingForEnforcement(this, rRelation);
 			}
@@ -765,24 +765,20 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			relation2relation2mapping.put(rRelation, relation2mappings);
 		}
 		for (@NonNull Relation rRelation : rRelations) {
-			AbstractQVTr2QVTcRelations relation2mapping = relation2relation2mapping.get(rRelation);
+			Relation2Mappings relation2mapping = relation2relation2mapping.get(rRelation);
 			assert relation2mapping != null;
-			boolean isAbstract = rRelation.isIsAbstract();
-			if (isAbstract) {
-				toString();
-			}
 			relation2mapping.synthesize();
 		}
 		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedOperationsList(cTransformation));
 		CompilerUtil.normalizeNameables(QVTbaseUtil.getRule(cTransformation));
 	}
 
-	public void addRelation2Mappings(@NonNull AbstractQVTr2QVTcRelations relation2mappings) {
+	public void addRelation2Mappings(@NonNull Relation2Mappings relation2mappings) {
 		Relation rRelation = relation2mappings.getRelation();
 		relation2relation2mapping.put(rRelation, relation2mappings);
 	}
 
-	public @NonNull AbstractQVTr2QVTcRelations getRelation2Mappings(@NonNull Relation rRelation) {
+	public @NonNull Relation2Mappings getRelation2Mappings(@NonNull Relation rRelation) {
 		return ClassUtil.nonNullState(relation2relation2mapping.get(rRelation));
 	}
 
