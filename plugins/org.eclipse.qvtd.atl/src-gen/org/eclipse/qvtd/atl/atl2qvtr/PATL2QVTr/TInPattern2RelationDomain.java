@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -186,12 +186,12 @@ public interface TInPattern2RelationDomain extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Where In Pattern2 Relation Domain guard</em>' reference.
-	 * @see #setWhere_InPattern2RelationDomain_guard(SInPattern2RelationDomain_guard)
+	 * @see #setWhere_InPattern2RelationDomain_guard(TInPattern2RelationDomain_guard)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_Where_InPattern2RelationDomain_guard()
 	 * @model
 	 * @generated
 	 */
-	SInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard();
+	TInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain#getWhere_InPattern2RelationDomain_guard <em>Where In Pattern2 Relation Domain guard</em>}' reference.
@@ -201,6 +201,6 @@ public interface TInPattern2RelationDomain extends EObject {
 	 * @see #getWhere_InPattern2RelationDomain_guard()
 	 * @generated
 	 */
-	void setWhere_InPattern2RelationDomain_guard(SInPattern2RelationDomain_guard value);
+	void setWhere_InPattern2RelationDomain_guard(TInPattern2RelationDomain_guard value);
 
 } // TInPattern2RelationDomain

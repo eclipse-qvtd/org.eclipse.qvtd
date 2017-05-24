@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -31,6 +31,7 @@ import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallEx
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl#get_success <em>success</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl#getAExpression <em>AExpression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TOperationCallExp2OperationCallExpImpl#getRExpression <em>RExpression</em>}</li>
  * </ul>
@@ -38,6 +39,26 @@ import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallEx
  * @generated
  */
 public class TOperationCallExp2OperationCallExpImpl extends MinimalEObjectImpl.Container implements TOperationCallExp2OperationCallExp {
+	/**
+	 * The default value of the '{@link #get_success() <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_success()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean _SUCCESS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_success() <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_success()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean _success = _SUCCESS_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getAExpression() <em>AExpression</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -75,6 +96,27 @@ public class TOperationCallExp2OperationCallExpImpl extends MinimalEObjectImpl.C
 	@Override
 	protected EClass eStaticClass() {
 		return PATL2QVTrPackage.Literals.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean get_success() {
+		return _success;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_success(Boolean new_success) {
+		Boolean old_success = _success;
+		_success = new_success;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS, old_success, _success));
 	}
 
 	/**
@@ -161,6 +203,8 @@ public class TOperationCallExp2OperationCallExpImpl extends MinimalEObjectImpl.C
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS:
+				return get_success();
 			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION:
 				if (resolve) return getAExpression();
 				return basicGetAExpression();
@@ -179,6 +223,9 @@ public class TOperationCallExp2OperationCallExpImpl extends MinimalEObjectImpl.C
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS:
+				set_success((Boolean)newValue);
+				return;
 			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION:
 				setAExpression((OperationCallExp)newValue);
 				return;
@@ -197,6 +244,9 @@ public class TOperationCallExp2OperationCallExpImpl extends MinimalEObjectImpl.C
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS:
+				set_success(_SUCCESS_EDEFAULT);
+				return;
 			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION:
 				setAExpression((OperationCallExp)null);
 				return;
@@ -215,12 +265,30 @@ public class TOperationCallExp2OperationCallExpImpl extends MinimalEObjectImpl.C
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS:
+				return _SUCCESS_EDEFAULT == null ? _success != null : !_SUCCESS_EDEFAULT.equals(_success);
 			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION:
 				return aExpression != null;
 			case PATL2QVTrPackage.TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION:
 				return rExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (_success: ");
+		result.append(_success);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TOperationCallExp2OperationCallExpImpl

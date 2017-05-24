@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -76,18 +76,6 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD: {
-				SInPattern2RelationDomain_guard sInPattern2RelationDomain_guard = (SInPattern2RelationDomain_guard)theEObject;
-				T result = caseSInPattern2RelationDomain_guard(sInPattern2RelationDomain_guard);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION: {
-				SOclExpression2OCLExpression sOclExpression2OCLExpression = (SOclExpression2OCLExpression)theEObject;
-				T result = caseSOclExpression2OCLExpression(sOclExpression2OCLExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case PATL2QVTrPackage.THELPER2_FUNCTION: {
 				THelper2Function tHelper2Function = (THelper2Function)theEObject;
 				T result = caseTHelper2Function(tHelper2Function);
@@ -144,36 +132,6 @@ public class PATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SIn Pattern2 Relation Domain guard</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SIn Pattern2 Relation Domain guard</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSInPattern2RelationDomain_guard(SInPattern2RelationDomain_guard object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SOcl Expression2 OCL Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SOcl Expression2 OCL Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSOclExpression2OCLExpression(SOclExpression2OCLExpression object) {
-		return null;
 	}
 
 	/**

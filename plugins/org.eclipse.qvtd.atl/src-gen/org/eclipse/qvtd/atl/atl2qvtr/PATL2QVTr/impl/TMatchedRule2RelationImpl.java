@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -35,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl#get_success <em>success</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl#getAModule <em>AModule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl#getMatchedRule <em>Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TMatchedRule2RelationImpl#getRRule <em>RRule</em>}</li>
@@ -45,6 +46,26 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  * @generated
  */
 public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container implements TMatchedRule2Relation {
+	/**
+	 * The default value of the '{@link #get_success() <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_success()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean _SUCCESS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_success() <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_success()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean _success = _SUCCESS_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getAModule() <em>AModule</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -122,6 +143,27 @@ public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	protected EClass eStaticClass() {
 		return PATL2QVTrPackage.Literals.TMATCHED_RULE2_RELATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean get_success() {
+		return _success;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_success(Boolean new_success) {
+		Boolean old_success = _success;
+		_success = new_success;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TMATCHED_RULE2_RELATION__SUCCESS, old_success, _success));
 	}
 
 	/**
@@ -305,6 +347,8 @@ public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__SUCCESS:
+				return get_success();
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__AMODULE:
 				if (resolve) return getAModule();
 				return basicGetAModule();
@@ -331,6 +375,9 @@ public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__SUCCESS:
+				set_success((Boolean)newValue);
+				return;
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__AMODULE:
 				setAModule((Module)newValue);
 				return;
@@ -358,6 +405,9 @@ public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__SUCCESS:
+				set_success(_SUCCESS_EDEFAULT);
+				return;
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__AMODULE:
 				setAModule((Module)null);
 				return;
@@ -385,6 +435,8 @@ public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__SUCCESS:
+				return _SUCCESS_EDEFAULT == null ? _success != null : !_SUCCESS_EDEFAULT.equals(_success);
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__AMODULE:
 				return aModule != null;
 			case PATL2QVTrPackage.TMATCHED_RULE2_RELATION__MATCHED_RULE:
@@ -409,7 +461,9 @@ public class TMatchedRule2RelationImpl extends MinimalEObjectImpl.Container impl
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (ruleName: ");
+		result.append(" (_success: ");
+		result.append(_success);
+		result.append(", ruleName: ");
 		result.append(ruleName);
 		result.append(')');
 		return result.toString();

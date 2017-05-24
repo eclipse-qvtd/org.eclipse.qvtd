@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -65,98 +65,6 @@ public interface PATL2QVTrPackage extends EPackage {
 	PATL2QVTrPackage eINSTANCE = org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl <em>SIn Pattern2 Relation Domain guard</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSInPattern2RelationDomain_guard()
-	 * @generated
-	 */
-	int SIN_PATTERN2_RELATION_DOMAIN_GUARD = 0;
-
-	/**
-	 * The feature id for the '<em><b>APattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = 0;
-
-	/**
-	 * The feature id for the '<em><b>RRule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = 1;
-
-	/**
-	 * The number of structural features of the '<em>SIn Pattern2 Relation Domain guard</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIN_PATTERN2_RELATION_DOMAIN_GUARD_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>SIn Pattern2 Relation Domain guard</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIN_PATTERN2_RELATION_DOMAIN_GUARD_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl <em>SOcl Expression2 OCL Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSOclExpression2OCLExpression()
-	 * @generated
-	 */
-	int SOCL_EXPRESSION2_OCL_EXPRESSION = 1;
-
-	/**
-	 * The feature id for the '<em><b>AExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = 0;
-
-	/**
-	 * The feature id for the '<em><b>RExpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = 1;
-
-	/**
-	 * The number of structural features of the '<em>SOcl Expression2 OCL Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SOCL_EXPRESSION2_OCL_EXPRESSION_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>SOcl Expression2 OCL Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SOCL_EXPRESSION2_OCL_EXPRESSION_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl <em>THelper2 Function</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,7 +72,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTHelper2Function()
 	 * @generated
 	 */
-	int THELPER2_FUNCTION = 2;
+	int THELPER2_FUNCTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>ADef</b></em>' reference.
@@ -255,7 +163,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain()
 	 * @generated
 	 */
-	int TIN_PATTERN2_RELATION_DOMAIN = 3;
+	int TIN_PATTERN2_RELATION_DOMAIN = 1;
 
 	/**
 	 * The feature id for the '<em><b>APattern</b></em>' reference.
@@ -337,7 +245,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTInPattern2RelationDomain_guard()
 	 * @generated
 	 */
-	int TIN_PATTERN2_RELATION_DOMAIN_GUARD = 4;
+	int TIN_PATTERN2_RELATION_DOMAIN_GUARD = 2;
 
 	/**
 	 * The feature id for the '<em><b>AExpression</b></em>' reference.
@@ -428,7 +336,16 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTMatchedRule2Relation()
 	 * @generated
 	 */
-	int TMATCHED_RULE2_RELATION = 5;
+	int TMATCHED_RULE2_RELATION = 3;
+
+	/**
+	 * The feature id for the '<em><b>success</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMATCHED_RULE2_RELATION__SUCCESS = 0;
 
 	/**
 	 * The feature id for the '<em><b>AModule</b></em>' reference.
@@ -437,7 +354,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMATCHED_RULE2_RELATION__AMODULE = 0;
+	int TMATCHED_RULE2_RELATION__AMODULE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Matched Rule</b></em>' reference.
@@ -446,7 +363,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMATCHED_RULE2_RELATION__MATCHED_RULE = 1;
+	int TMATCHED_RULE2_RELATION__MATCHED_RULE = 2;
 
 	/**
 	 * The feature id for the '<em><b>RRule</b></em>' reference.
@@ -455,7 +372,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMATCHED_RULE2_RELATION__RRULE = 2;
+	int TMATCHED_RULE2_RELATION__RRULE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
@@ -464,7 +381,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMATCHED_RULE2_RELATION__REL_TX = 3;
+	int TMATCHED_RULE2_RELATION__REL_TX = 4;
 
 	/**
 	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
@@ -473,7 +390,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMATCHED_RULE2_RELATION__RULE_NAME = 4;
+	int TMATCHED_RULE2_RELATION__RULE_NAME = 5;
 
 	/**
 	 * The number of structural features of the '<em>TMatched Rule2 Relation</em>' class.
@@ -482,7 +399,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMATCHED_RULE2_RELATION_FEATURE_COUNT = 5;
+	int TMATCHED_RULE2_RELATION_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>TMatched Rule2 Relation</em>' class.
@@ -501,7 +418,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTModel2RelationalTransformation()
 	 * @generated
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION = 6;
+	int TMODEL2_RELATIONAL_TRANSFORMATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>3</b></em>' reference.
@@ -522,13 +439,22 @@ public interface PATL2QVTrPackage extends EPackage {
 	int TMODEL2_RELATIONAL_TRANSFORMATION__4 = 1;
 
 	/**
+	 * The feature id for the '<em><b>success</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS = 2;
+
+	/**
 	 * The feature id for the '<em><b>Module</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION__MODULE = 2;
+	int TMODEL2_RELATIONAL_TRANSFORMATION__MODULE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Rel Tx</b></em>' reference.
@@ -537,7 +463,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX = 3;
+	int TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tx Name</b></em>' attribute.
@@ -546,7 +472,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME = 4;
+	int TMODEL2_RELATIONAL_TRANSFORMATION__TX_NAME = 5;
 
 	/**
 	 * The number of structural features of the '<em>TModel2 Relational Transformation</em>' class.
@@ -555,7 +481,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMODEL2_RELATIONAL_TRANSFORMATION_FEATURE_COUNT = 5;
+	int TMODEL2_RELATIONAL_TRANSFORMATION_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>TModel2 Relational Transformation</em>' class.
@@ -574,7 +500,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclExpression2OCLExpression()
 	 * @generated
 	 */
-	int TOCL_EXPRESSION2_OCL_EXPRESSION = 7;
+	int TOCL_EXPRESSION2_OCL_EXPRESSION = 5;
 
 	/**
 	 * The feature id for the '<em><b>AExpression</b></em>' reference.
@@ -620,7 +546,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclModel2ModelParameter_create()
 	 * @generated
 	 */
-	int TOCL_MODEL2_MODEL_PARAMETER_CREATE = 8;
+	int TOCL_MODEL2_MODEL_PARAMETER_CREATE = 6;
 
 	/**
 	 * The feature id for the '<em><b>AModule</b></em>' reference.
@@ -693,7 +619,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOclModel2ModelParameter_from()
 	 * @generated
 	 */
-	int TOCL_MODEL2_MODEL_PARAMETER_FROM = 9;
+	int TOCL_MODEL2_MODEL_PARAMETER_FROM = 7;
 
 	/**
 	 * The feature id for the '<em><b>AModule</b></em>' reference.
@@ -766,7 +692,16 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getTOperationCallExp2OperationCallExp()
 	 * @generated
 	 */
-	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP = 10;
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP = 8;
+
+	/**
+	 * The feature id for the '<em><b>success</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS = 0;
 
 	/**
 	 * The feature id for the '<em><b>AExpression</b></em>' reference.
@@ -775,7 +710,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION = 0;
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__AEXPRESSION = 1;
 
 	/**
 	 * The feature id for the '<em><b>RExpression</b></em>' reference.
@@ -784,7 +719,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION = 1;
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__REXPRESSION = 2;
 
 	/**
 	 * The number of structural features of the '<em>TOperation Call Exp2 Operation Call Exp</em>' class.
@@ -793,7 +728,7 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_FEATURE_COUNT = 2;
+	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>TOperation Call Exp2 Operation Call Exp</em>' class.
@@ -804,70 +739,6 @@ public interface PATL2QVTrPackage extends EPackage {
 	 */
 	int TOPERATION_CALL_EXP2_OPERATION_CALL_EXP_OPERATION_COUNT = 0;
 
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard <em>SIn Pattern2 Relation Domain guard</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>SIn Pattern2 Relation Domain guard</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard
-	 * @generated
-	 */
-	EClass getSInPattern2RelationDomain_guard();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getAPattern <em>APattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>APattern</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getAPattern()
-	 * @see #getSInPattern2RelationDomain_guard()
-	 * @generated
-	 */
-	EReference getSInPattern2RelationDomain_guard_APattern();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getRRule <em>RRule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>RRule</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard#getRRule()
-	 * @see #getSInPattern2RelationDomain_guard()
-	 * @generated
-	 */
-	EReference getSInPattern2RelationDomain_guard_RRule();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression <em>SOcl Expression2 OCL Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>SOcl Expression2 OCL Expression</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression
-	 * @generated
-	 */
-	EClass getSOclExpression2OCLExpression();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getAExpression <em>AExpression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>AExpression</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getAExpression()
-	 * @see #getSOclExpression2OCLExpression()
-	 * @generated
-	 */
-	EReference getSOclExpression2OCLExpression_AExpression();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getRExpression <em>RExpression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>RExpression</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression#getRExpression()
-	 * @see #getSOclExpression2OCLExpression()
-	 * @generated
-	 */
-	EReference getSOclExpression2OCLExpression_RExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function <em>THelper2 Function</em>}'.
@@ -1130,6 +1001,17 @@ public interface PATL2QVTrPackage extends EPackage {
 	EClass getTMatchedRule2Relation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#get_success <em>success</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>success</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#get_success()
+	 * @see #getTMatchedRule2Relation()
+	 * @generated
+	 */
+	EAttribute getTMatchedRule2Relation__success();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getAModule <em>AModule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1215,6 +1097,17 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTModel2RelationalTransformation__4();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#get_success <em>success</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>success</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#get_success()
+	 * @see #getTModel2RelationalTransformation()
+	 * @generated
+	 */
+	EAttribute getTModel2RelationalTransformation__success();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TModel2RelationalTransformation#getModule <em>Module</em>}'.
@@ -1422,6 +1315,17 @@ public interface PATL2QVTrPackage extends EPackage {
 	EClass getTOperationCallExp2OperationCallExp();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#get_success <em>success</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>success</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#get_success()
+	 * @see #getTOperationCallExp2OperationCallExp()
+	 * @generated
+	 */
+	EAttribute getTOperationCallExp2OperationCallExp__success();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TOperationCallExp2OperationCallExp#getAExpression <em>AExpression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1466,58 +1370,6 @@ public interface PATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl <em>SIn Pattern2 Relation Domain guard</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SInPattern2RelationDomain_guardImpl
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSInPattern2RelationDomain_guard()
-		 * @generated
-		 */
-		EClass SIN_PATTERN2_RELATION_DOMAIN_GUARD = eINSTANCE.getSInPattern2RelationDomain_guard();
-
-		/**
-		 * The meta object literal for the '<em><b>APattern</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIN_PATTERN2_RELATION_DOMAIN_GUARD__APATTERN = eINSTANCE.getSInPattern2RelationDomain_guard_APattern();
-
-		/**
-		 * The meta object literal for the '<em><b>RRule</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIN_PATTERN2_RELATION_DOMAIN_GUARD__RRULE = eINSTANCE.getSInPattern2RelationDomain_guard_RRule();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl <em>SOcl Expression2 OCL Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.SOclExpression2OCLExpressionImpl
-		 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.PATL2QVTrPackageImpl#getSOclExpression2OCLExpression()
-		 * @generated
-		 */
-		EClass SOCL_EXPRESSION2_OCL_EXPRESSION = eINSTANCE.getSOclExpression2OCLExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>AExpression</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SOCL_EXPRESSION2_OCL_EXPRESSION__AEXPRESSION = eINSTANCE.getSOclExpression2OCLExpression_AExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>RExpression</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SOCL_EXPRESSION2_OCL_EXPRESSION__REXPRESSION = eINSTANCE.getSOclExpression2OCLExpression_RExpression();
-
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.THelper2FunctionImpl <em>THelper2 Function</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1719,6 +1571,14 @@ public interface PATL2QVTrPackage extends EPackage {
 		EClass TMATCHED_RULE2_RELATION = eINSTANCE.getTMatchedRule2Relation();
 
 		/**
+		 * The meta object literal for the '<em><b>success</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TMATCHED_RULE2_RELATION__SUCCESS = eINSTANCE.getTMatchedRule2Relation__success();
+
+		/**
 		 * The meta object literal for the '<em><b>AModule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1783,6 +1643,14 @@ public interface PATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TMODEL2_RELATIONAL_TRANSFORMATION__4 = eINSTANCE.getTModel2RelationalTransformation__4();
+
+		/**
+		 * The meta object literal for the '<em><b>success</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS = eINSTANCE.getTModel2RelationalTransformation__success();
 
 		/**
 		 * The meta object literal for the '<em><b>Module</b></em>' reference feature.
@@ -1943,6 +1811,14 @@ public interface PATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TOPERATION_CALL_EXP2_OPERATION_CALL_EXP = eINSTANCE.getTOperationCallExp2OperationCallExp();
+
+		/**
+		 * The meta object literal for the '<em><b>success</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOPERATION_CALL_EXP2_OPERATION_CALL_EXP__SUCCESS = eINSTANCE.getTOperationCallExp2OperationCallExp__success();
 
 		/**
 		 * The meta object literal for the '<em><b>AExpression</b></em>' reference feature.

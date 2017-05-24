@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -215,12 +215,12 @@ public interface TInPattern2RelationDomain_guard extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>When Ocl Expression2 OCL Expression</em>' reference.
-	 * @see #setWhen_OclExpression2OCLExpression(SOclExpression2OCLExpression)
+	 * @see #setWhen_OclExpression2OCLExpression(TOclExpression2OCLExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTInPattern2RelationDomain_guard_When_OclExpression2OCLExpression()
 	 * @model
 	 * @generated
 	 */
-	SOclExpression2OCLExpression getWhen_OclExpression2OCLExpression();
+	TOclExpression2OCLExpression getWhen_OclExpression2OCLExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard#getWhen_OclExpression2OCLExpression <em>When Ocl Expression2 OCL Expression</em>}' reference.
@@ -230,6 +230,6 @@ public interface TInPattern2RelationDomain_guard extends EObject {
 	 * @see #getWhen_OclExpression2OCLExpression()
 	 * @generated
 	 */
-	void setWhen_OclExpression2OCLExpression(SOclExpression2OCLExpression value);
+	void setWhen_OclExpression2OCLExpression(TOclExpression2OCLExpression value);
 
 } // TInPattern2RelationDomain_guard

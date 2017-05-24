@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -22,8 +22,8 @@ import org.eclipse.m2m.atl.common.ATL.InPattern;
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
 
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage;
-import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard;
 import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain;
+import org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TInPattern2RelationDomain_guard;
 
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -115,7 +115,7 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 	 * @generated
 	 * @ordered
 	 */
-	protected SInPattern2RelationDomain_guard where_InPattern2RelationDomain_guard;
+	protected TInPattern2RelationDomain_guard where_InPattern2RelationDomain_guard;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -314,10 +314,10 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard() {
+	public TInPattern2RelationDomain_guard getWhere_InPattern2RelationDomain_guard() {
 		if (where_InPattern2RelationDomain_guard != null && where_InPattern2RelationDomain_guard.eIsProxy()) {
 			InternalEObject oldWhere_InPattern2RelationDomain_guard = (InternalEObject)where_InPattern2RelationDomain_guard;
-			where_InPattern2RelationDomain_guard = (SInPattern2RelationDomain_guard)eResolveProxy(oldWhere_InPattern2RelationDomain_guard);
+			where_InPattern2RelationDomain_guard = (TInPattern2RelationDomain_guard)eResolveProxy(oldWhere_InPattern2RelationDomain_guard);
 			if (where_InPattern2RelationDomain_guard != oldWhere_InPattern2RelationDomain_guard) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD, oldWhere_InPattern2RelationDomain_guard, where_InPattern2RelationDomain_guard));
@@ -331,7 +331,7 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SInPattern2RelationDomain_guard basicGetWhere_InPattern2RelationDomain_guard() {
+	public TInPattern2RelationDomain_guard basicGetWhere_InPattern2RelationDomain_guard() {
 		return where_InPattern2RelationDomain_guard;
 	}
 
@@ -340,8 +340,8 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhere_InPattern2RelationDomain_guard(SInPattern2RelationDomain_guard newWhere_InPattern2RelationDomain_guard) {
-		SInPattern2RelationDomain_guard oldWhere_InPattern2RelationDomain_guard = where_InPattern2RelationDomain_guard;
+	public void setWhere_InPattern2RelationDomain_guard(TInPattern2RelationDomain_guard newWhere_InPattern2RelationDomain_guard) {
+		TInPattern2RelationDomain_guard oldWhere_InPattern2RelationDomain_guard = where_InPattern2RelationDomain_guard;
 		where_InPattern2RelationDomain_guard = newWhere_InPattern2RelationDomain_guard;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD, oldWhere_InPattern2RelationDomain_guard, where_InPattern2RelationDomain_guard));
@@ -400,7 +400,7 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 				setTmName((String)newValue);
 				return;
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD:
-				setWhere_InPattern2RelationDomain_guard((SInPattern2RelationDomain_guard)newValue);
+				setWhere_InPattern2RelationDomain_guard((TInPattern2RelationDomain_guard)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -430,7 +430,7 @@ public class TInPattern2RelationDomainImpl extends MinimalEObjectImpl.Container 
 				setTmName(TM_NAME_EDEFAULT);
 				return;
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN__WHERE_IN_PATTERN2_RELATION_DOMAIN_GUARD:
-				setWhere_InPattern2RelationDomain_guard((SInPattern2RelationDomain_guard)null);
+				setWhere_InPattern2RelationDomain_guard((TInPattern2RelationDomain_guard)null);
 				return;
 		}
 		super.eUnset(featureID);

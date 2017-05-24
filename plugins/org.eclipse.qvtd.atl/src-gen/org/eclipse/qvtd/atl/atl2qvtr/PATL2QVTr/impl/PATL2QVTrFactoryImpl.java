@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -64,8 +64,6 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case PATL2QVTrPackage.SIN_PATTERN2_RELATION_DOMAIN_GUARD: return createSInPattern2RelationDomain_guard();
-			case PATL2QVTrPackage.SOCL_EXPRESSION2_OCL_EXPRESSION: return createSOclExpression2OCLExpression();
 			case PATL2QVTrPackage.THELPER2_FUNCTION: return createTHelper2Function();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN: return createTInPattern2RelationDomain();
 			case PATL2QVTrPackage.TIN_PATTERN2_RELATION_DOMAIN_GUARD: return createTInPattern2RelationDomain_guard();
@@ -78,26 +76,6 @@ public class PATL2QVTrFactoryImpl extends EFactoryImpl implements PATL2QVTrFacto
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SInPattern2RelationDomain_guard createSInPattern2RelationDomain_guard() {
-		SInPattern2RelationDomain_guardImpl sInPattern2RelationDomain_guard = new SInPattern2RelationDomain_guardImpl();
-		return sInPattern2RelationDomain_guard;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SOclExpression2OCLExpression createSOclExpression2OCLExpression() {
-		SOclExpression2OCLExpressionImpl sOclExpression2OCLExpression = new SOclExpression2OCLExpressionImpl();
-		return sOclExpression2OCLExpression;
 	}
 
 	/**

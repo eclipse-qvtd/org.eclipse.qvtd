@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#get_success <em>success</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getAModule <em>AModule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getMatchedRule <em>Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#getRRule <em>RRule</em>}</li>
@@ -39,6 +40,32 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  * @generated
  */
 public interface TMatchedRule2Relation extends EObject {
+	/**
+	 * Returns the value of the '<em><b>success</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>success</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>success</em>' attribute.
+	 * @see #set_success(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.PATL2QVTrPackage#getTMatchedRule2Relation__success()
+	 * @model
+	 * @generated
+	 */
+	Boolean get_success();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.TMatchedRule2Relation#get_success <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>success</em>' attribute.
+	 * @see #get_success()
+	 * @generated
+	 */
+	void set_success(Boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>AModule</b></em>' reference.
 	 * <!-- begin-user-doc -->

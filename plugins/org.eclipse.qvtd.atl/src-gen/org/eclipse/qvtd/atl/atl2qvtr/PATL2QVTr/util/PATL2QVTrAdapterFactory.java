@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -78,14 +78,6 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	protected PATL2QVTrSwitch<@Nullable Adapter> modelSwitch =
 		new PATL2QVTrSwitch<@Nullable Adapter>() {
 			@Override
-			public Adapter caseSInPattern2RelationDomain_guard(SInPattern2RelationDomain_guard object) {
-				return createSInPattern2RelationDomain_guardAdapter();
-			}
-			@Override
-			public Adapter caseSOclExpression2OCLExpression(SOclExpression2OCLExpression object) {
-				return createSOclExpression2OCLExpressionAdapter();
-			}
-			@Override
 			public Adapter caseTHelper2Function(THelper2Function object) {
 				return createTHelper2FunctionAdapter();
 			}
@@ -140,34 +132,6 @@ public class PATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard <em>SIn Pattern2 Relation Domain guard</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SInPattern2RelationDomain_guard
-	 * @generated
-	 */
-	public Adapter createSInPattern2RelationDomain_guardAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression <em>SOcl Expression2 OCL Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.SOclExpression2OCLExpression
-	 * @generated
-	 */
-	public Adapter createSOclExpression2OCLExpressionAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.THelper2Function <em>THelper2 Function</em>}'.

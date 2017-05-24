@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
  * ;All rights reserved. This program and the accompanying materials
  * ;are made available under the terms of the Eclipse Public License v1.0
  * ;which accompanies this distribution, and is available at
@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#get_3 <em>3</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#get_4 <em>4</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#get_success <em>success</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getModule <em>Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getRelTx <em>Rel Tx</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.PATL2QVTr.impl.TModel2RelationalTransformationImpl#getTxName <em>Tx Name</em>}</li>
@@ -63,6 +64,26 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * @ordered
 	 */
 	protected RelationModel _4;
+
+	/**
+	 * The default value of the '{@link #get_success() <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_success()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean _SUCCESS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_success() <em>success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_success()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean _success = _SUCCESS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getModule() <em>Module</em>}' reference.
@@ -204,6 +225,27 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean get_success() {
+		return _success;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_success(Boolean new_success) {
+		Boolean old_success = _success;
+		_success = new_success;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS, old_success, _success));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Module getModule() {
 		if (module != null && module.eIsProxy()) {
 			InternalEObject oldModule = (InternalEObject)module;
@@ -310,6 +352,8 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4:
 				if (resolve) return get_4();
 				return basicGet_4();
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS:
+				return get_success();
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				if (resolve) return getModule();
 				return basicGetModule();
@@ -335,6 +379,9 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4:
 				set_4((RelationModel)newValue);
+				return;
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS:
+				set_success((Boolean)newValue);
 				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				setModule((Module)newValue);
@@ -363,6 +410,9 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4:
 				set_4((RelationModel)null);
 				return;
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS:
+				set_success(_SUCCESS_EDEFAULT);
+				return;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				setModule((Module)null);
 				return;
@@ -388,6 +438,8 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 				return _3 != null;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__4:
 				return _4 != null;
+			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__SUCCESS:
+				return _SUCCESS_EDEFAULT == null ? _success != null : !_SUCCESS_EDEFAULT.equals(_success);
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__MODULE:
 				return module != null;
 			case PATL2QVTrPackage.TMODEL2_RELATIONAL_TRANSFORMATION__REL_TX:
@@ -408,7 +460,9 @@ public class TModel2RelationalTransformationImpl extends MinimalEObjectImpl.Cont
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (txName: ");
+		result.append(" (_success: ");
+		result.append(_success);
+		result.append(", txName: ");
 		result.append(txName);
 		result.append(')');
 		return result.toString();
