@@ -71,6 +71,10 @@ class NodeMerger
 		assert newNode2 == null;
 		for (@NonNull Node oldNode : oldNodes) {
 			newNode2 = newNode = oldNode.createNode(nodeRole, newRegion);
+			if (oldNode.isHead()) {
+				newNode2.setHead();
+				newRegion.getHeadNodes().add(newNode2);
+			}
 			newNode2.setUtility(nodeUtility);
 			break;
 		}
