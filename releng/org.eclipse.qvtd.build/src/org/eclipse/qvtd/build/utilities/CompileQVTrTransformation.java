@@ -141,7 +141,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 				"ATL2QVTr.qvtr", "qvtr",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/atl2qvtr/ATL2QVTr", false); //,
 		} catch (Exception e) {
-			issues.addError(this, e.getMessage());;
+			issues.addError(this, "Failed to compile 'ATL2QVTr.qvtr'", null, e, null);
 		}
 		finally {
 			myQVT.dispose();
