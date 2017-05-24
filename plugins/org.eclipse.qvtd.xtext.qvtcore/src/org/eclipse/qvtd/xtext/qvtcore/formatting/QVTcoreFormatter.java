@@ -130,14 +130,14 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 	}
 
 	protected void configureQualifiedPackageCS(FormattingConfig c, QualifiedPackageCSElements a) {
-		c.setLinewrap(2).before(a.getPackageKeyword_0());
+		c.setLinewrap(2).before(a.getGroup());
 		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
 		setBraces(c, a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
 	}
 
 	protected void configureQueryCS(FormattingConfig c, QueryCSElements a) {
-		c.setLinewrap(2).before(a.getIsTransientAssignment_0());
+		c.setLinewrap(2).before(a.getGroup());
 		c.setNoSpace().around(a.getLeftParenthesisKeyword_4());
 		c.setNoSpace().around(a.getLeftParenthesisKeyword_4());
 		c.setNoSpace().before(a.getCommaKeyword_5_1_0());
@@ -154,7 +154,7 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 	}
 
 	protected void configureTransformationCS(FormattingConfig c, TransformationCSElements a) {
-		c.setLinewrap(2).before(a.getTransformationKeyword_0());
+		c.setLinewrap(2).before(a.getGroup());
 		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_4_1());
@@ -204,7 +204,7 @@ public class QVTcoreFormatter extends AbstractEssentialOCLFormatter
 		configureTransformationCS(c, f.getTransformationCSAccess());
 		{
 			MappingCSElements a = f.getMappingCSAccess();
-			c.setLinewrap(2).before(a.getMapKeyword_2());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
 			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
 			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_8(), a.getOwnedDomainsAssignment_8());

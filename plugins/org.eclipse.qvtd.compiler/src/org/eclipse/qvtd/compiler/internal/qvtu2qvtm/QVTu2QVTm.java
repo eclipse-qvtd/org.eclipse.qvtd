@@ -113,6 +113,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 			Mapping mMapping = QVTcoreFactory.eINSTANCE.createMapping();
 			context.addTrace(mIn, mMapping);
+			mMapping.setIsAbstract(mIn.isIsAbstract());
 			context.pushScope(mMapping);
 			try {
 				MergedMapping mergedMapping = new MergedMapping(this, mIn);

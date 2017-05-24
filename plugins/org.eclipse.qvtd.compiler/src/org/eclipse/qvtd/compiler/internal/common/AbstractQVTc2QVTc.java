@@ -143,6 +143,7 @@ public abstract class AbstractQVTc2QVTc
 		protected void doMapping(@NonNull Mapping mIn, @NonNull Mapping mOut) {
 			context.addTrace(mIn, mOut);
 			mOut.setName(mIn.getName());
+			mOut.setIsAbstract(mIn.isIsAbstract());
 			mOut.setGuardPattern(create(mIn.getGuardPattern()));
 			mOut.setBottomPattern(create(mIn.getBottomPattern()));
 			createAll(mIn.getDomain(), mOut.getDomain());

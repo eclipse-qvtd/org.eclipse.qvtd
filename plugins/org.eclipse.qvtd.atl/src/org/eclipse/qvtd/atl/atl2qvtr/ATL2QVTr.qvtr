@@ -181,7 +181,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::OclExpression <=> ocl::OCLExpression
 		 */
-		relation OclExpression2OCLExpression {
+		abstract relation OclExpression2OCLExpression {
 			/*enforce*/ domain atl aExpression : OclExpression {
 			};	   
 			enforce domain qvtr rExpression : OCLExpression {

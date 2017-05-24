@@ -442,6 +442,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		assert (coreMapping == null);
 		coreMapping = helper.createMapping(name);
 		putGlobalTrace(coreMapping, relation);
+		coreMapping.setIsAbstract(relation.isIsAbstract());
 		coreMapping.setTransformation(cTransformation);
 		name2mapping.put(name, coreMapping);
 		return coreMapping;

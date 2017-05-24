@@ -134,14 +134,14 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();
-			c.setLinewrap(2).before(a.getPackageKeyword_0());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
 			setBraces(c, a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
 		}
 		{
 			QueryCSElements a = f.getQueryCSAccess();
-			c.setLinewrap(2).before(a.getIsTransientAssignment_0());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_3());
 			c.setNoSpace().before(a.getCommaKeyword_4_1_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_5());
