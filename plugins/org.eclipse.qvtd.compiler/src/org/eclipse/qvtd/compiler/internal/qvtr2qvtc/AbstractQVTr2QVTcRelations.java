@@ -72,17 +72,27 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  */
 /*public*/ abstract class AbstractQVTr2QVTcRelations extends QVTcoreHelper
 {
+	protected static interface EnforceableRelationDomain2CoreMapping
+	{
+		@NonNull Mapping getCoreMapping();
+	}
+
+	protected static interface OtherRelationDomain2CoreDomain
+	{
+		void synthesize() throws CompilerChainException;
+	}
+
 	/**
 	 * The AbstractEnforceableRelationDomain2CoreMapping supervises the conversion of the enforced
 	 * domains while enforcing a relation for a particular enforced domain.
 	 */
-	protected abstract class AbstractEnforceableRelationDomain2CoreMapping
+	protected abstract class AbstractEnforceableRelationDomain2CoreMapping implements EnforceableRelationDomain2CoreMapping
 	{
 		/**
 		 * The AbstractOtherRelationDomain2CoreDomain supervises the conversion of one of the not-enforced
 		 * domains while enforcing a relation for a particular enforced domain.
 		 */
-		protected abstract class AbstractOtherRelationDomain2CoreDomain
+		protected abstract class AbstractOtherRelationDomain2CoreDomain implements OtherRelationDomain2CoreDomain
 		{
 			// relations
 			/**
@@ -378,6 +388,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 			}
 
+			@Override
 			public void synthesize() throws CompilerChainException {
 				List<@NonNull TemplateExp> rOtherTemplateExpressions = getRootTemplateExpressions(rOtherDomain);
 				for (@NonNull TemplateExp rOtherTemplateExpression : rOtherTemplateExpressions) {
@@ -469,7 +480,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		/**
 		 * The conversion for each other domains sharing the parent of this domain
 		 */
-		protected final @NonNull List<@NonNull AbstractOtherRelationDomain2CoreDomain> otherDomain2coreDomains;
+		protected final @NonNull List<@NonNull OtherRelationDomain2CoreDomain> otherDomain2coreDomains;
 		/**
 		 *  All variables defined in other domains
 		 */
@@ -677,7 +688,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			return coreDomain;
 		}
 
-		protected abstract @NonNull AbstractOtherRelationDomain2CoreDomain createOtherDomain2CoreDomain(@NonNull RelationDomain rRelationDomain);
+		protected abstract @NonNull OtherRelationDomain2CoreDomain createOtherDomain2CoreDomain(@NonNull RelationDomain rRelationDomain);
 
 		protected abstract @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException;
 
@@ -695,6 +706,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			throw new IllegalStateException();
 		}
 
+		@Override
 		public @NonNull Mapping getCoreMapping() {
 			return cMapping;
 		}
@@ -1037,7 +1049,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		// IROppositeDomainsToMappingForEnforcement
 		protected void mapOtherDomainPatterns() throws CompilerChainException {
-			for (@NonNull AbstractOtherRelationDomain2CoreDomain otherDomain2coreDomain : otherDomain2coreDomains) {
+			for (@NonNull OtherRelationDomain2CoreDomain otherDomain2coreDomain : otherDomain2coreDomains) {
 				otherDomain2coreDomain.synthesize();
 			}
 		}
@@ -1069,7 +1081,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		//			return whenRealizedVariable(cEnforcedBottomPattern, rVariable);
 		//		}
 
-		protected abstract @NonNull AbstractEnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings);
+		protected abstract @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull AbstractQVTr2QVTcRelations relation2Mappings);
 
 		/**
 		 * Transform a rule implemented by a black box into an enforcement operation
@@ -1275,23 +1287,33 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			//
 			//			Set<@NonNull Variable> rEnforcedDomainGuardVariables = getEnforcedDomainGuardVariables(rEnforcedBottomDomainVariables);
 			// Relation Calls
-			mapWhereBottomPredicates(rWhereBottomPredicates);
+			boolean isAbstract = rRelation.isIsAbstract();
+			if (isAbstract) {
+				toString();
+			}
+			if (!isAbstract) {
+				mapWhereBottomPredicates(rWhereBottomPredicates);
+			}
 			//			mapVariables(rEnforcedDomainGuardVariables, cEnforcedGuardPattern);
 			//			mapVariables(rMiddleBottomDomainVariables, cMiddleBottomPattern);
 			mapOtherDomainPatterns();
 			// Invoked here so the variables are instantiated
 			//			mapIncomingInvocation();			// Only for Invoked rather than Top relation
-			mapOtherDomainVariables(rAllOtherReferredVariables);
-			mapWhenPattern();
-			mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);
-			mapEnforcedDomainPatterns();
-			mapWherePattern();
-			if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duploication/irregularity
-				for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
-					variablesAnalysis.addTraceNavigationAssignment(rMemberVariable, true);
-				}
+			if (!isAbstract) {
+				mapOtherDomainVariables(rAllOtherReferredVariables);
+				mapWhenPattern();
+				mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);
 			}
-			mapRelationImplementation();
+			mapEnforcedDomainPatterns();
+			if (!isAbstract) {
+				mapWherePattern();
+				if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duplication/irregularity
+					for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
+						variablesAnalysis.addTraceNavigationAssignment(rMemberVariable, true);
+					}
+				}
+				mapRelationImplementation();
+			}
 			//			Rule rOverrides = rRelation.getOverrides();
 			//			if (rOverrides != null) {
 			//				AbstractQVTr2QVTcRelations overridesRelation2mapping = qvtr2qvtc.getRelation2Mappings(rOverride)relation2relation2mapping.get(rOverrides);
@@ -1376,11 +1398,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.rRelation = rRelation;
 		this.rTransformation = QVTrelationUtil.getTransformation(rRelation);
 		this.rRelationName = PivotUtil.getName(rRelation);
+		boolean isAbstract = rRelation.isIsAbstract();
 		//
 		this.rWhenVariable2rTypedModel = new HashMap<>();
 		this.rWhenPredicates = new HashSet<>();
 		Pattern rWhenPattern = rRelation.getWhen();
-		if (rWhenPattern != null) {
+		if (!isAbstract && (rWhenPattern != null)) {
 			VariablesAnalysis.gatherReferredVariablesWithTypedModels(rWhenVariable2rTypedModel, rWhenPattern);
 			// FIXME	assert rWhenPattern.getBindsTo().equals(rWhenVariables);
 			//			rWhenPattern.getBindsTo().addAll(rWhenVariables);
@@ -1394,7 +1417,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.rWhereVariable2rTypedModel = new HashMap<>();
 		this.rWherePredicates = new HashSet<>();
 		Pattern rWherePattern = rRelation.getWhere();
-		if (rWherePattern != null) {
+		if (!isAbstract && (rWherePattern != null)) {
 			VariablesAnalysis.gatherReferredVariablesWithTypedModels(rWhereVariable2rTypedModel, rWherePattern);
 			// FIXME	assert rWherePattern.getBindsTo().equals(rWhereVariables);
 			//			rWherePattern.getBindsTo().addAll(rWhereVariables);
@@ -1406,15 +1429,23 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		//
 		this.rAllVariables = new HashSet<>();
-		VariablesAnalysis.gatherReferredVariables(rAllVariables, QVTrelationUtil.getOwnedDomains(rRelation));
-		if (rWhenPattern != null) {
-			VariablesAnalysis.gatherReferredVariables(rAllVariables, rWhenPattern);
+		if (!isAbstract) {
+			VariablesAnalysis.gatherReferredVariables(rAllVariables, QVTrelationUtil.getOwnedDomains(rRelation));
+			if (rWhenPattern != null) {
+				VariablesAnalysis.gatherReferredVariables(rAllVariables, rWhenPattern);
+			}
+			if (rWherePattern != null) {
+				VariablesAnalysis.gatherReferredVariables(rAllVariables, rWherePattern);
+			}
+			this.rSharedVariables = VariablesAnalysis.getMiddleDomainVariables(rRelation);
 		}
-		if (rWherePattern != null) {
-			VariablesAnalysis.gatherReferredVariables(rAllVariables, rWherePattern);
+		else {
+			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
+				rAllVariables.addAll(QVTrelationUtil.getRootVariables(rDomain));
+			}
+			this.rSharedVariables = new HashSet<>();
 		}
 		//
-		this.rSharedVariables = VariablesAnalysis.getMiddleDomainVariables(rRelation);
 		//
 		gatherOverrides(rRelation);
 		//
@@ -1442,7 +1473,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return rRelation;
 	}
 
-	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getTopRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
+	public @NonNull EnforceableRelationDomain2CoreMapping getTopRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
 		throw new IllegalStateException();
 	}
 
@@ -1450,7 +1481,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return null;
 	}
 
-	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getWhenRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
+	public @NonNull EnforceableRelationDomain2CoreMapping getWhenRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
 		throw new IllegalStateException();
 	}
 
@@ -1458,7 +1489,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return null;
 	}
 
-	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getWhereRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
+	public @NonNull EnforceableRelationDomain2CoreMapping getWhereRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
 		throw new IllegalStateException();
 	}
 

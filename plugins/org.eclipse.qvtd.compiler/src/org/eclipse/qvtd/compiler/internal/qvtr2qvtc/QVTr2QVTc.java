@@ -749,6 +749,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		//		}
 		mapQueries(rTransformation, cTransformation);
 		for (@NonNull Relation rRelation : rRelations) {
+			boolean isAbstract = rRelation.isIsAbstract();
+			if (isAbstract) {
+				toString();
+			}
 			AbstractQVTr2QVTcRelations relation2mappings;
 			if (rRelation.isIsTopLevel()) {
 				QVTr2QVTc.SYNTHESIS.println("topLevel " + rRelation);
@@ -763,6 +767,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		for (@NonNull Relation rRelation : rRelations) {
 			AbstractQVTr2QVTcRelations relation2mapping = relation2relation2mapping.get(rRelation);
 			assert relation2mapping != null;
+			boolean isAbstract = rRelation.isIsAbstract();
+			if (isAbstract) {
+				toString();
+			}
 			relation2mapping.synthesize();
 		}
 		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedOperationsList(cTransformation));
