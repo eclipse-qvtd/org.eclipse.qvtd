@@ -245,6 +245,7 @@ public class LateConsumerMerger extends AbstractMerger
 	public static @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> merge(@NonNull ScheduledRegion scheduledRegion) {
 		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduledRegion);
 		lateMerger.merge();
+		lateMerger.prune();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			RegionUtil.getScheduleManager(scheduledRegion).writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
 		}
@@ -414,6 +415,14 @@ public class LateConsumerMerger extends AbstractMerger
 					}
 				}
 				RegionUtil.getScheduleManager(mergedRegion).writeDebugGraphs(mergedRegion, null);
+			}
+		}
+	}
+
+	private void prune() {
+		for (@NonNull List<@NonNull Region> oldRegions : newRegion2oldRegions.values()) {
+			for (@NonNull Region oldRegion : oldRegions) {
+				oldRegion.getOwningScheduledRegion().getOwnedRegions().remove(oldRegion);
 			}
 		}
 	}
