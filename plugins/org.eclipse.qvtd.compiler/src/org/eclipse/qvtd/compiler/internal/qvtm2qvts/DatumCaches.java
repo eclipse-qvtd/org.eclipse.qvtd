@@ -449,7 +449,11 @@ public class DatumCaches
 		return propertyDatum;
 	}
 
-	// Property datum analysis
+	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {  // FIXME Could this be more regular ?? <<success>> in the QVTm ??
+		org.eclipse.ocl.pivot.Class owningClass = QVTcoreUtil.getOwningClass(successProperty);
+		TypedModel typedModel = getTypedModel(owningClass);
+		return getPropertyDatum(typedModel, owningClass, successProperty);
+	}
 
 	private @NonNull TypedModel getTypedModel(@NonNull Element element) {
 		DomainUsage domainUsage = getUsage(element);

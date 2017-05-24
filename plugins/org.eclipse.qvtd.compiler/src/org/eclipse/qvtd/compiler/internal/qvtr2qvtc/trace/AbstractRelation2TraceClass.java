@@ -85,6 +85,11 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	private org.eclipse.ocl.pivot.@Nullable Class signatureClass = null;
 
 	/**
+	 * The Property that provides the success/failure/not-ready state of the traced mapping.
+	 */
+	private @Nullable Property successProperty = null;
+
+	/**
 	 * Each Relation2TraceClass which directly consumes this Relation2TraceClass.
 	 */
 	private final @NonNull List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = new ArrayList<>();
@@ -108,7 +113,6 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	 * Each Relation2TraceClass that is both transitively consumed by and consumes this Relation2TraceClass.
 	 */
 	private @Nullable Set<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses = null;
-
 
 	/**
 	 * RelationCallExp invocations within the when pattern.
@@ -153,6 +157,14 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 				if (whereExpression instanceof RelationCallExp) {
 					whereInvocations.add((RelationCallExp)whereExpression);
 				}
+			}
+		}
+		if (!relation.isIsAbstract()) {
+			if (relation.getOverridden() != null) {
+				getSuccessProperty();		// Overridden relation needs overriding success to control-execution.
+			}
+			else if (relationalTransformation2tracePackage.qvtr2qvtc.getIncomingWhenInvocationsOf(relation) != null) {
+				getSuccessProperty();		// Invoking relation needs invoked success to control execution.
 			}
 		}
 	}
@@ -438,6 +450,18 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		assert variableDeclaration2TraceProperty != null;
 		return variableDeclaration2TraceProperty.getSignatureProperty();
 	} */
+
+	//	@Override
+	protected @NonNull Property getSuccessProperty() {
+		Property successProperty2 = successProperty;
+		if (successProperty2 == null) {
+			Type booleanType = relationalTransformation2tracePackage.getBooleanType();
+			successProperty = successProperty2 = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME, booleanType);
+			successProperty2.setIsRequired(false);
+			traceClass.getOwnedProperties().add(successProperty2);
+		}
+		return successProperty2;
+	}
 
 	@Override
 	public org.eclipse.ocl.pivot.@NonNull Class getTraceClass() {

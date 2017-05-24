@@ -348,6 +348,10 @@ public abstract class ScheduleManager implements Adapter
 		return standardLibraryHelper;
 	}
 
+	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {
+		return datumCaches.getSuccessPropertyDatum(successProperty);
+	}
+
 	@Override
 	public Notifier getTarget() {
 		return scheduleModel;

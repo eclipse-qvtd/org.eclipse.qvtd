@@ -326,6 +326,10 @@ public class RelationalTransformation2TracePackage
 		return qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(traceClass, true, null, null);
 	}
 
+	public org.eclipse.ocl.pivot.@NonNull Class getBooleanType() {
+		return qvtr2qvtc.getStandardLibrary().getBooleanType();
+	}
+
 	/*	protected @NonNull Iterable<Relation2TraceClass.@NonNull Internal> getInvocation2TraceClasses(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
 		return ClassUtil.nonNullState(invocation2relation2traceClasses.get(rInvocation));
 	} */

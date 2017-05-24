@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -73,6 +74,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
@@ -88,6 +90,14 @@ public class RegionUtil extends QVTscheduleUtil
 		}
 	}
 
+	public static @Nullable Property basicGetSuccessProperty(@NonNull Node node) {
+		if (!isMiddle(node)) {
+			return null;
+		}
+		CompleteClass completeClass = node.getCompleteClass();
+		return completeClass.getProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME);
+	}
+
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
 		for (@NonNull Node firstNode : firstNodes) {
 			for (@NonNull Node secondNode : secondNodes) {
@@ -101,7 +111,6 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
-		assert phase != null;
 		Role edgeRole = phase;
 		CastEdge castEdge = QVTscheduleFactory.eINSTANCE.createCastEdge();
 		castEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
@@ -267,7 +276,6 @@ public class RegionUtil extends QVTscheduleUtil
 
 	public static @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
 		Role phase = mergeToLessKnownPhase(getNodeRole(sourceNode), getNodeRole(targetNode));
-		assert phase != null;
 		Role edgeRole = phase;
 		NavigationEdge edge = QVTscheduleFactory.eINSTANCE.createNavigationEdge();
 		edge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
@@ -441,6 +449,18 @@ public class RegionUtil extends QVTscheduleUtil
 		return node;
 	}
 
+	public static @NonNull SuccessNode createSuccessNode(@NonNull Region region) {
+		ScheduleManager scheduleManager = getScheduleManager(region);
+		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
+		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
+		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
+		Role nodeRole = Role.REALIZED;
+		SuccessNode node = QVTscheduleFactory.eINSTANCE.createSuccessNode();
+		node.initialize(nodeRole, region, "«success»", classDatumAnalysis.getClassDatum());
+		node.setHead();
+		return node;
+	}
+
 	public static @NonNull Node createTrueNode(@NonNull Region region) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
@@ -552,6 +572,12 @@ public class RegionUtil extends QVTscheduleUtil
 		return ScheduleManager.get(getScheduleModel(region));
 	}
 
+	public static @NonNull Property getSuccessProperty(@NonNull Node node) {
+		assert isMiddle(node);
+		CompleteClass completeClass = node.getCompleteClass();
+		return ClassUtil.nonNullState(completeClass.getProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME));
+	}
+
 	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		return ClassUtil.nonNullState(classDatumAnalysis.getClassDatum().getReferredTypedModel());
 	}
@@ -592,6 +618,13 @@ public class RegionUtil extends QVTscheduleUtil
 			return false;
 		}
 		return isUnconditional(typedElement);
+	}
+
+	/**
+	 * Return true if node is part of the middle (traced) domain.
+	 */
+	public static boolean isMiddle(@NonNull Node node) {
+		return getClassDatumAnalysis(node).getDomainUsage().isMiddle();
 	}
 
 	/*	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
