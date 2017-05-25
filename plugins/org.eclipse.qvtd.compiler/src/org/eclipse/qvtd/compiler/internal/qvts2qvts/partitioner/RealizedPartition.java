@@ -26,7 +26,7 @@ import com.google.common.collect.Iterables;
  */
 class RealizedPartition extends AbstractPartition
 {
-	public RealizedPartition(@NonNull Partitioner partitioner) {
+	public RealizedPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
 		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		Iterable<@NonNull Node> realizedMiddleNodes = partitioner.getRealizedMiddleNodes();

@@ -31,13 +31,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-public class Partitioner
+/**
+ * The MappingPartitioner supervises the partitioning of a mapping region into micromappings that avoid
+ * #scheduling hazards. It collaborates with an overall TransformationPartitioner for global analyses.
+ */
+public class MappingPartitioner
 {
 	/*	private static @NonNull Iterable<@NonNull NavigationEdge> getNavigableEdges(@NonNull Iterable<@NonNull NavigationEdge> edges) {
 		List<@NonNull NavigationEdge> navigableEdges = new ArrayList<>();
@@ -73,39 +76,6 @@ public class Partitioner
 		}
 		return traceNodes;
 	} */
-
-	public static @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
-		Set<@NonNull Property> corrolaryProperties = new HashSet<>();
-		for (@NonNull Region region : activeRegions) {
-			if (region instanceof MappingRegion) {
-				gatherCorrolaries(corrolaryProperties, (MappingRegion)region);
-			}
-		}
-		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
-		for (@NonNull Region region : activeRegions) {
-			if (region instanceof MappingRegion) {
-				Partitioner partitioner = new Partitioner(problemHandler, (MappingRegion)region, corrolaryProperties);
-				Iterables.addAll(partitionedRegions, partitioner.partition());
-			}
-		}
-		return partitionedRegions;
-	}
-
-	private static void gatherCorrolaries(@NonNull Set<@NonNull Property> corrolaryProperties, @NonNull MappingRegion region) {
-		List<@NonNull Node> middleNodes = new ArrayList<>();
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
-			if (!node.isTrue() && node.isPattern() && node.isRealized() && RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
-				middleNodes.add(node);
-			}
-		}
-		for (@NonNull Node node : middleNodes) {
-			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-				if (edge.isRealized() && edge.getEdgeTarget().isRealized()) {
-					corrolaryProperties.add(RegionUtil.getProperty(edge));
-				}
-			}
-		}
-	}
 
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull MappingRegion region;
@@ -153,7 +123,7 @@ public class Partitioner
 
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
-	public Partitioner(@NonNull ProblemHandler problemHandler, @NonNull MappingRegion region, @NonNull Set<@NonNull Property> corrolaryProperties) {
+	public MappingPartitioner(@NonNull ProblemHandler problemHandler, @NonNull MappingRegion region, @NonNull Set<@NonNull Property> corrolaryProperties) {
 		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
 		this.problemHandler = problemHandler;
 		this.region = region;
@@ -519,6 +489,7 @@ public class Partitioner
 		}
 		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
 	}
+
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
 		if (node.isHead()) {
 			return false;

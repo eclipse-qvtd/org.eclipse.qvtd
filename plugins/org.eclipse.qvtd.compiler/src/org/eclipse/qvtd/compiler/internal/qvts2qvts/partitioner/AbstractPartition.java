@@ -61,13 +61,13 @@ abstract class AbstractPartition
 		}
 
 	}
-	protected final @NonNull Partitioner partitioner;
+	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Edge> alreadyRealizedEdges;
 	private final @NonNull Map<@NonNull Node, @NonNull Role> node2nodeRole = new HashMap<>();
 	private final @NonNull Map<@NonNull Edge, @NonNull Role> edge2edgeRole = new HashMap<>();
 	private /*@LazyNonNull*/ PartitionForest forest = null;
 
-	protected AbstractPartition(@NonNull Partitioner partitioner) {
+	protected AbstractPartition(@NonNull MappingPartitioner partitioner) {
 		this.partitioner = partitioner;
 		this.alreadyRealizedEdges = partitioner.getAlreadyRealizedEdges();
 	}
