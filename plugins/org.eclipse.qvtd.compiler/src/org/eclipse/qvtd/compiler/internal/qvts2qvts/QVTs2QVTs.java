@@ -412,7 +412,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				NodeConnection headConnection = createHeadConnection(region, headNode);
 				if (headConnection == null) {
 					scheduleManager.addRegionError(region, "createHeadConnections abandoned for " + headNode);
-					scheduleManager.addRegionError(region, "createHeadConnections abandoned for " + headNode);
 					headConnection = createHeadConnection(region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
@@ -1087,7 +1086,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		for (@NonNull Region region : activeRegions) {
 		//			System.out.println("activeRegions " + region);
 		//		}
-		Iterable<@NonNull MappingRegion> partitionedRegions = TransformationPartitioner.partition(problemHandler, activeRegions);
+		Iterable<@NonNull MappingRegion> partitionedRegions = TransformationPartitioner.partition(scheduleManager, problemHandler, activeRegions);
 		if (!Iterables.isEmpty(partitionedRegions)) {
 			//			for (@NonNull Region region : partitionedRegions) {
 			//				System.out.println("partitionedRegions " + region);

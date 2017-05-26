@@ -22,28 +22,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
  * The SpeculationPartition identifies the nodes and edges required in a speculation micro-mapping
- * which creates the speculated trace with predicates solely on constant/loaded inputs.
+ * which creates the speculated trace with predicates solely on constant inputs, loaded inputs
+ * and acyclic predicated nodes.
  */
 class SpeculationPartition extends AbstractPartition
 {
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
-		@SuppressWarnings("unused") String name = partitioner.getRegion().getName();
+		@SuppressWarnings("unused") String name = region.getName();
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
-		//	All traced loaded nodes are retained as is to be traced by the speculation.
-		//	NB. Unreachable loaded nodes are effectively predicates nd so are deferred.
 		//
-		//		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-		Node node = partitioner.getTraceNode();
-		if (node != null) {
-			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
-				Role speculationNodeRole = RegionUtil.asSpeculation(RegionUtil.getNodeRole(node));
-				addNode(node, speculationNodeRole);
-				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
-				}
-			}
+		addNode(partitioner.getTraceNode(), Role.SPECULATION);
+		//
+		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
+		//	NB. Unreachable loaded nodes are effectively predicates and so are deferred.
+		//
+		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
+			addReachableOldAcyclicNodes(node);
 		}
 		//
 		//	Perform any required computations.
@@ -54,22 +50,24 @@ class SpeculationPartition extends AbstractPartition
 		//
 		resolvePredicates();
 		//
+		//	Ensure that re-used trace classes do not lead to ambiguous mapings.
+		//
+		resolveDisambiguations();
+		//
 		//	Join up the edges.
 		//
 		resolveEdgeRoles();
 	}
 
 	/**
-	 * Add all nodes, including node, that are constant or loaded and reachable by to-one navigation from node.
+	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
 	 */
-	protected void addReachableConstantOrLoadedNodes(@NonNull Node node) {
-		if (/*node.isMatched() &&*/ (node.isConstant() || node.isLoaded())) {
-			if (!hasNode(node)) {
-				addNode(node, RegionUtil.getNodeRole(node));
-				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-					if (edge.isConstant() || edge.isLoaded()) {
-						addReachableConstantOrLoadedNodes(edge.getEdgeTarget());
-					}
+	protected void addReachableOldAcyclicNodes(@NonNull Node node) {
+		if (!hasNode(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
+			addNode(node, RegionUtil.getNodeRole(node));
+			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+				if (edge.isOld()) {
+					addReachableOldAcyclicNodes(edge.getEdgeTarget());
 				}
 			}
 		}

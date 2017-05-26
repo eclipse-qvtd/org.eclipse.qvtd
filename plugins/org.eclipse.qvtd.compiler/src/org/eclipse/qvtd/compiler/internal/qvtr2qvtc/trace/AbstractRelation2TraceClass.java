@@ -335,6 +335,15 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		return signatureClass;
 	}
 
+	//	@Override
+	public @Nullable Property basicGetSignatureProperty(@NonNull VariableDeclaration rVariable) {
+		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
+		if (variableDeclaration2TraceProperty == null) {
+			return null;
+		}
+		return variableDeclaration2TraceProperty.getSignatureProperty();
+	}
+
 	@Override
 	public @Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable) {
 		VariableDeclaration2TraceProperty variableDeclaration2traceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
@@ -434,7 +443,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		return relationalTransformation2tracePackage;
 	}
 
-	/*	@Override
+	@Override
 	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass() {
 		org.eclipse.ocl.pivot.Class signatureClass2 = signatureClass;
 		if (signatureClass2 == null) {
@@ -442,14 +451,14 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 			signatureClass = signatureClass2 = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
 		}
 		return signatureClass2;
-	} */
+	}
 
-	/*	@Override
+	@Override
 	public @NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable) {
 		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
 		assert variableDeclaration2TraceProperty != null;
 		return variableDeclaration2TraceProperty.getSignatureProperty();
-	} */
+	}
 
 	//	@Override
 	protected @NonNull Property getSuccessProperty() {

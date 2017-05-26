@@ -386,15 +386,15 @@ public class RelationalTransformation2TracePackage
 		return speculationClass2;
 	} */
 
-	//	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rRelation) {
-	//		return getRelation2TraceClass(rRelation).getSignatureClass();
-	//	}
+	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rRelation) {
+		return getRelation2TraceClass(rRelation).getSignatureClass();
+	}
 
-	//	public @NonNull Property getSignatureProperty(org.eclipse.ocl.pivot.@NonNull Class aClass, @NonNull VariableDeclaration rVariable) {
-	//		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
-	//		assert relation2TraceClass != null;
-	//		return relation2TraceClass.getSignatureProperty(rVariable);
-	//	}
+	public @NonNull Property getSignatureProperty(org.eclipse.ocl.pivot.@NonNull Class aClass, @NonNull VariableDeclaration rVariable) {
+		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
+		assert relation2TraceClass != null;
+		return relation2TraceClass.getSignatureProperty(rVariable);
+	}
 
 	//	public @NonNull Property getSignatureProperty(@NonNull RelationCallExp rInvocation) {
 	//		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(QVTrelationUtil.getContainingRelation(rInvocation));
@@ -433,9 +433,12 @@ public class RelationalTransformation2TracePackage
 		//
 		//	Create the trace and signature classes
 		//
-		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = new ArrayList<>(name2relation2traceClass.size());
-		for (@NonNull Relation2TraceClass relation2TraceClass : new HashSet<>(name2relation2traceClass.values())) {
+		HashSet<@NonNull Relation2TraceClass> relation2TraceClasses = new HashSet<>(name2relation2traceClass.values());
+		for (@NonNull Relation2TraceClass relation2TraceClass : relation2TraceClasses) {
 			relation2TraceClass.synthesize();
+		}
+		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = new ArrayList<>(name2relation2traceClass.size());
+		for (@NonNull Relation2TraceClass relation2TraceClass : relation2TraceClasses) {
 			org.eclipse.ocl.pivot.Class traceClass = relation2TraceClass.getTraceClass();
 			traceClasses.add(traceClass);
 			traceClass2relation2traceClass.put(traceClass, relation2TraceClass);

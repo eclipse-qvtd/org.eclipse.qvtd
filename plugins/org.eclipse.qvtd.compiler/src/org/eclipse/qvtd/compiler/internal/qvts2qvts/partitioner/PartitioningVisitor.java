@@ -20,16 +20,13 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /**
@@ -38,20 +35,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisit
  */
 class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
-	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion,
-			@NonNull String namePrefix, @NonNull String symbolSuffix, @NonNull AbstractPartition partition) {
-		assert !(fullRegion instanceof MicroMappingRegion);
-		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(fullRegion);
-		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
-		((MicroMappingRegionImpl)partialRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
-		partialRegion.setMappingRegion(fullRegion);
-		partialRegion.setNamePrefix(namePrefix);
-		partialRegion.setSymbolNameSuffix(symbolSuffix);
-		PartitioningVisitor partitioningVisitor = new PartitioningVisitor(partialRegion, partition);
-		fullRegion.accept(partitioningVisitor);
-		return partitioningVisitor;
-	}
-
 	protected final @NonNull MicroMappingRegion partialRegion;
 	protected final @NonNull AbstractPartition partition;
 	private final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2partialNode = new HashMap<>();
@@ -60,6 +43,15 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		super(null);
 		this.partialRegion = partialRegion;
 		this.partition = partition;
+	}
+
+	protected void addNode(@NonNull Node fullNode, @NonNull Node partialNode) {
+		oldNode2partialNode.put(fullNode, partialNode);
+		partialNode.setUtility(fullNode.getUtility());
+		partialNode.setContained(fullNode.isContained());
+		for (@NonNull TypedElement typedElement : fullNode.getTypedElements()) {
+			partialNode.addTypedElement(typedElement);
+		}
 	}
 
 	/*	private void checkEdges(@NonNull Region oldRegion) {
@@ -180,12 +172,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (partialNode == null) {
 			partialNode = node.createNode(nodeRole, partialRegion);
 		}
-		oldNode2partialNode.put(node, partialNode);
-		partialNode.setUtility(node.getUtility());
-		partialNode.setContained(node.isContained());
-		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
-			partialNode.addTypedElement(typedElement);
-		}
+		addNode(node, partialNode);
 		return partialNode;
 	}
 

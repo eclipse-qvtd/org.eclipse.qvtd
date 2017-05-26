@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,9 +20,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
-import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
@@ -42,48 +44,29 @@ import com.google.common.collect.Sets;
  */
 public class MappingPartitioner
 {
-	/*	private static @NonNull Iterable<@NonNull NavigationEdge> getNavigableEdges(@NonNull Iterable<@NonNull NavigationEdge> edges) {
-		List<@NonNull NavigationEdge> navigableEdges = new ArrayList<>();
-		for (@NonNull NavigationEdge edge : edges) {		// cf NavigationForestBuilder addEdge
-			if (edge.isSecondary()) {}
-			else if (edge == Role.REALIZED) {
-				if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-					navigableEdges.add(edge);
-				}
-			}
-			else if (!edge.isNavigable()) {}
-			else if (edge.isCast()) {}
-			else {
-				assert !edge.isExpression();
-				assert !edge.isComputation();
-				Node targetNode = edge.getTarget();
-				if (!targetNode.isNull()) {
-					navigableEdges.add(edge);
-				}
-			}
-		}
-		return navigableEdges;
-	} */
+	/**
+	 * The overall transforemation partitioner providing global analysis results.
+	 */
+	protected final @NonNull TransformationPartitioner transformationPartitioner;
 
-	/*	private static @NonNull Iterable<@NonNull Node> getTraceNodes(@NonNull Iterable<@NonNull Node> nodes) {
-		List<@NonNull Node> traceNodes = new ArrayList<>();
-		for (@NonNull Node node : nodes) {
-			if (node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-				if (node == Role.REALIZED) {
-					traceNodes.add(node);
-				}
-			}
-		}
-		return traceNodes;
-	} */
-
-	protected final @NonNull ProblemHandler problemHandler;
+	/**
+	 * The region to be partitioned.
+	 */
 	protected final @NonNull MappingRegion region;
+
+	/**
+	 * The TraceClassAnalysis instances that are consumed by this MappingPartitioner.
+	 */
+	private @Nullable List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = null;
+
+	/**
+	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
+	 */
+	private @Nullable List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = null;
 
 	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
-	protected final @NonNull Set<@NonNull Property> corrolaryProperties;
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
@@ -92,9 +75,33 @@ public class MappingPartitioner
 	private final @NonNull Set<@NonNull NavigableEdge> navigableEdges = new HashSet<>();
 	private final @NonNull Set<@NonNull Edge> realizedEdges = new HashSet<>();
 	private final @NonNull List<@NonNull Edge> realizedOutputEdges = new ArrayList<>();
-	private final @Nullable Node traceNode;
 	private final @NonNull List<@NonNull Node> trueNodes = new ArrayList<>();
-	private boolean hasLoadedNodes = false;
+	//	private boolean hasLoadedNodes = false;
+
+	/**
+	 * The one and only realizedMiddleNode that provides the traceability.
+	 *
+	 * May be null for Adolfo's prematurely folded middle optimization, and for manually partitionings
+	 * such as attributeColumns in testQVTcCompiler_SimpleUML2RDBMS_CG.
+	 */
+	private final @Nullable Node traceNode;
+
+	/**
+	 * The one and only realizedMiddleNode that provides the traceability result.
+	 */
+	private final @Nullable Node successNode;
+
+	/**
+	 * The realized edges from the (realized) trace node to a realized (corrolary) ouput node that identify what is
+	 * guaranteed to be created only speculation succeeds.
+	 */
+	private final @NonNull List<@NonNull NavigableEdge> corrolaryEdges = new ArrayList<>();
+
+	/**
+	 * The realized output nodes guaranteed to be created only speculation succeeds;
+	 * the targets of corrolaryEdges.
+	 */
+	private final @NonNull List<@NonNull Node> corrolaryNodes = new ArrayList<>();
 
 	/**
 	 * Dynamically growing list of edges that have been predicated by a partition.
@@ -123,14 +130,52 @@ public class MappingPartitioner
 
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
-	public MappingPartitioner(@NonNull ProblemHandler problemHandler, @NonNull MappingRegion region, @NonNull Set<@NonNull Property> corrolaryProperties) {
+	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull MappingRegion region) {
 		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
-		this.problemHandler = problemHandler;
+		this.transformationPartitioner = transformationPartitioner;
 		this.region = region;
-		this.corrolaryProperties = corrolaryProperties;
+		//
 		analyzeNodes();
-		this.traceNode = analyzeTraceNode();
+		Node traceNode2 = this.traceNode = analyzeTraceNode();
+		if (traceNode2 != null) {
+			Property successProperty = RegionUtil.basicGetSuccessProperty(traceNode2);
+			if (successProperty != null) {
+				transformationPartitioner.getSuccessPropertyDatum(successProperty);
+				Node successNode2 = this.successNode = RegionUtil.createSuccessNode(region);
+				successNode2.setUtility(Node.Utility.STRONGLY_MATCHED);
+				@SuppressWarnings("unused")
+				NavigableEdge successEdge = RegionUtil.createNavigationEdge(traceNode2, successProperty, successNode2, false);
+			}
+			else {
+				this.successNode = null;
+			}
+		}
+		else {
+			this.successNode = null;
+		}
+		//
 		analyzeEdges();
+	}
+
+	private void addConsumptionOfMiddleNode(@NonNull Node node) {
+		predicatedMiddleNodes.add(node);
+		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(node.getCompleteClass(), this);
+		List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
+		if (consumedTraceClassAnalyses2 == null) {
+			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
+		}
+		consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
+	}
+
+	private void addCorrolary(@NonNull NavigableEdge edge) {
+		Node targetNode = edge.getTargetNode();
+		assert edge.getSourceNode() == traceNode;
+		assert targetNode.isRealized();
+		assert !targetNode.isSuccess();
+		assert !corrolaryEdges.contains(edge);
+		corrolaryEdges.add(edge);
+		corrolaryNodes.add(targetNode);
+		transformationPartitioner.addCorrolary(RegionUtil.getProperty(edge), region);
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
@@ -154,7 +199,17 @@ public class MappingPartitioner
 	}
 
 	public void addProblem(@NonNull CompilerProblem problem) {
-		problemHandler.addProblem(problem);
+		transformationPartitioner.addProblem(problem);
+	}
+
+	private void addProductionOfMiddleNode(@NonNull Node node) {
+		realizedMiddleNodes.add(node);
+		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addProducer(node.getCompleteClass(), this);
+		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+		if (producedTraceClassAnalyses2 == null) {
+			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
+		}
+		producedTraceClassAnalyses2.add(consumedTraceAnalysis);
 	}
 
 	public boolean addRealizedNode(@NonNull Node node) {
@@ -175,13 +230,18 @@ public class MappingPartitioner
 					if (edge.isRealized()) {
 						realizedEdges.add(edge);
 						Node sourceNode = edge.getEdgeSource();
-						if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode.isPredicated() || sourceNode.isRealized())) {
-							Node targetNode = edge.getEdgeTarget();
-							if (!realizedMiddleNodes.contains(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
+						Node targetNode = edge.getEdgeTarget();
+						if (sourceNode == traceNode) {
+							if (targetNode.isRealized() && !targetNode.isSuccess()) {
+								addCorrolary((NavigableEdge) edge);
+							}
+						}
+						else if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
+							if ((targetNode != traceNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
 								realizedOutputEdges.add(edge);
 							}
 						}
-						if (edge.getEdgeTarget().isLoaded() && RegionUtil.getClassDatumAnalysis(edge.getEdgeSource()).getDomainUsage().isMiddle()) {
+						if (targetNode.isLoaded() && RegionUtil.isMiddle(sourceNode)) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
@@ -197,9 +257,9 @@ public class MappingPartitioner
 				/*				else if (RegionUtil.isRealizedIncludes(edge)) {
 					realizedEdges.add(edge);
 					Node sourceNode = edge.getSource();
-					if (!realizedMiddleNodes.contains(sourceNode) && (sourceNode == Role.PREDICATED || sourceNode == Role.REALIZED)) {
+					if ((sourceNode != traceNode) && (sourceNode == Role.PREDICATED || sourceNode == Role.REALIZED)) {
 						Node targetNode = edge.getTarget();
-						if (!realizedMiddleNodes.contains(targetNode) && (targetNode == Role.PREDICATED || targetNode == Role.REALIZED)) {
+						if ((targetNode != traceNode) && (targetNode == Role.PREDICATED || targetNode == Role.REALIZED)) {
 							realizedOutputEdges.add(edge);
 						}
 					}
@@ -225,14 +285,14 @@ public class MappingPartitioner
 				if (node.isConstant()) {
 				}
 				else if (node.isLoaded()) {
-					hasLoadedNodes  = true;
+					//					hasLoadedNodes  = true;
 				}
-				else if (RegionUtil.getClassDatumAnalysis(node).getDomainUsage().isMiddle()) {
+				else if (RegionUtil.isMiddle(node)) {
 					if (node.isPredicated()) {
-						predicatedMiddleNodes.add(node);
+						addConsumptionOfMiddleNode(node);
 					}
 					else if (node.isRealized()) {
-						realizedMiddleNodes.add(node);
+						addProductionOfMiddleNode(node);
 						//					for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 						//						Node targetNode = edge.getTarget();
 						//						NodeRole targetNodeRole = targetNode.getNodeRole();
@@ -298,10 +358,18 @@ public class MappingPartitioner
 		}
 	}
 
+	public @Nullable Node basicGetSuccessNode() {
+		return successNode;
+	}
+
+	public @Nullable Node basicGetTraceNode() {
+		return traceNode;
+	}
+
 	private void check() {
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
-				problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
+				transformationPartitioner.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
@@ -309,7 +377,7 @@ public class MappingPartitioner
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					problemHandler.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
+					transformationPartitioner.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
 				}
 			}
 		}
@@ -322,13 +390,13 @@ public class MappingPartitioner
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				problemHandler.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
+				transformationPartitioner.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (!isCorrolary(edge)) {// && !isDead(edge)) {
-					problemHandler.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
+				if (transformationPartitioner.getCorrolaryOf(edge) == null) {// && !isDead(edge)) {
+					transformationPartitioner.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
 		}
@@ -399,7 +467,16 @@ public class MappingPartitioner
 
 	private @NonNull MicroMappingRegion createSpeculatedRegion() {
 		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
-		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p1");
+		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p2");
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+		}
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createSpeculatingRegion() {
+		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this);
+		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p1");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
 		}
@@ -423,6 +500,18 @@ public class MappingPartitioner
 		return alreadyRealizedEdges;
 	}
 
+	public @Nullable Iterable<@NonNull TraceClassAnalysis> getConsumedTraceClassAnalyses() {
+		return consumedTraceClassAnalyses;
+	}
+
+	public @NonNull Iterable<@NonNull NavigableEdge> getCorrolaryEdges() {
+		return corrolaryEdges;
+	}
+
+	public @NonNull Iterable<@NonNull Node> getCorrolaryNodes() {
+		return corrolaryNodes;
+	}
+
 	public @NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges() {
 		return navigableEdges;
 	}
@@ -439,13 +528,17 @@ public class MappingPartitioner
 		return predicatedOutputNodes;
 	}
 
+	public @Nullable Iterable<@NonNull TraceClassAnalysis> getProducedTraceClassAnalyses() {
+		return producedTraceClassAnalyses;
+	}
+
 	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
 		return realizedEdges;
 	}
 
-	public @NonNull Iterable<@NonNull Node> getRealizedMiddleNodes() {
-		return realizedMiddleNodes;
-	}
+	//	public @NonNull Iterable<@NonNull Node> getRealizedMiddleNodes() {
+	//		return realizedMiddleNodes;
+	//	}
 
 	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
 		return realizedOutputNodes;
@@ -455,8 +548,21 @@ public class MappingPartitioner
 		return region;
 	}
 
-	public @Nullable Node getTraceNode() {
-		return traceNode;
+	public @NonNull Node getSuccessNode() {
+		return ClassUtil.nonNullState(successNode);
+	}
+
+	public @NonNull TraceClassAnalysis getTraceClassAnalysis() {
+		CompleteClass traceClass = getTraceNode().getCompleteClass();
+		return transformationPartitioner.getTraceClassAnalysis(traceClass);
+	}
+
+	public @NonNull Node getTraceNode() {
+		return ClassUtil.nonNullState(traceNode);
+	}
+
+	public @NonNull TransformationPartitioner getTransformationPartitioner() {
+		return transformationPartitioner;
 	}
 
 	public @NonNull Iterable<@NonNull Node> getTrueNodes() {
@@ -483,11 +589,13 @@ public class MappingPartitioner
 		return alreadyTrueNodes.contains(node);
 	}
 
-	public boolean isCorrolary(@NonNull Edge edge) {
-		if (!edge.isNavigation()) {
-			return false;
-		}
-		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
+	public @Nullable List<@NonNull MappingRegion> getCorrolaryOf(@NonNull Edge edge) {
+		return transformationPartitioner.getCorrolaryOf(edge);
+	}
+
+	public boolean isCyclic(@NonNull Node node) {
+		CompleteClass traceClass = node.getCompleteClass();
+		return transformationPartitioner.isCyclic(traceClass);
 	}
 
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
@@ -511,7 +619,6 @@ public class MappingPartitioner
 		return true;
 	}
 
-
 	/*	private boolean isDead(@NonNull Edge edge) {
 		if (!edge.isExpression()) {
 			return false;
@@ -532,46 +639,47 @@ public class MappingPartitioner
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition() {
 		//		System.out.println("    partition " + region);
-		List<@NonNull MappingRegion> regions = new ArrayList<>();
-		if (realizedMiddleNodes.isEmpty() && predicatedMiddleNodes.isEmpty()) {	// FIXME separate partitioning for folded middle
-			//			regions.add(createRealizedRegion());
+		Node traceNode2 = traceNode;
+		assert traceNode2 != null;												// Regular mapping
+		//		if (!hasLoadedNodes) {										// No inputs
+		//			Collections.singletonList(region);
+		//		} else
+		if (transformationPartitioner.getCycleAnalysis(this) == null) {	// Cycle analysis failed
+			return Collections.singletonList(region);
 		}
 		else {
-			if (!hasLoadedNodes) {
-				regions.add(region);
+			List<@NonNull MappingRegion> regions = new ArrayList<>();
+			if (predicatedMiddleNodes.isEmpty()) {
+				regions.add(createRealizedRegion());
 			}
 			else {
-				if (predicatedMiddleNodes.isEmpty()) {
-					regions.add(createRealizedRegion());
-				}
-				else {
-					regions.add(createSpeculationRegion());
-					regions.add(createSpeculatedRegion());
-				}
-				//
-				//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
-				//
-				for (@NonNull Edge outputEdge : realizedOutputEdges) {
-					if (!hasRealizedEdge(outputEdge)) {
-						regions.add(createAssignmentRegion(outputEdge, regions.size()));
-					}
-				}
-				//
-				//	Create an AssignmentRegion for each still to-be-realized edge to an output.
-				//
-				for (@NonNull Edge edge : realizedEdges) {
-					if (!hasRealizedEdge(edge)) {
-						regions.add(createAssignmentRegion(edge, regions.size()));
-					}
-				}
-				check();
+				regions.add(createSpeculationRegion());
+				regions.add(createSpeculatingRegion());
+				regions.add(createSpeculatedRegion());
 			}
+			//
+			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
+			//
+			for (@NonNull Edge outputEdge : realizedOutputEdges) {
+				if (!hasRealizedEdge(outputEdge)) {
+					regions.add(createAssignmentRegion(outputEdge, regions.size()));
+				}
+			}
+			//
+			//	Create an AssignmentRegion for each still to-be-realized edge to an output.
+			//
+			for (@NonNull Edge edge : realizedEdges) {
+				if (!hasRealizedEdge(edge)) {
+					regions.add(createAssignmentRegion(edge, regions.size()));
+				}
+			}
+			check();
+			return regions;
 		}
-		return regions;
 	}
 
 	@Override
 	public String toString() {
-		return region.toString();
+		return region.getName();
 	}
 }

@@ -26,7 +26,7 @@ class Invocation2TraceProperty extends Element2TraceProperty
 	//		final @NonNull RelationCallExp invocation;
 
 	public Invocation2TraceProperty(@NonNull Relation2TraceClass relation2traceClass, @NonNull String name, @NonNull RelationCallExp invocation) {
-		super(relation2traceClass, name, relation2traceClass.getRelationalTransformation2TracePackage().getRelation2TraceClass(QVTrelationUtil.getReferredRelation(invocation)).getTraceClass(), true);
+		super(relation2traceClass, name, relation2traceClass.getRelationalTransformation2TracePackage().getRelation2TraceClass(QVTrelationUtil.getReferredRelation(invocation)).getSignatureClass(), true);
 	}
 
 	/**

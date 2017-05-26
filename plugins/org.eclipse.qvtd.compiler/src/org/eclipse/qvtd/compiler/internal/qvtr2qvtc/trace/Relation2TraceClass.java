@@ -39,8 +39,8 @@ interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
 	@NonNull QVTrNameGenerator getNameGenerator();
 	@NonNull Relation getRelation();
 	@NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage();
-	//	org.eclipse.ocl.pivot.@NonNull Class getSignatureClass();
-	//	@NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable);
+	org.eclipse.ocl.pivot.@NonNull Class getSignatureClass();
+	@NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable);
 	org.eclipse.ocl.pivot.@NonNull Class getTraceClass();
 	@NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation);
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses();

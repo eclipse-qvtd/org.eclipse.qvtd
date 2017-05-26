@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,15 +20,21 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -35,8 +42,8 @@ abstract class AbstractPartition
 {
 	protected static class PartitionForest extends AbstractForestBuilder
 	{
-		protected PartitionForest(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> edges) {
-			super(rootNodes, edges);
+		protected PartitionForest(@Nullable Node traceNode, @NonNull Iterable<@NonNull NavigableEdge> edges) {
+			super(traceNode != null ? Collections.singletonList(traceNode) : Collections.emptyList(), edges);
 		}
 
 		protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
@@ -63,6 +70,7 @@ abstract class AbstractPartition
 	}
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Edge> alreadyRealizedEdges;
+	protected final @NonNull MappingRegion region;
 	private final @NonNull Map<@NonNull Node, @NonNull Role> node2nodeRole = new HashMap<>();
 	private final @NonNull Map<@NonNull Edge, @NonNull Role> edge2edgeRole = new HashMap<>();
 	private /*@LazyNonNull*/ PartitionForest forest = null;
@@ -70,6 +78,7 @@ abstract class AbstractPartition
 	protected AbstractPartition(@NonNull MappingPartitioner partitioner) {
 		this.partitioner = partitioner;
 		this.alreadyRealizedEdges = partitioner.getAlreadyRealizedEdges();
+		this.region = partitioner.getRegion();
 	}
 
 	private void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
@@ -141,24 +150,6 @@ abstract class AbstractPartition
 		assert (oldNodeRole == null) || (oldNodeRole == newNodeRole);
 	}
 
-	private @NonNull PartitionForest createForest() {
-		List<@NonNull NavigableEdge> navigableEdges = Lists.newArrayList(partitioner.getNavigableEdges());
-		for (@NonNull Edge edge : alreadyRealizedEdges) {
-			if (edge instanceof NavigableEdge) {
-				navigableEdges.add((NavigableEdge) edge);
-			}
-		}
-		return new PartitionForest(partitioner.getRealizedMiddleNodes(), navigableEdges);
-	}
-
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		PartitioningVisitor partitioningVisitor = PartitioningVisitor.createPartialRegion(partitioner.getRegion(), namePrefix, symbolSuffix, this);
-		MicroMappingRegion microMappingRegion = partitioningVisitor.getRegion();
-		RegionHelper.initHeadNodes(microMappingRegion);
-		check(microMappingRegion);
-		return microMappingRegion;
-	}
-
 	private void check(@NonNull MicroMappingRegion region) {
 		Set<@NonNull Node> reachableNodes = new HashSet<>();
 		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
@@ -177,6 +168,41 @@ abstract class AbstractPartition
 				partitioner.addProblem(RegionUtil.createRegionWarning(region, "unreachable " + node));
 			}
 		}
+	}
+
+	private @NonNull PartitionForest createForest() {
+		List<@NonNull NavigableEdge> navigableEdges = Lists.newArrayList(partitioner.getNavigableEdges());
+		for (@NonNull Edge edge : alreadyRealizedEdges) {
+			if (edge instanceof NavigableEdge) {
+				navigableEdges.add((NavigableEdge) edge);
+			}
+		}
+		return new PartitionForest(partitioner.getTraceNode(), navigableEdges);
+	}
+
+	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
+		assert !(region instanceof MicroMappingRegion);
+		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
+		PartitioningVisitor partitioningVisitor = createPartitioningVisitor(partialRegion);
+		region.accept(partitioningVisitor);
+		MicroMappingRegion microMappingRegion = partialRegion;//partitioningVisitor.getRegion();
+		RegionHelper.initHeadNodes(microMappingRegion);
+		check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix,@NonNull String symbolSuffix) {
+		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(region);
+		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
+		((MicroMappingRegionImpl)partialRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
+		partialRegion.setMappingRegion(region);
+		partialRegion.setNamePrefix(namePrefix);
+		partialRegion.setSymbolNameSuffix(symbolSuffix);
+		return partialRegion;
+	}
+
+	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
+		return new PartitioningVisitor(partialRegion, this);
 	}
 
 	private void gatherReachables(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node node) {
@@ -216,6 +242,10 @@ abstract class AbstractPartition
 			forest = forest2 = createForest();
 		}
 		return forest2.getPredecessors(targetNode);
+	}
+
+	protected @NonNull Iterable<@NonNull Node> getNodes() {
+		return node2nodeRole.keySet();
 	}
 
 	private boolean hasEdge(@NonNull Edge edge) {
@@ -330,6 +360,20 @@ abstract class AbstractPartition
 		return gotIt;
 	}
 
+	protected void resolveDisambiguations() {
+		TraceClassAnalysis traceClassAnalysis = partitioner.getTraceClassAnalysis();
+		Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
+		if (discriminatingProperties != null) {
+			for (@NonNull Property property : discriminatingProperties) {
+				Node targetNode = partitioner.getTraceNode().getNavigationTarget(property);
+				assert targetNode != null;
+				if (!hasNode(targetNode)) {
+					addNode(targetNode, RegionUtil.getNodeRole(targetNode));
+				}
+			}
+		}
+	}
+
 	protected abstract @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole);
 
 	/**
@@ -337,7 +381,7 @@ abstract class AbstractPartition
 	 * what form of edge is required.
 	 */
 	protected void resolveEdgeRoles() {
-		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(partitioner.getRegion())) {
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary() && !hasEdge(edge)) {
 				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 				if (sourceNodeRole != null) {

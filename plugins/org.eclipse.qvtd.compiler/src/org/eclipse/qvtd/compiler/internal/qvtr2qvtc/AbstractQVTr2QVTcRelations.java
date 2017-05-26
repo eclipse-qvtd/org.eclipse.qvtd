@@ -1198,7 +1198,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					if (rConditionExpression instanceof RelationCallExp) {
 						RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
 						Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
-						Type invokedSignatureClass/*tc*/ = qvtr2qvtc.getTraceClass(rInvokedRelation);
+						Type invokedSignatureClass/*tc*/ = qvtr2qvtc.getSignatureClass(rInvokedRelation);
 						List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
 						String invokedName = "where_" + invokedSignatureClass.getName()/* + vdId*/;
 						Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreRealizedVariable(invokedName, invokedSignatureClass);	// FIXME
@@ -1212,7 +1212,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							VariableExp rArgument = (VariableExp) rArguments.get(i);
 							Variable rParameter = rParameters.get(i);
 							Variable cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
-							Property cCalledProperty = qvtr2qvtc.getTraceProperty(QVTrelationUtil.getClass(cInvocationVariable), rParameter);
+							Property cCalledProperty = qvtr2qvtc.getSignatureProperty(QVTrelationUtil.getClass(cInvocationVariable), rParameter);
 							signatureVariableAnalysis.addNavigationAssignment(cCalledProperty, createVariableExp(cArgumentVariable), false);
 						}
 					}

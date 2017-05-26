@@ -12,11 +12,14 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -33,8 +36,10 @@ class AssignmentPartition extends AbstractPartition
 		//
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
-		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			addNode(node, QVTscheduleUtil.asPredicated(RegionUtil.getNodeRole(node))/*.asMatched()*/);
+		addNode(partitioner.getTraceNode(), Role.PREDICATED/*.asMatched()*/);
+		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
+		if (successNode != null) {
+			addNode(successNode, Role.PREDICATED);
 		}
 		//
 		//	The nodes that support identification of the realized edge are used as is.
@@ -42,9 +47,26 @@ class AssignmentPartition extends AbstractPartition
 		gatherSourceNavigations(realizedEdge.getEdgeSource());
 		gatherSourceNavigations(realizedEdge.getEdgeTarget());
 		//
+		//	Ensure that re-used trace classes do not lead to ambiguous mapings.
+		//
+		resolveDisambiguations();
+		//
 		//	Join up the edges.
 		//
 		resolveEdgeRoles();
+	}
+
+	@Override
+	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
+		return new PartitioningVisitor(partialRegion, this)
+		{
+			@Override
+			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+				Node partialNode = RegionUtil.createTrueNode(partialRegion);
+				addNode(node, partialNode);
+				return partialNode;
+			}
+		};
 	}
 
 	private void gatherSourceNavigations(@NonNull Node targetNode) {

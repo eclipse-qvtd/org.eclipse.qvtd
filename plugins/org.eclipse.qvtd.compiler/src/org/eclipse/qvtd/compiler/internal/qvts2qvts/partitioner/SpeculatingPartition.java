@@ -11,49 +11,50 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 
 /**
- * The SpeculatedPartition completes the speculation by realizing the corrolaries of the speculation.
+ * The SpeculatingPartition validates the residual predictaes omitted from the speculation.
+ * The corrolary is realized and realized edges that do not involve other speculations
+ * are also realized. Realization of speculation nodes must wait for the speculated partition.
  */
-class SpeculatedPartition extends AbstractPartition
+class SpeculatingPartition extends AbstractPartition
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	public SpeculatedPartition(@NonNull MappingPartitioner partitioner) {
+	public SpeculatingPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
 		//
-		//	The realized trace node becomes a speculated head node.
+		//	The realized middle (trace) nodes become speculated head nodes.
 		//
 		resolveTraceNode();
 		//
 		//	The predicated middle nodes become speculated guard nodes and all preceding
 		//	navigations are retained as is.
 		//
-		//		resolvePredicatedMiddleNodes();
+		resolvePredicatedMiddleNodes();
 		//
 		//	The predicated output nodes and all preceding navigations are retained as is.
 		//
-		//		resolvePredicatedOutputNodes();
+		resolvePredicatedOutputNodes();
 		//
 		//	The realized output nodes are realized as is.
 		//
-		resolveRealizedOutputNodes();
+		//		resolveRealizedOutputNodes();
 		//
 		//	The ends of all matched predicated edges not already matched in the Speculation partition are added as is.
 		//
-		//		resolveMatchedPredicatedEdges();
+		resolveMatchedPredicatedEdges();
 		//
 		//	The non-corrolary, non-realized ends of all realized edges are added as is.
 		//
@@ -74,30 +75,6 @@ class SpeculatedPartition extends AbstractPartition
 		//	Join up the edges.
 		//
 		resolveEdgeRoles();
-		//
-		//	Add the success predicates.
-		//
-		resolveSuccessPredicates();
-	}
-
-
-	@Override
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		MicroMappingRegion microMappingRegion = super.createMicroMappingRegion(namePrefix, symbolSuffix);
-		return microMappingRegion;
-	}
-
-	@Override
-	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(partialRegion, this)
-		{
-			@Override
-			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				Node partialNode = RegionUtil.createTrueNode(partialRegion);
-				addNode(node, partialNode);
-				return partialNode;
-			}
-		};
 	}
 
 	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull Role targetNodeRole) {
@@ -132,12 +109,39 @@ class SpeculatedPartition extends AbstractPartition
 	}
 
 	/**
+	 * Return true if node is a corrolary of some mapping.
+	 */
+	private boolean isCorrolary(@NonNull Node node) {
+		if (node.isPredicated()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+				if (edge.isPredicated() && edge.isNavigation()) {
+					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
+					if (corrolaryOf != null) {
+						return true;
+					}
+				}
+			}
+		}
+		else if (node.isRealized()) {
+			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+				if (edge.isRealized() && edge.isNavigation()) {
+					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
+					if (corrolaryOf != null) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Return true if node is a corrolary of this mapping.
-	 *
+	 */
 	private boolean isLocalCorrolary(@NonNull Node node) {
 		assert node.isRealized();
 		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-			if (edge.isRealized() && edge.isNavigation() /*&& !partitioner.isCyclic(RegionUtil.getSourceNode(edge))* /) {
+			if (edge.isRealized() && edge.isNavigation() && !partitioner.isCyclic(RegionUtil.getSourceNode(edge))) {
 				List<@NonNull MappingRegion> corrolaryOfRegions = partitioner.getCorrolaryOf(edge);
 				if ((corrolaryOfRegions != null) && (corrolaryOfRegions.size() == 1) && corrolaryOfRegions.contains(region)) {
 					return true;
@@ -145,16 +149,33 @@ class SpeculatedPartition extends AbstractPartition
 			}
 		}
 		return false;
-	} */
+	}
 
 	@Override
 	protected boolean resolveComputations(@NonNull Node targetNode) {
 		if (tracedInputNodes.contains(targetNode)) {
 			return true;
 		}
-		return super.resolveComputations(targetNode);
+		//		return super.resolveComputations(targetNode);
+		//	}
+		//	protected boolean resolveComputations(@NonNull Node targetNode) {
+		boolean gotIt = false;
+		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
+			if (incomingEdge.isComputation() || (incomingEdge.isNavigation() && incomingEdge.isOld())) {
+				Set<@NonNull Node> sourceNodes = new HashSet<>();
+				if (isComputable(sourceNodes, incomingEdge)) {
+					gotIt = true;
+					for (@NonNull Node sourceNode : sourceNodes) {
+						if (!hasNode(sourceNode)) {
+							//							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
+							gatherSourceNavigations(sourceNode, RegionUtil.getNodeRole(sourceNode));
+						}
+					}
+				}
+			}
+		}
+		return gotIt;
 	}
-
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
@@ -170,7 +191,7 @@ class SpeculatedPartition extends AbstractPartition
 		return edgeRole;
 	}
 
-	/*	protected void resolveMatchedPredicatedEdges() {
+	protected void resolveMatchedPredicatedEdges() {
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
 			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && (partitioner.getCorrolaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
@@ -187,7 +208,7 @@ class SpeculatedPartition extends AbstractPartition
 				}
 			}
 		}
-	} */
+	}
 
 	@Override
 	protected void resolveNavigations(@NonNull Node node) {
@@ -196,7 +217,7 @@ class SpeculatedPartition extends AbstractPartition
 		}
 	}
 
-	/*	protected void resolvePredicatedMiddleNodes() {
+	protected void resolvePredicatedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
 			if (node.isMatched() && partitioner.isCyclic(node)) {
 				Role nodeRole = RegionUtil.getNodeRole(node);
@@ -206,34 +227,24 @@ class SpeculatedPartition extends AbstractPartition
 				gatherSourceNavigations(node, RegionUtil.asSpeculated(nodeRole));
 			}
 		}
-	} */
+	}
 
-	/*	protected void resolvePredicatedOutputNodes() {
+	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
-			boolean isCorrolary = false;
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-				if (edge.isPredicated() && edge.isNavigation()) {
-					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
-					if (corrolaryOf != null) {
-						isCorrolary = true;
-						break;
-					}
-				}
-			}
-			if (!isCorrolary) {		// If not a corrolary of any mapping
+			if (!isCorrolary(node)) {
 				Role nodeRole = RegionUtil.getNodeRole(node);
 				gatherSourceNavigations(node, nodeRole);
 			}
 		}
-	} */
+	}
 
 	protected void resolveRealizedEdges() {
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorrolaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isPredicated() || partitioner.hasPredicatedNode(sourceNode)) { // || isLocalCorrolary(sourceNode)) {
+				if (!sourceNode.isRealized() || isLocalCorrolary(sourceNode)) {
 					Node targetNode = edge.getEdgeTarget();
-					if (!targetNode.isPredicated() || partitioner.hasPredicatedNode(targetNode)) { // || isLocalCorrolary(sourceNode)) {
+					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
 							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
 						}
@@ -246,47 +257,33 @@ class SpeculatedPartition extends AbstractPartition
 		}
 	}
 
-	protected void resolveRealizedOutputNodes() {
-		for (@NonNull Node node : partitioner.getCorrolaryNodes()) {
-			gatherSourceNavigations(node, RegionUtil.getNodeRole(node));
-			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
-				if (navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getEdgeTarget();
-					if (!targetNode.isPredicated() && !targetNode.isRealized()) {
-						gatherSourceNavigations(targetNode, RegionUtil.getNodeRole(targetNode));
+	/*	protected void resolveRealizedOutputNodes() {
+		for (@NonNull Node node : partitioner.getRealizedOutputNodes()) {
+			if (isCorrolary(node)) {
+				gatherSourceNavigations(node, RegionUtil.getNodeRole(node));
+				for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
+					if (navigationEdge.isRealized()) {
+						Node targetNode = navigationEdge.getEdgeTarget();
+						if (!targetNode.isPredicated() && !targetNode.isRealized()) {
+							gatherSourceNavigations(targetNode, RegionUtil.getNodeRole(targetNode));
+						}
 					}
 				}
 			}
 		}
-	}
-
-	protected void resolveSuccessPredicates() {
-		//		for (@NonNull Node node : getNodes()) {
-		//			if (node.isPredicated()) {
-		//				partitioner.getTransformationPartitioner().getMappingPartitioner(region)
-		//			}
-		//		}
-		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
-		if (successNode != null) {
-			//			createTrueNode();
-			addNode(successNode, Role.PREDICATED);
-		}
-	}
+	} */
 
 	protected void resolveTraceNode() {
 		Node traceNode = partitioner.getTraceNode();
-		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-		//		if (!hasNode(traceNode)) {
-		addNode(traceNode, Role.PREDICATED);
-		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
-		if (successNode != null) {
-			addNode(successNode, Role.PREDICATED);
-		}
-		//		}
+		addNode(traceNode, Role.SPECULATED);
 		for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
 			if (partitioner.hasRealizedEdge(edge)) {
 				tracedInputNodes.add(edge.getEdgeTarget());
 			}
+		}
+		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
+		if (successNode != null) {
+			addNode(successNode, Role.REALIZED);
 		}
 	}
 }
