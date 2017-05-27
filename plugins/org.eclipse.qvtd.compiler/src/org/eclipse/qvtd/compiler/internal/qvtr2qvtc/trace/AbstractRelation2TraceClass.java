@@ -80,11 +80,6 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	protected final org.eclipse.ocl.pivot.@NonNull Class traceClass;
 
 	/**
-	 * The Class that realizes a signature interface to for a static invocation of this trace class.
-	 */
-	private org.eclipse.ocl.pivot.@Nullable Class signatureClass = null;
-
-	/**
 	 * The Property that provides the success/failure/not-ready state of the traced mapping.
 	 */
 	private @Nullable Property successProperty = null;
@@ -331,26 +326,16 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	}
 
 	@Override
-	public @Nullable Class basicGetSignatureClass() {
-		return signatureClass;
-	}
-
-	//	@Override
-	public @Nullable Property basicGetSignatureProperty(@NonNull VariableDeclaration rVariable) {
-		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
-		if (variableDeclaration2TraceProperty == null) {
-			return null;
-		}
-		return variableDeclaration2TraceProperty.getSignatureProperty();
-	}
-
-	@Override
 	public @Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable) {
 		VariableDeclaration2TraceProperty variableDeclaration2traceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
 		if (variableDeclaration2traceProperty == null) {
 			return null;
 		}
 		return variableDeclaration2traceProperty.getTraceProperty();
+	}
+
+	protected @Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable) {
+		return variable2variableDeclaration2traceProperty.get(variable);
 	}
 
 	@Override
@@ -396,6 +381,10 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 		return traceProperty;
 	}
 
+	protected @NonNull VariableDeclaration2TraceProperty createVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean isNestedOneToOne) {
+		return new VariableDeclaration2TraceProperty(this, rTypedModel, variable, isNestedOneToOne);
+	}
+
 	@Override
 	public org.eclipse.ocl.pivot.@NonNull Class getBagOfTraceClass() {
 		Class bagOfTraceClass2 = bagOfTraceClass;
@@ -421,7 +410,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	}
 
 	private Invocation2TraceProperty getInvocation2TraceProperty(@NonNull String name, @NonNull RelationCallExp rInvocation) {
-		Invocation2TraceProperty invocation2TraceProperty = new Invocation2TraceProperty(this, name, rInvocation);
+		Invocation2TraceProperty invocation2TraceProperty = new Invocation2TraceProperty(this, name, QVTrelationUtil.getReferredRelation(rInvocation));
 		invocation2TraceProperty.getTraceProperty();
 		Invocation2TraceProperty oldInvocation2TraceProperty = invocation2invocation2traceProperty.put(rInvocation, invocation2TraceProperty);
 		assert oldInvocation2TraceProperty ==  null;
@@ -441,23 +430,6 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	@Override
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage() {
 		return relationalTransformation2tracePackage;
-	}
-
-	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass() {
-		org.eclipse.ocl.pivot.Class signatureClass2 = signatureClass;
-		if (signatureClass2 == null) {
-			String name = relationalTransformation2tracePackage.getNameGenerator().createSignatureClassName(traceClass);
-			signatureClass = signatureClass2 = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
-		}
-		return signatureClass2;
-	}
-
-	@Override
-	public @NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable) {
-		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rVariable);
-		assert variableDeclaration2TraceProperty != null;
-		return variableDeclaration2TraceProperty.getSignatureProperty();
 	}
 
 	//	@Override
@@ -543,10 +515,15 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 			variableDeclaration2TraceProperty.refineTraceProperty(rTypedModel, isNestedOneToOne);
 		}
 		else {
-			variableDeclaration2TraceProperty = new VariableDeclaration2TraceProperty(this, rTypedModel, variable, isNestedOneToOne);
+			variableDeclaration2TraceProperty = createVariableDeclaration2TraceProperty(rTypedModel, variable, isNestedOneToOne);
 			variable2variableDeclaration2traceProperty.put(variable, variableDeclaration2TraceProperty);
 		}
 		return variableDeclaration2TraceProperty;
+	}
+
+	@Override
+	public @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable) {
+		return ClassUtil.nonNullState(variable2variableDeclaration2traceProperty.get(variable));
 	}
 
 	@Override
@@ -706,43 +683,6 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 			}
 		}
 		CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(traceClass));
-		org.eclipse.ocl.pivot.Class signatureClass = basicGetSignatureClass();
-		if (signatureClass != null) {
-			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(rDomain)) {
-					VariableDeclaration2TraceProperty rootVariableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(rootVariable);
-					assert rootVariableDeclaration2TraceProperty != null;
-					rootVariableDeclaration2TraceProperty.getSignatureProperty();
-				}
-			}
-			CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(signatureClass));
-		}
-		/*		assert QVTrelationUtil.Internal.getOwnedPropertiesList(traceClass).size() == variable2variableDeclaration2traceProperty.size();
-				for (@NonNull Property property : QVTrelationUtil.getOwnedProperties(traceClass)) {
-			Property oppositeProperty = property.getOpposite();
-			boolean isMany = property.isIsMany() || ((oppositeProperty != null) && oppositeProperty.isIsMany());
-			boolean unitOpposite = (oppositeProperty != null) && !oppositeProperty.isIsMany();
-			VariableDeclaration variable = NameUtil.getNameable(variable2variableDeclaration2traceProperty.keySet(), property.getName());
-			if (variable != null) {
-				VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = variable2variableDeclaration2traceProperty.get(variable);
-				assert variableDeclaration2TraceProperty != null;
-				if (variableDeclaration2TraceProperty.unitOpposite != unitOpposite) {
-					System.out.println("Inconsistent " + property + " in " + relation);
-				}
-				else {
-					System.out.println("Consistent " + property + " in " + relation);
-				}
-			}
-			else {
-				if (!isMany) {
-					System.out.println("Inconsistent extra " + property + " in " + relation);
-				}
-				else {
-					System.out.println("Missing " + property + " in " + relation);
-				}
-				//				assert property.isIsMany();
-			}
-		} */
 	}
 
 	@Override

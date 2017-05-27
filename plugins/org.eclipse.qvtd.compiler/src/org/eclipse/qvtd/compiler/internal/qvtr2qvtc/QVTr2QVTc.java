@@ -645,8 +645,12 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return ClassUtil.nonNullState(relation2rootVariables.get(relation));
 	}
 
-	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rRelation) {
-		return getRelationalTransformation2TracePackage().getSignatureClass(rRelation);
+	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rInvokedRelation) {
+		return getRelationalTransformation2TracePackage().getSignatureClass(rInvokedRelation);
+	}
+
+	public @NonNull Property getSignatureProperty(@NonNull Relation rInvokedRelation, @NonNull VariableDeclaration rVariable) {
+		return getRelationalTransformation2TracePackage().getSignatureProperty(rInvokedRelation, rVariable);
 	}
 
 	//	public @NonNull Property getSignatureProperty(@NonNull RelationCallExp rInvocation) {
@@ -655,10 +659,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	/**
 	 * Return the trace property that corresponds to rVariable in aClass.
-	 */
-	protected @NonNull Property getSignatureProperty(org.eclipse.ocl.pivot.@NonNull Class aClass, @NonNull VariableDeclaration rVariable) {
+	 *
+	protected @NonNull Property getSignatureProperty(@NonNull RelationCallExp rInvocation, @NonNull VariableDeclaration rVariable) {
 		return getRelationalTransformation2TracePackage().getSignatureProperty(aClass, rVariable);
-	}
+	} */
 
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return standardLibrary;

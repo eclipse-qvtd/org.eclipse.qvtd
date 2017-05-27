@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
  */
 public class QVTrNameGenerator
 {
+	public static final @NonNull String INVOCATION_GUARD_NAME = "invocationGuard";
 	public static final @NonNull String IDENTIFIED_INSTANCE_VARIABLE_NAME = "identifiedInstance";
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";

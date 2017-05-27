@@ -87,7 +87,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
 		RealizedVariable realizedVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
-		setType(realizedVariable, type, true);;
+		setType(realizedVariable, type, true);
 		return realizedVariable;
 	}
 

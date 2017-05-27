@@ -112,6 +112,7 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -1237,7 +1238,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			cgBody.accept(this);
 		}
 		//		if (cgGuardVariables != null)  {
-		/*		for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
+		for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
 			VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
 			if (asGuardVariable instanceof GuardParameter) {
 				GuardParameter asGuardParameter = (GuardParameter)asGuardVariable;
@@ -1261,7 +1262,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("}\n");
 				}
 			}
-		} */
+		}
 		//		}
 		if (cgGuardVariables != null)  {
 			if (isGeneratedDebug) {
@@ -1767,29 +1768,29 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doMappingSuccess(@NonNull CGMappingExp cgMappingExp) {
-		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgMappingExp);
+		//		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgMappingExp);
 		//		CGValuedElement cgBody = cgMapping.getOwnedBody();
-		CGGuardVariable cgTraceParameter = QVTiCGUtil.getTraceParameter(cgMapping);
-		if (cgTraceParameter == null) {
-			js.appendDeclaration(cgMappingExp);
-			js.append(" = ");
-			js.appendClassReference(ValueUtil.class);
-			js.append(".TRUE_VALUE;\n");
-		}
-		else {
-			js.appendDeclaration(cgMappingExp);
-			js.append(" = ");
-			//			js.appendValueName(cgBody);
-			//			js.append(" && ");
-			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
-			js.append(".addSpeculation(");
-			js.appendValueName(cgTraceParameter);
-			for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
-				js.append(", ");
-				js.appendValueName(cgGuardVariable);
-			}
-			js.append(");\n");
-			/*			js.append("if (");
+		//		CGGuardVariable cgTraceParameter = QVTiCGUtil.getTraceParameter(cgMapping);
+		//		if (cgTraceParameter == null) {
+		js.appendDeclaration(cgMappingExp);
+		js.append(" = ");
+		js.appendClassReference(ValueUtil.class);
+		js.append(".TRUE_VALUE;\n");
+		//		}
+		//		else {
+		//			js.appendDeclaration(cgMappingExp);
+		//			js.append(" = ");
+		//			//			js.appendValueName(cgBody);
+		//			//			js.append(" && ");
+		//			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
+		//			js.append(".addSpeculation(");
+		//			js.appendValueName(cgTraceParameter);
+		//			for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgMapping)) {
+		//				js.append(", ");
+		//				js.appendValueName(cgGuardVariable);
+		//			}
+		//			js.append(");\n");
+		/*			js.append("if (");
 			js.appendValueName(cgMappingExp);
 			js.append(") {\n");
 			js.pushIndentation(null);
@@ -1815,15 +1816,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.popIndentation();
 			js.append("}\n"); */
-			js.append("if (debugInvocations) {\n");
+		/*			js.append("if (debugInvocations) {\n");
 			js.pushIndentation(null);
 			js.appendClassReference(AbstractTransformer.class);
 			js.append(".INVOCATIONS.println((");
 			js.appendValueName(cgMappingExp);
 			js.append(" ? \"done \"  : \"speculating \") + \"" + getMappingName(cgMapping) + "\");\n");
 			js.popIndentation();
-			js.append("}\n");
-		}
+			js.append("}\n"); */
+		//		}
 	}
 
 	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {

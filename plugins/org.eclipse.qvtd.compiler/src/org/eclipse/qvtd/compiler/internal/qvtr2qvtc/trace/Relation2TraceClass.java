@@ -39,7 +39,17 @@ interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
 	@NonNull QVTrNameGenerator getNameGenerator();
 	@NonNull Relation getRelation();
 	@NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage();
+
+	/**
+	 * Return the class that defines the call and return values of this relation.
+	 * @throws IllegalStateException if there is no signature class.
+	 */
 	org.eclipse.ocl.pivot.@NonNull Class getSignatureClass();
+
+	/**
+	 * Return the property that defines a particular call or return value of this relation.
+	 * @throws IllegalStateException if there is no signature class (or properties).
+	 */
 	@NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable);
 	org.eclipse.ocl.pivot.@NonNull Class getTraceClass();
 	@NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation);
@@ -47,6 +57,7 @@ interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses();
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
+	@NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable);
 	@NonNull String getUniqueTracePropertyName(@NonNull Element2TraceProperty variableDeclaration2TraceProperty, @NonNull String name);
 	@NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations();
 	@NonNull Iterable<@NonNull RelationCallExp> getWhereInvocations();

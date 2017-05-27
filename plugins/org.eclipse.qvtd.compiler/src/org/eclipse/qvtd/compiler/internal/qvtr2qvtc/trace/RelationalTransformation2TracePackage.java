@@ -257,7 +257,7 @@ public class RelationalTransformation2TracePackage
 		}
 		//
 		//	 Create each invocation Relation2TraceClass.
-		//
+		/*
 		for (@NonNull Relation rRelation : rRelations) {
 			Relation2TraceClass invokingRelation2TraceClass = getRelation2TraceClass(rRelation);
 			for (@NonNull RelationCallExp whenInvocation : invokingRelation2TraceClass.getWhenInvocations()) {
@@ -282,7 +282,7 @@ public class RelationalTransformation2TracePackage
 					//					}
 				}
 			}
-		}
+		} */
 	}
 
 	protected org.eclipse.ocl.pivot.@NonNull Package createTracePackage() {
@@ -342,64 +342,13 @@ public class RelationalTransformation2TracePackage
 		return ClassUtil.nonNullState(relation2relation2traceClass.get(rRelation));
 	}
 
-	/*	protected org.eclipse.ocl.pivot.@NonNull Class getSpeculatableClass() {
-		org.eclipse.ocl.pivot.Class speculatableClass2 = speculatableClass;
-		if (speculatableClass2 == null) {
-			//			org.eclipse.ocl.pivot.Class speculationClass2 = getSpeculationClass();
-			org.eclipse.ocl.pivot.Class speculatableInterface = PivotUtil.createClass(Speculatable.class.getSimpleName());
-			speculatableInterface.setInstanceClassName(Speculatable.class.getName());
-			speculatableInterface.setIsAbstract(true);
-			speculatableInterface.setIsInterface(true);
-			tracePackage.getOwnedClasses().add(speculatableInterface);
-			speculatableClass2 = speculatableClass = PivotUtil.createClass("Abstract" + Speculatable.class.getSimpleName());
-			speculatableClass2.setIsAbstract(true);
-			speculatableClass2.setIsInterface(false);
-			speculatableClass2.getSuperClasses().add(speculatableInterface);
-			Type speculationClass = getSpeculationClass();
-			Type speculationsType = qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(speculationClass, true, null, null);
-			Property referredSpeculationsProperty = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_REFERRED_SPECULATIONS_PROPERTY_NAME, speculationsType);
-			referredSpeculationsProperty.setIsRequired(true);
-			referredSpeculationsProperty.setIsResolveProxies(false);
-			speculatableClass2.getOwnedProperties().add(referredSpeculationsProperty);
-			Property speculationProperty = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_SPECULATION_PROPERTY_NAME, speculationClass);
-			speculationProperty.setIsRequired(false);
-			speculationProperty.setIsResolveProxies(false);
-			speculatableClass2.getOwnedProperties().add(speculationProperty);
-			Type booleanType = qvtr2qvtc.getStandardLibrary().getBooleanType();
-			Property successProperty = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME, booleanType);
-			successProperty.setIsRequired(true);
-			speculatableClass2.getOwnedProperties().add(successProperty);
-			tracePackage.getOwnedClasses().add(speculatableClass2);
-		}
-		return speculatableClass2;
-	} */
-
-	/*	protected org.eclipse.ocl.pivot.@NonNull Class getSpeculationClass() {
-		org.eclipse.ocl.pivot.Class speculationClass2 = speculationClass;
-		if (speculationClass2 == null) {
-			speculationClass2 = speculationClass = PivotUtil.createClass(Speculation.class.getSimpleName());
-			speculationClass2.setInstanceClassName(Speculation.class.getName());
-			speculationClass2.setIsAbstract(true);
-			speculationClass2.setIsInterface(true);
-			tracePackage.getOwnedClasses().add(speculationClass2);
-		}
-		return speculationClass2;
-	} */
-
-	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rRelation) {
-		return getRelation2TraceClass(rRelation).getSignatureClass();
+	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rInvokedRelation) {
+		return getRelation2TraceClass(rInvokedRelation).getSignatureClass();
 	}
 
-	public @NonNull Property getSignatureProperty(org.eclipse.ocl.pivot.@NonNull Class aClass, @NonNull VariableDeclaration rVariable) {
-		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
-		assert relation2TraceClass != null;
-		return relation2TraceClass.getSignatureProperty(rVariable);
+	public @NonNull Property getSignatureProperty(@NonNull Relation rInvokedRelation, @NonNull VariableDeclaration rVariable) {
+		return getRelation2TraceClass(rInvokedRelation).getSignatureProperty(rVariable);
 	}
-
-	//	public @NonNull Property getSignatureProperty(@NonNull RelationCallExp rInvocation) {
-	//		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(QVTrelationUtil.getContainingRelation(rInvocation));
-	//		return ClassUtil.nonNullState(relation2TraceClass.basicGetSignatureProperty(rInvocation));
-	//	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getTraceClass(@NonNull Relation rRelation) {
 		return getRelation2TraceClass(rRelation).getTraceClass();
@@ -427,6 +376,11 @@ public class RelationalTransformation2TracePackage
 			s.append(rPackage.getName());
 		}
 		return null;
+	}
+
+	public @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable) {
+		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(QVTrelationUtil.getContainingRelation(rVariable));
+		return relation2TraceClass.getVariableDeclaration2TraceProperty(rVariable);
 	}
 
 	protected void synthesizeTraceClasses() {

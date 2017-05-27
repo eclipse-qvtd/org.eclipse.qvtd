@@ -12,8 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
  * Invocation2TraceProperty defines the requirements on the trace property for an invocation signature.
@@ -25,8 +24,8 @@ class Invocation2TraceProperty extends Element2TraceProperty
 	 */
 	//		final @NonNull RelationCallExp invocation;
 
-	public Invocation2TraceProperty(@NonNull Relation2TraceClass relation2traceClass, @NonNull String name, @NonNull RelationCallExp invocation) {
-		super(relation2traceClass, name, relation2traceClass.getRelationalTransformation2TracePackage().getRelation2TraceClass(QVTrelationUtil.getReferredRelation(invocation)).getSignatureClass(), true);
+	public Invocation2TraceProperty(@NonNull Relation2TraceClass relation2traceClass, @NonNull String name, @NonNull Relation invokedRelation) {
+		super(relation2traceClass, name, relation2traceClass.getRelationalTransformation2TracePackage().getSignatureClass(invokedRelation), true);
 	}
 
 	/**

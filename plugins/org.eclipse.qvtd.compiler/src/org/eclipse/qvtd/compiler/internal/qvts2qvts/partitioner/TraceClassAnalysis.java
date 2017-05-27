@@ -115,9 +115,9 @@ public class TraceClassAnalysis
 			}
 		}
 		if ((commonProperties == null) || commonProperties.isEmpty()) {
-			//			throw new CompilerChainException("No common properties to disambiguate " + this);
-			TransformationPartitioner.DISCRIMINATION.println("No common properties to disambiguate " + this);
-			return;
+			throw new CompilerChainException("No common properties to disambiguate " + this);
+			//			TransformationPartitioner.DISCRIMINATION.println("No common properties to disambiguate " + this);
+			//			return;
 		}
 		//
 		//	Identify the discriminating power of each property.

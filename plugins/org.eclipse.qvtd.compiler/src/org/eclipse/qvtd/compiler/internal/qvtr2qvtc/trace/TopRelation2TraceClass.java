@@ -11,6 +11,10 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
@@ -20,5 +24,20 @@ class TopRelation2TraceClass extends AbstractRelation2TraceClass
 {
 	protected TopRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
 		super(relationalTransformation2tracePackage, relation);
+	}
+
+	@Override
+	public @Nullable Class basicGetSignatureClass() {
+		return null;
+	}
+
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass() {
+		throw new IllegalStateException("top relations have no signature class");
+	}
+
+	@Override
+	public @NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable) {
+		throw new IllegalStateException("top relations have no signature class or properties");
 	}
 }
