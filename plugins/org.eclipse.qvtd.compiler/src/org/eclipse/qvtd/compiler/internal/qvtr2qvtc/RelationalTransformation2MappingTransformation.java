@@ -22,11 +22,11 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
-/*public*/ class RelationalTransformationToMappingTransformation
+/*public*/ class RelationalTransformation2MappingTransformation
 {
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 
-	public RelationalTransformationToMappingTransformation(@NonNull QVTr2QVTc qvtr2qvtc) {
+	public RelationalTransformation2MappingTransformation(@NonNull QVTr2QVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 

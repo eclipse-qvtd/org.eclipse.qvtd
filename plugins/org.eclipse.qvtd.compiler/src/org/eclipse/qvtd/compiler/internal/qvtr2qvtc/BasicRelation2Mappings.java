@@ -63,11 +63,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
- * AbstractQVTr2QVTcRelations defines the mapping from a Relation, with a nested AbstractEnforceableRelationDomain2CoreMapping
+ * BasicRelation2Mappings defines the mapping from a Relation, with a nested AbstractEnforceableRelationDomain2CoreMapping
  * for each distinct enforcement of that relation and a further nested AbstractOtherRelationDomain2CoreDomain for each
  * other domain of the distinct enforcement.
  */
-/*public*/ abstract class AbstractQVTr2QVTcRelations extends AbstractRelation2Mappings
+/*public*/ abstract class BasicRelation2Mappings extends AbstractRelation2Mappings
 {
 	/**
 	 * The AbstractEnforceableRelationDomain2CoreMapping supervises the conversion of the enforced
@@ -1342,7 +1342,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	protected final @NonNull Set<@NonNull Relation> rAllOverrides = new HashSet<>();
 
-	protected AbstractQVTr2QVTcRelations(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	protected BasicRelation2Mappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert !rRelation.isIsAbstract();
 		//

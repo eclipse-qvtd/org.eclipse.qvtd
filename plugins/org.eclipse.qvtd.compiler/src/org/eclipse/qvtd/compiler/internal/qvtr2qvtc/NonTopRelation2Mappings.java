@@ -35,32 +35,32 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import com.google.common.collect.Iterables;
 
 /**
- * InvokedRelationToMappingForEnforcement refines AbstractQVTr2QVTcRelations to support conversion of an invoked relation.
+ * NonTopRelation2Mappings refines BasicRelation2Mappings to support conversion of a non-top, necessarily invoked relation.
  */
-/*public*/ class InvokedRelationToMappingForEnforcement extends AbstractQVTr2QVTcRelations
+/*public*/ class NonTopRelation2Mappings extends BasicRelation2Mappings
 {
 	/**
-	 * InvokedEnforceableRelationDomain2CoreMapping refines AbstractEnforceableRelationDomain2CoreMapping to support conversion of an invoked enforced domain.
+	 * NonTopEnforceableRelationDomain2CoreMapping refines AbstractEnforceableRelationDomain2CoreMapping to support conversion of an invoked enforced domain.
 	 */
-	protected abstract class InvokedEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
+	protected abstract class NonTopEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
 	{
 		/**
-		 * InvokedOtherRelationDomain2CoreDomain refines AbstractOtherRelationDomain2CoreDomain to support conversion of an invoked not-enforced domain.
+		 * NonTopOtherRelationDomain2CoreDomain refines AbstractOtherRelationDomain2CoreDomain to support conversion of an invoked not-enforced domain.
 		 */
-		protected class InvokedOtherRelationDomain2CoreDomain extends AbstractOtherRelationDomain2CoreDomain
+		protected class NonTopOtherRelationDomain2CoreDomain extends AbstractOtherRelationDomain2CoreDomain
 		{
-			public InvokedOtherRelationDomain2CoreDomain(@NonNull RelationDomain rOtherDomain) {
+			public NonTopOtherRelationDomain2CoreDomain(@NonNull RelationDomain rOtherDomain) {
 				super(rOtherDomain);
 			}
 		}
 
-		public InvokedEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
+		public NonTopEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
 		}
 
 		@Override
 		protected @NonNull OtherRelationDomain2CoreDomain createOtherDomain2CoreDomain( @NonNull RelationDomain rRelationDomain) {
-			return new InvokedOtherRelationDomain2CoreDomain(rRelationDomain);
+			return new NonTopOtherRelationDomain2CoreDomain(rRelationDomain);
 		}
 
 		@Override
@@ -112,7 +112,7 @@ import com.google.common.collect.Iterables;
 	 */
 	private @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> whereTypedModel2relationDomain2coreMapping = new HashMap<>();
 
-	public InvokedRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	public NonTopRelation2Mappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert !rRelation.isIsTopLevel();
 	}
@@ -208,7 +208,7 @@ import com.google.common.collect.Iterables;
 		}
 	}
 
-	protected final class WhenedEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
+	protected final class WhenedEnforceableRelationDomain2CoreMapping extends NonTopEnforceableRelationDomain2CoreMapping
 	{
 		protected WhenedEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
@@ -225,7 +225,7 @@ import com.google.common.collect.Iterables;
 		}
 	}
 
-	protected final class WheredEnforceableRelationDomain2CoreMapping extends InvokedEnforceableRelationDomain2CoreMapping
+	protected final class WheredEnforceableRelationDomain2CoreMapping extends NonTopEnforceableRelationDomain2CoreMapping
 	{
 		protected WheredEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);

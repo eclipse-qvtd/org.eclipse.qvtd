@@ -27,9 +27,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
- * TopLevelRelationToMappingForEnforcement refines AbstractQVTr2QVTcRelations to support conversion of a top level relation.
+ * TopRelation2Mappings refines BasicRelation2Mappings to support conversion of a top level, possibly invoked relation.
  */
-/*public*/ class TopLevelRelationToMappingForEnforcement extends AbstractQVTr2QVTcRelations
+/*public*/ class TopRelation2Mappings extends BasicRelation2Mappings
 {
 	/**
 	 * TopEnforceableRelationDomain2CoreMapping refines AbstractEnforceableRelationDomain2CoreMapping to support conversion of a top level enforced domain.
@@ -146,7 +146,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 	 */
 	protected @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> topTypedModel2relationDomain2coreMapping = new HashMap<>();
 
-	public TopLevelRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	public TopRelation2Mappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert rRelation.isIsTopLevel();
 	}

@@ -578,7 +578,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			org.eclipse.ocl.pivot.@NonNull Class identifiedClass = QVTrelationUtil.getIdentifies(rKey);
 			assert (Iterables.contains(usedClasses, identifiedClass));
 			QVTr2QVTc.SYNTHESIS.println("key " + rKey);
-			KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rTypedModel, rKey);
+			Key2FunctionForIdentification keyToMapping = new Key2FunctionForIdentification(this, rTypedModel, rKey);
 			cKeyFunction = keyToMapping.transform();
 			getCoreTransformation(QVTrelationUtil.getContainingTransformation(rTypedModel)).getOwnedOperations().add(cKeyFunction);
 			//			}
@@ -760,10 +760,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			}
 			else if (rRelation.isIsTopLevel()) {
 				QVTr2QVTc.SYNTHESIS.println("topLevel " + rRelation);
-				relation2mappings = new TopLevelRelationToMappingForEnforcement(this, rRelation);
+				relation2mappings = new TopRelation2Mappings(this, rRelation);
 			}
 			else {
-				relation2mappings = new InvokedRelationToMappingForEnforcement(this, rRelation);
+				relation2mappings = new NonTopRelation2Mappings(this, rRelation);
 			}
 			relation2mappings.analyze();
 			relation2relation2mapping.put(rRelation, relation2mappings);
@@ -1057,7 +1057,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			//
 			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : QVTrelationUtil.getOwnedClasses(relationPackage)) {
 				if (relationClass instanceof RelationalTransformation) {
-					RelationalTransformationToMappingTransformation rTransformationToMappingTransformation = new RelationalTransformationToMappingTransformation(this);
+					RelationalTransformation2MappingTransformation rTransformationToMappingTransformation = new RelationalTransformation2MappingTransformation(this);
 					Transformation cTransformation = rTransformationToMappingTransformation.doRelationalTransformationToMappingTransformation((RelationalTransformation)relationClass);
 					corePackage.getOwnedClasses().add(cTransformation);
 					//					CompilerUtil.normalizeNameables(QVTrelationUtil.getRule(cTransformation)));

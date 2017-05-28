@@ -30,16 +30,16 @@ import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
- * KeyToMappingForIdentification synthesizes a Core constructor function/query that enforces the uniqueness of a realized variable
+ * Key2FunctionForIdentification synthesizes a Core constructor function/query that enforces the uniqueness of a realized variable
  * with respect to its key parts.
  */
-public class KeyToFunctionForIdentification
+public class Key2FunctionForIdentification
 {
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull TypedModel rTypedModel;
 	protected final @NonNull Key rKey;
 
-	public KeyToFunctionForIdentification(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull TypedModel rTypedModel, @NonNull Key rKey) {
+	public Key2FunctionForIdentification(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull TypedModel rTypedModel, @NonNull Key rKey) {
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.rTypedModel = rTypedModel;
 		this.rKey = rKey;
