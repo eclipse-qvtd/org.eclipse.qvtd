@@ -6,8 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Horacio Hoyos - initial research
- *     E.D.Willink - initial API and implementation based on MtcBroker
+ *     E.D.Willink - initial API and implementation (inspired by Horacio Hoyos' prototype)
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.common;
 

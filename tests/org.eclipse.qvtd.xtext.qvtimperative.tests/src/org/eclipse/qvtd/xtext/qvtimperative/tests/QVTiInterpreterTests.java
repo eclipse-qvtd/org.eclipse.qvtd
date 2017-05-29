@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 The University of York, Willink Transformations and others.
+ * Copyright (c) 2012, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Horacio Hoyos - initial API and implementation
+ *     E.D.Willink - initial API and implementation (inspired by Horacio Hoyos' prototype)
  *     Adolfo Sanchez-Barbudo Herrera - Bug 456900, 457239
  ******************************************************************************/
 
@@ -59,11 +59,6 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Test001 is a set if simple tests on the QVTi API.
- * @author Horacio Hoyos
- *
- */
 public class QVTiInterpreterTests extends LoadTestCase
 {
 	protected class MyQVT extends QVTimperative
