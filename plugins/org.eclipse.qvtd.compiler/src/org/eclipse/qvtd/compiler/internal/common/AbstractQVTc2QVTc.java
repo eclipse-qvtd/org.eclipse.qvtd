@@ -78,7 +78,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTC/QVTu/QVTm chain.
  */
-public abstract class AbstractQVTc2QVTc
+public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 {
 	/**
 	 * An ExpressionCopier deep copies an OCLExpression tree, exploiting the forward traceability of context to
@@ -409,7 +409,7 @@ public abstract class AbstractQVTc2QVTc
 
 		public AbstractUpdateVisitor(@NonNull C context) {
 			super(context);
-			helper = context.getHelper();
+			helper = context;
 		}
 
 		/**
@@ -736,8 +736,6 @@ public abstract class AbstractQVTc2QVTc
 		}
 	}
 
-	protected final @NonNull EnvironmentFactory environmentFactory;
-	protected final @NonNull QVTcoreHelper helper;
 	protected final @NonNull AbstractCreateVisitor<@NonNull ?> createVisitor;
 	protected final @NonNull AbstractUpdateVisitor<@NonNull ?> updateVisitor;
 	private TypedModel middleTypedModelTarget = null;
@@ -767,8 +765,7 @@ public abstract class AbstractQVTc2QVTc
 	 * It may be used once by invoking transform(). Repeated transform() calls are beyond the current design.
 	 */
 	protected AbstractQVTc2QVTc(@NonNull EnvironmentFactory environmentFactory) {
-		this.environmentFactory = environmentFactory;
-		this.helper = new QVTcoreHelper(environmentFactory);
+		super(environmentFactory);
 		this.createVisitor = createCreateVisitor();
 		this.updateVisitor = createUpdateVisitor();
 	}
@@ -789,7 +786,7 @@ public abstract class AbstractQVTc2QVTc
 	 * @param generated the list of generated objects
 	 * @param context the context in which the trace is valid
 	 */
-	protected void addTrace(@NonNull Element source, @NonNull Element target) {
+	public void addTrace(@NonNull Element source, @NonNull Element target) {
 		target2source.put(target, source);
 		//
 		NamedElement scope = scopeStack.peek();
@@ -818,13 +815,13 @@ public abstract class AbstractQVTc2QVTc
 	protected abstract @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor();
 
 	protected @NonNull Import createImport(@NonNull Import iIn) {
-		Import iOut = helper.createImport(iIn.getName(), ClassUtil.nonNull(iIn.getImportedNamespace()));
+		Import iOut = createImport(iIn.getName(), ClassUtil.nonNull(iIn.getImportedNamespace()));
 		addTrace(iIn, iOut);
 		return iOut;
 	}
 
 	protected org.eclipse.ocl.pivot.@NonNull Package createPackage(org.eclipse.ocl.pivot.@NonNull Package pIn) {
-		org.eclipse.ocl.pivot.Package pOut = helper.createPackage(ClassUtil.nonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
+		org.eclipse.ocl.pivot.Package pOut = createPackage(ClassUtil.nonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
 		addTrace(pIn, pOut);
 		return pOut;
 	}
@@ -858,14 +855,6 @@ public abstract class AbstractQVTc2QVTc
 		else {
 			return source;
 		}
-	}
-
-	public @NonNull EnvironmentFactory getEnvironmentFactory() {
-		return environmentFactory;
-	}
-
-	public @NonNull QVTcoreHelper getHelper() {
-		return helper;
 	}
 
 	protected @NonNull TypedModel getMiddleTypedModelTarget() {

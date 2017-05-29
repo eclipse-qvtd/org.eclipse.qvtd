@@ -46,8 +46,8 @@ public class Key2FunctionForIdentification
 	}
 
 	public @NonNull Function transform() throws CompilerChainException {
-		QVTcoreHelper helper = qvtr2qvtc.getHelper();
-		String functionName = qvtr2qvtc.createKeyFunctionName(rTypedModel, rKey);
+		QVTcoreHelper helper = qvtr2qvtc;
+		String functionName = qvtr2qvtc.getNameGenerator().createKeyFunctionName(rTypedModel, rKey);
 		List<@NonNull FunctionParameter> asParameters = new ArrayList<>();
 		List<@NonNull ShadowPart> asShadowParts = new ArrayList<>();
 		//
@@ -74,7 +74,7 @@ public class Key2FunctionForIdentification
 		//
 		//	One shadow part per uninitialized key property
 		//
-		CompleteClass completeClass = qvtr2qvtc.getCompleteClass(identifiedClass);
+		CompleteClass completeClass = helper.getCompleteClass(identifiedClass);
 		for (@NonNull Property asProperty : completeClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
 			if (!asProperty.isIsImplicit() && !asProperty.isIsMany() && (asProperty != qvtr2qvtc.getOclContainerProperty())) {
 				boolean gotIt = false;

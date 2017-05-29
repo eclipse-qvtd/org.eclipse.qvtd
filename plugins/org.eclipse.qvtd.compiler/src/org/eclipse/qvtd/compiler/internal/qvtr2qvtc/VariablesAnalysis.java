@@ -37,6 +37,9 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -240,9 +243,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	public static class WhenedVariablesAnalysis extends VariablesAnalysis
 	{
-		public WhenedVariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain,
+		public WhenedVariablesAnalysis(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
 				@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			super(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+			super(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
 		}
 
 		@Override
@@ -253,9 +256,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	public static class WheredVariablesAnalysis extends VariablesAnalysis
 	{
-		public WheredVariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain,
+		public WheredVariablesAnalysis(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
 				@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			super(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+			super(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
 		}
 
 		@Override
@@ -264,7 +267,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	protected final @NonNull QVTr2QVTc qvtr2qvtc;
+	protected final @NonNull RelationAnalysis relationAnalysis;
+	//	protected final @NonNull QVTr2QVTc qvtr2qvtc;
+	protected final @NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage;
 	protected final @NonNull CoreDomain cEnforcedDomain;
 	protected final @NonNull Mapping cMapping;
 	protected final @NonNull Transformation cTransformation;
@@ -290,10 +295,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<>();
 
-	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationDomain rEnforcedDomain,
+	public VariablesAnalysis(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
 			@NonNull CoreDomain cEnforcedDomain, @Nullable Type traceClass) throws CompilerChainException {
-		super(qvtr2qvtc.getEnvironmentFactory());
-		this.qvtr2qvtc = qvtr2qvtc;
+		super(relationAnalysis.getEnvironmentFactory());
+		this.relationAnalysis = relationAnalysis;
+		TransformationAnalysis transformationAnalysis = relationAnalysis.getTransformationAnalysis();
+		QVTr2QVTc qvtr2qvtc = transformationAnalysis.getQVTr2QVTc();
+		this.relationalTransformation2tracePackage = qvtr2qvtc.getRelationalTransformation2TracePackage(transformationAnalysis);
 		this.cEnforcedDomain = cEnforcedDomain;
 		this.cMapping = ClassUtil.nonNullState(QVTcoreUtil.getContainingMapping(cEnforcedDomain));
 		this.cTransformation = ClassUtil.nonNullState(cMapping.getTransformation());
@@ -415,7 +423,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
 		RealizedVariable cMiddleRealizedVariable2 = getMiddleRealizedVariable();
 		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
-		Property cTargetProperty = qvtr2qvtc.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
+		Property cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
 		assert isOptional || (cTargetProperty != null);
 		if (cTargetProperty != null) {
 			assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));

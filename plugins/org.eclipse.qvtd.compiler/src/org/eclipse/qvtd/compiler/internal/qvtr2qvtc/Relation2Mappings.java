@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -34,6 +35,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 	void analyze() throws CompilerChainException;
 
 	@NonNull Relation getRelation();
+
+	@NonNull RelationAnalysis getRelationAnalysis();
 
 	@NonNull EnforceableRelationDomain2CoreMapping getTopRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel);
 

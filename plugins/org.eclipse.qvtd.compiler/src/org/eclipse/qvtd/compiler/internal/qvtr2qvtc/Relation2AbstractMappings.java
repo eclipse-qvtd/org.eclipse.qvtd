@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -27,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
@@ -106,14 +106,14 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 			this.rEnforcedTypedModel = QVTrelationUtil.getTypedModel(rEnforcedDomain);
 			//
 			this.cEnforcedTypedModel = getCoreTypedModel(rEnforcedTypedModel);
-			this.cMapping = qvtr2qvtc.createMapping(rRelation, cMappingName);
+			this.cMapping = createCoreMapping(cMappingName);
 			this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
 			this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
 			this.cEnforcedDomain = createCoreDomain(cEnforcedTypedModel, true);
 			//			this.cEnforcedGuardPattern = ClassUtil.nonNullState(cEnforcedDomain.getGuardPattern());
 			//			this.cEnforcedBottomPattern = ClassUtil.nonNullState(cEnforcedDomain.getBottomPattern());
 			//
-			this.variablesAnalysis = new VariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, null);
+			this.variablesAnalysis = new VariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, null);
 			//
 			this.otherDomain2coreDomains = new ArrayList<>();
 			for (@NonNull Domain rDomain : ClassUtil.nullFree(rEnforcedDomain.getRule().getDomain())) {
@@ -161,8 +161,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 	 */
 	protected @NonNull Map<@NonNull TypedModel, @NonNull RelationDomain2AbstractCoreMapping> typedModel2relationDomain2coreMapping = new HashMap<>();
 
-	public Relation2AbstractMappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
-		super(qvtr2qvtc, rRelation);
+	public Relation2AbstractMappings(@NonNull RelationalTransformation2CoreTransformation relationalTransformation2coreTransformation, @NonNull RelationAnalysis relationAnalysis) {
+		super(relationalTransformation2coreTransformation, relationAnalysis);
 		assert rRelation.isIsAbstract();
 	}
 

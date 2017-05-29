@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -24,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 import com.google.common.collect.Iterables;
@@ -69,10 +71,21 @@ public class QVTbaseHelper extends PivotHelper
 		return asPredicate;
 	}
 
+	public @NonNull Transformation createTransformation(@NonNull String name) {
+		Transformation transformation = QVTbaseFactory.eINSTANCE.createTransformation();
+		transformation.setName(name);
+		return transformation;
+	}
+
 	public @NonNull TypedModel createTypedModel(@NonNull String name, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> usedPackages) {
 		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		asTypedModel.setName(name);
 		Iterables.addAll(QVTbaseUtil.Internal.getUsedPackagesList(asTypedModel), usedPackages);
 		return asTypedModel;
+	}
+
+	public @NonNull CompleteClass getCompleteClass(@NonNull Type type) {
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(type);
+		return completeClass;
 	}
 }

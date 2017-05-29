@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -102,7 +103,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 		@Override
 		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			return new VariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+			return new VariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
 		}
 
 		@Override
@@ -146,8 +147,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 	 */
 	protected @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> topTypedModel2relationDomain2coreMapping = new HashMap<>();
 
-	public TopRelation2Mappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
-		super(qvtr2qvtc, rRelation);
+	public TopRelation2Mappings(@NonNull RelationalTransformation2CoreTransformation relationalTransformation2coreTransformation, @NonNull RelationAnalysis relationAnalysis) {
+		super(relationalTransformation2coreTransformation, relationAnalysis);
 		assert rRelation.isIsTopLevel();
 	}
 
@@ -178,9 +179,10 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
 			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
 			if (rOverriddenRelation != null) {
+				RelationAnalysis rOverriddenRelationAnalysis = transformationAnalysis.getRelationAnalysis(rOverriddenRelation);
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
 				Mapping coreOverridingMapping = enforceableRelationDomain2coreMapping.getCoreMapping();
-				Relation2Mappings overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
+				Relation2Mappings overriddenRelation2Mappings = relationalTransformation2coreTransformation.getRelation2Mappings(rOverriddenRelationAnalysis);
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getTopRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);

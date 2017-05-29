@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -534,10 +535,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.rEnforcedRootVariables = QVTrelationUtil.getRootVariables(rEnforcedDomain);
 			this.rEnforcedTypedModel = QVTrelationUtil.getTypedModel(rEnforcedDomain);
 			this.rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
-			@NonNull Type traceClass = qvtr2qvtc.getTraceClass(rRelation);
+			@NonNull Type traceClass = relationalTransformation2tracePackage.getTraceClass(rRelation);
 			//
 			this.cEnforcedTypedModel = getCoreTypedModel(rEnforcedTypedModel);
-			this.cMapping = qvtr2qvtc.createMapping(rRelation, cMappingName);
+			this.cMapping = createCoreMapping(cMappingName);
 			this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
 			this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
 			this.cEnforcedDomain = createCoreDomain(cEnforcedTypedModel, true);
@@ -574,7 +575,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 			}
 			for (@NonNull Variable rVariable : rEnforcedBoundVariables.keySet()) {
-				Key rKey = qvtr2qvtc.getKeyForType(QVTrelationUtil.getType(rVariable));
+
+				Key rKey = transformationAnalysis.getKeyForType(QVTrelationUtil.getType(rVariable));
+
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsEnforcedBound(rEnforcedBoundVariables.get(rVariable), rEnforcedTypedModel, rKey);
 			}
 			for (@NonNull Variable rVariable : rEnforcedReferredVariables) {
@@ -931,7 +934,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							// check
 							if (isVarBoundToSomeOtherTemplate((ObjectTemplateExp) rTemplateExpression, rEnforcedObjectTemplateExpression, rPartVariable)) {
 								Variable cReferredVariable = variablesAnalysis.getCoreVariable(rPartVariable);
-								Property cTargetProperty = qvtr2qvtc.getTraceProperty(QVTrelationUtil.getType(cReferredVariable), cReferredVariable);
+								Property cTargetProperty = relationalTransformation2tracePackage.getTraceProperty(QVTrelationUtil.getType(cReferredVariable), cReferredVariable);
 								NavigationCallExp cPropertyCallExp = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), cTargetProperty);
 								variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cPropertyCallExp, createVariableExp(cReferredVariable));
 								cEnforcedGuardPattern.getBindsTo().add(cReferredVariable);
@@ -956,7 +959,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		private void mapEnforcedTemplateExpression(@NonNull TemplateExp rEnforcedTemplateExpression/*te*/) throws CompilerChainException {
 			Variable rTemplateVariable/*v*/ = QVTrelationUtil.getBindsTo(rEnforcedTemplateExpression);
 			Type rTemplateVariableType/*c*/ = QVTrelationUtil.getType(rTemplateVariable);
-			Key key = qvtr2qvtc.getKeyForType(rTemplateVariableType);
+			Key key = transformationAnalysis.getKeyForType(rTemplateVariableType);
 			VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rTemplateVariable);
 			if (variableAnalysis.hasWhenDomain()) {
 				key = null;
@@ -1101,12 +1104,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						// body of RWhenRelCallToMGuard
 						RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
 						Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
+						RelationAnalysis rInvokedRelationAnalysis = transformationAnalysis.getRelationAnalysis(rInvokedRelation);
 						List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
-						List<@NonNull Variable> rParameters = qvtr2qvtc.getRootVariables(rInvokedRelation);
+						List<@NonNull Variable> rParameters = rInvokedRelationAnalysis.getRootVariables();
 						int iSize = rArguments.size();
 						assert iSize == rParameters.size();
 						if (rInvokedRelation.isIsTopLevel()) {
-							Type invokedTraceClass/*tc*/ = qvtr2qvtc.getTraceClass(rInvokedRelation);
+							Type invokedTraceClass/*tc*/ = relationalTransformation2tracePackage.getTraceClass(rInvokedRelation);
 							//
 							String invokedName = "when_" + invokedTraceClass.getName()/* + vdId*/;
 							Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(invokedName, invokedTraceClass);	// FIXME
@@ -1116,23 +1120,23 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 								//RWhenRelCallArgToMGuardPredicate
 								Variable rArgumentVariable/*v*/ = QVTbaseUtil.getReferredVariable(rArgument);
 								Variable cArgumentVariable/*mv*/ = variablesAnalysis.getCoreVariable(rArgumentVariable);
-								Property cCalledProperty/*pep*/ = qvtr2qvtc.getTraceProperty(QVTrelationUtil.getType(cCalledVariable), rParameter);
+								Property cCalledProperty/*pep*/ = relationalTransformation2tracePackage.getTraceProperty(QVTrelationUtil.getType(cCalledVariable), rParameter);
 								NavigationCallExp cCalledValue/*pe*/ = createNavigationCallExp(createVariableExp(cCalledVariable), cCalledProperty);
 								variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cCalledValue, createVariableExp(cArgumentVariable));
 							}
 						}
 						else {
-							Type invokedSignatureClass = qvtr2qvtc.getSignatureClass(rInvokedRelation);
+							Type invokedSignatureClass = relationalTransformation2tracePackage.getSignatureClass(rInvokedRelation);
 							String invokedName = "when_" + invokedSignatureClass.getName()/* + vdId*/;
 							Variable cInvocationVariable = variablesAnalysis.addCoreRealizedVariable(invokedName, invokedSignatureClass);	// FIXME
-							Property cInvocationProperty = qvtr2qvtc.getTraceProperty(rInvocation);
+							Property cInvocationProperty = relationalTransformation2tracePackage.getTraceProperty(rInvocation);
 							variablesAnalysis.addTraceNavigationAssignment(cInvocationProperty, cInvocationVariable);
 							VariableAnalysis signatureVariableAnalysis = variablesAnalysis.getCoreVariableAnalysis(cInvocationVariable);
 							for (int i = 0; i < iSize; i++) {
 								VariableExp rArgument = (VariableExp) rArguments.get(i);
 								Variable rParameter = rParameters.get(i);
 								Variable cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
-								Property cCalledProperty = qvtr2qvtc.getSignatureProperty(rInvokedRelation, rParameter);
+								Property cCalledProperty = relationalTransformation2tracePackage.getSignatureProperty(rInvokedRelation, rParameter);
 								signatureVariableAnalysis.addNavigationAssignment(cCalledProperty, createVariableExp(cArgumentVariable), false);
 							}
 
@@ -1198,21 +1202,22 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					if (rConditionExpression instanceof RelationCallExp) {
 						RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
 						Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
-						Type invokedSignatureClass/*tc*/ = qvtr2qvtc.getSignatureClass(rInvokedRelation);
+						RelationAnalysis rInvokedRelationAnalysis = transformationAnalysis.getRelationAnalysis(rInvokedRelation);
+						Type invokedSignatureClass/*tc*/ = relationalTransformation2tracePackage.getSignatureClass(rInvokedRelation);
 						List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
 						String invokedName = "where_" + invokedSignatureClass.getName()/* + vdId*/;
 						Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreRealizedVariable(invokedName, invokedSignatureClass);	// FIXME
-						Property cInvocationProperty/*pep*/ = qvtr2qvtc.getTraceProperty(rInvocation);
+						Property cInvocationProperty/*pep*/ = relationalTransformation2tracePackage.getTraceProperty(rInvocation);
 						variablesAnalysis.addTraceNavigationAssignment(cInvocationProperty, cInvocationVariable);
 						VariableAnalysis signatureVariableAnalysis = variablesAnalysis.getCoreVariableAnalysis(cInvocationVariable);
-						List<@NonNull Variable> rParameters = qvtr2qvtc.getRootVariables(rInvokedRelation);
+						List<@NonNull Variable> rParameters = rInvokedRelationAnalysis.getRootVariables();
 						int iSize = rArguments.size();
 						assert iSize == rParameters.size();
 						for (int i = 0; i < iSize; i++) {
 							VariableExp rArgument = (VariableExp) rArguments.get(i);
 							Variable rParameter = rParameters.get(i);
 							Variable cArgumentVariable = variablesAnalysis.getCoreVariable(QVTbaseUtil.getReferredVariable(rArgument));
-							Property cCalledProperty = qvtr2qvtc.getSignatureProperty(rInvokedRelation, rParameter);
+							Property cCalledProperty = relationalTransformation2tracePackage.getSignatureProperty(rInvokedRelation, rParameter);
 							signatureVariableAnalysis.addNavigationAssignment(cCalledProperty, createVariableExp(cArgumentVariable), false);
 						}
 					}
@@ -1342,8 +1347,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	protected final @NonNull Set<@NonNull Relation> rAllOverrides = new HashSet<>();
 
-	protected BasicRelation2Mappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
-		super(qvtr2qvtc, rRelation);
+	protected BasicRelation2Mappings(@NonNull RelationalTransformation2CoreTransformation relationalTransformation2coreTransformation, @NonNull RelationAnalysis relationAnalysis) {
+		super(relationalTransformation2coreTransformation, relationAnalysis);
 		assert !rRelation.isIsAbstract();
 		//
 		this.rWhenVariable2rTypedModel = new HashMap<>();

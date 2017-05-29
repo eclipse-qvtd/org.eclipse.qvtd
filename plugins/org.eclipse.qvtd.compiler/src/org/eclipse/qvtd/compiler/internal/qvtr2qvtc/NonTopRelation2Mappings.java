@@ -79,7 +79,7 @@ import com.google.common.collect.Iterables;
 			for (Relation rOverriddenRelation = rRelation; (rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rOverriddenRelation)) != null; ) {
 				rRootRelation = rOverriddenRelation;
 			}
-			org.eclipse.ocl.pivot.Class signatureClass = qvtr2qvtc.getSignatureClass(rRootRelation);
+			org.eclipse.ocl.pivot.Class signatureClass = relationalTransformation2tracePackage.getSignatureClass(rRootRelation);
 			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(QVTrNameGenerator.INVOCATION_GUARD_NAME, signatureClass);
 			List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rRootRelation);
 			List<@NonNull Variable> overridingVariables = QVTrelationUtil.getRootVariables(rRelation);
@@ -88,7 +88,7 @@ import com.google.common.collect.Iterables;
 			for (int i = 0; i < rootVariables.size(); i++) {
 				@NonNull Variable rRootDeclaration = rootVariables.get(i);
 				@NonNull Variable rOverridingDeclaration = overridingVariables.get(i);
-				Property signatureProperty = qvtr2qvtc.getSignatureProperty(rRootRelation, rRootDeclaration);
+				Property signatureProperty = relationalTransformation2tracePackage.getSignatureProperty(rRootRelation, rRootDeclaration);
 				Variable cArgumentVariable = variablesAnalysis.getCoreVariable(rOverridingDeclaration);
 				VariableExp cArgumentExpression = createVariableExp(cArgumentVariable);
 				if (cArgumentVariable instanceof RealizedVariable) {
@@ -113,8 +113,8 @@ import com.google.common.collect.Iterables;
 	 */
 	private @NonNull Map<@NonNull TypedModel, @NonNull AbstractEnforceableRelationDomain2CoreMapping> whereTypedModel2relationDomain2coreMapping = new HashMap<>();
 
-	public NonTopRelation2Mappings(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
-		super(qvtr2qvtc, rRelation);
+	public NonTopRelation2Mappings(@NonNull RelationalTransformation2CoreTransformation relationalTransformation2coreTransformation, @NonNull RelationAnalysis relationAnalysis) {
+		super(relationalTransformation2coreTransformation, relationAnalysis);
 		assert !rRelation.isIsTopLevel();
 	}
 
@@ -140,7 +140,7 @@ import com.google.common.collect.Iterables;
 		boolean hasWhenInvocation = false;
 		boolean hasWhereInvocation = false;
 		for (@NonNull Relation rOverride : rAllOverrides) {
-			RelationAnalysis rOverrideAnalysis = qvtr2qvtc.getRelationAnalysis(rOverride);
+			RelationAnalysis rOverrideAnalysis = transformationAnalysis.getRelationAnalysis(rOverride);
 			Iterable<@NonNull RelationCallExp> incomingWhenInvocations = rOverrideAnalysis.getIncomingWhenInvocations();
 			if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {
 				hasWhenInvocation = true;
@@ -187,9 +187,10 @@ import com.google.common.collect.Iterables;
 			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
 			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
 			if (rOverriddenRelation != null) {
+				RelationAnalysis rOverriddenRelationAnalysis = transformationAnalysis.getRelationAnalysis(rOverriddenRelation);
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
 				Mapping coreOverridingMapping = enforceableRelationDomain2coreMapping.getCoreMapping();
-				Relation2Mappings overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
+				Relation2Mappings overriddenRelation2Mappings = relationalTransformation2coreTransformation.getRelation2Mappings(rOverriddenRelationAnalysis);
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);
@@ -200,9 +201,10 @@ import com.google.common.collect.Iterables;
 			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
 			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
 			if (rOverriddenRelation != null) {
+				RelationAnalysis rOverriddenRelationAnalysis = transformationAnalysis.getRelationAnalysis(rOverriddenRelation);
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
 				Mapping coreOverridingMapping = enforceableRelationDomain2coreMapping.getCoreMapping();
-				Relation2Mappings overriddenRelation2Mappings = qvtr2qvtc.getRelation2Mappings(rOverriddenRelation);
+				Relation2Mappings overriddenRelation2Mappings = relationalTransformation2coreTransformation.getRelation2Mappings(rOverriddenRelationAnalysis);
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);
@@ -218,7 +220,7 @@ import com.google.common.collect.Iterables;
 
 		@Override
 		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			return new VariablesAnalysis.WhenedVariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+			return new VariablesAnalysis.WhenedVariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
 		}
 
 		@Override
@@ -235,7 +237,7 @@ import com.google.common.collect.Iterables;
 
 		@Override
 		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			return new VariablesAnalysis.WheredVariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass);
+			return new VariablesAnalysis.WheredVariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
 		}
 
 		@Override

@@ -47,8 +47,6 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		}
 
 		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
-			//			Transformation loadTransformation = QVTrelationUtil.loadTransformation(environmentFactory, txURI, false);
-			//			Resource rResource = ClassUtil.nonNullState(loadTransformation.eResource());
 			Resource rResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, rResource);
@@ -74,20 +72,17 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		 */
 		protected void doQVTcSerializeAndLoad(@NonNull URI asURI, @NonNull URI csURI) throws IOException {}
 
-		public @NonNull Resource execute(@NonNull QVTr2QVTc t, @NonNull Resource rResource, @NonNull Resource cResource) throws IOException {
+		public @NonNull Resource execute(@NonNull QVTr2QVTc t, @NonNull Resource rResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				// FIXME next few lines should be classURI != null, but a test fails in combination (? due to global registry leakage)
-				//		URI classURI = getURI(CLASS_STEP, URI_KEY);
-				//				URI classURI = compilerChain.getOption(CLASS_STEP, URI_KEY);
-				//				URI qvtcURI = compilerChain.getURI(QVTC_STEP, URI_KEY);
-				//
+				URI qvtcURI = compilerChain.getURI(QVTC_STEP, URI_KEY);
 				t.transformToCoreTransformations();
 				Map<Object, Object> saveOptions;
-				saveOptions = compilerChain.getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
+				saveOptions = compilerChain.getOption(QVTC_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
 					saveOptions = XMIUtil.createSaveOptions();
 				}
+				Resource cResource = compilerChain.createResource(qvtcURI);
 				t.saveCore(cResource, saveOptions);
 				assertNoResourceSetErrors("Core save", cResource);
 				compiled(cResource);
@@ -181,14 +176,10 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	protected @NonNull ImperativeTransformation compileQVTrAS(@NonNull Resource rResource, @NonNull String enforcedOutputName) throws IOException {
-		URI qvtcURI = getURI(QVTC_STEP, URI_KEY);
-		Resource cResource1 = createResource(qvtcURI);
-		QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource, cResource1);
-		t.prepare();
+		QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource);
 		traceCompilerStep.execute(t);
-		Resource cResource = qvtr2qvtcCompilerStep.execute(t, rResource, cResource1);
+		Resource cResource = qvtr2qvtcCompilerStep.execute(t, rResource);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
-		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
 		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
 		return qvtm2qvti(pResource);
 	}

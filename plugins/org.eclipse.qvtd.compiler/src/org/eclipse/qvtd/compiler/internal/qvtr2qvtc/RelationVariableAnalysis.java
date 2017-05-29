@@ -382,7 +382,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) throws CompilerChainException {
 		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(rEnforcedTypedModel);
 		Key rKey2 = ClassUtil.nonNull(rKey);
-		Function function = variablesAnalysis.qvtr2qvtc.getKeyFunction(rEnforcedTypedModel2, rKey2);
+		Function function = variablesAnalysis.relationAnalysis.getTransformationAnalysis().getKeyFunction(rEnforcedTypedModel2, rKey2);
 		List<@NonNull OCLExpression> asArguments = new ArrayList<@NonNull OCLExpression>();
 		if (rTemplateExp instanceof ObjectTemplateExp) {
 			ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)rTemplateExp;

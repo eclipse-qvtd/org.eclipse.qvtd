@@ -26,13 +26,14 @@ import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
  * A RelationAnalysis accumulates the tesults of analyzing a Relation and its contents.
  */
-public class RelationAnalysis
+public class RelationAnalysis extends QVTrelationHelper
 {
 	/**
 	 * The parent TransformationAnalysis.
@@ -75,6 +76,7 @@ public class RelationAnalysis
 	private @Nullable Set<org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis> overridingRelationAnalyses = null;
 
 	public RelationAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Relation relation) {
+		super(transformationAnalysis.getEnvironmentFactory());
 		this.transformationAnalysis = transformationAnalysis;
 		this.relation = relation;
 	}
@@ -207,6 +209,10 @@ public class RelationAnalysis
 
 	public @NonNull List<@NonNull Variable> getRootVariables() {
 		return rootVariables;
+	}
+
+	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
 	}
 
 	@Override
