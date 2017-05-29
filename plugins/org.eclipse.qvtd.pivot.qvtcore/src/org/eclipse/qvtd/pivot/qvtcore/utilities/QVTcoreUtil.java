@@ -86,6 +86,10 @@ public class QVTcoreUtil extends QVTbaseUtil
 		}
 	}
 
+	public static @Nullable CoreDomain basicGetDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
+		return (CoreDomain)basicGetDomain((Rule)rule, typedModel);
+	}
+
 	public static @Nullable Mapping basicGetOverridden(@NonNull Mapping asMapping) {
 		return (Mapping) asMapping.getOverridden();
 	}
@@ -152,7 +156,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable CoreDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
+	public static @NonNull CoreDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
 		return (CoreDomain)getDomain((Rule)rule, typedModel);
 	}
 

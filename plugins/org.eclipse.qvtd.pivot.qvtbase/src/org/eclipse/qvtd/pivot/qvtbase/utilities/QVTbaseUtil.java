@@ -132,6 +132,15 @@ public class QVTbaseUtil extends PivotUtil
 		return null;
 	}
 
+	public static @Nullable Domain basicGetDomain(@NonNull Rule rule, @NonNull TypedModel typedModel) {
+		for (Domain domain : rule.getDomain()) {
+			if (domain.getTypedModel() == typedModel) {
+				return domain;
+			}
+		}
+		return null;
+	}
+
 	public static boolean containsAll(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
 		for (Object e : iterable1) {
 			if (!Iterables.contains(iterable2, e)) {
@@ -310,13 +319,13 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(qvtrTypedModel.getDependsOn());
 	}
 
-	public static @Nullable Domain getDomain(@NonNull Rule rule, @NonNull TypedModel typedModel) {
+	public static @NonNull Domain getDomain(@NonNull Rule rule, @NonNull TypedModel typedModel) {
 		for (Domain domain : rule.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {
 				return domain;
 			}
 		}
-		return null;
+		throw new IllegalStateException("No '" + typedModel.getName() + "' domain in '" + rule);
 	}
 
 	/**

@@ -51,7 +51,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 				for (@NonNull Variable rVariable : rOtherRootVariables) {
 					VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
 					variableAnalysis.setIsRoot();
-					variableAnalysis.setOtherBound(cOtherDomain);
+					variableAnalysis.setOtherBound(rOtherTypedModel);
 				}
 			}
 

@@ -17,8 +17,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Area;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -80,27 +78,27 @@ public interface VariableAnalysis
 	void setIsRoot();
 
 	/**
-	 * Accumulate the definition of this variable by the not-enforced cOtherDomain.
+	 * Accumulate the definition of this variable by the not-enforced rOtherTypedModel.
 	 */
-	void setOtherBound(@NonNull CoreDomain cOtherDomain);
+	void setOtherBound(@NonNull TypedModel rOtherTypedModel);
 
 	/**
-	 * Accumulate the reference of this variable by the not-enforced otherDomain.
+	 * Accumulate the reference of this variable by the not-enforced rOtherTypedModel.
 	 */
-	void setOtherReferred(@NonNull CoreDomain cOtherDomain);
+	void setOtherReferred(@NonNull TypedModel rOtherTypedModeln);
 
 	/**
-	 * Accumulate the reference of this variable by the predicate in cPredicateArea.
+	 * Accumulate the reference of this variable by the predicate in rPredicateTypedModel.
 	 */
-	void setPredicate(@NonNull Area cPredicateArea);
+	void setPredicate(@NonNull TypedModel rPredicateTypedModel);
 
 	/**
-	 * Accumulate the usage of this variable in a when predicate for the cWhenDomain.
+	 * Accumulate the usage of this variable in a when predicate for the rWhenTypedModel.
 	 */
-	void setWhen(@NonNull CoreDomain cWhenDomain);
+	void setWhen(@NonNull TypedModel rWhenTypedModel);
 
 	/**
-	 * Accumulate the usage of this variable in a where corollary for the cWhereDomain.
+	 * Accumulate the usage of this variable in a where corollary for the rWhereTypedModel.
 	 */
-	void setWhere(@NonNull CoreDomain cWhereDomain);
+	void setWhere(@NonNull TypedModel rWhereTypedModel);
 }

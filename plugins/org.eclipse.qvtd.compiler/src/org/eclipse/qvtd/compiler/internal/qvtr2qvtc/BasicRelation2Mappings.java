@@ -156,10 +156,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				this.cOtherBottomPattern = ClassUtil.nonNullState(cOtherDomain.getBottomPattern());
 				//
 				for (@NonNull Variable rVariable : rOtherBoundVariables.keySet()) {
-					variablesAnalysis.getVariableAnalysis(rVariable).setOtherBound(cOtherDomain);
+					variablesAnalysis.getVariableAnalysis(rVariable).setOtherBound(rOtherTypedModel);
 				}
 				for (@NonNull Variable rVariable : rOtherReferredVariables) {
-					variablesAnalysis.getVariableAnalysis(rVariable).setOtherReferred(cOtherDomain);
+					variablesAnalysis.getVariableAnalysis(rVariable).setOtherReferred(rOtherTypedModel);
 				}
 				for (@NonNull Variable rVariable : rOtherRootVariables) {
 					variablesAnalysis.getVariableAnalysis(rVariable).setIsRoot();
@@ -567,13 +567,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			for (Map.Entry<@NonNull Variable, @Nullable TypedModel> entry : rWhenVariable2rTypedModel.entrySet()) {
 				TypedModel rWhenTypedModel = entry.getValue();
 				if (rWhenTypedModel != null) {
-					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhen(getCoreDomain(rWhenTypedModel));
+					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhen(rWhenTypedModel);
 				}
 			}
 			for (Map.Entry<@NonNull Variable, @Nullable TypedModel> entry : rWhereVariable2rTypedModel.entrySet()) {
 				TypedModel rWhereTypedModel = entry.getValue();
 				if (rWhereTypedModel != null) {
-					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhere(getCoreDomain(rWhereTypedModel));
+					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhere(rWhereTypedModel);
 				}
 			}
 			for (@NonNull Variable rVariable : rEnforcedBoundVariables.keySet()) {
@@ -603,7 +603,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							if (referredVariableAnalysis != null) {
 								CorePattern corePattern = referredVariableAnalysis.getCorePattern();
 								if (corePattern != null) {
-									variableAnalysis.setPredicate(ClassUtil.nonNullState(corePattern.getArea()));	// FIXME need QVTrDomainAnalayis
+									Domain containingDomain = QVTcoreUtil.getContainingDomain(corePattern);
+									TypedModel cTypedModel = QVTcoreUtil.getTypedModel(containingDomain);
+									TypedModel rTypedModel = qvtr2qvtc.getRelationTypedModel(cTypedModel);
+									variableAnalysis.setPredicate(rTypedModel);	// FIXME need QVTrDomainAnalayis
 								}
 								break;
 							}

@@ -494,6 +494,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return rVariable2analysis.values();
 	}
 
+	public @NonNull CoreDomain getCoreDomain(@NonNull TypedModel rTypedModel) {
+		TypedModel cTypedModel = relationAnalysis.getTransformationAnalysis().getQVTr2QVTc().getCoreTypedModel(rTypedModel);
+		return QVTcoreUtil.getDomain(cMapping, cTypedModel);
+	}
+
 	public @NonNull Variable getCoreThisVariable() {
 		return cThisVariable;
 	}

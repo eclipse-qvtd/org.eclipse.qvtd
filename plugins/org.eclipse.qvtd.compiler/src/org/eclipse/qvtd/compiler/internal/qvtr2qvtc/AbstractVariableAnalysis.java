@@ -18,8 +18,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Area;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -74,27 +72,27 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 	}
 
 	@Override
-	public void setOtherBound(@NonNull CoreDomain otherDomain) {
+	public void setOtherBound(@NonNull TypedModel rOtherTypedModel) {
 		System.err.println("Unexpected " + getClass().getSimpleName() + ".setOtherBound for " + this);
 	}
 
 	@Override
-	public void setOtherReferred(@NonNull CoreDomain cOtherDomain) {
+	public void setOtherReferred(@NonNull TypedModel rOtherTypedModel) {
 		System.err.println("Unexpected " + getClass().getSimpleName() + ".setOtherReferred for " + this);
 	}
 
 	@Override
-	public void setPredicate(@NonNull Area cPredicateArea) {
+	public void setPredicate(@NonNull TypedModel rPredicateTypedModel) {
 		System.err.println("Unexpected " + getClass().getSimpleName() + ".setPredicate for " + this);
 	}
 
 	@Override
-	public void setWhen(@NonNull CoreDomain cWhenDomain) {
+	public void setWhen(@NonNull TypedModel rWhenTypedModel) {
 		System.err.println("Unexpected " + getClass().getSimpleName() + ".setWhen for " + this);
 	}
 
 	@Override
-	public void setWhere(@NonNull CoreDomain cWhereDomain) {
+	public void setWhere(@NonNull TypedModel rWhereTypedModel) {
 		System.err.println("Unexpected " + getClass().getSimpleName() + ".setWhere for " + this);
 	}
 

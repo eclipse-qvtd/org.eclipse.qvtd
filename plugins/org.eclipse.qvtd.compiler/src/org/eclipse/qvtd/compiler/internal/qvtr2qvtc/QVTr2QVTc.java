@@ -182,12 +182,17 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	private @NonNull CoreModel coreModel;
 
 	/**
+	 * The relational TypedModel for each core TypedModel.
+	 */
+	private @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> coreTypedModel2relationalTypedModel = new HashMap<>();
+
+	/**
 	 * All leaf packages that contribute to the trace. Typically just one leaf package. May be many.
 	 */
 	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> txTracePackages = new ArrayList<>();
 
 	/**
-	 * The core TypedModel for each Relational TypedModel.
+	 * The core TypedModel for each relational TypedModel.
 	 */
 	private @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> relationalTypedModel2coreTypedModel = new HashMap<>();
 
@@ -265,7 +270,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		//qvtcSource.getContents().addAll(traceData.getRootOutputELements());
 	}
 
-	/*public*/ @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel relationTypedModel) {
+	public @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel relationTypedModel) {
 		return ClassUtil.nonNullState(relationalTypedModel2coreTypedModel.get(relationTypedModel));
 	}
 
@@ -294,6 +299,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage(@NonNull TransformationAnalysis transformationAnalysis) {
 		return ClassUtil.nonNullState(transformationAnalysis2relationalTransformation2tracePackage.get(transformationAnalysis));
+	}
+
+	public @NonNull TypedModel getRelationTypedModel(@NonNull TypedModel coreTypedModel) {
+		return ClassUtil.nonNullState(coreTypedModel2relationalTypedModel.get(coreTypedModel));
 	}
 
 	@Override
@@ -342,6 +351,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	public void putTypedModel(@NonNull TypedModel relationTypedModel, @NonNull TypedModel coreTypedModel) {
 		TypedModel oldTypedModel = relationalTypedModel2coreTypedModel.put(relationTypedModel, coreTypedModel);
+		assert oldTypedModel == null;
+		oldTypedModel = coreTypedModel2relationalTypedModel.put(coreTypedModel, relationTypedModel);
 		assert oldTypedModel == null;
 	}
 

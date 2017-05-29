@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 
 /**
@@ -47,11 +47,11 @@ public class ThisVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	@Override
-	public void setOtherReferred(@NonNull CoreDomain cOtherDomain) {}
+	public void setOtherReferred(@NonNull TypedModel rOtherTypedModel) {}
 
 	@Override
-	public void setWhen(@NonNull CoreDomain cWhenDomain) {}
+	public void setWhen(@NonNull TypedModel rWhenTypedModel) {}
 
 	@Override
-	public void setWhere(@NonNull CoreDomain cWhereDomain) {}
+	public void setWhere(@NonNull TypedModel rWhereTypedModel) {}
 }

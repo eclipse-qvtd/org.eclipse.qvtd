@@ -394,25 +394,25 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			this.mergedMapping = mergedMapping;
 			this.uTypedModel = uTypedModel;
 			this.uExampleDomain = uExampleDomain;
-			this.uLocalDomain = QVTcoreUtil.getDomain(mergedMapping.uMapping, uTypedModel);
+			this.uLocalDomain = QVTcoreUtil.basicGetDomain(mergedMapping.uMapping, uTypedModel);
 		}
 
 		@Override
 		public boolean analyze() {
 			for (@NonNull Mapping childMapping : mergedMapping.getChildAreas()) {
-				CoreDomain childDomain = QVTcoreUtil.getDomain(childMapping, uTypedModel);
+				CoreDomain childDomain = QVTcoreUtil.basicGetDomain(childMapping, uTypedModel);
 				if (childDomain != null) {
 					childDomains.add(childDomain);
 				}
 			}
 			for (@NonNull Mapping parentMapping : mergedMapping.getParentAreas()) {
-				CoreDomain parentDomain = QVTcoreUtil.getDomain(parentMapping, uTypedModel);
+				CoreDomain parentDomain = QVTcoreUtil.basicGetDomain(parentMapping, uTypedModel);
 				if (parentDomain != null) {
 					parentDomains.add(parentDomain);
 				}
 			}
 			for (@NonNull Mapping siblingMapping : mergedMapping.getSiblingAreas()) {
-				CoreDomain siblingDomain = QVTcoreUtil.getDomain(siblingMapping, uTypedModel);
+				CoreDomain siblingDomain = QVTcoreUtil.basicGetDomain(siblingMapping, uTypedModel);
 				if (siblingDomain != null) {
 					siblingDomains.add(siblingDomain);
 				}
@@ -427,7 +427,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 
 		@Override
 		protected @Nullable CoreDomain getArea(@NonNull Mapping uMapping) {
-			return QVTcoreUtil.getDomain(uMapping, uTypedModel);
+			return QVTcoreUtil.basicGetDomain(uMapping, uTypedModel);
 		}
 
 		@Override
