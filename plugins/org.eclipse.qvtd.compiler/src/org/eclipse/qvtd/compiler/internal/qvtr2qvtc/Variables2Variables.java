@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.VariablesAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -52,7 +53,6 @@ import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -67,7 +67,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 /**
  * VariablesAnalysis manages all the variables in use by a Relation and its corresponding Mapping.
  */
-/*public*/ class VariablesAnalysis extends QVTcoreHelper
+/*public*/ class Variables2Variables extends VariablesAnalysis
 {
 	//	public static void gatherBoundVariables(@NonNull Map<@NonNull Variable, @Nullable TemplateExp> boundVariables, @NonNull Iterable<@NonNull ? extends Element> asRoots) {
 	//		for (Element asRoot : asRoots) {
@@ -231,7 +231,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<>();
 		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 			Set<@NonNull Variable> rThisDomainVariables = new HashSet<>();
-			VariablesAnalysis.gatherReferredVariables(rThisDomainVariables, rDomain);
+			Variables2Variables.gatherReferredVariables(rThisDomainVariables, rDomain);
 			for (@NonNull Variable rVariable : rThisDomainVariables) {
 				if (!rSomeDomainVariables.add(rVariable)) {
 					rMiddleDomainVariables.add(rVariable);				// Accumulate second (and higher) usages
@@ -241,33 +241,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return rMiddleDomainVariables;
 	}
 
-	public static class WhenedVariablesAnalysis extends VariablesAnalysis
-	{
-		public WhenedVariablesAnalysis(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
-				@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			super(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
-		}
-
-		@Override
-		public boolean isWhened() {
-			return true;
-		}
-	}
-
-	public static class WheredVariablesAnalysis extends VariablesAnalysis
-	{
-		public WheredVariablesAnalysis(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
-				@NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			super(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
-		}
-
-		@Override
-		public boolean isWhered() {
-			return true;
-		}
-	}
-
-	protected final @NonNull RelationAnalysis relationAnalysis;
 	//	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage;
 	protected final @NonNull CoreDomain cEnforcedDomain;
@@ -281,24 +254,23 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	/**
 	 * Map from the each core variable name in use to an originating object, typically the VariableAnalysis of a relation variable,
-	 * but the RElationCallExp of a where, the invoking relation of a call-from invocation, or this for the middle variable.
+	 * but the RelationCallExp of a where, the invoking relation of a call-from invocation, or this for the middle variable.
 	 */
-	private @NonNull Map<@NonNull String, @NonNull VariableAnalysis> name2originator = new HashMap<>();
+	private @NonNull Map<@NonNull String, @NonNull Variable2Variable> name2originator = new HashMap<>();
 
 	/**
 	 * The analysis of each relation variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> rVariable2analysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Variable, @NonNull Variable2Variable> rVariable2analysis = new HashMap<>();
 
 	/**
 	 * The analysis of each core variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> cVariable2analysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Variable, @NonNull Variable2Variable> cVariable2analysis = new HashMap<>();
 
-	public VariablesAnalysis(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
-			@NonNull CoreDomain cEnforcedDomain, @Nullable Type traceClass) throws CompilerChainException {
-		super(relationAnalysis.getEnvironmentFactory());
-		this.relationAnalysis = relationAnalysis;
+	public Variables2Variables(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
+			@NonNull CoreDomain cEnforcedDomain, @Nullable Type traceClass, boolean isWhened, boolean isWhered) throws CompilerChainException {
+		super(relationAnalysis, isWhened, isWhered);
 		TransformationAnalysis transformationAnalysis = relationAnalysis.getTransformationAnalysis();
 		QVTr2QVTc qvtr2qvtc = transformationAnalysis.getQVTr2QVTc();
 		this.relationalTransformation2tracePackage = qvtr2qvtc.getRelationalTransformation2TracePackage(transformationAnalysis);
@@ -312,7 +284,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		this.rThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), QVTbaseUtil.getContainingTransformation(rEnforcedDomain));
 		this.cThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), cTransformation);
-		ThisVariableAnalysis thisVariableAnalysis = new ThisVariableAnalysis(this, rThisVariable, cThisVariable);
+		ThisVariable2Variable thisVariableAnalysis = new ThisVariable2Variable(this, rThisVariable, cThisVariable);
 		addVariableAnalysis(thisVariableAnalysis);
 	}
 
@@ -330,7 +302,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * @throws CompilerChainException
 	 */
 	public @NonNull Variable addCoreGuardVariable(@NonNull String name, @NonNull Type type) throws CompilerChainException {
-		CoreVariableAnalysis analysis = new CoreVariableAnalysis(this, name, type, null);
+		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, type, null);
 		Variable cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
 		cMiddleGuardPattern.getVariable().add(cVariable);
@@ -342,7 +314,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * @throws CompilerChainException
 	 */
 	public @NonNull RealizedVariable addCoreRealizedVariable(@NonNull String name, @NonNull Type type) throws CompilerChainException {
-		CoreVariableAnalysis analysis = new CoreVariableAnalysis(this, name, type);
+		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, type);
 		RealizedVariable cVariable = analysis.getCoreRealizedVariable();
 		addVariableAnalysis(analysis);
 		cMiddleBottomPattern.getRealizedVariable().add(cVariable);
@@ -350,7 +322,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public @NonNull Variable addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) throws CompilerChainException {
-		CoreVariableAnalysis analysis = new CoreVariableAnalysis(this, name, ClassUtil.nonNullState(mMember.getType()), mMember);
+		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, ClassUtil.nonNullState(mMember.getType()), mMember);
 		Variable cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
 		cMiddleGuardPattern.getVariable().add(cVariable);
@@ -381,7 +353,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		boolean isMiddle = false;
 		CorePattern cReferredPattern = null;
 		for (@NonNull Variable cReferredVariable : cReferredVariables) {
-			VariableAnalysis analysis = cVariable2analysis.get(cReferredVariable);
+			Variable2Variable analysis = cVariable2analysis.get(cReferredVariable);
 			if (analysis == null) {
 				isGuard = false;
 				isMiddle = true;
@@ -449,7 +421,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public void addVariableAnalysis(@NonNull VariableAnalysis analysis) throws CompilerChainException {
+	public void addVariableAnalysis(@NonNull Variable2Variable analysis) throws CompilerChainException {
 		Variable cVariable = analysis.getCoreVariable();
 		cVariable2analysis.put(cVariable, analysis);
 		Variable rVariable = analysis.getRelationVariable();
@@ -480,17 +452,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	protected @Nullable VariableAnalysis basicGetVariableAnalysis(@NonNull Variable relationVariable) {
+	protected @Nullable Variable2Variable basicGetVariableAnalysis(@NonNull Variable relationVariable) {
 		return rVariable2analysis.get(relationVariable);
 	}
 
 	public void check() {
-		for (@NonNull VariableAnalysis analysis : rVariable2analysis.values()) {
+		for (@NonNull Variable2Variable analysis : rVariable2analysis.values()) {
 			analysis.check();
 		}
 	}
 
-	public @NonNull Iterable<@NonNull VariableAnalysis> getAnalyses() {
+	public @NonNull Iterable<@NonNull Variable2Variable> getAnalyses() {
 		return rVariable2analysis.values();
 	}
 
@@ -507,7 +479,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return getVariableAnalysis(rVariable).getCoreVariable();
 	}
 
-	protected @NonNull VariableAnalysis getCoreVariableAnalysis(@NonNull Variable coreVariable) {
+	protected @NonNull Variable2Variable getCoreVariableAnalysis(@NonNull Variable coreVariable) {
 		return ClassUtil.nonNullState(cVariable2analysis.get(coreVariable));
 	}
 
@@ -521,6 +493,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 	public @NonNull RealizedVariable getMiddleRealizedVariable() {
 		return ClassUtil.nonNullState(cMiddleRealizedVariable);
+	}
+
+	public @NonNull RelationAnalysis getRelationAnalysis() {
+		return relationAnalysis;
 	}
 
 	@Nullable OCLExpression getTemplateExp(@NonNull ObjectTemplateExp objectTemplateExp, @NonNull Parameter keyParameter) {
@@ -543,7 +519,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return null;
 	}
 
-	public @NonNull String getUniqueVariableName(@NonNull String name, @NonNull VariableAnalysis originator) {
+	public @NonNull String getUniqueVariableName(@NonNull String name, @NonNull Variable2Variable originator) {
 		Object oldOriginator = name2originator.get(name);
 		if (oldOriginator != null) {
 			assert oldOriginator != originator;		// Lazy re-creation should not occur.
@@ -559,43 +535,22 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return name;
 	}
 
-	protected @NonNull VariableAnalysis getVariableAnalysis(@NonNull Variable relationVariable) {
-		VariableAnalysis analysis = rVariable2analysis.get(relationVariable);
+	protected @NonNull Variable2Variable getVariableAnalysis(@NonNull Variable relationVariable) {
+		Variable2Variable analysis = rVariable2analysis.get(relationVariable);
 		if (analysis == null) {
 			assert QVTbaseUtil.basicGetContainingTransformation(relationVariable) instanceof RelationalTransformation;
 			if (relationVariable instanceof IteratorVariable) {
-				analysis = new IteratorVariableAnalysis(this, (IteratorVariable)relationVariable);
+				analysis = new IteratorVariable2Variable(this, (IteratorVariable)relationVariable);
 			}
 			else if (relationVariable instanceof LetVariable) {
-				analysis = new LetVariableAnalysis(this, (LetVariable)relationVariable);
+				analysis = new LetVariable2Variable(this, (LetVariable)relationVariable);
 			}
 			else {
-				analysis = new RelationVariableAnalysis(this, relationVariable);
+				analysis = new RelationVariable2Variable(this, relationVariable);
 			}
 			rVariable2analysis.put(relationVariable, analysis);
 		}
 		return analysis;
-	}
-
-	/**
-	 * True if analysis of a relation invoked within a when or where clause.
-	 */
-	public boolean isInvoked() {
-		return isWhened() || isWhered();
-	}
-
-	/**
-	 * True if analysis of a relation invoked within a when clause.
-	 */
-	public boolean isWhened() {
-		return false;
-	}
-
-	/**
-	 * True if analysis of a relation invoked within a where clause.
-	 */
-	public boolean isWhered() {
-		return false;
 	}
 
 	@Override

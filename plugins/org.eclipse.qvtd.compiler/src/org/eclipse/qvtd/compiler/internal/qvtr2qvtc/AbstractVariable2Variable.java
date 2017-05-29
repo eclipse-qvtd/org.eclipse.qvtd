@@ -26,17 +26,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * An AbstractVariableAnalysis provides the abstract accumulation the usage of a core or relation variable.
  * Derived CoreVariableAnalysis/RelationVariableAnalysis/ThisVariableAnalysis provide real functionality.
  */
-public abstract class AbstractVariableAnalysis implements VariableAnalysis
+public abstract class AbstractVariable2Variable implements Variable2Variable
 {
-	protected final @NonNull VariablesAnalysis variablesAnalysis;
+	protected final @NonNull Variables2Variables variablesAnalysis;
 	protected final @NonNull String name;
 
-	protected AbstractVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull String name) {
+	protected AbstractVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull String name) {
 		this.variablesAnalysis = variablesAnalysis;
 		this.name = variablesAnalysis.getUniqueVariableName(name, this);
 	}
 
-	protected AbstractVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull Variable rThisVariable) {
+	protected AbstractVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rThisVariable) {
 		this.variablesAnalysis = variablesAnalysis;
 		this.name = ClassUtil.nonNullState(rThisVariable.getName());
 		assert rThisVariable.eContainer() instanceof RelationalTransformation;

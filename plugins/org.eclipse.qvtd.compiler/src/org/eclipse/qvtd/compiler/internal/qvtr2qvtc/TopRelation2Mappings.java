@@ -102,8 +102,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		}
 
 		@Override
-		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			return new VariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
+		protected @NonNull Variables2Variables createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			return new Variables2Variables(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass, false, false);
 		}
 
 		@Override

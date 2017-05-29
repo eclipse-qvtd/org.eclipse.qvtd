@@ -219,8 +219,8 @@ import com.google.common.collect.Iterables;
 		}
 
 		@Override
-		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			return new VariablesAnalysis.WhenedVariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
+		protected @NonNull Variables2Variables createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			return new Variables2Variables(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass, true, false);
 		}
 
 		@Override
@@ -236,8 +236,8 @@ import com.google.common.collect.Iterables;
 		}
 
 		@Override
-		protected @NonNull VariablesAnalysis createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
-			return new VariablesAnalysis.WheredVariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass);
+		protected @NonNull Variables2Variables createVariablesAnalysis(@NonNull RelationDomain rEnforcedDomain, @NonNull Type traceClass) throws CompilerChainException {
+			return new Variables2Variables(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass, false, true);
 		}
 
 		@Override

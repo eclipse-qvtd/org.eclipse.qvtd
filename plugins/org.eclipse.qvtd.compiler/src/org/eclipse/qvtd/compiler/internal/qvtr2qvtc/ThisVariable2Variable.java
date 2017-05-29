@@ -20,12 +20,12 @@ import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
  * A ThisVariableAnalysis describes the 'this' variable in relation and core transformations.
  * It requires no pattern or synthesis in a core mapping.
  */
-public class ThisVariableAnalysis extends AbstractVariableAnalysis
+public class ThisVariable2Variable extends AbstractVariable2Variable
 {
 	private @NonNull Variable rThisVariable;
 	private @NonNull Variable cThisVariable;
 
-	public ThisVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull Variable rThisVariable, @NonNull Variable cThisVariable) {
+	public ThisVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rThisVariable, @NonNull Variable cThisVariable) {
 		super(variablesAnalysis, rThisVariable);
 		this.rThisVariable = rThisVariable;
 		this.cThisVariable = cThisVariable;

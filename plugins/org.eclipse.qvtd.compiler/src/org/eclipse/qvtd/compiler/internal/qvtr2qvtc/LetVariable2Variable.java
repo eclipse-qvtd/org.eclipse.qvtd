@@ -12,23 +12,23 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.IteratorVariable;
+import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
- * A IteratorVariableAnalysis provides the degenerate analysis of an IteratorVariable.
+ * A LetVariable2Variable provides the degenerate analysis of a LetVariable.
  */
-public class IteratorVariableAnalysis extends AbstractVariableAnalysis
+public class LetVariable2Variable extends AbstractVariable2Variable
 {
-	protected final @NonNull IteratorVariable rIteratorVariable;
-	protected final @NonNull IteratorVariable cIteratorVariable;
+	protected final @NonNull LetVariable rLetVariable;
+	protected final @NonNull LetVariable cLetVariable;
 
-	protected IteratorVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull IteratorVariable rIteratorVariable) {
-		super(variablesAnalysis, rIteratorVariable);
-		this.rIteratorVariable = rIteratorVariable;
-		this.cIteratorVariable = variablesAnalysis.createIteratorVariable(name, QVTrelationUtil.getType(rIteratorVariable), rIteratorVariable.isIsRequired());
+	protected LetVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull LetVariable rLetVariable) {
+		super(variablesAnalysis, rLetVariable);
+		this.rLetVariable = rLetVariable;
+		this.cLetVariable = variablesAnalysis.createLetVariable(name, QVTrelationUtil.getType(rLetVariable), rLetVariable.isIsRequired());
 	}
 
 	@Override
@@ -38,11 +38,11 @@ public class IteratorVariableAnalysis extends AbstractVariableAnalysis
 
 	@Override
 	public @NonNull Variable getCoreVariable() {
-		return cIteratorVariable;
+		return cLetVariable;
 	}
 
 	@Override
-	public @Nullable IteratorVariable getRelationVariable() {
-		return rIteratorVariable;
+	public @Nullable LetVariable getRelationVariable() {
+		return rLetVariable;
 	}
 }

@@ -49,7 +49,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 				cOtherDomain.setIsCheckable(rOtherDomain.isIsCheckable());
 				cOtherDomain.setIsEnforceable(false);
 				for (@NonNull Variable rVariable : rOtherRootVariables) {
-					VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
+					Variable2Variable variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
 					variableAnalysis.setIsRoot();
 					variableAnalysis.setOtherBound(rOtherTypedModel);
 				}
@@ -98,7 +98,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		/**
 		 *  The analysis of each viariable in the relation.
 		 */
-		protected final @NonNull VariablesAnalysis variablesAnalysis;
+		protected final @NonNull Variables2Variables variablesAnalysis;
 
 		public RelationDomain2AbstractCoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			//			super(rEnforcedDomain, cMappingName);
@@ -113,7 +113,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 			//			this.cEnforcedGuardPattern = ClassUtil.nonNullState(cEnforcedDomain.getGuardPattern());
 			//			this.cEnforcedBottomPattern = ClassUtil.nonNullState(cEnforcedDomain.getBottomPattern());
 			//
-			this.variablesAnalysis = new VariablesAnalysis(relationAnalysis, rEnforcedDomain, cEnforcedDomain, null);
+			this.variablesAnalysis = new Variables2Variables(relationAnalysis, rEnforcedDomain, cEnforcedDomain, null, false, false);
 			//
 			this.otherDomain2coreDomains = new ArrayList<>();
 			for (@NonNull Domain rDomain : ClassUtil.nullFree(rEnforcedDomain.getRule().getDomain())) {
@@ -150,7 +150,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		}
 
 		protected void synthesize() throws CompilerChainException {
-			for (@NonNull VariableAnalysis variableAnalysis : variablesAnalysis.getAnalyses()) {
+			for (@NonNull Variable2Variable variableAnalysis : variablesAnalysis.getAnalyses()) {
 				variableAnalysis.getCoreVariable();
 			}
 		}

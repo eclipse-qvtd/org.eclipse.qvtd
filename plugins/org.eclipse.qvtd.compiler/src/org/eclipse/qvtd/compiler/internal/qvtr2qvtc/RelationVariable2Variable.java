@@ -27,6 +27,8 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationVariableAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationVariableAnalysis.Strategy;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -43,83 +45,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 /**
  * A RelationVariableAnalysis accumulates the usage of a relation variable and eventually synthesizes an appropriate core variable.
  */
-public class RelationVariableAnalysis extends AbstractVariableAnalysis
+public class RelationVariable2Variable extends AbstractVariable2Variable
 {
-	enum Strategy {
-		ENFORCED_GUARD,
-		KEYED,
-		OTHER_BOTTOM,
-		OTHER_GUARD,
-		REALIZED_BOTTOM,
-		SHARED_BOTTOM
-	};
-	// Constructed state
-	/**
-	 * The original relation variable.
-	 */
-	protected final @NonNull Variable rVariable;
-	// Analysis contributions
-	/**
-	 * The enforced TypedModel of a TemplateExp.bindsTo that this variable, set by setIsEnforcedBound.
-	 */
-	private @Nullable TypedModel rEnforcedTypedModel = null;
-	/**
-	 * A Key that unifies usage of a TemplateExp.bindsTo that this variable, set by setIsEnforcedBound.
-	 */
-	private @Nullable Key rKey = null;
-	/**
-	 * A TemplateExp.bindsTo that this variable, set by setIsEnforcedBound.
-	 */
-	private @Nullable TemplateExp rTemplateExp = null;
-	/**
-	 * True if this variable is enforced, set by setIsEnforcedBound.
-	 */
-	private boolean isEnforcedBound = false;
-	/**
-	 * True if this variable is referenced by an enforced domain, set by setIsEnforcedReferred.
-	 */
-	private boolean isEnforcedReferred = false;
-	/**
-	 * Non-null non-enforced TypedModel defining this variable, set by setOtherBound.
-	 */
-	private @Nullable TypedModel rOtherBound = null;
-	/**
-	 * Non-null non-enforced TypedModel referencing this variable, set by setOtherReferred.
-	 */
-	private @Nullable TypedModel rOtherReferred = null;
-	//	private @Nullable Area cThisArea = null;
-	/**
-	 * True if this variable is a root variable, set by setIsRoot.
-	 */
-	private boolean isRoot = false;
-	/**
-	 * Non-null domain of a when invocation that references this variable.
-	 */
-	private @Nullable TypedModel rWhenTypedModel = null;
-	/**
-	 * Non-null domain of a where invocation that references this variable.
-	 */
-	private @Nullable TypedModel rWhereTypedModel = null;
-	// Analysis conclusion
-	/**
-	 * FIXME: eliminate this derived state
-	 */
-	private @Nullable TypedModel rPredicateTypedModel = null;
-	/**
-	 * The startegy appropriate to the analysis contributions.
-	 */
-	private @Nullable Strategy strategy = null;
+	private final @NonNull RelationVariableAnalysis variableAnalysis;
 	/**
 	 * The corresponding synthesized core variable.
 	 */
 	private @Nullable Variable cVariable;
 
-	public RelationVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull Variable rVariable) {
-		super(variablesAnalysis, ClassUtil.nonNullState(rVariable.getName()));
-		assert !"this".equals(rVariable.getName());
-		this.rVariable = rVariable;
-		assert !(rVariable instanceof IteratorVariable);
-		assert !(rVariable instanceof LetVariable);
+	public RelationVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rVariable) {
+		super(variablesAnalysis, QVTrelationUtil.getName(rVariable));
+		this.variableAnalysis = new RelationVariableAnalysis(variablesAnalysis, rVariable);
 	}
 
 	/**
@@ -129,13 +65,13 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	 */
 	@Override
 	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
-		Key rKey2 = rKey;
-		boolean isKeyed = getStrategy() == Strategy.KEYED;
-		if (isKeyed && (rKey2 != null)) {
-			if (rKey2.getPart().contains(targetProperty)) {
+		Key rKey = variableAnalysis.getrKey();
+		boolean isKeyed = variableAnalysis.getStrategy() == Strategy.KEYED;
+		if (isKeyed && (rKey != null)) {
+			if (rKey.getPart().contains(targetProperty)) {
 				return;
 			}
-			if (rKey2.getOppositePart().contains(targetProperty.getOpposite())) {
+			if (rKey.getOppositePart().contains(targetProperty.getOpposite())) {
 				return;
 			}
 		}
@@ -179,100 +115,9 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			return;
 		}
 		CorePattern cPattern = getCorePattern();
-		boolean isRealized =  getStrategy() == Strategy.REALIZED_BOTTOM;
+		boolean isRealized =  variableAnalysis.getStrategy() == Strategy.REALIZED_BOTTOM;
 		assert (cVariable != null) && ((cVariable.eContainer() == cPattern) || (cVariable instanceof IteratorVariable) || (cVariable instanceof LetVariable));
 		assert (cVariable instanceof RealizedVariable) == (isRealized && !(cVariable.getType() instanceof DataType));
-	}
-
-	private @NonNull Strategy computeStrategy() {
-		if ((rWhenTypedModel == null) && !(variablesAnalysis.isInvoked() && isRoot) && isEnforcedBound && (rKey != null)) { // isKeyed()
-			assert rEnforcedTypedModel != null;
-			assert rKey != null;
-			//			assert rTemplateExp == null;
-			assert isEnforcedBound;
-			//			assert !isEnforcedReferred;
-			assert rOtherBound == null;
-			assert rOtherReferred == null;
-			//			assert !isRoot;
-			//			assert cWhenDomain == null;
-			//			assert cWhereDomain == null;
-			return Strategy.KEYED;
-		}
-		else if ((rWhenTypedModel == null) && !(variablesAnalysis.isWhered() && isRoot) && isEnforcedBound && (rKey == null)) { // isRealized()
-			assert rEnforcedTypedModel != null;
-			assert rKey == null;
-			assert rTemplateExp != null;
-			assert isEnforcedBound;
-			//			assert !isEnforcedReferred;
-			assert rOtherBound == null;
-			assert rOtherReferred == null;
-			//			assert !isRoot;
-			//			assert cWhenDomain == null;
-			//			assert cWhereDomain == null;
-			return Strategy.REALIZED_BOTTOM;
-		}
-		else if (rEnforcedTypedModel != null) {
-			assert rEnforcedTypedModel != null;
-			//			assert rKey == null;
-			//			assert rTemplateExp != null;
-			assert isEnforcedBound;
-			//			assert !isEnforcedReferred;
-			assert rOtherBound == null;
-			//			assert cOtherReferred == null;
-			//			assert isRoot;
-			//			assert cWhenDomain == null;
-			//			assert cWhereDomain == null;
-			return Strategy.ENFORCED_GUARD;
-		}
-		else if ((rWhenTypedModel != null)
-				|| (isEnforcedBound && variablesAnalysis.isInvoked() && isRoot) //rKey != null;
-				|| (!isEnforcedBound && (rOtherBound != null) && isRoot)
-				|| (!isEnforcedBound && (rOtherBound == null) && !(isEnforcedReferred && (rOtherReferred != null)) && (rOtherReferred == null) && (rPredicateTypedModel == null) && isEnforcedReferred && (rOtherReferred == null))) {
-			assert rEnforcedTypedModel == null;
-			//			assert rKey == null;
-			//			assert rTemplateExp != null;
-			assert !isEnforcedBound;
-			//			assert !isEnforcedReferred;
-			assert (rOtherBound != null) || (rOtherReferred != null) || (rWhenTypedModel != null) || (rWhereTypedModel != null);
-			//			assert isRoot;
-			return Strategy.OTHER_GUARD;
-		}
-		else if (rOtherBound != null) {
-			assert rEnforcedTypedModel == null;
-			assert rKey == null;
-			//			assert rTemplateExp != null;
-			assert !isEnforcedBound;
-			//			assert !isEnforcedReferred;
-			assert rOtherBound != null;
-			//			assert cOtherReferred == null;
-			assert !isRoot;
-			//			assert cWhenDomain == null;
-			//			assert cWhereDomain == null;
-			return Strategy.OTHER_BOTTOM;
-		}
-		else if (isEnforcedReferred && (rOtherReferred != null)) {
-			assert rEnforcedTypedModel == null;
-			assert rKey == null;
-			assert rTemplateExp == null;
-			assert !isEnforcedBound;
-			assert isEnforcedReferred;
-			assert rOtherBound == null;
-			assert rOtherReferred != null;
-			assert !isRoot;
-			//			assert cWhenDomain == null;
-			//			assert cWhereDomain == null;
-			return Strategy.SHARED_BOTTOM;
-		}
-		else {
-			assert rEnforcedTypedModel == null;
-			assert rKey == null;
-			//			assert rTemplateExp != null;
-			assert !isEnforcedBound;
-			assert !isEnforcedReferred;
-			assert (rOtherBound != null) || (rOtherReferred != null) || (rWhenTypedModel != null) || (rWhereTypedModel != null);
-			assert !isRoot;
-			return Strategy.OTHER_BOTTOM;
-		}
 	}
 
 	@Override
@@ -317,7 +162,8 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		assert cArea != null;
 		assert isGuard == (strategy2 == Strategy.ENFORCED_GUARD) || (strategy2 == Strategy.OTHER_GUARD);
 		CorePattern cPattern = null; */
-		switch (getStrategy()) {
+		Strategy strategy = variableAnalysis.getStrategy();
+		switch (strategy) {
 			case ENFORCED_GUARD:
 				return QVTcoreUtil.getGuardPattern(variablesAnalysis.cEnforcedDomain);
 			case KEYED:
@@ -344,44 +190,36 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	}
 
 	private @NonNull TypedModel getOtherTypedModel() throws IllegalStateException {
+		TypedModel rOtherBound = variableAnalysis.getrOtherBound();
 		if (rOtherBound != null) {
 			return rOtherBound;
 		}
-		else if (rOtherReferred != null) {
+		TypedModel rOtherReferred = variableAnalysis.getrOtherReferred();
+		if (rOtherReferred != null) {
 			return rOtherReferred;
 		}
-		else if (rWhenTypedModel != null) {
+		TypedModel rWhenTypedModel = variableAnalysis.getrWhenTypedModel();
+		if (rWhenTypedModel != null) {
 			return rWhenTypedModel;
 		}
-		else if (rWhereTypedModel != null) {
+		TypedModel rWhereTypedModel = variableAnalysis.getrWhereTypedModel();
+		if (rWhereTypedModel != null) {
 			return rWhereTypedModel;
 		}
 		throw new IllegalStateException("Failed to determine other pattern for " + this);
 	}
 
 	@Override
-	public @NonNull Variable getRelationVariable() {
-		return rVariable;
-	}
-
-	protected @NonNull Strategy getStrategy() {
-		Strategy strategy2 = strategy;
-		if (strategy2 == null) {
-			strategy = strategy2 = computeStrategy();
-		}
-		return strategy2;
-	}
-
-	@Override
-	public boolean hasWhenDomain() {
-		return rWhenTypedModel != null;
+	public @Nullable Variable getRelationVariable() {
+		return variableAnalysis.getRelationVariable();
 	}
 
 	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) throws CompilerChainException {
-		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(rEnforcedTypedModel);
-		Key rKey2 = ClassUtil.nonNull(rKey);
-		Function function = variablesAnalysis.relationAnalysis.getTransformationAnalysis().getKeyFunction(rEnforcedTypedModel2, rKey2);
+		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(variableAnalysis.getrEnforcedTypedModel());
+		Key rKey2 = ClassUtil.nonNull(variableAnalysis.getrKey());
+		Function function = variablesAnalysis.getRelationAnalysis().getTransformationAnalysis().getKeyFunction(rEnforcedTypedModel2, rKey2);
 		List<@NonNull OCLExpression> asArguments = new ArrayList<@NonNull OCLExpression>();
+		TemplateExp rTemplateExp = variableAnalysis.getrTemplateExp();
 		if (rTemplateExp instanceof ObjectTemplateExp) {
 			ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)rTemplateExp;
 			for (@NonNull Parameter keyParameter : ClassUtil.nullFree(function.getOwnedParameters())) {
@@ -411,71 +249,46 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 
 	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
-		assert strategy == null;
-		assert !isEnforcedBound;
-		assert this.rOtherBound == null;
-		assert this.rEnforcedTypedModel == null;
-		assert this.rKey == null;
-		assert this.rTemplateExp == null;
-		this.isEnforcedBound = true;
-		this.rTemplateExp = rTemplateExp;
-		this.rEnforcedTypedModel = rEnforcedTypedModel;
-		this.rKey = rKey;
-	}
-
-	@Override
-	public void setIsEnforcedReferred() {
-		assert strategy == null;
-		this.isEnforcedReferred = true;
+		variableAnalysis.setIsEnforcedBound(rTemplateExp, rEnforcedTypedModel, rKey);
 	}
 
 	@Override
 	public void setIsRoot() {
-		assert strategy == null;
-		this.isRoot = true;
+		variableAnalysis.setIsRoot();
 	}
 
 	@Override
 	public void setOtherBound(@NonNull TypedModel rOtherTypedModel) {
-		assert strategy == null;
-		assert !isEnforcedBound;
-		assert this.rOtherBound == null;
-		this.rOtherBound = rOtherTypedModel;
+		variableAnalysis.setOtherBound(rOtherTypedModel);
 	}
 
 	@Override
 	public void setOtherReferred(@NonNull TypedModel rOtherTypedModel) {
-		assert strategy == null;
-		assert (this.rOtherReferred == null) || (this.rOtherReferred == rOtherTypedModel);
-		this.rOtherReferred = rOtherTypedModel;
+		variableAnalysis.setOtherReferred(rOtherTypedModel);
 	}
 
 	@Override
 	public void setPredicate(@NonNull TypedModel rPredicateTypedModel) {
-		assert strategy == null;
-		this.rPredicateTypedModel = rPredicateTypedModel;
+		variableAnalysis.setPredicate(rPredicateTypedModel);
 	}
 
 	@Override
 	public void setWhen(@NonNull TypedModel rWhenTypedModel) {
-		assert strategy == null;
-		assert (this.rWhenTypedModel == null) || (this.rWhenTypedModel == rWhenTypedModel);
-		this.rWhenTypedModel = rWhenTypedModel;
+		variableAnalysis.setWhen(rWhenTypedModel);
 	}
 
 	@Override
 	public void setWhere(@NonNull TypedModel rWhereTypedModel) {
-		assert strategy == null;
-		assert (this.rWhereTypedModel == null) || (this.rWhereTypedModel == rWhereTypedModel);
-		this.rWhereTypedModel = rWhereTypedModel;
+		variableAnalysis.setWhere(rWhereTypedModel);
 	}
 
 	protected @NonNull Variable synthesize() throws CompilerChainException {
 		Variable cVariable2 = cVariable;
 		if (cVariable2 == null) {
-			Strategy strategy2 = getStrategy();
+			Strategy strategy = variableAnalysis.getStrategy();
+			Variable rVariable = variableAnalysis.getRelationVariable();
 			Type type = QVTrelationUtil.getType(rVariable);
-			switch (strategy2) {
+			switch (strategy) {
 				case ENFORCED_GUARD: {
 					cVariable2 = variablesAnalysis.createGuardVariable(name, type, rVariable.isIsRequired(), null);
 					variablesAnalysis.cEnforcedDomain.getGuardPattern().getVariable().add(cVariable2);
@@ -522,48 +335,5 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			variablesAnalysis.addVariableAnalysis(this);
 		}
 		return cVariable2;
-	}
-
-	@Override
-	public @NonNull String toString() {
-		StringBuilder s = new StringBuilder();
-		s.append(rVariable.toString());
-		if (rWhenTypedModel != null) {
-			s.append(" WHEN:" + rWhenTypedModel.getName());
-		}
-		if (rWhereTypedModel != null) {
-			s.append(" WHERE:" + rWhereTypedModel.getName());
-		}
-		if (variablesAnalysis.isWhened()) {
-			s.append(" WHENED");
-		}
-		if (variablesAnalysis.isWhered()) {
-			s.append(" WHERED");
-		}
-		if (rPredicateTypedModel != null) {
-			s.append(" PREDICATE:" + rPredicateTypedModel.getName());
-		}
-		if (isRoot) {
-			s.append(" ROOT");
-		}
-		if (rKey != null) {
-			s.append(" KEYED");
-		}
-		if (isEnforcedBound) {
-			s.append(" ENFORCED");
-		}
-		else if (isEnforcedReferred) {
-			s.append(" enforced");
-		}
-		if (rOtherBound != null) {
-			s.append(" OTHER:" + rOtherBound.getName());
-		}
-		else if (rOtherReferred != null) {
-			s.append(" other:" + rOtherReferred.getName());
-		}
-		if (rTemplateExp != null) {
-			s.append(" " + rTemplateExp);
-		}
-		return s.toString();
 	}
 }

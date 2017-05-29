@@ -30,16 +30,16 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 /**
  * A CoreVariableAnalysis accumulates the usage of a core variable that has no relation variable counterpart and eventually synthesises an appropriate core variable.
  */
-public class CoreVariableAnalysis extends AbstractVariableAnalysis
+public class CoreVariable2Variable extends AbstractVariable2Variable
 {
 	private @NonNull Variable cVariable;
 
-	public CoreVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initValue) {
+	public CoreVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initValue) {
 		super(variablesAnalysis, name);
 		this.cVariable = variablesAnalysis.createGuardVariable(this.name, type, true, initValue);
 	}
 
-	public CoreVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull String name, @NonNull Type type) {
+	public CoreVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull String name, @NonNull Type type) {
 		super(variablesAnalysis, name);
 		this.cVariable = variablesAnalysis.createRealizedVariable(this.name, type);
 	}
