@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -139,11 +140,12 @@ import com.google.common.collect.Iterables;
 		boolean hasWhenInvocation = false;
 		boolean hasWhereInvocation = false;
 		for (@NonNull Relation rOverride : rAllOverrides) {
-			Iterable<@NonNull RelationCallExp> incomingWhenInvocations = qvtr2qvtc.getIncomingWhenInvocationsOf(rOverride);
+			RelationAnalysis rOverrideAnalysis = qvtr2qvtc.getRelationAnalysis(rOverride);
+			Iterable<@NonNull RelationCallExp> incomingWhenInvocations = rOverrideAnalysis.getIncomingWhenInvocations();
 			if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {
 				hasWhenInvocation = true;
 			}
-			Iterable<@NonNull RelationCallExp> incomingWhereInvocations = qvtr2qvtc.getIncomingWhereInvocationsOf(rOverride);
+			Iterable<@NonNull RelationCallExp> incomingWhereInvocations = rOverrideAnalysis.getIncomingWhereInvocations();
 			if ((incomingWhereInvocations != null) && !Iterables.isEmpty(incomingWhereInvocations)) {
 				hasWhereInvocation = true;
 			}

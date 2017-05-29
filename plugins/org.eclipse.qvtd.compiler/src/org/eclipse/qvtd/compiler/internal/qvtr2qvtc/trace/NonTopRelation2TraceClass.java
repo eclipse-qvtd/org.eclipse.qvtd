@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -62,8 +63,8 @@ class NonTopRelation2TraceClass extends AbstractRelation2TraceClass
 	 */
 	private org.eclipse.ocl.pivot.@Nullable Class signatureClass = null;
 
-	protected NonTopRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
-		super(relationalTransformation2tracePackage, relation);
+	protected NonTopRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
+		super(relationAnalysis);
 		//			traceClass.setIsAbstract(true);
 		getSignatureClass();
 	}

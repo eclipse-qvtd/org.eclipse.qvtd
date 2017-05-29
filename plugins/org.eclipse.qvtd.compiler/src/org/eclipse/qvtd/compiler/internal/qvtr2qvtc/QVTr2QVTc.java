@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 The University of York and Willink Transformations.
+ * Copyright (c) 2014, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Horacio Hoyos - initial API and implementation
+ *     E.D.Willink - initial API and implementation (inspired by Horacio Hoyos' prototype)
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
@@ -42,7 +42,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
@@ -64,10 +63,11 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -80,17 +80,13 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -230,18 +226,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	//	private final @NonNull Map<@NonNull RelationCallExp, @NonNull List<org.eclipse.ocl.pivot.@NonNull Class>> invocation2traceClasses = new HashMap<>();
 
 	/**
-	 * Map from each relation to all the expressions that call the relation from a when clause.
-	 */
-	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2incomingWhenInvocations = new HashMap<>();
-	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2outgoingWhenInvocations = new HashMap<>();
-
-	/**
-	 * Map from each relation to all the expressions that call the relation from a where clause.
-	 */
-	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2incomingWhereInvocations = new HashMap<>();
-	private final @NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2outgoingWhereInvocations = new HashMap<>();
-
-	/**
 	 * Map from each relation invocation the relation whose where predicate contains the invocation.
 	 * @deprecated computable - no cache required
 	 */
@@ -249,6 +233,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> invocation2invokingRelation = new HashMap<>();
 
 	private @NonNull CoreModel coreModel;
+
+	/**
+	 * The analysis of each RelationalTransformation.
+	 */
+	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.TransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
 
 	/**
 	 * The core Transformation for each RelationalTransformation.
@@ -273,16 +262,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping = new HashMap<>();
 
 	/**
-	 * The root variables (in relation call order) of each relation.
-	 */
-	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<>();
-
-	/**
-	 * Closure of all overriding relations for each relation, or null if not overridden.
-	 */
-	private @NonNull Map<@NonNull Relation, @Nullable Set<@NonNull Relation>> relation2overridingRelations = new HashMap<>();
-
-	/**
 	 * The per-relation conversions.
 	 */
 	private @NonNull Map<@NonNull Relation, @NonNull Relation2Mappings> relation2relation2mapping = new HashMap<>();
@@ -303,88 +282,30 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		TreeIterator<EObject> it = qvtrResource.getAllContents();
 		while (it.hasNext()) {
 			EObject eo = it.next();
+			if (eo instanceof RelationalTransformation) {
+				RelationalTransformation rTransformation = (RelationalTransformation)eo;
+				transformation2transformationAnalysis.put(rTransformation, new TransformationAnalysis(this, rTransformation));
+			}
 			if (eo instanceof Key) {
 				analyzeKey((Key)eo);
-			}
-			if (eo instanceof Relation) {
-				Relation relation = (Relation)eo;
-				analyzeInvocations(relation);
-				analyzeRootVariables(relation);
-				for (Relation anOverriddenRelation = relation; anOverriddenRelation != null; anOverriddenRelation = QVTrelationUtil.basicGetOverridden(anOverriddenRelation)) {
-					if ((anOverriddenRelation != relation) && !addOverridingRelation(anOverriddenRelation, relation)) {
-						break;
-					}
-				}
 			}
 			if (eo instanceof Import) {
 				this.coreModel.getOwnedImports().add((Import) EcoreUtil.copy(eo));
 			}
 		}
-	}
-
-	private boolean addOverridingRelation(@NonNull Relation overriddenRelation, @NonNull Relation overridingRelation) {
-		assert overridingRelation != overriddenRelation;
-		Set<@NonNull Relation> overridingRelations = relation2overridingRelations.get(overriddenRelation);
-		if (overridingRelations == null) {
-			overridingRelations = new HashSet<>();
-			relation2overridingRelations.put(overriddenRelation, overridingRelations);
-		}
-		return overridingRelations.add(overridingRelation);
-	}
-
-	protected void analyzeInvocations(@NonNull Relation callingRelation) {
-		Pattern whenPattern = callingRelation.getWhen();
-		if (whenPattern != null) {
-			analyzeInvocations(callingRelation, whenPattern, relation2incomingWhenInvocations, relation2outgoingWhenInvocations);
-		}
-		Pattern wherePattern = callingRelation.getWhere();
-		if (wherePattern != null) {
-			analyzeInvocations(callingRelation, wherePattern, relation2incomingWhereInvocations, relation2outgoingWhereInvocations);
+		for (TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			transformationAnalysis.analyze();
 		}
 	}
 
-	protected void analyzeInvocations(@NonNull Relation callingRelation, @NonNull Pattern pattern,
-			@NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2incomingInvocations,
-			@NonNull Map<@NonNull Relation, @Nullable List<@NonNull RelationCallExp>> relation2outgoingInvocations) {
-		for (@NonNull Predicate predicate : QVTrelationUtil.getOwnedPredicates(pattern)) {
-			OCLExpression predicateExpression = predicate.getConditionExpression();
-			if (predicateExpression instanceof RelationCallExp) {
-				RelationCallExp relationInvocation = (RelationCallExp) predicateExpression;
-				Relation invokedRelation = QVTrelationUtil.getReferredRelation(relationInvocation);
-				List<@NonNull RelationCallExp> incomingInvocations = relation2incomingInvocations.get(invokedRelation);
-				if (incomingInvocations == null) {
-					incomingInvocations = new ArrayList<>();
-					relation2incomingInvocations.put(invokedRelation, incomingInvocations);
-				}
-				incomingInvocations.add(relationInvocation);
-				Relation invokingRelation = QVTrelationUtil.getContainingRelation(relationInvocation);
-				List<@NonNull RelationCallExp> outgoingInvocations = relation2outgoingInvocations.get(invokingRelation);
-				if (outgoingInvocations == null) {
-					outgoingInvocations = new ArrayList<>();
-					relation2outgoingInvocations.put(invokingRelation, outgoingInvocations);
-				}
-				outgoingInvocations.add(relationInvocation);
-				invocation2invokingRelation.put(relationInvocation, callingRelation);
-			}
-		}
+	public void addRelation2Mappings(@NonNull Relation2Mappings relation2mappings) {
+		Relation rRelation = relation2mappings.getRelation();
+		relation2relation2mapping.put(rRelation, relation2mappings);
 	}
 
 	protected void analyzeKey(@NonNull Key key) {
 		CompleteClass identifies = getCompleteClass(QVTrelationUtil.getIdentifies(key));
 		completeClass2key.put(identifies, key);
-	}
-
-	protected void analyzeRootVariables(@NonNull Relation relation) {
-		List<@NonNull Variable> rootVariables = new ArrayList<>();
-		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			for (@NonNull DomainPattern rDomainPattern : QVTrelationUtil.getOwnedPatterns(rDomain)) {
-				TemplateExp rRootTemplateExpression = rDomainPattern.getTemplateExpression();
-				if (rRootTemplateExpression != null) {
-					rootVariables.add(QVTrelationUtil.getBindsTo(rRootTemplateExpression));
-				}
-			}
-		}
-		relation2rootVariables.put(relation, rootVariables);
 	}
 
 	public org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass(@NonNull Relation rRelation) {
@@ -516,14 +437,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return helper;
 	}
 
-	public @Nullable Iterable<@NonNull RelationCallExp> getIncomingWhenInvocationsOf(@NonNull Relation relation) {
-		return relation2incomingWhenInvocations.get(relation);
-	}
-
-	public @Nullable Iterable<@NonNull RelationCallExp> getIncomingWhereInvocationsOf(@NonNull Relation relation) {
-		return relation2incomingWhereInvocations.get(relation);
-	}
-
 	/*public*/ @NonNull Relation getInvokingRelation(@NonNull RelationCallExp rInvocation) {
 		Relation rRelation1 = ClassUtil.nonNullState(invocation2invokingRelation.get(rInvocation));
 		Relation rRelation2 = (Relation) ((Predicate)rInvocation.eContainer()).getPattern().eContainer();
@@ -603,19 +516,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return oclContainerProperty2 ;
 	}
 
-	public @Nullable Iterable<@NonNull RelationCallExp> getOutgoingWhenInvocationsOf(@NonNull Relation relation) {
-		return relation2outgoingWhenInvocations.get(relation);
-	}
-
-	public @Nullable Iterable<@NonNull RelationCallExp> getOutgoingWhereInvocationsOf(@NonNull Relation relation) {
-		return relation2outgoingWhereInvocations.get(relation);
-	}
-
-	public @NonNull Iterable<@NonNull Relation> getOverridingRelations(@NonNull Relation overriddenRelation) {
-		Set<@NonNull Relation> overridingRelations = relation2overridingRelations.get(overriddenRelation);
-		return overridingRelations != null ? overridingRelations : Collections.emptyList();
-	}
-
 	public Predicate getPredicateForRelationCallExp(RelationCallExp ri) {
 		// TODO Auto-generated method stub
 		return null;
@@ -637,12 +537,22 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return qvtcResource;
 	}
 
+	public @NonNull Relation2Mappings getRelation2Mappings(@NonNull Relation rRelation) {
+		return ClassUtil.nonNullState(relation2relation2mapping.get(rRelation));
+	}
+
+	@Deprecated
+	public @NonNull RelationAnalysis getRelationAnalysis(@NonNull Relation rRelation) {
+		TransformationAnalysis transformationAnalysis = ClassUtil.nonNullState(transformation2transformationAnalysis.get(rRelation.getTransformation()));
+		return transformationAnalysis.getRelationAnalysis(rRelation);
+	}
+
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage() {
 		return ClassUtil.nonNullState(relationalTransformation2TracePackage);
 	}
 
 	public @NonNull List<@NonNull Variable> getRootVariables(@NonNull Relation relation) {
-		return ClassUtil.nonNullState(relation2rootVariables.get(relation));
+		return getRelationAnalysis(relation).getRootVariables();
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rInvokedRelation) {
@@ -694,6 +604,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	public @NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation) {
 		return getRelationalTransformation2TracePackage().getTraceProperty(rInvocation);
+	}
+
+	public @NonNull TransformationAnalysis getTransformationAnalysis(@NonNull RelationalTransformation rTransformation) {
+		return ClassUtil.nonNullState(transformation2transformationAnalysis.get(rTransformation));
 	}
 
 	private void getUsedGenPackageClosure(@NonNull ProblemHandler problemHandler, @NonNull Map<@NonNull String, @NonNull GenPackage> uri2genPackage, @NonNull Iterable<@NonNull ? extends GenPackage> genPackages) {
@@ -775,15 +689,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedOperationsList(cTransformation));
 		CompilerUtil.normalizeNameables(QVTbaseUtil.getRule(cTransformation));
-	}
-
-	public void addRelation2Mappings(@NonNull Relation2Mappings relation2mappings) {
-		Relation rRelation = relation2mappings.getRelation();
-		relation2relation2mapping.put(rRelation, relation2mappings);
-	}
-
-	public @NonNull Relation2Mappings getRelation2Mappings(@NonNull Relation rRelation) {
-		return ClassUtil.nonNullState(relation2relation2mapping.get(rRelation));
 	}
 
 	// Create the top rules, and search the input model for the appropriate types, when possible?
@@ -1057,8 +962,9 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			//
 			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : QVTrelationUtil.getOwnedClasses(relationPackage)) {
 				if (relationClass instanceof RelationalTransformation) {
+					RelationalTransformation rTransformation = (RelationalTransformation)relationClass;
 					RelationalTransformation2MappingTransformation rTransformationToMappingTransformation = new RelationalTransformation2MappingTransformation(this);
-					Transformation cTransformation = rTransformationToMappingTransformation.doRelationalTransformationToMappingTransformation((RelationalTransformation)relationClass);
+					Transformation cTransformation = rTransformationToMappingTransformation.doRelationalTransformationToMappingTransformation(rTransformation);
 					corePackage.getOwnedClasses().add(cTransformation);
 					//					CompilerUtil.normalizeNameables(QVTrelationUtil.getRule(cTransformation)));
 				}

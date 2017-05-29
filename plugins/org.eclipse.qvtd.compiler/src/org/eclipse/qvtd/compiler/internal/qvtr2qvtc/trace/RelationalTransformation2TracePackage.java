@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -230,7 +231,8 @@ public class RelationalTransformation2TracePackage
 		//		if (relation2relation2traceClass.containsKey(rRelation)) {
 		//			throw new CompilerChainException("Overrides cycle detected for " + rRelation);
 		//		}
-		relation2traceClass = rRelation.isIsTopLevel() ? new TopRelation2TraceClass(this, rRelation) : new NonTopRelation2TraceClass(this, rRelation);
+		RelationAnalysis relationAnalysis = qvtr2qvtc.getRelationAnalysis(rRelation);
+		relation2traceClass = rRelation.isIsTopLevel() ? new TopRelation2TraceClass(relationAnalysis) : new NonTopRelation2TraceClass(relationAnalysis);
 		qvtr2qvtc.putRelationTrace(rRelation, relation2traceClass.getTraceClass());
 		//		relation2relation2traceClass.put(rRelation, null);
 		//		relation2traceClass.analyze();

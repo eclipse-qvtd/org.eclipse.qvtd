@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -67,6 +68,8 @@ import com.google.common.collect.Iterables;
  */
 abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 {
+	protected final @NonNull RelationAnalysis relationAnalysis;
+
 	protected final @NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage;
 
 	/**
@@ -132,9 +135,10 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableDeclaration2TraceProperty> variable2variableDeclaration2traceProperty = new HashMap<>();
 	private @NonNull Map<@NonNull RelationCallExp, @NonNull Invocation2TraceProperty> invocation2invocation2traceProperty = new HashMap<>();
 
-	protected AbstractRelation2TraceClass(@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage, @NonNull Relation relation) {
-		this.relationalTransformation2tracePackage = relationalTransformation2tracePackage;
-		this.relation = relation;
+	protected AbstractRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
+		this.relationAnalysis = relationAnalysis;
+		this.relationalTransformation2tracePackage = relationAnalysis.getRelationalTransformation2TracePackage();
+		this.relation = relationAnalysis.getRelation();
 		String traceClassName = relationalTransformation2tracePackage.getNameGenerator().createTraceClassName(relation);
 		this.traceClass = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, traceClassName));
 		//		traceClass.setIsAbstract(relation.isIsAbstract());
@@ -158,7 +162,7 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 			if (relation.getOverridden() != null) {
 				getSuccessProperty();		// Overridden relation needs overriding success to control-execution.
 			}
-			else if (relationalTransformation2tracePackage.qvtr2qvtc.getIncomingWhenInvocationsOf(relation) != null) {
+			else if (relationAnalysis.getIncomingWhenInvocations() != null) {
 				getSuccessProperty();		// Invoking relation needs invoked success to control execution.
 			}
 		}
