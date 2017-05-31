@@ -66,26 +66,28 @@ transformation org::eclipse::qvtd::examples::qvtrelation::hstm2fstm::Hierarchica
 	 */
 	top relation HierachicalTransition2FlatTransition
 	{
-		leafFromState : hierMM::State;
-		leafToState : hierMM::State;
+		leafFromStates : Set(hierMM::State) = hierarchicalFromState->closure(nestedStates)->select(nestedStates->isEmpty());
+		leafToStates : Set(hierMM::State) = hierarchicalToState->closure(nestedStates)->select(nestedStates->isEmpty());
+		leafFromState : hierMM::State[1];
+		leafToState : hierMM::State[1];
 		domain hier hierarchicalTransition : Transition {
 			owningStateMachine = hierarchicalStateMachine : StateMachine{},
 			name = transitionName : String{},
 			fromState = hierarchicalFromState : State{},
 			toState = hierarchicalToState : State{}
-		};	   
+		};
 		enforce domain flat flatTransition : Transition {
 			owningStateMachine = flatStateMachine : StateMachine{},
 			name = transitionName,
 			fromState = flatFromState : State{},
 			toState = flatToState : State{}
-		};		
+		};
 		when {
 			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
 			LeafState2FlatState(leafFromState, flatFromState);
 			LeafState2FlatState(leafToState, flatToState);
-			this.getLeafStates(hierarchicalFromState)->includes(leafFromState);
-			this.getLeafStates(hierarchicalToState)->includes(leafToState);
+			leafFromStates->includes(leafFromState);
+			leafToStates->includes(leafToState);
 		}
 	}
 }
