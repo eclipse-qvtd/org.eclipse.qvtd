@@ -402,6 +402,8 @@ public class QVTrelationTables
 		public static final @NonNull ExecutorProperty _RelationImplementation__relation = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__RELATION, Types._RelationImplementation, 2);
 
 		public static final @NonNull ExecutorProperty _RelationalTransformation__ownedKey = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION__OWNED_KEY, Types._RelationalTransformation, 0);
+
+		public static final @NonNull ExecutorProperty _SharedVariable__typedModel = new EcoreExecutorProperty(QVTrelationPackage.Literals.SHARED_VARIABLE__TYPED_MODEL, Types._SharedVariable, 0);
 		static {
 			Init.initEnd();
 		}
@@ -1192,7 +1194,9 @@ public class QVTrelationTables
 			QVTrelationTables.Properties._RelationalTransformation__ownedKey
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _SharedVariable = {};
+		private static final @NonNull ExecutorProperty @NonNull [] _SharedVariable = {
+			QVTrelationTables.Properties._SharedVariable__typedModel
+		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _TemplateVariable = {};
 

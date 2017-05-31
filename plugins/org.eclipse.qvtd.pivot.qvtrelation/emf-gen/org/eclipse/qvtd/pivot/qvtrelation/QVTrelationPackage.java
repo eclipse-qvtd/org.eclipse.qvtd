@@ -1869,13 +1869,22 @@ public interface QVTrelationPackage extends EPackage {
 	int SHARED_VARIABLE__REPRESENTED_PARAMETER = PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
 
 	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHARED_VARIABLE__TYPED_MODEL = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Shared Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SHARED_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+	int SHARED_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2642,6 +2651,17 @@ public interface QVTrelationPackage extends EPackage {
 	EClass getSharedVariable();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtrelation.SharedVariable#getTypedModel <em>Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.SharedVariable#getTypedModel()
+	 * @see #getSharedVariable()
+	 * @generated
+	 */
+	EReference getSharedVariable_TypedModel();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable <em>Template Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3068,6 +3088,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SHARED_VARIABLE = eINSTANCE.getSharedVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SHARED_VARIABLE__TYPED_MODEL = eINSTANCE.getSharedVariable_TypedModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.TemplateVariableImpl <em>Template Variable</em>}' class.

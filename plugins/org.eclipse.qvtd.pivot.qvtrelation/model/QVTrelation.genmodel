@@ -113,7 +113,9 @@
         <genParameters ecoreParameter="QVTrelation.ecore#//RelationalTransformation/validateRulesAreRelations/context"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-SharedVariable"/>
+    <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-SharedVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-SharedVariable-typedModel"/>
+    </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-TemplateVariable"/>
   </genPackages>
 </genmodel:GenModel>

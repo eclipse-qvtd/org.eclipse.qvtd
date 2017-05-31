@@ -673,6 +673,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EReference getSharedVariable_TypedModel() {
+		return (EReference)sharedVariableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTemplateVariable() {
 		return templateVariableEClass;
 	}
@@ -762,6 +772,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEOperation(relationalTransformationEClass, RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP);
 
 		sharedVariableEClass = createEClass(SHARED_VARIABLE);
+		createEReference(sharedVariableEClass, SHARED_VARIABLE__TYPED_MODEL);
 
 		templateVariableEClass = createEClass(TEMPLATE_VARIABLE);
 	}
@@ -980,6 +991,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sharedVariableEClass, SharedVariable.class, "SharedVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSharedVariable_TypedModel(), theQVTbasePackage.getTypedModel(), null, "typedModel", null, 0, 1, SharedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateVariableEClass, TemplateVariable.class, "TemplateVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

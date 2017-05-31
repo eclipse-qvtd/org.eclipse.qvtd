@@ -337,7 +337,10 @@
         containment="true" eOpposite="#F-qvtrelation-Key-transformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtrelation-SharedVariable" name="SharedVariable"
-      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-SharedVariable-typedModel"
+        name="typedModel" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtrelation-TemplateVariable" name="TemplateVariable"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
 </ecore:EPackage>
