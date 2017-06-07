@@ -2,7 +2,7 @@ h1. Overview and Getting Started
 
 For a quick demonstration of QVTc or QVTr editing and execution go to "Getting Started":#GettingStarted.
 
-A PDF version of this documentation is available at "QVTd 0.13.0 Documentation":http://download.eclipse.org/qvtd/doc/0.13.0/qvtd.pdf.
+A PDF version of this documentation is available at "QVTd 0.14.0 Documentation":http://download.eclipse.org/qvtd/doc/0.14.0/qvtd.pdf.
 
 h2. What is QVT(Query/View/Transformation)?
 
@@ -24,13 +24,15 @@ The Eclipse QVTd support involves a transformation chain from QVTr via QVTc to e
 
 * QVTm - a minimal declarative transformation language - a further simplification of QVTc.
 
+* QVTp - a partitioned declarative transformation language - a further simplification of QVTc.
+
 * QVTs - a graphical declarative transformation language suitable for schedule determination.
 
 * QVTi - an executable imperative transformation language - a variant of QVTc.
 
 * Java - the ultimate executable form
 
-Note that QVTu, QVTm, QVTs and QVTi are not defined by the current OMG specification. It is possible that they may contribute to a future specification.
+Note that QVTu, QVTm, QVTp, QVTs and QVTi are not defined by the current OMG specification. It is possible that they may contribute to a future specification.
 
 h3. Modeling Layers
 
@@ -54,7 +56,7 @@ QVTr and QVTc are programming languages, so you will want to edit them, execute 
 
 h3. Editing
 
-Eclipse QVTd provides QVTr, QVTc and QVTi editors developed using Xtext. The QVTc editor may be used to view or maintain the intermediate QVTu and QVTm models.
+Eclipse QVTd provides QVTr, QVTc and QVTi editors developed using Xtext. The QVTc editor may be used to view or maintain the intermediate QVTu, QVTm and QVTp models.
 
 The editor may be opened conventionally by double clicking a *.qvtr, *.qvtc, or *.qvti text file name in an Explorer view. This displays the source text with syntax highlighting and an outline of the Abstract Syntax.
 
@@ -70,7 +72,7 @@ Hopefully 1.0.0 (Oxygen) will offer UMLX as a graphical alternative to the QVTr 
 
 h3. Execution
 
-The 0.13.0 release provides one QVTr and one QVTc example project that be installed and executed. However execution functionality is very new and not suitable for more than experimental use.
+The 0.14.0 release provides one UMLX, one QVTr and one QVTc example project that can be installed and executed. However execution functionality is very new and not suitable for more than experimental use.
 
 h4. Status
 
@@ -82,7 +84,9 @@ A very preliminary form of QVTc execution was available in 0.12.0 (Mars) using a
 
 The current execution supports only creation of output models. Checking, updated, incremental, in-place execution and views are work in progress.
 
-Hopefully 1.0.0 (Oxygen) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.
+0.14.0 (Neon) has much better transformaion, scheduling and execution but functionality such as RElation overriding and In-Place transformation are largely missing and certainly not usefully functional.
+
+Hopefully 1.0.0 (Photon) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.
 
 h3. Debugger
 
@@ -107,7 +111,7 @@ The many aspects of OCL and QVTd are converging; help welcome.
  
 h2(#GettingStarted). Getting Started
 
-*Warning: Eclipse QVTd 0.13.0 execution is not sufficiently mature for more than experimental/research usage.*
+*Warning: Eclipse QVTd 0.14.0 execution is not sufficiently mature for more than experimental/research usage.*
 
 For a very quick demonstration of QVTc or QVTr you may install the appropriate example project.
 

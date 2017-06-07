@@ -7,7 +7,7 @@
 			<link linkend="GettingStarted">Getting Started</link>.
 		</para>
 		<para>A PDF version of this documentation is available at 
-			<ulink url="http://download.eclipse.org/qvtd/doc/0.13.0/qvtd.pdf">QVTd 0.13.0 Documentation</ulink>.
+			<ulink url="http://download.eclipse.org/qvtd/doc/0.14.0/qvtd.pdf">QVTd 0.14.0 Documentation</ulink>.
 		</para>
 		<section id="WhatisQVTQueryViewTransformation">
 			<title>What is 
@@ -126,14 +126,15 @@
 			</section>
 			<section id="Execution">
 				<title>Execution</title>
-				<para>The 0.13.0 release provides one QVTr and one QVTc example project that be installed and executed. However execution functionality is very new and not suitable for more than experimental use.</para>
+				<para>The 0.14.0 release provides one UMLX, one QVTr and one QVTc example project that can be installed and executed. However execution functionality is very new and not suitable for more than experimental use.</para>
 				<section id="Status2">
 					<title>Status</title>
 					<para>QVTi execution has been available since 0.11.0 (Luna). It demonstrates the extensibility of the Eclipse OCL interpreter, Java code generator and debugger. QVTi is a low level intermediate; it is not intended as a primary programming language.</para>
 					<para>A very preliminary form of QVTc execution was available in 0.12.0 (Mars) using an Epsilon prototype of the transformation chain.</para>
 					<para>0.13.0 (Neon) introduces a Java re-implementation of the full transformation chain so that QVTr and QVTc transformations can be executed. It is only suitable for researchers.</para>
 					<para>The current execution supports only creation of output models. Checking, updated, incremental, in-place execution and views are work in progress.</para>
-					<para>Hopefully 1.0.0 (Oxygen) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.</para>
+					<para>0.14.0 (Neon) has much better transformaion, scheduling and execution but functionality such as RElation overriding and In-Place transformation are largely missing and certainly not usefully functional.</para>
+					<para>Hopefully 1.0.0 (Photon) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.</para>
 				</section>
 			</section>
 			<section id="Debugger">
@@ -158,7 +159,7 @@
 		<section id="GettingStarted">
 			<title>Getting Started</title>
 			<para>
-				<emphasis role="bold">Warning: Eclipse QVTd 0.13.0 execution is not sufficiently mature for more than experimental/research usage.</emphasis>
+				<emphasis role="bold">Warning: Eclipse QVTd 0.14.0 execution is not sufficiently mature for more than experimental/research usage.</emphasis>
 			</para>
 			<para>For a very quick demonstration of QVTc or QVTr you may install the appropriate example project.</para>
 			<section id="QVTrExampleProject">
