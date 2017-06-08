@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcore.analysis;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 
 /**
  * The DomainUsageAnalysis supports analysis of a Transformation's Domains to associated a bitmask of possible TypedModels with
@@ -61,5 +62,7 @@ public interface DomainUsageAnalysis
 	public interface Root extends DomainUsageAnalysis {
 		@NonNull DomainUsage getConstantUsage(int bitMask);
 		//		boolean isDirty(@NonNull Property property);
+
+		@NonNull EnvironmentFactory getEnvironmentFactory();
 	}
 }

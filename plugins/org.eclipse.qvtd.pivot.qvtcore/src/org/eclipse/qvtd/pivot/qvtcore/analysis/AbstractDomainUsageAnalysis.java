@@ -63,39 +63,20 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.util.AbstractExtendingPivotVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.Area;
-import org.eclipse.qvtd.pivot.qvtcore.Assignment;
-import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 /**
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreVisitor<org.eclipse.qvtd.pivot.qvtcore.analysis.@NonNull DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
+public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivotVisitor<@NonNull DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
 {
 	private DomainUsage selfUsage = null;
-	protected final @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> element2usage = new HashMap<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>();
+	protected final @NonNull Map<@NonNull Element, @NonNull DomainUsage> element2usage = new HashMap<>();
 
 	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -104,22 +85,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	@Override
 	public @Nullable DomainUsage basicGetUsage(@Nullable Element element) {
 		return element2usage.get(element);
-	}
-
-	protected @NonNull DomainUsage doNavigationAssignment(@NonNull Property property, @NonNull NavigationAssignment object) {
-		DomainUsage slotUsage = visit(object.getSlotExpression());
-		DomainUsage valueUsage = visit(object.getValue());
-		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
-		if (knownSourceUsage != null) {
-			DomainUsage knownTargetUsage = getRootAnalysis().getUsage(property);
-			assert knownTargetUsage != null;
-			intersection(knownSourceUsage, slotUsage);
-			intersection(knownTargetUsage, valueUsage);
-			return knownSourceUsage; //intersection(knownTargetUsage, valueUsage);
-		}
-		else {
-			return slotUsage; //intersection(slotUsage, valueUsage);
-		}
 	}
 
 	protected @NonNull DomainUsage doNavigationCallExp(@NonNull Property property, @NonNull NavigationCallExp object) {
@@ -146,17 +111,17 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		return sourceUsage;
 	}
 
-	protected @NonNull DomainUsage getDomainUsage(@Nullable EObject object) {
-		Domain domain = QVTcoreUtil.basicGetContainingDomain(object);
+	/*	protected @NonNull DomainUsage getDomainUsage(@Nullable EObject object) {
+		Domain domain = QVTbaseUtil.basicGetContainingDomain(object);
 		if (domain !=  null) {
 			return visit(domain.getTypedModel());
 		}
 		else {
 			return getRootAnalysis().getMiddleUsage();
 		}
-	}
+	} */
 
-	public @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> getElements2Usage() {
+	public @NonNull Map<@NonNull Element, DomainUsage> getElements2Usage() {
 		return element2usage;
 	}
 
@@ -245,39 +210,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		}
 	}
 
-	protected void setBoundVariablesUsages(@NonNull Rule rule) {
-		DomainUsage primitiveUsage = getRootAnalysis().getPrimitiveUsage();
-		for (Domain domain : rule.getDomain()) {
-			if (domain instanceof CoreDomain) {
-				DomainUsage usage = visit(domain.getTypedModel());
-				for (Variable variable : ((CoreDomain)domain).getGuardPattern().getVariable()) {
-					if (variable != null) {
-						DomainUsage variableUsage = visit(variable.getType());
-						if (variableUsage != primitiveUsage) {
-							variableUsage = usage;
-						}
-						assert variableUsage != null;
-						setUsage(variable, variableUsage);
-					}
-				}
-			}
-		}
-		if (rule instanceof Mapping) {
-			DomainUsage middleUsage = getRootAnalysis().getMiddleUsage();
-			for (Variable variable : ((Mapping)rule).getGuardPattern().getVariable()) {
-				if (variable != null) {
-					DomainUsage variableUsage = visit(variable.getType());
-					//					if (variableUsage != primitiveUsage) {
-					if (!variableUsage.isInput() && !variableUsage.isOutput() && !variableUsage.isPrimitive()) {
-						variableUsage = middleUsage;
-					}
-					assert variableUsage != null;
-					setUsage(variable, variableUsage);
-				}
-			}
-		}
-	}
-
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
 		//		if (newUsage.isNone()) {
 		//			element.toString();
@@ -295,9 +227,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 
 	@Override
 	public String toString() {
-		Map<@NonNull String, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> map = new HashMap<@NonNull String, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>(element2usage.size());
-		List<@NonNull String> keys = new ArrayList<@NonNull String>(element2usage.size());
-		for (Map.Entry<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> entry : element2usage.entrySet()) {
+		Map<@NonNull String, @NonNull DomainUsage> map = new HashMap<>(element2usage.size());
+		List<@NonNull String> keys = new ArrayList<>(element2usage.size());
+		for (Map.Entry<@NonNull Element, @NonNull DomainUsage> entry : element2usage.entrySet()) {
 			Element element = entry.getKey();
 			String key = element.eClass().getName() + " : " + element;
 			map.put(key, entry.getValue());
@@ -361,23 +293,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	@Override
-	public @NonNull DomainUsage visitBottomPattern(@NonNull BottomPattern object) {
-		for (Variable variable : object.getVariable()) {
-			visit(variable);
-		}
-		for (RealizedVariable variable : object.getRealizedVariable()) {
-			visit(variable);
-		}
-		for (Assignment assignment : object.getAssignment()) {
-			visit(assignment);
-		}
-		for (Predicate predicate : object.getPredicate()) {
-			visit(predicate);
-		}
-		return getDomainUsage(object);
-	}
-
-	@Override
 	public @NonNull DomainUsage visitClass(org.eclipse.ocl.pivot.@NonNull Class object) {
 		DomainUsage usage = getRootAnalysis().class2usage.get(object);
 		if (usage != null) {
@@ -414,14 +329,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	public @NonNull DomainUsage visitCollectionType(@NonNull CollectionType object) {
 		return visit(object.getElementType());
 	}
-	@Override
-	public @NonNull DomainUsage visitCoreDomain(@NonNull CoreDomain object) {
-		DomainUsage usage = visit(object.getTypedModel());
-		setUsage(object, usage);
-		visit(object.getGuardPattern());
-		visit(object.getBottomPattern());
-		return usage;
-	}
 
 	@Override
 	public @NonNull DomainUsage visitExpressionInOCL(@NonNull ExpressionInOCL object) {
@@ -449,37 +356,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	@Override
-	public @NonNull DomainUsage visitFunction(@NonNull Function object) {
-		for (@SuppressWarnings("null")@NonNull Parameter parameter : object.getOwnedParameters()) {
-			visit(parameter);
-		}
-		OCLExpression queryExpression = object.getQueryExpression();
-		if (queryExpression != null) {
-			return visit(queryExpression);
-		}
-		else {
-			return visit(object.getType());
-		}
-	}
-
-	@Override
 	public @NonNull DomainUsage visitIfExp(@NonNull IfExp object) {
 		@SuppressWarnings("unused") DomainUsage conditionUsage = visit(object.getOwnedCondition());
 		DomainUsage thenUsage = visit(object.getOwnedThen());
 		DomainUsage elseUsage = visit(object.getOwnedElse());
 		return intersection(thenUsage, elseUsage);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitGuardPattern(@NonNull GuardPattern object) {
-		DomainUsage domainUsage = getDomainUsage(object);
-		//		for (Variable variable : object.getVariable()) {			// In visitTransformation
-		//			setUsage(variable, domainUsage);
-		//		}
-		for (Predicate predicate : object.getPredicate()) {
-			visit(predicate);
-		}
-		return domainUsage;
 	}
 
 	@Override
@@ -538,7 +419,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 				}
 			}
 		}
-		return visit(iteration.getType());
+		return visit(object.getType());
 	}
 
 	@Override
@@ -566,15 +447,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		DomainUsage keyUsage = visit(object.getOwnedKey());
 		DomainUsage valueUsage = visit(object.getOwnedValue());
 		return intersection(keyUsage, valueUsage);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitNavigationAssignment(@NonNull NavigationAssignment object) {
-		Property property = QVTcoreUtil.getTargetProperty(object);
-		//		if ("middleRoot.name := hsvRoot.name".equals(object.toString())) {
-		//			property = object.getTargetProperty();
-		//		}
-		return doNavigationAssignment(property, object);
 	}
 
 	@Override
@@ -671,7 +543,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 				}
 			}
 			DomainUsageAnalysis analysis = rootAnalysis.getAnalysis(operation);
-			Map<DomainUsage, DomainUsage> referred2specialized = new HashMap<DomainUsage, DomainUsage>();
+			Map<@NonNull DomainUsage, @NonNull DomainUsage> referred2specialized = new HashMap<>();
 			List<@NonNull Parameter> ownedParameters = ClassUtil.nullFree(operation.getOwnedParameters());
 			int iMax = Math.min(ownedParameters.size(), object.getOwnedArguments().size());
 			for (int i = 0; i < iMax; i++) {
@@ -707,11 +579,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	@Override
-	public @NonNull DomainUsage visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
 	public @NonNull DomainUsage visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
 		Property property = ClassUtil.nonNullState(object.getReferredProperty());
 		Property oppositeProperty = ClassUtil.nonNullState(property.getOpposite());
@@ -725,11 +592,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		//		return map.get(object);
 		DomainUsage usage = visit(object.getType());
 		return getRootAnalysis().getValidOrVariableUsage(usage);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitPredicate(@NonNull Predicate object) {
-		return visit(object.getConditionExpression());
 	}
 
 	@Override
@@ -750,27 +612,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	@Override
-	public @NonNull DomainUsage visitPropertyAssignment(@NonNull PropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
 	public @NonNull DomainUsage visitPropertyCallExp(@NonNull PropertyCallExp object) {
 		Property property = ClassUtil.nonNullState(object.getReferredProperty());
 		return doNavigationCallExp(property, object);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitRealizedVariable(@NonNull RealizedVariable object) {
-		return getDomainUsage(object);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitRule(@NonNull Rule object) {
-		for (Domain domain : object.getDomain()) {
-			visit(domain);
-		}
-		return getRootAnalysis().getNoneUsage();
 	}
 
 	@Override
@@ -802,43 +646,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			usage = rootAnalysis.createVariableUsage(anyMask);
 		}
 		return usage;
-	}
-
-	@Override
-	public @NonNull DomainUsage visitTransformation(@NonNull Transformation object) {
-		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
-		if (rootAnalysis != this) {
-			return rootAnalysis.getNoneUsage();
-		}
-		//		for (TypedModel typedModel : object.getModelParameter()) {			-- done in analyzeTransformation
-		//			visit(typedModel);
-		//		}
-		//		System.out.println("  " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
-		Variable ownedContext = QVTbaseUtil.getContextVariable(getEnvironmentFactory().getStandardLibrary(), object);
-		setUsage(ownedContext, getRootAnalysis().getNoneUsage());
-		//
-		//	Ensure all operations are analyzed even if not used.
-		//
-		for (Operation operation : object.getOwnedOperations()) {
-			if (operation != null) {
-				getRootAnalysis().analyzeOperation(operation);
-			}
-		}
-		//
-		//	Define all bound variables so that they back propgate to resolve domain usage variables.
-		//
-		for (Rule rule : object.getRule()) {
-			if (rule != null) {
-				setBoundVariablesUsages(rule);
-			}
-		}
-		//
-		//	Analyze the rest of the tree.
-		//
-		for (Rule rule : object.getRule()) {
-			visit(rule);
-		}
-		return getRootAnalysis().getNoneUsage();
 	}
 
 	@Override
@@ -880,36 +687,14 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		return visit(object.getType());
 	}
 
-	@Override
-	public @NonNull DomainUsage visitTypedModel(@NonNull TypedModel object) {
-		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
-		if (rootAnalysis != this) {
-			return ClassUtil.nonNullState(rootAnalysis.basicGetUsage(object));
-		}
-		return ClassUtil.nonNullState(element2usage.get(object));
-	}
-
-	@Override
+	/*	@Override
 	public @NonNull DomainUsage visitVariable(@NonNull Variable object) {
 		OCLExpression ownedInit = object.getOwnedInit();
 		if (ownedInit != null) {
 			return visit(ownedInit);
 		}
-		Area area = QVTcoreUtil.getContainingArea(object);
-		if (area instanceof Domain) {
-			return visit(area);
-		}
-		else {
-			return visit(object.getType());
-		}
-	}
-
-	@Override
-	public @NonNull DomainUsage visitVariableAssignment(@NonNull VariableAssignment object) {
-		DomainUsage valueUsage = visit(object.getValue());
-		DomainUsage variableUsage = visit(object.getTargetVariable());
-		return intersection(variableUsage, valueUsage);
-	}
+		return visit(object.getType());
+	} */
 
 	@Override
 	public @NonNull DomainUsage visitVariableDeclaration(@NonNull VariableDeclaration object) {

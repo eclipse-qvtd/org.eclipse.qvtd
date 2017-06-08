@@ -34,6 +34,7 @@ public class AllQVTrelationTests extends TestCase
 	public static Test suite() {
 		TestSuite result = new TestSuite("All QVTrelation Tests");
 		result.addTestSuite(LoadTests.class);
+		result.addTestSuite(QVTrDomainUsageTests.class);
 		//		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 		//			result.addTestSuite(EditorTests.class);
 		//		}

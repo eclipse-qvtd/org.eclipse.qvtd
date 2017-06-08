@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,9 +30,7 @@ import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NullLiteralExp;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
@@ -50,14 +47,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.Area;
-import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
-public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTcoreVisitor<org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>, DomainUsageAnalysis.Root
+public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
 	protected abstract class AbstractDomainUsage implements DomainUsage.Internal
 	{
@@ -249,23 +240,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	}
 
 	/**
-	 * A Nested DomainUsageAnalysis is used for a nested context such as an operation which is analyzed without
-	 * regard to its invocation parameters. The invoking context is responsible for 'specializing' the generic
-	 * domain analysis to suit the invocations.
-	 */
-	protected class Nested extends AbstractDomainUsageAnalysis
-	{
-		protected Nested() {
-			super(RootDomainUsageAnalysis.this.getEnvironmentFactory());
-		}
-
-		@Override
-		protected @NonNull RootDomainUsageAnalysis getRootAnalysis() {
-			return RootDomainUsageAnalysis.this;
-		}
-	}
-
-	/**
 	 * No TypedModels is used by control infrastructure such as MappingLoops.
 	 */
 	private static final @NonNull Integer NONE_USAGE_BIT_MASK = 0;
@@ -320,7 +294,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	/**
 	 * The domains in which the containing class of a property may be used.
 	 */
-	protected final @NonNull Map<@NonNull Property, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> property2containingClassUsage = new HashMap<>();
+	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2containingClassUsage = new HashMap<>();
 
 	/**
 	 * The nested analyses for declared operations.
@@ -359,10 +333,18 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return nextBit;
 	}
 
+	protected void addDirtyProperty(@NonNull Property property) {
+		dirtyProperties.add(property);
+		EObject eProperty = property.getESObject();
+		if (eProperty instanceof EReference) {
+			dirtyEReferences.add((EReference) eProperty);
+		}
+	}
+
 	public @NonNull DomainUsageAnalysis analyzeOperation(@NonNull Operation object) {
 		DomainUsageAnalysis.Internal analysis = operation2analysis.get(object);
 		if (analysis == null) {
-			analysis = createNestedAnalysis();
+			analysis = createOperationUsageAnalysis();
 			operation2analysis.put(object, analysis);
 			DomainUsage usage = analysis.visit(object);
 			setUsage(object, usage);
@@ -371,27 +353,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	}
 
 	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
-		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof PropertyAssignment) {
-				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
-				//				if ("s.name := sn".equals(eObject.toString())) {
-				//					eObject.toString();
-				//				}
-				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
-				assert slotExpression != null;
-				DomainUsage domainUsage = getUsage(PivotUtil.getType(slotExpression));
-				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
-					Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
-					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
-					dirtyProperties.add(targetProperty);
-					EObject eProperty = targetProperty.getESObject();
-					if (eProperty instanceof EReference) {
-						dirtyEReferences.add((EReference) eProperty);
-					}
-				}
-			}
-		}
 		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
 				System.err.println("Dirty " + dirtyProperty + " is not transient");
@@ -513,41 +474,12 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return usage;
 	}
 
-	protected @NonNull Nested createNestedAnalysis() {
-		return new Nested();
+	protected @NonNull OperationUsageAnalysis createOperationUsageAnalysis() {
+		return new OperationUsageAnalysis(this);
 	}
 
 	public @NonNull DomainUsage createVariableUsage(int intersectionMask) {
 		return new DomainUsageVariable(intersectionMask);
-	}
-
-	@Override				// FIXME BUG 487257 Revise this
-	protected @NonNull DomainUsage getAllInstancesUsage(@NonNull OperationCallExp asCallExp, @NonNull DomainUsage sourceUsage) {
-		if (asCallExp.getOwnedSource().getTypeValue() instanceof DataType) {
-			return getPrimitiveUsage();
-		}
-		Area area = QVTcoreUtil.getContainingArea(asCallExp);
-		if (area instanceof CoreDomain) {
-			DomainUsage areaUsage = getUsage(area);
-			return intersection(sourceUsage, areaUsage);
-		}
-		else if (area instanceof Mapping) {
-			DomainUsage inputUsage = getNoneUsage();
-			for (Domain domain : ((Mapping)area).getDomain()) {
-				if (!domain.isIsEnforceable()) {
-					inputUsage = union(inputUsage, getUsage(domain));
-				}
-			}
-			if (inputUsage != getNoneUsage()) {
-				return intersection(sourceUsage, inputUsage);
-			}
-			else {				// Att root so no domains, use input
-				return intersection(sourceUsage, getInputUsage());
-			}
-		}
-		else {
-			return sourceUsage;
-		}
 	}
 
 	public @NonNull DomainUsageAnalysis getAnalysis(@NonNull Operation operation) {
