@@ -27,6 +27,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
@@ -70,6 +71,8 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 	 */
 	private final @NonNull Map<@NonNull CompleteClass, @Nullable Key> completeClass2key = new HashMap<>();
 
+	private @Nullable QVTrelationDomainUsageAnalysis domainUsageAnalysis = null;
+
 	public TransformationAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull RelationalTransformation rTransformation) {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
@@ -91,6 +94,15 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 	protected void analyzeKey(@NonNull Key key) {
 		CompleteClass identifies = getCompleteClass(QVTrelationUtil.getIdentifies(key));
 		completeClass2key.put(identifies, key);
+	}
+
+	public @NonNull DomainUsageAnalysis getDomainUsageAnalysis() {
+		QVTrelationDomainUsageAnalysis domainUsageAnalysis2 = domainUsageAnalysis;
+		if (domainUsageAnalysis2 == null) {
+			domainUsageAnalysis = domainUsageAnalysis2 = new QVTrelationDomainUsageAnalysis(environmentFactory);
+			domainUsageAnalysis2.analyzeTransformation(transformation);
+		}
+		return domainUsageAnalysis2;
 	}
 
 	/**

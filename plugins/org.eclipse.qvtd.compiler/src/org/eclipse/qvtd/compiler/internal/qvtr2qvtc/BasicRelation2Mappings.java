@@ -51,6 +51,8 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -607,6 +609,15 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							}
 						}
 					}
+				}
+			}
+			for (@NonNull Variable rVariable : rAllVariables) {
+				OCLExpression ownedInit = rVariable.getOwnedInit();
+				if (ownedInit != null) {
+					DomainUsageAnalysis domainUsageAnalysis = transformationAnalysis.getDomainUsageAnalysis();
+					DomainUsage usage = domainUsageAnalysis.getUsage(rVariable);
+					VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
+					//					variableAnalysis.set
 				}
 			}
 			//
