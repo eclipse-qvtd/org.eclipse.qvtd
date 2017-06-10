@@ -8,7 +8,7 @@
       license-feature-version="0.0.0">
 
    <description url="http://www.eclipse.org/modeling/mmt/qvtd">
-      [Enter Feature Description here.]
+      %description
    </description>
 
    <copyright>
