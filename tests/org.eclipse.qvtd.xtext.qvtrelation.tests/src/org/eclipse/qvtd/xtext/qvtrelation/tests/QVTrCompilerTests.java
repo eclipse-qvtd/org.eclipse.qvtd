@@ -342,6 +342,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 4);
+			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();
@@ -650,6 +651,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("seqDgm", "Seq.xmi");
 			myQVT.executeTransformation();

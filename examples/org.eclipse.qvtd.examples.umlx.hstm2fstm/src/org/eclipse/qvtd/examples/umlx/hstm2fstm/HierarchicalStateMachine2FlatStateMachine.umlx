@@ -12,7 +12,7 @@ TCS - initial implementation for ModelMorf
 E.D.Willink - alignment with evolved specification
 E.D.Willink - rename / comment
 *****************************************************************************</comments>
-  <ownedTxDiagrams xmi:id="T.HierarchicalStateMachine2FlatStateMachine" name="HierarchicalStateMachine2FlatStateMachine" package="org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm">
+  <ownedTxDiagrams xmi:id="T.HierarchicalStateMachine2FlatStateMachine" name="HierarchicalStateMachine2FlatStateMachine" package="org::eclipse::qvtd::xtext::umlx::tests::hstm2fstm">
     <comments>Transform a hierarchical StateMachine into a flat StateMachine.</comments>
     <ownedRelDiagrams xmi:id="R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine" name="HierachicalStateMachine2FlatStateMachine" isTop="true">
       <comments>Map each hierarchical StateMachine to a flat StateMachine</comments>

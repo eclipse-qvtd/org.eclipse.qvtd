@@ -212,9 +212,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
 			doSerialize(inputURI, serializedURI);
 		}
-		Class<? extends Transformer> txClass = compilerChain.generate(asTransformation, genModelFiles);
-		createGeneratedExecutor(txClass);	// FIXME this is convenient for a single execution, but dangerous for multi-execution
-		return txClass;
+		return compilerChain.generate(asTransformation, genModelFiles);
 	}
 
 	protected @NonNull ImperativeTransformation doCompile(@NonNull String testFileName, @NonNull String outputName,
