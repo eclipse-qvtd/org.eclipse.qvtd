@@ -42,7 +42,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -326,8 +325,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);

@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Key2FunctionForIdentification;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
@@ -140,7 +139,7 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 		return getKeyForCompleteClass(completeClass);
 	}
 
-	public @NonNull Function getKeyFunction(@NonNull TypedModel rTypedModel, @NonNull Key rKey) throws CompilerChainException {
+	public @NonNull Function getKeyFunction(@NonNull TypedModel rTypedModel, @NonNull Key rKey) {
 		Map<@NonNull TypedModel, @NonNull Function> typedModel2function = key2typedModel2function.get(rKey);
 		if (typedModel2function == null) {
 			typedModel2function = new HashMap<>();

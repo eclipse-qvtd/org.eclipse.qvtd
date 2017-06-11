@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
@@ -65,6 +64,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
+
+import com.google.common.collect.Sets;
 
 /**
  * BasicRelation2Mappings defines the mapping from a Relation, with a nested AbstractEnforceableRelationDomain2CoreMapping
@@ -416,12 +417,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			public EObject copy(EObject oIn) {
 				try {
 					if (oIn instanceof IteratorVariable) {
-						return variablesAnalysis.getCoreVariable((IteratorVariable)oIn);
+						Variable coreVariable = variablesAnalysis.getCoreVariable((IteratorVariable)oIn);
+						putTrace(coreVariable, (IteratorVariable)oIn);
+						return coreVariable;
 					}
 					else if (oIn instanceof LetVariable) {
-						return variablesAnalysis.getCoreVariable((LetVariable)oIn);
+						Variable coreVariable = variablesAnalysis.getCoreVariable((LetVariable)oIn);
+						putTrace(coreVariable, (LetVariable)oIn);
+						return coreVariable;
 					}
-				} catch (CompilerChainException e) {
+				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -590,38 +595,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsRoot();
 			}
 			//
-			for (Map.Entry<@NonNull Variable, @Nullable TypedModel> entry : rWhenVariable2rTypedModel.entrySet()) {
-				Variable rWhenVariable = entry.getKey();
-				TypedModel rWhenTypedModel = entry.getValue();
-				Variable2Variable variableAnalysis = variablesAnalysis.getVariableAnalysis(rWhenVariable);
-				if (rWhenTypedModel == null) {
-					OCLExpression rWhenInit = rWhenVariable.getOwnedInit();
-					if (rWhenInit != null) {
-						Set<@NonNull Variable> rReferredVariables = new HashSet<>();
-						Variables2Variables.gatherReferredVariables(rReferredVariables, rWhenInit);
-						for (Variable rReferredVariable : rReferredVariables) {
-							Variable2Variable referredVariableAnalysis = variablesAnalysis.basicGetVariableAnalysis(rReferredVariable);
-							if (referredVariableAnalysis != null) {
-								CorePattern corePattern = referredVariableAnalysis.getCorePattern();
-								if (corePattern != null) {
-									Domain containingDomain = QVTcoreUtil.getContainingDomain(corePattern);
-									TypedModel cTypedModel = QVTcoreUtil.getTypedModel(containingDomain);
-									TypedModel rTypedModel = qvtr2qvtc.getRelationTypedModel(cTypedModel);
-									variableAnalysis.setPredicate(rTypedModel);	// FIXME need QVTrDomainAnalayis
-								}
-								break;
-							}
-						}
-					}
-				}
-			}
 			for (@NonNull Variable rVariable : rAllVariables) {
 				OCLExpression ownedInit = rVariable.getOwnedInit();
 				if (ownedInit != null) {
 					DomainUsageAnalysis domainUsageAnalysis = transformationAnalysis.getDomainUsageAnalysis();
 					DomainUsage usage = domainUsageAnalysis.getUsage(rVariable);
-					VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
-					//					variableAnalysis.set
+					TypedModel rTypedModel = usage.getTypedModel(rVariable);
+					if (rTypedModel != null) {
+						VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rVariable);
+						variableAnalysis.setPredicate(rTypedModel);
+					}
 				}
 			}
 			//
@@ -630,19 +613,26 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				Variable rVariable = analysis.getRelationVariable();
 				if (rVariable != null) {
 					Variable cVariable = analysis.getCoreVariable();
-					putTrace(cVariable, rVariable);
+					putTrace(cVariable, rVariable);		// FIXME redundant / later
 				}
 			}
-			for (@NonNull Variable2Variable analysis : variablesAnalysis.getAnalyses()) {
-				Variable rVariable = analysis.getRelationVariable();
-				if (rVariable != null) {
-					OCLExpression rOwnedInit = rVariable.getOwnedInit();
-					if (rOwnedInit != null) {
-						Variable cVariable = analysis.getCoreVariable();
-						cVariable.setOwnedInit(mapExpression(rOwnedInit));
-						//					variablesAnalysis.addConditionPredicate(analysis.getCorePattern(), createVariableExp(cVariable), mapExpression(rOwnedInit));
+			Set<@NonNull Variable2Variable> toDo = Sets.newHashSet(variablesAnalysis.getAnalyses());
+			Set<@NonNull Variable2Variable> done = new HashSet<>();
+			while (toDo.size() > 0) {		// FIXME avoid need for CME proofing by scanning all variables first
+				for (@NonNull Variable2Variable analysis : toDo) {
+					Variable rVariable = analysis.getRelationVariable();
+					if (rVariable != null) {
+						OCLExpression rOwnedInit = rVariable.getOwnedInit();
+						if (rOwnedInit != null) {
+							Variable cVariable = analysis.getCoreVariable();
+							cVariable.setOwnedInit(mapExpression(rOwnedInit));
+							//					variablesAnalysis.addConditionPredicate(analysis.getCorePattern(), createVariableExp(cVariable), mapExpression(rOwnedInit));
+						}
 					}
 				}
+				done.addAll(toDo);
+				toDo = Sets.newHashSet(variablesAnalysis.getAnalyses());
+				toDo.removeAll(done);
 			}
 		}
 
@@ -1257,6 +1247,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				targets = new ArrayList<>();
 				source2targets.put(relationElement, targets);
 			}
+			assert !targets.contains(coreElement);
 			targets.add(coreElement);
 		}
 

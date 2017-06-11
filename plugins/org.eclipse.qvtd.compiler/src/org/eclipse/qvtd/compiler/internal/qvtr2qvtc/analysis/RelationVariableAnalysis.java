@@ -182,7 +182,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert rTemplateExp != null;
 			assert !isEnforcedBound;
 			assert !isEnforcedReferred;
-			assert (rOtherBound != null) || (rOtherReferred != null) || (rWhenTypedModel != null) || (rWhereTypedModel != null);
+			assert (rOtherBound != null) || (rOtherReferred != null) || (rPredicateTypedModel != null) || (rWhenTypedModel != null) || (rWhereTypedModel != null);
 			assert !isRoot;
 			return Strategy.OTHER_BOTTOM;
 		}
@@ -206,6 +206,10 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 
 	public TypedModel getrOtherReferred() {
 		return rOtherReferred;
+	}
+
+	public TypedModel getrPredicate() {
+		return rPredicateTypedModel;
 	}
 
 	public TypedModel getrWhenTypedModel() {

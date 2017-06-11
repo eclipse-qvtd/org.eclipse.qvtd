@@ -421,7 +421,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
-	public void addVariableAnalysis(@NonNull Variable2Variable analysis) throws CompilerChainException {
+	public void addVariableAnalysis(@NonNull Variable2Variable analysis) {
 		Variable cVariable = analysis.getCoreVariable();
 		cVariable2analysis.put(cVariable, analysis);
 		Variable rVariable = analysis.getRelationVariable();
@@ -475,7 +475,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cThisVariable;
 	}
 
-	public @NonNull Variable getCoreVariable(@NonNull Variable rVariable) throws CompilerChainException {			// doRVarToMVar
+	public @NonNull Variable getCoreVariable(@NonNull Variable rVariable) {			// doRVarToMVar
 		return getVariableAnalysis(rVariable).getCoreVariable();
 	}
 

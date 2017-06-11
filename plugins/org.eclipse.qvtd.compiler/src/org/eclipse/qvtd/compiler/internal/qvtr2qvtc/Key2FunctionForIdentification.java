@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -45,7 +44,7 @@ public class Key2FunctionForIdentification
 		this.rKey = rKey;
 	}
 
-	public @NonNull Function transform() throws CompilerChainException {
+	public @NonNull Function transform() {
 		QVTcoreHelper helper = qvtr2qvtc;
 		String functionName = qvtr2qvtc.getNameGenerator().createKeyFunctionName(rTypedModel, rKey);
 		List<@NonNull FunctionParameter> asParameters = new ArrayList<>();

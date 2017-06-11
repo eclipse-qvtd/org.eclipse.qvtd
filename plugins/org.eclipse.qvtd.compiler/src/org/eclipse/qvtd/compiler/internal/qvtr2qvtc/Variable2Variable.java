@@ -45,7 +45,6 @@ public interface Variable2Variable extends VariableAnalysis
 
 	/**
 	 * The core variable for this analysis.
-	 * @throws CompilerChainException
 	 */
-	@NonNull Variable getCoreVariable() throws CompilerChainException;
+	@NonNull Variable getCoreVariable();
 }

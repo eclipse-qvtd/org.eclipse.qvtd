@@ -26,7 +26,7 @@ public class IteratorVariable2Variable extends AbstractVariable2Variable
 	protected final @NonNull IteratorVariable cIteratorVariable;
 
 	protected IteratorVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull IteratorVariable rIteratorVariable) {
-		super(variablesAnalysis, rIteratorVariable);
+		super(variablesAnalysis, QVTrelationUtil.getName(rIteratorVariable));
 		this.rIteratorVariable = rIteratorVariable;
 		this.cIteratorVariable = variablesAnalysis.createIteratorVariable(name, QVTrelationUtil.getType(rIteratorVariable), rIteratorVariable.isIsRequired());
 	}

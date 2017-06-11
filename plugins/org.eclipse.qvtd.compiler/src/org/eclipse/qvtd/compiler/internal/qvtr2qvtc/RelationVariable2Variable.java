@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationVariableAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationVariableAnalysis.Strategy;
@@ -181,7 +182,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	}
 
 	@Override
-	public @NonNull Variable getCoreVariable() throws CompilerChainException {
+	public @NonNull Variable getCoreVariable() {
 		Variable cVariable2 = cVariable;
 		if (cVariable2 == null) {
 			cVariable2 = synthesize();
@@ -197,6 +198,10 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		TypedModel rOtherReferred = variableAnalysis.getrOtherReferred();
 		if (rOtherReferred != null) {
 			return rOtherReferred;
+		}
+		TypedModel rPredicate = variableAnalysis.getrPredicate();
+		if (rPredicate != null) {
+			return rPredicate;
 		}
 		TypedModel rWhenTypedModel = variableAnalysis.getrWhenTypedModel();
 		if (rWhenTypedModel != null) {
@@ -214,7 +219,12 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		return variableAnalysis.getRelationVariable();
 	}
 
-	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) throws CompilerChainException {
+	@Override
+	public boolean hasWhenDomain() {
+		return variableAnalysis.hasWhenDomain();
+	}
+
+	private void initializeKeyedVariable(@NonNull Variable cKeyedVariable) {
 		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(variableAnalysis.getrEnforcedTypedModel());
 		Key rKey2 = ClassUtil.nonNull(variableAnalysis.getrKey());
 		Function function = variablesAnalysis.getRelationAnalysis().getTransformationAnalysis().getKeyFunction(rEnforcedTypedModel2, rKey2);
@@ -235,7 +245,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
 				}
 				else {
-					throw new CompilerChainException("Missing ''{1}'' value for ''{0}'' key.", rKey2.getIdentifies().getName(), keyParameter.getName());
+					throw new IllegalStateException(NLS.bind("Missing ''{1}'' value for ''{0}'' key.", rKey2.getIdentifies().getName(), keyParameter.getName()));
 					//					asArguments.add(variablesAnalysis.createInvalidExpression());
 				}
 			}
@@ -250,6 +260,11 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
 		variableAnalysis.setIsEnforcedBound(rTemplateExp, rEnforcedTypedModel, rKey);
+	}
+
+	@Override
+	public void setIsEnforcedReferred() {
+		variableAnalysis.setIsEnforcedReferred();
 	}
 
 	@Override
@@ -282,7 +297,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		variableAnalysis.setWhere(rWhereTypedModel);
 	}
 
-	protected @NonNull Variable synthesize() throws CompilerChainException {
+	protected @NonNull Variable synthesize() {
 		Variable cVariable2 = cVariable;
 		if (cVariable2 == null) {
 			Strategy strategy = variableAnalysis.getStrategy();
