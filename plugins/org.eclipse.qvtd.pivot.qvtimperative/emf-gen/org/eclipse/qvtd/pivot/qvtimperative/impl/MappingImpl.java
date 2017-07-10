@@ -30,6 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.collection.CollectionMutableUnionOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionUnionOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -37,8 +38,6 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -241,9 +240,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -262,7 +261,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;
@@ -314,14 +313,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_VariableStatement = idResolver.getClass(QVTimperativeTables.CLSSid_VariableStatement, null);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Statement> ownedStatements = this.getOwnedStatements();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedStatements = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_Statement, ownedStatements);
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue union = (SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
-				@NonNull Iterator<Object> ITERATOR__1 = union.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedStatements = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_Statement, ownedStatements);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue selectByKind = CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue union = CollectionMutableUnionOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_VariableDeclaration, BOXED_ownedMappingParameters, selectByKind);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
+				@NonNull Iterator<Object> ITERATOR__1 = union.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -340,7 +339,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;

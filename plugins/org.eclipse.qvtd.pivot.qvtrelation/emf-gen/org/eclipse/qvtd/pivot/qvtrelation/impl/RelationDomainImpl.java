@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -179,9 +178,9 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 		}
 		else {
 			final /*@NonInvalid*/ java.util.@NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
-			/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.iterator();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
+			/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.lazyIterator();
 			/*@NonInvalid*/ boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {
@@ -201,7 +200,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 					break;
 				}
 				else {
-					accumulator.add(variable);
+					accumulator.mutableIncluding(variable);
 				}
 			}
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationDomain_c_c_RelationDomainAssignmentsAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();

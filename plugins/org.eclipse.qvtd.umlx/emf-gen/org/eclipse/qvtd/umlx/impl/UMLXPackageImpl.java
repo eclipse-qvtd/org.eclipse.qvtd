@@ -217,7 +217,7 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link UMLXPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -244,18 +244,17 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theUMLXPackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return UMLXValidator.INSTANCE;
-			}
-		});
+			(theUMLXPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return UMLXValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theUMLXPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(UMLXPackage.eNS_URI, theUMLXPackage);
 		return theUMLXPackage;
@@ -1639,72 +1638,72 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });	
 		addAnnotation
-		(relDiagramEClass,
-			source,
-			new String[] {
-				"constraints", "validateRelPatternNodeNamesAreUnique"
-		});
+		  (relDiagramEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateRelPatternNodeNamesAreUnique"
+		   });	
 		addAnnotation
-		(relInvocationNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateCompatibleEdges"
-		});
+		  (relInvocationNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateCompatibleEdges"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass,
-			source,
-			new String[] {
-				"constraints", "validateCompatibleMemberPropertyTarget"
-		});
+		  (relPatternEdgeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateCompatibleMemberPropertyTarget"
+		   });	
 		addAnnotation
-		(relPatternNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateEClassifierIsInTypedModel"
-		});
+		  (relPatternNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateEClassifierIsInTypedModel"
+		   });	
 		addAnnotation
-		(txDiagramEClass,
-			source,
-			new String[] {
-				"constraints", "validateTxTypedModelNodeNamesAreUnique"
-		});
+		  (txDiagramEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateTxTypedModelNodeNamesAreUnique"
+		   });	
 		addAnnotation
-		(txKeyNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validatePartsAreUnique"
-		});
+		  (txKeyNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validatePartsAreUnique"
+		   });	
 		addAnnotation
-		(txParameterNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateTypeIsRequired"
-		});
+		  (txParameterNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateTypeIsRequired"
+		   });	
 		addAnnotation
-		(txPartNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validatePartIsPropertyOfKey"
-		});
+		  (txPartNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validatePartIsPropertyOfKey"
+		   });	
 		addAnnotation
-		(txQueryNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateParametersAreUnique"
-		});
+		  (txQueryNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateParametersAreUnique"
+		   });	
 		addAnnotation
-		(txTypedModelNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateNameIsRequired"
-		});
+		  (txTypedModelNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validateNameIsRequired"
+		   });
 	}
 
 	/**
@@ -1714,175 +1713,175 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(relDiagramEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (relDiagramEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsRequired"
+		   });	
 		addAnnotation
-		(relDiagramEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "RelPatternNodeNamesAreUnique"
-		});
+		  (relDiagramEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "RelPatternNodeNamesAreUnique"
+		   });	
 		addAnnotation
-		(relInvocationNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "CompatibleEdges"
-		});
+		  (relInvocationNodeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleEdges"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "SourceIsEClass"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "SourceIsEClass"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "SourceIsClassNode"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "SourceIsClassNode"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "CompatibleEAttributePropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleEAttributePropertyTarget"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(3),
-			source,
-			new String[] {
-				"originalName", "CompatibleSourceMultiplicity"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleSourceMultiplicity"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(4),
-			source,
-			new String[] {
-				"originalName", "CompatibleEReferencePropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(4), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleEReferencePropertyTarget"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(5),
-			source,
-			new String[] {
-				"originalName", "CompatiblePropertySource"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(5), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatiblePropertySource"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(6),
-			source,
-			new String[] {
-				"originalName", "CompatibleSourceIndex"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(6), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleSourceIndex"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(7),
-			source,
-			new String[] {
-				"originalName", "CompatibleRestPropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(7), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleRestPropertyTarget"
+		   });	
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(8),
-			source,
-			new String[] {
-				"originalName", "CompatibleMemberPropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(8), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleMemberPropertyTarget"
+		   });	
 		addAnnotation
-		(relPatternNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "AnonIsUnnamed"
-		});
+		  (relPatternNodeEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "AnonIsUnnamed"
+		   });	
 		addAnnotation
-		(relPatternNodeEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "TypeIsRequired"
-		});
+		  (relPatternNodeEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "originalName", "TypeIsRequired"
+		   });	
 		addAnnotation
-		(relPatternNodeEClass.getEOperations().get(3),
-			source,
-			new String[] {
-				"originalName", "EClassifierIsInTypedModel"
-		});
+		  (relPatternNodeEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "originalName", "EClassifierIsInTypedModel"
+		   });	
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "TxQueryNodeNamesAreUnique"
-		});
+		  (txDiagramEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "TxQueryNodeNamesAreUnique"
+		   });	
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "RelDiagramNamesAreUnique"
-		});
+		  (txDiagramEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "RelDiagramNamesAreUnique"
+		   });	
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txDiagramEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsRequired"
+		   });	
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(3),
-			source,
-			new String[] {
-				"originalName", "TxTypedModelNodeNamesAreUnique"
-		});
+		  (txDiagramEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "originalName", "TxTypedModelNodeNamesAreUnique"
+		   });	
 		addAnnotation
-		(txKeyNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "PartsAreUnique"
-		});
+		  (txKeyNodeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "PartsAreUnique"
+		   });	
 		addAnnotation
-		(txParameterNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txParameterNodeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsRequired"
+		   });	
 		addAnnotation
-		(txParameterNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "TypeIsRequired"
-		});
+		  (txParameterNodeEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "TypeIsRequired"
+		   });	
 		addAnnotation
-		(txPartNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "PartIsPropertyOfKey"
-		});
+		  (txPartNodeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "PartIsPropertyOfKey"
+		   });	
 		addAnnotation
-		(txQueryNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txQueryNodeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsRequired"
+		   });	
 		addAnnotation
-		(txQueryNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "TypeIsRequired"
-		});
+		  (txQueryNodeEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "TypeIsRequired"
+		   });	
 		addAnnotation
-		(txQueryNodeEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "ParametersAreUnique"
-		});
+		  (txQueryNodeEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "originalName", "ParametersAreUnique"
+		   });	
 		addAnnotation
-		(txTypedModelNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "TxPackageNodePackagesAreUnique"
-		});
+		  (txTypedModelNodeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "originalName", "TxPackageNodePackagesAreUnique"
+		   });	
 		addAnnotation
-		(txTypedModelNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txTypedModelNodeEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsRequired"
+		   });
 	}
 
 } //UMLXPackageImpl

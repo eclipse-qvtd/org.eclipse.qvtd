@@ -587,7 +587,7 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 		if (eq) {
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@NonNull List<String> initExpressionLines = this.getInitExpressionLines();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_initExpressionLines = idResolver.createOrderedSetOfAll(UMLXTables.ORD_PRIMid_String, initExpressionLines);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_initExpressionLines = idResolver.createOrderedSetOfAll(UMLXTables.ORD_PRIMid_String, initExpressionLines);
 			final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_initExpressionLines).booleanValue();
 			and = notEmpty;
 		}
@@ -743,10 +743,10 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ java.util.@NonNull List<TxPackageNode> usedTxPackageNodes = txTypedModelNode.getUsedTxPackageNodes();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
-						/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_EPackage);
-						@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
+						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(UMLXTables.SEQ_CLSSid_EPackage);
+						@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.eagerIterator();
+						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect_0;
 						while (true) {
 							if (!ITERATOR__1.hasNext()) {
 								collect_0 = accumulator;
@@ -760,11 +760,11 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredEPackage = _1.getReferredEPackage();
 							//
-							accumulator.add(referredEPackage);
+							accumulator.mutableIncluding(referredEPackage);
 						}
-						/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_EClassifier);
-						@NonNull Iterator<Object> ITERATOR__1_0 = collect_0.iterator();
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator_0 = ValueUtil.createCollectionAccumulatorValue(UMLXTables.SEQ_CLSSid_EClassifier);
+						@NonNull Iterator<Object> ITERATOR__1_0 = collect_0.eagerIterator();
+						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 						while (true) {
 							if (!ITERATOR__1_0.hasNext()) {
 								collect = accumulator_0;
@@ -777,10 +777,10 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 							 */
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ java.util.@NonNull List<EClassifier> eClassifiers = _1_0.getEClassifiers();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eClassifiers = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClassifier, eClassifiers);
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_eClassifiers = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClassifier, eClassifiers);
 							//
 							for (Object value : BOXED_eClassifiers.flatten().getElements()) {
-								accumulator_0.add(value);
+								accumulator_0.mutableIncluding(value);
 							}
 						}
 						final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier = this.getReferredEClassifier();

@@ -44,8 +44,8 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.RelDomainNode;
 import org.eclipse.qvtd.umlx.RelPatternEdge;
 import org.eclipse.qvtd.umlx.RelPatternNode;
@@ -678,7 +678,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode target_0 = this.getTarget();
 					final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
 					final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass sourceEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0));
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, sourceEClass);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, sourceEClass);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 					final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
@@ -697,12 +697,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							}
 							@SuppressWarnings("null")
 							final /*@Thrown*/ java.util.@NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 							return BOXED_eSuperTypes;
 						}
 					};
 					final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure = ClassUtil.nonNullState((CollectionValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
 					final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
 					if (referredEStructuralFeature_1 == null) {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::ETypedElement::eType\'");
@@ -771,7 +771,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
 					final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
 					final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass));
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 					final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
@@ -790,12 +790,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							}
 							@SuppressWarnings("null")
 							final /*@Thrown*/ java.util.@NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 							return BOXED_eSuperTypes;
 						}
 					};
 					final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure = ClassUtil.nonNullState((CollectionValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
 					if (referredEStructuralFeature == null) {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EStructuralFeature::eContainingClass\'");
 					}
@@ -924,11 +924,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				try {
 					/*@Caught*/ @NonNull Object CAUGHT_sourceEClass;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_3 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
 						final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass sourceEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0));
+						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass sourceEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_3));
 						CAUGHT_sourceEClass = sourceEClass;
 					}
 					catch (Exception e) {
@@ -936,11 +936,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					}
 					/*@Caught*/ @NonNull Object CAUGHT_targetEClass;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_4 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode target_0 = this.getTarget();
 						final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass targetEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1));
+						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass targetEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_4));
 						CAUGHT_targetEClass = targetEClass;
 					}
 					catch (Exception e) {
@@ -1089,11 +1089,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				try {
 					/*@Caught*/ @NonNull Object CAUGHT_sourceEClass;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode source = this.getSource();
 						final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass sourceEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0));
+						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass sourceEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_1));
 						CAUGHT_sourceEClass = sourceEClass;
 					}
 					catch (Exception e) {
@@ -1101,11 +1101,11 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					}
 					/*@Caught*/ @NonNull Object CAUGHT_targetEClass;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_1 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_2 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull RelPatternNode target_0 = this.getTarget();
 						final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass targetEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1));
+						final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass targetEClass = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_2));
 						CAUGHT_targetEClass = targetEClass;
 					}
 					catch (Exception e) {
@@ -1116,7 +1116,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 						if (CAUGHT_sourceEClass instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_sourceEClass;
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_sourceEClass);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_sourceEClass);
 						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticTypeOf(oclAsSet);
 						final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_1 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 						final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
@@ -1135,12 +1135,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								}
 								@SuppressWarnings("null")
 								final /*@Thrown*/ java.util.@NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-								final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+								final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 								return BOXED_eSuperTypes;
 							}
 						};
 						final @NonNull  ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_1, oclAsSet, ACC_closure_1);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1));
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure = ClassUtil.nonNullState((CollectionValue)IMPL_closure_1.evaluateIteration(MGR_closure_1));
 						if (CAUGHT_targetEClass instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_targetEClass;
 						}
@@ -1155,7 +1155,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 						if (CAUGHT_targetEClass instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_targetEClass;
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_targetEClass);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, CAUGHT_targetEClass);
 						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0_0 = executor.getStaticTypeOf(oclAsSet_0);
 						final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 						final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
@@ -1174,12 +1174,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								}
 								@SuppressWarnings("null")
 								final /*@Thrown*/ java.util.@NonNull List<EClass> eSuperTypes_0 = symbol_1.getESuperTypes();
-								final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eSuperTypes_0 = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes_0);
+								final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_eSuperTypes_0 = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes_0);
 								return BOXED_eSuperTypes_0;
 							}
 						};
 						final @NonNull  ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0_0, oclAsSet_0, ACC_closure_0_0);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure_0 = ClassUtil.nonNullState((SetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0));
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure_0 = ClassUtil.nonNullState((CollectionValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0));
 						if (CAUGHT_sourceEClass instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_sourceEClass;
 						}

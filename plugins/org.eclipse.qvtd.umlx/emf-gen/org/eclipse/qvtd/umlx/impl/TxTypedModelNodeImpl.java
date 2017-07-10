@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxPackageNode;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
@@ -327,41 +326,34 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<TxPackageNode> usedTxPackageNodes = this.getUsedTxPackageNodes();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPackageNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
-				/*@Thrown*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = ValueUtil.TRUE_VALUE;
-						break;
-					}
-					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxPackageNode _1 = (TxPackageNode)ITERATOR__1.next();
-					/**
-					 * referredEPackage
-					 */
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredEPackage = _1.getReferredEPackage();
-					//
-					if (accumulator.includes(referredEPackage) == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.FALSE_VALUE;			// Abort after second find
-						break;
-					}
-					else {
-						accumulator.add(referredEPackage);
-					}
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ java.util.@NonNull List<TxPackageNode> usedTxPackageNodes = this.getUsedTxPackageNodes();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
+			/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPackageNode);
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.lazyIterator();
+			/*@NonInvalid*/ boolean result;
+			while (true) {
+				if (!ITERATOR__1.hasNext()) {
+					result = ValueUtil.TRUE_VALUE;
+					break;
 				}
-				CAUGHT_result = result;
+				@SuppressWarnings("null")
+				/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxPackageNode _1 = (TxPackageNode)ITERATOR__1.next();
+				/**
+				 * referredEPackage
+				 */
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EPackage referredEPackage = _1.getReferredEPackage();
+				//
+				if (accumulator.includes(referredEPackage) == ValueUtil.TRUE_VALUE) {
+					result = ValueUtil.FALSE_VALUE;			// Abort after second find
+					break;
+				}
+				else {
+					accumulator.mutableIncluding(referredEPackage);
+				}
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;

@@ -1806,6 +1806,15 @@ public interface QVTrelationPackage extends EPackage {
 	int SHARED_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHARED_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2003,6 +2012,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.

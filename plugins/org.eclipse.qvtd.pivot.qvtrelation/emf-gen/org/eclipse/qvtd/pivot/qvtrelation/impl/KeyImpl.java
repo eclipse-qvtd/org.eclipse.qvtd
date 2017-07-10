@@ -48,10 +48,8 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.BagValue;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -300,10 +298,10 @@ public class KeyImpl extends ElementImpl implements Key {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 					}
 					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
-					/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.eagerIterator();
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							collect = accumulator;
@@ -315,10 +313,10 @@ public class KeyImpl extends ElementImpl implements Key {
 						 * usedPackage
 						 */
 						final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
 						//
 						for (Object value : BOXED_usedPackage.flatten().getElements()) {
-							accumulator.add(value);
+							accumulator.mutableIncluding(value);
 						}
 					}
 					@SuppressWarnings("null")
@@ -386,7 +384,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
 					final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Class> superClasses_0 = identifies.getSuperClasses();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_superClasses_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_0);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_superClasses_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_0);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_2 = executor.getStaticTypeOf(BOXED_superClasses_0);
 					final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_superClasses_2 = (LibraryIteration.LibraryIterationExtension)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_superClasses_2 = IMPL_superClasses_2.createAccumulatorValue(executor, QVTrelationTables.SET_CLSSid_Class, QVTrelationTables.SET_CLSSid_Class);
@@ -404,22 +402,22 @@ public class KeyImpl extends ElementImpl implements Key {
 								throw new InvalidValueException("Null source for \'Class::superClasses\'");
 							}
 							final /*@Thrown*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Class> superClasses_1 = symbol_0.getSuperClasses();
-							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_superClasses_1 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_1);
+							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_superClasses_1 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_1);
 							return BOXED_superClasses_1;
 						}
 					};
 					final @NonNull  ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY_superClasses_2, BOXED_superClasses_0, ACC_superClasses_2);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue superClasses = ClassUtil.nonNullState((SetValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2));
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue superClasses = ClassUtil.nonNullState((CollectionValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2));
 					if (transformation == null) {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = transformation.getOwnedKey();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue otherKeys = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
-					/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
-					@NonNull Iterator<Object> ITERATOR__1_0 = otherKeys.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue otherKeys = CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
+					@NonNull Iterator<Object> ITERATOR__1_0 = otherKeys.eagerIterator();
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 					while (true) {
 						if (!ITERATOR__1_0.hasNext()) {
 							collect = accumulator;
@@ -433,7 +431,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies_0 = _1_0.getIdentifies();
 						//
-						accumulator.add(identifies_0);
+						accumulator.mutableIncluding(identifies_0);
 					}
 					final /*@Thrown*/ boolean excludesAll = CollectionExcludesAllOperation.INSTANCE.evaluate(collect, superClasses).booleanValue();
 					result = excludesAll;
@@ -495,11 +493,11 @@ public class KeyImpl extends ElementImpl implements Key {
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = transformation.getOwnedKey();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue otherKeys = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
-					/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
-					@NonNull Iterator<Object> ITERATOR__1 = otherKeys.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue otherKeys = CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
+					@NonNull Iterator<Object> ITERATOR__1 = otherKeys.eagerIterator();
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							collect = accumulator;
@@ -513,7 +511,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();
 						//
-						accumulator.add(identifies);
+						accumulator.mutableIncluding(identifies);
 					}
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies_0 = this.getIdentifies();
@@ -566,9 +564,9 @@ public class KeyImpl extends ElementImpl implements Key {
 		else {
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.lazyIterator();
 			/*@NonInvalid*/ java.lang.@Nullable Boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {
@@ -641,9 +639,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -732,9 +730,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Property> part = this.getPart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -822,13 +820,13 @@ public class KeyImpl extends ElementImpl implements Key {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Property> part = this.getPart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
-				/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Property);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(QVTrelationTables.BAG_CLSSid_Property);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.lazyIterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						collect = accumulator;
@@ -841,7 +839,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					 */
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = _1.getOpposite();
 					//
-					accumulator.add(opposite);
+					accumulator.mutableIncluding(opposite);
 				}
 				final /*@Thrown*/ boolean result = CollectionExcludesAllOperation.INSTANCE.evaluate(BOXED_part, collect).booleanValue();
 				CAUGHT_result = result;

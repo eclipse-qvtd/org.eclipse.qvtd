@@ -238,9 +238,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<OCLExpression> member = this.getMember();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
 				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {

@@ -37,11 +37,10 @@ import org.eclipse.ocl.pivot.ids.PackageId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
-import org.eclipse.ocl.pivot.internal.values.SetValueImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.MutableIterable;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
@@ -443,7 +442,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Deprecated // only used by exe2016/bugmde2016 tests
-	private static class UnenforcedSetAccumulator extends SetValueImpl implements SetValue.Accumulator
+	private static class UnenforcedSetAccumulator extends SetValueImpl implements MutableIterable
 	{
 		public UnenforcedSetAccumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new ArrayList<>());
@@ -608,7 +607,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Deprecated // Use createConnection
-	protected SetValue.@NonNull Accumulator createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
+	protected @NonNull MutableIterable createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
 		return new UnenforcedSetAccumulator(typeId);
 	}
 

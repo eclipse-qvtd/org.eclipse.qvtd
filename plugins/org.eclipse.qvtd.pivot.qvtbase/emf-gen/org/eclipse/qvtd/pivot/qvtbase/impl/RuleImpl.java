@@ -45,9 +45,8 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -328,9 +327,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -349,7 +348,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;
@@ -398,7 +397,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden = this.getOverridden();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule, overridden);
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule, overridden);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Rule, QVTbaseTables.CLSSid_Rule);
@@ -420,7 +419,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					}
 				};
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Rule, BODY_closure_0, oclAsSet, ACC_closure_0);
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure = ClassUtil.nonNullState((CollectionValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
 				final /*@Thrown*/ boolean result = CollectionExcludesOperation.INSTANCE.evaluate(closure, this).booleanValue();
 				CAUGHT_result = result;
 			}
@@ -476,9 +475,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					}
 					@SuppressWarnings("null")
 					final /*@Thrown*/ java.util.@NonNull List<Domain> domain = overridden.getDomain();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
 					/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
+					@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.eagerIterator();
 					/*@Thrown*/ boolean forAll;
 					while (true) {
 						if (!ITERATOR_od.hasNext()) {
@@ -499,10 +498,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						try {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain_0 = this.getDomain();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
-							/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
-							@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
-							/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+							/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator_0 = ValueUtil.createCollectionAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
+							@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.lazyIterator();
+							/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 							while (true) {
 								if (!ITERATOR__1.hasNext()) {
 									collect = accumulator_0;
@@ -515,7 +514,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 								 */
 								final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
 								//
-								accumulator_0.add(name);
+								accumulator_0.mutableIncluding(name);
 							}
 							final /*@NonInvalid*/ java.lang.@Nullable String name_0 = od.getName();
 							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, name_0).booleanValue();

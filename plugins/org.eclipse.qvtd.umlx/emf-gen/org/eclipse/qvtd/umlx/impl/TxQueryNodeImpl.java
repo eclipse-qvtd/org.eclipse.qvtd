@@ -40,7 +40,6 @@ import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxParameterNode;
 import org.eclipse.qvtd.umlx.TxQueryNode;
@@ -595,9 +594,9 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<TxParameterNode> ownedTxParameterNodes = this.getOwnedTxParameterNodes();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxParameterNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxParameterNode, ownedTxParameterNodes);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxParameterNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxParameterNodes.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedTxParameterNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxParameterNode, ownedTxParameterNodes);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxParameterNode);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxParameterNodes.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -616,7 +615,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;

@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.RelDiagram;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxKeyNode;
@@ -270,9 +269,9 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<TxQueryNode> ownedTxQueryNodes = this.getOwnedTxQueryNodes();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxQueryNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxQueryNode, ownedTxQueryNodes);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxQueryNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxQueryNodes.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedTxQueryNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxQueryNode, ownedTxQueryNodes);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxQueryNode);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxQueryNodes.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -291,7 +290,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;
@@ -339,9 +338,9 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<RelDiagram> ownedRelDiagrams = this.getOwnedRelDiagrams();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedRelDiagrams = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelDiagram, ownedRelDiagrams);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_RelDiagram);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedRelDiagrams.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedRelDiagrams = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelDiagram, ownedRelDiagrams);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_RelDiagram);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedRelDiagrams.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -360,7 +359,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;
@@ -444,9 +443,9 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<TxTypedModelNode> ownedTxTypedModelNodes = this.getOwnedTxTypedModelNodes();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxTypedModelNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxTypedModelNode, ownedTxTypedModelNodes);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxTypedModelNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxTypedModelNodes.iterator();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedTxTypedModelNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxTypedModelNode, ownedTxTypedModelNodes);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxTypedModelNode);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxTypedModelNodes.lazyIterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -465,7 +464,7 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 						break;
 					}
 					else {
-						accumulator.add(name);
+						accumulator.mutableIncluding(name);
 					}
 				}
 				CAUGHT_result = result;

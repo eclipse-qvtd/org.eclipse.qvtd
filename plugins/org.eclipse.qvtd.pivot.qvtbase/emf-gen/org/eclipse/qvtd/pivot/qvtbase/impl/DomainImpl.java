@@ -454,7 +454,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 					final /*@NonInvalid*/ java.lang.@Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
 					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation oclAsType = ClassUtil.nonNullState((Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0));
 					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
 					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
 					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
 					CAUGHT_includes = includes;

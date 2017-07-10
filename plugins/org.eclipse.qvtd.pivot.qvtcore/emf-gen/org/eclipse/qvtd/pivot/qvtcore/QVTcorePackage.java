@@ -658,6 +658,15 @@ public interface QVTcorePackage extends EPackage {
 	int BOTTOM_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1399,6 +1408,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int GUARD_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
@@ -2331,6 +2349,15 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.

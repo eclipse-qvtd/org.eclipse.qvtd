@@ -617,6 +617,15 @@ public interface QVTimperativePackage extends EPackage {
 	int CONNECTION_VARIABLE__TYPE = PivotPackage.VARIABLE_DECLARATION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE_DECLARATION__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -777,6 +786,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int APPEND_PARAMETER__TYPE = CONNECTION_VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER__CACHE_NEEDED = CONNECTION_VARIABLE__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
@@ -1227,6 +1245,15 @@ public interface QVTimperativePackage extends EPackage {
 	int BUFFER_STATEMENT__TYPE = CONNECTION_VARIABLE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT__CACHE_NEEDED = CONNECTION_VARIABLE__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1641,6 +1668,15 @@ public interface QVTimperativePackage extends EPackage {
 	int VARIABLE_STATEMENT__TYPE = PivotPackage.VARIABLE_DECLARATION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STATEMENT__CACHE_NEEDED = PivotPackage.VARIABLE_DECLARATION__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1801,6 +1837,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int DECLARE_STATEMENT__TYPE = VARIABLE_STATEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT__CACHE_NEEDED = VARIABLE_STATEMENT__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
@@ -2010,6 +2055,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_PARAMETER__TYPE = PivotPackage.VARIABLE_DECLARATION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER__CACHE_NEEDED = PivotPackage.VARIABLE_DECLARATION__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2170,6 +2224,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int GUARD_PARAMETER__TYPE = MAPPING_PARAMETER__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER__CACHE_NEEDED = MAPPING_PARAMETER__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
@@ -3254,6 +3317,15 @@ public interface QVTimperativePackage extends EPackage {
 	int LOOP_VARIABLE__TYPE = PivotPackage.VARIABLE_DECLARATION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_VARIABLE__CACHE_NEEDED = PivotPackage.VARIABLE_DECLARATION__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3939,6 +4011,15 @@ public interface QVTimperativePackage extends EPackage {
 	int NEW_STATEMENT__TYPE = VARIABLE_STATEMENT__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT__CACHE_NEEDED = VARIABLE_STATEMENT__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4380,6 +4461,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMPLE_PARAMETER__TYPE = MAPPING_PARAMETER__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER__CACHE_NEEDED = MAPPING_PARAMETER__CACHE_NEEDED;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.

@@ -17,8 +17,8 @@ import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 import com.google.common.collect.Lists;
@@ -33,7 +33,7 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();
 
 	@Override
-	public @NonNull SetValue evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
+	public @NonNull CollectionValue evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
 		org.eclipse.ocl.pivot.Class type = asClass(typeVal);
 		if (!(sourceVal instanceof TypedModelInstance)) {
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));

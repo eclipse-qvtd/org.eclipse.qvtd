@@ -56,8 +56,8 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -762,7 +762,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_VariableExp = idResolver.getClass(QVTimperativeTables.CLSSid_VariableExp, null);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTimperativeTables.SET_CLSSid_OclElement, QVTimperativeTables.SET_CLSSid_OclElement);
@@ -775,17 +775,17 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					 */
 					@Override
 					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object e_0) {
-						final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = (Object)e_0;
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclContents = ClassifierOclContentsOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OclElement, symbol_0);
+						final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = e_0;
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclContents = ClassifierOclContentsOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OclElement, symbol_0);
 						return oclContents;
 					}
 				};
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.SET_CLSSid_OclElement, BODY_closure_0, oclAsSet, ACC_closure_0);
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_VariableExp);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
-				@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue select_0;
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure = ClassUtil.nonNullState((CollectionValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue selectByKind = CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_VariableExp);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
+				@NonNull Iterator<Object> ITERATOR__1 = selectByKind.eagerIterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue select_0;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						select_0 = accumulator;
@@ -801,12 +801,12 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, TYP_qvtimperative_c_c_NewStatement).booleanValue();
 					//
 					if (oclIsKindOf == ValueUtil.TRUE_VALUE) {
-						accumulator.add(_1);
+						accumulator.mutableIncluding(_1);
 					}
 				}
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
-				@NonNull Iterator<Object> ITERATOR_s = select_0.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue select;
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator_0 = ValueUtil.createCollectionAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
+				@NonNull Iterator<Object> ITERATOR_s = select_0.eagerIterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue select;
 				while (true) {
 					if (!ITERATOR_s.hasNext()) {
 						select = accumulator_0;
@@ -849,7 +849,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					}
 					//
 					if (and == ValueUtil.TRUE_VALUE) {
-						accumulator_0.add(s);
+						accumulator_0.mutableIncluding(s);
 					}
 				}
 				final /*@Thrown*/ boolean result = CollectionIsEmptyOperation.INSTANCE.evaluate(select).booleanValue();

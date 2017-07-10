@@ -181,7 +181,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTcorePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -212,18 +212,17 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTcorePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTcoreValidator.INSTANCE;
-			}
-		});
+			(theQVTcorePackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTcoreValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTcorePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTcorePackage.eNS_URI, theQVTcorePackage);
 		return theQVTcorePackage;
@@ -1187,12 +1186,12 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -1202,37 +1201,37 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getAssignment_Value(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
+		  (getAssignment_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });	
 		addAnnotation
-		(getNavigationAssignment_SlotExpression(),
-			source,
-			new String[] {
-				"body", "slotAssignment"
-		});
+		  (getNavigationAssignment_SlotExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "slotAssignment"
+		   });	
 		addAnnotation
-		(getOppositePropertyAssignment_TargetProperty(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getOppositePropertyAssignment_TargetProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getPropertyAssignment_TargetProperty(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getPropertyAssignment_TargetProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getVariableAssignment_TargetVariable(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getVariableAssignment_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });
 	}
 
 	/**
@@ -1242,97 +1241,97 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "VariablesAreBottomVariables"
-		});
+		  (getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "VariablesAreBottomVariables"
+		   });	
 		addAnnotation
-		(getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "VariablesAreGuardVariables"
-		});
+		  (getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "VariablesAreGuardVariables"
+		   });	
 		addAnnotation
-		(getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "DomainsAreCoreDomains"
-		});
+		  (getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "DomainsAreCoreDomains"
+		   });	
 		addAnnotation
-		(getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NestedNameIsNull"
-		});
+		  (getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NestedNameIsNull"
+		   });	
 		addAnnotation
-		(getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "RootNameIsNotNull"
-		});
+		  (getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "RootNameIsNotNull"
+		   });	
 		addAnnotation
-		(getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForPartialValue"
-		});
+		  (getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForPartialValue"
+		   });	
 		addAnnotation
-		(getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForTotalValue"
-		});
+		  (getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForTotalValue"
+		   });	
 		addAnnotation
-		(getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "OppositePropertyIsImplicit"
-		});
+		  (getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "OppositePropertyIsImplicit"
+		   });	
 		addAnnotation
-		(getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TargetPropetyIsSlotProperty"
-		});
+		  (getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "TargetPropetyIsSlotProperty"
+		   });	
 		addAnnotation
-		(getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForPartialValue"
-		});
+		  (getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForPartialValue"
+		   });	
 		addAnnotation
-		(getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForTotalValue"
-		});
+		  (getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForTotalValue"
+		   });	
 		addAnnotation
-		(getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "PropertyIsNotImplicit"
-		});
+		  (getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "PropertyIsNotImplicit"
+		   });	
 		addAnnotation
-		(getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TargetPropetyIsSlotProperty"
-		});
+		  (getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "TargetPropetyIsSlotProperty"
+		   });	
 		addAnnotation
-		(getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NonDataTypeForType"
-		});
+		  (getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NonDataTypeForType"
+		   });	
 		addAnnotation
-		(getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForValue"
+		   });
 	}
 
 } //QVTcorePackageImpl

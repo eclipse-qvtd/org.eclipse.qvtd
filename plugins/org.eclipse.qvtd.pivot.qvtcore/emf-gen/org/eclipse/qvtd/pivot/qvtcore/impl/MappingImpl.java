@@ -271,9 +271,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		else {
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
 			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.lazyIterator();
 			/*@NonInvalid*/ boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {

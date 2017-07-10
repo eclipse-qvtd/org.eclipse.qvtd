@@ -161,9 +161,9 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 		else {
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@NonNull List<Variable> variable = this.getVariable();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
 			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.lazyIterator();
 			/*@NonInvalid*/ boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {

@@ -825,6 +825,15 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION_PARAMETER__TYPE = PivotPackage.PARAMETER__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Cache Needed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_PARAMETER__CACHE_NEEDED = PivotPackage.PARAMETER__CACHE_NEEDED;
+
+	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

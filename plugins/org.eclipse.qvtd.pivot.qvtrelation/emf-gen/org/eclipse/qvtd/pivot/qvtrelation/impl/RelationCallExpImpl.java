@@ -38,7 +38,6 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
@@ -191,16 +190,16 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			try {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<OCLExpression> argument = this.getArgument();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation referredRelation = this.getReferredRelation();
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = referredRelation.getDomain();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
-				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_RelationDomain);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(QVTrelationTables.SEQ_CLSSid_RelationDomain);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.lazyIterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect_0;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						collect_0 = accumulator;
@@ -214,11 +213,11 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain_0 = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
 					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain oclAsType = ClassUtil.nonNullState((RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain_0));
 					//
-					accumulator.add(oclAsType);
+					accumulator.mutableIncluding(oclAsType);
 				}
-				/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Variable);
-				@NonNull Iterator<Object> ITERATOR__1_0 = collect_0.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull MutableIterable accumulator_0 = ValueUtil.createCollectionAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Variable);
+				@NonNull Iterator<Object> ITERATOR__1_0 = collect_0.eagerIterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue collect;
 				while (true) {
 					if (!ITERATOR__1_0.hasNext()) {
 						collect = accumulator_0;
@@ -230,10 +229,10 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					 * rootVariable
 					 */
 					final /*@NonInvalid*/ java.util.@NonNull List<Variable> rootVariable = _1_0.getRootVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_rootVariable = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Variable, rootVariable);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_rootVariable = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Variable, rootVariable);
 					//
 					for (Object value : BOXED_rootVariable.flatten().getElements()) {
-						accumulator_0.add(value);
+						accumulator_0.mutableIncluding(value);
 					}
 				}
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(collect);

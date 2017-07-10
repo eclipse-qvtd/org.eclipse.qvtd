@@ -168,9 +168,9 @@ public class FunctionImpl extends OperationImpl implements Function {
 		}
 		else {
 			final /*@NonInvalid*/ java.util.@NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
 			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
+			@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.lazyIterator();
 			/*@NonInvalid*/ boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {

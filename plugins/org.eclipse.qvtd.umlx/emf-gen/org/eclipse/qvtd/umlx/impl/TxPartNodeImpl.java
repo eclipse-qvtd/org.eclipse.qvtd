@@ -36,8 +36,8 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.umlx.TxKeyNode;
 import org.eclipse.qvtd.umlx.TxPartNode;
 import org.eclipse.qvtd.umlx.UMLXPackage;
@@ -250,13 +250,13 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_0 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClass_5 = idResolver.getClass(UMLXTables.CLSSid_EClass, null);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxKeyNode owningTxKeyNode = this.getOwningTxKeyNode();
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EClass referredEClass = owningTxKeyNode.getReferredEClass();
-				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, TYP_ecore_c_c_EClass_0));
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
+				final /*@Thrown*/ org.eclipse.emf.ecore.@NonNull EClass oclAsType = ClassUtil.nonNullState((EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, TYP_ecore_c_c_EClass_5));
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
 				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
@@ -275,12 +275,12 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ java.util.@NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 						return BOXED_eSuperTypes;
 					}
 				};
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue closure = ClassUtil.nonNullState((CollectionValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.emf.ecore.@NonNull EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
 				final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClass eContainingClass = referredEStructuralFeature.getEContainingClass();

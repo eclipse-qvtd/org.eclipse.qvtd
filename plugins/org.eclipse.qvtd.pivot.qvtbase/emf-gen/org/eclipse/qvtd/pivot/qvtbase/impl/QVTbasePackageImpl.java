@@ -130,7 +130,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTbasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -160,18 +160,17 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTbasePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTbaseValidator.INSTANCE;
-			}
-		});
+			(theQVTbasePackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTbaseValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbasePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, theQVTbasePackage);
 		return theQVTbasePackage;
@@ -939,12 +938,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -954,25 +953,25 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getPredicate_ConditionExpression(),
-			source,
-			new String[] {
-				"body", "predicate"
-		});
+		  (getPredicate_ConditionExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "predicate"
+		   });	
 		addAnnotation
-		(getTransformation_Extends(),
-			source,
-			new String[] {
-				"body", "extendedBy"
-		});
+		  (getTransformation_Extends(), 
+		   source, 
+		   new String[] {
+			 "body", "extendedBy"
+		   });	
 		addAnnotation
-		(getTypedModel_DependsOn(),
-			source,
-			new String[] {
-				"body", "dependent"
-		});
+		  (getTypedModel_DependsOn(), 
+		   source, 
+		   new String[] {
+			 "body", "dependent"
+		   });
 	}
 
 	/**
@@ -982,79 +981,79 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NameIsTypedModelName"
-		});
+		  (getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsTypedModelName"
+		   });	
 		addAnnotation
-		(getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TypedModelIsTransformationModelParameter"
-		});
+		  (getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "TypedModelIsTransformationModelParameter"
+		   });	
 		addAnnotation
-		(getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ParametersAreFunctionParameter"
-		});
+		  (getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ParametersAreFunctionParameter"
+		   });	
 		addAnnotation
-		(getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ReturnTypeIsQueryType"
-		});
+		  (getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ReturnTypeIsQueryType"
+		   });	
 		addAnnotation
-		(getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ConditionIsBoolean"
-		});
+		  (getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ConditionIsBoolean"
+		   });	
 		addAnnotation
-		(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "DomainNameIsUnique"
-		});
+		  (getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "DomainNameIsUnique"
+		   });	
 		addAnnotation
-		(getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NoOverridesCycle"
-		});
+		  (getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NoOverridesCycle"
+		   });	
 		addAnnotation
-		(getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "OverridingRuleOverridesAllDomains"
-		});
+		  (getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "OverridingRuleOverridesAllDomains"
+		   });	
 		addAnnotation
-		(getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ContextTypeIsTransformation"
-		});
+		  (getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ContextTypeIsTransformation"
+		   });	
 		addAnnotation
-		(getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ExtendedTypedModelIsExtended"
-		});
+		  (getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ExtendedTypedModelIsExtended"
+		   });	
 		addAnnotation
-		(getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ModelParameterIsUnique"
-		});
+		  (getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ModelParameterIsUnique"
+		   });	
 		addAnnotation
-		(getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NoExtendsCycle"
-		});
+		  (getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NoExtendsCycle"
+		   });
 	}
 
 } //QVTbasePackageImpl
