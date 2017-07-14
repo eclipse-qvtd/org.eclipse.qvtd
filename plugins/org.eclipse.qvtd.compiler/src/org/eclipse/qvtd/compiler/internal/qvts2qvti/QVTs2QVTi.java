@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiCachingAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
@@ -137,6 +138,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		Transformation transformation = scheduleManager.getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(problemHandler, this, transformation, symbolNameReservation);
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
+		assert qvtiTransformation != null;
 		NamedElement qvtiChild = qvtiTransformation;
 		for (org.eclipse.ocl.pivot.Package qvtmPackage = transformation.getOwningPackage(); qvtmPackage != null; qvtmPackage = qvtmPackage.getOwningPackage()) {
 			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = createPackage(ClassUtil.nonNull(qvtmPackage.getName()), qvtmPackage.getNsPrefix(), qvtmPackage.getURI());
@@ -149,6 +151,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 			qvtiChild = qvtiPackage;
 		}
 		model.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)qvtiChild);
+		QVTiCachingAnalysis.analyze(qvtiTransformation);
 	}
 
 	public @NonNull Model transform(@NonNull ScheduledRegion scheduledRegion) {

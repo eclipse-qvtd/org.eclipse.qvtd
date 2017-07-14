@@ -40,6 +40,6 @@ public class ModelObjectsOfTypeOperation extends AbstractBinaryOperation
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
 		Iterable<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfType(type);
-		return createCollectionValue((CollectionTypeId)returnTypeId, true, (Collection<@Nullable ? extends Object>) results);
+		return createCollectionOfAll((CollectionTypeId)returnTypeId, true, (Collection<@Nullable ? extends Object>) results);
 	}
 }

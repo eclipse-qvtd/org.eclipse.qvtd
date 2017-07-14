@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
+import org.eclipse.ocl.pivot.internal.evaluation.CachingAnalysis;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -350,6 +351,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		OCLExpression ownedExpression = newStatement.getOwnedExpression();
 		if (ownedExpression != null) {
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
+			if (newStatement.isCacheNeeded()) {
+				CachingAnalysis.initCaching(newStatement, initValue);
+			}
 			getEvaluationEnvironment().add(newStatement, initValue);
 			replace(newStatement, initValue);
 			ImperativeTypedModel typedModel = newStatement.getReferredTypedModel();

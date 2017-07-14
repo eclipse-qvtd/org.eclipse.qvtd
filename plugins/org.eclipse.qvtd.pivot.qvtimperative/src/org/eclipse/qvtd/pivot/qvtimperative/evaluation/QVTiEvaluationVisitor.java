@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
+import org.eclipse.ocl.pivot.internal.evaluation.CachingAnalysis;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -301,6 +302,9 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		assert name != null;
 		if (ownedExpression != null) {
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
+			if (object.isCacheNeeded()) {
+				CachingAnalysis.initCaching(object, initValue);
+			}
 			connection = interval.createConnection(name, ownedExpression.getTypeId(), object.isIsStrict());
 			if (initValue != null) {
 				for (Object value : (Iterable<?>)initValue) {
@@ -338,6 +342,9 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 		else {
 			initValue = ownedExpression.accept(undecoratedVisitor);
+			if (asStatement.isCacheNeeded()) {
+				CachingAnalysis.initCaching(asStatement, initValue);
+			}
 			if (asStatement.isIsCheck()) {
 				Type guardType = asStatement.getType();
 				Type valueType = idResolver.getDynamicTypeOf(initValue);

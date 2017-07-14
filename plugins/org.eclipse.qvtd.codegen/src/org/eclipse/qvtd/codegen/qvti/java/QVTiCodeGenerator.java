@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.CGCachingAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
@@ -43,6 +44,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCGCachingAnalysis;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
@@ -95,6 +97,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<@NonNull CGValuedElement> sortedGlobals) {
 		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
+	}
+
+	@Override
+	protected @NonNull CGCachingAnalysis createCGCachingAnalysis(@NonNull CGPackage cgPackage) {
+		return new QVTiCGCachingAnalysis(cgPackage);
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
