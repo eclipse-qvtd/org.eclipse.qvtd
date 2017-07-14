@@ -17,8 +17,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.*;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReverseFactory;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.SlistHead2listHead;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,12 +68,24 @@ public class PForward2ReverseFactoryImpl extends EFactoryImpl implements PForwar
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case PForward2ReversePackage.SLIST_HEAD2LIST_HEAD: return createSlistHead2listHead();
 			case PForward2ReversePackage.TELEMENT2ELEMENT: return createTelement2element();
 			case PForward2ReversePackage.TLIST2LIST: return createTlist2list();
 			case PForward2ReversePackage.TLIST_HEAD2LIST_HEAD: return createTlistHead2listHead();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SlistHead2listHead createSlistHead2listHead() {
+		SlistHead2listHeadImpl slistHead2listHead = new SlistHead2listHeadImpl();
+		return slistHead2listHead;
 	}
 
 	/**

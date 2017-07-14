@@ -16,15 +16,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReverseFactory;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.SlistHead2listHead;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistPackageImpl;
 
 /**
@@ -34,6 +32,13 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinke
  * @generated
  */
 public class PForward2ReversePackageImpl extends EPackageImpl implements PForward2ReversePackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass slistHead2listHeadEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,7 +71,7 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#eNS_URI
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -103,14 +108,17 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		PForward2ReversePackageImpl thePForward2ReversePackage_1 = (PForward2ReversePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI) instanceof PForward2ReversePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI) : PForward2ReversePackage.eINSTANCE);
 		doublylinkedlistPackageImpl thedoublylinkedlistPackage = (doublylinkedlistPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(doublylinkedlistPackage.eNS_URI) instanceof doublylinkedlistPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(doublylinkedlistPackage.eNS_URI) : doublylinkedlistPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thePForward2ReversePackage.createPackageContents();
+		thePForward2ReversePackage_1.createPackageContents();
 		thedoublylinkedlistPackage.createPackageContents();
 
 		// Initialize created meta-data
 		thePForward2ReversePackage.initializePackageContents();
+		thePForward2ReversePackage_1.initializePackageContents();
 		thedoublylinkedlistPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -120,6 +128,36 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(PForward2ReversePackage.eNS_URI, thePForward2ReversePackage);
 		return thePForward2ReversePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSlistHead2listHead() {
+		return slistHead2listHeadEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSlistHead2listHead_ForwardList() {
+		return (EReference)slistHead2listHeadEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSlistHead2listHead_ReverseList() {
+		return (EReference)slistHead2listHeadEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -248,6 +286,16 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 	 * @generated
 	 */
 	@Override
+	public EReference getTlist2list_Where_listHead2listHead() {
+		return (EReference)tlist2listEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTlistHead2listHead() {
 		return tlistHead2listHeadEClass;
 	}
@@ -321,6 +369,10 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		isCreated = true;
 
 		// Create classes and their features
+		slistHead2listHeadEClass = createEClass(SLIST_HEAD2LIST_HEAD);
+		createEReference(slistHead2listHeadEClass, SLIST_HEAD2LIST_HEAD__FORWARD_LIST);
+		createEReference(slistHead2listHeadEClass, SLIST_HEAD2LIST_HEAD__REVERSE_LIST);
+
 		telement2elementEClass = createEClass(TELEMENT2ELEMENT);
 		createEAttribute(telement2elementEClass, TELEMENT2ELEMENT__ELEMENT_NAME);
 		createEReference(telement2elementEClass, TELEMENT2ELEMENT__FORWARD_ELEMENT);
@@ -334,6 +386,7 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		createEReference(tlist2listEClass, TLIST2LIST__FORWARD_LIST);
 		createEAttribute(tlist2listEClass, TLIST2LIST__LIST_NAME);
 		createEReference(tlist2listEClass, TLIST2LIST__REVERSE_LIST);
+		createEReference(tlist2listEClass, TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD);
 
 		tlistHead2listHeadEClass = createEClass(TLIST_HEAD2LIST_HEAD);
 		createEReference(tlistHead2listHeadEClass, TLIST_HEAD2LIST_HEAD__FORWARD_HEAD);
@@ -367,6 +420,7 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 
 		// Obtain other dependent packages
 		doublylinkedlistPackage thedoublylinkedlistPackage = (doublylinkedlistPackage)EPackage.Registry.INSTANCE.getEPackage(doublylinkedlistPackage.eNS_URI);
+		PForward2ReversePackage thePForward2ReversePackage_1 = (PForward2ReversePackage)EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -375,6 +429,10 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(slistHead2listHeadEClass, SlistHead2listHead.class, "SlistHead2listHead", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSlistHead2listHead_ForwardList(), thedoublylinkedlistPackage.getDoublyLinkedList(), null, "forwardList", null, 1, 1, SlistHead2listHead.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSlistHead2listHead_ReverseList(), thedoublylinkedlistPackage.getDoublyLinkedList(), null, "reverseList", null, 1, 1, SlistHead2listHead.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(telement2elementEClass, Telement2element.class, "Telement2element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTelement2element_ElementName(), ecorePackage.getEString(), "elementName", null, 1, 1, Telement2element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTelement2element_ForwardElement(), thedoublylinkedlistPackage.getElement(), null, "forwardElement", null, 1, 1, Telement2element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -388,6 +446,7 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		initEReference(getTlist2list_ForwardList(), thedoublylinkedlistPackage.getDoublyLinkedList(), null, "forwardList", null, 1, 1, Tlist2list.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTlist2list_ListName(), ecorePackage.getEString(), "listName", null, 1, 1, Tlist2list.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTlist2list_ReverseList(), thedoublylinkedlistPackage.getDoublyLinkedList(), null, "reverseList", null, 1, 1, Tlist2list.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTlist2list_Where_listHead2listHead(), thePForward2ReversePackage_1.getSlistHead2listHead(), null, "where_listHead2listHead", null, 0, 1, Tlist2list.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tlistHead2listHeadEClass, TlistHead2listHead.class, "TlistHead2listHead", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTlistHead2listHead_ForwardHead(), thedoublylinkedlistPackage.getElement(), null, "forwardHead", null, 1, 1, TlistHead2listHead.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -399,8 +458,80 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 		// http://www.eclipse.org/qvt#Domains
 		createQvtDomainsAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEmofAnnotations() {
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		addAnnotation
+		(getSlistHead2listHead_ForwardList(),
+			source,
+			new String[] {
+				"body", "SlistHead2listHead"
+		});
+		addAnnotation
+		(getSlistHead2listHead_ReverseList(),
+			source,
+			new String[] {
+				"body", "SlistHead2listHead"
+		});
+		addAnnotation
+		(getTelement2element_ForwardElement(),
+			source,
+			new String[] {
+				"body", "Telement2element"
+		});
+		addAnnotation
+		(getTelement2element_ForwardTarget(),
+			source,
+			new String[] {
+				"body", "Telement2element"
+		});
+		addAnnotation
+		(getTelement2element_ReverseElement(),
+			source,
+			new String[] {
+				"body", "Telement2element"
+		});
+		addAnnotation
+		(getTelement2element_ReverseSource(),
+			source,
+			new String[] {
+				"body", "Telement2element"
+		});
+		addAnnotation
+		(getTlist2list_ForwardList(),
+			source,
+			new String[] {
+				"body", "Tlist2list"
+		});
+		addAnnotation
+		(getTlist2list_ReverseList(),
+			source,
+			new String[] {
+				"body", "Tlist2list"
+		});
+		addAnnotation
+		(getTlistHead2listHead_ForwardList(),
+			source,
+			new String[] {
+				"body", "TlistHead2listHead"
+		});
+		addAnnotation
+		(getTlistHead2listHead_ReverseList(),
+			source,
+			new String[] {
+				"body", "TlistHead2listHead"
+		});
 	}
 
 	/**
@@ -411,6 +542,18 @@ public class PForward2ReversePackageImpl extends EPackageImpl implements PForwar
 	 */
 	protected void createQvtDomainsAnnotations() {
 		String source = "http://www.eclipse.org/qvt#Domains";
+		addAnnotation
+		(getSlistHead2listHead_ForwardList(),
+			source,
+			new String[] {
+				"referredDomain", "forward"
+		});
+		addAnnotation
+		(getSlistHead2listHead_ReverseList(),
+			source,
+			new String[] {
+				"referredDomain", "reverse"
+		});
 		addAnnotation
 		(getTelement2element_ForwardElement(),
 			source,

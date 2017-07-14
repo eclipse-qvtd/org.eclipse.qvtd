@@ -37,9 +37,9 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlist
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl#getHeadElement <em>Head Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl#getOwnedElements <em>Owned Elements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl#getHeadElement <em>Head Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl#getOwnedElements <em>Owned Elements</em>}</li>
  * </ul>
  *
  * @generated

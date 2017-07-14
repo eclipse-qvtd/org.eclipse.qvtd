@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *
@@ -25,19 +25,19 @@ package	org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * at-since 1.1
- */
 public interface ExecutionVisitor<R>
 {
 	/**
 	 * Return the result of visiting a visitable for which no more specific pivot type method
 	 * is available.
 	 */
-//	R visiting(@NonNull ExecutionVisitable visitable);
+	//	R visiting(@NonNull ExecutionVisitable visitable);
 
 	R visitComputation(@NonNull Computation object);
+	R visitConnection(@NonNull Connection object);
+	R visitInterval(@NonNull Interval object);
 	R visitInvocation(@NonNull Invocation object);
+	R visitInvocationConstructor(@NonNull InvocationConstructor object);
 	R visitInvocationManager(@NonNull InvocationManager object);
 	R visitObjectManager(@NonNull ObjectManager object);
 	R visitSlotState(@NonNull SlotState object);

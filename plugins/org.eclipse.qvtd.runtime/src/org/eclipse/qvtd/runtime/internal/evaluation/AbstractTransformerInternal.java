@@ -30,7 +30,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PackageId;
@@ -40,7 +39,6 @@ import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.MutableIterable;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
@@ -441,7 +439,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 	}
 
-	@Deprecated // only used by exe2016/bugmde2016 tests
+	/*	@Deprecated // only used by exe2016/bigmde2016 tests
 	private static class UnenforcedSetAccumulator extends SetValueImpl implements MutableIterable
 	{
 		public UnenforcedSetAccumulator(@NonNull CollectionTypeId typeId) {
@@ -453,7 +451,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			assert !elements.contains(value);
 			return elements.add(value);
 		}
-	}
+	} */
 
 	protected final @NonNull TransformationExecutor executor;
 	/** deprecated use executor */
@@ -606,10 +604,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return new Model(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 	}
 
-	@Deprecated // Use createConnection
-	protected @NonNull MutableIterable createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
-		return new UnenforcedSetAccumulator(typeId);
-	}
+	//	@Deprecated // Use createConnection
+	//	protected @NonNull MutableIterable createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
+	//		return new UnenforcedSetAccumulator(typeId);
+	//	}
 
 	/**
 	 * Create the ObjectManager. Creates a LazyObjectManager by default.

@@ -17,10 +17,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
 
@@ -32,13 +30,13 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getElementName <em>Element Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getForwardElement <em>Forward Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getForwardList <em>Forward List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getForwardTarget <em>Forward Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getReverseElement <em>Reverse Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getReverseList <em>Reverse List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl#getReverseSource <em>Reverse Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getElementName <em>Element Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getForwardElement <em>Forward Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getForwardList <em>Forward List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getForwardTarget <em>Forward Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getReverseElement <em>Reverse Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getReverseList <em>Reverse List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl#getReverseSource <em>Reverse Source</em>}</li>
  * </ul>
  *
  * @generated

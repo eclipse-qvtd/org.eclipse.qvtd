@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReverseFactory
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReverseFactory
  * @model kind="package"
  * @generated
  */
@@ -46,7 +46,7 @@ public interface PForward2ReversePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation2/tests/forward2reverse/Forward2Reverse";
+	String eNS_URI = "http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse";
 
 	/**
 	 * The package namespace name.
@@ -65,14 +65,60 @@ public interface PForward2ReversePackage extends EPackage {
 	PForward2ReversePackage eINSTANCE = org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl <em>Telement2element</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.SlistHead2listHeadImpl <em>Slist Head2list Head</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTelement2element()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.SlistHead2listHeadImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getSlistHead2listHead()
 	 * @generated
 	 */
-	int TELEMENT2ELEMENT = 0;
+	int SLIST_HEAD2LIST_HEAD = 0;
+
+	/**
+	 * The feature id for the '<em><b>Forward List</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIST_HEAD2LIST_HEAD__FORWARD_LIST = 0;
+
+	/**
+	 * The feature id for the '<em><b>Reverse List</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIST_HEAD2LIST_HEAD__REVERSE_LIST = 1;
+
+	/**
+	 * The number of structural features of the '<em>Slist Head2list Head</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIST_HEAD2LIST_HEAD_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Slist Head2list Head</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIST_HEAD2LIST_HEAD_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl <em>Telement2element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getTelement2element()
+	 * @generated
+	 */
+	int TELEMENT2ELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Element Name</b></em>' attribute.
@@ -156,14 +202,14 @@ public interface PForward2ReversePackage extends EPackage {
 	int TELEMENT2ELEMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl <em>Tlist2list</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl <em>Tlist2list</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlist2list()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlist2list()
 	 * @generated
 	 */
-	int TLIST2LIST = 1;
+	int TLIST2LIST = 2;
 
 	/**
 	 * The feature id for the '<em><b>Forward List</b></em>' reference.
@@ -193,13 +239,22 @@ public interface PForward2ReversePackage extends EPackage {
 	int TLIST2LIST__REVERSE_LIST = 2;
 
 	/**
+	 * The feature id for the '<em><b>Where list Head2list Head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD = 3;
+
+	/**
 	 * The number of structural features of the '<em>Tlist2list</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TLIST2LIST_FEATURE_COUNT = 3;
+	int TLIST2LIST_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Tlist2list</em>' class.
@@ -211,14 +266,14 @@ public interface PForward2ReversePackage extends EPackage {
 	int TLIST2LIST_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl <em>Tlist Head2list Head</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.TlistHead2listHeadImpl <em>Tlist Head2list Head</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlistHead2listHead()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.TlistHead2listHeadImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlistHead2listHead()
 	 * @generated
 	 */
-	int TLIST_HEAD2LIST_HEAD = 2;
+	int TLIST_HEAD2LIST_HEAD = 3;
 
 	/**
 	 * The feature id for the '<em><b>Forward Head</b></em>' reference.
@@ -276,184 +331,227 @@ public interface PForward2ReversePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element <em>Telement2element</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.SlistHead2listHead <em>Slist Head2list Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Slist Head2list Head</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.SlistHead2listHead
+	 * @generated
+	 */
+	EClass getSlistHead2listHead();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.SlistHead2listHead#getForwardList <em>Forward List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Forward List</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.SlistHead2listHead#getForwardList()
+	 * @see #getSlistHead2listHead()
+	 * @generated
+	 */
+	EReference getSlistHead2listHead_ForwardList();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.SlistHead2listHead#getReverseList <em>Reverse List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reverse List</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.SlistHead2listHead#getReverseList()
+	 * @see #getSlistHead2listHead()
+	 * @generated
+	 */
+	EReference getSlistHead2listHead_ReverseList();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element <em>Telement2element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Telement2element</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element
 	 * @generated
 	 */
 	EClass getTelement2element();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getElementName <em>Element Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getElementName <em>Element Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Element Name</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getElementName()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getElementName()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EAttribute getTelement2element_ElementName();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardElement <em>Forward Element</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardElement <em>Forward Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Forward Element</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardElement()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EReference getTelement2element_ForwardElement();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardList <em>Forward List</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardList <em>Forward List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Forward List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardList()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EReference getTelement2element_ForwardList();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardTarget <em>Forward Target</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardTarget <em>Forward Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Forward Target</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardTarget()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardTarget()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EReference getTelement2element_ForwardTarget();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseElement <em>Reverse Element</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseElement <em>Reverse Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reverse Element</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseElement()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EReference getTelement2element_ReverseElement();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseList <em>Reverse List</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseList <em>Reverse List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reverse List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseList()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EReference getTelement2element_ReverseList();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseSource <em>Reverse Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseSource <em>Reverse Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reverse Source</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseSource()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseSource()
 	 * @see #getTelement2element()
 	 * @generated
 	 */
 	EReference getTelement2element_ReverseSource();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list <em>Tlist2list</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list <em>Tlist2list</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tlist2list</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list
 	 * @generated
 	 */
 	EClass getTlist2list();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getForwardList <em>Forward List</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getForwardList <em>Forward List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Forward List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getForwardList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getForwardList()
 	 * @see #getTlist2list()
 	 * @generated
 	 */
 	EReference getTlist2list_ForwardList();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getListName <em>List Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getListName <em>List Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>List Name</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getListName()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getListName()
 	 * @see #getTlist2list()
 	 * @generated
 	 */
 	EAttribute getTlist2list_ListName();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getReverseList <em>Reverse List</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getReverseList <em>Reverse List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reverse List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getReverseList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getReverseList()
 	 * @see #getTlist2list()
 	 * @generated
 	 */
 	EReference getTlist2list_ReverseList();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead <em>Tlist Head2list Head</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getWhere_listHead2listHead <em>Where list Head2list Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Where list Head2list Head</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list#getWhere_listHead2listHead()
+	 * @see #getTlist2list()
+	 * @generated
+	 */
+	EReference getTlist2list_Where_listHead2listHead();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead <em>Tlist Head2list Head</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tlist Head2list Head</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead
 	 * @generated
 	 */
 	EClass getTlistHead2listHead();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Forward Head</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardHead()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardHead()
 	 * @see #getTlistHead2listHead()
 	 * @generated
 	 */
 	EReference getTlistHead2listHead_ForwardHead();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Forward List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardList()
 	 * @see #getTlistHead2listHead()
 	 * @generated
 	 */
 	EReference getTlistHead2listHead_ForwardList();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reverse Head</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseHead()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseHead()
 	 * @see #getTlistHead2listHead()
 	 * @generated
 	 */
 	EReference getTlistHead2listHead_ReverseHead();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Reverse List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseList()
 	 * @see #getTlistHead2listHead()
 	 * @generated
 	 */
@@ -483,11 +581,37 @@ public interface PForward2ReversePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl <em>Telement2element</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.SlistHead2listHeadImpl <em>Slist Head2list Head</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Telement2elementImpl
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTelement2element()
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.SlistHead2listHeadImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getSlistHead2listHead()
+		 * @generated
+		 */
+		EClass SLIST_HEAD2LIST_HEAD = eINSTANCE.getSlistHead2listHead();
+
+		/**
+		 * The meta object literal for the '<em><b>Forward List</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SLIST_HEAD2LIST_HEAD__FORWARD_LIST = eINSTANCE.getSlistHead2listHead_ForwardList();
+
+		/**
+		 * The meta object literal for the '<em><b>Reverse List</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SLIST_HEAD2LIST_HEAD__REVERSE_LIST = eINSTANCE.getSlistHead2listHead_ReverseList();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl <em>Telement2element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Telement2elementImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getTelement2element()
 		 * @generated
 		 */
 		EClass TELEMENT2ELEMENT = eINSTANCE.getTelement2element();
@@ -549,11 +673,11 @@ public interface PForward2ReversePackage extends EPackage {
 		EReference TELEMENT2ELEMENT__REVERSE_SOURCE = eINSTANCE.getTelement2element_ReverseSource();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl <em>Tlist2list</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl <em>Tlist2list</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlist2list()
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlist2list()
 		 * @generated
 		 */
 		EClass TLIST2LIST = eINSTANCE.getTlist2list();
@@ -583,11 +707,19 @@ public interface PForward2ReversePackage extends EPackage {
 		EReference TLIST2LIST__REVERSE_LIST = eINSTANCE.getTlist2list_ReverseList();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl <em>Tlist Head2list Head</em>}' class.
+		 * The meta object literal for the '<em><b>Where list Head2list Head</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlistHead2listHead()
+		 * @generated
+		 */
+		EReference TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD = eINSTANCE.getTlist2list_Where_listHead2listHead();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.TlistHead2listHeadImpl <em>Tlist Head2list Head</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.TlistHead2listHeadImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlistHead2listHead()
 		 * @generated
 		 */
 		EClass TLIST_HEAD2LIST_HEAD = eINSTANCE.getTlistHead2listHead();

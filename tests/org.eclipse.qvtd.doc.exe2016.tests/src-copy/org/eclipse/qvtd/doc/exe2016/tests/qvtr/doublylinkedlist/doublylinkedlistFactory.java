@@ -11,14 +11,13 @@
 package org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist;
 
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage
  * @generated
  */
 public interface doublylinkedlistFactory extends EFactory {
@@ -28,7 +27,7 @@ public interface doublylinkedlistFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	doublylinkedlistFactory eINSTANCE = doublylinkedlistFactoryImpl.init();
+	doublylinkedlistFactory eINSTANCE = org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Element</em>'.

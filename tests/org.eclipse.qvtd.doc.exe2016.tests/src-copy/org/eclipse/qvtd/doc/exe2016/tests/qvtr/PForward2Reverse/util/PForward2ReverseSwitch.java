@@ -16,7 +16,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.*;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.SlistHead2listHead;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +32,7 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage
  * @generated
  */
 public class PForward2ReverseSwitch<@Nullable T> extends Switch<T> {
@@ -75,6 +79,12 @@ public class PForward2ReverseSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case PForward2ReversePackage.SLIST_HEAD2LIST_HEAD: {
+				SlistHead2listHead slistHead2listHead = (SlistHead2listHead)theEObject;
+				T result = caseSlistHead2listHead(slistHead2listHead);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PForward2ReversePackage.TELEMENT2ELEMENT: {
 				Telement2element telement2element = (Telement2element)theEObject;
 				T result = caseTelement2element(telement2element);
@@ -95,6 +105,21 @@ public class PForward2ReverseSwitch<@Nullable T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Slist Head2list Head</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Slist Head2list Head</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSlistHead2listHead(SlistHead2listHead object) {
+		return null;
 	}
 
 	/**

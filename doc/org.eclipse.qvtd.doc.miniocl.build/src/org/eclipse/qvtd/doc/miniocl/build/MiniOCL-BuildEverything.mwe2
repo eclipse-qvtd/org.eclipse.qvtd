@@ -119,7 +119,7 @@ Workflow {
 	bean = org.eclipse.ocl.examples.build.utilities.ProjectMapSetup { resourceSet = rSet2 }
 	bean = org.eclipse.ocl.examples.build.utilities.EcoreGenModelSetup { resourceSet = rSet2 }
   
-	component = org.eclipse.ocl.examples.build.utilities.GenerateCGedQVTiTransformation {
+	component = /*org.eclipse.ocl.examples.build.utilities.*/GenerateCGedQVTiTransformation {
 		debug = true 
 		resourceSet = rSet2
 		oclDocURI = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/MiniOCLCS2AS.ocl"

@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -28,44 +28,49 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * The abstract implementation of a SlotState provides the mandatory shared functionality for maintaining
  * the state of an object slot.
- * 
- * at-since 1.1
  */
 public abstract class AbstractSlotState implements SlotState
 {
 
 	public abstract static class Incremental extends AbstractSlotState implements SlotState.Incremental
 	{
+		public static final @NonNull List<Execution.@NonNull Incremental> EMPTY_EXECUTIONS_LIST = Collections.emptyList();
 		public static final @NonNull List<Invocation.@NonNull Incremental> EMPTY_INVOCATIONS_LIST = Collections.emptyList();
 
 		private Set<Invocation.@NonNull Incremental> sources = null;
-		private Set<Invocation.@NonNull Incremental> targets = null;
+		private Set<Execution.@NonNull Incremental> targets = null;
 
 		@Override
 		public void addSourceInternal(Invocation.@NonNull Incremental invocation) {
 			if (sources == null) {
-				sources = new HashSet<Invocation.@NonNull Incremental>();
+				sources = new HashSet<>();
 			}
 			sources.add(invocation);
 		}
 
 		@Override
-		public void addTargetInternal(Invocation.@NonNull Incremental invocation) {
+		public void addTargetInternal(Execution.@NonNull Incremental invocation) {
 			if (targets == null) {
-				targets = new HashSet<Invocation.@NonNull Incremental>();
+				targets = new HashSet<>();
 			}
 			targets.add(invocation);
 		}
-		
+
 		@Override
 		public @NonNull Iterable<Invocation.@NonNull Incremental> getSources() {
 			return sources != null ? sources : EMPTY_INVOCATIONS_LIST;
 		}
 
-		
+
 		@Override
-		public @NonNull Iterable<Invocation.@NonNull Incremental> getTargets() {
-			return targets != null ? targets : EMPTY_INVOCATIONS_LIST;
+		public @NonNull Iterable<Execution.@NonNull Incremental> getTargets() {
+			return targets != null ? targets : EMPTY_EXECUTIONS_LIST;
+		}
+
+		protected void revokeTargets() {
+			for (Execution.@NonNull Incremental target : getTargets()) {
+				target.revoke();
+			}
 		}
 	}
 

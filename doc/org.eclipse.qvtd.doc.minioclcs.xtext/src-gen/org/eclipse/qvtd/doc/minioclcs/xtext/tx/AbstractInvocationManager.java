@@ -25,8 +25,6 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public abstract class AbstractInvocationManager implements InvocationManager
 {
-	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
-
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitInvocationManager(this);

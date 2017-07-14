@@ -31,9 +31,33 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface TypedModelInstance
 {
-	@NonNull Collection<@NonNull ? extends Object> getAllObjects();
+	/**
+	 * This is solely used by the Model::allObjects Operation which is not needed by synthesized QVTr.
+	 * @deprecated
+	 */
+	@Deprecated
+	@NonNull Iterable<@NonNull Object> getAllObjects();
+
 	@Nullable String getName();
-	@NonNull Collection<@NonNull ? extends Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type);
+
+	/**
+	 * This is solely used by the Model::objectsOfKind Operation which is not needed by synthesized QVTr.
+	 * @deprecated
+	 */
+	@Deprecated
+	@NonNull Iterable<@NonNull ? extends Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type);
+
+	/**
+	 * This is solely used by the Model::objectsOfType Operation which is not needed by synthesized QVTr.
+	 * @deprecated
+	 */
+	@Deprecated
 	@NonNull Collection<@NonNull ? extends Object> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type);
+
+	/**
+	 * This is solely used by the Model::rootObjects Operation which is not needed by synthesized QVTr.
+	 * @deprecated
+	 */
+	@Deprecated
 	@NonNull Collection<@NonNull ? extends Object> getRootObjects();
 }

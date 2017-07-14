@@ -17,7 +17,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.*;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistFactory;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage;
 
 /**
  * <!-- begin-user-doc -->

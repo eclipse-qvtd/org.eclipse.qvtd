@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistFactory
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistFactory
  * @model kind="package"
  * @generated
  */
@@ -65,11 +65,11 @@ public interface doublylinkedlistPackage extends EPackage {
 	doublylinkedlistPackage eINSTANCE = org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl <em>Element</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl <em>Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistPackageImpl#getElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.doublylinkedlistPackageImpl#getElement()
 	 * @generated
 	 */
 	int ELEMENT = 0;
@@ -129,11 +129,11 @@ public interface doublylinkedlistPackage extends EPackage {
 	int ELEMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl <em>Doubly Linked List</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl <em>Doubly Linked List</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistPackageImpl#getDoublyLinkedList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.doublylinkedlistPackageImpl#getDoublyLinkedList()
 	 * @generated
 	 */
 	int DOUBLY_LINKED_LIST = 1;
@@ -185,97 +185,97 @@ public interface doublylinkedlistPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element <em>Element</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Element</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element
 	 * @generated
 	 */
 	EClass getElement();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getList <em>List</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getList <em>List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getList()
 	 * @see #getElement()
 	 * @generated
 	 */
 	EReference getElement_List();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getName()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getName()
 	 * @see #getElement()
 	 * @generated
 	 */
 	EAttribute getElement_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getSource()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getSource()
 	 * @see #getElement()
 	 * @generated
 	 */
 	EReference getElement_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getTarget()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getTarget()
 	 * @see #getElement()
 	 * @generated
 	 */
 	EReference getElement_Target();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList <em>Doubly Linked List</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList <em>Doubly Linked List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Doubly Linked List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList
 	 * @generated
 	 */
 	EClass getDoublyLinkedList();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getHeadElement <em>Head Element</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getHeadElement <em>Head Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Head Element</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getHeadElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getHeadElement()
 	 * @see #getDoublyLinkedList()
 	 * @generated
 	 */
 	EReference getDoublyLinkedList_HeadElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getName()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getName()
 	 * @see #getDoublyLinkedList()
 	 * @generated
 	 */
 	EAttribute getDoublyLinkedList_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getOwnedElements <em>Owned Elements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getOwnedElements <em>Owned Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Elements</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getOwnedElements()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getOwnedElements()
 	 * @see #getDoublyLinkedList()
 	 * @generated
 	 */
@@ -305,11 +305,11 @@ public interface doublylinkedlistPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl <em>Element</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl <em>Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistPackageImpl#getElement()
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.doublylinkedlistPackageImpl#getElement()
 		 * @generated
 		 */
 		EClass ELEMENT = eINSTANCE.getElement();
@@ -347,11 +347,11 @@ public interface doublylinkedlistPackage extends EPackage {
 		EReference ELEMENT__TARGET = eINSTANCE.getElement_Target();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl <em>Doubly Linked List</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl <em>Doubly Linked List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.DoublyLinkedListImpl
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.doublylinkedlistPackageImpl#getDoublyLinkedList()
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.DoublyLinkedListImpl
+		 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.doublylinkedlistPackageImpl#getDoublyLinkedList()
 		 * @generated
 		 */
 		EClass DOUBLY_LINKED_LIST = eINSTANCE.getDoublyLinkedList();

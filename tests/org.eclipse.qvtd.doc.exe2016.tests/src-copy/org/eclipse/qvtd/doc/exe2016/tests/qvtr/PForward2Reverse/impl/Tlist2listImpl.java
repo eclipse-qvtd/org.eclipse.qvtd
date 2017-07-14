@@ -17,10 +17,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.SlistHead2listHead;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
 
 /**
@@ -31,9 +30,10 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getForwardList <em>Forward List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getListName <em>List Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getReverseList <em>Reverse List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl#getForwardList <em>Forward List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl#getListName <em>List Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl#getReverseList <em>Reverse List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.impl.Tlist2listImpl#getWhere_listHead2listHead <em>Where list Head2list Head</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,6 +78,16 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	 * @ordered
 	 */
 	protected DoublyLinkedList reverseList;
+
+	/**
+	 * The cached value of the '{@link #getWhere_listHead2listHead() <em>Where list Head2list Head</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWhere_listHead2listHead()
+	 * @generated
+	 * @ordered
+	 */
+	protected SlistHead2listHead where_listHead2listHead;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,6 +217,46 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	 * @generated
 	 */
 	@Override
+	public SlistHead2listHead getWhere_listHead2listHead() {
+		if (where_listHead2listHead != null && where_listHead2listHead.eIsProxy()) {
+			InternalEObject oldWhere_listHead2listHead = (InternalEObject)where_listHead2listHead;
+			where_listHead2listHead = (SlistHead2listHead)eResolveProxy(oldWhere_listHead2listHead);
+			if (where_listHead2listHead != oldWhere_listHead2listHead) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PForward2ReversePackage.TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD, oldWhere_listHead2listHead, where_listHead2listHead));
+			}
+		}
+		return where_listHead2listHead;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SlistHead2listHead basicGetWhere_listHead2listHead() {
+		return where_listHead2listHead;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setWhere_listHead2listHead(SlistHead2listHead newWhere_listHead2listHead) {
+		SlistHead2listHead oldWhere_listHead2listHead = where_listHead2listHead;
+		where_listHead2listHead = newWhere_listHead2listHead;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PForward2ReversePackage.TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD, oldWhere_listHead2listHead, where_listHead2listHead));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PForward2ReversePackage.TLIST2LIST__FORWARD_LIST:
@@ -217,6 +267,9 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				if (resolve) return getReverseList();
 				return basicGetReverseList();
+			case PForward2ReversePackage.TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD:
+				if (resolve) return getWhere_listHead2listHead();
+				return basicGetWhere_listHead2listHead();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -237,6 +290,9 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 				return;
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				setReverseList((DoublyLinkedList)newValue);
+				return;
+			case PForward2ReversePackage.TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD:
+				setWhere_listHead2listHead((SlistHead2listHead)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -259,6 +315,9 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				setReverseList((DoublyLinkedList)null);
 				return;
+			case PForward2ReversePackage.TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD:
+				setWhere_listHead2listHead((SlistHead2listHead)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -277,6 +336,8 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 				return LIST_NAME_EDEFAULT == null ? listName != null : !LIST_NAME_EDEFAULT.equals(listName);
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				return reverseList != null;
+			case PForward2ReversePackage.TLIST2LIST__WHERE_LIST_HEAD2LIST_HEAD:
+				return where_listHead2listHead != null;
 		}
 		return super.eIsSet(featureID);
 	}

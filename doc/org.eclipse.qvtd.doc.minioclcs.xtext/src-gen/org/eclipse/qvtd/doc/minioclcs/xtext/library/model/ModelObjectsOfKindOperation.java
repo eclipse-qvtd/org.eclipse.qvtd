@@ -18,8 +18,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.minioclcs.xtext.library.model;
 
-import java.util.Collection;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -27,27 +25,28 @@ import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.TypedModelInstance;
 
 /**
  * ModelObjectsOfKindOperation realises the Model::objectsOfKind() library operation.
- * at-since 1.1
+ * @deprecated This is not needed by synthesized QVTr
  */
+@Deprecated
 public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();
 
 	@Override
-	public @NonNull SetValue evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
+	public @NonNull CollectionValue evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
 		org.eclipse.ocl.pivot.Class type = asClass(typeVal);
 		if (!(sourceVal instanceof TypedModelInstance)) {
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Collection<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfKind(type);
-		return createSetValue((CollectionTypeId)returnTypeId, results);
-		//		return createSetValue((CollectionTypeId)returnTypeId, new ArrayList<@NonNull Object>(results));
+		Iterable<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfKind(type);
+		return ValueUtil.createCollectionOfEach((CollectionTypeId)returnTypeId, true, results);
 	}
 }

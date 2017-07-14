@@ -53,49 +53,49 @@ public class MiniOCLTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0 = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/doc/MiniOCL/1.0", null, org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.eINSTANCE);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CallExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CallExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Class", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionItem = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionItem", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionLiteralExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionLiteralExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionLiteralPart = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionLiteralPart", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionRange = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionRange", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Constraint = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Constraint", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ExpressionInOCL = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("ExpressionInOCL", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Import = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Import", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_IterateExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("IterateExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LetExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("LetExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LoopExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("LoopExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OCLExpression = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("OCLExpression", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Operation = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Operation", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OperationCallExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("OperationCallExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Package", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Parameter = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Parameter", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Property", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyCallExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("PropertyCallExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Root = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Root", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedElement = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("TypedElement", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Variable = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Variable", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("VariableExp", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_EInt = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_CollectionKind = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getEnumerationId("CollectionKind");
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Class = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Class);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Constraint = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Constraint);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_LoopExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_LoopExp);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_OperationCallExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_OperationCallExp);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_PropertyCallExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_PropertyCallExp);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_TypedElement = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_TypedElement);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_VariableExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_VariableExp);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Class = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Class);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_CollectionLiteralPart = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_CollectionLiteralPart);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Constraint = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Constraint);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Import = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Import);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OCLExpression = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_OCLExpression);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Operation = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Operation);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Package = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Package);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Parameter);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Property = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Property);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0 = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/doc/MiniOCL/1.0", null, org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CallExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CallExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionItem = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionItem", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionLiteralExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionLiteralExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionLiteralPart = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionLiteralPart", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionRange = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("CollectionRange", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Constraint = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Constraint", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ExpressionInOCL = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("ExpressionInOCL", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Import = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Import", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_IterateExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("IterateExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LetExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("LetExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LoopExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("LoopExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OCLExpression = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("OCLExpression", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Operation = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Operation", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OperationCallExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("OperationCallExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Package", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Parameter = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Parameter", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Property", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyCallExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("PropertyCallExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Root = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Root", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedElement = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("TypedElement", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Variable = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Variable", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableExp = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("VariableExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_EInt = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull EnumerationId ENUMid_CollectionKind = org.eclipse.qvtd.doc.miniocl.MiniOCLTables.PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getEnumerationId("CollectionKind");
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Class = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Class);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Constraint = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Constraint);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_LoopExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_LoopExp);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_OperationCallExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_OperationCallExp);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_PropertyCallExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_PropertyCallExp);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_TypedElement = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_TypedElement);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_VariableExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_VariableExp);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Class = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Class);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_CollectionLiteralPart = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_CollectionLiteralPart);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Constraint = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Constraint);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Import = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Import);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OCLExpression = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_OCLExpression);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Operation = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Operation);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Package = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Package);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Parameter);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Property = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.doc.miniocl.MiniOCLTables.CLSSid_Property);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -2637,47 +2637,24 @@ public class MiniOCLTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _BooleanLiteralExp = {
 			MiniOCLTables.Properties._BooleanLiteralExp__booleanSymbol,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CallExp = {
 			MiniOCLTables.Properties._CallExp__ownedSource,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Class = {
 			MiniOCLTables.Properties._NamedElement__name,
 			MiniOCLTables.Properties._Class__ownedOperations,
 			MiniOCLTables.Properties._Class__ownedProperties,
-			MiniOCLTables.Properties._Class__superClasses,
-			MiniOCLTables.Properties._Class__Class__superClasses,
-			MiniOCLTables.Properties._Class__Constraint__constrainedElement,
-			MiniOCLTables.Properties._Class__Package__ownedClasses,
-			MiniOCLTables.Properties._Class__TypedElement__type
+			MiniOCLTables.Properties._Class__superClasses
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionItem = {
 			MiniOCLTables.Properties._CollectionItem__ownedItem,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._CollectionLiteralPart__CollectionLiteralExp__ownedParts
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionKind = {};
@@ -2685,35 +2662,23 @@ public class MiniOCLTables
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionLiteralExp = {
 			MiniOCLTables.Properties._CollectionLiteralExp__kind,
 			MiniOCLTables.Properties._CollectionLiteralExp__ownedParts,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionLiteralPart = {
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._CollectionLiteralPart__CollectionLiteralExp__ownedParts
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionRange = {
 			MiniOCLTables.Properties._CollectionRange__ownedFirst,
 			MiniOCLTables.Properties._CollectionRange__ownedLast,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._CollectionLiteralPart__CollectionLiteralExp__ownedParts
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Constraint = {
 			MiniOCLTables.Properties._Constraint__constrainedElement,
 			MiniOCLTables.Properties._NamedElement__name,
-			MiniOCLTables.Properties._Constraint__ownedSpecification,
-			MiniOCLTables.Properties._Constraint__Root__ownedConstraints
+			MiniOCLTables.Properties._Constraint__ownedSpecification
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Element = {};
@@ -2722,9 +2687,7 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OpaqueExpression__language,
 			MiniOCLTables.Properties._ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._ExpressionInOCL__ownedSelfVar,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._ExpressionInOCL__Constraint__ownedSpecification,
-			MiniOCLTables.Properties._ExpressionInOCL__Operation__ownedBodyExpression
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Feature = {
@@ -2734,22 +2697,12 @@ public class MiniOCLTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Import = {
 			MiniOCLTables.Properties._Import__alias,
-			MiniOCLTables.Properties._Import__uri,
-			MiniOCLTables.Properties._Import__Root__ownedImports
+			MiniOCLTables.Properties._Import__uri
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IntegerLiteralExp = {
 			MiniOCLTables.Properties._IntegerLiteralExp__integerSymbol,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IterateExp = {
@@ -2757,16 +2710,7 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._LoopExp__ownedIterator,
 			MiniOCLTables.Properties._IterateExp__ownedResult,
 			MiniOCLTables.Properties._CallExp__ownedSource,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IteratorExp = {
@@ -2774,60 +2718,24 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._LoopExp__ownedBody,
 			MiniOCLTables.Properties._LoopExp__ownedIterator,
 			MiniOCLTables.Properties._CallExp__ownedSource,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LetExp = {
 			MiniOCLTables.Properties._LetExp__ownedIn,
 			MiniOCLTables.Properties._LetExp__ownedVariable,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LiteralExp = {
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LoopExp = {
 			MiniOCLTables.Properties._LoopExp__ownedBody,
 			MiniOCLTables.Properties._LoopExp__ownedIterator,
 			MiniOCLTables.Properties._CallExp__ownedSource,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NamedElement = {
@@ -2839,29 +2747,11 @@ public class MiniOCLTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NullLiteralExp = {
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OCLExpression = {
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OpaqueExpression = {
@@ -2874,57 +2764,30 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._Operation__ownedBodyExpression,
 			MiniOCLTables.Properties._Operation__ownedParameters,
 			MiniOCLTables.Properties._Operation__owningClass,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._Operation__OperationCallExp__referredOperation
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OperationCallExp = {
 			MiniOCLTables.Properties._OperationCallExp__ownedArguments,
 			MiniOCLTables.Properties._CallExp__ownedSource,
 			MiniOCLTables.Properties._OperationCallExp__referredOperation,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Package = {
 			MiniOCLTables.Properties._NamedElement__name,
 			MiniOCLTables.Properties._Package__ownedClasses,
-			MiniOCLTables.Properties._Package__ownedPackages,
-			MiniOCLTables.Properties._Package__Package__ownedPackages,
-			MiniOCLTables.Properties._Package__Root__ownedPackages
+			MiniOCLTables.Properties._Package__ownedPackages
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Parameter = {
 			MiniOCLTables.Properties._NamedElement__name,
 			MiniOCLTables.Properties._Variable__ownedInitExp,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._Variable__ExpressionInOCL__ownedSelfVar,
-			MiniOCLTables.Properties._Variable__IterateExp__ownedResult,
-			MiniOCLTables.Properties._Variable__LetExp__ownedVariable,
-			MiniOCLTables.Properties._Variable__LoopExp__ownedIterator,
-			MiniOCLTables.Properties._Parameter__Operation__ownedParameters,
-			MiniOCLTables.Properties._Variable__VariableExp__referredVariable
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PrimitiveLiteralExp = {
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Property = {
@@ -2932,23 +2795,13 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._NamedElement__name,
 			MiniOCLTables.Properties._Property__owningClass,
 			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._Property__upperBound,
-			MiniOCLTables.Properties._Property__PropertyCallExp__referredProperty
+			MiniOCLTables.Properties._Property__upperBound
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PropertyCallExp = {
 			MiniOCLTables.Properties._CallExp__ownedSource,
 			MiniOCLTables.Properties._PropertyCallExp__referredProperty,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Root = {
@@ -2964,26 +2817,12 @@ public class MiniOCLTables
 		private static final @NonNull ExecutorProperty @NonNull [] _Variable = {
 			MiniOCLTables.Properties._NamedElement__name,
 			MiniOCLTables.Properties._Variable__ownedInitExp,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._Variable__ExpressionInOCL__ownedSelfVar,
-			MiniOCLTables.Properties._Variable__IterateExp__ownedResult,
-			MiniOCLTables.Properties._Variable__LetExp__ownedVariable,
-			MiniOCLTables.Properties._Variable__LoopExp__ownedIterator,
-			MiniOCLTables.Properties._Variable__VariableExp__referredVariable
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _VariableExp = {
 			MiniOCLTables.Properties._VariableExp__referredVariable,
-			MiniOCLTables.Properties._TypedElement__type,
-			MiniOCLTables.Properties._OCLExpression__CallExp__ownedSource,
-			MiniOCLTables.Properties._OCLExpression__CollectionItem__ownedItem,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedFirst,
-			MiniOCLTables.Properties._OCLExpression__CollectionRange__ownedLast,
-			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
-			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
-			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
+			MiniOCLTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Visitable = {};

@@ -27,10 +27,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
-import org.eclipse.ocl.pivot.library.collection.CollectionIncludingOperation;
-import org.eclipse.ocl.pivot.values.CollectionValue;
-
+import org.eclipse.ocl.pivot.library.collection.CollectionMutableIncludingAllOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionMutableIncludingOperation;
 import example2.classes.NamedElement;
 import example2.classes.lookup.EnvironmentPackage;
 import example2.classes.lookup.EnvironmentTables;
@@ -160,13 +158,13 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property CTORid_namedElements = idResolver.getProperty(EnvironmentTables.PROPid_namedElements);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(EnvironmentTables.CLSSid_LookupEnvironment, null);
-		final /*@Thrown*/ example2.classes.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment = idResolver.getClass(EnvironmentTables.CLSSid_LookupEnvironment, null);
+		final /*@Thrown*/ example2.classes.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment.createInstance();
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ java.util.@NonNull List<NamedElement> namedElements = this.getNamedElements();
-		final /*@NonInvalid*/ @NonNull CollectionValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_elements = idResolver.createCollectionOfAll(EnvironmentTables.COL_TMPLid_, elements);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements, BOXED_elements);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue includingAll = CollectionMutableIncludingAllOperation.INSTANCE.evaluate(executor, EnvironmentTables.COL_PRIMid_OclAny, BOXED_namedElements, BOXED_elements);
 		final List<Object> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, Object.class);
 		assert UNBOXED_includingAll != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_includingAll);
@@ -196,8 +194,8 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@Thrown*/ example2.classes.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ java.util.@NonNull List<NamedElement> namedElements = this.getNamedElements();
-		final /*@NonInvalid*/ @NonNull CollectionValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
-		final /*@Thrown*/ @NonNull CollectionValue including = CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, element);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
+		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue including = CollectionMutableIncludingOperation.INSTANCE.evaluate(executor, EnvironmentTables.ORD_CLSSid_NamedElement, BOXED_namedElements, element);
 		final List<NamedElement> UNBOXED_including = including.asEcoreObjects(idResolver, NamedElement.class);
 		assert UNBOXED_including != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_including);

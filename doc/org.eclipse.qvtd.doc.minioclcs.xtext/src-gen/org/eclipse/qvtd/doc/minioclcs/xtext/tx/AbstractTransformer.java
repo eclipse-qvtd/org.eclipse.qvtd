@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -21,31 +21,34 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.util.PivotPlugin;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx.AbstractTransformerInternal;
 
 /**
  * The abstract implementation of an auto-generated transformation provides the mandatory shared functionality for maintaining
  * models and deferring invocation of not-ready mapping invocations.
- * 
- * at-since 1.1
  */
 public abstract class AbstractTransformer extends AbstractTransformerInternal
-{	
-	public static final @NonNull TracingOption EXCEPTIONS = new TracingOption(PivotPlugin.PLUGIN_ID, "tx/exceptions");
-	public static final @NonNull TracingOption INVOCATIONS = new TracingOption(PivotPlugin.PLUGIN_ID, "tx/invocations");
-
-	protected AbstractTransformer(@NonNull Executor executor, @NonNull String @NonNull [] modelNames,
-			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+{
+	public static abstract class Incremental extends AbstractTransformerInternal.Incremental
+	{
+		protected Incremental(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
+				@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+		}
 	}
 
-	@Override
-	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
-		return visitor.visitTransformer(this);
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.runtime";
+	public static final @NonNull TracingOption APPENDS = new TracingOption(PLUGIN_ID, "tx/appends");
+	public static final @NonNull TracingOption CONSUMES = new TracingOption(PLUGIN_ID, "tx/consumes");
+	public static final @NonNull TracingOption CONTAINMENTS = new TracingOption(PLUGIN_ID, "tx/containments");
+	public static final @NonNull TracingOption EXCEPTIONS = new TracingOption(PLUGIN_ID, "tx/exceptions");
+	public static final @NonNull TracingOption INVOCATIONS = new TracingOption(PLUGIN_ID, "tx/invocations");
+
+	protected AbstractTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
+			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
 	}
 }

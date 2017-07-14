@@ -79,15 +79,17 @@ public class OperationFilter
 			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args = (List<Argument>)OperationFilter.this.args;
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element_0.getOwnedParameters();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_args_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull CollectionValue BOXED_args_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
+			BOXED_args_0.cachedIterable();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull CollectionValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters);
+			BOXED_ownedParameters.cachedIterable();
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_args_0);
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_ownedParameters);
 			final /*@NonInvalid*/ boolean eq = size.equals(size_0);
 			/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and;
 			if (eq) {
 				/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR_x = BOXED_args_0.iterator();
+				@NonNull Iterator<Object> ITERATOR_x = BOXED_args_0.lazyIterator();
 				/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean forAll;
 				while (true) {
 					if (!ITERATOR_x.hasNext()) {

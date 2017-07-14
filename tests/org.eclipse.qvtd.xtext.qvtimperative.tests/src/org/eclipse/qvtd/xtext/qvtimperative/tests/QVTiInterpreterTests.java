@@ -416,6 +416,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		TestUtil.doCompleteOCLSetup();
 		URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
 		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
+		environmentFactory.setEvaluationTracingEnabled(true);
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, environmentFactory);

@@ -24,11 +24,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx.AbstractIntervalInternal;
 import org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx.AbstractInvocationInternal;
 
 /**
  * AbstractInvocation provides the mandatory shared functionality of the intrusive blocked/waiting linked list functionality.
- * at-since 1.1
  */
 public abstract class AbstractInvocation extends AbstractInvocationInternal
 {
@@ -37,9 +38,21 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		public static final @NonNull List<@NonNull Object> EMPTY_OBJECT_LIST = Collections.emptyList();
 		public static final @NonNull List<SlotState.@NonNull Incremental> EMPTY_SLOT_LIST = Collections.emptyList();
 
+		protected final InvocationConstructor.@NonNull Incremental constructor;
+		private final int invocationHashCode;
+		protected final int sequence;
+
 		private Set<@NonNull Object> createdObjects = null;
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
 		private Set<SlotState.@NonNull Incremental> writeSlots = null;
+		private boolean isDestroyed = false;
+
+		protected Incremental(InvocationConstructor.@NonNull Incremental constructor, int invocationHashCode) {
+			super(constructor);
+			this.constructor = constructor;
+			this.invocationHashCode = invocationHashCode;
+			this.sequence = constructor.nextSequence();
+		}
 
 		@Override
 		public void addCreatedObject(@NonNull Object createdObject) {
@@ -67,9 +80,51 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 			writeSlot.addSourceInternal(this);
 		}
 
+		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+			return constructor.getInterval().createConnection(name, typeId, isStrict);
+		}
+
+		protected Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+			return constructor.getInterval().createIncrementalConnection(name, typeId, isStrict);
+		}
+
+		@Override
+		public void destroy() {
+			isDestroyed = true;
+			((AbstractIntervalInternal)interval).destroy(this);
+			constructor.destroy(this, invocationHashCode);
+			if (AbstractTransformer.INVOCATIONS.isActive()) {
+				AbstractTransformer.INVOCATIONS.println("destroy " + this);
+			}
+			if (writeSlots != null) {
+				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
+					writeSlot.revokeAssigned();
+				}
+			}
+			/*
+			 * Revoke all consumed input objects.
+			 */
+			int i = 0;
+			for (Connection.@NonNull Incremental consumedConnection : constructor.getConsumedConnections()) {
+				consumedConnection.revokeConsumer(getBoundValue(i), this);
+			}
+		}
+
+		@Override
+		public InvocationConstructor.@NonNull Incremental getConstructor() {
+			return constructor;
+		}
+
 		@Override
 		public @NonNull Iterable<@NonNull Object> getCreatedObjects() {
 			return createdObjects != null ? createdObjects : EMPTY_OBJECT_LIST;
+		}
+
+		@SuppressWarnings("null")
+		@Override
+		public @NonNull String getName() {
+			InvocationConstructor constructor2 = constructor;	// May be invoked from toString() during constructor debugging
+			return (constructor2 != null ? constructor2.getName() : "null") + "-" + sequence;
 		}
 
 		@Override
@@ -81,10 +136,44 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		public @NonNull Iterable<SlotState.@NonNull Incremental> getWriteSlots() {
 			return writeSlots != null ? writeSlots : EMPTY_SLOT_LIST;
 		}
+
+		@Override
+		public void revoke() {
+			if (AbstractTransformer.INVOCATIONS.isActive()) {
+				AbstractTransformer.INVOCATIONS.println("revoke " + this);
+			}
+			if (writeSlots != null) {
+				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
+					writeSlot.revokeAssigned();
+				}
+			}
+			if (!isDestroyed) {
+				interval.queue(this);
+			}
+		}
+
+		@Override
+		public @NonNull String toString() {
+			return getName();
+		}
+
+		@Override
+		public void unblock() {
+			super.unblock();
+		}
+	}
+
+	protected AbstractInvocation(@NonNull InvocationConstructor constructor) {
+		super(constructor.getInterval());
 	}
 
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitInvocation(this);
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return toString().replace("@",  "\n@");
 	}
 }

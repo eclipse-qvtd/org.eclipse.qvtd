@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.library.model;
 
+import java.util.Collection;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -20,8 +22,6 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
-
-import com.google.common.collect.Lists;
 
 /**
  * ModelObjectsOfKindOperation realises the Model::objectsOfKind() library operation.
@@ -40,6 +40,6 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
 		Iterable<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfKind(type);
-		return new IterableAsSetValue((CollectionTypeId)returnTypeId, Lists.newArrayList(results));
+		return createCollectionValue((CollectionTypeId)returnTypeId, true, (Collection<@Nullable ? extends Object>) results);
 	}
 }

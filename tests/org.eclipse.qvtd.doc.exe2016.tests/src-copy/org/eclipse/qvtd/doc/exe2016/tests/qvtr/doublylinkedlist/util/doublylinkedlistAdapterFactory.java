@@ -12,8 +12,11 @@ package org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
@@ -24,7 +27,7 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlist
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage
  * @generated
  */
 public class doublylinkedlistAdapterFactory extends AdapterFactoryImpl {
@@ -104,13 +107,13 @@ public class doublylinkedlistAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element <em>Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element
 	 * @generated
 	 */
 	public Adapter createElementAdapter() {
@@ -118,13 +121,13 @@ public class doublylinkedlistAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList <em>Doubly Linked List</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList <em>Doubly Linked List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList
 	 * @generated
 	 */
 	public Adapter createDoublyLinkedListAdapter() {

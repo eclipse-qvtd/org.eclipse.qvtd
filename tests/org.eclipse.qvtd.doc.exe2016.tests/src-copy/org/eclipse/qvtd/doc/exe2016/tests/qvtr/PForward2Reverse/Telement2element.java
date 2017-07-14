@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
 
@@ -24,16 +23,16 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getElementName <em>Element Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardElement <em>Forward Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardList <em>Forward List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardTarget <em>Forward Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseElement <em>Reverse Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseList <em>Reverse List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseSource <em>Reverse Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getElementName <em>Element Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardElement <em>Forward Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardList <em>Forward List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardTarget <em>Forward Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseElement <em>Reverse Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseList <em>Reverse List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseSource <em>Reverse Source</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element()
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element()
  * @model
  * @generated
  */
@@ -48,14 +47,14 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Element Name</em>' attribute.
 	 * @see #setElementName(String)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ElementName()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ElementName()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getElementName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getElementName <em>Element Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getElementName <em>Element Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Element Name</em>' attribute.
@@ -74,15 +73,16 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Forward Element</em>' reference.
 	 * @see #setForwardElement(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ForwardElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ForwardElement()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='Telement2element'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
 	 */
 	Element getForwardElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardElement <em>Forward Element</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardElement <em>Forward Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Forward Element</em>' reference.
@@ -101,7 +101,7 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Forward List</em>' reference.
 	 * @see #setForwardList(DoublyLinkedList)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ForwardList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ForwardList()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
@@ -109,7 +109,7 @@ public interface Telement2element extends EObject {
 	DoublyLinkedList getForwardList();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardList <em>Forward List</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardList <em>Forward List</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Forward List</em>' reference.
@@ -128,15 +128,16 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Forward Target</em>' reference.
 	 * @see #setForwardTarget(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ForwardTarget()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ForwardTarget()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='Telement2element'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
 	 */
 	Element getForwardTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getForwardTarget <em>Forward Target</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getForwardTarget <em>Forward Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Forward Target</em>' reference.
@@ -155,15 +156,16 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reverse Element</em>' reference.
 	 * @see #setReverseElement(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ReverseElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ReverseElement()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='Telement2element'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
 	 */
 	Element getReverseElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseElement <em>Reverse Element</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseElement <em>Reverse Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reverse Element</em>' reference.
@@ -182,7 +184,7 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reverse List</em>' reference.
 	 * @see #setReverseList(DoublyLinkedList)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ReverseList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ReverseList()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
@@ -190,7 +192,7 @@ public interface Telement2element extends EObject {
 	DoublyLinkedList getReverseList();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseList <em>Reverse List</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseList <em>Reverse List</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reverse List</em>' reference.
@@ -209,15 +211,16 @@ public interface Telement2element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reverse Source</em>' reference.
 	 * @see #setReverseSource(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTelement2element_ReverseSource()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTelement2element_ReverseSource()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='Telement2element'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
 	 */
 	Element getReverseSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element#getReverseSource <em>Reverse Source</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element#getReverseSource <em>Reverse Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reverse Source</em>' reference.

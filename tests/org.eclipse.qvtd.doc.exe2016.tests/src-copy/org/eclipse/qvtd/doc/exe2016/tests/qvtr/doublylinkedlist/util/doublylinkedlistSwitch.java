@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.*;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +30,7 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage
  * @generated
  */
 public class doublylinkedlistSwitch<@Nullable T> extends Switch<T> {

@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -20,19 +20,30 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Interval;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Invocation;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.SlotState;
 
 /**
  * AbstractInvocation provides the shared implementation of the intrusive blocked/waiting linked list functionality.
- * at-since 1.1
  */
 public abstract class AbstractInvocationInternal implements Invocation
 {
+	protected final @NonNull Interval interval;
+
 	@NonNull AbstractInvocationInternal prev = this;
 	@NonNull AbstractInvocationInternal next = this;
 	public @Nullable SlotState debug_blockedBy = null;
-	
+
+	protected AbstractInvocationInternal(@NonNull Interval interval) {
+		this.interval = interval;
+	}
+
+	@Override
+	public @NonNull Interval getInterval() {
+		return interval;
+	}
+
 	@Override
 	public void insertAfter(@NonNull Invocation predecessor) {
 		@NonNull AbstractInvocationInternal castPredecessor = (AbstractInvocationInternal)predecessor;
@@ -54,5 +65,10 @@ public abstract class AbstractInvocationInternal implements Invocation
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this));
+	}
+
+	@Override
+	public void unblock() {
+		interval.unblock(this);
 	}
 }

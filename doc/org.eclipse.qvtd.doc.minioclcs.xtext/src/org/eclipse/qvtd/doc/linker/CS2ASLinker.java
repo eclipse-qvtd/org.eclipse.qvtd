@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.doc.minioclcs.xtext._MiniOCLCS2AS_qvtp_qvtcas.MiniOCLCS2AS_qvtp_qvtcas;
+import org.eclipse.qvtd.doc.minioclcs.xtext._MiniOCLCS2AS_qvtm_qvtcas.MiniOCLCS2AS_qvtm_qvtcas;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.CS2ASDiagnostic;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.CS2ASException;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.CS2ASExceptionDiagnostic;
@@ -36,12 +36,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 /**
  * CS2ASLinker ensures that the CS 2 Pivot mappings are refreshed after
  * and CS Resource modification is committed.
- * 
+ *
  * FIXME auto-generate in src-gen
  */
 public class CS2ASLinker extends LazyLinker
 {
-	
+
 	@Override
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		Resource eResource = model.eResource();
@@ -49,12 +49,12 @@ public class CS2ASLinker extends LazyLinker
 			List<Diagnostic> errors = eResource.getErrors();
 			if (!LinkerUtil.hasSyntaxError(errors)) {
 				ResourceSet rSet = eResource.getResourceSet();
-				CS2ASTransformer tx = null;		
+				CS2ASTransformer tx = null;
 				OCL ocl = OCL.newInstance(rSet);
 				try {
-					CS2ASTransformationExecutor txExecutor= new CS2ASTransformationExecutor(ocl.getEnvironmentFactory(), MiniOCLCS2AS_qvtp_qvtcas.class);
+					CS2ASTransformationExecutor txExecutor= new CS2ASTransformationExecutor(ocl.getEnvironmentFactory(), MiniOCLCS2AS_qvtm_qvtcas.class);
 					tx = txExecutor.getTransformer();
-					
+
 					tx.addRootObjects("leftCS", ClassUtil.nonNullState(eResource.getContents()));
 					if (tx.run()) {
 						URI asModelURI = eResource.getURI().appendFileExtension("xmi");
@@ -71,22 +71,22 @@ public class CS2ASLinker extends LazyLinker
 					errors.add(new CS2ASExceptionDiagnostic(exception));
 				}
 				catch (Exception exception) {	// Never let an Exception leak out to abort Xtext
-				    Exception cause = exception instanceof Resource.IOWrappedException ? (Exception)exception.getCause() : exception;
-				    errors.add(new ExceptionDiagnostic(cause));
+					Exception cause = exception instanceof Resource.IOWrappedException ? (Exception)exception.getCause() : exception;
+					errors.add(new ExceptionDiagnostic(cause));
 				} finally {
 					if (tx != null) {
-						for (CS2ASDiagnostic diagnostic : tx.getErrors()) {							
-							errors.add(createLinkingDiagnostic(diagnostic));	
-						}						
+						for (CS2ASDiagnostic diagnostic : tx.getErrors()) {
+							errors.add(createLinkingDiagnostic(diagnostic));
+						}
 					}
 					ocl.dispose();
 				}
 			}
 		}
 	}
-	
+
 	protected org.eclipse.xtext.diagnostics.Diagnostic createLinkingDiagnostic(CS2ASDiagnostic diagnostic) {
-		
+
 		return new XtextLinkingDiagnostic(NodeModelUtils.getNode(diagnostic.getCSObject()),
 				diagnostic.getMessage(),
 				diagnostic.getSource());

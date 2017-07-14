@@ -40,20 +40,19 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractSlotState;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractTransformer;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Execution;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Invocation;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.InvocationFailedException;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.ObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.SlotState;
 
-/**
- * at-since 1.1
- */
 public class LazyObjectManager extends AbstractObjectManager
 {
 	/**
@@ -225,7 +224,7 @@ public class LazyObjectManager extends AbstractObjectManager
 			s.append("::");
 			s.append(debug_eFeature.getName());
 			s.append(" for ");
-			s.append(debug_eObject);
+			s.append(LabelUtil.getLabel(debug_eObject));
 			s.append("]");
 			return s.toString();
 		}
@@ -233,13 +232,13 @@ public class LazyObjectManager extends AbstractObjectManager
 		protected synchronized void unblock(@NonNull ObjectManager objectManager) {
 			final Object blockedInvocations2 = blockedInvocations;
 			if (blockedInvocations2 instanceof Invocation) {
-				objectManager.unblock((Invocation) blockedInvocations2);
+				((Invocation) blockedInvocations2).unblock();
 			}
 			else if (blockedInvocations2 != null) {
 				@SuppressWarnings("unchecked")
 				List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
 				for (@SuppressWarnings("null")@NonNull Invocation invocation : blockedInvocationList) {
-					objectManager.unblock(invocation);
+					invocation.unblock();
 				}
 			}
 			blockedInvocations = null;
@@ -734,7 +733,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		assert eFeature != null;
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " = " + ecoreValue);
+			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(eObject) + " = " + LabelUtil.getLabel(ecoreValue));
 		}
 		Map<@NonNull EStructuralFeature, @NonNull SlotState> objectState = getObjectState(eObject);
 		SlotState slotState = objectState.get(eFeature);
@@ -746,82 +745,86 @@ public class LazyObjectManager extends AbstractObjectManager
 				slotState = new SimpleSlotState(eObject, (EAttribute)eFeature, ecoreValue);
 			}
 			else {
+				Object ecoreValue2 = ecoreValue;
 				EReference eReference = (EReference)eFeature;
 				EReference eOppositeReference = getEOppositeReference(eReference);
 				if (!(eOppositeReference instanceof EOppositeReferenceImpl)) {
-					//					if (ecoreValue != null) {
-					//						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState((EObject) ecoreValue);
+					//					if (ecoreValue2 != null) {
+					//						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState((EObject) ecoreValue2);
 					//						SlotState oppositeSlotState = oppositeObjectState.get(eOppositeReference);
 					//					}
 					if (eReference.isMany()) {
-						assert ecoreValue != null;
+						assert ecoreValue2 != null;
 						if (eOppositeReference.isMany()) {
 							slotState = createManyToManySlotState(eObject, eReference, eOppositeReference);
 						}
 						else {
-							slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+							slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 						}
 					}
-					else if (ecoreValue != null) {
+					else if (ecoreValue2 != null) {
 						if (eOppositeReference.isMany()) {
-							slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+							slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 						}
 						//						else if (isIncremental) {
-						//							slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, ecoreValue);
+						//							slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, ecoreValue2);
 						//						}
 						else {
-							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 						}
 					}
 					else {
-						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 					}
 				}
 				else if (eReference.isContainment()) {
-					assert ecoreValue != null;
+					assert ecoreValue2 != null;
 					eOppositeReference = OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER;
 					assert eOppositeReference != null;
 					if (eReference.isMany()) {
-						slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+						assert eOppositeReference != null;
+						slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 					}
 					else {
-						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue);
+						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue2);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState != null) {
-							slotState.assigned(ecoreValue, eOppositeReference, eObject);
+							assert eOppositeReference != null;
+							slotState.assigned(ecoreValue2, eOppositeReference, eObject);
 						}
 						else {
-							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, (EObject)ecoreValue);
+							assert eOppositeReference != null;
+							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, (EObject)ecoreValue2);
 						}
 					}
 				}
 				//				else if (eReference == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-				//					slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, (EObject)ecoreValue);
+				//					slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, (EObject)ecoreValue2);
 				//				}
 				else {						// Unidirectional non-containment EReference
-					if (ecoreValue != null) {
+					if (ecoreValue2 != null) {
 						//						eOppositeReference = getEOppositeReference(eReference);
-						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue);
+						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue2);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState == null) {
 							if (eOppositeReference.isMany()) {
-								slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+								slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 							}
 							else if (eReference.isMany()) {
-								slotState = new OneToManyAggregatorSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue);
+								slotState = new OneToManyAggregatorSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue2);
 								oppositeObjectState.put(eOppositeReference, slotState);
 							}
 							else {
-								slotState = new OneToOneSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue);
+								slotState = new OneToOneSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue2);
 								oppositeObjectState.put(eOppositeReference, slotState);
 							}
 						}
 						else {
-							slotState.assigned(ecoreValue, eOppositeReference, eObject);
+							slotState.assigned(ecoreValue2, eOppositeReference, eObject);
 						}
 					}
 					else {
-						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 
 					}
 				}
@@ -894,6 +897,11 @@ public class LazyObjectManager extends AbstractObjectManager
 
 	@Override
 	public void created(Invocation.@NonNull Incremental invocation, @NonNull Object eObject) {
+		// Ignore incremental API
+	}
+
+	@Override
+	public void destroyed(@NonNull Object eObject) {
 		// Ignore incremental API
 	}
 
@@ -1014,7 +1022,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	public synchronized void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) {
 		assert eFeature != null;
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + (isOpposite ? "<opposite> " : "") + " for " + eObject);
+			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + (isOpposite ? "<opposite> " : "") + " for " + LabelUtil.getLabel(eObject));
 		}
 		if (isOpposite) {
 			eFeature = getEOppositeReference((EReference) eFeature);
@@ -1024,7 +1032,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	}
 
 	@Override
-	public void got(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+	public void got(Execution.@NonNull Incremental computation, @NonNull Object eObject, EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 		// Ignore incremental API
 	}
 }

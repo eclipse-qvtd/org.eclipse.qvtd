@@ -17,9 +17,9 @@ import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.AbstractUnaryOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.MutableIterable;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 /**
@@ -39,6 +39,6 @@ public class AllObjectsOperation extends AbstractUnaryOperation
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
 		@SuppressWarnings("null")
 		Iterable<@Nullable Object> results = (Iterable<@Nullable Object>) typedModelInstance.getAllObjects();
-		return new IterableAsSetValue((CollectionTypeId)returnTypeId, results);
+		return ValueUtil.createCollectionOfEach((CollectionTypeId)returnTypeId, true, results);
 	}
 }

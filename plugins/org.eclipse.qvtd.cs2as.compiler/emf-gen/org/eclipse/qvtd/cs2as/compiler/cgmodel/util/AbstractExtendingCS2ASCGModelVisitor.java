@@ -32,12 +32,12 @@ public abstract class AbstractExtendingCS2ASCGModelVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingCS2ASCGModelVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {

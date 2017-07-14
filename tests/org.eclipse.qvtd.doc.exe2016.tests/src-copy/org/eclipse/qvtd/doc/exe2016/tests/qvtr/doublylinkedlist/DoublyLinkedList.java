@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,12 +23,12 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getHeadElement <em>Head Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getOwnedElements <em>Owned Elements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getHeadElement <em>Head Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getOwnedElements <em>Owned Elements</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList()
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList()
  * @model
  * @generated
  */
@@ -42,14 +43,14 @@ public interface DoublyLinkedList extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Head Element</em>' reference.
 	 * @see #setHeadElement(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList_HeadElement()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList_HeadElement()
 	 * @model
 	 * @generated
 	 */
 	Element getHeadElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getHeadElement <em>Head Element</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getHeadElement <em>Head Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Head Element</em>' reference.
@@ -68,14 +69,14 @@ public interface DoublyLinkedList extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList_Name()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -86,8 +87,8 @@ public interface DoublyLinkedList extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getList <em>List</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getList <em>List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Elements</em>' containment reference list isn't clear,
@@ -95,8 +96,8 @@ public interface DoublyLinkedList extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Elements</em>' containment reference list.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList_OwnedElements()
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getList
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getDoublyLinkedList_OwnedElements()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getList
 	 * @model opposite="list" containment="true" ordered="false"
 	 * @generated
 	 */

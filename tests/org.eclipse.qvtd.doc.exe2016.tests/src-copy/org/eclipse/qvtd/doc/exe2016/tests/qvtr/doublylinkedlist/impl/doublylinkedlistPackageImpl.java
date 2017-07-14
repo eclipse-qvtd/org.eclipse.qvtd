@@ -55,7 +55,7 @@ public class doublylinkedlistPackageImpl extends EPackageImpl implements doublyl
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#eNS_URI
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -93,14 +93,17 @@ public class doublylinkedlistPackageImpl extends EPackageImpl implements doublyl
 
 		// Obtain or create and register interdependencies
 		PForward2ReversePackageImpl thePForward2ReversePackage = (PForward2ReversePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI) instanceof PForward2ReversePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI) : PForward2ReversePackage.eINSTANCE);
+		PForward2ReversePackageImpl thePForward2ReversePackage_1 = (PForward2ReversePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI) instanceof PForward2ReversePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PForward2ReversePackage.eNS_URI) : PForward2ReversePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thedoublylinkedlistPackage.createPackageContents();
 		thePForward2ReversePackage.createPackageContents();
+		thePForward2ReversePackage_1.createPackageContents();
 
 		// Initialize created meta-data
 		thedoublylinkedlistPackage.initializePackageContents();
 		thePForward2ReversePackage.initializePackageContents();
+		thePForward2ReversePackage_1.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		thedoublylinkedlistPackage.freeze();

@@ -32,10 +32,10 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlist
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl#getList <em>List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.impl.ElementImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl#getList <em>List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.impl.ElementImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
  * @generated

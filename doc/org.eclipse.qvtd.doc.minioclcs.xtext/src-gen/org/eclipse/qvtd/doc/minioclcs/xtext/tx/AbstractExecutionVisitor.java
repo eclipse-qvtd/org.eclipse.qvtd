@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *
@@ -25,9 +25,6 @@ package	org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * at-since 1.1
- */
 public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisitor<R>
 {
 	/**
@@ -35,7 +32,7 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	 * is available.
 	 */
 	public R visiting(@NonNull ExecutionVisitable visitable) {
-		throw new UnsupportedOperationException("No " + getClass().getSimpleName() + " suupport for a " + visitable.getClass().getSimpleName());
+		throw new UnsupportedOperationException("No " + getClass().getSimpleName() + " support for a " + visitable.getClass().getSimpleName());
 	}
 
 	@Override
@@ -44,10 +41,25 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	}
 
 	@Override
+	public R visitConnection(@NonNull Connection object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitInterval(@NonNull Interval object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitInvocation(@NonNull Invocation object) {
 		return visiting(object);
 	}
-	
+
+	@Override
+	public R visitInvocationConstructor(@NonNull InvocationConstructor object) {
+		return visiting(object);
+	}
+
 	@Override
 	public R visitInvocationManager(@NonNull InvocationManager object) {
 		return visiting(object);
@@ -67,5 +79,4 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	public R visitTransformer(@NonNull Transformer object) {
 		return visiting(object);
 	}
-
 }

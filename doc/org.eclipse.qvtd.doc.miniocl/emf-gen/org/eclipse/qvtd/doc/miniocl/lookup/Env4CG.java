@@ -19,7 +19,7 @@ public interface Env4CG extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new <%java.lang.UnsupportedOperationException%>(\"LookupEnvironment::hasFinalResult() has been created for CG purposes. Don\'t call this method\");'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new &lt;%java.lang.UnsupportedOperationException%&gt;(\"LookupEnvironment::hasFinalResult() has been created for CG purposes. Don\'t call this method\");'"
 	 * @generated
 	 */
 	boolean hasFinalResult();
@@ -28,7 +28,7 @@ public interface Env4CG extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" type="org.eclipse.qvtd.doc.miniocl.lookup.Executor"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new <%java.lang.UnsupportedOperationException%>(\"LookupEnvironment::getEvaluator() has been created for CG purposes. Don\'t call this method\");'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new &lt;%java.lang.UnsupportedOperationException%&gt;(\"LookupEnvironment::getEvaluator() has been created for CG purposes. Don\'t call this method\");'"
 	 * @generated
 	 */
 	Executor getExecutor();

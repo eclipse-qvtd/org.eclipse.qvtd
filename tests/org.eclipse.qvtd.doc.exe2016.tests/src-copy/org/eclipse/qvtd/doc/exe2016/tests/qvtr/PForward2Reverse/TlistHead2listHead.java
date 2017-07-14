@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
 
@@ -24,13 +23,13 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead()
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead()
  * @model
  * @generated
  */
@@ -45,7 +44,7 @@ public interface TlistHead2listHead extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Forward Head</em>' reference.
 	 * @see #setForwardHead(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ForwardHead()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ForwardHead()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
@@ -53,7 +52,7 @@ public interface TlistHead2listHead extends EObject {
 	Element getForwardHead();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Forward Head</em>' reference.
@@ -72,15 +71,16 @@ public interface TlistHead2listHead extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Forward List</em>' reference.
 	 * @see #setForwardList(DoublyLinkedList)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ForwardList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ForwardList()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TlistHead2listHead'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
 	 */
 	DoublyLinkedList getForwardList();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Forward List</em>' reference.
@@ -99,7 +99,7 @@ public interface TlistHead2listHead extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reverse Head</em>' reference.
 	 * @see #setReverseHead(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ReverseHead()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ReverseHead()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
@@ -107,7 +107,7 @@ public interface TlistHead2listHead extends EObject {
 	Element getReverseHead();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reverse Head</em>' reference.
@@ -126,15 +126,16 @@ public interface TlistHead2listHead extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reverse List</em>' reference.
 	 * @see #setReverseList(DoublyLinkedList)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ReverseList()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage#getTlistHead2listHead_ReverseList()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TlistHead2listHead'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
 	 */
 	DoublyLinkedList getReverseList();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reverse List</em>' reference.

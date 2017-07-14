@@ -21,20 +21,20 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getList <em>List</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getList <em>List</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getTarget <em>Target</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getElement()
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getElement()
  * @model
  * @generated
  */
 public interface Element extends EObject {
 	/**
 	 * Returns the value of the '<em><b>List</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getOwnedElements <em>Owned Elements</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getOwnedElements <em>Owned Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>List</em>' container reference isn't clear,
@@ -43,15 +43,15 @@ public interface Element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>List</em>' container reference.
 	 * @see #setList(DoublyLinkedList)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getElement_List()
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList#getOwnedElements
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getElement_List()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList#getOwnedElements
 	 * @model opposite="ownedElements" required="true" transient="false"
 	 * @generated
 	 */
 	DoublyLinkedList getList();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getList <em>List</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getList <em>List</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>List</em>' container reference.
@@ -70,14 +70,14 @@ public interface Element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getElement_Name()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getElement_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -88,7 +88,7 @@ public interface Element extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getTarget <em>Target</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear,
@@ -97,15 +97,15 @@ public interface Element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
 	 * @see #setSource(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getElement_Source()
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getTarget
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getElement_Source()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getTarget
 	 * @model opposite="target" required="true"
 	 * @generated
 	 */
 	Element getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getSource <em>Source</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getSource <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source</em>' reference.
@@ -116,7 +116,7 @@ public interface Element extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getSource <em>Source</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear,
@@ -125,15 +125,15 @@ public interface Element extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(Element)
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistPackage#getElement_Target()
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getSource
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage#getElement_Target()
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getSource
 	 * @model opposite="source" required="true"
 	 * @generated
 	 */
 	Element getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element#getTarget <em>Target</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Target</em>' reference.

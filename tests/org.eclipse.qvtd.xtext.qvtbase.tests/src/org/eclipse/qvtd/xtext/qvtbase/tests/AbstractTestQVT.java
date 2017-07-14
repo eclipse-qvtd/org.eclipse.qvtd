@@ -225,7 +225,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		if (txURI != null) {
 			URI inputURI = txURI;
 			URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
-			doSerialize(inputURI, serializedURI);
+			//			doSerialize(inputURI, serializedURI);
 		}
 		return transformation;
 	}

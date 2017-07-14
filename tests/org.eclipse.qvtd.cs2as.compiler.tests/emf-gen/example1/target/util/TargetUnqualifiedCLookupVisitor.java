@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.library.collection.OrderedCollectionIndexOfOperatio
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 public class TargetUnqualifiedCLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
@@ -91,13 +90,14 @@ public class TargetUnqualifiedCLookupVisitor
 			@SuppressWarnings("null") final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_0 = (/*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2)sourceAndArgumentValues[0];
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element_0.getOwnsC();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsC = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownsC);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull CollectionValue BOXED_ownsC = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownsC);
+			BOXED_ownsC.cachedIterable();
 			final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownsC, child_0).booleanValue();
 			/*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_1;
 			if (includes) {
-				/*@Thrown*/ OrderedSetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
-				@NonNull Iterator<Object> ITERATOR_x = BOXED_ownsC.iterator();
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue select;
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull MutableIterable accumulator = ValueUtil.createCollectionAccumulatorValue(ORD_CLSSid_C);
+				@NonNull Iterator<Object> ITERATOR_x = BOXED_ownsC.lazyIterator();
+				/*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull CollectionValue select;
 				while (true) {
 					if (!ITERATOR_x.hasNext()) {
 						select = accumulator;
@@ -113,7 +113,7 @@ public class TargetUnqualifiedCLookupVisitor
 					final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(executor, indexOf, indexOf_0).booleanValue();
 					//
 					if (lt == ValueUtil.TRUE_VALUE) {
-						accumulator.add(x);
+						accumulator.mutableIncluding(x);
 					}
 				}
 				final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ECORE_select = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(C.class, select);

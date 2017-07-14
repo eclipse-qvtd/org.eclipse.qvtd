@@ -39,8 +39,7 @@ public class ModelObjectsOfTypeOperation extends AbstractBinaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		@SuppressWarnings("null")
-		Collection<@Nullable ? extends Object> results = (Collection<@Nullable ? extends Object>)typedModelInstance.getObjectsOfType(type);
-		return createSetValue((CollectionTypeId)returnTypeId, results);
+		Iterable<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfType(type);
+		return createCollectionValue((CollectionTypeId)returnTypeId, true, (Collection<@Nullable ? extends Object>) results);
 	}
 }

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage
+ * @see org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage
  * @generated
  */
 public interface PForward2ReverseFactory extends EFactory {
@@ -28,6 +28,15 @@ public interface PForward2ReverseFactory extends EFactory {
 	 * @generated
 	 */
 	PForward2ReverseFactory eINSTANCE = org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReverseFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>Slist Head2list Head</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Slist Head2list Head</em>'.
+	 * @generated
+	 */
+	SlistHead2listHead createSlistHead2listHead();
 
 	/**
 	 * Returns a new object of class '<em>Telement2element</em>'.

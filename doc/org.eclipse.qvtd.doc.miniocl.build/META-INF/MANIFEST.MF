@@ -10,4 +10,8 @@ Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="[2.9.0,3.0.0)",
  org.eclipse.ocl.examples.build;bundle-version="[2.2.0,2.3.0)",
  org.eclipse.qvtd.cs2as.build;bundle-version="[0.14.0,1.0.0)",
  org.eclipse.qvtd.doc.minioclcs.xtext;bundle-version="[0.14.0,1.0.0)",
- org.eclipse.qvtd.doc.miniocl;bundle-version="[0.14.0,1.0.0)"
+ org.eclipse.qvtd.doc.miniocl;bundle-version="[0.14.0,1.0.0)",
+ org.eclipse.jdt.annotation,
+ org.apache.commons.logging,
+ org.eclipse.ocl.pivot,
+ org.eclipse.qvtd.runtime
