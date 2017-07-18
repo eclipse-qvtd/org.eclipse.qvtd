@@ -371,8 +371,8 @@ public class QVTrelationTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _DomainPattern__templateExpression = new EcoreExecutorProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, Types._DomainPattern, 0);
-		public static final @NonNull ExecutorProperty _DomainPattern__RelationDomain__pattern = new ExecutorPropertyWithImplementation("RelationDomain", Types._DomainPattern, 1, new EcoreLibraryOppositeProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__PATTERN));
+		public static final @NonNull ExecutorProperty _DomainPattern__relationDomain = new EcoreExecutorProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__RELATION_DOMAIN, Types._DomainPattern, 0);
+		public static final @NonNull ExecutorProperty _DomainPattern__templateExpression = new EcoreExecutorProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, Types._DomainPattern, 1);
 
 		public static final @NonNull ExecutorProperty _Key__identifies = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__IDENTIFIES, Types._Key, 0);
 		public static final @NonNull ExecutorProperty _Key__oppositePart = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__OPPOSITE_PART, Types._Key, 1);
@@ -393,9 +393,9 @@ public class QVTrelationTables
 		public static final @NonNull ExecutorProperty _RelationDomain__pattern = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__PATTERN, Types._RelationDomain, 1);
 		public static final @NonNull ExecutorProperty _RelationDomain__rootVariable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__ROOT_VARIABLE, Types._RelationDomain, 2);
 
-		public static final @NonNull ExecutorProperty _RelationDomainAssignment__valueExp = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, Types._RelationDomainAssignment, 0);
-		public static final @NonNull ExecutorProperty _RelationDomainAssignment__variable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VARIABLE, Types._RelationDomainAssignment, 1);
-		public static final @NonNull ExecutorProperty _RelationDomainAssignment__owner__defaultAssignment = new ExecutorPropertyWithImplementation("owner", Types._RelationDomainAssignment, 2, new EcoreLibraryOppositeProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__DEFAULT_ASSIGNMENT));
+		public static final @NonNull ExecutorProperty _RelationDomainAssignment__owner = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__OWNER, Types._RelationDomainAssignment, 0);
+		public static final @NonNull ExecutorProperty _RelationDomainAssignment__valueExp = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, Types._RelationDomainAssignment, 1);
+		public static final @NonNull ExecutorProperty _RelationDomainAssignment__variable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VARIABLE, Types._RelationDomainAssignment, 2);
 
 		public static final @NonNull ExecutorProperty _RelationImplementation__impl = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IMPL, Types._RelationImplementation, 0);
 		public static final @NonNull ExecutorProperty _RelationImplementation__inDirectionOf = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IN_DIRECTION_OF, Types._RelationImplementation, 1);
@@ -1144,6 +1144,7 @@ public class QVTrelationTables
 		}
 
 		private static final @NonNull ExecutorProperty @NonNull [] _DomainPattern = {
+			QVTrelationTables.Properties._DomainPattern__relationDomain,
 			QVTrelationTables.Properties._DomainPattern__templateExpression
 		};
 
@@ -1174,6 +1175,7 @@ public class QVTrelationTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RelationDomainAssignment = {
+			QVTrelationTables.Properties._RelationDomainAssignment__owner,
 			QVTrelationTables.Properties._RelationDomainAssignment__valueExp,
 			QVTrelationTables.Properties._RelationDomainAssignment__variable
 		};

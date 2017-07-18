@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getRelationDomain <em>Relation Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getTemplateExpression <em>Template Expression</em>}</li>
  * </ul>
  *
@@ -30,6 +31,35 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * @generated
  */
 public interface DomainPattern extends Pattern {
+	/**
+	 * Returns the value of the '<em><b>Relation Domain</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern <em>Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Relation Domain</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Relation Domain</em>' container reference.
+	 * @see #setRelationDomain(RelationDomain)
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getDomainPattern_RelationDomain()
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern
+	 * @model opposite="pattern" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!DomainPattern!relationDomain'"
+	 * @generated
+	 */
+	RelationDomain getRelationDomain();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getRelationDomain <em>Relation Domain</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Relation Domain</em>' container reference.
+	 * @see #getRelationDomain()
+	 * @generated
+	 */
+	void setRelationDomain(RelationDomain value);
+
 	/**
 	 * Returns the value of the '<em><b>Template Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -34,6 +35,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 
@@ -45,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainAssignmentImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainAssignmentImpl#getValueExp <em>Value Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainAssignmentImpl#getVariable <em>Variable</em>}</li>
  * </ul>
@@ -89,6 +92,49 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationDomain getOwner() {
+		if (eContainerFeatureID() != QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER) return null;
+		return (RelationDomain)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwner(RelationDomain newOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwner, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwner(RelationDomain newOwner) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER && newOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwner != null)
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, RelationDomain.class, msgs);
+			msgs = basicSetOwner(newOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER, newOwner, newOwner));
 	}
 
 	/**
@@ -232,8 +278,26 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwner((RelationDomain)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				return basicSetOwner(null, msgs);
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
 				return basicSetValueExp(null, msgs);
 		}
@@ -246,8 +310,24 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				return eInternalContainer().eInverseRemove(this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, RelationDomain.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				return getOwner();
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
 				return getValueExp();
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
@@ -265,6 +345,9 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				setOwner((RelationDomain)newValue);
+				return;
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
 				setValueExp((OCLExpression)newValue);
 				return;
@@ -283,6 +366,9 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				setOwner((RelationDomain)null);
+				return;
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
 				setValueExp((OCLExpression)null);
 				return;
@@ -301,6 +387,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+				return getOwner() != null;
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
 				return valueExp != null;
 			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:

@@ -15,11 +15,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
@@ -31,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.DomainPatternImpl#getRelationDomain <em>Relation Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.DomainPatternImpl#getTemplateExpression <em>Template Expression</em>}</li>
  * </ul>
  *
@@ -64,6 +67,49 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationPackage.Literals.DOMAIN_PATTERN;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationDomain getRelationDomain() {
+		if (eContainerFeatureID() != QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN) return null;
+		return (RelationDomain)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRelationDomain(RelationDomain newRelationDomain, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newRelationDomain, QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRelationDomain(RelationDomain newRelationDomain) {
+		if (newRelationDomain != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN && newRelationDomain != null)) {
+			if (EcoreUtil.isAncestor(this, newRelationDomain))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newRelationDomain != null)
+				msgs = ((InternalEObject)newRelationDomain).eInverseAdd(this, QVTrelationPackage.RELATION_DOMAIN__PATTERN, RelationDomain.class, msgs);
+			msgs = basicSetRelationDomain(newRelationDomain, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN, newRelationDomain, newRelationDomain));
 	}
 
 	/**
@@ -117,8 +163,26 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetRelationDomain((RelationDomain)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				return basicSetRelationDomain(null, msgs);
 			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
 				return basicSetTemplateExpression(null, msgs);
 		}
@@ -131,8 +195,24 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				return eInternalContainer().eInverseRemove(this, QVTrelationPackage.RELATION_DOMAIN__PATTERN, RelationDomain.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				return getRelationDomain();
 			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
 				return getTemplateExpression();
 		}
@@ -147,6 +227,9 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				setRelationDomain((RelationDomain)newValue);
+				return;
 			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
 				setTemplateExpression((TemplateExp)newValue);
 				return;
@@ -162,6 +245,9 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				setRelationDomain((RelationDomain)null);
+				return;
 			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
 				setTemplateExpression((TemplateExp)null);
 				return;
@@ -177,6 +263,8 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+				return getRelationDomain() != null;
 			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
 				return templateExpression != null;
 		}

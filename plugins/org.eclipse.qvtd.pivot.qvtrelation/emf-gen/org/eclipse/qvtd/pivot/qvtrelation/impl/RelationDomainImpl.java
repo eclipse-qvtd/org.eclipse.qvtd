@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -115,7 +115,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	@Override
 	public @NonNull EList<RelationDomainAssignment> getDefaultAssignment() {
 		if (defaultAssignment == null) {
-			defaultAssignment = new EObjectContainmentEList<RelationDomainAssignment>(RelationDomainAssignment.class, this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
+			defaultAssignment = new EObjectContainmentWithInverseEList<RelationDomainAssignment>(RelationDomainAssignment.class, this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER);
 		}
 		return defaultAssignment;
 	}
@@ -129,7 +129,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	@Override
 	public @NonNull EList<DomainPattern> getPattern() {
 		if (pattern == null) {
-			pattern = new EObjectContainmentEList<DomainPattern>(DomainPattern.class, this, QVTrelationPackage.RELATION_DOMAIN__PATTERN);
+			pattern = new EObjectContainmentWithInverseEList<DomainPattern>(DomainPattern.class, this, QVTrelationPackage.RELATION_DOMAIN__PATTERN, QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN);
 		}
 		return pattern;
 	}
@@ -208,6 +208,23 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			symbol_0 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDefaultAssignment()).basicAdd(otherEnd, msgs);
+			case QVTrelationPackage.RELATION_DOMAIN__PATTERN:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPattern()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

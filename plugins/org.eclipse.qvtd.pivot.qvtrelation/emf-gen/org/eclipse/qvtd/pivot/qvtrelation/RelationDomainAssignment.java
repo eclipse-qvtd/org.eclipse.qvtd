@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.Variable;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getValueExp <em>Value Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getVariable <em>Variable</em>}</li>
  * </ul>
@@ -34,6 +35,35 @@ import org.eclipse.ocl.pivot.Variable;
  * @generated
  */
 public interface RelationDomainAssignment extends Element {
+	/**
+	 * Returns the value of the '<em><b>Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getDefaultAssignment <em>Default Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owner</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owner</em>' container reference.
+	 * @see #setOwner(RelationDomain)
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomainAssignment_Owner()
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getDefaultAssignment
+	 * @model opposite="defaultAssignment" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomainAssignment!owner'"
+	 * @generated
+	 */
+	RelationDomain getOwner();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getOwner <em>Owner</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owner</em>' container reference.
+	 * @see #getOwner()
+	 * @generated
+	 */
+	void setOwner(RelationDomain value);
+
 	/**
 	 * Returns the value of the '<em><b>Value Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

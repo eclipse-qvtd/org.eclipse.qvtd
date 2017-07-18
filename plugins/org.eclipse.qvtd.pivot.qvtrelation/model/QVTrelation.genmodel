@@ -18,6 +18,7 @@
       contentTypeIdentifier="org.eclipse.qvtd.qvtrelation" fileExtensions="qvtras"
       ecorePackage="QVTrelation.ecore#P-qvtrelation">
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-DomainPattern">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-DomainPattern-relationDomain"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-DomainPattern-templateExpression"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-Key">
@@ -91,6 +92,7 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationDomainAssignment">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomainAssignment-owner"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomainAssignment-valueExp"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomainAssignment-variable"/>
       <genOperations ecoreOperation="QVTrelation.ecore#//RelationDomainAssignment/validateCompatibleTypeForValue">

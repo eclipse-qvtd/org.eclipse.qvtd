@@ -213,8 +213,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainPattern_TemplateExpression() {
+	public EReference getDomainPattern_RelationDomain() {
 		return (EReference)domainPatternEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDomainPattern_TemplateExpression() {
+		return (EReference)domainPatternEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -533,7 +543,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationDomainAssignment_ValueExp() {
+	public EReference getRelationDomainAssignment_Owner() {
 		return (EReference)relationDomainAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -543,8 +553,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationDomainAssignment_Variable() {
+	public EReference getRelationDomainAssignment_ValueExp() {
 		return (EReference)relationDomainAssignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelationDomainAssignment_Variable() {
+		return (EReference)relationDomainAssignmentEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -687,6 +707,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		// Create classes and their features
 		domainPatternEClass = createEClass(DOMAIN_PATTERN);
+		createEReference(domainPatternEClass, DOMAIN_PATTERN__RELATION_DOMAIN);
 		createEReference(domainPatternEClass, DOMAIN_PATTERN__TEMPLATE_EXPRESSION);
 
 		keyEClass = createEClass(KEY);
@@ -724,6 +745,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEOperation(relationDomainEClass, RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
 
 		relationDomainAssignmentEClass = createEClass(RELATION_DOMAIN_ASSIGNMENT);
+		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__OWNER);
 		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP);
 		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VARIABLE);
 		createEOperation(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
@@ -791,6 +813,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(domainPatternEClass, DomainPattern.class, "DomainPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDomainPattern_RelationDomain(), this.getRelationDomain(), this.getRelationDomain_Pattern(), "relationDomain", null, 1, 1, DomainPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainPattern_TemplateExpression(), theQVTtemplatePackage.getTemplateExp(), null, "templateExpression", null, 0, 1, DomainPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(keyEClass, Key.class, "Key", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -910,8 +933,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(relationDomainEClass, RelationDomain.class, "RelationDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationDomain_DefaultAssignment(), this.getRelationDomainAssignment(), null, "defaultAssignment", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getRelationDomain_Pattern(), this.getDomainPattern(), null, "pattern", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationDomain_DefaultAssignment(), this.getRelationDomainAssignment(), this.getRelationDomainAssignment_Owner(), "defaultAssignment", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getRelationDomain_Pattern(), this.getDomainPattern(), this.getDomainPattern_RelationDomain(), "pattern", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationDomain_RootVariable(), thePivotPackage.getVariable(), null, "rootVariable", null, 1, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRelationDomainAssignmentsAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -924,6 +947,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(relationDomainAssignmentEClass, RelationDomainAssignment.class, "RelationDomainAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRelationDomainAssignment_Owner(), this.getRelationDomain(), this.getRelationDomain_DefaultAssignment(), "owner", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationDomainAssignment_ValueExp(), thePivotPackage.getOCLExpression(), null, "valueExp", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationDomainAssignment_Variable(), thePivotPackage.getVariable(), null, "variable", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1035,12 +1059,6 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 			source,
 			new String[] {
 				"body", "relationCallExp"
-		});
-		addAnnotation
-		(getRelationDomain_DefaultAssignment(),
-			source,
-			new String[] {
-				"body", "owner"
 		});
 		addAnnotation
 		(getRelationDomainAssignment_ValueExp(),

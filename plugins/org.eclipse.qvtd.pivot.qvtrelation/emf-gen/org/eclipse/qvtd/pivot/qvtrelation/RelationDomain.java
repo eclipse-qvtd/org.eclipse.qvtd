@@ -39,6 +39,7 @@ public interface RelationDomain extends Domain {
 	/**
 	 * Returns the value of the '<em><b>Default Assignment</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Default Assignment</em>' containment reference list isn't clear,
@@ -47,8 +48,8 @@ public interface RelationDomain extends Domain {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default Assignment</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_DefaultAssignment()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owner'"
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getOwner
+	 * @model opposite="owner" containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!defaultAssignment'"
 	 * @generated
 	 */
@@ -57,6 +58,7 @@ public interface RelationDomain extends Domain {
 	/**
 	 * Returns the value of the '<em><b>Pattern</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getRelationDomain <em>Relation Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Pattern</em>' containment reference isn't clear,
@@ -65,7 +67,8 @@ public interface RelationDomain extends Domain {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pattern</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_Pattern()
-	 * @model containment="true"
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getRelationDomain
+	 * @model opposite="relationDomain" containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!pattern'"
 	 * @generated
 	 */

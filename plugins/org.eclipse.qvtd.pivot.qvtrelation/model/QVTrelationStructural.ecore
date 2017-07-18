@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmi:id="P.qvtrelation" name="qvtrelation" nsURI="http://www.eclipse.org/qvt/2015/QVTrelation" nsPrefix="qvtr">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="P.qvtrelation" name="qvtrelation" nsURI="http://www.eclipse.org/qvt/2015/QVTrelation"
+    nsPrefix="qvtr">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
     <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
@@ -8,6 +9,8 @@
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T.qvtrelation.DomainPattern" name="DomainPattern"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Pattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationDomain" lowerBound="1"
+        eType="#T.qvtrelation.RelationDomain" eOpposite="#p.qvtrelation.RelationDomain.pattern"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="p.qvtrelation.DomainPattern.templateExpression"
         name="templateExpression" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore#T-qvttemplate-TemplateExp"
         containment="true"/>
@@ -80,18 +83,21 @@
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Domain">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="p.qvtrelation.RelationDomain.defaultAssignment"
         name="defaultAssignment" ordered="false" upperBound="-1" eType="#T.qvtrelation.RelationDomainAssignment"
-        containment="true">
+        containment="true" eOpposite="#//RelationDomainAssignment/owner">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="owner"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="p.qvtrelation.RelationDomain.pattern"
-        name="pattern" upperBound="-1" eType="#T.qvtrelation.DomainPattern" containment="true"/>
+        name="pattern" upperBound="-1" eType="#T.qvtrelation.DomainPattern" containment="true"
+        eOpposite="#//DomainPattern/relationDomain"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="p.qvtrelation.RelationDomain.rootVariable"
         name="rootVariable" lowerBound="1" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T.qvtrelation.RelationDomainAssignment"
       name="RelationDomainAssignment" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#T.qvtrelation.RelationDomain"
+        eOpposite="#p.qvtrelation.RelationDomain.defaultAssignment"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="p.qvtrelation.RelationDomainAssignment.valueExp"
         name="valueExp" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">

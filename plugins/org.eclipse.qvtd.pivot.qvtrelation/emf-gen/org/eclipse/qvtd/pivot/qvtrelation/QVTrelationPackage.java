@@ -140,13 +140,22 @@ public interface QVTrelationPackage extends EPackage {
 	int DOMAIN_PATTERN__BINDS_TO = QVTbasePackage.PATTERN__BINDS_TO;
 
 	/**
+	 * The feature id for the '<em><b>Relation Domain</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_PATTERN__RELATION_DOMAIN = QVTbasePackage.PATTERN_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Template Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN__TEMPLATE_EXPRESSION = QVTbasePackage.PATTERN_FEATURE_COUNT + 0;
+	int DOMAIN_PATTERN__TEMPLATE_EXPRESSION = QVTbasePackage.PATTERN_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Domain Pattern</em>' class.
@@ -155,7 +164,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN_FEATURE_COUNT = QVTbasePackage.PATTERN_FEATURE_COUNT + 1;
+	int DOMAIN_PATTERN_FEATURE_COUNT = QVTbasePackage.PATTERN_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1027,13 +1036,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN_ASSIGNMENT__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Owner</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_DOMAIN_ASSIGNMENT__OWNER = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Value Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -1042,7 +1060,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT__VARIABLE = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int RELATION_DOMAIN_ASSIGNMENT__VARIABLE = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Relation Domain Assignment</em>' class.
@@ -1051,7 +1069,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int RELATION_DOMAIN_ASSIGNMENT_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2132,6 +2150,17 @@ public interface QVTrelationPackage extends EPackage {
 	EClass getDomainPattern();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getRelationDomain <em>Relation Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Relation Domain</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getRelationDomain()
+	 * @see #getDomainPattern()
+	 * @generated
+	 */
+	EReference getDomainPattern_RelationDomain();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getTemplateExpression <em>Template Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2467,6 +2496,17 @@ public interface QVTrelationPackage extends EPackage {
 	EClass getRelationDomainAssignment();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getOwner <em>Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owner</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getOwner()
+	 * @see #getRelationDomainAssignment()
+	 * @generated
+	 */
+	EReference getRelationDomainAssignment_Owner();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#getValueExp <em>Value Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2633,6 +2673,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DOMAIN_PATTERN = eINSTANCE.getDomainPattern();
+
+		/**
+		 * The meta object literal for the '<em><b>Relation Domain</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_PATTERN__RELATION_DOMAIN = eINSTANCE.getDomainPattern_RelationDomain();
 
 		/**
 		 * The meta object literal for the '<em><b>Template Expression</b></em>' containment reference feature.
@@ -2899,6 +2947,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RELATION_DOMAIN_ASSIGNMENT = eINSTANCE.getRelationDomainAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATION_DOMAIN_ASSIGNMENT__OWNER = eINSTANCE.getRelationDomainAssignment_Owner();
 
 		/**
 		 * The meta object literal for the '<em><b>Value Exp</b></em>' containment reference feature.
