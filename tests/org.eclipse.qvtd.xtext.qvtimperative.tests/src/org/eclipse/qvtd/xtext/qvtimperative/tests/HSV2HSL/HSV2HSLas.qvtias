@@ -199,51 +199,47 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.3" elementType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.3">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.4 #//@ownedPackages.1/@ownedClasses.3"
-        elementType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" isNullFree="true">
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.4 #//@ownedPackages.1/@ownedClasses.3" isNullFree="true">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.5 #//@ownedPackages.1/@ownedClasses.6"
-        elementType="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode" isNullFree="true">
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.5 #//@ownedPackages.1/@ownedClasses.6" isNullFree="true">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7" elementType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7" elementType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8" elementType="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode">
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8" elementType="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode">
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class HSV2HSL.ecore.oclas#T.HSV2HSL.HSVNode2HSLNode" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>

@@ -177,66 +177,60 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.3" elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-        isNullFree="true">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.3" isNullFree="true">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.4 #//@ownedPackages.1/@ownedClasses.5"
-        elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element" isNullFree="true">
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.4 #//@ownedPackages.1/@ownedClasses.5" isNullFree="true">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.6 #//@ownedPackages.1/@ownedClasses.7"
-        elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element" isNullFree="true">
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.6 #//@ownedPackages.1/@ownedClasses.7" isNullFree="true">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8" elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.9" elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.9">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.9" elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.9">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.10" elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.10">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.10" elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.10">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph">
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>

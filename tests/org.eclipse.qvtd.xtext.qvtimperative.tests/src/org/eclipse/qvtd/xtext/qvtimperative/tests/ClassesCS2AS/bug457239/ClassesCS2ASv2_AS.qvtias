@@ -50,19 +50,18 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1" elementType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1"
         isNullFree="true">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS">
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
