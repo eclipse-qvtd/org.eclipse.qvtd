@@ -10,21 +10,42 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.values.TemplateParameterSubstitutions;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
+import com.google.common.collect.Lists;
 
 /**
  * <!-- begin-user-doc -->
@@ -337,5 +358,158 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationImplementation(this);
+	}
+
+	private OCL ocl = null;
+	private Map<@NonNull String, @NonNull String> importName2importURI = null;
+	private Set<@NonNull String> allImportURIs = null;
+
+	public void dispose() {
+		eResource().getContents().remove(this);
+		ocl.dispose();
+		ocl = null;
+		importName2importURI = null;
+		allImportURIs = null;
+	}
+
+	protected OCL getOCL() {
+		if (ocl == null) {
+			QVTrelationPivotStandaloneSetup.init();
+			ocl = OCL.newInstance();
+			importName2importURI = new HashMap<>();
+			allImportURIs = new HashSet<>();
+		}
+		return ocl;
+	}
+
+	public @Nullable Type getCommonType(@NonNull Type leftType, @NonNull Type rightType) {
+		return getMetamodelManager().getCommonType(leftType, TemplateParameterSubstitutions.EMPTY, rightType, TemplateParameterSubstitutions.EMPTY);
+	}
+
+	public @Nullable Type getLibraryType1(@NonNull Type unspecializedType, @NonNull Type parameterType1) {
+		List<@NonNull Type> list = Lists.newArrayList(parameterType1);
+		return getMetamodelManager().getLibraryType((org.eclipse.ocl.pivot.@NonNull Class)unspecializedType, list);
+	}
+
+	public @Nullable Type getLibraryType2(@NonNull Type unspecializedType, @NonNull Type parameterType1, @NonNull Type parameterType2) {
+		List<@NonNull Type> list = Lists.newArrayList(parameterType1, parameterType2);
+		return getMetamodelManager().getLibraryType((org.eclipse.ocl.pivot.@NonNull Class)unspecializedType, list);
+	}
+
+	//	public @Nullable Type getLibraryType(org.eclipse.ocl.pivot.@NonNull Class unspecializedType, @NonNull Type... parameterTypes) {
+	//		List<@NonNull Type> list = Lists.newArrayList(parameterTypes);
+	//		return getMetamodelManager().getLibraryType(unspecializedType, list);
+	//	}
+
+	protected @NonNull PivotMetamodelManager getMetamodelManager() {
+		return (PivotMetamodelManager) getOCL().getEnvironmentFactory().getMetamodelManager();			// FIXME avoid this cast
+	}
+
+	public @Nullable Element getType(@NonNull String modelName, @NonNull String typeName) {
+		String importURI = getImportName2ImportURI().get(modelName);
+		if (importURI != null) {
+			org.eclipse.ocl.pivot.Package asPackage = resolveURI(importURI);
+			if (asPackage != null) {
+				org.eclipse.ocl.pivot.Class asClass = NameUtil.getNameable(asPackage.getOwnedClasses(), typeName);
+				if (asClass != null) {
+					return asClass;
+				}
+			}
+		}
+		HashSet<@NonNull String> otherURIs = new HashSet<>(getAllImportURIs());
+		//		otherURIs.removeAll(getImportName2ImportURI().values());
+		for (String anyURI : otherURIs) {
+			org.eclipse.ocl.pivot.Package asPackage = resolveURI(anyURI);
+			if (asPackage != null) {
+				org.eclipse.ocl.pivot.Class asClass = NameUtil.getNameable(asPackage.getOwnedClasses(), typeName);
+				if (asClass != null) {
+					return asClass;
+				}
+			}
+		}
+		return null;
+	}
+
+	public @Nullable Iteration computeReferredIteration(@NonNull Type sourceType, @NonNull String opName, int itSize) {
+		CompleteClass sourceCompleteClass = getOCL().getEnvironmentFactory().getCompleteModel().getCompleteClass(sourceType);
+		Iterable<@NonNull Operation> operations = sourceCompleteClass.getOperations(FeatureFilter.SELECT_NON_STATIC, opName);
+		for (@NonNull Operation op : operations) {
+			if (op instanceof Iteration) {
+				Iteration it = (Iteration)op;
+				if (it.getOwnedIterators().size() == itSize) {
+					return it;
+				}
+			}
+		}
+		return null;
+	}
+
+	public @Nullable Operation computeReferredOperation(@NonNull Type sourceType, @NonNull String opName, @NonNull List<Type> argTypes) {
+		//		@NonNull Type[] argTypeArray = argTypes.toArray(new @NonNull Type[argTypes.size()]);
+		//		OperationId operationId = sourceType.getTypeId().getOperationId(0, opName, IdManager.getParametersId(argTypeArray));
+		CompleteClass sourceCompleteClass = getOCL().getEnvironmentFactory().getCompleteModel().getCompleteClass(sourceType);
+		//		return sourceCompleteClass.getOperation(operationId);
+		Iterable<@NonNull Operation> operations = sourceCompleteClass.getOperations(FeatureFilter.SELECT_NON_STATIC, opName);
+		// FIXME resolve correct overload
+		return operations.iterator().next();
+	}
+
+	public @Nullable Property computeReferredProperty(@NonNull Type sourceType, @NonNull String propName) {
+		CompleteClass sourceCompleteClass = getOCL().getEnvironmentFactory().getCompleteModel().getCompleteClass(sourceType);
+		return sourceCompleteClass.getProperty(propName);
+	}
+
+	//	public @NonNull List<@NonNull String> getImports() {
+	//		return new ArrayList<>(getImportName2ImportURI().keySet());
+	//	}
+
+	private @NonNull Set<@NonNull String> getAllImportURIs() {
+		getOCL();
+		Set<@NonNull String> allImportURIs2 = allImportURIs;
+		assert allImportURIs2 != null;;
+		return allImportURIs2;
+	}
+
+	private @NonNull Map<@NonNull String, @NonNull String> getImportName2ImportURI() {
+		getOCL();
+		Map<@NonNull String, @NonNull String> importName2importURI2 = importName2importURI;
+		assert importName2importURI2 != null;;
+		return importName2importURI2;
+	}
+
+	public Boolean loadImports(@NonNull EObject module, @NonNull List<@NonNull String> commentsBefore) {
+		Set<@NonNull String> allImportURIs2 = getAllImportURIs();
+		Map<@NonNull String, @NonNull String> importName2importURI2 = getImportName2ImportURI();
+		for (@NonNull String comment : commentsBefore) {
+			String trimmedComment = comment.trim();
+			if (trimmedComment.startsWith("--")) {
+				trimmedComment = trimmedComment.substring(2).trim();
+				if (trimmedComment.startsWith("@nsURI")) {
+					trimmedComment = trimmedComment.substring(6).trim();
+					int index = trimmedComment.indexOf("=");
+					if (index >= 0) {
+						String key = trimmedComment.substring(0, index).trim();
+						String value = trimmedComment.substring(index+1).trim();
+						importName2importURI2.put(key, value);
+						if (!allImportURIs.contains(value)) {
+							allImportURIs2.add(value);
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public org.eclipse.ocl.pivot.Package resolveImport(@NonNull String key) {
+		Map<@NonNull String, @NonNull String> importName2importURI2 = getImportName2ImportURI();
+		String nsURI = importName2importURI2.get(key);
+		return nsURI != null ? resolveURI(nsURI) : null;
+	}
+
+	public org.eclipse.ocl.pivot.Package resolveURI(@NonNull String nsURI) {
+		EPackage ePackage = getOCL().getResourceSet().getPackageRegistry().getEPackage(nsURI);
+		org.eclipse.ocl.pivot.Package asPackage = getOCL().getMetamodelManager().getASOfEcore(org.eclipse.ocl.pivot.Package.class, ePackage);
+		return asPackage;
 	}
 } //RelationImplementationImpl
