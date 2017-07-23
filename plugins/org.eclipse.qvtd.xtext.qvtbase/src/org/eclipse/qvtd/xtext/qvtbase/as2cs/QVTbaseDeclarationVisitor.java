@@ -62,8 +62,8 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 			MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
 			if (!asTypedElement.isIsRequired()) {
 				csMultiplicity.setLowerBound(0);
+				csMultiplicity.setUpperBound(1);
 			}
-			csMultiplicity.setUpperBound(1);
 			csTypeRef.setOwnedMultiplicity(csMultiplicity);
 		}
 		else if (csTypeRef != null) {
