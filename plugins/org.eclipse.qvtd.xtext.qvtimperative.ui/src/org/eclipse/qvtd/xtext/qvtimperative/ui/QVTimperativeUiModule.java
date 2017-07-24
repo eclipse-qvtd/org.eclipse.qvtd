@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
+import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.model.QVTimperativeDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
@@ -19,6 +20,9 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
  */
 public class QVTimperativeUiModule extends AbstractQVTimperativeUiModule
 {
+	public static final String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtimperative.ui";
+	public static final String EDITOR_ID = QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE;
+
 	public QVTimperativeUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}

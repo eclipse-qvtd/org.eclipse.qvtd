@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.ui.model.BaseCSorASDocumentProvider;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationUiModule;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 
 /**
@@ -42,5 +43,10 @@ public class QVTrelationDocumentProvider extends BaseCSorASDocumentProvider
 	@Override
 	protected @NonNull String getFileExtension() {
 		return "qvtr";
+	}
+
+	@Override
+	protected String getPluginId() {
+		return QVTrelationUiModule.PLUGIN_ID;
 	}
 }

@@ -16,11 +16,12 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.ui.model.BaseCSorASDocumentProvider;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreUiModule;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 
 /**
  * QVTcoreDocumentProvider orchestrates the load and saving of optional XMI content
- * externally while maintaining the serialised human friendly form internally. 
+ * externally while maintaining the serialised human friendly form internally.
  */
 public class QVTcoreDocumentProvider extends BaseCSorASDocumentProvider
 {
@@ -42,5 +43,10 @@ public class QVTcoreDocumentProvider extends BaseCSorASDocumentProvider
 	@Override
 	protected @NonNull String getFileExtension() {
 		return "qvtc";
+	}
+
+	@Override
+	protected String getPluginId() {
+		return QVTcoreUiModule.PLUGIN_ID;
 	}
 }

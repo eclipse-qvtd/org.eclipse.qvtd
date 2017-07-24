@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
  */
 public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQVTcoreUiModule
 {
+	public static final String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtcore.ui";
 	public static final String EDITOR_ID = QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE;
 
 	public QVTcoreUiModule(AbstractUIPlugin plugin) {
