@@ -39,7 +39,7 @@
                       <xsl:text>Eclipse QVTd </xsl:text><xsl:value-of select="//releaseinfo"/>
               </xsl:when>
               <xsl:otherwise>
-                  Eclipse QVTd 0.14.0
+                  Eclipse QVTd 0.15.0
               </xsl:otherwise>
           </xsl:choose>
       </xsl:variable>
