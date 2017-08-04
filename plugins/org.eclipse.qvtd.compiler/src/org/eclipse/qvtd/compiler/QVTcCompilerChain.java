@@ -43,6 +43,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 			if (missingOperationCallSources != null) {
 				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
+			checkForProxyURIs(cResource);
 			compiled(cResource);
 			return cResource;
 		}

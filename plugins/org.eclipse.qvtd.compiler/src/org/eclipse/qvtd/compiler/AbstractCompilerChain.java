@@ -13,6 +13,8 @@ package org.eclipse.qvtd.compiler;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +26,11 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
@@ -289,9 +293,21 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 	}
 
-	@Override
-	public @Nullable URI basicGetURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
-		return getOption(stepKey, URI_KEY);
+	public static void checkForProxyURIs(@NonNull Resource resource) throws CompilerChainException {
+		Map<EObject, Collection<Setting>> unresolvedCrossReferences = EcoreUtil.UnresolvedProxyCrossReferencer.find(resource);
+		if ((unresolvedCrossReferences != null) && (unresolvedCrossReferences.size() > 0)) {
+			List<@NonNull String> proxyURIs = new ArrayList<>();
+			for (EObject eObject : unresolvedCrossReferences.keySet()) {
+				proxyURIs.add(String.valueOf(EcoreUtil.getURI(eObject)));
+			}
+			Collections.sort(proxyURIs);
+			StringBuilder s = new StringBuilder();
+			s.append("Unresolved proxyURIs in " + resource.getURI());
+			for (@NonNull String proxyURI : proxyURIs) {
+				s.append("\n\t" + proxyURI);
+			}
+			throw new CompilerChainException(s.toString());
+		}
 	}
 
 	public static @Nullable String getDefaultExtension(@NonNull String key) {
@@ -407,6 +423,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		if (!listeners2.contains(listener)) {
 			listeners2.add(listener);
 		}
+	}
+
+	@Override
+	public @Nullable URI basicGetURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
+		return getOption(stepKey, URI_KEY);
 	}
 
 	@Override

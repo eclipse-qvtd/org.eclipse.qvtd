@@ -55,6 +55,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			if (missingOperationCallSources != null) {
 				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
+			checkForProxyURIs(rResource);
 			compiled(rResource);
 			//			saveResource(rResource, QVTR_STEP); -- causes test failures
 			return rResource;

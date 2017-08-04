@@ -36,6 +36,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 		public @NonNull ImperativeTransformation execute(@NonNull URI txURI) throws IOException {
 			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, false);
 			Resource iResource = ClassUtil.nonNullState(asTransformation.eResource());
+			checkForProxyURIs(iResource);
 			compiled(iResource);
 			return asTransformation;
 		}
