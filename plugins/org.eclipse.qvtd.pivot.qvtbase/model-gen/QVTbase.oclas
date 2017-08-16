@@ -1,279 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" name="QVTbase.ecore">
-  <ownedPackages xmi:id="P.qvtbase" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
-    <ownedClasses xmi:id="T.qvtbase.BaseModel" name="BaseModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model"/>
-    <ownedClasses xmi:id="T.qvtbase.Domain" isAbstract="true" name="Domain" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ReferringElement">
-      <ownedInvariants xmi:id="ciqvtbase.Domain.NameIsTypedModelName" isCallable="true" name="NameIsTypedModelName">
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" xmi:id="AAAAA" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" name="QVTbase.ecore">
+  <ownedPackages xmi:id="6+ray" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
+    <ownedClasses xmi:id="Phhr+" name="BaseModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#aKB,e"/>
+    <ownedClasses xmi:id="7pR2u" isAbstract="true" name="Domain" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#dXAFV">
+      <ownedInvariants xmi:id="G93EB" isCallable="true" name="NameIsTypedModelName">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;typedModel &lt;> null implies name = typedModel.name&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Domain.TypedModelIsTransformationModelParameter" isCallable="true" name="TypedModelIsTransformationModelParameter">
+      <ownedInvariants xmi:id="5OsGZ" isCallable="true" name="TypedModelIsTransformationModelParameter">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;oclContainer().oclIsKindOf(Transformation) and typedModel &lt;> null implies&#xA;&#x9;oclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="p.qvtbase.Domain.isCheckable" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
-      <ownedProperties xmi:id="p.qvtbase.Domain.isEnforceable" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
-      <ownedProperties xmi:id="p.qvtbase.Domain.rule" isTransient="true" name="rule" opposite="#p.qvtbase.Rule.domain" type="#T.qvtbase.Rule"/>
-      <ownedProperties xmi:id="p.qvtbase.Domain.typedModel" isRequired="false" name="typedModel" opposite="#p.qvtbase.TypedModel.Domain"
-          type="#T.qvtbase.TypedModel"/>
+      <ownedProperties xmi:id=",1+xi" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
+      <ownedProperties xmi:id="ZXmmB" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
+      <ownedProperties xmi:id=",11ob" isTransient="true" name="rule" opposite="#nw+6e" type="#zS2p0"/>
+      <ownedProperties xmi:id="CBqPj" isRequired="false" name="typedModel" opposite="#TPm6," type="#WqJYx"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.Function" name="Function" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation">
-      <ownedInvariants xmi:id="ciqvtbase.Function.ParametersAreFunctionParameter" isCallable="true" name="ParametersAreFunctionParameter">
+    <ownedClasses xmi:id="PGjqK" name="Function" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Yz,F1">
+      <ownedInvariants xmi:id="S1Iog" isCallable="true" name="ParametersAreFunctionParameter">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedParameters->forAll(oclIsKindOf(FunctionParameter))&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Function.ReturnTypeIsQueryType" isCallable="true" name="ReturnTypeIsQueryType">
+      <ownedInvariants xmi:id="5hGIF" isCallable="true" name="ReturnTypeIsQueryType">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies type = queryExpression.type&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="p.qvtbase.Function.queryExpression" isComposite="true" isRequired="false" name="queryExpression" opposite="#p.pivot.OCLExpression.Function"
-          type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.OCLExpression"/>
+      <ownedProperties xmi:id="zUxun" isComposite="true" isRequired="false" name="queryExpression" opposite="#N9fOm" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.FunctionParameter" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter"/>
-    <ownedClasses xmi:id="T.qvtbase.Pattern" name="Pattern" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Element">
-      <ownedProperties xmi:id="p.qvtbase.Pattern.bindsTo" name="bindsTo" opposite="#p.pivot.Variable.Pattern" type="#//@ownedPackages.2/@ownedClasses.19"/>
-      <ownedProperties xmi:id="p.qvtbase.Pattern.predicate" isComposite="true" name="predicate" opposite="#p.qvtbase.Predicate.pattern"
-          type="#//@ownedPackages.2/@ownedClasses.20"/>
+    <ownedClasses xmi:id="owsj9" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#as9eG"/>
+    <ownedClasses xmi:id="H0dko" name="Pattern" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
+      <ownedProperties xmi:id="Eakqg" name="bindsTo" opposite="#YwYCh" type="#+iD8q"/>
+      <ownedProperties xmi:id="qg,Ng" isComposite="true" name="predicate" opposite="#faTDd" type="#XYdvW"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.Predicate" name="Predicate" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Element">
-      <ownedInvariants xmi:id="ciqvtbase.Predicate.ConditionIsBoolean" isCallable="true" name="ConditionIsBoolean">
+    <ownedClasses xmi:id="uMSmb" name="Predicate" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
+      <ownedInvariants xmi:id="xFRwU" isCallable="true" name="ConditionIsBoolean">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;conditionExpression.type = Boolean&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="p.qvtbase.Predicate.conditionExpression" isComposite="true" name="conditionExpression" opposite="#p.pivot.OCLExpression.predicate"
-          type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.OCLExpression"/>
-      <ownedProperties xmi:id="p.qvtbase.Predicate.pattern" isTransient="true" name="pattern" opposite="#p.qvtbase.Pattern.predicate"
-          type="#T.qvtbase.Pattern"/>
+      <ownedProperties xmi:id="iEcp5" isComposite="true" name="conditionExpression" opposite="#R0cad" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+      <ownedProperties xmi:id="faTDd" isTransient="true" name="pattern" opposite="#qg,Ng" type="#H0dko"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.Rule" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
-      <ownedInvariants xmi:id="ciqvtbase.Rule.DomainNameIsUnique" isCallable="true" name="DomainNameIsUnique">
+    <ownedClasses xmi:id="zS2p0" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
+      <ownedInvariants xmi:id="JBzn4" isCallable="true" name="DomainNameIsUnique">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;domain->isUnique(name)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Rule.NoOverridesCycle" isCallable="true" name="NoOverridesCycle">
+      <ownedInvariants xmi:id=",MTyQ" isCallable="true" name="NoOverridesCycle">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overridden->closure(overridden)->excludes(self)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Rule.OverridingRuleOverridesAllDomains" isCallable="true" name="OverridingRuleOverridesAllDomains">
+      <ownedInvariants xmi:id="PB949" isCallable="true" name="OverridingRuleOverridesAllDomains">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overridden &lt;> null implies&#xA;&#x9;overridden.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="p.qvtbase.Rule.domain" isComposite="true" name="domain" opposite="#p.qvtbase.Domain.rule" type="#//@ownedPackages.2/@ownedClasses.14"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.isAbstract" defaultValueString="false" name="isAbstract" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.overridden" isRequired="false" name="overridden" opposite="#p.qvtbase.Rule.overrides" type="#T.qvtbase.Rule"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.overrides" name="overrides" opposite="#p.qvtbase.Rule.overridden" type="#//@ownedPackages.2/@ownedClasses.15"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.transformation" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation"
-          opposite="#p.qvtbase.Transformation.rule" type="#T.qvtbase.Transformation"/>
+      <ownedProperties xmi:id="nw+6e" isComposite="true" name="domain" opposite="#,11ob" type="#vBkLs"/>
+      <ownedProperties xmi:id="r3ogk" defaultValueString="false" name="isAbstract" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
+      <ownedProperties xmi:id="Etu1J" isRequired="false" name="overridden" opposite="#SCQib" type="#zS2p0"/>
+      <ownedProperties xmi:id="SCQib" name="overrides" opposite="#Etu1J" type="#n3g5w"/>
+      <ownedProperties xmi:id="spSXK" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation" opposite="#Tq8Ol"
+          type="#AjDLV"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.Transformation" name="Transformation" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Class">
-      <ownedInvariants xmi:id="ciqvtbase.Transformation.ContextTypeIsTransformation" isCallable="true" name="ContextTypeIsTransformation">
+    <ownedClasses xmi:id="AjDLV" name="Transformation" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#pDcbe">
+      <ownedInvariants xmi:id="0YsQy" isCallable="true" name="ContextTypeIsTransformation">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type = self&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Transformation.ExtendedTypedModelIsExtended" isCallable="true" name="ExtendedTypedModelIsExtended">
+      <ownedInvariants xmi:id="TG1RG" isCallable="true" name="ExtendedTypedModelIsExtended">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;_extends &lt;> null implies&#xA;&#x9;_extends.modelParameter->forAll(etm |&#xA;&#x9;&#x9;self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)&#xA;&#x9;)&#xA;&#x9;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Transformation.ModelParameterIsUnique" isCallable="true" name="ModelParameterIsUnique">
+      <ownedInvariants xmi:id="zwc,y" isCallable="true" name="ModelParameterIsUnique">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;modelParameter->isUnique(name)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedInvariants xmi:id="ciqvtbase.Transformation.NoExtendsCycle" isCallable="true" name="NoExtendsCycle">
+      <ownedInvariants xmi:id="mgXEj" isCallable="true" name="NoExtendsCycle">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;_extends->closure(_extends)->excludes(self)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedOperations xmi:id="o.qvtbase.Transformation.getFunction..ocl.String" name="getFunction" type="#T.qvtbase.Function">
-        <ownedParameters xmi:id="p0o.qvtbase.Transformation.getFunction..ocl.String" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedOperations xmi:id="DU934" name="getFunction" type="#PGjqK">
+        <ownedParameters name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
       </ownedOperations>
-      <ownedOperations xmi:id="o.qvtbase.Transformation.getModelParameter..ocl.String" name="getModelParameter" type="#T.qvtbase.TypedModel">
-        <ownedParameters xmi:id="p0o.qvtbase.Transformation.getModelParameter..ocl.String" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedOperations xmi:id="rcEGq" name="getModelParameter" type="#WqJYx">
+        <ownedParameters name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
       </ownedOperations>
-      <ownedProperties xmi:id="p.qvtbase.Transformation.extends" isRequired="false" name="extends" opposite="#p.qvtbase.Transformation.extendedBy"
-          type="#T.qvtbase.Transformation"/>
-      <ownedProperties xmi:id="p.qvtbase.Transformation.modelParameter" isComposite="true" name="modelParameter" opposite="#p.qvtbase.TypedModel.transformation"
-          type="#//@ownedPackages.2/@ownedClasses.16"/>
-      <ownedProperties xmi:id="p.qvtbase.Transformation.ownedContext" isComposite="true" isRequired="false" name="ownedContext" opposite="#p.pivot.Variable.Transformation"
-          type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>
-      <ownedProperties xmi:id="p.qvtbase.Transformation.ownedTag" isComposite="true" name="ownedTag" opposite="#p.pivot.Annotation.Transformation"
-          type="#//@ownedPackages.2/@ownedClasses.17"/>
-      <ownedProperties xmi:id="p.qvtbase.Transformation.rule" isComposite="true" name="rule" opposite="#p.qvtbase.Rule.transformation"
-          type="#//@ownedPackages.2/@ownedClasses.21"/>
-      <ownedProperties xmi:id="p.qvtbase.Transformation.extendedBy" isImplicit="true" isRequired="false" name="extendedBy" opposite="#p.qvtbase.Transformation.extends"
-          type="#T.qvtbase.Transformation"/>
+      <ownedProperties xmi:id="BMypX" isRequired="false" name="extends" opposite="#3n7zQ" type="#AjDLV"/>
+      <ownedProperties xmi:id="XoI01" isComposite="true" name="modelParameter" opposite="#fFlGt" type="#SncSN"/>
+      <ownedProperties xmi:id="B,0v1" isComposite="true" isRequired="false" name="ownedContext" opposite="#AROTe" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="s8NEm" isComposite="true" name="ownedTag" opposite="#UougY" type="#5bIlO"/>
+      <ownedProperties xmi:id="Tq8Ol" isComposite="true" name="rule" opposite="#spSXK" type="#U1psM"/>
+      <ownedProperties xmi:id="3n7zQ" isImplicit="true" isRequired="false" name="extendedBy" opposite="#BMypX" type="#AjDLV"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.TypedModel" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
-      <ownedProperties xmi:id="p.qvtbase.TypedModel.dependsOn" name="dependsOn" opposite="#p.qvtbase.TypedModel.dependent" type="#//@ownedPackages.2/@ownedClasses.22"/>
-      <ownedProperties xmi:id="p.qvtbase.TypedModel.ownedContext" isComposite="true" isRequired="false" name="ownedContext" opposite="#p.pivot.Variable.TypedModel"
-          type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>
-      <ownedProperties xmi:id="p.qvtbase.TypedModel.transformation" isTransient="true" name="transformation" opposite="#p.qvtbase.Transformation.modelParameter"
-          type="#T.qvtbase.Transformation"/>
-      <ownedProperties xmi:id="p.qvtbase.TypedModel.usedPackage" name="usedPackage" opposite="#p.pivot.Package.TypedModel" type="#//@ownedPackages.2/@ownedClasses.18"/>
-      <ownedProperties xmi:id="p.qvtbase.TypedModel.Domain" isImplicit="true" name="Domain" opposite="#p.qvtbase.Domain.typedModel" type="#//@ownedPackages.2/@ownedClasses.0"/>
-      <ownedProperties xmi:id="p.qvtbase.TypedModel.dependent" isImplicit="true" isRequired="false" name="dependent" opposite="#p.qvtbase.TypedModel.dependsOn"
-          type="#T.qvtbase.TypedModel"/>
+    <ownedClasses xmi:id="WqJYx" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
+      <ownedProperties xmi:id="VmWQK" name="dependsOn" opposite="#,4oQK" type="#,klFp"/>
+      <ownedProperties xmi:id="Z8CG4" isComposite="true" isRequired="false" name="ownedContext" opposite="#WYUg6" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="fFlGt" isTransient="true" name="transformation" opposite="#XoI01" type="#AjDLV"/>
+      <ownedProperties xmi:id="YmU5U" name="usedPackage" opposite="#xb2NR" type="#4WjM+"/>
+      <ownedProperties xmi:id="TPm6," isImplicit="true" name="Domain" opposite="#CBqPj" type="#9+o+H"/>
+      <ownedProperties xmi:id=",4oQK" isImplicit="true" isRequired="false" name="dependent" opposite="#VmWQK" type="#WqJYx"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages xmi:id="P.pivot" URI="http://www.eclipse.org/ocl/2015/Pivot" name="pivot" nsPrefix="pivot">
-    <ownedClasses xmi:id="T.pivot.Annotation" name="Annotation">
-      <ownedProperties xmi:id="p.pivot.Annotation.Transformation" isImplicit="true" isRequired="false" name="Transformation" opposite="#p.qvtbase.Transformation.ownedTag"
-          type="#T.qvtbase.Transformation"/>
+  <ownedPackages xmi:id="82dOP" URI="http://www.eclipse.org/ocl/2015/Pivot" name="pivot" nsPrefix="pivot">
+    <ownedClasses xmi:id="g7Mr0" name="Annotation">
+      <ownedProperties xmi:id="UougY" isImplicit="true" isRequired="false" name="Transformation" opposite="#s8NEm" type="#AjDLV"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.pivot.OCLExpression" name="OCLExpression">
-      <ownedProperties xmi:id="p.pivot.OCLExpression.Function" isImplicit="true" isRequired="false" name="Function" opposite="#p.qvtbase.Function.queryExpression"
-          type="#T.qvtbase.Function"/>
-      <ownedProperties xmi:id="p.pivot.OCLExpression.predicate" isImplicit="true" isRequired="false" name="predicate" opposite="#p.qvtbase.Predicate.conditionExpression"
-          type="#T.qvtbase.Predicate"/>
+    <ownedClasses xmi:id="BFtK4" name="OCLExpression">
+      <ownedProperties xmi:id="N9fOm" isImplicit="true" isRequired="false" name="Function" opposite="#zUxun" type="#PGjqK"/>
+      <ownedProperties xmi:id="R0cad" isImplicit="true" isRequired="false" name="predicate" opposite="#iEcp5" type="#uMSmb"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.pivot.Package" name="Package">
-      <ownedProperties xmi:id="p.pivot.Package.TypedModel" isImplicit="true" name="TypedModel" opposite="#p.qvtbase.TypedModel.usedPackage"
-          type="#//@ownedPackages.2/@ownedClasses.2"/>
+    <ownedClasses xmi:id="3ONqN" name="Package">
+      <ownedProperties xmi:id="xb2NR" isImplicit="true" name="TypedModel" opposite="#YmU5U" type="#gkhFp"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.pivot.Variable" name="Variable">
-      <ownedProperties xmi:id="p.pivot.Variable.Pattern" isImplicit="true" name="Pattern" opposite="#p.qvtbase.Pattern.bindsTo" type="#//@ownedPackages.2/@ownedClasses.1"/>
-      <ownedProperties xmi:id="p.pivot.Variable.Transformation" isImplicit="true" isRequired="false" name="Transformation" opposite="#p.qvtbase.Transformation.ownedContext"
-          type="#T.qvtbase.Transformation"/>
-      <ownedProperties xmi:id="p.pivot.Variable.TypedModel" isImplicit="true" isRequired="false" name="TypedModel" opposite="#p.qvtbase.TypedModel.ownedContext"
-          type="#T.qvtbase.TypedModel"/>
+    <ownedClasses xmi:id="t4j6T" name="Variable">
+      <ownedProperties xmi:id="YwYCh" isImplicit="true" name="Pattern" opposite="#Eakqg" type="#pJjNZ"/>
+      <ownedProperties xmi:id="AROTe" isImplicit="true" isRequired="false" name="Transformation" opposite="#B,0v1" type="#AjDLV"/>
+      <ownedProperties xmi:id="WYUg6" isImplicit="true" isRequired="false" name="TypedModel" opposite="#Z8CG4" type="#WqJYx"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages xmi:id="P.$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.2/@ownedClasses.6">
+  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="9+o+H" name="Bag" superClasses="#TaRAX">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Domain" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
+        <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#k2OA6"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.2/@ownedClasses.7">
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="pJjNZ" name="Bag" superClasses="#,kLPo">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Pattern" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
+        <ownedSubstitutions actual="#H0dko" formal="http://www.eclipse.org/ocl/2015/Library.oclas#k2OA6"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.2/@ownedClasses.10">
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="gkhFp" name="Bag" superClasses="#2,JH4">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.TypedModel" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
+        <ownedSubstitutions actual="#WqJYx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#k2OA6"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="w2smd" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#g7Mr0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="vxHON" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#3ONqN" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="19n95" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="TaRAX" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Domain" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",kLPo" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Pattern" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="#H0dko" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="OzBxl" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Predicate" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="#uMSmb" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LQOub" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Rule" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="#zS2p0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="2,JH4" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.TypedModel" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="#WqJYx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.2/@ownedClasses.6">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gqGXN" name="OrderedCollection" superClasses="#TaRAX">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Domain" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+        <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#feFHs"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.2/@ownedClasses.9">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YgDFS" name="OrderedCollection" superClasses="#LQOub">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Rule" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+        <ownedSubstitutions actual="#zS2p0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#feFHs"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.2/@ownedClasses.10">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="DQ,du" name="OrderedCollection" superClasses="#2,JH4">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.TypedModel" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+        <ownedSubstitutions actual="#WqJYx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#feFHs"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" isNullFree="true" name="OrderedSet" superClasses="#//@ownedPackages.2/@ownedClasses.11 #//@ownedPackages.2/@ownedClasses.26">
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="vBkLs" isNullFree="true" name="OrderedSet" superClasses="#gqGXN #EVB8G">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Domain" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+        <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#53+C2"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" isNullFree="true" name="OrderedSet" superClasses="#//@ownedPackages.2/@ownedClasses.12 #//@ownedPackages.2/@ownedClasses.28">
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="n3g5w" isNullFree="true" name="OrderedSet" superClasses="#YgDFS #8K+pL">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Rule" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+        <ownedSubstitutions actual="#zS2p0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#53+C2"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" isNullFree="true" name="OrderedSet" superClasses="#//@ownedPackages.2/@ownedClasses.13 #//@ownedPackages.2/@ownedClasses.29">
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="SncSN" isNullFree="true" name="OrderedSet" superClasses="#DQ,du #n65Co">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.TypedModel" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+        <ownedSubstitutions actual="#WqJYx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#53+C2"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.23">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="5bIlO" isNullFree="true" name="Set" superClasses="#hxciN">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#g7Mr0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.24">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="4WjM+" isNullFree="true" name="Set" superClasses="#gs3J9">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#3ONqN" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.25">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="+iD8q" isNullFree="true" name="Set" superClasses="#m4X5p">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.27">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="XYdvW" isNullFree="true" name="Set" superClasses="#,txsV">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Predicate" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="#uMSmb" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.28">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="U1psM" isNullFree="true" name="Set" superClasses="#8K+pL">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Rule" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="#zS2p0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" isNullFree="true" name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.29">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id=",klFp" isNullFree="true" name="Set" superClasses="#n65Co">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.TypedModel" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="#WqJYx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.3">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="hxciN" name="UniqueCollection" superClasses="#w2smd">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#g7Mr0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.4">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gs3J9" name="UniqueCollection" superClasses="#vxHON">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#3ONqN" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.5">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="m4X5p" name="UniqueCollection" superClasses="#19n95">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.6">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="EVB8G" name="UniqueCollection" superClasses="#TaRAX">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Domain" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="#7pR2u" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.8">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",txsV" name="UniqueCollection" superClasses="#OzBxl">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Predicate" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="#uMSmb" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.9">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8K+pL" name="UniqueCollection" superClasses="#LQOub">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.Rule" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="#zS2p0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.10">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="n65Co" name="UniqueCollection" superClasses="#2,JH4">
       <ownedBindings>
-        <ownedSubstitutions actual="#T.qvtbase.TypedModel" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="#WqJYx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>
