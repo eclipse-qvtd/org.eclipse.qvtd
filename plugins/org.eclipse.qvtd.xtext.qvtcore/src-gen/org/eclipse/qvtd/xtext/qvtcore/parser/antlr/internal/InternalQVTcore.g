@@ -1047,67 +1047,45 @@ ruleMappingCS returns [EObject current=null]
 	    }
 
 )
-))*)?(	otherlv_10='overrides'
+))*)?	otherlv_10='{'
     {
-    	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getOverridesKeyword_6_0());
+    	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_6());
     }
 (
 (
 		{
-		  /* */
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMappingCSRule());
-	        }
-        }
-		{
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOverriddenMappingCrossReference_6_1_0());
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsNamedDomainCSParserRuleCall_7_0());
 	    }
-		ruleUnrestrictedName		{
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))?	otherlv_12='{'
-    {
-    	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_7());
-    }
-(
-(
-		{
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsNamedDomainCSParserRuleCall_8_0());
-	    }
-		lv_ownedDomains_13_0=ruleNamedDomainCS		{
+		lv_ownedDomains_11_0=ruleNamedDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		add(
        			$current,
        			"ownedDomains",
-        		lv_ownedDomains_13_0,
+        		lv_ownedDomains_11_0,
         		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.NamedDomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*(	otherlv_14='where'
+)*(	otherlv_12='where'
     {
-    	newLeafNode(otherlv_14, grammarAccess.getMappingCSAccess().getWhereKeyword_9_0());
+    	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getWhereKeyword_8_0());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleUnnamedDomainCSParserRuleCall_9_1_0());
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleUnnamedDomainCSParserRuleCall_8_1_0());
 	    }
-		lv_ownedMiddle_15_0=ruleUnnamedDomainCS		{
+		lv_ownedMiddle_13_0=ruleUnnamedDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		set(
        			$current,
        			"ownedMiddle",
-        		lv_ownedMiddle_15_0,
+        		lv_ownedMiddle_13_0,
         		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnnamedDomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1116,24 +1094,24 @@ ruleMappingCS returns [EObject current=null]
 ))?(
 (
 		{
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsMappingCSParserRuleCall_10_0());
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsMappingCSParserRuleCall_9_0());
 	    }
-		lv_ownedComposedMappings_16_0=ruleMappingCS		{
+		lv_ownedComposedMappings_14_0=ruleMappingCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		add(
        			$current,
        			"ownedComposedMappings",
-        		lv_ownedComposedMappings_16_0,
+        		lv_ownedComposedMappings_14_0,
         		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.MappingCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*	otherlv_17='}'
+)*	otherlv_15='}'
     {
-    	newLeafNode(otherlv_17, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_11());
+    	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_10());
     }
 )
 ;

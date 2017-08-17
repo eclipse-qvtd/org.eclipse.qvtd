@@ -40,7 +40,6 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#isIsAbstract <em>Is Abstract</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedComposedMappings <em>Owned Composed Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
@@ -70,16 +69,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected boolean isAbstract = IS_ABSTRACT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getOverridden() <em>Overridden</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOverridden()
-	 * @generated
-	 * @ordered
-	 */
-	protected Mapping overridden;
 
 	/**
 	 * The cached value of the '{@link #getOwnedComposedMappings() <em>Owned Composed Mappings</em>}' containment reference list.
@@ -171,46 +160,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT, oldIsAbstract, isAbstract));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Mapping getOverridden() {
-		if (overridden != null && overridden.eIsProxy()) {
-			InternalEObject oldOverridden = (InternalEObject)overridden;
-			overridden = (Mapping)eResolveProxy(oldOverridden);
-			if (overridden != oldOverridden) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSPackage.MAPPING_CS__OVERRIDDEN, oldOverridden, overridden));
-			}
-		}
-		return overridden;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Mapping basicGetOverridden() {
-		return overridden;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOverridden(Mapping newOverridden) {
-		Mapping oldOverridden = overridden;
-		overridden = newOverridden;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__OVERRIDDEN, oldOverridden, overridden));
 	}
 
 	/**
@@ -382,9 +331,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
 				return isIsAbstract();
-			case QVTcoreCSPackage.MAPPING_CS__OVERRIDDEN:
-				if (resolve) return getOverridden();
-				return basicGetOverridden();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				return getOwnedComposedMappings();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
@@ -410,9 +356,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
-				return;
-			case QVTcoreCSPackage.MAPPING_CS__OVERRIDDEN:
-				setOverridden((Mapping)newValue);
 				return;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				getOwnedComposedMappings().clear();
@@ -447,9 +390,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OVERRIDDEN:
-				setOverridden((Mapping)null);
-				return;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				getOwnedComposedMappings().clear();
 				return;
@@ -479,8 +419,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
-			case QVTcoreCSPackage.MAPPING_CS__OVERRIDDEN:
-				return overridden != null;
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
 				return ownedComposedMappings != null && !ownedComposedMappings.isEmpty();
 			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:

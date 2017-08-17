@@ -25,7 +25,6 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#isIsAbstract <em>Is Abstract</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedComposedMappings <em>Owned Composed Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
@@ -64,32 +63,6 @@ public interface MappingCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setIsAbstract(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Overridden</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Overridden</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Overridden</em>' reference.
-	 * @see #setOverridden(Mapping)
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getMappingCS_Overridden()
-	 * @model
-	 * @generated
-	 */
-	Mapping getOverridden();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOverridden <em>Overridden</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Overridden</em>' reference.
-	 * @see #getOverridden()
-	 * @generated
-	 */
-	void setOverridden(Mapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Composed Mappings</b></em>' containment reference list.
