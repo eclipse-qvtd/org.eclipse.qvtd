@@ -165,6 +165,15 @@ public interface QVTbasePackage extends EPackage {
 	int BASE_MODEL__OWNED_PACKAGES = PivotPackage.MODEL__OWNED_PACKAGES;
 
 	/**
+	 * The feature id for the '<em><b>Xmiid Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_MODEL__XMIID_VERSION = PivotPackage.MODEL__XMIID_VERSION;
+
+	/**
 	 * The number of structural features of the '<em>Base Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

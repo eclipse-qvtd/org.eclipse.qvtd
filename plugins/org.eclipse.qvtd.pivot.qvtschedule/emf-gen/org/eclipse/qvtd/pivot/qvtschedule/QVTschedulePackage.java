@@ -5094,6 +5094,15 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULE_MODEL__OWNED_PACKAGES = PivotPackage.MODEL__OWNED_PACKAGES;
 
 	/**
+	 * The feature id for the '<em><b>Xmiid Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__XMIID_VERSION = PivotPackage.MODEL__XMIID_VERSION;
+
+	/**
 	 * The feature id for the '<em><b>Loading Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
