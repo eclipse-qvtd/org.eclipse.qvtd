@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -66,6 +67,9 @@ public class QVTcoreHelper extends QVTbaseHelper
 	}
 
 	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isPartial) {
+		CompleteClass slotClass = getCompleteClass(QVTcoreUtil.getType(asSlotExpression));
+		CompleteClass propertyClass = getCompleteClass(QVTcoreUtil.getOwningClass(asProperty));
+		assert slotClass.conformsTo(propertyClass);
 		NavigationAssignment asNavigationAssignment;
 		if (asProperty.isIsImplicit()) {
 			OppositePropertyAssignment asPropertyAssignment = QVTcoreFactory.eINSTANCE.createOppositePropertyAssignment();
