@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -49,14 +48,6 @@ class Invocation2TraceProperty extends Element2TraceProperty
 	 */
 	@Override
 	protected @NonNull Property createTraceProperty() {
-		//		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(null, relation2traceClass.getTraceClass(), name, type, isRequired, true);
-		Property signatureProperty = PivotFactory.eINSTANCE.createProperty();
-		signatureProperty.setName(name);
-		signatureProperty.setType(type);
-		signatureProperty.setIsRequired(false);
-		//		signatureProperty.setIsResolveProxies(false);
-		//		signatureProperty.setIsTransient(true);		-- FIXME transient has no determinate xmi:id
-		signatureProperty.setOwningClass(relation2traceClass.getTraceClass());
-		return signatureProperty;
+		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(null, relation2traceClass.getTraceClass(), name, type, false, true);
 	}
 }

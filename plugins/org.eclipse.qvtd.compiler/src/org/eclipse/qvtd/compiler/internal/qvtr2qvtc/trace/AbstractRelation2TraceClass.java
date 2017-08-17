@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.IteratorVariable;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -352,6 +354,12 @@ abstract class AbstractRelation2TraceClass implements Relation2TraceClass
 			traceProperty.getOwnedAnnotations().add(domainAnnotation);
 		}
 		traceProperty.setOwningClass(owningClass);
+		if (type instanceof CollectionType) {
+			Type elementType = ((CollectionType)type).getElementType();
+			if (elementType instanceof org.eclipse.ocl.pivot.Class) {
+				type = (org.eclipse.ocl.pivot.Class)elementType;
+			}
+		}
 		if (!(type instanceof DataType)) {
 			Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
 			oppositeProperty.setName(owningClass.getName());
