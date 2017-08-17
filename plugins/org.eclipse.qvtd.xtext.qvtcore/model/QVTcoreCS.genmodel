@@ -42,7 +42,6 @@
     </genClasses>
     <genClasses ecoreClass="QVTcoreCS.ecore#//MappingCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//MappingCS/isAbstract"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/overridden"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedComposedMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedDomains"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedInPathName"/>
