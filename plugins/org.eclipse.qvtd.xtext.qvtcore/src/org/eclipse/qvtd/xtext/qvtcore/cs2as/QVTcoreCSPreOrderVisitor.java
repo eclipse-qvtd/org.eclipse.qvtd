@@ -123,7 +123,6 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
 		if (pMapping != null) {
 			PivotUtilInternal.refreshList(pMapping.getSpecification(), csElement.getRefines());
-			pMapping.setOverridden(csElement.getOverridden());
 		}
 		return null;
 	}
