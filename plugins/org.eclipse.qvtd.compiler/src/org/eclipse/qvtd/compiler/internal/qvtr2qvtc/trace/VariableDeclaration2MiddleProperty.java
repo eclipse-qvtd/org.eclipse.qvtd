@@ -18,13 +18,13 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
- * VariableDeclaration2TraceProperty accumulates the requirements on the trace property for a pattern variable.
+ * VariableDeclaration2MiddleProperty accumulates the requirements on the trace property for a pattern variable.
  *
  * Its relation TypedModel may be initially null (unknown) and set non-null once encountered as a template binding.
  *
  * Its unitOpposite may evolve to true if any mechanism for unit usage is encountered.
  */
-class VariableDeclaration2TraceProperty extends Element2TraceProperty
+class VariableDeclaration2MiddleProperty extends Element2MiddleProperty
 {
 	/**
 	 * The typed model within which the variable's reference is located. null for unknown or primitive.
@@ -42,15 +42,11 @@ class VariableDeclaration2TraceProperty extends Element2TraceProperty
 	 */
 	private boolean unitOpposite;
 
-	public VariableDeclaration2TraceProperty(@NonNull Relation2TraceClass relation2traceClass, @Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
-		super(relation2traceClass, relation2traceClass.getNameGenerator().createTracePropertyName(variable), QVTrelationUtil.getClass(variable), variable.isIsRequired());
+	public VariableDeclaration2MiddleProperty(@NonNull Relation2MiddleClass relation2middleClass, @Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
+		super(relation2middleClass, relation2middleClass.getNameGenerator().createTracePropertyName(variable), QVTrelationUtil.getClass(variable), variable.isIsRequired());
 		this.rTypedModel = rTypedModel;
 		//			this.variable = variable;
 		this.unitOpposite = unitOpposite;
-	}
-
-	protected @NonNull Property createProperty(org.eclipse.ocl.pivot.@NonNull Class owningClass, boolean unitOpposite) {
-		return ((AbstractRelation2TraceClass) relation2traceClass).createProperty(rTypedModel, owningClass, name, type, isRequired, unitOpposite);
 	}
 
 	/**
@@ -58,15 +54,15 @@ class VariableDeclaration2TraceProperty extends Element2TraceProperty
 	 * the trace property and so the implicit opposite must be a Bag.
 	 */
 	@Override
-	protected @NonNull Property createTraceProperty() {
-		return createProperty(relation2traceClass.getTraceClass(), unitOpposite);
+	protected @NonNull Property createMiddleProperty() {
+		return createMiddleProperty(rTypedModel, unitOpposite);
 	}
 
 	protected @Nullable TypedModel getrTypedModel() {
 		return rTypedModel;
 	}
 
-	public void refineTraceProperty(@Nullable TypedModel rTypedModel, boolean isNestedOneToOne) {
+	public void refineProperty(@Nullable TypedModel rTypedModel, boolean isNestedOneToOne) {
 		if (rTypedModel != null) {
 			if (this.rTypedModel == null) {
 				this.rTypedModel = rTypedModel;

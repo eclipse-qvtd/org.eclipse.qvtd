@@ -25,8 +25,8 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -75,20 +75,19 @@ import com.google.common.collect.Iterables;
 
 		@Override
 		protected void synthesize() throws CompilerChainException {
-			Relation rRootRelation = rRelation;
-			for (Relation rOverriddenRelation = rRelation; (rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rOverriddenRelation)) != null; ) {
-				rRootRelation = rOverriddenRelation;
-			}
-			org.eclipse.ocl.pivot.Class signatureClass = relationalTransformation2tracePackage.getSignatureClass(rRootRelation);
-			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(QVTrNameGenerator.INVOCATION_GUARD_NAME, signatureClass);
-			List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rRootRelation);
+			Relation rBaseRelation = QVTrelationUtil.getBaseRelation(rRelation);
+			org.eclipse.ocl.pivot.Class signatureClass = relationalTransformation2tracePackage.getSignatureClass(rBaseRelation);
+			Element2MiddleProperty relation2TraceProperty = relationalTransformation2tracePackage.getRelation2TraceProperty(rRelation);
+			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(relation2TraceProperty.getName(), signatureClass);
+			variablesAnalysis.addTraceNavigationAssignment(relation2TraceProperty.getMiddleProperty(), cCalledVariable);
+			List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rBaseRelation);
 			List<@NonNull Variable> overridingVariables = QVTrelationUtil.getRootVariables(rRelation);
 			int iMax = rootVariables.size();
 			assert iMax == overridingVariables.size();
 			for (int i = 0; i < rootVariables.size(); i++) {
 				@NonNull Variable rRootDeclaration = rootVariables.get(i);
 				@NonNull Variable rOverridingDeclaration = overridingVariables.get(i);
-				Property signatureProperty = relationalTransformation2tracePackage.getSignatureProperty(rRootRelation, rRootDeclaration);
+				Property signatureProperty = relationalTransformation2tracePackage.getSignatureProperty(rBaseRelation, rRootDeclaration);
 				Variable cArgumentVariable = variablesAnalysis.getCoreVariable(rOverridingDeclaration);
 				VariableExp cArgumentExpression = createVariableExp(cArgumentVariable);
 				if (cArgumentVariable instanceof RealizedVariable) {
@@ -154,7 +153,7 @@ import com.google.common.collect.Iterables;
 			QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 				if (rDomain.isIsEnforceable()) {
-					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhenMappingClassName(rDomain);
+					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhenMappingClassName(rDomain, null);
 					addWhenRelationDomain2coreMapping(new WhenedEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}
 			}
@@ -163,7 +162,7 @@ import com.google.common.collect.Iterables;
 			QVTr2QVTc.SYNTHESIS.println("invocation of where " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 				if (rDomain.isIsEnforceable()) {
-					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhereMappingClassName(rDomain);
+					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhereMappingClassName(rDomain, null);
 					addWhereRelationDomain2coreMapping(new WheredEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}
 			}
@@ -185,7 +184,7 @@ import com.google.common.collect.Iterables;
 		for (@NonNull AbstractEnforceableRelationDomain2CoreMapping enforceableRelationDomain2coreMapping : whenTypedModel2relationDomain2coreMapping.values()) {
 			enforceableRelationDomain2coreMapping.synthesize();
 			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
-			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
+			/*			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
 			if (rOverriddenRelation != null) {
 				RelationAnalysis rOverriddenRelationAnalysis = transformationAnalysis.getRelationAnalysis(rOverriddenRelation);
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
@@ -194,12 +193,12 @@ import com.google.common.collect.Iterables;
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);
-			}
+			} */
 		}
 		for (@NonNull AbstractEnforceableRelationDomain2CoreMapping enforceableRelationDomain2coreMapping : whereTypedModel2relationDomain2coreMapping.values()) {
 			enforceableRelationDomain2coreMapping.synthesize();
 			enforceableRelationDomain2coreMapping.variablesAnalysis.check();
-			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
+			/*			Relation rOverriddenRelation = QVTrelationUtil.basicGetOverridden(rRelation);
 			if (rOverriddenRelation != null) {
 				RelationAnalysis rOverriddenRelationAnalysis = transformationAnalysis.getRelationAnalysis(rOverriddenRelation);
 				TypedModel rEnforcedTypedModel = enforceableRelationDomain2coreMapping.rEnforcedTypedModel;
@@ -208,7 +207,7 @@ import com.google.common.collect.Iterables;
 				EnforceableRelationDomain2CoreMapping overriddenRelationDomain2CoreMapping = overriddenRelation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
 				Mapping coreOverriddenMapping = overriddenRelationDomain2CoreMapping.getCoreMapping();
 				coreOverridingMapping.setOverridden(coreOverriddenMapping);
-			}
+			} */
 		}
 	}
 

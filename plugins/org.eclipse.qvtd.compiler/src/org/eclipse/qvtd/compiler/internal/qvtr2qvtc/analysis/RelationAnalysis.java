@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -189,6 +190,10 @@ public class RelationAnalysis extends QVTrelationHelper
 
 	public @Nullable Iterable<@NonNull RelationCallExp> getIncomingWhereInvocations() {
 		return incomingWhereInvocations;
+	}
+
+	public @NonNull QVTrNameGenerator getNameGenerator() {
+		return getRelationalTransformation2TracePackage().getNameGenerator();
 	}
 
 	public @Nullable Iterable<@NonNull RelationCallExp> getOutgoingWhenInvocations() {

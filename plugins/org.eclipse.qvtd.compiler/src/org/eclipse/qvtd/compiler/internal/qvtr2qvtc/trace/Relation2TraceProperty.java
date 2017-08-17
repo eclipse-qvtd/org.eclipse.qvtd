@@ -12,25 +12,18 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
- * Invocation2TraceProperty defines the requirements on the trace property for an invocation signature.
+ * Relation2TraceProperty defines the mapping from a non-top Relation to the trace property that
+ * identifies its invocation arguments.
  */
-class Invocation2TraceProperty extends Element2MiddleProperty
+class Relation2TraceProperty extends Element2MiddleProperty
 {
-	/**
-	 * The invocation whose use is persisted by the signature property.
-	 */
-	//		final @NonNull RelationCallExp invocation;
-
-	public Invocation2TraceProperty(@NonNull Relation2TraceClass relation2traceClass, @NonNull String name, @NonNull Relation invokedRelation) {
-		super(relation2traceClass, name, relation2traceClass.getRelationalTransformation2TracePackage().getSignatureClass(invokedRelation), true);
+	public Relation2TraceProperty(@NonNull Relation2TraceClass relation2traceClass,
+			@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired) {
+		super(relation2traceClass, name, type, isRequired);
 	}
 
-	/**
-	 * Create the middle Property.
-	 */
 	@Override
 	protected @NonNull Property createMiddleProperty() {
 		return createMiddleProperty(null, true);

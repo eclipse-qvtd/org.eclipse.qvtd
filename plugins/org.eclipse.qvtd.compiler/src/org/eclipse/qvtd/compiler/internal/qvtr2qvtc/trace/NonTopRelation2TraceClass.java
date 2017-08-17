@@ -12,17 +12,10 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
@@ -30,91 +23,43 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
  */
 class NonTopRelation2TraceClass extends AbstractRelation2TraceClass
 {
+	protected final @NonNull Relation2SignatureClass relation2signatureClass;
+	protected final @NonNull Relation2TraceProperty relation2traceProperty;
 
-	/**
-	 * VariableDeclaration2TraceProperty accumulates the requirements on the trace property for a pattern variable.
-	 *
-	 * Its relation TypedModel may be initially null (unknown) and set non-null once encountered as a template binding.
-	 *
-	 * Its unitOpposite may evolve to true if any mechanism for unit usage is encountered.
-	 */
-	class VariableDeclaration2SignatureOrTraceProperty extends VariableDeclaration2TraceProperty
-	{
-		/**
-		 * The lazily created signature property.
-		 */
-		private @Nullable Property signatureProperty;
-
-		public VariableDeclaration2SignatureOrTraceProperty(@NonNull NonTopRelation2TraceClass relation2traceClass, @Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {
-			super(relation2traceClass, rTypedModel, variable, unitOpposite);
-		}
-
-		public @NonNull Property getSignatureProperty() {
-			Property signatureProperty2 = signatureProperty;
-			if (signatureProperty2 == null) {
-				signatureProperty = signatureProperty2 = createProperty(((NonTopRelation2TraceClass)relation2traceClass).getSignatureClass(), false);
-			}
-			return signatureProperty2;
-		}
-	}
-
-	/**
-	 * The Class that realizes a signature interface to for a static invocation of this trace class.
-	 */
-	private org.eclipse.ocl.pivot.@Nullable Class signatureClass = null;
-
-	protected NonTopRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
-		super(relationAnalysis);
+	protected NonTopRelation2TraceClass(@NonNull Relation2SignatureClass relation2signatureClass) {
+		super(relation2signatureClass.getRelationAnalysis(), relation2signatureClass.getNameGenerator().createTraceClassName(relation2signatureClass.getRelation()));
+		this.relation2signatureClass = relation2signatureClass;
 		//			traceClass.setIsAbstract(true);
-		getSignatureClass();
+		Relation baseRelation = QVTrelationUtil.getBaseRelation(relation);
+		Relation2SignatureClass baseRelation2SignatureClass = relationalTransformation2tracePackage.getRelation2SignatureClass(baseRelation);
+		String inName = nameGenerator.createInPropertyName(baseRelation);
+		org.eclipse.ocl.pivot.Class signatureClass = baseRelation2SignatureClass.getMiddleClass();
+		this.relation2traceProperty = new Relation2TraceProperty(this, inName, signatureClass, true);
 	}
 
 	@Override
 	public void analyzeProperties() throws CompilerChainException {
-		super.analyzeProperties();
-		for (@NonNull Variable rRoot : QVTrelationUtil.getRootVariables(relation)) {
-			getSignatureProperty(rRoot);
-		}
+		//		super.analyzeProperties();
+		boolean manyTraces = analyzeTraceMultiplicity();
+		analyzeSharedVariables();
+		//		analyzeRootTemplateVariables(manyTraces); -- root variables are nested in the invocation Relation2TraceProperty
+		analyzeNonRootTemplateVariables(manyTraces);
+		analyzePredicateVariables();
+	}
+
+	//	protected void createRelation2TraceProperty() {
+	//		String inName = nameGenerator.createInPropertyName(relation);
+	//		Relation2TraceProperty relation2MiddleProperty = new Relation2TraceProperty(this, inName, relation2signatureClass.getMiddleClass(), true);
+	//		nameGenerator.getUniqueName(name2element2middleProperty, inName, element2middleProperty);
+	//	}
+
+	@Override
+	protected @NonNull VariableDeclaration2MiddleProperty createVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean isNestedOneToOne) {
+		return new VariableDeclaration2MiddleProperty(this, rTypedModel, variable, isNestedOneToOne);
 	}
 
 	@Override
-	public @Nullable Class basicGetSignatureClass() {
-		return signatureClass;
-	}
-
-	@Override
-	protected @NonNull VariableDeclaration2TraceProperty createVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration variable, boolean isNestedOneToOne) {
-		return new VariableDeclaration2SignatureOrTraceProperty(this, rTypedModel, variable, isNestedOneToOne);
-	}
-
-	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass() {
-		org.eclipse.ocl.pivot.Class signatureClass2 = signatureClass;
-		if (signatureClass2 == null) {
-			String name = relationalTransformation2tracePackage.getNameGenerator().createSignatureClassName(traceClass);
-			signatureClass = signatureClass2 = PivotUtil.createClass(relationalTransformation2tracePackage.getUniqueTraceClassName(this, name));
-		}
-		return signatureClass2;
-	}
-
-	@Override
-	public @NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable) {
-		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = basicGetVariableDeclaration2TraceProperty(rVariable);
-		assert variableDeclaration2TraceProperty != null;
-		return ((VariableDeclaration2SignatureOrTraceProperty)variableDeclaration2TraceProperty).getSignatureProperty();
-	}
-
-	@Override
-	public void synthesize() {
-		super.synthesize();
-		org.eclipse.ocl.pivot.Class signatureClass = getSignatureClass();
-		for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-			for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(rDomain)) {
-				VariableDeclaration2TraceProperty rootVariableDeclaration2TraceProperty = basicGetVariableDeclaration2TraceProperty(rootVariable);
-				assert rootVariableDeclaration2TraceProperty != null;
-				((VariableDeclaration2SignatureOrTraceProperty)rootVariableDeclaration2TraceProperty).getSignatureProperty();
-			}
-		}
-		CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(signatureClass));
+	public @NonNull Element2MiddleProperty getRelation2TraceProperty() {
+		return relation2traceProperty;
 	}
 }

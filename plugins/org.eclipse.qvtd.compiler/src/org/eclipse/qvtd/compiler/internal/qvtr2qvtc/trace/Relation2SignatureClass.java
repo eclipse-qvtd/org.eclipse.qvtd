@@ -10,15 +10,9 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
-
 /**
- * A TopRelation2TraceClass represents the mapping between a top level QVTr Relation and the trace class for a QVTc Mapping.
+ * A Relation2SignatureClass represents the mapping between a Relation and a SignatureClass/Mapping
  */
-class TopRelation2TraceClass extends AbstractRelation2TraceClass
+interface Relation2SignatureClass extends Relation2MiddleClass
 {
-	protected TopRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
-		super(relationAnalysis, relationAnalysis.getNameGenerator().createTraceClassName(relationAnalysis.getRelation()));
-	}
 }

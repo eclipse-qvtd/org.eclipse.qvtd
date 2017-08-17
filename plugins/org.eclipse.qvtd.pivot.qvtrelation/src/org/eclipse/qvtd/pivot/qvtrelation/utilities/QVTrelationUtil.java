@@ -13,7 +13,9 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -103,6 +105,27 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static @Nullable Relation basicGetOverridden(@NonNull Relation relation) {
 		return (Relation) relation.getOverridden();
+	}
+
+	public static @NonNull Relation getBaseRelation(@NonNull Relation relation) {
+		Relation aRelation = relation;
+		int i = 0;
+		for (Rule aRule; (aRule = aRelation.getOverridden()) instanceof Relation; ) {
+			aRelation = (Relation) aRule;
+			if (i++ > 100) {	// More than a 100 is probably a cycle. Try again with an accurate cycle check
+				Set<Relation> relations = new HashSet<>();
+				aRelation = relation;
+				relations.add(relation);
+				while ((aRule = aRelation.getOverridden()) instanceof Relation) {
+					aRelation = (Relation) aRule;
+					if (!relations.add(aRelation)) {
+						System.err.println("Cyclic override of '" + relation + "' ignored.");
+						return relation;
+					}
+				}
+			}
+		}
+		return aRelation;
 	}
 
 	public static @NonNull Variable getBindsTo(@NonNull TemplateExp rTemplateExp) {

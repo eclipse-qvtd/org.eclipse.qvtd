@@ -15,52 +15,26 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
-import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 
 /**
  * A Relation2TraceClass represents the mapping between a Relation and a TraceClass/Mapping
  */
-interface Relation2TraceClass extends Comparable<@NonNull Relation2TraceClass>
+public interface Relation2TraceClass extends Relation2MiddleClass
 {
 	void addConsumedBy(@NonNull Relation2TraceClass consumedByRelation2TraceClass);
 	void addConsumedInternal(@NonNull Relation2TraceClass consumedRelation2TraceClass);
 	void analyzeInheritance();
-	void analyzeProperties() throws CompilerChainException;
-	org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass();
-	@Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable);
-	org.eclipse.ocl.pivot.@NonNull Class getBagOfTraceClass();
 	@Nullable Iterable<@NonNull Relation2TraceClass> getConsumedByRelation2TraceClasses();
 	@Nullable Iterable<@NonNull Relation2TraceClass> getConsumedRelation2TraceClasses();
 	@Nullable Iterable<@NonNull Relation2TraceClass> getCyclicRelation2TraceClasses();
-	@NonNull QVTrNameGenerator getNameGenerator();
-	@NonNull Relation getRelation();
-	@NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage();
-
-	/**
-	 * Return the class that defines the call and return values of this relation.
-	 * @throws IllegalStateException if there is no signature class.
-	 */
-	org.eclipse.ocl.pivot.@NonNull Class getSignatureClass();
-
-	/**
-	 * Return the property that defines a particular call or return value of this relation.
-	 * @throws IllegalStateException if there is no signature class (or properties).
-	 */
-	@NonNull Property getSignatureProperty(@NonNull VariableDeclaration rVariable);
-	org.eclipse.ocl.pivot.@NonNull Class getTraceClass();
 	@NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation);
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses();
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses();
 	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
-	@NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable);
-	@NonNull String getUniqueTracePropertyName(@NonNull Element2TraceProperty variableDeclaration2TraceProperty, @NonNull String name);
 	@NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations();
 	@NonNull Iterable<@NonNull RelationCallExp> getWhereInvocations();
 	void installConsumesDependencies() throws CompilerChainException;
-	void synthesize();
 }

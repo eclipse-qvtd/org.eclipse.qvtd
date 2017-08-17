@@ -988,7 +988,7 @@ import com.google.common.collect.Sets;
 			 * Creates the assignment of the middle model to the L/R models
 			 */
 			// RDomainVarToMDBottomAssignmnetForEnforcement
-			variablesAnalysis.addTraceNavigationAssignment(rTemplateVariable, false);
+			variablesAnalysis.addTraceNavigationAssignment(rTemplateVariable, !rRelation.isIsTopLevel());
 			OCLExpression rGuardPredicate = rEnforcedTemplateExpression.getWhere();
 			if (rGuardPredicate != null) {
 				cMiddleGuardPattern.getPredicate().add(createPredicate(mapExpression(rGuardPredicate)));

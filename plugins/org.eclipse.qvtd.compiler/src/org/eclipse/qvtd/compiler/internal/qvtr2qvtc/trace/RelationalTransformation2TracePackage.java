@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -25,18 +26,21 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -62,16 +66,21 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 	//	private org.eclipse.ocl.pivot.@Nullable Class speculationClass = null;
 
 	/**
-	 * Name to corresponding trace class
+	 * Name to corresponding signature or trace class
 	 */
-	protected final @NonNull Map<@NonNull String, @NonNull Relation2TraceClass> name2relation2traceClass = new HashMap<>();
+	protected final @NonNull Map<@NonNull String, @NonNull Relation2MiddleClass> name2relation2middleClass = new HashMap<>();
+
+	/**
+	 * Map of relation to signature class.
+	 */
+	protected final @NonNull Map<@NonNull Relation, @Nullable Relation2SignatureClass> relation2relation2signatureClass = new HashMap<>();
 
 	/**
 	 * Map of relation to trace class. The trace class is set null at the start of conversion enabling cycles to be ddetected.
 	 */
 	protected final @NonNull Map<@NonNull Relation, @Nullable Relation2TraceClass> relation2relation2traceClass = new HashMap<>();
 
-	private @NonNull Map<@NonNull Type, @NonNull Relation2TraceClass> traceClass2relation2traceClass = new HashMap<>();
+	private @NonNull Map<@NonNull Type, @NonNull Relation2MiddleClass> middleClass2relation2middleClass = new HashMap<>();
 
 	/**
 	 * Map of invocation to trace classes.
@@ -101,17 +110,17 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		//
 		//	Analyze each Relation2TraceClass
 		//
-		for (@NonNull Relation2TraceClass relation2TraceClass : name2relation2traceClass.values()) {
-			relation2TraceClass.analyzeProperties();
+		for (@NonNull Relation2MiddleClass relation2middleClass : name2relation2middleClass.values()) {
+			relation2middleClass.analyzeProperties();
 		}
 	}
 
-	public org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass(@NonNull Relation rRelation) {
-		return getRelation2TraceClass(rRelation).basicGetSignatureClass();
-	}
+	//	public org.eclipse.ocl.pivot.@Nullable Class basicGetSignatureClass(@NonNull Relation rRelation) {
+	//		return getRelation2SignatureClass(rRelation).basicGetSignatureClass();
+	//	}
 
 	public @Nullable Property basicGetTraceProperty(@NonNull Type aClass, @NonNull VariableDeclaration rVariable) {
-		Relation2TraceClass relation2TraceClass = traceClass2relation2traceClass.get(aClass);
+		Relation2MiddleClass relation2TraceClass = middleClass2relation2middleClass.get(aClass);
 		if (relation2TraceClass == null) {
 			return null;
 		}
@@ -124,13 +133,13 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 	 * Build the inter-Relation2TraceClass dependencies.
 	 */
 	protected void createDependencies() throws CompilerChainException {
-		List<@NonNull Relation2TraceClass> relation2TraceClasses2 = new ArrayList<>(name2relation2traceClass.values());
-		Collections.sort(relation2TraceClasses2);
+		List<@NonNull Relation2TraceClass> relation2traceClasses = Lists.newArrayList(Iterables.filter(name2relation2middleClass.values(), Relation2TraceClass.class));
+		Collections.sort(relation2traceClasses);
 		//
 		//	Establish the Relation2TraceClass directly consumes Relation2TraceClass dependencies
 		//
-		for (@NonNull Relation2TraceClass relation2TraceClass : relation2TraceClasses2) {
-			relation2TraceClass.installConsumesDependencies();
+		for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
+			relation2traceClass.installConsumesDependencies();
 		}
 		//
 		//	Identify the dependency cycles
@@ -143,12 +152,12 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		//
 		if (QVTr2QVTc.CALL_TREE.isActive()) {
 			StringBuilder s = new StringBuilder();
-			for (@NonNull Relation2TraceClass relation2TraceClasses : relation2TraceClasses2) {
-				s.append("\n\t" + relation2TraceClasses.toString() + "(");
+			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
+				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = Lists.newArrayList(relation2TraceClasses.getConsumedRelation2TraceClasses());
+				List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = Lists.newArrayList(relation2traceClass.getConsumedRelation2TraceClasses());
 				Collections.sort(consumedRelation2TraceClasses);;
-				for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
+				for (@NonNull Relation2MiddleClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
 					if (!isFirst) {
 						s.append(",");
 					}
@@ -161,10 +170,10 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		}
 		if (QVTr2QVTc.CALL_TREE.isActive()) {
 			StringBuilder s = new StringBuilder();
-			for (@NonNull Relation2TraceClass relation2TraceClass : relation2TraceClasses2) {
-				s.append("\n\t" + relation2TraceClass.toString() + "(");
+			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
+				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = new ArrayList<>(relation2TraceClass.getTransitivelyConsumedRelation2TraceClasses());
+				List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = new ArrayList<>(relation2traceClass.getTransitivelyConsumedRelation2TraceClasses());
 				Collections.sort(consumedRelation2TraceClasses);;
 				for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
 					if (!isFirst) {
@@ -179,10 +188,10 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		}
 		if (QVTr2QVTc.CALL_TREE.isActive()) {
 			StringBuilder s = new StringBuilder();
-			for (@NonNull Relation2TraceClass relation2TraceClasses : relation2TraceClasses2) {
-				s.append("\n\t" + relation2TraceClasses.toString() + "(");
+			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
+				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = Lists.newArrayList(relation2TraceClasses.getConsumedByRelation2TraceClasses());
+				List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = Lists.newArrayList(relation2traceClass.getConsumedByRelation2TraceClasses());
 				Collections.sort(consumedByRelation2TraceClasses);;
 				for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRelation2TraceClasses) {
 					if (!isFirst) {
@@ -197,10 +206,10 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		}
 		if (QVTr2QVTc.CALL_TREE.isActive()) {
 			StringBuilder s = new StringBuilder();
-			for (@NonNull Relation2TraceClass relation2TraceClasses : relation2TraceClasses2) {
-				s.append("\n\t" + relation2TraceClasses.toString() + "(");
+			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
+				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = new ArrayList<>(relation2TraceClasses.getTransitivelyConsumedByRelation2TraceClasses());
+				List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = new ArrayList<>(relation2traceClass.getTransitivelyConsumedByRelation2TraceClasses());
 				Collections.sort(consumedByRelation2TraceClasses);;
 				for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRelation2TraceClasses) {
 					if (!isFirst) {
@@ -215,10 +224,10 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		}
 		if (QVTr2QVTc.CALL_TREE.isActive()) {
 			StringBuilder s = new StringBuilder();
-			for (@NonNull Relation2TraceClass relation2TraceClasses : relation2TraceClasses2) {
-				s.append("\n\t" + relation2TraceClasses.toString() + "(");
+			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
+				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses = Lists.newArrayList(relation2TraceClasses.getCyclicRelation2TraceClasses());
+				List<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses = Lists.newArrayList(relation2traceClass.getCyclicRelation2TraceClasses());
 				Collections.sort(cyclicRelation2TraceClasses);;
 				for (@NonNull Relation2TraceClass cyclicRelation2TraceClass : cyclicRelation2TraceClasses) {
 					if (!isFirst) {
@@ -233,35 +242,23 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		}
 	}
 
-	protected void createRelation2TraceClass(@NonNull Relation rRelation) {
-		Relation2TraceClass relation2traceClass = relation2relation2traceClass.get(rRelation);
-		assert relation2traceClass == null;
-		//		if (relation2relation2traceClass.containsKey(rRelation)) {
-		//			throw new CompilerChainException("Overrides cycle detected for " + rRelation);
-		//		}
-		TransformationAnalysis rTransformationAnalysis = qvtr2qvtc.getTransformationAnalysis(rTransformation);
-		RelationAnalysis relationAnalysis = rTransformationAnalysis.getRelationAnalysis(rRelation);
-		relation2traceClass = rRelation.isIsTopLevel() ? new TopRelation2TraceClass(relationAnalysis) : new NonTopRelation2TraceClass(relationAnalysis);
-		relation2relation2traceClass.put(rRelation, relation2traceClass);
-	}
-
 	/**
 	 * Create a Relation2TraceClass for every QVTc Mapping and its middle model trace Class to be synthesized.
 	 */
-	protected void createRelation2TraceClasses() {
+	protected void createRelation2MiddleClasses() {
 		Iterable<@NonNull Relation> rRelations = QVTrelationUtil.getOwnedRelations(rTransformation);
 		//
 		//	 Create each relation Relation2TraceClass.
 		//
 		for (@NonNull Relation rRelation : rRelations) {
-			createRelation2TraceClass(rRelation);
+			createRelation2MiddleClasses(rRelation);
 		}
 		//
 		//	 Create a trace interface for each override.
 		//
 		for (@NonNull Relation rRelation : rRelations) {
-			Relation2TraceClass relation2TraceClass = getRelation2TraceClass(rRelation);
-			relation2TraceClass.analyzeInheritance();
+			Relation2TraceClass relation2traceClass = getRelation2TraceClass(rRelation);
+			relation2traceClass.analyzeInheritance();
 		}
 		//
 		//	 Create each invocation Relation2TraceClass.
@@ -291,6 +288,55 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 				}
 			}
 		} */
+	}
+
+	/*	protected void createRelation2TraceClass(@NonNull Relation rRelation) {
+		Relation2TraceClass relation2traceClass = relation2relation2traceClass.get(rRelation);
+		assert relation2traceClass == null;
+		//		if (relation2relation2traceClass.containsKey(rRelation)) {
+		//			throw new CompilerChainException("Overrides cycle detected for " + rRelation);
+		//		}
+		TransformationAnalysis rTransformationAnalysis = qvtr2qvtc.getTransformationAnalysis(rTransformation);
+		RelationAnalysis relationAnalysis = rTransformationAnalysis.getRelationAnalysis(rRelation);
+		relation2traceClass = rRelation.isIsTopLevel() ? new TopRelation2TraceClass(relationAnalysis) : new NonTopRelation2TraceClass(relationAnalysis);
+		relation2relation2traceClass.put(rRelation, relation2traceClass);
+	} */
+	protected void createRelation2MiddleClasses(@NonNull Relation rRelation) {
+		Relation2TraceClass relation2traceClass = relation2relation2traceClass.get(rRelation);
+		assert relation2traceClass == null;
+		//		if (relation2relation2traceClass.containsKey(rRelation)) {
+		//			throw new CompilerChainException("Overrides cycle detected for " + rRelation);
+		//		}
+		TransformationAnalysis rTransformationAnalysis = qvtr2qvtc.getTransformationAnalysis(rTransformation);
+		RelationAnalysis relationAnalysis = rTransformationAnalysis.getRelationAnalysis(rRelation);
+		if (rRelation.isIsTopLevel()) {
+			relation2traceClass = new TopRelation2TraceClass(relationAnalysis);
+			//			qvtr2qvtc.putRelationTrace(rRelation, relation2traceClass.getTraceClass());
+			relation2relation2traceClass.put(rRelation, relation2traceClass);
+		}
+		else {
+			Relation2SignatureClass relation2signatureClass = relation2relation2signatureClass.get(rRelation);
+			assert relation2signatureClass == null;
+			relation2signatureClass = new NonTopRelation2SignatureClass(relationAnalysis);
+			relation2relation2signatureClass.put(rRelation, relation2signatureClass);
+			relation2traceClass = new NonTopRelation2TraceClass(relation2signatureClass);
+			//			qvtr2qvtc.putRelationTrace(rRelation, relation2traceClass.getTraceClass());
+			relation2relation2traceClass.put(rRelation, relation2traceClass);
+			Pattern whenPattern = rRelation.getWhen();
+			if (whenPattern != null) {
+				for (EObject eObject : new TreeIterable(whenPattern, true)) {
+					if (eObject instanceof RelationCallExp) {
+						RelationCallExp rInvocation = (RelationCallExp)eObject;
+						if (!QVTrelationUtil.getReferredRelation(rInvocation).isIsTopLevel()) {
+							//							Invocation2TraceClass invocation2traceClass = new Invocation2TraceClass(relationAnalysis, rInvocation);
+							//							relation2traceClass.addInvocation2TraceClass(invocation2traceClass);
+							//							qvtr2qvtc.putRelationTrace(rRelation, relation2traceClass.getTraceClass());
+							//							relation2relation2traceClass.put(rRelation, relation2traceClass);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	protected org.eclipse.ocl.pivot.@NonNull Package createTracePackage() {
@@ -355,20 +401,29 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		throw new CompilerChainException("No property '" + name + "' in '" + aClass + "::" + "'");
 	}
 
-	protected @NonNull Relation2TraceClass getRelation2TraceClass(@NonNull Relation rRelation) {
+	protected @NonNull Relation2SignatureClass getRelation2SignatureClass(@NonNull Relation rRelation) {
+		return ClassUtil.nonNullState(relation2relation2signatureClass.get(rRelation));
+	}
+
+	public @NonNull Relation2TraceClass getRelation2TraceClass(@NonNull Relation rRelation) {
 		return ClassUtil.nonNullState(relation2relation2traceClass.get(rRelation));
 	}
 
+	public @NonNull Element2MiddleProperty getRelation2TraceProperty(@NonNull Relation rRelation) {
+		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(rRelation);
+		return relation2TraceClass.getRelation2TraceProperty();
+	}
+
 	public org.eclipse.ocl.pivot.@NonNull Class getSignatureClass(@NonNull Relation rInvokedRelation) {
-		return getRelation2TraceClass(rInvokedRelation).getSignatureClass();
+		return getRelation2SignatureClass(rInvokedRelation).getMiddleClass();
 	}
 
 	public @NonNull Property getSignatureProperty(@NonNull Relation rInvokedRelation, @NonNull VariableDeclaration rVariable) {
-		return getRelation2TraceClass(rInvokedRelation).getSignatureProperty(rVariable);
+		return getRelation2SignatureClass(rInvokedRelation).getMiddleProperty(rVariable);
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getTraceClass(@NonNull Relation rRelation) {
-		return getRelation2TraceClass(rRelation).getTraceClass();
+		return getRelation2TraceClass(rRelation).getMiddleClass();
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Package getTracePackage() {
@@ -396,8 +451,8 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		return relation2TraceClass.getTraceProperty(rInvocation);
 	}
 
-	protected @NonNull String getUniqueTraceClassName(@NonNull Relation2TraceClass mapping2traceClass, @NonNull String name) {
-		return getNameGenerator().getUniqueName(name2relation2traceClass, name, mapping2traceClass);
+	protected @NonNull String getUniqueMiddleClassName(@NonNull Relation2MiddleClass mapping2middleClass, @NonNull String name) {
+		return getNameGenerator().getUniqueName(name2relation2middleClass, name, mapping2middleClass);
 	}
 
 	private String getURI(org.eclipse.ocl.pivot.Package rPackage, @NonNull StringBuilder s) {
@@ -415,33 +470,27 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		return null;
 	}
 
-	public @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable) {
+	public @NonNull VariableDeclaration2MiddleProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable) {
 		Relation2TraceClass relation2TraceClass = getRelation2TraceClass(QVTrelationUtil.getContainingRelation(rVariable));
-		return relation2TraceClass.getVariableDeclaration2TraceProperty(rVariable);
+		return relation2TraceClass.getVariableDeclaration2MiddleProperty(rVariable);
 	}
 
 	protected void synthesizeTraceClasses() {
+		List<org.eclipse.ocl.pivot.@NonNull Class> middleClasses = new ArrayList<>(name2relation2middleClass.size());
 		//
 		//	Create the trace and signature classes
 		//
-		HashSet<@NonNull Relation2TraceClass> relation2TraceClasses = new HashSet<>(name2relation2traceClass.values());
-		for (@NonNull Relation2TraceClass relation2TraceClass : relation2TraceClasses) {
-			relation2TraceClass.synthesize();
+		HashSet<@NonNull Relation2MiddleClass> relation2middleClasses = new HashSet<>(name2relation2middleClass.values());
+		for (@NonNull Relation2MiddleClass relation2middleClass : relation2middleClasses) {
+			org.eclipse.ocl.pivot.Class middleClass = relation2middleClass.synthesize();
+			//		}
+			//		for (@NonNull Relation2MiddleClass relation2middleClass : relation2middleClasses) {
+			//			org.eclipse.ocl.pivot.Class middleClass = relation2middleClass.getMiddleClass();
+			middleClasses.add(middleClass);
+			middleClass2relation2middleClass.put(middleClass, relation2middleClass);
 		}
-		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = new ArrayList<>(name2relation2traceClass.size());
-		for (@NonNull Relation2TraceClass relation2TraceClass : relation2TraceClasses) {
-			org.eclipse.ocl.pivot.Class traceClass = relation2TraceClass.getTraceClass();
-			traceClasses.add(traceClass);
-			traceClass2relation2traceClass.put(traceClass, relation2TraceClass);
-			org.eclipse.ocl.pivot.Class signatureClass = relation2TraceClass.basicGetSignatureClass();
-			if (signatureClass != null) {
-				traceClasses.add(signatureClass);
-				traceClass2relation2traceClass.put(signatureClass, relation2TraceClass);
-				// FIXME signature inheritance
-			}
-		}
-		CompilerUtil.normalizeNameables(traceClasses);
-		tracePackage.getOwnedClasses().addAll(traceClasses);
+		CompilerUtil.normalizeNameables(middleClasses);
+		tracePackage.getOwnedClasses().addAll(middleClasses);
 	}
 
 	@Override
@@ -453,7 +502,7 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		//
 		//	 Create a Relation2TraceClass for each Relation and each Invocation.
 		//
-		createRelation2TraceClasses();
+		createRelation2MiddleClasses();
 		//
 		//	Analyze the trace classes and interfaces to determine their properties
 		//
