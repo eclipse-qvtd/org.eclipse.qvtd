@@ -24,7 +24,6 @@ import junit.textui.TestRunner;
 /**
  * Tests for the Xtext QVTr editor support.
  */
-@SuppressWarnings("nls")
 public class AllQVTrelationTests extends TestCase
 {
 	public AllQVTrelationTests() {
@@ -35,6 +34,8 @@ public class AllQVTrelationTests extends TestCase
 		TestSuite result = new TestSuite("All QVTrelation Tests");
 		result.addTestSuite(LoadTests.class);
 		result.addTestSuite(QVTrDomainUsageTests.class);
+		result.addTestSuite(QVTr2QVTrTests.class);
+		//		result.addTestSuite(QVTrPartialRelationAnalysisTests.class);
 		//		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 		//			result.addTestSuite(EditorTests.class);
 		//		}
