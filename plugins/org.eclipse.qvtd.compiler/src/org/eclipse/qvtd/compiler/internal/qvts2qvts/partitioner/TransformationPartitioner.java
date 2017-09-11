@@ -147,7 +147,7 @@ public class TransformationPartitioner
 		}
 		//
 		List<@NonNull Set<@NonNull MappingPartitioner>> prunedCycleElements = new ArrayList<>(allCycleElements);
-		for (int i = prunedCycleElements.size(); --i > 0; ) {
+		for (int i = prunedCycleElements.size(); --i >= 0; ) {
 			Set<@NonNull MappingPartitioner> iCycleElements = prunedCycleElements.get(i);
 			boolean pruneIt = false;
 			for (int j = i; --j >= 0; ) {
