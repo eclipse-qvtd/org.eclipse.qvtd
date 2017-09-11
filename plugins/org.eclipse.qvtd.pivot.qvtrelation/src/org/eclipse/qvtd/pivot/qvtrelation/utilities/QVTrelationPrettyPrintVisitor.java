@@ -87,7 +87,7 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 				if (type != null) {
 					context.append(" : ");
 					context.appendQualifiedType(type);
-					context.appendTypedMultiplicity(variable);
+					context.appendTypeMultiplicity(variable);
 				}
 				prefix = ",";
 			}
