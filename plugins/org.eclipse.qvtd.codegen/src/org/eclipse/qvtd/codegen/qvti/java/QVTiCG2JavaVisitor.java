@@ -109,6 +109,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -775,10 +776,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected boolean doFunctionBody(@NonNull CGFunction cgFunction, @NonNull String instanceName) {
 		String functionName = getFunctionName(cgFunction);
-		CGValuedElement body = getExpression(cgFunction.getBody());
+		CGValuedElement cgBody = cgFunction.getBody();
 		ElementId elementId = cgFunction.getTypeId().getElementId();
 		// FIXME merge locals into AST as LetExps.
-		if (cgFunction.getBody() != null) {
+		if (cgBody != null) {
+			CGValuedElement body = getExpression(cgBody);
 			if (!js.appendLocalStatements(body)) {
 				return false;
 			}
@@ -786,6 +788,23 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("." + instanceName + " = ");
 			js.appendValueName(body);
 			js.append(";\n");
+		}
+		else if (QVTiCGUtil.getAST(cgFunction).getImplementationClass() != null) {
+			final CGTypeId resultType = cgFunction.getTypeId();
+			Function asFunction = QVTiCGUtil.getAST(cgFunction);
+			js.appendThis(functionName);
+			js.append("." + instanceName + " = ");
+			js.appendClassCast(cgFunction);
+			js.append(asFunction.getImplementationClass());
+			js.append(".INSTANCE.evaluate(");
+			js.append(JavaConstants.EXECUTOR_NAME);
+			js.append(", ");
+			js.appendValueName(resultType);
+			for (@NonNull CGParameter cgParameter : cgFunction.getParameters()) {
+				js.append(", ");
+				js.appendValueName(cgParameter);
+			}
+			js.append(");\n");
 		}
 		else {
 			TypeId asTypeId = cgFunction.getASTypeId();
@@ -2022,6 +2041,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return JavaStream.convertToJavaIdentifier("FTOR_" + cgFunction.getName());
 	}
 
+	protected String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
+		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+		Object instanceKey = cgFunction.getBody();
+		if (instanceKey == null) {
+			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
+		}
+		return functionContext.getNameManagerContext().getSymbolName(instanceKey, "instance");
+	}
+
 	protected @NonNull String getFunctionName(@NonNull CGFunction cgFunction) {
 		return JavaStream.convertToJavaIdentifier("FUN_" + cgFunction.getName());
 	}
@@ -2321,8 +2349,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				CGShadowExp cgShadowExp = useClassToCreateObject(cgFunction);
 				String functionName = getFunctionName(cgFunction);
 				if (cgShadowExp != null) {
-					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-					String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
+					String instanceName = getFunctionInstanceName(cgFunction);
 					//					Type
 					js.append("protected class ");
 					js.append(functionName);
@@ -2341,8 +2368,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.popClassBody(false);
 				}
 				else if (useCache(cgFunction)) {
-					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-					String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
+					String instanceName = getFunctionInstanceName(cgFunction);
 					CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
 					js.append("protected class ");
 					js.append(functionName);
@@ -2418,6 +2444,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
+
 		Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		CGFunction cgFunction = ClassUtil.nonNullState(cgFunctionCallExp.getFunction());
 		boolean useClass = useClass(cgFunction);
@@ -2471,8 +2498,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(")");
 		if (isIdentifiedInstance) {
 			js.append(")");
-			JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-			String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
+			String instanceName = getFunctionInstanceName(cgFunction);
 			//			js.append(".getInstance()");
 			js.append(".");
 			js.append(instanceName);
@@ -2784,6 +2810,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			boolean isRequired = cgPropertyCallExp.isRequired();
 			String cacheName = oppositeProperties.get(asProperty);
 			if (cacheName != null) {
+				if (asOppositeProperty.isIsMany()) {
+					js.appendClassCast(cgPropertyCallExp);
+				}
 				if (isRequired) {
 					js.appendClassReference(ClassUtil.class);
 					js.append(".nonNullState (");

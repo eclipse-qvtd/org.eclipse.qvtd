@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal;
 
 public abstract class AbstractTransformationExecutor extends ExecutorManager implements TransformationExecutor
@@ -52,8 +53,18 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
+		return environmentFactory;
+	}
+
+	@Override
 	public @NonNull IdResolver getIdResolver() {
 		return environmentFactory.getIdResolver();
+	}
+
+	@Override
+	public @NonNull MetamodelManager getMetamodelManager() {
+		return environmentFactory.getMetamodelManager();
 	}
 
 	@Override
