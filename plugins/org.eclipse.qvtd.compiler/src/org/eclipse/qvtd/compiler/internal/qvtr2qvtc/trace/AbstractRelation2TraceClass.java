@@ -10,12 +10,10 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -23,6 +21,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.IteratorVariable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -31,11 +31,10 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -49,105 +48,106 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
+import com.google.common.collect.Iterables;
+
 /**
- * An AbstractRelation2TraceClass represents the mapping between a QVTr Relation and the future trace class for an invoked QVTc Mapping.
- * Derived classes adjust the behaviour for a top/non-top relation.
+ * An AbstractRelation2TraceClass represents the mapping between a QVTr Relation and the trace class for an invoked QVTc Mapping.
+ * Derived classes adjust the behaviour for a top/non-top overrides/non-overrides.
  */
-abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass implements Relation2TraceClass
+abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType implements Relation2TraceClass
 {
-	/**
-	 * The Property that provides the success/failure/not-ready state of the traced mapping.
-	 */
-	private @Nullable Property successProperty = null;
+	private @Nullable Map<@NonNull RelationCallExp, @NonNull Invocation2TraceProperty> invocation2relation2traceProperty = null;
 
 	/**
-	 * Each Relation2TraceClass which directly consumes this Relation2TraceClass.
+	 * Name to corresponding future trace property
 	 */
-	private final @NonNull List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = new ArrayList<>();
+	private final @NonNull Map<@NonNull String, @Nullable Element2MiddleProperty> name2element2traceProperty = new HashMap<>();
 
-	/**
-	 * Each Relation2TraceClass which this Relation2TraceClass directly consumes.
-	 */
-	private final @NonNull List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = new ArrayList<>();
-
-	/**
-	 * Each Relation2TraceClass that transitively consumes this Relation2TraceClass.
-	 */
-	private @Nullable Set<@NonNull Relation2TraceClass> transitivelyConsumedByRelation2TraceClasses = null;
-
-	/**
-	 * Each Relation2TraceClass that is transitively consumed by this Relation2TraceClass.
-	 */
-	private @Nullable Set<@NonNull Relation2TraceClass> transitivelyConsumedRelation2TraceClasses = null;
-
-	/**
-	 * Each Relation2TraceClass that is both transitively consumed by and consumes this Relation2TraceClass.
-	 */
-	private @Nullable Set<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses = null;
-
-	/**
-	 * RelationCallExp invocations within the when pattern.
-	 */
-	private final @NonNull List<@NonNull RelationCallExp> whenInvocations = new ArrayList<>();
-
-	/**
-	 * RelationCallExp invocations within the where pattern.
-	 */
-	private final @NonNull List<@NonNull RelationCallExp> whereInvocations = new ArrayList<>();
-
-	private @NonNull Map<@NonNull RelationCallExp, @NonNull Invocation2TraceProperty> invocation2invocation2traceProperty = new HashMap<>();
-
-	protected AbstractRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis, @NonNull String traceClassName) {
-		super(relationAnalysis, traceClassName);
+	protected AbstractRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis, @NonNull String middleClassName) {
+		super(relationAnalysis, middleClassName);
 		//		traceClass.setIsAbstract(relation.isIsAbstract());
-		Pattern whenPattern = relation.getWhen();
-		if (whenPattern != null) {
-			for (@NonNull EObject whenExpression : new TreeIterable(whenPattern, false)) {
-				if (whenExpression instanceof RelationCallExp) {
-					whenInvocations.add((RelationCallExp)whenExpression);
-				}
-			}
-		}
-		Pattern wherePattern = relation.getWhere();
-		if (wherePattern != null) {
-			for (@NonNull EObject whereExpression : new TreeIterable(wherePattern, false)) {
-				if (whereExpression instanceof RelationCallExp) {
-					whereInvocations.add((RelationCallExp)whereExpression);
-				}
-			}
-		}
-		if (!relation.isIsAbstract()) {
-			if (relation.getOverridden() != null) {
-				getSuccessProperty();		// Overridden relation needs overriding success to control-execution.
-			}
-			else if (relationAnalysis.getIncomingWhenInvocations() != null) {
-				getSuccessProperty();		// Invoking relation needs invoked success to control execution.
-			}
-		}
-	}
-
-	@Override
-	public void addConsumedBy(@NonNull Relation2TraceClass consumedByRelation2TraceClass) {
-		if (!consumedByRelation2TraceClasses.contains(consumedByRelation2TraceClass)) {
-			consumedByRelation2TraceClasses.add(consumedByRelation2TraceClass);
-		}
-		consumedByRelation2TraceClass.addConsumedInternal(this);
-	}
-
-	@Override
-	public void addConsumedInternal(@NonNull Relation2TraceClass consumedRelation2TraceClass) {
-		if (!consumedRelation2TraceClasses.contains(consumedRelation2TraceClass)) {
-			consumedRelation2TraceClasses.add(consumedRelation2TraceClass);
-		}
-	}
-
-	@Override
-	public void analyzeInheritance() {
-		//		Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
-		//		if (overriddenRelation != null) {
-		//			Relation2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(overriddenRelation);
-		//			traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceInterface());
+		//		if (relation.isIsAbstract()) {
+		//		middleClass.getOwningPackage().getOwnedClasses().remove(middleClass);
 		//		}
+	}
+
+	/*	@Override
+	public void analyzeInheritance() {
+				Relation overriddenRelation = QVTrelationUtil.basicGetOverrides(relation);
+				if (overriddenRelation != null) {
+					Relation2TraceClass.@NonNull Internal overriddenRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(overriddenRelation);
+					traceClass.getSuperClasses().add(overriddenRelation2TraceClass.getTraceInterface());
+				}
+	} */
+
+	@Override
+	public void analyze() throws CompilerChainException {
+		boolean manyTraces = analyzeTraceMultiplicity();
+		analyzeSharedVariables();
+		analyzeRootTemplateVariables(manyTraces);
+		analyzeNonRootTemplateVariables(manyTraces);
+		analyzeInvocationVariables();
+	}
+
+	protected void analyzeInvocationVariable(@NonNull RelationCallExp rInvocation) {
+		Relation invokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
+		if (!invokedRelation.isIsTopLevel()) {
+			getInvocation2TraceProperty(rInvocation);
+		}
+	}
+
+	/**
+	 * Create child trace properties for each invocation of a non-top relation.
+	 */
+	protected void analyzeInvocationVariables() {
+		Iterable<@NonNull RelationCallExp> outgoingInvocations = relationAnalysis.getOutgoingInvocations();
+		if (outgoingInvocations != null) {
+			for (@NonNull RelationCallExp rInvocation : outgoingInvocations) {
+				analyzeInvocationVariable(rInvocation);
+			}
+		}
+		//
+		//	Prepare a trace property for each invocation argument variable - typically just narrowing
+		//	an indeterminate typed model to a specific one.
+		/*
+		Pattern rWhenPattern = relation.getWhen();
+		if (rWhenPattern != null) {
+			analyzePredicateVariables(rWhenPattern, true);
+		}
+		Pattern rWherePattern = relation.getWhere();
+		if (rWherePattern != null) {
+			analyzePredicateVariables(rWherePattern, false);
+		} */
+		Iterable<@NonNull RelationCallExp> outgoingWhereInvocations = relationAnalysis.getOutgoingWhereInvocations();
+		if (outgoingWhereInvocations != null) {
+			for (@NonNull RelationCallExp rInvocation : outgoingWhereInvocations) {
+				//				analyzeInvocationVariable(rInvocation);
+				Relation invokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
+				if (!invokedRelation.isIsTopLevel()) {
+					//					getInvocation2TraceProperty(rInvocation);
+					getInvocation2TraceProperty(rInvocation).getTraceProperty();
+				}
+			}
+		}
+	}
+
+	//
+	//	Determine the trace variables and whether they have a to-one opposite
+	//
+	protected boolean analyzeTraceMultiplicity() {
+		//
+		//	Determine whether a navigation from the trace to an unambiguous left/right object can ever be possible.
+		//
+		boolean manyTraces = hasManyRootMatches() || hasCollectionMemberMatches() || hasMultiObjectMatches();
+		if (!manyTraces) {
+			for (@NonNull Variable rVariable : QVTrelationUtil.getOwnedVariables(relation)) {
+				if (hasManyVariableMatches(rVariable)) {
+					manyTraces = true;
+					break;
+				}
+			}
+		}
+		return manyTraces;
 	}
 
 	protected void analyzeNonRootTemplateVariables(boolean manyTraces) {
@@ -166,24 +166,9 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 		}
 	}
 
-	protected void analyzePredicateVariables() {
-		//
-		//	Prepare a trace property for each invocation argument variable - typically just narrowing
-		//	an indeterminate typed model to a specific one.
-		//
-		Pattern rWhenPattern = relation.getWhen();
-		if (rWhenPattern != null) {
-			analyzePredicateVariables(rWhenPattern, true);
-		}
-		Pattern rWherePattern = relation.getWhere();
-		if (rWherePattern != null) {
-			analyzePredicateVariables(rWherePattern, false);
-		}
-	}
-
 	/**
 	 * Traverse a Pattern hierarchy to prepare/refine a trace property for each invocation argument variable.
-	 */
+	 *
 	private void analyzePredicateVariables(@NonNull Pattern rPattern, boolean isWhen) {
 		for (@NonNull Predicate rPredicate : QVTrelationUtil.getOwnedPredicates(rPattern)) {
 			OCLExpression rConditionExpression = QVTrelationUtil.getConditionExpression(rPredicate);
@@ -192,7 +177,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 				Relation invokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
 				if (!invokedRelation.isIsTopLevel()) {
 					String invocationPropertyName = isWhen ? nameGenerator.createWhenInvocationPropertyName(invokedRelation) : nameGenerator.createWhereInvocationPropertyName(invokedRelation);
-					getInvocation2TraceProperty(invocationPropertyName, rInvocation);
+					//					getInvocation2TraceProperty(invocationPropertyName, rInvocation);
 				}
 				else {
 					List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
@@ -201,22 +186,13 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 						if (rArgument instanceof VariableExp) {
 							VariableDeclaration rVariable = QVTrelationUtil.getReferredVariable((VariableExp)rArgument);
 							RelationDomain rDomain = QVTrelationUtil.getRelationCallExpArgumentDomain(rInvocation, i);
-							getVariableDeclaration2MiddleProperty(rDomain.getTypedModel(), rVariable, false);
+							getVariableDeclaration2TraceProperty(rDomain.getTypedModel(), rVariable, false);
 						}
 					}
 				}
 			}
 		}
-	}
-
-	@Override
-	public void analyzeProperties() throws CompilerChainException {
-		boolean manyTraces = analyzeTraceMultiplicity();
-		analyzeSharedVariables();
-		analyzeRootTemplateVariables(manyTraces);
-		analyzeNonRootTemplateVariables(manyTraces);
-		analyzePredicateVariables();
-	}
+	} */
 
 	protected void analyzeSharedVariables() {
 		//
@@ -225,7 +201,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 		for (@NonNull Variable rVariable : QVTrelationUtil.getOwnedVariables(relation)) {
 			if (!(rVariable instanceof IteratorVariable) && !(rVariable instanceof TemplateVariable) && !rVariable.isIsImplicit()) {
 				assert rVariable instanceof SharedVariable;
-				getVariableDeclaration2MiddleProperty(null, rVariable, false);
+				getVariableDeclaration2TraceProperty(null, rVariable, false);
 			}
 		}
 	}
@@ -235,7 +211,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 	 */
 	private void analyzeTemplateVariables(@NonNull TemplateExp templateExp, @NonNull TypedModel rTypedModel, boolean isOneToOne) {
 		Variable templateVariable = QVTrelationUtil.getBindsTo(templateExp);
-		VariableDeclaration2MiddleProperty variableDeclaration2TraceProperty = basicGetVariableDeclaration2MiddleProperty(templateVariable);
+		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = basicGetVariableDeclaration2TraceProperty(templateVariable);
 		if (variableDeclaration2TraceProperty != null) {
 			if (templateExp instanceof ObjectTemplateExp) {
 				for (@NonNull PropertyTemplateItem rPropertyTemplateItem : QVTrelationUtil.getOwnedParts((ObjectTemplateExp)templateExp)) {
@@ -252,18 +228,18 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 						TemplateExp templateValueExpression = (TemplateExp)valueExpression;
 						Variable itemVariable = QVTrelationUtil.getBindsTo(templateValueExpression);
 						if (QVTrelationUtil.getElementalType(QVTrelationUtil.getType(itemVariable)) instanceof DataType) {
-							getVariableDeclaration2MiddleProperty(null, itemVariable, false);
+							getVariableDeclaration2TraceProperty(null, itemVariable, false);
 						}
 						else {
 							assert itemVariable instanceof TemplateVariable;
-							getVariableDeclaration2MiddleProperty(rTypedModel, itemVariable, isNestedOneToOne);
+							getVariableDeclaration2TraceProperty(rTypedModel, itemVariable, isNestedOneToOne);
 							analyzeTemplateVariables(templateValueExpression, rTypedModel, isOneToOne);
 						}
 					}
 					else if (valueExpression instanceof VariableExp) {
 						VariableExp variableExpression = (VariableExp)valueExpression;
 						Variable itemVariable = QVTrelationUtil.getReferredVariable(variableExpression);
-						getVariableDeclaration2MiddleProperty(null, itemVariable, isNestedOneToOne);
+						getVariableDeclaration2TraceProperty(null, itemVariable, isNestedOneToOne);
 					}
 				}
 			}
@@ -273,167 +249,154 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleClass 
 						TemplateExp templateValueExpression = (TemplateExp)memberExpression;
 						Variable itemVariable = QVTrelationUtil.getBindsTo(templateValueExpression);
 						assert itemVariable instanceof TemplateVariable;
-						getVariableDeclaration2MiddleProperty(rTypedModel, itemVariable, false);
+						getVariableDeclaration2TraceProperty(rTypedModel, itemVariable, false);
 						analyzeTemplateVariables(templateValueExpression, rTypedModel, false);
 					}
 					else if (memberExpression instanceof VariableExp) {
 						VariableExp variableExpression = (VariableExp)memberExpression;
 						Variable itemVariable = QVTrelationUtil.getReferredVariable(variableExpression);
-						getVariableDeclaration2MiddleProperty(null, itemVariable, false);
+						getVariableDeclaration2TraceProperty(null, itemVariable, false);
 					}
 				}
 			}
 		}
 	}
 
-	@Override
-	public @Nullable Iterable<@NonNull Relation2TraceClass> getConsumedByRelation2TraceClasses() {
-		return consumedByRelation2TraceClasses;
+	public @NonNull String createInvocationClassName() {
+		return relationAnalysis.getNameGenerator().createInvocationClassName(relation);
+	}
+
+	public @NonNull String createInvocationInterfaceName() {
+		return relationAnalysis.getNameGenerator().createInvocationInterfaceName(relation);
+	}
+
+	public @NonNull Property createProperty(@NonNull String name, @NonNull Type type) {
+		String uniqueName = QVTrNameGenerator.getUniqueName(name2element2traceProperty.keySet(), name);
+		Property property = PivotUtil.createProperty(uniqueName, type);
+		//FIXME		name2element2traceProperty.put(uniqueName, property);
+		return property;
+	}
+
+	public @NonNull String createTraceInterfaceName() {
+		return relationAnalysis.getNameGenerator().createTraceInterfaceName(relation);
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull Relation2TraceClass> getConsumedRelation2TraceClasses() {
-		return consumedRelation2TraceClasses;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull Relation2TraceClass> getCyclicRelation2TraceClasses() {
-		return cyclicRelation2TraceClasses;
-	}
-
-	private Invocation2TraceProperty getInvocation2TraceProperty(@NonNull String name, @NonNull RelationCallExp rInvocation) {
-		Invocation2TraceProperty invocation2TraceProperty = new Invocation2TraceProperty(this, name, QVTrelationUtil.getReferredRelation(rInvocation));
-		invocation2TraceProperty.getMiddleProperty();
-		Invocation2TraceProperty oldInvocation2TraceProperty = invocation2invocation2traceProperty.put(rInvocation, invocation2TraceProperty);
-		assert oldInvocation2TraceProperty == null;
-		return invocation2TraceProperty;
-	}
-
-	//	@Override
-	protected @NonNull Property getSuccessProperty() {
-		Property successProperty2 = successProperty;
-		if (successProperty2 == null) {
-			Type booleanType = relationalTransformation2tracePackage.getBooleanType();
-			successProperty = successProperty2 = PivotUtil.createProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME, booleanType);
-			successProperty2.setIsRequired(false);
-			middleClass.getOwnedProperties().add(successProperty2);
+	public @NonNull Invocation2TraceProperty getInvocation2TraceProperty(@NonNull RelationCallExp rInvocation) {
+		Map<@NonNull RelationCallExp, @NonNull Invocation2TraceProperty> invocation2relation2traceProperty2 = invocation2relation2traceProperty;
+		if (invocation2relation2traceProperty2 == null) {
+			invocation2relation2traceProperty = invocation2relation2traceProperty2 = new HashMap<>();
 		}
-		return successProperty2;
-	}
-
-	@Override
-	public @NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation) {
-		Invocation2TraceProperty invocation2TraceProperty = invocation2invocation2traceProperty.get(rInvocation);
-		assert invocation2TraceProperty != null;
-		return invocation2TraceProperty.getMiddleProperty();
-	}
-
-	@Override
-	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses() {
-		Set<@NonNull Relation2TraceClass> transitivelyConsumedByRelation2TraceClasses2 = transitivelyConsumedByRelation2TraceClasses;
-		if (transitivelyConsumedByRelation2TraceClasses2 == null) {
-			transitivelyConsumedByRelation2TraceClasses2 = getTransitivelyConsumedByRelation2TraceClasses(new HashSet<>());
+		Invocation2TraceProperty relation2traceProperty = invocation2relation2traceProperty2.get(rInvocation);
+		if (relation2traceProperty == null) {
+			Relation invokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
+			Relation2TraceClass invokedRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(invokedRelation);
+			relation2traceProperty = new Invocation2TraceProperty(this, invokedRelation2TraceClass.getRelation2InvocationClass());
+			invocation2relation2traceProperty2.put(rInvocation, relation2traceProperty);
 		}
-		return transitivelyConsumedByRelation2TraceClasses2;
+		return relation2traceProperty;
 	}
+
 	@Override
-	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator) {
-		Set<@NonNull Relation2TraceClass> transitivelyConsumedByRelation2TraceClasses2 = this.transitivelyConsumedByRelation2TraceClasses;
-		if (transitivelyConsumedByRelation2TraceClasses2 != null) {
-			accumulator.addAll(transitivelyConsumedByRelation2TraceClasses2);
+	public @NonNull AbstractRelation2TraceClass getRelation2TraceClass() {
+		return this;
+	}
+
+	@Override
+	public @NonNull String getUniquePropertyName(@NonNull Element2MiddleProperty element2traceProperty, @NonNull String name) {
+		return QVTrNameGenerator.getUniqueName(name2element2traceProperty, name, element2traceProperty);
+	}
+
+	private boolean hasCollectionMemberMatches() {
+		for (EObject eObject : new TreeIterable(relation, true)) {
+			if (eObject instanceof CollectionTemplateExp) {
+				List<OCLExpression> members = ((CollectionTemplateExp)eObject).getMember();
+				if (members.size() > 0) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if there may be more than one trace instance for a given root variable.
+	 */
+	private boolean hasManyRootMatches() {
+		//
+		//	Only a single root variable in each of just two domains gurantees just one trace per root variable.
+		//
+		List<@NonNull Domain> rDomains = QVTrelationUtil.Internal.getOwnedDomainsList(relation);
+		if (rDomains.size() > 2) {
+			return true;
 		}
 		else {
-			for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRelation2TraceClasses) {
-				if (accumulator.add(consumedByRelation2TraceClass)) {
-					consumedByRelation2TraceClass.getTransitivelyConsumedByRelation2TraceClasses(accumulator);
+			for (@NonNull Domain rDomain : rDomains) {
+				List<Variable> rootVariables = ((RelationDomain)rDomain).getRootVariable();
+				if (rootVariables.size() > 1) {
+					return true;
 				}
 			}
 		}
-		return accumulator;
+		return false;
 	}
 
-	@Override
-	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses() {
-		Set<@NonNull Relation2TraceClass> transitivelyConsumedRelation2TraceClasses2 = transitivelyConsumedRelation2TraceClasses;
-		if (transitivelyConsumedRelation2TraceClasses2 == null) {
-			transitivelyConsumedRelation2TraceClasses2 = getTransitivelyConsumedRelation2TraceClasses(new HashSet<>());
+	private boolean hasManyVariableMatches(@NonNull Variable rVariable) {
+		for (@NonNull Domain rDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			Iterable<@NonNull Variable> bindsTo = QVTr2QVTcUtil.getRelationDomainBindsTo((RelationDomain) rDomain);
+			if (Iterables.contains(bindsTo, rVariable)) {
+				return false;
+			}
 		}
-		return transitivelyConsumedRelation2TraceClasses2;
-	}
-	@Override
-	public @NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator) {
-		Set<@NonNull Relation2TraceClass> transitivelyConsumedRelation2TraceClasses2 = this.transitivelyConsumedRelation2TraceClasses;
-		if (transitivelyConsumedRelation2TraceClasses2 != null) {
-			accumulator.addAll(transitivelyConsumedRelation2TraceClasses2);
-		}
-		else {
-			for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
-				if (accumulator.add(consumedRelation2TraceClass)) {
-					consumedRelation2TraceClass.getTransitivelyConsumedRelation2TraceClasses(accumulator);
+		for (@NonNull EObject eObject : new TreeIterable(relation, true)) {
+			if (eObject instanceof VariableExp) {
+				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+				if (referredVariable == rVariable) {
+					EObject eContainer = eObject.eContainer();
+					if (eContainer instanceof OperationCallExp) {
+						OperationCallExp operationCallExp = (OperationCallExp)eContainer;
+						Operation referredOperation = operationCallExp.getReferredOperation();
+						assert referredOperation != null;
+						if (operationCallExp.getOwnedArguments().equals(Collections.singletonList(eObject)) && "includes".equals(referredOperation.getName())) {		// FIXME stronger test
+							return true;
+						}
+					}
+					// FIXME more cases
 				}
 			}
 		}
-		return accumulator;
+		return false;
 	}
 
-	@Override
-	public @NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations() {
-		return whenInvocations;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull RelationCallExp> getWhereInvocations() {
-		return whereInvocations;
-	}
-
-	//		public void installConsumedByDependencies() {
-	//			for (@NonNull Relation2TraceClass consumedRelation2TraceClass : getTransitivelyConsumedRelation2TraceClasses()) {
-	//				ClassUtil.nonNullState(consumedRelation2TraceClass.transitivelyConsumedByRelation2TraceClasses).add(this);
-	//			}
-	//		}
-
-	/*		public void installDependencyCycles() throws CompilerChainException {
-		Set<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses2 = cyclicRelation2TraceClasses = new HashSet<>(getTransitivelyConsumedByRelation2TraceClasses());
-		cyclicRelation2TraceClasses2.retainAll(getTransitivelyConsumedRelation2TraceClasses());
-		if (!cyclicRelation2TraceClasses2.isEmpty()) {
-			traceClass.getSuperClasses().add(relationalTransformation2tracePackage.getSpeculatableClass());
-		}
-	} */
-
-	@Override
-	public void installConsumesDependencies() throws CompilerChainException {
-		/*		for (@NonNull RelationCallExp whenInvocation : whenInvocations) {
-			Relation whenInvokedRelation = QVTrelationUtil.getReferredRelation(whenInvocation);
-			if (whenInvokedRelation.isIsTopLevel()) {
-				Relation2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(whenInvokedRelation);
-				invokedRelation2TraceClass.addConsumedBy(this);
-			}
-			else {
-				for (Relation2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whenInvocation)) {
-					addConsumedBy(invocation2TraceClass);
-					invocation2TraceClass.addConsumedBy(this);
+	private boolean hasMultiObjectMatches() {
+		for (RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			if (!relationDomain.isIsEnforceable()) {
+				for (EObject eObject : new TreeIterable(relationDomain, true)) {
+					if (eObject instanceof PropertyTemplateItem) {
+						Property referredProperty = ((PropertyTemplateItem)eObject).getReferredProperty();
+						if (referredProperty.isIsMany()) {
+							return true;
+						}
+					}
 				}
 			}
 		}
-		for (@NonNull RelationCallExp whereInvocation : whereInvocations) {
-			Relation whereInvokedRelation = QVTrelationUtil.getReferredRelation(whereInvocation);
-			if (whereInvokedRelation.isIsTopLevel()) {
-				Relation2TraceClass.@NonNull Internal invokedRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(whereInvokedRelation);
-				invokedRelation2TraceClass.addConsumedBy(this);
-			}
-			else {
-				for (Relation2TraceClass.@NonNull Internal invocation2TraceClass : relationalTransformation2tracePackage.getInvocation2TraceClasses(whereInvocation)) {
-					addConsumedBy(invocation2TraceClass);
-					invocation2TraceClass.addConsumedBy(this);
-				}
-			}
-		} */
+		return false;
+	}
+
+	protected void reservePropertyName(@NonNull String name) {
+		assert !name2element2traceProperty.containsKey(name);
+		name2element2traceProperty.put(name, null);
 	}
 
 	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class synthesize() {
+	public void synthesize() {
+		Map<@NonNull RelationCallExp, @NonNull Invocation2TraceProperty> invocation2relation2traceProperty2 = invocation2relation2traceProperty;
+		if (invocation2relation2traceProperty2 != null) {
+			for (@NonNull Invocation2TraceProperty relation2traceProperty : invocation2relation2traceProperty2.values()) {
+				relation2traceProperty.synthesize();
+			}
+		}
 		super.synthesize();
-		CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(middleClass));
-		return middleClass;
 	}
 }

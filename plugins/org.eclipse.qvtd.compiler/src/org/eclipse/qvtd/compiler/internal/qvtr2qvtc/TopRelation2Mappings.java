@@ -128,10 +128,10 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 			return ClassUtil.nonNullState(topTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
 		}
 
-		@Override
-		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
-			return relation2Mappings.getTopRelationDomain2CoreMapping(rEnforcedTypedModel);
-		}
+		//		@Override
+		//		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
+		//			return relation2Mappings.getTopRelationDomain2CoreMapping(rEnforcedTypedModel);
+		//		}
 
 		@Override
 		protected void synthesize() throws CompilerChainException {

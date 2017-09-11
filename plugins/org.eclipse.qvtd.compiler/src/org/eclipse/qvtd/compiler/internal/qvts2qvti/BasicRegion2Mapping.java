@@ -1214,7 +1214,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getClassDatum().getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
-		Property successProperty = RegionUtil.basicGetSuccessProperty(guardNode);
+		Property successProperty = RegionUtil.basicGetStatusProperty(guardNode);
 		if (successProperty != null) {
 			NavigableEdge successEdge = guardNode.getNavigationEdge(successProperty);
 			if ((successEdge != null) && successEdge.isRealized()) {

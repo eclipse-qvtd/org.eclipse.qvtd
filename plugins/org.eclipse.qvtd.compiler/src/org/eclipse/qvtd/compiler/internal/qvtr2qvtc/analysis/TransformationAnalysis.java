@@ -54,7 +54,7 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 	/**
 	 * Map from each relation to its analysis.
 	 */
-	private final @NonNull Map<@NonNull Relation, org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis> relation2relationAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Relation, @NonNull RelationAnalysis> relation2relationAnalysis = new HashMap<>();
 
 	/**
 	 * Mapping from each key via the TYpedModel in which it is enforced to its corresponding identification constructor function.
@@ -85,7 +85,7 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 		for (@NonNull Key key : QVTrelationUtil.getOwnedKey(transformation)) {
 			analyzeKey(key);
 		}
-		for (RelationAnalysis relationAnalysis : relation2relationAnalysis.values()) {
+		for (@NonNull RelationAnalysis relationAnalysis : relation2relationAnalysis.values()) {
 			relationAnalysis.analyze();
 		}
 	}
@@ -170,6 +170,10 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage() {
 		return qvtr2qvtc.getRelationalTransformation2TracePackage(this);
+	}
+
+	public @NonNull Iterable<@NonNull RelationAnalysis> getRelationAnalyses() {
+		return relation2relationAnalysis.values();
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis(@NonNull Relation relation) {

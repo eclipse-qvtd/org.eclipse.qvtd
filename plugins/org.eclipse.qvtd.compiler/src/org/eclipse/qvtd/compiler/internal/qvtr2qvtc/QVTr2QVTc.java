@@ -75,7 +75,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
-	public static final @NonNull TracingOption CALL_TREE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/callTree");
+	//	public static final @NonNull TracingOption CALL_TREE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/callTree");
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
 	public static final @NonNull TracingOption VARIABLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/variables");
 
@@ -165,7 +165,6 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 	}
 
-	protected final @NonNull StandardLibrary standardLibrary;
 	private final @NonNull Resource qvtrResource;
 	protected final @NonNull QVTrNameGenerator nameGenerator;
 
@@ -215,11 +214,12 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 
 	public QVTr2QVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource) {
 		super(environmentFactory);
-		this.standardLibrary = environmentFactory.getStandardLibrary();
 		this.qvtrResource = qvtrResource;
-		this.nameGenerator = new QVTrNameGenerator(this);
+		this.nameGenerator = new QVTrNameGenerator();
 		this.coreModel = QVTcoreFactory.eINSTANCE.createCoreModel();
+	}
 
+	public void analyze() {
 		// Create a cache of opposite relations and copy imports
 		TreeIterator<EObject> it = qvtrResource.getAllContents();
 		while (it.hasNext()) {
@@ -591,6 +591,9 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					rootTracePackages.addAll(tracePackages);
 				}
 			}
+		}
+		for (@NonNull RelationalTransformation2TracePackage relationalTransformation2tracePackage : transformationAnalysis2relationalTransformation2tracePackage.values()) {
+			relationalTransformation2tracePackage.freeze();
 		}
 		if (rootTracePackages != null) {
 			CompilerUtil.normalizeNameables(rootTracePackages);

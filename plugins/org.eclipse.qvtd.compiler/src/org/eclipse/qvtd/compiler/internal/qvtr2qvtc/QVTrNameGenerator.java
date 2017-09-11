@@ -11,11 +11,14 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -29,20 +32,67 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
  */
 public class QVTrNameGenerator
 {
+	public static final @NonNull String INVOCATIONCLASS_RESULT_PROPERTY_NAME = "result";
 	public static final @NonNull String INVOCATION_GUARD_NAME = "invocationGuard";
 	public static final @NonNull String IDENTIFIED_INSTANCE_VARIABLE_NAME = "identifiedInstance";
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";
-	public static final @NonNull String TRACECLASS_SUCCESS_PROPERTY_NAME = "_success";
+	public static final @NonNull String TRACECLASS_PROPERTY_NAME = "trace";
+	public static final @NonNull String TRACECLASS_STATUS_PROPERTY_NAME = "status";
 
-	protected final @NonNull QVTr2QVTc qvtr2qvtc;
+	//	public @NonNull String createWhereTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
+	//		return "T" + invokingRelation.getName() + "_where_" + invokedRelation.getName();
+	//	} */
 
-	public QVTrNameGenerator(@NonNull QVTr2QVTc qvtr2qvtc) {
-		this.qvtr2qvtc = qvtr2qvtc;
+	/**
+	 * Return a uniqueName for object within the name2object domain.
+	 * Returns name if not already in use otherwise a numerically suffixed variant of name.
+	 * In either case a new entry is added to name2object for the the returned name mapped to object.
+	 */
+	public static <T> @NonNull String getUniqueName(@NonNull Map<@NonNull String, T> name2object, @NonNull String name, @NonNull T object) {
+		assert !name2object.containsValue(object);
+		String uniqueName = name;
+		int suffix = 0;
+		while (name2object.get(uniqueName) != null) {
+			uniqueName = name + ++suffix;
+		}
+		name2object.put(uniqueName, object);
+		return uniqueName;
+	}
+	public static <T> @NonNull String getUniqueName(@NonNull Set<@NonNull String> names, @NonNull String newName) {
+		String uniqueName = newName;
+		int suffix = 0;
+		while (names.contains(uniqueName)) {
+			uniqueName = newName + ++suffix;
+		}
+		return uniqueName;
+	}
+	public static <T> @NonNull String getUniqueName(@NonNull Iterable<? extends @NonNull Nameable> nameables, @NonNull String newName) {
+		String uniqueName = newName;
+		int suffix = 0;
+		while (NameUtil.getNameable(nameables, uniqueName) != null) {
+			uniqueName = newName + ++suffix;
+		}
+		return uniqueName;
 	}
 
-	public @NonNull String createInPropertyName(@NonNull Relation relation) {
-		return "in_" + QVTrelationUtil.getName(relation);
+	//	public @NonNull String createInPropertyName(@NonNull Relation relation) {
+	//		return "in_" + QVTrelationUtil.getName(relation);
+	//	}
+
+	//	public @NonNull String createSignatureClassName(org.eclipse.ocl.pivot.@NonNull Class signatureClass) {
+	//		return "S" + signatureClass.getName().substring(1);
+	//	}
+	//	public @NonNull String createSignatureClassName(@NonNull Relation relation) {
+	//		return "S" + QVTrelationUtil.getName(relation);
+	//	}
+
+	public @NonNull String createInvocationClassName(@NonNull Relation relation) {
+		return "WC_" + QVTrelationUtil.getName(relation);
+	}
+
+	public @NonNull String createInvocationInterfaceName(@NonNull Relation relation) {
+		return "WI_" + QVTrelationUtil.getName(relation);
 	}
 
 	public @NonNull String createKeyFunctionName(@NonNull TypedModel rTypedModel, @NonNull Key rKey) {
@@ -70,15 +120,12 @@ public class QVTrNameGenerator
 		return rRelationName + '_' + rEnforcedDomainName;
 	}
 
-	//	public @NonNull String createSignatureClassName(org.eclipse.ocl.pivot.@NonNull Class signatureClass) {
-	//		return "S" + signatureClass.getName().substring(1);
-	//	}
-	public @NonNull String createSignatureClassName(@NonNull Relation relation) {
-		return "S" + QVTrelationUtil.getName(relation);
+	public @NonNull String createTraceClassName(@NonNull Relation relation) {
+		return "TC_" + QVTrelationUtil.getName(relation);
 	}
 
-	public @NonNull String createTraceClassName(@NonNull Relation relation) {
-		return "T" + QVTrelationUtil.getName(relation);
+	public @NonNull String createTraceInterfaceName(@NonNull Relation relation) {
+		return "TI_" + QVTrelationUtil.getName(relation);
 	}
 
 	public @NonNull String createTracePropertyName(@NonNull VariableDeclaration variable) {
@@ -131,25 +178,5 @@ public class QVTrNameGenerator
 
 	public @NonNull String createWhereInvocationPropertyName(@NonNull Relation relation) {
 		return "where_" + QVTrelationUtil.getName(relation);
-	}
-
-	//	public @NonNull String createWhereTraceClassName(@NonNull Relation invokingRelation, @NonNull Relation invokedRelation) {
-	//		return "T" + invokingRelation.getName() + "_where_" + invokedRelation.getName();
-	//	} */
-
-	/**
-	 * Return a uniqueName for object within the name2object domain.
-	 * Returns name if not already in use otherwise a numerically suffixed variant of name.
-	 * In either case a new entry is added to name2object for the the returned name mapped to object.
-	 */
-	public <T> @NonNull String getUniqueName(@NonNull Map<@NonNull String, @NonNull T> name2object, @NonNull String name, @NonNull T object) {
-		assert !name2object.containsValue(object);
-		String uniqueName = name;
-		int suffix = 0;
-		while (name2object.get(uniqueName) != null) {
-			uniqueName = name + ++suffix;
-		}
-		name2object.put(uniqueName, object);
-		return uniqueName;
 	}
 }

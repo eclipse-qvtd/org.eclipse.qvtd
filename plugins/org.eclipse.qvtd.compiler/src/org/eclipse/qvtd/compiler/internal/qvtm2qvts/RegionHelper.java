@@ -42,9 +42,10 @@ public class RegionHelper
 	/**
 	 * HeadComparator supports sorting a list of Head candidates into a most suitable first order.
 	 */
-	protected class HeadComparator implements Comparator<@NonNull Node>
+	protected static class HeadComparator implements Comparator<@NonNull Node>
 	{
 		private final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure;
+		private @Nullable Map<@NonNull Node, @NonNull Integer> node2implicity = null;
 
 		public HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure) {
 			this.targetFromSourceClosure = targetFromSourceClosure;
@@ -83,6 +84,15 @@ public class RegionHelper
 				return diff;
 			}
 			//
+			//	Loaded heads seem more attractive than predicated, since we can just dispatch on an input object collection. If the scheduler ensures
+			//	that the predicated input is actually ready then we just incur a probably inefficuent implicit opposite navigation.
+			//
+			//	But conversely, predicated heads ensure that we use what we are waiting for anyway and then navigate more efficiently.
+			//
+			//	The clinching argument demonstrated by testQVTcCompiler_Forward2Reverse is that the predicated candidate might
+			//	be part of a nasty cyclic dependency and so need speculation. Heads cannot be speculated. So we must prefer a loaded head
+			//	at least until we can anticipate speculation more accurately.
+			//
 			//	Loaded next
 			//
 			if (o1.isLoaded() != o2.isLoaded()) {
@@ -118,6 +128,29 @@ public class RegionHelper
 			String n2 = o2.getName();
 			return n1.compareTo(n2);
 		}
+
+		/**
+		 * Return the number of outgoing implicit connection from node. A middle model node
+		 * has no implicit connections and so is a better candodate for a head than an output
+		 * model node which has implicit connections to the trace.
+		 */
+		private int getImplicity(@NonNull Node node) {
+			Map<@NonNull Node, @NonNull Integer> node2implicity2 = node2implicity;
+			if (node2implicity2 == null) {
+				node2implicity = node2implicity2 = new HashMap<>();
+			}
+			Integer implicity = node2implicity2.get(node);
+			if (implicity == null) {
+				implicity = 0;
+				for (@NonNull NavigableEdge e : node.getNavigationEdges()) {
+					if (e.getProperty().isIsImplicit()) {
+						implicity++;
+					}
+				}
+				node2implicity2.put(node, implicity);
+			}
+			return implicity;
+		}
 	}
 
 	protected final @NonNull MappingRegion mappingRegion;
@@ -127,7 +160,6 @@ public class RegionHelper
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> conditionalNodes = null;
 	//	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> dependencyNodes = null;
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> deadNodes = null;
-	private @Nullable Map<@NonNull Node, @NonNull Integer> node2implicity = null;
 
 	public RegionHelper(@NonNull MappingRegion mappingRegion) {
 		this.mappingRegion = mappingRegion;
@@ -157,6 +189,29 @@ public class RegionHelper
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Gather all the source pattern Nodes from which a unique targetNode may be computed.
+	 * Return false if a unique computation is not possible.
+	 */
+	private boolean computeComputationSources(@NonNull Node targetNode, @NonNull Set<@NonNull Node> sourceNodes) {
+		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
+			if (incomingEdge.isComputation()) {
+				if (incomingEdge.isPredicate()) {		// Ignore multi-valued <<includes>>
+					return false;
+				}
+				Node sourceNode = incomingEdge.getEdgeSource();
+				if (sourceNodes.add(sourceNode)) {
+					if (!sourceNode.isPattern()) {
+						if (!computeComputationSources(sourceNode, sourceNodes)) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -217,88 +272,22 @@ public class RegionHelper
 		return dependencyNodes;
 	} */
 
-	protected @NonNull List<@NonNull Node> computeHeadNodes(@NonNull MappingRegion mappingRegion) {
+	public @NonNull List<@NonNull Node> computeHeadNodes(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources) {
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourcesClosure = targetFromSources;
+		Iterable <@NonNull Node> navigableNodes = targetFromSourcesClosure.keySet();
 		//
-		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
-		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
-		//
-		List<@NonNull Node> navigableNodes = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (node.isPattern() && node.isMatched() && node.isClass() && !node.isExplicitNull() && !node.isOperation()) {	// Excludes, null, attributes, constants, operations
-				if (node.isLoaded() || node.isPredicated() || node.isSpeculated()) {
-					navigableNodes.add(node);
-				}
-			}
-		}
-		//
-		//	Compute the Set of all source nodes from which each target can be reached by transitive to-one navigation.
-		//
-		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure = new HashMap<>();
-		for (@NonNull Node targetNode : navigableNodes) {
-			targetFromSourceClosure.put(targetNode, Sets.newHashSet(targetNode));
-		}
-		for (@NonNull Node sourceNode : navigableNodes) {
-			//			assert !navigableNode.isDataType();									// FIXME avoid even considering these nodes
-			//			assert !navigableNode.isSpeculation();								// FIXME avoid even considering these nodes
-			//			assert !navigableNode.isRealized();									// FIXME avoid even considering these nodes
-			//			Type type = navigableNode.getCompleteClass().getPrimaryClass();
-			//			assert !(type instanceof CollectionType);
-			//				System.out.println("No head created for CollectionType " + type + " in " + this);
-			//				continue;
-			//			}
-			//			Set<@NonNull Node> sourceClosure = new HashSet<>();
-			//			targetFromSourceClosure.put(navigableNode, targetClosure);
-			//			targetClosure.add(navigableNode);
-			for (@NonNull Edge navigationEdge : sourceNode.getNavigationEdges()) {
-				if (!navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getEdgeTarget();
-					if (targetNode.isMatched() && targetNode.isClass() && !targetNode.isExplicitNull()) {
-						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
-						if (sourceClosure != null) {
-							sourceClosure.add(sourceNode);
-						}
-					}
-				}
-			}
-			//			for (@NonNull Edge computationEdge : navigableNode.getComputationEdges()) {
-			//				targetClosure.add(computationEdge.getSource());
-			//			}
-		}
-		List<@NonNull Node> headNodes = computeHeadNodes(targetFromSourceClosure);
-		//
-		//	Check head node consistency
-		//
-		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (node.isTrue() || node.isDependency()) {
-				debugHeadNodes.add(node);
-				node.setHead();
-				assert !headNodes.contains(node);
-				headNodes.add(node);
-			}
-			else if (node.isHead()) {
-				debugHeadNodes.add(node);
-			}
-		}
-		assert debugHeadNodes.equals(new HashSet<>(headNodes));
-		return headNodes;
-	}
-
-	public @NonNull List<@NonNull Node> computeHeadNodes(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure) {
-		Iterable <@NonNull Node> navigableNodes = targetFromSourceClosure.keySet();
-		//
-		//	Ripple the local target-from-source closure to compute the overall target-from-source closure.
+		//	Ripple the local target-from-sources to compute the overall target-from-sources closure.
 		//
 		boolean isChanged = true;
 		while (isChanged) {
 			isChanged = false;
 			for (@NonNull Node targetNode : navigableNodes) {
-				Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
-				assert sourceClosure != null;
-				for (@NonNull Node sourceNode : new ArrayList<>(sourceClosure)) {
-					Set<@NonNull Node> sourceSourceClosure = targetFromSourceClosure.get(sourceNode);
+				Set<@NonNull Node> sourcesClosure = targetFromSourcesClosure.get(targetNode);
+				assert sourcesClosure != null;
+				for (@NonNull Node sourceNode : new ArrayList<>(sourcesClosure)) {
+					Set<@NonNull Node> sourceSourceClosure = targetFromSourcesClosure.get(sourceNode);
 					assert sourceSourceClosure != null;
-					if (sourceClosure.addAll(sourceSourceClosure)) {
+					if (sourcesClosure.addAll(sourceSourceClosure)) {
 						isChanged = true;
 					}
 				}
@@ -307,15 +296,15 @@ public class RegionHelper
 		//
 		//	Compute the inverse Set of all source nodes from which a particular target node can be reached by transitive to-one navigation.
 		//
-		final Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<>();
+		final Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetsClosure = new HashMap<>();
 		for (@NonNull Node sourceNode : navigableNodes) {
-			source2targetClosure.put(sourceNode, Sets.newHashSet(sourceNode));
+			source2targetsClosure.put(sourceNode, Sets.newHashSet(sourceNode));
 		}
-		for (@NonNull Node targetNode : targetFromSourceClosure.keySet()) {
-			Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
-			assert sourceClosure != null;
-			for (@NonNull Node sourceNode : sourceClosure) {
-				Set<@NonNull Node> targetClosure = source2targetClosure.get(sourceNode);
+		for (@NonNull Node targetNode : targetFromSourcesClosure.keySet()) {
+			Set<@NonNull Node> sourcesClosure = targetFromSourcesClosure.get(targetNode);
+			assert sourcesClosure != null;
+			for (@NonNull Node sourceNode : sourcesClosure) {
+				Set<@NonNull Node> targetClosure = source2targetsClosure.get(sourceNode);
 				assert targetClosure != null;
 				targetClosure.add(targetNode);
 			}
@@ -325,32 +314,94 @@ public class RegionHelper
 		//	by successive removal from the start of the list.
 		//
 		List<@NonNull Node> headLessNodes = new ArrayList<>();
-		Iterables.addAll(headLessNodes, targetFromSourceClosure.keySet());
-		Collections.sort(headLessNodes, new HeadComparator(targetFromSourceClosure));
+		Iterables.addAll(headLessNodes, targetFromSourcesClosure.keySet());
+		Collections.sort(headLessNodes, new HeadComparator(targetFromSourcesClosure));
 		//
-		//	Loop to keep removing distinct inputs until all guard nodes are reachable from some head.
+		//	Loop to identify the least reachable residual node and then remove all nodes reachable from this new head.
+		//	Removed nodes from which the new head is reachable are accumulated as a mutually reachable head group.
 		//
-		List<@NonNull Node> headNodes = new ArrayList<>();
+		List<@NonNull List<@NonNull Node>> headNodeGroups = new ArrayList<>();
+		Set<@NonNull Node> reachableNodes = new HashSet<>();
 		while (!headLessNodes.isEmpty()) {
 			Node headNode = headLessNodes.remove(0);
 			assert headNode != null;
-			@SuppressWarnings("unused") Set<@NonNull Node> debugSourceClosure = targetFromSourceClosure.get(headNode);
-			Set<@NonNull Node> targetClosure = source2targetClosure.get(headNode);
-			assert targetClosure != null;
-			for (@NonNull Node node : targetClosure) {
-				if (node != headNode) {
-					node.resetHead();
+			List<@NonNull Node> headNodeGroup = new ArrayList<>();
+			headNodeGroup.add(headNode);
+			@SuppressWarnings("unused") Set<@NonNull Node> debugSourceClosure = targetFromSourcesClosure.get(headNode);
+			Set<@NonNull Node> targetsClosure = source2targetsClosure.get(headNode);
+			assert targetsClosure != null;
+			for (@NonNull Node targetNode : targetsClosure) {
+				if (reachableNodes.add(targetNode)) {
+					headLessNodes.remove(targetNode);
+					if (targetNode != headNode) {
+						Set<@NonNull Node> otherTargetsClosure = source2targetsClosure.get(targetNode);
+						assert otherTargetsClosure != null;
+						if (otherTargetsClosure.contains(headNode)) {
+							headNodeGroup.add(targetNode);
+						}
+					}
 				}
-				else {
-					headNode.setHead();
-				}
-				headLessNodes.remove(node);
 			}
-			targetClosure.remove(headNode);
+			headNodeGroups.add(headNodeGroup);
+		}
+		//
+		//	Prune any computationally derived heads
+		//
+		if (headNodeGroups.size() > 1) {
+			for (int iGroup = headNodeGroups.size()-1; iGroup >= 0; --iGroup) {		// Reverse index to allow removal
+				List<@NonNull Node> headNodeGroup = headNodeGroups.get(iGroup);
+				Set<@NonNull Node> computationalSources = new HashSet<>();
+				for (@NonNull Node headNode : headNodeGroup) {
+					if (!computeComputationSources(headNode, computationalSources)) {
+						computationalSources.clear();
+						break;
+					}
+				}
+				if (computationalSources.size() > 0) {
+					Set<@NonNull Node> otherReachables = new HashSet<>();
+					for (@NonNull List<@NonNull Node> otherHeadNodeGroup : headNodeGroups) {
+						if (otherHeadNodeGroup != headNodeGroup) {
+							for (@NonNull Node otherHeadNode : otherHeadNodeGroup) {
+								Set<@NonNull Node> otherTargets = source2targetsClosure.get(otherHeadNode);
+								assert otherTargets != null;
+								otherReachables.addAll(otherTargets);
+							}
+						}
+					}
+					boolean allReachable = true;
+					for (@NonNull Node computationalSource : computationalSources) {
+						if (computationalSource.isPattern() && !otherReachables.contains(computationalSource)) {
+							allReachable = false;
+							break;
+						}
+					}
+					if (allReachable) {
+						headNodeGroups.remove(iGroup);
+					}
+				}
+			}
+		}
+		//
+		//	Pick the first element of each headNodeGroup as a headNode.
+		//
+		List<@NonNull Node> headNodes = new ArrayList<>();
+		for (@NonNull List<@NonNull Node> headNodeGroup : headNodeGroups) {
+			Node headNode = headNodeGroup.get(0);
 			assert !headNodes.contains(headNode);
 			headNodes.add(headNode);
 		}
 		//
+		//	Set/reset the head flag on each node.
+		//
+		assert reachableNodes.equals(targetFromSourcesClosure.keySet());
+		for (@NonNull Node node : reachableNodes) {
+			if (headNodes.contains(node)) {
+				node.setHead();
+			}
+			else {
+				node.resetHead();
+			}
+		}
 		return headNodes;
 	}
 
@@ -384,6 +435,41 @@ public class RegionHelper
 		this.stronglyMatchedNodes = new ArrayList<>(stronglyMatchedNodes);
 		Collections.sort(this.stronglyMatchedNodes, NameUtil.NAMEABLE_COMPARATOR);
 		return stronglyMatchedNodes;
+	}
+
+	//
+	//	Compute the Set of all source nodes from which each target can be reached by transitive to-one navigation.
+	//
+	protected @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeTargetFromSources(@NonNull Iterable<@NonNull Node> navigableNodes) {
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure = new HashMap<>();
+		for (@NonNull Node targetNode : navigableNodes) {
+			targetFromSourceClosure.put(targetNode, Sets.newHashSet(targetNode));
+		}
+		for (@NonNull Node sourceNode : navigableNodes) {
+			//			assert !navigableNode.isDataType();									// FIXME avoid even considering these nodes
+			//			assert !navigableNode.isSpeculation();								// FIXME avoid even considering these nodes
+			//			assert !navigableNode.isRealized();									// FIXME avoid even considering these nodes
+			//			Type type = navigableNode.getCompleteClass().getPrimaryClass();
+			//			assert !(type instanceof CollectionType);
+			//				System.out.println("No head created for CollectionType " + type + " in " + this);
+			//				continue;
+			//			}
+			//			Set<@NonNull Node> sourceClosure = new HashSet<>();
+			//			targetFromSourceClosure.put(navigableNode, targetClosure);
+			//			targetClosure.add(navigableNode);
+			for (@NonNull Edge navigationEdge : sourceNode.getNavigationEdges()) {
+				if (!navigationEdge.isRealized()) {
+					Node targetNode = navigationEdge.getEdgeTarget();
+					if (targetNode.isMatched() && targetNode.isClass() && !targetNode.isExplicitNull()) {
+						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
+						if (sourceClosure != null) {
+							sourceClosure.add(sourceNode);
+						}
+					}
+				}
+			}
+		}
+		return targetFromSourceClosure;
 	}
 
 	private @NonNull Set<@NonNull Node> computeUnconditionalNodes(@NonNull Iterable<@NonNull Node> headNodes) {
@@ -506,31 +592,37 @@ public class RegionHelper
 		} */
 	}
 
-	/**
-	 * Return the number of outgoing implicit connection from node. A middle model node
-	 * has no implicit connections and so is a better candodate for a head than an output
-	 * model node which has implicit connections to the trace.
-	 */
-	private int getImplicity(@NonNull Node node) {
-		Map<@NonNull Node, @NonNull Integer> node2implicity2 = node2implicity;
-		if (node2implicity2 == null) {
-			node2implicity = node2implicity2 = new HashMap<>();
-		}
-		Integer implicity = node2implicity2.get(node);
-		if (implicity == null) {
-			implicity = 0;
-			for (@NonNull NavigableEdge e : node.getNavigationEdges()) {
-				if (e.getProperty().isIsImplicit()) {
-					implicity++;
+	public @NonNull List<@NonNull Node> initHeadNodes() {
+		//
+		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
+		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
+		//
+		List<@NonNull Node> navigableNodes = new ArrayList<>();
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (node.isPattern() && node.isMatched() && node.isClass() && !node.isExplicitNull() && !node.isOperation()) {	// Excludes, null, attributes, constants, operations
+				if (node.isLoaded() || node.isPredicated() || node.isSpeculated()) {
+					navigableNodes.add(node);
 				}
 			}
-			node2implicity2.put(node, implicity);
 		}
-		return implicity;
-	}
-
-	public @NonNull List<@NonNull Node> initHeadNodes() {
-		List<@NonNull Node> headNodes = computeHeadNodes(mappingRegion);
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = computeTargetFromSources(navigableNodes);
+		List<@NonNull Node> headNodes = computeHeadNodes(targetFromSources);
+		//
+		//	Check head node consistency
+		//
+		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (node.isTrue() || node.isDependency()) {
+				debugHeadNodes.add(node);
+				node.setHead();
+				assert !headNodes.contains(node);
+				headNodes.add(node);
+			}
+			else if (node.isHead()) {
+				debugHeadNodes.add(node);
+			}
+		}
+		assert debugHeadNodes.equals(new HashSet<>(headNodes));
 		mappingRegion.getHeadNodes().addAll(headNodes);
 		return headNodes;
 	}

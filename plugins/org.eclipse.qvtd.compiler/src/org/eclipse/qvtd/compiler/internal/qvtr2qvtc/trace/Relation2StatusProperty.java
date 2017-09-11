@@ -12,20 +12,22 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 
 /**
- * Invocation2TraceProperty defines the future trace property that identifies the invoked mapping for a non-top relation.
+ * Relation2StatusProperty defines the future trace property that identifies the invocation
+ * status of a relation execution.
  */
-public class Invocation2TraceProperty extends Element2MiddleProperty
+class Relation2StatusProperty extends Element2MiddleProperty
 {
-	public Invocation2TraceProperty(@NonNull Relation2MiddleType invokingRelation2middleType, @NonNull Relation2MiddleType invokedRelation2middleType) {
-		super(invokingRelation2middleType, invokedRelation2middleType.getName(), invokedRelation2middleType.getMiddleClass(), false);
+	public Relation2StatusProperty(@NonNull Relation2MiddleType relation2middleType) {
+		super(relation2middleType, QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME, relation2middleType.getRelationalTransformation2TracePackage().getBooleanType(), false);
 	}
 
 	@Override
 	protected @NonNull Property createTraceProperty() {
-		Property traceProperty = createMiddleProperty(null, "invocation_" + nameHint, false);
-		traceProperty.setIsComposite(true);
+		Property traceProperty = createMiddleProperty(null, QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME, false);
+		traceProperty.setIsRequired(false);
 		return traceProperty;
 	}
 }

@@ -13,28 +13,31 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 /**
- * A Relation2MiddleClass represents the mapping between a Relation and a SignatureClass/TraceClass/Mapping
+ * A Relation2MiddleType supports the future invocation/trace class/interface for a Relation
+ * realized by a QVTc Mapping
  */
-interface Relation2MiddleClass extends Comparable<@NonNull Relation2MiddleClass>
+public interface Relation2MiddleType extends Comparable<@NonNull Relation2MiddleType>
 {
-	void analyzeProperties() throws CompilerChainException;
-	@Nullable Property basicGetMiddleProperty(@NonNull VariableDeclaration rVariable);
+	void analyze() throws CompilerChainException;
+	@Nullable Property basicGetTraceProperty(@NonNull VariableDeclaration rVariable);
+	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull Variable rVariable, boolean manyTraces);
 	org.eclipse.ocl.pivot.@NonNull Class getBagOfMiddleClass();
 	org.eclipse.ocl.pivot.@NonNull Class getMiddleClass();
-	@NonNull Property getMiddleProperty(@NonNull VariableDeclaration rVariable);
-	@NonNull QVTrNameGenerator getNameGenerator();
+	@NonNull String getName();
 	@NonNull Relation getRelation();
-	@NonNull Element2MiddleProperty getRelation2TraceProperty();
+	@NonNull AbstractRelation2TraceClass getRelation2TraceClass();
 	@NonNull RelationAnalysis getRelationAnalysis();
 	@NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage();
+	@NonNull Property getTraceProperty(@NonNull VariableDeclaration rVariable);
 	@NonNull String getUniquePropertyName(@NonNull Element2MiddleProperty variableDeclaration2middleProperty, @NonNull String name);
-	@NonNull VariableDeclaration2MiddleProperty getVariableDeclaration2MiddleProperty(@NonNull VariableDeclaration rVariable);
-	org.eclipse.ocl.pivot.@NonNull Class synthesize();
+	@NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration rVariable);
+	void synthesize();
 }

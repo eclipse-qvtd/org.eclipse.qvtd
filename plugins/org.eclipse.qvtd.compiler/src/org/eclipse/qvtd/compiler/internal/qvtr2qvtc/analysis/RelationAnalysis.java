@@ -15,10 +15,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.RelationalTransformation2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -32,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
- * A RelationAnalysis accumulates the tesults of analyzing a Relation and its contents.
+ * A RelationAnalysis accumulates the results of analyzing a Relation and its contents.
  */
 public class RelationAnalysis extends QVTrelationHelper
 {
@@ -52,6 +54,11 @@ public class RelationAnalysis extends QVTrelationHelper
 	private @NonNull List<@NonNull Variable> rootVariables = new ArrayList<>();
 
 	/**
+	 * The expressions that call this relation.
+	 */
+	private @Nullable List<@NonNull RelationCallExp> incomingInvocations = null;
+
+	/**
 	 * The expressions that call this relation from a when clause.
 	 */
 	private @Nullable List<@NonNull RelationCallExp> incomingWhenInvocations = null;
@@ -60,6 +67,11 @@ public class RelationAnalysis extends QVTrelationHelper
 	 * The expressions that call this relation from a where clause.
 	 */
 	private @Nullable List<@NonNull RelationCallExp> incomingWhereInvocations = null;
+
+	/**
+	 * The expressions that call relations with this relation.
+	 */
+	private @Nullable List<@NonNull RelationCallExp> outgoingInvocations = null;
 
 	/**
 	 * The expressions that call relations with this relation's when clause.
@@ -74,12 +86,20 @@ public class RelationAnalysis extends QVTrelationHelper
 	/**
 	 * Closure of all overriding relations or null if not overridden.
 	 */
-	private @Nullable Set<org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis> overridingRelationAnalyses = null;
+	private @Nullable Set<@NonNull RelationAnalysis> overridingRelationAnalyses = null;
 
 	public RelationAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Relation relation) {
 		super(transformationAnalysis.getEnvironmentFactory());
 		this.transformationAnalysis = transformationAnalysis;
 		this.relation = relation;
+	}
+
+	private void addIncomingRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> incomingInvocations2 = incomingInvocations;
+		if (incomingInvocations2 == null) {
+			incomingInvocations = incomingInvocations2 = new ArrayList<>();
+		}
+		incomingInvocations2.add(relationInvocation);
 	}
 
 	private void addIncomingWhenRelation(@NonNull RelationCallExp relationInvocation) {
@@ -96,6 +116,14 @@ public class RelationAnalysis extends QVTrelationHelper
 			incomingWhereInvocations = incomingWhereInvocations2 = new ArrayList<>();
 		}
 		incomingWhereInvocations2.add(relationInvocation);
+	}
+
+	private void addOutgoingRelation(@NonNull RelationCallExp relationInvocation) {
+		List<@NonNull RelationCallExp> outgoingInvocations2 = outgoingInvocations;
+		if (outgoingInvocations2 == null) {
+			outgoingInvocations = outgoingInvocations2 = new ArrayList<>();
+		}
+		outgoingInvocations2.add(relationInvocation);
 	}
 
 	private void addOutgoingWhenRelation(@NonNull RelationCallExp relationInvocation) {
@@ -116,7 +144,7 @@ public class RelationAnalysis extends QVTrelationHelper
 
 	private boolean addOverridingRelation(@NonNull RelationAnalysis overridingRelationAnalysis) {
 		assert overridingRelationAnalysis != this;
-		Set<org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis> overridingRelationAnalyses2 = overridingRelationAnalyses;
+		Set<@NonNull RelationAnalysis> overridingRelationAnalyses2 = overridingRelationAnalyses;
 		if (overridingRelationAnalyses2 == null) {
 			overridingRelationAnalyses = overridingRelationAnalyses2 = new HashSet<>();
 		}
@@ -126,10 +154,20 @@ public class RelationAnalysis extends QVTrelationHelper
 	public void analyze() {
 		analyzeInvocations();
 		analyzeRootVariables();
-		analyzeOverrides();
+		analyzeOverriddens();
 	}
 
 	protected void analyzeInvocations() {
+		for (@NonNull EObject eObject : new TreeIterable(relation, true)) {
+			if (eObject instanceof RelationCallExp) {
+				RelationCallExp relationInvocation = (RelationCallExp) eObject;
+				Relation invokedRelation = QVTrelationUtil.getReferredRelation(relationInvocation);
+				RelationAnalysis invokedRelationAnalysis = transformationAnalysis.getRelationAnalysis(invokedRelation);
+				RelationAnalysis invokingRelationAnalysis = this;
+				invokedRelationAnalysis.addIncomingRelation(relationInvocation);
+				invokingRelationAnalysis.addOutgoingRelation(relationInvocation);
+			}
+		}
 		Pattern whenPattern = relation.getWhen();
 		if (whenPattern != null) {
 			analyzeInvocations(whenPattern, true);
@@ -146,23 +184,21 @@ public class RelationAnalysis extends QVTrelationHelper
 			if (predicateExpression instanceof RelationCallExp) {
 				RelationCallExp relationInvocation = (RelationCallExp) predicateExpression;
 				Relation invokedRelation = QVTrelationUtil.getReferredRelation(relationInvocation);
-				//				Relation invokingRelation = relation;
 				RelationAnalysis invokedRelationAnalysis = transformationAnalysis.getRelationAnalysis(invokedRelation);
-				//				RelationAnalysis invokingRelationAnalysis = this;
+				RelationAnalysis invokingRelationAnalysis = this;
 				if (isWhen) {
 					invokedRelationAnalysis.addIncomingWhenRelation(relationInvocation);
-					this.addOutgoingWhenRelation(relationInvocation);
+					invokingRelationAnalysis.addOutgoingWhenRelation(relationInvocation);
 				}
 				else {
 					invokedRelationAnalysis.addIncomingWhereRelation(relationInvocation);
-					this.addOutgoingWhereRelation(relationInvocation);
+					invokingRelationAnalysis.addOutgoingWhereRelation(relationInvocation);
 				}
-				//				invocation2invokingRelation.put(relationInvocation, callingRelation);
 			}
 		}
 	}
 
-	protected void analyzeOverrides() {
+	protected void analyzeOverriddens() {
 		for (Relation anOverriddenRelation = relation; anOverriddenRelation != null; anOverriddenRelation = QVTrelationUtil.basicGetOverridden(anOverriddenRelation)) {
 			if (anOverriddenRelation != relation) {
 				RelationAnalysis overriddenRelationAnalysis = transformationAnalysis.getRelationAnalysis(anOverriddenRelation);
@@ -184,6 +220,10 @@ public class RelationAnalysis extends QVTrelationHelper
 		}
 	}
 
+	public @Nullable Iterable<@NonNull RelationCallExp> getIncomingInvocations() {
+		return incomingInvocations;
+	}
+
 	public @Nullable Iterable<@NonNull RelationCallExp> getIncomingWhenInvocations() {
 		return incomingWhenInvocations;
 	}
@@ -196,6 +236,10 @@ public class RelationAnalysis extends QVTrelationHelper
 		return getRelationalTransformation2TracePackage().getNameGenerator();
 	}
 
+	public @Nullable Iterable<@NonNull RelationCallExp> getOutgoingInvocations() {
+		return outgoingInvocations;
+	}
+
 	public @Nullable Iterable<@NonNull RelationCallExp> getOutgoingWhenInvocations() {
 		return outgoingWhenInvocations;
 	}
@@ -206,6 +250,10 @@ public class RelationAnalysis extends QVTrelationHelper
 
 	public @NonNull Relation getRelation() {
 		return relation;
+	}
+
+	public @Nullable Iterable<@NonNull RelationAnalysis> getOverridingRelationAnalyses() {
+		return overridingRelationAnalyses;
 	}
 
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage() {
@@ -223,5 +271,15 @@ public class RelationAnalysis extends QVTrelationHelper
 	@Override
 	public @NonNull String toString() {
 		return String.valueOf(relation);
+	}
+
+	public boolean traceIsRealized() {
+		if (relation.isIsTopLevel()) {
+			return true;			// tops always realize their trace
+		}
+		if ((relation.getOverridden() != null) || !relation.getOverrides().isEmpty()) {
+			return true;			// overrides require invocation (not trace) to be passed from dispatcher.
+		}
+		return false;  // nooverrides allows trace to be passed from dispatcher.
 	}
 }

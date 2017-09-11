@@ -10,31 +10,44 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 
 /**
- * A Relation2TraceClass represents the mapping between a Relation and a TraceClass/Mapping
+ * A TopRelation2TraceClass represents the mapping between a top level QVTr Relation and the trace class for a QVTc Mapping.
  */
-public interface Relation2TraceClass extends Relation2MiddleClass
+public interface Relation2TraceClass extends Relation2MiddleType
 {
-	void addConsumedBy(@NonNull Relation2TraceClass consumedByRelation2TraceClass);
-	void addConsumedInternal(@NonNull Relation2TraceClass consumedRelation2TraceClass);
-	void analyzeInheritance();
-	@Nullable Iterable<@NonNull Relation2TraceClass> getConsumedByRelation2TraceClasses();
-	@Nullable Iterable<@NonNull Relation2TraceClass> getConsumedRelation2TraceClasses();
-	@Nullable Iterable<@NonNull Relation2TraceClass> getCyclicRelation2TraceClasses();
-	@NonNull Property getTraceProperty(@NonNull RelationCallExp rInvocation);
-	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses();
-	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedByRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
-	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses();
-	@NonNull Set<@NonNull Relation2TraceClass> getTransitivelyConsumedRelation2TraceClasses(@NonNull Set<@NonNull Relation2TraceClass> accumulator);
-	@NonNull Iterable<@NonNull RelationCallExp> getWhenInvocations();
-	@NonNull Iterable<@NonNull RelationCallExp> getWhereInvocations();
-	void installConsumesDependencies() throws CompilerChainException;
+	@NonNull Element2MiddleProperty getInvocation2TraceProperty(@NonNull RelationCallExp rInvocation);
+
+	/**
+	 * Return the class used to invoke the non-top relation.
+	 */
+	org.eclipse.ocl.pivot.@NonNull Class getInvocationClass();
+
+	@NonNull Property getStatusInterfaceProperty();
+
+	/**
+	 * Return the interface of the class used to invoke the non-top relation. Interface and class differ when the relation has overrides.
+	 */
+	org.eclipse.ocl.pivot.@NonNull Class getInvocationInterface();
+
+	@NonNull Relation2MiddleType getRelation2InvocationClass();
+
+	@NonNull Relation2MiddleType getRelation2InvocationInterface();
+
+	@NonNull Relation2MiddleType getRelation2TraceInterface();
+
+	@NonNull Property getStatusTraceProperty();
+
+	/**
+	 * Return the class used to trace execution of the relation.
+	 */
+	org.eclipse.ocl.pivot.@NonNull Class getTraceClass();
+
+	/**
+	 * Return the interface of the class used to trace execution of the relation. Interface and class differ when the relation has overrides.
+	 */
+	org.eclipse.ocl.pivot.@NonNull Class getTraceInterface();
 }

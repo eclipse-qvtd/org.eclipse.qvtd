@@ -32,40 +32,50 @@ public abstract class Element2MiddleProperty implements Nameable
 	/**
 	 * The future trace class.
 	 */
-	protected final @NonNull Relation2MiddleClass relation2middleClass;
+	protected final @NonNull Relation2MiddleType relation2middleType;
 
 	/**
-	 * The unique name for the middle property.
+	 * The unique name for the trace property.
 	 */
-	protected final @NonNull String name;
+	protected final @NonNull String nameHint;
 
 	/**
-	 * The type the middle property.
+	 * The type the trace property.
 	 */
 	protected final org.eclipse.ocl.pivot.@NonNull Class type;
 
 	/**
-	 * The isRequired the middle property.
+	 * The isRequired the trace property.
 	 */
 	protected final boolean isRequired;
 
 	/**
-	 * The lazily created middle property.
+	 * The lazily created trace property.
 	 */
-	private @Nullable Property middleProperty;
+	private @Nullable Property traceProperty;
 
-	protected Element2MiddleProperty(@NonNull Relation2MiddleClass relation2middleClass, @NonNull String name, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired) {
-		this.relation2middleClass = relation2middleClass;
-		this.name = relation2middleClass.getUniquePropertyName(this, name);
+	protected Element2MiddleProperty(@NonNull Relation2MiddleType relation2middleType, @NonNull String name, org.eclipse.ocl.pivot.@NonNull Class type, boolean isRequired) {
+		this.relation2middleType = relation2middleType;
+		this.nameHint = name;
 		this.type = type;
 		this.isRequired = isRequired;
 	}
 
-	protected abstract @NonNull Property createMiddleProperty();
+	protected abstract @NonNull Property createTraceProperty();
 
-	protected @NonNull Property createMiddleProperty(@Nullable TypedModel rTypedModel, boolean unitOpposite) {
-		org.eclipse.ocl.pivot.Class middleClass = relation2middleClass.getMiddleClass();
-		String domainName = rTypedModel != null ? rTypedModel.getName() : null;
+	protected @NonNull Property createMiddleProperty(@Nullable TypedModel rTypedModel, @NonNull String nameHint, boolean unitOpposite) {
+		if (relation2middleType.getRelationalTransformation2TracePackage().isFrozen()) {
+			throw new IllegalStateException("Creating " + nameHint + " after trace package frozen.");
+		}
+		org.eclipse.ocl.pivot.Class traceClass = relation2middleType.getMiddleClass();
+		String domainName;
+		if (rTypedModel != null) {
+			domainName = rTypedModel.getName();
+		}
+		else {
+			domainName = null;
+		}
+		String name = relation2middleType.getUniquePropertyName(this, nameHint);
 		Property property = PivotFactory.eINSTANCE.createProperty();
 		property.setName(name);
 		property.setType(type);
@@ -79,7 +89,7 @@ public abstract class Element2MiddleProperty implements Nameable
 			domainAnnotation.getOwnedDetails().add(domainDetail);
 			property.getOwnedAnnotations().add(domainAnnotation);
 		}
-		property.setOwningClass(middleClass);
+		property.setOwningClass(traceClass);
 		org.eclipse.ocl.pivot.Class oppositeType = type;
 		if (oppositeType instanceof CollectionType) {
 			Type elementType = ((CollectionType)oppositeType).getElementType();
@@ -89,8 +99,8 @@ public abstract class Element2MiddleProperty implements Nameable
 		}
 		if (!(oppositeType instanceof DataType)) {
 			Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
-			oppositeProperty.setName(middleClass.getName());
-			oppositeProperty.setType(unitOpposite ? middleClass : relation2middleClass.getBagOfMiddleClass());
+			oppositeProperty.setName(traceClass.getName());
+			oppositeProperty.setType(unitOpposite ? traceClass : relation2middleType.getBagOfMiddleClass());
 			oppositeProperty.setIsRequired(!unitOpposite);
 			oppositeProperty.setIsImplicit(true);
 			oppositeProperty.setOwningClass(oppositeType);
@@ -102,21 +112,25 @@ public abstract class Element2MiddleProperty implements Nameable
 		return property;
 	}
 
-	public @NonNull Property getMiddleProperty() {
-		Property middleProperty2 = middleProperty;
-		if (middleProperty2 == null) {
-			middleProperty = middleProperty2 = createMiddleProperty();
+	public @NonNull Property getTraceProperty() {
+		Property traceProperty2 = traceProperty;
+		if (traceProperty2 == null) {
+			traceProperty = traceProperty2 = createTraceProperty();
 		}
-		return middleProperty2;
+		return traceProperty2;
 	}
 
 	@Override
 	public @NonNull String getName() {
-		return name;
+		return nameHint;
+	}
+
+	public @NonNull Property synthesize() {
+		return getTraceProperty();
 	}
 
 	@Override
 	public String toString() {
-		return name + ":" + type + (isRequired? "[1]" : "[?]");
+		return nameHint + ":" + type + (isRequired? "[1]" : "[?]");
 	}
 }

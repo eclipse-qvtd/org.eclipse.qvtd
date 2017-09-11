@@ -278,7 +278,7 @@ public class UMLXCompilerTests extends LoadTestCase
 		finally {
 			myQVT.dispose();
 			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage", exceptionThrown);
-			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage", exceptionThrown);
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.umlx.tests.forward2reverse.trace_Forward2Reverse.trace_Forward2ReversePackage", exceptionThrown);
 		}
 	}
 

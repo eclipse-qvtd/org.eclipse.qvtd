@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -28,7 +28,7 @@ public interface VariableAnalysis
 	/**
 	 * The relation variable for this analysis. Returns null if the core variable is an additional synthesized artefact.
 	 */
-	@Nullable Variable getRelationVariable();
+	@Nullable VariableDeclaration getRelationVariable();
 
 	/**
 	 * Return true if this variable is associated with a when clause.

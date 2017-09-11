@@ -143,7 +143,7 @@ public class MappingPartitioner
 		analyzeNodes();
 		Node traceNode2 = this.traceNode = analyzeTraceNode();
 		if (traceNode2 != null) {
-			Property successProperty = RegionUtil.basicGetSuccessProperty(traceNode2);
+			Property successProperty = RegionUtil.basicGetStatusProperty(traceNode2);
 			if (successProperty != null) {
 				transformationPartitioner.getSuccessPropertyDatum(successProperty);
 				Node successNode2 = this.successNode = RegionUtil.createSuccessNode(region);
@@ -666,6 +666,9 @@ public class MappingPartitioner
 		if (transformationPartitioner.getCycleAnalysis(this) == null) {	// Cycle analysis failed
 			return Collections.singletonList(region);
 		}
+		//		else if (region.getName().startsWith(QVTrNameGenerator.OVERRIDDEN_PREFIX)) {	// FIXME better test
+		//			return Collections.singletonList(region);
+		//		}
 		else {
 			List<@NonNull MappingRegion> regions = new ArrayList<>();
 			if (predicatedMiddleNodes.isEmpty()) {

@@ -31,6 +31,7 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
@@ -222,6 +223,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		QVTiTestUtil.doQVTimperativeSetup();
 		//		QVTrelationPivotStandaloneSetup.doSetup();
 		//		QVTimperativePivotStandaloneSetup.doSetup();
+		ConnectivityChecker.CONNECTIVITY.setState(true);
 	}
 
 	/* (non-Javadoc)
@@ -230,6 +232,7 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Override
 	@After
 	public void tearDown() throws Exception {
+		ConnectivityChecker.CONNECTIVITY.setState(false);
 		super.tearDown();
 	}
 
@@ -367,7 +370,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT.dispose();
 			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage", exceptionThrown);
-			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage", exceptionThrown);
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.trace_Forward2Reverse.trace_Forward2ReversePackage", exceptionThrown);
 		}
 	}
 

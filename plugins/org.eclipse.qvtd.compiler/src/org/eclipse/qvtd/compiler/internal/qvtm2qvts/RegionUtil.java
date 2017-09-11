@@ -92,12 +92,12 @@ public class RegionUtil extends QVTscheduleUtil
 		}
 	}
 
-	public static @Nullable Property basicGetSuccessProperty(@NonNull Node node) {
+	public static @Nullable Property basicGetStatusProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
 		}
 		CompleteClass completeClass = node.getCompleteClass();
-		return completeClass.getProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME);
+		return completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME);
 	}
 
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
@@ -582,10 +582,10 @@ public class RegionUtil extends QVTscheduleUtil
 		return ScheduleManager.get(getScheduleModel(region));
 	}
 
-	public static @NonNull Property getSuccessProperty(@NonNull Node node) {
+	public static @NonNull Property getStatusProperty(@NonNull Node node) {
 		assert isMiddle(node);
 		CompleteClass completeClass = node.getCompleteClass();
-		return ClassUtil.nonNullState(completeClass.getProperty(QVTrNameGenerator.TRACECLASS_SUCCESS_PROPERTY_NAME));
+		return ClassUtil.nonNullState(completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME));
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatumAnalysis classDatumAnalysis) {

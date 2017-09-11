@@ -73,6 +73,35 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		protected void doQVTcSerializeAndLoad(@NonNull URI asURI, @NonNull URI csURI) throws IOException {}
 
 		public @NonNull Resource execute(@NonNull QVTr2QVTc t, @NonNull Resource rResource) throws IOException {
+
+			/*			QVTr2QVTrOverrides noOverrides = new QVTr2QVTrOverrides(environmentFactory);
+			URI noOverridesURI = compilerChain.getURI(QVTC_STEP, URI_KEY).trimFileExtension().appendFileExtension("nooverrides.qvtras");
+			Map<@NonNull String, @Nullable String> noOverridesOptions = null;//compilerChain.getOption(QVTC_STEP, QVTC_OPTIONS_KEY);
+			//			String noOverridesNsURI = null;//noOverridesOptions != null ? noOverridesOptions.get(QVTC_NS_URI) : null;
+			Resource noOverridesResource = createResource(noOverridesURI);
+			//			if (noOverridesNsURI != null) {
+			//				t.setTraceNsURI(noOverridesNsURI);
+			//			}
+			noOverrides.transform((ASResource)rResource, (ASResource)noOverridesResource);
+			compilerChain.saveResource(noOverridesResource, name);
+			//
+			URI invocationsURI = compilerChain.getURI(QVTC_STEP, URI_KEY).trimFileExtension().appendFileExtension("invocations.ecore");
+			Resource invocationsResource = createResource(PivotUtilInternal.getASURI(invocationsURI));
+			QVTr2QVTrTops noNonTops = new QVTr2QVTrTops(environmentFactory, (ASResource)invocationsResource);
+			URI noNonTopsURI = compilerChain.getURI(QVTC_STEP, URI_KEY).trimFileExtension().appendFileExtension("nonontops.qvtras");
+			Map<@NonNull String, @Nullable String> noNonTopsOptions = null;//compilerChain.getOption(QVTC_STEP, QVTC_OPTIONS_KEY);
+			//			String noNonTopsNsURI = null;//noOverridesOptions != null ? noOverridesOptions.get(QVTC_NS_URI) : null;
+			Resource noNonTopsResource = createResource(noNonTopsURI);
+			//			if (noNonTopsNsURI != null) {
+			//				t.setTraceNsURI(noNonTopsNsURI);
+			//			}
+			noNonTops.transform((ASResource)noOverridesResource, (ASResource)noNonTopsResource);
+			compilerChain.saveResource(noNonTopsResource, name);
+			invocationsResource.save(null);
+			AS2Ecore as2ecore = new AS2Ecore(environmentFactory, invocationsURI, null);
+			XMLResource ecoreResource = as2ecore.convertResource(invocationsResource, invocationsURI);
+			ecoreResource.save(null); */
+			//
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				URI qvtcURI = compilerChain.getURI(QVTC_STEP, URI_KEY);
@@ -177,6 +206,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	protected @NonNull ImperativeTransformation compileQVTrAS(@NonNull Resource rResource, @NonNull String enforcedOutputName) throws IOException {
 		QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource);
+		t.analyze();
 		traceCompilerStep.execute(t);
 		Resource cResource = qvtr2qvtcCompilerStep.execute(t, rResource);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);

@@ -248,7 +248,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected final @NonNull Transformation cTransformation;
 	protected final @NonNull BottomPattern cMiddleBottomPattern;
 	protected final @NonNull GuardPattern cMiddleGuardPattern;
-	protected final @Nullable RealizedVariable cMiddleRealizedVariable;		// tcv: The trace class variable (the middle variable identifying the middle object)
+	protected final @Nullable VariableDeclaration cMiddleVariable;		// tcv: The trace class variable (the middle variable identifying the middle object)
 	protected final @NonNull Variable rThisVariable;
 	protected final @NonNull Variable cThisVariable;
 
@@ -261,12 +261,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	/**
 	 * The analysis of each relation variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull Variable2Variable> rVariable2analysis = new HashMap<>();
+	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Variable2Variable> rVariable2analysis = new HashMap<>();
 
 	/**
 	 * The analysis of each core variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull Variable2Variable> cVariable2analysis = new HashMap<>();
+	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Variable2Variable> cVariable2analysis = new HashMap<>();
 
 	public Variables2Variables(@NonNull RelationAnalysis relationAnalysis, @NonNull RelationDomain rEnforcedDomain,
 			@NonNull CoreDomain cEnforcedDomain, @Nullable Type traceClass, boolean isWhened, boolean isWhered) throws CompilerChainException {
@@ -280,7 +280,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
 		this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
 		//
-		this.cMiddleRealizedVariable = traceClass != null ? addCoreRealizedVariable("trace", traceClass) : null;
+		this.cMiddleVariable = (traceClass != null) ? relationAnalysis.traceIsRealized() ? addCoreRealizedVariable("trace", traceClass) : addCoreGuardVariable("trace", traceClass) : null;
 
 		this.rThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), QVTbaseUtil.getContainingTransformation(rEnforcedDomain));
 		this.cThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), cTransformation);
@@ -393,9 +393,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * Returns the core variant of the relation variable.
 	 */
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
-		RealizedVariable cMiddleRealizedVariable2 = getMiddleRealizedVariable();
+		boolean traceIsRealized = getRelationAnalysis().traceIsRealized();
+		//		assert traceIsRealized;
+		VariableDeclaration cMiddleRealizedVariable2 = getMiddleVariable();
 		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
 		Property cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
+		if (!isOptional && (cTargetProperty == null)) {		// FIXME debugging
+			cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
+		}
 		assert isOptional || (cTargetProperty != null);
 		if (cTargetProperty != null) {
 			assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
@@ -410,8 +415,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Property cTargetProperty, @NonNull Variable cVariable) throws CompilerChainException {
+		boolean traceIsRealized = getRelationAnalysis().traceIsRealized();
+		//		assert traceIsRealized;
 		assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
-		RealizedVariable cMiddleRealizedVariable2 = getMiddleRealizedVariable();
+		VariableDeclaration cMiddleRealizedVariable2 = getMiddleVariable();
 		VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable2);
 		OCLExpression cExpression = createVariableExp(cVariable);
 		NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cTargetProperty, cExpression, false);
@@ -421,10 +428,29 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cVariable;
 	}
 
+	/**
+	 * Add a predicate for rVariable wrt its trace in the middle GuardPattern.
+	 *
+	 * Returns the core variant of the relation variable.
+	 */
+	public @NonNull Variable addTraceNavigationPredicate(@NonNull Variable rVariable) throws CompilerChainException {
+		VariableDeclaration cMiddleRealizedVariable2 = getMiddleVariable();
+		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
+		Property cTargetProperty = relationalTransformation2tracePackage.basicGetTraceProperty(QVTrelationUtil.getType(cMiddleRealizedVariable2), rVariable);
+		assert cTargetProperty != null;
+		assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
+		VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable2);
+		OCLExpression cRightExp = createVariableExp(cVariable);
+		NavigationCallExp cLeftExp = createNavigationCallExp(cSlotVariableExp, cTargetProperty);
+		//			QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
+		addConditionPredicate(cMiddleGuardPattern, cLeftExp, cRightExp);
+		return cVariable;
+	}
+
 	public void addVariableAnalysis(@NonNull Variable2Variable analysis) {
 		Variable cVariable = analysis.getCoreVariable();
 		cVariable2analysis.put(cVariable, analysis);
-		Variable rVariable = analysis.getRelationVariable();
+		VariableDeclaration rVariable = analysis.getRelationVariable();
 		if (rVariable != null) {
 			rVariable2analysis.put(rVariable, analysis);
 		}
@@ -479,7 +505,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return getVariableAnalysis(rVariable).getCoreVariable();
 	}
 
-	protected @NonNull Variable2Variable getCoreVariableAnalysis(@NonNull Variable coreVariable) {
+	protected @NonNull Variable2Variable getCoreVariableAnalysis(@NonNull VariableDeclaration coreVariable) {
 		return ClassUtil.nonNullState(cVariable2analysis.get(coreVariable));
 	}
 
@@ -491,8 +517,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return cMiddleGuardPattern;
 	}
 
-	public @NonNull RealizedVariable getMiddleRealizedVariable() {
-		return ClassUtil.nonNullState(cMiddleRealizedVariable);
+	public @NonNull VariableDeclaration getMiddleVariable() {
+		return ClassUtil.nonNullState(cMiddleVariable);
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis() {

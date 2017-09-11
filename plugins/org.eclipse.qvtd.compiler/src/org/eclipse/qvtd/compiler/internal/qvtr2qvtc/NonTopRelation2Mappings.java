@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,13 +20,13 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.Relation2InvocationInterface;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.Relation2MiddleType;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace.Relation2TraceClass;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -73,21 +72,20 @@ import com.google.common.collect.Iterables;
 			return rEnforcedBottomDomainVariables;
 		}
 
-		@Override
+		/*		@Override
 		protected void synthesize() throws CompilerChainException {
-			Relation rBaseRelation = QVTrelationUtil.getBaseRelation(rRelation);
-			org.eclipse.ocl.pivot.Class signatureClass = relationalTransformation2tracePackage.getSignatureClass(rBaseRelation);
-			Element2MiddleProperty relation2TraceProperty = relationalTransformation2tracePackage.getRelation2TraceProperty(rRelation);
-			Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(relation2TraceProperty.getName(), signatureClass);
-			variablesAnalysis.addTraceNavigationAssignment(relation2TraceProperty.getMiddleProperty(), cCalledVariable);
-			List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rBaseRelation);
+			org.eclipse.ocl.pivot.Class traceClass = relationalTransformation2tracePackage.getTraceClass(rRelation);
+			//			Element2TraceProperty relation2TraceProperty = null;//relationalTransformation2tracePackage.getRelation2TraceProperty(rRelation);
+			VariableDeclaration cCalledVariable/*vd* / = variablesAnalysis.getMiddleVariable();
+			//			variablesAnalysis.addTraceNavigationAssignment(relation2TraceProperty.getTraceProperty(), cCalledVariable);
+			List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rRelation);
 			List<@NonNull Variable> overridingVariables = QVTrelationUtil.getRootVariables(rRelation);
 			int iMax = rootVariables.size();
 			assert iMax == overridingVariables.size();
 			for (int i = 0; i < rootVariables.size(); i++) {
 				@NonNull Variable rRootDeclaration = rootVariables.get(i);
 				@NonNull Variable rOverridingDeclaration = overridingVariables.get(i);
-				Property signatureProperty = relationalTransformation2tracePackage.getSignatureProperty(rBaseRelation, rRootDeclaration);
+				Property signatureProperty = relationalTransformation2tracePackage.getRelation2TraceClass(rRelation).getTraceProperty(rRootDeclaration);
 				Variable cArgumentVariable = variablesAnalysis.getCoreVariable(rOverridingDeclaration);
 				VariableExp cArgumentExpression = createVariableExp(cArgumentVariable);
 				if (cArgumentVariable instanceof RealizedVariable) {
@@ -99,7 +97,7 @@ import com.google.common.collect.Iterables;
 				}
 			}
 			super.synthesize();
-		}
+		} */
 	}
 
 	/**
@@ -138,8 +136,8 @@ import com.google.common.collect.Iterables;
 	public void analyze() throws CompilerChainException {
 		boolean hasWhenInvocation = false;
 		boolean hasWhereInvocation = false;
-		for (@NonNull Relation rOverride : rAllOverrides) {
-			RelationAnalysis rOverrideAnalysis = transformationAnalysis.getRelationAnalysis(rOverride);
+		for (@NonNull Relation rOverriden : rAllOverridens) {
+			RelationAnalysis rOverrideAnalysis = transformationAnalysis.getRelationAnalysis(rOverriden);
 			Iterable<@NonNull RelationCallExp> incomingWhenInvocations = rOverrideAnalysis.getIncomingWhenInvocations();
 			if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {
 				hasWhenInvocation = true;
@@ -149,21 +147,21 @@ import com.google.common.collect.Iterables;
 				hasWhereInvocation = true;
 			}
 		}
-		if (hasWhenInvocation) {
-			QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation);
-			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
-				if (rDomain.isIsEnforceable()) {
-					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhenMappingClassName(rDomain, null);
-					addWhenRelationDomain2coreMapping(new WhenedEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
-				}
-			}
-		}
 		if (hasWhereInvocation) {
 			QVTr2QVTc.SYNTHESIS.println("invocation of where " + rRelation);
 			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
 				if (rDomain.isIsEnforceable()) {
 					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhereMappingClassName(rDomain, null);
 					addWhereRelationDomain2coreMapping(new WheredEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
+				}
+			}
+		}
+		else if (hasWhenInvocation) {
+			QVTr2QVTc.SYNTHESIS.println("invocation of when " + rRelation);
+			for (@NonNull RelationDomain rDomain : QVTrelationUtil.getOwnedDomains(rRelation)) {
+				if (rDomain.isIsEnforceable()) {
+					String coreMappingName = qvtr2qvtc.getNameGenerator().createWhenMappingClassName(rDomain, null);
+					addWhenRelationDomain2coreMapping(new WhenedEnforceableRelationDomain2CoreMapping(rDomain, coreMappingName));
 				}
 			}
 		}
@@ -211,7 +209,7 @@ import com.google.common.collect.Iterables;
 		}
 	}
 
-	protected final class WhenedEnforceableRelationDomain2CoreMapping extends NonTopEnforceableRelationDomain2CoreMapping
+	protected final class WhenedEnforceableRelationDomain2CoreMapping extends NonTopEnforceableRelationDomain2CoreMapping	// FIXME flatten
 	{
 		protected WhenedEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
@@ -222,16 +220,41 @@ import com.google.common.collect.Iterables;
 			return new Variables2Variables(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass, true, false);
 		}
 
-		@Override
-		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
-			return relation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
-		}
+		//		@Override
+		//		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
+		//			return relation2Mappings.getWhenRelationDomain2CoreMapping(rEnforcedTypedModel);
+		//		}
 	}
 
-	protected final class WheredEnforceableRelationDomain2CoreMapping extends NonTopEnforceableRelationDomain2CoreMapping
+	protected final class WheredEnforceableRelationDomain2CoreMapping extends NonTopEnforceableRelationDomain2CoreMapping	// FIXME flatten
 	{
 		protected WheredEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) throws CompilerChainException {
 			super(rEnforcedDomain, cMappingName);
+			if ((rRelation.getOverridden() != null) || (rRelation.getOverrides().size() > 0)) {
+				Relation rBaseRelation = QVTrelationUtil.getBaseRelation(rRelation);
+				//				cMiddleVariable.get
+				Variable2Variable coreVariableAnalysis = variablesAnalysis.getCoreVariableAnalysis(cMiddleVariable);
+				coreVariableAnalysis.toString();
+				Relation2TraceClass relation2traceClass = relationalTransformation2tracePackage.getRelation2TraceClass(rBaseRelation);
+				Relation2MiddleType relation2InvocationInterface = relation2traceClass.getRelation2InvocationInterface();
+				if (relation2InvocationInterface != relation2traceClass) {
+					Variable cInvocationVariable = variablesAnalysis.addCoreGuardVariable("invocation", relation2InvocationInterface.getMiddleClass());
+					Variable2Variable cInvocationVariableAnalysis = variablesAnalysis.getCoreVariableAnalysis(cInvocationVariable);
+					//					variablesAnalysis.addTraceNavigationAssignment(rVariable, isOptional);
+
+					for (@NonNull Variable rRootVariable : QVTrelationUtil.getRootVariables(rRelation)) {
+						Variable rOverriddenRootVariable = QVTrelationUtil.getOverriddenVariable(rBaseRelation, rRootVariable);
+						Variable cRootVariable = variablesAnalysis.getCoreVariable(rRootVariable);
+						Property cProperty = relation2InvocationInterface.getTraceProperty(rOverriddenRootVariable);
+						NavigationCallExp cNavigationExp = createNavigationCallExp(createVariableExp(cInvocationVariable), cProperty);
+						variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, createVariableExp(cRootVariable), cNavigationExp);
+					}
+
+
+					Property cResultProperty = ((Relation2InvocationInterface)relation2InvocationInterface).getResultProperty();
+					cInvocationVariableAnalysis.addNavigationAssignment(cResultProperty, createVariableExp(cMiddleVariable), false);
+				}
+			}
 		}
 
 		@Override
@@ -239,9 +262,9 @@ import com.google.common.collect.Iterables;
 			return new Variables2Variables(relationAnalysis, rEnforcedDomain, cEnforcedDomain, traceClass, false, true);
 		}
 
-		@Override
-		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
-			return relation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
-		}
+		//		@Override
+		//		protected @NonNull EnforceableRelationDomain2CoreMapping mapOverrides(@NonNull Relation2Mappings relation2Mappings) {
+		//			return relation2Mappings.getWhereRelationDomain2CoreMapping(rEnforcedTypedModel);
+		//		}
 	}
 }
