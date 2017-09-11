@@ -94,7 +94,7 @@ public class MappingPartitioner
 	/**
 	 * The one and only realizedMiddleNode that provides the traceability result.
 	 */
-	private final @Nullable Node successNode;
+	private final @Nullable Node statusNode;
 
 	/**
 	 * The realized edges from the (realized) trace node to a realized (corrolary) ouput node that identify what is
@@ -143,20 +143,20 @@ public class MappingPartitioner
 		analyzeNodes();
 		Node traceNode2 = this.traceNode = analyzeTraceNode();
 		if (traceNode2 != null) {
-			Property successProperty = RegionUtil.basicGetStatusProperty(traceNode2);
-			if (successProperty != null) {
-				transformationPartitioner.getSuccessPropertyDatum(successProperty);
-				Node successNode2 = this.successNode = RegionUtil.createSuccessNode(region);
-				successNode2.setUtility(Node.Utility.STRONGLY_MATCHED);
+			Property statusProperty = RegionUtil.basicGetStatusProperty(traceNode2);
+			if (statusProperty != null) {
+				transformationPartitioner.getSuccessPropertyDatum(statusProperty);
+				Node statusNode2 = this.statusNode = RegionUtil.createStatusNode(region);
+				statusNode2.setUtility(Node.Utility.STRONGLY_MATCHED);
 				@SuppressWarnings("unused")
-				NavigableEdge successEdge = RegionUtil.createNavigationEdge(traceNode2, successProperty, successNode2, false);
+				NavigableEdge statusEdge = RegionUtil.createNavigationEdge(traceNode2, statusProperty, statusNode2, false);
 			}
 			else {
-				this.successNode = null;
+				this.statusNode = null;
 			}
 		}
 		else {
-			this.successNode = null;
+			this.statusNode = null;
 		}
 		//
 		analyzeEdges();
@@ -176,7 +176,7 @@ public class MappingPartitioner
 		Node targetNode = edge.getTargetNode();
 		assert edge.getSourceNode() == traceNode;
 		assert targetNode.isRealized();
-		assert !targetNode.isSuccess();
+		assert !targetNode.isStatus();
 		assert !corrolaryEdges.contains(edge);
 		corrolaryEdges.add(edge);
 		corrolaryNodes.add(targetNode);
@@ -237,7 +237,7 @@ public class MappingPartitioner
 						Node sourceNode = edge.getEdgeSource();
 						Node targetNode = edge.getEdgeTarget();
 						if (sourceNode == traceNode) {
-							if (targetNode.isRealized() && !targetNode.isSuccess()) {
+							if (targetNode.isRealized() && !targetNode.isStatus()) {
 								addCorrolary((NavigableEdge) edge);
 							}
 						}
@@ -363,8 +363,8 @@ public class MappingPartitioner
 		}
 	}
 
-	public @Nullable Node basicGetSuccessNode() {
-		return successNode;
+	public @Nullable Node basicGetStatusNode() {
+		return statusNode;
 	}
 
 	public @Nullable Node basicGetTraceNode() {
@@ -553,8 +553,8 @@ public class MappingPartitioner
 		return region;
 	}
 
-	public @NonNull Node getSuccessNode() {
-		return ClassUtil.nonNullState(successNode);
+	public @NonNull Node getStatusNode() {
+		return ClassUtil.nonNullState(statusNode);
 	}
 
 	public @Nullable Iterable<@NonNull TraceClassAnalysis> getSuperProducedTraceClassAnalyses() {

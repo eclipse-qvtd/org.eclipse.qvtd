@@ -222,7 +222,7 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
+	public @Nullable Object visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
 		return visitNode(object);
 	}
 

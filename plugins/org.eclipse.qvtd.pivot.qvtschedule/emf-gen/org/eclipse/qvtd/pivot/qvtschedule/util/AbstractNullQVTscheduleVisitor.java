@@ -217,7 +217,7 @@ public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
+	public R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
 		return null;
 	}
 

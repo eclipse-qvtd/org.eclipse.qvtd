@@ -1,15 +1,15 @@
 /*******************************************************************************
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
@@ -189,7 +189,7 @@ public class QVTscheduleTables
 		public static final @NonNull EcoreExecutorEnumeration _Role = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.ROLE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ScheduleModel = new EcoreExecutorType(QVTschedulePackage.Literals.SCHEDULE_MODEL, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ScheduledRegion = new EcoreExecutorType(QVTschedulePackage.Literals.SCHEDULED_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _SuccessNode = new EcoreExecutorType(QVTschedulePackage.Literals.SUCCESS_NODE, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _StatusNode = new EcoreExecutorType(QVTschedulePackage.Literals.STATUS_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Symbolable = new EcoreExecutorType(QVTschedulePackage.Literals.SYMBOLABLE, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _TrueNode = new EcoreExecutorType(QVTschedulePackage.Literals.TRUE_NODE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _UnknownNode = new EcoreExecutorType(QVTschedulePackage.Literals.UNKNOWN_NODE, PACKAGE, 0);
@@ -235,7 +235,7 @@ public class QVTscheduleTables
 			_Role,
 			_ScheduleModel,
 			_ScheduledRegion,
-			_SuccessNode,
+			_StatusNode,
 			_Symbolable,
 			_TrueNode,
 			_UnknownNode,
@@ -591,14 +591,14 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _ScheduledRegion__Symbolable = new ExecutorFragment(Types._ScheduledRegion, QVTscheduleTables.Types._Symbolable);
 		private static final @NonNull ExecutorFragment _ScheduledRegion__Visitable = new ExecutorFragment(Types._ScheduledRegion, PivotTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _SuccessNode__ConnectionEnd = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _SuccessNode__Element = new ExecutorFragment(Types._SuccessNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _SuccessNode__Nameable = new ExecutorFragment(Types._SuccessNode, PivotTables.Types._Nameable);
-		private static final @NonNull ExecutorFragment _SuccessNode__Node = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _SuccessNode__OclAny = new ExecutorFragment(Types._SuccessNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _SuccessNode__OclElement = new ExecutorFragment(Types._SuccessNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _SuccessNode__SuccessNode = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._SuccessNode);
-		private static final @NonNull ExecutorFragment _SuccessNode__Visitable = new ExecutorFragment(Types._SuccessNode, PivotTables.Types._Visitable);
+		private static final @NonNull ExecutorFragment _StatusNode__ConnectionEnd = new ExecutorFragment(Types._StatusNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull ExecutorFragment _StatusNode__Element = new ExecutorFragment(Types._StatusNode, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _StatusNode__Nameable = new ExecutorFragment(Types._StatusNode, PivotTables.Types._Nameable);
+		private static final @NonNull ExecutorFragment _StatusNode__Node = new ExecutorFragment(Types._StatusNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull ExecutorFragment _StatusNode__OclAny = new ExecutorFragment(Types._StatusNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _StatusNode__OclElement = new ExecutorFragment(Types._StatusNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _StatusNode__StatusNode = new ExecutorFragment(Types._StatusNode, QVTscheduleTables.Types._StatusNode);
+		private static final @NonNull ExecutorFragment _StatusNode__Visitable = new ExecutorFragment(Types._StatusNode, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Symbolable__OclAny = new ExecutorFragment(Types._Symbolable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Symbolable__OclElement = new ExecutorFragment(Types._Symbolable, OCLstdlibTables.Types._OclElement);
@@ -841,545 +841,545 @@ public class QVTscheduleTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _AbstractDatum =
-		{
-			Fragments._AbstractDatum__OclAny /* 0 */,
-			Fragments._AbstractDatum__OclElement /* 1 */,
-			Fragments._AbstractDatum__Visitable /* 2 */,
-			Fragments._AbstractDatum__Element /* 3 */,
-			Fragments._AbstractDatum__AbstractDatum /* 4 */
-		};
+			{
+				Fragments._AbstractDatum__OclAny /* 0 */,
+				Fragments._AbstractDatum__OclElement /* 1 */,
+				Fragments._AbstractDatum__Visitable /* 2 */,
+				Fragments._AbstractDatum__Element /* 3 */,
+				Fragments._AbstractDatum__AbstractDatum /* 4 */
+			};
 		private static final int @NonNull [] __AbstractDatum = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _BasicMappingRegion =
-		{
-			Fragments._BasicMappingRegion__OclAny /* 0 */,
-			Fragments._BasicMappingRegion__OclElement /* 1 */,
-			Fragments._BasicMappingRegion__Nameable /* 2 */,
-			Fragments._BasicMappingRegion__Symbolable /* 2 */,
-			Fragments._BasicMappingRegion__Visitable /* 2 */,
-			Fragments._BasicMappingRegion__Element /* 3 */,
-			Fragments._BasicMappingRegion__Region /* 4 */,
-			Fragments._BasicMappingRegion__MappingRegion /* 5 */,
-			Fragments._BasicMappingRegion__BasicMappingRegion /* 6 */
-		};
+			{
+				Fragments._BasicMappingRegion__OclAny /* 0 */,
+				Fragments._BasicMappingRegion__OclElement /* 1 */,
+				Fragments._BasicMappingRegion__Nameable /* 2 */,
+				Fragments._BasicMappingRegion__Symbolable /* 2 */,
+				Fragments._BasicMappingRegion__Visitable /* 2 */,
+				Fragments._BasicMappingRegion__Element /* 3 */,
+				Fragments._BasicMappingRegion__Region /* 4 */,
+				Fragments._BasicMappingRegion__MappingRegion /* 5 */,
+				Fragments._BasicMappingRegion__BasicMappingRegion /* 6 */
+			};
 		private static final int @NonNull [] __BasicMappingRegion = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CastEdge =
-		{
-			Fragments._CastEdge__OclAny /* 0 */,
-			Fragments._CastEdge__OclElement /* 1 */,
-			Fragments._CastEdge__ConnectionEnd /* 2 */,
-			Fragments._CastEdge__Nameable /* 2 */,
-			Fragments._CastEdge__Visitable /* 2 */,
-			Fragments._CastEdge__Element /* 3 */,
-			Fragments._CastEdge__Edge /* 4 */,
-			Fragments._CastEdge__NavigableEdge /* 5 */,
-			Fragments._CastEdge__CastEdge /* 6 */
-		};
+			{
+				Fragments._CastEdge__OclAny /* 0 */,
+				Fragments._CastEdge__OclElement /* 1 */,
+				Fragments._CastEdge__ConnectionEnd /* 2 */,
+				Fragments._CastEdge__Nameable /* 2 */,
+				Fragments._CastEdge__Visitable /* 2 */,
+				Fragments._CastEdge__Element /* 3 */,
+				Fragments._CastEdge__Edge /* 4 */,
+				Fragments._CastEdge__NavigableEdge /* 5 */,
+				Fragments._CastEdge__CastEdge /* 6 */
+			};
 		private static final int @NonNull [] __CastEdge = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ClassDatum =
-		{
-			Fragments._ClassDatum__OclAny /* 0 */,
-			Fragments._ClassDatum__OclElement /* 1 */,
-			Fragments._ClassDatum__Visitable /* 2 */,
-			Fragments._ClassDatum__Element /* 3 */,
-			Fragments._ClassDatum__AbstractDatum /* 4 */,
-			Fragments._ClassDatum__ClassDatum /* 5 */
-		};
+			{
+				Fragments._ClassDatum__OclAny /* 0 */,
+				Fragments._ClassDatum__OclElement /* 1 */,
+				Fragments._ClassDatum__Visitable /* 2 */,
+				Fragments._ClassDatum__Element /* 3 */,
+				Fragments._ClassDatum__AbstractDatum /* 4 */,
+				Fragments._ClassDatum__ClassDatum /* 5 */
+			};
 		private static final int @NonNull [] __ClassDatum = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ComposedNode =
-		{
-			Fragments._ComposedNode__OclAny /* 0 */,
-			Fragments._ComposedNode__OclElement /* 1 */,
-			Fragments._ComposedNode__ConnectionEnd /* 2 */,
-			Fragments._ComposedNode__Nameable /* 2 */,
-			Fragments._ComposedNode__Visitable /* 2 */,
-			Fragments._ComposedNode__Element /* 3 */,
-			Fragments._ComposedNode__Node /* 4 */,
-			Fragments._ComposedNode__ComposedNode /* 5 */
-		};
+			{
+				Fragments._ComposedNode__OclAny /* 0 */,
+				Fragments._ComposedNode__OclElement /* 1 */,
+				Fragments._ComposedNode__ConnectionEnd /* 2 */,
+				Fragments._ComposedNode__Nameable /* 2 */,
+				Fragments._ComposedNode__Visitable /* 2 */,
+				Fragments._ComposedNode__Element /* 3 */,
+				Fragments._ComposedNode__Node /* 4 */,
+				Fragments._ComposedNode__ComposedNode /* 5 */
+			};
 		private static final int @NonNull [] __ComposedNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Connection =
-		{
-			Fragments._Connection__OclAny /* 0 */,
-			Fragments._Connection__OclElement /* 1 */,
-			Fragments._Connection__Nameable /* 2 */,
-			Fragments._Connection__Symbolable /* 2 */,
-			Fragments._Connection__Visitable /* 2 */,
-			Fragments._Connection__Element /* 3 */,
-			Fragments._Connection__Connection /* 4 */
-		};
+			{
+				Fragments._Connection__OclAny /* 0 */,
+				Fragments._Connection__OclElement /* 1 */,
+				Fragments._Connection__Nameable /* 2 */,
+				Fragments._Connection__Symbolable /* 2 */,
+				Fragments._Connection__Visitable /* 2 */,
+				Fragments._Connection__Element /* 3 */,
+				Fragments._Connection__Connection /* 4 */
+			};
 		private static final int @NonNull [] __Connection = { 1,1,3,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ConnectionEnd =
-		{
-			Fragments._ConnectionEnd__OclAny /* 0 */,
-			Fragments._ConnectionEnd__OclElement /* 1 */,
-			Fragments._ConnectionEnd__ConnectionEnd /* 2 */
-		};
+			{
+				Fragments._ConnectionEnd__OclAny /* 0 */,
+				Fragments._ConnectionEnd__OclElement /* 1 */,
+				Fragments._ConnectionEnd__ConnectionEnd /* 2 */
+			};
 		private static final int @NonNull [] __ConnectionEnd = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ConnectionRole =
-		{
-			Fragments._ConnectionRole__OclAny /* 0 */,
-			Fragments._ConnectionRole__OclElement /* 1 */,
-			Fragments._ConnectionRole__OclType /* 2 */,
-			Fragments._ConnectionRole__OclEnumeration /* 3 */,
-			Fragments._ConnectionRole__ConnectionRole /* 4 */
-		};
+			{
+				Fragments._ConnectionRole__OclAny /* 0 */,
+				Fragments._ConnectionRole__OclElement /* 1 */,
+				Fragments._ConnectionRole__OclType /* 2 */,
+				Fragments._ConnectionRole__OclEnumeration /* 3 */,
+				Fragments._ConnectionRole__ConnectionRole /* 4 */
+			};
 		private static final int @NonNull [] __ConnectionRole = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _DatumConnection =
-		{
-			Fragments._DatumConnection__OclAny /* 0 */,
-			Fragments._DatumConnection__OclElement /* 1 */,
-			Fragments._DatumConnection__Nameable /* 2 */,
-			Fragments._DatumConnection__Symbolable /* 2 */,
-			Fragments._DatumConnection__Visitable /* 2 */,
-			Fragments._DatumConnection__Element /* 3 */,
-			Fragments._DatumConnection__Connection /* 4 */,
-			Fragments._DatumConnection__DatumConnection /* 5 */
-		};
+			{
+				Fragments._DatumConnection__OclAny /* 0 */,
+				Fragments._DatumConnection__OclElement /* 1 */,
+				Fragments._DatumConnection__Nameable /* 2 */,
+				Fragments._DatumConnection__Symbolable /* 2 */,
+				Fragments._DatumConnection__Visitable /* 2 */,
+				Fragments._DatumConnection__Element /* 3 */,
+				Fragments._DatumConnection__Connection /* 4 */,
+				Fragments._DatumConnection__DatumConnection /* 5 */
+			};
 		private static final int @NonNull [] __DatumConnection = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _DependencyNode =
-		{
-			Fragments._DependencyNode__OclAny /* 0 */,
-			Fragments._DependencyNode__OclElement /* 1 */,
-			Fragments._DependencyNode__ConnectionEnd /* 2 */,
-			Fragments._DependencyNode__Nameable /* 2 */,
-			Fragments._DependencyNode__Visitable /* 2 */,
-			Fragments._DependencyNode__Element /* 3 */,
-			Fragments._DependencyNode__Node /* 4 */,
-			Fragments._DependencyNode__DependencyNode /* 5 */
-		};
+			{
+				Fragments._DependencyNode__OclAny /* 0 */,
+				Fragments._DependencyNode__OclElement /* 1 */,
+				Fragments._DependencyNode__ConnectionEnd /* 2 */,
+				Fragments._DependencyNode__Nameable /* 2 */,
+				Fragments._DependencyNode__Visitable /* 2 */,
+				Fragments._DependencyNode__Element /* 3 */,
+				Fragments._DependencyNode__Node /* 4 */,
+				Fragments._DependencyNode__DependencyNode /* 5 */
+			};
 		private static final int @NonNull [] __DependencyNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _DomainUsage =
-		{
-			Fragments._DomainUsage__OclAny /* 0 */,
-			Fragments._DomainUsage__OclElement /* 1 */,
-			Fragments._DomainUsage__DomainUsage /* 2 */
-		};
+			{
+				Fragments._DomainUsage__OclAny /* 0 */,
+				Fragments._DomainUsage__OclElement /* 1 */,
+				Fragments._DomainUsage__DomainUsage /* 2 */
+			};
 		private static final int @NonNull [] __DomainUsage = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Edge =
-		{
-			Fragments._Edge__OclAny /* 0 */,
-			Fragments._Edge__OclElement /* 1 */,
-			Fragments._Edge__Nameable /* 2 */,
-			Fragments._Edge__Visitable /* 2 */,
-			Fragments._Edge__Element /* 3 */,
-			Fragments._Edge__Edge /* 4 */
-		};
+			{
+				Fragments._Edge__OclAny /* 0 */,
+				Fragments._Edge__OclElement /* 1 */,
+				Fragments._Edge__Nameable /* 2 */,
+				Fragments._Edge__Visitable /* 2 */,
+				Fragments._Edge__Element /* 3 */,
+				Fragments._Edge__Edge /* 4 */
+			};
 		private static final int @NonNull [] __Edge = { 1,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _EdgeConnection =
-		{
-			Fragments._EdgeConnection__OclAny /* 0 */,
-			Fragments._EdgeConnection__OclElement /* 1 */,
-			Fragments._EdgeConnection__Nameable /* 2 */,
-			Fragments._EdgeConnection__Symbolable /* 2 */,
-			Fragments._EdgeConnection__Visitable /* 2 */,
-			Fragments._EdgeConnection__Element /* 3 */,
-			Fragments._EdgeConnection__Connection /* 4 */,
-			Fragments._EdgeConnection__DatumConnection /* 5 */,
-			Fragments._EdgeConnection__EdgeConnection /* 6 */
-		};
+			{
+				Fragments._EdgeConnection__OclAny /* 0 */,
+				Fragments._EdgeConnection__OclElement /* 1 */,
+				Fragments._EdgeConnection__Nameable /* 2 */,
+				Fragments._EdgeConnection__Symbolable /* 2 */,
+				Fragments._EdgeConnection__Visitable /* 2 */,
+				Fragments._EdgeConnection__Element /* 3 */,
+				Fragments._EdgeConnection__Connection /* 4 */,
+				Fragments._EdgeConnection__DatumConnection /* 5 */,
+				Fragments._EdgeConnection__EdgeConnection /* 6 */
+			};
 		private static final int @NonNull [] __EdgeConnection = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ErrorNode =
-		{
-			Fragments._ErrorNode__OclAny /* 0 */,
-			Fragments._ErrorNode__OclElement /* 1 */,
-			Fragments._ErrorNode__ConnectionEnd /* 2 */,
-			Fragments._ErrorNode__Nameable /* 2 */,
-			Fragments._ErrorNode__Visitable /* 2 */,
-			Fragments._ErrorNode__Element /* 3 */,
-			Fragments._ErrorNode__Node /* 4 */,
-			Fragments._ErrorNode__ErrorNode /* 5 */
-		};
+			{
+				Fragments._ErrorNode__OclAny /* 0 */,
+				Fragments._ErrorNode__OclElement /* 1 */,
+				Fragments._ErrorNode__ConnectionEnd /* 2 */,
+				Fragments._ErrorNode__Nameable /* 2 */,
+				Fragments._ErrorNode__Visitable /* 2 */,
+				Fragments._ErrorNode__Element /* 3 */,
+				Fragments._ErrorNode__Node /* 4 */,
+				Fragments._ErrorNode__ErrorNode /* 5 */
+			};
 		private static final int @NonNull [] __ErrorNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ExpressionEdge =
-		{
-			Fragments._ExpressionEdge__OclAny /* 0 */,
-			Fragments._ExpressionEdge__OclElement /* 1 */,
-			Fragments._ExpressionEdge__Nameable /* 2 */,
-			Fragments._ExpressionEdge__Visitable /* 2 */,
-			Fragments._ExpressionEdge__Element /* 3 */,
-			Fragments._ExpressionEdge__Edge /* 4 */,
-			Fragments._ExpressionEdge__ExpressionEdge /* 5 */
-		};
+			{
+				Fragments._ExpressionEdge__OclAny /* 0 */,
+				Fragments._ExpressionEdge__OclElement /* 1 */,
+				Fragments._ExpressionEdge__Nameable /* 2 */,
+				Fragments._ExpressionEdge__Visitable /* 2 */,
+				Fragments._ExpressionEdge__Element /* 3 */,
+				Fragments._ExpressionEdge__Edge /* 4 */,
+				Fragments._ExpressionEdge__ExpressionEdge /* 5 */
+			};
 		private static final int @NonNull [] __ExpressionEdge = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _InputNode =
-		{
-			Fragments._InputNode__OclAny /* 0 */,
-			Fragments._InputNode__OclElement /* 1 */,
-			Fragments._InputNode__ConnectionEnd /* 2 */,
-			Fragments._InputNode__Nameable /* 2 */,
-			Fragments._InputNode__Visitable /* 2 */,
-			Fragments._InputNode__Element /* 3 */,
-			Fragments._InputNode__Node /* 4 */,
-			Fragments._InputNode__InputNode /* 5 */
-		};
+			{
+				Fragments._InputNode__OclAny /* 0 */,
+				Fragments._InputNode__OclElement /* 1 */,
+				Fragments._InputNode__ConnectionEnd /* 2 */,
+				Fragments._InputNode__Nameable /* 2 */,
+				Fragments._InputNode__Visitable /* 2 */,
+				Fragments._InputNode__Element /* 3 */,
+				Fragments._InputNode__Node /* 4 */,
+				Fragments._InputNode__InputNode /* 5 */
+			};
 		private static final int @NonNull [] __InputNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _IteratedEdge =
-		{
-			Fragments._IteratedEdge__OclAny /* 0 */,
-			Fragments._IteratedEdge__OclElement /* 1 */,
-			Fragments._IteratedEdge__Nameable /* 2 */,
-			Fragments._IteratedEdge__Visitable /* 2 */,
-			Fragments._IteratedEdge__Element /* 3 */,
-			Fragments._IteratedEdge__Edge /* 4 */,
-			Fragments._IteratedEdge__IteratedEdge /* 5 */
-		};
+			{
+				Fragments._IteratedEdge__OclAny /* 0 */,
+				Fragments._IteratedEdge__OclElement /* 1 */,
+				Fragments._IteratedEdge__Nameable /* 2 */,
+				Fragments._IteratedEdge__Visitable /* 2 */,
+				Fragments._IteratedEdge__Element /* 3 */,
+				Fragments._IteratedEdge__Edge /* 4 */,
+				Fragments._IteratedEdge__IteratedEdge /* 5 */
+			};
 		private static final int @NonNull [] __IteratedEdge = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _IteratorNode =
-		{
-			Fragments._IteratorNode__OclAny /* 0 */,
-			Fragments._IteratorNode__OclElement /* 1 */,
-			Fragments._IteratorNode__ConnectionEnd /* 2 */,
-			Fragments._IteratorNode__Nameable /* 2 */,
-			Fragments._IteratorNode__Visitable /* 2 */,
-			Fragments._IteratorNode__Element /* 3 */,
-			Fragments._IteratorNode__Node /* 4 */,
-			Fragments._IteratorNode__VariableNode /* 5 */,
-			Fragments._IteratorNode__IteratorNode /* 6 */
-		};
+			{
+				Fragments._IteratorNode__OclAny /* 0 */,
+				Fragments._IteratorNode__OclElement /* 1 */,
+				Fragments._IteratorNode__ConnectionEnd /* 2 */,
+				Fragments._IteratorNode__Nameable /* 2 */,
+				Fragments._IteratorNode__Visitable /* 2 */,
+				Fragments._IteratorNode__Element /* 3 */,
+				Fragments._IteratorNode__Node /* 4 */,
+				Fragments._IteratorNode__VariableNode /* 5 */,
+				Fragments._IteratorNode__IteratorNode /* 6 */
+			};
 		private static final int @NonNull [] __IteratorNode = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _LoadingRegion =
-		{
-			Fragments._LoadingRegion__OclAny /* 0 */,
-			Fragments._LoadingRegion__OclElement /* 1 */,
-			Fragments._LoadingRegion__Nameable /* 2 */,
-			Fragments._LoadingRegion__Symbolable /* 2 */,
-			Fragments._LoadingRegion__Visitable /* 2 */,
-			Fragments._LoadingRegion__Element /* 3 */,
-			Fragments._LoadingRegion__Region /* 4 */,
-			Fragments._LoadingRegion__LoadingRegion /* 5 */
-		};
+			{
+				Fragments._LoadingRegion__OclAny /* 0 */,
+				Fragments._LoadingRegion__OclElement /* 1 */,
+				Fragments._LoadingRegion__Nameable /* 2 */,
+				Fragments._LoadingRegion__Symbolable /* 2 */,
+				Fragments._LoadingRegion__Visitable /* 2 */,
+				Fragments._LoadingRegion__Element /* 3 */,
+				Fragments._LoadingRegion__Region /* 4 */,
+				Fragments._LoadingRegion__LoadingRegion /* 5 */
+			};
 		private static final int @NonNull [] __LoadingRegion = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _MappingAction =
-		{
-			Fragments._MappingAction__OclAny /* 0 */,
-			Fragments._MappingAction__OclElement /* 1 */,
-			Fragments._MappingAction__Visitable /* 2 */,
-			Fragments._MappingAction__Element /* 3 */,
-			Fragments._MappingAction__MappingAction /* 4 */
-		};
+			{
+				Fragments._MappingAction__OclAny /* 0 */,
+				Fragments._MappingAction__OclElement /* 1 */,
+				Fragments._MappingAction__Visitable /* 2 */,
+				Fragments._MappingAction__Element /* 3 */,
+				Fragments._MappingAction__MappingAction /* 4 */
+			};
 		private static final int @NonNull [] __MappingAction = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _MappingRegion =
-		{
-			Fragments._MappingRegion__OclAny /* 0 */,
-			Fragments._MappingRegion__OclElement /* 1 */,
-			Fragments._MappingRegion__Nameable /* 2 */,
-			Fragments._MappingRegion__Symbolable /* 2 */,
-			Fragments._MappingRegion__Visitable /* 2 */,
-			Fragments._MappingRegion__Element /* 3 */,
-			Fragments._MappingRegion__Region /* 4 */,
-			Fragments._MappingRegion__MappingRegion /* 5 */
-		};
+			{
+				Fragments._MappingRegion__OclAny /* 0 */,
+				Fragments._MappingRegion__OclElement /* 1 */,
+				Fragments._MappingRegion__Nameable /* 2 */,
+				Fragments._MappingRegion__Symbolable /* 2 */,
+				Fragments._MappingRegion__Visitable /* 2 */,
+				Fragments._MappingRegion__Element /* 3 */,
+				Fragments._MappingRegion__Region /* 4 */,
+				Fragments._MappingRegion__MappingRegion /* 5 */
+			};
 		private static final int @NonNull [] __MappingRegion = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _MicroMappingRegion =
-		{
-			Fragments._MicroMappingRegion__OclAny /* 0 */,
-			Fragments._MicroMappingRegion__OclElement /* 1 */,
-			Fragments._MicroMappingRegion__Nameable /* 2 */,
-			Fragments._MicroMappingRegion__Symbolable /* 2 */,
-			Fragments._MicroMappingRegion__Visitable /* 2 */,
-			Fragments._MicroMappingRegion__Element /* 3 */,
-			Fragments._MicroMappingRegion__Region /* 4 */,
-			Fragments._MicroMappingRegion__MappingRegion /* 5 */,
-			Fragments._MicroMappingRegion__MicroMappingRegion /* 6 */
-		};
+			{
+				Fragments._MicroMappingRegion__OclAny /* 0 */,
+				Fragments._MicroMappingRegion__OclElement /* 1 */,
+				Fragments._MicroMappingRegion__Nameable /* 2 */,
+				Fragments._MicroMappingRegion__Symbolable /* 2 */,
+				Fragments._MicroMappingRegion__Visitable /* 2 */,
+				Fragments._MicroMappingRegion__Element /* 3 */,
+				Fragments._MicroMappingRegion__Region /* 4 */,
+				Fragments._MicroMappingRegion__MappingRegion /* 5 */,
+				Fragments._MicroMappingRegion__MicroMappingRegion /* 6 */
+			};
 		private static final int @NonNull [] __MicroMappingRegion = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NamedMappingRegion =
-		{
-			Fragments._NamedMappingRegion__OclAny /* 0 */,
-			Fragments._NamedMappingRegion__OclElement /* 1 */,
-			Fragments._NamedMappingRegion__Nameable /* 2 */,
-			Fragments._NamedMappingRegion__Symbolable /* 2 */,
-			Fragments._NamedMappingRegion__Visitable /* 2 */,
-			Fragments._NamedMappingRegion__Element /* 3 */,
-			Fragments._NamedMappingRegion__Region /* 4 */,
-			Fragments._NamedMappingRegion__MappingRegion /* 5 */,
-			Fragments._NamedMappingRegion__NamedMappingRegion /* 6 */
-		};
+			{
+				Fragments._NamedMappingRegion__OclAny /* 0 */,
+				Fragments._NamedMappingRegion__OclElement /* 1 */,
+				Fragments._NamedMappingRegion__Nameable /* 2 */,
+				Fragments._NamedMappingRegion__Symbolable /* 2 */,
+				Fragments._NamedMappingRegion__Visitable /* 2 */,
+				Fragments._NamedMappingRegion__Element /* 3 */,
+				Fragments._NamedMappingRegion__Region /* 4 */,
+				Fragments._NamedMappingRegion__MappingRegion /* 5 */,
+				Fragments._NamedMappingRegion__NamedMappingRegion /* 6 */
+			};
 		private static final int @NonNull [] __NamedMappingRegion = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NavigableEdge =
-		{
-			Fragments._NavigableEdge__OclAny /* 0 */,
-			Fragments._NavigableEdge__OclElement /* 1 */,
-			Fragments._NavigableEdge__ConnectionEnd /* 2 */,
-			Fragments._NavigableEdge__Nameable /* 2 */,
-			Fragments._NavigableEdge__Visitable /* 2 */,
-			Fragments._NavigableEdge__Element /* 3 */,
-			Fragments._NavigableEdge__Edge /* 4 */,
-			Fragments._NavigableEdge__NavigableEdge /* 5 */
-		};
+			{
+				Fragments._NavigableEdge__OclAny /* 0 */,
+				Fragments._NavigableEdge__OclElement /* 1 */,
+				Fragments._NavigableEdge__ConnectionEnd /* 2 */,
+				Fragments._NavigableEdge__Nameable /* 2 */,
+				Fragments._NavigableEdge__Visitable /* 2 */,
+				Fragments._NavigableEdge__Element /* 3 */,
+				Fragments._NavigableEdge__Edge /* 4 */,
+				Fragments._NavigableEdge__NavigableEdge /* 5 */
+			};
 		private static final int @NonNull [] __NavigableEdge = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NavigationEdge =
-		{
-			Fragments._NavigationEdge__OclAny /* 0 */,
-			Fragments._NavigationEdge__OclElement /* 1 */,
-			Fragments._NavigationEdge__ConnectionEnd /* 2 */,
-			Fragments._NavigationEdge__Nameable /* 2 */,
-			Fragments._NavigationEdge__Visitable /* 2 */,
-			Fragments._NavigationEdge__Element /* 3 */,
-			Fragments._NavigationEdge__Edge /* 4 */,
-			Fragments._NavigationEdge__NavigableEdge /* 5 */,
-			Fragments._NavigationEdge__NavigationEdge /* 6 */
-		};
+			{
+				Fragments._NavigationEdge__OclAny /* 0 */,
+				Fragments._NavigationEdge__OclElement /* 1 */,
+				Fragments._NavigationEdge__ConnectionEnd /* 2 */,
+				Fragments._NavigationEdge__Nameable /* 2 */,
+				Fragments._NavigationEdge__Visitable /* 2 */,
+				Fragments._NavigationEdge__Element /* 3 */,
+				Fragments._NavigationEdge__Edge /* 4 */,
+				Fragments._NavigationEdge__NavigableEdge /* 5 */,
+				Fragments._NavigationEdge__NavigationEdge /* 6 */
+			};
 		private static final int @NonNull [] __NavigationEdge = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Node =
-		{
-			Fragments._Node__OclAny /* 0 */,
-			Fragments._Node__OclElement /* 1 */,
-			Fragments._Node__ConnectionEnd /* 2 */,
-			Fragments._Node__Nameable /* 2 */,
-			Fragments._Node__Visitable /* 2 */,
-			Fragments._Node__Element /* 3 */,
-			Fragments._Node__Node /* 4 */
-		};
+			{
+				Fragments._Node__OclAny /* 0 */,
+				Fragments._Node__OclElement /* 1 */,
+				Fragments._Node__ConnectionEnd /* 2 */,
+				Fragments._Node__Nameable /* 2 */,
+				Fragments._Node__Visitable /* 2 */,
+				Fragments._Node__Element /* 3 */,
+				Fragments._Node__Node /* 4 */
+			};
 		private static final int @NonNull [] __Node = { 1,1,3,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NodeConnection =
-		{
-			Fragments._NodeConnection__OclAny /* 0 */,
-			Fragments._NodeConnection__OclElement /* 1 */,
-			Fragments._NodeConnection__Nameable /* 2 */,
-			Fragments._NodeConnection__Symbolable /* 2 */,
-			Fragments._NodeConnection__Visitable /* 2 */,
-			Fragments._NodeConnection__Element /* 3 */,
-			Fragments._NodeConnection__Connection /* 4 */,
-			Fragments._NodeConnection__DatumConnection /* 5 */,
-			Fragments._NodeConnection__NodeConnection /* 6 */
-		};
+			{
+				Fragments._NodeConnection__OclAny /* 0 */,
+				Fragments._NodeConnection__OclElement /* 1 */,
+				Fragments._NodeConnection__Nameable /* 2 */,
+				Fragments._NodeConnection__Symbolable /* 2 */,
+				Fragments._NodeConnection__Visitable /* 2 */,
+				Fragments._NodeConnection__Element /* 3 */,
+				Fragments._NodeConnection__Connection /* 4 */,
+				Fragments._NodeConnection__DatumConnection /* 5 */,
+				Fragments._NodeConnection__NodeConnection /* 6 */
+			};
 		private static final int @NonNull [] __NodeConnection = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NullNode =
-		{
-			Fragments._NullNode__OclAny /* 0 */,
-			Fragments._NullNode__OclElement /* 1 */,
-			Fragments._NullNode__ConnectionEnd /* 2 */,
-			Fragments._NullNode__Nameable /* 2 */,
-			Fragments._NullNode__Visitable /* 2 */,
-			Fragments._NullNode__Element /* 3 */,
-			Fragments._NullNode__Node /* 4 */,
-			Fragments._NullNode__NullNode /* 5 */
-		};
+			{
+				Fragments._NullNode__OclAny /* 0 */,
+				Fragments._NullNode__OclElement /* 1 */,
+				Fragments._NullNode__ConnectionEnd /* 2 */,
+				Fragments._NullNode__Nameable /* 2 */,
+				Fragments._NullNode__Visitable /* 2 */,
+				Fragments._NullNode__Element /* 3 */,
+				Fragments._NullNode__Node /* 4 */,
+				Fragments._NullNode__NullNode /* 5 */
+			};
 		private static final int @NonNull [] __NullNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _OperationNode =
-		{
-			Fragments._OperationNode__OclAny /* 0 */,
-			Fragments._OperationNode__OclElement /* 1 */,
-			Fragments._OperationNode__ConnectionEnd /* 2 */,
-			Fragments._OperationNode__Nameable /* 2 */,
-			Fragments._OperationNode__Visitable /* 2 */,
-			Fragments._OperationNode__Element /* 3 */,
-			Fragments._OperationNode__Node /* 4 */,
-			Fragments._OperationNode__OperationNode /* 5 */
-		};
+			{
+				Fragments._OperationNode__OclAny /* 0 */,
+				Fragments._OperationNode__OclElement /* 1 */,
+				Fragments._OperationNode__ConnectionEnd /* 2 */,
+				Fragments._OperationNode__Nameable /* 2 */,
+				Fragments._OperationNode__Visitable /* 2 */,
+				Fragments._OperationNode__Element /* 3 */,
+				Fragments._OperationNode__Node /* 4 */,
+				Fragments._OperationNode__OperationNode /* 5 */
+			};
 		private static final int @NonNull [] __OperationNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _OperationRegion =
-		{
-			Fragments._OperationRegion__OclAny /* 0 */,
-			Fragments._OperationRegion__OclElement /* 1 */,
-			Fragments._OperationRegion__Nameable /* 2 */,
-			Fragments._OperationRegion__Symbolable /* 2 */,
-			Fragments._OperationRegion__Visitable /* 2 */,
-			Fragments._OperationRegion__Element /* 3 */,
-			Fragments._OperationRegion__Region /* 4 */,
-			Fragments._OperationRegion__OperationRegion /* 5 */
-		};
+			{
+				Fragments._OperationRegion__OclAny /* 0 */,
+				Fragments._OperationRegion__OclElement /* 1 */,
+				Fragments._OperationRegion__Nameable /* 2 */,
+				Fragments._OperationRegion__Symbolable /* 2 */,
+				Fragments._OperationRegion__Visitable /* 2 */,
+				Fragments._OperationRegion__Element /* 3 */,
+				Fragments._OperationRegion__Region /* 4 */,
+				Fragments._OperationRegion__OperationRegion /* 5 */
+			};
 		private static final int @NonNull [] __OperationRegion = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PatternTypedNode =
-		{
-			Fragments._PatternTypedNode__OclAny /* 0 */,
-			Fragments._PatternTypedNode__OclElement /* 1 */,
-			Fragments._PatternTypedNode__ConnectionEnd /* 2 */,
-			Fragments._PatternTypedNode__Nameable /* 2 */,
-			Fragments._PatternTypedNode__Visitable /* 2 */,
-			Fragments._PatternTypedNode__Element /* 3 */,
-			Fragments._PatternTypedNode__Node /* 4 */,
-			Fragments._PatternTypedNode__PatternTypedNode /* 5 */
-		};
+			{
+				Fragments._PatternTypedNode__OclAny /* 0 */,
+				Fragments._PatternTypedNode__OclElement /* 1 */,
+				Fragments._PatternTypedNode__ConnectionEnd /* 2 */,
+				Fragments._PatternTypedNode__Nameable /* 2 */,
+				Fragments._PatternTypedNode__Visitable /* 2 */,
+				Fragments._PatternTypedNode__Element /* 3 */,
+				Fragments._PatternTypedNode__Node /* 4 */,
+				Fragments._PatternTypedNode__PatternTypedNode /* 5 */
+			};
 		private static final int @NonNull [] __PatternTypedNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PatternVariableNode =
-		{
-			Fragments._PatternVariableNode__OclAny /* 0 */,
-			Fragments._PatternVariableNode__OclElement /* 1 */,
-			Fragments._PatternVariableNode__ConnectionEnd /* 2 */,
-			Fragments._PatternVariableNode__Nameable /* 2 */,
-			Fragments._PatternVariableNode__Visitable /* 2 */,
-			Fragments._PatternVariableNode__Element /* 3 */,
-			Fragments._PatternVariableNode__Node /* 4 */,
-			Fragments._PatternVariableNode__VariableNode /* 5 */,
-			Fragments._PatternVariableNode__PatternVariableNode /* 6 */
-		};
+			{
+				Fragments._PatternVariableNode__OclAny /* 0 */,
+				Fragments._PatternVariableNode__OclElement /* 1 */,
+				Fragments._PatternVariableNode__ConnectionEnd /* 2 */,
+				Fragments._PatternVariableNode__Nameable /* 2 */,
+				Fragments._PatternVariableNode__Visitable /* 2 */,
+				Fragments._PatternVariableNode__Element /* 3 */,
+				Fragments._PatternVariableNode__Node /* 4 */,
+				Fragments._PatternVariableNode__VariableNode /* 5 */,
+				Fragments._PatternVariableNode__PatternVariableNode /* 6 */
+			};
 		private static final int @NonNull [] __PatternVariableNode = { 1,1,3,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PredicateEdge =
-		{
-			Fragments._PredicateEdge__OclAny /* 0 */,
-			Fragments._PredicateEdge__OclElement /* 1 */,
-			Fragments._PredicateEdge__Nameable /* 2 */,
-			Fragments._PredicateEdge__Visitable /* 2 */,
-			Fragments._PredicateEdge__Element /* 3 */,
-			Fragments._PredicateEdge__Edge /* 4 */,
-			Fragments._PredicateEdge__PredicateEdge /* 5 */
-		};
+			{
+				Fragments._PredicateEdge__OclAny /* 0 */,
+				Fragments._PredicateEdge__OclElement /* 1 */,
+				Fragments._PredicateEdge__Nameable /* 2 */,
+				Fragments._PredicateEdge__Visitable /* 2 */,
+				Fragments._PredicateEdge__Element /* 3 */,
+				Fragments._PredicateEdge__Edge /* 4 */,
+				Fragments._PredicateEdge__PredicateEdge /* 5 */
+			};
 		private static final int @NonNull [] __PredicateEdge = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PropertyDatum =
-		{
-			Fragments._PropertyDatum__OclAny /* 0 */,
-			Fragments._PropertyDatum__OclElement /* 1 */,
-			Fragments._PropertyDatum__Visitable /* 2 */,
-			Fragments._PropertyDatum__Element /* 3 */,
-			Fragments._PropertyDatum__AbstractDatum /* 4 */,
-			Fragments._PropertyDatum__PropertyDatum /* 5 */
-		};
+			{
+				Fragments._PropertyDatum__OclAny /* 0 */,
+				Fragments._PropertyDatum__OclElement /* 1 */,
+				Fragments._PropertyDatum__Visitable /* 2 */,
+				Fragments._PropertyDatum__Element /* 3 */,
+				Fragments._PropertyDatum__AbstractDatum /* 4 */,
+				Fragments._PropertyDatum__PropertyDatum /* 5 */
+			};
 		private static final int @NonNull [] __PropertyDatum = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RecursionEdge =
-		{
-			Fragments._RecursionEdge__OclAny /* 0 */,
-			Fragments._RecursionEdge__OclElement /* 1 */,
-			Fragments._RecursionEdge__Nameable /* 2 */,
-			Fragments._RecursionEdge__Visitable /* 2 */,
-			Fragments._RecursionEdge__Element /* 3 */,
-			Fragments._RecursionEdge__Edge /* 4 */,
-			Fragments._RecursionEdge__RecursionEdge /* 5 */
-		};
+			{
+				Fragments._RecursionEdge__OclAny /* 0 */,
+				Fragments._RecursionEdge__OclElement /* 1 */,
+				Fragments._RecursionEdge__Nameable /* 2 */,
+				Fragments._RecursionEdge__Visitable /* 2 */,
+				Fragments._RecursionEdge__Element /* 3 */,
+				Fragments._RecursionEdge__Edge /* 4 */,
+				Fragments._RecursionEdge__RecursionEdge /* 5 */
+			};
 		private static final int @NonNull [] __RecursionEdge = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Region =
-		{
-			Fragments._Region__OclAny /* 0 */,
-			Fragments._Region__OclElement /* 1 */,
-			Fragments._Region__Nameable /* 2 */,
-			Fragments._Region__Symbolable /* 2 */,
-			Fragments._Region__Visitable /* 2 */,
-			Fragments._Region__Element /* 3 */,
-			Fragments._Region__Region /* 4 */
-		};
+			{
+				Fragments._Region__OclAny /* 0 */,
+				Fragments._Region__OclElement /* 1 */,
+				Fragments._Region__Nameable /* 2 */,
+				Fragments._Region__Symbolable /* 2 */,
+				Fragments._Region__Visitable /* 2 */,
+				Fragments._Region__Element /* 3 */,
+				Fragments._Region__Region /* 4 */
+			};
 		private static final int @NonNull [] __Region = { 1,1,3,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Role =
-		{
-			Fragments._Role__OclAny /* 0 */,
-			Fragments._Role__OclElement /* 1 */,
-			Fragments._Role__OclType /* 2 */,
-			Fragments._Role__OclEnumeration /* 3 */,
-			Fragments._Role__Role /* 4 */
-		};
+			{
+				Fragments._Role__OclAny /* 0 */,
+				Fragments._Role__OclElement /* 1 */,
+				Fragments._Role__OclType /* 2 */,
+				Fragments._Role__OclEnumeration /* 3 */,
+				Fragments._Role__Role /* 4 */
+			};
 		private static final int @NonNull [] __Role = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ScheduleModel =
-		{
-			Fragments._ScheduleModel__OclAny /* 0 */,
-			Fragments._ScheduleModel__OclElement /* 1 */,
-			Fragments._ScheduleModel__Nameable /* 2 */,
-			Fragments._ScheduleModel__Visitable /* 2 */,
-			Fragments._ScheduleModel__Element /* 3 */,
-			Fragments._ScheduleModel__NamedElement /* 4 */,
-			Fragments._ScheduleModel__Namespace /* 5 */,
-			Fragments._ScheduleModel__Model /* 6 */,
-			Fragments._ScheduleModel__ScheduleModel /* 7 */
-		};
+			{
+				Fragments._ScheduleModel__OclAny /* 0 */,
+				Fragments._ScheduleModel__OclElement /* 1 */,
+				Fragments._ScheduleModel__Nameable /* 2 */,
+				Fragments._ScheduleModel__Visitable /* 2 */,
+				Fragments._ScheduleModel__Element /* 3 */,
+				Fragments._ScheduleModel__NamedElement /* 4 */,
+				Fragments._ScheduleModel__Namespace /* 5 */,
+				Fragments._ScheduleModel__Model /* 6 */,
+				Fragments._ScheduleModel__ScheduleModel /* 7 */
+			};
 		private static final int @NonNull [] __ScheduleModel = { 1,1,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ScheduledRegion =
-		{
-			Fragments._ScheduledRegion__OclAny /* 0 */,
-			Fragments._ScheduledRegion__OclElement /* 1 */,
-			Fragments._ScheduledRegion__Nameable /* 2 */,
-			Fragments._ScheduledRegion__Symbolable /* 2 */,
-			Fragments._ScheduledRegion__Visitable /* 2 */,
-			Fragments._ScheduledRegion__Element /* 3 */,
-			Fragments._ScheduledRegion__Region /* 4 */,
-			Fragments._ScheduledRegion__ScheduledRegion /* 5 */
-		};
+			{
+				Fragments._ScheduledRegion__OclAny /* 0 */,
+				Fragments._ScheduledRegion__OclElement /* 1 */,
+				Fragments._ScheduledRegion__Nameable /* 2 */,
+				Fragments._ScheduledRegion__Symbolable /* 2 */,
+				Fragments._ScheduledRegion__Visitable /* 2 */,
+				Fragments._ScheduledRegion__Element /* 3 */,
+				Fragments._ScheduledRegion__Region /* 4 */,
+				Fragments._ScheduledRegion__ScheduledRegion /* 5 */
+			};
 		private static final int @NonNull [] __ScheduledRegion = { 1,1,3,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _SuccessNode =
-		{
-			Fragments._SuccessNode__OclAny /* 0 */,
-			Fragments._SuccessNode__OclElement /* 1 */,
-			Fragments._SuccessNode__ConnectionEnd /* 2 */,
-			Fragments._SuccessNode__Nameable /* 2 */,
-			Fragments._SuccessNode__Visitable /* 2 */,
-			Fragments._SuccessNode__Element /* 3 */,
-			Fragments._SuccessNode__Node /* 4 */,
-			Fragments._SuccessNode__SuccessNode /* 5 */
-		};
-		private static final int @NonNull [] __SuccessNode = { 1,1,3,1,1,1 };
+		private static final @NonNull ExecutorFragment @NonNull [] _StatusNode =
+			{
+				Fragments._StatusNode__OclAny /* 0 */,
+				Fragments._StatusNode__OclElement /* 1 */,
+				Fragments._StatusNode__ConnectionEnd /* 2 */,
+				Fragments._StatusNode__Nameable /* 2 */,
+				Fragments._StatusNode__Visitable /* 2 */,
+				Fragments._StatusNode__Element /* 3 */,
+				Fragments._StatusNode__Node /* 4 */,
+				Fragments._StatusNode__StatusNode /* 5 */
+			};
+		private static final int @NonNull [] __StatusNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Symbolable =
-		{
-			Fragments._Symbolable__OclAny /* 0 */,
-			Fragments._Symbolable__OclElement /* 1 */,
-			Fragments._Symbolable__Symbolable /* 2 */
-		};
+			{
+				Fragments._Symbolable__OclAny /* 0 */,
+				Fragments._Symbolable__OclElement /* 1 */,
+				Fragments._Symbolable__Symbolable /* 2 */
+			};
 		private static final int @NonNull [] __Symbolable = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TrueNode =
-		{
-			Fragments._TrueNode__OclAny /* 0 */,
-			Fragments._TrueNode__OclElement /* 1 */,
-			Fragments._TrueNode__ConnectionEnd /* 2 */,
-			Fragments._TrueNode__Nameable /* 2 */,
-			Fragments._TrueNode__Visitable /* 2 */,
-			Fragments._TrueNode__Element /* 3 */,
-			Fragments._TrueNode__Node /* 4 */,
-			Fragments._TrueNode__TrueNode /* 5 */
-		};
+			{
+				Fragments._TrueNode__OclAny /* 0 */,
+				Fragments._TrueNode__OclElement /* 1 */,
+				Fragments._TrueNode__ConnectionEnd /* 2 */,
+				Fragments._TrueNode__Nameable /* 2 */,
+				Fragments._TrueNode__Visitable /* 2 */,
+				Fragments._TrueNode__Element /* 3 */,
+				Fragments._TrueNode__Node /* 4 */,
+				Fragments._TrueNode__TrueNode /* 5 */
+			};
 		private static final int @NonNull [] __TrueNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _UnknownNode =
-		{
-			Fragments._UnknownNode__OclAny /* 0 */,
-			Fragments._UnknownNode__OclElement /* 1 */,
-			Fragments._UnknownNode__ConnectionEnd /* 2 */,
-			Fragments._UnknownNode__Nameable /* 2 */,
-			Fragments._UnknownNode__Visitable /* 2 */,
-			Fragments._UnknownNode__Element /* 3 */,
-			Fragments._UnknownNode__Node /* 4 */,
-			Fragments._UnknownNode__UnknownNode /* 5 */
-		};
+			{
+				Fragments._UnknownNode__OclAny /* 0 */,
+				Fragments._UnknownNode__OclElement /* 1 */,
+				Fragments._UnknownNode__ConnectionEnd /* 2 */,
+				Fragments._UnknownNode__Nameable /* 2 */,
+				Fragments._UnknownNode__Visitable /* 2 */,
+				Fragments._UnknownNode__Element /* 3 */,
+				Fragments._UnknownNode__Node /* 4 */,
+				Fragments._UnknownNode__UnknownNode /* 5 */
+			};
 		private static final int @NonNull [] __UnknownNode = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _VariableNode =
-		{
-			Fragments._VariableNode__OclAny /* 0 */,
-			Fragments._VariableNode__OclElement /* 1 */,
-			Fragments._VariableNode__ConnectionEnd /* 2 */,
-			Fragments._VariableNode__Nameable /* 2 */,
-			Fragments._VariableNode__Visitable /* 2 */,
-			Fragments._VariableNode__Element /* 3 */,
-			Fragments._VariableNode__Node /* 4 */,
-			Fragments._VariableNode__VariableNode /* 5 */
-		};
+			{
+				Fragments._VariableNode__OclAny /* 0 */,
+				Fragments._VariableNode__OclElement /* 1 */,
+				Fragments._VariableNode__ConnectionEnd /* 2 */,
+				Fragments._VariableNode__Nameable /* 2 */,
+				Fragments._VariableNode__Visitable /* 2 */,
+				Fragments._VariableNode__Element /* 3 */,
+				Fragments._VariableNode__Node /* 4 */,
+				Fragments._VariableNode__VariableNode /* 5 */
+			};
 		private static final int @NonNull [] __VariableNode = { 1,1,3,1,1,1 };
 
 		/**
@@ -1425,7 +1425,7 @@ public class QVTscheduleTables
 			Types._Role.initFragments(_Role, __Role);
 			Types._ScheduleModel.initFragments(_ScheduleModel, __ScheduleModel);
 			Types._ScheduledRegion.initFragments(_ScheduledRegion, __ScheduledRegion);
-			Types._SuccessNode.initFragments(_SuccessNode, __SuccessNode);
+			Types._StatusNode.initFragments(_StatusNode, __StatusNode);
 			Types._Symbolable.initFragments(_Symbolable, __Symbolable);
 			Types._TrueNode.initFragments(_TrueNode, __TrueNode);
 			Types._UnknownNode.initFragments(_UnknownNode, __UnknownNode);
@@ -2824,15 +2824,15 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorOperation @NonNull [] _ScheduledRegion__Symbolable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ScheduledRegion__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__SuccessNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__Element = {
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__StatusNode = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__ConnectionEnd = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__Nameable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__Nameable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__Node = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2849,7 +2849,7 @@ public class QVTscheduleTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
@@ -2858,7 +2858,7 @@ public class QVTscheduleTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _StatusNode__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Symbolable__Symbolable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Symbolable__OclAny = {
@@ -3326,14 +3326,14 @@ public class QVTscheduleTables
 			Fragments._ScheduledRegion__Symbolable.initOperations(_ScheduledRegion__Symbolable);
 			Fragments._ScheduledRegion__Visitable.initOperations(_ScheduledRegion__Visitable);
 
-			Fragments._SuccessNode__ConnectionEnd.initOperations(_SuccessNode__ConnectionEnd);
-			Fragments._SuccessNode__Element.initOperations(_SuccessNode__Element);
-			Fragments._SuccessNode__Nameable.initOperations(_SuccessNode__Nameable);
-			Fragments._SuccessNode__Node.initOperations(_SuccessNode__Node);
-			Fragments._SuccessNode__OclAny.initOperations(_SuccessNode__OclAny);
-			Fragments._SuccessNode__OclElement.initOperations(_SuccessNode__OclElement);
-			Fragments._SuccessNode__SuccessNode.initOperations(_SuccessNode__SuccessNode);
-			Fragments._SuccessNode__Visitable.initOperations(_SuccessNode__Visitable);
+			Fragments._StatusNode__ConnectionEnd.initOperations(_StatusNode__ConnectionEnd);
+			Fragments._StatusNode__Element.initOperations(_StatusNode__Element);
+			Fragments._StatusNode__Nameable.initOperations(_StatusNode__Nameable);
+			Fragments._StatusNode__Node.initOperations(_StatusNode__Node);
+			Fragments._StatusNode__OclAny.initOperations(_StatusNode__OclAny);
+			Fragments._StatusNode__OclElement.initOperations(_StatusNode__OclElement);
+			Fragments._StatusNode__StatusNode.initOperations(_StatusNode__StatusNode);
+			Fragments._StatusNode__Visitable.initOperations(_StatusNode__Visitable);
 
 			Fragments._Symbolable__OclAny.initOperations(_Symbolable__OclAny);
 			Fragments._Symbolable__OclElement.initOperations(_Symbolable__OclElement);
@@ -3738,7 +3738,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _SuccessNode = {
+		private static final @NonNull ExecutorProperty @NonNull [] _StatusNode = {
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__incomingConnection,
 			QVTscheduleTables.Properties._Node__incomingEdges,
@@ -3830,7 +3830,7 @@ public class QVTscheduleTables
 			Fragments._Role__Role.initProperties(_Role);
 			Fragments._ScheduleModel__ScheduleModel.initProperties(_ScheduleModel);
 			Fragments._ScheduledRegion__ScheduledRegion.initProperties(_ScheduledRegion);
-			Fragments._SuccessNode__SuccessNode.initProperties(_SuccessNode);
+			Fragments._StatusNode__StatusNode.initProperties(_StatusNode);
 			Fragments._Symbolable__Symbolable.initProperties(_Symbolable);
 			Fragments._TrueNode__TrueNode.initProperties(_TrueNode);
 			Fragments._UnknownNode__UnknownNode.initProperties(_UnknownNode);

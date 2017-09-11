@@ -76,7 +76,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
@@ -451,14 +451,14 @@ public class RegionUtil extends QVTscheduleUtil
 		return node;
 	}
 
-	public static @NonNull SuccessNode createSuccessNode(@NonNull Region region) {
+	public static @NonNull StatusNode createStatusNode(@NonNull Region region) {
 		ScheduleManager scheduleManager = getScheduleManager(region);
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
 		Role nodeRole = Role.REALIZED;
-		SuccessNode node = QVTscheduleFactory.eINSTANCE.createSuccessNode();
-		node.initialize(nodeRole, region, "«success»", classDatumAnalysis.getClassDatum());
+		StatusNode node = QVTscheduleFactory.eINSTANCE.createStatusNode();
+		node.initialize(nodeRole, region, "«status»", classDatumAnalysis.getClassDatum());
 		node.setHead();
 		return node;
 	}

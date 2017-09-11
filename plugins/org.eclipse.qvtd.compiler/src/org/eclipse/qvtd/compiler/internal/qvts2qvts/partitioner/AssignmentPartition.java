@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -37,7 +37,7 @@ class AssignmentPartition extends AbstractPartition
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		addNode(partitioner.getTraceNode(), Role.PREDICATED/*.asMatched()*/);
-		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
+		Node successNode = partitioner.basicGetStatusNode();		// FIXME only optional because trace property can be missing
 		if (successNode != null) {
 			addNode(successNode, Role.PREDICATED);
 		}
@@ -61,7 +61,7 @@ class AssignmentPartition extends AbstractPartition
 		return new PartitioningVisitor(partialRegion, this)
 		{
 			@Override
-			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {
 				Node partialNode = RegionUtil.createTrueNode(partialRegion);
 				addNode(node, partialNode);
 				return partialNode;

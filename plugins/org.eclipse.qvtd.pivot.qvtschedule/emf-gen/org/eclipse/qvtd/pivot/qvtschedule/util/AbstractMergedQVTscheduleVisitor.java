@@ -209,7 +209,7 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
+	public R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
 		return visiting(object);
 	}
 

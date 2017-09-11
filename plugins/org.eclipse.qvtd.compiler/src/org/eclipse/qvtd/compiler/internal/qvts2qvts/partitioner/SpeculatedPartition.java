@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
 
 /**
  * The SpeculatedPartition completes the speculation by realizing the corrolaries of the speculation.
@@ -92,7 +92,7 @@ class SpeculatedPartition extends AbstractPartition
 		return new PartitioningVisitor(partialRegion, this)
 		{
 			@Override
-			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {
 				Node partialNode = RegionUtil.createTrueNode(partialRegion);
 				addNode(node, partialNode);
 				return partialNode;
@@ -266,7 +266,7 @@ class SpeculatedPartition extends AbstractPartition
 		//				partitioner.getTransformationPartitioner().getMappingPartitioner(region)
 		//			}
 		//		}
-		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
+		Node successNode = partitioner.basicGetStatusNode();		// FIXME only optional because trace property can be missing
 		if (successNode != null) {
 			//			createTrueNode();
 			addNode(successNode, Role.PREDICATED);
@@ -278,7 +278,7 @@ class SpeculatedPartition extends AbstractPartition
 		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 		//		if (!hasNode(traceNode)) {
 		addNode(traceNode, Role.PREDICATED);
-		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
+		Node successNode = partitioner.basicGetStatusNode();		// FIXME only optional because trace property can be missing
 		if (successNode != null) {
 			addNode(successNode, Role.PREDICATED);
 		}

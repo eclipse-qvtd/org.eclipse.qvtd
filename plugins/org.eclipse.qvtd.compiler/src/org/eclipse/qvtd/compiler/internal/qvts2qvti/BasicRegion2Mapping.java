@@ -1214,11 +1214,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getClassDatum().getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
-		Property successProperty = RegionUtil.basicGetStatusProperty(guardNode);
-		if (successProperty != null) {
-			NavigableEdge successEdge = guardNode.getNavigationEdge(successProperty);
-			if ((successEdge != null) && successEdge.isRealized()) {
-				guardParameter.setSuccessProperty(successProperty);
+		Property statusProperty = RegionUtil.basicGetStatusProperty(guardNode);
+		if (statusProperty != null) {
+			NavigableEdge statusEdge = guardNode.getNavigationEdge(statusProperty);
+			if ((statusEdge != null) && statusEdge.isRealized()) {
+				guardParameter.setSuccessProperty(statusProperty);
 			}
 		}
 		mapping.getOwnedMappingParameters().add(guardParameter);
@@ -1351,7 +1351,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigableEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
 			Node sourceNode = edge.getEdgeSource();
 			Node targetNode = edge.getEdgeTarget();
-			if (targetNode.isSuccess()) {}											// SuccessNode has a 'magic' automatic assignment
+			if (targetNode.isStatus()) {}											// SuccessNode has a 'magic' automatic assignment
 			else if (targetNode.isDataType()) {
 				VariableDeclaration asVariable = getVariable(sourceNode);
 				Property property = RegionUtil.getProperty(edge);

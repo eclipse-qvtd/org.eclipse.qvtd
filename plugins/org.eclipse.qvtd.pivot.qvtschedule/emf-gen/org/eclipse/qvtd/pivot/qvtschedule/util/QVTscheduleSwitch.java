@@ -466,14 +466,14 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.SUCCESS_NODE: {
-				SuccessNode successNode = (SuccessNode)theEObject;
-				T result = caseSuccessNode(successNode);
-				if (result == null) result = caseNode(successNode);
-				if (result == null) result = caseElement(successNode);
-				if (result == null) result = caseConnectionEnd(successNode);
-				if (result == null) result = caseNameable(successNode);
-				if (result == null) result = caseVisitable(successNode);
+			case QVTschedulePackage.STATUS_NODE: {
+				StatusNode statusNode = (StatusNode)theEObject;
+				T result = caseStatusNode(statusNode);
+				if (result == null) result = caseNode(statusNode);
+				if (result == null) result = caseElement(statusNode);
+				if (result == null) result = caseConnectionEnd(statusNode);
+				if (result == null) result = caseNameable(statusNode);
+				if (result == null) result = caseVisitable(statusNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -722,17 +722,17 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Success Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Status Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Success Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Status Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSuccessNode(SuccessNode object) {
+	public T caseStatusNode(StatusNode object) {
 		return null;
 	}
 

@@ -96,7 +96,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
-			case QVTschedulePackage.SUCCESS_NODE: return createSuccessNode();
+			case QVTschedulePackage.STATUS_NODE: return createStatusNode();
 			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
 			default:
@@ -441,9 +441,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public SuccessNode createSuccessNode() {
-		SuccessNodeImpl successNode = new SuccessNodeImpl();
-		return successNode;
+	public @NonNull StatusNode createStatusNode() {
+		StatusNodeImpl statusNode = new StatusNodeImpl();
+		return statusNode;
 	}
 
 	/**

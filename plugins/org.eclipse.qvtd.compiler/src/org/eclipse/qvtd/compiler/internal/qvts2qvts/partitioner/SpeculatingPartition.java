@@ -281,9 +281,9 @@ class SpeculatingPartition extends AbstractPartition
 				tracedInputNodes.add(edge.getEdgeTarget());
 			}
 		}
-		Node successNode = partitioner.basicGetSuccessNode();		// FIXME only optional because trace property can be missing
-		if (successNode != null) {
-			addNode(successNode, Role.REALIZED);
+		Node statusNode = partitioner.basicGetStatusNode();		// FIXME only optional because trace property can be missing
+		if (statusNode != null) {
+			addNode(statusNode, Role.REALIZED);
 		}
 	}
 }

@@ -454,10 +454,10 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
+	public R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
-			R result = delegate.visitSuccessNode(object);
+			R result = delegate.visitStatusNode(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

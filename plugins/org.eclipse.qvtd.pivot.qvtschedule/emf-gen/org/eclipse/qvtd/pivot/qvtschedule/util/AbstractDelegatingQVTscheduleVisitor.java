@@ -213,8 +213,8 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
-		return delegate.visitSuccessNode(object);
+	public R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
+		return delegate.visitStatusNode(object);
 	}
 
 	@Override

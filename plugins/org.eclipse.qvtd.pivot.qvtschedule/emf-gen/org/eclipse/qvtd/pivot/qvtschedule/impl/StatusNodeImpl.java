@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
 
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
@@ -32,13 +32,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *
  * @generated
  */
-public class SuccessNodeImpl extends NodeImpl implements SuccessNode {
+public class StatusNodeImpl extends NodeImpl implements StatusNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SuccessNodeImpl() {
+	protected StatusNodeImpl() {
 		super();
 	}
 
@@ -49,7 +49,7 @@ public class SuccessNodeImpl extends NodeImpl implements SuccessNode {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.SUCCESS_NODE;
+		return QVTschedulePackage.Literals.STATUS_NODE;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class SuccessNodeImpl extends NodeImpl implements SuccessNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitSuccessNode(this);
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitStatusNode(this);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class SuccessNodeImpl extends NodeImpl implements SuccessNode {
 	}
 
 	@Override
-	public boolean isSuccess() {
+	public boolean isStatus() {
 		return true;
 	}
 } //SuccessNodeImpl
