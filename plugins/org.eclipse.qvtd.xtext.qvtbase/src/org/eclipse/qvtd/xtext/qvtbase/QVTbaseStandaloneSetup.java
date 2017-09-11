@@ -16,13 +16,13 @@ import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import com.google.inject.Injector;
 
 /**
- * Initialization support for running Xtext languages 
+ * Initialization support for running Xtext languages
  * without equinox extension registry
  */
 public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -32,9 +32,9 @@ public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
 		QVTbaseCSPackage.eINSTANCE.getName();
-//		QVTbaseCS2MonikerVisitor.FACTORY.getClass();
+		//		QVTbaseCS2MonikerVisitor.FACTORY.getClass();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */
@@ -51,4 +51,3 @@ public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 		return super.createInjector();
 	}
 }
-

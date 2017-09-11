@@ -24,6 +24,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
@@ -37,6 +40,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#isIsTransient <em>Is Transient</em>}</li>
@@ -45,6 +49,16 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * @generated
  */
 public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
+	/**
+	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementation()
+	 * @generated
+	 * @ordered
+	 */
+	protected JavaClassCS implementation;
+
 	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -168,6 +182,46 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
+	public JavaClassCS getImplementation() {
+		if (implementation != null && implementation.eIsProxy()) {
+			InternalEObject oldImplementation = (InternalEObject)implementation;
+			implementation = (JavaClassCS)eResolveProxy(oldImplementation);
+			if (implementation != oldImplementation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION, oldImplementation, implementation));
+			}
+		}
+		return implementation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaClassCS basicGetImplementation() {
+		return implementation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setImplementation(JavaClassCS newImplementation) {
+		JavaClassCS oldImplementation = implementation;
+		implementation = newImplementation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION, oldImplementation, implementation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isIsTransient() {
 		return isTransient;
 	}
@@ -219,6 +273,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION:
+				if (resolve) return getImplementation();
+				return basicGetImplementation();
 			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
 				return getOwnedParameters();
 			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
@@ -238,6 +295,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION:
+				setImplementation((JavaClassCS)newValue);
+				return;
 			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
@@ -260,6 +320,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION:
+				setImplementation((JavaClassCS)null);
+				return;
 			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
 				getOwnedParameters().clear();
 				return;
@@ -281,6 +344,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION:
+				return implementation != null;
 			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
 				return ownedParameters != null && !ownedParameters.isEmpty();
 			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
@@ -289,6 +354,38 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 				return isTransient != IS_TRANSIENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaImplementationCS.class) {
+			switch (derivedFeatureID) {
+				case QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION: return QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaImplementationCS.class) {
+			switch (baseFeatureID) {
+				case QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION: return QVTrelationCSPackage.QUERY_CS__IMPLEMENTATION;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

@@ -31,6 +31,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.*;
 
 /**
@@ -88,144 +89,148 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTcoreCSSwitch<@Nullable Adapter> modelSwitch =
-		new QVTcoreCSSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseAreaCS(AreaCS object) {
-				return createAreaCSAdapter();
-			}
-			@Override
-			public Adapter caseBottomPatternCS(BottomPatternCS object) {
-				return createBottomPatternCSAdapter();
-			}
-			@Override
-			public Adapter caseDirectionCS(DirectionCS object) {
-				return createDirectionCSAdapter();
-			}
-			@Override
-			public Adapter caseDomainCS(DomainCS object) {
-				return createDomainCSAdapter();
-			}
-			@Override
-			public Adapter caseEnforcementOperationCS(EnforcementOperationCS object) {
-				return createEnforcementOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseGuardPatternCS(GuardPatternCS object) {
-				return createGuardPatternCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingCS(MappingCS object) {
-				return createMappingCSAdapter();
-			}
-			@Override
-			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
-				return createParamDeclarationCSAdapter();
-			}
-			@Override
-			public Adapter casePatternCS(PatternCS object) {
-				return createPatternCSAdapter();
-			}
-			@Override
-			public Adapter casePredicateCS(PredicateCS object) {
-				return createPredicateCSAdapter();
-			}
-			@Override
-			public Adapter casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
-				return createPredicateOrAssignmentCSAdapter();
-			}
-			@Override
-			public Adapter caseQueryCS(QueryCS object) {
-				return createQueryCSAdapter();
-			}
-			@Override
-			public Adapter caseRealizeableVariableCS(RealizeableVariableCS object) {
-				return createRealizeableVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
-				return createRealizedVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseTopLevelCS(TopLevelCS object) {
-				return createTopLevelCSAdapter();
-			}
-			@Override
-			public Adapter caseTransformationCS(TransformationCS object) {
-				return createTransformationCSAdapter();
-			}
-			@Override
-			public Adapter caseUnrealizedVariableCS(UnrealizedVariableCS object) {
-				return createUnrealizedVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseVisitableCS(VisitableCS object) {
-				return createVisitableCSAdapter();
-			}
-			@Override
-			public Adapter caseElementCS(ElementCS object) {
-				return createElementCSAdapter();
-			}
-			@Override
-			public Adapter casePivotable(Pivotable object) {
-				return createPivotableAdapter();
-			}
-			@Override
-			public Adapter casePivotableElementCS(PivotableElementCS object) {
-				return createPivotableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseModelElementCS(ModelElementCS object) {
-				return createModelElementCSAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElementCS(NamedElementCS object) {
-				return createNamedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseTypedElementCS(TypedElementCS object) {
-				return createTypedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
-			}
-			@Override
-			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
-				return createPackageOwnerCSAdapter();
-			}
-			@Override
-			public Adapter caseRootCS(RootCS object) {
-				return createRootCSAdapter();
-			}
-			@Override
-			public Adapter caseRootPackageCS(RootPackageCS object) {
-				return createRootPackageCSAdapter();
-			}
-			@Override
-			public Adapter caseTypeCS(TypeCS object) {
-				return createTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
-				return createTemplateableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseClassCS(ClassCS object) {
-				return createClassCSAdapter();
-			}
-			@Override
-			public Adapter caseAbstractTransformationCS(AbstractTransformationCS object) {
-				return createAbstractTransformationCSAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+			new QVTcoreCSSwitch<@Nullable Adapter>() {
+		@Override
+		public Adapter caseAreaCS(AreaCS object) {
+			return createAreaCSAdapter();
+		}
+		@Override
+		public Adapter caseBottomPatternCS(BottomPatternCS object) {
+			return createBottomPatternCSAdapter();
+		}
+		@Override
+		public Adapter caseDirectionCS(DirectionCS object) {
+			return createDirectionCSAdapter();
+		}
+		@Override
+		public Adapter caseDomainCS(DomainCS object) {
+			return createDomainCSAdapter();
+		}
+		@Override
+		public Adapter caseEnforcementOperationCS(EnforcementOperationCS object) {
+			return createEnforcementOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseGuardPatternCS(GuardPatternCS object) {
+			return createGuardPatternCSAdapter();
+		}
+		@Override
+		public Adapter caseMappingCS(MappingCS object) {
+			return createMappingCSAdapter();
+		}
+		@Override
+		public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
+			return createParamDeclarationCSAdapter();
+		}
+		@Override
+		public Adapter casePatternCS(PatternCS object) {
+			return createPatternCSAdapter();
+		}
+		@Override
+		public Adapter casePredicateCS(PredicateCS object) {
+			return createPredicateCSAdapter();
+		}
+		@Override
+		public Adapter casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
+			return createPredicateOrAssignmentCSAdapter();
+		}
+		@Override
+		public Adapter caseQueryCS(QueryCS object) {
+			return createQueryCSAdapter();
+		}
+		@Override
+		public Adapter caseRealizeableVariableCS(RealizeableVariableCS object) {
+			return createRealizeableVariableCSAdapter();
+		}
+		@Override
+		public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
+			return createRealizedVariableCSAdapter();
+		}
+		@Override
+		public Adapter caseTopLevelCS(TopLevelCS object) {
+			return createTopLevelCSAdapter();
+		}
+		@Override
+		public Adapter caseTransformationCS(TransformationCS object) {
+			return createTransformationCSAdapter();
+		}
+		@Override
+		public Adapter caseUnrealizedVariableCS(UnrealizedVariableCS object) {
+			return createUnrealizedVariableCSAdapter();
+		}
+		@Override
+		public Adapter caseVisitableCS(VisitableCS object) {
+			return createVisitableCSAdapter();
+		}
+		@Override
+		public Adapter caseElementCS(ElementCS object) {
+			return createElementCSAdapter();
+		}
+		@Override
+		public Adapter casePivotable(Pivotable object) {
+			return createPivotableAdapter();
+		}
+		@Override
+		public Adapter casePivotableElementCS(PivotableElementCS object) {
+			return createPivotableElementCSAdapter();
+		}
+		@Override
+		public Adapter caseModelElementCS(ModelElementCS object) {
+			return createModelElementCSAdapter();
+		}
+		@Override
+		public Adapter caseNameable(Nameable object) {
+			return createNameableAdapter();
+		}
+		@Override
+		public Adapter caseNamedElementCS(NamedElementCS object) {
+			return createNamedElementCSAdapter();
+		}
+		@Override
+		public Adapter caseTypedElementCS(TypedElementCS object) {
+			return createTypedElementCSAdapter();
+		}
+		@Override
+		public Adapter caseExpCS(ExpCS object) {
+			return createExpCSAdapter();
+		}
+		@Override
+		public Adapter caseJavaImplementationCS(JavaImplementationCS object) {
+			return createJavaImplementationCSAdapter();
+		}
+		@Override
+		public Adapter casePackageOwnerCS(PackageOwnerCS object) {
+			return createPackageOwnerCSAdapter();
+		}
+		@Override
+		public Adapter caseRootCS(RootCS object) {
+			return createRootCSAdapter();
+		}
+		@Override
+		public Adapter caseRootPackageCS(RootPackageCS object) {
+			return createRootPackageCSAdapter();
+		}
+		@Override
+		public Adapter caseTypeCS(TypeCS object) {
+			return createTypeCSAdapter();
+		}
+		@Override
+		public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
+			return createTemplateableElementCSAdapter();
+		}
+		@Override
+		public Adapter caseClassCS(ClassCS object) {
+			return createClassCSAdapter();
+		}
+		@Override
+		public Adapter caseAbstractTransformationCS(AbstractTransformationCS object) {
+			return createAbstractTransformationCSAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -602,6 +607,20 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS
+	 * @generated
+	 */
+	public Adapter createJavaImplementationCSAdapter() {
 		return null;
 	}
 

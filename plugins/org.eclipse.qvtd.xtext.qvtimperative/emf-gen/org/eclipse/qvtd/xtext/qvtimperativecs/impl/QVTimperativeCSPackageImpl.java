@@ -1295,8 +1295,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
-		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
+		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1330,6 +1330,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		observableStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		queryCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getJavaImplementationCS());
 		setStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		simpleParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		simpleParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());

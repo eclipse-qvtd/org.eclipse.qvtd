@@ -47,6 +47,16 @@ public abstract class AbstractQVTbaseCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS csElement) {
+		return visitNamedElementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Element visitJavaImplementationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaImplementationCS csElement) {
+		return visitElementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitQualifiedPackageCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull QualifiedPackageCS csElement) {
 		return visitPackageCS(csElement);
 	}

@@ -30,6 +30,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -353,6 +354,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
 				if (result == null) result = caseTypedElementCS(queryCS);
+				if (result == null) result = caseJavaImplementationCS(queryCS);
 				if (result == null) result = caseNamedElementCS(queryCS);
 				if (result == null) result = caseModelElementCS(queryCS);
 				if (result == null) result = caseNameable(queryCS);
@@ -972,6 +974,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElementCS(TypedElementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Java Implementation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Java Implementation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavaImplementationCS(JavaImplementationCS object) {
 		return null;
 	}
 

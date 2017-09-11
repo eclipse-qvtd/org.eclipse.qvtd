@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
@@ -22,6 +22,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +44,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * @model
  * @generated
  */
-public interface QueryCS extends TypedElementCS {
+public interface QueryCS extends TypedElementCS, JavaImplementationCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

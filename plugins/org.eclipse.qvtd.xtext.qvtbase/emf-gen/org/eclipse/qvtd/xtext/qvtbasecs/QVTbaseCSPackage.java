@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -184,6 +184,125 @@ public interface QVTbaseCSPackage extends EPackage
 	int ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaClassCS()
+	 * @generated
+	 */
+	int JAVA_CLASS_CS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS__CSI = BaseCSPackage.NAMED_ELEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS__PARENT = BaseCSPackage.NAMED_ELEMENT_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS__PIVOT = BaseCSPackage.NAMED_ELEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS__OWNED_ANNOTATIONS = BaseCSPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Java Class CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaImplementationCS()
+	 * @generated
+	 */
+	int JAVA_IMPLEMENTATION_CS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_IMPLEMENTATION_CS__CSI = BaseCSPackage.ELEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_IMPLEMENTATION_CS__PARENT = BaseCSPackage.ELEMENT_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Implementation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_IMPLEMENTATION_CS__IMPLEMENTATION = BaseCSPackage.ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Java Implementation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_IMPLEMENTATION_CS_FEATURE_COUNT = BaseCSPackage.ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.QualifiedPackageCSImpl <em>Qualified Package CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,7 +310,7 @@ public interface QVTbaseCSPackage extends EPackage
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getQualifiedPackageCS()
 	 * @generated
 	 */
-	int QUALIFIED_PACKAGE_CS = 1;
+	int QUALIFIED_PACKAGE_CS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -323,6 +442,37 @@ public interface QVTbaseCSPackage extends EPackage
 	EReference getAbstractTransformationCS_OwnedPathName();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS <em>Java Class CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Java Class CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS
+	 * @generated
+	 */
+	EClass getJavaClassCS();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Java Implementation CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS
+	 * @generated
+	 */
+	EClass getJavaImplementationCS();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS#getImplementation <em>Implementation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Implementation</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS#getImplementation()
+	 * @see #getJavaImplementationCS()
+	 * @generated
+	 */
+	EReference getJavaImplementationCS_Implementation();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS <em>Qualified Package CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -383,6 +533,34 @@ public interface QVTbaseCSPackage extends EPackage
 		 * @generated
 		 */
 		EReference ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME = eINSTANCE.getAbstractTransformationCS_OwnedPathName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaClassCS()
+		 * @generated
+		 */
+		EClass JAVA_CLASS_CS = eINSTANCE.getJavaClassCS();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaImplementationCS()
+		 * @generated
+		 */
+		EClass JAVA_IMPLEMENTATION_CS = eINSTANCE.getJavaImplementationCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Implementation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVA_IMPLEMENTATION_CS__IMPLEMENTATION = eINSTANCE.getJavaImplementationCS_Implementation();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.QualifiedPackageCSImpl <em>Qualified Package CS</em>}' class.

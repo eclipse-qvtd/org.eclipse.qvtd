@@ -11,16 +11,16 @@
 package org.eclipse.qvtd.xtext.qvtbase.validation;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class QVTbaseJavaValidator extends org.eclipse.qvtd.xtext.qvtbase.validation.AbstractQVTbaseJavaValidator {
 
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
-//		}
-//	}
+	//	@Check
+	//	public void checkGreetingStartsWithCapital(Greeting greeting) {
+	//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
+	//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
+	//		}
+	//	}
 }

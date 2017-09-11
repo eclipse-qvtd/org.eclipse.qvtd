@@ -28,6 +28,7 @@ import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.*;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
@@ -99,6 +100,16 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 		public Adapter caseAbstractTransformationCS(AbstractTransformationCS object)
 		{
 			return createAbstractTransformationCSAdapter();
+		}
+		@Override
+		public Adapter caseJavaClassCS(JavaClassCS object)
+		{
+			return createJavaClassCSAdapter();
+		}
+		@Override
+		public Adapter caseJavaImplementationCS(JavaImplementationCS object)
+		{
+			return createJavaImplementationCSAdapter();
 		}
 		@Override
 		public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
@@ -203,6 +214,36 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createAbstractTransformationCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS <em>Java Class CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS
+	 * @generated
+	 */
+	public Adapter createJavaClassCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS
+	 * @generated
+	 */
+	public Adapter createJavaImplementationCSAdapter()
 	{
 		return null;
 	}

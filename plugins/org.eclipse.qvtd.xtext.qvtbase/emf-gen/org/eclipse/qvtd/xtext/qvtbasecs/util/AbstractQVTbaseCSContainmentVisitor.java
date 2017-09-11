@@ -47,6 +47,16 @@ public abstract class AbstractQVTbaseCSContainmentVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS csElement) {
+		return visitNamedElementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitJavaImplementationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaImplementationCS csElement) {
+		return visitElementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitQualifiedPackageCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull QualifiedPackageCS csElement) {
 		return visitPackageCS(csElement);
 	}

@@ -41,6 +41,9 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -55,6 +58,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
@@ -65,6 +69,16 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
+	/**
+	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementation()
+	 * @generated
+	 * @ordered
+	 */
+	protected JavaClassCS implementation;
+
 	/**
 	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -132,6 +146,46 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.QUERY_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public JavaClassCS getImplementation() {
+		if (implementation != null && implementation.eIsProxy()) {
+			InternalEObject oldImplementation = (InternalEObject)implementation;
+			implementation = (JavaClassCS)eResolveProxy(oldImplementation);
+			if (implementation != oldImplementation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION, oldImplementation, implementation));
+			}
+		}
+		return implementation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaClassCS basicGetImplementation() {
+		return implementation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setImplementation(JavaClassCS newImplementation) {
+		JavaClassCS oldImplementation = implementation;
+		implementation = newImplementation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION, oldImplementation, implementation));
 	}
 
 	/**
@@ -309,6 +363,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+				if (resolve) return getImplementation();
+				return basicGetImplementation();
 			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
 				return getOwnedPathName();
 			case QVTimperativeCSPackage.QUERY_CS__TRANSFORMATION:
@@ -332,6 +389,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+				setImplementation((JavaClassCS)newValue);
+				return;
 			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
 				setOwnedPathName((PathNameCS)newValue);
 				return;
@@ -357,6 +417,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+				setImplementation((JavaClassCS)null);
+				return;
 			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
 				setOwnedPathName((PathNameCS)null);
 				return;
@@ -381,6 +444,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+				return implementation != null;
 			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
 				return ownedPathName != null;
 			case QVTimperativeCSPackage.QUERY_CS__TRANSFORMATION:
@@ -393,6 +458,38 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 				return isTransient != IS_TRANSIENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaImplementationCS.class) {
+			switch (derivedFeatureID) {
+				case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION: return QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaImplementationCS.class) {
+			switch (baseFeatureID) {
+				case QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION: return QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

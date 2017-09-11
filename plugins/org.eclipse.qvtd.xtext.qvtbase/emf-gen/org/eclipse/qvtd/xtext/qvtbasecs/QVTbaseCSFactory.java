@@ -4,13 +4,14 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.xtext.qvtbasecs;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,13 +32,22 @@ public interface QVTbaseCSFactory extends EFactory
 	QVTbaseCSFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Java Class CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Java Class CS</em>'.
+	 * @generated
+	 */
+	@NonNull JavaClassCS createJavaClassCS();
+
+	/**
 	 * Returns a new object of class '<em>Qualified Package CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Qualified Package CS</em>'.
 	 * @generated
 	 */
-	QualifiedPackageCS createQualifiedPackageCS();
+	@NonNull QualifiedPackageCS createQualifiedPackageCS();
 
 	/**
 	 * Returns the package supported by this factory.

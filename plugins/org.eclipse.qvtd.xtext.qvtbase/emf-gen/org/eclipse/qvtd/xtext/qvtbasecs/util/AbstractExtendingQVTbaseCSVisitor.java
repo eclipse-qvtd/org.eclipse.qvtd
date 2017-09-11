@@ -43,6 +43,16 @@ public abstract class AbstractExtendingQVTbaseCSVisitor<R, C>
 	}
 
 	@Override
+	public R visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS object) {
+		return visitNamedElementCS(object);
+	}
+
+	@Override
+	public R visitJavaImplementationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaImplementationCS object) {
+		return visitElementCS(object);
+	}
+
+	@Override
 	public R visitQualifiedPackageCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull QualifiedPackageCS object) {
 		return visitPackageCS(object);
 	}

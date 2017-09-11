@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -18,6 +18,8 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
@@ -36,6 +38,18 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * @generated
 	 */
 	private EClass abstractTransformationCSEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javaClassCSEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javaImplementationCSEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,7 +85,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTbaseCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -105,7 +119,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		// Mark meta-data to indicate it can't be changed
 		theQVTbaseCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbaseCSPackage.eNS_URI, theQVTbaseCSPackage);
 		return theQVTbaseCSPackage;
@@ -131,6 +145,39 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	public EReference getAbstractTransformationCS_OwnedPathName()
 	{
 		return (EReference)abstractTransformationCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getJavaClassCS()
+	{
+		return javaClassCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getJavaImplementationCS()
+	{
+		return javaImplementationCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getJavaImplementationCS_Implementation()
+	{
+		return (EReference)javaImplementationCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -189,6 +236,11 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		abstractTransformationCSEClass = createEClass(ABSTRACT_TRANSFORMATION_CS);
 		createEReference(abstractTransformationCSEClass, ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME);
 
+		javaClassCSEClass = createEClass(JAVA_CLASS_CS);
+
+		javaImplementationCSEClass = createEClass(JAVA_IMPLEMENTATION_CS);
+		createEReference(javaImplementationCSEClass, JAVA_IMPLEMENTATION_CS__IMPLEMENTATION);
+
 		qualifiedPackageCSEClass = createEClass(QUALIFIED_PACKAGE_CS);
 		createEReference(qualifiedPackageCSEClass, QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME);
 	}
@@ -226,11 +278,18 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 		// Add supertypes to classes
 		abstractTransformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
+		javaClassCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
+		javaImplementationCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		qualifiedPackageCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractTransformationCSEClass, AbstractTransformationCS.class, "AbstractTransformationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractTransformationCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, AbstractTransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javaClassCSEClass, JavaClassCS.class, "JavaClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(javaImplementationCSEClass, JavaImplementationCS.class, "JavaImplementationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJavaImplementationCS_Implementation(), this.getJavaClassCS(), null, "implementation", null, 0, 1, JavaImplementationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qualifiedPackageCSEClass, QualifiedPackageCS.class, "QualifiedPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQualifiedPackageCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, QualifiedPackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
