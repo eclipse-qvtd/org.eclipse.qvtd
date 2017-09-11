@@ -64,7 +64,9 @@ public class LoadTests extends LoadTestCase
 	}
 
 	public void testLoad_ClassModelToClassModel_qvtr() throws IOException, InterruptedException {
-		doLoad_ModelMorf("ClassModelToClassModel/ClassModelToClassModel", NO_MESSAGES);
+		doLoad_ModelMorf("ClassModelToClassModel/ClassModelToClassModel", new @NonNull String[] {
+			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'classToClass(c1, c2)'"
+		});
 	}
 
 	public void testLoad_DNF_bbox_qvtr() throws IOException, InterruptedException {
@@ -108,7 +110,8 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {		// FIXME delete once Bug 512532 resolved
 			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name}'",
 			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name}'"
+			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name}'",
+			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'RelationalTransformationToMappingTransformation(rt, mt)'"
 		});
 	}
 
@@ -119,7 +122,8 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {		// FIXME delete once Bug 512532 resolved
 			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name}'",
 			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name}'"
+			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name}'",
+			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'RelationalTransformationToMappingTransformation(rt, mt)'"
 		});
 	}
 
