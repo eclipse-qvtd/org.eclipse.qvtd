@@ -18,6 +18,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
@@ -31,7 +32,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -106,19 +106,30 @@ public class LateConsumerMerger extends AbstractMerger
 	{
 		@Override
 		public boolean navigableEdgesMatch(@NonNull NavigableEdge secondaryEdge, @Nullable NavigableEdge primaryEdge) { // assert same property, skip secondary properties
-			if (secondaryEdge.isSecondary()) {				// Ignore opposites - checked by theit forward edge
+			if (secondaryEdge.isSecondary()) {				// Ignore opposites - checked by their forward edge
 				return true;
 			}
 			Property property = secondaryEdge.getProperty();
 			if (primaryEdge == null) {
-				if (/*!secondaryEdge.isRequired() ||*/ !secondaryEdge.isUnconditional()) {
+				//				if (/*!secondaryEdge.isRequired() ||*/ !secondaryEdge.isUnconditional()) {
+				//				if (/*!secondaryEdge.isRequired() ||*/ !(QVTscheduleUtil.getSourceNode(secondaryEdge).isUnconditional() && (QVTscheduleUtil.getTargetNode(secondaryEdge).getUtility() == Utility.STRONGLY_MATCHED))) {
+				if (!secondaryEdge.isMatched()) {
+					return true;
+				}
+				if (property.isIsMany() && (((CollectionType)property.getType()).getLower().intValue() == 0)) {
 					return true;
 				}
 				if (secondaryEdge.isConstant()) {
-					return true;
+					if (debugFailures) {
+						FAILURE.println("Missing constant : " + secondaryEdge);
+					}
+					return false;
 				}
 				if (secondaryEdge.isLoaded()) {
-					return true;
+					if (debugFailures) {
+						FAILURE.println("Missing loaded : " + secondaryEdge);
+					}
+					return false;
 				}
 				if (secondaryEdge.isNew()) {
 					return true;

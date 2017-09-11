@@ -111,7 +111,7 @@ class Correlator
 		//
 		//	Accumulate the transitive navigation from the head nodes. All common navigation edges must have compatible node types.
 		//
-		if (!correlateNavigablePredicates()) {
+		if (!correlateNavigablePredicates()) { // FIXME this may be more efficient but it's a pig to debug, rewrite as intersection then no-extra-predicates
 			return false;
 		}
 		Set<@NonNull Node> navigableNodes = secondaryNode2primaryNode.keySet();
@@ -289,7 +289,13 @@ class Correlator
 						for (@NonNull Node secondaryTargetNode : secondaryTargetNodes) {
 							CompleteClass targetCompleteClass = secondaryTargetNode.getCompleteClass();
 							Node primaryTargetNode = completeClass2primaryTargetNodes.remove(targetCompleteClass);
-							if (primaryTargetNode != null) {
+							if (primaryTargetNode == null) {
+								if (debugFailures) {
+									AbstractMerger.FAILURE.println("Inconsistent types at: " + primaryTargetNode + ", " + secondaryTargetNode);
+								}
+								return false;		// FIXME Inconsistent navigation is too complex
+							}
+							else {
 								Node primaryTargetNode2 = secondaryNode2primaryNode.get(secondaryTargetNode);
 								if (primaryTargetNode2 == null) {
 									secondaryNode2primaryNode.put(secondaryTargetNode, primaryTargetNode);
