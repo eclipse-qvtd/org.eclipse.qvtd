@@ -27,7 +27,13 @@ public class RelationModelAttribution extends ModelAttribution
 		super.computeLookup(target, environmentView, scopeView);
 		RelationModel targetElement = (RelationModel)target;
 		for (Import _import : targetElement.getOwnedImports()) {
-			environmentView.addElement(_import.getName(), _import.getImportedNamespace());
+			String name = _import.getName();
+			if (name != null) {
+				environmentView.addElement(name, _import.getImportedNamespace());
+			}
+			else {
+				environmentView.addNamedElement(_import.getImportedNamespace());
+			}
 		}
 		return scopeView.getParent();
 	}

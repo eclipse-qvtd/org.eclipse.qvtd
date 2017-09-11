@@ -29,7 +29,13 @@ public class TypedModelAttribution extends AbstractAttribution
 		TypedModel typedModel = (TypedModel)target;
 		BaseModel model = QVTbaseUtil.getContainingModel(typedModel);
 		for (Import _import : model.getOwnedImports()) {
-			environmentView.addElement(_import.getName(), _import.getImportedNamespace());
+			String name = _import.getName();
+			if (name != null) {
+				environmentView.addElement(name, _import.getImportedNamespace());
+			}
+			else {
+				environmentView.addNamedElement(_import.getImportedNamespace());
+			}
 		}
 		return scopeView.getParent();
 	}
