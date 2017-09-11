@@ -65,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
@@ -364,6 +365,11 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitJavaClassCS(@NonNull JavaClassCS csElement) {
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitModelDeclCS(@NonNull ModelDeclCS csElement) {
 		@SuppressWarnings("unused")
 		TypedModel pivotElement = refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
@@ -456,6 +462,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		pivotElement.setIsTransient(csElement.isIsTransient());
+		JavaClassCS csJavaClass = csElement.getImplementation();
+		pivotElement.setImplementationClass(csJavaClass != null ? csJavaClass.getName() : null);
 		return null;
 	}
 

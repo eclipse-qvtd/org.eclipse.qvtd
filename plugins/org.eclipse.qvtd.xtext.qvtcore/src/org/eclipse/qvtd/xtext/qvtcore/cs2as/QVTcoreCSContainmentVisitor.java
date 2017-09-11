@@ -57,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DomainCS;
@@ -332,6 +333,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		//		pivotElement.setIsStatic(true);
 		pivotElement.setIsTransient(csElement.isIsTransient());
+		JavaClassCS csJavaClass = csElement.getImplementation();
+		pivotElement.setImplementationClass(csJavaClass != null ? csJavaClass.getName() : null);
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		return null;
 	}

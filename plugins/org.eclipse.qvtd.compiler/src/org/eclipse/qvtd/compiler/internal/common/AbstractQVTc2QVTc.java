@@ -232,6 +232,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			fOut.setIsStatic(fIn.isIsStatic());
 			fOut.setIsTransient(fIn.isIsTransient());
 			fOut.setIsTypeof(fIn.isIsTypeof());
+			fOut.setImplementationClass(fIn.getImplementationClass());
 			createAll(fIn.getOwnedParameters(), fOut.getOwnedParameters());
 			createAll(fIn.getOwnedComments(), fOut.getOwnedComments());
 			context.popScope();

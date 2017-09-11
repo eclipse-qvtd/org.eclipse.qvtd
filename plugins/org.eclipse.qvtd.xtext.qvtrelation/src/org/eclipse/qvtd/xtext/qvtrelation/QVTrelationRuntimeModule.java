@@ -13,10 +13,12 @@ package org.eclipse.qvtd.xtext.qvtrelation;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.ocl.xtext.base.services.RetokenizingTokenSource;
 import org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.QVTrelationParser;
+import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScopeProvider;
 import org.eclipse.qvtd.xtext.qvtrelation.serializer.QVTrelationCrossReferenceSerializer;
 import org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSResource;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -49,6 +51,11 @@ public class QVTrelationRuntimeModule extends org.eclipse.qvtd.xtext.qvtrelation
 		protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
 			return super.createTokenStream(new RetokenizingTokenSource(tokenSource, getTokenDefProvider().getTokenDefMap()));
 		}
+	}
+
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return QVTrelationScopeProvider.class;
 	}
 
 	@Override
