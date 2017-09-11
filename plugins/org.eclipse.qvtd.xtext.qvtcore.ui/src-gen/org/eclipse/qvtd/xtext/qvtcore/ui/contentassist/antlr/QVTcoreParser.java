@@ -151,6 +151,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQueryCSAccess().getGroup_5(), "rule__QueryCS__Group_5__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_5_1(), "rule__QueryCS__Group_5_1__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_9_1(), "rule__QueryCS__Group_9_1__0");
+					put(grammarAccess.getQueryCSAccess().getGroup_9_2(), "rule__QueryCS__Group_9_2__0");
 					put(grammarAccess.getScopeNameCSAccess().getGroup(), "rule__ScopeNameCS__Group__0");
 					put(grammarAccess.getScopeNameCSAccess().getGroup_2(), "rule__ScopeNameCS__Group_2__0");
 					put(grammarAccess.getTransformationCSAccess().getGroup(), "rule__TransformationCS__Group__0");
@@ -376,6 +377,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQueryCSAccess().getOwnedParametersAssignment_5_1_1(), "rule__QueryCS__OwnedParametersAssignment_5_1_1");
 					put(grammarAccess.getQueryCSAccess().getOwnedTypeAssignment_8(), "rule__QueryCS__OwnedTypeAssignment_8");
 					put(grammarAccess.getQueryCSAccess().getOwnedExpressionAssignment_9_1_1(), "rule__QueryCS__OwnedExpressionAssignment_9_1_1");
+					put(grammarAccess.getQueryCSAccess().getImplementationAssignment_9_2_1(), "rule__QueryCS__ImplementationAssignment_9_2_1");
 					put(grammarAccess.getScopeNameCSAccess().getOwnedPathElementsAssignment_0(), "rule__ScopeNameCS__OwnedPathElementsAssignment_0");
 					put(grammarAccess.getScopeNameCSAccess().getOwnedPathElementsAssignment_2_0(), "rule__ScopeNameCS__OwnedPathElementsAssignment_2_0");
 					put(grammarAccess.getTransformationCSAccess().getOwnedPathNameAssignment_1(), "rule__TransformationCS__OwnedPathNameAssignment_1");

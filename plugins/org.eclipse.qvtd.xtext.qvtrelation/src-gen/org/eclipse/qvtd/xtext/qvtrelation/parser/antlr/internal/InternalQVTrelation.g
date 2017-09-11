@@ -1712,6 +1712,31 @@ ruleQueryCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_13, grammarAccess.getQueryCSAccess().getRightCurlyBracketKeyword_8_1_2());
     }
+)
+    |(	otherlv_14='implementedby'
+    {
+    	newLeafNode(otherlv_14, grammarAccess.getQueryCSAccess().getImplementedbyKeyword_8_2_0());
+    }
+(
+(
+		{
+		  /* */
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getQueryCSRule());
+	        }
+        }
+	otherlv_15=RULE_SINGLE_QUOTED_STRING
+	{
+		newLeafNode(otherlv_15, grammarAccess.getQueryCSAccess().getImplementationJavaClassCSCrossReference_8_2_1_0());
+	}
+
+)
+)	otherlv_16=';'
+    {
+    	newLeafNode(otherlv_16, grammarAccess.getQueryCSAccess().getSemicolonKeyword_8_2_2());
+    }
 )))
 ;
 

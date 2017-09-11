@@ -707,7 +707,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         name=UnrestrictedName
 	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)?
 	 *         ownedType=TypeExpCS
-	 *         ownedExpression=ExpCS?
+	 *         (ownedExpression=ExpCS | implementation=[JavaClassCS|SINGLE_QUOTED_STRING])?
 	 *     )
 	 */
 	protected void sequence_QueryCS(ISerializationContext context, QueryCS semanticObject) {

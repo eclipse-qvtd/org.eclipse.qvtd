@@ -96,7 +96,8 @@ QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
 		
 QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
-		':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
+		':' ownedType=TypeExpCS
+		(';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
 
 ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
@@ -122,6 +123,7 @@ QVTimperativeUnrestrictedName:
 |	'contained'
 |	'enforce'
 |	'for'
+|	'implementedby'
 |	'imports'
 //|	'in'
 |	'install'

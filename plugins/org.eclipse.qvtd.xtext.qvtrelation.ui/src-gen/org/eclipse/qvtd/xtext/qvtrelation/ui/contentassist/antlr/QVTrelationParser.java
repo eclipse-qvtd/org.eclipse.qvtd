@@ -153,6 +153,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQueryCSAccess().getGroup_4(), "rule__QueryCS__Group_4__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_4_1(), "rule__QueryCS__Group_4_1__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_8_1(), "rule__QueryCS__Group_8_1__0");
+					put(grammarAccess.getQueryCSAccess().getGroup_8_2(), "rule__QueryCS__Group_8_2__0");
 					put(grammarAccess.getRelationCSAccess().getGroup(), "rule__RelationCS__Group__0");
 					put(grammarAccess.getRelationCSAccess().getGroup_4(), "rule__RelationCS__Group_4__0");
 					put(grammarAccess.getScopeNameCSAccess().getGroup(), "rule__ScopeNameCS__Group__0");
@@ -381,6 +382,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQueryCSAccess().getOwnedParametersAssignment_4_1_1(), "rule__QueryCS__OwnedParametersAssignment_4_1_1");
 					put(grammarAccess.getQueryCSAccess().getOwnedTypeAssignment_7(), "rule__QueryCS__OwnedTypeAssignment_7");
 					put(grammarAccess.getQueryCSAccess().getOwnedExpressionAssignment_8_1_1(), "rule__QueryCS__OwnedExpressionAssignment_8_1_1");
+					put(grammarAccess.getQueryCSAccess().getImplementationAssignment_8_2_1(), "rule__QueryCS__ImplementationAssignment_8_2_1");
 					put(grammarAccess.getRelationCSAccess().getIsTopAssignment_0(), "rule__RelationCS__IsTopAssignment_0");
 					put(grammarAccess.getRelationCSAccess().getIsAbstractAssignment_1(), "rule__RelationCS__IsAbstractAssignment_1");
 					put(grammarAccess.getRelationCSAccess().getNameAssignment_3(), "rule__RelationCS__NameAssignment_3");

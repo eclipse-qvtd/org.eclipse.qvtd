@@ -81,9 +81,9 @@ PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
 	'=' ownedExpression=ExpCSOrTemplateCS;
 		
 QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName 
-            '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
-      	  ':' ownedType=TypeExpCS
-            (';' | '{' ownedExpression=ExpCS '}');
+		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
+		':' ownedType=TypeExpCS
+		(';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
 
 RelationCS: isTop?='top'? isAbstract?='abstract'? 'relation' name=UnrestrictedName
    			 ('overrides' overridden=[qvtrelation::Relation|UnrestrictedName])?
@@ -140,28 +140,28 @@ TypedRefCS returns base::TypedRefCS:
 //|	TemplateCS;
 	
 QVTrelationUnrestrictedName:
-    'abstract'
-|   'checkonly'
-|   'default_values'
-|   'domain'
-|   'enforce'
-|   'extends'
-|   'implementedby'
-|   'import'
-|   'library'
-|   'key'
-|   'opposite'
-|   'overrides'
-|   'package'
-|   'primitive'
-|   'query'
-|   'relation'
-|   'replace'
-|   'top'
-|   'transformation'
-|   'uses'
-|   'when'
-|   'where'
+	'abstract'
+|	'checkonly'
+|	'default_values'
+|	'domain'
+|	'enforce'
+|	'extends'
+|	'implementedby'
+|	'import'
+|	'library'
+|	'key'
+|	'opposite'
+|	'overrides'
+|	'package'
+|	'primitive'
+|	'query'
+|	'relation'
+|	'replace'
+|	'top'
+|	'transformation'
+|	'uses'
+|	'when'
+|	'where'
 ;
 /*
 |	'callable'
