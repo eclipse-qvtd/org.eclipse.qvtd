@@ -60,6 +60,11 @@ public class PredicateEdgeImpl extends EdgeImpl implements PredicateEdge {
 	}
 
 	@Override
+	public @NonNull String getDisplayName() {
+		return "«predicate»" + getTargetNode().getDisplayName();
+	}
+
+	@Override
 	public final boolean isComputation() {
 		return true;
 	}

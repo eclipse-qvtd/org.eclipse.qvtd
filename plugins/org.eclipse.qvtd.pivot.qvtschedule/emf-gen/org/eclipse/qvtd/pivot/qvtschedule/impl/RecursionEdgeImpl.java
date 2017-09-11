@@ -189,6 +189,11 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	}
 
 	@Override
+	public @NonNull String getDisplayName() {
+		return "«recursion»" + getTargetNode().getDisplayName();
+	}
+
+	@Override
 	public final boolean isRecursion() {
 		return true;
 	}

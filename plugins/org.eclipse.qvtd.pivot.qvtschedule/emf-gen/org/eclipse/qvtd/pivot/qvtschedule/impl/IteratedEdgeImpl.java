@@ -60,6 +60,11 @@ public class IteratedEdgeImpl extends EdgeImpl implements IteratedEdge {
 	}
 
 	@Override
+	public @NonNull String getDisplayName() {
+		return "«iterated»" + getTargetNode().getDisplayName();
+	}
+
+	@Override
 	public final boolean isComputation() {
 		return true;
 	}

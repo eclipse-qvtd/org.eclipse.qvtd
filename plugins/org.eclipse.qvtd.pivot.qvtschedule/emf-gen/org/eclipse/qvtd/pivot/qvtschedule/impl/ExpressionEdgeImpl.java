@@ -60,6 +60,11 @@ public class ExpressionEdgeImpl extends EdgeImpl implements ExpressionEdge {
 	}
 
 	@Override
+	public @NonNull String getDisplayName() {
+		return "«expression»" + getTargetNode().getDisplayName();
+	}
+
+	@Override
 	public final boolean isComputation() {
 		return true;
 	}

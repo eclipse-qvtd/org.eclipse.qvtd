@@ -212,15 +212,7 @@ public interface Edge extends Element, Nameable, GraphEdge {
 	 */
 	@NonNull String getColor();
 
-	/**
-	 * Return the forward form of this edge if this is a bidirectional edge, this edge otherwise.
-	 */
-	@NonNull Edge getForwardEdge();
-
-	/**
-	 * Return a formatted label to accompany the edge, or null for no label.
-	 */
-	@Nullable String getLabel();
+	@NonNull String getDisplayName();
 
 	/**
 	 * Return the source Node.
@@ -233,6 +225,16 @@ public interface Edge extends Element, Nameable, GraphEdge {
 	 */
 	@Override
 	@NonNull Node getEdgeTarget();
+
+	/**
+	 * Return the forward form of this edge if this is a bidirectional edge, this edge otherwise.
+	 */
+	@NonNull Edge getForwardEdge();
+
+	/**
+	 * Return a formatted label to accompany the edge, or null for no label.
+	 */
+	@Nullable String getLabel();
 
 	void initialize(@NonNull Role edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 
