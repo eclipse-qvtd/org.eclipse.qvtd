@@ -65,6 +65,11 @@ public class MappingPartitioner
 	private @Nullable List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = null;
 
 	/**
+	 * The TraceClassAnalysis instances and super instances that are produced by this MappingPartitioner.
+	 */
+	private @Nullable Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses = null;
+
+	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
@@ -84,7 +89,7 @@ public class MappingPartitioner
 	 * May be null for Adolfo's prematurely folded middle optimization, and for manually partitionings
 	 * such as attributeColumns in testQVTcCompiler_SimpleUML2RDBMS_CG.
 	 */
-	private final @Nullable Node traceNode;
+	private final @Nullable Node traceNode;		// FIXME may be multiple if early-merged
 
 	/**
 	 * The one and only realizedMiddleNode that provides the traceability result.
@@ -550,6 +555,20 @@ public class MappingPartitioner
 
 	public @NonNull Node getSuccessNode() {
 		return ClassUtil.nonNullState(successNode);
+	}
+
+	public @Nullable Iterable<@NonNull TraceClassAnalysis> getSuperProducedTraceClassAnalyses() {
+		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+		if (producedTraceClassAnalyses2 != null) {
+			Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
+			if (superProducedTraceClassAnalyses2 == null) {
+				superProducedTraceClassAnalyses = superProducedTraceClassAnalyses2 = new HashSet<>();
+			}
+			for (@NonNull TraceClassAnalysis producedTraceClassAnalysis : producedTraceClassAnalyses2) {
+				Iterables.addAll(superProducedTraceClassAnalyses2, producedTraceClassAnalysis.getSuperTraceClassAnalyses());
+			}
+		}
+		return superProducedTraceClassAnalyses;
 	}
 
 	public @NonNull TraceClassAnalysis getTraceClassAnalysis() {

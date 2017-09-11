@@ -368,13 +368,13 @@ public class TransformationPartitioner
 			traceClassAnalysis2cycleAnalysis = traceClassAnalysis2cycleAnalysis2 = new HashMap<>();
 		}
 		Set<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = new HashSet<>();
-		Set<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = new HashSet<>();
+		Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses = new HashSet<>();
 		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
 			Iterables.addAll(consumedTraceClassAnalyses, cyclicMappingPartitioner.getConsumedTraceClassAnalyses());
-			Iterables.addAll(producedTraceClassAnalyses, cyclicMappingPartitioner.getProducedTraceClassAnalyses());
+			Iterables.addAll(superProducedTraceClassAnalyses, cyclicMappingPartitioner.getSuperProducedTraceClassAnalyses());
 		}
 		Set<@NonNull TraceClassAnalysis> cyclicTraceClassAnalyses = new HashSet<>(consumedTraceClassAnalyses);
-		cyclicTraceClassAnalyses.retainAll(producedTraceClassAnalyses);
+		cyclicTraceClassAnalyses.retainAll(superProducedTraceClassAnalyses);
 		CycleAnalysis cycleAnalysis = new CycleAnalysis(this, cyclicMappingPartitioners, cyclicTraceClassAnalyses);
 		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
 			CycleAnalysis oldCycleAnalysis = mappingPartitioner2cycleAnalysis2.put(cyclicMappingPartitioner, cycleAnalysis);
@@ -456,6 +456,7 @@ public class TransformationPartitioner
 		computeTraceClassDiscrimination();
 		computeTraceClassInheritance();
 		computeCyclicTraceClasses();
+		// FIXME check that all head nodes have trace properties
 		//
 		//	Perform per-mapping partitioning
 		//
