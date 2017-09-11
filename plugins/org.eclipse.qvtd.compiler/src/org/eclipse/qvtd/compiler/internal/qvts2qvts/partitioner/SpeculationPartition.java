@@ -25,6 +25,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  * which creates the speculated trace with predicates solely on constant inputs, loaded inputs
  * and acyclic predicated nodes.
  */
+//
+// FIXME if multiple heads are predicated, we cannot wait for all of them before specluating. Speculation
+//	may need to cobsider just loaded nodes.
+//
 class SpeculationPartition extends AbstractPartition
 {
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner) {

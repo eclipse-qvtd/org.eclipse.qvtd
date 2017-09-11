@@ -87,6 +87,13 @@ public class TraceClassAnalysis
 		}
 	}
 
+	/**
+	 * Discrimination is required when manually specified trace classes are re-used by more than one mapping. It is therefore necessary
+	 * to identify properties such as parent=null/not-null that may distinguish different uses and so enable what appears to be a full
+	 * N-producer N-consumer permutation to actually be N distinct 1-producer 1-consumer problems.
+	 *
+	 * This method identifies the discriminating properties.
+	 */
 	public void discriminate() throws CompilerChainException {
 		if (producers.size() <= 1) {
 			TransformationPartitioner.DISCRIMINATION.println("Not required for " + this);
@@ -115,9 +122,9 @@ public class TraceClassAnalysis
 			}
 		}
 		if ((commonProperties == null) || commonProperties.isEmpty()) {
-			throw new CompilerChainException("No common properties to disambiguate " + this);
-			//			TransformationPartitioner.DISCRIMINATION.println("No common properties to disambiguate " + this);
-			//			return;
+			//			throw new CompilerChainException("No common properties to disambiguate " + this);
+			TransformationPartitioner.DISCRIMINATION.println("No common properties to disambiguate " + this);
+			return;
 		}
 		//
 		//	Identify the discriminating power of each property.
