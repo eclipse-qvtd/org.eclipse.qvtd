@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
+import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.Type;
@@ -925,6 +926,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			partNodes[i] = analyze(ownedParts.get(i));
 		}
 		Node operationNode = createConnectedOperationNode(ClassUtil.nonNullState(tupleLiteralExp.getName()), tupleLiteralExp, partNodes);
+		return operationNode;
+	}
+
+	@Override
+	public @NonNull Node visitStringLiteralExp(@NonNull StringLiteralExp stringLiteralExp) {
+		Node operationNode = createOperationNode(ClassUtil.nonNullState(stringLiteralExp.getStringSymbol()), stringLiteralExp);
 		return operationNode;
 	}
 
