@@ -129,7 +129,6 @@ public abstract class ScheduleManager implements Adapter
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		oclVoidClassDatumAnalysis = getClassDatumAnalysis(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
-		//
 	}
 
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {

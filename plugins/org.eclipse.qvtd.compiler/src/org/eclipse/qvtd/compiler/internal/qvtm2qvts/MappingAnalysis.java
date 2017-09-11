@@ -37,7 +37,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
@@ -259,17 +258,21 @@ public class MappingAnalysis implements Nameable
 						OCLExpression referenceExpression = getPredicateComparisonReferenceExpression(conditionExpression);
 						assert referenceExpression != null;
 						VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable(((VariableExp)boundExpression));
-						if (referredVariable instanceof BottomVariable) {
-							addExpression(referredVariable, referenceExpression);
+						//						if (referredVariable instanceof BottomVariable) {
+						//							addExpression(referredVariable, referenceExpression);
+						//						}
+						//						else {
+						if (!analyzeSimplePredicate(referredVariable, referenceExpression)) {
+							complexPredicates.add(predicate);
 						}
-						else {
-							analyzeSimplePredicate(referredVariable, referenceExpression);
-						}
+						//						}
 					}
 					else if (boundExpression instanceof NullLiteralExp) {
 						OCLExpression referenceExpression = getPredicateComparisonReferenceExpression(conditionExpression);
 						assert referenceExpression != null;
-						analyzeSimplePredicate(null, referenceExpression);
+						if (!analyzeSimplePredicate(null, referenceExpression)) {
+							complexPredicates.add(predicate);
+						}
 					}
 					else {
 						complexPredicates.add(predicate);
@@ -301,7 +304,19 @@ public class MappingAnalysis implements Nameable
 	//
 	//	A reverse entry is also created if no PropertyCallExp is not to-one.
 	//
-	private void analyzeSimplePredicate(@Nullable VariableDeclaration boundVariable, @NonNull OCLExpression referenceExpression) {
+	private boolean analyzeSimplePredicate(@Nullable VariableDeclaration boundVariable, @NonNull OCLExpression referenceExpression) {
+		boolean isValid = false;
+		for (@NonNull OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
+			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
+			expression = ClassUtil.nonNullState(navigationCallExp.getOwnedSource());
+			if (expression instanceof VariableExp) {
+				isValid = true;
+				break;
+			}
+		}
+		if (!isValid) {
+			return false;
+		}
 		for (@NonNull OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
 			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
 			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
@@ -328,6 +343,7 @@ public class MappingAnalysis implements Nameable
 				}
 			}
 		}
+		return true;
 	}
 
 	private @Nullable Node analyzeVariable(@NonNull Variable variable, @NonNull List<@NonNull OCLExpression> expressions) {
@@ -609,5 +625,10 @@ public class MappingAnalysis implements Nameable
 				}
 			}
 		}
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return getName();
 	}
 }
