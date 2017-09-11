@@ -103,6 +103,13 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete("models/Packages.qvtr", NO_MESSAGES);
 	}
 
+	public void testLoad_ATL2QVTr_qvtr() throws IOException, InterruptedException {
+		//		ProjectMap.getAdapter(resourceSet);
+		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/src/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		URI pivotURI = getProjectFileURI("ATL2QVTr.qvtras");
+		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {});
+	}
+
 	public void testLoad_RelToCore_qvtr() throws IOException, InterruptedException {
 		//		ProjectMap.getAdapter(resourceSet);
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);

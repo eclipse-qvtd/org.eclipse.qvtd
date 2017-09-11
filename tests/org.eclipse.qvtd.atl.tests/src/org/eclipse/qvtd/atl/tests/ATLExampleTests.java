@@ -10,7 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.atl.tests;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.junit.Test;
@@ -27,7 +32,13 @@ public class ATLExampleTests extends TestCase
 		try {
 			Class<?> txClass = Class.forName("org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr");		// FIXME Use direct reference once generation works redliably
 			myQVT.createGeneratedExecutor((Class<? extends Transformer>)txClass);
-			myQVT.loadInput("atl", testName + ".atl");
+			Resource atlResource = myQVT.loadInput("atl", testName + ".atl");
+			assert atlResource != null;
+			EList<@NonNull EObject> contents = atlResource.getContents();
+			Resource atlXmiResource = atlResource.getResourceSet().createResource(atlResource.getURI().appendFileExtension("xmi"));
+			atlXmiResource.getContents().addAll(contents);
+			atlXmiResource.save(null);
+			contents.addAll(atlXmiResource.getContents());
 			myQVT.executeTransformation();
 			myQVT.saveOutput("qvtr", testName + "_CG.qvtras", testName + "_expected.qvtras");
 		}
@@ -40,6 +51,9 @@ public class ATLExampleTests extends TestCase
 	public void testATLExample_Families2Persons_CG() throws Exception {
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		AbstractTransformer.INVOCATIONS.setState(true);
+		//		PivotStandaloneSetup.init();
+		QVTimperativeLibrary.install();
+		QVTrelationToStringVisitor.FACTORY.getClass();
 		doATLExampleTest_CG("Families2Persons");
 	}
 }
