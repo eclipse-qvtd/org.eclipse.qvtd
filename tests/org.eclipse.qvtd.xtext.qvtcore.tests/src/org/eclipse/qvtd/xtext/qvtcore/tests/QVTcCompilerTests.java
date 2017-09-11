@@ -488,6 +488,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		Splitter.RESULT.setState(true);
 		String testFolderName = "uml2rdbms";
 		MyQVT myQVT = new MyQVT(testFolderName);
+		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("SimpleUML2RDBMS.qvtcas", "rdbms", "SimpleUML2RDBMS.genmodel");
 			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 11);
@@ -538,6 +539,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		URI testsBaseURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/bin/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/", true);
 		String projectName = "org.eclipse.qvtd.examples.qvtcore.uml2rdbms";
 		MyQVT myQVT = new MyQVT(testsBaseURI, projectName, null, null);
+		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("SimpleUML2RDBMS.qvtc", "rdbms", "SimpleUML2RDBMS.genmodel");
 			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 11);

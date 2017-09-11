@@ -111,6 +111,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private BasicQVTiExecutor interpretedExecutor = null;
 	private QVTiTransformationExecutor generatedExecutor = null;
 	private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
+	private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
 	public AbstractTestQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName) {
 		this(testsBaseURI, projectName, testFolderName, "samples");
@@ -271,15 +272,15 @@ public abstract class AbstractTestQVT extends QVTimperative
 		if (interpretedExecutor != null) {
 			interpretedExecutor.execute();
 			interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
-			//				interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
 			return null;
 		}
 		else {
 			Transformer transformer = generatedExecutor.getTransformer();
-			transformer.run();						// FIXME BUG 511028
-			//			if (!transformer.run()) {
-			//				throw new Exception("Failed to execute");
-			//			}
+			if (!transformer.run()) {
+				if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
+					throw new Exception("Failed to execute");
+				}
+			}
 			return transformer;
 		}
 	}
@@ -395,4 +396,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected void setPackagePrefixOption(@NonNull QVTiCodeGenOptions options) {}
+
+	public void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis) {		// FIXME BUG 511028
+		this.suppressFailureDiagnosis = suppressFailureDiagnosis;
+	}
 }
