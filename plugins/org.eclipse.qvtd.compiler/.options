@@ -50,12 +50,23 @@ org.eclipse.qvtd.compiler/qvtm2qvts/regionTraversal=false
 # Turn on tracing of the polled properties computation 
 org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 
-# Turn on tracing of the QVTr realtions callTree 
-org.eclipse.qvtd.compiler/qvtr2qvtc/callTree=false
+# Turn on tracing of the QVTr relations callTree 
+#org.eclipse.qvtd.compiler/qvtr2qvtc/callTree=false
 # Turn on tracing of the QVTc synthesis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
 # Turn on tracing of the QVTr variables analysis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
+
+# Turn on optional check for producer-less consumed nodes
+org.eclipse.qvtd.compiler/qvts2qvts/connectivity=false
+# Turn on display of the final of classdatum inheritance
+org.eclipse.qvtd.compiler/qvts2qvts/connectivity/classdatums=false
+# Turn on display of the final of connection fan-in to fan-out
+org.eclipse.qvtd.compiler/qvts2qvts/connectivity/connections=false
+# Turn on display of the final of edge fan-in to fan-out
+org.eclipse.qvtd.compiler/qvts2qvts/connectivity/edges=false
+# Turn on display of the final of node fan-in to fan-out
+org.eclipse.qvtd.compiler/qvts2qvts/connectivity/nodes=false
 
 # Turn on tracing of the early merge correlation attempts
 org.eclipse.qvtd.compiler/qvts2qvts/merge/early=false

@@ -74,6 +74,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
@@ -513,6 +515,10 @@ public class RegionUtil extends QVTscheduleUtil
 		return ClassUtil.nonNullState(classDatumAnalysis.getElementalClassDatum());
 	}
 
+	public static @NonNull String getName(@NonNull ClassDatum classDatum) {
+		return classDatum.getReferredTypedModel().getName() + "!" + classDatum.getCompleteClass().getPrimaryClass().toString();
+	}
+
 	public static @NonNull Role getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		boolean isLoaded = false;
 		boolean isPredicated = false;
@@ -551,6 +557,10 @@ public class RegionUtil extends QVTscheduleUtil
 		else {
 			return Role.CONSTANT;
 		}
+	}
+
+	public static @NonNull ScheduledRegion getOwnedScheduledRegion(@NonNull ScheduleModel scheduleModel) {
+		return ClassUtil.nonNullState(scheduleModel.getOwnedScheduledRegion());
 	}
 
 	private static @NonNull Role getPatternNodeRole(@NonNull Node sourceNode, @NonNull Property property) {

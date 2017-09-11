@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
@@ -1098,6 +1099,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		createSchedule2(rootRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(rootRegion, "9-final", true, true, true);
+		}
+		//
+		if (ConnectivityChecker.CONNECTIVITY.isActive()) {
+			ConnectivityChecker.checkConnectivity(scheduleManager);
 		}
 		return rootRegion;
 	}
