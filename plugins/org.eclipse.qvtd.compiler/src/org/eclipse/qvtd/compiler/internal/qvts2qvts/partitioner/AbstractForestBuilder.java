@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 import com.google.common.collect.Sets;
 
-public abstract class AbstractForestBuilder implements Comparator<@NonNull NavigableEdge>
+abstract class AbstractForestBuilder implements Comparator<@NonNull NavigableEdge>
 {
 	/**
 	 * The preferred non-secondary edges to be used in the tree.
