@@ -243,10 +243,18 @@ public class DatumCaches
 					getUsage(propertyType);
 					throw new IllegalStateException("No DomainUsage for " + propertyType);
 				}
-				valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
+				if (valueUsage == domainUsageAnalysis.getNoneUsage()) {
+					valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
+				}
+				else {
+					valueUsage = propertyUsage;
+				}
 			}
 			TypedModel oppositeTypedModel = valueUsage.getTypedModel(propAssign);
 			if (oppositeTypedModel == null) {
+				DomainUsage valueUsage2 = getUsage(value);
+				DomainUsage propertyUsage2 = propertyType != null ? getUsage(propertyType) : null;
+				oppositeTypedModel = valueUsage.getTypedModel(propAssign);
 				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
 			}
 			PropertyDatum oppositeDatum = getPropertyDatum(oppositeTypedModel, getElementClass(targetProp), oppositeProp);
