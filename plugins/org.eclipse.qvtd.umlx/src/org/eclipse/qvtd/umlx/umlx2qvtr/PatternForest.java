@@ -548,6 +548,7 @@ class PatternForest
 		assert treeRoot != null;
 		for (@NonNull TreeClassNode rootNode : treeRoot.rootNodes) {
 			Element qvtrElement = relPatternNode2qvtrElement.get(rootNode.patternNode);
+			assert qvtrElement != null;
 			qvtrRelationDomain.getPattern().add(umlx2qvtr.createDomainPattern((TemplateExp)qvtrElement));
 		}
 		return qvtrRelationDomain;

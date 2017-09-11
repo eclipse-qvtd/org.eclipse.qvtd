@@ -112,7 +112,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 		return asCollectionTemplateExp;
 	}
 
-	public @NonNull DomainPattern createDomainPattern(TemplateExp asTemplateExp) {
+	public @NonNull DomainPattern createDomainPattern(@NonNull TemplateExp asTemplateExp) {
 		DomainPattern asDomainPattern = QVTrelationFactory.eINSTANCE.createDomainPattern();
 		asDomainPattern.setTemplateExpression(asTemplateExp);
 		return asDomainPattern;
@@ -148,7 +148,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 		return asRelation;
 	}
 
-	public @NonNull RelationCallExp createRelationCallExp(Relation asRelation, @NonNull List<? extends @NonNull OCLExpression> asArguments) {
+	public @NonNull RelationCallExp createRelationCallExp(@NonNull Relation asRelation, @NonNull List<? extends @NonNull OCLExpression> asArguments) {
 		RelationCallExp asRelationCallExp = QVTrelationFactory.eINSTANCE.createRelationCallExp();
 		asRelationCallExp.setReferredRelation(asRelation);
 		Iterables.addAll(QVTrelationUtil.Internal.getOwnedArgumentsList(asRelationCallExp), asArguments);

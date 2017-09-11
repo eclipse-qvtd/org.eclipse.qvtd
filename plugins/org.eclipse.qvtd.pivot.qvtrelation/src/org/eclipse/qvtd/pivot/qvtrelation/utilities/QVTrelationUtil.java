@@ -91,6 +91,17 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		}
 	}
 
+	public static final class RelationCallExpComparator implements Comparator<@NonNull RelationCallExp>
+	{
+		public static final @NonNull RelationCallExpComparator INSTANCE = new RelationCallExpComparator();
+
+		@Override
+		public int compare(@NonNull RelationCallExp o1, @NonNull RelationCallExp o2) {
+			String n1 = getName(getReferredRelation(o1));
+			String n2 = getName(getReferredRelation(o2));
+			return ClassUtil.safeCompareTo(n1, n2);
+		}
+	}
 
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
 
@@ -161,6 +172,21 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getIdentifies(@NonNull Key rKey) {
 		return ClassUtil.nonNullState(rKey.getIdentifies());
+	}
+
+	public static @NonNull Variable getOverriddenVariable(@NonNull Relation overriddenRelation, @NonNull Variable overridingRootVariable) {
+		RelationDomain overridingDomain = QVTrelationUtil.getRootVariableDomain(overridingRootVariable);
+		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(overridingDomain);
+		int rootVariableIndex = rootVariables.indexOf(overridingRootVariable);
+		assert rootVariableIndex >= 0;
+		RelationDomain overriddenRelationDomain = QVTrelationUtil.getRelationDomain(overriddenRelation, QVTrelationUtil.getTypedModel(overridingDomain));
+		List<@NonNull Variable> overriddenRootVariables = QVTrelationUtil.getRootVariables(overriddenRelationDomain);
+		assert rootVariableIndex < overriddenRootVariables.size();
+		return overriddenRootVariables.get(rootVariableIndex);
+	}
+
+	public static @NonNull Iterable<@NonNull Relation> getOverrides(@NonNull Relation rRelation) {
+		return Iterables.filter(ClassUtil.nullFree(rRelation.getOverrides()), Relation.class);
 	}
 
 	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedArguments(@NonNull RelationCallExp rInvocation) {
@@ -284,6 +310,13 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static @NonNull RelationalTransformation getTransformation(@NonNull Relation rRelation) {
 		return (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
+	}
+
+	/**
+	 * Return true if rRelation participates in a hierarchy of overriding/overridden relations.
+	 */
+	public static boolean hasOverrides(@NonNull Relation rRelation) {
+		return (rRelation.getOverridden() != null) || !rRelation.getOverrides().isEmpty();
 	}
 
 	//	public static @NonNull Pattern getWhen(@NonNull Relation rRelation) {

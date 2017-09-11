@@ -258,6 +258,15 @@ public class QVTbaseUtil extends PivotUtil
 		throw new IllegalStateException();
 	}
 
+	public static org.eclipse.ocl.pivot.@NonNull Package getContainingPackage(@Nullable EObject element) {
+		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof org.eclipse.ocl.pivot.Package) {
+				return (org.eclipse.ocl.pivot.Package)eObject;
+			}
+		}
+		throw new IllegalStateException();
+	}
+
 	public static @NonNull Rule getContainingRule(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Rule) {

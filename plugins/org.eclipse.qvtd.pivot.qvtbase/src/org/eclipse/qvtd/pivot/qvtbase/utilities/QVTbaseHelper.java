@@ -15,14 +15,22 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.IteratorExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.SelfType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -63,6 +71,64 @@ public class QVTbaseHelper extends PivotHelper
 		asParameter.setName(name);
 		setType(asParameter, type, typedElement.isIsRequired());
 		return asParameter;
+	}
+
+	public @NonNull IteratorExp createIteratorExp(@NonNull OCLExpression asSourceExpression, @NonNull String opName, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull OCLExpression asBody) {
+		Type asType = ClassUtil.nonNullState(asSourceExpression.getType());
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asType);
+		int iteratorsCount = asIterators.size();
+		int bestMatches = -1;
+		Iteration bestIteration = null;
+		for (@NonNull Operation asOperation : completeClass.getOperations(FeatureFilter.SELECT_NON_STATIC, opName)) {
+			if (asOperation instanceof Iteration) {
+				Iteration asIteration = (Iteration) asOperation;
+				List<@NonNull Parameter> asParameters = ClassUtil.nullFree(asIteration.getOwnedIterators());
+				if (asParameters.size() == iteratorsCount) {
+					int exactMatches = 0;
+					boolean gotOne = true;
+					for (int i = 0; i < iteratorsCount; i++) {
+						Type asParameterType = ClassUtil.nonNullState(asParameters.get(i).getType());
+						if (asParameterType instanceof SelfType) {
+							Type asArgumentType = asIterators.get(i).getType();
+							if (asArgumentType.conformsTo(standardLibrary, asType) && asType.conformsTo(standardLibrary, asArgumentType)) {
+								exactMatches++;
+							}
+						}
+						else {
+							Type asArgumentType = asIterators.get(i).getType();
+							if (!asArgumentType.conformsTo(standardLibrary, asParameterType)) {
+								gotOne = false;
+								break;
+							}
+							if (asParameterType.conformsTo(standardLibrary, asArgumentType)) {
+								exactMatches++;
+							}
+						}
+					}
+					if (gotOne) {
+						if (exactMatches > bestMatches) {
+							bestMatches = exactMatches;
+							bestIteration = asIteration;
+						}
+						else if (exactMatches > bestMatches) {
+							bestIteration = null;
+						}
+					}
+				}
+			}
+		}
+		if (bestMatches < 0) {
+			throw new IllegalStateException("No match found for " + opName);
+		}
+		if (bestIteration == null) {
+			throw new IllegalStateException("Ambiguous match found for " + opName);
+		}
+		return createIteratorExp(asSourceExpression, bestIteration, asIterators, asBody);
+	}
+
+	public @NonNull Pattern createPattern() {
+		Pattern asPattern = QVTbaseFactory.eINSTANCE.createPattern();
+		return asPattern;
 	}
 
 	public @NonNull Predicate createPredicate(@NonNull OCLExpression asConditionExpression) {
