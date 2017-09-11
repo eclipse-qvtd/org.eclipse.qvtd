@@ -125,6 +125,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		return accept;
 	}
 
+	private @Nullable Node analyzeOperationCallExp_equals(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
+		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
+		//		createPredicateEdge(sourceNode, "«equals»", targetNode);
+		createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, sourceNode);
+		return null;
+	}
+
 	private @Nullable Node analyzeOperationCallExp_includes(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
@@ -828,6 +835,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
 		}
 		else if ((operationCallExp.eContainer() instanceof Predicate)
+				&& !(ownedSource.getType() instanceof DataType)
+				&& PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyEqualsId())) {
+			return analyzeOperationCallExp_equals(sourceNode, operationCallExp);
+		}
+		else if ((operationCallExp.eContainer() instanceof Predicate)
 				&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
 				&& "includes".equals(operationName)) {
 			return analyzeOperationCallExp_includes(sourceNode, operationCallExp);
@@ -918,6 +930,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	@Override
+	public @NonNull Node visitStringLiteralExp(@NonNull StringLiteralExp stringLiteralExp) {
+		Node operationNode = createOperationNode(ClassUtil.nonNullState(stringLiteralExp.getStringSymbol()), stringLiteralExp);
+		return operationNode;
+	}
+
+	@Override
 	public @NonNull Node visitTupleLiteralExp(@NonNull TupleLiteralExp tupleLiteralExp) {
 		List<TupleLiteralPart> ownedParts = tupleLiteralExp.getOwnedParts();
 		int iSize = ownedParts.size();
@@ -926,12 +944,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			partNodes[i] = analyze(ownedParts.get(i));
 		}
 		Node operationNode = createConnectedOperationNode(ClassUtil.nonNullState(tupleLiteralExp.getName()), tupleLiteralExp, partNodes);
-		return operationNode;
-	}
-
-	@Override
-	public @NonNull Node visitStringLiteralExp(@NonNull StringLiteralExp stringLiteralExp) {
-		Node operationNode = createOperationNode(ClassUtil.nonNullState(stringLiteralExp.getStringSymbol()), stringLiteralExp);
 		return operationNode;
 	}
 
