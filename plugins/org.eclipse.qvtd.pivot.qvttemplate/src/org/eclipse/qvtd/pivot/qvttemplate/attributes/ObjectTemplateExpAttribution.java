@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvttemplate.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
@@ -25,7 +26,7 @@ public class ObjectTemplateExpAttribution extends TemplateExpAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ObjectTemplateExp targetElement = (ObjectTemplateExp)target;
 		org.eclipse.ocl.pivot.Class referredClass = targetElement.getReferredClass();
-		if (referredClass != null) {
+		if ((referredClass != null) && (environmentView.getRequiredType() == PivotPackage.Literals.PROPERTY)) {		// FIXME this is a pragmatic filtering to suppress resolution within PropertyTemplateItem values
 			environmentView.addAllProperties(referredClass, FeatureFilter.SELECT_NON_STATIC);
 		}
 		return super.computeLookup(target, environmentView, scopeView);
