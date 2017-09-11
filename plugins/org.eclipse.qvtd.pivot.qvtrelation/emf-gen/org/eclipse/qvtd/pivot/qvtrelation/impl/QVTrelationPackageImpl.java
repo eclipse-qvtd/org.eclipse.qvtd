@@ -433,8 +433,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EOperation getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map() {
+	public EOperation getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map() {
 		return relationEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map() {
+		return relationEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -475,6 +485,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	@Override
 	public EOperation getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map() {
 		return relationCallExpEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map() {
+		return relationCallExpEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -741,12 +761,14 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(relationEClass, RELATION__WHEN);
 		createEReference(relationEClass, RELATION__WHERE);
 		createEOperation(relationEClass, RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP);
+		createEOperation(relationEClass, RELATION___VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
 		createEOperation(relationEClass, RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
 
 		relationCallExpEClass = createEClass(RELATION_CALL_EXP);
 		createEReference(relationCallExpEClass, RELATION_CALL_EXP__ARGUMENT);
 		createEReference(relationCallExpEClass, RELATION_CALL_EXP__REFERRED_RELATION);
 		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
+		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
 
 		relationDomainEClass = createEClass(RELATION_DOMAIN);
 		createEReference(relationDomainEClass, RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
@@ -921,6 +943,15 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTopRelationOverriddenByTopRelation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = initEOperation(getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTransformationIsRelationalTransformation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
@@ -935,6 +966,15 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getRelationCallExp_ReferredRelation(), this.getRelation(), null, "referredRelation", null, 1, 1, RelationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateMatchingArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateWhereInvocationIsANonTopRelation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1149,6 +1189,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 				"originalName", "DomainsAreRelationDomains"
 		});
 		addAnnotation
+		(getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TopRelationOverriddenByTopRelation"
+		});
+		addAnnotation
 		(getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(),
 			source,
 			new String[] {
@@ -1159,6 +1205,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 			source,
 			new String[] {
 				"originalName", "MatchingArgumentCount"
+		});
+		addAnnotation
+		(getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "WhereInvocationIsANonTopRelation"
 		});
 		addAnnotation
 		(getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(),

@@ -127,12 +127,20 @@ public class QVTrelationValidator extends EObjectValidator {
 	public static final int RELATION__VALIDATE_DOMAINS_ARE_RELATION_DOMAINS = 9;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Top Relation Overridden By Top Relation' of 'Relation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RELATION__VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION = 10;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Transformation Is Relational Transformation' of 'Relation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION__VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION = 10;
+	public static final int RELATION__VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Argument Count' of 'Relation Call Exp'.
@@ -140,7 +148,15 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_CALL_EXP__VALIDATE_MATCHING_ARGUMENT_COUNT = 11;
+	public static final int RELATION_CALL_EXP__VALIDATE_MATCHING_ARGUMENT_COUNT = 12;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Where Invocation Is ANon Top Relation' of 'Relation Call Exp'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RELATION_CALL_EXP__VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Relation Domain Assignments Are Unique' of 'Relation Domain'.
@@ -148,7 +164,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 12;
+	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Relation Domain Assignment'.
@@ -156,7 +172,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 13;
+	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rules Are Relations' of 'Relational Transformation'.
@@ -164,7 +180,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 14;
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 16;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -172,7 +188,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 14;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 16;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -391,6 +407,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateNoOverridesCycle(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridingRuleOverridesAllDomains(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_validateDomainsAreRelationDomains(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_validateTopRelationOverriddenByTopRelation(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_validateTransformationIsRelationalTransformation(relation, diagnostics, context);
 		return result;
 	}
@@ -403,6 +420,16 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	public boolean validateRelation_validateDomainsAreRelationDomains(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return relation.validateDomainsAreRelationDomains(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateTopRelationOverriddenByTopRelation constraint of '<em>Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelation_validateTopRelationOverriddenByTopRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relation.validateTopRelationOverriddenByTopRelation(diagnostics, context);
 	}
 
 	/**
@@ -432,6 +459,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateOCLExpression_validateTypeIsNotNull(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationCallExp_validateMatchingArgumentCount(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_validateWhereInvocationIsANonTopRelation(relationCallExp, diagnostics, context);
 		return result;
 	}
 
@@ -443,6 +471,16 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	public boolean validateRelationCallExp_validateMatchingArgumentCount(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return relationCallExp.validateMatchingArgumentCount(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateWhereInvocationIsANonTopRelation constraint of '<em>Relation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelationCallExp_validateWhereInvocationIsANonTopRelation(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relationCallExp.validateWhereInvocationIsANonTopRelation(diagnostics, context);
 	}
 
 	/**

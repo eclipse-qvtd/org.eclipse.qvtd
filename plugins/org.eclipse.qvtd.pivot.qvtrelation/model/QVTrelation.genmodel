@@ -69,6 +69,10 @@
         <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateDomainsAreRelationDomains/diagnostics"/>
         <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateDomainsAreRelationDomains/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Relation/validateTopRelationOverriddenByTopRelation">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTopRelationOverriddenByTopRelation/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTopRelationOverriddenByTopRelation/context"/>
+      </genOperations>
       <genOperations ecoreOperation="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation">
         <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation/diagnostics"/>
         <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation/context"/>
@@ -80,6 +84,10 @@
       <genOperations ecoreOperation="QVTrelation.ecore#//RelationCallExp/validateMatchingArgumentCount">
         <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateMatchingArgumentCount/diagnostics"/>
         <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateMatchingArgumentCount/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//RelationCallExp/validateWhereInvocationIsANonTopRelation">
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateWhereInvocationIsANonTopRelation/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateWhereInvocationIsANonTopRelation/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationDomain">

@@ -12,29 +12,29 @@
       </ownedInvariants>
       <ownedProperties xmi:id=",1+xi" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
       <ownedProperties xmi:id="ZXmmB" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
-      <ownedProperties xmi:id=",11ob" isTransient="true" name="rule" opposite="#nw+6e" type="#zS2p0"/>
-      <ownedProperties xmi:id="CBqPj" isRequired="false" name="typedModel" opposite="#TPm6," type="#WqJYx"/>
+      <ownedProperties xmi:id="jwI+E" isTransient="true" name="rule" opposite="#DtMdd" type="#zS2p0"/>
+      <ownedProperties xmi:id="GoV0K" isRequired="false" name="typedModel" opposite="#TPm6," type="#WqJYx"/>
     </ownedClasses>
     <ownedClasses xmi:id="PGjqK" name="Function" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Yz,F1">
       <ownedInvariants xmi:id="S1Iog" isCallable="true" name="ParametersAreFunctionParameter">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedParameters->forAll(oclIsKindOf(FunctionParameter))&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="5hGIF" isCallable="true" name="ReturnTypeIsQueryType">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies type = queryExpression.type&#xA;&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type.conformsTo(type)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="zUxun" isComposite="true" isRequired="false" name="queryExpression" opposite="#N9fOm" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+      <ownedProperties xmi:id="r1ilM" isComposite="true" isRequired="false" name="queryExpression" opposite="#N9fOm" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
     </ownedClasses>
     <ownedClasses xmi:id="owsj9" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#as9eG"/>
     <ownedClasses xmi:id="H0dko" name="Pattern" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
-      <ownedProperties xmi:id="Eakqg" name="bindsTo" opposite="#YwYCh" type="#+iD8q"/>
-      <ownedProperties xmi:id="qg,Ng" isComposite="true" name="predicate" opposite="#faTDd" type="#XYdvW"/>
+      <ownedProperties xmi:id="056L0" name="bindsTo" opposite="#YwYCh" type="#+iD8q"/>
+      <ownedProperties xmi:id="6cYSq" isComposite="true" name="predicate" opposite="#eKpfP" type="#XYdvW"/>
     </ownedClasses>
     <ownedClasses xmi:id="uMSmb" name="Predicate" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
       <ownedInvariants xmi:id="xFRwU" isCallable="true" name="ConditionIsBoolean">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;conditionExpression.type = Boolean&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="iEcp5" isComposite="true" name="conditionExpression" opposite="#R0cad" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
-      <ownedProperties xmi:id="faTDd" isTransient="true" name="pattern" opposite="#qg,Ng" type="#H0dko"/>
+      <ownedProperties xmi:id="h0xFs" isComposite="true" name="conditionExpression" opposite="#R0cad" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+      <ownedProperties xmi:id="eKpfP" isTransient="true" name="pattern" opposite="#6cYSq" type="#H0dko"/>
     </ownedClasses>
     <ownedClasses xmi:id="zS2p0" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
       <ownedInvariants xmi:id="JBzn4" isCallable="true" name="DomainNameIsUnique">
@@ -46,11 +46,11 @@
       <ownedInvariants xmi:id="PB949" isCallable="true" name="OverridingRuleOverridesAllDomains">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overridden &lt;> null implies&#xA;&#x9;overridden.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="nw+6e" isComposite="true" name="domain" opposite="#,11ob" type="#vBkLs"/>
+      <ownedProperties xmi:id="DtMdd" isComposite="true" name="domain" opposite="#jwI+E" type="#vBkLs"/>
       <ownedProperties xmi:id="r3ogk" defaultValueString="false" name="isAbstract" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
-      <ownedProperties xmi:id="Etu1J" isRequired="false" name="overridden" opposite="#SCQib" type="#zS2p0"/>
-      <ownedProperties xmi:id="SCQib" name="overrides" opposite="#Etu1J" type="#n3g5w"/>
-      <ownedProperties xmi:id="spSXK" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation" opposite="#Tq8Ol"
+      <ownedProperties xmi:id="zgFwC" isRequired="false" name="overridden" opposite="#mSVz," type="#zS2p0"/>
+      <ownedProperties xmi:id="mSVz," name="overrides" opposite="#zgFwC" type="#n3g5w"/>
+      <ownedProperties xmi:id="Img5I" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation" opposite="#UVEee"
           type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="AjDLV" name="Transformation" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#pDcbe">
@@ -72,37 +72,37 @@
       <ownedOperations xmi:id="rcEGq" name="getModelParameter" type="#WqJYx">
         <ownedParameters name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
       </ownedOperations>
-      <ownedProperties xmi:id="BMypX" isRequired="false" name="extends" opposite="#3n7zQ" type="#AjDLV"/>
-      <ownedProperties xmi:id="XoI01" isComposite="true" name="modelParameter" opposite="#fFlGt" type="#SncSN"/>
-      <ownedProperties xmi:id="B,0v1" isComposite="true" isRequired="false" name="ownedContext" opposite="#AROTe" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
-      <ownedProperties xmi:id="s8NEm" isComposite="true" name="ownedTag" opposite="#UougY" type="#5bIlO"/>
-      <ownedProperties xmi:id="Tq8Ol" isComposite="true" name="rule" opposite="#spSXK" type="#U1psM"/>
-      <ownedProperties xmi:id="3n7zQ" isImplicit="true" isRequired="false" name="extendedBy" opposite="#BMypX" type="#AjDLV"/>
+      <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" opposite="#3n7zQ" type="#AjDLV"/>
+      <ownedProperties xmi:id="YTQDv" isComposite="true" name="modelParameter" opposite="#fPfk3" type="#SncSN"/>
+      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" opposite="#AROTe" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="NUcXB" isComposite="true" name="ownedTag" opposite="#UougY" type="#5bIlO"/>
+      <ownedProperties xmi:id="UVEee" isComposite="true" name="rule" opposite="#Img5I" type="#U1psM"/>
+      <ownedProperties xmi:id="3n7zQ" isImplicit="true" isRequired="false" name="extendedBy" opposite="#xL9bQ" type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="WqJYx" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
-      <ownedProperties xmi:id="VmWQK" name="dependsOn" opposite="#,4oQK" type="#,klFp"/>
-      <ownedProperties xmi:id="Z8CG4" isComposite="true" isRequired="false" name="ownedContext" opposite="#WYUg6" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
-      <ownedProperties xmi:id="fFlGt" isTransient="true" name="transformation" opposite="#XoI01" type="#AjDLV"/>
-      <ownedProperties xmi:id="YmU5U" name="usedPackage" opposite="#xb2NR" type="#4WjM+"/>
-      <ownedProperties xmi:id="TPm6," isImplicit="true" name="Domain" opposite="#CBqPj" type="#9+o+H"/>
-      <ownedProperties xmi:id=",4oQK" isImplicit="true" isRequired="false" name="dependent" opposite="#VmWQK" type="#WqJYx"/>
+      <ownedProperties xmi:id="cy5DZ" name="dependsOn" opposite="#,4oQK" type="#,klFp"/>
+      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" opposite="#WYUg6" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="fPfk3" isTransient="true" name="transformation" opposite="#YTQDv" type="#AjDLV"/>
+      <ownedProperties xmi:id="fK4wq" name="usedPackage" opposite="#xb2NR" type="#4WjM+"/>
+      <ownedProperties xmi:id="TPm6," isImplicit="true" name="Domain" opposite="#GoV0K" type="#9+o+H"/>
+      <ownedProperties xmi:id=",4oQK" isImplicit="true" isRequired="false" name="dependent" opposite="#cy5DZ" type="#WqJYx"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="82dOP" URI="http://www.eclipse.org/ocl/2015/Pivot" name="pivot" nsPrefix="pivot">
     <ownedClasses xmi:id="g7Mr0" name="Annotation">
-      <ownedProperties xmi:id="UougY" isImplicit="true" isRequired="false" name="Transformation" opposite="#s8NEm" type="#AjDLV"/>
+      <ownedProperties xmi:id="UougY" isImplicit="true" isRequired="false" name="Transformation" opposite="#NUcXB" type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="BFtK4" name="OCLExpression">
-      <ownedProperties xmi:id="N9fOm" isImplicit="true" isRequired="false" name="Function" opposite="#zUxun" type="#PGjqK"/>
-      <ownedProperties xmi:id="R0cad" isImplicit="true" isRequired="false" name="predicate" opposite="#iEcp5" type="#uMSmb"/>
+      <ownedProperties xmi:id="N9fOm" isImplicit="true" isRequired="false" name="Function" opposite="#r1ilM" type="#PGjqK"/>
+      <ownedProperties xmi:id="R0cad" isImplicit="true" isRequired="false" name="predicate" opposite="#h0xFs" type="#uMSmb"/>
     </ownedClasses>
     <ownedClasses xmi:id="3ONqN" name="Package">
-      <ownedProperties xmi:id="xb2NR" isImplicit="true" name="TypedModel" opposite="#YmU5U" type="#gkhFp"/>
+      <ownedProperties xmi:id="xb2NR" isImplicit="true" name="TypedModel" opposite="#fK4wq" type="#gkhFp"/>
     </ownedClasses>
     <ownedClasses xmi:id="t4j6T" name="Variable">
-      <ownedProperties xmi:id="YwYCh" isImplicit="true" name="Pattern" opposite="#Eakqg" type="#pJjNZ"/>
-      <ownedProperties xmi:id="AROTe" isImplicit="true" isRequired="false" name="Transformation" opposite="#B,0v1" type="#AjDLV"/>
-      <ownedProperties xmi:id="WYUg6" isImplicit="true" isRequired="false" name="TypedModel" opposite="#Z8CG4" type="#WqJYx"/>
+      <ownedProperties xmi:id="YwYCh" isImplicit="true" name="Pattern" opposite="#056L0" type="#pJjNZ"/>
+      <ownedProperties xmi:id="AROTe" isImplicit="true" isRequired="false" name="Transformation" opposite="#iWDDR" type="#AjDLV"/>
+      <ownedProperties xmi:id="WYUg6" isImplicit="true" isRequired="false" name="TypedModel" opposite="#ggm9N" type="#WqJYx"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">

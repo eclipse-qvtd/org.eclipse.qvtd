@@ -592,13 +592,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Top Relation Overridden By Top Relation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>Validate Transformation Is Relational Transformation</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 1;
+	int RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Relation</em>' class.
@@ -607,7 +616,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 2;
+	int RELATION_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationCallExpImpl <em>Relation Call Exp</em>}' class.
@@ -791,13 +800,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Where Invocation Is ANon Top Relation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Relation Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CALL_EXP_OPERATION_COUNT = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 1;
+	int RELATION_CALL_EXP_OPERATION_COUNT = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainImpl <em>Relation Domain</em>}' class.
@@ -2399,6 +2417,16 @@ public interface QVTrelationPackage extends EPackage {
 	EOperation getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#validateTopRelationOverriddenByTopRelation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Top Relation Overridden By Top Relation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Top Relation Overridden By Top Relation</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#validateTopRelationOverriddenByTopRelation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#validateTransformationIsRelationalTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Transformation Is Relational Transformation</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2449,6 +2477,16 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp#validateWhereInvocationIsANonTopRelation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Where Invocation Is ANon Top Relation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Where Invocation Is ANon Top Relation</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp#validateWhereInvocationIsANonTopRelation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain <em>Relation Domain</em>}'.
@@ -2884,6 +2922,14 @@ public interface QVTrelationPackage extends EPackage {
 		EOperation RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Top Relation Overridden By Top Relation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Transformation Is Relational Transformation</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2924,6 +2970,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Where Invocation Is ANon Top Relation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainImpl <em>Relation Domain</em>}' class.

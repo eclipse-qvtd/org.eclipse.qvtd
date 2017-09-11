@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -222,7 +223,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let result : Boolean[?] = queryExpression <> null implies type = queryExpression.type
+		 *       let result : Boolean[?] = queryExpression <> null implies
+		 *         queryExpression.type.conformsTo(type)
 		 *       in
 		 *         'Function::ReturnTypeIsQueryType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
@@ -241,13 +243,13 @@ public class FunctionImpl extends OperationImpl implements Function {
 				final /*@NonInvalid*/ boolean ne = queryExpression != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
 					if (queryExpression == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = queryExpression.getType();
-					final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : false;
-					result = eq;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = queryExpression.getType();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+					result = conformsTo;
 				}
 				else {
 					result = ValueUtil.TRUE_VALUE;
