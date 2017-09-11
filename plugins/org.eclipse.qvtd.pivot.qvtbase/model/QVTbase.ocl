@@ -16,7 +16,7 @@ inv ParametersAreFunctionParameter:
 	ownedParameters->forAll(oclIsKindOf(FunctionParameter))
 
 inv ReturnTypeIsQueryType:
-	queryExpression <> null implies type = queryExpression.type
+	queryExpression <> null implies queryExpression.type.conformsTo(type)
 
 context Predicate
 inv ConditionIsBoolean:

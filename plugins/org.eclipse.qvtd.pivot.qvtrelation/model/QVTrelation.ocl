@@ -37,6 +37,8 @@ inv PartsAreUnique:
 context Relation
 inv DomainsAreRelationDomains:
 	domain->forAll(oclIsKindOf(RelationDomain))
+inv TopRelationOverriddenByTopRelation:
+	overridden <> null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel
 
 inv TransformationIsRelationalTransformation:
 	transformation.oclIsKindOf(RelationalTransformation)
@@ -47,7 +49,11 @@ inv TransformationIsRelationalTransformation:
 context RelationCallExp
 inv MatchingArgumentCount:
 	self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()
-
+inv WhereInvocationIsANonTopRelation:
+	let pattern : qvtbase::Pattern = self->asOrderedSet()->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(qvtbase::Pattern)->first() in
+    let relation : Relation = pattern->asOrderedSet()->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(Relation)->first() in
+	relation._where = pattern implies not referredRelation.isTopLevel
+	
 context RelationDomain
 inv RelationDomainAssignmentsAreUnique:
 	defaultAssignment->isUnique(variable)
