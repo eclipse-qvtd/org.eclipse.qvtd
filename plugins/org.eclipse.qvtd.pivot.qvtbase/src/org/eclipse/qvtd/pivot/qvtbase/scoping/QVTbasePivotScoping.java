@@ -19,16 +19,14 @@ import org.eclipse.qvtd.pivot.qvtbase.attributes.BaseModelAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.DomainAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.FunctionAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.TransformationAttribution;
-import org.eclipse.qvtd.pivot.qvtbase.attributes.TypedModelAttribution;
 
 public class QVTbasePivotScoping
-{	
+{
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTbasePackage.Literals.BASE_MODEL, BaseModelAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.DOMAIN, DomainAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.FUNCTION, FunctionAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.TRANSFORMATION, TransformationAttribution.INSTANCE);
-		registry.put(QVTbasePackage.Literals.TYPED_MODEL, TypedModelAttribution.INSTANCE);
 	}
 }

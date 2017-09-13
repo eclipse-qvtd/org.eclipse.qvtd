@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.attributes.ModelAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
@@ -25,13 +24,9 @@ public class BaseModelAttribution extends ModelAttribution
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		BaseModel targetElement = (BaseModel)target;
-		org.eclipse.ocl.pivot.Package unnamedPackage = NameUtil.getNameable(targetElement.getOwnedPackages(), "");
-		if (unnamedPackage != null) {
-			environmentView.addAllTypes(unnamedPackage);
-		}
 		ScopeView nextScopeView = super.computeLookup(target, environmentView, scopeView);
 		if (!environmentView.hasFinalResult()) {
+			BaseModel targetElement = (BaseModel)target;
 			environmentView.addNamedElements(QVTbaseUtil.getAllTransformations(targetElement));
 		}
 		return nextScopeView;
