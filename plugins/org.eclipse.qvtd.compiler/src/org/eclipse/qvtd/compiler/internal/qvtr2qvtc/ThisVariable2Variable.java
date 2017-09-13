@@ -47,6 +47,11 @@ public class ThisVariable2Variable extends AbstractVariable2Variable
 	}
 
 	@Override
+	public void setIsEnforcedReferred() {
+		// this may be used in any domain;
+	}
+
+	@Override
 	public void setOtherReferred(@NonNull TypedModel rOtherTypedModel) {}
 
 	@Override
