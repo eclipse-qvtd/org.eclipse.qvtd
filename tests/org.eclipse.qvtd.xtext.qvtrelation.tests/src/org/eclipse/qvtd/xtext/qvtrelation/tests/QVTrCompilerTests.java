@@ -245,9 +245,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
-		AbstractMerger.EARLY.setState(true);
-		AbstractMerger.FAILURE.setState(true);
-		AbstractMerger.LATE.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
 		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);

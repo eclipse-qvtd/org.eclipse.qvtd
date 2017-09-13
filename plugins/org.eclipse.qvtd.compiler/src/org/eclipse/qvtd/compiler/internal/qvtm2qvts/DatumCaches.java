@@ -236,6 +236,10 @@ public class DatumCaches
 				getUsage(value);
 				throw new IllegalStateException("No DomainUsage for " + value);
 			}
+//			if (valueUsage == domainUsageAnalysis.getNoneUsage()) {
+//				getUsage(value);
+//				throw new IllegalStateException("None DomainUsage for " + value);
+//			}
 			Type propertyType = targetProp.getType();
 			if ((propertyType != null) && (propertyType.getESObject() != EcorePackage.Literals.EOBJECT)) {		// FIXME Legacy fix tolerating undeclared import of EObject
 				DomainUsage propertyUsage = getUsage(propertyType);
@@ -243,7 +247,7 @@ public class DatumCaches
 					getUsage(propertyType);
 					throw new IllegalStateException("No DomainUsage for " + propertyType);
 				}
-				if (valueUsage == domainUsageAnalysis.getNoneUsage()) {
+				if ((valueUsage != domainUsageAnalysis.getNoneUsage()) && (valueUsage != domainUsageAnalysis.getPrimitiveUsage())) {
 					valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
 				}
 				else {
@@ -258,7 +262,7 @@ public class DatumCaches
 				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
 			}
 			PropertyDatum oppositeDatum = getPropertyDatum(oppositeTypedModel, getElementClass(targetProp), oppositeProp);
-			targetDatum.setOpposite(oppositeDatum);
+			targetDatum.setOpposite(oppositeDatum);		// FIXME this property is obsolete
 			result.add(oppositeDatum);
 		}
 		return result;
