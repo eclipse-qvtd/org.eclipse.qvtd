@@ -195,8 +195,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		if (isInited) return (QVTcorePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcorePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTcorePackageImpl theQVTcorePackage = (QVTcorePackageImpl)(ePackage instanceof QVTcorePackageImpl ? ePackage : new QVTcorePackageImpl());
+		Object registeredQVTcorePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTcorePackageImpl theQVTcorePackage = registeredQVTcorePackage instanceof QVTcorePackageImpl ? (QVTcorePackageImpl)registeredQVTcorePackage : new QVTcorePackageImpl();
 
 		isInited = true;
 
@@ -222,7 +222,6 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTcorePackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTcorePackage.eNS_URI, theQVTcorePackage);

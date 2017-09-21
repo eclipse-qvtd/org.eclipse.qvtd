@@ -429,8 +429,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		if (isInited) return (QVTschedulePackage)EPackage.Registry.INSTANCE.getEPackage(QVTschedulePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTschedulePackageImpl theQVTschedulePackage = (QVTschedulePackageImpl)(ePackage instanceof QVTschedulePackageImpl ? ePackage : new QVTschedulePackageImpl());
+		Object registeredQVTschedulePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTschedulePackageImpl theQVTschedulePackage = registeredQVTschedulePackage instanceof QVTschedulePackageImpl ? (QVTschedulePackageImpl)registeredQVTschedulePackage : new QVTschedulePackageImpl();
 
 		isInited = true;
 
@@ -447,7 +447,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTschedulePackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);

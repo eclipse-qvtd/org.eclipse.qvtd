@@ -289,8 +289,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		if (isInited) return (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTimperativePackageImpl theQVTimperativePackage = (QVTimperativePackageImpl)(ePackage instanceof QVTimperativePackageImpl ? ePackage : new QVTimperativePackageImpl());
+		Object registeredQVTimperativePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTimperativePackageImpl theQVTimperativePackage = registeredQVTimperativePackage instanceof QVTimperativePackageImpl ? (QVTimperativePackageImpl)registeredQVTimperativePackage : new QVTimperativePackageImpl();
 
 		isInited = true;
 
@@ -316,7 +316,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);

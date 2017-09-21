@@ -258,8 +258,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		if (isInited) return (QVTrelationCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTrelationCSPackageImpl theQVTrelationCSPackage = (QVTrelationCSPackageImpl)(ePackage instanceof QVTrelationCSPackageImpl ? ePackage : new QVTrelationCSPackageImpl());
+		Object registeredQVTrelationCSPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTrelationCSPackageImpl theQVTrelationCSPackage = registeredQVTrelationCSPackage instanceof QVTrelationCSPackageImpl ? (QVTrelationCSPackageImpl)registeredQVTrelationCSPackage : new QVTrelationCSPackageImpl();
 
 		isInited = true;
 
@@ -280,7 +280,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationCSPackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationCSPackage.eNS_URI, theQVTrelationCSPackage);

@@ -104,8 +104,8 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		if (isInited) return (QVTtemplatePackage)EPackage.Registry.INSTANCE.getEPackage(QVTtemplatePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTtemplatePackageImpl theQVTtemplatePackage = (QVTtemplatePackageImpl)(ePackage instanceof QVTtemplatePackageImpl ? ePackage : new QVTtemplatePackageImpl());
+		Object registeredQVTtemplatePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTtemplatePackageImpl theQVTtemplatePackage = registeredQVTtemplatePackage instanceof QVTtemplatePackageImpl ? (QVTtemplatePackageImpl)registeredQVTtemplatePackage : new QVTtemplatePackageImpl();
 
 		isInited = true;
 
@@ -130,7 +130,6 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTtemplatePackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTtemplatePackage.eNS_URI, theQVTtemplatePackage);

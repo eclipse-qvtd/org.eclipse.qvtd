@@ -1,4 +1,4 @@
-<%@ jet package="org.eclipse.qvtd.compiler.internal.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*" class="AdapterFactoryClass"%>
+<%@ jet package="org.eclipse.qvtd.compiler.internal.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil" class="AdapterFactoryClass"%>
 <%
 /**
  * Copyright (c) 2002-2006 IBM Corporation and others.

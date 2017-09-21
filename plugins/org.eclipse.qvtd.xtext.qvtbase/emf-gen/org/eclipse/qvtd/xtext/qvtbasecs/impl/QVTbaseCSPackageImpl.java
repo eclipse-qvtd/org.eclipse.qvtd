@@ -100,8 +100,8 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		if (isInited) return (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTbaseCSPackageImpl theQVTbaseCSPackage = (QVTbaseCSPackageImpl)(ePackage instanceof QVTbaseCSPackageImpl ? ePackage : new QVTbaseCSPackageImpl());
+		Object registeredQVTbaseCSPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTbaseCSPackageImpl theQVTbaseCSPackage = registeredQVTbaseCSPackage instanceof QVTbaseCSPackageImpl ? (QVTbaseCSPackageImpl)registeredQVTbaseCSPackage : new QVTbaseCSPackageImpl();
 
 		isInited = true;
 
@@ -118,7 +118,6 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbaseCSPackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbaseCSPackage.eNS_URI, theQVTbaseCSPackage);

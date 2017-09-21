@@ -144,8 +144,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		if (isInited) return (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTbasePackageImpl theQVTbasePackage = (QVTbasePackageImpl)(ePackage instanceof QVTbasePackageImpl ? ePackage : new QVTbasePackageImpl());
+		Object registeredQVTbasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTbasePackageImpl theQVTbasePackage = registeredQVTbasePackage instanceof QVTbasePackageImpl ? (QVTbasePackageImpl)registeredQVTbasePackage : new QVTbasePackageImpl();
 
 		isInited = true;
 
@@ -170,7 +170,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbasePackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, theQVTbasePackage);

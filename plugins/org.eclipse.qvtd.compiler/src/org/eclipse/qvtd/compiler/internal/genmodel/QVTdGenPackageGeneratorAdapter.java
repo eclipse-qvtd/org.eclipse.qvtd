@@ -30,7 +30,6 @@ public class QVTdGenPackageGeneratorAdapter extends GenPackageGeneratorAdapter
 			JETEmitterDescriptor[] superJETEmitterDescriptors = super.getJETEmitterDescriptors();
 			JET_EMITTER_DESCRIPTORS = new JETEmitterDescriptor[superJETEmitterDescriptors.length];
 			System.arraycopy(superJETEmitterDescriptors, 0, JET_EMITTER_DESCRIPTORS, 0, superJETEmitterDescriptors.length);
-			JET_EMITTER_DESCRIPTORS[PACKAGE_CLASS_ID] = new JETEmitterDescriptor("model/PackageClass.javajet", "org.eclipse.qvtd.compiler.internal.templates.model.PackageClass");  // FIXME BUG 485764
 			JET_EMITTER_DESCRIPTORS[SWITCH_CLASS_ID] = new JETEmitterDescriptor("model/SwitchClass.javajet", "org.eclipse.qvtd.compiler.internal.templates.model.SwitchClass");  // FIXME BUG 485089
 			JET_EMITTER_DESCRIPTORS[ADAPTER_FACTORY_CLASS_ID] = new JETEmitterDescriptor("model/AdapterFactoryClass.javajet", "org.eclipse.qvtd.compiler.internal.templates.model.AdapterFactoryClass");  // FIXME BUG 485089
 		}
