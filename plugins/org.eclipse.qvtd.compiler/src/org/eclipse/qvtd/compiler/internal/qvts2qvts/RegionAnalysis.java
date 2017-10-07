@@ -59,8 +59,9 @@ public class RegionAnalysis implements Adapter
 
 	/**
 	 * The per-typed model realized navigable edges for which an execution may be attempted elsewhere before assignment here.
+	 * Sub-index is both by property and its opposite.
 	 */
-	private @Nullable Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges = null;
+	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges = null;
 
 	public RegionAnalysis(@NonNull Region region) {
 		region.eAdapters().add(this);
@@ -87,17 +88,27 @@ public class RegionAnalysis implements Adapter
 	private void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {
 		assert realizedEdge.isRealized();
 		assert realizedEdge.getOwningRegion() == region;
-		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2enforcedEdges2 = typedModel2enforcedEdges;
-		assert typedModel2enforcedEdges2 != null;
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges2 = typedModel2property2enforcedEdges;
+		assert typedModel2property2enforcedEdges2 != null;
 		ClassDatum classDatum = RegionUtil.getClassDatum(realizedEdge.getEdgeSource());
 		TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
-		Set<@NonNull NavigableEdge> enforcedEdges = typedModel2enforcedEdges2.get(typedModel);
+		Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>> property2enforcedEdges2 = typedModel2property2enforcedEdges2.get(typedModel);
+		if (property2enforcedEdges2 == null) {
+			property2enforcedEdges2 = new HashMap<>();
+			typedModel2property2enforcedEdges2.put(typedModel, property2enforcedEdges2);
+		}
+		Property asProperty = RegionUtil.getProperty(realizedEdge);
+		Set<@NonNull NavigableEdge> enforcedEdges = property2enforcedEdges2.get(asProperty);
 		if (enforcedEdges == null) {
 			enforcedEdges = new HashSet<>();
-			typedModel2enforcedEdges2.put(typedModel, enforcedEdges);
+			property2enforcedEdges2.put(asProperty, enforcedEdges);
+			Property asOpposite = asProperty.getOpposite();
+			if (asOpposite != null) {
+				property2enforcedEdges2.put(asOpposite, enforcedEdges);
+			}
 		}
 		enforcedEdges.add(realizedEdge);
-		QVTscheduleConstants.POLLED_PROPERTIES.println("    enforced " + realizedEdge.getProperty() +
+		QVTscheduleConstants.POLLED_PROPERTIES.println("    enforced " + asProperty +
 			" at " + region.getIndexRangeText() +
 			" in " + typedModel + " for " + region);
 	}
@@ -107,7 +118,7 @@ public class RegionAnalysis implements Adapter
 		buildPredicatedNavigationEdgesIndex2(typedModel2property2predicatedEdges);
 		buildRealizedNavigationEdgesIndex2(typedModel2property2realizedEdges);
 		typedModel2checkedEdges = new HashMap<>();
-		typedModel2enforcedEdges = new HashMap<>();
+		typedModel2property2enforcedEdges = new HashMap<>();
 	}
 
 	private void buildPredicatedNavigationEdgesIndex2(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges) {
@@ -316,9 +327,14 @@ public class RegionAnalysis implements Adapter
 		return typedModel2checkedEdges.get(typedModel);
 	}
 
-	public @Nullable Set<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel) {
-		assert typedModel2enforcedEdges != null;
-		return typedModel2enforcedEdges.get(typedModel);
+	public @Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty) {
+		assert typedModel2property2enforcedEdges != null;
+		Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>> property2enforcedEdge = typedModel2property2enforcedEdges.get(typedModel);
+		if (property2enforcedEdge != null) {
+			Set<@NonNull NavigableEdge> enforcedEdges = property2enforcedEdge.get(asProperty);
+			return enforcedEdges;
+		}
+		return null;
 	}
 
 	@Override
@@ -336,4 +352,9 @@ public class RegionAnalysis implements Adapter
 
 	@Override
 	public void setTarget(Notifier newTarget) {}
+
+	@Override
+	public String toString() {
+		return region.toString();
+	}
 }
