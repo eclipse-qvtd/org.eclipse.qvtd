@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.junit.Test;
 
@@ -39,8 +40,14 @@ public class ATLExampleTests extends TestCase
 			atlXmiResource.getContents().addAll(contents);
 			atlXmiResource.save(null);
 			contents.addAll(atlXmiResource.getContents());
-			myQVT.executeTransformation();
-			myQVT.saveOutput("qvtr", testName + "_CG.qvtras", testName + "_expected.qvtras");
+			try {
+				Transformer executeTransformation = myQVT.executeTransformation();
+				myQVT.saveOutput("qvtr", testName + "_CG.qvtras", testName + "_expected.qvtras");
+			}
+			catch (InvalidEvaluationException e) {
+				myQVT.saveOutput("qvtr", testName + "_CG.qvtras", "");
+				throw e;
+			}
 		}
 		finally {
 			myQVT.dispose();
@@ -56,4 +63,14 @@ public class ATLExampleTests extends TestCase
 		QVTrelationToStringVisitor.FACTORY.getClass();
 		doATLExampleTest_CG("Families2Persons");
 	}
+
+	/*	@Test
+	public void testATLExample_Families2PersonsMini_CG() throws Exception {
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		//		PivotStandaloneSetup.init();
+		QVTimperativeLibrary.install();
+		QVTrelationToStringVisitor.FACTORY.getClass();
+		doATLExampleTest_CG("Families2PersonsMini");
+	} */
 }

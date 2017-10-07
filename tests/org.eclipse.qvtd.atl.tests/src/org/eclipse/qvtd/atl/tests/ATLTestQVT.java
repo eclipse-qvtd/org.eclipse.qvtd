@@ -26,8 +26,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -47,6 +51,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory;
+import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
+import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.xtext.util.EmfFormatter;
 
@@ -195,7 +201,13 @@ public class ATLTestQVT extends QVTimperative
 			Transformer transformer = generatedExecutor.getTransformer();
 			//			transformer.run();						// FIXME BUG 511028
 			if (!transformer.run()) {
-				throw new Exception("Failed to execute");
+				InvocationManager invocationManager = transformer.getInvocationManager();
+				invocationManager.flush();
+				//				if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
+				StringBuilder s = new StringBuilder();
+				invocationManager.diagnoseWorkLists(s);
+				throw new InvalidEvaluationException("Failed to execute" + s.toString());
+				//				}
 			}
 			return transformer;
 		}
@@ -230,6 +242,7 @@ public class ATLTestQVT extends QVTimperative
 		}
 	}
 
+	// FIXME "" expectedFile used as proxy rescue
 	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile) throws IOException, InterruptedException {
 		URI modelURI = testFolderURI.appendSegment(modelFile);
 		ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
@@ -241,10 +254,25 @@ public class ATLTestQVT extends QVTimperative
 		else {
 			outputResource = resourceSet.createResource(modelURI);
 			outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
+			if ("".equals(expectedFile)) {
+				Map<EObject, Collection<Setting>> find = EcoreUtil.UnresolvedProxyCrossReferencer.find(outputResource);
+				for (EObject eObject : find.keySet()) {
+					outputResource.getContents().add(eObject);
+					Collection<Setting> settings = find.get(eObject);
+					assert settings != null;
+					for (Setting s : settings) {
+						EObject eObject2 = s.getEObject();
+						EStructuralFeature eStructuralFeature = s.getEStructuralFeature();
+					}
+					((InternalEObject)eObject).eSetProxyURI(null);
+				};
+			}
+			//			((XMLResource)outputResource).getEObjectToIDMap().clear();
+			//			((XMLResource)outputResource).getIDToEObjectMap().clear();
 			outputResource.save(getSaveOptions());
 		}
 		assert outputResource != null;
-		if (expectedFile != null) {
+		if ((expectedFile != null) && (expectedFile.length() > 0)){
 			checkOutput(outputResource, expectedFile);
 		}
 		return outputResource;
