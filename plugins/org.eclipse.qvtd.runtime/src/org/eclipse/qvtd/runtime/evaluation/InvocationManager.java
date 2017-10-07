@@ -24,6 +24,7 @@ public interface InvocationManager extends ExecutionVisitable
 {
 	void addInvoker(@NonNull InvocationConstructor constructor);
 	@NonNull Interval createInterval();
+	void diagnoseWorkLists(@NonNull StringBuilder s);
 	boolean flush();
 	@NonNull Executor getExecutor();
 	@NonNull Iterable<@NonNull Interval> getIntervals();

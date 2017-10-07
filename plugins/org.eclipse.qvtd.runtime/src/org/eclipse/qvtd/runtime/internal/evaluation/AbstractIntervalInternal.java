@@ -149,6 +149,35 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	@Override
+	public void diagnoseWorkLists(@NonNull StringBuilder s) {
+		for (AbstractInvocationInternal blocked = blockedInvocations; blocked != null; ) {
+			SlotState debug_blockedBy = blocked.debug_blockedBy;
+			s.append("\n" + intervalIndex + ": " + blocked + "\n\tblocked by " + debug_blockedBy);
+			if (debug_blockedBy != null) {
+				debug_blockedBy.debugUnblock();
+			}
+			blocked = blocked.next;
+			if (blocked == blockedInvocations) {
+				break;
+			}
+		}
+		for (AbstractInvocationInternal waiting = waitingInvocations; waiting != null; ) {
+			SlotState debug_blockedBy = waiting.debug_blockedBy;
+			s.append("\n" + intervalIndex + ": " + waiting + "\n\twaiting for " + debug_blockedBy);
+			if (debug_blockedBy != null) {
+				debug_blockedBy.debugUnblock();
+			}
+			waiting = waiting.next;
+			if (waiting == waitingInvocations) {
+				break;
+			}
+		}
+		for (AbstractConnection connection = headConnection; connection != null; connection = connection.getNextConnection()) {
+			s.append("\n" + intervalIndex + ": connection: " + connection);
+		}
+	}
+
+	@Override
 	public boolean flush() {
 		while (headConnection != null) {
 			AbstractConnection nextConnection2;

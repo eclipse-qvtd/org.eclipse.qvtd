@@ -82,6 +82,13 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	}
 
 	@Override
+	public void diagnoseWorkLists(@NonNull StringBuilder s) {
+		for (@NonNull Interval interval : intervals) {
+			interval.diagnoseWorkLists(s);
+		}
+	}
+
+	@Override
 	public boolean flush() {
 		for (int index = nextIndex; index < intervals.size(); index = nextIndex) {
 			nextIndex = index+1;

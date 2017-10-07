@@ -26,6 +26,8 @@ public interface Interval extends ExecutionVisitable, Nameable
 
 	Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict);
 
+	void diagnoseWorkLists(@NonNull StringBuilder s);
+
 	boolean flush();
 
 	@NonNull Iterable<@NonNull Connection> getConnections();

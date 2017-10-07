@@ -35,6 +35,8 @@ public interface SlotState extends ExecutionVisitable
 
 	void block(@NonNull Invocation invocation);
 
+	void debugUnblock();
+
 	/**
 	 * Throw an InvocationFailedException if the eFeature of eObject has not been assigned.
 	 */

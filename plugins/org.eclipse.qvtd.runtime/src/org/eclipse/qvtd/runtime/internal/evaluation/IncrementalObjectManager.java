@@ -15,10 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -103,6 +108,44 @@ public class IncrementalObjectManager extends AbstractObjectManager
 				@SuppressWarnings("unchecked")
 				List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
 				blockedInvocationList.add(invocation);
+			}
+		}
+
+		@Override
+		public void debugUnblock() {
+			if (eObject instanceof EObject) {
+				Object eProxy = null;
+				EObject eObject = ((EObject)this.eObject);
+				EClassifier eType = eFeature.getEType();
+				if (eType instanceof EClass) {
+					EClass eClass = (EClass) eType;
+					for (EClassifier eClassifier : eClass.getEPackage().getEClassifiers()) {
+						if (eClassifier instanceof EClass) {
+							EClass eClass2 = (EClass)eClassifier;
+							if (!eClass2.isAbstract() && eClass2.getEAllSuperTypes().contains(eClass)) {
+								eClass = eClass2;
+							}
+						}
+					}
+					eProxy = eType.getEPackage().getEFactoryInstance().create(eClass);
+					if (eProxy instanceof InternalEObject) {
+						((InternalEObject)eProxy).eSetProxyURI(URI.createURI("blocked"));
+					}
+				}
+				else {
+					try {
+						eProxy = eType.getEPackage().getEFactoryInstance().createFromString((EDataType)eType, "");
+					}
+					catch (Throwable e) {}
+				}
+				if (eFeature.isMany()) {
+					@SuppressWarnings("unchecked")
+					List<Object> list = (List<Object>)eObject.eGet(eFeature);
+					list.add(eProxy);
+				}
+				else {
+					eObject.eSet(eFeature, eProxy);
+				}
 			}
 		}
 
