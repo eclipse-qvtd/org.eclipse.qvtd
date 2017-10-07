@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -69,11 +71,13 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
@@ -110,6 +114,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
 
+	/**
+	 * Map from the non-trivial side of an "=" expression to the known node for a variable on the other side. This avoids the need to create a redundant
+	 * node for the other side with an «equals» edge to tie them together.
+	 */
+	private @Nullable Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode;
+
 	protected ExpressionAnalyzer(@NonNull MappingAnalysis context) {
 		super(context);
 		this.scheduleManager = RegionUtil.getScheduleManager(context.getMappingRegion());
@@ -125,8 +135,88 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		return accept;
 	}
 
-	private @Nullable Node analyzeOperationCallExp_equals(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
-		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
+	/**
+	 * Generate the node(s) for xxxx = yyyy where xxxx and yyy are non-trivial expressions
+	 *
+	 * For the terminal navigation x = yyyy.y, xxxx.x = yyyy, xxxx.x = yyyy.y a node can be shared.
+	 *
+	 * For terminal operfations xxxx = yyyy.y() etc it cannot (yet).
+	 */
+	private @Nullable Node analyzeOperationCallExp_equals(@NonNull OperationCallExp operationCallExp) {
+		OCLExpression asSource = QVTcoreUtil.getOwnedSource(operationCallExp);
+		OCLExpression asTarget = QVTcoreUtil.getOwnedArgument(operationCallExp, 0);
+		Node sourceNode;
+		Node targetNode;
+		if (asSource instanceof VariableExp) {
+			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asSource);
+			BasicMappingRegion mappingRegion = context.getMappingRegion();
+			sourceNode = mappingRegion.getNode(referredVariable);
+			if (sourceNode != null) {
+				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
+				if (expression2knownNode2 == null) {
+					expression2knownNode = expression2knownNode2 = new HashMap<>();
+				}
+				expression2knownNode2.put(asTarget, sourceNode);
+			}
+			targetNode = analyze(asTarget);
+			if (targetNode == sourceNode) {
+				return null;
+			}
+			else {
+				//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+				sourceNode = analyze(asSource);
+			}
+		}
+		else if (asTarget instanceof VariableExp) {
+			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asTarget);
+			BasicMappingRegionImpl mappingRegion = (BasicMappingRegionImpl)context.getMappingRegion();
+			targetNode = mappingRegion.getNode(referredVariable);
+			if (targetNode != null) {
+				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
+				if (expression2knownNode2 == null) {
+					expression2knownNode = expression2knownNode2 = new HashMap<>();
+				}
+				expression2knownNode2.put(asSource, targetNode);
+			}
+			sourceNode = analyze(asSource);
+			if (targetNode == sourceNode) {
+				return null;
+			}
+			else {
+				//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+				targetNode = analyze(asTarget);
+			}
+		}
+		else if (asSource instanceof NavigationCallExp) {
+			targetNode = analyze(asTarget);
+			if (!targetNode.isDataType()) {
+				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
+				if (expression2knownNode2 == null) {
+					expression2knownNode = expression2knownNode2 = new HashMap<>();
+				}
+				expression2knownNode2.put(asSource, targetNode);
+			}
+			sourceNode = analyze(asSource);
+			if (targetNode == sourceNode) {
+				return null;
+			}
+			//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+		}
+		else {
+			sourceNode = analyze(asSource);
+			if (!sourceNode.isDataType()) {
+				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
+				if (expression2knownNode2 == null) {
+					expression2knownNode = expression2knownNode2 = new HashMap<>();
+				}
+				expression2knownNode2.put(asTarget, sourceNode);
+			}
+			targetNode = analyze(asTarget);
+			if (targetNode == sourceNode) {
+				return null;
+			}
+			//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+		}
 		//		createPredicateEdge(sourceNode, "«equals»", targetNode);
 		createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, sourceNode);
 		return null;
@@ -549,15 +639,20 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		}
 		else {
 			NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
-			assert navigationEdge != null;
-			Node valueNode = navigationEdge.getEdgeTarget();
-			assert valueNode.isRealized();
-			Type type = source2targetProperty.getType();
-			Edge equalsEdge = RegionUtil.createEqualsEdge(targetNode, valueNode);
-			if (type instanceof DataType) {
-				assert equalsEdge.isRealized();			// ?? obsolete legacy check that never seems to be used
+			if (navigationEdge != null) {
+				Node valueNode = navigationEdge.getEdgeTarget();
+				assert valueNode.isRealized();
+				Type type = source2targetProperty.getType();
+				Edge equalsEdge = RegionUtil.createEqualsEdge(targetNode, valueNode);
+				if (type instanceof DataType) {
+					assert equalsEdge.isRealized();			// ?? obsolete legacy check that never seems to be used
+				}
+				return navigationEdge;
 			}
-			return navigationEdge;
+			else {
+				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
+				return navigationEdge;
+			}
 		}
 	}
 
@@ -764,15 +859,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				name = QVTcoreUtil.getName(referredProperty);
 			}
 			Type type = QVTcoreUtil.getType(referredProperty);
-			Node targetNode;
-			if (type instanceof DataType) {
-				targetNode = sourceNode.getNavigationTarget(referredProperty);
-				if (targetNode == null) {
-					targetNode = createDataTypeNode(name, sourceNode, navigationCallExp);
+			Node targetNode = expression2knownNode != null ? expression2knownNode.get(navigationCallExp) : null;
+			if (targetNode == null) {
+				if (type instanceof DataType) {
+					targetNode = sourceNode.getNavigationTarget(referredProperty);
+					if (targetNode == null) {
+						targetNode = createDataTypeNode(name, sourceNode, navigationCallExp);
+					}
 				}
-			}
-			else {
-				targetNode = createStepNode(name, navigationCallExp, sourceNode);
+				else {
+					targetNode = createStepNode(name, navigationCallExp, sourceNode);
+				}
 			}
 			getNavigationEdge(sourceNode, referredProperty, targetNode, null);
 			return targetNode;
@@ -821,8 +918,16 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			Node operationNode = createConnectedOperationNode(operationName, argNames, operationCallExp, argNodes);
 			return operationNode;
 		}
-		Node sourceNode = analyze(ownedSource);
 		OperationId operationId = referredOperation.getOperationId();
+		//
+		//	"=" is best handled as a single multi-constrained node
+		//
+		if ((operationCallExp.eContainer() instanceof Predicate)
+				&& !(ownedSource.getType() instanceof DataType)
+				&& PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyEqualsId())) {
+			return analyzeOperationCallExp_equals(operationCallExp);
+		}
+		Node sourceNode = analyze(ownedSource);
 		// FIXME "=" can identify that LHS and RHS can be coalesced
 		// FIXME "includes" may also indicate a coalesce
 		if (operationId == standardLibraryHelper.getOclAnyOclAsTypeId()) {
@@ -833,11 +938,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		}
 		else if (PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
 			return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
-		}
-		else if ((operationCallExp.eContainer() instanceof Predicate)
-				&& !(ownedSource.getType() instanceof DataType)
-				&& PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyEqualsId())) {
-			return analyzeOperationCallExp_equals(sourceNode, operationCallExp);
 		}
 		else if ((operationCallExp.eContainer() instanceof Predicate)
 				&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
