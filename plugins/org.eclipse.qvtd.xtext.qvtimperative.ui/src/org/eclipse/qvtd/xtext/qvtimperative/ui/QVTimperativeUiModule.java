@@ -10,9 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
+import org.eclipse.qvtd.xtext.qvtbase.ui.QVTbaseJavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.model.QVTimperativeDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 /**
@@ -29,5 +31,10 @@ public class QVTimperativeUiModule extends AbstractQVTimperativeUiModule
 
 	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
 		return QVTimperativeDocumentProvider.class;
+	}
+
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return QVTbaseJavaClassPathResourceForIEditorInputFactory.class;
 	}
 }

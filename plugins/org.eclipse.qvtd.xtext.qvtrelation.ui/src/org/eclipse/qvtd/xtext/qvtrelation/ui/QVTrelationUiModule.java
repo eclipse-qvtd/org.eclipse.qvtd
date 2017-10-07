@@ -10,9 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
+import org.eclipse.qvtd.xtext.qvtbase.ui.QVTbaseJavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 import org.eclipse.qvtd.xtext.qvtrelation.ui.model.QVTrelationDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 /**
@@ -29,5 +31,10 @@ public class QVTrelationUiModule extends org.eclipse.qvtd.xtext.qvtrelation.ui.A
 
 	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
 		return QVTrelationDocumentProvider.class;
+	}
+
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return QVTbaseJavaClassPathResourceForIEditorInputFactory.class;
 	}
 }

@@ -10,9 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui;
 
+import org.eclipse.qvtd.xtext.qvtbase.ui.QVTbaseJavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 import org.eclipse.qvtd.xtext.qvtcore.ui.model.QVTcoreDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 /**
@@ -29,5 +31,10 @@ public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQ
 
 	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
 		return QVTcoreDocumentProvider.class;
+	}
+
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return QVTbaseJavaClassPathResourceForIEditorInputFactory.class;
 	}
 }
