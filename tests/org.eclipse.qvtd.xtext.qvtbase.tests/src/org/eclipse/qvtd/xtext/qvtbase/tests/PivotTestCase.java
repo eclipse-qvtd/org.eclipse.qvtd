@@ -172,7 +172,7 @@ public class PivotTestCase extends TestCase
 			return;
 		}
 		StringBuilder s = new StringBuilder();
-		s.append(children.size() + " validation errors");
+		s.append(children.size() + " validation errors: " + string);
 		for (Diagnostic child : children){
 			s.append("\n\t");
 			if (child.getData().size() > 0) {

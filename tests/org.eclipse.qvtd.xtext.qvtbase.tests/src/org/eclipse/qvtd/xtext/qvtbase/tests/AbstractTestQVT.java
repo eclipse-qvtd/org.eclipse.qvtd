@@ -117,15 +117,22 @@ public abstract class AbstractTestQVT extends QVTimperative
 		this(testsBaseURI, projectName, testFolderName, "samples");
 	}
 
-	public AbstractTestQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @Nullable String testFolderName, @Nullable String samplesFolderName) {
+	public AbstractTestQVT(@NonNull URI rawTestsBaseURI, @NonNull String projectName, @Nullable String testFolderName, @Nullable String samplesFolderName) {
 		super(new QVTiEnvironmentFactory(LoadTestCase.getProjectMap(), null));
-		this.testsBaseURI = testsBaseURI.toString().endsWith("/") ? testsBaseURI :  testsBaseURI.appendSegment("");
+		this.testsBaseURI = rawTestsBaseURI.toString().endsWith("/") ? rawTestsBaseURI : rawTestsBaseURI.appendSegment("");
 		this.projectName = projectName;
 		//		this.testFolderName = testFolderName;
-		URI testFolderURI = testFolderName != null ? testsBaseURI.appendSegment(testFolderName) : testsBaseURI;
-		this.testFolderURI = testFolderURI.toString().endsWith("/") ? testFolderURI :  testFolderURI.appendSegment("");
-		URI samplesBaseUri = samplesFolderName != null ? testFolderURI.appendSegment(samplesFolderName) : testFolderURI;
-		this.samplesBaseUri = samplesBaseUri.toString().endsWith("/") ? samplesBaseUri :  samplesBaseUri.appendSegment("");
+		URI rawTestFolderURI = testFolderName != null ? URI.createURI(testFolderName).resolve(testsBaseURI) : testsBaseURI;
+		this.testFolderURI = rawTestFolderURI.toString().endsWith("/") ? rawTestFolderURI : rawTestFolderURI.appendSegment("");
+		URI samplesBaseUri = samplesFolderName != null ? URI.createURI(samplesFolderName).resolve(testFolderURI) : testFolderURI;
+		this.samplesBaseUri = samplesBaseUri.toString().endsWith("/") ? samplesBaseUri : samplesBaseUri.appendSegment("");
+	}
+
+	public void addRegisteredPackage(@NonNull String ePackageClassName) throws Exception {
+		Class<?> ePackageClass = Class.forName(ePackageClassName);
+		Field instanceField = ePackageClass.getField("eINSTANCE");
+		EPackage ePackage = (EPackage) instanceField.get(null);
+		EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 	}
 
 	protected void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
@@ -205,7 +212,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull String testFileName, @NonNull String outputName,
 			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options,
 			@NonNull String @NonNull... genModelFiles) throws Exception {
-		compilerChain = createCompilerChain(testFolderURI.appendSegment(testFileName), options);
+		URI testFileURI1 = URI.createURI(testFileName);
+		URI testFileURI2 = testFileURI1.resolve(testFolderURI);
+		compilerChain = createCompilerChain(testFileURI2, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(outputName);
 		URI txURI = asTransformation.eResource().getURI();
 		if (txURI != null) {
@@ -238,9 +247,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		ocl.getEnvironmentFactory().setSeverity(PivotTables.STR_Variable_c_c_CompatibleInitialiserType, StatusCodes.Severity.IGNORE);
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
-			LoadTestCase.assertNoResourceErrors("Normalisation failed", asResource);
-			LoadTestCase.assertNoUnresolvedProxies("Normalisation invalid", asResource);
-			LoadTestCase.assertNoValidationErrors("Normalisation invalid", asResource);
+			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
+			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
+			LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
 			//
 			//	Pivot to CS
 			//
@@ -252,9 +261,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 				ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
 				Resource asResource2 = asTransformation.eResource();
 				assert asResource2 != null;
-				LoadTestCase.assertNoResourceErrors("Load failed", asResource2);
-				LoadTestCase.assertNoUnresolvedProxies("Load invalid", asResource2);
-				LoadTestCase.assertNoValidationErrors("Load invalid", asResource2);
+				LoadTestCase.assertNoResourceErrors("Loading " + serializedURI, asResource2);
+				LoadTestCase.assertNoUnresolvedProxies("Loading " + serializedURI, asResource2);
+				LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
 			}
 			finally {
 				qvti.dispose();
@@ -278,7 +287,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 			Transformer transformer = generatedExecutor.getTransformer();
 			if (!transformer.run()) {
 				if (!suppressFailureDiagnosis) {						// FIXME BUG 511028
-					throw new Exception("Failed to execute");
+					StringBuilder s = new StringBuilder();
+					transformer.getInvocationManager().diagnoseWorkLists(s);
+					throw new Exception("Failed to execute" + s.toString());
 				}
 			}
 			return transformer;

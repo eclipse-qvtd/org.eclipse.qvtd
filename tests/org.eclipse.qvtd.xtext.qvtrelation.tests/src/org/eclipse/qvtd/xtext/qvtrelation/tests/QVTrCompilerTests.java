@@ -33,7 +33,6 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.AbstractMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -51,7 +50,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
-//import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2Reverse;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Families2PersonsNormalizer;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseNormalizer;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
 import org.junit.After;
@@ -253,43 +252,109 @@ public class QVTrCompilerTests extends LoadTestCase
 		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		URI projectURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/bin/org/eclipse/qvtd/atl", true);
-		MyQVT myQVT = new MyQVT(projectURI, "org.eclipse.qvtd.atl", "atl2qvtr", "samples");
-		myQVT.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//ATL");
-		myQVT.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//OCL");
-		myQVT.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//PrimitiveTypes");
-		myQVT.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
-		myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
-		myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
-		myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+		MyQVT myQVT1 = new MyQVT(projectURI, "org.eclipse.qvtd.atl", "atl2qvtr", "samples");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//ATL");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//OCL");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//PrimitiveTypes");
+		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
+		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+		Class<? extends Transformer> txClass1 = null;
 		try {
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("atl2qvtr", "ATL2QVTr.qvtr", "qvtr",
-				"http://www.eclipse.org/qvtd/xtext/atl/tests/atl2qvtr/ATL2QVTr", false/*,
-				"platform:/resource/org.eclipse.ocl.pivot/model/Pivot.genmodel",
-				"platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel",
-				"platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel",
-					"platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel"*/);
-			//			Class<? extends Transformer> txClass = MiToSiSimpleWithKeys.class;
+			txClass1 = myQVT1.buildTransformation("atl2qvtr", "ATL2QVTr.qvtr", "qvtr",
+				"http://www.eclipse.org/qvtd/xtext/atl/tests/atl2qvtr/ATL2QVTr", false);
+			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
-			//			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
-			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
-			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			//			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 8);
-			myQVT.createGeneratedExecutor(txClass);
-			//			myQVT.getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());	// FIXME wrong ResourceSet
-			//			myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT.loadInput("atl", "Families2Persons.atl.xmi");
-			myQVT.executeTransformation();
-			myQVT.saveOutput("qvtr", "Families2Persons_CG.qvtras", "Families2Persons_expected.qvtras", null);
-			//
-			//	        myQVT.createGeneratedExecutor(txClass);
-			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
-			//	    	myQVT.executeTransformation();
-			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
 		}
 		finally {
-			myQVT.dispose();
+			myQVT1.dispose();
+		}
+		MyQVT myQVT2 = new MyQVT(TESTS_BASE_URI, PROJECT_NAME, "families2persons", null);
+		try {
+			myQVT2.createGeneratedExecutor(txClass1);
+			//			myQVT1.getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());	// FIXME wrong ResourceSet
+			//			myQVT1.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+			myQVT2.loadInput("atl", "Families2Persons.atl.xmi");
+			myQVT2.executeTransformation();
+			myQVT2.saveOutput("qvtr", "Families2Persons_CG.qvtras", "Families2Persons_expected.qvtras", null);
+		}
+		finally {
+			myQVT2.dispose();
+		}
+		MyQVT myQVT3 = new MyQVT("families2persons");
+		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Families.FamiliesPackage");
+		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Persons.PersonsPackage");
+		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.trace_Families2Persons.trace_Families2PersonsPackage");
+		boolean exceptionThrown = true;
+		try {
+			Class<? extends Transformer> txClass = myQVT3.buildTransformation("families2persons",
+				"Families2Persons_CG.qvtras", "Persons",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/families2persons/Families2Persons", false);//,
+			myQVT3.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			//
+			myQVT3.createGeneratedExecutor(txClass);
+			myQVT3.loadInput("Families", "Families.xmi");
+			myQVT3.executeTransformation();
+			myQVT3.saveOutput("Persons", "Persons_CG.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+			exceptionThrown = false;
+		}
+		finally {
+			myQVT3.dispose();
+			myQVT3.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Families.FamiliesPackage", exceptionThrown);
+			myQVT3.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Persons.PersonsPackage", exceptionThrown);
+			myQVT3.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.trace_Families2Persons.trace_Families2PersonsPackage", exceptionThrown);
 		}
 	}
+
+	@Test
+	public void testQVTrCompiler_Families2Persons_CG() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
+		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
+		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
+		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
+		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		boolean exceptionThrown = true;
+		MyQVT myQVT3 = new MyQVT("families2persons");
+		try {
+			Class<? extends Transformer> txClass = myQVT3.buildTransformation("families2persons",
+				"Families2Persons_expected.qvtras", "Persons",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/families2persons/Families2Persons", false);//,
+			//			Class<? extends Transformer> txClass = Families2Persons.class;
+			myQVT3.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			//
+			myQVT3.createGeneratedExecutor(txClass);
+			myQVT3.loadInput("Families", "Families.xmi");
+			myQVT3.executeTransformation();
+			myQVT3.saveOutput("Persons", "Persons_CG.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+			exceptionThrown = false;
+		}
+		finally {
+			myQVT3.dispose();
+			myQVT3.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Families.FamiliesPackage", exceptionThrown);
+			myQVT3.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.Persons.PersonsPackage", exceptionThrown);
+			myQVT3.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons.trace_Families2Persons.trace_Families2PersonsPackage", exceptionThrown);
+		}
+	}
+
 	/*	@Test
     public void testQVTrCompiler_ClassModelToClassModel() throws Exception {
 //		AbstractTransformer.EXCEPTIONS.setState(true);
