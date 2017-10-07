@@ -21,6 +21,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -34,9 +38,157 @@ import com.google.common.collect.Sets;
 
 public class RegionHelper
 {
-	public static void initHeadNodes(@NonNull MappingRegion mappingRegion) {
+	public static void initHeadNodes(@NonNull MappingRegion mappingRegion, @Nullable List<@NonNull Node> preferredHeadNodes) {
 		RegionHelper regionHelper = new RegionHelper(mappingRegion);
-		regionHelper.initHeadNodes();
+		regionHelper.initHeadNodes(preferredHeadNodes);
+	}
+
+	public class HeadNodeGroup
+	{
+		private final @NonNull List<@NonNull Node> headNodes;
+		private Set<@NonNull Node> missingNodes = null;
+		private List<@NonNull Node> toOneList = null;
+		private Set<@NonNull Node> toOneSet = null;
+		private List<@NonNull Node> toManyList = null;
+		private Set<@NonNull Node> toManySet = null;
+
+		public HeadNodeGroup(@NonNull List<@NonNull Node> headNodes) {
+			this.headNodes = headNodes;
+		}
+
+		public @NonNull Iterable<@NonNull Node> getHeadNodes() {
+			return headNodes;
+		}
+
+		public @NonNull Node getPreferredHeadNode() {
+			return headNodes.get(0);
+		}
+
+		private void computeReachables() {
+			missingNodes = new HashSet<>();
+			toOneList = new ArrayList<>(headNodes);
+			toOneSet = new HashSet<>(headNodes);
+			toManyList = new ArrayList<>();
+			toManySet = new HashSet<>();
+			int iToOne = 0;
+			int iToMany = 0;
+			while ((iToOne < toOneList.size()) || (iToMany < toManyList.size())) {
+				while (iToOne < toOneList.size()) {
+					Node toOneNode = toOneList.get(iToOne++);
+					computeReachable(toOneNode);
+				}
+				if (iToMany < toManyList.size()) {
+					Node toManyNode = toManyList.get(iToMany++);
+					computeReachable(toManyNode);
+				}
+			}
+		}
+
+		private void computeReachable(@NonNull Node node) {
+			for (@NonNull Edge outgoingEdge : RegionUtil.getOutgoingEdges(node)) {
+				if (outgoingEdge.isOld()) {
+					Type sourceType = null;
+					Node targetNode = RegionUtil.getTargetNode(outgoingEdge);
+					if (outgoingEdge.isNavigation()) {
+						Property targetProperty = RegionUtil.getProperty((NavigableEdge) outgoingEdge);
+						sourceType = targetProperty.getType();
+					}
+					else if (outgoingEdge.isPredicate()) {
+						// sourceType = null;			// «includes» is not reachable
+					}
+					else if (outgoingEdge.isComputation() && !toOneSet.contains(targetNode) && !toManySet.contains(targetNode)) {
+						boolean reachable = true;
+						for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
+							if ((incomingEdge != outgoingEdge) && incomingEdge.isComputation()) {
+								Node sourceNode = RegionUtil.getSourceNode(incomingEdge);
+								if (!sourceNode.isConstant() && !toOneSet.contains(sourceNode) && !toManySet.contains(sourceNode)) {
+									missingNodes.add(sourceNode);
+									reachable = false;
+								}
+							}
+						}
+						if (reachable) {
+							// assert targetNode.isOperation() || targetNode.isIterator();
+							Iterable<@NonNull TypedElement> typedElements = targetNode.getTypedElements();
+							if (!Iterables.isEmpty(typedElements)) {
+								TypedElement typedElement = typedElements.iterator().next();
+								sourceType = typedElement.getType();
+							}
+						}
+					}
+					if (sourceType != null) {
+						Type nodeType = null;
+						Iterable<@NonNull TypedElement> typedElements = targetNode.getTypedElements();
+						if (!Iterables.isEmpty(typedElements)) {
+							TypedElement typedElement = typedElements.iterator().next();
+							nodeType = typedElement.getType();
+						}
+						if ((sourceType instanceof CollectionType) || (nodeType instanceof CollectionType)) {
+							if (!toOneSet.contains(targetNode) && toManySet.add(targetNode)) {
+								toManyList.add(targetNode);
+								missingNodes.remove(targetNode);
+							}
+						}
+						else {
+							if (toOneSet.add(targetNode)) {
+								toOneList.add(targetNode);
+								missingNodes.remove(targetNode);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * Return true if all of the headNodes of this HeadNodeGroup are reachable as to-one nodess of thatHeadNodeGroup.
+		 */
+		public boolean isDeriveableFrom(@NonNull HeadNodeGroup thatHeadNodeGroup) {
+			return thatHeadNodeGroup.getToOneList().containsAll(headNodes);
+		}
+
+		private @NonNull List<@NonNull Node> getToOneList() {
+			List<@NonNull Node> toOneList2 = toOneList;
+			if (toOneList2 == null) {
+				computeReachables();
+				toOneList2 = toOneList;
+				assert toOneList2 != null;
+			}
+			return toOneList2;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder s = new StringBuilder();
+			s.append(mappingRegion);
+			s.append("\n\theads:");
+			for (@NonNull Node node : headNodes) {
+				s.append("\n\t\t");
+				s.append(node);
+			}
+			if (toOneList != null) {
+				s.append("\n\tto-ones:");
+				for (@NonNull Node node : toOneList) {
+					s.append("\n\t\t");
+					s.append(node);
+				}
+			}
+			if (toManyList != null) {
+				s.append("\n\tto-manys:");
+				for (@NonNull Node node : toManyList) {
+					s.append("\n\t\t");
+					s.append(node);
+				}
+			}
+			if (missingNodes != null) {
+				s.append("\n\tmissings:");
+				for (@NonNull Node node : missingNodes) {
+					s.append("\n\t\t");
+					s.append(node);
+				}
+			}
+			return s.toString();
+		}
 	}
 
 	/**
@@ -45,14 +197,43 @@ public class RegionHelper
 	protected static class HeadComparator implements Comparator<@NonNull Node>
 	{
 		private final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure;
+		private final @Nullable List<@NonNull Node> preferredHeadNodes;
 		private @Nullable Map<@NonNull Node, @NonNull Integer> node2implicity = null;
 
-		public HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure) {
+		public HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure, @Nullable List<@NonNull Node> preferredHeadNodes) {
 			this.targetFromSourceClosure = targetFromSourceClosure;
+			this.preferredHeadNodes = preferredHeadNodes;
 		}
 
 		@Override
 		public int compare(@NonNull Node o1, @NonNull Node o2) {
+			//
+			//	DataTypes last
+			//
+			boolean d1 = o1.isDataType();
+			boolean d2 = o2.isDataType();
+			if (d1 != d2) {
+				return d1 ? 1 : -1;
+			}
+			//
+			//	Preferred heads in preference order.
+			//
+			List<@NonNull Node> preferredHeadNodes2 = preferredHeadNodes;
+			if (preferredHeadNodes2 != null) {
+				int i1 = preferredHeadNodes2.indexOf(o1);
+				int i2 = preferredHeadNodes2.indexOf(o2);
+				if (i1 != i2) {
+					if (i1 < 0) {
+						return 1;
+					}
+					else if (i2 < 0) {
+						return -1;
+					}
+					else {
+						return i1 - i2;
+					}
+				}
+			}
 			//
 			//	Explicit head first
 			//
@@ -192,29 +373,6 @@ public class RegionHelper
 	}
 
 	/**
-	 * Gather all the source pattern Nodes from which a unique targetNode may be computed.
-	 * Return false if a unique computation is not possible.
-	 */
-	private boolean computeComputationSources(@NonNull Node targetNode, @NonNull Set<@NonNull Node> sourceNodes) {
-		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
-			if (incomingEdge.isComputation()) {
-				if (incomingEdge.isPredicate()) {		// Ignore multi-valued <<includes>>
-					return false;
-				}
-				Node sourceNode = incomingEdge.getEdgeSource();
-				if (sourceNodes.add(sourceNode)) {
-					if (!sourceNode.isPattern()) {
-						if (!computeComputationSources(sourceNode, sourceNodes)) {
-							return false;
-						}
-					}
-				}
-			}
-		}
-		return true;
-	}
-
-	/**
 	 * Any node with an edge to an unconditional node that is not itself unconditional must be conditional.
 	 */
 	private @NonNull Set<@NonNull Node> computeConditionalNodes(@NonNull Set<@NonNull Node> unconditionalNodes) {
@@ -246,33 +404,7 @@ public class RegionHelper
 		return conditionalNodes;
 	}
 
-	/**
-	 * Any dependency node transitively connected to a deopendency head contributes to the dependency nodes.
-	 *
-	private @NonNull Set<@NonNull Node> computeDependencyNodes(@NonNull Iterable <@NonNull Node> headNodes) {
-		Set<@NonNull Node> dependencyNodes = new HashSet<>();
-		Iterable<@NonNull Node> moreNodes = headNodes;
-		while (!Iterables.isEmpty(moreNodes)) {
-			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
-			for (@NonNull Node node : moreNodes) {
-				if (node.isDependency() && dependencyNodes.add(node)) {
-					for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-						Node targetNode = edge.getTarget();
-						moreMoreNodes.add(targetNode);
-					}
-				}
-			}
-			if (moreMoreNodes.size() <= 0) {
-				break;
-			}
-			moreNodes = moreMoreNodes;
-		}
-		this.dependencyNodes = new ArrayList<>(dependencyNodes);
-		Collections.sort(this.dependencyNodes, NameUtil.NAMEABLE_COMPARATOR);
-		return dependencyNodes;
-	} */
-
-	public @NonNull List<@NonNull Node> computeHeadNodes(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources) {
+	public @NonNull List<@NonNull Node> computeHeadNodes(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources, @Nullable List<@NonNull Node> preferredHeadNodes) {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourcesClosure = targetFromSources;
 		Iterable <@NonNull Node> navigableNodes = targetFromSourcesClosure.keySet();
 		//
@@ -315,12 +447,12 @@ public class RegionHelper
 		//
 		List<@NonNull Node> headLessNodes = new ArrayList<>();
 		Iterables.addAll(headLessNodes, targetFromSourcesClosure.keySet());
-		Collections.sort(headLessNodes, new HeadComparator(targetFromSourcesClosure));
+		Collections.sort(headLessNodes, new HeadComparator(targetFromSourcesClosure, preferredHeadNodes));
 		//
 		//	Loop to identify the least reachable residual node and then remove all nodes reachable from this new head.
 		//	Removed nodes from which the new head is reachable are accumulated as a mutually reachable head group.
 		//
-		List<@NonNull List<@NonNull Node>> headNodeGroups = new ArrayList<>();
+		List<@NonNull HeadNodeGroup> headNodeGroups = new ArrayList<>();
 		Set<@NonNull Node> reachableNodes = new HashSet<>();
 		while (!headLessNodes.isEmpty()) {
 			Node headNode = headLessNodes.remove(0);
@@ -342,41 +474,20 @@ public class RegionHelper
 					}
 				}
 			}
-			headNodeGroups.add(headNodeGroup);
+			headNodeGroups.add(new HeadNodeGroup(headNodeGroup));
 		}
 		//
 		//	Prune any computationally derived heads
 		//
 		if (headNodeGroups.size() > 1) {
 			for (int iGroup = headNodeGroups.size()-1; iGroup >= 0; --iGroup) {		// Reverse index to allow removal
-				List<@NonNull Node> headNodeGroup = headNodeGroups.get(iGroup);
-				Set<@NonNull Node> computationalSources = new HashSet<>();
-				for (@NonNull Node headNode : headNodeGroup) {
-					if (!computeComputationSources(headNode, computationalSources)) {
-						computationalSources.clear();
-						break;
-					}
-				}
-				if (computationalSources.size() > 0) {
-					Set<@NonNull Node> otherReachables = new HashSet<>();
-					for (@NonNull List<@NonNull Node> otherHeadNodeGroup : headNodeGroups) {
-						if (otherHeadNodeGroup != headNodeGroup) {
-							for (@NonNull Node otherHeadNode : otherHeadNodeGroup) {
-								Set<@NonNull Node> otherTargets = source2targetsClosure.get(otherHeadNode);
-								assert otherTargets != null;
-								otherReachables.addAll(otherTargets);
-							}
-						}
-					}
-					boolean allReachable = true;
-					for (@NonNull Node computationalSource : computationalSources) {
-						if (computationalSource.isPattern() && !otherReachables.contains(computationalSource)) {
-							allReachable = false;
+				HeadNodeGroup headNodeGroup = headNodeGroups.get(iGroup);
+				for (@NonNull HeadNodeGroup otherHeadNodeGroup : headNodeGroups) {
+					if (otherHeadNodeGroup != headNodeGroup) {
+						if (headNodeGroup.isDeriveableFrom(otherHeadNodeGroup)) {
+							headNodeGroups.remove(iGroup);
 							break;
 						}
-					}
-					if (allReachable) {
-						headNodeGroups.remove(iGroup);
 					}
 				}
 			}
@@ -385,8 +496,8 @@ public class RegionHelper
 		//	Pick the first element of each headNodeGroup as a headNode.
 		//
 		List<@NonNull Node> headNodes = new ArrayList<>();
-		for (@NonNull List<@NonNull Node> headNodeGroup : headNodeGroups) {
-			Node headNode = headNodeGroup.get(0);
+		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
+			Node headNode = headNodeGroup.getPreferredHeadNode();
 			assert !headNodes.contains(headNode);
 			headNodes.add(headNode);
 		}
@@ -460,7 +571,7 @@ public class RegionHelper
 			for (@NonNull Edge navigationEdge : sourceNode.getNavigationEdges()) {
 				if (!navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getEdgeTarget();
-					if (targetNode.isMatched() && targetNode.isClass() && !targetNode.isExplicitNull()) {
+					if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isExplicitNull()) {
 						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
 						if (sourceClosure != null) {
 							sourceClosure.add(sourceNode);
@@ -592,7 +703,7 @@ public class RegionHelper
 		} */
 	}
 
-	public @NonNull List<@NonNull Node> initHeadNodes() {
+	public @NonNull List<@NonNull Node> initHeadNodes(@Nullable List<@NonNull Node> preferredHeadNodes) {
 		//
 		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
 		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
@@ -606,7 +717,7 @@ public class RegionHelper
 			}
 		}
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = computeTargetFromSources(navigableNodes);
-		List<@NonNull Node> headNodes = computeHeadNodes(targetFromSources);
+		List<@NonNull Node> headNodes = computeHeadNodes(targetFromSources, preferredHeadNodes);
 		//
 		//	Check head node consistency
 		//

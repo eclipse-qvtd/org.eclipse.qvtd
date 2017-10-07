@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -432,7 +433,7 @@ public class MappingAnalysis implements Nameable
 		return null;
 	}
 
-	public @NonNull MappingRegion getMappingRegion() {
+	public @NonNull BasicMappingRegion getMappingRegion() {
 		return mappingRegion;
 	}
 
@@ -523,6 +524,7 @@ public class MappingAnalysis implements Nameable
 					DomainUsage domainUsage = RegionUtil.getScheduleManager(mappingRegion).getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
+						assert variable instanceof RealizedVariable;
 						node = RegionUtil.createRealizedStepNode(mappingRegion, variable);
 					}
 					else {
@@ -577,7 +579,7 @@ public class MappingAnalysis implements Nameable
 		analyzeContainments();
 		//
 		RegionHelper regionHelper = new RegionHelper(mappingRegion);
-		List<@NonNull Node> headNodes = regionHelper.initHeadNodes();
+		List<@NonNull Node> headNodes = regionHelper.initHeadNodes(null);
 		regionHelper.computeUtilities(headNodes);
 	}
 
