@@ -107,10 +107,11 @@ public class TraceClassAnalysis
 		for (@NonNull MappingPartitioner producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
-			Node traceNode = producer.getTraceNode();
-			for (@NonNull NavigableEdge edge : traceNode.getRealizedNavigationEdges()) {
-				if (!edge.getEdgeTarget().isRealized()) {
-					property2edge.put(RegionUtil.getProperty(edge), edge);
+			for (@NonNull Node traceNode : producer.getTraceNodes()) {
+				for (@NonNull NavigableEdge edge : traceNode.getRealizedNavigationEdges()) {
+					if (!edge.getEdgeTarget().isRealized()) {
+						property2edge.put(RegionUtil.getProperty(edge), edge);
+					}
 				}
 			}
 			Set<@NonNull Property> partionerProperties = property2edge.keySet();

@@ -233,8 +233,7 @@ public class TransformationPartitioner
 		//
 		Set<@NonNull TraceClassAnalysis> acylicAnalysis = new HashSet<>();
 		for (@NonNull MappingPartitioner acyclicProducer : acyclicProducers) {
-			Node traceNode = acyclicProducer.basicGetTraceNode();
-			if (traceNode != null) {
+			for (@NonNull Node traceNode : acyclicProducer.getTraceNodes()) {
 				CompleteClass traceClass = traceNode.getCompleteClass();
 				TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(traceClass);
 				assert middleAnalysis != null;
@@ -464,7 +463,7 @@ public class TransformationPartitioner
 		Set<@NonNull CycleAnalysis> partitionedCycles = new HashSet<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
 			CycleAnalysis cycleAnalysis = getCycleAnalysis(mappingPartitioner);
-			if (mappingPartitioner.basicGetTraceNode() == null) {
+			if (Iterables.isEmpty(mappingPartitioner.getTraceNodes())) {
 				partitionedRegions.add(mappingPartitioner.getRegion());
 			}
 			else if (cycleAnalysis == null) {

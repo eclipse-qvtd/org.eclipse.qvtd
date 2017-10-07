@@ -35,11 +35,11 @@ class SpeculatingPartition extends AbstractPartition
 	public SpeculatingPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
 		//
-		//	The realized middle (trace) nodes become speculated head nodes.
+		//	The realized middle (trace) nodes become speculated head nodes and their already realized edge ends populate tracedInputNodes.
 		//
-		resolveTraceNode();
+		resolveTraceNodes();
 		//
-		//	The predicated middle nodes become speculated guard nodes and all preceding
+		//	The cyclic predicated middle nodes become speculated guard nodes and all preceding
 		//	navigations are retained as is.
 		//
 		resolvePredicatedMiddleNodes();
@@ -47,10 +47,6 @@ class SpeculatingPartition extends AbstractPartition
 		//	The predicated output nodes and all preceding navigations are retained as is.
 		//
 		resolvePredicatedOutputNodes();
-		//
-		//	The realized output nodes are realized as is.
-		//
-		//		resolveRealizedOutputNodes();
 		//
 		//	The ends of all matched predicated edges not already matched in the Speculation partition are added as is.
 		//
@@ -60,79 +56,48 @@ class SpeculatingPartition extends AbstractPartition
 		//
 		resolveRealizedEdges();
 		//
-		//	Perform any required computations.
+		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveComputations();
+		resolveTrueNodes();
 		//
-		//	Perform any outstanding predicates.
+		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePredicates();
+		resolvePrecedingNodes();
 		//
-		//	Ensure that re-used trace classes do not lead to ambiguous mapings.
+		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
 		resolveDisambiguations();
 		//
 		//	Join up the edges.
 		//
-		resolveEdgeRoles();
+		resolveEdges();
 	}
 
-	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull Role targetNodeRole) {
-		if (!hasNode(targetNode)) {
-			addNode(targetNode, targetNodeRole);
-			if (!tracedInputNodes.contains(targetNode)) {
-				boolean hasPredecessor = false;
-				for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
-					hasPredecessor = true;
-					gatherSourceNavigations(sourceNode, RegionUtil.getNodeRole(sourceNode));
-				}
-				if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
-					for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
-						if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
-							Node nonUnitSourceNode = edge.getEdgeTarget();
-							gatherSourceNavigations(nonUnitSourceNode, RegionUtil.getNodeRole(nonUnitSourceNode));
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@Override
-	protected boolean isComputable(@NonNull Set<@NonNull Node> sourceNodes, @NonNull Edge edge) {
-		Node sourceNode = edge.getEdgeSource();
-		if (tracedInputNodes.contains(sourceNode)) {
-			sourceNodes.add(sourceNode);
+	private boolean isDownstreamFromCorrolary(@NonNull Node node) {
+		if (isCorrolary(node)) {
 			return true;
 		}
-		return super.isComputable(sourceNodes, edge);
-	}
-
-	/**
-	 * Return true if node is a corrolary of some mapping.
-	 */
-	private boolean isCorrolary(@NonNull Node node) {
-		if (node.isPredicated()) {
+		if (node.isOperation()) {
+			boolean allReachable = true;
 			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-				if (edge.isPredicated() && edge.isNavigation()) {
-					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
-					if (corrolaryOf != null) {
-						return true;
+				if (edge.isComputation()) {
+					Node sourceNode = RegionUtil.getSourceNode(edge);
+					if (isDownstreamFromCorrolary(sourceNode)) {
+						allReachable = false;
+						break;
 					}
 				}
 			}
-		}
-		else if (node.isRealized()) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-				if (edge.isRealized() && edge.isNavigation()) {
-					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
-					if (corrolaryOf != null) {
-						return true;
-					}
-				}
+			if (allReachable) {
+				return false;
 			}
 		}
-		return false;
+		for (@NonNull Node precedingNode : getPredecessors(node)) {
+			if (!isDownstreamFromCorrolary(precedingNode)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -149,32 +114,6 @@ class SpeculatingPartition extends AbstractPartition
 			}
 		}
 		return false;
-	}
-
-	@Override
-	protected boolean resolveComputations(@NonNull Node targetNode) {
-		if (tracedInputNodes.contains(targetNode)) {
-			return true;
-		}
-		//		return super.resolveComputations(targetNode);
-		//	}
-		//	protected boolean resolveComputations(@NonNull Node targetNode) {
-		boolean gotIt = false;
-		for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
-			if (incomingEdge.isComputation() || (incomingEdge.isNavigation() && incomingEdge.isOld())) {
-				Set<@NonNull Node> sourceNodes = new HashSet<>();
-				if (isComputable(sourceNodes, incomingEdge)) {
-					gotIt = true;
-					for (@NonNull Node sourceNode : sourceNodes) {
-						if (!hasNode(sourceNode)) {
-							//							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
-							gatherSourceNavigations(sourceNode, RegionUtil.getNodeRole(sourceNode));
-						}
-					}
-				}
-			}
-		}
-		return gotIt;
 	}
 
 	@Override
@@ -210,30 +149,22 @@ class SpeculatingPartition extends AbstractPartition
 		}
 	}
 
-	@Override
-	protected void resolveNavigations(@NonNull Node node) {
-		if (!node.isConstant() && !node.isLoaded()) {
-			super.resolveNavigations(node);
-		}
-	}
-
 	protected void resolvePredicatedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
-			if (node.isMatched() && partitioner.isCyclic(node)) {
+			if (!hasNode(node) && node.isMatched() && partitioner.isCyclic(node)) {
 				Role nodeRole = RegionUtil.getNodeRole(node);
 				if (node.isPattern() && node.isClass()) {
 					nodeRole = RegionUtil.asSpeculated(nodeRole);
 				}
-				gatherSourceNavigations(node, RegionUtil.asSpeculated(nodeRole));
+				addNode(node, RegionUtil.asSpeculated(nodeRole));
 			}
 		}
 	}
 
 	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
-			if (!isCorrolary(node)) {
-				Role nodeRole = RegionUtil.getNodeRole(node);
-				gatherSourceNavigations(node, nodeRole);
+			if (!hasNode(node) && !isCorrolary(node) && !isDownstreamFromCorrolary(node)) {
+				addNode(node, RegionUtil.getNodeRole(node));
 			}
 		}
 	}
@@ -257,33 +188,21 @@ class SpeculatingPartition extends AbstractPartition
 		}
 	}
 
-	/*	protected void resolveRealizedOutputNodes() {
-		for (@NonNull Node node : partitioner.getRealizedOutputNodes()) {
-			if (isCorrolary(node)) {
-				gatherSourceNavigations(node, RegionUtil.getNodeRole(node));
-				for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
-					if (navigationEdge.isRealized()) {
-						Node targetNode = navigationEdge.getEdgeTarget();
-						if (!targetNode.isPredicated() && !targetNode.isRealized()) {
-							gatherSourceNavigations(targetNode, RegionUtil.getNodeRole(targetNode));
-						}
-					}
+	protected void resolveTraceNodes() {
+		Iterable<@NonNull Node> traceNodes = partitioner.getTraceNodes();
+		for (@NonNull Node traceNode : traceNodes) {
+			addNode(traceNode, Role.SPECULATED);
+		}
+		for (@NonNull Node traceNode : traceNodes) {
+			for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+				if (partitioner.hasRealizedEdge(edge)) {
+					tracedInputNodes.add(edge.getEdgeTarget());
 				}
 			}
-		}
-	} */
-
-	protected void resolveTraceNode() {
-		Node traceNode = partitioner.getTraceNode();
-		addNode(traceNode, Role.SPECULATED);
-		for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
-			if (partitioner.hasRealizedEdge(edge)) {
-				tracedInputNodes.add(edge.getEdgeTarget());
+			Node statusNode = partitioner.getStatusNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (statusNode != null) {
+				addNode(statusNode, Role.REALIZED);
 			}
-		}
-		Node statusNode = partitioner.basicGetStatusNode();		// FIXME only optional because trace property can be missing
-		if (statusNode != null) {
-			addNode(statusNode, Role.REALIZED);
 		}
 	}
 }

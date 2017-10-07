@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Collections;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
@@ -31,44 +29,44 @@ class RealizedPartition extends AbstractPartition
 	public RealizedPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
 		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
-		Node traceNode = partitioner.getTraceNode();
-		Iterable<@NonNull Node> realizedOutputNodes = partitioner.getRealizedOutputNodes();
 		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//
 		//	The ends of loaded navigation edges are retained as is for the predicate.
 		//
 		addLoadedNavigationEdgeSourceAndTargetNodes();
 		//
-		//	The realized nodes are realized as is.
+		//	The trace nodes are realized as is.
 		//
-		for (@NonNull Node node : Iterables.concat(Collections.singletonList(traceNode), realizedOutputNodes)) {
-			gatherSourceNavigations(node, RegionUtil.getNodeRole(node));
-			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
-				if (navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getEdgeTarget();
-					if (!targetNode.isPredicated() && !targetNode.isRealized()) {
-						gatherSourceNavigations(targetNode, RegionUtil.getNodeRole(targetNode));
-					}
-				}
+		for (@NonNull Node node : partitioner.getTraceNodes()) {
+			if (!hasNode(node)) {
+				addNode(node, RegionUtil.getNodeRole(node));
 			}
 		}
 		//
-		//	Perform any required computations.
+		//	The realized nodes are realized as is.
 		//
-		resolveComputations();
+		for (@NonNull Node node : partitioner.getRealizedOutputNodes()) {
+			if (!hasNode(node)) {
+				addNode(node, RegionUtil.getNodeRole(node));
+			}
+		}
 		//
-		//	Perform any outstanding predicates.
+		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolvePredicates();
+		resolveTrueNodes();
+		//
+		//	Ensure that the predecessors of each node are included in the partition.
+		//
+		resolvePrecedingNodes();
 		//
 		//	Join up the edges.
 		//
-		resolveEdgeRoles();
+		resolveEdges();
 	}
 
 	/**
 	 * Add the ends of all the loaded edges. This gathers the loaded PatternNodeRoles and also the
-	 * odd-valls such as Null nodes.
+	 * odd-balls such as Null nodes.
 	 */
 	protected void addLoadedNavigationEdgeSourceAndTargetNodes() {
 		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
@@ -85,13 +83,13 @@ class RealizedPartition extends AbstractPartition
 		}
 	}
 
-	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull Role targetNodeRole) {
-		if (!hasNode(targetNode)) {
-			addNode(targetNode, targetNodeRole);
-			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
-				gatherSourceNavigations(sourceNode, RegionUtil.getNodeRole(sourceNode));
-			}
-		}
+	/**
+	 * Return a prioritized hint for the choice of head nodes.
+	 * The override implementation returns null for no hint.
+	 */
+	@Override
+	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
+		return null;
 	}
 
 	@Override

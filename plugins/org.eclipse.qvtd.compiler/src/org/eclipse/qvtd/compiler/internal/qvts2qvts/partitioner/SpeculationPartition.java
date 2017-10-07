@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -20,47 +22,55 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
+import com.google.common.collect.Sets;
+
 /**
  * The SpeculationPartition identifies the nodes and edges required in a speculation micro-mapping
  * which creates the speculated trace with predicates solely on constant inputs, loaded inputs
  * and acyclic predicated nodes.
  */
 //
-// FIXME if multiple heads are predicated, we cannot wait for all of them before specluating. Speculation
-//	may need to cobsider just loaded nodes.
+// FIXME if multiple heads are predicated, we cannot wait for all of them before speculating. Speculation
+//	may need to consider just loaded nodes.
 //
 class SpeculationPartition extends AbstractPartition
 {
+	private final @NonNull Set<@NonNull Node> headNodes;
+
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
-		@SuppressWarnings("unused") String name = region.getName();
+		this.headNodes = Sets.newHashSet(RegionUtil.getHeadNodes(region));
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
 		//
-		addNode(partitioner.getTraceNode(), Role.SPECULATION);
+		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
+			addNode(traceNode, Role.SPECULATION);
+		}
 		//
 		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
 		//	NB. Unreachable loaded nodes are effectively predicates and so are deferred.
 		//
-		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
-			addReachableOldAcyclicNodes(node);
+		for (@NonNull Node node : headNodes) {
+			if (!node.isTrue()) {
+				addReachableOldAcyclicNodes(node);
+			}
 		}
 		//
-		//	Perform any required computations.
+		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveComputations();
+		resolveTrueNodes();
 		//
-		//	Perform any outstanding predicates.
+		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePredicates();
+		resolvePrecedingNodes();
 		//
-		//	Ensure that re-used trace classes do not lead to ambiguous mapings.
+		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
 		resolveDisambiguations();
 		//
 		//	Join up the edges.
 		//
-		resolveEdgeRoles();
+		resolveEdges();
 	}
 
 	/**
@@ -77,25 +87,47 @@ class SpeculationPartition extends AbstractPartition
 		}
 	}
 
+	/**
+	 * Return a prioritized hint for the choice of head nodes.
+	 * The override implementation returns null for no hint.
+	 */
 	@Override
-	protected boolean isComputable(@NonNull Set<@NonNull Node> sourceNodes, @NonNull Edge edge) {
-		if (edge.isPredicated()) {
-			return false;
-		}
-		if (edge.getEdgeTarget().isRealized()) {
-			return false;
-		}
-		return super.isComputable(sourceNodes, edge);
+	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
+		return null;
 	}
 
 	@Override
-	protected boolean resolveComputations(@NonNull Node targetNode) {
-		if (targetNode.isConstant() || targetNode.isLoaded()) {
-			return super.resolveComputations(targetNode);
+	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
+		List<@NonNull Node> rootNodes = new ArrayList<>();
+		for (@NonNull Node headNode : RegionUtil.getHeadNodes(region)) {
+			if (!headNode.isTrue()) {
+				rootNodes.add(headNode);
+			}
 		}
-		else {
-			return false;
+		for (@NonNull Node leafConstant : partitioner.getLeafConstantNodes()) {
+			//			if (!leafConstant.isTrue()) {
+			rootNodes.add(leafConstant);
+			//			}
 		}
+		return rootNodes;
+	}
+
+	/**
+	 * Return true if edge is available for use by this partition.
+	 * The override implementation returns true for all constant and loaded edges.
+	 */
+	@Override
+	protected boolean isAvailable(@NonNull Edge edge) {
+		return edge.isConstant() || edge.isLoaded();
+	}
+
+	/**
+	 * Return true if node is available for use by this partition.
+	 * The override implementation returns true for all constant and loaded nodes.
+	 */
+	@Override
+	protected boolean isAvailable(@NonNull Node node) {
+		return node.isConstant() || node.isLoaded();
 	}
 
 	@Override

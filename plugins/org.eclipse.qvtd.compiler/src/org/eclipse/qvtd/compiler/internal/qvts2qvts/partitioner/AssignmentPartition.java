@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
@@ -28,32 +27,52 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class AssignmentPartition extends AbstractPartition
 {
-	protected final @NonNull Edge realizedEdge;
+	//	protected final @NonNull Edge realizedEdge;
 
 	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull Edge realizedEdge) {
 		super(partitioner);
-		this.realizedEdge = realizedEdge;
+		//		this.realizedEdge = realizedEdge;
 		//
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
-		addNode(partitioner.getTraceNode(), Role.PREDICATED/*.asMatched()*/);
-		Node successNode = partitioner.basicGetStatusNode();		// FIXME only optional because trace property can be missing
-		if (successNode != null) {
-			addNode(successNode, Role.PREDICATED);
+		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
+			addNode(traceNode, Role.PREDICATED);
+			Node statusNode = partitioner.getStatusNode(traceNode);
+			if (statusNode != null) {		// status property is not mandatory
+				addNode(statusNode, Role.PREDICATED);
+			}
 		}
 		//
-		//	The nodes that support identification of the realized edge are used as is.
+		//	The ends of the realized edge are used as is except that REALIZED elsewhere nodes are PREDICATED here.
 		//
-		gatherSourceNavigations(realizedEdge.getEdgeSource());
-		gatherSourceNavigations(realizedEdge.getEdgeTarget());
+		Node sourceNode = realizedEdge.getEdgeSource();
+		if (!hasNode(sourceNode)) {							// never fails; source node is not a trace node
+			Role sourceNodeRole = RegionUtil.getNodeRole(sourceNode);
+			if (sourceNodeRole == Role.REALIZED) {
+				sourceNodeRole = QVTscheduleUtil.asPredicated(sourceNodeRole);
+			}
+			addNode(sourceNode, sourceNodeRole);
+		}
+		Node targetNode = realizedEdge.getEdgeTarget();
+		if (!hasNode(targetNode)) {							// very unlikely to fail; can a REALIZED edge share source/target
+			Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
+			if (targetNodeRole == Role.REALIZED) {
+				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole);
+			}
+			addNode(targetNode, targetNodeRole);
+		}
 		//
-		//	Ensure that re-used trace classes do not lead to ambiguous mapings.
+		//	Add all nodes required to reach the source/target nodes.
+		//
+		resolvePrecedingNodes();
+		//
+		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
 		resolveDisambiguations();
 		//
 		//	Join up the edges.
 		//
-		resolveEdgeRoles();
+		resolveEdges();
 	}
 
 	@Override
@@ -69,34 +88,19 @@ class AssignmentPartition extends AbstractPartition
 		};
 	}
 
-	private void gatherSourceNavigations(@NonNull Node targetNode) {
-		if (!hasNode(targetNode)) {
-			Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
-			if (targetNodeRole == Role.REALIZED) {
-				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole)/*.asMatched()*/;
-			}
-			addNode(targetNode, targetNodeRole);
-			boolean hasPredecessor = false;
-			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
-				hasPredecessor = true;
-				gatherSourceNavigations(sourceNode);
-			}
-			if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
-				for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
-					if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
-						Node nonUnitSourceNode = edge.getEdgeTarget();
-						gatherSourceNavigations(nonUnitSourceNode);
-					}
-				}
-			}
-		}
-	}
-
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = RegionUtil.getEdgeRole(edge);
-		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
-			edgeRole = Role.PREDICATED;
+		if (edgeRole == Role.REALIZED) {
+			AbstractPartition realizingPartition = partitioner.getRealizingPartition(edge);
+			if (realizingPartition instanceof AssignmentPartition) {
+				if (!isCorrolary(RegionUtil.getTargetNode(edge))) {			// FIXME do corrolaries before assigns
+					return null;
+				}
+			}
+			if (realizingPartition != null) {
+				edgeRole = Role.PREDICATED;
+			}
 		}
 		return edgeRole;
 	}
