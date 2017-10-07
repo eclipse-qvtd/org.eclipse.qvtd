@@ -384,6 +384,26 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map() {
+		return bottomVariableEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getBottomVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map() {
+		return bottomVariableEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCoreDomain() {
 		return coreDomainEClass;
 	}
@@ -506,6 +526,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	@Override
 	public EClass getGuardVariable() {
 		return guardVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map() {
+		return guardVariableEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -724,7 +754,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+	public EOperation getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map() {
 		return propertyAssignmentEClass.getEOperations().get(4);
 	}
 
@@ -855,6 +885,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEOperation(bottomPatternEClass, BOTTOM_PATTERN___VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES__DIAGNOSTICCHAIN_MAP);
 
 		bottomVariableEClass = createEClass(BOTTOM_VARIABLE);
+		createEOperation(bottomVariableEClass, BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
+		createEOperation(bottomVariableEClass, BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
 
 		coreDomainEClass = createEClass(CORE_DOMAIN);
 
@@ -874,6 +906,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEOperation(guardPatternEClass, GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP);
 
 		guardVariableEClass = createEClass(GUARD_VARIABLE);
+		createEOperation(guardVariableEClass, GUARD_VARIABLE___VALIDATE_NO_INITIALIZER__DIAGNOSTICCHAIN_MAP);
 
 		mappingEClass = createEClass(MAPPING);
 		createEReference(mappingEClass, MAPPING__CONTEXT);
@@ -901,7 +934,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
+		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
 
 		realizedVariableEClass = createEClass(REALIZED_VARIABLE);
 		createEOperation(realizedVariableEClass, REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
@@ -993,6 +1026,24 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		initEClass(bottomVariableEClass, BottomVariable.class, "BottomVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		op = initEOperation(getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForInitializer", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getBottomVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleNullityForInitializer", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(coreDomainEClass, CoreDomain.class, "CoreDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(coreModelEClass, CoreModel.class, "CoreModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1020,6 +1071,15 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(guardVariableEClass, GuardVariable.class, "GuardVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = initEOperation(getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNoInitializer", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMapping_Context(), this.getMapping(), this.getMapping_Local(), "context", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1130,7 +1190,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTargetPropetyIsSlotProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTargetPropertyIsSlotProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1249,10 +1309,28 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 				"originalName", "VariablesAreBottomVariables"
 		});
 		addAnnotation
+		(getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForInitializer"
+		});
+		addAnnotation
+		(getBottomVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleNullityForInitializer"
+		});
+		addAnnotation
 		(getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "VariablesAreGuardVariables"
+		});
+		addAnnotation
+		(getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NoInitializer"
 		});
 		addAnnotation
 		(getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(),
@@ -1315,10 +1393,10 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 				"originalName", "PropertyIsNotImplicit"
 		});
 		addAnnotation
-		(getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
+		(getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map(),
 			source,
 			new String[] {
-				"originalName", "TargetPropetyIsSlotProperty"
+				"originalName", "TargetPropertyIsSlotProperty"
 		});
 		addAnnotation
 		(getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(),

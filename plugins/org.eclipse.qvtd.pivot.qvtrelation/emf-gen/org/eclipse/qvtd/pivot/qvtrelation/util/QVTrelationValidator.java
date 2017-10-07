@@ -183,12 +183,28 @@ public class QVTrelationValidator extends EObjectValidator {
 	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 16;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Initializer' of 'Shared Variable'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 17;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Nullity For Initializer' of 'Shared Variable'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 18;
+
+	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 16;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 18;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -234,7 +250,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTrelationPackage.eINSTANCE;
+		return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -615,7 +631,29 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(sharedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(sharedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariable_validateCompatibleInitialiserType(sharedVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSharedVariable_validateCompatibleTypeForInitializer(sharedVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSharedVariable_validateCompatibleNullityForInitializer(sharedVariable, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForInitializer constraint of '<em>Shared Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSharedVariable_validateCompatibleTypeForInitializer(SharedVariable sharedVariable, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return sharedVariable.validateCompatibleTypeForInitializer(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleNullityForInitializer constraint of '<em>Shared Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSharedVariable_validateCompatibleNullityForInitializer(SharedVariable sharedVariable, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return sharedVariable.validateCompatibleNullityForInitializer(diagnostics, context);
 	}
 
 	/**

@@ -220,6 +220,7 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING, oldReferredMapping, referredMapping));
 	}
 
+	@Override
 	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
 		return variable2node.get(typedElement);
 	}

@@ -232,8 +232,8 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 
 	@Override
 	public @Nullable Object visitRelationalTransformation(@NonNull RelationalTransformation object) {
-		@SuppressWarnings("null") Comparator<@NonNull Nameable> nameableComparator = NameUtil.NAMEABLE_COMPARATOR;
-		ClassUtil.sort(QVTrelationUtil.Internal.getOwnedRelationsList(object), nameableComparator);
+		@SuppressWarnings("null") Comparator<@NonNull Nameable> nonNullNameableComparator = NameUtil.NAMEABLE_COMPARATOR;
+		ClassUtil.sort(QVTrelationUtil.Internal.getOwnedRelationsList(object), nonNullNameableComparator);
 		return super.visitRelationalTransformation(object);
 	}
 }

@@ -702,6 +702,26 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map() {
+		return sharedVariableEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map() {
+		return sharedVariableEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTemplateVariable() {
 		return templateVariableEClass;
 	}
@@ -794,6 +814,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		sharedVariableEClass = createEClass(SHARED_VARIABLE);
 		createEReference(sharedVariableEClass, SHARED_VARIABLE__TYPED_MODEL);
+		createEOperation(sharedVariableEClass, SHARED_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
+		createEOperation(sharedVariableEClass, SHARED_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
 
 		templateVariableEClass = createEClass(TEMPLATE_VARIABLE);
 	}
@@ -1032,6 +1054,24 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEClass(sharedVariableEClass, SharedVariable.class, "SharedVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSharedVariable_TypedModel(), theQVTbasePackage.getTypedModel(), null, "typedModel", null, 0, 1, SharedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = initEOperation(getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForInitializer", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleNullityForInitializer", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(templateVariableEClass, TemplateVariable.class, "TemplateVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
@@ -1228,6 +1268,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 			source,
 			new String[] {
 				"originalName", "RulesAreRelations"
+		});
+		addAnnotation
+		(getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForInitializer"
+		});
+		addAnnotation
+		(getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleNullityForInitializer"
 		});
 	}
 

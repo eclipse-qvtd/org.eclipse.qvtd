@@ -766,13 +766,31 @@ public interface QVTcorePackage extends EPackage {
 	int BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Initializer</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Nullity For Initializer</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Bottom Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+	int BOTTOM_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreDomainImpl <em>Core Domain</em>}' class.
@@ -1518,13 +1536,22 @@ public interface QVTcorePackage extends EPackage {
 	int GUARD_VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate No Initializer</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE___VALIDATE_NO_INITIALIZER__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Guard Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+	int GUARD_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl <em>Mapping</em>}' class.
@@ -2242,13 +2269,13 @@ public interface QVTcorePackage extends EPackage {
 	int PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Validate Target Propety Is Slot Property</em>' operation.
+	 * The operation id for the '<em>Validate Target Property Is Slot Property</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
+	int PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Property Assignment</em>' class.
@@ -2774,6 +2801,26 @@ public interface QVTcorePackage extends EPackage {
 	EClass getBottomVariable();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.BottomVariable#validateCompatibleTypeForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Initializer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Initializer</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomVariable#validateCompatibleTypeForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.BottomVariable#validateCompatibleNullityForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Nullity For Initializer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Nullity For Initializer</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomVariable#validateCompatibleNullityForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getBottomVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.CoreDomain <em>Core Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2907,6 +2954,16 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getGuardVariable();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.GuardVariable#validateNoInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Initializer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate No Initializer</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.GuardVariable#validateNoInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping <em>Mapping</em>}'.
@@ -3124,14 +3181,14 @@ public interface QVTcorePackage extends EPackage {
 	EOperation getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateTargetPropetyIsSlotProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Target Propety Is Slot Property</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateTargetPropertyIsSlotProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Target Property Is Slot Property</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Target Propety Is Slot Property</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateTargetPropetyIsSlotProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Target Property Is Slot Property</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateTargetPropertyIsSlotProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map();
+	EOperation getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.RealizedVariable <em>Realized Variable</em>}'.
@@ -3367,6 +3424,22 @@ public interface QVTcorePackage extends EPackage {
 		EClass BOTTOM_VARIABLE = eINSTANCE.getBottomVariable();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Initializer</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Nullity For Initializer</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getBottomVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreDomainImpl <em>Core Domain</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3481,6 +3554,14 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass GUARD_VARIABLE = eINSTANCE.getGuardVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate No Initializer</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation GUARD_VARIABLE___VALIDATE_NO_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl <em>Mapping</em>}' class.
@@ -3659,12 +3740,12 @@ public interface QVTcorePackage extends EPackage {
 		EOperation PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Target Propety Is Slot Property</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Target Property Is Slot Property</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map();
+		EOperation PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.

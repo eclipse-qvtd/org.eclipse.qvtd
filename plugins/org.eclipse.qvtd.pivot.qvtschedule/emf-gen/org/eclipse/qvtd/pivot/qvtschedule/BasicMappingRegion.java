@@ -14,6 +14,9 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 
@@ -78,4 +81,6 @@ public interface BasicMappingRegion extends MappingRegion {
 	 * @generated
 	 */
 	void setReferredMapping(Mapping value);
+
+	@Nullable Node getNode(@NonNull TypedElement typedElement);
 } // BasicMappingRegion

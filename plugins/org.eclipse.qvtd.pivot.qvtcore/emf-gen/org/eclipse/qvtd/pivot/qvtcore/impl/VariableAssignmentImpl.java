@@ -164,12 +164,12 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-		/*@NonInvalid*/ java.lang.@NonNull Object symbol_5;
+		/*@NonInvalid*/ java.lang.@NonNull Object symbol_2;
 		if (le) {
-			symbol_5 = ValueUtil.TRUE_VALUE;
+			symbol_2 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_symbol_4;
+			/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
 			try {
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
@@ -200,54 +200,54 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
 				}
 				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
-				final /*@Thrown*/ boolean symbol_0 = status == Boolean.TRUE;
-				/*@Thrown*/ java.lang.@NonNull Object symbol_4;
-				if (symbol_0) {
-					symbol_4 = ValueUtil.TRUE_VALUE;
+				final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
+				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
+				if (eq) {
+					symbol_1 = ValueUtil.TRUE_VALUE;
 				}
 				else {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_3 = value_1.getType();
-					final /*@NonInvalid*/ @NonNull Object symbol_1 = type_3 == null;
+					final /*@NonInvalid*/ @NonNull Object name = type_3 == null;
 					/*@Thrown*/ java.lang.@Nullable String safe_name_source;
-					if (symbol_1 == Boolean.TRUE) {
+					if (name == Boolean.TRUE) {
 						safe_name_source = null;
 					}
 					else {
 						assert type_3 != null;
-						final /*@Thrown*/ java.lang.@Nullable String name = type_3.getName();
-						safe_name_source = name;
+						final /*@Thrown*/ java.lang.@Nullable String name_0 = type_3.getName();
+						safe_name_source = name_0;
 					}
 					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
 					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_1 = this.getTargetVariable();
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_4 = targetVariable_1.getType();
-					final /*@NonInvalid*/ @NonNull Object symbol_2 = type_4 == null;
+					final /*@NonInvalid*/ @NonNull Object name_1 = type_4 == null;
 					/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
-					if (symbol_2 == Boolean.TRUE) {
+					if (name_1 == Boolean.TRUE) {
 						safe_name_source_0 = null;
 					}
 					else {
 						assert type_4 != null;
-						final /*@Thrown*/ java.lang.@Nullable String name_0 = type_4.getName();
-						safe_name_source_0 = name_0;
+						final /*@Thrown*/ java.lang.@Nullable String name_2 = type_4.getName();
+						safe_name_source_0 = name_2;
 					}
 					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
 					final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_3 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
-					symbol_4 = symbol_3;
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+					symbol_1 = symbol_0;
 				}
-				CAUGHT_symbol_4 = symbol_4;
+				CAUGHT_symbol_1 = symbol_1;
 			}
 			catch (Exception e) {
-				CAUGHT_symbol_4 = ValueUtil.createInvalidValue(e);
+				CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_4, QVTcoreTables.INT_0).booleanValue();
-			symbol_5 = logDiagnostic;
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTcoreTables.INT_0).booleanValue();
+			symbol_2 = logDiagnostic;
 		}
-		return Boolean.TRUE == symbol_5;
+		return Boolean.TRUE == symbol_2;
 	}
 
 	/**

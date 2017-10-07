@@ -1968,13 +1968,31 @@ public interface QVTrelationPackage extends EPackage {
 	int SHARED_VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Initializer</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHARED_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Nullity For Initializer</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHARED_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Shared Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SHARED_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
+	int SHARED_VARIABLE_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.TemplateVariableImpl <em>Template Variable</em>}' class.
@@ -2700,6 +2718,26 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getSharedVariable_TypedModel();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.SharedVariable#validateCompatibleTypeForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Initializer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Initializer</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.SharedVariable#validateCompatibleTypeForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.SharedVariable#validateCompatibleNullityForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Nullity For Initializer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Nullity For Initializer</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.SharedVariable#validateCompatibleNullityForInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable <em>Template Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3150,6 +3188,22 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SHARED_VARIABLE__TYPED_MODEL = eINSTANCE.getSharedVariable_TypedModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Initializer</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SHARED_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Nullity For Initializer</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SHARED_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.TemplateVariableImpl <em>Template Variable</em>}' class.
