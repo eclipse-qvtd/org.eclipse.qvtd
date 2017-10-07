@@ -6,9 +6,19 @@ context BottomPattern
 inv VariablesAreBottomVariables:
 	variable->forAll(oclIsKindOf(BottomVariable))
 
+context BottomVariable
+/** The type of a Let variable initializer expression conforms to the type of the Let variable. */
+inv CompatibleTypeForInitializer: ownedInit <> null implies ownedInit.type?.conformsTo(type)
+/** The nullity of a Let variable initializer expression is the nullity of the Let variable. */
+inv CompatibleNullityForInitializer: ownedInit <> null implies ownedInit.isRequired = isRequired
+
 context GuardPattern
 inv VariablesAreGuardVariables:
 	variable->forAll(oclIsKindOf(GuardVariable))
+
+context GuardVariable
+/** A GuardVariable cannot have an initializer. Use a predicate. */
+inv NoInitializer: ownedInit = null
 
 context Mapping
 inv DomainsAreCoreDomains:
@@ -75,7 +85,7 @@ inv CompatibleTypeForTotalValue:
 inv PropertyIsNotImplicit:
 	not targetProperty.isImplicit
 
-inv TargetPropetyIsSlotProperty:
+inv TargetPropertyIsSlotProperty:
 	slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
 
 context RealizedVariable
