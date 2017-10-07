@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
@@ -442,7 +441,7 @@ public class RegionUtil extends QVTscheduleUtil
 			Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
 			isDirty = scheduleManager.isDirty(referredProperty);
 		}
-		Role phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.PREDICATED : Role.LOADED;
+		Role phase = /*sourceNode.isPredicated() ||*/ isMiddleOrOutput || isDirty ? Role.PREDICATED : Role.LOADED;
 		Role stepNodeRole = phase;
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(stepNodeRole, region, name, scheduleManager.getClassDatum(callExp));
@@ -559,6 +558,10 @@ public class RegionUtil extends QVTscheduleUtil
 		}
 	}
 
+	public static @NonNull NavigableEdge getOppositeEdge(@NonNull NavigableEdge navigableEdge) {
+		return ClassUtil.nonNullState(navigableEdge.getOppositeEdge());
+	}
+
 	public static @NonNull ScheduledRegion getOwnedScheduledRegion(@NonNull ScheduleModel scheduleModel) {
 		return ClassUtil.nonNullState(scheduleModel.getOwnedScheduledRegion());
 	}
@@ -576,6 +579,10 @@ public class RegionUtil extends QVTscheduleUtil
 			default: throw new UnsupportedOperationException();
 		}
 		return phase;
+	}
+
+	public static @NonNull NavigableEdge getPrimaryEdge(@NonNull NavigableEdge navigableEdge) {
+		return navigableEdge.isSecondary() ? getOppositeEdge(navigableEdge) : navigableEdge;
 	}
 
 	public static @NonNull ScheduleManager getScheduleManager(@NonNull Region region) {
