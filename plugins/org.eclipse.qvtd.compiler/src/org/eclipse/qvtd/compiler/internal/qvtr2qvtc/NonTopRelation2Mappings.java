@@ -136,7 +136,7 @@ import com.google.common.collect.Iterables;
 	public void analyze() throws CompilerChainException {
 		boolean hasWhenInvocation = false;
 		boolean hasWhereInvocation = false;
-		for (@NonNull Relation rOverriden : rAllOverridens) {
+		for (@NonNull Relation rOverriden : rAllOverriddens) {
 			RelationAnalysis rOverrideAnalysis = transformationAnalysis.getRelationAnalysis(rOverriden);
 			Iterable<@NonNull RelationCallExp> incomingWhenInvocations = rOverrideAnalysis.getIncomingWhenInvocations();
 			if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {

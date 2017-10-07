@@ -138,6 +138,19 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert cWhereDomain == null;
 			return Strategy.ENFORCED_GUARD;
 		}
+		else if (rVariable.getOwnedInit() != null) {
+			//			assert rEnforcedTypedModel == null;
+			//			assert rKey == null;
+			//			assert rTemplateExp == null;
+			//			assert !isEnforcedBound;
+			//			assert isEnforcedReferred;
+			//			assert rOtherBound == null;
+			//			assert rOtherReferred != null;
+			//			assert !isRoot;
+			//			assert cWhenDomain == null;
+			//			assert cWhereDomain == null;
+			return Strategy.SHARED_BOTTOM;
+		}
 		else if ((rWhenTypedModel != null)
 				|| (isEnforcedBound && variablesAnalysis.isInvoked() && isRoot) //rKey != null;
 				|| (!isEnforcedBound && (rOtherBound != null) && isRoot)) {

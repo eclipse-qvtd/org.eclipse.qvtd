@@ -49,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -521,8 +522,11 @@ import com.google.common.collect.Sets;
 						assert oOuts.size() == 1;
 						return oOuts.get(0);
 					}
+					return super.get(oIn);		// e.g. Features/Collections which are re-useable externals
 				}
-				return super.get(oIn);
+				else {
+					return super.get(oIn);
+				}
 			}
 
 			@Override
@@ -737,8 +741,8 @@ import com.google.common.collect.Sets;
 						OCLExpression rOwnedInit = ((Variable)rVariable).getOwnedInit();
 						if (rOwnedInit != null) {
 							Variable cVariable = analysis.getCoreVariable();
+							assert cVariable instanceof BottomVariable;
 							cVariable.setOwnedInit(mapExpression(rOwnedInit));
-							//					variablesAnalysis.addConditionPredicate(analysis.getCorePattern(), createVariableExp(cVariable), mapExpression(rOwnedInit));
 						}
 					}
 				}
@@ -1132,7 +1136,7 @@ import com.google.common.collect.Sets;
 			}
 			OCLExpression rGuardPredicate = rEnforcedTemplateExpression.getWhere();
 			if (rGuardPredicate != null) {
-				cMiddleGuardPattern.getPredicate().add(createPredicate(mapExpression(rGuardPredicate)));
+				cMiddleBottomPattern.getPredicate().add(createPredicate(mapExpression(rGuardPredicate)));
 			}
 		}
 
@@ -1223,6 +1227,14 @@ import com.google.common.collect.Sets;
 					// no need to trace "this"
 				}
 				else if (relationAnalysis.traceIsRealized()) {
+					OCLExpression rInit = rDomainVariable.getOwnedInit();
+					if (rInit != null) {
+						Variable2Variable variableAnalysis = variablesAnalysis.getVariableAnalysis(rDomainVariable);
+						//						Variable cVariable = variableAnalysis.getCoreVariable();
+						//						CorePattern corePattern = variableAnalysis.getCorePattern();
+						//						assert corePattern != null;
+						//						variablesAnalysis.addConditionPredicate(corePattern, createVariableExp(cVariable), mapExpression(rInit));
+					}
 					variablesAnalysis.addTraceNavigationAssignment(rDomainVariable, true);
 				}
 				else if (!QVTrelationUtil.getRootVariables(rRelation).contains(rDomainVariable)) {
@@ -1273,9 +1285,9 @@ import com.google.common.collect.Sets;
 				}
 				else {
 					OCLExpression cArgument = mapExpression(rArgument);	// FIXME tis fails, but possibly only in m2s
-					Variable cArgumentVariable/*mv*/ = variablesAnalysis.addCoreGuardVariable("FIXME",  cArgument.getType());
-					variablesAnalysis.addConditionPredicate(cMiddleBottomPattern, createVariableExp(cArgumentVariable),  cArgument); //createVariableExp(cArgumentVariable));
-					cReferenceValue = createVariableExp(cArgumentVariable);
+					//					Variable cArgumentVariable/*mv*/ = variablesAnalysis.addCoreGuardVariable("FIXME",  cArgument.getType());
+					//					variablesAnalysis.addConditionPredicate(cMiddleBottomPattern, createVariableExp(cArgumentVariable),  cArgument); //createVariableExp(cArgumentVariable));
+					cReferenceValue = cArgument; //createVariableExp(cArgumentVariable);
 				}
 				Variable rParameter/*dv*/ = rParameters.get(i);
 				Property cCalledProperty/*pep*/ = relationalTransformation2tracePackage.getTraceProperty(QVTrelationUtil.getType(cCalledVariable), rParameter);
@@ -1449,8 +1461,9 @@ import com.google.common.collect.Sets;
 				targets = new ArrayList<>();
 				source2targets.put(relationElement, targets);
 			}
-			assert !targets.contains(coreElement);
-			targets.add(coreElement);
+			if (!targets.contains(coreElement)) {			// IteratorVariables are traced proactively
+				targets.add(coreElement);
+			}
 		}
 
 		protected @NonNull Set<@NonNull Predicate> selectPredicatesThatReferToVariables(@NonNull Set<@NonNull Predicate> rPredicates, @NonNull Set<@NonNull Variable> rVariables) {
@@ -1547,7 +1560,7 @@ import com.google.common.collect.Sets;
 	/**
 	 *  All relations, including this one, that this relation overrides.
 	 */
-	protected final @NonNull Set<@NonNull Relation> rAllOverridens = new HashSet<>();
+	protected final @NonNull Set<@NonNull Relation> rAllOverriddens = new HashSet<>();
 
 	protected BasicRelation2Mappings(@NonNull RelationalTransformation2CoreTransformation relationalTransformation2coreTransformation, @NonNull RelationAnalysis relationAnalysis) {
 		super(relationalTransformation2coreTransformation, relationAnalysis);
@@ -1581,6 +1594,8 @@ import com.google.common.collect.Sets;
 			}
 		}
 		//
+		//	Gather all non-dead, non-implicit variables
+		//
 		this.rAllVariables = new HashSet<>();
 		Variables2Variables.gatherReferredVariables(rAllVariables, QVTrelationUtil.getOwnedDomains(rRelation));
 		if (rWhenPattern != null) {
@@ -1589,17 +1604,31 @@ import com.google.common.collect.Sets;
 		if (rWherePattern != null) {
 			Variables2Variables.gatherReferredVariables(rAllVariables, rWherePattern);
 		}
+		List<@NonNull Variable> allVariablesList = new ArrayList<>(rAllVariables);
+		for (int i = 0; i < allVariablesList.size(); i++) {
+			Variable variable = allVariablesList.get(i);
+			OCLExpression ownedInit = variable.getOwnedInit();
+			if (ownedInit != null) {
+				Set<@NonNull Variable> moreVariables = new HashSet<>();
+				Variables2Variables.gatherReferredVariables(moreVariables, ownedInit);
+				for (@NonNull Variable moreVariable : moreVariables) {
+					if (rAllVariables.add(moreVariable)) {
+						allVariablesList.add(moreVariable);
+					}
+				}
+			}
+		}
+		//
 		this.rSharedVariables = Variables2Variables.getMiddleDomainVariables(rRelation);
 		//
-		//
-		gatherOverridens(rRelation);
+		gatherOverriddens(rRelation);
 	}
 
-	private void gatherOverridens(@NonNull Relation rOverriding) {
-		if (rAllOverridens.add(rOverriding)) {
+	private void gatherOverriddens(@NonNull Relation rOverriding) {
+		if (rAllOverriddens.add(rOverriding)) {
 			Relation rOverridden = QVTrelationUtil.basicGetOverridden(rOverriding);
 			if (rOverridden != null) {
-				gatherOverridens(rOverridden);
+				gatherOverriddens(rOverridden);
 			}
 		}
 		else {

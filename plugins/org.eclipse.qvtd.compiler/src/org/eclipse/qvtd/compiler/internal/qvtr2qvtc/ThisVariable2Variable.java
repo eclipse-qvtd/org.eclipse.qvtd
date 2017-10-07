@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 /**
  * A ThisVariableAnalysis describes the 'this' variable in relation and core transformations.
@@ -27,6 +28,7 @@ public class ThisVariable2Variable extends AbstractVariable2Variable
 
 	public ThisVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rThisVariable, @NonNull Variable cThisVariable) {
 		super(variablesAnalysis, rThisVariable);
+		assert rThisVariable.eContainer() instanceof RelationalTransformation;
 		this.rThisVariable = rThisVariable;
 		this.cThisVariable = cThisVariable;
 	}

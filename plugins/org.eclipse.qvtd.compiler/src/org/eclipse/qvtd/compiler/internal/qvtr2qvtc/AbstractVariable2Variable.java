@@ -15,11 +15,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
@@ -36,10 +35,9 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 		this.name = variablesAnalysis.getUniqueVariableName(name, this);
 	}
 
-	protected AbstractVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rThisVariable) {
+	protected AbstractVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull Variable rVariable) {
 		this.variablesAnalysis = variablesAnalysis;
-		this.name = ClassUtil.nonNullState(rThisVariable.getName());
-		assert rThisVariable.eContainer() instanceof RelationalTransformation;
+		this.name = QVTrelationUtil.getName(rVariable);
 	}
 
 	@Override
