@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 public class RelationVariableAnalysis extends AbstractVariableAnalysis
 {
 	public enum Strategy {
+		ENFORCED_BOTTOM,
 		ENFORCED_GUARD,
 		KEYED,
 		OTHER_BOTTOM,
@@ -139,8 +140,8 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		}
 		else if ((rWhenTypedModel != null)
 				|| (isEnforcedBound && variablesAnalysis.isInvoked() && isRoot) //rKey != null;
-				|| (!isEnforcedBound && (rOtherBound != null) && isRoot)
-				|| (!isEnforcedBound && (rOtherBound == null) && !(isEnforcedReferred && (rOtherReferred != null)) && (rOtherReferred == null) && (rPredicateTypedModel == null) && isEnforcedReferred && (rOtherReferred == null))) {
+				|| (!isEnforcedBound && (rOtherBound != null) && isRoot)) {
+			//				|| (!isEnforcedBound && (rOtherBound == null) && !isEnforcedReferred && (rOtherReferred == null) && (rPredicateTypedModel == null) && isEnforcedReferred && (rOtherReferred == null))) {
 			assert rEnforcedTypedModel == null;
 			//			assert rKey == null;
 			//			assert rTemplateExp != null;
@@ -175,6 +176,19 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//			assert cWhenDomain == null;
 			//			assert cWhereDomain == null;
 			return Strategy.SHARED_BOTTOM;
+		}
+		else if (isEnforcedReferred && (rOtherReferred == null)) {	// New WIP for enforced where guard
+			assert rEnforcedTypedModel == null;
+			assert rKey == null;
+			assert rTemplateExp == null;
+			assert !isEnforcedBound;
+			assert isEnforcedReferred;
+			assert rOtherBound == null;
+			assert rOtherReferred == null;
+			assert !isRoot;
+			//			assert cWhenDomain == null;
+			//			assert cWhereDomain == null;
+			return Strategy.ENFORCED_BOTTOM;		// ?? enforced bottom
 		}
 		else {
 			assert rEnforcedTypedModel == null;

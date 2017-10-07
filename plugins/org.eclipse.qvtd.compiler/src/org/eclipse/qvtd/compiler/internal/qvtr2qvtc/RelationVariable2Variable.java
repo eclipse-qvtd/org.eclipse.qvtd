@@ -165,6 +165,8 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		CorePattern cPattern = null; */
 		Strategy strategy = variableAnalysis.getStrategy();
 		switch (strategy) {
+			case ENFORCED_BOTTOM:
+				return QVTcoreUtil.getBottomPattern(variablesAnalysis.cEnforcedDomain);
 			case ENFORCED_GUARD:
 				return QVTcoreUtil.getGuardPattern(variablesAnalysis.cEnforcedDomain);
 			case KEYED:
@@ -304,6 +306,11 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			Variable rVariable = variableAnalysis.getRelationVariable();
 			Type type = QVTrelationUtil.getType(rVariable);
 			switch (strategy) {
+				case ENFORCED_BOTTOM: {
+					cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
+					variablesAnalysis.cEnforcedDomain.getBottomPattern().getVariable().add(cVariable2);
+					break;
+				}
 				case ENFORCED_GUARD: {
 					cVariable2 = variablesAnalysis.createGuardVariable(name, type, rVariable.isIsRequired(), null);
 					variablesAnalysis.cEnforcedDomain.getGuardPattern().getVariable().add(cVariable2);
