@@ -373,7 +373,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 			if (!relationDomain.isIsEnforceable()) {
 				for (EObject eObject : new TreeIterable(relationDomain, true)) {
 					if (eObject instanceof PropertyTemplateItem) {
-						Property referredProperty = ((PropertyTemplateItem)eObject).getReferredProperty();
+						Property referredProperty = QVTrelationUtil.getReferredProperty((PropertyTemplateItem)eObject);
 						if (referredProperty.isIsMany()) {
 							return true;
 						}
