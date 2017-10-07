@@ -2,9 +2,18 @@ package org.eclipse.qvtd.atl.atl2qvtr;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.m2m.atl.common.ATL.Module;
+import org.eclipse.m2m.atl.common.OCL.BooleanType;
+import org.eclipse.m2m.atl.common.OCL.IntegerType;
+import org.eclipse.m2m.atl.common.OCL.OclModel;
+import org.eclipse.m2m.atl.common.OCL.OclModelElement;
+import org.eclipse.m2m.atl.common.OCL.OclType;
+import org.eclipse.m2m.atl.common.OCL.RealType;
+import org.eclipse.m2m.atl.common.OCL.StringType;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 public class HelperUtils
@@ -55,5 +64,40 @@ public class HelperUtils
 			}
 		}
 		return null;
+	}
+
+	public static org.eclipse.ocl.pivot.@NonNull Class getType(@NonNull Executor executor, @NonNull OclType atlType) {
+		StandardLibrary standardLibrary = executor.getStandardLibrary();
+		if (atlType instanceof BooleanType) {
+			return standardLibrary.getBooleanType();
+		}
+		else if (atlType instanceof IntegerType) {
+			return standardLibrary.getIntegerType();
+		}
+		else if (atlType instanceof RealType) {
+			return standardLibrary.getRealType();
+		}
+		else if (atlType instanceof StringType) {
+			return standardLibrary.getStringType();
+		}
+		else if (atlType instanceof OclModelElement) {
+			OclModelElement oclModelElement = (OclModelElement)atlType;
+			OclModel metamodel = oclModelElement.getModel();
+			//			OclModel metamodel = model.getMetamodel();
+			Module atlModule = (Module) EcoreUtil.getRootContainer(oclModelElement);
+			assert atlModule != null;
+			String packageName = metamodel.getName();
+			assert packageName != null;
+			String className = oclModelElement.getName();
+			assert className != null;
+			org.eclipse.ocl.pivot.Class asClass = HelperUtils.getClass(executor, atlModule, packageName, className);
+			if (asClass != null) {
+				return asClass;
+			}
+			return standardLibrary.getOclInvalidType();
+		}
+		else {
+			return standardLibrary.getOclInvalidType();
+		}
 	}
 }

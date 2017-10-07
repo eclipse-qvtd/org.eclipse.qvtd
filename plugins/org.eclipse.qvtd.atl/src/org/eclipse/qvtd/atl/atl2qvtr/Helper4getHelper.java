@@ -17,12 +17,12 @@ public class Helper4getHelper extends AbstractUnaryOperation
 	//			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
 	//		}
 	@Override
-	public @NonNull Object evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @Nullable Helper evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		for (EObject eObject = (LocatedElement)sourceValue; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Helper) {
-				return eObject;
+				return (Helper) eObject;
 			}
 		}
-		return throwInvalidValueException();
+		return null; //throwInvalidValueException();
 	}
 }
