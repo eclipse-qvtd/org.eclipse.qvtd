@@ -52,7 +52,6 @@ import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -317,9 +316,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			asAssignment.setIsPartial(csElement.isIsPartial());
 		}
 		else {
-			PropertyAssignment asAssignment = context.refreshModelElement(PropertyAssignment.class, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
-			asAssignment.setIsDefault(csElement.isIsDefault());
-			asAssignment.setIsPartial(csElement.isIsPartial());
+			// QVTcorePackage.Literals.PROPERTY_ASSIGNMENT must wait till isIsImplicit determines if an OPPOSITE_PROPERTY_ASSIGNMENT
 		}
 		return null;
 	}

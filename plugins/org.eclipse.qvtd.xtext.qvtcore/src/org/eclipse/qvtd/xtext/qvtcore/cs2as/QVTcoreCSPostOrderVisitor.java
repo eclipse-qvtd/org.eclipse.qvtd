@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -31,7 +32,10 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
@@ -59,13 +63,22 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	}
 
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull NavigationCallExp target, @NonNull PredicateOrAssignmentCS csConstraint) {
-		PropertyAssignment propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
-		if (propertyAssignment != null) {
-			propertyAssignment.setSlotExpression(target.getOwnedSource());
-			propertyAssignment.setTargetProperty(PivotUtil.getReferredProperty(target));
-			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
+		NavigationAssignment navigationAssignment;
+		Property targetProperty = PivotUtil.getReferredProperty(target);
+		if (targetProperty.isIsImplicit()) {
+			OppositePropertyAssignment propertyAssignment = context.refreshModelElement(OppositePropertyAssignment.class, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT, csConstraint);
+			propertyAssignment.setTargetProperty(targetProperty.getOpposite());
+			navigationAssignment = propertyAssignment;
 		}
-		return propertyAssignment;
+		else {
+			PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
+			propertyAssignment.setTargetProperty(targetProperty);
+			navigationAssignment = propertyAssignment;
+		}
+		navigationAssignment.setSlotExpression(target.getOwnedSource());
+		navigationAssignment.setIsDefault(csConstraint.isIsDefault());
+		navigationAssignment.setIsPartial(csConstraint.isIsPartial());
+		return navigationAssignment;
 	}
 
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
