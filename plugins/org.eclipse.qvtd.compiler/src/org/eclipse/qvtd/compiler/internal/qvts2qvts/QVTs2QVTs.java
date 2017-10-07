@@ -361,17 +361,44 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Locate compatible introducers and non-recursive producers
 		//
+		boolean isSpeculation = false;
 		Iterable<@NonNull Node> sourceNodes = getIntroducingOrNewNodes(headNode);
 		if (sourceNodes != null) {
 			for (@NonNull Node sourceNode : sourceNodes) {
+				if (sourceNode.isSpeculation()) {
+					isSpeculation = true;
+				}
+			}
+		}
+		if (isSpeculation && !headNode.isSpeculated()) {
+			sourceNodes = contentsAnalysis.getOldNodes(classDatumAnalysis);
+			assert sourceNodes != null;
+		}
+		if (sourceNodes != null) {
+			for (@NonNull Node sourceNode : sourceNodes) {
+				boolean isSource = true;
+				if (isSpeculation) {
+					if (headNode.isSpeculated()) {
+						//						if (!sourceNode.isOld()) {
+						//							isSource = false;
+						//						}
+					}
+					else {
+						if (!sourceNode.isSpeculated() || !sourceNode.isHead()) {
+							isSource = false;
+						}
+					}
+				}
 				//				Region sourceRegion = sourceNode.getRegion();
 				//				if (sourceRegion != this) {
-				Map<@NonNull Node, @NonNull Node> called2calling = new HashMap<>();
-				if (isCompatiblePattern(region, headNode, sourceNode, called2calling)) {
-					if (headSources == null) {
-						headSources = new ArrayList<>();
+				if (isSource) {
+					Map<@NonNull Node, @NonNull Node> called2calling = new HashMap<>();
+					if (isCompatiblePattern(region, headNode, sourceNode, called2calling)) {
+						if (headSources == null) {
+							headSources = new ArrayList<>();
+						}
+						headSources.add(sourceNode);
 					}
-					headSources.add(sourceNode);
 				}
 				//				}
 			}
@@ -1102,7 +1129,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 		//
 		if (ConnectivityChecker.CONNECTIVITY.isActive()) {
-			ConnectivityChecker.checkConnectivity(scheduleManager);
+			//			ConnectivityChecker.checkConnectivity(scheduleManager);
 		}
 		return rootRegion;
 	}
