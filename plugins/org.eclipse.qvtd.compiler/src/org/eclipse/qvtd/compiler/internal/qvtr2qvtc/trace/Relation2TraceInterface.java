@@ -13,6 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.trace;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.IteratorVariable;
+import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -40,6 +42,12 @@ class Relation2TraceInterface extends AbstractRelation2MiddleType
 
 	@Override
 	protected @Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable) {
+		if (variable instanceof IteratorVariable) {
+			return null;
+		}
+		if (variable instanceof LetVariable) {
+			return null;
+		}
 		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = super.basicGetVariableDeclaration2TraceProperty(variable);
 		if (variableDeclaration2TraceProperty != null) {
 			return variableDeclaration2TraceProperty;
