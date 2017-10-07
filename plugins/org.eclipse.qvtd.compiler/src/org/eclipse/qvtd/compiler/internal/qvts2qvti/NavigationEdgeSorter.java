@@ -29,8 +29,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import com.google.common.collect.Lists;
 
 /**
- * NavigationEdgeSorter supports ordering of a list of NavigationEdges  into least-dependent first order thereby ensuring
- * that unrealized variables are created and initualized for accessed realized attribute nodes before they are used.
+ * NavigationEdgeSorter supports ordering of a list of NavigationEdges into least-dependent first order thereby ensuring
+ * that unrealized variables are created and initialized for accessed realized attribute nodes before they are used.
  */
 public class NavigationEdgeSorter
 {

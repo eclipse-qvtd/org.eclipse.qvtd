@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -60,7 +61,9 @@ public abstract class AbstractRegion2Mapping
 	protected final @NonNull QVTs2QVTiVisitor visitor;
 	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull Region region;
+	@SuppressWarnings("unused")private final @NonNull String regionName;
 	protected final @NonNull Mapping mapping;
+	@SuppressWarnings("unused")private final @NonNull String mappingName;
 
 	/**
 	 * Mapping from QVTm expression to Schedule Node.
@@ -86,9 +89,14 @@ public abstract class AbstractRegion2Mapping
 		this.visitor = visitor;
 		this.helper = new QVTimperativeHelper(visitor.getEnvironmentFactory());
 		this.region = region;
-		String name = region.getSymbolName();
-		assert name != null;
-		this.mapping = helper.createMapping(name);
+		this.regionName = RegionUtil.getName(region);
+		String mappingName = region.getSymbolName();
+		assert mappingName != null;
+		this.mapping = helper.createMapping(mappingName);
+		this.mappingName = mappingName;
+		if (region instanceof BasicMappingRegion) {
+			this.mapping.setIsAbstract(((BasicMappingRegion)region).getReferredMapping().isIsAbstract());
+		}
 		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			for (TypedElement typedElement : node.getTypedElements()) {
@@ -144,14 +152,16 @@ public abstract class AbstractRegion2Mapping
 		}
 	}
 
+	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
+		return helper.createMappingCall(getMapping(), mappingParameterBindings);
+	}
+
 	protected @NonNull CallExp createOclAsTypeCallExp(@NonNull OCLExpression asSource, @NonNull Type asType) {
 		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
 		CompleteClass completeClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
 		TypeExp asTypeExp = helper.createTypeExp(completeClass.getPrimaryClass());
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}
-
-	public abstract void createSchedulingStatements();
 
 	protected int getCollectionDepth(@NonNull Type type) {
 		if (type instanceof CollectionType) {
@@ -279,12 +289,11 @@ public abstract class AbstractRegion2Mapping
 		return false;
 	}
 
+	public abstract void synthesizeCallStatements();
+	public abstract void synthesizeLocalStatements();
+
 	@Override
 	public String toString() {
 		return mapping.toString();
-	}
-
-	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
-		return helper.createMappingCall(getMapping(), mappingParameterBindings);
 	}
 }

@@ -66,21 +66,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	public RootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull LoadingRegion region) {
 		super(visitor, region);
-		//
-		//	Create domains
-		//
-		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
-			ClassDatum classDatum = node.getClassDatum();
-			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
-			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
-				TypedModel qvtmTypedModel = classDatum.getReferredTypedModel();
-				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
-				if (qvtiTypedModel != null) {
-					checkableTypedModels.add(qvtiTypedModel);
-				}
-			}
-		}
 	}
 
 	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {
@@ -118,78 +103,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			}
 			else {
 				connection2variable.put(rootConnection, createRootConnectionVariable(name, false, commonType, null));
-			}
-		}
-	}
-
-	@Override
-	public void createSchedulingStatements() {
-		//		BottomPattern bottomPattern = mapping.getBottomPattern();
-		createRootConnectionVariables();
-		/*		//
-		//	Cache the children in a middle bottom pattern variable.
-		//
-		OCLExpression parentExpression = createVariableExp(headNode);
-		OCLExpression initExpression = PivotUtil.createNavigationCallExp(parentExpression, property);
-		Type asType = initExpression.getType();
-		if (!(asType instanceof CollectionType)) {
-			initExpression = createOclAsSetCallExp(initExpression);
-			asType = initExpression.getType();
-		}
-		assert asType != null;
-		Variable childrenVariable = PivotUtil.createVariable(getSafeName("allChildren"), asType, true, initExpression);
-		mapping.getBottomPattern().getVariable().add(childrenVariable); */
-		//
-		//	Create union assignments for connections.
-		//
-		//		if (connection2variable != null) {
-		/*			Operation asOperation = NameUtil.getNameable(visitor.getStandardLibrary().getCollectionType().getOwnedOperations(), "union");
-			for (Node node : region.getNodes()) {
-				if (node.isComposed()) {
-					for (InterRegionEdge edge : node.getOutgoingPassedBindingEdges()) {
-						Node connectionNode = edge.getTarget();
-						Region connectionRegion = connectionNode.getRegion();
-						Variable connectionVariable = connection2variable.get(connectionRegion);
-						if (connectionVariable != null) {
-							OCLExpression collection1 = helper.createVariableExp(connectionVariable);
-							OCLExpression collection2 = createSelectByKind(node);
-							OCLExpression union = createOperationCallExp(collection1, asOperation, collection2);
-							VariableAssignment variableAssignment = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
-							variableAssignment.setTargetVariable(connectionVariable);
-							variableAssignment.setValue(union);
-							bottomPattern.getAssignment().add(variableAssignment);
-						}
-					}
-				}
-			}
-			bottomPattern.getVariable().addAll(connection2variable.values());
-//		} */
-		/*		ChainNode chain = visitor.getChain(region);
-		for (ChainNode child : chain.getChildren()) {
-			Region calledRegion = child.getRegion();
-			if (!calledRegion.isConnectionRegion()) {
-				mappingStatement = createCalls(mappingStatement, calledRegion);
-			}
-			else if (Iterables.isEmpty(child.getChildren())) {
-//				mappingStatement = createCalls(mappingStatement, calledRegion);
-			}
-			else {
-				assert calledRegion.isConnectionRegion();
-				assert !Iterables.isEmpty(child.getChildren());
-				for (ChainNode connectionChild : child.getChildren()) {
-					Region connectionedRegion = connectionChild.getRegion();
-					assert !connectionedRegion.isConnectionRegion();
-					mappingStatement = createCalls(mappingStatement, connectionedRegion);
-				}
-			}
-		} */
-		List<Statement> ownedStatements = mapping.getOwnedStatements();
-		for (@NonNull Region callableRegion : region.getCallableChildren()) {
-			if (isInstall(callableRegion)) {
-				ownedStatements.add(createInstall(callableRegion));
-			}
-			else {
-				ownedStatements.add(createCall(callableRegion, null));
 			}
 		}
 	}
@@ -266,5 +179,96 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void synthesizeCallStatements() {
+		//		BottomPattern bottomPattern = mapping.getBottomPattern();
+		createRootConnectionVariables();
+		/*		//
+			//	Cache the children in a middle bottom pattern variable.
+			//
+			OCLExpression parentExpression = createVariableExp(headNode);
+			OCLExpression initExpression = PivotUtil.createNavigationCallExp(parentExpression, property);
+			Type asType = initExpression.getType();
+			if (!(asType instanceof CollectionType)) {
+				initExpression = createOclAsSetCallExp(initExpression);
+				asType = initExpression.getType();
+			}
+			assert asType != null;
+			Variable childrenVariable = PivotUtil.createVariable(getSafeName("allChildren"), asType, true, initExpression);
+			mapping.getBottomPattern().getVariable().add(childrenVariable); */
+		//
+		//	Create union assignments for connections.
+		//
+		//		if (connection2variable != null) {
+		/*			Operation asOperation = NameUtil.getNameable(visitor.getStandardLibrary().getCollectionType().getOwnedOperations(), "union");
+				for (Node node : region.getNodes()) {
+					if (node.isComposed()) {
+						for (InterRegionEdge edge : node.getOutgoingPassedBindingEdges()) {
+							Node connectionNode = edge.getTarget();
+							Region connectionRegion = connectionNode.getRegion();
+							Variable connectionVariable = connection2variable.get(connectionRegion);
+							if (connectionVariable != null) {
+								OCLExpression collection1 = helper.createVariableExp(connectionVariable);
+								OCLExpression collection2 = createSelectByKind(node);
+								OCLExpression union = createOperationCallExp(collection1, asOperation, collection2);
+								VariableAssignment variableAssignment = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
+								variableAssignment.setTargetVariable(connectionVariable);
+								variableAssignment.setValue(union);
+								bottomPattern.getAssignment().add(variableAssignment);
+							}
+						}
+					}
+				}
+				bottomPattern.getVariable().addAll(connection2variable.values());
+	//		} */
+		/*		ChainNode chain = visitor.getChain(region);
+			for (ChainNode child : chain.getChildren()) {
+				Region calledRegion = child.getRegion();
+				if (!calledRegion.isConnectionRegion()) {
+					mappingStatement = createCalls(mappingStatement, calledRegion);
+				}
+				else if (Iterables.isEmpty(child.getChildren())) {
+	//				mappingStatement = createCalls(mappingStatement, calledRegion);
+				}
+				else {
+					assert calledRegion.isConnectionRegion();
+					assert !Iterables.isEmpty(child.getChildren());
+					for (ChainNode connectionChild : child.getChildren()) {
+						Region connectionedRegion = connectionChild.getRegion();
+						assert !connectionedRegion.isConnectionRegion();
+						mappingStatement = createCalls(mappingStatement, connectionedRegion);
+					}
+				}
+			} */
+		List<Statement> ownedStatements = mapping.getOwnedStatements();
+		for (@NonNull Region callableRegion : region.getCallableChildren()) {
+			if (isInstall(callableRegion)) {
+				ownedStatements.add(createInstall(callableRegion));
+			}
+			else {
+				ownedStatements.add(createCall(callableRegion, null));
+			}
+		}
+	}
+
+	@Override
+	public void synthesizeLocalStatements() {
+		//
+		//	Create domains
+		//
+		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+			ClassDatum classDatum = node.getClassDatum();
+			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
+			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
+				TypedModel qvtmTypedModel = classDatum.getReferredTypedModel();
+				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtmTypedModel);
+				if (qvtiTypedModel != null) {
+					checkableTypedModels.add(qvtiTypedModel);
+				}
+			}
+		}
 	}
 }

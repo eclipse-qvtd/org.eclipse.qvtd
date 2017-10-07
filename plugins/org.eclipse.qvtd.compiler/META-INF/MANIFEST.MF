@@ -32,6 +32,7 @@ Export-Package: org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.merger,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner,
  org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter,
+ org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities,
  org.eclipse.qvtd.compiler.internal.qvtu2qvtm,
  org.eclipse.qvtd.compiler.internal.templates.model,
  org.eclipse.qvtd.compiler.internal.utilities

@@ -194,6 +194,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		else {
 			region2mapping = new BasicRegion2Mapping(this, region);
 		}
+		region2mapping.synthesizeLocalStatements();
 		region2region2mapping.put(region, region2mapping);
 		qvtiTransformation.getRule().add(region2mapping.getMapping());
 		region.accept(this);
@@ -456,7 +457,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		for (@NonNull Region region : sortedRegions) {
 			//			if (!region.isConnectionRegion()) {
 			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
-			region2Mapping.createSchedulingStatements();
+			region2Mapping.synthesizeCallStatements();
 			//			}
 		}
 		// Mappings are in schedule index order.

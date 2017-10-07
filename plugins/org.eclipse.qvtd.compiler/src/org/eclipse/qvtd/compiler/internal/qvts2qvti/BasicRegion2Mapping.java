@@ -13,7 +13,6 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +29,7 @@ import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.IterateExp;
@@ -71,6 +71,7 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -105,6 +106,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -117,19 +119,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * to build a linear edge traversal schedule in which unconditional checks that may fail appear
 	 * as early as possible.
 	 */
-	private class OldEdgeSchedule implements Comparator<@NonNull Edge>
+	private class OldEdgeSchedule
 	{
-		protected final @NonNull Region region;
-
-		private @NonNull Map<@NonNull Node, @NonNull Integer> node2depth;
-
-		private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
-
-		/**
-		 * All properties (and their opposites) that need to be checked for readiness before access.
-		 */
-		private final @Nullable Set<@NonNull Property> allCheckedProperties;
-
 		/**
 		 * The linear execution schedule for edges.
 		 */
@@ -141,16 +132,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private final @NonNull Set<@NonNull Edge> scheduledEdges = new HashSet<>();
 
 		/**
-		 * The edges (and their opposites) in edgeSchedule.
+		 * The nodes at the ends of the edges in edgeSchedule.
 		 */
 		private final @NonNull Set<@NonNull Node> scheduledNodes;
 
-		public OldEdgeSchedule(@NonNull Region region) {
-			this.region = region;
-			this.node2depth = computeDepths();
-			this.oldUnconditionalEdges = computeOldUnconditionalEdges();
-			this.allCheckedProperties = computeCheckedProperties();
-			this.scheduledNodes = Sets.newHashSet(RegionUtil.getHeadNodes(region));
+		public OldEdgeSchedule() {
+			this.scheduledNodes = Sets.newHashSet(RegionUtil.getHeadNodes(region));  // ?? leaf constants
 		}
 
 		private void addEdge(@NonNull Edge edge) {
@@ -176,21 +163,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (scheduledNodes.add(targetNode)) {
 				Subexpression subexpression = node2subexpression.get(targetNode);
 				if (subexpression != null) {
-					for (@NonNull Node inputNode : subexpression.inputNodes) {
+					for (@NonNull Node inputNode : subexpression.unconditionalInputNodes) {
 						addNode(inputNode);
 					}
+					targetNode = subexpression.resultNode;
+					addNode(targetNode);
 				}
-				else {
-					Integer targetDepth = node2depth.get(targetNode);
-					assert targetDepth != null;
-					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(targetNode)) {
-						if (edge.isOld()) {
-							Node sourceNode = RegionUtil.getSourceNode(edge);
-							Integer sourceDepth = node2depth.get(sourceNode);
-							assert sourceDepth != null;
-							if (sourceDepth < targetDepth) {
-								addEdge(edge);
-							}
+				Integer targetCost = reachabilityForest.getCost(targetNode);
+				assert targetCost != null;
+				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(targetNode)) {
+					if (edge.isOld() && edge.isUnconditional()) {
+						Node sourceNode = RegionUtil.getSourceNode(edge);
+						Integer sourceCost = reachabilityForest.getCost(sourceNode);
+						assert sourceCost != null;
+						if (sourceCost < targetCost) {
+							addEdge(edge);
 						}
 					}
 				}
@@ -198,15 +185,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		public void analyze() {
-			Set<@NonNull Edge> checkableEdges = computeCheckables();
-			int checkableSize = checkableEdges.size();
+			Set<@NonNull CheckedCondition> checkedConditions = computeCheckedConditions();
+			int checkableSize = checkedConditions.size();
 			if (checkableSize > 0) {
-				List<@NonNull Edge> sortedCheckableEdges = new ArrayList<>(checkableEdges);
+				List<@NonNull CheckedCondition> sortedCheckedConditions = new ArrayList<>(checkedConditions);
 				if (checkableSize > 1) {
-					Collections.sort(sortedCheckableEdges, this);
+					Collections.sort(sortedCheckedConditions);
 				}
-				for (@NonNull Edge checkableEdge : sortedCheckableEdges) {
-					addEdge(checkableEdge);
+				for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {
+					for (@NonNull Edge edge : checkedCondition.getEdges()) {
+						addEdge(edge);
+					}
 				}
 			}
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
@@ -218,66 +207,84 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//			assert new HashSet<>(edgeSchedule).equals(new HashSet<>(oldEdges));
 		}
 
-		@Override
-		public int compare(@NonNull Edge e1, @NonNull Edge e2) {
-			Integer d1s = node2depth.get(RegionUtil.getSourceNode(e1));
-			Integer d1t = node2depth.get(RegionUtil.getTargetNode(e1));
-			Integer d2s = node2depth.get(RegionUtil.getSourceNode(e2));
-			Integer d2t = node2depth.get(RegionUtil.getTargetNode(e2));
-			assert (d1s != null) && (d1t != null) && (d2s != null) && (d2t != null);
-			int d1 = Math.max(d1s,  d1t);
-			int d2 = Math.max(d2s,  d2t);
-			if (d1 != d2) {
-				return d1 - d2;
-			}
-			if (d1s != d2s) {
-				return d1s - d2s;
-			}
-			return ClassUtil.safeCompareTo(e1.getDisplayName(), e2.getDisplayName());
-		}
-
 		/**
 		 * Return all old edges that require a check for readiness or consistency.
 		 */
-		private @NonNull Set<@NonNull Edge> computeCheckables() {
+		private @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
 			Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
-			Set<@NonNull Edge> checkables = new HashSet<>();
+			Set<@NonNull CheckedCondition> checkedConditions = new HashSet<>();
+			Set<@NonNull NavigableEdge> checkedNavigableEdges = null;
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
+				CheckedCondition checkedCondition = null;
 				if (edge instanceof CastEdge) {
-					checkables.add(edge);
+					checkedCondition = new CastEdgeCheckedCondition((CastEdge)edge);
 				}
 				else if (edge instanceof PredicateEdge) {
-					checkables.add(edge);
+					checkedCondition = new PredicateEdgeCheckedCondition((PredicateEdge)edge);
 				}
 				else if (edge instanceof NavigableEdge) {
+					NavigableEdge navigableEdge = (NavigableEdge)edge;
 					if (allCheckedProperties2 != null) {
-						Property property = ((NavigableEdge)edge).getProperty();
+						NavigableEdge primaryEdge = RegionUtil.getPrimaryEdge(navigableEdge);
+						Property property = primaryEdge.getProperty();
 						if (allCheckedProperties2.contains(property)) {
-							checkables.add(edge);
+							if (checkedNavigableEdges == null) {
+								checkedNavigableEdges = new HashSet<>();
+							}
+							if (checkedNavigableEdges.add(primaryEdge)) {
+								checkedCondition = new NavigableEdgeCheckedCondition(primaryEdge);
+							}
+						}
+					}
+					if (checkedCondition == null) {
+						Node targetNode = RegionUtil.getTargetNode(edge);
+						if (edge.isPredicated() && targetNode.isConstant()) {
+							checkedCondition = new ConstantTargetCheckedCondition((NavigableEdge)edge);
+						}
+						if ((checkedCondition == null) && edge.isOld()) {
+							Property property = QVTscheduleUtil.getProperty(navigableEdge);
+							CompleteClass edgeTargetCompleteClass = getMetamodelManager().getCompleteModel().getCompleteClass(QVTrelationUtil.getType(property));
+							Node sourceNode = RegionUtil.getSourceNode(edge);
+							Integer sourceCost = reachabilityForest.getCost(sourceNode);
+							Integer targetCost = reachabilityForest.getCost(targetNode);
+							assert (sourceCost != null) && (targetCost != null);
+							if (sourceCost < targetCost) {
+								CompleteClass targetNodeCompleteClass = targetNode.getCompleteClass();
+								if (!edgeTargetCompleteClass.conformsTo(targetNodeCompleteClass)) {
+									checkedCondition = new CastEdgeCheckedCondition(navigableEdge);
+								}
+							}
 						}
 					}
 				}
+				if (checkedCondition != null) {
+					checkedConditions.add(checkedCondition);
+				}
 			}
 			//
-			//	Double input nodes require a consistency check.
+			//	Multi-input nodes require a consistency check.
 			//
 			for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 				if (node.isOld() && node.isUnconditional()) {
-					Integer targetDepth = node2depth.get(node);
-					assert targetDepth != null;
+					Integer targetCost = reachabilityForest.getCost(node);
+					assert targetCost != null;
 					if (node.isOld()) {
 						Edge firstEdge = null;
+						MultipleEdgeCheckedCondition checkedCondition = null;
 						for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-							if (edge.isOld() && !edge.isExpression()) {
-								Integer sourceDepth = node2depth.get(RegionUtil.getSourceNode(edge));
-								assert sourceDepth != null;
-								if (sourceDepth <= targetDepth) {
+							if (edge.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
+								Integer sourceCost = reachabilityForest.getCost(RegionUtil.getSourceNode(edge));
+								assert sourceCost != null;
+								if (sourceCost <= targetCost) {
 									if (firstEdge == null) {
 										firstEdge = edge;
 									}
+									else if (checkedCondition == null){
+										checkedCondition = new MultipleEdgeCheckedCondition(firstEdge, edge);
+										checkedConditions.add(checkedCondition);
+									}
 									else {
-										checkables.add(firstEdge);
-										checkables.add(edge);
+										checkedCondition.addEdge(edge);
 									}
 								}
 							}
@@ -285,94 +292,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
-			return checkables;
-		}
-
-		/**
-		 * Return all properties (and their opposites) that need checking for readiness prior to access.
-		 */
-		private @Nullable Set<@NonNull Property> computeCheckedProperties() {
-			//
-			// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
-			// mappings, but that incurs many typedModel accuracy issues.
-			//
-			Set<@NonNull Property> allCheckedProperties = null;
-			DomainUsage anyUsage = RegionUtil.getScheduleManager(region).getDomainAnalysis().getAnyUsage();
-			for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
-				Iterable<@NonNull NavigableEdge> checkedEdges = RegionAnalysis.get(region).getCheckedEdges(qvtmTypedModel);
-				if (checkedEdges != null) {
-					for (NavigableEdge checkedEdge : checkedEdges) {
-						Property asProperty = RegionUtil.getProperty(checkedEdge);
-						if (allCheckedProperties == null) {
-							allCheckedProperties = new HashSet<>();
-						}
-						allCheckedProperties.add(asProperty);
-						Property asOppositeProperty = asProperty.getOpposite();
-						if (asOppositeProperty != null) {
-							allCheckedProperties.add(asOppositeProperty);
-						}
-					}
-				}
-			}
-			return allCheckedProperties;
-		}
-
-		/**
-		 * Return a map from each old node to the minimum edge distance from a head node.
-		 * @return
-		 */
-		private @NonNull Map<@NonNull Node, @NonNull Integer> computeDepths() {
-			// Successive depth candidate iteration works fine.
-			// A recursion has trouble with the forward/reverse edge pairs.
-			// A max-depth similarly has trouble with forward/reverse recursion.
-			Map<@NonNull Node, @NonNull Integer> node2minDepth = new HashMap<>();
-			Set<@NonNull Node> lowerDepthNodes = new HashSet<>();
-			Iterable<@NonNull Node> thisDepthNodes = RegionUtil.getHeadNodes(region);
-			for (int depth = 0; thisDepthNodes != null; depth++) {
-				Set<@NonNull Node> nextDepthNodes = null;
-				for (@NonNull Node node : thisDepthNodes) {
-					if (!node2minDepth.containsKey(node)) {
-						node2minDepth.put(node, depth);
-					}
-					for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
-						if (edge.isOld()) {
-							Node targetNode = RegionUtil.getTargetNode(edge);
-							if (!lowerDepthNodes.contains(targetNode)) {
-								if (nextDepthNodes == null) {
-									nextDepthNodes = new HashSet<>();
-								}
-								nextDepthNodes.add(targetNode);
-							}
-						}
-					}
-				}
-				for (@NonNull Node node : thisDepthNodes) {
-					lowerDepthNodes.add(node);
-				}
-				thisDepthNodes = nextDepthNodes;
-			}
-			for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
-				if (node.isOld()) {
-					Integer depth = node2minDepth.get(node);
-					if (depth == null) {
-						assert node.isConstant();
-						node2minDepth.put(node, 0);
-					}
-				}
-			}
-			return node2minDepth;
-		}
-
-		private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
-			Set<@NonNull Edge> oldEdges = new HashSet<>();
-			for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
-				if (edge.isOld() && edge.isUnconditional()) {
-					oldEdges.add(edge);
-				}
-			}
-			List<@NonNull Edge> sortedEdges = new ArrayList<>(oldEdges);
-			Collections.sort(sortedEdges, this);
-			return sortedEdges;
+			return checkedConditions;
 		}
 
 		private void createCastPredicates(@NonNull Node sourceNode, @NonNull VariableDeclaration sourceVariable) {
@@ -400,12 +320,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 
-		public @Nullable Set<@NonNull Property> getAllCheckedProperties() {
-			return allCheckedProperties;
-		}
-
 		public void synthesize() {
-			@SuppressWarnings("unused")String regionName = region.getName();
 			for (@NonNull Edge edge : edgeSchedule) {
 				assert edge.isUnconditional();
 				Node sourceNode = RegionUtil.getSourceNode(edge);
@@ -452,7 +367,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					getSubexpressionDeclaration(targetNode);
 				}
 			}
-			List<@NonNull Subexpression> subexpressions = new ArrayList<>(node2subexpression.values());
+			List<@NonNull Subexpression> subexpressions = new ArrayList<>(resultNode2subexpression.values());
 			Collections.sort(subexpressions);
 			for (@NonNull Subexpression subexpression : subexpressions) {
 				if (!subexpression.resultNode.isNew() && subexpression.resultNode.isUnconditional()) {
@@ -921,16 +836,29 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 			TypedElement oldTypedElement = node.getTypedElements().iterator().next();
 			assert oldTypedElement != null;
-			if ((oldTypedElement instanceof Variable) && (((Variable)oldTypedElement).getOwnedInit() == null)) {
-				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-					if (edge.isExpression() && QVTscheduleConstants.EQUALS_NAME.equals(edge.getName())) {
-						Node edgeSource = edge.getEdgeSource();
-						return create(edgeSource); //createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
+			if (oldTypedElement instanceof Variable) {
+				Variable variable = (Variable)oldTypedElement;
+				OCLExpression ownedInit = variable.getOwnedInit();
+				if (ownedInit == null) {
+					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+						if (edge.isExpression() && QVTscheduleConstants.EQUALS_NAME.equals(edge.getName())) {
+							Node sourceNode = RegionUtil.getSourceNode(edge);
+							return create(sourceNode); //createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
+						}
+						else if (edge.isCast()) {
+							throw new UnsupportedOperationException();
+							//theVariable = createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
+						}
+						else if (edge.isNavigation()) {
+							Node sourceNode = RegionUtil.getSourceNode(edge);
+							OCLExpression sourceExpression = create(sourceNode);
+							Property referredProperty = RegionUtil.getProperty((NavigableEdge) edge);
+							return helper.createNavigationCallExp(sourceExpression, referredProperty);
+						}
 					}
-					else if (edge.isCast()) {
-						throw new UnsupportedOperationException();
-						//theVariable = createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
-					}
+				}
+				else {
+					return ownedInit.accept(this);
 				}
 			}
 			else {
@@ -948,16 +876,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private final @NonNull OperationNode resultNode;
 
 		/**
-		 * Externalnodes used within the subexpression
+		 * External nodes used within the subexpression
 		 */
 		private final @NonNull Set<@NonNull Node> inputNodes = new HashSet<>();
+
+		/**
+		 * External nodes used within the subexpression
+		 */
+		private final @NonNull Set<@NonNull Node> unconditionalInputNodes = new HashSet<>();
 
 		/**
 		 * Nodes within the subexpression
 		 */
 		private final @NonNull Set<@NonNull Node> contentNodes = new HashSet<>();
 
-		private @Nullable Integer depth = null;
+		private @Nullable Integer cost = null;
 
 		public Subexpression(@NonNull OperationNode resultNode) {
 			this.resultNode = resultNode;
@@ -971,8 +904,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		@Override
 		public int compareTo(@NonNull Subexpression e2) {
 			Subexpression e1 = this;
-			int d1 = e1.getDepth();
-			int d2 = e2.getDepth();
+			int d1 = e1.getCost();
+			int d2 = e2.getCost();
 			if (d1 != d2) {
 				return d1 - d2;
 			}
@@ -981,26 +914,36 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		private void computeSubexpressionContent(@NonNull Node node, @NonNull Set<@NonNull OperationNode> subexpressionResults) {
 			if (contentNodes.add(node)) {
+				node2subexpression.put(node, this);
 				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
 					//					if (edge.isUnconditional()) {
 					Node sourceNode = edge.getEdgeSource();
 					if (subexpressionResults.contains(sourceNode)) {
 						if (sourceNode.isOld() || (!edge.isSecondary() && resultNode.isNew())) {
 							inputNodes.add(sourceNode);
+							if (edge.isUnconditional() && sourceNode.isUnconditional()) {
+								unconditionalInputNodes.add(sourceNode);
+							}
+							//							edge2subexpression.put(edge, this);
 						}
 					}
 					else if (sourceNode.isExpression()) {
+						node2subexpression.put(sourceNode, this);
 						edge2subexpression.put(edge, this);
 						computeSubexpressionContent(sourceNode, subexpressionResults);
 					}
 					else if (!sourceNode.isUnconditional()) {
+						node2subexpression.put(sourceNode, this);
 						edge2subexpression.put(edge, this);
 						computeSubexpressionContent(sourceNode, subexpressionResults);
 					}
 					else {
 						if (sourceNode.isOld() || resultNode.isNew()) {
 							inputNodes.add(sourceNode);
-							edge2subexpression.put(edge, this);
+							if (edge.isUnconditional() && sourceNode.isUnconditional()) {
+								unconditionalInputNodes.add(sourceNode);
+							}
+							//							edge2subexpression.put(edge, this);
 						}
 					}
 					//					}
@@ -1008,19 +951,23 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 
-		public int getDepth() {
-			Integer depth2 = depth;
-			if (depth2 == null) {
-				int inputDepth = 0;
-				for (@NonNull Node inputNode : inputNodes) {
-					Subexpression inputSubexpression = node2subexpression.get(inputNode);
-					if (inputSubexpression != null) {
-						inputDepth = Math.max(inputDepth, inputSubexpression.getDepth()+1);
+		public int getCost() {
+			Integer cost2 = cost;
+			if (cost2 == null) {
+				cost2 = reachabilityForest.getCost(resultNode);
+				if (cost2 == null) {			// Can happen for REALIZED results
+					int inputCost = 0;
+					for (@NonNull Node inputNode : inputNodes) {
+						Subexpression inputSubexpression = resultNode2subexpression.get(inputNode);
+						if (inputSubexpression != null) {
+							inputCost = Math.max(inputCost, inputSubexpression.getCost()+1);
+						}
 					}
+					cost2 = inputCost;
 				}
-				depth = depth2 = inputDepth;
+				cost = cost2;
 			}
-			return depth2;
+			return cost2;
 		}
 		@Override
 		public @NonNull String toString() {
@@ -1029,14 +976,214 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	/**
-	 * Map from each subexpression result to its contents.
+	 * A CheckedCondition identifies a possible micromapping failure mechanism. QVTi synthesis prioritises
+	 * easily computed CheckedConditions to minimize the wasted effort in computing failures.
 	 */
-	private final @NonNull Map<@NonNull OperationNode, @NonNull Subexpression> node2subexpression;
+	abstract class CheckedCondition implements Comparable<@NonNull CheckedCondition>
+	{
+		private int weight = -1;
+
+		protected void accumulateNodes(@NonNull Set<@NonNull Node> requiredNodes, @NonNull Edge edge) {
+			requiredNodes.addAll(getPrecedingNodes(RegionUtil.getSourceNode(edge)));
+			requiredNodes.addAll(getPrecedingNodes(RegionUtil.getTargetNode(edge)));
+		}
+
+		@Override
+		public int compareTo(@NonNull CheckedCondition that) {
+			int w1 = this.getWeight();
+			int w2 = that.getWeight();
+			return w1 - w2;
+		}
+
+		protected abstract int computeWeight();
+
+		public abstract @NonNull Iterable<@NonNull Edge> getEdges();
+
+		public int getWeight() {
+			if (weight < 0) {
+				weight = computeWeight();
+			}
+			return weight;
+		}
+
+		@Override
+		public @NonNull String toString() {
+			StringBuilder s = new StringBuilder();
+			s.append(getClass().getSimpleName());
+			s.append("(");
+			boolean isFirst = true;
+			for (@NonNull Edge edge : getEdges()) {
+				if (!isFirst) {
+					s.append(",");
+				}
+				s.append(edge.getDisplayName());
+				isFirst = false;
+			}
+			s.append(")");
+			return s.toString();
+		}
+
+	}
+
+	/**
+	 * A CastEdgeCheckedCondition identifies the failure when a source fails to compky with the required target type.
+	 */
+	class CastEdgeCheckedCondition extends CheckedCondition
+	{
+		private final @NonNull NavigableEdge castEdge;
+
+		public CastEdgeCheckedCondition(@NonNull NavigableEdge castEdge) {
+			this.castEdge = castEdge;
+		}
+
+		@Override
+		protected int computeWeight() {
+			Set<@NonNull Node> requiredNodes = new HashSet<>();
+			accumulateNodes(requiredNodes, castEdge);
+			return requiredNodes.size();
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Edge> getEdges() {
+			return Collections.singletonList(castEdge);
+		}
+	}
+
+	/**
+	 * A ConstantTargetCheckedCondition identifies the failure when a computation fails to yield the required constant value.
+	 */
+	class ConstantTargetCheckedCondition extends CheckedCondition
+	{
+		private final @NonNull NavigableEdge predicateEdge;
+
+		public ConstantTargetCheckedCondition(@NonNull NavigableEdge predicateEdge) {
+			this.predicateEdge = predicateEdge;
+		}
+
+		@Override
+		protected int computeWeight() {
+			Set<@NonNull Node> requiredNodes = new HashSet<>();
+			requiredNodes.addAll(getPrecedingNodes(RegionUtil.getSourceNode(predicateEdge)));
+			return requiredNodes.size();
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Edge> getEdges() {
+			return Collections.singletonList(predicateEdge);
+		}
+	}
+
+	/**
+	 * A MultipleEdgeCheckedCondition identifies the failure when two alternate navigation paths yield inconsistent results.
+	 */
+	class MultipleEdgeCheckedCondition extends CheckedCondition
+	{
+		private final @NonNull List<@NonNull Edge> edges = new ArrayList<>();
+
+		public MultipleEdgeCheckedCondition(@NonNull Edge firstEdge, @NonNull Edge secondEdge) {
+			addEdge(firstEdge);
+			addEdge(secondEdge);
+		}
+
+		public boolean addEdge(@NonNull Edge edge) {
+			return edges.add(edge);
+		}
+
+		@Override
+		protected int computeWeight() {
+			Set<@NonNull Node> requiredNodes = new HashSet<>();
+			for (@NonNull Edge edge : edges) {
+				accumulateNodes(requiredNodes, edge);
+			}
+			return requiredNodes.size();
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Edge> getEdges() {
+			return edges;
+		}
+	}
+
+	/**
+	 * A NavigableEdgeCheckedCondition identifies the temporary failure that arises when
+	 * observing a property access to a not-yet assigned slot.
+	 */
+	class NavigableEdgeCheckedCondition extends CheckedCondition
+	{
+		private final @NonNull NavigableEdge navigableEdge;
+
+		public NavigableEdgeCheckedCondition(@NonNull NavigableEdge navigableEdge) {
+			this.navigableEdge = navigableEdge;
+		}
+
+		@Override
+		protected int computeWeight() {
+			Set<@NonNull Node> requiredNodes = new HashSet<>();
+			accumulateNodes(requiredNodes, navigableEdge);
+			return requiredNodes.size();
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Edge> getEdges() {
+			return Collections.singletonList(navigableEdge);
+		}
+	}
+
+	/**
+	 * A PredicateEdgeCheckedCondition identifies the failure of a required consistent computation result.
+	 */
+	class PredicateEdgeCheckedCondition extends CheckedCondition
+	{
+		private final @NonNull PredicateEdge predicateEdge;
+
+		public PredicateEdgeCheckedCondition(@NonNull PredicateEdge predicateEdge) {
+			this.predicateEdge = predicateEdge;
+		}
+
+		@Override
+		protected int computeWeight() {
+			Set<@NonNull Node> requiredNodes = new HashSet<>();
+			accumulateNodes(requiredNodes, predicateEdge);
+			return requiredNodes.size();
+		}
+
+		@Override
+		public @NonNull Iterable<@NonNull Edge> getEdges() {
+			return Collections.singletonList(predicateEdge);
+		}
+	}
+
+	/**
+	 * Lazily computed closure of all preceding nodes, icluding the final node, of each node.
+	 */
+	private @Nullable Map<@NonNull Node, @NonNull Set<@NonNull Node>> node2precedingNodeClosure = null;
+
+	/**
+	 * Map from each subexpression result node to its contents.
+	 */
+	private final @NonNull Map<@NonNull OperationNode, @NonNull Subexpression> resultNode2subexpression;
+
+	/**
+	 * Map from each subexpression node to its contents.
+	 */
+	private final @NonNull Map<@NonNull Node, @NonNull Subexpression> node2subexpression = new HashMap<>();
 
 	/**
 	 * Map from each subexpression edge to its contents.
 	 */
 	private final @NonNull Map<@NonNull Edge, @NonNull Subexpression> edge2subexpression = new HashMap<>();
+
+	/**
+	 * All properties (and their opposites) that need to be checked for readiness before access.
+	 */
+	private final @Nullable Set<@NonNull Property> allCheckedProperties;
+
+	/**
+	 * The unconditional old edges provide the pattern matching workload.
+	 * Once cost sorted the list is a sensible residual scheduling order after higher priority checked edges.
+	 * Conditional edges should be scheduled as a consequence of an invoking unconditional edge/node.
+	 */
+	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
 	/**
 	 * The selected head from each head group that is actually passed. Other heads are computed.
@@ -1053,27 +1200,70 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private final @NonNull Map<@NonNull Node, @NonNull VariableDeclaration> node2variable = new HashMap<>();
 
+	/**
+	 * The mechanisms to reach required nodes.
+	 */
+	private final @NonNull ReachabilityForest reachabilityForest;
+
 	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
-		@SuppressWarnings("unused")String name = region.getName();
-		this.node2subexpression = computeSubexpressions();
-
+		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		this.resultNode2subexpression = computeSubexpressions();
 		//
-		//	Create the 'local' statements.
+		//	Gather the subexpression contents.
 		//
-		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
-		OldEdgeSchedule oldSchedule = createNavigablePredicates();	// BLUE/CYAN navigable nodes and edges
-		createRealizedVariables();					// GREEN nodes
-		createPropertyAssignments();				// GREEN edges
-		createAddStatements();						// export to append nodes
-		createRealizedIncludesAssignments();
-		Set<@NonNull Property> allCheckedProperties = oldSchedule.getAllCheckedProperties();
-		if (allCheckedProperties != null) {
-			createObservedProperties(allCheckedProperties);					// wrap observable clauses around hazardous accesses
+		Set<@NonNull OperationNode> subexpressionResults = resultNode2subexpression.keySet();
+		for (@NonNull Subexpression subexpression : resultNode2subexpression.values()) {
+			subexpression.analyze(subexpressionResults);
 		}
+		this.allCheckedProperties = computeCheckedProperties();
+		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
+	}
+	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		//
-		//	The 'global' statements are created by createSchedulingStatements().
+		//	The zero-cost nodes are the head nodes ...
 		//
+		List<@NonNull Node> zeroCostNodes = Lists.newArrayList(RegionUtil.getHeadNodes(region));
+		//
+		//	... and the no-input constant nodes
+		//
+		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+			if (node.isExplicitNull() || node.isOperation()) {
+				if (node.isConstant()) {
+					boolean hasNoComputationInputs = true;
+					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+						if (edge.isComputation()) {
+							hasNoComputationInputs = false;
+							break;
+						}
+					}
+					if (hasNoComputationInputs) {
+						zeroCostNodes.add(node);
+					}
+				}
+			}
+		}
+		return zeroCostNodes;
+	}
+	/**
+	 * Return the navigable edges that may be used by to locate nodes by this partition.
+	 * The default implementation returns all old primary navigable edges
+	 * and all already realized navigable edges
+	 */
+	protected @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
+		Set<@NonNull NavigableEdge> oldEdges = new HashSet<>();
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
+			if (edge.isOld() && edge.isNavigation() /*&& edge.isUnconditional()*/) {
+				Node sourceNode = RegionUtil.getSourceNode(edge);
+				Node targetNode = RegionUtil.getTargetNode(edge);
+				if (sourceNode.isOld() && targetNode.isOld()) {
+					oldEdges.add((NavigableEdge) edge);
+				}
+			}
+		}
+		//		List<@NonNull Edge> sortedEdges = new ArrayList<>(oldEdges);
+		//		Collections.sort(sortedEdges, reachabilityForest.getEdgeCostComparator());
+		return oldEdges;
 	}
 
 	public @Nullable VariableDeclaration basicGetVariable(@NonNull Node node) {
@@ -1081,55 +1271,103 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	/**
+	 * Return all properties (and their opposites) that need checking for readiness prior to access.
+	 */
+	private @Nullable Set<@NonNull Property> computeCheckedProperties() {
+		//
+		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
+		// mappings, but that incurs many typedModel accuracy issues.
+		//
+		Set<@NonNull Property> allCheckedProperties = null;
+		DomainUsage anyUsage = RegionUtil.getScheduleManager(region).getDomainAnalysis().getAnyUsage();
+		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
+			Iterable<@NonNull NavigableEdge> checkedEdges = RegionAnalysis.get(region).getCheckedEdges(qvtmTypedModel);
+			if (checkedEdges != null) {
+				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
+					Property asProperty = RegionUtil.getProperty(checkedEdge);
+					if (allCheckedProperties == null) {
+						allCheckedProperties = new HashSet<>();
+					}
+					allCheckedProperties.add(asProperty);
+					Property asOppositeProperty = asProperty.getOpposite();
+					if (asOppositeProperty != null) {
+						allCheckedProperties.add(asOppositeProperty);
+					}
+				}
+			}
+		}
+		return allCheckedProperties;
+	}
+
+	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
+		Set<@NonNull Edge> oldEdges = new HashSet<>();
+		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
+			if (edge.isOld() && edge.isUnconditional()) {
+				Node sourceNode = RegionUtil.getSourceNode(edge);
+				Node targetNode = RegionUtil.getTargetNode(edge);
+				if (sourceNode.isOld() && targetNode.isOld()) {
+					oldEdges.add(edge);
+				}
+			}
+		}
+		List<@NonNull Edge> sortedEdges = new ArrayList<>(oldEdges);
+		Collections.sort(sortedEdges, reachabilityForest.getEdgeCostComparator());
+		return sortedEdges;
+	}
+
+	/**
 	 * Return all subexpressions and their content. A subexpression is an OperationNode whose value is consumed by
 	 * one (or more) PatternNodes or by two (or more) OperationNodes.
 	 */
 	private @NonNull Map<@NonNull OperationNode, @NonNull Subexpression> computeSubexpressions() {
-		Map<@NonNull OperationNode, @NonNull Subexpression> node2subexpression = new HashMap<>();
+		Map<@NonNull OperationNode, @NonNull Subexpression> resultNode2subexpression = new HashMap<>();
 		//
 		//	Identify the subexpression result nodes
 		//
 		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
 			if (node.isOperation() && node.isUnconditional()) {
 				OperationNode resultNode = (OperationNode) node;
-				Edge firstEdge = null;
-				boolean isSubexpression = false;
-				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-					if (edge.isNew() && !edge.isSecondary()) {
-						Node edgeSource = edge.getSourceNode();
-						if (edgeSource.isPattern()) {
-							node2subexpression.put(resultNode, new Subexpression(resultNode));
-							isSubexpression = true;
-							break;
-						}
+				boolean isPrimitiveLiteralExp = false;
+				if (node.isConstant()) {
+					TypedElement oldTypedElement = node.getTypedElements().iterator().next();
+					assert oldTypedElement != null;
+					if (oldTypedElement instanceof PrimitiveLiteralExp) {
+						isPrimitiveLiteralExp = true;
 					}
 				}
-				if (!isSubexpression) {
-					for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
-						Node edgeTarget = edge.getTargetNode();
-						if (edgeTarget.isPattern() || edgeTarget.isTrue()) {
-							node2subexpression.put(resultNode, new Subexpression(resultNode));
-							break;
+				if (!isPrimitiveLiteralExp) {
+					Edge firstEdge = null;
+					boolean isSubexpression = false;
+					for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+						if (edge.isNew() && !edge.isSecondary()) {
+							Node edgeSource = edge.getSourceNode();
+							if (edgeSource.isPattern()) {
+								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+								isSubexpression = true;
+								break;
+							}
 						}
-						if (firstEdge == null) {
-							firstEdge = edge;
-						}
-						else {
-							node2subexpression.put(resultNode, new Subexpression(resultNode));
-							break;
+					}
+					if (!isSubexpression) {
+						for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
+							Node edgeTarget = edge.getTargetNode();
+							if (edgeTarget.isPattern() || edgeTarget.isTrue()) {
+								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+								break;
+							}
+							if (firstEdge == null) {
+								firstEdge = edge;
+							}
+							else {
+								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+								break;
+							}
 						}
 					}
 				}
 			}
 		}
-		//
-		//	Gather the subexpression contents.
-		//
-		Set<@NonNull OperationNode> subexpressionResults = node2subexpression.keySet();
-		for (@NonNull Subexpression subexpression : node2subexpression.values()) {
-			subexpression.analyze(subexpressionResults);
-		}
-		return node2subexpression;
+		return resultNode2subexpression;
 	}
 
 	/**
@@ -1145,6 +1383,49 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				createAddStatement(connectionVariable, variableExpression);
 			}
 		}
+	}
+
+	private void createCallStatements(@NonNull Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {
+		List<@NonNull MappingStatement> mappingStatements = new ArrayList<>();
+		Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables = null;
+		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
+			@NonNull Region calledRegion = entry.getKey();
+			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
+			List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
+			for (Map.Entry<@NonNull Node, @NonNull Node> entry2 : entry.getValue().entrySet()) {
+				@NonNull Node sourceNode = entry2.getKey();
+				@NonNull Node targetNode = entry2.getValue();
+				OCLExpression sourceExpression = createVariableExp(sourceNode);
+				Type type = sourceExpression.getType();
+				if (type instanceof CollectionType) {
+					if (loopVariables == null) {
+						loopVariables = new HashMap<>();
+					}
+					Type elementType = ((CollectionType)type).getElementType();
+					assert elementType != null;
+					LoopVariable loopVariable = helper.createLoopVariable(getSafeName("loop" + loopVariables.size()), elementType);//, true, sourceExpression);
+					loopVariables.put(loopVariable, sourceExpression);
+					//					sourceExpression = PivotUtil.createVariableExp(loopVariable);
+					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
+					mappingParameterBindings.add(helper.createLoopParameterBinding((GuardParameter) guardVariable, loopVariable));
+				}
+				else {
+					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
+					mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
+				}
+			}
+			Collections.sort(mappingParameterBindings, QVTimperativeUtil.MappingParameterBindingComparator.INSTANCE);
+			MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingParameterBindings);
+			if (loopVariables != null) {
+				for (Map.Entry<@NonNull LoopVariable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
+					@NonNull LoopVariable loopVariable = loopEntry.getKey();
+					@NonNull OCLExpression loopSource = loopEntry.getValue();
+					mappingCallStatement = helper.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
+				}
+			}
+			mappingStatements.add(mappingCallStatement);
+		}
+		mapping.getOwnedStatements().addAll(mappingStatements);
 	}
 
 	private @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression booleanExpression) {
@@ -1266,83 +1547,46 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createAppendParameters();
 	}
 
-	private void createMappingStatements(@NonNull Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {
-		List<@NonNull MappingStatement> mappingStatements = new ArrayList<>();
-		Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables = null;
-		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
-			@NonNull Region calledRegion = entry.getKey();
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-			List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
-			for (Map.Entry<@NonNull Node, @NonNull Node> entry2 : entry.getValue().entrySet()) {
-				@NonNull Node sourceNode = entry2.getKey();
-				@NonNull Node targetNode = entry2.getValue();
-				OCLExpression sourceExpression = createVariableExp(sourceNode);
-				Type type = sourceExpression.getType();
-				if (type instanceof CollectionType) {
-					if (loopVariables == null) {
-						loopVariables = new HashMap<>();
+	private void createObservedProperties() {
+		Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
+		if (allCheckedProperties2 != null) {
+			//
+			// Ideally we could install each observed property as it is actually used. But
+			// this needs to be coded in many places.
+			//
+			for (Statement asStatement : mapping.getOwnedStatements()) {
+				if (asStatement instanceof ObservableStatement) {
+					List<Property> observedProperties = ((ObservableStatement)asStatement).getObservedProperties();
+					for (EObject eObject : new TreeIterable(asStatement, false)) {
+						if (eObject instanceof PropertyCallExp) {
+							Property property = PivotUtil.getReferredProperty((PropertyCallExp) eObject);
+							if (allCheckedProperties2.contains(property) && !observedProperties.contains(property)) {
+								observedProperties.add(property);
+							}
+						}
+						else if (eObject instanceof OppositePropertyCallExp) {
+							Property property = PivotUtil.getReferredProperty((NavigationCallExp) eObject).getOpposite();
+							if (allCheckedProperties2.contains(property) && !observedProperties.contains(property)) {
+								observedProperties.add(property);
+							}
+						}
 					}
-					Type elementType = ((CollectionType)type).getElementType();
-					assert elementType != null;
-					LoopVariable loopVariable = helper.createLoopVariable(getSafeName("loop" + loopVariables.size()), elementType);//, true, sourceExpression);
-					loopVariables.put(loopVariable, sourceExpression);
-					//					sourceExpression = PivotUtil.createVariableExp(loopVariable);
-					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-					mappingParameterBindings.add(helper.createLoopParameterBinding((GuardParameter) guardVariable, loopVariable));
-				}
-				else {
-					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-					mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
 				}
 			}
-			Collections.sort(mappingParameterBindings, QVTimperativeUtil.MappingParameterBindingComparator.INSTANCE);
-			MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingParameterBindings);
-			if (loopVariables != null) {
-				for (Map.Entry<@NonNull LoopVariable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
-					@NonNull LoopVariable loopVariable = loopEntry.getKey();
-					@NonNull OCLExpression loopSource = loopEntry.getValue();
-					mappingCallStatement = helper.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
-				}
-			}
-			mappingStatements.add(mappingCallStatement);
 		}
-		mapping.getOwnedStatements().addAll(mappingStatements);
 	}
 
 	/**
-	 * Recurse over the guard nodes and loaded/predicates region and convert the non-guard nodes to unrealized variables
-	 * and edges to predicates or initializations
+	 * Determine a traversal order for the old edges then synthesize the patttern matching statements.
 	 */
-	private @NonNull OldEdgeSchedule createNavigablePredicates() {
-		OldEdgeSchedule oldSchedule = new OldEdgeSchedule(region);
-		oldSchedule.analyze();
-		oldSchedule.synthesize();
-		return oldSchedule;
-	}
-
-	private void createObservedProperties(@NonNull Set<@NonNull Property> allCheckedProperties) {
-		//
-		// Ideally we could install each observed property as it is actually used. But
-		// this needs to be coded in many places.
-		//
-		for (Statement asStatement : mapping.getOwnedStatements()) {
-			if (asStatement instanceof ObservableStatement) {
-				List<Property> observedProperties = ((ObservableStatement)asStatement).getObservedProperties();
-				for (EObject eObject : new TreeIterable(asStatement, false)) {
-					if (eObject instanceof PropertyCallExp) {
-						Property property = PivotUtil.getReferredProperty((PropertyCallExp) eObject);
-						if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
-							observedProperties.add(property);
-						}
-					}
-					else if (eObject instanceof OppositePropertyCallExp) {
-						Property property = PivotUtil.getReferredProperty((NavigationCallExp) eObject).getOpposite();
-						if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
-							observedProperties.add(property);
-						}
-					}
-				}
-			}
+	private void createPatternMatch() {
+		if (mapping.isIsAbstract()) {
+			mapping.getOwnedStatements().add(createCheckStatement(helper.createBooleanLiteralExp(false)));	// FIXME add a message
+		}
+		else {
+			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
+			oldSchedule.analyze();
+			oldSchedule.synthesize();
 		}
 	}
 
@@ -1452,39 +1696,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	}
 
-	@Override
-	public void createSchedulingStatements() {
-		Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
-		for (@NonNull Region calledRegion : region.getCallableChildren()) {
-			if (calls == null) {
-				calls = new HashMap<>();
-			}
-			Map<@NonNull Node, @NonNull Node> source2target = calls.get(calledRegion);
-			if (source2target == null) {
-				source2target = new HashMap<>();
-				calls.put(calledRegion, source2target);
-			}
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-			for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-				for (@NonNull Node callingNode : calledGuardNode.getPassedBindingSources()) {
-					if (callingNode.getOwningRegion() == region) {
-						Node oldNode = source2target.put(callingNode, calledGuardNode);
-						assert oldNode == null;
-					}
-				}
-				for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
-					if (callingNode.getOwningRegion() == region) {
-						Node oldNode = source2target.put(callingNode, calledGuardNode);
-						assert oldNode == null;
-					}
-				}
-			}
-		}
-		if (calls != null) {
-			createMappingStatements(calls);
-		}
-	}
-
 	private @NonNull OCLExpression createVariableExp(@NonNull Node node) {
 		if (node.isExplicitNull()) {
 			return helper.createNullLiteralExp();
@@ -1505,6 +1716,24 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		VariableDeclaration variable = node2variable.get(node);
 		assert variable != null;
 		return (MappingParameter) variable;
+	}
+
+	public @NonNull Set<@NonNull Node> getPrecedingNodes(@NonNull Node targetNode) {
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> node2precedingNodeClosure2 = node2precedingNodeClosure;
+		if (node2precedingNodeClosure2 == null) {
+			node2precedingNodeClosure = node2precedingNodeClosure2 = new HashMap<>();
+		}
+		Set<@NonNull Node> precedingNodes = node2precedingNodeClosure2.get(targetNode);
+		if (precedingNodes == null) {
+			precedingNodes = new HashSet<>();
+			node2precedingNodeClosure2.put(targetNode, precedingNodes);
+			precedingNodes.add(targetNode);
+			for (@NonNull Node sourceNode : reachabilityForest.getPredecessors(targetNode)) {
+				precedingNodes.addAll(getPrecedingNodes(sourceNode));
+			}
+		}
+		assert precedingNodes.size() > 0;
+		return precedingNodes;
 	}
 
 	private @NonNull VariableDeclaration getSubexpressionDeclaration(@NonNull Node node) {
@@ -1535,6 +1764,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return variable; */
 	}
 
+	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
+		Node sourceNode = edge.getEdgeSource();
+		Property asProperty = edge.getProperty();
+		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatumAnalysis(sourceNode));
+		RegionAnalysis regionAnalysis = RegionAnalysis.get(region);
+		Iterable<@NonNull NavigableEdge> enforcedEdges = regionAnalysis.getEnforcedEdges(typedModel, asProperty);
+		return enforcedEdges != null;
+	}
+
 	private boolean isIfExp(@NonNull Node node) {
 		if (node.isExpression()) {
 			for (TypedElement typedElement : node.getTypedElements()) {
@@ -1545,24 +1783,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		return false;
 	}
-
-	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
-		Node sourceNode = edge.getEdgeSource();
-		Property asProperty = edge.getProperty();
-		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatumAnalysis(sourceNode));
-		Iterable<@NonNull NavigableEdge> enforcedEdges = RegionAnalysis.get(region).getEnforcedEdges(typedModel);
-		if (enforcedEdges != null) {
-			Property asOppositeProperty = asProperty.getOpposite();
-			for (@NonNull NavigableEdge enforcedEdge : enforcedEdges) {
-				Property edgeProperty = enforcedEdge.getProperty();
-				if ((edgeProperty == asProperty) || (edgeProperty == asOppositeProperty)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public boolean isInfinite() {
 		if (region.getRecursionEdges().iterator().hasNext()) {		// FIXME unduly pessimistic
@@ -1610,6 +1830,53 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 		}
+	}
+
+	@Override
+	public void synthesizeCallStatements() {
+		Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
+		for (@NonNull Region calledRegion : region.getCallableChildren()) {
+			if (calls == null) {
+				calls = new HashMap<>();
+			}
+			Map<@NonNull Node, @NonNull Node> source2target = calls.get(calledRegion);
+			if (source2target == null) {
+				source2target = new HashMap<>();
+				calls.put(calledRegion, source2target);
+			}
+			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
+			for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
+				for (@NonNull Node callingNode : calledGuardNode.getPassedBindingSources()) {
+					if (callingNode.getOwningRegion() == region) {
+						Node oldNode = source2target.put(callingNode, calledGuardNode);
+						assert oldNode == null;
+					}
+				}
+				for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
+					if (callingNode.getOwningRegion() == region) {
+						Node oldNode = source2target.put(callingNode, calledGuardNode);
+						assert oldNode == null;
+					}
+				}
+			}
+		}
+		if (calls != null) {
+			createCallStatements(calls);
+		}
+	}
+
+	/**
+	 * Create all the statements that support the local content of this micromapping.
+	 */
+	@Override
+	public void synthesizeLocalStatements() {
+		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
+		createPatternMatch();						// BLUE/CYAN nodes and edges
+		createRealizedVariables();					// GREEN nodes
+		createPropertyAssignments();				// GREEN edges
+		createAddStatements();						// export to append nodes
+		createRealizedIncludesAssignments();
+		createObservedProperties();					// wrap observable clauses around hazardous accesses
 	}
 
 	@Override
