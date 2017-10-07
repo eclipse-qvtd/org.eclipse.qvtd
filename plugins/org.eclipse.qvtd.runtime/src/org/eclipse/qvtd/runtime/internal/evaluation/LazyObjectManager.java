@@ -18,15 +18,19 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EReferenceImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -47,6 +51,32 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState;
 
 public class LazyObjectManager extends AbstractObjectManager
 {
+	/**
+	 * An AutoAssigningHashMap supports the slots in an input model by automatically marking
+	 * each slot ASSIGNED as soon as its SlotState is registered.
+	 */
+	private static final class AutoAssigningHashMap extends HashMap<@NonNull EStructuralFeature, /*@NonNull*/ SlotState>
+	{
+		// FIXME missing /*@NonNull*/ SlotState works around JDT limitation
+
+		private final @NonNull Object eObject;
+
+		private static final long serialVersionUID = 1L;
+
+		private AutoAssigningHashMap(@NonNull Object eObject) {
+			this.eObject = eObject;
+		}
+
+		@Override
+		public @Nullable SlotState put(@NonNull EStructuralFeature eFeature, /*@NonNull*/ SlotState slotState) {
+			SlotState oldSlotState = super.put(eFeature, slotState);
+			if ((oldSlotState == null) && !(eFeature instanceof EOppositeReferenceImpl)) {
+				slotState.assigned(eObject, eFeature, ((EObject)eObject).eGet(eFeature));
+			}
+			return oldSlotState;
+		}
+	}
+
 	/**
 	 * EOppositeReferenceImpl is used internally to reify the missing EReference.eOpposite. The instances should not be used
 	 * externally since they violate many WFRs. Only getEOpposite() is useful.
@@ -192,6 +222,44 @@ public class LazyObjectManager extends AbstractObjectManager
 		}
 
 		@Override
+		public void debugUnblock() {
+			if (debug_eObject instanceof EObject) {
+				Object eProxy = null;
+				EObject eObject = ((EObject)debug_eObject);
+				EClassifier eType = debug_eFeature.getEType();
+				if (eType instanceof EClass) {
+					EClass eClass = (EClass) eType;
+					for (EClassifier eClassifier : eClass.getEPackage().getEClassifiers()) {
+						if (eClassifier instanceof EClass) {
+							EClass eClass2 = (EClass)eClassifier;
+							if (!eClass2.isAbstract() && eClass2.getEAllSuperTypes().contains(eClass)) {
+								eClass = eClass2;
+							}
+						}
+					}
+					eProxy = eType.getEPackage().getEFactoryInstance().create(eClass);
+					if (eProxy instanceof InternalEObject) {
+						((InternalEObject)eProxy).eSetProxyURI(URI.createURI("blocked"));
+					}
+				}
+				else {
+					try {
+						eProxy = eType.getEPackage().getEFactoryInstance().createFromString((EDataType)eType, "");
+					}
+					catch (Throwable e) {}
+				}
+				if (debug_eFeature.isMany()) {
+					@SuppressWarnings("unchecked")
+					List<Object> list = (List<Object>)eObject.eGet(debug_eFeature);
+					list.add(eProxy);
+				}
+				else {
+					eObject.eSet(debug_eFeature, eProxy);
+				}
+			}
+		}
+
+		@Override
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
 				case ASSIGNABLE:
@@ -208,16 +276,17 @@ public class LazyObjectManager extends AbstractObjectManager
 		@Override
 		public String toString() {
 			StringBuilder s = new StringBuilder();
-			s.append(getClass().getSimpleName());
-			s.append("@");
-			s.append(Integer.toHexString(System.identityHashCode(this)));
-			s.append("[");
+			s.append(LabelUtil.getLabel(debug_eObject));
+			s.append(".");
 			s.append(debug_eFeature.getEContainingClass().getName());
 			s.append("::");
 			s.append(debug_eFeature.getName());
-			s.append(" for ");
-			s.append(LabelUtil.getLabel(debug_eObject));
-			s.append("]");
+			s.append(" ");
+			s.append(getClass().getSimpleName());
+			s.append("@");
+			s.append(Integer.toHexString(System.identityHashCode(this)));
+			s.append(" ");
+			s.append(mode);
 			return s.toString();
 		}
 
@@ -830,6 +899,23 @@ public class LazyObjectManager extends AbstractObjectManager
 		assigned(eObject, eFeature, ecoreValue, childKey);		// Delegate incremental API to non-incremental API
 	}
 
+	protected @NonNull Map<@NonNull EStructuralFeature, @NonNull SlotState> createFeature2State(@NonNull Object eObject) {
+		Map<@NonNull EStructuralFeature, @NonNull SlotState> feature2state;
+		Resource eResource = null;
+		if (eObject instanceof EObject) {
+			eResource = ((EObject)eObject).eResource();
+		}
+		if (eResource != null) {
+			@SuppressWarnings("null")		// Working around JDT limitation
+			Map<@NonNull EStructuralFeature, @NonNull SlotState> autoAssigningHashMap = new AutoAssigningHashMap(eObject);
+			feature2state = autoAssigningHashMap;
+		}
+		else {
+			feature2state = new HashMap<@NonNull EStructuralFeature, @NonNull SlotState>();
+		}
+		return feature2state;
+	}
+
 	@NonNull SlotState createManyToManySlotState(
 			@NonNull Object eObject, @NonNull EReference eFeature, @NonNull EReference eOppositeFeature) {
 		throw new UnsupportedOperationException();
@@ -943,7 +1029,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	public @NonNull Map<@NonNull EStructuralFeature, @NonNull SlotState> getObjectState(@NonNull Object eObject) {
 		Map<@NonNull EStructuralFeature, @NonNull SlotState> feature2state = object2feature2slotState.get(eObject);
 		if (feature2state == null) {
-			feature2state = new HashMap<@NonNull EStructuralFeature, @NonNull SlotState>();
+			feature2state = createFeature2State(eObject);
 			object2feature2slotState.put(eObject, feature2state);
 		}
 		return feature2state;

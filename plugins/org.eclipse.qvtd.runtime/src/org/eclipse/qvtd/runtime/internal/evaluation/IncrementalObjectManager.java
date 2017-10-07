@@ -838,6 +838,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	public @NonNull Map<@NonNull EStructuralFeature, @NonNull BasicSlotState> getObjectState(@NonNull Object eObject) {
 		Map<@NonNull EStructuralFeature, @NonNull BasicSlotState> feature2state = object2feature2slotState.get(eObject);
 		if (feature2state == null) {
+			//			feature2state = createFeature2State(eObject);	// FIXME this LazyObjectManager functionality gives a StackOverflowError
 			feature2state = new HashMap<@NonNull EStructuralFeature, @NonNull BasicSlotState>();
 			object2feature2slotState.put(eObject, feature2state);
 		}
