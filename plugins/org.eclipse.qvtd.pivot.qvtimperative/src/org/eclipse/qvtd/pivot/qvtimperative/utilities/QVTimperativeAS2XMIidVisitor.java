@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeAS2XMIidVisitor;
 
+@SuppressWarnings("deprecation")
 public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidVisitor
 {
 	public static final @NonNull String MAPPING_PREFIX = "m."; //$NON-NLS-1$

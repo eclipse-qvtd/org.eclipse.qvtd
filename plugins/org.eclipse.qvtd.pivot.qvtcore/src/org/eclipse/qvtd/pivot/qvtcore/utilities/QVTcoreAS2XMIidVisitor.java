@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreAS2XMIidVisitor;
 
+@SuppressWarnings("deprecation")
 public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor
 {
 	public static final @NonNull String MAPPING_PREFIX = "m."; //$NON-NLS-1$

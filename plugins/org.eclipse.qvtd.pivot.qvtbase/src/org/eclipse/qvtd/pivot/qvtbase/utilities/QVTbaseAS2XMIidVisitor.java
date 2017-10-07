@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -25,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseAS2XMIidVisitor;
 
+@SuppressWarnings("deprecation")
 public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 {
 	public static final @NonNull String DOMAIN_PREFIX = "qD."; //$NON-NLS-1$
@@ -35,7 +36,7 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 
 	public QVTbaseAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Boolean visitBaseModel(@NonNull BaseModel object) {
