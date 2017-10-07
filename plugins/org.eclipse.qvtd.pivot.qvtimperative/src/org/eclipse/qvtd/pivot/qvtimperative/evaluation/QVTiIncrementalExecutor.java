@@ -344,14 +344,14 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	@Override
-	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		super.internalExecuteSetStatement(setStatement, sourceObject, ecoreValue, childKey);
+	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue) {
+		super.internalExecuteSetStatement(setStatement, sourceObject, ecoreValue);
 		if (mode == Mode.LAZY) {
 			if (setStatement.isIsNotify()) {
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-				objectManager.assigned(sourceObject, eFeature, ecoreValue, childKey);
+				objectManager.assigned(sourceObject, eFeature, ecoreValue);
 			}
 		}
 		else {
@@ -360,7 +360,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
-			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, childKey);
+			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue);
 		}
 	}
 }

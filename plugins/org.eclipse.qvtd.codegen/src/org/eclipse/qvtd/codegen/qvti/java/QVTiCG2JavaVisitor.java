@@ -435,7 +435,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
 			js.append(", ");
 			js.appendValueName(cgSlot);
-			js.append(", null);\n");
+			js.append(");\n");
 		}
 	}
 
@@ -458,7 +458,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
 			js.append(", ");
 			js.appendValueName(cgInit);
-			js.append(", null);\n");
+			js.append(");\n");
 		}
 	}
 
@@ -480,7 +480,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
 		js.append(", ");
 		js.appendValueName(cgInit);
-		js.append(", null);\n");
+		js.append(");\n");
 		//		}
 	}
 
@@ -2037,11 +2037,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER;
 	}
 
-	protected String getFunctionCtorName(@NonNull CGFunction cgFunction) {
+	protected @NonNull String getFunctionCtorName(@NonNull CGFunction cgFunction) {
 		return JavaStream.convertToJavaIdentifier("FTOR_" + cgFunction.getName());
 	}
 
-	protected String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
+	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
 		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
 		Object instanceKey = cgFunction.getBody();
 		if (instanceKey == null) {
@@ -2072,7 +2072,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return bindings;
 	}
 
-	protected String getMappingCtorName(@NonNull CGMapping cgMapping) {
+	protected @NonNull String getMappingCtorName(@NonNull CGMapping cgMapping) {
 		return JavaStream.convertToJavaIdentifier("CTOR_" + cgMapping.getName());
 	}
 

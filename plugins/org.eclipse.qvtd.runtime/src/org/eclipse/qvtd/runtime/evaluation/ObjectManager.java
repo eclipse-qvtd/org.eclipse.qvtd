@@ -28,11 +28,15 @@ public interface ObjectManager extends ExecutionVisitable
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue. Ordered child assignments may be ordered by the childKey.
 	 */
+	void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	@Deprecated /* @deprecated childKey not used */
 	void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey);
 
 	/**
 	 * Mark the eFeature of eObject as assigned with an ecoreValue by an invocation. Ordered child assignments may be ordered by the childKey.
 	 */
+	void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	@Deprecated /* @deprecated childKey not used */
 	void assigned(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey);
 
 	/**

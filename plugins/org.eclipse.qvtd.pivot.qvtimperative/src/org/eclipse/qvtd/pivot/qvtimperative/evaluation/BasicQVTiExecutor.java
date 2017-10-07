@@ -395,8 +395,14 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		}
 	}
 
+	@Deprecated /* @deprecated childKey not used */
 	@Override
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
+		internalExecuteSetStatement(setStatement, slotObject, ecoreValue);
+	}
+
+	@Override
+	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue) {
 		Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 		targetProperty.initValue(slotObject, ecoreValue);
 		Integer cacheIndex = modelsManager.getTransformationAnalysis().getCacheIndex(setStatement);

@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
@@ -531,27 +530,16 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			throw (InvalidValueException)slotObject;
 		}
 		if (slotObject instanceof EObject) {
-			Integer childKey = null;
 			try {
 				Object boxedValue = setStatement.getOwnedExpression().accept(undecoratedVisitor);
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
-				Property oppositeProperty = targetProperty.getOpposite();
-				if (oppositeProperty != null) {
-					Type type = oppositeProperty.getType();
-					if (type instanceof CollectionType) {
-						boolean isOrdered = ((CollectionType)type).isOrdered();
-						if (isOrdered) {
-
-						}
-					}
-				}
-				executor.internalExecuteSetStatement(setStatement, slotObject, ecoreValue, childKey);
+				executor.internalExecuteSetStatement(setStatement, slotObject, ecoreValue);
 				return true;
 			}
 			catch (InvocationFailedException e) {
-				executor.internalExecuteSetStatement(setStatement, slotObject, e, childKey);		// FIXME This leads to an AssertionError in PropertyImpl.initValue
+				executor.internalExecuteSetStatement(setStatement, slotObject, e);		// FIXME This leads to an AssertionError in PropertyImpl.initValue
 				//				throw e;
 			}
 			//		} else if (slotObject == null){
