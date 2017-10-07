@@ -127,14 +127,20 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return false;
 		}
 
-		private boolean anyReferencedOutputDomainVariables(@NonNull OCLExpression value) {
+		private boolean anyReferencedRealizedVariables(@NonNull OCLExpression value) {
 			VariableDeclaration referredVariable = getReferredMappingVariable(value);
-			if ((referredVariable != null) && isMiddleDomain(basicGetArea(referredVariable))) {
+			//			if ((referredVariable != null) && isMiddleDomain(basicGetArea(referredVariable))) {
+			//				return true;
+			//			}
+			if (referredVariable instanceof RealizedVariable) {
 				return true;
 			}
 			for (TreeIterator<EObject> tit = value.eAllContents(); tit.hasNext(); ) {
 				referredVariable = getReferredMappingVariable(tit.next());
-				if ((referredVariable != null) && isOutputDomain(basicGetArea(referredVariable))) {
+				//				if ((referredVariable != null) && isOutputDomain(basicGetArea(referredVariable))) {
+				//					return true;
+				//				}
+				if (referredVariable instanceof RealizedVariable) {
 					return true;
 				}
 			}
@@ -423,7 +429,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			//			else if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
 			//				oldResult = false;
 			//			}
-			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedOutputDomainVariables(QVTcoreUtil.getConditionExpression(pIn))) {
+			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedRealizedVariables(QVTcoreUtil.getConditionExpression(pIn))) {
 				//				assert !oldResult;
 				return null;
 			}
