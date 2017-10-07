@@ -438,6 +438,9 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 	}
 
+	/**
+	 * Return the lists of child regions that have consecutive indexes.
+	 */
 	protected @NonNull Iterable<@NonNull List<@NonNull MappingRegion>> selectConsecutiveRegionRuns(@NonNull NodeConnection nodeConnection) {
 		Map<@NonNull Integer, @NonNull MappingRegion> index2region = new HashMap<>();
 		for (@NonNull Region targetRegion : nodeConnection.getTargetRegions()) {

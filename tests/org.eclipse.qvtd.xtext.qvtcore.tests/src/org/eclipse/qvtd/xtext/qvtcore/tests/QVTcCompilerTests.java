@@ -334,6 +334,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("Forward2Reverse.qvtc", "forward", "List2List.genmodel");
+			//			Class<? extends Transformer> txClassReverse = Forward2Reverse.class;
 			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -415,8 +416,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("HSV2HSL.qvtc", "hsl", "HSV2HSL.genmodel");
 			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 1);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 1);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 4);
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");

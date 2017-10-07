@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -35,6 +36,16 @@ import com.google.common.collect.Sets;
 class Correlator
 {
 	public static @Nullable Correlator correlate(@NonNull MappingRegion secondaryRegion, @NonNull MappingRegion primaryRegion, @NonNull CorrelationStrategy strategy, @Nullable Map<@NonNull Node, @NonNull Node> primaryNode2secondaryNode) {
+		if (secondaryRegion instanceof BasicMappingRegion) {
+			if (((BasicMappingRegion)secondaryRegion).getReferredMapping().isIsAbstract()) {
+				return null;
+			}
+		}
+		if (primaryRegion instanceof BasicMappingRegion) {
+			if (((BasicMappingRegion)primaryRegion).getReferredMapping().isIsAbstract()) {
+				return null;
+			}
+		}
 		Correlator correlator = new Correlator(primaryRegion, secondaryRegion, strategy, primaryNode2secondaryNode);
 		return correlator.correlate() ? correlator : null;
 	}
@@ -225,25 +236,34 @@ class Correlator
 		Node secondaryHeadNode = secondaryHeadNodes.get(0);
 		CompleteClass completeClass = secondaryHeadNode.getCompleteClass();
 		List<@NonNull Node> primaryNodes = completeClass2primaryNodes.get(completeClass);
-		if (primaryNodes == null) {
+		if ((primaryNodes == null) || (primaryNodes.size() == 0)) {
 			if (debugFailures) {
 				AbstractMerger.FAILURE.println("No primary nodes of type: " + completeClass);
 			}
 			return false;
 		}
 		Node primaryHeadNode = secondaryNode2primaryNode.get(secondaryHeadNode);
-		if (primaryHeadNode != null) {
-			return true;
-		}
-		primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);
 		if (primaryHeadNode == null) {
-			primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);		// FIXME debugging
-			if (debugFailures) {
-				AbstractMerger.FAILURE.println("No primary head node to match: " + secondaryHeadNode);
+			primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);
+			if (primaryHeadNode == null) {
+				primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);		// FIXME debugging
+				if (debugFailures) {
+					AbstractMerger.FAILURE.println("No primary head node to match: " + secondaryHeadNode);
+				}
+				return false;
 			}
-			return false;
+			secondaryNode2primaryNode.put(secondaryHeadNode, primaryHeadNode);
 		}
-		secondaryNode2primaryNode.put(secondaryHeadNode, primaryHeadNode);
+		if (primaryNodes.size() > 1) {
+			for (@NonNull Node primaryNode : primaryNodes) {
+				if ((primaryNode != primaryHeadNode) && !primaryNode.isLoaded()) {
+					if (debugFailures) {		// FIXME multiple matching not-speculated might be ok
+						AbstractMerger.FAILURE.println("Multiple primary nodes of type: " + completeClass);
+					}
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 
