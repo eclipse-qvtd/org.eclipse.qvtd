@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
@@ -99,14 +98,13 @@ public class QVTrSerializeTests extends LoadTestCase
 	}
 
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved, @NonNull String @Nullable [] messages) throws Exception {
-		ResourceSet resourceSet = new ResourceSetImpl();
 		//		getProjectMap().initializeResourceSet(resourceSet);
 		String outputName = stem + ".serialized.qvtr";
 		URI outputURI = getProjectFileURI(outputName);
 		//
 		//	Load QVTiAS
 		//
-		QVTrelation ocl = QVTrelation.newInstance(QVTrelation.NO_PROJECTS);
+		QVTrelation ocl = QVTrelation.newInstance(QVTrelation.CLASS_PATH);
 		try {
 			ASResource asResource = AbstractTestQVT.loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
@@ -115,6 +113,7 @@ public class QVTrSerializeTests extends LoadTestCase
 			//
 			//	Pivot to CS
 			//
+			ResourceSet resourceSet = ocl.getResourceSet();
 			XtextResource xtextResource = AbstractTestQVT.as2cs(ocl, resourceSet, asResource, outputURI, QVTrelationCSPackage.eCONTENT_TYPE);
 			resourceSet.getResources().clear();
 			return xtextResource;

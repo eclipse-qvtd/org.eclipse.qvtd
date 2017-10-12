@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
@@ -36,7 +37,13 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 
 	public void testQVTrDomainUsage_HierarchicalStateMachine2FlatStateMachine() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/bin/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
+		URI transformURI;
+		if (EMFPlugin.IS_ECLIPSE_RUNNING /*TestUtil.isPackaged()*/) {
+			transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
+		}
+		else {
+			transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
+		}
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();

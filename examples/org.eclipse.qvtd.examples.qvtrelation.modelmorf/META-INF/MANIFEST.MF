@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: QVTrelation ModelMorf Examples (Incubation)
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.examples.qvtrelation.modelmorf
 Bundle-Version: 0.15.0.qualifier
 Export-Package: org.eclipse.qvtd.examples.qvtrelation.modelmorf
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.emf.mwe2.runtime,
  org.eclipse.emf.mwe2.launch

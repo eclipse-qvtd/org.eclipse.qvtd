@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipse.qvtd</groupId>
+    <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../releng/org.eclipse.qvtd.releng.tycho</relativePath>
+  </parent>
+  <groupId>org.eclipse.qvtd-examples</groupId>
+  <artifactId>org.eclipse.qvtd.examples-folder</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>org.eclipse.qvtd.examples</module>
+    <!--module>org.eclipse.qvtd.examples.qvtcore.empty</module-->
+    <module>org.eclipse.qvtd.examples.qvtcore.uml2rdbms</module>
+    <!--module>org.eclipse.qvtd.examples.qvtrelation.empty</module-->
+    <module>org.eclipse.qvtd.examples.qvtrelation.hstm2fstm</module>
+    <module>org.eclipse.qvtd.examples.qvtrelation.modelmorf</module>
+    <module>org.eclipse.qvtd.examples.qvtrelation.reltocore</module>
+    <module>org.eclipse.qvtd.examples.umlx.hstm2fstm</module>
+  </modules>
+</project>

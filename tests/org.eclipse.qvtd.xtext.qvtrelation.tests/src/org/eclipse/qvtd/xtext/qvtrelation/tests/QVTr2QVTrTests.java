@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -65,8 +66,7 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		return new MyQVT(myEnvironmentFactory, new QVTrelationDomainUsageAnalysis(myEnvironmentFactory));
 	}
 
-	protected void doCopierTest(@NonNull MyQVT myQVT, @NonNull URI inURI) throws Exception {
-		URI outURI = inURI.trimFileExtension().appendFileExtension("copied.qvtras");
+	protected void doCopierTest(@NonNull MyQVT myQVT, @NonNull URI inURI, @NonNull URI outURI) throws Exception {
 		Transformation asTransformation = loadTransformation(myQVT, inURI);
 		QVTr2QVTrCopier copier = new QVTr2QVTrCopier(myQVT.getEnvironmentFactory());
 		Resource inResource = asTransformation.eResource();
@@ -127,16 +127,34 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 
 	public void testQVTr2QVTrCopy_HierarchicalStateMachine2FlatStateMachine() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/bin/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
-		doCopierTest(myQVT, inURI);
+		URI inURI;
+		URI outURI;
+		if (EMFPlugin.IS_ECLIPSE_RUNNING /*TestUtil.isPackaged()*/) {
+			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
+			outURI = getProjectFileURI(getName() + "/HierarchicalStateMachine2FlatStateMachine.qvtr.copied.qvtras");
+		}
+		else {
+			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
+			outURI = getProjectFileURI(getName() + "/HierarchicalStateMachine2FlatStateMachine.qvtr.copied.qvtras");
+		}
+		doCopierTest(myQVT, inURI, outURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
 	}
 
 	public void testQVTr2QVTrCopy_RelToCore() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
-		doCopierTest(myQVT, inURI);
+		URI inURI;
+		URI outURI;
+		if (EMFPlugin.IS_ECLIPSE_RUNNING /*TestUtil.isPackaged()*/) {
+			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
+			outURI = getProjectFileURI(getName() + "/RelToCore.qvtr.copied.qvtras");
+		}
+		else {
+			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
+			outURI = getProjectFileURI(getName() + "/RelToCore.qvtr.copied.qvtras");
+		}
+		doCopierTest(myQVT, inURI, outURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
 	}

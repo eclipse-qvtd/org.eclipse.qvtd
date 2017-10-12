@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.qvtd</groupId>
+  <artifactId>org.eclipse.qvtd.plugins-folder</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <parent>
+    <groupId>org.eclipse.qvtd</groupId>
+    <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../releng/org.eclipse.qvtd.releng.tycho</relativePath>
+  </parent>
+
+  <modules>
+    <module>org.eclipse.qvt</module>
+    <module>org.eclipse.qvtd.atl</module>
+    <module>org.eclipse.qvtd.codegen</module>
+    <module>org.eclipse.qvtd.compiler</module>
+    <!--module>org.eclipse.qvtd.cs2as.compiler</module-->
+    <module>org.eclipse.qvtd.debug</module>
+    <module>org.eclipse.qvtd.debug.ui</module>
+    <module>org.eclipse.qvtd.pivot.qvtbase</module>
+    <module>org.eclipse.qvtd.pivot.qvtcore</module>
+    <module>org.eclipse.qvtd.pivot.qvtimperative</module>
+    <module>org.eclipse.qvtd.pivot.qvtrelation</module>
+    <module>org.eclipse.qvtd.pivot.qvtschedule</module>
+    <module>org.eclipse.qvtd.pivot.qvttemplate</module>
+    <module>org.eclipse.qvtd.runtime</module>
+    <module>org.eclipse.qvtd.umlx</module>
+    <module>org.eclipse.qvtd.umlx.design</module>
+    <module>org.eclipse.qvtd.umlx.ui</module>
+    <module>org.eclipse.qvtd.xtext.qvtbase</module>
+    <module>org.eclipse.qvtd.xtext.qvtbase.ui</module>
+    <module>org.eclipse.qvtd.xtext.qvtcore</module>
+    <module>org.eclipse.qvtd.xtext.qvtcore.ui</module>
+    <module>org.eclipse.qvtd.xtext.qvtimperative</module>
+    <module>org.eclipse.qvtd.xtext.qvtimperative.ui</module>
+    <module>org.eclipse.qvtd.xtext.qvtrelation</module>
+    <module>org.eclipse.qvtd.xtext.qvtrelation.ui</module>
+  </modules>
+</project>

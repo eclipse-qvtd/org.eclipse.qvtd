@@ -11,10 +11,13 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
+import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -32,7 +35,18 @@ public class LoadTests extends LoadTestCase
 	}
 
 	protected void doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @NonNull [] messages) throws IOException {
+		ClassLoader cl0 = getClass().getClassLoader();
 		OCL ocl = OCL.newInstance(getProjectMap());
+		ClassLoader cl1 = ocl.getClass().getClassLoader();
+		ClassLoader cl2 = ocl.getResourceSet().getClass().getClassLoader();
+		EnvironmentFactoryAdapter environmentFactoryAdapter = EnvironmentFactoryAdapter.find(ocl.getResourceSet());
+		assert environmentFactoryAdapter != null;
+		ClassLoader cl3 = environmentFactoryAdapter.getClass().getClassLoader();
+		ImplementationManager implementationManager = environmentFactoryAdapter.getMetamodelManager().getImplementationManager();
+		@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();
+		if (!classLoaders.contains(cl0)) {
+			implementationManager.addClassLoader(cl0);
+		}
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}
@@ -105,7 +119,13 @@ public class LoadTests extends LoadTestCase
 
 	public void testLoad_ATL2QVTr_qvtr() throws IOException, InterruptedException {
 		//		ProjectMap.getAdapter(resourceSet);
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/src/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		URI inputURI;
+		if (Boolean.getBoolean("TYCHO_UI_TEST")) {
+			inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		}
+		else {
+			inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/src/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		}
 		URI pivotURI = getProjectFileURI("ATL2QVTr.qvtras");
 		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {});
 	}
