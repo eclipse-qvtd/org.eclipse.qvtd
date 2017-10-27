@@ -9,6 +9,7 @@
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="0.0.0"/>
+    <unit id="org.eclipse.m2m.qvt.oml.samples" version="0.0.0"/>
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
     <repository location="http://download.eclipse.org/releases/photon/201709221000"/>
   </location>

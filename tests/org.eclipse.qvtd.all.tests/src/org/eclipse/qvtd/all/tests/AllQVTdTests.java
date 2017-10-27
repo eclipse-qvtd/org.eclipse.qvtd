@@ -16,6 +16,8 @@ import java.util.Arrays;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.compiler.tests.AllCompilerTests;
+import org.eclipse.qvtd.doc.bigmde2016.tests.AllbigMDE2016Tests;
+import org.eclipse.qvtd.doc.exe2016.tests.Allexe2016Tests;
 import org.eclipse.qvtd.umlx.tests.AllUMLXTests;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
@@ -55,9 +57,8 @@ public class AllQVTdTests extends TestCase
 		}
 		result.addTest(AllUMLXTests.suite());
 		//	result.addTest(AllATLTests.suite()); // ATL uses a different ANTLR to Xtext - must be run separately
-		//		result.addTestSuite(BigMDE2016_QVTc_AutomatedTests.class);	// NB this is very slow since we are -ea
-		//		result.addTestSuite(EXE2016_QVTc_AutomatedTests.class);		// NB this is very slow since we are -ea
-		//		result.addTestSuite(EXE2016_QVTr_AutomatedTests.class);		// NB this is very slow since we are -ea
+		result.addTest(AllbigMDE2016Tests.suite());	// NB this is very slow since we are -ea
+		result.addTest(Allexe2016Tests.suite());		// NB this is very slow since we are -ea
 		//		result.addTestSuite(MiniOCLCSParsingTest.class);
 		return result;
 	}

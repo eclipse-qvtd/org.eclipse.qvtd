@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Willink Transformations and others.
+ * Copyright (c) 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,11 +9,11 @@
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.qvtd.xtext.qvtcore.tests;
+package org.eclipse.qvtd.doc.bigmde2016.tests;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016_QVTc_AutomatedTests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -21,23 +21,17 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * Tests for the Xtext QVTc editor support.
+ * Tests for the BigMDE 2016 example.
  */
-@SuppressWarnings("nls")
-public class AllQVTcoreTests extends TestCase
+public class AllbigMDE2016Tests extends TestCase
 {
-	public AllQVTcoreTests() {
+	public AllbigMDE2016Tests() {
 		super("");
 	}
 
 	public static Test suite() {
-		TestSuite result = new TestSuite("All QVTcore Tests");
-		result.addTestSuite(LoadTests.class);
-		result.addTestSuite(QVTcDomainUsageTests.class);
-		result.addTestSuite(QVTcSerializeTests.class);
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			result.addTestSuite(QVTcCompilerTests.class);
-		}
+		TestSuite result = new TestSuite("All BigMDE 2016 Tests");
+		result.addTestSuite(BigMDE2016_QVTc_AutomatedTests.class);	// NB this is very slow since we are -ea
 		return result;
 	}
 
