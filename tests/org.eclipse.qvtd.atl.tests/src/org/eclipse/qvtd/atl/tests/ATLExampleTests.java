@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.atl.tests;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,24 +29,30 @@ import junit.framework.TestCase;
  */
 public class ATLExampleTests extends TestCase
 {
-	protected void doATLExampleTest_CG(@NonNull String testName) throws Exception {
+	protected void doATLExampleTest_CG(@NonNull URI testFolderURI, @NonNull String testName) throws Exception {
 		ATLTestQVT myQVT = new ATLTestQVT(testName.toLowerCase());
 		try {
 			Class<?> txClass = Class.forName("org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr");		// FIXME Use direct reference once generation works redliably
-			myQVT.createGeneratedExecutor((Class<? extends Transformer>)txClass);
-			Resource atlResource = myQVT.loadInput("atl", testName + ".atl");
+			@SuppressWarnings({"unchecked", "null"})
+			@NonNull Class<? extends Transformer> txCastClass = (Class<? extends Transformer>)txClass;
+			myQVT.createGeneratedExecutor(txCastClass);
+			URI atlURI = testFolderURI.appendSegment(testName + ".atl");
+			URI atlXMIURI = atlURI.appendFileExtension("xmi");
+			Resource atlResource = myQVT.loadInput("atl", atlURI);
 			assert atlResource != null;
 			EList<@NonNull EObject> contents = atlResource.getContents();
-			Resource atlXmiResource = atlResource.getResourceSet().createResource(atlResource.getURI().appendFileExtension("xmi"));
+			assert !contents.isEmpty() : "ATL's ANTLR cannot co-exist with Xext's ANTLR - run test separately";
+			Resource atlXmiResource = atlResource.getResourceSet().createResource(atlXMIURI);
 			atlXmiResource.getContents().addAll(contents);
 			atlXmiResource.save(null);
 			contents.addAll(atlXmiResource.getContents());
 			try {
+				@SuppressWarnings("unused")
 				Transformer executeTransformation = myQVT.executeTransformation();
-				myQVT.saveOutput("qvtr", testName + "_CG.qvtras", testName + "_expected.qvtras");
+				myQVT.saveOutput("qvtr", testFolderURI.appendSegment(testName + "_CG.qvtras"), testFolderURI.appendSegment(testName + "_expected.qvtras"));
 			}
 			catch (InvalidEvaluationException e) {
-				myQVT.saveOutput("qvtr", testName + "_CG.qvtras", "");
+				myQVT.saveOutput("qvtr", testFolderURI.appendSegment(testName + "_CG.qvtras"), null);
 				throw e;
 			}
 		}
@@ -55,13 +62,13 @@ public class ATLExampleTests extends TestCase
 	}
 
 	@Test
-	public void testATLExample_Families2Persons_CG() throws Exception {
+	public void testATL2QVTr_Families2Persons_CG() throws Exception {
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		AbstractTransformer.INVOCATIONS.setState(true);
 		//		PivotStandaloneSetup.init();
 		QVTimperativeLibrary.install();
 		QVTrelationToStringVisitor.FACTORY.getClass();
-		doATLExampleTest_CG("Families2Persons");
+		doATLExampleTest_CG(URI.createPlatformResourceURI("org.eclipse.qvtd.atl.tests/models/families2persons", true), "Families2Persons");
 	}
 
 	/*	@Test

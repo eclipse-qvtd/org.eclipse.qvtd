@@ -167,8 +167,7 @@ public class ATLTestQVT extends QVTimperative
 		EmftvmFactory.class.getName();
 	}
 
-	protected void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile) throws IOException, InterruptedException {
-		URI referenceModelURI = testFolderURI.appendSegment(expectedFile);
+	protected void checkOutput(@NonNull Resource outputResource, @NonNull URI referenceModelURI) throws IOException, InterruptedException {
 		Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
 		assert referenceResource != null;
 		assertSameModel(referenceResource, outputResource);
@@ -228,8 +227,7 @@ public class ATLTestQVT extends QVTimperative
 		return saveOptions;
 	}
 
-	public @Nullable Resource loadInput(@NonNull String modelName, @NonNull String modelFile) {
-		URI modelURI = testFolderURI.appendSegment(modelFile);
+	public @Nullable Resource loadInput(@NonNull String modelName, @NonNull URI modelURI) {
 		if (interpretedExecutor != null) {
 			return interpretedExecutor.loadModel(modelName, modelURI);
 		}
@@ -242,9 +240,8 @@ public class ATLTestQVT extends QVTimperative
 		}
 	}
 
-	// FIXME "" expectedFile used as proxy rescue
-	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile) throws IOException, InterruptedException {
-		URI modelURI = testFolderURI.appendSegment(modelFile);
+	// FIXME null referenceModelURI used as proxy rescue
+	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull URI modelURI, @Nullable URI referenceModelURI) throws IOException, InterruptedException {
 		ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("qvtras", new QVTrelationASResourceFactory());
 		Resource outputResource;
@@ -254,15 +251,16 @@ public class ATLTestQVT extends QVTimperative
 		else {
 			outputResource = resourceSet.createResource(modelURI);
 			outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
-			if ("".equals(expectedFile)) {
+			if (referenceModelURI == null) {
 				Map<EObject, Collection<Setting>> find = EcoreUtil.UnresolvedProxyCrossReferencer.find(outputResource);
 				for (EObject eObject : find.keySet()) {
+					assert eObject != null;
 					outputResource.getContents().add(eObject);
 					Collection<Setting> settings = find.get(eObject);
 					assert settings != null;
 					for (Setting s : settings) {
-						EObject eObject2 = s.getEObject();
-						EStructuralFeature eStructuralFeature = s.getEStructuralFeature();
+						@SuppressWarnings("unused") EObject eObject2 = s.getEObject();
+						@SuppressWarnings("unused") EStructuralFeature eStructuralFeature = s.getEStructuralFeature();
 					}
 					((InternalEObject)eObject).eSetProxyURI(null);
 				};
@@ -272,8 +270,8 @@ public class ATLTestQVT extends QVTimperative
 			outputResource.save(getSaveOptions());
 		}
 		assert outputResource != null;
-		if ((expectedFile != null) && (expectedFile.length() > 0)){
-			checkOutput(outputResource, expectedFile);
+		if (referenceModelURI != null) {
+			checkOutput(outputResource, referenceModelURI);
 		}
 		return outputResource;
 	}
