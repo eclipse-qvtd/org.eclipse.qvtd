@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -552,5 +553,17 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		XMLResource resource = (XMLResource) transformation.eResource();
 		//    	new AS2ID().assignIds(resource.getResourceSet());
 		resource.save(options);
+	}
+
+	public void setExternalURI(@NonNull String name, @NonNull URI modelURI) throws IOException {
+		ImperativeTypedModel typedModel = getTypedModel(name);
+		Resource resource = modelsManager.getModel(typedModel);
+		if (resource != null) {
+			for (EObject eObject : resource.getContents()) {
+				if (eObject instanceof Model) {
+					((Model)eObject).setExternalURI(modelURI.toString());
+				}
+			}
+		}
 	}
 }

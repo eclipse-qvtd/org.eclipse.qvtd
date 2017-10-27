@@ -37,7 +37,7 @@ public class ATLExampleTests extends TestCase
 			@NonNull Class<? extends Transformer> txCastClass = (Class<? extends Transformer>)txClass;
 			myQVT.createGeneratedExecutor(txCastClass);
 			URI atlURI = testFolderURI.appendSegment(testName + ".atl");
-			URI atlXMIURI = atlURI.appendFileExtension("xmi");
+			URI atlXMIURI = myQVT.makeWriteable(atlURI.appendFileExtension("xmi"));
 			Resource atlResource = myQVT.loadInput("atl", atlURI);
 			assert atlResource != null;
 			EList<@NonNull EObject> contents = atlResource.getContents();
@@ -46,13 +46,14 @@ public class ATLExampleTests extends TestCase
 			atlXmiResource.getContents().addAll(contents);
 			atlXmiResource.save(null);
 			contents.addAll(atlXmiResource.getContents());
+			URI outputURI = testFolderURI.appendSegment(testName + "_CG.qvtras");
 			try {
 				@SuppressWarnings("unused")
 				Transformer executeTransformation = myQVT.executeTransformation();
-				myQVT.saveOutput("qvtr", testFolderURI.appendSegment(testName + "_CG.qvtras"), testFolderURI.appendSegment(testName + "_expected.qvtras"));
+				myQVT.saveOutput("qvtr", outputURI, testFolderURI.appendSegment(testName + "_expected.qvtras"));
 			}
 			catch (InvalidEvaluationException e) {
-				myQVT.saveOutput("qvtr", testFolderURI.appendSegment(testName + "_CG.qvtras"), null);
+				myQVT.saveOutput("qvtr", outputURI, null);
 				throw e;
 			}
 		}

@@ -54,6 +54,7 @@ public class AllQVTdTests extends TestCase
 			//			result.addTestSuite(OCL2QVTiTestCases.class);
 		}
 		result.addTest(AllUMLXTests.suite());
+		//	result.addTest(AllATLTests.suite()); // ATL uses a different ANTLR to Xtext - must be run separately
 		//		result.addTestSuite(BigMDE2016_QVTc_AutomatedTests.class);	// NB this is very slow since we are -ea
 		//		result.addTestSuite(EXE2016_QVTc_AutomatedTests.class);		// NB this is very slow since we are -ea
 		//		result.addTestSuite(EXE2016_QVTr_AutomatedTests.class);		// NB this is very slow since we are -ea

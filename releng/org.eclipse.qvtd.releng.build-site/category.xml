@@ -3,13 +3,37 @@
    <feature id="org.eclipse.qvtd.atl" version="0.0.0">
       <category name="qvtd"/>
    </feature>
+   <feature id="org.eclipse.qvtd.atl.source" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
+   <feature id="org.eclipse.qvtd.doc" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
+   <feature id="org.eclipse.qvtd.doc.source" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
    <feature id="org.eclipse.qvtd.examples" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
+   <feature id="org.eclipse.qvtd.examples.source" version="0.0.0">
       <category name="qvtd"/>
    </feature>
    <feature id="org.eclipse.qvtd.master" version="0.0.0">
       <category name="qvtd"/>
    </feature>
+   <feature id="org.eclipse.qvtd.master.source" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
+   <feature id="org.eclipse.qvtd.tests" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
+   <feature id="org.eclipse.qvtd.tests.source" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
    <feature id="org.eclipse.qvtd.umlx" version="0.0.0">
+      <category name="qvtd"/>
+   </feature>
+   <feature id="org.eclipse.qvtd.umlx.source" version="0.0.0">
       <category name="qvtd"/>
    </feature>
    <category-def name="qvtd" label="QVTd">

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.atl.tests;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collection;
@@ -55,7 +56,6 @@ import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.xtext.util.EmfFormatter;
-
 import junit.framework.TestCase;
 
 public class ATLTestQVT extends QVTimperative
@@ -121,7 +121,7 @@ public class ATLTestQVT extends QVTimperative
 	}
 
 	static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.atl.tests";
-	static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
+	//	static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
 
 	private static StandaloneProjectMap projectMap = null;
 
@@ -152,13 +152,13 @@ public class ATLTestQVT extends QVTimperative
 		TestCase.assertEquals(expected, actual);
 	}
 
-	protected final @NonNull URI testFolderURI;
+	//	protected final @NonNull URI testFolderURI;
 	private BasicQVTiExecutor interpretedExecutor = null;
 	private QVTiTransformationExecutor generatedExecutor = null;
 
 	public ATLTestQVT(@NonNull String testFolderName) {
 		super(new QVTiEnvironmentFactory(getProjectMap(), null));
-		this.testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
+		//		this.testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 		getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl_514599());	// FIXME wrong ResourceSet
 		// Ensure ATL parser support is classpath
 		AtlParser.class.getName();
@@ -177,10 +177,10 @@ public class ATLTestQVT extends QVTimperative
 		return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 	}
 
-	public @Nullable Resource createModel(@NonNull String modelName, @NonNull String modelFile) {
-		URI modelURI = testFolderURI.appendSegment(modelFile);
-		return interpretedExecutor.createModel(modelName, modelURI, null);
-	}
+	//	public @Nullable Resource createModel(@NonNull String modelName, @NonNull String modelFile) {
+	//		URI modelURI = testFolderURI.appendSegment(modelFile);
+	//		return interpretedExecutor.createModel(modelName, modelURI, null);
+	//	}
 
 	@Override
 	public synchronized void dispose() {
@@ -240,16 +240,57 @@ public class ATLTestQVT extends QVTimperative
 		}
 	}
 
+	public @NonNull URI makeWriteable(@NonNull URI uri) {
+		assert uri.isPlatformResource();
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			String projectName = uri.segment(1);
+			/*			Bundle bundle = Platform.getBundle(projectName);
+			String location = bundle.getLocation();
+			if (location.startsWith("initial@")) {
+				try {
+					bundle.start();
+				} catch (BundleException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				location = bundle.getLocation();
+			}
+			assert location.startsWith("reference:file:") : "Unexpected prefix for " + location + " for " + projectName;
+			assert location.endsWith("/") : "Unexpected suffix for " + location + " for " + projectName;
+			URI locationURI = URI.createFileURI(location.substring(15, location.length()-1));
+			assert locationURI != null;
+			for (int i = 2; i < uri.segmentCount(); i++) {
+				locationURI = locationURI.appendSegment(uri.segment(i));
+			} */
+			File projectFile;
+			try {
+				projectFile = File.createTempFile("qvtdtest", uri.lastSegment());
+				projectFile.deleteOnExit();
+				uri = URI.createFileURI(projectFile.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			// FIXME delete any old file
+		}
+		return uri;
+	}
+
 	// FIXME null referenceModelURI used as proxy rescue
 	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull URI modelURI, @Nullable URI referenceModelURI) throws IOException, InterruptedException {
 		ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("qvtras", new QVTrelationASResourceFactory());
 		Resource outputResource;
+		URI writeableModelURI = makeWriteable(modelURI);
 		if (interpretedExecutor != null) {
-			outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
+			interpretedExecutor.setExternalURI(modelName, modelURI);
+			outputResource = interpretedExecutor.saveModel(modelName, writeableModelURI, null, getSaveOptions());
 		}
 		else {
-			outputResource = resourceSet.createResource(modelURI);
+			generatedExecutor.getTransformer().setExternalURI(modelName, modelURI);
+			outputResource = resourceSet.createResource(writeableModelURI);
 			outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
 			if (referenceModelURI == null) {
 				Map<EObject, Collection<Setting>> find = EcoreUtil.UnresolvedProxyCrossReferencer.find(outputResource);

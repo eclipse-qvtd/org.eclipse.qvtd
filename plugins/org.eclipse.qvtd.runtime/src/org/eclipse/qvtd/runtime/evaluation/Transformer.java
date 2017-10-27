@@ -12,6 +12,7 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
@@ -50,4 +51,5 @@ public interface Transformer extends ExecutionVisitable
 	@NonNull Collection<@NonNull Object> getRootObjects(@NonNull String modelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;
+	void setExternalURI(@NonNull String modelName, @NonNull URI modelURI);
 }

@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -832,4 +833,14 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			constructor.addAppendedConnection(appendedConnection);
 		}
 	} */
+
+	@Override
+	public void setExternalURI(@NonNull String modelName, @NonNull URI modelURI) {
+		Model model = getTypedModelInstance(modelName);
+		for (Object object : model.getRootObjects()) {
+			if (object instanceof org.eclipse.ocl.pivot.Model) {
+				((org.eclipse.ocl.pivot.Model)object).setExternalURI(modelURI.toString());
+			}
+		}
+	}
 }
