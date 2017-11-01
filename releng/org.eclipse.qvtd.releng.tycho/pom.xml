@@ -15,7 +15,7 @@
   </prerequisites>
   <groupId>org.eclipse.qvtd</groupId>
   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>0.15.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <licenses>
     <license>
@@ -412,7 +412,7 @@
                 <artifact>
                   <groupId>org.eclipse.qvtd</groupId>
                   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-                  <version>1.0.0-SNAPSHOT</version>
+                  <version>0.15.0-SNAPSHOT</version>
                   <classifier>targetPlatforms/nightly</classifier>
                 </artifact>
               </target>
@@ -439,7 +439,7 @@
                 <artifact>
                   <groupId>org.eclipse.qvtd</groupId>
                   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-                  <version>1.0.0-SNAPSHOT</version>
+                  <version>0.15.0-SNAPSHOT</version>
                   <classifier>targetPlatforms/interim</classifier>
                 </artifact>
               </target>
@@ -474,7 +474,7 @@
                 <artifact>
                   <groupId>org.eclipse.qvtd</groupId>
                   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-                  <version>1.0.0-SNAPSHOT</version>
+                  <version>0.15.0-SNAPSHOT</version>
                   <classifier>targetPlatforms/stable</classifier>
                 </artifact>
               </target>
@@ -501,7 +501,7 @@
                 <artifact>
                   <groupId>org.eclipse.qvtd</groupId>
                   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-                  <version>1.0.0-SNAPSHOT</version>
+                  <version>0.15.0-SNAPSHOT</version>
                   <classifier>targetPlatforms/oxygen</classifier>
                 </artifact>
               </target>
@@ -528,7 +528,7 @@
                 <artifact>
                   <groupId>org.eclipse.qvtd</groupId>
                   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-                  <version>1.0.0-SNAPSHOT</version>
+                  <version>0.15.0-SNAPSHOT</version>
                   <classifier>targetPlatforms/photon</classifier>
                 </artifact>
               </target>
