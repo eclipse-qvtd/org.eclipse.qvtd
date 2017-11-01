@@ -43,18 +43,18 @@ public class GrammarTests extends AbstractGrammarTests
 	 * FIXME check the library/model version instead.
 	 */
 	public void testGrammar_QVTbase() throws Exception {
-		doTestGrammar(QVTbaseGrammarResource.class.getResource("QVTbase.xtextbin"), QVTbaseGrammarResource.INSTANCE);
+		doTestGrammar(QVTbaseGrammarResource.class, "QVTbase.xtextbin", QVTbaseGrammarResource.INSTANCE);
 	}
 
 	public void testGrammar_QVTcore() throws Exception {
-		doTestGrammar(QVTcoreGrammarResource.class.getResource("QVTcore.xtextbin"), QVTcoreGrammarResource.INSTANCE);
+		doTestGrammar(QVTcoreGrammarResource.class, "QVTcore.xtextbin", QVTcoreGrammarResource.INSTANCE);
 	}
 
 	public void testGrammar_QVTimperative() throws Exception {
-		doTestGrammar(QVTimperativeGrammarResource.class.getResource("QVTimperative.xtextbin"), QVTimperativeGrammarResource.INSTANCE);
+		doTestGrammar(QVTimperativeGrammarResource.class, "QVTimperative.xtextbin", QVTimperativeGrammarResource.INSTANCE);
 	}
 
 	public void testGrammar_QVTrelation() throws Exception {
-		doTestGrammar(QVTrelationGrammarResource.class.getResource("QVTrelation.xtextbin"), QVTrelationGrammarResource.INSTANCE);
+		doTestGrammar(QVTrelationGrammarResource.class, "QVTrelation.xtextbin", QVTrelationGrammarResource.INSTANCE);
 	}
 }
