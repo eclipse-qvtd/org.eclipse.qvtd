@@ -14,7 +14,7 @@
 		<condition property="examplesDir" value="../../examples/" else="../">
 		    <available file="../../examples" type="dir"/>
 		</condition>
-		<echoproperties/>
+		<!--echoproperties/-->
 		<!-- This example may have been compiled already in the Master feature -->
 		<delete>
 			<!-- Cleanup obsolete zips from earlier variant of script -->
