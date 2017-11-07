@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
-package org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl;
+package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.util.ArrayList;
 import java.util.Comparator;
