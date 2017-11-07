@@ -22,3 +22,4 @@ Export-Package: org.eclipse.qvtd.doc,
  org.eclipse.qvtd.doc.services,
  org.eclipse.qvtd.doc.validation
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.qvtd.doc.minioclcs.xtext

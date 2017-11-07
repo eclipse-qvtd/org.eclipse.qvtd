@@ -15,3 +15,4 @@ Require-Bundle: org.eclipse.emf.codegen.ecore;bundle-version="[2.7.0,3.0.0)",
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
+Automatic-Module-Name: org.eclipse.qvtd.cs2as.build

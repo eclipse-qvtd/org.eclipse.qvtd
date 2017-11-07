@@ -38,3 +38,4 @@ Export-Package: org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.utilities
 Import-Package: com.google.common.base,
  com.google.common.collect
+Automatic-Module-Name: org.eclipse.qvtd.compiler

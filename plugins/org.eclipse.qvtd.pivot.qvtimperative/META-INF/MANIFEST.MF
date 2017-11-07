@@ -26,3 +26,4 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.google.inject,
  com.google.common.collect,
  org.apache.log4j;version="1.2.15"
+Automatic-Module-Name: org.eclipse.qvtd.pivot.qvtimperative

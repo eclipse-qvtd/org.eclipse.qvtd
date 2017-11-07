@@ -16,3 +16,5 @@ Export-Package: org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simplerdbms,
  org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms,
  org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl,
  org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.util
+Automatic-Module-Name: org.eclipse.qvtd.examples.qvtcore.uml2rdbms
+

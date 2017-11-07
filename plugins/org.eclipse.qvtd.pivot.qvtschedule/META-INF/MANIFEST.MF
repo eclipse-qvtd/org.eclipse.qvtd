@@ -17,3 +17,4 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.google.common.base,
  com.google.common.collect,
  com.google.inject
+Automatic-Module-Name: org.eclipse.qvtd.pivot.qvtschedule

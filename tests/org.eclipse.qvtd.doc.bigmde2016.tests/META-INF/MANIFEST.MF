@@ -26,3 +26,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.doc.bigmde2016.tests
+Automatic-Module-Name: org.eclipse.qvtd.doc.bigmde2016.tests

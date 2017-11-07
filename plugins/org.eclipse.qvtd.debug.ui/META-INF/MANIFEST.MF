@@ -30,3 +30,4 @@ Export-Package: org.eclipse.qvtd.debug.ui,
  org.eclipse.qvtd.debug.ui.launching,
  org.eclipse.qvtd.debug.ui.messages,
  org.eclipse.qvtd.debug.ui.pages
+Automatic-Module-Name: org.eclipse.qvtd.debug.ui

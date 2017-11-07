@@ -25,3 +25,4 @@ Export-Package: org.eclipse.qvtd.debug,
  org.eclipse.qvtd.debug.vm
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.debug.QVTiDebugPlugin
+Automatic-Module-Name: org.eclipse.qvtd.debug

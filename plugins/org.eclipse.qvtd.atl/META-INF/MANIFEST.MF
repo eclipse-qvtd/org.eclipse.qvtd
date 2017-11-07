@@ -14,3 +14,4 @@ Export-Package: org.eclipse.qvtd.atl.atl2qvtr,
  org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl,
  org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.util,
  org.eclipse.qvtd.atl.atl2qvtr.utilities
+Automatic-Module-Name: org.eclipse.qvtd.atl

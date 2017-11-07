@@ -22,3 +22,4 @@ Export-Package: org.eclipse.qvtd.doc.minioclcs.xtext.ui.internal,
  org.eclipse.qvtd.doc.ui.quickfix,
  org.eclipse.qvtd.doc.ui.contentassist
 Bundle-Activator: org.eclipse.qvtd.doc.minioclcs.xtext.ui.internal.XtextActivator
+Automatic-Module-Name: org.eclipse.qvtd.doc.minioclcs.xtext.ui

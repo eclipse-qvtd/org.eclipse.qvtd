@@ -21,3 +21,4 @@ Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.10.0,3.0.0)",
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator
 Bundle-Vendor: %providerName
+Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtcore.ui

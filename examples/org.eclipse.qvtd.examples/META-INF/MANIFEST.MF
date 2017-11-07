@@ -18,3 +18,4 @@ Export-Package: org.eclipse.qvtd.examples,
  org.eclipse.qvtd.examples.qvtc.wizards,
  org.eclipse.qvtd.examples.qvtr.wizards,
  org.eclipse.qvtd.examples.wizards
+Automatic-Module-Name: org.eclipse.qvtd.examples

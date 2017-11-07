@@ -16,3 +16,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.xtext.qvtcore.tests
+Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtcore.tests

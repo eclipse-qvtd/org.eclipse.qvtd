@@ -7,3 +7,4 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.qvtd.runtime
+Automatic-Module-Name: org.eclipse.qvtd.examples.qvtrelation.hstm2fstm

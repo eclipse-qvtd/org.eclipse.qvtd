@@ -19,3 +19,4 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)",
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.common.collect,
  com.google.inject
+Automatic-Module-Name: org.eclipse.qvtd.pivot.qvtrelation

@@ -28,3 +28,4 @@ Export-Package: org.eclipse.qvtd.xtext.qvtbase,
  org.eclipse.qvtd.xtext.qvtbasecs,
  org.eclipse.qvtd.xtext.qvtbasecs.impl,
  org.eclipse.qvtd.xtext.qvtbasecs.util
+Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtbase
