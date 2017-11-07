@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
-package org.eclipse.qvtd.umlx.tests.forward2reverse;
+package org.eclipse.qvtd.umlx.tests;
 
 import java.util.ArrayList;
 import java.util.Comparator;
