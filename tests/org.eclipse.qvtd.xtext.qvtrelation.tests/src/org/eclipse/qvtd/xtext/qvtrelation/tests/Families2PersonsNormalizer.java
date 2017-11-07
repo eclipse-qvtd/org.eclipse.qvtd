@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
-package org.eclipse.qvtd.xtext.qvtrelation.tests.families2persons;
+package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.util.ArrayList;
 import java.util.Comparator;

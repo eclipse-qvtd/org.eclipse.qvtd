@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtrelation.tests.rel2core;
+package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.util.ArrayList;
 import java.util.Comparator;
