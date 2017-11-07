@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS;
+package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.util.ArrayList;
 import java.util.Comparator;

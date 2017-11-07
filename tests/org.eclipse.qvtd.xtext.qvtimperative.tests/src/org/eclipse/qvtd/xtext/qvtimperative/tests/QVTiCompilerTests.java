@@ -66,8 +66,6 @@ import org.eclipse.qvtd.runtime.internal.evaluation.ModificationMonitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
 
 import com.google.common.collect.Iterables;
 
@@ -98,7 +96,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			String message = OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource);
 			assertNull(message);
 			@SuppressWarnings("unchecked")
-			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName, null);
 			return txClass;
 		}
 
