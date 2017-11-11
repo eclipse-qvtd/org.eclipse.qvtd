@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tbase:TRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tbase="http://cs2as/tests/example5/targetBaseMM/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example5/targetBaseMM/1.0 ../TargetBaseMM.ecore">
+  <ownedA name="x1">
+    <ownsB name="y1">
+      <ownsC/>
+    </ownsB>
+  </ownedA>
+</tbase:TRoot>

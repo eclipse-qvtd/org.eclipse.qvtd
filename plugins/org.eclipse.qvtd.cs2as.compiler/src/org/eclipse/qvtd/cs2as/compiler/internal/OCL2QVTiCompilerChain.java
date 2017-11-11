@@ -78,8 +78,8 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
 		public @NonNull Resource ocl2qvtm(@NonNull URI oclURI) throws IOException {
 			OCL2QVTm ocl2qvtm = new OCL2QVTm(environmentFactory, traceabilityPropName);
-			Resource pResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
-			saveResource(pResource, QVTM_STEP);
+			Resource pResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI, getURI());
+			saveResource(pResource);
 			return pResource;
 		}
 
@@ -121,8 +121,8 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 * @throws CompilerChainException
 	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
-			@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-		super(qvti.getEnvironmentFactory(), oclDocURI, oclDocURI, options);
+			@NonNull URI oclDocURI, @NonNull URI prefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
+		super(qvti.getEnvironmentFactory(), oclDocURI, prefixURI, options);
 		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}
 

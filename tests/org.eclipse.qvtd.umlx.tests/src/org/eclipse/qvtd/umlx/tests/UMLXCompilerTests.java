@@ -285,9 +285,6 @@ public class UMLXCompilerTests extends LoadTestCase
 		//		MyQVT myQVT = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/example_hstm2fstm", "samples");
 		//		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
-			URI prefixURI = getTestURI("HierarchicalStateMachine2FlatStateMachine");
-			URI srcURI = getTestURI(JavaFileUtil.TEST_SRC_FOLDER_NAME);
-			URI binURI = getTestURI(JavaFileUtil.TEST_BIN_FOLDER_NAME);
 			txClass = myQVT1.buildTransformation("flat", false);
 			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 3);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);

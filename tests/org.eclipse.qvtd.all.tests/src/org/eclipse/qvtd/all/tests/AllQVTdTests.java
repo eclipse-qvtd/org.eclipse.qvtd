@@ -12,8 +12,8 @@ package org.eclipse.qvtd.all.tests;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.compiler.tests.AllCompilerTests;
+import org.eclipse.qvtd.cs2as.compiler.tests.OCL2QVTiTestCases;
 import org.eclipse.qvtd.doc.bigmde2016.tests.AllbigMDE2016Tests;
 import org.eclipse.qvtd.doc.exe2016.tests.Allexe2016Tests;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSParsingTest;
@@ -45,9 +45,7 @@ public class AllQVTdTests extends TestCase
 		result.addTest(AllQVTrelationTests.suite());
 		result.addTestSuite(QVTbaseLibraryTests.class);
 		result.addTestSuite(GrammarTests.class);
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			//			result.addTestSuite(OCL2QVTiTestCases.class);
-		}
+		result.addTestSuite(OCL2QVTiTestCases.class);
 		result.addTest(AllUMLXTests.suite());
 		//	result.addTest(AllATLTests.suite()); // ATL uses a different ANTLR to Xtext - must be run separately
 		result.addTest(AllbigMDE2016Tests.suite());	// NB this is very slow since we are -ea

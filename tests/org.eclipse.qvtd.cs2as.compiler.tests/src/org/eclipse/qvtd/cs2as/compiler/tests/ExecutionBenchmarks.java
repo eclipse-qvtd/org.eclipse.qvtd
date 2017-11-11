@@ -263,7 +263,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
 
 		BasicQVTiExecutor testEvaluator = qvt.createEvaluator(tx);
-		testEvaluator.saveTransformation(null);
+		testEvaluator.saveTransformation(null, null);
 		testEvaluator.loadModel("leftCS", csModelURI);
 		testEvaluator.createModel("rightAS", asModelURI, null);
 		boolean success = testEvaluator.execute();

@@ -180,7 +180,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			this.transitionComparator = transitionComparator;
 		}
 
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({"unchecked", "null"})
 		@Override
 		public void normalize(@NonNull EObject eObject) {
 			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedStates), stateComparator);
@@ -202,7 +202,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			this.transitionComparator = transitionComparator;
 		}
 
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({"unchecked", "null"})
 		@Override
 		public void normalize(@NonNull EObject eObject) {
 			ECollections.sort((EList<EObject>)eObject.eGet(stateOutTransitions), transitionComparator);
@@ -227,7 +227,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			this.transitionComparator = transitionComparator;
 		}
 
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({"unchecked", "null"})
 		@Override
 		public void normalize(@NonNull EObject eObject) {
 			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedStates), stateComparator);

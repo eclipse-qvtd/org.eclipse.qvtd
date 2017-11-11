@@ -60,7 +60,8 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		for (int i=0; i< extendedOclFileURIs.size(); i++) {
 			extendedOclDocURIs[i] = URI.createURI(extendedOclFileURIs.get(i));
 		}
-		CS2ASJavaCompilerParametersImpl cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder, javaPackage);
+		CS2ASJavaCompilerParametersImpl cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder);
+		cgParams.setPackagePrefix(javaPackage);
 		if (packageRenames != null) {
 			for (Map.Entry<String, String> entry : packageRenames.entrySet()) {
 				String fromPackage = entry.getKey();

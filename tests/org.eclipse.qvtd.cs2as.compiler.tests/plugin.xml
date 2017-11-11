@@ -5,5 +5,8 @@
 -->
 
 <plugin>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+   </extension>
 
 </plugin>

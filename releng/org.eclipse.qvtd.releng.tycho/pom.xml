@@ -95,7 +95,7 @@
         <configuration>
           <includePackedArtifacts>true</includePackedArtifacts>
           <resolver>p2</resolver>
-          <!-->executionEnvironment>JavaSE-1.8</executionEnvironment-->
+          <!--executionEnvironment>JavaSE-1.8</executionEnvironment-->
           <dependency-resolution>
             <extraRequirements>
               <requirement>

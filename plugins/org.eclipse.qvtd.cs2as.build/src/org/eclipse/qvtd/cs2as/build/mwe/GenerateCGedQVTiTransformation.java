@@ -87,7 +87,9 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		return new OCL2QVTiCGTxCompiler();
 	}
 	protected @NonNull CS2ASJavaCompilerParameters createParameters() {
-		return new CS2ASJavaCompilerParametersImpl(lookupResolverClassName, lookupResultItfName, javaFolder, javaPackage);
+		CS2ASJavaCompilerParametersImpl parameters = new CS2ASJavaCompilerParametersImpl(lookupResolverClassName, lookupResultItfName, javaFolder);
+		parameters.setPackagePrefix(javaPackage);
+		return parameters;
 	}
 
 	/**

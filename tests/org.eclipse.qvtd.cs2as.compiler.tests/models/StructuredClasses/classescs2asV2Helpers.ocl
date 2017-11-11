@@ -1,0 +1,2 @@
+import  cs : '../SimpleClasses/ClassesCS.ecore#/'
+import  as : '../SimpleClasses/Classes.ecore#/'

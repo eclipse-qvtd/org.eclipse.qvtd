@@ -311,9 +311,8 @@ public class XtextTestCase extends PivotTestCase
 	 * Return the name of the test bundle. The default implementation assumes that the package name is
 	 * the same as the bundle name. Override when this assumption is unjustified.
 	 */
-	@SuppressWarnings("null")
 	protected @NonNull String getTestBundleName() {
-		return getClass().getPackage().getName();
+		return ClassUtil.nonNullState(getClass().getPackage().getName());
 	}
 	protected @NonNull URI getTestBundleURI() {
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -324,7 +323,7 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 
-	protected @NonNull TestFileSystem getTestFileSystem() throws Exception {
+	protected @NonNull TestFileSystem getTestFileSystem() {
 		TestFileSystem testFileSystem2 = testFileSystem;
 		if (testFileSystem2 == null) {
 			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -339,7 +338,7 @@ public class XtextTestCase extends PivotTestCase
 	/**
 	 * Return the URI of the file within the testProject.
 	 */
-	protected @NonNull URI getTestFileURI(@NonNull String filePath) throws Exception {
+	protected @NonNull URI getTestFileURI(@NonNull String filePath) {
 		TestProject testProject = getTestProject();
 		TestFile outFile = testProject.getOutputFile(filePath);
 		return URI.createFileURI(outFile.getFile().toString());
@@ -352,16 +351,16 @@ public class XtextTestCase extends PivotTestCase
 		return getTestBundleURI().appendSegment("models");
 	}
 
-	protected @NonNull TestProject getTestProject() throws Exception {
+	protected @NonNull TestProject getTestProject() {
 		TestProject testProject2 = testProject;
 		if (testProject2 == null) {
 			String testProjectName = getClass().getSimpleName() + "__" + getTestName();
-			testProject = testProject2 = getTestFileSystem().getTestProject(testProjectName);
+			testProject = testProject2 = getTestFileSystem().getTestProject(testProjectName, true);
 		}
 		return testProject2;
 	}
 
-	protected @NonNull ProjectManager getTestProjectManager() throws Exception {
+	protected @NonNull ProjectManager getTestProjectManager() {
 		ProjectManager testProjectManager2 = testProjectManager;
 		if (testProjectManager2 == null) {
 			testProjectManager = testProjectManager2 = getTestProject().createTestProjectManager();
@@ -372,7 +371,7 @@ public class XtextTestCase extends PivotTestCase
 	/**
 	 * Return the URI of the filePath within the testProject.
 	 */
-	protected @NonNull URI getTestURI(@NonNull String filePath) throws Exception {
+	protected @NonNull URI getTestURI(@NonNull String filePath) {
 		TestProject testProject = getTestProject();
 		TestFile outFile = testProject.getOutputFile(filePath);
 		return outFile.getURI();
@@ -382,8 +381,11 @@ public class XtextTestCase extends PivotTestCase
 	 * Return the URI of a file in the test project based on the file name of the inputURI and
 	 * file extension replaced by fileExtension.
 	 */
-	protected @NonNull URI getTestURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) throws Exception {
-		URI fileStem = inputURI.trimFileExtension().appendFileExtension(fileExtension);
+	protected @NonNull URI getTestURIWithExtension(@NonNull URI inputURI, @Nullable String fileExtension) {
+		URI fileStem = inputURI.trimFileExtension();
+		if (fileExtension != null) {
+			fileStem = fileStem.appendFileExtension(fileExtension);
+		}
 		String fileName = ClassUtil.nonNullState(fileStem.lastSegment());
 		return getTestURI(fileName);
 	}
@@ -392,7 +394,7 @@ public class XtextTestCase extends PivotTestCase
 	 * Return the URI of a file based on the file name of the inputURI and
 	 * file extension replaced by fileExtension.
 	 */
-	protected @NonNull URI getURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) throws Exception {
+	protected @NonNull URI getURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) {
 		return inputURI.trimFileExtension().appendFileExtension(fileExtension);
 	}
 

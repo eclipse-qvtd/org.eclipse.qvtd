@@ -11,9 +11,12 @@
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.tools.JavaFileObject;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
@@ -444,15 +448,18 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	private @Nullable Log log = null;
 
 	// Copied from QVTiCompilerTest
-	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
+	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @Nullable List<@NonNull String> classPathProjectNames, @Nullable ClassLoader classLoader) throws Exception {
 		String qualifiedClassName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
-		String problem = OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);
+		//		String problem = OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource, classPathProjectNames);
+		List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(new OCL2JavaFileObject(qualifiedClassName, javaCodeSource));
+		List<@NonNull String> classpathProjects = classPathProjectNames != null ? JavaFileUtil.createClassPathProjectList(cg.getEnvironmentFactory().getResourceSet().getURIConverter(), classPathProjectNames) : null;
+		String problem = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, String.valueOf(explicitClassPath), classpathProjects);
 		if (problem != null) {
 			throw new CompilerChainException(problem);
 		}
 		@SuppressWarnings("unchecked")
-		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName/*, null*/);
+		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName, classLoader);
 		return txClass;
 	}
 
@@ -478,7 +485,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
 		options.setIsIncremental(params.isIncremental());
-		options.setPackagePrefix(params.getPackageName());
+		options.setPackagePrefix(params.getPackagePrefix());
 		try {
 			cg.generateClassFile();
 		}
@@ -499,7 +506,9 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		if (log2 != null) {
 			log2.info("Saved " + savePath + cg.getQualifiedName());
 		}
-		return ClassUtil.nonNullState(compileTransformation(new File(new File(savePath).getParentFile(), "bin"), cg));
+		File explicitClassPath = new File(new File(savePath).getParentFile(), JavaFileUtil.TEST_BIN_FOLDER_NAME);
+		explicitClassPath.mkdir();
+		return ClassUtil.nonNullState(compileTransformation(explicitClassPath, cg, params.getClassPathProjectNames(), params.getClassLoader()));
 	}
 
 	public void setLog(@Nullable Log log) {

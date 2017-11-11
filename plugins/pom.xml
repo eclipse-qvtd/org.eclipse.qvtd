@@ -18,7 +18,7 @@
     <module>org.eclipse.qvtd.atl</module>
     <module>org.eclipse.qvtd.codegen</module>
     <module>org.eclipse.qvtd.compiler</module>
-    <!--module>org.eclipse.qvtd.cs2as.compiler</module-->
+    <module>org.eclipse.qvtd.cs2as.compiler</module>
     <module>org.eclipse.qvtd.debug</module>
     <module>org.eclipse.qvtd.debug.ui</module>
     <module>org.eclipse.qvtd.pivot.qvtbase</module>

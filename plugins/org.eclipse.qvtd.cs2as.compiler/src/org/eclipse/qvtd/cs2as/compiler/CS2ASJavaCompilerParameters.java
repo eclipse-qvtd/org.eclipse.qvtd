@@ -10,12 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
 
+	public @Nullable ClassLoader getClassLoader();
+
+	public @Nullable List<@NonNull String> getClassPathProjectNames();
 
 	/**
 	 * @return the fully qualified name of the lookup resolver class
@@ -37,7 +42,7 @@ public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
 	/**
 	 * @return the java package name in which the CGed transformation will be created
 	 */
-	public @NonNull String getPackageName();
+	public @Nullable String getPackagePrefix();
 
 	/**
 	 * @return the map of Java package renames to replicate the localization of the run-time packages.

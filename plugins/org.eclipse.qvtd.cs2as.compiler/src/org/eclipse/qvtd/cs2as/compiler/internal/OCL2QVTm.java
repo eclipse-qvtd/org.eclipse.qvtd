@@ -84,7 +84,7 @@ public class OCL2QVTm {
 		this.traceabilityPropName = traceabilityPropName;
 	}
 
-	public Resource run(ResourceSet resourceSet, URI oclDocURI) {
+	public @NonNull Resource run(@NonNull ResourceSet resourceSet, @NonNull URI oclDocURI, @NonNull URI outputURI) {
 
 		if (!"oclas".equals(oclDocURI.fileExtension())) {
 			throw new IllegalArgumentException(oclDocURI.toString() + " is not an .oclas URI");
@@ -96,7 +96,7 @@ public class OCL2QVTm {
 			CoreModel outputModel = oclModelToImperativeModel().apply(model);
 
 			// We create the output resource
-			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtm.qvtcas");
+			//			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtm.qvtcas");
 			Resource outputResource = resourceSet.createResource(outputURI);
 			outputResource.getContents().add(outputModel);
 			return outputResource;

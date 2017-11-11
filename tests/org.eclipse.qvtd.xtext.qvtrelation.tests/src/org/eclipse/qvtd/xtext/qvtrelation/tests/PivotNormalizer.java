@@ -57,6 +57,7 @@ public class PivotNormalizer implements ModelNormalizer
 			throw new UnsupportedOperationException();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void normalize() {
 			ECollections.sort((EList<NamedElement>)(Object)asClass.getOwnedProperties(), NameUtil.NAMEABLE_COMPARATOR);
@@ -77,6 +78,7 @@ public class PivotNormalizer implements ModelNormalizer
 			throw new UnsupportedOperationException();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void normalize() {
 			ECollections.sort((EList<NamedElement>)(Object)asModel.getOwnedPackages(), NameUtil.NAMEABLE_COMPARATOR);
@@ -96,6 +98,7 @@ public class PivotNormalizer implements ModelNormalizer
 			throw new UnsupportedOperationException();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void normalize() {
 			ECollections.sort((EList<NamedElement>)(Object)asPackage.getOwnedClasses(), ToStringComparator.INSTANCE);
