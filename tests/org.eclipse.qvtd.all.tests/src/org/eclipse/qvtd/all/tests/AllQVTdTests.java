@@ -1,15 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2002, 2017 IBM Corporation and others.
+ * Copyright (c) 2012, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *   IBM - Initial API and implementation
- *   E.D.Willink - Bug 298634
+ *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-
 package org.eclipse.qvtd.all.tests;
 
 import java.util.Arrays;
@@ -18,6 +16,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.compiler.tests.AllCompilerTests;
 import org.eclipse.qvtd.doc.bigmde2016.tests.AllbigMDE2016Tests;
 import org.eclipse.qvtd.doc.exe2016.tests.Allexe2016Tests;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSParsingTest;
 import org.eclipse.qvtd.umlx.tests.AllUMLXTests;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
@@ -53,7 +52,7 @@ public class AllQVTdTests extends TestCase
 		//	result.addTest(AllATLTests.suite()); // ATL uses a different ANTLR to Xtext - must be run separately
 		result.addTest(AllbigMDE2016Tests.suite());	// NB this is very slow since we are -ea
 		result.addTest(Allexe2016Tests.suite());		// NB this is very slow since we are -ea
-		//		result.addTestSuite(MiniOCLCSParsingTest.class);
+		result.addTestSuite(MiniOCLCSParsingTest.class);
 		return result;
 	}
 

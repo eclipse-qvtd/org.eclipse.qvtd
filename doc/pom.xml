@@ -14,7 +14,7 @@
   </parent>
   <modules>
     <module>org.eclipse.qvtd.doc</module>
-    <!--module>org.eclipse.qvtd.doc.miniocl</module-->
-    <!--module>org.eclipse.qvtd.doc.minioclcs.xtext</module-->
+    <module>org.eclipse.qvtd.doc.miniocl</module>
+    <module>org.eclipse.qvtd.doc.minioclcs.xtext</module>
   </modules>
 </project>

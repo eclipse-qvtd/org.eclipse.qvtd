@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.qvtd-tests</groupId>
+  <artifactId>org.eclipse.qvtd.doc.minioclcs.xtext.tests</artifactId>
+  <version>0.15.0-SNAPSHOT</version>
+  <packaging>eclipse-test-plugin</packaging>
+  <parent>
+    <groupId>org.eclipse.qvtd-tests</groupId>
+    <artifactId>org.eclipse.qvtd.tests-folder</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/MiniOCLCSParsingTest.java</include>
+              </includes>
+              <argLine>-DtestNameSuffix="maven" -ea</argLine>
+              <workingDirectory>${project.build.directory}/test-projects</workingDirectory>
+              <reportsDirectory>${project.build.directory}/surefire-reports/standalone</reportsDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <configuration>
+          <!--debugPort>5005</debugPort-->
+          <testClass>org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSParsingTest</testClass>
+          <useUIHarness>true</useUIHarness>
+          <useUIThread>true</useUIThread>
+          <argLine>-DtestNameSuffix="tycho" -ea</argLine>
+          <reportsDirectory>${project.build.directory}/surefire-reports/plugin</reportsDirectory>
+          <systemProperties>
+            <TYCHO_UI_TEST>true</TYCHO_UI_TEST><!-- See Bug 526252 -->
+          </systemProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
