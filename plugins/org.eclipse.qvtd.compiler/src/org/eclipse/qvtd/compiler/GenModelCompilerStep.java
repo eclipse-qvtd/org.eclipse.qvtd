@@ -14,7 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -34,15 +36,13 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
-import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
-import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
+
+import com.google.common.collect.Lists;
 
 /**
  * GenModelCompilerStep activates the EMG GenModel tooling to generate the Java classes from the
@@ -108,49 +108,61 @@ public class GenModelCompilerStep extends AbstractCompilerStep
 		Resource gResource = environmentFactory.getResourceSet().getResource(genmodelURI, true);
 		assert gResource != null;
 		GenModel genModel = (GenModel) gResource.getContents().get(0);
-		URI classURI = compilerChain.getOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
+		List<@NonNull String> classProjectNames = compilerChain.getOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.CLASS_PROJECT_NAMES_KEY);
+		URI classFileURI = compilerChain.getOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
 		URI traceURI = compilerChain.getURI(QVTrCompilerChain.TRACE_STEP, QVTrCompilerChain.URI_KEY);
-		if (classURI != null) {
+		if (classFileURI != null) {
 			String binProjectName = QVTr2QVTc.getProjectName(traceURI);
-			File binFile;
-			String objectPath;
-			String sourcePathPrefix;
+			//			File zbinFile;
+			String classFilePath;
+			String sourceFilePathPrefix;
 			List<@NonNull String> classpathProjects;
 			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
 				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 				IProject binProject = root.getProject(binProjectName);
-				IFolder binFolder = binProject.getFolder("bin");
-				binFile = URIUtil.toFile(binFolder.getLocationURI());
-				objectPath = binFile.toString()/*.replace(".", "/")*/.replace("\\", "/");		// FIXME deduce/parameterize bin
+				IFolder binFolder = binProject.getFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME);
+				File binFile = URIUtil.toFile(binFolder.getLocationURI());
+				classFilePath = binFile.toString()/*.replace(".", "/")*/.replace("\\", "/");		// FIXME deduce/parameterize bin
 				IFile genIFile = root.getFile(new Path(genModel.getModelDirectory()));
 				File genFile = URIUtil.toFile(genIFile.getLocationURI());
-				sourcePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
-				classpathProjects = JavaSourceFileObject.createClasspathProjectList(binProjectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+				sourceFilePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
+				if (classProjectNames == null) {
+					classProjectNames = Lists.newArrayList(binProjectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+				}
+				classpathProjects = JavaFileUtil.createClassPathProjectList(environmentFactory.getResourceSet().getURIConverter(), classProjectNames);
 			}
 			else {
-				ResourceSet resourceSet = environmentFactory.getResourceSet();
-				URI normalizedClassURI = resourceSet.getURIConverter().normalize(classURI);
-				objectPath = normalizedClassURI.toFileString();
-				URI location = ClassUtil.nonNullState(((StandaloneProjectMap)environmentFactory.getProjectManager()).getLocation(binProjectName));
-				binFile = new File(location.appendSegment("bin").toFileString());
+				//				ResourceSet resourceSet = environmentFactory.getResourceSet();
+				//				URI normalizedClassURI = resourceSet.getURIConverter().normalize(classFileURI);
+				classFilePath = classFileURI.toFileString();
+				//				URI location = classFileURI;//ClassUtil.nonNullState(((StandaloneProjectMap)environmentFactory.getProjectManager()).getLocation(binProjectName));
+				//				binFile = new File(objectPath);
 				URI genModelDirectoryURI = URI.createPlatformResourceURI(genModel.getModelDirectory(), true);
-				sourcePathPrefix = resourceSet.getURIConverter().normalize(genModelDirectoryURI).toFileString() + "/";
+				sourceFilePathPrefix = environmentFactory.getResourceSet().getURIConverter().normalize(genModelDirectoryURI).toFileString() + "/";
 				classpathProjects = null;
 			}
-			assert objectPath != null;
+			assert classFilePath != null;
 			for (GenPackage genPackage : genModel.getGenPackages()) {
 				String basePackage = genPackage.getBasePackage();
-				String sourcePath = sourcePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
+				String sourcePath = sourceFilePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
 				JavaFileUtil.deleteJavaFiles(sourcePath);
 			}
 			generateModels(genModel);
-			binFile.mkdir();
+			new File(classFilePath).mkdirs();
+			Set<@NonNull String> basePackages = new HashSet<>();
 			for (GenPackage genPackage : genModel.getGenPackages()) {
 				String basePackage = genPackage.getBasePackage();
-				String sourcePath = sourcePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
-				JavaSourceFileObject.compileClasses(sourcePath, objectPath, classpathProjects);
+				basePackage = basePackage != null ? ("/" + basePackage.replace(".", "/")) : "";
+				if (basePackages.add(basePackage)) {
+					String sourceFilePath = sourceFilePathPrefix + basePackage;
+					String problemMessage = JavaFileUtil.compileClasses(sourceFilePath, classFilePath, classpathProjects);
+					if (problemMessage != null) {
+						addProblem(new CompilerChainException(problemMessage));
+					}
+				}
 			}
 		}
+		throwCompilerChainExceptionForErrors();
 		compiled(cResource);
 	}
 

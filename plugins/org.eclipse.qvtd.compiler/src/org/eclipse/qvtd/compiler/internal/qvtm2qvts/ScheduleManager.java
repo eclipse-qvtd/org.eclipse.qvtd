@@ -21,7 +21,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -407,7 +406,7 @@ public abstract class ScheduleManager implements Adapter
 		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".dot").resolve(baseURI);
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 			ToCallGraphVisitor visitor = new ToCallGraphVisitor(new DOTStringBuilder());
 			String s = visitor.visit(region);
 			outputStream.write(s.getBytes());
@@ -421,7 +420,7 @@ public abstract class ScheduleManager implements Adapter
 		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".graphml").resolve(baseURI);
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 			ToCallGraphVisitor visitor = new ToCallGraphVisitor(new GraphMLStringBuilder());
 			String s = visitor.visit(region);
 			outputStream.write(s.getBytes());
@@ -462,7 +461,7 @@ public abstract class ScheduleManager implements Adapter
 		}
 		URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
 			region.toGraph(s);
 			outputStream.write(s.toString().getBytes());
@@ -480,7 +479,7 @@ public abstract class ScheduleManager implements Adapter
 		}
 		URI dotURI = URI.createURI(symbolName + ".graphml").resolve(baseURI);
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
 			region.toGraph(s);
 			outputStream.write(s.toString().getBytes());
@@ -494,7 +493,7 @@ public abstract class ScheduleManager implements Adapter
 		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 			ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new DOTStringBuilder());
 			String s = visitor.visit(region);
 			outputStream.write(s.getBytes());
@@ -513,7 +512,7 @@ public abstract class ScheduleManager implements Adapter
 		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 			ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new GraphMLStringBuilder());
 			String s = visitor.visit(region);
 			outputStream.write(s.getBytes());

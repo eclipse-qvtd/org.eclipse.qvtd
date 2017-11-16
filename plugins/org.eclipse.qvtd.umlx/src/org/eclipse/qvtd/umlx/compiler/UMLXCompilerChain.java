@@ -59,8 +59,8 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 
 	protected final @NonNull UMLX2QVTrCompilerStep umlx2qvtrCompilerStep;
 
-	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		super(environmentFactory, txURI, options);
+	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		super(environmentFactory, txURI, prefixURI, options);
 		this.umlx2qvtrCompilerStep = createUMLX2QVTrCompilerStep();
 	}
 

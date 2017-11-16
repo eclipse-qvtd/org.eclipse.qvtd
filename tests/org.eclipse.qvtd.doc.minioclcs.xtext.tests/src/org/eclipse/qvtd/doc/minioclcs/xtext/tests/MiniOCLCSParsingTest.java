@@ -14,29 +14,29 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MiniOCLCSParsingTest extends LoadTestCase {
-	
+
 	@Before
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		MiniOCLCSStandaloneSetup.doSetup();
 	}
-	
-	
+
+
 	protected RootCS parse(String fileName) {
-		URI fileURI = getProjectFileURI(fileName);
+		URI fileURI = getModelsURI(fileName);
 		ResourceSet rSet = new ResourceSetImpl();
 		Resource resoure = rSet.getResource(fileURI, true);
-		return (RootCS) resoure.getContents().get(0); 
+		return (RootCS) resoure.getContents().get(0);
 	}
-	
-	@Test 
+
+	@Test
 	public void testSimpleMiniOCL_PackagesDef() {
 		RootCS result = parse("models/simple_packages.mocl");
 		assertNotNull(result);
 	}
 
-	@Test 
+	@Test
 	public void testSimpleMiniOCL_Invariant() {
 		RootCS result = parse("models/simple_invariants.mocl");
 		assertNotNull(result);

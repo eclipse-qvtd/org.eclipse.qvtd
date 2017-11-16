@@ -104,9 +104,9 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		MyQVT myQVT = new MyQVT("atl2qvtr") {
 
 			@Override
-			protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI prefixURI,
+			protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
 					@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
-				QVTrCompilerChain compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
+				QVTrCompilerChain compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
 				compilerChain.addListener(new Listener()
 				{
 					@Override

@@ -5,14 +5,14 @@
   <groupId>org.eclipse.qvtd-tests</groupId>
   <artifactId>org.eclipse.qvtd.atl.tests</artifactId>
   <version>0.15.0-SNAPSHOT</version>
-  <packaging>eclipse-test-plugin</packaging>
+  <packaging>eclipse-plugin</packaging>
   <parent>
     <groupId>org.eclipse.qvtd-tests</groupId>
     <artifactId>org.eclipse.qvtd.tests-folder</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <build>
-  <plugins>
+    <plugins>
     <!--plugin>
       <groupId>org.eclipse.tycho</groupId>
       <artifactId>maven-surefire-plugin</artifactId>
@@ -24,26 +24,29 @@
         <includes>
           <include>org.eclipse.ocl.examples.test.xtext.AllXtextTests.java</include>
         </includes>
-        <argLine>-DtestSuiteName="org.eclipse.ocl.examples.xtext.tests [standalone]" -Xms40m -Xmx1024m -ea</argLine>
+        <argLine>-DtestNameSuffix="maven" -ea</argLine>
+              <systemProperties>
+                <MAVEN_TEST>true</MAVEN_TEST>
+              </systemProperties>
         <reportsDirectory>${project.build.directory}/surefire-reports/standalone</reportsDirectory>
       </configuration>
     </plugin-->
-    <plugin>
-      <groupId>org.eclipse.tycho</groupId>
-      <artifactId>tycho-surefire-plugin</artifactId>
-      <version>${tycho-version}</version>
-      <configuration>
-        <!--debugPort>5005</debugPort-->
-        <testClass>org.eclipse.qvtd.atl.tests.AllATLTests</testClass>
-        <useUIHarness>true</useUIHarness>
-        <useUIThread>true</useUIThread>
-        <argLine>-ea</argLine>
-        <reportsDirectory>${project.build.directory}/surefire-reports/plugin</reportsDirectory>
-        <systemProperties>
-          <TYCHO_UI_TEST>true</TYCHO_UI_TEST><!-- See Bug 526252 -->
-        </systemProperties>
-      </configuration>
-    </plugin>
-  </plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <!--debugPort>5005</debugPort-->
+          <testClass>org.eclipse.qvtd.atl.tests.AllATLTests</testClass>
+          <useUIHarness>true</useUIHarness>
+          <useUIThread>true</useUIThread>
+          <argLine>-DtestNameSuffix="tycho" -ea</argLine>
+          <systemProperties>
+            <TYCHO_TEST>true</TYCHO_TEST>
+          </systemProperties>
+          <reportsDirectory>${project.build.directory}/surefire-reports/plugin</reportsDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

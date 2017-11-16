@@ -34,23 +34,22 @@ public class LoadTestCase extends XtextTestCase
 {
 	public static final @NonNull String @NonNull [] NO_MESSAGES = new @NonNull String[] {};
 
-	public void doLoad_Concrete(@NonNull String inputName, @NonNull String @Nullable [] messages) throws IOException {
-		OCL ocl = QVTbase.newInstance(getProjectMap(), null);
+	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
+		OCL ocl = QVTbase.newInstance(getTestProjectManager(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
-		URI inputURI = getProjectFileURI(inputName);
-		URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
+		URI pivotURI = getTestURIWithExtension(inputURI, "qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}
 
-	public Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull String inputName, @NonNull String outputName, @NonNull String @Nullable [] messages) throws IOException {
-		URI inputURI = getProjectFileURI(inputName);
-		URI pivotURI = getProjectFileURI(outputName);
-		return doLoad_Concrete(ocl, inputURI, pivotURI, messages);
-	}
+	//	public Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull String inputName, @NonNull String outputName, @NonNull String @Nullable [] messages) throws IOException {
+	//		URI inputURI = getProjectFileURI(inputName);
+	//		URI pivotURI = getProjectFileURI(outputName);
+	//		return doLoad_Concrete(ocl, inputURI, pivotURI, messages);
+	//	}
 
-	protected Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages) throws IOException {
-		URI cstURI = pivotURI.trimFileExtension().appendFileExtension("xmi");
+	protected Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @Nullable [] messages) throws Exception {
+		URI cstURI = getTestURIWithExtension(pivotURI, "xmi");
 		BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
@@ -66,7 +65,7 @@ public class LoadTestCase extends XtextTestCase
 		return pivotResource;
 	}
 
-	protected void saveAsXMI(Resource resource, URI xmiURI) throws IOException {
+	protected void saveAsXMI(@NonNull Resource resource, @NonNull URI xmiURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 		Resource xmiResource = resourceSet.createResource(xmiURI);

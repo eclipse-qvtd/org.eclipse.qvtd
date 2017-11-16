@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.exe2016.tests;
 
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+
 import junit.framework.TestCase;
 
 public class AbstractEXE2016CGTests extends TestCase
@@ -19,5 +21,10 @@ public class AbstractEXE2016CGTests extends TestCase
 			System.gc();
 			Thread.sleep(100);
 		}
+	}
+
+	@Override
+	public String getName() {
+		return TestUtil.getName(super.getName());
 	}
 }

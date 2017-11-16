@@ -76,8 +76,11 @@
   </modules>
 
   <build>
-   <!-- This is for checkstyle and PMD -->
-   <sourceDirectory>src</sourceDirectory>
+    <!-- This is for checkstyle and PMD -->
+    <sourceDirectory>src</sourceDirectory>
+    
+    <!-- See Bug 526404 This enables maven-surefire-plugin to do standalone tests AND tycho-surefire-plugin to do plugin tests -->
+    <testOutputDirectory>${project.build.directory}/classes</testOutputDirectory>
 
     <plugins>
       <plugin>
@@ -198,6 +201,7 @@
               <generate>true</generate>
             </sourceReferences>
             <timestampProvider>jgit</timestampProvider>
+            <jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
             <jgit.ignore>
               pom.xml
               .polyglot.build.properties
@@ -382,6 +386,13 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven-surefire-version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.maven.surefire</groupId>
+              <artifactId>surefire-junit4</artifactId>
+              <version>${maven-surefire-version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -541,6 +552,33 @@
                   <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
                   <version>0.15.0-SNAPSHOT</version>
                   <classifier>targetPlatforms/photon</classifier>
+                </artifact>
+              </target>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>unstable</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <BUILD_T></BUILD_T>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.qvtd</groupId>
+                  <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
+                  <version>0.15.0-SNAPSHOT</version>
+                  <classifier>targetPlatforms/unstable</classifier>
                 </artifact>
               </target>
             </configuration>

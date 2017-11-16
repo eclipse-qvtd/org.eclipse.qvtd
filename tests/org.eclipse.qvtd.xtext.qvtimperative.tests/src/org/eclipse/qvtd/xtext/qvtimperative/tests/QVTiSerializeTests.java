@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -36,14 +37,19 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class QVTiSerializeTests extends LoadTestCase
 {
-	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
-		OCL ocl1 = QVTimperative.newInstance(OCL.CLASS_PATH, null);
-		OCL ocl2 = QVTimperative.newInstance(OCL.CLASS_PATH, null);
-		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias", NO_MESSAGES);
-		URI inputURI = getProjectFileURI(stem + ".qvtias");
-		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
-		doSerialize(inputURI, stem, referenceURI, null, true, true);
-		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias", NO_MESSAGES);
+	protected void doSerializeRoundTrip(@NonNull URI inputURI) throws Exception {
+		doSerializeRoundTrip(inputURI, getURIWithExtension(inputURI, "ref.qvtias"));
+	}
+	protected void doSerializeRoundTrip(@NonNull URI inputURI, @NonNull URI referenceURI) throws Exception {
+		URI pivotURI = getTestURIWithExtension(inputURI, "qvtias");
+		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvti");
+		URI serializedPivotURI = getTestURIWithExtension(inputURI, "serialized.qvtias");
+		ProjectManager projectManager = getTestProjectManager();
+		OCL ocl1 = QVTimperative.newInstance(projectManager, null);
+		OCL ocl2 = QVTimperative.newInstance(projectManager, null);
+		Resource asResource1 = doLoad_Concrete(ocl1, inputURI, pivotURI, NO_MESSAGES);
+		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
+		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
@@ -51,29 +57,32 @@ public class QVTiSerializeTests extends LoadTestCase
 		ocl1.dispose();
 		ocl2.dispose();
 	}
-	protected void doSerializeRoundTripFromAS(@NonNull String stem) throws Exception {
-		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
-		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
-		URI inputURI = getProjectFileURI(stem + ".qvtias");
-		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
-		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
-		doSerialize(inputURI, stem, referenceURI, null, true, true);
-		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias", NO_MESSAGES);
+
+	protected void doSerializeRoundTripFromAS(@NonNull URI inputURI) throws Exception {
+		doSerializeRoundTripFromAS(inputURI, getURIWithExtension(inputURI, "ref.qvtias"));
+	}
+	protected void doSerializeRoundTripFromAS(@NonNull URI pivotURI, @NonNull URI referenceURI) throws Exception {
+		URI serializedInputURI = getTestURIWithExtension(pivotURI, "serialized.qvti");
+		URI serializedPivotURI = getTestURIWithExtension(pivotURI, "serialized.qvtias");
+		ProjectManager projectManager = getTestProjectManager();
+		OCL ocl1 = OCL.newInstance(projectManager);
+		OCL ocl2 = OCL.newInstance(projectManager);
+		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(pivotURI, true);
+		doSerialize(pivotURI, serializedInputURI, referenceURI, null, true, true);
+		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
 	}
 
-	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
+	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedInputURI, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//		getProjectMap().initializeResourceSet(resourceSet);
-		String outputName = stem + ".serialized.qvti";
-		URI outputURI = getProjectFileURI(outputName);
 		//
 		//	Load QVTiAS
 		//
-		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
+		OCL ocl = QVTbase.newInstance(getTestProjectManager());
 		try {
 			ASResource asResource = AbstractTestQVT.loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
@@ -81,7 +90,7 @@ public class QVTiSerializeTests extends LoadTestCase
 			//
 			//	Pivot to CS
 			//
-			XtextResource xtextResource = AbstractTestQVT.as2cs(ocl, resourceSet, asResource, outputURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+			XtextResource xtextResource = AbstractTestQVT.as2cs(ocl, resourceSet, asResource, serializedInputURI, QVTimperativeCSPackage.eCONTENT_TYPE);
 			resourceSet.getResources().clear();
 			return xtextResource;
 		}
@@ -99,62 +108,70 @@ public class QVTiSerializeTests extends LoadTestCase
 		super.setUp();
 	}
 
-	public void testSerialize_Constructors() throws Exception {
-		doSerializeRoundTrip("Constructors/Constructors");
+	public void testQVTiSerialize_Constructors() throws Exception {
+		URI inputURI = getModelsURI("Constructors/Constructors.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_Dependencies() throws Exception {
-		doSerializeRoundTrip("Dependencies/Dependencies");
+	public void testQVTiSerialize_Dependencies() throws Exception {
+		URI inputURI = getModelsURI("Dependencies/Dependencies.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_Expressions() throws Exception {
-		doSerializeRoundTrip("Expressions/Expressions");
+	public void testQVTiSerialize_Expressions() throws Exception {
+		URI inputURI = getModelsURI("Expressions/Expressions.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_Graph2GraphHierarchical() throws Exception {
-		doSerializeRoundTrip("Graph2GraphHierarchical/Graph2GraphHierarchical");
+	public void testQVTiSerialize_Graph2GraphHierarchical() throws Exception {
+		URI inputURI = getModelsURI("Graph2GraphHierarchical/Graph2GraphHierarchical.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_Graph2GraphMinimal() throws Exception {
-		doSerializeRoundTrip("Graph2GraphMinimal/Graph2GraphMinimal");
+	public void testQVTiSerialize_Graph2GraphMinimal() throws Exception {
+		URI inputURI = getModelsURI("Graph2GraphMinimal/Graph2GraphMinimal.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_HSV2HSL_qvti() throws Exception {
-		doSerializeRoundTrip("HSV2HSL/HSV2HSL");
+	public void testQVTiSerialize_HSV2HSL_qvti() throws Exception {
+		URI inputURI = getModelsURI("HSV2HSL/HSV2HSL.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_HSV2HSLas_qvtias() throws Exception {
-		doSerialize("HSV2HSL/HSV2HSLas");
+	public void testQVTiSerialize_HSV2HSLas_qvtias() throws Exception {
+		URI inputURI = getModelsURI("HSV2HSL/HSV2HSLas.qvtias");
+		URI referenceURI = getURIWithExtension(inputURI, "ref.qvtias");
+		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvti");
+		doSerialize(inputURI, serializedInputURI, referenceURI, null, true, true);
 	}
 
-	public void testSerialize_KiamaRewrite_qvti() throws Exception {
-		doSerializeRoundTrip("KiamaRewrite/KiamaRewrite");
+	public void testQVTiSerialize_KiamaRewrite_qvti() throws Exception {
+		URI inputURI = getModelsURI("KiamaRewrite/KiamaRewrite.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_ManualUML2RDBMS_qvti() throws Exception {
-		doSerializeRoundTrip("ManualUML2RDBMS/ManualUML2RDBMS");
+	public void testQVTiSerialize_ManualUML2RDBMS_qvti() throws Exception {
+		URI inputURI = getModelsURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_SimpleUML2RDBMS_qvti() throws Exception {
-		doSerializeRoundTrip("SimpleUML2RDBMS/SimpleUML2RDBMS");
+	public void testQVTiSerialize_SimpleUML2RDBMS_qvti() throws Exception {
+		URI inputURI = getModelsURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
-	public void testSerialize_Tree2TallTree_qvti() throws Exception {
-		doSerializeRoundTrip("Tree2TallTree/Tree2TallTree");
+	public void testQVTiSerialize_Tree2TallTree_qvti() throws Exception {
+		URI inputURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
+		doSerializeRoundTrip(inputURI);
 	}
 
 	public void zztestSerialize_platformResource_BaseCS2AS() throws Exception {
-		doSerializeRoundTripFromAS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS");
+		URI inputURI = getModelsURI("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtias");
+		doSerializeRoundTripFromAS(inputURI);
 	}
 
 	public void zztestSerialize_platformResource_EssentialOCLCS2AS() throws Exception {
-		doSerializeRoundTripFromAS("platformResource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS2AS");
+		URI inputURI = getModelsURI("platformResource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS2AS.qvtias");
+		doSerializeRoundTripFromAS(inputURI);
 	}
-
-	protected void doSerialize(@NonNull String stem) throws Exception {
-		URI inputURI = getProjectFileURI(stem + ".qvtias");
-		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
-		doSerialize(inputURI, stem, referenceURI, null, true, true);
-	}
-
 }

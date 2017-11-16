@@ -12,38 +12,47 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <build>
-  <plugins>
-    <!--plugin>
-      <groupId>org.eclipse.tycho</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-      <version>${maven-surefire-version}</version>
-      <configuration>
-        <!- -excludes>
-          <exclude>**/*.java</exclude>
-        </excludes- ->
-        <includes>
-          <include>org.eclipse.ocl.examples.test.xtext.AllXtextTests.java</include>
-        </includes>
-        <argLine>-DtestSuiteName="org.eclipse.ocl.examples.xtext.tests [standalone]" -Xms40m -Xmx1024m -ea</argLine>
-        <reportsDirectory>${project.build.directory}/surefire-reports/standalone</reportsDirectory>
-      </configuration>
-    </plugin-->
-    <plugin>
-      <groupId>org.eclipse.tycho</groupId>
-      <artifactId>tycho-surefire-plugin</artifactId>
-      <version>${tycho-version}</version>
-      <configuration>
-        <!--debugPort>5005</debugPort-->
-        <testClass>org.eclipse.qvtd.compiler.tests.AllCompilerTests</testClass>
-        <useUIHarness>true</useUIHarness>
-        <useUIThread>true</useUIThread>
-        <argLine>-ea</argLine>
-        <reportsDirectory>${project.build.directory}/surefire-reports/plugin</reportsDirectory>
-        <systemProperties>
-          <TYCHO_UI_TEST>true</TYCHO_UI_TEST><!-- See Bug 526252 -->
-        </systemProperties>
-      </configuration>
-    </plugin>
-  </plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/AllCompilerTests.java</include>
+              </includes>
+              <argLine>-DtestNameSuffix="maven" -ea</argLine>
+              <systemProperties>
+                <MAVEN_TEST>true</MAVEN_TEST>
+              </systemProperties>
+              <reportsDirectory>${project.build.directory}/surefire-reports/standalone</reportsDirectory>
+              <workingDirectory>${project.build.directory}/test-reports</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <!--debugPort>5005</debugPort-->
+          <testClass>org.eclipse.qvtd.compiler.tests.AllCompilerTests</testClass>
+          <useUIHarness>true</useUIHarness>
+          <useUIThread>true</useUIThread>
+          <argLine>-DtestNameSuffix="tycho" -ea</argLine>
+          <systemProperties>
+            <TYCHO_TEST>true</TYCHO_TEST>
+          </systemProperties>
+          <reportsDirectory>${project.build.directory}/surefire-reports/plugin</reportsDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

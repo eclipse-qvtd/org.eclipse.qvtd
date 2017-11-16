@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -120,6 +122,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return visitor;
 	}
 
+	public @Nullable Resource createModel(@NonNull String name, @NonNull URI modelURI) {
+		return createModel(name, modelURI, null);
+	}
 	@Override
 	public @Nullable Resource createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
 		ImperativeTypedModel typedModel = getTypedModel(name);
@@ -540,18 +545,30 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		modelsManager.saveModels(savingOptions);
 	}
 
-	public void saveModels(@NonNull URI traceURI) {
-		this.saveModels(traceURI, null);
+	public void saveModels(@Nullable URI traceURI) {
+		Map<Object, Object> saveOptions = XMIUtil.createSaveOptions();
+		saveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+		this.saveModels(traceURI, saveOptions);
 	}
 
-	public void saveModels(@NonNull URI traceURI, @Nullable Map<?, ?> savingOptions) {
+	public void saveModels(@Nullable URI traceURI, @Nullable Map<?, ?> savingOptions) {
 		this.saveModels(savingOptions);
-		modelsManager.saveMiddleModel(traceURI, savingOptions);
+		if (traceURI != null) {
+			modelsManager.saveMiddleModel(traceURI, savingOptions);
+		}
 	}
 
+	@Deprecated /* @deprecated supply URI */
 	public void saveTransformation(Map<?,?> options) throws IOException {
+		saveTransformation(null, options);
+	}
+
+	public void saveTransformation(URI saveURI, Map<?,?> options) throws IOException {
 		XMLResource resource = (XMLResource) transformation.eResource();
 		//    	new AS2ID().assignIds(resource.getResourceSet());
+		if (saveURI != null) {
+			resource.setURI(saveURI);
+		}
 		resource.save(options);
 	}
 

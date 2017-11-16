@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -70,7 +71,7 @@ public class UMLXSerializeTests extends LoadTestCase
 	} */
 
 	protected void doLoadTest(URI inputURI, URI pivotURI, URI umlxURI) throws Exception {
-		OCL ocl = OCL.newInstance(getProjectMap());
+		OCL ocl = OCL.newInstance(getTestProjectManager());
 		Resource qvtrResource = doLoad_Concrete(ocl, inputURI, pivotURI, null);
 		Resource umlxResource = qvtrResource.getResourceSet().createResource(umlxURI);
 		QVTr2UMLX qvtr2umlx = new QVTr2UMLX(ocl.getEnvironmentFactory(), qvtrResource, umlxResource);
@@ -83,17 +84,17 @@ public class UMLXSerializeTests extends LoadTestCase
 	}
 
 	protected void doRoundTripTest(@NonNull String path, @NonNull String stem, boolean skipCompare) throws Exception {
-		QVTrelation ocl1 = QVTrelation.newInstance(getProjectMap());
-		URI inputURI1 = URI.createPlatformResourceURI(path + stem + ".qvtr", true);
-		URI pivotURI1 = getProjectFileURI(stem + ".qvtras");
-		URI umlxURI = URI.createPlatformResourceURI(path + stem + ".umlx", true);
-		URI pivotURI2 = getProjectFileURI(stem + ".regenerated.qvtras");
+		QVTrelation ocl1 = QVTrelation.newInstance(getTestProjectManager());
+		URI inputURI1 = getResourceURI(path + stem + ".qvtr");
+		URI pivotURI1 = getTestURI(stem + ".qvtras");
+		URI umlxURI = getTestURI(path + stem + ".umlx");
+		URI pivotURI2 = getTestURI(stem + ".regenerated.qvtras");
 
 		URIConverter uriConverter = ocl1.getResourceSet().getURIConverter();
 		URI normalizedURI = uriConverter.normalize(umlxURI);
 		URIHandler uriHandler = uriConverter.getURIHandler(normalizedURI);
 		if (!(uriHandler instanceof FileURIHandlerImpl)) {		// platform:/plugin on Hudson
-			umlxURI = getProjectFileURI(stem + ".umlx");
+			umlxURI = getTestURI(stem + ".umlx");
 		}
 
 		Resource qvtrResource1 = doLoad_Concrete(ocl1, inputURI1, pivotURI1, null);
@@ -104,12 +105,12 @@ public class UMLXSerializeTests extends LoadTestCase
 		//
 		assertNoValidationErrors(umlxURI.toString(), umlxResource1);
 		//
-		QVTrelation ocl2 = QVTrelation.newInstance(getProjectMap());
+		QVTrelation ocl2 = QVTrelation.newInstance(getTestProjectManager());
 		Resource umlxResource2 = ocl2.getResourceSet().getResource(umlxURI, true);
 		Resource qvtrResource2 = ocl2.getMetamodelManager().getASResourceSet().createResource(pivotURI2);
 		UMLX2QVTr umlx2qvtr = new UMLX2QVTr(ocl2.getEnvironmentFactory(), umlxResource2, qvtrResource2);
 		umlx2qvtr.transform();
-		qvtrResource2.save(TestsXMLUtil.defaultSavingOptions);
+		qvtrResource2.save(CompilerUtil.defaultSavingOptions);
 		//
 		Model asModel1 = PivotUtil.getModel(qvtrResource1);
 		Model asModel2 = PivotUtil.getModel(qvtrResource2);
@@ -282,70 +283,70 @@ public class UMLXSerializeTests extends LoadTestCase
 	}
 
 	public void testUMLXLoad_Forward2Reverse_qvtr() throws Exception {
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse.qvtr", true);
-		URI pivotURI = getProjectFileURI("Forward2Reverse.qvtras");
-		URI umlxURI = getProjectFileURI("Forward2Reverse.umlx");
+		URI inputURI = getResourceURI("org.eclipse.qvtd.xtext.qvtrelation.tests/models/forward2reverse/Forward2Reverse.qvtr");
+		URI pivotURI = getTestURI("Forward2Reverse.qvtras");
+		URI umlxURI = getTestURI("Forward2Reverse.umlx");
 		doLoadTest(inputURI, pivotURI, umlxURI);
 	}
 
 	public void testUMLXLoad_Keys_qvtr() throws Exception {
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/models/Keys.qvtr", true);
-		URI pivotURI = getProjectFileURI("Keys.qvtras");
-		URI umlxURI = getProjectFileURI("Keys.umlx");
+		URI inputURI = getResourceURI("org.eclipse.qvtd.xtext.qvtrelation.tests/models/misc/Keys.qvtr");
+		URI pivotURI = getTestURI("Keys.qvtras");
+		URI umlxURI = getTestURI("Keys.umlx");
 		doLoadTest(inputURI, pivotURI, umlxURI);
 	}
 
 	public void testUMLXLoad_RelToCore_qvtr() throws Exception {
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
-		URI pivotURI = getProjectFileURI("RelToCore.qvtras");
-		URI umlxURI = getProjectFileURI("RelToCore.umlx");
+		URI inputURI = getResourceURI("org.eclipse.qvtd.examples.qvtrelation.reltocore/model/RelToCore.qvtr");
+		URI pivotURI =  getTestURI("RelToCore.qvtras");
+		URI umlxURI = getTestURI("RelToCore.umlx");
 		doLoadTest(inputURI, pivotURI, umlxURI);
 	}
 
 	public void testUMLXLoad_SeqToStm_qvtr() throws Exception {
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm.qvtr", true);
-		URI pivotURI = getProjectFileURI("SeqToStm.qvtras");
-		URI umlxURI = getProjectFileURI("SeqToStm.umlx");
+		URI inputURI = getResourceURI("org.eclipse.qvtd.xtext.qvtrelation.tests/models/seq2stm/SeqToStm.qvtr");
+		URI pivotURI = getTestURI("SeqToStm.qvtras");
+		URI umlxURI = getTestURI("SeqToStm.umlx");
 		doLoadTest(inputURI, pivotURI, umlxURI);
 	}
 
 	public void testUMLXLoad_SimplerRelToCore_qvtr() throws Exception {
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/SimplerRelToCore.qvtr", true);
-		URI pivotURI = getProjectFileURI("SimplerRelToCore.qvtras");
-		URI umlxURI = getProjectFileURI("SimplerRelToCore.umlx");
+		URI inputURI = getResourceURI("org.eclipse.qvtd.examples.qvtrelation.reltocore/model/SimplerRelToCore.qvtr");
+		URI pivotURI = getTestURI("SimplerRelToCore.qvtras");
+		URI umlxURI = getTestURI("SimplerRelToCore.umlx");
 		doLoadTest(inputURI, pivotURI, umlxURI);
 	}
 
 	public void testUMLXRoundtrip_Forward2Reverse_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/forward2reverse/", "Forward2Reverse", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/forward2reverse/", "Forward2Reverse", true);
 	}
 
 	public void testUMLXRoundtrip_HierarchicalStateMachine2FlatStateMachine_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/hstm2fstm/", "HierarchicalStateMachine2FlatStateMachine", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/hstm2fstm/", "HierarchicalStateMachine2FlatStateMachine", true);
 	}
 
 	public void testUMLXRoundtrip_Iterated2Iterated_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/iterated2iterated/", "Iterated2Iterated", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/iterated2iterated/", "Iterated2Iterated", true);
 	}
 
 	public void testUMLXRoundtrip_Keys_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/models/", "Keys", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/misc/", "Keys", true);
 	}
 
 	public void testUMLXRoundtrip_MiToSiSimple_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/mitosi/", "MiToSiSimple", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/mitosi/", "MiToSiSimple", true);
 	}
 
 	public void testUMLXRoundtrip_PN2SC_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/pn2sc/", "PetriNet2StateChart", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/pn2sc/", "PetriNet2StateChart", true);
 	}
 
 	public void testUMLXRoundtrip_SeqToStm_qvtr() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		doRoundTripTest("/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/seq2stm/", "SeqToStm", true);
+		doRoundTripTest("org.eclipse.qvtd.xtext.qvtrelation.tests/models/seq2stm/", "SeqToStm", true);
 	}
 
 	public void testUMLXRoundtrip_SimplerRelToCore_qvtr() throws Exception {
-		doRoundTripTest("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/", "SimplerRelToCore", true);
+		doRoundTripTest("org.eclipse.qvtd.examples.qvtrelation.reltocore/model/", "SimplerRelToCore", true);
 	}
 }

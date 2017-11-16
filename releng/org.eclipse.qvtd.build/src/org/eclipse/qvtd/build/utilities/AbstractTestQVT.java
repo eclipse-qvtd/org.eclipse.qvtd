@@ -84,7 +84,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		this.samplesBaseUri = testFolderURI.appendSegment("samples");
 	}
 
-	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI prefixURI,
+	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
 			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options);
 
 	public @Nullable Resource createModel(@NonNull String modelName, @NonNull String modelFile) {
@@ -113,13 +113,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull String testFileName, @NonNull String outputName,
 			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options,
 			@NonNull String @NonNull... genModelFiles) throws Exception {
-		compilerChain = createCompilerChain(testFolderURI.appendSegment(testFileName), options);
+		URI prefixURI = testFolderURI.appendSegment(testFileName);
+		compilerChain = createCompilerChain(prefixURI, prefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(outputName);
 		URI txURI = asTransformation.eResource().getURI();
 		if (txURI != null) {
 			URI inputURI = txURI;
 			URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
-			XtextCompilerUtil.doQVTiSerializeAndLoad(inputURI, serializedURI);
+			XtextCompilerUtil.doQVTiSerializeAndLoad(environmentFactory.getProjectManager(), inputURI, serializedURI);
 		}
 		Class<? extends Transformer> txClass = compilerChain.generate(asTransformation, genModelFiles);
 		return txClass;

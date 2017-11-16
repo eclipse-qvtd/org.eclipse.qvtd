@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Constraint;
@@ -178,7 +178,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-
+		TestUtil.doOCLstdlibSetup();
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		//	Load OCL QVTbaseLibrary as a file.
 		//
 		ResourceSet resourceSet = ocl.getResourceSet();
-		getProjectMap().initializeResourceSet(resourceSet);
+		getTestProjectManager().initializeResourceSet(resourceSet);
 		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib", true);
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
 		assert xtextResource != null;
@@ -306,7 +306,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 	 * Java implementation.
 	 */
 	public void testQVTbaseLibrary_AS() throws Exception {
-		OCL ocl = OCL.newInstance(getProjectMap());
+		OCL ocl = OCL.newInstance(getTestProjectManager());
 		//
 		//	Load QVTbase-1.3 as an AS file.
 		//
@@ -323,7 +323,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 	 * Checks that the QVTbase AS model is the same as the pre-compiled Java implementation.
 	 */
 	public void testQVTbase_AS() throws Exception {
-		OCLInternal ocl = OCLInternal.newInstance(getProjectMap(), null);
+		OCLInternal ocl = OCLInternal.newInstance(getTestProjectManager(), null);
 		//
 		//	Load QVTbase as an AS file.
 		//

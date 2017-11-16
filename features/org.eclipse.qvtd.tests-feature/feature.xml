@@ -55,12 +55,12 @@
          version="0.0.0"
          unpack="false"/>
 
-   <!--plugin
+   <plugin
          id="org.eclipse.qvtd.all.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/-->
+         unpack="false"/>
 
    <!--plugin
          id="org.eclipse.qvtd.cs2as.compiler.tests"
@@ -74,21 +74,21 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
+         unpack="false"/-->
 
    <plugin
          id="org.eclipse.qvtd.compiler.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/-->
+         unpack="false"/>
 
-   <!--plugin
+   <plugin
          id="org.eclipse.qvtd.umlx.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/-->
+         unpack="false"/>
 
    <plugin
          id="org.eclipse.qvtd.atl"

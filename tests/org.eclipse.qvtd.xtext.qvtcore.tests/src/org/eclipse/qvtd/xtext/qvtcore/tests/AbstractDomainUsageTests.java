@@ -134,8 +134,8 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		String inputName = transformURI.lastSegment();
 		String cstName = inputName + ".xmi";
 		String pivotName = inputName + "as";
-		URI cstURI = getProjectFileURI(cstName);
-		URI pivotURI = getProjectFileURI(pivotName);
+		URI cstURI = getTestURI(cstName);
+		URI pivotURI = getTestURI(pivotName);
 		BaseCSResource xtextResource = (BaseCSResource) myQVT.getResourceSet().getResource(transformURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
@@ -157,6 +157,7 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		//		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE));
 
 		//		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
+		//		System.out.println("asResource.getURI() = " + asResource.getURI());
 		asResource.save(getSaveOptions());
 
 		for (EObject eObject : new TreeIterable(asResource)) {

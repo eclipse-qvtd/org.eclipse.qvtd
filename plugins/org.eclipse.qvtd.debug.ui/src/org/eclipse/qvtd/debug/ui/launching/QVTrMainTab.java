@@ -47,7 +47,7 @@ public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 	@Override
 	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		return new QVTrCompilerChain(environmentFactory, txURI, options);
+		return new QVTrCompilerChain(environmentFactory, txURI, txURI, options);
 	}
 
 	@Override

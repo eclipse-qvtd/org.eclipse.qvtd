@@ -53,7 +53,7 @@ public class QVTcLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		//
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
 		QVTiEnvironmentFactory environmentFactory = qvt.getEnvironmentFactory();
-		CompilerChain compilerChain = new QVTcCompilerChain(environmentFactory, txURI, null);
+		CompilerChain compilerChain = new QVTcCompilerChain(environmentFactory, txURI, txURI, null);
 		compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
 
 		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);

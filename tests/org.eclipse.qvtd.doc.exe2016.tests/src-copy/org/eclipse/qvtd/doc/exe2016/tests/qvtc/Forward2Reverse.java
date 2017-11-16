@@ -48,8 +48,8 @@ public class Forward2Reverse extends AbstractTransformer
 {
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtcore_s_tests_s_forward2reverse_s_1_0_s_DoublyLinkList = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/DoublyLinkList", null, DoublylinkedlistPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtcore_s_tests_s_forward2reverse_s_1_0_s_List2List = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/List2List", null, List2listPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtcore_s_tests_s_forward2reverse_s_1_0_s_DoublyLinkList = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/doc/exe2016tests/qvtc/forward2reverse/1.0/DoublyLinkList", null, DoublylinkedlistPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtcore_s_tests_s_forward2reverse_s_1_0_s_List2List = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/doc/exe2016tests/qvtc/forward2reverse/1.0/List2List", null, List2listPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_DoublyLinkedList = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtcore_s_tests_s_forward2reverse_s_1_0_s_DoublyLinkList.getClassId("DoublyLinkedList", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Element = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtcore_s_tests_s_forward2reverse_s_1_0_s_DoublyLinkList.getClassId("Element", 0);
@@ -413,7 +413,7 @@ public class Forward2Reverse extends AbstractTransformer
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable Element headElement = forwardList_0.getHeadElement();
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull List2List middle1 = ClassUtil.nonNullState (OPPOSITE_OF_List2List_list1.get(forwardList_0));
 			if (headElement == null) {
-				throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/DoublyLinkList\'::Element::middle1\'");
+				throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/exe2016tests/qvtc/forward2reverse/1.0/DoublyLinkList\'::Element::middle1\'");
 			}
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Element2Element_element1.get(headElement));
 			@SuppressWarnings("null")

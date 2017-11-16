@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
@@ -23,8 +22,8 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.AbstractDomainUsageTests;
  */
 public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 {
-	protected @NonNull MyQVT createQVT() {
-		QVTrEnvironmentFactory myEnvironmentFactory = new QVTrEnvironmentFactory(getProjectMap(), null);
+	protected @NonNull MyQVT createQVT() throws Exception {
+		QVTrEnvironmentFactory myEnvironmentFactory = new QVTrEnvironmentFactory(getTestProjectManager(), null);
 		return new MyQVT(myEnvironmentFactory, new QVTrelationDomainUsageAnalysis(myEnvironmentFactory));
 	}
 
@@ -37,13 +36,7 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 
 	public void testQVTrDomainUsage_HierarchicalStateMachine2FlatStateMachine() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI transformURI;
-		if (EMFPlugin.IS_ECLIPSE_RUNNING /*TestUtil.isPackaged()*/) {
-			transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
-		}
-		else {
-			transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
-		}
+		URI transformURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/model/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
@@ -51,7 +44,7 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 
 	public void testQVTrDomainUsage_Keys() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI transformURI = getProjectFileURI("models/Keys.qvtr");
+		URI transformURI = getModelsURI("misc/Keys.qvtr");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
@@ -59,7 +52,7 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 
 	public void testQVTrDomainUsage_Rel2Core() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI transformURI = getProjectFileURI("rel2core/RelToCore.qvtr");
+		URI transformURI = getModelsURI("rel2core/RelToCore.qvtr");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();

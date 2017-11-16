@@ -13,6 +13,7 @@ package org.eclipse.qvtd.doc.bigmde2016.tests.qvtc;
 import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.doc.bigmde2016.tests.FamiliesGenerator;
 import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
@@ -52,6 +53,11 @@ public class BigMDE2016_QVTc_AutomatedTests extends TestCase
 		logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 		Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("person");
 		assert rootObjects2.size() == 9*testSize;
+	}
+
+	@Override
+	public String getName() {
+		return TestUtil.getName(super.getName());
 	}
 
 	@Override

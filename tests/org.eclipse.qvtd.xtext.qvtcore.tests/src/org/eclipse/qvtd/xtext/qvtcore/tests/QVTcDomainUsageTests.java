@@ -21,8 +21,8 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
  */
 public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 {
-	protected @NonNull MyQVT createQVT() {
-		QVTcEnvironmentFactory myEnvironmentFactory = new QVTcEnvironmentFactory(getProjectMap(), null);
+	protected @NonNull MyQVT createQVT() throws Exception {
+		QVTcEnvironmentFactory myEnvironmentFactory = new QVTcEnvironmentFactory(getTestProjectManager(), null);
 		return new MyQVT(myEnvironmentFactory, new QVTcoreDomainUsageAnalysis(myEnvironmentFactory));
 	}
 
@@ -33,9 +33,9 @@ public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 		super.setUp();
 	}
 
-	public void testQVTrDomainUsage_uml2rdbms_qvtu() throws Exception {
+	public void testQVTcDomainUsage_uml2rdbms_qvtu() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI transformURI = getProjectFileURI("models/uml2rdbms.qvtu.qvtc");
+		URI transformURI = getModelsURI("misc/uml2rdbms.qvtu.qvtc");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();

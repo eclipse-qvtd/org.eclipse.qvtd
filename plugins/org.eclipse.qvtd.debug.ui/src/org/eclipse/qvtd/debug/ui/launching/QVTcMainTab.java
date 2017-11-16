@@ -42,7 +42,7 @@ public class QVTcMainTab extends QVTDirectionalMainTab<Transformation>
 
 	@Override
 	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		return new QVTcCompilerChain(environmentFactory, txURI, options);
+		return new QVTcCompilerChain(environmentFactory, txURI, txURI, options);
 	}
 
 	@Override

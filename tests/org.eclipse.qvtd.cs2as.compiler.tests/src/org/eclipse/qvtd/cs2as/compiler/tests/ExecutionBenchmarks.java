@@ -79,8 +79,8 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		CompleteOCLStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
 	}
 
-	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new QVTiEnvironmentFactory(getProjectMap(), null));
+	protected @NonNull MyQVT createQVT() throws Exception {
+		return new MyQVT(new QVTiEnvironmentFactory(getTestProjectManager(), null));
 	}
 
 	@Test

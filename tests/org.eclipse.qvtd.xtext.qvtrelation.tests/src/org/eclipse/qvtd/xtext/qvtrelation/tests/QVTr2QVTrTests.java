@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -61,8 +60,8 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		}
 	}
 
-	protected @NonNull MyQVT createQVT() {
-		QVTrEnvironmentFactory myEnvironmentFactory = new QVTrEnvironmentFactory(getProjectMap(), null);
+	protected @NonNull MyQVT createQVT() throws Exception {
+		QVTrEnvironmentFactory myEnvironmentFactory = new QVTrEnvironmentFactory(getTestProjectManager(), null);
 		return new MyQVT(myEnvironmentFactory, new QVTrelationDomainUsageAnalysis(myEnvironmentFactory));
 	}
 
@@ -119,41 +118,27 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 
 	/*	public void testQVTr2QVTrCopy_ATL2QVTr() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/bin/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		doCopierTest(myQVT, inURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
 	} */
 
 	public void testQVTr2QVTrCopy_HierarchicalStateMachine2FlatStateMachine() throws Exception {
+		URI inURI = getResourceURI("org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/model/HierarchicalStateMachine2FlatStateMachine.qvtr");
+		URI outURI = getTestURI("HierarchicalStateMachine2FlatStateMachine.qvtr.copied.qvtras");
+		//
 		MyQVT myQVT = createQVT();
-		URI inURI;
-		URI outURI;
-		if (EMFPlugin.IS_ECLIPSE_RUNNING /*TestUtil.isPackaged()*/) {
-			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
-			outURI = getProjectFileURI(getName() + "/HierarchicalStateMachine2FlatStateMachine.qvtr.copied.qvtras");
-		}
-		else {
-			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr", true);
-			outURI = getProjectFileURI(getName() + "/HierarchicalStateMachine2FlatStateMachine.qvtr.copied.qvtras");
-		}
 		doCopierTest(myQVT, inURI, outURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
 	}
 
 	public void testQVTr2QVTrCopy_RelToCore() throws Exception {
+		URI inURI = getResourceURI("org.eclipse.qvtd.examples.qvtrelation.reltocore/model/RelToCore.qvtr");
+		URI outURI = getTestURI("RelToCore.qvtr.copied.qvtras");
+		//
 		MyQVT myQVT = createQVT();
-		URI inURI;
-		URI outURI;
-		if (EMFPlugin.IS_ECLIPSE_RUNNING /*TestUtil.isPackaged()*/) {
-			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
-			outURI = getProjectFileURI(getName() + "/RelToCore.qvtr.copied.qvtras");
-		}
-		else {
-			inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
-			outURI = getProjectFileURI(getName() + "/RelToCore.qvtr.copied.qvtras");
-		}
 		doCopierTest(myQVT, inURI, outURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
@@ -161,7 +146,7 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 
 	/*	public void testQVTr2QVTrTops_ATL2QVTr() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/bin/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		doTopsTest(myQVT, inURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
@@ -169,7 +154,7 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 
 	/*	public void testQVTr2QVTroOverrides_ATL2QVTr() throws Exception {
 		MyQVT myQVT = createQVT();
-		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/bin/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr", true);
+		URI inURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		doOverridesTest(myQVT, inURI);
 		//		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();

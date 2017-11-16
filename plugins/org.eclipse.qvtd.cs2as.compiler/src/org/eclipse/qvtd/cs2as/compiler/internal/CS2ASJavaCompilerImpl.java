@@ -452,7 +452,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			throw new CompilerChainException(problem);
 		}
 		@SuppressWarnings("unchecked")
-		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName/*, null*/);
 		return txClass;
 	}
 

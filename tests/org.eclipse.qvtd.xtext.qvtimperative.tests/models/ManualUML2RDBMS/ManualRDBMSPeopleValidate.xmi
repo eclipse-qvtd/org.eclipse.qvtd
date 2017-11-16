@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <rdbms:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbms="http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS java://manualuml2rdbms.rdbms.RDBMSPackage" name="People">
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS ManualRDBMS.ecore" name="People">
   <tables name="Student" kind="base">
     <column name="Student_tid" type="NUMBER" key="//@tables.0/@key.0"/>
     <column name="timeTable_year" type="VARCHAR"/>

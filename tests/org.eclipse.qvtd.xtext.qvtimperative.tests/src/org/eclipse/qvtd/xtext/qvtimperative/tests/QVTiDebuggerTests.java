@@ -29,6 +29,7 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -112,13 +113,15 @@ public class QVTiDebuggerTests extends XtextTestCase
 		return launchConfiguration;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	protected @NonNull String getProjectName() {
 		return getClass().getPackage().getName().replace('.', '/');
 	}
 
 	public void testDebugger_Run_HSV2HSL() throws Exception {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			return;
+		}
 		TestUIUtil.closeIntro();
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
@@ -163,6 +166,9 @@ public class QVTiDebuggerTests extends XtextTestCase
 	}
 
 	public void testDebugger_Debug_HSV2HSL() throws Exception {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			return;
+		}
 		final @NonNull String inName = "hsl";
 		final @NonNull String outName = "hsv";
 		final @NonNull String middleName = "middle";

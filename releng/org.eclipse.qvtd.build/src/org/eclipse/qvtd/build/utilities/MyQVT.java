@@ -87,9 +87,9 @@ public class MyQVT extends AbstractTestQVT
 	}
 
 	@Override
-	protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI prefixURI,
+	protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
 			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
-		return new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
+		return new QVTrCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
 	}
 
 	protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions(String basePrefix) {

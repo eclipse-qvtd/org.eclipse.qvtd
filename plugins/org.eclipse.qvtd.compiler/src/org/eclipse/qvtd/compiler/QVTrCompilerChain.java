@@ -190,8 +190,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	protected final @NonNull GenModelCompilerStep genmodelCompilerStep;
 	protected final @NonNull TraceCompilerStep traceCompilerStep;
 
-	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		super(environmentFactory, txURI, options);
+	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		super(environmentFactory, txURI, prefixURI, options);
 		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
 		this.qvtr2qvtcCompilerStep = createQVTr2QVTcCompilerStep();
 		this.genmodelCompilerStep = createGenModelCompilerStep();

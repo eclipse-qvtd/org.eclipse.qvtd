@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
@@ -89,7 +88,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 
 	public static void writeGraphMLfile(Transformer tx, @NonNull URI graphmlURI) {
 		try {
-			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(graphmlURI);
+			OutputStream outputStream = tx.getExecutor().getEnvironmentFactory().getResourceSet().getURIConverter().createOutputStream(graphmlURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
 			Execution2GraphVisitor execution2GraphVisitor = new Execution2GraphVisitor(s);
 			tx.accept(execution2GraphVisitor);

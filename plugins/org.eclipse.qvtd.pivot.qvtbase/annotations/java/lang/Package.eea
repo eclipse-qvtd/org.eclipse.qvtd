@@ -1,0 +1,4 @@
+class java/lang/Package
+getName
+ ()Ljava/lang/String;
+ ()L1java/lang/String;

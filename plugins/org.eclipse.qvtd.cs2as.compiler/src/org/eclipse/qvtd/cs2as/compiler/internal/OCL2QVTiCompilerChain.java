@@ -122,7 +122,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
 			@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-		super(qvti.getEnvironmentFactory(), oclDocURI, options);
+		super(qvti.getEnvironmentFactory(), oclDocURI, oclDocURI, options);
 		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}
 

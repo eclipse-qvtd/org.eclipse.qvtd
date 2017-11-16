@@ -14,14 +14,14 @@
   </parent>
 
   <modules>
-    <!--module>org.eclipse.qvtd.all.tests</module-->
+    <module>org.eclipse.qvtd.all.tests</module>
     <module>org.eclipse.qvtd.atl.tests</module>
     <module>org.eclipse.qvtd.compiler.tests</module>
     <!--module>org.eclipse.qvtd.cs2as.compiler.tests</module-->
     <module>org.eclipse.qvtd.doc.bigmde2016.tests</module>
     <module>org.eclipse.qvtd.doc.exe2016.tests</module>
     <!--module>org.eclipse.qvtd.doc.minioclcs.xtext.tests</module-->
-    <!--module>org.eclipse.qvtd.umlx.tests</module-->
+    <module>org.eclipse.qvtd.umlx.tests</module>
     <module>org.eclipse.qvtd.xtext.qvtbase.tests</module>
     <module>org.eclipse.qvtd.xtext.qvtcore.tests</module>
     <module>org.eclipse.qvtd.xtext.qvtimperative.tests</module>

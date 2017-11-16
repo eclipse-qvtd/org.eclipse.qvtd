@@ -22,7 +22,6 @@ import org.eclipse.qvtd.umlx.tests.AllUMLXTests;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiDebuggerTests;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.AllQVTrelationTests;
 
 import junit.framework.Test;
@@ -46,12 +45,7 @@ public class AllQVTdTests extends TestCase
 		result.addTest(AllQVTimperativeTests.suite());
 		result.addTest(AllQVTrelationTests.suite());
 		result.addTestSuite(QVTbaseLibraryTests.class);
-		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			result.addTestSuite(QVTiDebuggerTests.class);
-		}
-		else {
-			result.addTestSuite(GrammarTests.class);		// *.xtextbin fail to load in Eclipse, but we don't need to test twice anyway.
-		}
+		result.addTestSuite(GrammarTests.class);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
 			//			result.addTestSuite(OCL2QVTiTestCases.class);
 		}

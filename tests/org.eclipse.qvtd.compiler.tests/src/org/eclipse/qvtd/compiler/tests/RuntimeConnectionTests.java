@@ -18,11 +18,13 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.AbstractInterpretedInvocation;
@@ -210,6 +212,15 @@ public class RuntimeConnectionTests extends TestCase
 		public void append() {
 			appendElement(counter++);
 		}
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return TestUtil.getName(getTestName());
+	}
+
+	public @NonNull String getTestName() {
+		return ClassUtil.nonNullState(super.getName());
 	}
 
 	@Test

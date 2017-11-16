@@ -93,26 +93,26 @@ public class XtextCompilerUtil extends CompilerUtil
 		assert false : s.toString();
 	}
 
-	public static void doQVTcSerializeAndLoad(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
-		/*XtextResource csResource =*/ doSerialize(inputURI, serializedURI);
-		QVTcore qvtc = QVTcore.newInstance(ProjectManager.NO_PROJECTS, null);
+	public static void doQVTcSerializeAndLoad(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
+		/*XtextResource csResource =*/ doSerialize(projectManager, inputURI, serializedURI);
+		QVTcore qvtc = QVTcore.newInstance(projectManager, null);
 		Resource cResource2 = QVTcoreUtil.loadTransformations(qvtc.getEnvironmentFactory(), serializedURI, false);
 		assertNoResourceErrors("Core Load", cResource2);
 	}
 
-	public static void doQVTiSerializeAndLoad(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
-		/*XtextResource csResource =*/ doSerialize(inputURI, serializedURI);
-		QVTimperative qvti = QVTimperative.newInstance(ProjectManager.NO_PROJECTS, null);
+	public static void doQVTiSerializeAndLoad(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
+		/*XtextResource csResource =*/ doSerialize(projectManager, inputURI, serializedURI);
+		QVTimperative qvti = QVTimperative.newInstance(projectManager, null);
 		Resource iResource2 = QVTimperativeUtil.loadTransformations(ImperativeModel.class, qvti.getEnvironmentFactory(), serializedURI, false);
 		assertNoResourceErrors("IMperative Load", iResource2);
 	}
 
-	private static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
+	private static XtextResource doSerialize(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//
 		//	Load QVTcAS
 		//
-		OCL ocl = QVTcore.newInstance(OCL.NO_PROJECTS, null);
+		OCL ocl = QVTcore.newInstance(projectManager, null);
 		try {
 			ASResource asResource = loadQVTcAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);

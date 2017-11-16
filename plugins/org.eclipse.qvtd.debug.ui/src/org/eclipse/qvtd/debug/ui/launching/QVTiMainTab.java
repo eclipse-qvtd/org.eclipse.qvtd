@@ -39,7 +39,7 @@ public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchCo
 
 	@Override
 	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		return new QVTiCompilerChain(environmentFactory, txURI, options);
+		return new QVTiCompilerChain(environmentFactory, txURI, txURI, options);
 	}
 
 	@Override

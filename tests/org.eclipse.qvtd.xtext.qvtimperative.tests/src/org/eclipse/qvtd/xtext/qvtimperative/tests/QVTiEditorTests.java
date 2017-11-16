@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
-import java.io.IOException;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -26,11 +24,10 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 public class QVTiEditorTests extends LoadTestCase
 {
 	@Override
-	public void doLoad_Concrete(@NonNull String inputName, @NonNull String @Nullable [] messages) throws IOException {
-		OCL ocl = QVTimperative.newInstance(getProjectMap(), null);
+	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
+		OCL ocl = QVTimperative.newInstance(getTestProjectManager(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
-		URI inputURI = getProjectFileURI(inputName);
-		@NonNull URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
+		URI pivotURI = getTestURIWithExtension(inputURI, "qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}
@@ -41,13 +38,13 @@ public class QVTiEditorTests extends LoadTestCase
 		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
-	public void testLoad_HSV2HSL_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HSL/HSV2HSL.qvti", NO_MESSAGES);
+	public void testLoad_HSV2HSL_qvti() throws Exception {
+		doLoad_Concrete(getModelsURI("HSV2HSL/HSV2HSL.qvti"), NO_MESSAGES);
 	}
 
 
-	public void testLoad_Classescs2Classes_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("ClassesCS2AS/ClassesCS2AS.qvti", NO_MESSAGES);
+	public void testLoad_Classescs2Classes_qvti() throws Exception {
+		doLoad_Concrete(getModelsURI("ClassesCS2AS/ClassesCS2AS.qvti"), NO_MESSAGES);
 	}
 
 	//	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {

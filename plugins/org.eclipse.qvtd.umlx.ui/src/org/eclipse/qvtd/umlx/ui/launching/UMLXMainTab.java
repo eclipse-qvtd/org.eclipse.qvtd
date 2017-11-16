@@ -60,7 +60,7 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI,
 			@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		return new UMLXCompilerChain(environmentFactory, txURI, options);
+		return new UMLXCompilerChain(environmentFactory, txURI, txURI, options);
 	}
 
 	private void gatherOutputModels(@NonNull List<TxTypedModelNode> outputModels, @NonNull TxTypedModelNode typedModel) {

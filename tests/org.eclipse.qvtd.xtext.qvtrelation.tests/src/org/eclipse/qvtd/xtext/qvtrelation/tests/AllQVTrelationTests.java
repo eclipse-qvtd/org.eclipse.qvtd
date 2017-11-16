@@ -14,8 +14,6 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.EMFPlugin;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -32,7 +30,7 @@ public class AllQVTrelationTests extends TestCase
 
 	public static Test suite() {
 		TestSuite result = new TestSuite("All QVTrelation Tests");
-		result.addTestSuite(LoadTests.class);
+		result.addTestSuite(QVTrLoadTests.class);
 		result.addTestSuite(QVTrDomainUsageTests.class);
 		result.addTestSuite(QVTr2QVTrTests.class);
 		//		result.addTestSuite(QVTrPartialRelationAnalysisTests.class);
@@ -43,9 +41,7 @@ public class AllQVTrelationTests extends TestCase
 		//			result.addTestSuite(UsageTests.class);
 		//		}
 		result.addTestSuite(QVTrSerializeTests.class);
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			result.addTestSuite(QVTrCompilerTests.class);
-		}
+		result.addTestSuite(QVTrCompilerTests.class);
 		return result;
 	}
 

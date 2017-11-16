@@ -529,7 +529,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type1 = (Type)boundValues[1];
 			this.type2 = (Type)boundValues[2];
-			this.instance = (Type)org.eclipse.qvtd.atl.atl2qvtr.Helper4getCommonType.INSTANCE.evaluate(executor, CLSSid_Type, type1, type2);
+			this.instance = (Type)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getCommonType.INSTANCE.evaluate(executor, CLSSid_Type, type1, type2);
 		}
 
 		@Override
@@ -557,7 +557,7 @@ public class ATL2QVTr extends AbstractTransformer
 		public FUN_getHelper(/*Nullable*/ Object @NonNull [] boundValues) {
 			this.self = (ATL2QVTr)boundValues[0];
 			this.element = (LocatedElement)boundValues[1];
-			this.instance = (Helper)org.eclipse.qvtd.atl.atl2qvtr.Helper4getHelper.INSTANCE.evaluate(executor, CLSSid_Helper, element);
+			this.instance = (Helper)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getHelper.INSTANCE.evaluate(executor, CLSSid_Helper, element);
 		}
 
 		@Override
@@ -584,7 +584,7 @@ public class ATL2QVTr extends AbstractTransformer
 		public FUN_getModule(/*Nullable*/ Object @NonNull [] boundValues) {
 			this.self = (ATL2QVTr)boundValues[0];
 			this.element_0 = (LocatedElement)boundValues[1];
-			this.instance = (Module)org.eclipse.qvtd.atl.atl2qvtr.Helper4getModule.INSTANCE.evaluate(executor, CLSSid_Module, element_0);
+			this.instance = (Module)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getModule.INSTANCE.evaluate(executor, CLSSid_Module, element_0);
 		}
 
 		@Override
@@ -613,7 +613,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type = (Type)boundValues[1];
 			this.name = (String)boundValues[2];
-			this.instance = (org.eclipse.ocl.pivot.Operation)org.eclipse.qvtd.atl.atl2qvtr.Helper4getOperation.INSTANCE.evaluate(executor, CLSSid_Operation_0, type, name);
+			this.instance = (org.eclipse.ocl.pivot.Operation)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getOperation.INSTANCE.evaluate(executor, CLSSid_Operation_0, type, name);
 		}
 
 		@Override
@@ -643,7 +643,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.atlModule_0 = (Module)boundValues[1];
 			this.name_0 = (String)boundValues[2];
-			this.instance = (Package)org.eclipse.qvtd.atl.atl2qvtr.Helper4getPackage.INSTANCE.evaluate(executor, CLSSid_Package, atlModule_0, name_0);
+			this.instance = (Package)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getPackage.INSTANCE.evaluate(executor, CLSSid_Package, atlModule_0, name_0);
 		}
 
 		@Override
@@ -673,7 +673,7 @@ public class ATL2QVTr extends AbstractTransformer
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type_0 = (Type)boundValues[1];
 			this.name_1 = (String)boundValues[2];
-			this.instance = (Property)org.eclipse.qvtd.atl.atl2qvtr.Helper4getProperty.INSTANCE.evaluate(executor, CLSSid_Property, type_0, name_1);
+			this.instance = (Property)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getProperty.INSTANCE.evaluate(executor, CLSSid_Property, type_0, name_1);
 		}
 
 		@Override
@@ -701,7 +701,7 @@ public class ATL2QVTr extends AbstractTransformer
 		public FUN_getType(/*Nullable*/ Object @NonNull [] boundValues) {
 			this.self = (ATL2QVTr)boundValues[0];
 			this.type_1 = (OclType)boundValues[1];
-			this.instance = (Class)org.eclipse.qvtd.atl.atl2qvtr.Helper4getType.INSTANCE.evaluate(executor, CLSSid_Class, type_1);
+			this.instance = (Class)org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getType.INSTANCE.evaluate(executor, CLSSid_Class, type_1);
 		}
 
 		@Override

@@ -57,7 +57,7 @@ public class UMLXLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
 		QVTiEnvironmentFactory environmentFactory = qvt.getEnvironmentFactory();
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		CompilerChain compilerChain = new UMLXCompilerChain(environmentFactory, txURI, null);
+		CompilerChain compilerChain = new UMLXCompilerChain(environmentFactory, txURI, txURI, null);
 		compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
 		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);
 		String genmodelAttribute = configuration.getAttribute(GENMODEL_KEY, "");

@@ -1,4 +1,4 @@
-modeltype lMM uses 'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/DoublyLinkList';
+modeltype lMM uses 'http://www.eclipse.org/qvtd/doc/exe2016tests/qvtc/forward2reverse/1.0/DoublyLinkList';
 
 transformation Forward2Reverse(in family : lMM, out lMM);
 

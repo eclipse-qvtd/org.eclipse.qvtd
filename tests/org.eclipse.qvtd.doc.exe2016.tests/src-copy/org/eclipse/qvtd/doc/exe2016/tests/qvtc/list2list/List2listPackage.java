@@ -46,7 +46,7 @@ public interface List2listPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/List2List";
+	String eNS_URI = "http://www.eclipse.org/qvtd/doc/exe2016tests/qvtc/forward2reverse/1.0/List2List";
 
 	/**
 	 * The package namespace name.

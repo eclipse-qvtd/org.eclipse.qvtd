@@ -11,6 +11,9 @@ appendQuery
 appendSegment
  (Ljava/lang/String;)Lorg/eclipse/emf/common/util/URI;
  (Ljava/lang/String;)L1org/eclipse/emf/common/util/URI;
+appendSegments
+ ([Ljava/lang/String;)Lorg/eclipse/emf/common/util/URI;
+ ([Ljava/lang/String;)L1org/eclipse/emf/common/util/URI;
 authority
  ()Ljava/lang/String;
  ()L0java/lang/String;

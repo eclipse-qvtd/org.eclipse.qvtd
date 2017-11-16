@@ -156,7 +156,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			String javaCodeSource = cg.generateClassFile();
 			OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);
 			@SuppressWarnings("unchecked")
-			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName/*, null*/);
 			if (txClass == null) {
 				//				TestCase.fail("Failed to compile transformation");
 				throw new UnsupportedOperationException();

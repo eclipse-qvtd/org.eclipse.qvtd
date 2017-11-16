@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +21,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -32,6 +30,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestFile;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
+import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -48,12 +50,12 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
-
-import junit.framework.TestCase;
 
 public class XtextTestCase extends PivotTestCase
 {
@@ -274,33 +276,124 @@ public class XtextTestCase extends PivotTestCase
 		return pivotResource;
 	} */
 
-	protected File getProjectFile() {
-		String projectName = getProjectName();
-		URL projectURL = getTestResource(projectName);
-		assertNotNull(projectURL);
-		return new File(projectURL.getFile());
+	public @Nullable TestFileSystem testFileSystem = null;
+	public @Nullable TestProject testProject = null;
+	public @Nullable ProjectManager testProjectManager = null;
+
+	/**
+	 * Return the URI of a file in the test harness models folder.
+	 */
+	protected @NonNull URI getModelsURI(@NonNull String filePath) {
+		return URI.createPlatformResourceURI(getTestBundleName() + "/models/" + filePath, true);
 	}
 
-	protected @NonNull URI getProjectFileURI(String referenceName) {
-		File projectFile = getProjectFile();
-		return URI.createFileURI(projectFile.toString() + "/" + referenceName);
-	}
+	/**
+	 * Return the URI of a file in the test project based on the file name of the inputURI and
+	 * file extension replaced by fileExtension.
+	 *
+	protected @NonNull URI getModelsURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) throws Exception {
+		URI fileStem = inputURI.trimFileExtension().appendFileExtension(fileExtension);
+		return getModelsURI(ClassUtil.nonNullState(fileStem.lastSegment()));
+	} */
 
-	protected String getProjectName() {
+	protected @NonNull String getProjectName() {
 		return getClass().getPackage().getName().replace('.', '/');
 	}
 
-	protected URL getTestResource(String resourceName) {
-		URL projectURL = getClass().getClassLoader().getResource(resourceName);
-		if ((projectURL != null) && Platform.isRunning()) {
-			try {
-				projectURL = FileLocator.resolve(projectURL);
-			} catch (IOException e) {
-				TestCase.fail(e.getMessage());
-				return null;
-			}
+	/**
+	 * Return platform:/resource/'filePath'
+	 */
+	protected @NonNull URI getResourceURI(@NonNull String filePath) {
+		return URI.createPlatformResourceURI(filePath, true);
+	}
+
+	/**
+	 * Return the name of the test bundle. The default implementation assumes that the package name is
+	 * the same as the bundle name. Override when this assumption is unjustified.
+	 */
+	@SuppressWarnings("null")
+	protected @NonNull String getTestBundleName() {
+		return getClass().getPackage().getName();
+	}
+	protected @NonNull URI getTestBundleURI() {
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			return URI.createPlatformPluginURI("/" + getTestBundleName(), true);
 		}
-		return projectURL;
+		else {
+			return URI.createPlatformResourceURI("/" + getTestBundleName(), true);
+		}
+	}
+
+	protected @NonNull TestFileSystem getTestFileSystem() throws Exception {
+		TestFileSystem testFileSystem2 = testFileSystem;
+		if (testFileSystem2 == null) {
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+				File testBundleFile = new File(".project");
+				assert !testBundleFile.exists() : "Default working directory should be the workspace rather than a project: " + testBundleFile.getAbsolutePath();
+			}
+			testFileSystem = testFileSystem2 = TestFileSystem.create();
+		}
+		return testFileSystem2;
+	}
+
+	/**
+	 * Return the URI of the file within the testProject.
+	 */
+	protected @NonNull URI getTestFileURI(@NonNull String filePath) throws Exception {
+		TestProject testProject = getTestProject();
+		TestFile outFile = testProject.getOutputFile(filePath);
+		return URI.createFileURI(outFile.getFile().toString());
+	}
+
+	/**
+	 * Return the URI of the test models folder.
+	 */
+	protected @NonNull URI getTestModelsFolderURI() {
+		return getTestBundleURI().appendSegment("models");
+	}
+
+	protected @NonNull TestProject getTestProject() throws Exception {
+		TestProject testProject2 = testProject;
+		if (testProject2 == null) {
+			String testProjectName = getClass().getSimpleName() + "__" + getTestName();
+			testProject = testProject2 = getTestFileSystem().getTestProject(testProjectName);
+		}
+		return testProject2;
+	}
+
+	protected @NonNull ProjectManager getTestProjectManager() throws Exception {
+		ProjectManager testProjectManager2 = testProjectManager;
+		if (testProjectManager2 == null) {
+			testProjectManager = testProjectManager2 = getTestProject().createTestProjectManager();
+		}
+		return testProjectManager2;
+	}
+
+	/**
+	 * Return the URI of the filePath within the testProject.
+	 */
+	protected @NonNull URI getTestURI(@NonNull String filePath) throws Exception {
+		TestProject testProject = getTestProject();
+		TestFile outFile = testProject.getOutputFile(filePath);
+		return outFile.getURI();
+	}
+
+	/**
+	 * Return the URI of a file in the test project based on the file name of the inputURI and
+	 * file extension replaced by fileExtension.
+	 */
+	protected @NonNull URI getTestURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) throws Exception {
+		URI fileStem = inputURI.trimFileExtension().appendFileExtension(fileExtension);
+		String fileName = ClassUtil.nonNullState(fileStem.lastSegment());
+		return getTestURI(fileName);
+	}
+
+	/**
+	 * Return the URI of a file based on the file name of the inputURI and
+	 * file extension replaced by fileExtension.
+	 */
+	protected @NonNull URI getURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) throws Exception {
+		return inputURI.trimFileExtension().appendFileExtension(fileExtension);
 	}
 
 	@Override

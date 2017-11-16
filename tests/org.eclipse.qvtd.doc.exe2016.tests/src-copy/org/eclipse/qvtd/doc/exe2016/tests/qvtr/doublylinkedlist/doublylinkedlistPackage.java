@@ -46,7 +46,7 @@ public interface doublylinkedlistPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/1.0/DoublyLinkList";
+	String eNS_URI = "http://www.eclipse.org/qvtd/doc/exe2016tests/qvtr/forward2reverse/1.0/DoublyLinkList";
 
 	/**
 	 * The package namespace name.

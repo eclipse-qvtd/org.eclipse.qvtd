@@ -29,26 +29,26 @@ public class BigMDE2016InterpreterTests extends QVTcCompilerTests
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("families2persons");
+		MyQVT myQVT = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons.qvtc"));
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			ImperativeTransformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("person");
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
 				BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
-				myQVT.loadInput("family", "Families.xmi");
+				myQVT.loadInput("family", getModelsURI("families2persons/samples/Families.xmi"));
 				Resource inResource = interpretedExecutor.getModel("family");
 				inResource.getContents().clear();
 				inResource.getContents().addAll(FamiliesGenerator.createFamiliesModel(testSize, 9));
-				myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
-				myQVT.createModel("person", "Persons_Interpreted.xmi");
+				myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, getTestURI("Families2Persons_trace.xmi"));
+				myQVT.createModel("person", getTestURI("Persons_Interpreted.xmi"));
 				BigMDE2016CGTests.garbageCollect();
 				logger.printf("%9d, ", 10*testSize);
 				long startTime = System.nanoTime();
 				myQVT.executeTransformation();
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+				//				myQVT.saveOutput("person", getTestURI("Persons_Interpreted.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
 			}
 		}
 		finally {

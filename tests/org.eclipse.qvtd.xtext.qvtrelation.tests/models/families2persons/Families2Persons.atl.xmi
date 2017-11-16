@@ -2,8 +2,8 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
   <atl:Module location="5:1-50:2" name="Families2Persons">
     <commentsBefore>-- @atlcompiler emftvm</commentsBefore>
-    <commentsBefore>-- @path Families=/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/families2persons/Families.ecore</commentsBefore>
-    <commentsBefore>-- @path Persons=/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/families2persons/Persons.ecore</commentsBefore>
+    <commentsBefore>-- @path Families=/org.eclipse.qvtd.xtext.qvtrelation.tests/models/families2persons/Families.ecore</commentsBefore>
+    <commentsBefore>-- @path Persons=/org.eclipse.qvtd.xtext.qvtrelation.tests/models/families2persons/Persons.ecore</commentsBefore>
     <inModels location="6:27-6:40" name="IN" metamodel="/2"/>
     <outModels location="6:8-6:21" name="OUT" metamodel="/1"/>
     <elements xsi:type="atl:Helper" location="8:1-21:8">

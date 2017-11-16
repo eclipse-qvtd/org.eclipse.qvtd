@@ -13,8 +13,6 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.EMFPlugin;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -23,7 +21,6 @@ import junit.textui.TestRunner;
 /**
  * Tests for the Xtext QVTc editor support.
  */
-@SuppressWarnings("nls")
 public class AllQVTcoreTests extends TestCase
 {
 	public AllQVTcoreTests() {
@@ -32,12 +29,10 @@ public class AllQVTcoreTests extends TestCase
 
 	public static Test suite() {
 		TestSuite result = new TestSuite("All QVTcore Tests");
-		result.addTestSuite(LoadTests.class);
+		result.addTestSuite(QVTcLoadTests.class);
 		result.addTestSuite(QVTcDomainUsageTests.class);
 		result.addTestSuite(QVTcSerializeTests.class);
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			result.addTestSuite(QVTcCompilerTests.class);
-		}
+		result.addTestSuite(QVTcCompilerTests.class);
 		return result;
 	}
 

@@ -7,3 +7,12 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.qvtd.runtime
+Export-Package: org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simplerdbms,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simplerdbms.impl,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simplerdbms.util,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.impl,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.util,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl,
+ org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.util

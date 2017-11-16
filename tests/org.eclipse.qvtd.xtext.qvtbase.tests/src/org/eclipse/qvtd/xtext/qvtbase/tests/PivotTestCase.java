@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -33,11 +32,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
-import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
@@ -59,12 +57,10 @@ import junit.framework.TestCase;
 /**
  * Tests for OclAny operations.
  */
-@SuppressWarnings("nls")
 public class PivotTestCase extends TestCase
 {
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.tests";
 	public static final @NonNull TracingOption TEST_START = new TracingOption(PLUGIN_ID, "test/start");
-	private static StandaloneProjectMap projectMap = null;
 
 	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
@@ -298,24 +294,6 @@ public class PivotTestCase extends TestCase
 		return ecoreResource;
 	}
 
-	public static @NonNull StandaloneProjectMap getProjectMap() {
-		StandaloneProjectMap projectMap2 = projectMap;
-		if (projectMap2 == null) {
-			projectMap = projectMap2 = EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false);
-		}
-		return projectMap2;
-	}
-
-	public URI getTestModelURI(String localFileName) {
-		String urlString = ClassUtil.nonNullState(getProjectMap().getLocation(PLUGIN_ID)).toString();
-		TestCase.assertNotNull(urlString);
-		return URI.createURI(urlString + "/" + localFileName);
-	}
-
-	//	public static void resetProjectMap() {
-	//		projectMap = null;
-	//	}
-
 	public static Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
 		return savePivotAsEcore(ocl, pivotResource, ecoreURI, null, validateSaved);
 	}
@@ -355,6 +333,15 @@ public class PivotTestCase extends TestCase
 		if (!noDebug) {
 			System.out.println(string);
 		}
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return TestUtil.getName(getTestName());
+	}
+
+	public @NonNull String getTestName() {
+		return ClassUtil.nonNullState(super.getName());
 	}
 
 	@Override

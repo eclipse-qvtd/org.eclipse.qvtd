@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -73,6 +74,8 @@ public interface CompilerChain
 	public static final @NonNull Key<@NonNull Map<@NonNull Key<? extends Object>, @Nullable Object>> SCHEDULER_OPTIONS_KEY = new Key<>("scheduler-options");
 	public static final @NonNull Key<@Nullable URI> URI_KEY = new Key<>("uri");
 	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<>("validate");
+
+	public static final @NonNull Key<@NonNull List<@NonNull String>> CLASS_PROJECT_NAMES_KEY = new Key<>("classProjectNames");
 
 	public static final @NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new Key<>("javaExtraPrefix");
 	public static final @NonNull Key<@Nullable Boolean> JAVA_GENERATED_DEBUG_KEY = new Key<>("javaGeneratedDebug");

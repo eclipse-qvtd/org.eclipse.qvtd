@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
@@ -391,7 +392,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			Collections.sort(allUsedGenPackages, GenPackageComparator.INSTANCE);
 			genModel.getUsedGenPackages().addAll(allUsedGenPackages);
 		}
-		genModel.setModelDirectory("/" + projectName + "/src-gen");
+		genModel.setModelDirectory("/" + projectName + "/" + JavaFileUtil.TEST_SRC_FOLDER_NAME);
 		genModel.setModelPluginID(projectName);
 		genModel.setModelName(trimFileExtension.lastSegment());
 		genModel.setBundleManifest(false);
@@ -458,13 +459,21 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 							}
 						}
 						if (genPackage == null) {
-							genPackage = genModel.createGenPackage();
-							genPackage.setEcorePackage(ePackage);
-							genPackage.setPrefix(ePackage.getName());
-							if (basePrefix != null) {
-								genPackage.setBasePackage(basePrefix);
+							for (GenPackage aGenPackage : genPackages) {
+								if (aGenPackage.getEcorePackage() == ePackage) {
+									genPackage = aGenPackage;
+									break;
+								}
 							}
-							genPackages.add(genPackage);
+							if (genPackage == null) {
+								genPackage = genModel.createGenPackage();
+								genPackage.setEcorePackage(ePackage);
+								genPackage.setPrefix(ePackage.getName());
+								if (basePrefix != null) {
+									genPackage.setBasePackage(basePrefix);
+								}
+								genPackages.add(genPackage);
+							}
 						}
 					}
 				}

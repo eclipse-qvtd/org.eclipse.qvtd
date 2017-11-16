@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
@@ -94,8 +95,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		protected final @NonNull URI samplesBaseUri;
 		private final @NonNull Map<@NonNull Class<? extends Region>, @NonNull Integer> regionClass2count = new HashMap<>();
 
-		public MyQVT(@NonNull String testName) {
-			super(new QVTiEnvironmentFactory(getProjectMap(), null));
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testName) {
+			super(new QVTiEnvironmentFactory(projectManager, null));
 			this.testName = testName;
 			this.baseURI = TESTS_BASE_URI.appendSegment(testName);
 			//
@@ -268,6 +269,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		}
 	}
 
+	private @NonNull MyQVT createQVT(@NonNull String name) throws Exception {
+		return new MyQVT(getTestProjectManager(), name);
+	}
+
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -292,7 +297,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		OperationDependencyAnalysis.REFINING.setState(true);
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
-		MyQVT myQVT = new MyQVT("example1");
+		MyQVT myQVT = createQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
@@ -313,7 +318,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample1_CGManual() throws Exception {
-		MyQVT myQVT = new MyQVT("example1");
+		MyQVT myQVT = createQVT("example1");
 		@SuppressWarnings({"null", "unchecked"})
 		@NonNull Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._Source2Target_qvtm_qvtcas.Source2Target_qvtm_qvtcas");
 		myQVT.executeModelsTX_CG(txClass, "model1");
@@ -325,14 +330,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample1_Interpreted() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		MyQVT myQVT = new MyQVT("example1");
+		MyQVT myQVT = createQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example1");
+		myQVT = createQVT("example1");
 		myQVT.loadEcoreFile("SourceMM1.ecore", SourcePackage.eINSTANCE);
 		myQVT.loadEcoreFile("TargetMM1.ecore", TargetPackage.eINSTANCE);
 		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
@@ -345,7 +350,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample1_OCL2QVTm() throws Exception {
-		MyQVT myQVT = new MyQVT("example1");
+		MyQVT myQVT = createQVT("example1");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
 		URI qvtmFileURI = baseURI.appendSegment("Source2Target.qvtm.qvtcas");
@@ -367,7 +372,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		//		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("example2");
+		MyQVT myQVT = createQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		myQVT.loadEcoreFile("EnvExample2.ecore", example2.classes.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
@@ -401,14 +406,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		MyQVT myQVT = new MyQVT("example2");
+		MyQVT myQVT = createQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example2");
+		myQVT = createQVT("example2");
 		myQVT.loadEcoreFile("ClassesCS.ecore", ClassescsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("Classes.ecore", ClassesPackage.eINSTANCE);
 		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
@@ -437,7 +442,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("example2");
+		MyQVT myQVT = createQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
 		myQVT.assertRegionCount(BasicMappingRegionImpl.class, 15);
@@ -451,7 +456,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example2");
+		myQVT = createQVT("example2");
 		myQVT.loadEcoreFile("ClassesCS.ecore", ClassescsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("Classes.ecore", ClassesPackage.eINSTANCE);
 
@@ -472,14 +477,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
 		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		MyQVT myQVT = new MyQVT("example2");
+		MyQVT myQVT = createQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example2");
+		myQVT = createQVT("example2");
 		myQVT.loadEcoreFile("ClassesCS.ecore", ClassescsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("Classes.ecore", ClassesPackage.eINSTANCE);
 		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
@@ -493,7 +498,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	//  Note supported anymore
 	//	@Test
 	//	public void testExample2_OCL2QVTm_MiddleModel() throws Exception {
-	//		MyQVT myQVT = new MyQVT("example2");
+	//		MyQVT myQVT = createQVT("example2");
 	//		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 	//		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
 	//		URI qvtmFileURI = baseURI.appendSegment("classescs2as.qvtm.qvtcas");
@@ -508,7 +513,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample2_OCL2QVTm_MiddleFolded() throws Exception {
-		MyQVT myQVT = new MyQVT("example2");
+		MyQVT myQVT = createQVT("example2");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
 		URI qvtmFileURI = baseURI.appendSegment("classescs2as.qvtm.qvtcas");
@@ -530,7 +535,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_STACK.setState(true);
-		MyQVT myQVT = new MyQVT("example3");
+		MyQVT myQVT = createQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
 		myQVT.assertRegionCount(BasicMappingRegionImpl.class, 6);
@@ -554,7 +559,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		EPackage.Registry.INSTANCE.put(example3.kiamaas.KiamaasPackage.eNS_URI, example3.kiamaas.KiamaasPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(example3.kiamacs.KiamacsPackage.eNS_URI, example3.kiamacs.KiamacsPackage.eINSTANCE);
 		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("example3");
+		MyQVT myQVT = createQVT("example3");
 		Class<? extends Transformer> txClass = KiamaRewrite_qvtm_qvtcas.class;
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.dispose();
@@ -565,7 +570,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample3_Interpreted() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("example3");
+		MyQVT myQVT = createQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		ImperativeTransformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
 		myQVT.executeModelsTX_Interpreted(tx, "model1");
@@ -587,7 +592,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("example4");
+		MyQVT myQVT = createQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		myQVT.assertRegionCount(BasicMappingRegionImpl.class, 7);
@@ -608,13 +613,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample4_Interpreted() throws Exception {
-		MyQVT myQVT = new MyQVT("example4");
+		MyQVT myQVT = createQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		ImperativeTransformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example4");
+		myQVT = createQVT("example4");
 		myQVT.loadEcoreFile("SimplerKiamaCS.ecore", example4.kiamacs.KiamacsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("SimplerKiamaAS.ecore", example4.kiamaas.KiamaasPackage.eINSTANCE);
 
@@ -630,7 +635,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample5_CG() throws Exception {
-		MyQVT myQVT = new MyQVT("example5");
+		MyQVT myQVT = createQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
 		myQVT.assertRegionCount(BasicMappingRegionImpl.class, 5);
@@ -648,7 +653,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.executeModelsTX_CG(txClass, "model1");
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example5");
+		myQVT = createQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel",
 			"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
 
@@ -668,13 +673,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample5_Interpreted() throws Exception {
-		MyQVT myQVT = new MyQVT("example5");
+		MyQVT myQVT = createQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
 		ImperativeTransformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
 		myQVT.executeModelsTX_Interpreted(tx, "model1");
 
 		myQVT.dispose();
-		myQVT = new MyQVT("example5");
+		myQVT = createQVT("example5");
 
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel",
 			"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
