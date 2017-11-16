@@ -53,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
 import org.junit.Test;
@@ -236,7 +237,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTiTestUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
 

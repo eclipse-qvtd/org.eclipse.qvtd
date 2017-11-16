@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
@@ -50,7 +51,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
-import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -286,8 +287,8 @@ public class AnalysisTests extends XtextTestCase
 
 	@Test
 	public void testOperationDependencyAnalysis_Companies() throws ParserException {
-		QVTcTestUtil.doCompleteOCLSetup();
-		QVTcTestUtil.doQVTcoreSetup();
+		TestUtil.doCompleteOCLSetup();
+		XtextCompilerUtil.doQVTcoreSetup();
 		OCLInternal ocl = OCLInternal.newInstance();
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		//

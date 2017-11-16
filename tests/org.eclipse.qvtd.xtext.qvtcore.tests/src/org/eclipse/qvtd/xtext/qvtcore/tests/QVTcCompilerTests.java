@@ -42,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
@@ -53,7 +54,6 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms.SimplerdbmsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -144,8 +144,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
 		super.setUp();
 		OCLstdlib.install();
-		QVTcTestUtil.doQVTcoreSetup();
-		QVTiTestUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTcoreSetup();
+		XtextCompilerUtil.doQVTimperativeSetup();
 		//		QVTcorePivotStandaloneSetup.doSetup();
 		//		QVTimperativePivotStandaloneSetup.doSetup();
 	}

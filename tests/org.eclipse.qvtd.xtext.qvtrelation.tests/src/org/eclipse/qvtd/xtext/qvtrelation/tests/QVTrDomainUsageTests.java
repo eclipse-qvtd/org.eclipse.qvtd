@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AbstractDomainUsageTests;
 
 /**
@@ -30,7 +31,7 @@ public class QVTrDomainUsageTests extends AbstractDomainUsageTests
 	@Override
 	protected void setUp() throws Exception {
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTrTestUtil.doQVTrelationSetup();
+		XtextCompilerUtil.doQVTrelationSetup();
 		super.setUp();
 	}
 

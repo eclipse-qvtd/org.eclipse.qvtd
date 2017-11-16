@@ -45,9 +45,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
-import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrTestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -192,9 +189,9 @@ public class UMLXCompilerTests extends LoadTestCase
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			UMLXStandaloneSetup.doSetup();
 		}
-		QVTrTestUtil.doQVTrelationSetup();
-		QVTcTestUtil.doQVTcoreSetup();
-		QVTiTestUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTrelationSetup();
+		XtextCompilerUtil.doQVTcoreSetup();
+		XtextCompilerUtil.doQVTimperativeSetup();
 		//		QVTrelationPivotStandaloneSetup.doSetup();
 		//		QVTimperativePivotStandaloneSetup.doSetup();
 	}

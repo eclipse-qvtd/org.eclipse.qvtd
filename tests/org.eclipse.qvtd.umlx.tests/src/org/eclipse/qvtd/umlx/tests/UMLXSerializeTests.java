@@ -55,7 +55,7 @@ import org.eclipse.qvtd.umlx.umlx2qvtr.UMLX2QVTr;
 import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrTestUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
 import com.google.common.collect.Lists;
 
@@ -275,7 +275,7 @@ public class UMLXSerializeTests extends LoadTestCase
 
 	@Override
 	protected void setUp() throws Exception {
-		QVTrTestUtil.doQVTrelationSetup();
+		XtextCompilerUtil.doQVTrelationSetup();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			UMLXStandaloneSetup.doSetup();
 		}

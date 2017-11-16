@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -61,7 +62,7 @@ public class QVTrLoadTests extends LoadTestCase
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTrTestUtil.doQVTrelationSetup();
+		XtextCompilerUtil.doQVTrelationSetup();
 		super.setUp();
 		//		getProjectMap().
 		//		ProjectMap.getAdapter(resourceSet);

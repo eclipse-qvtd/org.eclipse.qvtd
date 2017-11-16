@@ -60,8 +60,7 @@ import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
@@ -286,8 +285,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		QVTiTestUtil.doQVTimperativeSetup(); // To be able to add QVTimperative.ocl validation
-		QVTcTestUtil.doQVTcoreSetup();
+		XtextCompilerUtil.doQVTimperativeSetup(); // To be able to add QVTimperative.ocl validation
+		XtextCompilerUtil.doQVTcoreSetup();
 		TestUtil.doCompleteOCLSetup();
 	}
 

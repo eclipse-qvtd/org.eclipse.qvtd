@@ -72,6 +72,8 @@ import org.eclipse.qvtd.runtime.internal.evaluation.ModificationMonitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -262,7 +264,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		//		JavaFileUtil.CLASS_PATH.setState(true);
 		TestUtil.doCompleteOCLSetup();
-		QVTiTestUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
 
