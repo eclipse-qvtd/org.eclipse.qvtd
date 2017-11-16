@@ -32,8 +32,8 @@ public class AllQVTimperativeTests extends TestCase
 		result.addTestSuite(QVTiInterpreterTests.class);
 		result.addTestSuite(QVTiCompilerTests.class);
 		result.addTestSuite(QVTiSerializeTests.class);
-		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			//			result.addTestSuite(QVTiDebuggerTests.class);
+		if (EMFPlugin.IS_ECLIPSE_RUNNING && (System.getProperty("TYCHO_TEST") == null)) {	// See BUG 526252
+			result.addTestSuite(QVTiDebuggerTests.class);
 		}
 		return result;
 	}

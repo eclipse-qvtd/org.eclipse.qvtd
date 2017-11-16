@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,14 +35,15 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.core.VMVariable;
 import org.eclipse.ocl.examples.xtext.tests.TestUIUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
-import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
@@ -48,6 +51,7 @@ import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -98,6 +102,17 @@ public class QVTiDebuggerTests extends XtextTestCase
 		assertEquals(expectedNames, actualNames);
 	}
 
+	public static @NonNull IFile copyIFile2(@NonNull URIConverter uriConverter, /*@NonNull*/ IFile outFile, @NonNull URI uri, String encoding) throws CoreException, IOException {
+		//		String string = uri.isFile() ? uri.toFileString() : uri.toString();
+		//		Reader reader = new BufferedReader(new FileReader(string));
+		//		if (encoding == null) {
+		//			encoding = URIConverter.ReadableInputStream.getEncoding(reader);
+		//		}
+		InputStream inputStream = uriConverter.createInputStream(uri, null);
+		outFile.create(inputStream, true, null);
+		return outFile;
+	}
+
 	protected ILaunchConfigurationWorkingCopy createLaunchConfiguration(@NonNull IProject iProject, @NonNull String launchName,
 			@NonNull URI transformationURI, @NonNull Map<String,String> newInKeys, @NonNull Map<String,String> newOutKeys) throws CoreException {
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
@@ -125,12 +140,14 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.closeIntro();
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
+		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
+		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
 		IProject iProject = TestUIUtil.createIProject("QVTiDebuggerRunTests");
-		IFile txFile = TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.qvti"), getProjectFileURI("HSV2HSL/HSV2HSL.qvti"), "UTF-8");
-		TestUIUtil.copyIFile(iProject.getFile("HSVTree.ecore"), getProjectFileURI("HSV2HSL/HSVTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HSLTree.ecore"), getProjectFileURI("HSV2HSL/HSLTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.ecore"), getProjectFileURI("HSV2HSL/HSV2HSL.ecore"), null);
-		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HSL/HSVNode.xmi"), null);
+		IFile txFile = copyIFile2(uriConverter, iProject.getFile("HSV2HSL.qvti"), getModelsURI("HSV2HSL/HSV2HSL.qvti"), "UTF-8");
+		copyIFile2(uriConverter, iProject.getFile("HSVTree.ecore"), getModelsURI("HSV2HSL/HSVTree.ecore"), null);
+		copyIFile2(uriConverter, iProject.getFile("HSLTree.ecore"), getModelsURI("HSV2HSL/HSLTree.ecore"), null);
+		copyIFile2(uriConverter, iProject.getFile("HSV2HSL.ecore"), getModelsURI("HSV2HSL/HSV2HSL.ecore"), null);
+		IFile inFile = copyIFile2(uriConverter, iProject.getFile("HSVNode.xmi"), getModelsURI("HSV2HSL/HSVNode.xmi"), null);
 		IFile outFile = iProject.getFile("HSLNode.xmi");
 		IFile middleFile = iProject.getFile("HSV2HSLNode.xmi");
 		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
@@ -157,12 +174,15 @@ public class QVTiDebuggerTests extends XtextTestCase
 			TestUIUtil.wait(1000);
 		}
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		Resource expectedResource = expectedResourceSet.getResource(getProjectFileURI("HSV2HSL/HSLNodeValidate.xmi"), true);
+		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
+		//		ocl.getProjectManager().initializeResourceSet(actualResourceSet);
 		Resource actualResource = actualResourceSet.getResource(outURI, true);
 		assert actualResource != null;
 		TestUtil.assertSameModel(expectedResource, actualResource);
+		ocl.dispose();
 	}
 
 	public void testDebugger_Debug_HSV2HSL() throws Exception {
@@ -176,12 +196,14 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.closeIntro();
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
+		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
+		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
 		IProject iProject = TestUIUtil.createIProject("QVTiDebuggerDebugTests");
-		IFile txFile = TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.qvti"), getProjectFileURI("HSV2HSL/HSV2HSL.qvti"), "UTF-8");
-		TestUIUtil.copyIFile(iProject.getFile("HSVTree.ecore"), getProjectFileURI("HSV2HSL/HSVTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HSLTree.ecore"), getProjectFileURI("HSV2HSL/HSLTree.ecore"), null);
-		TestUIUtil.copyIFile(iProject.getFile("HSV2HSL.ecore"), getProjectFileURI("HSV2HSL/HSV2HSL.ecore"), null);
-		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HSL/HSVNode.xmi"), null);
+		IFile txFile = copyIFile2(uriConverter, iProject.getFile("HSV2HSL.qvti"), getModelsURI("HSV2HSL/HSV2HSL.qvti"), "UTF-8");
+		copyIFile2(uriConverter, iProject.getFile("HSVTree.ecore"), getModelsURI("HSV2HSL/HSVTree.ecore"), null);
+		copyIFile2(uriConverter, iProject.getFile("HSLTree.ecore"), getModelsURI("HSV2HSL/HSLTree.ecore"), null);
+		copyIFile2(uriConverter, iProject.getFile("HSV2HSL.ecore"), getModelsURI("HSV2HSL/HSV2HSL.ecore"), null);
+		IFile inFile = copyIFile2(uriConverter, iProject.getFile("HSVNode.xmi"), getModelsURI("HSV2HSL/HSVNode.xmi"), null);
 		IFile outFile = iProject.getFile("HSLNode.xmi");
 		IFile middleFile = iProject.getFile("HSV2HSLNode.xmi");
 		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
@@ -251,11 +273,14 @@ public class QVTiDebuggerTests extends XtextTestCase
 		//
 		TestUIUtil.flushEvents();
 		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		Resource expectedResource = expectedResourceSet.getResource(getProjectFileURI("HSV2HSL/HSLNodeValidate.xmi"), true);
+		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), true);
 		assert expectedResource != null;
 		ResourceSet actualResourceSet = new ResourceSetImpl();
+		//		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
 		Resource actualResource = actualResourceSet.getResource(outURI, true);
 		assert actualResource != null;
 		TestUtil.assertSameModel(expectedResource, actualResource);
+		ocl.dispose();
 	}
 }
