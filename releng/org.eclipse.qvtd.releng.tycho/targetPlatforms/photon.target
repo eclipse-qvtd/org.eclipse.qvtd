@@ -14,10 +14,6 @@
     <repository location="http://download.eclipse.org/staging/photon"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-    <unit id="org.eclipse.m2m.atl.emftvm.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/mmt/atl/updates/releases/3.8"/>
-  </location>
-  <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>
     <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.14milestones/core"/>
   </location>

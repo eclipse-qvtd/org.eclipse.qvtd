@@ -10,9 +10,8 @@
 <repository location="http://download.eclipse.org/acceleo/updates/releases/3.7"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.m2m.atl.emftvm.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.m2m.atl.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/mmt/atl/updates/releases/3.8"/>
+    <repository location="http://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>

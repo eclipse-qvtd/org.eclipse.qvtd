@@ -104,7 +104,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			assert uriConverter != null;
 			//			System.out.println("classPathProjectNames = " + classPathProjectNames);
 			List<@NonNull String> classpathProjects = JavaFileUtil.createClassPathProjectList(uriConverter, classPathProjectNames);
-			//			classpathProjects.add(0, javaResult.classPath);
 			//			System.out.println("classpathProjects = " + classpathProjects);
 			String problemMessage = JavaFileUtil.compileClass(javaResult.qualifiedClassName, javaResult.code, javaResult.classPath, classpathProjects);
 			if (problemMessage != null) {

@@ -25,6 +25,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
+import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
+import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
@@ -260,9 +263,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		MyQVT myQVT1 = createQVT("ATL2QVTr", txURI1);
-		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//ATL");
-		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//OCL");
-		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel", "//PrimitiveTypes");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
 		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
@@ -292,9 +295,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			//			myQVT1.getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());	// FIXME wrong ResourceSet
-			//			myQVT1.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-			myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				EMFTCSInjector.class.getName();				// Hidden ATL dependency
+				AtlParser.class.getName();					// Hidden ATL dependency
+				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
+			}
+			else {
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			}
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
 		}

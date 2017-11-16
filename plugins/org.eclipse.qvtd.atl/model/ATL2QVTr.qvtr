@@ -8,9 +8,9 @@
  * Contributors:
  *     E.D.Willink - initial implementation
  *******************************************************************************/
-import atlMM : 'platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/0'; 
-import atloclMM : 'platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/1'; 
-import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.ecore#/2'; 
+import atlMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/0'; 
+import atloclMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/1'; 
+import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/2'; 
 --import atlMM : 'http://www.eclipse.org/gmt/2005/ATL'; 
 --import atloclMM : 'http://www.eclipse.org/gmt/2005/OCL'; 
 --import atlprimsMM : 'http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes'; 
