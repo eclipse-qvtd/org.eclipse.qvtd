@@ -153,6 +153,16 @@ public class ATLExampleTests extends LoadTestCase
 		doATLExampleTest_CG("Families2Persons", getModelsURI("families2persons/Families2Persons.atl"));
 	}
 
+	@Test
+	public void testATL2QVTr_Tree2List_CG() throws Exception {
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//		PivotStandaloneSetup.init();
+		QVTimperativeLibrary.install();
+		QVTrelationToStringVisitor.FACTORY.getClass();
+		doATLExampleTest_CG(URI.createPlatformResourceURI("org.eclipse.qvtd.atl.tests/models/tree2list", true), "Tree2List");
+	}
+
 	/*	@Test
 	public void testATLExample_Families2PersonsMini_CG() throws Exception {
 		AbstractTransformer.EXCEPTIONS.setState(true);
