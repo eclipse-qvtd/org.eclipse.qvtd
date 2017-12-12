@@ -354,7 +354,7 @@ public class XtextTestCase extends PivotTestCase
 	protected @NonNull TestProject getTestProject() {
 		TestProject testProject2 = testProject;
 		if (testProject2 == null) {
-			String testProjectName = getClass().getSimpleName() + "__" + getTestName();
+			String testProjectName = "QVTd_" + getClass().getSimpleName() + "__" + getTestName();
 			testProject = testProject2 = getTestFileSystem().getTestProject(testProjectName, true);
 		}
 		return testProject2;

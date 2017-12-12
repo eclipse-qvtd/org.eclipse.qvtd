@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.all.tests;
 
 import java.util.Arrays;
-
+import org.eclipse.qvtd.atl.tests.AllATLTests;
 import org.eclipse.qvtd.compiler.tests.AllCompilerTests;
 import org.eclipse.qvtd.cs2as.compiler.tests.OCL2QVTiTestCases;
 import org.eclipse.qvtd.doc.bigmde2016.tests.AllbigMDE2016Tests;
@@ -47,7 +47,7 @@ public class AllQVTdTests extends TestCase
 		result.addTestSuite(GrammarTests.class);
 		result.addTestSuite(OCL2QVTiTestCases.class);
 		result.addTest(AllUMLXTests.suite());
-		//	result.addTest(AllATLTests.suite()); // ATL uses a different ANTLR to Xtext - must be run separately
+		result.addTest(AllATLTests.suite());
 		result.addTest(AllbigMDE2016Tests.suite());	// NB this is very slow since we are -ea
 		result.addTest(Allexe2016Tests.suite());		// NB this is very slow since we are -ea
 		result.addTestSuite(MiniOCLCSParsingTest.class);
