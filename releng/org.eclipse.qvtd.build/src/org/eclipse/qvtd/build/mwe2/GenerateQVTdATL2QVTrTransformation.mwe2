@@ -27,17 +27,17 @@ import org.eclipse.emf.ecore.resource.impl.*
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
-    	platformUri = ".."
+    	platformUri = "."
     	scanClassPath = true
     }
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
     component = CompileQVTrTransformation { /*resourceSet = resourceSet*/ skipOnErrors = true
-    	qvtrModel = "/org.eclipse.qvtd.atl/src/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr.qvtr" 	
+    	qvtrModel = "/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr" 	
 		usedGenPackage = "org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel#//qvtrelation"
-		usedGenPackage = "org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel#//ATL"
-		usedGenPackage = "org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel#//OCL"
-		usedGenPackage = "org.eclipse.m2m.atl.common/org/eclipse/m2m/atl/common/resources/ATL.genmodel#//PrimitiveTypes"
+		usedGenPackage = "org.eclipse.m2m.atl.common/model/ATL.genmodel#//ATL"
+		usedGenPackage = "org.eclipse.m2m.atl.common/model/ATL.genmodel#//OCL"
+		usedGenPackage = "org.eclipse.m2m.atl.common/model/ATL.genmodel#//PrimitiveTypes"
     }
     
 //	component = ConvertToUnixLineEndings {
