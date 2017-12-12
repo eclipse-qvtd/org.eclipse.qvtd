@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -147,9 +148,15 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 	private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
-	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
+	protected final @NonNull String testProjectName;
+	private Collection<@NonNull GenPackage> usedGenPackages = null;
+	private Collection<@NonNull EPackage> loadedEPackages = null;
+
+
+	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
 		super(new QVTiEnvironmentFactory(projectManager, null));
 		assert testBundleURI.isPlatform();
+		this.testProjectName = testProjectName;
 		this.testBundleURI = testBundleURI;
 		this.txURI = txURI;
 		this.prefixURI = prefixURI;
@@ -185,6 +192,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Field instanceField = ePackageClass.getField("eINSTANCE");
 		EPackage ePackage = (EPackage) instanceField.get(null);
 		EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+	}
+
+	public @NonNull GenPackage addUsedGenPackage(@NonNull String resourcePath, @Nullable String fragment) {
+		if (usedGenPackages == null) {
+			usedGenPackages = new ArrayList<>();
+		}
+		URI uri = URI.createPlatformResourceURI(resourcePath, false);
+		if (fragment != null) {
+			uri = uri.appendFragment(fragment);
+		}
+		GenPackage genPackage = ClassUtil.nonNullState((GenPackage)getResourceSet().getEObject(uri, true));
+		usedGenPackages.add(genPackage);
+		return genPackage;
 	}
 
 	public void assertRegionCount(@NonNull Class<? extends Region> regionClass, @NonNull Integer count) {
@@ -230,6 +250,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 		QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_GENERATED_DEBUG_KEY, true);
 		QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.CLASS_PROJECT_NAMES_KEY, createClassProjectNames());
 		QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, binFileURI);
+		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
+		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
+		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+		//			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 		return options;
 	}
 
@@ -238,6 +265,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	 */
 	protected @NonNull List<@NonNull String> createClassProjectNames() {
 		List<@NonNull String> classProjectNames = new ArrayList<>();
+		classProjectNames.add(testProjectName);
 		classProjectNames.add("org.eclipse.qvtd.runtime");
 		classProjectNames.add("org.eclipse.ocl.pivot");
 		classProjectNames.add("org.eclipse.emf.ecore");
@@ -256,9 +284,20 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options);
 
 	protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions() {
+		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
+		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
+		//			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+		Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
+		//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
 		Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
 		QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 		QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
+		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
+		AbstractCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
+		AbstractCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
+		AbstractCompilerChain.setOption(options, CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
+		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 		return options;
 	}
 
@@ -305,6 +344,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	@Override
 	public synchronized void dispose() {
+		if (loadedEPackages != null) {
+			for (@NonNull EPackage ePackage : loadedEPackages) {
+				EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
+			}
+		}
 		super.dispose();
 		if (interpretedExecutor != null) {
 			interpretedExecutor.dispose();
@@ -406,6 +450,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
+	protected abstract @NonNull String getBasePrefix();
+
 	@Override
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return super.getEnvironmentFactory();
@@ -460,17 +506,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	protected void loadGenModel(@NonNull URI genModelURI) {
-		ResourceSet resourceSet = getResourceSet();
-		MetamodelManagerInternal metamodelManager = getMetamodelManager();
-		Resource csGenResource = resourceSet.getResource(genModelURI, true);
-		for (EObject eObject : csGenResource.getContents()) {
-			if (eObject instanceof GenModel) {
-				GenModel genModel = (GenModel)eObject;
-				genModel.reconcile();
-				metamodelManager.addGenModel(genModel);
-			}
+	public void loadEPackage(@NonNull Class<?> txClass, @NonNull String qualifiedClassName) throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+		Class<?> ePackageClass = txClass.getClassLoader().loadClass(getBasePrefix() + "." + qualifiedClassName);
+		EPackage ePackage = (EPackage)ePackageClass.getField("eINSTANCE").get(null);
+		assert ePackage != null;
+		if (loadedEPackages == null) {
+			loadedEPackages = new ArrayList<>();
 		}
+		loadedEPackages.add(ePackage);
 	}
 
 	/**
@@ -493,9 +536,24 @@ public abstract class AbstractTestQVT extends QVTimperative
 		rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
 	}
 
+	protected void loadGenModel(@NonNull URI genModelURI) {
+		ResourceSet resourceSet = getResourceSet();
+		MetamodelManagerInternal metamodelManager = getMetamodelManager();
+		Resource csGenResource = resourceSet.getResource(genModelURI, true);
+		for (EObject eObject : csGenResource.getContents()) {
+			if (eObject instanceof GenModel) {
+				GenModel genModel = (GenModel)eObject;
+				genModel.reconcile();
+				metamodelManager.addGenModel(genModel);
+			}
+		}
+	}
+
 	protected void loadGenModels(@NonNull String @NonNull... genModelFiles) {
+		URI primaryGenModelURI = compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
+		loadGenModel(primaryGenModelURI);
 		for (String genModelFile : genModelFiles) {
-			URI genModelURI = testBundleURI.appendSegment(genModelFile);
+			URI genModelURI = URI.createURI(genModelFile).resolve(testBundleURI);
 			loadGenModel(genModelURI);
 		}
 	}

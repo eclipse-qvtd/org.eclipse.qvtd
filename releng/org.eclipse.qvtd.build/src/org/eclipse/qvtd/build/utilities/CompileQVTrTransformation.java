@@ -12,8 +12,6 @@ package org.eclipse.qvtd.build.utilities;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +44,6 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 
@@ -57,46 +54,8 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 {
 	protected class MyQVT extends AbstractTestQVT
 	{
-		protected final @NonNull String testProjectName;
-		private Collection<@NonNull GenPackage> usedGenPackages = null;
-		private Collection<@NonNull EPackage> loadedEPackages = null;
-
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testBundleURI, txURI, prefixURI, srcFileURI, binFileURI);
-			this.testProjectName = testProjectName;
-		}
-
-		public @NonNull GenPackage addUsedGenPackage(@NonNull String resourcePath, @Nullable String fragment) {
-			if (usedGenPackages == null) {
-				usedGenPackages = new ArrayList<>();
-			}
-			URI uri = URI.createPlatformResourceURI(resourcePath, false);
-			if (fragment != null) {
-				uri = uri.appendFragment(fragment);
-			}
-			GenPackage genPackage = ClassUtil.nonNullState((GenPackage)getResourceSet().getEObject(uri, true));
-			usedGenPackages.add(genPackage);
-			return genPackage;
-		}
-
-		@Override
-		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(boolean isIncremental) {
-			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = super.createBuildCompilerChainOptions(isIncremental);
-			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
-			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-			//			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
-			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
-			return options;
-		}
-
-		@Override
-		protected @NonNull List<@NonNull String> createClassProjectNames() {
-			List<@NonNull String> classProjectNames = super.createClassProjectNames();
-			classProjectNames.add(0, testProjectName);
-			return classProjectNames;
+			super(projectManager, testProjectName, testBundleURI, txURI, prefixURI, srcFileURI, binFileURI);
 		}
 
 		@Override
@@ -115,72 +74,20 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 
 		@Override
-		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions() {
-			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
-			//			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
-			Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
-			//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
-			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = super.createCompilerChainOptions();
-			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
-			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
-			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
-			QVTrCompilerChain.setOption(options, CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
-			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
-			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-			return options;
+		protected @NonNull String getBasePrefix() {
+			return "org.eclipse.qvtd.atl.atl2qvtr";
 		}
-
-		@Override
-		public synchronized void dispose() {
-			if (loadedEPackages != null) {
-				for (@NonNull EPackage ePackage : loadedEPackages) {
-					EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
-				}
-			}
-			super.dispose();
-		}
-
-		public @NonNull String getBasePrefix() {
-			return "org.eclipse.qvtd.xtext.qvtrelation.tests";
-		}
-
-		//		@Override
-		//		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
-		// TODO Auto-generated method stub
-		//			return QVTrCompilerTests.this.getTestProjectManager();
-		//		}
 
 		@Override
 		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
 			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : CompileQVTrTransformation.this.getTestProjectManager();
 		}
-
-		@Override
-		protected void loadGenModels(@NonNull String @NonNull... genModelFiles) {
-			URI primaryGenModelURI = compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
-			loadGenModel(primaryGenModelURI);
-			for (String genModelFile : genModelFiles) {
-				URI genModelURI = URI.createURI(genModelFile).resolve(testBundleURI);
-				loadGenModel(genModelURI);
-			}
-		}
-
-		public void loadEPackage(@NonNull Class<?> txClass, @NonNull String qualifiedClassName) throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
-			Class<?> ePackageClass = txClass.getClassLoader().loadClass(getBasePrefix() + "." + qualifiedClassName);
-			EPackage ePackage = (EPackage)ePackageClass.getField("eINSTANCE").get(null);
-			assert ePackage != null;
-			if (loadedEPackages == null) {
-				loadedEPackages = new ArrayList<>();
-			}
-			loadedEPackages.add(ePackage);
-			//			}
-		}
 	}
+
 	private Logger log = Logger.getLogger(getClass());
 
 	private String qvtrModel = null;
-	private List<@NonNull String> usedGenPackages = new ArrayList<>();
+	private List<@NonNull String> usedGenPackages2 = new ArrayList<>();
 
 	/**
 	 * Define a workspace-relative path to the GenPackage identifying a pre-compiled EPackage to be used
@@ -188,12 +95,12 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 	 * e.g. "org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
 	 */
 	public void addUsedGenPackage(@NonNull String usedGenPackage) {
-		usedGenPackages.add(usedGenPackage);
+		usedGenPackages2.add(usedGenPackage);
 	}
 
 	@Override
 	public void checkConfiguration(final Issues issues) {
-		for (@NonNull String usedGenPackage : usedGenPackages) {
+		for (@NonNull String usedGenPackage : usedGenPackages2) {
 			if (usedGenPackage.indexOf("#") < 0) {
 				issues.addError(this, "missing fragment separator for '" + usedGenPackage + "'.");
 			}
@@ -325,7 +232,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		//
 		//	Install the GenPackages and ensure that their nsURIs redirect to their *.ecores.
 		//
-		for (@NonNull String usedGenPackage : usedGenPackages) {
+		for (@NonNull String usedGenPackage : usedGenPackages2) {
 			int separator = usedGenPackage.indexOf("#");
 			String projectPath = usedGenPackage.substring(0, separator);
 			String genPackageFragment = usedGenPackage.substring(separator+1);
