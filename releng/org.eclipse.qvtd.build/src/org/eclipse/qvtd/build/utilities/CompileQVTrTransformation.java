@@ -229,6 +229,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");
 		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtrelation");
 		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvttemplate");
+		myQVT.setCopyright("Copyright (c) 2015, 2017 Willink Transformations and others.\nAll rights reserved. This program and the accompanying materials\nare made available under the terms of the Eclipse Public License v1.0\nwhich accompanies this distribution, and is available at\nhttp://www.eclipse.org/legal/epl-v10.html\n\nContributors:\n  E.D.Willink - Initial API and implementation");
 		//
 		//	Install the GenPackages and ensure that their nsURIs redirect to their *.ecores.
 		//

@@ -11,6 +11,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="**" kind="src" output="oclbin" path="oclsrc"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

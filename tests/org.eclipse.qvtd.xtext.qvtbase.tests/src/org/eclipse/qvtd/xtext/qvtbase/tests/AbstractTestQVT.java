@@ -151,7 +151,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected final @NonNull String testProjectName;
 	private Collection<@NonNull GenPackage> usedGenPackages = null;
 	private Collection<@NonNull EPackage> loadedEPackages = null;
-
+	private @Nullable String copyright = null;
 
 	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
 		super(new QVTiEnvironmentFactory(projectManager, null));
@@ -255,7 +255,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
 		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
 		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-		//			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+		if (copyright != null) {
+			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, copyright);
+		}
 		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 		return options;
 	}
@@ -286,7 +288,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 	protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions() {
 		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
 		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
-		//			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+		if (copyright != null) {
+			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, copyright);
+		}
 		Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
 		//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
 		Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
@@ -633,6 +637,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 			checkOutput(outputResource, expectedURI, normalizer);
 		}
 		return outputResource;
+	}
+
+	public void setCopyright(@Nullable String copyright) {
+		this.copyright = copyright;
 	}
 
 	protected void setPackagePrefixOption(@NonNull QVTiCodeGenOptions options) {}
