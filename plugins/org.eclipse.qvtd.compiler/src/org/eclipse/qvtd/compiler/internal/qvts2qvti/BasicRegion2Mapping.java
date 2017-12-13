@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1440,34 +1439,30 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return checkStatement;
 	}
 
-	private void createClassSetStatements(@NonNull Iterable<@NonNull List<@NonNull NavigableEdge>> classAssignments) {
-		for (@NonNull List<@NonNull NavigableEdge> edges : classAssignments) {
-			for (@NonNull NavigableEdge edge : edges) {
-				Node sourceNode = edge.getEdgeSource();
-				Node targetNode = edge.getEdgeTarget();
-				Property property = RegionUtil.getProperty(edge);
-				boolean isNotify = isHazardousWrite(edge);
-				Property setProperty;
-				VariableDeclaration slotVariable;
-				OCLExpression targetVariableExp;
-				SetStatement setStatement;
-				boolean isPartial;
-				if (/*!isPartial &&*/ property.isIsImplicit()) {
-					slotVariable = getVariable(targetNode);
-					setProperty = QVTrelationUtil.getOpposite(property);
-					targetVariableExp = createVariableExp(sourceNode);
-					isPartial = setProperty.isIsMany();
-				}
-				else {
-					slotVariable = getVariable(sourceNode);
-					setProperty = property;
-					targetVariableExp = createVariableExp(targetNode);
-					isPartial = edge.isPartial();
-				}
-				setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
-				mapping.getOwnedStatements().add(setStatement);
-			}
+	private void createClassSetStatement(@NonNull NavigableEdge edge) {
+		Node sourceNode = edge.getEdgeSource();
+		Node targetNode = edge.getEdgeTarget();
+		Property property = RegionUtil.getProperty(edge);
+		boolean isNotify = isHazardousWrite(edge);
+		Property setProperty;
+		VariableDeclaration slotVariable;
+		OCLExpression targetVariableExp;
+		SetStatement setStatement;
+		boolean isPartial;
+		if (/*!isPartial &&*/ property.isIsImplicit()) {
+			slotVariable = getVariable(targetNode);
+			setProperty = QVTrelationUtil.getOpposite(property);
+			targetVariableExp = createVariableExp(sourceNode);
+			isPartial = setProperty.isIsMany();
 		}
+		else {
+			slotVariable = getVariable(sourceNode);
+			setProperty = property;
+			targetVariableExp = createVariableExp(targetNode);
+			isPartial = edge.isPartial();
+		}
+		setStatement = helper.createSetStatement(slotVariable, setProperty, targetVariableExp, isPartial, isNotify);
+		mapping.getOwnedStatements().add(setStatement);
 	}
 
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
@@ -1592,7 +1587,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createPropertyAssignments() {
 		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
-		for (@NonNull NavigableEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
+		Iterable<@NonNull NavigableEdge> sortedEdges = NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges());
+		for (@NonNull NavigableEdge edge : sortedEdges) {
 			Node sourceNode = edge.getEdgeSource();
 			Node targetNode = edge.getEdgeTarget();
 			if (targetNode.isStatus()) {}											// SuccessNode has a 'magic' automatic assignment
@@ -1629,8 +1625,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		if (classAssignments != null) {
 			pruneClassAssignments(classAssignments);
-			Collection<@NonNull List<@NonNull NavigableEdge>> values = classAssignments.values();
-			createClassSetStatements(values);
+			Set<@NonNull NavigableEdge> classAssignmentEdges = new HashSet<>();
+			for (@NonNull List<@NonNull NavigableEdge> values : classAssignments.values()) {
+				classAssignmentEdges.addAll(values);
+			}
+			for (@NonNull NavigableEdge edge : sortedEdges) {
+				if (classAssignmentEdges.contains(edge)) {
+					createClassSetStatement(edge);
+				}
+			}
 		}
 		//		@SuppressWarnings("null")
 		//		@NonNull EList<@NonNull Statement> statements = mapping.getOwnedStatements();
@@ -1766,7 +1769,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
 		Node sourceNode = edge.getEdgeSource();
-		Property asProperty = edge.getProperty();
+		Property asProperty = RegionUtil.getProperty(edge);
 		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatumAnalysis(sourceNode));
 		RegionAnalysis regionAnalysis = RegionAnalysis.get(region);
 		Iterable<@NonNull NavigableEdge> enforcedEdges = regionAnalysis.getEnforcedEdges(typedModel, asProperty);
