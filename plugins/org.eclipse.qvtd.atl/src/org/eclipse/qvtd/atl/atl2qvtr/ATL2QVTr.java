@@ -166,8 +166,8 @@ public class ATL2QVTr extends AbstractTransformer
 	public static final /*@NonInvalid*/ @NonNull NestedPackageId PACKid_eclipse = PACKid_org.getNestedPackageId("eclipse");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_ATL = IdManager.getNsURIPackageId("http://www.eclipse.org/gmt/2005/ATL", null, ATLPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL = IdManager.getNsURIPackageId("http://www.eclipse.org/gmt/2005/OCL", null, OCLPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", "qvtb", QVTbasePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTrelation", "qvtr", QVTrelationPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTrelation", null, QVTrelationPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr", "PATL2QVTr", trace_ATL2QVTrPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Attribute = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("Attribute", 0);
@@ -284,8 +284,8 @@ public class ATL2QVTr extends AbstractTransformer
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlHelper_0 = CLSSid_TI_mapHelper.getPropertyId("atl_atlHelper");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlHelper_1 = CLSSid_TC_mapHelper_Context.getPropertyId("atl_atlHelper");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlModule_9 = CLSSid_TC_mapModule.getPropertyId("atl_atlModule");
-	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlPattern_2 = CLSSid_TC_mapInPattern.getPropertyId("atl_atlPattern");
-	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlPattern_3 = CLSSid_TC_mapOutPattern.getPropertyId("atl_atlPattern");
+	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlPattern_2 = CLSSid_TC_mapOutPattern.getPropertyId("atl_atlPattern");
+	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlPattern_3 = CLSSid_TC_mapInPattern.getPropertyId("atl_atlPattern");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_atlVariable_2 = CLSSid_TC_mapVariable.getPropertyId("atl_atlVariable");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_matchedRule = CLSSid_TC_mapMatchedRule.getPropertyId("atl_matchedRule");
 	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_atl_oclMetamodel_1 = CLSSid_TC_mapOclMetamodel.getPropertyId("atl_oclMetamodel");
@@ -326,8 +326,8 @@ public class ATL2QVTr extends AbstractTransformer
 		PROPid_atl_atlModule_9,		// 0 => atl_atlModule
 		PROPid_atl_matchedRule,		// 1 => atl_matchedRule
 		PROPid_atl_oclMetamodel_1,		// 2 => atl_oclMetamodel
-		PROPid_atl_atlPattern_2,		// 3 => atl_atlPattern
-		PROPid_atl_atlPattern_3,		// 4 => atl_atlPattern
+		PROPid_atl_atlPattern_3,		// 3 => atl_atlPattern
+		PROPid_atl_atlPattern_2,		// 4 => atl_atlPattern
 		PROPid_atl_atlExpression_6,		// 5 => atl_atlExpression
 		PROPid_atl_atlHelper_1,		// 6 => atl_atlHelper
 		PROPid_atl_atlHelper_0,		// 7 => atl_atlHelper
@@ -1325,9 +1325,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle trace : trace_ATL2QVTr::TC_mapBooleanExp[1];
 	 * set qvtrExpression.booleanSymbol := symbol;
 	 * set trace.primitive_symbol := symbol;
+	 * notify set qvtrExpression.type := Boolean1;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
-	 * notify set qvtrExpression.type := Boolean1;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapBooleanExp_atl_atlExpression_primitive_symb(final /*@NonInvalid*/ @NonNull BooleanExp atlExpression)  {
@@ -1345,11 +1345,11 @@ public class ATL2QVTr extends AbstractTransformer
 		// mapping statements
 		qvtrExpression.setBooleanSymbol(booleanSymbol);
 		trace_37.setPrimitive_symbol(booleanSymbol);
+		qvtrExpression.setType(TYP_Boolean_0);
+		objectManager.assigned(qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, TYP_Boolean_0);
 		OPPOSITE_OF_TI_mapOclExpression_atl_atlExpression.put(atlExpression, trace_37);
 		trace_37.setAtl_atlExpression(atlExpression);
 		trace_37.setQvtr_qvtrExpression(qvtrExpression);
-		qvtrExpression.setType(TYP_Boolean_0);
-		objectManager.assigned(qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, TYP_Boolean_0);
 		final /*@Thrown*/ @Nullable Boolean m_TC__mapBooleanExp_atl_atlExpression_primitive_symb = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((m_TC__mapBooleanExp_atl_atlExpression_primitive_symb ? "done "  : "fail ") + "MAP_m_TC__mapBooleanExp_atl_atlExpression_primitive_symb");
@@ -1431,14 +1431,14 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set qvtrTransformation.name := txName;
 	 * set trace.primitive_txName := txName;
 	 * set _4.ownedPackages := _3;
+	 * set _5.type := qvtrTransformation;
+	 * set qvtrTransformation.ownedContext := _5;
+	 * set qvtrTransformation.owningPackage := _3;
 	 * set trace.atl_atlModule := atlModule;
 	 * set trace.qvtr__3 := _3;
 	 * set trace.qvtr__4 := _4;
 	 * set trace.qvtr__5 := _5;
 	 * set trace.qvtr_qvtrTransformation := qvtrTransformation;
-	 * set qvtrTransformation.ownedContext := _5;
-	 * set qvtrTransformation.owningPackage := _3;
-	 * set _5.type := qvtrTransformation;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapModule_atl_atlModule_primitive_txName_qvtr_(final /*@NonInvalid*/ @NonNull Module atlModule)  {
@@ -1465,15 +1465,15 @@ public class ATL2QVTr extends AbstractTransformer
 		qvtrTransformation.setName(name_2);
 		trace_37.setPrimitive_txName(name_2);
 		_4.getOwnedPackages().add(_3);
+		_5.setType(qvtrTransformation);
+		qvtrTransformation.setOwnedContext(_5);
+		qvtrTransformation.setOwningPackage(_3);
 		OPPOSITE_OF_TC_mapModule_atl_atlModule.put(atlModule, trace_37);
 		trace_37.setAtl_atlModule(atlModule);
 		trace_37.setQvtr__3(_3);
 		trace_37.setQvtr__4(_4);
 		trace_37.setQvtr__5(_5);
 		trace_37.setQvtr_qvtrTransformation(qvtrTransformation);
-		qvtrTransformation.setOwnedContext(_5);
-		qvtrTransformation.setOwningPackage(_3);
-		_5.setType(qvtrTransformation);
 		final /*@Thrown*/ @Nullable Boolean m_TC__mapModule_atl_atlModule_primitive_txName_qvtr_ = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((m_TC__mapModule_atl_atlModule_primitive_txName_qvtr_ ? "done "  : "fail ") + "MAP_m_TC__mapModule_atl_atlModule_primitive_txName_qvtr_");
@@ -1728,7 +1728,7 @@ public class ATL2QVTr extends AbstractTransformer
 	 * map m_TC__mapInPattern_atl_atlModel_atl_atlPattern_atl_a in ATL2QVTr {
 	 *
 	 *   guard:atl atlPattern : ATL::InPattern[1];
-	 * var elements : Set(ATL::InPatternElement) := atlPattern.elements;
+	 * var elements : Set(ATL::InPatternElement[+|1]) := atlPattern.elements;
 	 * var atlRule : ATL::MatchedRule[1] := atlPattern.rule;
 	 * var when_TC_mapMatchedRule : trace_ATL2QVTr::TC_mapMatchedRule[1] := atlRule.TC_mapMatchedRule;
 	 * var qvtrRelation : qvtrelation::Relation[1] := when_TC_mapMatchedRule.qvtr_qvtrRelation;
@@ -1901,12 +1901,12 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle trace : trace_ATL2QVTr::TC_mapOclModel_IN[1];
 	 * set trace.primitive_tmName := tmName;
 	 * set qvtrTypedModel.usedPackage := oclAsSet;
+	 * set qvtrTypedModel.transformation := qvtrTransformation;
 	 * set trace.atl_atlModule := atlModule;
 	 * set trace.atl_oclMetamodel := oclMetamodel;
 	 * set trace.atl_oclModel := oclModel;
 	 * set trace.qvtr_qvtrTransformation := qvtrTransformation;
 	 * set trace.qvtr_qvtrTypedModel := qvtrTypedModel;
-	 * set qvtrTypedModel.transformation := qvtrTransformation;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapOclModel__IN_atl_atlModule_atl_oclMetamodel(final /*@NonInvalid*/ @NonNull OclModel oclModel)  {
@@ -1922,55 +1922,65 @@ public class ATL2QVTr extends AbstractTransformer
 			if (Module == null) {
 				throw new InvalidEvaluationException("Null where non-null value required");
 			}
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull OclModel metamodel = oclModel.getMetamodel();
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull String name_2 = metamodel.getName();
-			final /*@Thrown*/ @Nullable TC_mapModule TC_mapModule = OPPOSITE_OF_TC_mapModule_atl_atlModule.get(Module);
-			final /*@Thrown*/ boolean symbol_1 = TC_mapModule != null;
-			/*@Thrown*/ @Nullable Boolean raw_when_TC_mapModule;
+			final /*@NonInvalid*/ @Nullable OclModel metamodel = oclModel.getMetamodel();
+			final /*@NonInvalid*/ boolean symbol_1 = metamodel != null;
+			/*@Thrown*/ @Nullable Boolean raw_oclMetamodel;
 			if (symbol_1) {
-				if (TC_mapModule == null) {
+				if (metamodel == null) {
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				final /*@NonInvalid*/ @Nullable TC_mapOclMetamodel TC_mapOclMetamodel = OPPOSITE_OF_TC_mapOclMetamodel_atl_oclMetamodel.get(metamodel);
-				final /*@NonInvalid*/ boolean symbol_2 = TC_mapOclMetamodel != null;
-				/*@Thrown*/ @Nullable Boolean raw_when_TC_mapOclMetamodel;
+				@SuppressWarnings("null")
+				final /*@Thrown*/ @NonNull String name_2 = metamodel.getName();
+				final /*@Thrown*/ @Nullable TC_mapModule TC_mapModule = OPPOSITE_OF_TC_mapModule_atl_atlModule.get(Module);
+				final /*@Thrown*/ boolean symbol_2 = TC_mapModule != null;
+				/*@Thrown*/ @Nullable Boolean raw_when_TC_mapModule;
 				if (symbol_2) {
-					if (TC_mapOclMetamodel == null) {
+					if (TC_mapModule == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull RelationalTransformation qvtr_qvtrTransformation = TC_mapModule.getQvtr_qvtrTransformation();
-					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull TypedModel qvtr_qvtrTypedModel = TC_mapOclMetamodel.getQvtr_qvtrTypedModel();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package getPackage_0 = ((FUN_getPackage)FTOR_getPackage.getUniqueComputation(this, Module, name_2)).instance;
-					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, getPackage_0);
-					// creations
-					final @SuppressWarnings("null")@NonNull TC_mapOclModel_IN trace_37 = trace_ATL2QVTrFactory.eINSTANCE.createTC_mapOclModel_IN();
-					models[0/*middle*/].add(trace_37, false);
-					// mapping statements
-					trace_37.setPrimitive_tmName(name_2);
-					final /*@Thrown*/ @NonNull List<Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, oclAsSet);
-					qvtr_qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
-					trace_37.setAtl_atlModule(Module);
-					trace_37.setAtl_oclMetamodel(metamodel);
-					trace_37.setAtl_oclModel(oclModel);
-					trace_37.setQvtr_qvtrTransformation(qvtr_qvtrTransformation);
-					trace_37.setQvtr_qvtrTypedModel(qvtr_qvtrTypedModel);
-					qvtr_qvtrTypedModel.setTransformation(qvtr_qvtrTransformation);
-					final /*@Thrown*/ @Nullable Boolean m_TC__mapOclModel__IN_atl_atlModule_atl_oclMetamodel = ValueUtil.TRUE_VALUE;
-					raw_when_TC_mapOclMetamodel = m_TC__mapOclModel__IN_atl_atlModule_atl_oclMetamodel;
+					final /*@Thrown*/ @Nullable TC_mapOclMetamodel TC_mapOclMetamodel = OPPOSITE_OF_TC_mapOclMetamodel_atl_oclMetamodel.get(metamodel);
+					final /*@Thrown*/ boolean symbol_3 = TC_mapOclMetamodel != null;
+					/*@Thrown*/ @Nullable Boolean raw_when_TC_mapOclMetamodel;
+					if (symbol_3) {
+						if (TC_mapOclMetamodel == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull RelationalTransformation qvtr_qvtrTransformation = TC_mapModule.getQvtr_qvtrTransformation();
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull TypedModel qvtr_qvtrTypedModel = TC_mapOclMetamodel.getQvtr_qvtrTypedModel();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package getPackage_0 = ((FUN_getPackage)FTOR_getPackage.getUniqueComputation(this, Module, name_2)).instance;
+						final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, getPackage_0);
+						// creations
+						final @SuppressWarnings("null")@NonNull TC_mapOclModel_IN trace_37 = trace_ATL2QVTrFactory.eINSTANCE.createTC_mapOclModel_IN();
+						models[0/*middle*/].add(trace_37, false);
+						// mapping statements
+						trace_37.setPrimitive_tmName(name_2);
+						final /*@Thrown*/ @NonNull List<Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, oclAsSet);
+						qvtr_qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
+						qvtr_qvtrTypedModel.setTransformation(qvtr_qvtrTransformation);
+						trace_37.setAtl_atlModule(Module);
+						trace_37.setAtl_oclMetamodel(metamodel);
+						trace_37.setAtl_oclModel(oclModel);
+						trace_37.setQvtr_qvtrTransformation(qvtr_qvtrTransformation);
+						trace_37.setQvtr_qvtrTypedModel(qvtr_qvtrTypedModel);
+						final /*@Thrown*/ @Nullable Boolean m_TC__mapOclModel__IN_atl_atlModule_atl_oclMetamodel = ValueUtil.TRUE_VALUE;
+						raw_when_TC_mapOclMetamodel = m_TC__mapOclModel__IN_atl_atlModule_atl_oclMetamodel;
+					}
+					else {
+						raw_when_TC_mapOclMetamodel = ValueUtil.FALSE_VALUE;
+					}
+					raw_when_TC_mapModule = raw_when_TC_mapOclMetamodel;
 				}
 				else {
-					raw_when_TC_mapOclMetamodel = ValueUtil.FALSE_VALUE;
+					raw_when_TC_mapModule = ValueUtil.FALSE_VALUE;
 				}
-				raw_when_TC_mapModule = raw_when_TC_mapOclMetamodel;
+				raw_oclMetamodel = raw_when_TC_mapModule;
 			}
 			else {
-				raw_when_TC_mapModule = ValueUtil.FALSE_VALUE;
+				raw_oclMetamodel = ValueUtil.FALSE_VALUE;
 			}
-			raw_atlModule = raw_when_TC_mapModule;
+			raw_atlModule = raw_oclMetamodel;
 		}
 		else {
 			raw_atlModule = ValueUtil.FALSE_VALUE;
@@ -2021,55 +2031,65 @@ public class ATL2QVTr extends AbstractTransformer
 			if (Module == null) {
 				throw new InvalidEvaluationException("Null where non-null value required");
 			}
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull OclModel metamodel = oclModel_0.getMetamodel();
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull String name_2 = metamodel.getName();
-			final /*@Thrown*/ @Nullable TC_mapModule TC_mapModule = OPPOSITE_OF_TC_mapModule_atl_atlModule.get(Module);
-			final /*@Thrown*/ boolean symbol_1 = TC_mapModule != null;
-			/*@Thrown*/ @Nullable Boolean raw_when_TC_mapModule;
+			final /*@NonInvalid*/ @Nullable OclModel metamodel = oclModel_0.getMetamodel();
+			final /*@NonInvalid*/ boolean symbol_1 = metamodel != null;
+			/*@Thrown*/ @Nullable Boolean raw_oclMetamodel;
 			if (symbol_1) {
-				if (TC_mapModule == null) {
+				if (metamodel == null) {
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				final /*@NonInvalid*/ @Nullable TC_mapOclMetamodel TC_mapOclMetamodel = OPPOSITE_OF_TC_mapOclMetamodel_atl_oclMetamodel.get(metamodel);
-				final /*@NonInvalid*/ boolean symbol_2 = TC_mapOclMetamodel != null;
-				/*@Thrown*/ @Nullable Boolean raw_when_TC_mapOclMetamodel;
+				@SuppressWarnings("null")
+				final /*@Thrown*/ @NonNull String name_2 = metamodel.getName();
+				final /*@Thrown*/ @Nullable TC_mapModule TC_mapModule = OPPOSITE_OF_TC_mapModule_atl_atlModule.get(Module);
+				final /*@Thrown*/ boolean symbol_2 = TC_mapModule != null;
+				/*@Thrown*/ @Nullable Boolean raw_when_TC_mapModule;
 				if (symbol_2) {
-					if (TC_mapOclMetamodel == null) {
+					if (TC_mapModule == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull RelationalTransformation qvtr_qvtrTransformation = TC_mapModule.getQvtr_qvtrTransformation();
-					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull TypedModel qvtr_qvtrTypedModel = TC_mapOclMetamodel.getQvtr_qvtrTypedModel();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package getPackage_0 = ((FUN_getPackage)FTOR_getPackage.getUniqueComputation(this, Module, name_2)).instance;
-					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, getPackage_0);
-					// creations
-					final @SuppressWarnings("null")@NonNull TC_mapOclModel_OUT trace_37 = trace_ATL2QVTrFactory.eINSTANCE.createTC_mapOclModel_OUT();
-					models[0/*middle*/].add(trace_37, false);
-					// mapping statements
-					trace_37.setPrimitive_tmName(name_2);
-					final /*@Thrown*/ @NonNull List<Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, oclAsSet);
-					qvtr_qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
-					qvtr_qvtrTypedModel.setTransformation(qvtr_qvtrTransformation);
-					trace_37.setAtl_atlModule(Module);
-					trace_37.setAtl_oclMetamodel(metamodel);
-					trace_37.setAtl_oclModel(oclModel_0);
-					trace_37.setQvtr_qvtrTransformation(qvtr_qvtrTransformation);
-					trace_37.setQvtr_qvtrTypedModel(qvtr_qvtrTypedModel);
-					final /*@Thrown*/ @Nullable Boolean m_TC__mapOclModel__OUT_atl_atlModule_atl_oclMetamode = ValueUtil.TRUE_VALUE;
-					raw_when_TC_mapOclMetamodel = m_TC__mapOclModel__OUT_atl_atlModule_atl_oclMetamode;
+					final /*@Thrown*/ @Nullable TC_mapOclMetamodel TC_mapOclMetamodel = OPPOSITE_OF_TC_mapOclMetamodel_atl_oclMetamodel.get(metamodel);
+					final /*@Thrown*/ boolean symbol_3 = TC_mapOclMetamodel != null;
+					/*@Thrown*/ @Nullable Boolean raw_when_TC_mapOclMetamodel;
+					if (symbol_3) {
+						if (TC_mapOclMetamodel == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull RelationalTransformation qvtr_qvtrTransformation = TC_mapModule.getQvtr_qvtrTransformation();
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull TypedModel qvtr_qvtrTypedModel = TC_mapOclMetamodel.getQvtr_qvtrTypedModel();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package getPackage_0 = ((FUN_getPackage)FTOR_getPackage.getUniqueComputation(this, Module, name_2)).instance;
+						final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, getPackage_0);
+						// creations
+						final @SuppressWarnings("null")@NonNull TC_mapOclModel_OUT trace_37 = trace_ATL2QVTrFactory.eINSTANCE.createTC_mapOclModel_OUT();
+						models[0/*middle*/].add(trace_37, false);
+						// mapping statements
+						trace_37.setPrimitive_tmName(name_2);
+						final /*@Thrown*/ @NonNull List<Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, oclAsSet);
+						qvtr_qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
+						qvtr_qvtrTypedModel.setTransformation(qvtr_qvtrTransformation);
+						trace_37.setAtl_atlModule(Module);
+						trace_37.setAtl_oclMetamodel(metamodel);
+						trace_37.setAtl_oclModel(oclModel_0);
+						trace_37.setQvtr_qvtrTransformation(qvtr_qvtrTransformation);
+						trace_37.setQvtr_qvtrTypedModel(qvtr_qvtrTypedModel);
+						final /*@Thrown*/ @Nullable Boolean m_TC__mapOclModel__OUT_atl_atlModule_atl_oclMetamode = ValueUtil.TRUE_VALUE;
+						raw_when_TC_mapOclMetamodel = m_TC__mapOclModel__OUT_atl_atlModule_atl_oclMetamode;
+					}
+					else {
+						raw_when_TC_mapOclMetamodel = ValueUtil.FALSE_VALUE;
+					}
+					raw_when_TC_mapModule = raw_when_TC_mapOclMetamodel;
 				}
 				else {
-					raw_when_TC_mapOclMetamodel = ValueUtil.FALSE_VALUE;
+					raw_when_TC_mapModule = ValueUtil.FALSE_VALUE;
 				}
-				raw_when_TC_mapModule = raw_when_TC_mapOclMetamodel;
+				raw_oclMetamodel = raw_when_TC_mapModule;
 			}
 			else {
-				raw_when_TC_mapModule = ValueUtil.FALSE_VALUE;
+				raw_oclMetamodel = ValueUtil.FALSE_VALUE;
 			}
-			raw_atlModule = raw_when_TC_mapModule;
+			raw_atlModule = raw_oclMetamodel;
 		}
 		else {
 			raw_atlModule = ValueUtil.FALSE_VALUE;
@@ -2103,15 +2123,15 @@ public class ATL2QVTr extends AbstractTransformer
 	 *
 	 *   guard:atl atlPattern : ATL::OutPattern[1];
 	 * check var atlRule : ATL::MatchedRule[1] := atlPattern.rule;
-	 * var elements : OrderedSet(ATL::OutPatternElement) := atlPattern.elements;
+	 * var elements : OrderedSet(ATL::OutPatternElement[+|1]) := atlPattern.elements;
 	 * var when_TC_mapMatchedRule : trace_ATL2QVTr::TC_mapMatchedRule[1] := atlRule.TC_mapMatchedRule;
 	 * var qvtrRelation : qvtrelation::Relation[1] := when_TC_mapMatchedRule.qvtr_qvtrRelation;
-	 * var selectByKind : Sequence(OCL::OclModelElement) := elements->collect(_'1__0' | _'1__0'.type)
+	 * var selectByKind : Sequence(OCL::OclModelElement) := elements->collect(_'1_' | _'1_'.type)
 	 *   ->selectByKind(OCL::OclModelElement)
 	 *   ;
-	 * var _'\u00ABcollect\u00BB' : Sequence(OCL::OclType[*|?]) := elements->collect(_'1__0' | _'1__0'.type)
+	 * var _'\u00ABcollect\u00BB' : Sequence(OCL::OclType[*|?]) := elements->collect(_'1_' | _'1_'.type)
 	 *   ;
-	 * var _'\u00ABany\u00BB' : OCL::OclModelElement[?] := selectByKind->any(_'1_' | true);
+	 * var _'\u00ABany\u00BB' : OCL::OclModelElement[?] := selectByKind->any(_'1__0' | true);
 	 * var model : OCL::OclModel[1] := _'\u00ABany\u00BB'?.model;
 	 * var when_TC_mapOclMetamodel : trace_ATL2QVTr::TC_mapOclMetamodel[1] := model.TC_mapOclMetamodel;
 	 * var qvtrTypedModel : qvtbase::TypedModel[1] := when_TC_mapOclMetamodel.qvtr_qvtrTypedModel;
@@ -2153,37 +2173,37 @@ public class ATL2QVTr extends AbstractTransformer
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_OCL_c_c_OclModelElement_0 = idResolver.getClass(CLSSid_OclModelElement, null);
 				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_elements_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_OutPatternElement, elements);
 				/*@Thrown*/ SequenceValue.@NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_OclType);
-				@NonNull Iterator<Object> ITERATOR__49___0_0 = BOXED_elements_0.iterator();
+				@NonNull Iterator<Object> ITERATOR__1_0 = BOXED_elements_0.iterator();
 				/*@Thrown*/ @NonNull SequenceValue collect_0;
 				while (true) {
-					if (!ITERATOR__49___0_0.hasNext()) {
+					if (!ITERATOR__1_0.hasNext()) {
 						collect_0 = accumulator;
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull OutPatternElement _49___0_0 = (OutPatternElement)ITERATOR__49___0_0.next();
+					/*@NonInvalid*/ @NonNull OutPatternElement _1_0 = (OutPatternElement)ITERATOR__1_0.next();
 					/**
-					 * _'1__0'.type
+					 * _'1_'.type
 					 */
-					final /*@NonInvalid*/ @Nullable OclType type_3 = _49___0_0.getType();
+					final /*@NonInvalid*/ @Nullable OclType type_3 = _1_0.getType();
 					//
 					accumulator.add(type_3);
 				}
 				final /*@Thrown*/ @NonNull SequenceValue selectByKind = (SequenceValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, collect_0, TYP_OCL_c_c_OclModelElement_0);
-				@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
+				@NonNull Iterator<Object> ITERATOR__49___0 = selectByKind.iterator();
 				/*@Thrown*/ @Nullable OclModelElement any;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
+					if (!ITERATOR__49___0.hasNext()) {
 						throw new InvalidValueException("No matching content for 'any'");
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull OclModelElement _1 = (OclModelElement)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull OclModelElement _49___0 = (OclModelElement)ITERATOR__49___0.next();
 					/**
 					 * true
 					 */
 					//
 					if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
-						any = _1;
+						any = _49___0;
 						break;
 					}
 				}
@@ -2289,8 +2309,6 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set qvtrTemplate.bindsTo := qvtrVariable;
 	 * set qvtrTemplate.referredClass := getType1;
 	 * notify set qvtrTemplate.type := getType1;
-	 * set where_TC_mapVariable.atl_atlVariable := atlElement;
-	 * set where_TC_mapVariable.qvtr_qvtrVariable := qvtrVariable;
 	 * set qvtrRelation.variable := qvtrVariable;
 	 * set qvtrDomain.rootVariable := qvtrVariable;
 	 * notify set qvtrVariable.type := getType1;
@@ -2303,6 +2321,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set trace.qvtr_qvtrRelation := qvtrRelation;
 	 * set trace.qvtr_qvtrTemplate := qvtrTemplate;
 	 * set trace.qvtr_qvtrVariable := qvtrVariable;
+	 * set where_TC_mapVariable.atl_atlVariable := atlElement;
+	 * set where_TC_mapVariable.qvtr_qvtrVariable := qvtrVariable;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapSimpleInPatternElement_atl_atlElement_atl_a(final /*@NonInvalid*/ @NonNull SimpleInPatternElement atlElement)  {
@@ -2354,9 +2374,6 @@ public class ATL2QVTr extends AbstractTransformer
 				qvtr_qvtrDomain.getPattern().add(qvtrPattern);
 				qvtrPattern.setTemplateExpression(qvtrTemplate);
 				qvtrTemplate.setBindsTo(qvtrVariable);
-				OPPOSITE_OF_TC_mapVariable_atl_atlVariable.put(atlElement, where_TC_mapVariable);
-				where_TC_mapVariable.setAtl_atlVariable(atlElement);
-				where_TC_mapVariable.setQvtr_qvtrVariable(qvtrVariable);
 				qvtr_qvtrRelation.getVariable().add(qvtrVariable);
 				qvtr_qvtrDomain.getRootVariable().add(qvtrVariable);
 				qvtrVariable.setType(getType);
@@ -2370,6 +2387,9 @@ public class ATL2QVTr extends AbstractTransformer
 				trace_37.setQvtr_qvtrRelation(qvtr_qvtrRelation);
 				trace_37.setQvtr_qvtrTemplate(qvtrTemplate);
 				trace_37.setQvtr_qvtrVariable(qvtrVariable);
+				OPPOSITE_OF_TC_mapVariable_atl_atlVariable.put(atlElement, where_TC_mapVariable);
+				where_TC_mapVariable.setAtl_atlVariable(atlElement);
+				where_TC_mapVariable.setQvtr_qvtrVariable(qvtrVariable);
 				final /*@Thrown*/ @Nullable Boolean m_TC__mapSimpleInPatternElement_atl_atlElement_atl_a = ValueUtil.TRUE_VALUE;
 				raw_when_TC_mapMatchedRule = m_TC__mapSimpleInPatternElement_atl_atlElement_atl_a;
 			}
@@ -2409,6 +2429,13 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set qvtrVariable.name := elementName;
 	 * set trace.primitive_elementName := elementName;
 	 * set qvtrDomain.pattern := qvtrPattern;
+	 * set qvtrPattern.templateExpression := qvtrTemplate;
+	 * set qvtrTemplate.bindsTo := qvtrVariable;
+	 * set qvtrTemplate.referredClass := getType1;
+	 * notify set qvtrTemplate.type := getType1;
+	 * set qvtrRelation.variable := qvtrVariable;
+	 * set qvtrDomain.rootVariable := qvtrVariable;
+	 * notify set qvtrVariable.type := getType1;
 	 * set trace.atl_atlElement := atlElement;
 	 * set trace.atl_atlPattern := atlPattern;
 	 * set trace.atl_atlRule := atlRule;
@@ -2418,13 +2445,6 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set trace.qvtr_qvtrRelation := qvtrRelation;
 	 * set trace.qvtr_qvtrTemplate := qvtrTemplate;
 	 * set trace.qvtr_qvtrVariable := qvtrVariable;
-	 * set qvtrTemplate.bindsTo := qvtrVariable;
-	 * set qvtrTemplate.referredClass := getType1;
-	 * notify set qvtrTemplate.type := getType1;
-	 * set qvtrRelation.variable := qvtrVariable;
-	 * set qvtrDomain.rootVariable := qvtrVariable;
-	 * notify set qvtrVariable.type := getType1;
-	 * set qvtrPattern.templateExpression := qvtrTemplate;
 	 * set where_TC_mapVariable.atl_atlVariable := atlElement;
 	 * set where_TC_mapVariable.qvtr_qvtrVariable := qvtrVariable;
 	 *
@@ -2480,6 +2500,12 @@ public class ATL2QVTr extends AbstractTransformer
 					qvtrVariable.setName(varName);
 					trace_37.setPrimitive_elementName(varName);
 					qvtr_qvtrDomain.getPattern().add(qvtrPattern);
+					qvtrPattern.setTemplateExpression(qvtrTemplate);
+					qvtrTemplate.setBindsTo(qvtrVariable);
+					qvtr_qvtrRelation.getVariable().add(qvtrVariable);
+					qvtr_qvtrDomain.getRootVariable().add(qvtrVariable);
+					qvtrVariable.setType(getType);
+					objectManager.assigned(qvtrVariable, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getType);
 					OPPOSITE_OF_TC_mapSimpleOutPatternElement_atl_atlElement.put(atlElement_0, trace_37);
 					trace_37.setAtl_atlElement(atlElement_0);
 					trace_37.setAtl_atlPattern(outPattern);
@@ -2490,12 +2516,6 @@ public class ATL2QVTr extends AbstractTransformer
 					trace_37.setQvtr_qvtrRelation(qvtr_qvtrRelation);
 					trace_37.setQvtr_qvtrTemplate(qvtrTemplate);
 					trace_37.setQvtr_qvtrVariable(qvtrVariable);
-					qvtrTemplate.setBindsTo(qvtrVariable);
-					qvtr_qvtrRelation.getVariable().add(qvtrVariable);
-					qvtr_qvtrDomain.getRootVariable().add(qvtrVariable);
-					qvtrVariable.setType(getType);
-					objectManager.assigned(qvtrVariable, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getType);
-					qvtrPattern.setTemplateExpression(qvtrTemplate);
 					OPPOSITE_OF_TC_mapVariable_atl_atlVariable.put(atlElement_0, where_TC_mapVariable);
 					where_TC_mapVariable.setAtl_atlVariable(atlElement_0);
 					where_TC_mapVariable.setQvtr_qvtrVariable(qvtrVariable);
@@ -2531,9 +2551,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle trace : trace_ATL2QVTr::TC_mapStringExp[1];
 	 * set qvtrExpression.stringSymbol := symbol;
 	 * set trace.primitive_symbol := symbol;
+	 * notify set qvtrExpression.type := String1;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
-	 * notify set qvtrExpression.type := String1;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapStringExp_atl_atlExpression_primitive_symbo(final /*@NonInvalid*/ @NonNull StringExp atlExpression_4)  {
@@ -2552,11 +2572,11 @@ public class ATL2QVTr extends AbstractTransformer
 		// mapping statements
 		qvtrExpression.setStringSymbol(stringSymbol);
 		trace_37.setPrimitive_symbol(stringSymbol);
+		qvtrExpression.setType(TYP_String_0);
+		objectManager.assigned(qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, TYP_String_0);
 		OPPOSITE_OF_TI_mapOclExpression_atl_atlExpression.put(atlExpression_4, trace_37);
 		trace_37.setAtl_atlExpression(atlExpression_4);
 		trace_37.setQvtr_qvtrExpression(qvtrExpression);
-		qvtrExpression.setType(TYP_String_0);
-		objectManager.assigned(qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, TYP_String_0);
 		final /*@Thrown*/ @Nullable Boolean m_TC__mapStringExp_atl_atlExpression_primitive_symbo = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((m_TC__mapStringExp_atl_atlExpression_primitive_symbo ? "done "  : "fail ") + "MAP_m_TC__mapStringExp_atl_atlExpression_primitive_symbo");
@@ -2575,12 +2595,12 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle where_WC_mapVariableExp_referredVariable : trace_ATL2QVTr::WC_mapVariableExp_referredVariable[1];
 	 * set qvtrExpression.name := varName;
 	 * set trace.primitive_varName := varName;
-	 * set where_WC_mapVariableExp_referredVariable.atl_atlExpression := atlExpression;
-	 * set where_WC_mapVariableExp_referredVariable.qvtr_qvtrExpression := qvtrExpression;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.atl_atlVariable := atlVariable;
 	 * set trace.invocation_mapVariableExp_referredVariable := where_WC_mapVariableExp_referredVariable;
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
+	 * set where_WC_mapVariableExp_referredVariable.atl_atlExpression := atlExpression;
+	 * set where_WC_mapVariableExp_referredVariable.qvtr_qvtrExpression := qvtrExpression;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapVariableExp_atl_atlExpression_atl_atlVariab(final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull VariableExp atlExpression_5)  {
@@ -2601,14 +2621,14 @@ public class ATL2QVTr extends AbstractTransformer
 		// mapping statements
 		qvtrExpression.setName(varName);
 		trace_37.setPrimitive_varName(varName);
-		OPPOSITE_OF_WI_mapVariableExp_referredVariable_atl_atlExpression.put(atlExpression_5, where_WC_mapVariableExp_referredVariable);
-		where_WC_mapVariableExp_referredVariable.setAtl_atlExpression(atlExpression_5);
-		where_WC_mapVariableExp_referredVariable.setQvtr_qvtrExpression(qvtrExpression);
 		OPPOSITE_OF_TI_mapOclExpression_atl_atlExpression.put(atlExpression_5, trace_37);
 		trace_37.setAtl_atlExpression(atlExpression_5);
 		trace_37.setAtl_atlVariable(referredVariable);
 		trace_37.setInvocation_mapVariableExp_referredVariable(where_WC_mapVariableExp_referredVariable);
 		trace_37.setQvtr_qvtrExpression(qvtrExpression);
+		OPPOSITE_OF_WI_mapVariableExp_referredVariable_atl_atlExpression.put(atlExpression_5, where_WC_mapVariableExp_referredVariable);
+		where_WC_mapVariableExp_referredVariable.setAtl_atlExpression(atlExpression_5);
+		where_WC_mapVariableExp_referredVariable.setQvtr_qvtrExpression(qvtrExpression);
 		final /*@Thrown*/ @Nullable Boolean m_TC__mapVariableExp_atl_atlExpression_atl_atlVariab = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((m_TC__mapVariableExp_atl_atlExpression_atl_atlVariab ? "done "  : "fail ") + "MAP_m_TC__mapVariableExp_atl_atlExpression_atl_atlVariab");
@@ -3620,9 +3640,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var getType1 : Class[1] := this.getType(atlType);
 	 * contained new:qvtr qvtrFunction : qvtbase::Function[1];
 	 * set qvtrFunction.name := attributeName;
+	 * set trace.qvtr_qvtrFunction := qvtrFunction;
 	 * set qvtrFunction.owningClass := qvtrTransformation;
 	 * set qvtrFunction.type := getType1;
-	 * set trace.qvtr_qvtrFunction := qvtrFunction;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapHelper__Attribute_qvtr_qvtrFunction_p2(final /*@NonInvalid*/ @NonNull TC_mapHelper_Attribute trace_0)  {
@@ -3647,9 +3667,9 @@ public class ATL2QVTr extends AbstractTransformer
 			models[2/*qvtr*/].add(qvtrFunction, true);
 			// mapping statements
 			qvtrFunction.setName(primitive_attributeName);
+			trace_0.setQvtr_qvtrFunction(qvtrFunction);
 			qvtrFunction.setOwningClass(qvtr_qvtrTransformation);
 			qvtrFunction.setType(getType);
-			trace_0.setQvtr_qvtrFunction(qvtrFunction);
 			final /*@Thrown*/ @Nullable Boolean m_TC__mapHelper__Attribute_qvtr_qvtrFunction_p2 = ValueUtil.TRUE_VALUE;
 			symbol_5 = m_TC__mapHelper__Attribute_qvtr_qvtrFunction_p2;
 		}
@@ -3671,8 +3691,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var atlHelper : ATL::Helper[1] := trace.atl_atlHelper;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlExpression.TI_mapOclExpression;
 	 * new:middle where_TC_mapHelper_Context : trace_ATL2QVTr::TC_mapHelper_Context[1];
-	 * set trace.invocation_mapHelper_Context := where_TC_mapHelper_Context;
 	 * set where_TC_mapHelper_Context.atl_atlHelper := atlHelper;
+	 * set trace.invocation_mapHelper_Context := where_TC_mapHelper_Context;
 	 * add jm_TC__mapHelper__Operation += trace;
 	 *
 	 */
@@ -3695,9 +3715,9 @@ public class ATL2QVTr extends AbstractTransformer
 			final @SuppressWarnings("null")@NonNull TC_mapHelper_Context where_TC_mapHelper_Context = trace_ATL2QVTrFactory.eINSTANCE.createTC_mapHelper_Context();
 			models[0/*middle*/].add(where_TC_mapHelper_Context, false);
 			// mapping statements
-			trace_1.setInvocation_mapHelper_Context(where_TC_mapHelper_Context);
 			OPPOSITE_OF_TC_mapHelper_Context_atl_atlHelper.put(atl_atlHelper, where_TC_mapHelper_Context);
 			where_TC_mapHelper_Context.setAtl_atlHelper(atl_atlHelper);
+			trace_1.setInvocation_mapHelper_Context(where_TC_mapHelper_Context);
 			jm_TC__mapHelper__Operation.appendElement(trace_1);
 			final /*@Thrown*/ @Nullable Boolean m_TC__mapHelper__Operation_invocation_mapHelper_Cont_p1 = ValueUtil.TRUE_VALUE;
 			raw_when_TI_mapOclExpression = m_TC__mapHelper__Operation_invocation_mapHelper_Cont_p1;
@@ -3727,9 +3747,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var getType1 : Class[1] := this.getType(atlType);
 	 * contained new:qvtr qvtrFunction : qvtbase::Function[1];
 	 * set qvtrFunction.name := operationName;
+	 * set trace.qvtr_qvtrFunction := qvtrFunction;
 	 * set qvtrFunction.owningClass := qvtrTransformation;
 	 * set qvtrFunction.type := getType1;
-	 * set trace.qvtr_qvtrFunction := qvtrFunction;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapHelper__Operation_qvtr_qvtrFunction_p2(final /*@NonInvalid*/ @NonNull TC_mapHelper_Operation trace_2)  {
@@ -3754,9 +3774,9 @@ public class ATL2QVTr extends AbstractTransformer
 			models[2/*qvtr*/].add(qvtrFunction, true);
 			// mapping statements
 			qvtrFunction.setName(primitive_operationName);
+			trace_2.setQvtr_qvtrFunction(qvtrFunction);
 			qvtrFunction.setOwningClass(qvtr_qvtrTransformation);
 			qvtrFunction.setType(getType);
-			trace_2.setQvtr_qvtrFunction(qvtrFunction);
 			final /*@Thrown*/ @Nullable Boolean m_TC__mapHelper__Operation_qvtr_qvtrFunction_p2 = ValueUtil.TRUE_VALUE;
 			symbol_5 = m_TC__mapHelper__Operation_qvtr_qvtrFunction_p2;
 		}
@@ -3880,12 +3900,12 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle where_TC_mapVariable : trace_ATL2QVTr::TC_mapVariable[1];
 	 * set qvtrParameter.name := 'self';
 	 * set qvtrFunction.ownedParameters := qvtrParameter;
-	 * set qvtrParameter.type := getType1;
 	 * set trace.atl_atlContext := atlContext;
 	 * set trace.atl_atlDefinition := atlDefinition;
 	 * set trace.atl_atlReturnType := atlReturnType;
 	 * set trace.invocation_mapVariable := where_TC_mapVariable;
 	 * set trace.qvtr_qvtrParameter := qvtrParameter;
+	 * set qvtrParameter.type := getType1;
 	 * set where_TC_mapVariable.atl_atlVariable := atlHelper;
 	 * set where_TC_mapVariable.qvtr_qvtrVariable := qvtrParameter;
 	 *
@@ -3924,12 +3944,12 @@ public class ATL2QVTr extends AbstractTransformer
 				// mapping statements
 				qvtrParameter.setName(STR_self);
 				qvtr_qvtrFunction.getOwnedParameters().add(qvtrParameter);
-				qvtrParameter.setType(getType);
 				TC_mapHelper_Context.setAtl_atlContext(atlContext);
 				TC_mapHelper_Context.setAtl_atlDefinition(definition);
 				TC_mapHelper_Context.setAtl_atlReturnType(context_);
 				TC_mapHelper_Context.setInvocation_mapVariable(where_TC_mapVariable);
 				TC_mapHelper_Context.setQvtr_qvtrParameter(qvtrParameter);
+				qvtrParameter.setType(getType);
 				OPPOSITE_OF_TC_mapVariable_atl_atlVariable.put(Helper, where_TC_mapVariable);
 				where_TC_mapVariable.setAtl_atlVariable(Helper);
 				where_TC_mapVariable.setQvtr_qvtrVariable(qvtrParameter);
@@ -4508,12 +4528,12 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var _'\u00ABcollect\u00BB1' : Sequence(OCL::OclFeature) := _'\u00ABcollect\u00BB'->collect(_'1__0' | _'1__0'.feature);
 	 * contained new:qvtr qvtrSource : VariableExp[1];
 	 * set qvtrSource.name := name;
+	 * set qvtrSource.referredVariable := qvtrThisVariable;
+	 * notify set qvtrSource.type := type;
 	 * set trace.qvtr_qvtrOperation := qvtrOperation;
 	 * set trace.qvtr_qvtrSource := qvtrSource;
 	 * set trace.qvtr_qvtrThisVariable := qvtrThisVariable;
 	 * set trace.qvtr_qvtrTransformation := qvtrTransformation;
-	 * set qvtrSource.referredVariable := qvtrThisVariable;
-	 * notify set qvtrSource.type := type;
 	 * add jm_TC__mapOperationCallExp__Helper += trace;
 	 *
 	 */
@@ -4715,13 +4735,13 @@ public class ATL2QVTr extends AbstractTransformer
 						models[2/*qvtr*/].add(qvtrSource, true);
 						// mapping statements
 						qvtrSource.setName(safe_name_source);
+						qvtrSource.setReferredVariable(ownedContext);
+						qvtrSource.setType(safe_type_source);
+						objectManager.assigned(qvtrSource, PivotPackage.Literals.TYPED_ELEMENT__TYPE, safe_type_source);
 						trace_11.setQvtr_qvtrOperation(qvtr_qvtrFunction);
 						trace_11.setQvtr_qvtrSource(qvtrSource);
 						trace_11.setQvtr_qvtrThisVariable(ownedContext);
 						trace_11.setQvtr_qvtrTransformation(qvtr_qvtrTransformation);
-						qvtrSource.setReferredVariable(ownedContext);
-						qvtrSource.setType(safe_type_source);
-						objectManager.assigned(qvtrSource, PivotPackage.Literals.TYPED_ELEMENT__TYPE, safe_type_source);
 						jm_TC__mapOperationCallExp__Helper.appendElement(trace_11);
 						final /*@Thrown*/ @Nullable Boolean m_TC__mapOperationCallExp__Helper_qvtr_qvtrOperation_p1 = ValueUtil.TRUE_VALUE;
 						raw_when_TI_mapOclExpression = m_TC__mapOperationCallExp__Helper_qvtr_qvtrOperation_p1;
@@ -4773,13 +4793,13 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:middle trace : trace_ATL2QVTr::TC_mapVariableExp_referredVariable_Helper[1];
 	 * set qvtrExpression.name := 'self';
 	 * set invocation.result := trace;
+	 * set qvtrExpression.referredVariable := qvtrVariable;
+	 * notify set qvtrExpression.type := type;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.atl_atlHelper := atlHelper1;
 	 * set trace.atl_atlVariable := atlVariable;
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 * set trace.qvtr_qvtrVariable := qvtrVariable;
-	 * set qvtrExpression.referredVariable := qvtrVariable;
-	 * notify set qvtrExpression.type := type;
 	 *
 	 */
 	protected boolean MAP_m_WI__mapVariableExp__referredVariable_result(final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull VariableExp atlExpression_14)  {
@@ -4825,14 +4845,14 @@ public class ATL2QVTr extends AbstractTransformer
 						// mapping statements
 						qvtr_qvtrExpression.setName(STR_self);
 						WI_mapVariableExp_referredVariable.setResult(trace_37);
+						qvtr_qvtrExpression.setReferredVariable(qvtr_qvtrVariable);
+						qvtr_qvtrExpression.setType(type_2);
+						objectManager.assigned(qvtr_qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type_2);
 						trace_37.setAtl_atlExpression(atlExpression_14);
 						trace_37.setAtl_atlHelper(getHelper);
 						trace_37.setAtl_atlVariable(referredVariable);
 						trace_37.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 						trace_37.setQvtr_qvtrVariable(qvtr_qvtrVariable);
-						qvtr_qvtrExpression.setReferredVariable(qvtr_qvtrVariable);
-						qvtr_qvtrExpression.setType(type_2);
-						objectManager.assigned(qvtr_qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type_2);
 						final /*@Thrown*/ @Nullable Boolean m_WI__mapVariableExp__referredVariable_result = ValueUtil.TRUE_VALUE;
 						raw_when_TC_mapVariable = m_WI__mapVariableExp__referredVariable_result;
 					}
@@ -4873,9 +4893,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var type : Type[?] := qvtrVariable.type;
 	 * new:middle trace : trace_ATL2QVTr::TC_mapVariableExp_referredVariable_VariableDeclaration[1];
 	 * set qvtrExpression.name := name;
+	 * set invocation.result := trace;
 	 * set qvtrExpression.referredVariable := qvtrVariable;
 	 * notify set qvtrExpression.type := type;
-	 * set invocation.result := trace;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.atl_atlVariable := atlVariable;
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
@@ -4917,10 +4937,10 @@ public class ATL2QVTr extends AbstractTransformer
 					models[0/*middle*/].add(trace_37, false);
 					// mapping statements
 					qvtr_qvtrExpression.setName(name_2);
+					WI_mapVariableExp_referredVariable.setResult(trace_37);
 					qvtr_qvtrExpression.setReferredVariable(qvtr_qvtrVariable);
 					qvtr_qvtrExpression.setType(type_2);
 					objectManager.assigned(qvtr_qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type_2);
-					WI_mapVariableExp_referredVariable.setResult(trace_37);
 					trace_37.setAtl_atlExpression(atlExpression_15);
 					trace_37.setAtl_atlVariable(symbol_1);
 					trace_37.setQvtr_qvtrExpression(qvtr_qvtrExpression);
@@ -5272,15 +5292,15 @@ public class ATL2QVTr extends AbstractTransformer
 	 * contained new:qvtr qvtrPart : qvttemplate::PropertyTemplateItem[1];
 	 * new:middle trace : trace_ATL2QVTr::TC_mapBinding[1];
 	 * set trace.primitive_propertyName := propertyName;
+	 * set qvtrPart.objContainer := qvtrTemplate;
+	 * set qvtrPart.referredProperty := getProperty1;
+	 * set qvtrPart.value := qvtrExpression;
 	 * set trace.atl_atlBinding := atlBinding;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.atl_atlOutPatternElement := atlOutPatternElement;
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 * set trace.qvtr_qvtrPart := qvtrPart;
 	 * set trace.qvtr_qvtrTemplate := qvtrTemplate;
-	 * set qvtrPart.objContainer := qvtrTemplate;
-	 * set qvtrPart.referredProperty := getProperty1;
-	 * set qvtrPart.value := qvtrExpression;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapBinding_atl_atlBinding_atl_atlExpression_at(final /*@NonInvalid*/ @NonNull Binding atlBinding)  {
@@ -5324,15 +5344,15 @@ public class ATL2QVTr extends AbstractTransformer
 					models[0/*middle*/].add(trace_37, false);
 					// mapping statements
 					trace_37.setPrimitive_propertyName(propertyName);
+					qvtrPart.setObjContainer(qvtr_qvtrTemplate);
+					qvtrPart.setReferredProperty(getProperty);
+					qvtrPart.setValue(qvtr_qvtrExpression);
 					trace_37.setAtl_atlBinding(atlBinding);
 					trace_37.setAtl_atlExpression(value);
 					trace_37.setAtl_atlOutPatternElement(symbol_1);
 					trace_37.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 					trace_37.setQvtr_qvtrPart(qvtrPart);
 					trace_37.setQvtr_qvtrTemplate(qvtr_qvtrTemplate);
-					qvtrPart.setObjContainer(qvtr_qvtrTemplate);
-					qvtrPart.setReferredProperty(getProperty);
-					qvtrPart.setValue(qvtr_qvtrExpression);
 					final /*@Thrown*/ @Nullable Boolean m_TC__mapBinding_atl_atlBinding_atl_atlExpression_at = ValueUtil.TRUE_VALUE;
 					raw_when_TC_mapSimpleOutPatternElement = m_TC__mapBinding_atl_atlBinding_atl_atlExpression_at;
 				}
@@ -5370,9 +5390,9 @@ public class ATL2QVTr extends AbstractTransformer
 	 * new:qvtr p : qvtbase::Predicate[1];
 	 * new:middle trace : trace_ATL2QVTr::TC_mapInPattern_filter[1];
 	 * contained new:qvtr w : qvtbase::Pattern[1];
-	 * set qvtrRelation.when := w;
 	 * set qvtrDomain.rule := qvtrRelation;
-	 * set w.predicate := p;
+	 * set qvtrRelation.when := w;
+	 * set p.conditionExpression := qvtrExpression;
 	 * set trace.atl_atlExpression := atlExpression;
 	 * set trace.atl_atlPattern := atlPattern;
 	 * set trace.atl_atlRule := atlRule;
@@ -5381,7 +5401,7 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 * set trace.qvtr_qvtrRelation := qvtrRelation;
 	 * set trace.qvtr_w := w;
-	 * set p.conditionExpression := qvtrExpression;
+	 * set w.predicate := p;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapInPattern__filter_atl_atlExpression_atl_atl(final /*@NonInvalid*/ @NonNull InPattern atlPattern_1)  {
@@ -5432,9 +5452,9 @@ public class ATL2QVTr extends AbstractTransformer
 						final @NonNull Pattern w = QVTbaseFactory.eINSTANCE.createPattern();
 						models[2/*qvtr*/].add(w, true);
 						// mapping statements
-						qvtr_qvtrRelation.setWhen(w);
 						qvtr_qvtrDomain.setRule(qvtr_qvtrRelation);
-						w.getPredicate().add(p);
+						qvtr_qvtrRelation.setWhen(w);
+						p.setConditionExpression(qvtr_qvtrExpression);
 						trace_37.setAtl_atlExpression(filter);
 						trace_37.setAtl_atlPattern(atlPattern_1);
 						trace_37.setAtl_atlRule(rule);
@@ -5443,7 +5463,7 @@ public class ATL2QVTr extends AbstractTransformer
 						trace_37.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 						trace_37.setQvtr_qvtrRelation(qvtr_qvtrRelation);
 						trace_37.setQvtr_w(w);
-						p.setConditionExpression(qvtr_qvtrExpression);
+						w.getPredicate().add(p);
 						final /*@Thrown*/ @Nullable Boolean m_TC__mapInPattern__filter_atl_atlExpression_atl_atl = ValueUtil.TRUE_VALUE;
 						raw_when_TI_mapOclExpression = m_TC__mapInPattern__filter_atl_atlExpression_atl_atl;
 					}
@@ -5481,11 +5501,11 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlArgument.TI_mapOclExpression;
 	 * var qvtrArgument : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
 	 * new:middle trace : trace_ATL2QVTr::TC_mapOperationCallExp_argument[1];
+	 * set qvtrParent.ownedArguments := qvtrArgument;
 	 * set trace.atl_atlArgument := atlArgument;
 	 * set trace.atl_atlParent := atlParent;
 	 * set trace.qvtr_qvtrArgument := qvtrArgument;
 	 * set trace.qvtr_qvtrParent := qvtrParent;
-	 * set qvtrParent.ownedArguments := qvtrArgument;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapOperationCallExp__argument_atl_atlArgument_(final /*@NonInvalid*/ @NonNull OclExpression atlArgument)  {
@@ -5526,11 +5546,11 @@ public class ATL2QVTr extends AbstractTransformer
 						final @SuppressWarnings("null")@NonNull TC_mapOperationCallExp_argument trace_37 = trace_ATL2QVTrFactory.eINSTANCE.createTC_mapOperationCallExp_argument();
 						models[0/*middle*/].add(trace_37, false);
 						// mapping statements
+						symbol_4.getOwnedArguments().add(qvtr_qvtrExpression);
 						trace_37.setAtl_atlArgument(atlArgument);
 						trace_37.setAtl_atlParent(parentOperation);
 						trace_37.setQvtr_qvtrArgument(qvtr_qvtrExpression);
 						trace_37.setQvtr_qvtrParent(symbol_4);
-						symbol_4.getOwnedArguments().add(qvtr_qvtrExpression);
 						final /*@Thrown*/ @Nullable Boolean m_TC__mapOperationCallExp__argument_atl_atlArgument_ = ValueUtil.TRUE_VALUE;
 						raw_when_TI_mapOclExpression = m_TC__mapOperationCallExp__argument_atl_atlArgument_;
 					}
@@ -5567,8 +5587,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var qvtrFunction : qvtbase::Function[1] := trace.qvtr_qvtrFunction;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlExpression.TI_mapOclExpression;
 	 * var qvtrExpression : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 * set qvtrFunction.queryExpression := qvtrExpression;
+	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapHelper__Attribute_qvtr_qvtrExpression_p3(final /*@NonInvalid*/ @NonNull TC_mapHelper_Attribute trace_18)  {
@@ -5595,8 +5615,8 @@ public class ATL2QVTr extends AbstractTransformer
 				@SuppressWarnings("null")
 				final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 				// mapping statements
-				trace_18.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 				qvtr_qvtrFunction.setQueryExpression(qvtr_qvtrExpression);
+				trace_18.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 				final /*@Thrown*/ @Nullable Boolean m_TC__mapHelper__Attribute_qvtr_qvtrExpression_p3 = ValueUtil.TRUE_VALUE;
 				raw_when_TI_mapOclExpression = m_TC__mapHelper__Attribute_qvtr_qvtrExpression_p3;
 			}
@@ -5623,8 +5643,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var qvtrFunction : qvtbase::Function[1] := trace.qvtr_qvtrFunction;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlExpression.TI_mapOclExpression;
 	 * var qvtrExpression : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 * set qvtrFunction.queryExpression := qvtrExpression;
+	 * set trace.qvtr_qvtrExpression := qvtrExpression;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapHelper__Operation_qvtr_qvtrExpression_p3(final /*@NonInvalid*/ @NonNull TC_mapHelper_Operation trace_19)  {
@@ -5651,8 +5671,8 @@ public class ATL2QVTr extends AbstractTransformer
 				@SuppressWarnings("null")
 				final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 				// mapping statements
-				trace_19.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 				qvtr_qvtrFunction.setQueryExpression(qvtr_qvtrExpression);
+				trace_19.setQvtr_qvtrExpression(qvtr_qvtrExpression);
 				final /*@Thrown*/ @Nullable Boolean m_TC__mapHelper__Operation_qvtr_qvtrExpression_p3 = ValueUtil.TRUE_VALUE;
 				raw_when_TI_mapOclExpression = m_TC__mapHelper__Operation_qvtr_qvtrExpression_p3;
 			}
@@ -5679,8 +5699,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var atlCondition : OCL::OclExpression[1] := trace.atl_atlCondition;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlCondition.TI_mapOclExpression;
 	 * var qvtrCondition : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrCondition := qvtrCondition;
 	 * set qvtrExpression.ownedCondition := qvtrCondition;
+	 * set trace.qvtr_qvtrCondition := qvtrCondition;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapIfExp_qvtr_qvtrCondition_p3(final /*@NonInvalid*/ @NonNull TC_mapIfExp trace_20)  {
@@ -5711,8 +5731,8 @@ public class ATL2QVTr extends AbstractTransformer
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 					// mapping statements
-					trace_20.setQvtr_qvtrCondition(qvtr_qvtrExpression);
 					symbol_1.setOwnedCondition(qvtr_qvtrExpression);
+					trace_20.setQvtr_qvtrCondition(qvtr_qvtrExpression);
 					final /*@Thrown*/ @Nullable Boolean m_TC__mapIfExp_qvtr_qvtrCondition_p3 = ValueUtil.TRUE_VALUE;
 					raw_when_TI_mapOclExpression = m_TC__mapIfExp_qvtr_qvtrCondition_p3;
 				}
@@ -5744,8 +5764,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var atlSource : OCL::OclExpression[1] := trace.atl_atlSource;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlSource.TI_mapOclExpression;
 	 * var qvtrSourceArgument : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrSourceArgument := qvtrSourceArgument;
 	 * set qvtrExpression.ownedArguments := qvtrSourceArgument;
+	 * set trace.qvtr_qvtrSourceArgument := qvtrSourceArgument;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapNavigationOrAttributeCallExp__Helper_qvtr_q_p3(final /*@NonInvalid*/ @NonNull TC_mapNavigationOrAttributeCallExp_Helper trace_21)  {
@@ -5776,8 +5796,8 @@ public class ATL2QVTr extends AbstractTransformer
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 					// mapping statements
-					trace_21.setQvtr_qvtrSourceArgument(qvtr_qvtrExpression);
 					symbol_1.getOwnedArguments().add(qvtr_qvtrExpression);
+					trace_21.setQvtr_qvtrSourceArgument(qvtr_qvtrExpression);
 					final /*@Thrown*/ @Nullable Boolean m_TC__mapNavigationOrAttributeCallExp__Helper_qvtr_q_p3 = ValueUtil.TRUE_VALUE;
 					raw_when_TI_mapOclExpression = m_TC__mapNavigationOrAttributeCallExp__Helper_qvtr_q_p3;
 				}
@@ -5874,8 +5894,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var atlSource : OCL::OclExpression[1] := trace.atl_atlSource;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlSource.TI_mapOclExpression;
 	 * var qvtrSourceArgument : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrSourceArgument := qvtrSourceArgument;
 	 * set qvtrExpression.ownedArguments := qvtrSourceArgument;
+	 * set trace.qvtr_qvtrSourceArgument := qvtrSourceArgument;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapOperationCallExp__Helper_qvtr_qvtrSourceArg_p3(final /*@NonInvalid*/ @NonNull TC_mapOperationCallExp_Helper trace_23)  {
@@ -5906,8 +5926,8 @@ public class ATL2QVTr extends AbstractTransformer
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 					// mapping statements
-					trace_23.setQvtr_qvtrSourceArgument(qvtr_qvtrExpression);
 					symbol_1.getOwnedArguments().add(qvtr_qvtrExpression);
+					trace_23.setQvtr_qvtrSourceArgument(qvtr_qvtrExpression);
 					final /*@Thrown*/ @Nullable Boolean m_TC__mapOperationCallExp__Helper_qvtr_qvtrSourceArg_p3 = ValueUtil.TRUE_VALUE;
 					raw_when_TI_mapOclExpression = m_TC__mapOperationCallExp__Helper_qvtr_qvtrSourceArg_p3;
 				}
@@ -5939,8 +5959,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var atlSource : OCL::OclExpression[1] := trace.atl_atlSource;
 	 * var when_TI_mapOclExpression : trace_ATL2QVTr::TI_mapOclExpression[1] := atlSource.TI_mapOclExpression;
 	 * var qvtrSource : OCLExpression[1] := when_TI_mapOclExpression.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrSource := qvtrSource;
 	 * set qvtrExpression.ownedSource := qvtrSource;
+	 * set trace.qvtr_qvtrSource := qvtrSource;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapOperationCallExp__Operation_qvtr_qvtrSource_p3(final /*@NonInvalid*/ @NonNull TC_mapOperationCallExp_Operation trace_24)  {
@@ -5971,8 +5991,8 @@ public class ATL2QVTr extends AbstractTransformer
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 					// mapping statements
-					trace_24.setQvtr_qvtrSource(qvtr_qvtrExpression);
 					symbol_1.setOwnedSource(qvtr_qvtrExpression);
+					trace_24.setQvtr_qvtrSource(qvtr_qvtrExpression);
 					final /*@Thrown*/ @Nullable Boolean m_TC__mapOperationCallExp__Operation_qvtr_qvtrSource_p3 = ValueUtil.TRUE_VALUE;
 					raw_when_TI_mapOclExpression = m_TC__mapOperationCallExp__Operation_qvtr_qvtrSource_p3;
 				}
@@ -6228,8 +6248,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var atlThen : OCL::OclExpression[1] := trace.atl_atlThen;
 	 * var when_TI_mapOclExpression_0 : trace_ATL2QVTr::TI_mapOclExpression[1] := atlThen.TI_mapOclExpression;
 	 * var qvtrThen : OCLExpression[1] := when_TI_mapOclExpression_0.qvtr_qvtrExpression;
-	 * set trace.qvtr_qvtrThen := qvtrThen;
 	 * set qvtrExpression.ownedThen := qvtrThen;
+	 * set trace.qvtr_qvtrThen := qvtrThen;
 	 *
 	 */
 	protected boolean MAP_m_TC__mapIfExp_qvtr_qvtrThen_p5(final /*@NonInvalid*/ @NonNull TC_mapIfExp trace_29)  {
@@ -6260,8 +6280,8 @@ public class ATL2QVTr extends AbstractTransformer
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull OCLExpression qvtr_qvtrExpression = TI_mapOclExpression.getQvtr_qvtrExpression();
 					// mapping statements
-					trace_29.setQvtr_qvtrThen(qvtr_qvtrExpression);
 					symbol_1.setOwnedThen(qvtr_qvtrExpression);
+					trace_29.setQvtr_qvtrThen(qvtr_qvtrExpression);
 					final /*@Thrown*/ @Nullable Boolean m_TC__mapIfExp_qvtr_qvtrThen_p5 = ValueUtil.TRUE_VALUE;
 					raw_when_TI_mapOclExpression_0 = m_TC__mapIfExp_qvtr_qvtrThen_p5;
 				}
@@ -6501,11 +6521,11 @@ public class ATL2QVTr extends AbstractTransformer
 	 *   guard:middle trace : trace_ATL2QVTr::TC_mapIfExp[1];
 	 * check trace.status;
 	 * check var qvtrExpression : IfExp[1] := trace.qvtr_qvtrExpression;
-	 * var qvtrThen : OCLExpression[1] := trace.qvtr_qvtrThen;
-	 * var type : Type[?] := qvtrThen.type;
 	 * var qvtrElse : OCLExpression[1] := trace.qvtr_qvtrElse;
-	 * var type1 : Type[?] := qvtrElse.type;
-	 * var getCommonType1 : Type[1] := this.getCommonType(type, type1);
+	 * var type : Type[?] := qvtrElse.type;
+	 * var qvtrThen : OCLExpression[1] := trace.qvtr_qvtrThen;
+	 * var type1 : Type[?] := qvtrThen.type;
+	 * var getCommonType1 : Type[1] := this.getCommonType(type1, type);
 	 * notify set qvtrExpression.type := getCommonType1;
 	 *
 	 */
@@ -6533,14 +6553,14 @@ public class ATL2QVTr extends AbstractTransformer
 				if (symbol_0) {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull IfExp symbol_1 = (org.eclipse.ocl.pivot.IfExp)temp1_qvtrExpression;
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression qvtr_qvtrThen = trace_33.getQvtr_qvtrThen();
-					objectManager.getting(qvtr_qvtrThen, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
-					final /*@NonInvalid*/ @Nullable Type type_2 = qvtr_qvtrThen.getType();
-					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull OCLExpression qvtr_qvtrElse = trace_33.getQvtr_qvtrElse();
 					objectManager.getting(qvtr_qvtrElse, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
-					final /*@NonInvalid*/ @Nullable Type type_3 = qvtr_qvtrElse.getType();
-					final /*@Thrown*/ @NonNull Type getCommonType = ((FUN_getCommonType)FTOR_getCommonType.getUniqueComputation(ATL2QVTr.this, type_2, type_3)).instance;
+					final /*@NonInvalid*/ @Nullable Type type_2 = qvtr_qvtrElse.getType();
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ @NonNull OCLExpression qvtr_qvtrThen = trace_33.getQvtr_qvtrThen();
+					objectManager.getting(qvtr_qvtrThen, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
+					final /*@NonInvalid*/ @Nullable Type type_3 = qvtr_qvtrThen.getType();
+					final /*@Thrown*/ @NonNull Type getCommonType = ((FUN_getCommonType)FTOR_getCommonType.getUniqueComputation(ATL2QVTr.this, type_3, type_2)).instance;
 					// mapping statements
 					symbol_1.setType(getCommonType);
 					objectManager.assigned(symbol_1, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getCommonType);

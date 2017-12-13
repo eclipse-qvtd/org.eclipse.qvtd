@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2015, 2016 Willink Transformations and others.
- * ;All rights reserved. This program and the accompanying materials
- * ;are made available under the terms of the Eclipse Public License v1.0
- * ;which accompanies this distribution, and is available at
- * ;http://www.eclipse.org/legal/epl-v10.html
- * ;
- * ;Contributors:
- * ;  E.D.Willink - Initial API and implementation
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl;
 
@@ -569,17 +569,11 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		QVTrelationPackage.eINSTANCE.eClass();
 		QVTtemplatePackage.eINSTANCE.eClass();
 
-		// Obtain or create and register interdependencies
-		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(trace_ATL2QVTrPackage.eNS_URI);
-		trace_ATL2QVTrPackageImpl thetrace_ATL2QVTrPackage_1 = (trace_ATL2QVTrPackageImpl)(registeredPackage instanceof trace_ATL2QVTrPackageImpl ? registeredPackage : trace_ATL2QVTrPackage.eINSTANCE);
-
 		// Create package meta-data objects
 		thetrace_ATL2QVTrPackage.createPackageContents();
-		thetrace_ATL2QVTrPackage_1.createPackageContents();
 
 		// Initialize created meta-data
 		thetrace_ATL2QVTrPackage.initializePackageContents();
-		thetrace_ATL2QVTrPackage_1.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		thetrace_ATL2QVTrPackage.freeze();
@@ -3423,7 +3417,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		OCLPackage theOCLPackage = (OCLPackage)EPackage.Registry.INSTANCE.getEPackage(OCLPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 		QVTtemplatePackage theQVTtemplatePackage = (QVTtemplatePackage)EPackage.Registry.INSTANCE.getEPackage(QVTtemplatePackage.eNS_URI);
-		trace_ATL2QVTrPackage thetrace_ATL2QVTrPackage_1 = (trace_ATL2QVTrPackage)EPackage.Registry.INSTANCE.getEPackage(trace_ATL2QVTrPackage.eNS_URI);
 		QVTrelationPackage theQVTrelationPackage = (QVTrelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationPackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
@@ -3432,46 +3425,46 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		tC_mapBooleanExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapBooleanExp());
-		tC_mapHelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapHelper());
-		tC_mapHelper_AttributeEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapHelper_Attribute());
-		tC_mapHelper_OperationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapHelper_Operation());
-		tC_mapIfExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapIfExp());
-		tC_mapIntegerExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapIntegerExp());
-		tC_mapNavigationOrAttributeCallExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapNavigationOrAttributeCallExp());
-		tC_mapNavigationOrAttributeCallExp_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapNavigationOrAttributeCallExp_Helper());
-		tC_mapNavigationOrAttributeCallExp_PropertyEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapNavigationOrAttributeCallExp_Property());
-		tC_mapOclExpressionEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tC_mapOperationCallExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperationCallExp());
-		tC_mapOperationCallExp_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperationCallExp_Helper());
-		tC_mapOperationCallExp_OperationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperationCallExp_Operation());
-		tC_mapOperatorCallExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperatorCallExp());
-		tC_mapStringExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapStringExp());
-		tC_mapVariableExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp());
-		tC_mapVariableExp_referredVariableEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp_referredVariable());
-		tC_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp_referredVariable_Helper());
-		tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp_referredVariable_VariableDeclaration());
-		tI_mapBooleanExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapHelper_AttributeEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapHelper());
-		tI_mapHelper_OperationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapHelper());
-		tI_mapIfExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapIntegerExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapNavigationOrAttributeCallExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapNavigationOrAttributeCallExp_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapNavigationOrAttributeCallExp());
-		tI_mapNavigationOrAttributeCallExp_PropertyEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapNavigationOrAttributeCallExp());
-		tI_mapOperationCallExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapOperationCallExp_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperationCallExp());
-		tI_mapOperationCallExp_OperationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperationCallExp());
-		tI_mapOperatorCallExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOperationCallExp());
-		tI_mapStringExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapVariableExpEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapOclExpression());
-		tI_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp_referredVariable());
-		tI_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp_referredVariable());
-		wC_mapVariableExp_referredVariableEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getWI_mapVariableExp_referredVariable());
-		wC_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getWI_mapVariableExp_referredVariable_Helper());
-		wC_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getWI_mapVariableExp_referredVariable_VariableDeclaration());
-		wI_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getWI_mapVariableExp_referredVariable());
-		wI_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(thetrace_ATL2QVTrPackage_1.getWI_mapVariableExp_referredVariable());
+		tC_mapBooleanExpEClass.getESuperTypes().add(this.getTI_mapBooleanExp());
+		tC_mapHelperEClass.getESuperTypes().add(this.getTI_mapHelper());
+		tC_mapHelper_AttributeEClass.getESuperTypes().add(this.getTI_mapHelper_Attribute());
+		tC_mapHelper_OperationEClass.getESuperTypes().add(this.getTI_mapHelper_Operation());
+		tC_mapIfExpEClass.getESuperTypes().add(this.getTI_mapIfExp());
+		tC_mapIntegerExpEClass.getESuperTypes().add(this.getTI_mapIntegerExp());
+		tC_mapNavigationOrAttributeCallExpEClass.getESuperTypes().add(this.getTI_mapNavigationOrAttributeCallExp());
+		tC_mapNavigationOrAttributeCallExp_HelperEClass.getESuperTypes().add(this.getTI_mapNavigationOrAttributeCallExp_Helper());
+		tC_mapNavigationOrAttributeCallExp_PropertyEClass.getESuperTypes().add(this.getTI_mapNavigationOrAttributeCallExp_Property());
+		tC_mapOclExpressionEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tC_mapOperationCallExpEClass.getESuperTypes().add(this.getTI_mapOperationCallExp());
+		tC_mapOperationCallExp_HelperEClass.getESuperTypes().add(this.getTI_mapOperationCallExp_Helper());
+		tC_mapOperationCallExp_OperationEClass.getESuperTypes().add(this.getTI_mapOperationCallExp_Operation());
+		tC_mapOperatorCallExpEClass.getESuperTypes().add(this.getTI_mapOperatorCallExp());
+		tC_mapStringExpEClass.getESuperTypes().add(this.getTI_mapStringExp());
+		tC_mapVariableExpEClass.getESuperTypes().add(this.getTI_mapVariableExp());
+		tC_mapVariableExp_referredVariableEClass.getESuperTypes().add(this.getTI_mapVariableExp_referredVariable());
+		tC_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(this.getTI_mapVariableExp_referredVariable_Helper());
+		tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(this.getTI_mapVariableExp_referredVariable_VariableDeclaration());
+		tI_mapBooleanExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapHelper_AttributeEClass.getESuperTypes().add(this.getTI_mapHelper());
+		tI_mapHelper_OperationEClass.getESuperTypes().add(this.getTI_mapHelper());
+		tI_mapIfExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapIntegerExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapNavigationOrAttributeCallExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapNavigationOrAttributeCallExp_HelperEClass.getESuperTypes().add(this.getTI_mapNavigationOrAttributeCallExp());
+		tI_mapNavigationOrAttributeCallExp_PropertyEClass.getESuperTypes().add(this.getTI_mapNavigationOrAttributeCallExp());
+		tI_mapOperationCallExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapOperationCallExp_HelperEClass.getESuperTypes().add(this.getTI_mapOperationCallExp());
+		tI_mapOperationCallExp_OperationEClass.getESuperTypes().add(this.getTI_mapOperationCallExp());
+		tI_mapOperatorCallExpEClass.getESuperTypes().add(this.getTI_mapOperationCallExp());
+		tI_mapStringExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapVariableExpEClass.getESuperTypes().add(this.getTI_mapOclExpression());
+		tI_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(this.getTI_mapVariableExp_referredVariable());
+		tI_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(this.getTI_mapVariableExp_referredVariable());
+		wC_mapVariableExp_referredVariableEClass.getESuperTypes().add(this.getWI_mapVariableExp_referredVariable());
+		wC_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(this.getWI_mapVariableExp_referredVariable_Helper());
+		wC_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(this.getWI_mapVariableExp_referredVariable_VariableDeclaration());
+		wI_mapVariableExp_referredVariable_HelperEClass.getESuperTypes().add(this.getWI_mapVariableExp_referredVariable());
+		wI_mapVariableExp_referredVariable_VariableDeclarationEClass.getESuperTypes().add(this.getWI_mapVariableExp_referredVariable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(tC_mapBindingEClass, TC_mapBinding.class, "TC_mapBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3494,7 +3487,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTC_mapHelper_Attribute_Atl_atlFeature(), theOCLPackage.getAttribute(), null, "atl_atlFeature", null, 1, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Attribute_Atl_atlModule(), theATLPackage.getModule(), null, "atl_atlModule", null, 1, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Attribute_Atl_atlType(), theOCLPackage.getOclType(), null, "atl_atlType", null, 1, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapHelper_Attribute_Invocation_mapHelper_Context(), thetrace_ATL2QVTrPackage_1.getTC_mapHelper_Context(), null, "invocation_mapHelper_Context", null, 0, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapHelper_Attribute_Invocation_mapHelper_Context(), this.getTC_mapHelper_Context(), null, "invocation_mapHelper_Context", null, 0, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTC_mapHelper_Attribute_Primitive_attributeName(), ecorePackage.getEString(), "primitive_attributeName", null, 1, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Attribute_Qvtr_qvtrExpression(), thePivotPackage.getOCLExpression(), null, "qvtr_qvtrExpression", null, 1, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Attribute_Qvtr_qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "qvtr_qvtrTransformation", null, 1, 1, TC_mapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3504,7 +3497,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTC_mapHelper_Context_Atl_atlDefinition(), theOCLPackage.getOclFeatureDefinition(), null, "atl_atlDefinition", null, 1, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Context_Atl_atlHelper(), theATLPackage.getHelper(), null, "atl_atlHelper", null, 1, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Context_Atl_atlReturnType(), theOCLPackage.getOclType(), null, "atl_atlReturnType", null, 1, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapHelper_Context_Invocation_mapVariable(), thetrace_ATL2QVTrPackage_1.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapHelper_Context_Invocation_mapVariable(), this.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Context_Qvtr_qvtrFunction(), theQVTbasePackage.getFunction(), null, "qvtr_qvtrFunction", null, 1, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Context_Qvtr_qvtrParameter(), theQVTbasePackage.getFunctionParameter(), null, "qvtr_qvtrParameter", null, 1, 1, TC_mapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3514,7 +3507,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTC_mapHelper_Operation_Atl_atlFeature(), theOCLPackage.getOperation(), null, "atl_atlFeature", null, 1, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Operation_Atl_atlModule(), theATLPackage.getModule(), null, "atl_atlModule", null, 1, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Operation_Atl_atlType(), theOCLPackage.getOclType(), null, "atl_atlType", null, 1, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapHelper_Operation_Invocation_mapHelper_Context(), thetrace_ATL2QVTrPackage_1.getTC_mapHelper_Context(), null, "invocation_mapHelper_Context", null, 0, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapHelper_Operation_Invocation_mapHelper_Context(), this.getTC_mapHelper_Context(), null, "invocation_mapHelper_Context", null, 0, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTC_mapHelper_Operation_Primitive_operationName(), ecorePackage.getEString(), "primitive_operationName", null, 1, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Operation_Qvtr_qvtrExpression(), thePivotPackage.getOCLExpression(), null, "qvtr_qvtrExpression", null, 1, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapHelper_Operation_Qvtr_qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "qvtr_qvtrTransformation", null, 1, 1, TC_mapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3666,7 +3659,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTC_mapSimpleInPatternElement_Atl_atlElement(), theATLPackage.getSimpleInPatternElement(), null, "atl_atlElement", null, 1, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleInPatternElement_Atl_atlPattern(), theATLPackage.getInPattern(), null, "atl_atlPattern", null, 1, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleInPatternElement_Atl_atlRule(), theATLPackage.getMatchedRule(), null, "atl_atlRule", null, 1, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapSimpleInPatternElement_Invocation_mapVariable(), thetrace_ATL2QVTrPackage_1.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapSimpleInPatternElement_Invocation_mapVariable(), this.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTC_mapSimpleInPatternElement_Primitive_elementName(), ecorePackage.getEString(), "primitive_elementName", null, 1, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain(), theQVTrelationPackage.getRelationDomain(), null, "qvtr_qvtrDomain", null, 1, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain1(), theQVTrelationPackage.getRelationDomain(), null, "qvtr_qvtrDomain1", null, 1, 1, TC_mapSimpleInPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3679,7 +3672,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTC_mapSimpleOutPatternElement_Atl_atlElement(), theATLPackage.getSimpleOutPatternElement(), null, "atl_atlElement", null, 1, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleOutPatternElement_Atl_atlPattern(), theATLPackage.getOutPattern(), null, "atl_atlPattern", null, 1, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleOutPatternElement_Atl_atlRule(), theATLPackage.getMatchedRule(), null, "atl_atlRule", null, 1, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapSimpleOutPatternElement_Invocation_mapVariable(), thetrace_ATL2QVTrPackage_1.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapSimpleOutPatternElement_Invocation_mapVariable(), this.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTC_mapSimpleOutPatternElement_Primitive_elementName(), ecorePackage.getEString(), "primitive_elementName", null, 1, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain(), theQVTrelationPackage.getRelationDomain(), null, "qvtr_qvtrDomain", null, 1, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain1(), theQVTrelationPackage.getRelationDomain(), null, "qvtr_qvtrDomain1", null, 1, 1, TC_mapSimpleOutPatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3698,7 +3691,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 
 		initEClass(tC_mapVariableExpEClass, TC_mapVariableExp.class, "TC_mapVariableExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTC_mapVariableExp_Atl_atlVariable(), theOCLPackage.getVariableDeclaration(), null, "atl_atlVariable", null, 1, 1, TC_mapVariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapVariableExp_Invocation_mapVariableExp_referredVariable(), thetrace_ATL2QVTrPackage_1.getWC_mapVariableExp_referredVariable(), null, "invocation_mapVariableExp_referredVariable", null, 0, 1, TC_mapVariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapVariableExp_Invocation_mapVariableExp_referredVariable(), this.getWC_mapVariableExp_referredVariable(), null, "invocation_mapVariableExp_referredVariable", null, 0, 1, TC_mapVariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTC_mapVariableExp_Primitive_varName(), ecorePackage.getEString(), "primitive_varName", null, 1, 1, TC_mapVariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tC_mapVariableExp_referredVariableEClass, TC_mapVariableExp_referredVariable.class, "TC_mapVariableExp_referredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3709,14 +3702,14 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTC_mapVariableExp_referredVariable_Helper_Atl_atlExpression(), theOCLPackage.getVariableExp(), null, "atl_atlExpression", null, 1, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_Helper_Atl_atlHelper(), theATLPackage.getHelper(), null, "atl_atlHelper", null, 1, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_Helper_Atl_atlVariable(), theOCLPackage.getVariableDeclaration(), null, "atl_atlVariable", null, 1, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapVariableExp_referredVariable_Helper_Invocation_mapVariable(), thetrace_ATL2QVTrPackage_1.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapVariableExp_referredVariable_Helper_Invocation_mapVariable(), this.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrExpression(), thePivotPackage.getVariableExp(), null, "qvtr_qvtrExpression", null, 1, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrVariable(), thePivotPackage.getVariableDeclaration(), null, "qvtr_qvtrVariable", null, 1, 1, TC_mapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tC_mapVariableExp_referredVariable_VariableDeclarationEClass, TC_mapVariableExp_referredVariable_VariableDeclaration.class, "TC_mapVariableExp_referredVariable_VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlExpression(), theOCLPackage.getVariableExp(), null, "atl_atlExpression", null, 1, 1, TC_mapVariableExp_referredVariable_VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlVariable(), theATLPackage.getPatternElement(), null, "atl_atlVariable", null, 1, 1, TC_mapVariableExp_referredVariable_VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTC_mapVariableExp_referredVariable_VariableDeclaration_Invocation_mapVariable(), thetrace_ATL2QVTrPackage_1.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapVariableExp_referredVariable_VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTC_mapVariableExp_referredVariable_VariableDeclaration_Invocation_mapVariable(), this.getTC_mapVariable(), null, "invocation_mapVariable", null, 0, 1, TC_mapVariableExp_referredVariable_VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrExpression(), thePivotPackage.getVariableExp(), null, "qvtr_qvtrExpression", null, 1, 1, TC_mapVariableExp_referredVariable_VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrVariable(), thePivotPackage.getVariableDeclaration(), null, "qvtr_qvtrVariable", null, 1, 1, TC_mapVariableExp_referredVariable_VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3774,7 +3767,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEClass(wI_mapVariableExp_referredVariableEClass, WI_mapVariableExp_referredVariable.class, "WI_mapVariableExp_referredVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWI_mapVariableExp_referredVariable_Atl_atlExpression(), theOCLPackage.getVariableExp(), null, "atl_atlExpression", null, 1, 1, WI_mapVariableExp_referredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWI_mapVariableExp_referredVariable_Qvtr_qvtrExpression(), thePivotPackage.getVariableExp(), null, "qvtr_qvtrExpression", null, 1, 1, WI_mapVariableExp_referredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWI_mapVariableExp_referredVariable_Result(), thetrace_ATL2QVTrPackage_1.getTI_mapVariableExp_referredVariable(), null, "result", null, 0, 1, WI_mapVariableExp_referredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWI_mapVariableExp_referredVariable_Result(), this.getTI_mapVariableExp_referredVariable(), null, "result", null, 0, 1, WI_mapVariableExp_referredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(wI_mapVariableExp_referredVariable_HelperEClass, WI_mapVariableExp_referredVariable_Helper.class, "WI_mapVariableExp_referredVariable_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

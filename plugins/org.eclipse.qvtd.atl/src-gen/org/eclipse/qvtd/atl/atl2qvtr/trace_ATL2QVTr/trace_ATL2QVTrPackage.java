@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2015, 2016 Willink Transformations and others.
- * ;All rights reserved. This program and the accompanying materials
- * ;are made available under the terms of the Eclipse Public License v1.0
- * ;which accompanies this distribution, and is available at
- * ;http://www.eclipse.org/legal/epl-v10.html
- * ;
- * ;Contributors:
- * ;  E.D.Willink - Initial API and implementation
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
@@ -166,6 +166,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_OCL_EXPRESSION = 43;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OCL_EXPRESSION__STATUS = 2;
+
+	/**
+	 * The number of structural features of the '<em>TI map Ocl Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OCL_EXPRESSION_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>TI map Ocl Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OCL_EXPRESSION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapBooleanExpImpl <em>TI map Boolean Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -174,6 +219,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_BOOLEAN_EXP = 34;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_BOOLEAN_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_BOOLEAN_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_BOOLEAN_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Boolean Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_BOOLEAN_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Boolean Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_BOOLEAN_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapBooleanExpImpl <em>TC map Boolean Exp</em>}' class.
@@ -192,7 +282,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_BOOLEAN_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_BOOLEAN_EXP__ATL_ATL_EXPRESSION = TI_MAP_BOOLEAN_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -201,7 +291,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_BOOLEAN_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_BOOLEAN_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_BOOLEAN_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -210,7 +300,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_BOOLEAN_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP__STATUS;
+	int TC_MAP_BOOLEAN_EXP__STATUS = TI_MAP_BOOLEAN_EXP__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Primitive symbol</b></em>' attribute.
@@ -219,7 +309,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_BOOLEAN_EXP__PRIMITIVE_SYMBOL = trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_BOOLEAN_EXP__PRIMITIVE_SYMBOL = TI_MAP_BOOLEAN_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>TC map Boolean Exp</em>' class.
@@ -228,7 +318,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_BOOLEAN_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP_FEATURE_COUNT + 1;
+	int TC_MAP_BOOLEAN_EXP_FEATURE_COUNT = TI_MAP_BOOLEAN_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>TC map Boolean Exp</em>' class.
@@ -237,7 +327,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_BOOLEAN_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_BOOLEAN_EXP_OPERATION_COUNT = TI_MAP_BOOLEAN_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapHelperImpl <em>TI map Helper</em>}' class.
@@ -248,6 +338,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_HELPER = 35;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER__ATL_ATL_HELPER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER__QVTR_QVTR_FUNCTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER__STATUS = 2;
+
+	/**
+	 * The number of structural features of the '<em>TI map Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>TI map Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapHelperImpl <em>TC map Helper</em>}' class.
@@ -266,7 +401,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER__ATL_ATL_HELPER = trace_ATL2QVTrPackage.TI_MAP_HELPER__ATL_ATL_HELPER;
+	int TC_MAP_HELPER__ATL_ATL_HELPER = TI_MAP_HELPER__ATL_ATL_HELPER;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
@@ -275,7 +410,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER__QVTR_QVTR_FUNCTION = trace_ATL2QVTrPackage.TI_MAP_HELPER__QVTR_QVTR_FUNCTION;
+	int TC_MAP_HELPER__QVTR_QVTR_FUNCTION = TI_MAP_HELPER__QVTR_QVTR_FUNCTION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -284,7 +419,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_HELPER__STATUS;
+	int TC_MAP_HELPER__STATUS = TI_MAP_HELPER__STATUS;
 
 	/**
 	 * The number of structural features of the '<em>TC map Helper</em>' class.
@@ -293,7 +428,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_FEATURE_COUNT + 0;
+	int TC_MAP_HELPER_FEATURE_COUNT = TI_MAP_HELPER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>TC map Helper</em>' class.
@@ -302,7 +437,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_COUNT + 0;
+	int TC_MAP_HELPER_OPERATION_COUNT = TI_MAP_HELPER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapHelper_AttributeImpl <em>TI map Helper Attribute</em>}' class.
@@ -313,6 +448,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_HELPER_ATTRIBUTE = 36;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_ATTRIBUTE__ATL_ATL_HELPER = TI_MAP_HELPER__ATL_ATL_HELPER;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_FUNCTION = TI_MAP_HELPER__QVTR_QVTR_FUNCTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_ATTRIBUTE__STATUS = TI_MAP_HELPER__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Helper Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT = TI_MAP_HELPER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Helper Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_ATTRIBUTE_OPERATION_COUNT = TI_MAP_HELPER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapHelper_AttributeImpl <em>TC map Helper Attribute</em>}' class.
@@ -331,7 +511,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_HELPER = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE__ATL_ATL_HELPER;
+	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_HELPER = TI_MAP_HELPER_ATTRIBUTE__ATL_ATL_HELPER;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
@@ -340,7 +520,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_FUNCTION = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_FUNCTION;
+	int TC_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_FUNCTION = TI_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_FUNCTION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -349,7 +529,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__STATUS = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE__STATUS;
+	int TC_MAP_HELPER_ATTRIBUTE__STATUS = TI_MAP_HELPER_ATTRIBUTE__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Definition</b></em>' reference.
@@ -358,7 +538,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_DEFINITION = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 0;
+	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_DEFINITION = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -367,7 +547,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 1;
+	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_EXPRESSION = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Feature</b></em>' reference.
@@ -376,7 +556,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_FEATURE = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 2;
+	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_FEATURE = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -385,7 +565,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 3;
+	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_MODULE = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Type</b></em>' reference.
@@ -394,7 +574,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_TYPE = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 4;
+	int TC_MAP_HELPER_ATTRIBUTE__ATL_ATL_TYPE = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Invocation map Helper Context</b></em>' containment reference.
@@ -403,7 +583,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__INVOCATION_MAP_HELPER_CONTEXT = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 5;
+	int TC_MAP_HELPER_ATTRIBUTE__INVOCATION_MAP_HELPER_CONTEXT = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Primitive attribute Name</b></em>' attribute.
@@ -412,7 +592,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__PRIMITIVE_ATTRIBUTE_NAME = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 6;
+	int TC_MAP_HELPER_ATTRIBUTE__PRIMITIVE_ATTRIBUTE_NAME = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -421,7 +601,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 7;
+	int TC_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_EXPRESSION = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Transformation</b></em>' reference.
@@ -430,7 +610,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_TRANSFORMATION = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 8;
+	int TC_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_TRANSFORMATION = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>TC map Helper Attribute</em>' class.
@@ -439,7 +619,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 9;
+	int TC_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT = TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>TC map Helper Attribute</em>' class.
@@ -448,7 +628,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_ATTRIBUTE_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE_OPERATION_COUNT + 0;
+	int TC_MAP_HELPER_ATTRIBUTE_OPERATION_COUNT = TI_MAP_HELPER_ATTRIBUTE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapHelper_ContextImpl <em>TC map Helper Context</em>}' class.
@@ -552,6 +732,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_HELPER_OPERATION = 37;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_OPERATION__ATL_ATL_HELPER = TI_MAP_HELPER__ATL_ATL_HELPER;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_OPERATION__QVTR_QVTR_FUNCTION = TI_MAP_HELPER__QVTR_QVTR_FUNCTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_OPERATION__STATUS = TI_MAP_HELPER__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Helper Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_OPERATION_FEATURE_COUNT = TI_MAP_HELPER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Helper Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_HELPER_OPERATION_OPERATION_COUNT = TI_MAP_HELPER_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapHelper_OperationImpl <em>TC map Helper Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -568,7 +793,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__ATL_ATL_HELPER = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION__ATL_ATL_HELPER;
+	int TC_MAP_HELPER_OPERATION__ATL_ATL_HELPER = TI_MAP_HELPER_OPERATION__ATL_ATL_HELPER;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
@@ -577,7 +802,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__QVTR_QVTR_FUNCTION = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION__QVTR_QVTR_FUNCTION;
+	int TC_MAP_HELPER_OPERATION__QVTR_QVTR_FUNCTION = TI_MAP_HELPER_OPERATION__QVTR_QVTR_FUNCTION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -586,7 +811,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__STATUS = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION__STATUS;
+	int TC_MAP_HELPER_OPERATION__STATUS = TI_MAP_HELPER_OPERATION__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Definition</b></em>' reference.
@@ -595,7 +820,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__ATL_ATL_DEFINITION = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 0;
+	int TC_MAP_HELPER_OPERATION__ATL_ATL_DEFINITION = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -604,7 +829,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 1;
+	int TC_MAP_HELPER_OPERATION__ATL_ATL_EXPRESSION = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Feature</b></em>' reference.
@@ -613,7 +838,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__ATL_ATL_FEATURE = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 2;
+	int TC_MAP_HELPER_OPERATION__ATL_ATL_FEATURE = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -622,7 +847,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 3;
+	int TC_MAP_HELPER_OPERATION__ATL_ATL_MODULE = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Type</b></em>' reference.
@@ -631,7 +856,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__ATL_ATL_TYPE = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 4;
+	int TC_MAP_HELPER_OPERATION__ATL_ATL_TYPE = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Invocation map Helper Context</b></em>' containment reference.
@@ -640,7 +865,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__INVOCATION_MAP_HELPER_CONTEXT = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 5;
+	int TC_MAP_HELPER_OPERATION__INVOCATION_MAP_HELPER_CONTEXT = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Primitive operation Name</b></em>' attribute.
@@ -649,7 +874,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__PRIMITIVE_OPERATION_NAME = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 6;
+	int TC_MAP_HELPER_OPERATION__PRIMITIVE_OPERATION_NAME = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -658,7 +883,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 7;
+	int TC_MAP_HELPER_OPERATION__QVTR_QVTR_EXPRESSION = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Transformation</b></em>' reference.
@@ -667,7 +892,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION__QVTR_QVTR_TRANSFORMATION = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 8;
+	int TC_MAP_HELPER_OPERATION__QVTR_QVTR_TRANSFORMATION = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>TC map Helper Operation</em>' class.
@@ -676,7 +901,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 9;
+	int TC_MAP_HELPER_OPERATION_FEATURE_COUNT = TI_MAP_HELPER_OPERATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>TC map Helper Operation</em>' class.
@@ -685,7 +910,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_HELPER_OPERATION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_OPERATION_COUNT + 0;
+	int TC_MAP_HELPER_OPERATION_OPERATION_COUNT = TI_MAP_HELPER_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapIfExpImpl <em>TI map If Exp</em>}' class.
@@ -696,6 +921,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_IF_EXP = 38;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IF_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IF_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IF_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map If Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IF_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map If Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IF_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapIfExpImpl <em>TC map If Exp</em>}' class.
@@ -714,7 +984,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_IF_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_IF_EXP__ATL_ATL_EXPRESSION = TI_MAP_IF_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -723,7 +993,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_IF_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_IF_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_IF_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -732,7 +1002,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_IF_EXP__STATUS;
+	int TC_MAP_IF_EXP__STATUS = TI_MAP_IF_EXP__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Condition</b></em>' reference.
@@ -741,7 +1011,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__ATL_ATL_CONDITION = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_IF_EXP__ATL_ATL_CONDITION = TI_MAP_IF_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Else</b></em>' reference.
@@ -750,7 +1020,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__ATL_ATL_ELSE = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 1;
+	int TC_MAP_IF_EXP__ATL_ATL_ELSE = TI_MAP_IF_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Then</b></em>' reference.
@@ -759,7 +1029,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__ATL_ATL_THEN = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 2;
+	int TC_MAP_IF_EXP__ATL_ATL_THEN = TI_MAP_IF_EXP_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Condition</b></em>' reference.
@@ -768,7 +1038,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__QVTR_QVTR_CONDITION = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 3;
+	int TC_MAP_IF_EXP__QVTR_QVTR_CONDITION = TI_MAP_IF_EXP_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Else</b></em>' reference.
@@ -777,7 +1047,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__QVTR_QVTR_ELSE = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 4;
+	int TC_MAP_IF_EXP__QVTR_QVTR_ELSE = TI_MAP_IF_EXP_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Then</b></em>' reference.
@@ -786,7 +1056,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP__QVTR_QVTR_THEN = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 5;
+	int TC_MAP_IF_EXP__QVTR_QVTR_THEN = TI_MAP_IF_EXP_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>TC map If Exp</em>' class.
@@ -795,7 +1065,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_FEATURE_COUNT + 6;
+	int TC_MAP_IF_EXP_FEATURE_COUNT = TI_MAP_IF_EXP_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>TC map If Exp</em>' class.
@@ -804,7 +1074,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IF_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_IF_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_IF_EXP_OPERATION_COUNT = TI_MAP_IF_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapInPatternImpl <em>TC map In Pattern</em>}' class.
@@ -1017,6 +1287,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_INTEGER_EXP = 39;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_INTEGER_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_INTEGER_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_INTEGER_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Integer Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_INTEGER_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Integer Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_INTEGER_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapIntegerExpImpl <em>TC map Integer Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1033,7 +1348,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_INTEGER_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_INTEGER_EXP__ATL_ATL_EXPRESSION = TI_MAP_INTEGER_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -1042,7 +1357,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_INTEGER_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_INTEGER_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_INTEGER_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1051,7 +1366,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_INTEGER_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP__STATUS;
+	int TC_MAP_INTEGER_EXP__STATUS = TI_MAP_INTEGER_EXP__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Primitive symbol</b></em>' attribute.
@@ -1060,7 +1375,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_INTEGER_EXP__PRIMITIVE_SYMBOL = trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_INTEGER_EXP__PRIMITIVE_SYMBOL = TI_MAP_INTEGER_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>TC map Integer Exp</em>' class.
@@ -1069,7 +1384,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_INTEGER_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP_FEATURE_COUNT + 1;
+	int TC_MAP_INTEGER_EXP_FEATURE_COUNT = TI_MAP_INTEGER_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>TC map Integer Exp</em>' class.
@@ -1078,7 +1393,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_INTEGER_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_INTEGER_EXP_OPERATION_COUNT = TI_MAP_INTEGER_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapMatchedRuleImpl <em>TC map Matched Rule</em>}' class.
@@ -1328,6 +1643,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP = 40;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Navigation Or Attribute Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Navigation Or Attribute Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapNavigationOrAttributeCallExpImpl <em>TC map Navigation Or Attribute Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1344,7 +1704,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -1353,7 +1713,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1362,7 +1722,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS;
 
 	/**
 	 * The number of structural features of the '<em>TC map Navigation Or Attribute Call Exp</em>' class.
@@ -1371,7 +1731,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>TC map Navigation Or Attribute Call Exp</em>' class.
@@ -1380,7 +1740,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapNavigationOrAttributeCallExp_HelperImpl <em>TI map Navigation Or Attribute Call Exp Helper</em>}' class.
@@ -1391,6 +1751,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER = 41;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__STATUS = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Navigation Or Attribute Call Exp Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Navigation Or Attribute Call Exp Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_OPERATION_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapNavigationOrAttributeCallExp_HelperImpl <em>TC map Navigation Or Attribute Call Exp Helper</em>}' class.
@@ -1409,7 +1814,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_EXPRESSION;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -1418,7 +1823,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1427,7 +1832,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__STATUS;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__STATUS = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Attributes</b></em>' reference list.
@@ -1436,7 +1841,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_ATTRIBUTES = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 0;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_ATTRIBUTES = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -1445,7 +1850,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 1;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_MODULE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Source</b></em>' reference.
@@ -1454,7 +1859,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_SOURCE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 2;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_SOURCE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Primitive property Name</b></em>' attribute.
@@ -1463,7 +1868,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__PRIMITIVE_PROPERTY_NAME = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 3;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__PRIMITIVE_PROPERTY_NAME = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Operation</b></em>' reference.
@@ -1472,7 +1877,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_OPERATION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 4;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_OPERATION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source</b></em>' reference.
@@ -1481,7 +1886,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_SOURCE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 5;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_SOURCE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source Argument</b></em>' reference.
@@ -1490,7 +1895,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_SOURCE_ARGUMENT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 6;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_SOURCE_ARGUMENT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr This Variable</b></em>' reference.
@@ -1499,7 +1904,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_THIS_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 7;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_THIS_VARIABLE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Transformation</b></em>' reference.
@@ -1508,7 +1913,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_TRANSFORMATION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 8;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_TRANSFORMATION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>TC map Navigation Or Attribute Call Exp Helper</em>' class.
@@ -1517,7 +1922,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 9;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>TC map Navigation Or Attribute Call Exp Helper</em>' class.
@@ -1526,7 +1931,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_OPERATION_COUNT + 0;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_OPERATION_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapNavigationOrAttributeCallExp_PropertyImpl <em>TI map Navigation Or Attribute Call Exp Property</em>}' class.
@@ -1537,6 +1942,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY = 42;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__STATUS = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Navigation Or Attribute Call Exp Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Navigation Or Attribute Call Exp Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_OPERATION_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapNavigationOrAttributeCallExp_PropertyImpl <em>TC map Navigation Or Attribute Call Exp Property</em>}' class.
@@ -1555,7 +2005,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_EXPRESSION;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -1564,7 +2014,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_EXPRESSION = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1573,7 +2023,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__STATUS = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__STATUS;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__STATUS = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Attributes</b></em>' reference list.
@@ -1582,7 +2032,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_ATTRIBUTES = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 0;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_ATTRIBUTES = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -1591,7 +2041,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 1;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_MODULE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Source</b></em>' reference.
@@ -1600,7 +2050,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_SOURCE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 2;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_SOURCE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Primitive property Name</b></em>' attribute.
@@ -1609,7 +2059,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__PRIMITIVE_PROPERTY_NAME = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 3;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__PRIMITIVE_PROPERTY_NAME = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Property</b></em>' reference.
@@ -1618,7 +2068,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_PROPERTY = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 4;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_PROPERTY = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source</b></em>' reference.
@@ -1627,7 +2077,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_SOURCE = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 5;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_SOURCE = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>TC map Navigation Or Attribute Call Exp Property</em>' class.
@@ -1636,7 +2086,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 6;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>TC map Navigation Or Attribute Call Exp Property</em>' class.
@@ -1645,7 +2095,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_OPERATION_COUNT + 0;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_OPERATION_COUNT = TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOclExpressionImpl <em>TC map Ocl Expression</em>}' class.
@@ -1664,7 +2114,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+	int TC_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -1673,7 +2123,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1682,7 +2132,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OCL_EXPRESSION__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
+	int TC_MAP_OCL_EXPRESSION__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
 
 	/**
 	 * The number of structural features of the '<em>TC map Ocl Expression</em>' class.
@@ -1691,7 +2141,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OCL_EXPRESSION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+	int TC_MAP_OCL_EXPRESSION_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>TC map Ocl Expression</em>' class.
@@ -1700,7 +2150,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OCL_EXPRESSION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+	int TC_MAP_OCL_EXPRESSION_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOclMetamodelImpl <em>TC map Ocl Metamodel</em>}' class.
@@ -1941,6 +2391,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_OPERATION_CALL_EXP = 44;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOperationCallExpImpl <em>TC map Operation Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1957,7 +2452,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -1966,7 +2461,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1975,7 +2470,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__STATUS;
+	int TC_MAP_OPERATION_CALL_EXP__STATUS = TI_MAP_OPERATION_CALL_EXP__STATUS;
 
 	/**
 	 * The number of structural features of the '<em>TC map Operation Call Exp</em>' class.
@@ -1984,7 +2479,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_OPERATION_CALL_EXP_FEATURE_COUNT = TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>TC map Operation Call Exp</em>' class.
@@ -1993,7 +2488,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION_COUNT = TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapOperationCallExp_HelperImpl <em>TI map Operation Call Exp Helper</em>}' class.
@@ -2004,6 +2499,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_OPERATION_CALL_EXP_HELPER = 45;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_HELPER__STATUS = TI_MAP_OPERATION_CALL_EXP__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Operation Call Exp Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT = TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Operation Call Exp Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_HELPER_OPERATION_COUNT = TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOperationCallExp_HelperImpl <em>TC map Operation Call Exp Helper</em>}' class.
@@ -2022,7 +2562,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_EXPRESSION;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = TI_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -2031,7 +2571,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -2040,7 +2580,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER__STATUS;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__STATUS = TI_MAP_OPERATION_CALL_EXP_HELPER__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -2049,7 +2589,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 0;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_MODULE = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Operations</b></em>' reference list.
@@ -2058,7 +2598,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_OPERATIONS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 1;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_OPERATIONS = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Source</b></em>' reference.
@@ -2067,7 +2607,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_SOURCE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 2;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_SOURCE = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Primitive operation Name</b></em>' attribute.
@@ -2076,7 +2616,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__PRIMITIVE_OPERATION_NAME = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 3;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__PRIMITIVE_OPERATION_NAME = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Operation</b></em>' reference.
@@ -2085,7 +2625,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_OPERATION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 4;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_OPERATION = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source</b></em>' reference.
@@ -2094,7 +2634,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_SOURCE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 5;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_SOURCE = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source Argument</b></em>' reference.
@@ -2103,7 +2643,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_SOURCE_ARGUMENT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 6;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_SOURCE_ARGUMENT = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr This Variable</b></em>' reference.
@@ -2112,7 +2652,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_THIS_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 7;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_THIS_VARIABLE = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Transformation</b></em>' reference.
@@ -2121,7 +2661,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_TRANSFORMATION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 8;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_TRANSFORMATION = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>TC map Operation Call Exp Helper</em>' class.
@@ -2130,7 +2670,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 9;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT = TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>TC map Operation Call Exp Helper</em>' class.
@@ -2139,7 +2679,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER_OPERATION_COUNT + 0;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER_OPERATION_COUNT = TI_MAP_OPERATION_CALL_EXP_HELPER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapOperationCallExp_OperationImpl <em>TI map Operation Call Exp Operation</em>}' class.
@@ -2150,6 +2690,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_OPERATION_CALL_EXP_OPERATION = 46;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION__STATUS = TI_MAP_OPERATION_CALL_EXP__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Operation Call Exp Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT = TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Operation Call Exp Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION_OPERATION_COUNT = TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOperationCallExp_OperationImpl <em>TC map Operation Call Exp Operation</em>}' class.
@@ -2168,7 +2753,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_EXPRESSION;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_EXPRESSION = TI_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -2177,7 +2762,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -2186,7 +2771,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION__STATUS;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__STATUS = TI_MAP_OPERATION_CALL_EXP_OPERATION__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -2195,7 +2780,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 0;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_MODULE = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Operations</b></em>' reference list.
@@ -2204,7 +2789,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_OPERATIONS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 1;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_OPERATIONS = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Source</b></em>' reference.
@@ -2213,7 +2798,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_SOURCE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 2;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_SOURCE = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Primitive operation Name</b></em>' attribute.
@@ -2222,7 +2807,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__PRIMITIVE_OPERATION_NAME = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 3;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__PRIMITIVE_OPERATION_NAME = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Operation</b></em>' reference.
@@ -2231,7 +2816,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_OPERATION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 4;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_OPERATION = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source</b></em>' reference.
@@ -2240,7 +2825,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_SOURCE = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 5;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_SOURCE = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>TC map Operation Call Exp Operation</em>' class.
@@ -2249,7 +2834,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 6;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT = TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>TC map Operation Call Exp Operation</em>' class.
@@ -2258,7 +2843,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_OPERATION_COUNT + 0;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION_OPERATION_COUNT = TI_MAP_OPERATION_CALL_EXP_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOperationCallExp_argumentImpl <em>TC map Operation Call Exp argument</em>}' class.
@@ -2335,6 +2920,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_OPERATOR_CALL_EXP = 47;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATOR_CALL_EXP__ATL_ATL_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATOR_CALL_EXP__STATUS = TI_MAP_OPERATION_CALL_EXP__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Operator Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT = TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Operator Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT = TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOperatorCallExpImpl <em>TC map Operator Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2351,7 +2981,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_OPERATOR_CALL_EXP__ATL_ATL_EXPRESSION = TI_MAP_OPERATOR_CALL_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -2360,7 +2990,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -2369,7 +2999,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP__STATUS;
+	int TC_MAP_OPERATOR_CALL_EXP__STATUS = TI_MAP_OPERATOR_CALL_EXP__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -2378,7 +3008,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__ATL_ATL_MODULE = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_OPERATOR_CALL_EXP__ATL_ATL_MODULE = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Source</b></em>' reference.
@@ -2387,7 +3017,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__ATL_ATL_SOURCE = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 1;
+	int TC_MAP_OPERATOR_CALL_EXP__ATL_ATL_SOURCE = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Primitive operation Name</b></em>' attribute.
@@ -2396,7 +3026,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__PRIMITIVE_OPERATION_NAME = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 2;
+	int TC_MAP_OPERATOR_CALL_EXP__PRIMITIVE_OPERATION_NAME = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Operation</b></em>' reference.
@@ -2405,7 +3035,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_OPERATION = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 3;
+	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_OPERATION = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Source</b></em>' reference.
@@ -2414,7 +3044,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_SOURCE = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 4;
+	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_SOURCE = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Transformation</b></em>' reference.
@@ -2423,7 +3053,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_TRANSFORMATION = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 5;
+	int TC_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_TRANSFORMATION = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>TC map Operator Call Exp</em>' class.
@@ -2432,7 +3062,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 6;
+	int TC_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT = TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>TC map Operator Call Exp</em>' class.
@@ -2441,7 +3071,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT = TI_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOutPatternImpl <em>TC map Out Pattern</em>}' class.
@@ -2808,6 +3438,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_STRING_EXP = 48;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_STRING_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_STRING_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_STRING_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map String Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_STRING_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map String Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_STRING_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapStringExpImpl <em>TC map String Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2824,7 +3499,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_STRING_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_STRING_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_STRING_EXP__ATL_ATL_EXPRESSION = TI_MAP_STRING_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -2833,7 +3508,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_STRING_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_STRING_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_STRING_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_STRING_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -2842,7 +3517,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_STRING_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_STRING_EXP__STATUS;
+	int TC_MAP_STRING_EXP__STATUS = TI_MAP_STRING_EXP__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Primitive symbol</b></em>' attribute.
@@ -2851,7 +3526,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_STRING_EXP__PRIMITIVE_SYMBOL = trace_ATL2QVTrPackage.TI_MAP_STRING_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_STRING_EXP__PRIMITIVE_SYMBOL = TI_MAP_STRING_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>TC map String Exp</em>' class.
@@ -2860,7 +3535,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_STRING_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_STRING_EXP_FEATURE_COUNT + 1;
+	int TC_MAP_STRING_EXP_FEATURE_COUNT = TI_MAP_STRING_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>TC map String Exp</em>' class.
@@ -2869,7 +3544,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_STRING_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_STRING_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_STRING_EXP_OPERATION_COUNT = TI_MAP_STRING_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableImpl <em>TC map Variable</em>}' class.
@@ -2928,6 +3603,51 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_VARIABLE_EXP = 49;
 
 	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP__ATL_ATL_EXPRESSION = TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP__STATUS = TI_MAP_OCL_EXPRESSION__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Variable Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP_FEATURE_COUNT = TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Variable Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP_OPERATION_COUNT = TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExpImpl <em>TC map Variable Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2944,7 +3664,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP__ATL_ATL_EXPRESSION;
+	int TC_MAP_VARIABLE_EXP__ATL_ATL_EXPRESSION = TI_MAP_VARIABLE_EXP__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -2953,7 +3673,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP__QVTR_QVTR_EXPRESSION;
+	int TC_MAP_VARIABLE_EXP__QVTR_QVTR_EXPRESSION = TI_MAP_VARIABLE_EXP__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -2962,7 +3682,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP__STATUS;
+	int TC_MAP_VARIABLE_EXP__STATUS = TI_MAP_VARIABLE_EXP__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Variable</b></em>' reference.
@@ -2971,7 +3691,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP__ATL_ATL_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 0;
+	int TC_MAP_VARIABLE_EXP__ATL_ATL_VARIABLE = TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Invocation map Variable Exp referred Variable</b></em>' containment reference.
@@ -2980,7 +3700,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP__INVOCATION_MAP_VARIABLE_EXP_REFERRED_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 1;
+	int TC_MAP_VARIABLE_EXP__INVOCATION_MAP_VARIABLE_EXP_REFERRED_VARIABLE = TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Primitive var Name</b></em>' attribute.
@@ -2989,7 +3709,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP__PRIMITIVE_VAR_NAME = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 2;
+	int TC_MAP_VARIABLE_EXP__PRIMITIVE_VAR_NAME = TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>TC map Variable Exp</em>' class.
@@ -2998,7 +3718,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 3;
+	int TC_MAP_VARIABLE_EXP_FEATURE_COUNT = TI_MAP_VARIABLE_EXP_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>TC map Variable Exp</em>' class.
@@ -3007,7 +3727,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_VARIABLE_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_OPERATION_COUNT + 0;
+	int TC_MAP_VARIABLE_EXP_OPERATION_COUNT = TI_MAP_VARIABLE_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariableImpl <em>TI map Variable Exp referred Variable</em>}' class.
@@ -3018,974 +3738,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 50;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariableImpl <em>TC map Variable Exp referred Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariableImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable()
-	 * @generated
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 31;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression1</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION1 = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression1</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION1 = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>TC map Variable Exp referred Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>TC map Variable Exp referred Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_HelperImpl <em>TI map Variable Exp referred Variable Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_HelperImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable_Helper()
-	 * @generated
-	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 51;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_HelperImpl <em>TC map Variable Exp referred Variable Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_HelperImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable_Helper()
-	 * @generated
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 32;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__STATUS;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_HELPER = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__INVOCATION_MAP_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of structural features of the '<em>TC map Variable Exp referred Variable Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of operations of the '<em>TC map Variable Exp referred Variable Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_VariableDeclarationImpl <em>TI map Variable Exp referred Variable Variable Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_VariableDeclarationImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable_VariableDeclaration()
-	 * @generated
-	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 52;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_VariableDeclarationImpl <em>TC map Variable Exp referred Variable Variable Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_VariableDeclarationImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable_VariableDeclaration()
-	 * @generated
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 33;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__STATUS = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__STATUS;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__INVOCATION_MAP_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_VARIABLE = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>TC map Variable Exp referred Variable Variable Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of operations of the '<em>TC map Variable Exp referred Variable Variable Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_BOOLEAN_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_BOOLEAN_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_BOOLEAN_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Boolean Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_BOOLEAN_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Boolean Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_BOOLEAN_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER__ATL_ATL_HELPER = 0;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER__QVTR_QVTR_FUNCTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER__STATUS = 2;
-
-	/**
-	 * The number of structural features of the '<em>TI map Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>TI map Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_OPERATION_COUNT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_ATTRIBUTE__ATL_ATL_HELPER = trace_ATL2QVTrPackage.TI_MAP_HELPER__ATL_ATL_HELPER;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_ATTRIBUTE__QVTR_QVTR_FUNCTION = trace_ATL2QVTrPackage.TI_MAP_HELPER__QVTR_QVTR_FUNCTION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_ATTRIBUTE__STATUS = trace_ATL2QVTrPackage.TI_MAP_HELPER__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Helper Attribute</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_ATTRIBUTE_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Helper Attribute</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_ATTRIBUTE_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_OPERATION__ATL_ATL_HELPER = trace_ATL2QVTrPackage.TI_MAP_HELPER__ATL_ATL_HELPER;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Function</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_OPERATION__QVTR_QVTR_FUNCTION = trace_ATL2QVTrPackage.TI_MAP_HELPER__QVTR_QVTR_FUNCTION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_OPERATION__STATUS = trace_ATL2QVTrPackage.TI_MAP_HELPER__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Helper Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_OPERATION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Helper Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_HELPER_OPERATION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_IF_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_IF_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_IF_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map If Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_IF_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map If Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_IF_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_INTEGER_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_INTEGER_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_INTEGER_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Integer Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_INTEGER_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Integer Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_INTEGER_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Navigation Or Attribute Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Navigation Or Attribute Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Navigation Or Attribute Call Exp Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Navigation Or Attribute Call Exp Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__STATUS = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Navigation Or Attribute Call Exp Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Navigation Or Attribute Call Exp Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OCL_EXPRESSION__STATUS = 2;
-
-	/**
-	 * The number of structural features of the '<em>TI map Ocl Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OCL_EXPRESSION_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>TI map Ocl Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OCL_EXPRESSION_OPERATION_COUNT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Operation Call Exp Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Operation Call Exp Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Operation Call Exp Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Operation Call Exp Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATOR_CALL_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATOR_CALL_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATOR_CALL_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Operator Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATOR_CALL_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Operator Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_STRING_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_STRING_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_STRING_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map String Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_STRING_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map String Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_STRING_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_VARIABLE_EXP__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_VARIABLE_EXP__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_VARIABLE_EXP__STATUS = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION__STATUS;
-
-	/**
-	 * The number of structural features of the '<em>TI map Variable Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_VARIABLE_EXP_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>TI map Variable Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TI_MAP_VARIABLE_EXP_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -4015,13 +3767,78 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariableImpl <em>TC map Variable Exp referred Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariableImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable()
+	 * @generated
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 31;
+
+	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__STATUS = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS;
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION1 = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION1 = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>TC map Variable Exp referred Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>TC map Variable Exp referred Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_HelperImpl <em>TI map Variable Exp referred Variable Helper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_HelperImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable_Helper()
+	 * @generated
+	 */
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 51;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__STATUS = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS;
 
 	/**
 	 * The number of structural features of the '<em>TI map Variable Exp referred Variable Helper</em>' class.
@@ -4030,7 +3847,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>TI map Variable Exp referred Variable Helper</em>' class.
@@ -4039,7 +3856,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_HelperImpl <em>TC map Variable Exp referred Variable Helper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_HelperImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable_Helper()
+	 * @generated
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 32;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -4048,7 +3875,98 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__STATUS = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS;
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__STATUS = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_HELPER = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_VARIABLE = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__INVOCATION_MAP_VARIABLE = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_VARIABLE = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>TC map Variable Exp referred Variable Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>TC map Variable Exp referred Variable Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_VariableDeclarationImpl <em>TI map Variable Exp referred Variable Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapVariableExp_referredVariable_VariableDeclarationImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable_VariableDeclaration()
+	 * @generated
+	 */
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 52;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__STATUS = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__STATUS;
 
 	/**
 	 * The number of structural features of the '<em>TI map Variable Exp referred Variable Variable Declaration</em>' class.
@@ -4057,7 +3975,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>TI map Variable Exp referred Variable Variable Declaration</em>' class.
@@ -4066,7 +3984,89 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_VariableDeclarationImpl <em>TC map Variable Exp referred Variable Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapVariableExp_referredVariable_VariableDeclarationImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable_VariableDeclaration()
+	 * @generated
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 33;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__STATUS = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_VARIABLE = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__INVOCATION_MAP_VARIABLE = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_VARIABLE = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>TC map Variable Exp referred Variable Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>TC map Variable Exp referred Variable Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariableImpl <em>WI map Variable Exp referred Variable</em>}' class.
@@ -4077,191 +4077,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 56;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariableImpl <em>WC map Variable Exp referred Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariableImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable()
-	 * @generated
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 53;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Result</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT;
-
-	/**
-	 * The number of structural features of the '<em>WC map Variable Exp referred Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>WC map Variable Exp referred Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_HelperImpl <em>WI map Variable Exp referred Variable Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_HelperImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable_Helper()
-	 * @generated
-	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 57;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_HelperImpl <em>WC map Variable Exp referred Variable Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_HelperImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable_Helper()
-	 * @generated
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 54;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Result</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__RESULT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__RESULT;
-
-	/**
-	 * The number of structural features of the '<em>WC map Variable Exp referred Variable Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>WC map Variable Exp referred Variable Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_VariableDeclarationImpl <em>WI map Variable Exp referred Variable Variable Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_VariableDeclarationImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable_VariableDeclaration()
-	 * @generated
-	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 58;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_VariableDeclarationImpl <em>WC map Variable Exp referred Variable Variable Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_VariableDeclarationImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable_VariableDeclaration()
-	 * @generated
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 55;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Result</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__RESULT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__RESULT;
-
-	/**
-	 * The number of structural features of the '<em>WC map Variable Exp referred Variable Variable Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>WC map Variable Exp referred Variable Variable Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4309,13 +4124,23 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariableImpl <em>WC map Variable Exp referred Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariableImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable()
+	 * @generated
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 53;
+
+	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -4324,7 +4149,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Result</b></em>' reference.
@@ -4333,7 +4158,62 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__RESULT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT;
+
+	/**
+	 * The number of structural features of the '<em>WC map Variable Exp referred Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>WC map Variable Exp referred Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_HelperImpl <em>WI map Variable Exp referred Variable Helper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_HelperImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable_Helper()
+	 * @generated
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 57;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Result</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__RESULT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT;
 
 	/**
 	 * The number of structural features of the '<em>WI map Variable Exp referred Variable Helper</em>' class.
@@ -4342,7 +4222,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>WI map Variable Exp referred Variable Helper</em>' class.
@@ -4351,7 +4231,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_HelperImpl <em>WC map Variable Exp referred Variable Helper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_HelperImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable_Helper()
+	 * @generated
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 54;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4360,7 +4250,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__ATL_ATL_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
@@ -4369,7 +4259,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__QVTR_QVTR_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Result</b></em>' reference.
@@ -4378,7 +4268,62 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__RESULT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__RESULT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__RESULT;
+
+	/**
+	 * The number of structural features of the '<em>WC map Variable Exp referred Variable Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>WC map Variable Exp referred Variable Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_VariableDeclarationImpl <em>WI map Variable Exp referred Variable Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WI_mapVariableExp_referredVariable_VariableDeclarationImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable_VariableDeclaration()
+	 * @generated
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 58;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Result</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__RESULT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT;
 
 	/**
 	 * The number of structural features of the '<em>WI map Variable Exp referred Variable Variable Declaration</em>' class.
@@ -4387,7 +4332,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>WI map Variable Exp referred Variable Variable Declaration</em>' class.
@@ -4396,7 +4341,62 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_VariableDeclarationImpl <em>WC map Variable Exp referred Variable Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.WC_mapVariableExp_referredVariable_VariableDeclarationImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable_VariableDeclaration()
+	 * @generated
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 55;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__ATL_ATL_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__QVTR_QVTR_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Result</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__RESULT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__RESULT;
+
+	/**
+	 * The number of structural features of the '<em>WC map Variable Exp referred Variable Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>WC map Variable Exp referred Variable Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT = WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_OPERATION_COUNT + 0;
 
 
 	/**

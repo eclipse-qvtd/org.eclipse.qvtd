@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2015, 2016 Willink Transformations and others.
- * ;All rights reserved. This program and the accompanying materials
- * ;are made available under the terms of the Eclipse Public License v1.0
- * ;which accompanies this distribution, and is available at
- * ;http://www.eclipse.org/legal/epl-v10.html
- * ;
- * ;Contributors:
- * ;  E.D.Willink - Initial API and implementation
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl;
 
@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.m2m.atl.common.ATL.Module;
 
 import org.eclipse.m2m.atl.common.OCL.OclModel;
 
@@ -56,7 +54,7 @@ public class TC_mapOclModel_OUTImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected Module atl_atlModule;
+	protected org.eclipse.m2m.atl.common.ATL.Module atl_atlModule;
 
 	/**
 	 * The cached value of the '{@link #getAtl_oclMetamodel() <em>Atl ocl Metamodel</em>}' reference.
@@ -143,10 +141,10 @@ public class TC_mapOclModel_OUTImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public Module getAtl_atlModule() {
+	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
 			InternalEObject oldAtl_atlModule = atl_atlModule;
-			atl_atlModule = (Module)eResolveProxy(oldAtl_atlModule);
+			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT__ATL_ATL_MODULE, oldAtl_atlModule, atl_atlModule));
@@ -160,7 +158,7 @@ public class TC_mapOclModel_OUTImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Module basicGetAtl_atlModule() {
+	public org.eclipse.m2m.atl.common.ATL.Module basicGetAtl_atlModule() {
 		return atl_atlModule;
 	}
 
@@ -170,8 +168,8 @@ public class TC_mapOclModel_OUTImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public void setAtl_atlModule(Module newAtl_atlModule) {
-		Module oldAtl_atlModule = atl_atlModule;
+	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
+		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT__ATL_ATL_MODULE, oldAtl_atlModule, atl_atlModule));
@@ -398,7 +396,7 @@ public class TC_mapOclModel_OUTImpl extends MinimalEObjectImpl.Container impleme
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT__ATL_ATL_MODULE:
-				setAtl_atlModule((Module)newValue);
+				setAtl_atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
 				return;
 			case trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT__ATL_OCL_METAMODEL:
 				setAtl_oclMetamodel((OclModel)newValue);
@@ -428,7 +426,7 @@ public class TC_mapOclModel_OUTImpl extends MinimalEObjectImpl.Container impleme
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT__ATL_ATL_MODULE:
-				setAtl_atlModule((Module)null);
+				setAtl_atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
 				return;
 			case trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT__ATL_OCL_METAMODEL:
 				setAtl_oclMetamodel((OclModel)null);

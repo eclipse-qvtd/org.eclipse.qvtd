@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2015, 2016 Willink Transformations and others.
- * ;All rights reserved. This program and the accompanying materials
- * ;are made available under the terms of the Eclipse Public License v1.0
- * ;which accompanies this distribution, and is available at
- * ;http://www.eclipse.org/legal/epl-v10.html
- * ;
- * ;Contributors:
- * ;  E.D.Willink - Initial API and implementation
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.m2m.atl.common.ATL.InPattern;
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
-import org.eclipse.m2m.atl.common.ATL.Module;
 
 import org.eclipse.m2m.atl.common.OCL.OclModel;
 
@@ -83,13 +82,13 @@ public interface TC_mapInPattern extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Atl atl Module</em>' reference.
-	 * @see #setAtl_atlModule(Module)
+	 * @see #setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapInPattern_Atl_atlModule()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	Module getAtl_atlModule();
+	org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getAtl_atlModule <em>Atl atl Module</em>}' reference.
@@ -99,7 +98,7 @@ public interface TC_mapInPattern extends EObject {
 	 * @see #getAtl_atlModule()
 	 * @generated
 	 */
-	void setAtl_atlModule(Module value);
+	void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
 
 	/**
 	 * Returns the value of the '<em><b>Atl atl Pattern</b></em>' reference.
