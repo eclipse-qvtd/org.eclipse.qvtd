@@ -197,8 +197,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
+			List<@NonNull Edge> residualEdges = null;
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
 				if (!edge2subexpression.containsKey(edge)) {
+					if (residualEdges == null) {
+						residualEdges = new ArrayList<>();
+					}
+					residualEdges.add(edge);
+				}
+			}
+			if (residualEdges != null) {
+				Collections.sort(residualEdges, reachabilityForest.getEdgeCostComparator());
+				for (@NonNull Edge edge : residualEdges) {
 					addEdge(edge);
 				}
 			}

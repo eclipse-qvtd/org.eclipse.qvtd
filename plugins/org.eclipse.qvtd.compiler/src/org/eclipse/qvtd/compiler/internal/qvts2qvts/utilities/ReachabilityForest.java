@@ -205,10 +205,14 @@ public class ReachabilityForest
 			{
 				@Override
 				public int compare(@NonNull Edge e1, @NonNull Edge e2) {
-					Integer d1s = node2cost.get(RegionUtil.getSourceNode(e1));
-					Integer d1t = node2cost.get(RegionUtil.getTargetNode(e1));
-					Integer d2s = node2cost.get(RegionUtil.getSourceNode(e2));
-					Integer d2t = node2cost.get(RegionUtil.getTargetNode(e2));
+					Node s1 = RegionUtil.getSourceNode(e1);
+					Node t1 = RegionUtil.getTargetNode(e1);
+					Node s2 = RegionUtil.getSourceNode(e2);
+					Node t2 = RegionUtil.getTargetNode(e2);
+					Integer d1s = node2cost.get(s1);
+					Integer d1t = node2cost.get(t1);
+					Integer d2s = node2cost.get(s2);
+					Integer d2t = node2cost.get(t2);
 					assert (d1s != null) && (d1t != null) && (d2s != null) && (d2t != null);
 					int d1 = Math.max(d1s,  d1t);
 					int d2 = Math.max(d2s,  d2t);
@@ -218,7 +222,22 @@ public class ReachabilityForest
 					if (d1s != d2s) {
 						return d1s - d2s;
 					}
-					return ClassUtil.safeCompareTo(e1.getDisplayName(), e2.getDisplayName());
+					String n1 = e1.getDisplayName();
+					String n2 = e2.getDisplayName();
+					int d = ClassUtil.safeCompareTo(n1, n2);
+					if (d != 0) {
+						return d;
+					}
+					n1 = s1.getDisplayName();
+					n2 = s2.getDisplayName();
+					d = ClassUtil.safeCompareTo(n1, n2);
+					if (d != 0) {
+						return d;
+					}
+					n1 = t1.getDisplayName();
+					n2 = t2.getDisplayName();
+					d = ClassUtil.safeCompareTo(n1, n2);
+					return d;
 				}
 			};
 		}
