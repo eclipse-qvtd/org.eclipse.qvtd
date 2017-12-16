@@ -33,7 +33,7 @@
           <createArtifactRepository>true</createArtifactRepository>
           <finalName>${project.groupId}-${unqualifiedVersion}.${buildQualifier}</finalName>
           <compress>true</compress>
-          <repositoryName>EMF Compare ${unqualifiedVersion}.${buildQualifier}</repositoryName>
+          <repositoryName>QVTd ${unqualifiedVersion}.${buildQualifier}</repositoryName>
         </configuration>
       </plugin>
       <plugin>
