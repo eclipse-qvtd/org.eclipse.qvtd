@@ -794,13 +794,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			Function asFunction = QVTiCGUtil.getAST(cgFunction);
 			js.appendThis(functionName);
 			js.append("." + instanceName + " = ");
-			js.appendClassCast(cgFunction);
+//			js.appendClassCast(cgFunction);
 			js.append(asFunction.getImplementationClass());
 			js.append(".INSTANCE.evaluate(");
 			js.append(JavaConstants.EXECUTOR_NAME);
 			js.append(", ");
 			js.appendValueName(resultType);
-			for (@NonNull CGParameter cgParameter : cgFunction.getParameters()) {
+			for (@NonNull CGParameter cgParameter : QVTiCGUtil.getParameters(cgFunction)) {
 				js.append(", ");
 				js.appendValueName(cgParameter);
 			}
@@ -950,9 +950,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (cgBody != null) {
 			js.appendCommentWithOCL(null, cgBody.getAst());
 		}
-		//		if (js.isUseNullAnnotations()) {
-		//			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
-		//		}
+		if (js.isUseNullAnnotations()) {
+			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
+		}
 		js.append("public ");
 		js.append(functionName);
 		js.append("(/*Nullable*/ Object ");

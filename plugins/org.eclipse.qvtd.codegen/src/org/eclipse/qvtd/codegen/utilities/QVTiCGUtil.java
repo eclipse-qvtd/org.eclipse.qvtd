@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -167,6 +168,10 @@ public class QVTiCGUtil extends CGUtil
 	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nonNullState(cgMapping.getOwningTransformation());
 
+	}
+
+	public static @NonNull Iterable<@NonNull CGParameter> getParameters(@NonNull CGFunction cgFunction) {
+		return ClassUtil.nullFree(cgFunction.getParameters());
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
