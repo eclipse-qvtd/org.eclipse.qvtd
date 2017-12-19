@@ -289,7 +289,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 				}
 			}
 		}
-		context.refreshList(asElement.getObservedProperties(), properties);
+		helper.refreshList(asElement.getObservedProperties(), properties);
 	}
 
 	@Override
@@ -430,7 +430,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
-			//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
+			//			helper.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
 				org.eclipse.ocl.pivot.Class oclElementType = context.getMetamodelManager().getStandardLibrary().getOclElementType();
 				pivotElement.getSuperClasses().add(oclElementType);

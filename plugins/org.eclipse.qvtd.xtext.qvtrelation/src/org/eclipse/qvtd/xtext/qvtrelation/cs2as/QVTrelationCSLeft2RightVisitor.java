@@ -235,7 +235,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			String boundMessage = StringUtil.bind(PivotMessagesInternal.MismatchedArgumentCount_ERROR_, csArgumentCount, patternsCount);
 			context.addDiagnostic(csNameExp, boundMessage);
 		}
-		context.refreshList(relationCallExp.getArgument(), pivotArguments);
+		helper.refreshList(relationCallExp.getArgument(), pivotArguments);
 	}
 
 	protected void resolveRelationArgumentTypes(@Nullable List<Variable> rootVariables, @NonNull RoundBracketedClauseCS csRoundBracketedClause) {

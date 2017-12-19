@@ -141,7 +141,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 				//				Operation baseOperation = metamodelManager.resolveBaseOperation(function);
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
-				context.setType(operationCallExp, function.getType(), function.isIsRequired());
+				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;

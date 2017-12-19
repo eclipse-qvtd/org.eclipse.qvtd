@@ -141,7 +141,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 					// FIXME else => error
 					// FIXME !isRequired => error
 					// FIXME isStrict
-					context.setType(asOutStatement, targetType, isRequired, target.getTypeValue());
+					helper.setType(asOutStatement, targetType, isRequired, target.getTypeValue());
 				}
 			}
 		}
@@ -176,7 +176,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				asVariable.setOwnedExpression(target);
 				if ((csElement.getOwnedType() == null) && (target != null)) {
-					context.setType(asVariable, target.getType(), target.isIsRequired(), target.getTypeValue());
+					helper.setType(asVariable, target.getType(), target.isIsRequired(), target.getTypeValue());
 				}
 			}
 		}

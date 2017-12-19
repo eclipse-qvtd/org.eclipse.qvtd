@@ -290,7 +290,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			variable = QVTrelationFactory.eINSTANCE.createTemplateVariable();
 			pivotElement.setBindsTo(variable);
 		}
-		context.refreshName(variable, csElement.getName());
+		helper.refreshName(variable, csElement.getName());
 	}
 
 	@Override
@@ -437,7 +437,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@NonNull TemplateExp template = context.refreshModelElement(TemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null);
 		asPattern.setTemplateExpression(template);
 		@NonNull TemplateVariable rootVariable = context.refreshModelElement(TemplateVariable.class, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, null);
-		context.refreshName(rootVariable, csElement.getName());
+		helper.refreshName(rootVariable, csElement.getName());
 		template.setBindsTo(rootVariable);
 		asPattern.getBindsTo().add(rootVariable);
 		return null;

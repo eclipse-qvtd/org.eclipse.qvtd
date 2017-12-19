@@ -16,12 +16,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 
@@ -53,6 +55,11 @@ public class QVTimperativeCS2AS extends EssentialOCLCS2AS
 	@Override
 	protected @NonNull QVTimperativeCSContainmentVisitor createContainmentVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTimperativeCSContainmentVisitor(converter);
+	}
+
+	@Override
+	protected @NonNull PivotHelper createHelper() {
+		return new QVTimperativeHelper(environmentFactory);
 	}
 
 	@Override
