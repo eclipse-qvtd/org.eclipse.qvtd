@@ -47,4 +47,9 @@ public interface Variable2Variable extends VariableAnalysis
 	 * The core variable for this analysis.
 	 */
 	@NonNull Variable getCoreVariable();
+
+	/**
+	 * Return true if this variable is realized in an enforced domain.
+	 */
+	boolean isRealized();
 }

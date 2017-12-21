@@ -265,6 +265,13 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 		return rWhenTypedModel != null;
 	}
 
+	public boolean isRealized() {
+		switch (getStrategy()) {
+			case REALIZED_BOTTOM: return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
 		assert strategy == null;

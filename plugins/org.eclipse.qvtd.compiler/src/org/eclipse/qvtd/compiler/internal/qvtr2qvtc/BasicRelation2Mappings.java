@@ -675,6 +675,9 @@ import com.google.common.collect.Sets;
 			//
 			this.otherDomain2coreDomains = new ArrayList<>();
 			this.rAllOtherBoundVariables = new HashSet<>();
+			if (rRelation.isIsAbstract()) {
+				getClass();
+			}
 			for (@NonNull Domain rDomain : ClassUtil.nullFree(rEnforcedDomain.getRule().getDomain())) {
 				if ((rDomain != rEnforcedDomain) && (rDomain instanceof RelationDomain)) {
 					RelationDomain rRelationDomain = (RelationDomain)rDomain;
@@ -727,7 +730,7 @@ import com.google.common.collect.Sets;
 			QVTr2QVTc.VARIABLES.println(" In " + cMapping + "\n\t\t" + variablesAnalysis.toString().replace("\n", "\n\t\t"));
 			for (@NonNull Variable2Variable analysis : variablesAnalysis.getAnalyses()) {
 				VariableDeclaration rVariable = analysis.getRelationVariable();
-				if (rVariable != null) {
+				if ((rVariable != null) && !(rRelation.isIsAbstract() && analysis.isRealized())) {
 					Variable cVariable = analysis.getCoreVariable();
 					putTrace(cVariable, rVariable);		// FIXME redundant / later
 				}
@@ -749,6 +752,9 @@ import com.google.common.collect.Sets;
 				done.addAll(toDo);
 				toDo = Sets.newHashSet(variablesAnalysis.getAnalyses());
 				toDo.removeAll(done);
+			}
+			if (rRelation.isIsAbstract()) {
+				getClass();
 			}
 		}
 
@@ -1187,7 +1193,7 @@ import com.google.common.collect.Sets;
 						} catch (CompilerChainException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							return createStringLiteralExp(oIn.toString());
+							return createStringLiteralExp(String.valueOf(oIn));
 						}
 
 					}
@@ -1227,14 +1233,14 @@ import com.google.common.collect.Sets;
 					// no need to trace "this"
 				}
 				else if (relationAnalysis.traceIsRealized()) {
-					OCLExpression rInit = rDomainVariable.getOwnedInit();
-					if (rInit != null) {
-						Variable2Variable variableAnalysis = variablesAnalysis.getVariableAnalysis(rDomainVariable);
-						//						Variable cVariable = variableAnalysis.getCoreVariable();
-						//						CorePattern corePattern = variableAnalysis.getCorePattern();
-						//						assert corePattern != null;
-						//						variablesAnalysis.addConditionPredicate(corePattern, createVariableExp(cVariable), mapExpression(rInit));
-					}
+					//					OCLExpression rInit = rDomainVariable.getOwnedInit();
+					//					if (rInit != null) {
+					//						Variable2Variable variableAnalysis = variablesAnalysis.getVariableAnalysis(rDomainVariable);
+					//						Variable cVariable = variableAnalysis.getCoreVariable();
+					//						CorePattern corePattern = variableAnalysis.getCorePattern();
+					//						assert corePattern != null;
+					//						variablesAnalysis.addConditionPredicate(corePattern, createVariableExp(cVariable), mapExpression(rInit));
+					//					}
 					variablesAnalysis.addTraceNavigationAssignment(rDomainVariable, true);
 				}
 				else if (!QVTrelationUtil.getRootVariables(rRelation).contains(rDomainVariable)) {
@@ -1503,7 +1509,9 @@ import com.google.common.collect.Sets;
 			mapOtherDomainVariables(rAllOtherReferredVariables);
 			mapWhenPattern();
 			mapWhereGuardPredicates(rWhereGuardPredicates, rEnforcedBottomDomainVariables);
-			mapEnforcedDomainPatterns();
+			if (!rRelation.isIsAbstract()) {
+				mapEnforcedDomainPatterns();
+			}
 			mapWherePattern();
 			if (rEnforcedMemberVariables != null) {	// FIXME mapOtherDomainVariables duplication/irregularity
 				for (@NonNull Variable rMemberVariable : rEnforcedMemberVariables.keySet()) {
@@ -1564,7 +1572,7 @@ import com.google.common.collect.Sets;
 
 	protected BasicRelation2Mappings(@NonNull RelationalTransformation2CoreTransformation relationalTransformation2coreTransformation, @NonNull RelationAnalysis relationAnalysis) {
 		super(relationalTransformation2coreTransformation, relationAnalysis);
-		assert !rRelation.isIsAbstract();
+		//		assert !rRelation.isIsAbstract();
 		//
 		this.rWhenVariable2rTypedModel = new HashMap<>();
 		this.rWhenPredicates = new HashSet<>();

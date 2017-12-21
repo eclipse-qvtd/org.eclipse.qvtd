@@ -141,11 +141,11 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 		for (@NonNull Relation rRelation : rRelations) {
 			RelationAnalysis relationAnalysis = rTransformationAnalysis.getRelationAnalysis(rRelation);
 			Relation2Mappings relation2mappings;
-			if (rRelation.isIsAbstract()) {
+			/*if (rRelation.isIsAbstract()) {
 				QVTr2QVTc.SYNTHESIS.println("abstract " + rRelation);
 				relation2mappings = new Relation2AbstractMappings(this, relationAnalysis);
 			}
-			else if (rRelation.isIsTopLevel()) {
+			else*/ if (rRelation.isIsTopLevel()) {
 				QVTr2QVTc.SYNTHESIS.println("topLevel " + rRelation);
 				relation2mappings = new TopRelation2Mappings(this, relationAnalysis);
 			}

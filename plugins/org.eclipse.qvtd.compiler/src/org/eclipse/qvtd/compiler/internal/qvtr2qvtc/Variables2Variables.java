@@ -393,6 +393,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 * Returns the core variant of the relation variable.
 	 */
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
+		@SuppressWarnings("unused")
 		boolean traceIsRealized = getRelationAnalysis().traceIsRealized();
 		//		assert traceIsRealized;
 		VariableDeclaration cMiddleRealizedVariable2 = getMiddleVariable();
@@ -415,6 +416,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public @NonNull Variable addTraceNavigationAssignment(@NonNull Property cTargetProperty, @NonNull Variable cVariable) throws CompilerChainException {
+		@SuppressWarnings("unused")
 		boolean traceIsRealized = getRelationAnalysis().traceIsRealized();
 		//		assert traceIsRealized;
 		assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
@@ -577,6 +579,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			rVariable2analysis.put(relationVariable, analysis);
 		}
 		return analysis;
+	}
+
+	public boolean isAbstract() {
+		return relationAnalysis.getRelation().isIsAbstract();
 	}
 
 	@Override

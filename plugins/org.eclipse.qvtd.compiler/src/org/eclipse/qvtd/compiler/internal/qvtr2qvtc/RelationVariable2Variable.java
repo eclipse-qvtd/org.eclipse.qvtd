@@ -111,12 +111,18 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 
 	@Override
 	public void check() {
+		boolean isRealized =  variableAnalysis.getStrategy() == Strategy.REALIZED_BOTTOM;
+		if (variablesAnalysis.isAbstract() && isRealized) {
+			if (cVariable != null) {
+				System.err.println("cVariable for abstract " + this);
+			}
+			return;
+		}
 		if (cVariable == null) {
 			System.err.println("No cVariable for " + this);
 			return;
 		}
 		CorePattern cPattern = getCorePattern();
-		boolean isRealized =  variableAnalysis.getStrategy() == Strategy.REALIZED_BOTTOM;
 		assert (cVariable != null) && ((cVariable.eContainer() == cPattern) || (cVariable instanceof IteratorVariable) || (cVariable instanceof LetVariable));
 		assert (cVariable instanceof RealizedVariable) == (isRealized && !(cVariable.getType() instanceof DataType));
 	}
@@ -260,6 +266,11 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	}
 
 	@Override
+	public boolean isRealized() {
+		return variableAnalysis.isRealized();
+	}
+
+	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
 		variableAnalysis.setIsEnforcedBound(rTemplateExp, rEnforcedTypedModel, rKey);
 	}
@@ -333,7 +344,10 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 					break;
 				}
 				case REALIZED_BOTTOM: {
-					if ((type instanceof CollectionType)) {
+					if (variablesAnalysis.isAbstract()) {
+						throw new IllegalStateException();
+					}
+					else if ((type instanceof CollectionType)) {
 						cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
 						variablesAnalysis.cEnforcedDomain.getBottomPattern().getVariable().add(cVariable2);
 					}

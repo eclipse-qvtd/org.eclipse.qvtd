@@ -1586,7 +1586,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private void createPatternMatch() {
 		if (mapping.isIsAbstract()) {
-			mapping.getOwnedStatements().add(createCheckStatement(helper.createBooleanLiteralExp(false)));	// FIXME add a message
+			//			mapping.getOwnedStatements().add(createCheckStatement(helper.createBooleanLiteralExp(false)));	// FIXME add a message
+			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
+			oldSchedule.analyze();
+			oldSchedule.synthesize();
 		}
 		else {
 			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();

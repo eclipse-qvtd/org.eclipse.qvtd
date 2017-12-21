@@ -55,6 +55,11 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 	}
 
 	@Override
+	public boolean isRealized() {
+		return false;
+	}
+
+	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
 		System.err.println("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedBound for " + this);
 	}
