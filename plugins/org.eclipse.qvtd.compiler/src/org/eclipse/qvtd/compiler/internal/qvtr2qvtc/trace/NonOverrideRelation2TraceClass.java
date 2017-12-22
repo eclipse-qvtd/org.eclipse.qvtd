@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 class NonOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 {
 	protected NonOverrideRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
-		super(relationAnalysis, relationAnalysis.getNameGenerator().createTraceClassName(relationAnalysis.getRelation()));
+		super(relationAnalysis, relationAnalysis.getNameGenerator().createExecutionClassName(relationAnalysis.getRelation()));
 		assert !QVTrelationUtil.hasOverrides(relation);
 		resolveStatusProperty();
 	}

@@ -33,7 +33,7 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	private @Nullable Relation2TraceClass baseRelation2TraceClass;
 
 	protected TopOverrideRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
-		super(relationAnalysis, relationAnalysis.getNameGenerator().createTraceClassName(relationAnalysis.getRelation()));
+		super(relationAnalysis, relationAnalysis.getNameGenerator().createExecutionClassName(relationAnalysis.getRelation()));
 		assert QVTrelationUtil.hasOverrides(relation);
 		assert relation.isIsTopLevel();
 		relation2traceInterface = new Relation2TraceInterface(this);

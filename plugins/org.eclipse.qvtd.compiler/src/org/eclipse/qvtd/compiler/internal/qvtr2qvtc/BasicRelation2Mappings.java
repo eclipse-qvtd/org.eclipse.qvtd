@@ -443,7 +443,7 @@ import com.google.common.collect.Sets;
 					}
 					else {
 						//
-						//	not root1.oclIsKindOf(overrdingRoot1Type) and not root2.oclIsKindOf(overrdingRoot2Type) and not ...
+						//	root1.oclIsKindOf(overridingRoot1Type) and root2.oclIsKindOf(overridingRoot2Type) and ... implies overridingStatus = false
 						//
 						for (int i = 0; i < iSize; i++) {
 							Variable rootVariable = rOtherRootVariables.get(i);
@@ -451,16 +451,28 @@ import com.google.common.collect.Sets;
 							org.eclipse.ocl.pivot.Class overridingRootType = QVTrelationUtil.getClass(overridingRootVariable);
 							Variable cRootVariable = variablesAnalysis.getCoreVariable(rootVariable);
 							OCLExpression overrideIsConformantExp = createOperationCallExp(createVariableExp(cRootVariable), "oclIsKindOf", createTypeExp(overridingRootType));
-							OCLExpression predicateTerm = createOperationCallExp(overrideIsConformantExp, "not");
 							if (predicateBody != null) {
-								predicateBody = createOperationCallExp(predicateBody, "and", predicateTerm);
+								predicateBody = createOperationCallExp(predicateBody, "and", overrideIsConformantExp);
 							}
 							else {
-								predicateBody = predicateTerm;
+								predicateBody = overrideIsConformantExp;
 							}
 						}
 					}
 					assert predicateBody != null;
+					OCLExpression failedTerm = createBooleanLiteralExp(false);
+					Property overridingStatusProperty = overridingRelation2TraceClass.getStatusTraceProperty();
+					if (overridingStatusProperty != null) {
+						Variable rootVariable = rOtherRootVariables.get(0);
+						Variable overridingRootVariable = overridingRootVariables.get(0);
+						org.eclipse.ocl.pivot.Class overridingRootType = QVTrelationUtil.getClass(overridingRootVariable);
+						Variable cRootVariable = variablesAnalysis.getCoreVariable(rootVariable);
+						OCLExpression castExp = createOperationCallExp(createVariableExp(cRootVariable), "oclAsType", createTypeExp(overridingRootType));
+						OCLExpression overridingTrace = createNavigationCallExp(castExp, overridingRelation2TraceClass.getTraceProperty(overridingRootVariable).getOpposite());
+						OCLExpression overridingStatusTerm = createNavigationCallExp(overridingTrace, overridingStatusProperty);
+						failedTerm = createOperationCallExp(overridingStatusTerm, "=", failedTerm);
+					}
+					predicateBody = createOperationCallExp(predicateBody, "implies", failedTerm);
 					variablesAnalysis.addPredicate(cMiddleBottomPattern, predicateBody);
 				}
 			}
@@ -726,6 +738,8 @@ import com.google.common.collect.Sets;
 					}
 				}
 			}
+			//
+			//	Create (and initialize) all core variables to ensure availability for derived syntheses.
 			//
 			QVTr2QVTc.VARIABLES.println(" In " + cMapping + "\n\t\t" + variablesAnalysis.toString().replace("\n", "\n\t\t"));
 			for (@NonNull Variable2Variable analysis : variablesAnalysis.getAnalyses()) {

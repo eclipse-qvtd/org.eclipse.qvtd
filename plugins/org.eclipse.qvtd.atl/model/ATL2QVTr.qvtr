@@ -62,6 +62,14 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		query getHelper(element : atlMM::LocatedElement) : atlMM::Helper[1] {
 			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
 		}
+		
+		/**
+		 *  abstract fall-back/error: atl::LocatedElement <=> qvtr::Element
+		 */
+		top abstract relation mapLocatedElement {
+			/*enforce*/ domain atl atlElement : LocatedElement {};
+			enforce domain qvtr qvtrElement : Element {};
+		}
 
 		/**
 		 *  atl::Binding <=> qvtr::PropertyTemplateItem
@@ -192,7 +200,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::InPattern <=> qvtr::RelationDomain (checkonly)
 		 */
-		top relation mapInPattern {
+		top relation mapInPattern overrides mapLocatedElement {
 			atlModule : atlMM::Module;
 			qvtrTypedModel : qvtbMM::TypedModel;
 			atlModel : atloclMM::OclModel = atlPattern.elements.type->selectByKind(atloclMM::OclModelElement)->any(true).model;
@@ -367,7 +375,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::OutPattern <=> qvtr::RelationDomain (enforce)
 		 */
-		top relation mapOutPattern {
+		top relation mapOutPattern overrides mapLocatedElement {
 			atlModule : atlMM::Module;
 			qvtrTypedModel : qvtbMM::TypedModel;
 			/*enforce*/ domain atl atlPattern : OutPattern {
@@ -396,7 +404,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::SimpleInPatternElement <=> qvtr::DomainPattern,ObjectTemplateExp,TemplateVariable
 		 */
-		top relation mapSimpleInPatternElement {
+		top relation mapSimpleInPatternElement overrides mapLocatedElement {
 			elementName : String;
 			atlRule : atlMM::MatchedRule;
 			qvtrDomain : qvtrMM::RelationDomain;
@@ -435,7 +443,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::SimpleOutPatternElement <=> qvtr::DomainPattern,ObjectTemplateExp,TemplateVariable
 		 */
-		top relation mapSimpleOutPatternElement {
+		top relation mapSimpleOutPatternElement overrides mapLocatedElement {
 			elementName : String;
 			atlRule : atlMM::MatchedRule;
 			qvtrDomain : qvtrMM::RelationDomain;

@@ -263,11 +263,11 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 	}
 
 	public @NonNull String createInvocationClassName() {
-		return relationAnalysis.getNameGenerator().createInvocationClassName(relation);
+		return relationAnalysis.getNameGenerator().createEnableClassName(relation);
 	}
 
 	public @NonNull String createInvocationInterfaceName() {
-		return relationAnalysis.getNameGenerator().createInvocationInterfaceName(relation);
+		return relationAnalysis.getNameGenerator().createEnableInterfaceName(relation);
 	}
 
 	public @NonNull Property createProperty(@NonNull String name, @NonNull Type type) {
@@ -278,7 +278,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 	}
 
 	public @NonNull String createTraceInterfaceName() {
-		return relationAnalysis.getNameGenerator().createTraceInterfaceName(relation);
+		return relationAnalysis.getNameGenerator().createExecutionInterfaceName(relation);
 	}
 
 	@Override
