@@ -105,10 +105,9 @@ public abstract class TI_mapHelperImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Helper getAtl_atlHelper() {
 		if (atl_atlHelper != null && atl_atlHelper.eIsProxy()) {
-			InternalEObject oldAtl_atlHelper = atl_atlHelper;
+			InternalEObject oldAtl_atlHelper = (InternalEObject)atl_atlHelper;
 			atl_atlHelper = (Helper)eResolveProxy(oldAtl_atlHelper);
 			if (atl_atlHelper != oldAtl_atlHelper) {
 				if (eNotificationRequired())
@@ -132,7 +131,6 @@ public abstract class TI_mapHelperImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlHelper(Helper newAtl_atlHelper) {
 		Helper oldAtl_atlHelper = atl_atlHelper;
 		atl_atlHelper = newAtl_atlHelper;
@@ -145,7 +143,6 @@ public abstract class TI_mapHelperImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Function getQvtr_qvtrFunction() {
 		if (qvtr_qvtrFunction != null && qvtr_qvtrFunction.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrFunction = (InternalEObject)qvtr_qvtrFunction;
@@ -172,7 +169,6 @@ public abstract class TI_mapHelperImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrFunction(Function newQvtr_qvtrFunction) {
 		Function oldQvtr_qvtrFunction = qvtr_qvtrFunction;
 		qvtr_qvtrFunction = newQvtr_qvtrFunction;
@@ -185,7 +181,6 @@ public abstract class TI_mapHelperImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Boolean getStatus() {
 		return status;
 	}
@@ -195,7 +190,6 @@ public abstract class TI_mapHelperImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(Boolean newStatus) {
 		Boolean oldStatus = status;
 		status = newStatus;

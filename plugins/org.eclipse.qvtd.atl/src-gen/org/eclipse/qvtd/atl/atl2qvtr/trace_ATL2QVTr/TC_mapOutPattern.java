@@ -10,15 +10,11 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
-import org.eclipse.m2m.atl.common.ATL.OutPattern;
 
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,19 +26,16 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlModule <em>Atl atl Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlPattern <em>Atl atl Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlRule <em>Atl atl Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrDomain <em>Qvtr qvtr Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrRelation <em>Qvtr qvtr Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrTypedModel <em>Qvtr qvtr Typed Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getStatus <em>Status</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapOutPattern()
  * @model
  * @generated
  */
-public interface TC_mapOutPattern extends EObject {
+public interface TC_mapOutPattern extends TI_mapOutPattern {
 	/**
 	 * Returns the value of the '<em><b>Atl atl Module</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -71,34 +64,6 @@ public interface TC_mapOutPattern extends EObject {
 	void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
 
 	/**
-	 * Returns the value of the '<em><b>Atl atl Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Atl atl Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Atl atl Pattern</em>' reference.
-	 * @see #setAtl_atlPattern(OutPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapOutPattern_Atl_atlPattern()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TC_mapOutPattern'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	OutPattern getAtl_atlPattern();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlPattern <em>Atl atl Pattern</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Atl atl Pattern</em>' reference.
-	 * @see #getAtl_atlPattern()
-	 * @generated
-	 */
-	void setAtl_atlPattern(OutPattern value);
-
-	/**
 	 * Returns the value of the '<em><b>Atl atl Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -125,34 +90,6 @@ public interface TC_mapOutPattern extends EObject {
 	 * @generated
 	 */
 	void setAtl_atlRule(MatchedRule value);
-
-	/**
-	 * Returns the value of the '<em><b>Qvtr qvtr Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Qvtr qvtr Domain</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Qvtr qvtr Domain</em>' reference.
-	 * @see #setQvtr_qvtrDomain(RelationDomain)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapOutPattern_Qvtr_qvtrDomain()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TC_mapOutPattern'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	RelationDomain getQvtr_qvtrDomain();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrDomain <em>Qvtr qvtr Domain</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Qvtr qvtr Domain</em>' reference.
-	 * @see #getQvtr_qvtrDomain()
-	 * @generated
-	 */
-	void setQvtr_qvtrDomain(RelationDomain value);
 
 	/**
 	 * Returns the value of the '<em><b>Qvtr qvtr Relation</b></em>' reference.
@@ -207,31 +144,5 @@ public interface TC_mapOutPattern extends EObject {
 	 * @generated
 	 */
 	void setQvtr_qvtrTypedModel(TypedModel value);
-
-	/**
-	 * Returns the value of the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status</em>' attribute.
-	 * @see #setStatus(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapOutPattern_Status()
-	 * @model
-	 * @generated
-	 */
-	Boolean getStatus();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getStatus <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status</em>' attribute.
-	 * @see #getStatus()
-	 * @generated
-	 */
-	void setStatus(Boolean value);
 
 } // TC_mapOutPattern

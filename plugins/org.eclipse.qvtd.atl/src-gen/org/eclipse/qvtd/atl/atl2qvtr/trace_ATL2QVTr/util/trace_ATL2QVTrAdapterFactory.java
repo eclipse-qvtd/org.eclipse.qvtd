@@ -118,6 +118,10 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTC_mapIntegerExpAdapter();
 			}
 			@Override
+			public Adapter caseTC_mapLocatedElement(TC_mapLocatedElement object) {
+				return createTC_mapLocatedElementAdapter();
+			}
+			@Override
 			public Adapter caseTC_mapMatchedRule(TC_mapMatchedRule object) {
 				return createTC_mapMatchedRuleAdapter();
 			}
@@ -234,8 +238,16 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTI_mapIfExpAdapter();
 			}
 			@Override
+			public Adapter caseTI_mapInPattern(TI_mapInPattern object) {
+				return createTI_mapInPatternAdapter();
+			}
+			@Override
 			public Adapter caseTI_mapIntegerExp(TI_mapIntegerExp object) {
 				return createTI_mapIntegerExpAdapter();
+			}
+			@Override
+			public Adapter caseTI_mapLocatedElement(TI_mapLocatedElement object) {
+				return createTI_mapLocatedElementAdapter();
 			}
 			@Override
 			public Adapter caseTI_mapNavigationOrAttributeCallExp(TI_mapNavigationOrAttributeCallExp object) {
@@ -268,6 +280,18 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTI_mapOperatorCallExp(TI_mapOperatorCallExp object) {
 				return createTI_mapOperatorCallExpAdapter();
+			}
+			@Override
+			public Adapter caseTI_mapOutPattern(TI_mapOutPattern object) {
+				return createTI_mapOutPatternAdapter();
+			}
+			@Override
+			public Adapter caseTI_mapSimpleInPatternElement(TI_mapSimpleInPatternElement object) {
+				return createTI_mapSimpleInPatternElementAdapter();
+			}
+			@Override
+			public Adapter caseTI_mapSimpleOutPatternElement(TI_mapSimpleOutPatternElement object) {
+				return createTI_mapSimpleOutPatternElementAdapter();
 			}
 			@Override
 			public Adapter caseTI_mapStringExp(TI_mapStringExp object) {
@@ -470,6 +494,20 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTC_mapIntegerExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapLocatedElement <em>TC map Located Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapLocatedElement
+	 * @generated
+	 */
+	public Adapter createTC_mapLocatedElementAdapter() {
 		return null;
 	}
 
@@ -880,6 +918,20 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapInPattern <em>TI map In Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapInPattern
+	 * @generated
+	 */
+	public Adapter createTI_mapInPatternAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapIntegerExp <em>TI map Integer Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -890,6 +942,20 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTI_mapIntegerExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement <em>TI map Located Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement
+	 * @generated
+	 */
+	public Adapter createTI_mapLocatedElementAdapter() {
 		return null;
 	}
 
@@ -1002,6 +1068,48 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTI_mapOperatorCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOutPattern <em>TI map Out Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOutPattern
+	 * @generated
+	 */
+	public Adapter createTI_mapOutPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleInPatternElement <em>TI map Simple In Pattern Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleInPatternElement
+	 * @generated
+	 */
+	public Adapter createTI_mapSimpleInPatternElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleOutPatternElement <em>TI map Simple Out Pattern Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleOutPatternElement
+	 * @generated
+	 */
+	public Adapter createTI_mapSimpleOutPatternElementAdapter() {
 		return null;
 	}
 

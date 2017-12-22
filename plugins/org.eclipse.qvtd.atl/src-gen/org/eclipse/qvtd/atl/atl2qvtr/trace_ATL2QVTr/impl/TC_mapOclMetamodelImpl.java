@@ -126,10 +126,9 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclModel getAtl_oclMetamodel() {
 		if (atl_oclMetamodel != null && atl_oclMetamodel.eIsProxy()) {
-			InternalEObject oldAtl_oclMetamodel = atl_oclMetamodel;
+			InternalEObject oldAtl_oclMetamodel = (InternalEObject)atl_oclMetamodel;
 			atl_oclMetamodel = (OclModel)eResolveProxy(oldAtl_oclMetamodel);
 			if (atl_oclMetamodel != oldAtl_oclMetamodel) {
 				if (eNotificationRequired())
@@ -153,7 +152,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_oclMetamodel(OclModel newAtl_oclMetamodel) {
 		OclModel oldAtl_oclMetamodel = atl_oclMetamodel;
 		atl_oclMetamodel = newAtl_oclMetamodel;
@@ -166,7 +164,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_tmName() {
 		return primitive_tmName;
 	}
@@ -176,7 +173,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_tmName(String newPrimitive_tmName) {
 		String oldPrimitive_tmName = primitive_tmName;
 		primitive_tmName = newPrimitive_tmName;
@@ -189,7 +185,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TypedModel getQvtr_qvtrTypedModel() {
 		if (qvtr_qvtrTypedModel != null && qvtr_qvtrTypedModel.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTypedModel = (InternalEObject)qvtr_qvtrTypedModel;
@@ -216,7 +211,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTypedModel(TypedModel newQvtr_qvtrTypedModel) {
 		TypedModel oldQvtr_qvtrTypedModel = qvtr_qvtrTypedModel;
 		qvtr_qvtrTypedModel = newQvtr_qvtrTypedModel;
@@ -229,7 +223,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Boolean getStatus() {
 		return status;
 	}
@@ -239,7 +232,6 @@ public class TC_mapOclMetamodelImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(Boolean newStatus) {
 		Boolean oldStatus = status;
 		status = newStatus;

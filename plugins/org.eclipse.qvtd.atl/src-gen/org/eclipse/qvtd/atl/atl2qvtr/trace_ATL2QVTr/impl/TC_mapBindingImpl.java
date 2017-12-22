@@ -155,10 +155,9 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Binding getAtl_atlBinding() {
 		if (atl_atlBinding != null && atl_atlBinding.eIsProxy()) {
-			InternalEObject oldAtl_atlBinding = atl_atlBinding;
+			InternalEObject oldAtl_atlBinding = (InternalEObject)atl_atlBinding;
 			atl_atlBinding = (Binding)eResolveProxy(oldAtl_atlBinding);
 			if (atl_atlBinding != oldAtl_atlBinding) {
 				if (eNotificationRequired())
@@ -182,7 +181,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlBinding(Binding newAtl_atlBinding) {
 		Binding oldAtl_atlBinding = atl_atlBinding;
 		atl_atlBinding = newAtl_atlBinding;
@@ -195,10 +193,9 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlExpression() {
 		if (atl_atlExpression != null && atl_atlExpression.eIsProxy()) {
-			InternalEObject oldAtl_atlExpression = atl_atlExpression;
+			InternalEObject oldAtl_atlExpression = (InternalEObject)atl_atlExpression;
 			atl_atlExpression = (OclExpression)eResolveProxy(oldAtl_atlExpression);
 			if (atl_atlExpression != oldAtl_atlExpression) {
 				if (eNotificationRequired())
@@ -222,7 +219,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlExpression(OclExpression newAtl_atlExpression) {
 		OclExpression oldAtl_atlExpression = atl_atlExpression;
 		atl_atlExpression = newAtl_atlExpression;
@@ -235,10 +231,9 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public SimpleOutPatternElement getAtl_atlOutPatternElement() {
 		if (atl_atlOutPatternElement != null && atl_atlOutPatternElement.eIsProxy()) {
-			InternalEObject oldAtl_atlOutPatternElement = atl_atlOutPatternElement;
+			InternalEObject oldAtl_atlOutPatternElement = (InternalEObject)atl_atlOutPatternElement;
 			atl_atlOutPatternElement = (SimpleOutPatternElement)eResolveProxy(oldAtl_atlOutPatternElement);
 			if (atl_atlOutPatternElement != oldAtl_atlOutPatternElement) {
 				if (eNotificationRequired())
@@ -262,7 +257,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlOutPatternElement(SimpleOutPatternElement newAtl_atlOutPatternElement) {
 		SimpleOutPatternElement oldAtl_atlOutPatternElement = atl_atlOutPatternElement;
 		atl_atlOutPatternElement = newAtl_atlOutPatternElement;
@@ -275,7 +269,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_propertyName() {
 		return primitive_propertyName;
 	}
@@ -285,7 +278,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_propertyName(String newPrimitive_propertyName) {
 		String oldPrimitive_propertyName = primitive_propertyName;
 		primitive_propertyName = newPrimitive_propertyName;
@@ -298,7 +290,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrExpression() {
 		if (qvtr_qvtrExpression != null && qvtr_qvtrExpression.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrExpression = (InternalEObject)qvtr_qvtrExpression;
@@ -325,7 +316,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrExpression(OCLExpression newQvtr_qvtrExpression) {
 		OCLExpression oldQvtr_qvtrExpression = qvtr_qvtrExpression;
 		qvtr_qvtrExpression = newQvtr_qvtrExpression;
@@ -338,7 +328,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PropertyTemplateItem getQvtr_qvtrPart() {
 		if (qvtr_qvtrPart != null && qvtr_qvtrPart.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrPart = (InternalEObject)qvtr_qvtrPart;
@@ -365,7 +354,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrPart(PropertyTemplateItem newQvtr_qvtrPart) {
 		PropertyTemplateItem oldQvtr_qvtrPart = qvtr_qvtrPart;
 		qvtr_qvtrPart = newQvtr_qvtrPart;
@@ -378,7 +366,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ObjectTemplateExp getQvtr_qvtrTemplate() {
 		if (qvtr_qvtrTemplate != null && qvtr_qvtrTemplate.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTemplate = (InternalEObject)qvtr_qvtrTemplate;
@@ -405,7 +392,6 @@ public class TC_mapBindingImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTemplate(ObjectTemplateExp newQvtr_qvtrTemplate) {
 		ObjectTemplateExp oldQvtr_qvtrTemplate = qvtr_qvtrTemplate;
 		qvtr_qvtrTemplate = newQvtr_qvtrTemplate;

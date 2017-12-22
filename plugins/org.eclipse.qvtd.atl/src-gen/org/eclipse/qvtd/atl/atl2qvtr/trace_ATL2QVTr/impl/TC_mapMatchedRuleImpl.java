@@ -149,10 +149,9 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -176,7 +175,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -189,10 +187,9 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MatchedRule getAtl_matchedRule() {
 		if (atl_matchedRule != null && atl_matchedRule.eIsProxy()) {
-			InternalEObject oldAtl_matchedRule = atl_matchedRule;
+			InternalEObject oldAtl_matchedRule = (InternalEObject)atl_matchedRule;
 			atl_matchedRule = (MatchedRule)eResolveProxy(oldAtl_matchedRule);
 			if (atl_matchedRule != oldAtl_matchedRule) {
 				if (eNotificationRequired())
@@ -216,7 +213,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_matchedRule(MatchedRule newAtl_matchedRule) {
 		MatchedRule oldAtl_matchedRule = atl_matchedRule;
 		atl_matchedRule = newAtl_matchedRule;
@@ -229,7 +225,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_ruleName() {
 		return primitive_ruleName;
 	}
@@ -239,7 +234,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_ruleName(String newPrimitive_ruleName) {
 		String oldPrimitive_ruleName = primitive_ruleName;
 		primitive_ruleName = newPrimitive_ruleName;
@@ -252,7 +246,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Relation getQvtr_qvtrRelation() {
 		if (qvtr_qvtrRelation != null && qvtr_qvtrRelation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrRelation = (InternalEObject)qvtr_qvtrRelation;
@@ -279,7 +272,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrRelation(Relation newQvtr_qvtrRelation) {
 		Relation oldQvtr_qvtrRelation = qvtr_qvtrRelation;
 		qvtr_qvtrRelation = newQvtr_qvtrRelation;
@@ -292,7 +284,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationalTransformation getQvtr_qvtrTransformation() {
 		if (qvtr_qvtrTransformation != null && qvtr_qvtrTransformation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTransformation = (InternalEObject)qvtr_qvtrTransformation;
@@ -319,7 +310,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTransformation(RelationalTransformation newQvtr_qvtrTransformation) {
 		RelationalTransformation oldQvtr_qvtrTransformation = qvtr_qvtrTransformation;
 		qvtr_qvtrTransformation = newQvtr_qvtrTransformation;
@@ -332,7 +322,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Boolean getStatus() {
 		return status;
 	}
@@ -342,7 +331,6 @@ public class TC_mapMatchedRuleImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(Boolean newStatus) {
 		Boolean oldStatus = status;
 		status = newStatus;

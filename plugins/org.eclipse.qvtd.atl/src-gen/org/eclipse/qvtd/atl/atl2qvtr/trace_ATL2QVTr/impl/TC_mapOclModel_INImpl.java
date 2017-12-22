@@ -140,10 +140,9 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -167,7 +166,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -180,10 +178,9 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclModel getAtl_oclMetamodel() {
 		if (atl_oclMetamodel != null && atl_oclMetamodel.eIsProxy()) {
-			InternalEObject oldAtl_oclMetamodel = atl_oclMetamodel;
+			InternalEObject oldAtl_oclMetamodel = (InternalEObject)atl_oclMetamodel;
 			atl_oclMetamodel = (OclModel)eResolveProxy(oldAtl_oclMetamodel);
 			if (atl_oclMetamodel != oldAtl_oclMetamodel) {
 				if (eNotificationRequired())
@@ -207,7 +204,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_oclMetamodel(OclModel newAtl_oclMetamodel) {
 		OclModel oldAtl_oclMetamodel = atl_oclMetamodel;
 		atl_oclMetamodel = newAtl_oclMetamodel;
@@ -220,10 +216,9 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclModel getAtl_oclModel() {
 		if (atl_oclModel != null && atl_oclModel.eIsProxy()) {
-			InternalEObject oldAtl_oclModel = atl_oclModel;
+			InternalEObject oldAtl_oclModel = (InternalEObject)atl_oclModel;
 			atl_oclModel = (OclModel)eResolveProxy(oldAtl_oclModel);
 			if (atl_oclModel != oldAtl_oclModel) {
 				if (eNotificationRequired())
@@ -247,7 +242,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_oclModel(OclModel newAtl_oclModel) {
 		OclModel oldAtl_oclModel = atl_oclModel;
 		atl_oclModel = newAtl_oclModel;
@@ -260,7 +254,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_tmName() {
 		return primitive_tmName;
 	}
@@ -270,7 +263,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_tmName(String newPrimitive_tmName) {
 		String oldPrimitive_tmName = primitive_tmName;
 		primitive_tmName = newPrimitive_tmName;
@@ -283,7 +275,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationalTransformation getQvtr_qvtrTransformation() {
 		if (qvtr_qvtrTransformation != null && qvtr_qvtrTransformation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTransformation = (InternalEObject)qvtr_qvtrTransformation;
@@ -310,7 +301,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTransformation(RelationalTransformation newQvtr_qvtrTransformation) {
 		RelationalTransformation oldQvtr_qvtrTransformation = qvtr_qvtrTransformation;
 		qvtr_qvtrTransformation = newQvtr_qvtrTransformation;
@@ -323,7 +313,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TypedModel getQvtr_qvtrTypedModel() {
 		if (qvtr_qvtrTypedModel != null && qvtr_qvtrTypedModel.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTypedModel = (InternalEObject)qvtr_qvtrTypedModel;
@@ -350,7 +339,6 @@ public class TC_mapOclModel_INImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTypedModel(TypedModel newQvtr_qvtrTypedModel) {
 		TypedModel oldQvtr_qvtrTypedModel = qvtr_qvtrTypedModel;
 		qvtr_qvtrTypedModel = newQvtr_qvtrTypedModel;

@@ -163,7 +163,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOclExpression()
 	 * @generated
 	 */
-	int TI_MAP_OCL_EXPRESSION = 43;
+	int TI_MAP_OCL_EXPRESSION = 46;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -218,7 +218,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapBooleanExp()
 	 * @generated
 	 */
-	int TI_MAP_BOOLEAN_EXP = 34;
+	int TI_MAP_BOOLEAN_EXP = 35;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -337,7 +337,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapHelper()
 	 * @generated
 	 */
-	int TI_MAP_HELPER = 35;
+	int TI_MAP_HELPER = 36;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
@@ -447,7 +447,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapHelper_Attribute()
 	 * @generated
 	 */
-	int TI_MAP_HELPER_ATTRIBUTE = 36;
+	int TI_MAP_HELPER_ATTRIBUTE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
@@ -729,7 +729,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapHelper_Operation()
 	 * @generated
 	 */
-	int TI_MAP_HELPER_OPERATION = 37;
+	int TI_MAP_HELPER_OPERATION = 38;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Helper</b></em>' reference.
@@ -920,7 +920,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapIfExp()
 	 * @generated
 	 */
-	int TI_MAP_IF_EXP = 38;
+	int TI_MAP_IF_EXP = 39;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1077,6 +1077,116 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TC_MAP_IF_EXP_OPERATION_COUNT = TI_MAP_IF_EXP_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapLocatedElementImpl <em>TI map Located Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapLocatedElementImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapLocatedElement()
+	 * @generated
+	 */
+	int TI_MAP_LOCATED_ELEMENT = 42;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_LOCATED_ELEMENT__STATUS = 2;
+
+	/**
+	 * The number of structural features of the '<em>TI map Located Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_LOCATED_ELEMENT_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>TI map Located Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_LOCATED_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapInPatternImpl <em>TI map In Pattern</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapInPatternImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapInPattern()
+	 * @generated
+	 */
+	int TI_MAP_IN_PATTERN = 40;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IN_PATTERN__ATL_ATL_ELEMENT = TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IN_PATTERN__QVTR_QVTR_ELEMENT = TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IN_PATTERN__STATUS = TI_MAP_LOCATED_ELEMENT__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map In Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IN_PATTERN_FEATURE_COUNT = TI_MAP_LOCATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map In Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_IN_PATTERN_OPERATION_COUNT = TI_MAP_LOCATED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapInPatternImpl <em>TC map In Pattern</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1087,67 +1197,22 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TC_MAP_IN_PATTERN = 7;
 
 	/**
-	 * The feature id for the '<em><b>Atl atl Model</b></em>' reference.
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IN_PATTERN__ATL_ATL_MODEL = 0;
+	int TC_MAP_IN_PATTERN__ATL_ATL_ELEMENT = TI_MAP_IN_PATTERN__ATL_ATL_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IN_PATTERN__ATL_ATL_MODULE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_IN_PATTERN__ATL_ATL_PATTERN = 2;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_IN_PATTERN__ATL_ATL_RULE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_IN_PATTERN__QVTR_QVTR_DOMAIN = 4;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_IN_PATTERN__QVTR_QVTR_RELATION = 5;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Typed Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_IN_PATTERN__QVTR_QVTR_TYPED_MODEL = 6;
+	int TC_MAP_IN_PATTERN__QVTR_QVTR_ELEMENT = TI_MAP_IN_PATTERN__QVTR_QVTR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1156,7 +1221,52 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IN_PATTERN__STATUS = 7;
+	int TC_MAP_IN_PATTERN__STATUS = TI_MAP_IN_PATTERN__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_IN_PATTERN__ATL_ATL_MODEL = TI_MAP_IN_PATTERN_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_IN_PATTERN__ATL_ATL_MODULE = TI_MAP_IN_PATTERN_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_IN_PATTERN__ATL_ATL_RULE = TI_MAP_IN_PATTERN_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_IN_PATTERN__QVTR_QVTR_RELATION = TI_MAP_IN_PATTERN_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_IN_PATTERN__QVTR_QVTR_TYPED_MODEL = TI_MAP_IN_PATTERN_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>TC map In Pattern</em>' class.
@@ -1165,7 +1275,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IN_PATTERN_FEATURE_COUNT = 8;
+	int TC_MAP_IN_PATTERN_FEATURE_COUNT = TI_MAP_IN_PATTERN_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>TC map In Pattern</em>' class.
@@ -1174,7 +1284,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_IN_PATTERN_OPERATION_COUNT = 0;
+	int TC_MAP_IN_PATTERN_OPERATION_COUNT = TI_MAP_IN_PATTERN_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapInPattern_filterImpl <em>TC map In Pattern filter</em>}' class.
@@ -1284,7 +1394,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapIntegerExp()
 	 * @generated
 	 */
-	int TI_MAP_INTEGER_EXP = 39;
+	int TI_MAP_INTEGER_EXP = 41;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1396,6 +1506,61 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TC_MAP_INTEGER_EXP_OPERATION_COUNT = TI_MAP_INTEGER_EXP_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapLocatedElementImpl <em>TC map Located Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapLocatedElementImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapLocatedElement()
+	 * @generated
+	 */
+	int TC_MAP_LOCATED_ELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT = TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT = TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_LOCATED_ELEMENT__STATUS = TI_MAP_LOCATED_ELEMENT__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TC map Located Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_LOCATED_ELEMENT_FEATURE_COUNT = TI_MAP_LOCATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TC map Located Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_LOCATED_ELEMENT_OPERATION_COUNT = TI_MAP_LOCATED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapMatchedRuleImpl <em>TC map Matched Rule</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1403,7 +1568,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapMatchedRule()
 	 * @generated
 	 */
-	int TC_MAP_MATCHED_RULE = 10;
+	int TC_MAP_MATCHED_RULE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -1485,7 +1650,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapMatchedRule_super()
 	 * @generated
 	 */
-	int TC_MAP_MATCHED_RULE_SUPER = 11;
+	int TC_MAP_MATCHED_RULE_SUPER = 12;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Child Rule</b></em>' reference.
@@ -1549,7 +1714,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapModule()
 	 * @generated
 	 */
-	int TC_MAP_MODULE = 12;
+	int TC_MAP_MODULE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -1640,7 +1805,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapNavigationOrAttributeCallExp()
 	 * @generated
 	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP = 40;
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP = 43;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1695,7 +1860,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapNavigationOrAttributeCallExp()
 	 * @generated
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP = 13;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP = 14;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1750,7 +1915,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapNavigationOrAttributeCallExp_Helper()
 	 * @generated
 	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER = 41;
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER = 44;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1805,7 +1970,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapNavigationOrAttributeCallExp_Helper()
 	 * @generated
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER = 14;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER = 15;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1941,7 +2106,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapNavigationOrAttributeCallExp_Property()
 	 * @generated
 	 */
-	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY = 42;
+	int TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY = 45;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -1996,7 +2161,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapNavigationOrAttributeCallExp_Property()
 	 * @generated
 	 */
-	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY = 15;
+	int TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY = 16;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2105,7 +2270,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOclExpression()
 	 * @generated
 	 */
-	int TC_MAP_OCL_EXPRESSION = 16;
+	int TC_MAP_OCL_EXPRESSION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2160,7 +2325,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOclMetamodel()
 	 * @generated
 	 */
-	int TC_MAP_OCL_METAMODEL = 17;
+	int TC_MAP_OCL_METAMODEL = 18;
 
 	/**
 	 * The feature id for the '<em><b>Atl ocl Metamodel</b></em>' reference.
@@ -2224,7 +2389,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOclModel_IN()
 	 * @generated
 	 */
-	int TC_MAP_OCL_MODEL_IN = 18;
+	int TC_MAP_OCL_MODEL_IN = 19;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -2306,7 +2471,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOclModel_OUT()
 	 * @generated
 	 */
-	int TC_MAP_OCL_MODEL_OUT = 19;
+	int TC_MAP_OCL_MODEL_OUT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
@@ -2388,7 +2553,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOperationCallExp()
 	 * @generated
 	 */
-	int TI_MAP_OPERATION_CALL_EXP = 44;
+	int TI_MAP_OPERATION_CALL_EXP = 47;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2443,7 +2608,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOperationCallExp()
 	 * @generated
 	 */
-	int TC_MAP_OPERATION_CALL_EXP = 20;
+	int TC_MAP_OPERATION_CALL_EXP = 21;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2498,7 +2663,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOperationCallExp_Helper()
 	 * @generated
 	 */
-	int TI_MAP_OPERATION_CALL_EXP_HELPER = 45;
+	int TI_MAP_OPERATION_CALL_EXP_HELPER = 48;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2553,7 +2718,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOperationCallExp_Helper()
 	 * @generated
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_HELPER = 21;
+	int TC_MAP_OPERATION_CALL_EXP_HELPER = 22;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2689,7 +2854,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOperationCallExp_Operation()
 	 * @generated
 	 */
-	int TI_MAP_OPERATION_CALL_EXP_OPERATION = 46;
+	int TI_MAP_OPERATION_CALL_EXP_OPERATION = 49;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2744,7 +2909,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOperationCallExp_Operation()
 	 * @generated
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_OPERATION = 22;
+	int TC_MAP_OPERATION_CALL_EXP_OPERATION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2853,7 +3018,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOperationCallExp_argument()
 	 * @generated
 	 */
-	int TC_MAP_OPERATION_CALL_EXP_ARGUMENT = 23;
+	int TC_MAP_OPERATION_CALL_EXP_ARGUMENT = 24;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Argument</b></em>' reference.
@@ -2917,7 +3082,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOperatorCallExp()
 	 * @generated
 	 */
-	int TI_MAP_OPERATOR_CALL_EXP = 47;
+	int TI_MAP_OPERATOR_CALL_EXP = 50;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -2972,7 +3137,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOperatorCallExp()
 	 * @generated
 	 */
-	int TC_MAP_OPERATOR_CALL_EXP = 24;
+	int TC_MAP_OPERATOR_CALL_EXP = 25;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -3074,68 +3239,32 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TC_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT = TI_MAP_OPERATOR_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOutPatternImpl <em>TC map Out Pattern</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapOutPatternImpl <em>TI map Out Pattern</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOutPatternImpl
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOutPattern()
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapOutPatternImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOutPattern()
 	 * @generated
 	 */
-	int TC_MAP_OUT_PATTERN = 25;
+	int TI_MAP_OUT_PATTERN = 51;
 
 	/**
-	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OUT_PATTERN__ATL_ATL_MODULE = 0;
+	int TI_MAP_OUT_PATTERN__ATL_ATL_ELEMENT = TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Atl atl Pattern</b></em>' reference.
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OUT_PATTERN__ATL_ATL_PATTERN = 1;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_OUT_PATTERN__ATL_ATL_RULE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_OUT_PATTERN__QVTR_QVTR_DOMAIN = 3;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_OUT_PATTERN__QVTR_QVTR_RELATION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Typed Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_OUT_PATTERN__QVTR_QVTR_TYPED_MODEL = 5;
+	int TI_MAP_OUT_PATTERN__QVTR_QVTR_ELEMENT = TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3144,7 +3273,98 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OUT_PATTERN__STATUS = 6;
+	int TI_MAP_OUT_PATTERN__STATUS = TI_MAP_LOCATED_ELEMENT__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Out Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OUT_PATTERN_FEATURE_COUNT = TI_MAP_LOCATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Out Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_OUT_PATTERN_OPERATION_COUNT = TI_MAP_LOCATED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOutPatternImpl <em>TC map Out Pattern</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapOutPatternImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapOutPattern()
+	 * @generated
+	 */
+	int TC_MAP_OUT_PATTERN = 26;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__ATL_ATL_ELEMENT = TI_MAP_OUT_PATTERN__ATL_ATL_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__QVTR_QVTR_ELEMENT = TI_MAP_OUT_PATTERN__QVTR_QVTR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__STATUS = TI_MAP_OUT_PATTERN__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Module</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__ATL_ATL_MODULE = TI_MAP_OUT_PATTERN_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__ATL_ATL_RULE = TI_MAP_OUT_PATTERN_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__QVTR_QVTR_RELATION = TI_MAP_OUT_PATTERN_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_OUT_PATTERN__QVTR_QVTR_TYPED_MODEL = TI_MAP_OUT_PATTERN_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>TC map Out Pattern</em>' class.
@@ -3153,7 +3373,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OUT_PATTERN_FEATURE_COUNT = 7;
+	int TC_MAP_OUT_PATTERN_FEATURE_COUNT = TI_MAP_OUT_PATTERN_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>TC map Out Pattern</em>' class.
@@ -3162,7 +3382,62 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_OUT_PATTERN_OPERATION_COUNT = 0;
+	int TC_MAP_OUT_PATTERN_OPERATION_COUNT = TI_MAP_OUT_PATTERN_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleInPatternElementImpl <em>TI map Simple In Pattern Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleInPatternElementImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapSimpleInPatternElement()
+	 * @generated
+	 */
+	int TI_MAP_SIMPLE_IN_PATTERN_ELEMENT = 52;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT = TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_ELEMENT = TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_IN_PATTERN_ELEMENT__STATUS = TI_MAP_LOCATED_ELEMENT__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Simple In Pattern Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT = TI_MAP_LOCATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Simple In Pattern Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_OPERATION_COUNT = TI_MAP_LOCATED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleInPatternElementImpl <em>TC map Simple In Pattern Element</em>}' class.
@@ -3172,7 +3447,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapSimpleInPatternElement()
 	 * @generated
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT = 26;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT = 27;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
@@ -3181,7 +3456,25 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT = 0;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_ELEMENT = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__STATUS = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Pattern</b></em>' reference.
@@ -3190,7 +3483,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_PATTERN = 1;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_PATTERN = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
@@ -3199,7 +3492,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_RULE = 2;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_RULE = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
@@ -3208,7 +3501,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__INVOCATION_MAP_VARIABLE = 3;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__INVOCATION_MAP_VARIABLE = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Primitive element Name</b></em>' attribute.
@@ -3217,7 +3510,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__PRIMITIVE_ELEMENT_NAME = 4;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__PRIMITIVE_ELEMENT_NAME = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Domain</b></em>' reference.
@@ -3226,7 +3519,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN = 5;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Domain1</b></em>' reference.
@@ -3235,7 +3528,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN1 = 6;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN1 = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Pattern</b></em>' reference.
@@ -3244,7 +3537,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_PATTERN = 7;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_PATTERN = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
@@ -3253,7 +3546,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_RELATION = 8;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_RELATION = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Template</b></em>' reference.
@@ -3262,7 +3555,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_TEMPLATE = 9;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_TEMPLATE = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
@@ -3271,7 +3564,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_VARIABLE = 10;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__QVTR_QVTR_VARIABLE = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>TC map Simple In Pattern Element</em>' class.
@@ -3280,7 +3573,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT = 11;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of operations of the '<em>TC map Simple In Pattern Element</em>' class.
@@ -3289,7 +3582,62 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT_OPERATION_COUNT = 0;
+	int TC_MAP_SIMPLE_IN_PATTERN_ELEMENT_OPERATION_COUNT = TI_MAP_SIMPLE_IN_PATTERN_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleOutPatternElementImpl <em>TI map Simple Out Pattern Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleOutPatternElementImpl
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapSimpleOutPatternElement()
+	 * @generated
+	 */
+	int TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT = 53;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_ELEMENT = TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_ELEMENT = TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT__STATUS = TI_MAP_LOCATED_ELEMENT__STATUS;
+
+	/**
+	 * The number of structural features of the '<em>TI map Simple Out Pattern Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT = TI_MAP_LOCATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>TI map Simple Out Pattern Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_OPERATION_COUNT = TI_MAP_LOCATED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleOutPatternElementImpl <em>TC map Simple Out Pattern Element</em>}' class.
@@ -3299,7 +3647,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapSimpleOutPatternElement()
 	 * @generated
 	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT = 27;
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Element</b></em>' reference.
@@ -3308,97 +3656,16 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_ELEMENT = 0;
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_ELEMENT = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Atl atl Pattern</b></em>' reference.
+	 * The feature id for the '<em><b>Qvtr qvtr Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_PATTERN = 1;
-
-	/**
-	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_RULE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__INVOCATION_MAP_VARIABLE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Primitive element Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__PRIMITIVE_ELEMENT_NAME = 4;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN = 5;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Domain1</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN1 = 6;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_PATTERN = 7;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_RELATION = 8;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_TEMPLATE = 9;
-
-	/**
-	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_VARIABLE = 10;
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_ELEMENT = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3407,7 +3674,97 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__STATUS = 11;
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__STATUS = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Pattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_PATTERN = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Atl atl Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_RULE = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Invocation map Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__INVOCATION_MAP_VARIABLE = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Primitive element Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__PRIMITIVE_ELEMENT_NAME = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Domain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Domain1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_DOMAIN1 = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Pattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_PATTERN = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_RELATION = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Template</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_TEMPLATE = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Qvtr qvtr Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_VARIABLE = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>TC map Simple Out Pattern Element</em>' class.
@@ -3416,7 +3773,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT = 12;
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of operations of the '<em>TC map Simple Out Pattern Element</em>' class.
@@ -3425,7 +3782,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT_OPERATION_COUNT = 0;
+	int TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT_OPERATION_COUNT = TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapStringExpImpl <em>TI map String Exp</em>}' class.
@@ -3435,7 +3792,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapStringExp()
 	 * @generated
 	 */
-	int TI_MAP_STRING_EXP = 48;
+	int TI_MAP_STRING_EXP = 54;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -3490,7 +3847,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapStringExp()
 	 * @generated
 	 */
-	int TC_MAP_STRING_EXP = 28;
+	int TC_MAP_STRING_EXP = 29;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -3554,7 +3911,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariable()
 	 * @generated
 	 */
-	int TC_MAP_VARIABLE = 29;
+	int TC_MAP_VARIABLE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Variable</b></em>' reference.
@@ -3600,7 +3957,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp()
 	 * @generated
 	 */
-	int TI_MAP_VARIABLE_EXP = 49;
+	int TI_MAP_VARIABLE_EXP = 55;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -3655,7 +4012,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp()
 	 * @generated
 	 */
-	int TC_MAP_VARIABLE_EXP = 30;
+	int TC_MAP_VARIABLE_EXP = 31;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -3737,7 +4094,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable()
 	 * @generated
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 50;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 56;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3774,7 +4131,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable()
 	 * @generated
 	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 31;
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3829,7 +4186,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable_Helper()
 	 * @generated
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 51;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 57;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3866,7 +4223,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable_Helper()
 	 * @generated
 	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 32;
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 33;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3957,7 +4314,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapVariableExp_referredVariable_VariableDeclaration()
 	 * @generated
 	 */
-	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 52;
+	int TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 58;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3994,7 +4351,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapVariableExp_referredVariable_VariableDeclaration()
 	 * @generated
 	 */
-	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 33;
+	int TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -4076,7 +4433,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable()
 	 * @generated
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 56;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 62;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4131,7 +4488,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable()
 	 * @generated
 	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 53;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE = 59;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4186,7 +4543,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable_Helper()
 	 * @generated
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 57;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 63;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4241,7 +4598,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable_Helper()
 	 * @generated
 	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 54;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER = 60;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4296,7 +4653,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWI_mapVariableExp_referredVariable_VariableDeclaration()
 	 * @generated
 	 */
-	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 58;
+	int WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 64;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4351,7 +4708,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getWC_mapVariableExp_referredVariable_VariableDeclaration()
 	 * @generated
 	 */
-	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 55;
+	int WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION = 61;
 
 	/**
 	 * The feature id for the '<em><b>Atl atl Expression</b></em>' reference.
@@ -4931,17 +5288,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTC_mapInPattern_Atl_atlModule();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getAtl_atlPattern <em>Atl atl Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Atl atl Pattern</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getAtl_atlPattern()
-	 * @see #getTC_mapInPattern()
-	 * @generated
-	 */
-	EReference getTC_mapInPattern_Atl_atlPattern();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getAtl_atlRule <em>Atl atl Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4951,17 +5297,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTC_mapInPattern_Atl_atlRule();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getQvtr_qvtrDomain <em>Qvtr qvtr Domain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Qvtr qvtr Domain</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getQvtr_qvtrDomain()
-	 * @see #getTC_mapInPattern()
-	 * @generated
-	 */
-	EReference getTC_mapInPattern_Qvtr_qvtrDomain();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getQvtr_qvtrRelation <em>Qvtr qvtr Relation</em>}'.
@@ -4984,17 +5319,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTC_mapInPattern_Qvtr_qvtrTypedModel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern#getStatus()
-	 * @see #getTC_mapInPattern()
-	 * @generated
-	 */
-	EAttribute getTC_mapInPattern_Status();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern_filter <em>TC map In Pattern filter</em>}'.
@@ -5114,6 +5438,16 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTC_mapIntegerExp_Primitive_symbol();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapLocatedElement <em>TC map Located Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TC map Located Element</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapLocatedElement
+	 * @generated
+	 */
+	EClass getTC_mapLocatedElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapMatchedRule <em>TC map Matched Rule</em>}'.
@@ -6090,17 +6424,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTC_mapOutPattern_Atl_atlModule();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlPattern <em>Atl atl Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Atl atl Pattern</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlPattern()
-	 * @see #getTC_mapOutPattern()
-	 * @generated
-	 */
-	EReference getTC_mapOutPattern_Atl_atlPattern();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getAtl_atlRule <em>Atl atl Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6110,17 +6433,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTC_mapOutPattern_Atl_atlRule();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrDomain <em>Qvtr qvtr Domain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Qvtr qvtr Domain</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrDomain()
-	 * @see #getTC_mapOutPattern()
-	 * @generated
-	 */
-	EReference getTC_mapOutPattern_Qvtr_qvtrDomain();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getQvtr_qvtrRelation <em>Qvtr qvtr Relation</em>}'.
@@ -6145,17 +6457,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTC_mapOutPattern_Qvtr_qvtrTypedModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern#getStatus()
-	 * @see #getTC_mapOutPattern()
-	 * @generated
-	 */
-	EAttribute getTC_mapOutPattern_Status();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement <em>TC map Simple In Pattern Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6164,17 +6465,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTC_mapSimpleInPatternElement();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlElement <em>Atl atl Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Atl atl Element</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlElement()
-	 * @see #getTC_mapSimpleInPatternElement()
-	 * @generated
-	 */
-	EReference getTC_mapSimpleInPatternElement_Atl_atlElement();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlPattern <em>Atl atl Pattern</em>}'.
@@ -6297,17 +6587,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EClass getTC_mapSimpleOutPatternElement();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlElement <em>Atl atl Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Atl atl Element</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlElement()
-	 * @see #getTC_mapSimpleOutPatternElement()
-	 * @generated
-	 */
-	EReference getTC_mapSimpleOutPatternElement_Atl_atlElement();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlPattern <em>Atl atl Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6416,17 +6695,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getStatus()
-	 * @see #getTC_mapSimpleOutPatternElement()
-	 * @generated
-	 */
-	EAttribute getTC_mapSimpleOutPatternElement_Status();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapStringExp <em>TC map String Exp</em>}'.
@@ -6781,6 +7049,16 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EClass getTI_mapIfExp();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapInPattern <em>TI map In Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TI map In Pattern</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapInPattern
+	 * @generated
+	 */
+	EClass getTI_mapInPattern();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapIntegerExp <em>TI map Integer Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6789,6 +7067,49 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTI_mapIntegerExp();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement <em>TI map Located Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TI map Located Element</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement
+	 * @generated
+	 */
+	EClass getTI_mapLocatedElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement#getAtl_atlElement <em>Atl atl Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Atl atl Element</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement#getAtl_atlElement()
+	 * @see #getTI_mapLocatedElement()
+	 * @generated
+	 */
+	EReference getTI_mapLocatedElement_Atl_atlElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement#getQvtr_qvtrElement <em>Qvtr qvtr Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Qvtr qvtr Element</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement#getQvtr_qvtrElement()
+	 * @see #getTI_mapLocatedElement()
+	 * @generated
+	 */
+	EReference getTI_mapLocatedElement_Qvtr_qvtrElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapLocatedElement#getStatus()
+	 * @see #getTI_mapLocatedElement()
+	 * @generated
+	 */
+	EAttribute getTI_mapLocatedElement_Status();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp <em>TI map Navigation Or Attribute Call Exp</em>}'.
@@ -6902,6 +7223,36 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTI_mapOperatorCallExp();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOutPattern <em>TI map Out Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TI map Out Pattern</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOutPattern
+	 * @generated
+	 */
+	EClass getTI_mapOutPattern();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleInPatternElement <em>TI map Simple In Pattern Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TI map Simple In Pattern Element</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleInPatternElement
+	 * @generated
+	 */
+	EClass getTI_mapSimpleInPatternElement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleOutPatternElement <em>TI map Simple Out Pattern Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>TI map Simple Out Pattern Element</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapSimpleOutPatternElement
+	 * @generated
+	 */
+	EClass getTI_mapSimpleOutPatternElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapStringExp <em>TI map String Exp</em>}'.
@@ -7489,28 +7840,12 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TC_MAP_IN_PATTERN__ATL_ATL_MODULE = eINSTANCE.getTC_mapInPattern_Atl_atlModule();
 
 		/**
-		 * The meta object literal for the '<em><b>Atl atl Pattern</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TC_MAP_IN_PATTERN__ATL_ATL_PATTERN = eINSTANCE.getTC_mapInPattern_Atl_atlPattern();
-
-		/**
 		 * The meta object literal for the '<em><b>Atl atl Rule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TC_MAP_IN_PATTERN__ATL_ATL_RULE = eINSTANCE.getTC_mapInPattern_Atl_atlRule();
-
-		/**
-		 * The meta object literal for the '<em><b>Qvtr qvtr Domain</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TC_MAP_IN_PATTERN__QVTR_QVTR_DOMAIN = eINSTANCE.getTC_mapInPattern_Qvtr_qvtrDomain();
 
 		/**
 		 * The meta object literal for the '<em><b>Qvtr qvtr Relation</b></em>' reference feature.
@@ -7527,14 +7862,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TC_MAP_IN_PATTERN__QVTR_QVTR_TYPED_MODEL = eINSTANCE.getTC_mapInPattern_Qvtr_qvtrTypedModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TC_MAP_IN_PATTERN__STATUS = eINSTANCE.getTC_mapInPattern_Status();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapInPattern_filterImpl <em>TC map In Pattern filter</em>}' class.
@@ -7627,6 +7954,16 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TC_MAP_INTEGER_EXP__PRIMITIVE_SYMBOL = eINSTANCE.getTC_mapIntegerExp_Primitive_symbol();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapLocatedElementImpl <em>TC map Located Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapLocatedElementImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTC_mapLocatedElement()
+		 * @generated
+		 */
+		EClass TC_MAP_LOCATED_ELEMENT = eINSTANCE.getTC_mapLocatedElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapMatchedRuleImpl <em>TC map Matched Rule</em>}' class.
@@ -8381,28 +8718,12 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TC_MAP_OUT_PATTERN__ATL_ATL_MODULE = eINSTANCE.getTC_mapOutPattern_Atl_atlModule();
 
 		/**
-		 * The meta object literal for the '<em><b>Atl atl Pattern</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TC_MAP_OUT_PATTERN__ATL_ATL_PATTERN = eINSTANCE.getTC_mapOutPattern_Atl_atlPattern();
-
-		/**
 		 * The meta object literal for the '<em><b>Atl atl Rule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TC_MAP_OUT_PATTERN__ATL_ATL_RULE = eINSTANCE.getTC_mapOutPattern_Atl_atlRule();
-
-		/**
-		 * The meta object literal for the '<em><b>Qvtr qvtr Domain</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TC_MAP_OUT_PATTERN__QVTR_QVTR_DOMAIN = eINSTANCE.getTC_mapOutPattern_Qvtr_qvtrDomain();
 
 		/**
 		 * The meta object literal for the '<em><b>Qvtr qvtr Relation</b></em>' reference feature.
@@ -8421,14 +8742,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TC_MAP_OUT_PATTERN__QVTR_QVTR_TYPED_MODEL = eINSTANCE.getTC_mapOutPattern_Qvtr_qvtrTypedModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TC_MAP_OUT_PATTERN__STATUS = eINSTANCE.getTC_mapOutPattern_Status();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleInPatternElementImpl <em>TC map Simple In Pattern Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8437,14 +8750,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TC_MAP_SIMPLE_IN_PATTERN_ELEMENT = eINSTANCE.getTC_mapSimpleInPatternElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Atl atl Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT = eINSTANCE.getTC_mapSimpleInPatternElement_Atl_atlElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Atl atl Pattern</b></em>' reference feature.
@@ -8537,14 +8842,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EClass TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT = eINSTANCE.getTC_mapSimpleOutPatternElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Atl atl Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__ATL_ATL_ELEMENT = eINSTANCE.getTC_mapSimpleOutPatternElement_Atl_atlElement();
-
-		/**
 		 * The meta object literal for the '<em><b>Atl atl Pattern</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8623,14 +8920,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__QVTR_QVTR_VARIABLE = eINSTANCE.getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable();
-
-		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT__STATUS = eINSTANCE.getTC_mapSimpleOutPatternElement_Status();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapStringExpImpl <em>TC map String Exp</em>}' class.
@@ -8919,6 +9208,16 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EClass TI_MAP_IF_EXP = eINSTANCE.getTI_mapIfExp();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapInPatternImpl <em>TI map In Pattern</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapInPatternImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapInPattern()
+		 * @generated
+		 */
+		EClass TI_MAP_IN_PATTERN = eINSTANCE.getTI_mapInPattern();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapIntegerExpImpl <em>TI map Integer Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8927,6 +9226,40 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TI_MAP_INTEGER_EXP = eINSTANCE.getTI_mapIntegerExp();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapLocatedElementImpl <em>TI map Located Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapLocatedElementImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapLocatedElement()
+		 * @generated
+		 */
+		EClass TI_MAP_LOCATED_ELEMENT = eINSTANCE.getTI_mapLocatedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Atl atl Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TI_MAP_LOCATED_ELEMENT__ATL_ATL_ELEMENT = eINSTANCE.getTI_mapLocatedElement_Atl_atlElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Qvtr qvtr Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TI_MAP_LOCATED_ELEMENT__QVTR_QVTR_ELEMENT = eINSTANCE.getTI_mapLocatedElement_Qvtr_qvtrElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TI_MAP_LOCATED_ELEMENT__STATUS = eINSTANCE.getTI_mapLocatedElement_Status();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapNavigationOrAttributeCallExpImpl <em>TI map Navigation Or Attribute Call Exp</em>}' class.
@@ -9031,6 +9364,36 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TI_MAP_OPERATOR_CALL_EXP = eINSTANCE.getTI_mapOperatorCallExp();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapOutPatternImpl <em>TI map Out Pattern</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapOutPatternImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapOutPattern()
+		 * @generated
+		 */
+		EClass TI_MAP_OUT_PATTERN = eINSTANCE.getTI_mapOutPattern();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleInPatternElementImpl <em>TI map Simple In Pattern Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleInPatternElementImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapSimpleInPatternElement()
+		 * @generated
+		 */
+		EClass TI_MAP_SIMPLE_IN_PATTERN_ELEMENT = eINSTANCE.getTI_mapSimpleInPatternElement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleOutPatternElementImpl <em>TI map Simple Out Pattern Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapSimpleOutPatternElementImpl
+		 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrPackageImpl#getTI_mapSimpleOutPatternElement()
+		 * @generated
+		 */
+		EClass TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT = eINSTANCE.getTI_mapSimpleOutPatternElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TI_mapStringExpImpl <em>TI map String Exp</em>}' class.

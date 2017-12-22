@@ -94,10 +94,9 @@ public abstract class WI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public VariableExp getAtl_atlExpression() {
 		if (atl_atlExpression != null && atl_atlExpression.eIsProxy()) {
-			InternalEObject oldAtl_atlExpression = atl_atlExpression;
+			InternalEObject oldAtl_atlExpression = (InternalEObject)atl_atlExpression;
 			atl_atlExpression = (VariableExp)eResolveProxy(oldAtl_atlExpression);
 			if (atl_atlExpression != oldAtl_atlExpression) {
 				if (eNotificationRequired())
@@ -121,7 +120,6 @@ public abstract class WI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlExpression(VariableExp newAtl_atlExpression) {
 		VariableExp oldAtl_atlExpression = atl_atlExpression;
 		atl_atlExpression = newAtl_atlExpression;
@@ -134,7 +132,6 @@ public abstract class WI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.ocl.pivot.VariableExp getQvtr_qvtrExpression() {
 		if (qvtr_qvtrExpression != null && qvtr_qvtrExpression.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrExpression = (InternalEObject)qvtr_qvtrExpression;
@@ -161,7 +158,6 @@ public abstract class WI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrExpression(org.eclipse.ocl.pivot.VariableExp newQvtr_qvtrExpression) {
 		org.eclipse.ocl.pivot.VariableExp oldQvtr_qvtrExpression = qvtr_qvtrExpression;
 		qvtr_qvtrExpression = newQvtr_qvtrExpression;
@@ -174,7 +170,6 @@ public abstract class WI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TI_mapVariableExp_referredVariable getResult() {
 		if (result != null && result.eIsProxy()) {
 			InternalEObject oldResult = (InternalEObject)result;
@@ -201,7 +196,6 @@ public abstract class WI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setResult(TI_mapVariableExp_referredVariable newResult) {
 		TI_mapVariableExp_referredVariable oldResult = result;
 		result = newResult;

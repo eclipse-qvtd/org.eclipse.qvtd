@@ -84,10 +84,9 @@ public class TC_mapVariableImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public LocatedElement getAtl_atlVariable() {
 		if (atl_atlVariable != null && atl_atlVariable.eIsProxy()) {
-			InternalEObject oldAtl_atlVariable = atl_atlVariable;
+			InternalEObject oldAtl_atlVariable = (InternalEObject)atl_atlVariable;
 			atl_atlVariable = (LocatedElement)eResolveProxy(oldAtl_atlVariable);
 			if (atl_atlVariable != oldAtl_atlVariable) {
 				if (eNotificationRequired())
@@ -111,7 +110,6 @@ public class TC_mapVariableImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlVariable(LocatedElement newAtl_atlVariable) {
 		LocatedElement oldAtl_atlVariable = atl_atlVariable;
 		atl_atlVariable = newAtl_atlVariable;
@@ -124,7 +122,6 @@ public class TC_mapVariableImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public VariableDeclaration getQvtr_qvtrVariable() {
 		if (qvtr_qvtrVariable != null && qvtr_qvtrVariable.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrVariable = (InternalEObject)qvtr_qvtrVariable;
@@ -151,7 +148,6 @@ public class TC_mapVariableImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrVariable(VariableDeclaration newQvtr_qvtrVariable) {
 		VariableDeclaration oldQvtr_qvtrVariable = qvtr_qvtrVariable;
 		qvtr_qvtrVariable = newQvtr_qvtrVariable;

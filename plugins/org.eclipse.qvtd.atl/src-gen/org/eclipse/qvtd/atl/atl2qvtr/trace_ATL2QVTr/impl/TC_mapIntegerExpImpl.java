@@ -79,7 +79,6 @@ public class TC_mapIntegerExpImpl extends TI_mapIntegerExpImpl implements TC_map
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigInteger getPrimitive_symbol() {
 		return primitive_symbol;
 	}
@@ -89,7 +88,6 @@ public class TC_mapIntegerExpImpl extends TI_mapIntegerExpImpl implements TC_map
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_symbol(BigInteger newPrimitive_symbol) {
 		BigInteger oldPrimitive_symbol = primitive_symbol;
 		primitive_symbol = newPrimitive_symbol;

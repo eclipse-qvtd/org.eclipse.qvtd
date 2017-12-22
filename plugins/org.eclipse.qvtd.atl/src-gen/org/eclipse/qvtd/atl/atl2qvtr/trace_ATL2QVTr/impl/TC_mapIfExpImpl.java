@@ -127,10 +127,9 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlCondition() {
 		if (atl_atlCondition != null && atl_atlCondition.eIsProxy()) {
-			InternalEObject oldAtl_atlCondition = atl_atlCondition;
+			InternalEObject oldAtl_atlCondition = (InternalEObject)atl_atlCondition;
 			atl_atlCondition = (OclExpression)eResolveProxy(oldAtl_atlCondition);
 			if (atl_atlCondition != oldAtl_atlCondition) {
 				if (eNotificationRequired())
@@ -154,7 +153,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlCondition(OclExpression newAtl_atlCondition) {
 		OclExpression oldAtl_atlCondition = atl_atlCondition;
 		atl_atlCondition = newAtl_atlCondition;
@@ -167,10 +165,9 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlElse() {
 		if (atl_atlElse != null && atl_atlElse.eIsProxy()) {
-			InternalEObject oldAtl_atlElse = atl_atlElse;
+			InternalEObject oldAtl_atlElse = (InternalEObject)atl_atlElse;
 			atl_atlElse = (OclExpression)eResolveProxy(oldAtl_atlElse);
 			if (atl_atlElse != oldAtl_atlElse) {
 				if (eNotificationRequired())
@@ -194,7 +191,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlElse(OclExpression newAtl_atlElse) {
 		OclExpression oldAtl_atlElse = atl_atlElse;
 		atl_atlElse = newAtl_atlElse;
@@ -207,10 +203,9 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlThen() {
 		if (atl_atlThen != null && atl_atlThen.eIsProxy()) {
-			InternalEObject oldAtl_atlThen = atl_atlThen;
+			InternalEObject oldAtl_atlThen = (InternalEObject)atl_atlThen;
 			atl_atlThen = (OclExpression)eResolveProxy(oldAtl_atlThen);
 			if (atl_atlThen != oldAtl_atlThen) {
 				if (eNotificationRequired())
@@ -234,7 +229,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlThen(OclExpression newAtl_atlThen) {
 		OclExpression oldAtl_atlThen = atl_atlThen;
 		atl_atlThen = newAtl_atlThen;
@@ -247,7 +241,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrCondition() {
 		if (qvtr_qvtrCondition != null && qvtr_qvtrCondition.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrCondition = (InternalEObject)qvtr_qvtrCondition;
@@ -274,7 +267,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrCondition(OCLExpression newQvtr_qvtrCondition) {
 		OCLExpression oldQvtr_qvtrCondition = qvtr_qvtrCondition;
 		qvtr_qvtrCondition = newQvtr_qvtrCondition;
@@ -287,7 +279,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrElse() {
 		if (qvtr_qvtrElse != null && qvtr_qvtrElse.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrElse = (InternalEObject)qvtr_qvtrElse;
@@ -314,7 +305,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrElse(OCLExpression newQvtr_qvtrElse) {
 		OCLExpression oldQvtr_qvtrElse = qvtr_qvtrElse;
 		qvtr_qvtrElse = newQvtr_qvtrElse;
@@ -327,7 +317,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrThen() {
 		if (qvtr_qvtrThen != null && qvtr_qvtrThen.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrThen = (InternalEObject)qvtr_qvtrThen;
@@ -354,7 +343,6 @@ public class TC_mapIfExpImpl extends TI_mapIfExpImpl implements TC_mapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrThen(OCLExpression newQvtr_qvtrThen) {
 		OCLExpression oldQvtr_qvtrThen = qvtr_qvtrThen;
 		qvtr_qvtrThen = newQvtr_qvtrThen;

@@ -140,10 +140,9 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -167,7 +166,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -180,10 +178,9 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlSource() {
 		if (atl_atlSource != null && atl_atlSource.eIsProxy()) {
-			InternalEObject oldAtl_atlSource = atl_atlSource;
+			InternalEObject oldAtl_atlSource = (InternalEObject)atl_atlSource;
 			atl_atlSource = (OclExpression)eResolveProxy(oldAtl_atlSource);
 			if (atl_atlSource != oldAtl_atlSource) {
 				if (eNotificationRequired())
@@ -207,7 +204,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlSource(OclExpression newAtl_atlSource) {
 		OclExpression oldAtl_atlSource = atl_atlSource;
 		atl_atlSource = newAtl_atlSource;
@@ -220,7 +216,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_operationName() {
 		return primitive_operationName;
 	}
@@ -230,7 +225,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_operationName(String newPrimitive_operationName) {
 		String oldPrimitive_operationName = primitive_operationName;
 		primitive_operationName = newPrimitive_operationName;
@@ -243,7 +237,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Operation getQvtr_qvtrOperation() {
 		if (qvtr_qvtrOperation != null && qvtr_qvtrOperation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrOperation = (InternalEObject)qvtr_qvtrOperation;
@@ -270,7 +263,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrOperation(Operation newQvtr_qvtrOperation) {
 		Operation oldQvtr_qvtrOperation = qvtr_qvtrOperation;
 		qvtr_qvtrOperation = newQvtr_qvtrOperation;
@@ -283,7 +275,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrSource() {
 		if (qvtr_qvtrSource != null && qvtr_qvtrSource.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrSource = (InternalEObject)qvtr_qvtrSource;
@@ -310,7 +301,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrSource(OCLExpression newQvtr_qvtrSource) {
 		OCLExpression oldQvtr_qvtrSource = qvtr_qvtrSource;
 		qvtr_qvtrSource = newQvtr_qvtrSource;
@@ -323,7 +313,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationalTransformation getQvtr_qvtrTransformation() {
 		if (qvtr_qvtrTransformation != null && qvtr_qvtrTransformation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTransformation = (InternalEObject)qvtr_qvtrTransformation;
@@ -350,7 +339,6 @@ public class TC_mapOperatorCallExpImpl extends TI_mapOperatorCallExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTransformation(RelationalTransformation newQvtr_qvtrTransformation) {
 		RelationalTransformation oldQvtr_qvtrTransformation = qvtr_qvtrTransformation;
 		qvtr_qvtrTransformation = newQvtr_qvtrTransformation;

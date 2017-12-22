@@ -145,7 +145,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Attribute> getAtl_atlAttributes() {
 		if (atl_atlAttributes == null) {
 			atl_atlAttributes = new EObjectResolvingEList<Attribute>(Attribute.class, this, trace_ATL2QVTrPackage.TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__ATL_ATL_ATTRIBUTES);
@@ -158,10 +157,9 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -185,7 +183,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -198,10 +195,9 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlSource() {
 		if (atl_atlSource != null && atl_atlSource.eIsProxy()) {
-			InternalEObject oldAtl_atlSource = atl_atlSource;
+			InternalEObject oldAtl_atlSource = (InternalEObject)atl_atlSource;
 			atl_atlSource = (OclExpression)eResolveProxy(oldAtl_atlSource);
 			if (atl_atlSource != oldAtl_atlSource) {
 				if (eNotificationRequired())
@@ -225,7 +221,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlSource(OclExpression newAtl_atlSource) {
 		OclExpression oldAtl_atlSource = atl_atlSource;
 		atl_atlSource = newAtl_atlSource;
@@ -238,7 +233,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_propertyName() {
 		return primitive_propertyName;
 	}
@@ -248,7 +242,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_propertyName(String newPrimitive_propertyName) {
 		String oldPrimitive_propertyName = primitive_propertyName;
 		primitive_propertyName = newPrimitive_propertyName;
@@ -261,7 +254,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Property getQvtr_qvtrProperty() {
 		if (qvtr_qvtrProperty != null && qvtr_qvtrProperty.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrProperty = (InternalEObject)qvtr_qvtrProperty;
@@ -288,7 +280,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrProperty(Property newQvtr_qvtrProperty) {
 		Property oldQvtr_qvtrProperty = qvtr_qvtrProperty;
 		qvtr_qvtrProperty = newQvtr_qvtrProperty;
@@ -301,7 +292,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrSource() {
 		if (qvtr_qvtrSource != null && qvtr_qvtrSource.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrSource = (InternalEObject)qvtr_qvtrSource;
@@ -328,7 +318,6 @@ public class TC_mapNavigationOrAttributeCallExp_PropertyImpl extends TI_mapNavig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrSource(OCLExpression newQvtr_qvtrSource) {
 		OCLExpression oldQvtr_qvtrSource = qvtr_qvtrSource;
 		qvtr_qvtrSource = newQvtr_qvtrSource;

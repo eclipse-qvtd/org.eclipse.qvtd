@@ -81,10 +81,9 @@ public class TC_mapVariableExp_referredVariableImpl extends TI_mapVariableExp_re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public VariableExp getAtl_atlExpression1() {
 		if (atl_atlExpression1 != null && atl_atlExpression1.eIsProxy()) {
-			InternalEObject oldAtl_atlExpression1 = atl_atlExpression1;
+			InternalEObject oldAtl_atlExpression1 = (InternalEObject)atl_atlExpression1;
 			atl_atlExpression1 = (VariableExp)eResolveProxy(oldAtl_atlExpression1);
 			if (atl_atlExpression1 != oldAtl_atlExpression1) {
 				if (eNotificationRequired())
@@ -108,7 +107,6 @@ public class TC_mapVariableExp_referredVariableImpl extends TI_mapVariableExp_re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlExpression1(VariableExp newAtl_atlExpression1) {
 		VariableExp oldAtl_atlExpression1 = atl_atlExpression1;
 		atl_atlExpression1 = newAtl_atlExpression1;
@@ -121,7 +119,6 @@ public class TC_mapVariableExp_referredVariableImpl extends TI_mapVariableExp_re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.ocl.pivot.VariableExp getQvtr_qvtrExpression1() {
 		if (qvtr_qvtrExpression1 != null && qvtr_qvtrExpression1.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrExpression1 = (InternalEObject)qvtr_qvtrExpression1;
@@ -148,7 +145,6 @@ public class TC_mapVariableExp_referredVariableImpl extends TI_mapVariableExp_re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrExpression1(org.eclipse.ocl.pivot.VariableExp newQvtr_qvtrExpression1) {
 		org.eclipse.ocl.pivot.VariableExp oldQvtr_qvtrExpression1 = qvtr_qvtrExpression1;
 		qvtr_qvtrExpression1 = newQvtr_qvtrExpression1;

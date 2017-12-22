@@ -77,7 +77,6 @@ public class TC_mapBooleanExpImpl extends TI_mapBooleanExpImpl implements TC_map
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isPrimitive_symbol() {
 		return primitive_symbol;
 	}
@@ -87,7 +86,6 @@ public class TC_mapBooleanExpImpl extends TI_mapBooleanExpImpl implements TC_map
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_symbol(boolean newPrimitive_symbol) {
 		boolean oldPrimitive_symbol = primitive_symbol;
 		primitive_symbol = newPrimitive_symbol;

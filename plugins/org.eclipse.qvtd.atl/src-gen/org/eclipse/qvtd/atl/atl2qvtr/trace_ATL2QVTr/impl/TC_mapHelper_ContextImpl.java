@@ -146,10 +146,9 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclContextDefinition getAtl_atlContext() {
 		if (atl_atlContext != null && atl_atlContext.eIsProxy()) {
-			InternalEObject oldAtl_atlContext = atl_atlContext;
+			InternalEObject oldAtl_atlContext = (InternalEObject)atl_atlContext;
 			atl_atlContext = (OclContextDefinition)eResolveProxy(oldAtl_atlContext);
 			if (atl_atlContext != oldAtl_atlContext) {
 				if (eNotificationRequired())
@@ -173,7 +172,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlContext(OclContextDefinition newAtl_atlContext) {
 		OclContextDefinition oldAtl_atlContext = atl_atlContext;
 		atl_atlContext = newAtl_atlContext;
@@ -186,10 +184,9 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclFeatureDefinition getAtl_atlDefinition() {
 		if (atl_atlDefinition != null && atl_atlDefinition.eIsProxy()) {
-			InternalEObject oldAtl_atlDefinition = atl_atlDefinition;
+			InternalEObject oldAtl_atlDefinition = (InternalEObject)atl_atlDefinition;
 			atl_atlDefinition = (OclFeatureDefinition)eResolveProxy(oldAtl_atlDefinition);
 			if (atl_atlDefinition != oldAtl_atlDefinition) {
 				if (eNotificationRequired())
@@ -213,7 +210,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlDefinition(OclFeatureDefinition newAtl_atlDefinition) {
 		OclFeatureDefinition oldAtl_atlDefinition = atl_atlDefinition;
 		atl_atlDefinition = newAtl_atlDefinition;
@@ -226,10 +222,9 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Helper getAtl_atlHelper() {
 		if (atl_atlHelper != null && atl_atlHelper.eIsProxy()) {
-			InternalEObject oldAtl_atlHelper = atl_atlHelper;
+			InternalEObject oldAtl_atlHelper = (InternalEObject)atl_atlHelper;
 			atl_atlHelper = (Helper)eResolveProxy(oldAtl_atlHelper);
 			if (atl_atlHelper != oldAtl_atlHelper) {
 				if (eNotificationRequired())
@@ -253,7 +248,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlHelper(Helper newAtl_atlHelper) {
 		Helper oldAtl_atlHelper = atl_atlHelper;
 		atl_atlHelper = newAtl_atlHelper;
@@ -266,10 +260,9 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclType getAtl_atlReturnType() {
 		if (atl_atlReturnType != null && atl_atlReturnType.eIsProxy()) {
-			InternalEObject oldAtl_atlReturnType = atl_atlReturnType;
+			InternalEObject oldAtl_atlReturnType = (InternalEObject)atl_atlReturnType;
 			atl_atlReturnType = (OclType)eResolveProxy(oldAtl_atlReturnType);
 			if (atl_atlReturnType != oldAtl_atlReturnType) {
 				if (eNotificationRequired())
@@ -293,7 +286,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlReturnType(OclType newAtl_atlReturnType) {
 		OclType oldAtl_atlReturnType = atl_atlReturnType;
 		atl_atlReturnType = newAtl_atlReturnType;
@@ -306,7 +298,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariable getInvocation_mapVariable() {
 		return invocation_mapVariable;
 	}
@@ -331,7 +322,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setInvocation_mapVariable(TC_mapVariable newInvocation_mapVariable) {
 		if (newInvocation_mapVariable != invocation_mapVariable) {
 			NotificationChain msgs = null;
@@ -351,7 +341,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Function getQvtr_qvtrFunction() {
 		if (qvtr_qvtrFunction != null && qvtr_qvtrFunction.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrFunction = (InternalEObject)qvtr_qvtrFunction;
@@ -378,7 +367,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrFunction(Function newQvtr_qvtrFunction) {
 		Function oldQvtr_qvtrFunction = qvtr_qvtrFunction;
 		qvtr_qvtrFunction = newQvtr_qvtrFunction;
@@ -391,7 +379,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public FunctionParameter getQvtr_qvtrParameter() {
 		if (qvtr_qvtrParameter != null && qvtr_qvtrParameter.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrParameter = (InternalEObject)qvtr_qvtrParameter;
@@ -418,7 +405,6 @@ public class TC_mapHelper_ContextImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrParameter(FunctionParameter newQvtr_qvtrParameter) {
 		FunctionParameter oldQvtr_qvtrParameter = qvtr_qvtrParameter;
 		qvtr_qvtrParameter = newQvtr_qvtrParameter;

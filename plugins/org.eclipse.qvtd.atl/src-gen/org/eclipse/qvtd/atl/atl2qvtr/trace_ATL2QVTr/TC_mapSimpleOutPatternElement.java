@@ -10,11 +10,8 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
 import org.eclipse.m2m.atl.common.ATL.OutPattern;
-import org.eclipse.m2m.atl.common.ATL.SimpleOutPatternElement;
 
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -32,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlElement <em>Atl atl Element</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlPattern <em>Atl atl Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlRule <em>Atl atl Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getInvocation_mapVariable <em>Invocation map Variable</em>}</li>
@@ -43,42 +39,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getQvtr_qvtrRelation <em>Qvtr qvtr Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getQvtr_qvtrTemplate <em>Qvtr qvtr Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getQvtr_qvtrVariable <em>Qvtr qvtr Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getStatus <em>Status</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapSimpleOutPatternElement()
  * @model
  * @generated
  */
-public interface TC_mapSimpleOutPatternElement extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Atl atl Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Atl atl Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Atl atl Element</em>' reference.
-	 * @see #setAtl_atlElement(SimpleOutPatternElement)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapSimpleOutPatternElement_Atl_atlElement()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TC_mapSimpleOutPatternElement'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	SimpleOutPatternElement getAtl_atlElement();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getAtl_atlElement <em>Atl atl Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Atl atl Element</em>' reference.
-	 * @see #getAtl_atlElement()
-	 * @generated
-	 */
-	void setAtl_atlElement(SimpleOutPatternElement value);
-
+public interface TC_mapSimpleOutPatternElement extends TI_mapSimpleOutPatternElement {
 	/**
 	 * Returns the value of the '<em><b>Atl atl Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -351,31 +318,5 @@ public interface TC_mapSimpleOutPatternElement extends EObject {
 	 * @generated
 	 */
 	void setQvtr_qvtrVariable(TemplateVariable value);
-
-	/**
-	 * Returns the value of the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status</em>' attribute.
-	 * @see #setStatus(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapSimpleOutPatternElement_Status()
-	 * @model
-	 * @generated
-	 */
-	Boolean getStatus();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement#getStatus <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status</em>' attribute.
-	 * @see #getStatus()
-	 * @generated
-	 */
-	void setStatus(Boolean value);
 
 } // TC_mapSimpleOutPatternElement

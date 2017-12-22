@@ -77,7 +77,6 @@ public class TC_mapStringExpImpl extends TI_mapStringExpImpl implements TC_mapSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_symbol() {
 		return primitive_symbol;
 	}
@@ -87,7 +86,6 @@ public class TC_mapStringExpImpl extends TI_mapStringExpImpl implements TC_mapSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_symbol(String newPrimitive_symbol) {
 		String oldPrimitive_symbol = primitive_symbol;
 		primitive_symbol = newPrimitive_symbol;

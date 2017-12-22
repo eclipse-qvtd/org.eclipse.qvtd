@@ -182,7 +182,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Attribute> getAtl_atlAttributes() {
 		if (atl_atlAttributes == null) {
 			atl_atlAttributes = new EObjectResolvingEList<Attribute>(Attribute.class, this, trace_ATL2QVTrPackage.TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__ATL_ATL_ATTRIBUTES);
@@ -195,10 +194,9 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -222,7 +220,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -235,10 +232,9 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlSource() {
 		if (atl_atlSource != null && atl_atlSource.eIsProxy()) {
-			InternalEObject oldAtl_atlSource = atl_atlSource;
+			InternalEObject oldAtl_atlSource = (InternalEObject)atl_atlSource;
 			atl_atlSource = (OclExpression)eResolveProxy(oldAtl_atlSource);
 			if (atl_atlSource != oldAtl_atlSource) {
 				if (eNotificationRequired())
@@ -262,7 +258,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlSource(OclExpression newAtl_atlSource) {
 		OclExpression oldAtl_atlSource = atl_atlSource;
 		atl_atlSource = newAtl_atlSource;
@@ -275,7 +270,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_propertyName() {
 		return primitive_propertyName;
 	}
@@ -285,7 +279,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_propertyName(String newPrimitive_propertyName) {
 		String oldPrimitive_propertyName = primitive_propertyName;
 		primitive_propertyName = newPrimitive_propertyName;
@@ -298,7 +291,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Operation getQvtr_qvtrOperation() {
 		if (qvtr_qvtrOperation != null && qvtr_qvtrOperation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrOperation = (InternalEObject)qvtr_qvtrOperation;
@@ -325,7 +317,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrOperation(Operation newQvtr_qvtrOperation) {
 		Operation oldQvtr_qvtrOperation = qvtr_qvtrOperation;
 		qvtr_qvtrOperation = newQvtr_qvtrOperation;
@@ -338,7 +329,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public VariableExp getQvtr_qvtrSource() {
 		if (qvtr_qvtrSource != null && qvtr_qvtrSource.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrSource = (InternalEObject)qvtr_qvtrSource;
@@ -365,7 +355,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrSource(VariableExp newQvtr_qvtrSource) {
 		VariableExp oldQvtr_qvtrSource = qvtr_qvtrSource;
 		qvtr_qvtrSource = newQvtr_qvtrSource;
@@ -378,7 +367,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrSourceArgument() {
 		if (qvtr_qvtrSourceArgument != null && qvtr_qvtrSourceArgument.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrSourceArgument = (InternalEObject)qvtr_qvtrSourceArgument;
@@ -405,7 +393,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrSourceArgument(OCLExpression newQvtr_qvtrSourceArgument) {
 		OCLExpression oldQvtr_qvtrSourceArgument = qvtr_qvtrSourceArgument;
 		qvtr_qvtrSourceArgument = newQvtr_qvtrSourceArgument;
@@ -418,7 +405,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public VariableDeclaration getQvtr_qvtrThisVariable() {
 		if (qvtr_qvtrThisVariable != null && qvtr_qvtrThisVariable.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrThisVariable = (InternalEObject)qvtr_qvtrThisVariable;
@@ -445,7 +431,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrThisVariable(VariableDeclaration newQvtr_qvtrThisVariable) {
 		VariableDeclaration oldQvtr_qvtrThisVariable = qvtr_qvtrThisVariable;
 		qvtr_qvtrThisVariable = newQvtr_qvtrThisVariable;
@@ -458,7 +443,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationalTransformation getQvtr_qvtrTransformation() {
 		if (qvtr_qvtrTransformation != null && qvtr_qvtrTransformation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTransformation = (InternalEObject)qvtr_qvtrTransformation;
@@ -485,7 +469,6 @@ public class TC_mapNavigationOrAttributeCallExp_HelperImpl extends TI_mapNavigat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTransformation(RelationalTransformation newQvtr_qvtrTransformation) {
 		RelationalTransformation oldQvtr_qvtrTransformation = qvtr_qvtrTransformation;
 		qvtr_qvtrTransformation = newQvtr_qvtrTransformation;

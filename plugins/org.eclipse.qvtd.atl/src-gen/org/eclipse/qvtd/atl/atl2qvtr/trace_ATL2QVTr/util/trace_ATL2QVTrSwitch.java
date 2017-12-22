@@ -130,6 +130,8 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 			case trace_ATL2QVTrPackage.TC_MAP_IN_PATTERN: {
 				TC_mapInPattern tC_mapInPattern = (TC_mapInPattern)theEObject;
 				T result = caseTC_mapInPattern(tC_mapInPattern);
+				if (result == null) result = caseTI_mapInPattern(tC_mapInPattern);
+				if (result == null) result = caseTI_mapLocatedElement(tC_mapInPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,6 +146,13 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				T result = caseTC_mapIntegerExp(tC_mapIntegerExp);
 				if (result == null) result = caseTI_mapIntegerExp(tC_mapIntegerExp);
 				if (result == null) result = caseTI_mapOclExpression(tC_mapIntegerExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case trace_ATL2QVTrPackage.TC_MAP_LOCATED_ELEMENT: {
+				TC_mapLocatedElement tC_mapLocatedElement = (TC_mapLocatedElement)theEObject;
+				T result = caseTC_mapLocatedElement(tC_mapLocatedElement);
+				if (result == null) result = caseTI_mapLocatedElement(tC_mapLocatedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -260,18 +269,24 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 			case trace_ATL2QVTrPackage.TC_MAP_OUT_PATTERN: {
 				TC_mapOutPattern tC_mapOutPattern = (TC_mapOutPattern)theEObject;
 				T result = caseTC_mapOutPattern(tC_mapOutPattern);
+				if (result == null) result = caseTI_mapOutPattern(tC_mapOutPattern);
+				if (result == null) result = caseTI_mapLocatedElement(tC_mapOutPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT: {
 				TC_mapSimpleInPatternElement tC_mapSimpleInPatternElement = (TC_mapSimpleInPatternElement)theEObject;
 				T result = caseTC_mapSimpleInPatternElement(tC_mapSimpleInPatternElement);
+				if (result == null) result = caseTI_mapSimpleInPatternElement(tC_mapSimpleInPatternElement);
+				if (result == null) result = caseTI_mapLocatedElement(tC_mapSimpleInPatternElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT: {
 				TC_mapSimpleOutPatternElement tC_mapSimpleOutPatternElement = (TC_mapSimpleOutPatternElement)theEObject;
 				T result = caseTC_mapSimpleOutPatternElement(tC_mapSimpleOutPatternElement);
+				if (result == null) result = caseTI_mapSimpleOutPatternElement(tC_mapSimpleOutPatternElement);
+				if (result == null) result = caseTI_mapLocatedElement(tC_mapSimpleOutPatternElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -354,10 +369,23 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case trace_ATL2QVTrPackage.TI_MAP_IN_PATTERN: {
+				TI_mapInPattern tI_mapInPattern = (TI_mapInPattern)theEObject;
+				T result = caseTI_mapInPattern(tI_mapInPattern);
+				if (result == null) result = caseTI_mapLocatedElement(tI_mapInPattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP: {
 				TI_mapIntegerExp tI_mapIntegerExp = (TI_mapIntegerExp)theEObject;
 				T result = caseTI_mapIntegerExp(tI_mapIntegerExp);
 				if (result == null) result = caseTI_mapOclExpression(tI_mapIntegerExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case trace_ATL2QVTrPackage.TI_MAP_LOCATED_ELEMENT: {
+				TI_mapLocatedElement tI_mapLocatedElement = (TI_mapLocatedElement)theEObject;
+				T result = caseTI_mapLocatedElement(tI_mapLocatedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -418,6 +446,27 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				T result = caseTI_mapOperatorCallExp(tI_mapOperatorCallExp);
 				if (result == null) result = caseTI_mapOperationCallExp(tI_mapOperatorCallExp);
 				if (result == null) result = caseTI_mapOclExpression(tI_mapOperatorCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case trace_ATL2QVTrPackage.TI_MAP_OUT_PATTERN: {
+				TI_mapOutPattern tI_mapOutPattern = (TI_mapOutPattern)theEObject;
+				T result = caseTI_mapOutPattern(tI_mapOutPattern);
+				if (result == null) result = caseTI_mapLocatedElement(tI_mapOutPattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case trace_ATL2QVTrPackage.TI_MAP_SIMPLE_IN_PATTERN_ELEMENT: {
+				TI_mapSimpleInPatternElement tI_mapSimpleInPatternElement = (TI_mapSimpleInPatternElement)theEObject;
+				T result = caseTI_mapSimpleInPatternElement(tI_mapSimpleInPatternElement);
+				if (result == null) result = caseTI_mapLocatedElement(tI_mapSimpleInPatternElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case trace_ATL2QVTrPackage.TI_MAP_SIMPLE_OUT_PATTERN_ELEMENT: {
+				TI_mapSimpleOutPatternElement tI_mapSimpleOutPatternElement = (TI_mapSimpleOutPatternElement)theEObject;
+				T result = caseTI_mapSimpleOutPatternElement(tI_mapSimpleOutPatternElement);
+				if (result == null) result = caseTI_mapLocatedElement(tI_mapSimpleOutPatternElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -649,6 +698,21 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTC_mapIntegerExp(TC_mapIntegerExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TC map Located Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TC map Located Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTC_mapLocatedElement(TC_mapLocatedElement object) {
 		return null;
 	}
 
@@ -1088,6 +1152,21 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TI map In Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TI map In Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTI_mapInPattern(TI_mapInPattern object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>TI map Integer Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1099,6 +1178,21 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTI_mapIntegerExp(TI_mapIntegerExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TI map Located Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TI map Located Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTI_mapLocatedElement(TI_mapLocatedElement object) {
 		return null;
 	}
 
@@ -1219,6 +1313,51 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTI_mapOperatorCallExp(TI_mapOperatorCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TI map Out Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TI map Out Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTI_mapOutPattern(TI_mapOutPattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TI map Simple In Pattern Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TI map Simple In Pattern Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTI_mapSimpleInPatternElement(TI_mapSimpleInPatternElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>TI map Simple Out Pattern Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>TI map Simple Out Pattern Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTI_mapSimpleOutPatternElement(TI_mapSimpleOutPatternElement object) {
 		return null;
 	}
 

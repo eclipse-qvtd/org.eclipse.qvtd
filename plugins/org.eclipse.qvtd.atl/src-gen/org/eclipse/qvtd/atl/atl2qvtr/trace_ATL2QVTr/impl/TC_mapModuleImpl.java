@@ -160,10 +160,9 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -187,7 +186,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -200,7 +198,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_txName() {
 		return primitive_txName;
 	}
@@ -210,7 +207,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_txName(String newPrimitive_txName) {
 		String oldPrimitive_txName = primitive_txName;
 		primitive_txName = newPrimitive_txName;
@@ -223,7 +219,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.ocl.pivot.Package getQvtr__3() {
 		if (qvtr__3 != null && qvtr__3.eIsProxy()) {
 			InternalEObject oldQvtr__3 = (InternalEObject)qvtr__3;
@@ -250,7 +245,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr__3(org.eclipse.ocl.pivot.Package newQvtr__3) {
 		org.eclipse.ocl.pivot.Package oldQvtr__3 = qvtr__3;
 		qvtr__3 = newQvtr__3;
@@ -263,7 +257,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationModel getQvtr__4() {
 		if (qvtr__4 != null && qvtr__4.eIsProxy()) {
 			InternalEObject oldQvtr__4 = (InternalEObject)qvtr__4;
@@ -290,7 +283,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr__4(RelationModel newQvtr__4) {
 		RelationModel oldQvtr__4 = qvtr__4;
 		qvtr__4 = newQvtr__4;
@@ -303,7 +295,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ParameterVariable getQvtr__5() {
 		if (qvtr__5 != null && qvtr__5.eIsProxy()) {
 			InternalEObject oldQvtr__5 = (InternalEObject)qvtr__5;
@@ -330,7 +321,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr__5(ParameterVariable newQvtr__5) {
 		ParameterVariable oldQvtr__5 = qvtr__5;
 		qvtr__5 = newQvtr__5;
@@ -343,7 +333,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationalTransformation getQvtr_qvtrTransformation() {
 		if (qvtr_qvtrTransformation != null && qvtr_qvtrTransformation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTransformation = (InternalEObject)qvtr_qvtrTransformation;
@@ -370,7 +359,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTransformation(RelationalTransformation newQvtr_qvtrTransformation) {
 		RelationalTransformation oldQvtr_qvtrTransformation = qvtr_qvtrTransformation;
 		qvtr_qvtrTransformation = newQvtr_qvtrTransformation;
@@ -383,7 +371,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Boolean getStatus() {
 		return status;
 	}
@@ -393,7 +380,6 @@ public class TC_mapModuleImpl extends MinimalEObjectImpl.Container implements TC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(Boolean newStatus) {
 		Boolean oldStatus = status;
 		status = newStatus;

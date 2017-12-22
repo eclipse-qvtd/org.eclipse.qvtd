@@ -10,11 +10,8 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.m2m.atl.common.ATL.InPattern;
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
-import org.eclipse.m2m.atl.common.ATL.SimpleInPatternElement;
 
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -32,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlElement <em>Atl atl Element</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlPattern <em>Atl atl Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlRule <em>Atl atl Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getInvocation_mapVariable <em>Invocation map Variable</em>}</li>
@@ -49,35 +45,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
  * @model
  * @generated
  */
-public interface TC_mapSimpleInPatternElement extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Atl atl Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Atl atl Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Atl atl Element</em>' reference.
-	 * @see #setAtl_atlElement(SimpleInPatternElement)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTC_mapSimpleInPatternElement_Atl_atlElement()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TC_mapSimpleInPatternElement'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	SimpleInPatternElement getAtl_atlElement();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement#getAtl_atlElement <em>Atl atl Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Atl atl Element</em>' reference.
-	 * @see #getAtl_atlElement()
-	 * @generated
-	 */
-	void setAtl_atlElement(SimpleInPatternElement value);
-
+public interface TC_mapSimpleInPatternElement extends TI_mapSimpleInPatternElement {
 	/**
 	 * Returns the value of the '<em><b>Atl atl Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->

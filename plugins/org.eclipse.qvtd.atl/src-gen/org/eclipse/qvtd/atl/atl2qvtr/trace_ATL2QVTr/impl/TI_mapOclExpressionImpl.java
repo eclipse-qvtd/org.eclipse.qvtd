@@ -105,10 +105,9 @@ public abstract class TI_mapOclExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlExpression() {
 		if (atl_atlExpression != null && atl_atlExpression.eIsProxy()) {
-			InternalEObject oldAtl_atlExpression = atl_atlExpression;
+			InternalEObject oldAtl_atlExpression = (InternalEObject)atl_atlExpression;
 			atl_atlExpression = (OclExpression)eResolveProxy(oldAtl_atlExpression);
 			if (atl_atlExpression != oldAtl_atlExpression) {
 				if (eNotificationRequired())
@@ -132,7 +131,6 @@ public abstract class TI_mapOclExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlExpression(OclExpression newAtl_atlExpression) {
 		OclExpression oldAtl_atlExpression = atl_atlExpression;
 		atl_atlExpression = newAtl_atlExpression;
@@ -145,7 +143,6 @@ public abstract class TI_mapOclExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrExpression() {
 		if (qvtr_qvtrExpression != null && qvtr_qvtrExpression.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrExpression = (InternalEObject)qvtr_qvtrExpression;
@@ -172,7 +169,6 @@ public abstract class TI_mapOclExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrExpression(OCLExpression newQvtr_qvtrExpression) {
 		OCLExpression oldQvtr_qvtrExpression = qvtr_qvtrExpression;
 		qvtr_qvtrExpression = newQvtr_qvtrExpression;
@@ -185,7 +181,6 @@ public abstract class TI_mapOclExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Boolean getStatus() {
 		return status;
 	}
@@ -195,7 +190,6 @@ public abstract class TI_mapOclExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(Boolean newStatus) {
 		Boolean oldStatus = status;
 		status = newStatus;

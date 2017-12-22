@@ -159,10 +159,9 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlExpression() {
 		if (atl_atlExpression != null && atl_atlExpression.eIsProxy()) {
-			InternalEObject oldAtl_atlExpression = atl_atlExpression;
+			InternalEObject oldAtl_atlExpression = (InternalEObject)atl_atlExpression;
 			atl_atlExpression = (OclExpression)eResolveProxy(oldAtl_atlExpression);
 			if (atl_atlExpression != oldAtl_atlExpression) {
 				if (eNotificationRequired())
@@ -186,7 +185,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlExpression(OclExpression newAtl_atlExpression) {
 		OclExpression oldAtl_atlExpression = atl_atlExpression;
 		atl_atlExpression = newAtl_atlExpression;
@@ -199,10 +197,9 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public InPattern getAtl_atlPattern() {
 		if (atl_atlPattern != null && atl_atlPattern.eIsProxy()) {
-			InternalEObject oldAtl_atlPattern = atl_atlPattern;
+			InternalEObject oldAtl_atlPattern = (InternalEObject)atl_atlPattern;
 			atl_atlPattern = (InPattern)eResolveProxy(oldAtl_atlPattern);
 			if (atl_atlPattern != oldAtl_atlPattern) {
 				if (eNotificationRequired())
@@ -226,7 +223,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlPattern(InPattern newAtl_atlPattern) {
 		InPattern oldAtl_atlPattern = atl_atlPattern;
 		atl_atlPattern = newAtl_atlPattern;
@@ -239,10 +235,9 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MatchedRule getAtl_atlRule() {
 		if (atl_atlRule != null && atl_atlRule.eIsProxy()) {
-			InternalEObject oldAtl_atlRule = atl_atlRule;
+			InternalEObject oldAtl_atlRule = (InternalEObject)atl_atlRule;
 			atl_atlRule = (MatchedRule)eResolveProxy(oldAtl_atlRule);
 			if (atl_atlRule != oldAtl_atlRule) {
 				if (eNotificationRequired())
@@ -266,7 +261,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlRule(MatchedRule newAtl_atlRule) {
 		MatchedRule oldAtl_atlRule = atl_atlRule;
 		atl_atlRule = newAtl_atlRule;
@@ -279,7 +273,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Predicate getQvtr_p() {
 		if (qvtr_p != null && qvtr_p.eIsProxy()) {
 			InternalEObject oldQvtr_p = (InternalEObject)qvtr_p;
@@ -306,7 +299,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_p(Predicate newQvtr_p) {
 		Predicate oldQvtr_p = qvtr_p;
 		qvtr_p = newQvtr_p;
@@ -319,7 +311,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationDomain getQvtr_qvtrDomain() {
 		if (qvtr_qvtrDomain != null && qvtr_qvtrDomain.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrDomain = (InternalEObject)qvtr_qvtrDomain;
@@ -346,7 +337,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrDomain(RelationDomain newQvtr_qvtrDomain) {
 		RelationDomain oldQvtr_qvtrDomain = qvtr_qvtrDomain;
 		qvtr_qvtrDomain = newQvtr_qvtrDomain;
@@ -359,7 +349,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrExpression() {
 		if (qvtr_qvtrExpression != null && qvtr_qvtrExpression.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrExpression = (InternalEObject)qvtr_qvtrExpression;
@@ -386,7 +375,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrExpression(OCLExpression newQvtr_qvtrExpression) {
 		OCLExpression oldQvtr_qvtrExpression = qvtr_qvtrExpression;
 		qvtr_qvtrExpression = newQvtr_qvtrExpression;
@@ -399,7 +387,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Relation getQvtr_qvtrRelation() {
 		if (qvtr_qvtrRelation != null && qvtr_qvtrRelation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrRelation = (InternalEObject)qvtr_qvtrRelation;
@@ -426,7 +413,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrRelation(Relation newQvtr_qvtrRelation) {
 		Relation oldQvtr_qvtrRelation = qvtr_qvtrRelation;
 		qvtr_qvtrRelation = newQvtr_qvtrRelation;
@@ -439,7 +425,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Pattern getQvtr_w() {
 		if (qvtr_w != null && qvtr_w.eIsProxy()) {
 			InternalEObject oldQvtr_w = (InternalEObject)qvtr_w;
@@ -466,7 +451,6 @@ public class TC_mapInPattern_filterImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_w(Pattern newQvtr_w) {
 		Pattern oldQvtr_w = qvtr_w;
 		qvtr_w = newQvtr_w;

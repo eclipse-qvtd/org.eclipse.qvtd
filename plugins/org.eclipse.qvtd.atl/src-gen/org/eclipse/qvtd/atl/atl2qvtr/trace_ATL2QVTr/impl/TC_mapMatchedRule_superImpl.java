@@ -106,10 +106,9 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MatchedRule getAtl_atlChildRule() {
 		if (atl_atlChildRule != null && atl_atlChildRule.eIsProxy()) {
-			InternalEObject oldAtl_atlChildRule = atl_atlChildRule;
+			InternalEObject oldAtl_atlChildRule = (InternalEObject)atl_atlChildRule;
 			atl_atlChildRule = (MatchedRule)eResolveProxy(oldAtl_atlChildRule);
 			if (atl_atlChildRule != oldAtl_atlChildRule) {
 				if (eNotificationRequired())
@@ -133,7 +132,6 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlChildRule(MatchedRule newAtl_atlChildRule) {
 		MatchedRule oldAtl_atlChildRule = atl_atlChildRule;
 		atl_atlChildRule = newAtl_atlChildRule;
@@ -146,10 +144,9 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MatchedRule getAtl_atlSuperRule() {
 		if (atl_atlSuperRule != null && atl_atlSuperRule.eIsProxy()) {
-			InternalEObject oldAtl_atlSuperRule = atl_atlSuperRule;
+			InternalEObject oldAtl_atlSuperRule = (InternalEObject)atl_atlSuperRule;
 			atl_atlSuperRule = (MatchedRule)eResolveProxy(oldAtl_atlSuperRule);
 			if (atl_atlSuperRule != oldAtl_atlSuperRule) {
 				if (eNotificationRequired())
@@ -173,7 +170,6 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlSuperRule(MatchedRule newAtl_atlSuperRule) {
 		MatchedRule oldAtl_atlSuperRule = atl_atlSuperRule;
 		atl_atlSuperRule = newAtl_atlSuperRule;
@@ -186,7 +182,6 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Relation getQvtr_qvtrOverriddenRelation() {
 		if (qvtr_qvtrOverriddenRelation != null && qvtr_qvtrOverriddenRelation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrOverriddenRelation = (InternalEObject)qvtr_qvtrOverriddenRelation;
@@ -213,7 +208,6 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrOverriddenRelation(Relation newQvtr_qvtrOverriddenRelation) {
 		Relation oldQvtr_qvtrOverriddenRelation = qvtr_qvtrOverriddenRelation;
 		qvtr_qvtrOverriddenRelation = newQvtr_qvtrOverriddenRelation;
@@ -226,7 +220,6 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Relation getQvtr_qvtrOverridesRelation() {
 		if (qvtr_qvtrOverridesRelation != null && qvtr_qvtrOverridesRelation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrOverridesRelation = (InternalEObject)qvtr_qvtrOverridesRelation;
@@ -253,7 +246,6 @@ public class TC_mapMatchedRule_superImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrOverridesRelation(Relation newQvtr_qvtrOverridesRelation) {
 		Relation oldQvtr_qvtrOverridesRelation = qvtr_qvtrOverridesRelation;
 		qvtr_qvtrOverridesRelation = newQvtr_qvtrOverridesRelation;

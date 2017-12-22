@@ -78,7 +78,6 @@ public abstract class TI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Boolean getStatus() {
 		return status;
 	}
@@ -88,7 +87,6 @@ public abstract class TI_mapVariableExp_referredVariableImpl extends MinimalEObj
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(Boolean newStatus) {
 		Boolean oldStatus = status;
 		status = newStatus;

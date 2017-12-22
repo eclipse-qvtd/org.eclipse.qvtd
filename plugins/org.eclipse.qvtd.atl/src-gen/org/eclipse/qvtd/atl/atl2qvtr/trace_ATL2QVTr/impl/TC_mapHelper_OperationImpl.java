@@ -177,10 +177,9 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclFeatureDefinition getAtl_atlDefinition() {
 		if (atl_atlDefinition != null && atl_atlDefinition.eIsProxy()) {
-			InternalEObject oldAtl_atlDefinition = atl_atlDefinition;
+			InternalEObject oldAtl_atlDefinition = (InternalEObject)atl_atlDefinition;
 			atl_atlDefinition = (OclFeatureDefinition)eResolveProxy(oldAtl_atlDefinition);
 			if (atl_atlDefinition != oldAtl_atlDefinition) {
 				if (eNotificationRequired())
@@ -204,7 +203,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlDefinition(OclFeatureDefinition newAtl_atlDefinition) {
 		OclFeatureDefinition oldAtl_atlDefinition = atl_atlDefinition;
 		atl_atlDefinition = newAtl_atlDefinition;
@@ -217,10 +215,9 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlExpression() {
 		if (atl_atlExpression != null && atl_atlExpression.eIsProxy()) {
-			InternalEObject oldAtl_atlExpression = atl_atlExpression;
+			InternalEObject oldAtl_atlExpression = (InternalEObject)atl_atlExpression;
 			atl_atlExpression = (OclExpression)eResolveProxy(oldAtl_atlExpression);
 			if (atl_atlExpression != oldAtl_atlExpression) {
 				if (eNotificationRequired())
@@ -244,7 +241,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlExpression(OclExpression newAtl_atlExpression) {
 		OclExpression oldAtl_atlExpression = atl_atlExpression;
 		atl_atlExpression = newAtl_atlExpression;
@@ -257,10 +253,9 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Operation getAtl_atlFeature() {
 		if (atl_atlFeature != null && atl_atlFeature.eIsProxy()) {
-			InternalEObject oldAtl_atlFeature = atl_atlFeature;
+			InternalEObject oldAtl_atlFeature = (InternalEObject)atl_atlFeature;
 			atl_atlFeature = (Operation)eResolveProxy(oldAtl_atlFeature);
 			if (atl_atlFeature != oldAtl_atlFeature) {
 				if (eNotificationRequired())
@@ -284,7 +279,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlFeature(Operation newAtl_atlFeature) {
 		Operation oldAtl_atlFeature = atl_atlFeature;
 		atl_atlFeature = newAtl_atlFeature;
@@ -297,10 +291,9 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getAtl_atlModule() {
 		if (atl_atlModule != null && atl_atlModule.eIsProxy()) {
-			InternalEObject oldAtl_atlModule = atl_atlModule;
+			InternalEObject oldAtl_atlModule = (InternalEObject)atl_atlModule;
 			atl_atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldAtl_atlModule);
 			if (atl_atlModule != oldAtl_atlModule) {
 				if (eNotificationRequired())
@@ -324,7 +317,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlModule(org.eclipse.m2m.atl.common.ATL.Module newAtl_atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldAtl_atlModule = atl_atlModule;
 		atl_atlModule = newAtl_atlModule;
@@ -337,10 +329,9 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclType getAtl_atlType() {
 		if (atl_atlType != null && atl_atlType.eIsProxy()) {
-			InternalEObject oldAtl_atlType = atl_atlType;
+			InternalEObject oldAtl_atlType = (InternalEObject)atl_atlType;
 			atl_atlType = (OclType)eResolveProxy(oldAtl_atlType);
 			if (atl_atlType != oldAtl_atlType) {
 				if (eNotificationRequired())
@@ -364,7 +355,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlType(OclType newAtl_atlType) {
 		OclType oldAtl_atlType = atl_atlType;
 		atl_atlType = newAtl_atlType;
@@ -377,7 +367,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapHelper_Context getInvocation_mapHelper_Context() {
 		return invocation_mapHelper_Context;
 	}
@@ -402,7 +391,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setInvocation_mapHelper_Context(TC_mapHelper_Context newInvocation_mapHelper_Context) {
 		if (newInvocation_mapHelper_Context != invocation_mapHelper_Context) {
 			NotificationChain msgs = null;
@@ -422,7 +410,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_operationName() {
 		return primitive_operationName;
 	}
@@ -432,7 +419,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_operationName(String newPrimitive_operationName) {
 		String oldPrimitive_operationName = primitive_operationName;
 		primitive_operationName = newPrimitive_operationName;
@@ -445,7 +431,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrExpression() {
 		if (qvtr_qvtrExpression != null && qvtr_qvtrExpression.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrExpression = (InternalEObject)qvtr_qvtrExpression;
@@ -472,7 +457,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrExpression(OCLExpression newQvtr_qvtrExpression) {
 		OCLExpression oldQvtr_qvtrExpression = qvtr_qvtrExpression;
 		qvtr_qvtrExpression = newQvtr_qvtrExpression;
@@ -485,7 +469,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationalTransformation getQvtr_qvtrTransformation() {
 		if (qvtr_qvtrTransformation != null && qvtr_qvtrTransformation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTransformation = (InternalEObject)qvtr_qvtrTransformation;
@@ -512,7 +495,6 @@ public class TC_mapHelper_OperationImpl extends TI_mapHelper_OperationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTransformation(RelationalTransformation newQvtr_qvtrTransformation) {
 		RelationalTransformation oldQvtr_qvtrTransformation = qvtr_qvtrTransformation;
 		qvtr_qvtrTransformation = newQvtr_qvtrTransformation;

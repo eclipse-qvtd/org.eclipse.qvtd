@@ -104,10 +104,9 @@ public class TC_mapVariableExpImpl extends TI_mapVariableExpImpl implements TC_m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public VariableDeclaration getAtl_atlVariable() {
 		if (atl_atlVariable != null && atl_atlVariable.eIsProxy()) {
-			InternalEObject oldAtl_atlVariable = atl_atlVariable;
+			InternalEObject oldAtl_atlVariable = (InternalEObject)atl_atlVariable;
 			atl_atlVariable = (VariableDeclaration)eResolveProxy(oldAtl_atlVariable);
 			if (atl_atlVariable != oldAtl_atlVariable) {
 				if (eNotificationRequired())
@@ -131,7 +130,6 @@ public class TC_mapVariableExpImpl extends TI_mapVariableExpImpl implements TC_m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlVariable(VariableDeclaration newAtl_atlVariable) {
 		VariableDeclaration oldAtl_atlVariable = atl_atlVariable;
 		atl_atlVariable = newAtl_atlVariable;
@@ -144,7 +142,6 @@ public class TC_mapVariableExpImpl extends TI_mapVariableExpImpl implements TC_m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public WC_mapVariableExp_referredVariable getInvocation_mapVariableExp_referredVariable() {
 		return invocation_mapVariableExp_referredVariable;
 	}
@@ -169,7 +166,6 @@ public class TC_mapVariableExpImpl extends TI_mapVariableExpImpl implements TC_m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setInvocation_mapVariableExp_referredVariable(WC_mapVariableExp_referredVariable newInvocation_mapVariableExp_referredVariable) {
 		if (newInvocation_mapVariableExp_referredVariable != invocation_mapVariableExp_referredVariable) {
 			NotificationChain msgs = null;
@@ -189,7 +185,6 @@ public class TC_mapVariableExpImpl extends TI_mapVariableExpImpl implements TC_m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_varName() {
 		return primitive_varName;
 	}
@@ -199,7 +194,6 @@ public class TC_mapVariableExpImpl extends TI_mapVariableExpImpl implements TC_m
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_varName(String newPrimitive_varName) {
 		String oldPrimitive_varName = primitive_varName;
 		primitive_varName = newPrimitive_varName;

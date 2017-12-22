@@ -120,6 +120,15 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	TC_mapIntegerExp createTC_mapIntegerExp();
 
 	/**
+	 * Returns a new object of class '<em>TC map Located Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>TC map Located Element</em>'.
+	 * @generated
+	 */
+	TC_mapLocatedElement createTC_mapLocatedElement();
+
+	/**
 	 * Returns a new object of class '<em>TC map Matched Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

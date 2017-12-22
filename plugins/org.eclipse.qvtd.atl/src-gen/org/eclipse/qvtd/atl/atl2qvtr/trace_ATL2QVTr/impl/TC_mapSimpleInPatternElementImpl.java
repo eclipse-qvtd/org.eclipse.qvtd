@@ -17,11 +17,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.m2m.atl.common.ATL.InPattern;
 import org.eclipse.m2m.atl.common.ATL.MatchedRule;
-import org.eclipse.m2m.atl.common.ATL.SimpleInPatternElement;
 
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariable;
@@ -42,7 +40,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleInPatternElementImpl#getAtl_atlElement <em>Atl atl Element</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleInPatternElementImpl#getAtl_atlPattern <em>Atl atl Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleInPatternElementImpl#getAtl_atlRule <em>Atl atl Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TC_mapSimpleInPatternElementImpl#getInvocation_mapVariable <em>Invocation map Variable</em>}</li>
@@ -57,17 +54,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
  *
  * @generated
  */
-public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Container implements TC_mapSimpleInPatternElement {
-	/**
-	 * The cached value of the '{@link #getAtl_atlElement() <em>Atl atl Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAtl_atlElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected SimpleInPatternElement atl_atlElement;
-
+public class TC_mapSimpleInPatternElementImpl extends TI_mapSimpleInPatternElementImpl implements TC_mapSimpleInPatternElement {
 	/**
 	 * The cached value of the '{@link #getAtl_atlPattern() <em>Atl atl Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -202,50 +189,9 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public SimpleInPatternElement getAtl_atlElement() {
-		if (atl_atlElement != null && atl_atlElement.eIsProxy()) {
-			InternalEObject oldAtl_atlElement = atl_atlElement;
-			atl_atlElement = (SimpleInPatternElement)eResolveProxy(oldAtl_atlElement);
-			if (atl_atlElement != oldAtl_atlElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT, oldAtl_atlElement, atl_atlElement));
-			}
-		}
-		return atl_atlElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimpleInPatternElement basicGetAtl_atlElement() {
-		return atl_atlElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setAtl_atlElement(SimpleInPatternElement newAtl_atlElement) {
-		SimpleInPatternElement oldAtl_atlElement = atl_atlElement;
-		atl_atlElement = newAtl_atlElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT, oldAtl_atlElement, atl_atlElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public InPattern getAtl_atlPattern() {
 		if (atl_atlPattern != null && atl_atlPattern.eIsProxy()) {
-			InternalEObject oldAtl_atlPattern = atl_atlPattern;
+			InternalEObject oldAtl_atlPattern = (InternalEObject)atl_atlPattern;
 			atl_atlPattern = (InPattern)eResolveProxy(oldAtl_atlPattern);
 			if (atl_atlPattern != oldAtl_atlPattern) {
 				if (eNotificationRequired())
@@ -269,7 +215,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlPattern(InPattern newAtl_atlPattern) {
 		InPattern oldAtl_atlPattern = atl_atlPattern;
 		atl_atlPattern = newAtl_atlPattern;
@@ -282,10 +227,9 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MatchedRule getAtl_atlRule() {
 		if (atl_atlRule != null && atl_atlRule.eIsProxy()) {
-			InternalEObject oldAtl_atlRule = atl_atlRule;
+			InternalEObject oldAtl_atlRule = (InternalEObject)atl_atlRule;
 			atl_atlRule = (MatchedRule)eResolveProxy(oldAtl_atlRule);
 			if (atl_atlRule != oldAtl_atlRule) {
 				if (eNotificationRequired())
@@ -309,7 +253,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlRule(MatchedRule newAtl_atlRule) {
 		MatchedRule oldAtl_atlRule = atl_atlRule;
 		atl_atlRule = newAtl_atlRule;
@@ -322,7 +265,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariable getInvocation_mapVariable() {
 		return invocation_mapVariable;
 	}
@@ -347,7 +289,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setInvocation_mapVariable(TC_mapVariable newInvocation_mapVariable) {
 		if (newInvocation_mapVariable != invocation_mapVariable) {
 			NotificationChain msgs = null;
@@ -367,7 +308,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPrimitive_elementName() {
 		return primitive_elementName;
 	}
@@ -377,7 +317,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPrimitive_elementName(String newPrimitive_elementName) {
 		String oldPrimitive_elementName = primitive_elementName;
 		primitive_elementName = newPrimitive_elementName;
@@ -390,7 +329,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationDomain getQvtr_qvtrDomain() {
 		if (qvtr_qvtrDomain != null && qvtr_qvtrDomain.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrDomain = (InternalEObject)qvtr_qvtrDomain;
@@ -417,7 +355,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrDomain(RelationDomain newQvtr_qvtrDomain) {
 		RelationDomain oldQvtr_qvtrDomain = qvtr_qvtrDomain;
 		qvtr_qvtrDomain = newQvtr_qvtrDomain;
@@ -430,7 +367,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RelationDomain getQvtr_qvtrDomain1() {
 		if (qvtr_qvtrDomain1 != null && qvtr_qvtrDomain1.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrDomain1 = (InternalEObject)qvtr_qvtrDomain1;
@@ -457,7 +393,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrDomain1(RelationDomain newQvtr_qvtrDomain1) {
 		RelationDomain oldQvtr_qvtrDomain1 = qvtr_qvtrDomain1;
 		qvtr_qvtrDomain1 = newQvtr_qvtrDomain1;
@@ -470,7 +405,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DomainPattern getQvtr_qvtrPattern() {
 		if (qvtr_qvtrPattern != null && qvtr_qvtrPattern.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrPattern = (InternalEObject)qvtr_qvtrPattern;
@@ -497,7 +431,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrPattern(DomainPattern newQvtr_qvtrPattern) {
 		DomainPattern oldQvtr_qvtrPattern = qvtr_qvtrPattern;
 		qvtr_qvtrPattern = newQvtr_qvtrPattern;
@@ -510,7 +443,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Relation getQvtr_qvtrRelation() {
 		if (qvtr_qvtrRelation != null && qvtr_qvtrRelation.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrRelation = (InternalEObject)qvtr_qvtrRelation;
@@ -537,7 +469,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrRelation(Relation newQvtr_qvtrRelation) {
 		Relation oldQvtr_qvtrRelation = qvtr_qvtrRelation;
 		qvtr_qvtrRelation = newQvtr_qvtrRelation;
@@ -550,7 +481,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ObjectTemplateExp getQvtr_qvtrTemplate() {
 		if (qvtr_qvtrTemplate != null && qvtr_qvtrTemplate.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrTemplate = (InternalEObject)qvtr_qvtrTemplate;
@@ -577,7 +507,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrTemplate(ObjectTemplateExp newQvtr_qvtrTemplate) {
 		ObjectTemplateExp oldQvtr_qvtrTemplate = qvtr_qvtrTemplate;
 		qvtr_qvtrTemplate = newQvtr_qvtrTemplate;
@@ -590,7 +519,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TemplateVariable getQvtr_qvtrVariable() {
 		if (qvtr_qvtrVariable != null && qvtr_qvtrVariable.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrVariable = (InternalEObject)qvtr_qvtrVariable;
@@ -617,7 +545,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrVariable(TemplateVariable newQvtr_qvtrVariable) {
 		TemplateVariable oldQvtr_qvtrVariable = qvtr_qvtrVariable;
 		qvtr_qvtrVariable = newQvtr_qvtrVariable;
@@ -647,9 +574,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT:
-				if (resolve) return getAtl_atlElement();
-				return basicGetAtl_atlElement();
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_PATTERN:
 				if (resolve) return getAtl_atlPattern();
 				return basicGetAtl_atlPattern();
@@ -690,9 +614,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT:
-				setAtl_atlElement((SimpleInPatternElement)newValue);
-				return;
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_PATTERN:
 				setAtl_atlPattern((InPattern)newValue);
 				return;
@@ -735,9 +656,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT:
-				setAtl_atlElement((SimpleInPatternElement)null);
-				return;
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_PATTERN:
 				setAtl_atlPattern((InPattern)null);
 				return;
@@ -780,8 +698,6 @@ public class TC_mapSimpleInPatternElementImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_ELEMENT:
-				return atl_atlElement != null;
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_PATTERN:
 				return atl_atlPattern != null;
 			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT__ATL_ATL_RULE:

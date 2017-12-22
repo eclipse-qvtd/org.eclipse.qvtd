@@ -107,10 +107,9 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OclExpression getAtl_atlArgument() {
 		if (atl_atlArgument != null && atl_atlArgument.eIsProxy()) {
-			InternalEObject oldAtl_atlArgument = atl_atlArgument;
+			InternalEObject oldAtl_atlArgument = (InternalEObject)atl_atlArgument;
 			atl_atlArgument = (OclExpression)eResolveProxy(oldAtl_atlArgument);
 			if (atl_atlArgument != oldAtl_atlArgument) {
 				if (eNotificationRequired())
@@ -134,7 +133,6 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlArgument(OclExpression newAtl_atlArgument) {
 		OclExpression oldAtl_atlArgument = atl_atlArgument;
 		atl_atlArgument = newAtl_atlArgument;
@@ -147,10 +145,9 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OperationCallExp getAtl_atlParent() {
 		if (atl_atlParent != null && atl_atlParent.eIsProxy()) {
-			InternalEObject oldAtl_atlParent = atl_atlParent;
+			InternalEObject oldAtl_atlParent = (InternalEObject)atl_atlParent;
 			atl_atlParent = (OperationCallExp)eResolveProxy(oldAtl_atlParent);
 			if (atl_atlParent != oldAtl_atlParent) {
 				if (eNotificationRequired())
@@ -174,7 +171,6 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAtl_atlParent(OperationCallExp newAtl_atlParent) {
 		OperationCallExp oldAtl_atlParent = atl_atlParent;
 		atl_atlParent = newAtl_atlParent;
@@ -187,7 +183,6 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public OCLExpression getQvtr_qvtrArgument() {
 		if (qvtr_qvtrArgument != null && qvtr_qvtrArgument.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrArgument = (InternalEObject)qvtr_qvtrArgument;
@@ -214,7 +209,6 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrArgument(OCLExpression newQvtr_qvtrArgument) {
 		OCLExpression oldQvtr_qvtrArgument = qvtr_qvtrArgument;
 		qvtr_qvtrArgument = newQvtr_qvtrArgument;
@@ -227,7 +221,6 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public org.eclipse.ocl.pivot.OperationCallExp getQvtr_qvtrParent() {
 		if (qvtr_qvtrParent != null && qvtr_qvtrParent.eIsProxy()) {
 			InternalEObject oldQvtr_qvtrParent = (InternalEObject)qvtr_qvtrParent;
@@ -254,7 +247,6 @@ public class TC_mapOperationCallExp_argumentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQvtr_qvtrParent(org.eclipse.ocl.pivot.OperationCallExp newQvtr_qvtrParent) {
 		org.eclipse.ocl.pivot.OperationCallExp oldQvtr_qvtrParent = qvtr_qvtrParent;
 		qvtr_qvtrParent = newQvtr_qvtrParent;

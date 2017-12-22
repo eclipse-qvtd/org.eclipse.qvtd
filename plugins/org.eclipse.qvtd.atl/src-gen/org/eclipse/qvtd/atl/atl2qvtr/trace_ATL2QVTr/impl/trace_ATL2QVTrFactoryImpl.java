@@ -74,6 +74,7 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 			case trace_ATL2QVTrPackage.TC_MAP_IN_PATTERN: return createTC_mapInPattern();
 			case trace_ATL2QVTrPackage.TC_MAP_IN_PATTERN_FILTER: return createTC_mapInPattern_filter();
 			case trace_ATL2QVTrPackage.TC_MAP_INTEGER_EXP: return createTC_mapIntegerExp();
+			case trace_ATL2QVTrPackage.TC_MAP_LOCATED_ELEMENT: return createTC_mapLocatedElement();
 			case trace_ATL2QVTrPackage.TC_MAP_MATCHED_RULE: return createTC_mapMatchedRule();
 			case trace_ATL2QVTrPackage.TC_MAP_MATCHED_RULE_SUPER: return createTC_mapMatchedRule_super();
 			case trace_ATL2QVTrPackage.TC_MAP_MODULE: return createTC_mapModule();
@@ -113,7 +114,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapBinding createTC_mapBinding() {
 		TC_mapBindingImpl tC_mapBinding = new TC_mapBindingImpl();
 		return tC_mapBinding;
@@ -124,7 +124,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapBooleanExp createTC_mapBooleanExp() {
 		TC_mapBooleanExpImpl tC_mapBooleanExp = new TC_mapBooleanExpImpl();
 		return tC_mapBooleanExp;
@@ -135,7 +134,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapHelper createTC_mapHelper() {
 		TC_mapHelperImpl tC_mapHelper = new TC_mapHelperImpl();
 		return tC_mapHelper;
@@ -146,7 +144,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapHelper_Attribute createTC_mapHelper_Attribute() {
 		TC_mapHelper_AttributeImpl tC_mapHelper_Attribute = new TC_mapHelper_AttributeImpl();
 		return tC_mapHelper_Attribute;
@@ -157,7 +154,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapHelper_Context createTC_mapHelper_Context() {
 		TC_mapHelper_ContextImpl tC_mapHelper_Context = new TC_mapHelper_ContextImpl();
 		return tC_mapHelper_Context;
@@ -168,7 +164,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapHelper_Operation createTC_mapHelper_Operation() {
 		TC_mapHelper_OperationImpl tC_mapHelper_Operation = new TC_mapHelper_OperationImpl();
 		return tC_mapHelper_Operation;
@@ -179,7 +174,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapIfExp createTC_mapIfExp() {
 		TC_mapIfExpImpl tC_mapIfExp = new TC_mapIfExpImpl();
 		return tC_mapIfExp;
@@ -190,7 +184,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapInPattern createTC_mapInPattern() {
 		TC_mapInPatternImpl tC_mapInPattern = new TC_mapInPatternImpl();
 		return tC_mapInPattern;
@@ -201,7 +194,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapInPattern_filter createTC_mapInPattern_filter() {
 		TC_mapInPattern_filterImpl tC_mapInPattern_filter = new TC_mapInPattern_filterImpl();
 		return tC_mapInPattern_filter;
@@ -212,7 +204,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapIntegerExp createTC_mapIntegerExp() {
 		TC_mapIntegerExpImpl tC_mapIntegerExp = new TC_mapIntegerExpImpl();
 		return tC_mapIntegerExp;
@@ -223,7 +214,16 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
+	public TC_mapLocatedElement createTC_mapLocatedElement() {
+		TC_mapLocatedElementImpl tC_mapLocatedElement = new TC_mapLocatedElementImpl();
+		return tC_mapLocatedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TC_mapMatchedRule createTC_mapMatchedRule() {
 		TC_mapMatchedRuleImpl tC_mapMatchedRule = new TC_mapMatchedRuleImpl();
 		return tC_mapMatchedRule;
@@ -234,7 +234,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapMatchedRule_super createTC_mapMatchedRule_super() {
 		TC_mapMatchedRule_superImpl tC_mapMatchedRule_super = new TC_mapMatchedRule_superImpl();
 		return tC_mapMatchedRule_super;
@@ -245,7 +244,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapModule createTC_mapModule() {
 		TC_mapModuleImpl tC_mapModule = new TC_mapModuleImpl();
 		return tC_mapModule;
@@ -256,7 +254,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapNavigationOrAttributeCallExp createTC_mapNavigationOrAttributeCallExp() {
 		TC_mapNavigationOrAttributeCallExpImpl tC_mapNavigationOrAttributeCallExp = new TC_mapNavigationOrAttributeCallExpImpl();
 		return tC_mapNavigationOrAttributeCallExp;
@@ -267,7 +264,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapNavigationOrAttributeCallExp_Helper createTC_mapNavigationOrAttributeCallExp_Helper() {
 		TC_mapNavigationOrAttributeCallExp_HelperImpl tC_mapNavigationOrAttributeCallExp_Helper = new TC_mapNavigationOrAttributeCallExp_HelperImpl();
 		return tC_mapNavigationOrAttributeCallExp_Helper;
@@ -278,7 +274,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapNavigationOrAttributeCallExp_Property createTC_mapNavigationOrAttributeCallExp_Property() {
 		TC_mapNavigationOrAttributeCallExp_PropertyImpl tC_mapNavigationOrAttributeCallExp_Property = new TC_mapNavigationOrAttributeCallExp_PropertyImpl();
 		return tC_mapNavigationOrAttributeCallExp_Property;
@@ -289,7 +284,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOclExpression createTC_mapOclExpression() {
 		TC_mapOclExpressionImpl tC_mapOclExpression = new TC_mapOclExpressionImpl();
 		return tC_mapOclExpression;
@@ -300,7 +294,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOclMetamodel createTC_mapOclMetamodel() {
 		TC_mapOclMetamodelImpl tC_mapOclMetamodel = new TC_mapOclMetamodelImpl();
 		return tC_mapOclMetamodel;
@@ -311,7 +304,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOclModel_IN createTC_mapOclModel_IN() {
 		TC_mapOclModel_INImpl tC_mapOclModel_IN = new TC_mapOclModel_INImpl();
 		return tC_mapOclModel_IN;
@@ -322,7 +314,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOclModel_OUT createTC_mapOclModel_OUT() {
 		TC_mapOclModel_OUTImpl tC_mapOclModel_OUT = new TC_mapOclModel_OUTImpl();
 		return tC_mapOclModel_OUT;
@@ -333,7 +324,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOperationCallExp createTC_mapOperationCallExp() {
 		TC_mapOperationCallExpImpl tC_mapOperationCallExp = new TC_mapOperationCallExpImpl();
 		return tC_mapOperationCallExp;
@@ -344,7 +334,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOperationCallExp_Helper createTC_mapOperationCallExp_Helper() {
 		TC_mapOperationCallExp_HelperImpl tC_mapOperationCallExp_Helper = new TC_mapOperationCallExp_HelperImpl();
 		return tC_mapOperationCallExp_Helper;
@@ -355,7 +344,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOperationCallExp_Operation createTC_mapOperationCallExp_Operation() {
 		TC_mapOperationCallExp_OperationImpl tC_mapOperationCallExp_Operation = new TC_mapOperationCallExp_OperationImpl();
 		return tC_mapOperationCallExp_Operation;
@@ -366,7 +354,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOperationCallExp_argument createTC_mapOperationCallExp_argument() {
 		TC_mapOperationCallExp_argumentImpl tC_mapOperationCallExp_argument = new TC_mapOperationCallExp_argumentImpl();
 		return tC_mapOperationCallExp_argument;
@@ -377,7 +364,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOperatorCallExp createTC_mapOperatorCallExp() {
 		TC_mapOperatorCallExpImpl tC_mapOperatorCallExp = new TC_mapOperatorCallExpImpl();
 		return tC_mapOperatorCallExp;
@@ -388,7 +374,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapOutPattern createTC_mapOutPattern() {
 		TC_mapOutPatternImpl tC_mapOutPattern = new TC_mapOutPatternImpl();
 		return tC_mapOutPattern;
@@ -399,7 +384,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapSimpleInPatternElement createTC_mapSimpleInPatternElement() {
 		TC_mapSimpleInPatternElementImpl tC_mapSimpleInPatternElement = new TC_mapSimpleInPatternElementImpl();
 		return tC_mapSimpleInPatternElement;
@@ -410,7 +394,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapSimpleOutPatternElement createTC_mapSimpleOutPatternElement() {
 		TC_mapSimpleOutPatternElementImpl tC_mapSimpleOutPatternElement = new TC_mapSimpleOutPatternElementImpl();
 		return tC_mapSimpleOutPatternElement;
@@ -421,7 +404,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapStringExp createTC_mapStringExp() {
 		TC_mapStringExpImpl tC_mapStringExp = new TC_mapStringExpImpl();
 		return tC_mapStringExp;
@@ -432,7 +414,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariable createTC_mapVariable() {
 		TC_mapVariableImpl tC_mapVariable = new TC_mapVariableImpl();
 		return tC_mapVariable;
@@ -443,7 +424,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariableExp createTC_mapVariableExp() {
 		TC_mapVariableExpImpl tC_mapVariableExp = new TC_mapVariableExpImpl();
 		return tC_mapVariableExp;
@@ -454,7 +434,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariableExp_referredVariable createTC_mapVariableExp_referredVariable() {
 		TC_mapVariableExp_referredVariableImpl tC_mapVariableExp_referredVariable = new TC_mapVariableExp_referredVariableImpl();
 		return tC_mapVariableExp_referredVariable;
@@ -465,7 +444,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariableExp_referredVariable_Helper createTC_mapVariableExp_referredVariable_Helper() {
 		TC_mapVariableExp_referredVariable_HelperImpl tC_mapVariableExp_referredVariable_Helper = new TC_mapVariableExp_referredVariable_HelperImpl();
 		return tC_mapVariableExp_referredVariable_Helper;
@@ -476,7 +454,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TC_mapVariableExp_referredVariable_VariableDeclaration createTC_mapVariableExp_referredVariable_VariableDeclaration() {
 		TC_mapVariableExp_referredVariable_VariableDeclarationImpl tC_mapVariableExp_referredVariable_VariableDeclaration = new TC_mapVariableExp_referredVariable_VariableDeclarationImpl();
 		return tC_mapVariableExp_referredVariable_VariableDeclaration;
@@ -487,7 +464,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public WC_mapVariableExp_referredVariable createWC_mapVariableExp_referredVariable() {
 		WC_mapVariableExp_referredVariableImpl wC_mapVariableExp_referredVariable = new WC_mapVariableExp_referredVariableImpl();
 		return wC_mapVariableExp_referredVariable;
@@ -498,7 +474,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public WC_mapVariableExp_referredVariable_Helper createWC_mapVariableExp_referredVariable_Helper() {
 		WC_mapVariableExp_referredVariable_HelperImpl wC_mapVariableExp_referredVariable_Helper = new WC_mapVariableExp_referredVariable_HelperImpl();
 		return wC_mapVariableExp_referredVariable_Helper;
@@ -509,7 +484,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public WC_mapVariableExp_referredVariable_VariableDeclaration createWC_mapVariableExp_referredVariable_VariableDeclaration() {
 		WC_mapVariableExp_referredVariable_VariableDeclarationImpl wC_mapVariableExp_referredVariable_VariableDeclaration = new WC_mapVariableExp_referredVariable_VariableDeclarationImpl();
 		return wC_mapVariableExp_referredVariable_VariableDeclaration;
@@ -520,7 +494,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public WI_mapVariableExp_referredVariable_Helper createWI_mapVariableExp_referredVariable_Helper() {
 		WI_mapVariableExp_referredVariable_HelperImpl wI_mapVariableExp_referredVariable_Helper = new WI_mapVariableExp_referredVariable_HelperImpl();
 		return wI_mapVariableExp_referredVariable_Helper;
@@ -531,7 +504,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public WI_mapVariableExp_referredVariable_VariableDeclaration createWI_mapVariableExp_referredVariable_VariableDeclaration() {
 		WI_mapVariableExp_referredVariable_VariableDeclarationImpl wI_mapVariableExp_referredVariable_VariableDeclaration = new WI_mapVariableExp_referredVariable_VariableDeclarationImpl();
 		return wI_mapVariableExp_referredVariable_VariableDeclaration;
@@ -542,7 +514,6 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public trace_ATL2QVTrPackage gettrace_ATL2QVTrPackage() {
 		return (trace_ATL2QVTrPackage)getEPackage();
 	}
