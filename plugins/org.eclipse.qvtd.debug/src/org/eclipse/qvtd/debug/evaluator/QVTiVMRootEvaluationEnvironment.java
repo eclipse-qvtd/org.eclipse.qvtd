@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
@@ -35,42 +36,42 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnviron
 
 public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements QVTiVMEvaluationEnvironment
 {
-//	private IContext myContext;
+	//	private IContext myContext;
 	private List<Runnable> myDeferredTasks;
-//    private EObjectEStructuralFeaturePair myLastAssignLvalue;	  
-//    private ModelParameterExtent myUnboundExtent;
-    private boolean myIsDeferedExecution;
-//    private QvtRuntimeException myException;
-//    private Trace myTraces;
+	//    private EObjectEStructuralFeaturePair myLastAssignLvalue;
+	//    private ModelParameterExtent myUnboundExtent;
+	private boolean myIsDeferedExecution;
+	//    private QvtRuntimeException myException;
+	//    private Trace myTraces;
 	private @NonNull Element myCurrentIP;
 	private final long id;
 	private final @NonNull Variable pcVariable;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
 
-    public QVTiVMRootEvaluationEnvironment(@NonNull QVTiVMExecutor vmExecutor, @NonNull Transformation executableObject, long id) {
+	public QVTiVMRootEvaluationEnvironment(@NonNull QVTiVMExecutor vmExecutor, @NonNull Transformation executableObject, long id) {
 		super(vmExecutor, executableObject);
 		myCurrentIP = executableObject;
 		this.id = id;
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName("$pc");
 		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.NAMED_ELEMENT.getName());
-		pcVariable.setType(environmentFactory.getMetamodelManager().getASClass(typeName));
+		pcVariable.setType(((EnvironmentFactoryInternalExtension)environmentFactory).getASClass(typeName));
 	}
 
 	@Override
 	public @NonNull QVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public @NonNull VariableFinder createVariableFinder(boolean isStoreValues) {
 		return new QVTiVariableFinder(this, isStoreValues);
 	}
 
-//    @Override
-//    IContext getContext() {
-//    	return myContext;
-//    }
+	//    @Override
+	//    IContext getContext() {
+	//    	return myContext;
+	//    }
 
 	@Override
 	public @NonNull Element getCurrentIP() {
@@ -79,14 +80,14 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 
 	@Override
 	public @NonNull UnitLocation getCurrentLocation() {
-//		if (myCurrentIP == null) {
-//			return null;
-//		}
-//		else {
+		//		if (myCurrentIP == null) {
+		//			return null;
+		//		}
+		//		else {
 		int startPosition = ASTBindingHelper.getStartPosition(myCurrentIP);
 		int endPosition = ASTBindingHelper.getEndPosition(myCurrentIP);
-			return new UnitLocation(startPosition, endPosition, this, myCurrentIP); 
-//		}
+		return new UnitLocation(startPosition, endPosition, this, myCurrentIP);
+		//		}
 	}
 
 	@Override
@@ -104,10 +105,10 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		return 1;
 	}
 
-//    @Override
-//    public QvtRuntimeException getException() {
-//    	return myException;
-//    }
+	//    @Override
+	//    public QvtRuntimeException getException() {
+	//    	return myException;
+	//    }
 
 	@Override
 	public long getID() {
@@ -144,32 +145,32 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		return this;
 	}
 
-    @Override
+	@Override
 	public boolean isDeferredExecution() {
 		return myIsDeferedExecution;
 	}
-	    
+
 	@Override
 	public void processDeferredTasks() {
 		if (myDeferredTasks != null) {
 			try {
-				myIsDeferedExecution = true;	    			
-				// make me re-entrant in case of errorenous call to #addDeferredTask() 
+				myIsDeferedExecution = true;
+				// make me re-entrant in case of errorenous call to #addDeferredTask()
 				// from running the task => concurrent modification exception
 				// This error condition should be handled elsewhere
 				List<Runnable> tasksCopy = new ArrayList<Runnable>(myDeferredTasks);
-			    for (Runnable task : tasksCopy) {
-		            task.run();
-		        }
+				for (Runnable task : tasksCopy) {
+					task.run();
+				}
 			} finally {
-				myIsDeferedExecution = false;	    			
+				myIsDeferedExecution = false;
 			}
 		}
 	}
-	
-    protected void saveThrownException(@NonNull VMRuntimeException exception) {
-//    	myException = exception;
-    }
+
+	protected void saveThrownException(@NonNull VMRuntimeException exception) {
+		//    	myException = exception;
+	}
 
 	@Override
 	public @NonNull Element setCurrentIP(@NonNull Element element) {
@@ -178,9 +179,9 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		return prevValue;
 	}
 
-    public void setException(@NonNull VMRuntimeException exception) {
-    	saveThrownException(exception);
-    }
+	public void setException(@NonNull VMRuntimeException exception) {
+		saveThrownException(exception);
+	}
 
 	@Override
 	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
@@ -190,7 +191,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		} catch (Exception e) {
 			getDebugCore().error("Failed to build VM stack trace", e); //$NON-NLS-1$
 		}
-		
+
 		throw exception;
 	}
 }

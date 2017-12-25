@@ -63,9 +63,9 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.FinalAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
@@ -1311,7 +1311,7 @@ public class OperationDependencyAnalysis
 				bodyExpression = ClassUtil.nonNullState(operation.getBodyExpression());
 				ExpressionInOCL specification;
 				try {
-					specification = operationDependencyAnalysis.metamodelManager.parseSpecification(bodyExpression);
+					specification = operationDependencyAnalysis.environmentFactory.parseSpecification(bodyExpression);
 				} catch (ParserException e) {
 					throw new IllegalStateException(e);
 				}
@@ -1392,6 +1392,7 @@ public class OperationDependencyAnalysis
 		}
 	}
 
+	private final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 	private final @NonNull MetamodelManager metamodelManager;
 	private final @NonNull CompleteModel completeModel;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
@@ -1417,7 +1418,7 @@ public class OperationDependencyAnalysis
 	private final @NonNull Set<@NonNull OperationAnalysis> refining = new HashSet<>();
 
 	public OperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
-		EnvironmentFactory environmentFactory = containmentAnalysis.getEnvironmentFactory();
+		this.environmentFactory = (EnvironmentFactoryInternalExtension) containmentAnalysis.getEnvironmentFactory();
 		this.metamodelManager = environmentFactory.getMetamodelManager();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);

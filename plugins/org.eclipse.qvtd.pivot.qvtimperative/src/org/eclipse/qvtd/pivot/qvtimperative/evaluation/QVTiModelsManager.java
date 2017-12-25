@@ -31,6 +31,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
@@ -51,7 +52,7 @@ import com.google.common.collect.Iterables;
 public class QVTiModelsManager
 {
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
-	protected final @NonNull MetamodelManager metamodelManager;
+	protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
 	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull Resource> modelResourceMap = new HashMap<>();
@@ -89,7 +90,7 @@ public class QVTiModelsManager
 	 */
 	public QVTiModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		this.transformationAnalysis = transformationAnalysis;
-		this.metamodelManager = transformationAnalysis.getMetamodelManager();
+		this.environmentFactory = (EnvironmentFactoryInternalExtension) transformationAnalysis.getEnvironmentFactory();
 		this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 		int cacheIndexes = transformationAnalysis.getCacheIndexes();
 		this.unnavigableOpposites = new @NonNull Map<?, ?>[cacheIndexes];
@@ -217,7 +218,7 @@ public class QVTiModelsManager
 	}
 
 	public @NonNull MetamodelManager getMetamodelManager() {
-		return metamodelManager;
+		return environmentFactory.getMetamodelManager();
 	}
 
 	/**
@@ -273,11 +274,11 @@ public class QVTiModelsManager
 		Type objectType = null;
 		if (ePackage == PivotPackage.eINSTANCE) {
 			String name = ClassUtil.nonNullEMF(eClass.getName());
-			objectType = metamodelManager.getASClass(name);
+			objectType = environmentFactory.getASClass(name);
 		}
 		else {
 			try {
-				objectType = metamodelManager.getASOf(Type.class,  eClass);
+				objectType = environmentFactory.getASOf(Type.class,  eClass);
 			} catch (ParserException e) {
 				// FIXME				if (!generatedErrorMessage) {
 				//					generatedErrorMessage = true;
@@ -285,7 +286,7 @@ public class QVTiModelsManager
 				//				}
 			}
 		}
-		return (objectType != null) && objectType.conformsTo(metamodelManager.getStandardLibrary(), requiredType);
+		return (objectType != null) && objectType.conformsTo(environmentFactory.getStandardLibrary(), requiredType);
 	}
 
 	public void saveContents() {

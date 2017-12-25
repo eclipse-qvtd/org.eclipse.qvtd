@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VoidType;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -112,7 +113,7 @@ public class QVTm2QVTs extends ScheduleManager
 		assert  bodyExpression != null;
 		ExpressionInOCL specification;
 		try {
-			specification = getEnvironmentFactory().getMetamodelManager().parseSpecification(bodyExpression);
+			specification = ((EnvironmentFactoryInternalExtension)getEnvironmentFactory()).parseSpecification(bodyExpression);
 			OperationDatum operationDatum = createOperationDatum(operationCallExp);
 			OperationRegion operationRegion = operationDatum2operationRegion.get(operationDatum);
 			if (operationRegion == null) {

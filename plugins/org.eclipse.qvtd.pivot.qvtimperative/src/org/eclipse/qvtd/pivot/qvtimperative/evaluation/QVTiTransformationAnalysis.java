@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -340,6 +341,10 @@ public class QVTiTransformationAnalysis
 
 	public @NonNull Map<@NonNull Property, @NonNull Integer> getCaches() {
 		return property2cacheIndex;
+	}
+
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
+		return environmentFactory;
 	}
 
 	public @NonNull Set<@NonNull Mapping> getHazardousMappings() {

@@ -28,9 +28,9 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -66,13 +66,12 @@ public class UMLX2QVTr extends QVTrelationHelper
 {
 	protected static class CreateVisitor extends AbstractExtendingUMLXVisitor<@Nullable Element, @NonNull UMLX2QVTr>
 	{
-		protected final @NonNull MetamodelManager metamodelManager;
+		protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
 		protected final @NonNull RelationModel qvtrModel;
 
 		public CreateVisitor(@NonNull UMLX2QVTr context, @NonNull RelationModel qvtrModel) {
 			super(context);
-			EnvironmentFactory environmentFactory = context.getEnvironmentFactory();
-			this.metamodelManager = environmentFactory.getMetamodelManager();
+			this.environmentFactory = (EnvironmentFactoryInternalExtension) context.getEnvironmentFactory();
 			this.qvtrModel = qvtrModel;
 		}
 
@@ -123,6 +122,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			if (packagePath != null) {
 				for (StringTokenizer tokenizer = new StringTokenizer(packagePath, "::"); tokenizer.hasMoreTokens(); ) {
 					String token = tokenizer.nextToken();
+					assert token != null;
 					asPackage = getPackage(asPackage, token);
 				}
 			}
@@ -149,7 +149,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			for (@NonNull TxPackageNode txPackageNode : UMLXUtil.getOwnedTxPackageNodes(txDiagram)) {
 				for (@NonNull String name : UMLXUtil.getImportAliases(txPackageNode)) {
 					try {
-						org.eclipse.ocl.pivot.Package asImportedPackage = metamodelManager.getASOf(org.eclipse.ocl.pivot.Package.class, txPackageNode.getReferredEPackage());
+						org.eclipse.ocl.pivot.Package asImportedPackage = environmentFactory.getASOf(org.eclipse.ocl.pivot.Package.class, txPackageNode.getReferredEPackage());
 						if (asImportedPackage != null) {
 							Import qvtrImport = NameUtil.getNameable(qvtrImports, name);
 							if (qvtrImport != null) {
@@ -168,19 +168,25 @@ public class UMLX2QVTr extends QVTrelationHelper
 			}
 			//
 			Iterables.addAll(QVTrelationUtil.Internal.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
-			QVTbaseUtil.getContextVariable(metamodelManager.getStandardLibrary(), qvtrRelationalTransformation);
+			QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), qvtrRelationalTransformation);
 			return qvtrRelationalTransformation;
 		}
 
 		@Override
 		public @Nullable Element visitTxKeyNode(@NonNull TxKeyNode txKeyNode) {
 			EClass eClass = UMLXUtil.getReferredEClass(txKeyNode);
-			org.eclipse.ocl.pivot.Class asClass = metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Class.class, eClass);
-			assert asClass != null;
-			List<@NonNull Property> asProperties = new ArrayList<>();
-			createAll(UMLXUtil.getOwnedTxPartNodes(txKeyNode), asProperties);
-			Key asKey = context.createKey(asClass, asProperties);
-			context.install(txKeyNode, asKey);
+			Key asKey = null;
+			try {
+				org.eclipse.ocl.pivot.Class asClass = environmentFactory.getASOf(org.eclipse.ocl.pivot.Class.class, eClass);
+				assert asClass != null;
+				List<@NonNull Property> asProperties = new ArrayList<>();
+				createAll(UMLXUtil.getOwnedTxPartNodes(txKeyNode), asProperties);
+				asKey = context.createKey(asClass, asProperties);
+				context.install(txKeyNode, asKey);
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return asKey;
 		}
 
@@ -193,10 +199,16 @@ public class UMLX2QVTr extends QVTrelationHelper
 		@Override
 		public @Nullable Element visitTxPartNode(@NonNull TxPartNode txPartNode) {
 			EStructuralFeature eStructuralFeature = UMLXUtil.getReferredEStructuralFeature(txPartNode);
-			Property asProperty = metamodelManager.getASOfEcore(Property.class, eStructuralFeature);
-			assert asProperty != null;
-			if (txPartNode.isIsOpposite()) {
-				asProperty = asProperty.getOpposite();
+			Property asProperty = null;
+			try {
+				asProperty = environmentFactory.getASOf(Property.class, eStructuralFeature);
+				assert asProperty != null;
+				if (txPartNode.isIsOpposite()) {
+					asProperty = asProperty.getOpposite();
+				}
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			return asProperty;
 		}
@@ -225,7 +237,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			List<org.eclipse.ocl.pivot.@NonNull Package> usedPackages = new ArrayList<>();
 			for (@NonNull TxPackageNode txPackageNode : UMLXUtil.getUsedTxPackageNodes(txTypedModelNode)) {
 				try {
-					org.eclipse.ocl.pivot.Package asPackage = metamodelManager.getASOf(org.eclipse.ocl.pivot.Package.class, txPackageNode.getReferredEPackage());
+					org.eclipse.ocl.pivot.Package asPackage = environmentFactory.getASOf(org.eclipse.ocl.pivot.Package.class, txPackageNode.getReferredEPackage());
 					if (asPackage != null) {
 						usedPackages.add(asPackage);
 					}
