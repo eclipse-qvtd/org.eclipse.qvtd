@@ -1594,6 +1594,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlSource() {
 		return (EReference)tC_mapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(2);
 	}
@@ -1603,6 +1604,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapNavigationOrAttributeCallExp_Property_Primitive_propertyName() {
 		return (EAttribute)tC_mapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(3);
 	}
@@ -1612,6 +1614,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrProperty() {
 		return (EReference)tC_mapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(4);
 	}
@@ -1621,6 +1624,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrSource() {
 		return (EReference)tC_mapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(5);
 	}
@@ -1630,6 +1634,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOclExpression() {
 		return tC_mapOclExpressionEClass;
 	}
@@ -1639,6 +1644,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOclMetamodel() {
 		return tC_mapOclMetamodelEClass;
 	}
@@ -1648,6 +1654,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclMetamodel_Atl_oclMetamodel() {
 		return (EReference)tC_mapOclMetamodelEClass.getEStructuralFeatures().get(0);
 	}
@@ -1657,6 +1664,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOclMetamodel_Primitive_tmName() {
 		return (EAttribute)tC_mapOclMetamodelEClass.getEStructuralFeatures().get(1);
 	}
@@ -1666,6 +1674,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclMetamodel_Qvtr_qvtrTypedModel() {
 		return (EReference)tC_mapOclMetamodelEClass.getEStructuralFeatures().get(2);
 	}
@@ -1675,6 +1684,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOclMetamodel_Status() {
 		return (EAttribute)tC_mapOclMetamodelEClass.getEStructuralFeatures().get(3);
 	}
@@ -1684,6 +1694,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOclModel_IN() {
 		return tC_mapOclModel_INEClass;
 	}
@@ -1693,6 +1704,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_IN_Atl_atlModule() {
 		return (EReference)tC_mapOclModel_INEClass.getEStructuralFeatures().get(0);
 	}
@@ -1702,6 +1714,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_IN_Atl_oclMetamodel() {
 		return (EReference)tC_mapOclModel_INEClass.getEStructuralFeatures().get(1);
 	}
@@ -1711,6 +1724,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_IN_Atl_oclModel() {
 		return (EReference)tC_mapOclModel_INEClass.getEStructuralFeatures().get(2);
 	}
@@ -1720,6 +1734,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOclModel_IN_Primitive_tmName() {
 		return (EAttribute)tC_mapOclModel_INEClass.getEStructuralFeatures().get(3);
 	}
@@ -1729,6 +1744,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_IN_Qvtr_qvtrTransformation() {
 		return (EReference)tC_mapOclModel_INEClass.getEStructuralFeatures().get(4);
 	}
@@ -1738,6 +1754,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_IN_Qvtr_qvtrTypedModel() {
 		return (EReference)tC_mapOclModel_INEClass.getEStructuralFeatures().get(5);
 	}
@@ -1747,6 +1764,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOclModel_OUT() {
 		return tC_mapOclModel_OUTEClass;
 	}
@@ -1756,6 +1774,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_OUT_Atl_atlModule() {
 		return (EReference)tC_mapOclModel_OUTEClass.getEStructuralFeatures().get(0);
 	}
@@ -1765,6 +1784,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_OUT_Atl_oclMetamodel() {
 		return (EReference)tC_mapOclModel_OUTEClass.getEStructuralFeatures().get(1);
 	}
@@ -1774,6 +1794,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_OUT_Atl_oclModel() {
 		return (EReference)tC_mapOclModel_OUTEClass.getEStructuralFeatures().get(2);
 	}
@@ -1783,6 +1804,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOclModel_OUT_Primitive_tmName() {
 		return (EAttribute)tC_mapOclModel_OUTEClass.getEStructuralFeatures().get(3);
 	}
@@ -1792,6 +1814,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_OUT_Qvtr_qvtrTransformation() {
 		return (EReference)tC_mapOclModel_OUTEClass.getEStructuralFeatures().get(4);
 	}
@@ -1801,6 +1824,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOclModel_OUT_Qvtr_qvtrTypedModel() {
 		return (EReference)tC_mapOclModel_OUTEClass.getEStructuralFeatures().get(5);
 	}
@@ -1810,6 +1834,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOperationCallExp() {
 		return tC_mapOperationCallExpEClass;
 	}
@@ -1819,6 +1844,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOperationCallExp_Helper() {
 		return tC_mapOperationCallExp_HelperEClass;
 	}
@@ -1828,6 +1854,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Atl_atlModule() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -1837,6 +1864,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Atl_atlOperations() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -1846,6 +1874,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Atl_atlSource() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -1855,6 +1884,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOperationCallExp_Helper_Primitive_operationName() {
 		return (EAttribute)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(3);
 	}
@@ -1864,6 +1894,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Qvtr_qvtrOperation() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(4);
 	}
@@ -1873,6 +1904,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Qvtr_qvtrSource() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(5);
 	}
@@ -1882,6 +1914,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Qvtr_qvtrSourceArgument() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(6);
 	}
@@ -1891,6 +1924,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Qvtr_qvtrThisVariable() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(7);
 	}
@@ -1900,6 +1934,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Helper_Qvtr_qvtrTransformation() {
 		return (EReference)tC_mapOperationCallExp_HelperEClass.getEStructuralFeatures().get(8);
 	}
@@ -1909,6 +1944,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOperationCallExp_Operation() {
 		return tC_mapOperationCallExp_OperationEClass;
 	}
@@ -1918,6 +1954,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Operation_Atl_atlModule() {
 		return (EReference)tC_mapOperationCallExp_OperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1927,6 +1964,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Operation_Atl_atlOperations() {
 		return (EReference)tC_mapOperationCallExp_OperationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1936,6 +1974,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Operation_Atl_atlSource() {
 		return (EReference)tC_mapOperationCallExp_OperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -1945,6 +1984,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOperationCallExp_Operation_Primitive_operationName() {
 		return (EAttribute)tC_mapOperationCallExp_OperationEClass.getEStructuralFeatures().get(3);
 	}
@@ -1954,6 +1994,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Operation_Qvtr_qvtrOperation() {
 		return (EReference)tC_mapOperationCallExp_OperationEClass.getEStructuralFeatures().get(4);
 	}
@@ -1963,6 +2004,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_Operation_Qvtr_qvtrSource() {
 		return (EReference)tC_mapOperationCallExp_OperationEClass.getEStructuralFeatures().get(5);
 	}
@@ -1972,6 +2014,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOperationCallExp_argument() {
 		return tC_mapOperationCallExp_argumentEClass;
 	}
@@ -1981,6 +2024,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_argument_Atl_atlArgument() {
 		return (EReference)tC_mapOperationCallExp_argumentEClass.getEStructuralFeatures().get(0);
 	}
@@ -1990,6 +2034,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_argument_Atl_atlParent() {
 		return (EReference)tC_mapOperationCallExp_argumentEClass.getEStructuralFeatures().get(1);
 	}
@@ -1999,6 +2044,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_argument_Qvtr_qvtrArgument() {
 		return (EReference)tC_mapOperationCallExp_argumentEClass.getEStructuralFeatures().get(2);
 	}
@@ -2008,6 +2054,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperationCallExp_argument_Qvtr_qvtrParent() {
 		return (EReference)tC_mapOperationCallExp_argumentEClass.getEStructuralFeatures().get(3);
 	}
@@ -2017,6 +2064,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOperatorCallExp() {
 		return tC_mapOperatorCallExpEClass;
 	}
@@ -2026,6 +2074,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperatorCallExp_Atl_atlModule() {
 		return (EReference)tC_mapOperatorCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2035,6 +2084,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperatorCallExp_Atl_atlSource() {
 		return (EReference)tC_mapOperatorCallExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -2044,6 +2094,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOperatorCallExp_Primitive_operationName() {
 		return (EAttribute)tC_mapOperatorCallExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -2053,6 +2104,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperatorCallExp_Qvtr_qvtrOperation() {
 		return (EReference)tC_mapOperatorCallExpEClass.getEStructuralFeatures().get(3);
 	}
@@ -2062,6 +2114,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperatorCallExp_Qvtr_qvtrSource() {
 		return (EReference)tC_mapOperatorCallExpEClass.getEStructuralFeatures().get(4);
 	}
@@ -2071,6 +2124,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOperatorCallExp_Qvtr_qvtrTransformation() {
 		return (EReference)tC_mapOperatorCallExpEClass.getEStructuralFeatures().get(5);
 	}
@@ -2080,6 +2134,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapOutPattern() {
 		return tC_mapOutPatternEClass;
 	}
@@ -2089,6 +2144,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOutPattern_Atl_atlModule() {
 		return (EReference)tC_mapOutPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -2098,6 +2154,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOutPattern_Atl_atlPattern() {
 		return (EReference)tC_mapOutPatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -2107,6 +2164,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOutPattern_Atl_atlRule() {
 		return (EReference)tC_mapOutPatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -2116,6 +2174,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOutPattern_Qvtr_qvtrDomain() {
 		return (EReference)tC_mapOutPatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -2125,6 +2184,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOutPattern_Qvtr_qvtrRelation() {
 		return (EReference)tC_mapOutPatternEClass.getEStructuralFeatures().get(4);
 	}
@@ -2134,6 +2194,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapOutPattern_Qvtr_qvtrTypedModel() {
 		return (EReference)tC_mapOutPatternEClass.getEStructuralFeatures().get(5);
 	}
@@ -2143,6 +2204,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapOutPattern_Status() {
 		return (EAttribute)tC_mapOutPatternEClass.getEStructuralFeatures().get(6);
 	}
@@ -2152,6 +2214,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapSimpleInPatternElement() {
 		return tC_mapSimpleInPatternElementEClass;
 	}
@@ -2161,6 +2224,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Atl_atlElement() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -2170,6 +2234,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Atl_atlPattern() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -2179,6 +2244,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Atl_atlRule() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -2188,6 +2254,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Invocation_mapVariable() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(3);
 	}
@@ -2197,6 +2264,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapSimpleInPatternElement_Primitive_elementName() {
 		return (EAttribute)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(4);
 	}
@@ -2206,6 +2274,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(5);
 	}
@@ -2215,6 +2284,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain1() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(6);
 	}
@@ -2224,6 +2294,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Qvtr_qvtrPattern() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(7);
 	}
@@ -2233,6 +2304,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Qvtr_qvtrRelation() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(8);
 	}
@@ -2242,6 +2314,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Qvtr_qvtrTemplate() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(9);
 	}
@@ -2251,6 +2324,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleInPatternElement_Qvtr_qvtrVariable() {
 		return (EReference)tC_mapSimpleInPatternElementEClass.getEStructuralFeatures().get(10);
 	}
@@ -2260,6 +2334,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapSimpleOutPatternElement() {
 		return tC_mapSimpleOutPatternElementEClass;
 	}
@@ -2269,6 +2344,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Atl_atlElement() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -2278,6 +2354,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Atl_atlPattern() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -2287,6 +2364,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Atl_atlRule() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -2296,6 +2374,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Invocation_mapVariable() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(3);
 	}
@@ -2305,6 +2384,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapSimpleOutPatternElement_Primitive_elementName() {
 		return (EAttribute)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(4);
 	}
@@ -2314,6 +2394,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(5);
 	}
@@ -2323,6 +2404,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain1() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(6);
 	}
@@ -2332,6 +2414,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrPattern() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(7);
 	}
@@ -2341,6 +2424,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrRelation() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(8);
 	}
@@ -2350,6 +2434,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrTemplate() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(9);
 	}
@@ -2359,6 +2444,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable() {
 		return (EReference)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(10);
 	}
@@ -2368,6 +2454,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapSimpleOutPatternElement_Status() {
 		return (EAttribute)tC_mapSimpleOutPatternElementEClass.getEStructuralFeatures().get(11);
 	}
@@ -2377,6 +2464,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapStringExp() {
 		return tC_mapStringExpEClass;
 	}
@@ -2386,6 +2474,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapStringExp_Primitive_symbol() {
 		return (EAttribute)tC_mapStringExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2395,6 +2484,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapVariable() {
 		return tC_mapVariableEClass;
 	}
@@ -2404,6 +2494,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariable_Atl_atlVariable() {
 		return (EReference)tC_mapVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -2413,6 +2504,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariable_Qvtr_qvtrVariable() {
 		return (EReference)tC_mapVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -2422,6 +2514,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapVariableExp() {
 		return tC_mapVariableExpEClass;
 	}
@@ -2431,6 +2524,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_Atl_atlVariable() {
 		return (EReference)tC_mapVariableExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2440,6 +2534,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_Invocation_mapVariableExp_referredVariable() {
 		return (EReference)tC_mapVariableExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -2449,6 +2544,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTC_mapVariableExp_Primitive_varName() {
 		return (EAttribute)tC_mapVariableExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -2458,6 +2554,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapVariableExp_referredVariable() {
 		return tC_mapVariableExp_referredVariableEClass;
 	}
@@ -2467,6 +2564,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Atl_atlExpression1() {
 		return (EReference)tC_mapVariableExp_referredVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -2476,6 +2574,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Qvtr_qvtrExpression1() {
 		return (EReference)tC_mapVariableExp_referredVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -2485,6 +2584,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapVariableExp_referredVariable_Helper() {
 		return tC_mapVariableExp_referredVariable_HelperEClass;
 	}
@@ -2494,6 +2594,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Helper_Atl_atlExpression() {
 		return (EReference)tC_mapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -2503,6 +2604,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Helper_Atl_atlHelper() {
 		return (EReference)tC_mapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -2512,6 +2614,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Helper_Atl_atlVariable() {
 		return (EReference)tC_mapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -2521,6 +2624,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Helper_Invocation_mapVariable() {
 		return (EReference)tC_mapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(3);
 	}
@@ -2530,6 +2634,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrExpression() {
 		return (EReference)tC_mapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(4);
 	}
@@ -2539,6 +2644,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrVariable() {
 		return (EReference)tC_mapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(5);
 	}
@@ -2548,6 +2654,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTC_mapVariableExp_referredVariable_VariableDeclaration() {
 		return tC_mapVariableExp_referredVariable_VariableDeclarationEClass;
 	}
@@ -2557,6 +2664,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlExpression() {
 		return (EReference)tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(0);
 	}
@@ -2566,6 +2674,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlVariable() {
 		return (EReference)tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(1);
 	}
@@ -2575,6 +2684,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_VariableDeclaration_Invocation_mapVariable() {
 		return (EReference)tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(2);
 	}
@@ -2584,6 +2694,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrExpression() {
 		return (EReference)tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(3);
 	}
@@ -2593,6 +2704,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrVariable() {
 		return (EReference)tC_mapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(4);
 	}
@@ -2602,6 +2714,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapBooleanExp() {
 		return tI_mapBooleanExpEClass;
 	}
@@ -2611,6 +2724,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapHelper() {
 		return tI_mapHelperEClass;
 	}
@@ -2620,6 +2734,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTI_mapHelper_Atl_atlHelper() {
 		return (EReference)tI_mapHelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -2629,6 +2744,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTI_mapHelper_Qvtr_qvtrFunction() {
 		return (EReference)tI_mapHelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -2638,6 +2754,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTI_mapHelper_Status() {
 		return (EAttribute)tI_mapHelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -2647,6 +2764,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapHelper_Attribute() {
 		return tI_mapHelper_AttributeEClass;
 	}
@@ -2656,6 +2774,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapHelper_Operation() {
 		return tI_mapHelper_OperationEClass;
 	}
@@ -2665,6 +2784,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapIfExp() {
 		return tI_mapIfExpEClass;
 	}
@@ -2674,6 +2794,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapIntegerExp() {
 		return tI_mapIntegerExpEClass;
 	}
@@ -2683,6 +2804,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapNavigationOrAttributeCallExp() {
 		return tI_mapNavigationOrAttributeCallExpEClass;
 	}
@@ -2692,6 +2814,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapNavigationOrAttributeCallExp_Helper() {
 		return tI_mapNavigationOrAttributeCallExp_HelperEClass;
 	}
@@ -2701,6 +2824,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapNavigationOrAttributeCallExp_Property() {
 		return tI_mapNavigationOrAttributeCallExp_PropertyEClass;
 	}
@@ -2710,6 +2834,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapOclExpression() {
 		return tI_mapOclExpressionEClass;
 	}
@@ -2719,6 +2844,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTI_mapOclExpression_Atl_atlExpression() {
 		return (EReference)tI_mapOclExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2728,6 +2854,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTI_mapOclExpression_Qvtr_qvtrExpression() {
 		return (EReference)tI_mapOclExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -2737,6 +2864,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTI_mapOclExpression_Status() {
 		return (EAttribute)tI_mapOclExpressionEClass.getEStructuralFeatures().get(2);
 	}
@@ -2746,6 +2874,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapOperationCallExp() {
 		return tI_mapOperationCallExpEClass;
 	}
@@ -2755,6 +2884,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapOperationCallExp_Helper() {
 		return tI_mapOperationCallExp_HelperEClass;
 	}
@@ -2764,6 +2894,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapOperationCallExp_Operation() {
 		return tI_mapOperationCallExp_OperationEClass;
 	}
@@ -2773,6 +2904,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapOperatorCallExp() {
 		return tI_mapOperatorCallExpEClass;
 	}
@@ -2782,6 +2914,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapStringExp() {
 		return tI_mapStringExpEClass;
 	}
@@ -2791,6 +2924,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapVariableExp() {
 		return tI_mapVariableExpEClass;
 	}
@@ -2800,6 +2934,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapVariableExp_referredVariable() {
 		return tI_mapVariableExp_referredVariableEClass;
 	}
@@ -2809,6 +2944,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTI_mapVariableExp_referredVariable_Status() {
 		return (EAttribute)tI_mapVariableExp_referredVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -2818,6 +2954,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapVariableExp_referredVariable_Helper() {
 		return tI_mapVariableExp_referredVariable_HelperEClass;
 	}
@@ -2827,6 +2964,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTI_mapVariableExp_referredVariable_VariableDeclaration() {
 		return tI_mapVariableExp_referredVariable_VariableDeclarationEClass;
 	}
@@ -2836,6 +2974,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWC_mapVariableExp_referredVariable() {
 		return wC_mapVariableExp_referredVariableEClass;
 	}
@@ -2845,6 +2984,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWC_mapVariableExp_referredVariable_Helper() {
 		return wC_mapVariableExp_referredVariable_HelperEClass;
 	}
@@ -2854,6 +2994,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWC_mapVariableExp_referredVariable_VariableDeclaration() {
 		return wC_mapVariableExp_referredVariable_VariableDeclarationEClass;
 	}
@@ -2863,6 +3004,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWI_mapVariableExp_referredVariable() {
 		return wI_mapVariableExp_referredVariableEClass;
 	}
@@ -2872,6 +3014,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWI_mapVariableExp_referredVariable_Atl_atlExpression() {
 		return (EReference)wI_mapVariableExp_referredVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -2881,6 +3024,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWI_mapVariableExp_referredVariable_Qvtr_qvtrExpression() {
 		return (EReference)wI_mapVariableExp_referredVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -2890,6 +3034,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWI_mapVariableExp_referredVariable_Result() {
 		return (EReference)wI_mapVariableExp_referredVariableEClass.getEStructuralFeatures().get(2);
 	}
@@ -2899,6 +3044,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWI_mapVariableExp_referredVariable_Helper() {
 		return wI_mapVariableExp_referredVariable_HelperEClass;
 	}
@@ -2908,6 +3054,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWI_mapVariableExp_referredVariable_VariableDeclaration() {
 		return wI_mapVariableExp_referredVariable_VariableDeclarationEClass;
 	}
@@ -2917,6 +3064,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public trace_ATL2QVTrFactory gettrace_ATL2QVTrFactory() {
 		return (trace_ATL2QVTrFactory)getEFactoryInstance();
 	}
@@ -3651,573 +3799,573 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getTC_mapBinding_Atl_atlBinding(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapBinding"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapBinding"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapBinding"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Qvtr_qvtrPart(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapBinding"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlDefinition(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Attribute"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Attribute"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlFeature(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Attribute"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlType(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Attribute"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Invocation_mapHelper_Context(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Attribute",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Attribute"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlContext(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Context"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlDefinition(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Context"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlHelper(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Context"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlReturnType(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Context"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Invocation_mapVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Context",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Qvtr_qvtrFunction(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Context"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlDefinition(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlFeature(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlType(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Invocation_mapHelper_Context(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Operation",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapHelper_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Atl_atlCondition(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapIfExp"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Atl_atlElse(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapIfExp"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Atl_atlThen(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapIfExp"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Qvtr_qvtrCondition(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapIfExp"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Qvtr_qvtrElse(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapIfExp"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Qvtr_qvtrThen(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapIfExp"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern_filter"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern_filter"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern_filter"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern_filter"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern_filter"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_w(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapInPattern_filter"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Atl_matchedRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapMatchedRule"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapMatchedRule"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_super_Atl_atlChildRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapMatchedRule_super"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_super_Qvtr_qvtrOverridesRelation(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapMatchedRule_super"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapModule"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Qvtr__5(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapModule"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapModule"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapNavigationOrAttributeCallExp_Helper"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapNavigationOrAttributeCallExp_Helper"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapNavigationOrAttributeCallExp_Property"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapNavigationOrAttributeCallExp_Property"
-		   });
-		addAnnotation
-		  (getTC_mapOclMetamodel_Atl_oclMetamodel(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOclMetamodel"
-		   });
-		addAnnotation
-		  (getTC_mapOclMetamodel_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOclMetamodel"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Atl_oclModel(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOclModel_IN"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOclModel_IN"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Atl_oclModel(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOclModel_OUT"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOclModel_OUT"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperationCallExp_Helper"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperationCallExp_Helper"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperationCallExp_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperationCallExp_Operation"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_argument_Atl_atlArgument(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperationCallExp_argument"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_argument_Qvtr_qvtrArgument(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperationCallExp_argument"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperatorCallExp"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOperatorCallExp"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOutPattern"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOutPattern"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapOutPattern"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Atl_atlElement(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleInPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleInPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Invocation_mapVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleInPatternElement",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleInPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleInPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Atl_atlElement(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleOutPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleOutPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Invocation_mapVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleOutPatternElement",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleOutPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapSimpleOutPatternElement"
-		   });
-		addAnnotation
-		  (getTC_mapVariable_Atl_atlVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariable"
-		   });
-		addAnnotation
-		  (getTC_mapVariable_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariable"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_Invocation_mapVariableExp_referredVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Atl_atlExpression1(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Qvtr_qvtrExpression1(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable_Helper"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Invocation_mapVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable_Helper",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable_Helper"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable_VariableDeclaration"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Invocation_mapVariable(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable_VariableDeclaration",
-			   "unique", "false",
-			   "upper", "*"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TC_mapVariableExp_referredVariable_VariableDeclaration"
-		   });
-		addAnnotation
-		  (getTI_mapHelper_Atl_atlHelper(),
-		   source,
-		   new String[] {
-			   "body", "TI_mapHelper"
-		   });
-		addAnnotation
-		  (getTI_mapHelper_Qvtr_qvtrFunction(),
-		   source,
-		   new String[] {
-			   "body", "TI_mapHelper"
-		   });
-		addAnnotation
-		  (getTI_mapOclExpression_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "TI_mapOclExpression"
-		   });
-		addAnnotation
-		  (getTI_mapOclExpression_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "TI_mapOclExpression"
-		   });
-		addAnnotation
-		  (getWI_mapVariableExp_referredVariable_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "WI_mapVariableExp_referredVariable"
-		   });
-		addAnnotation
-		  (getWI_mapVariableExp_referredVariable_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "WI_mapVariableExp_referredVariable"
-		   });
+		(getTC_mapBinding_Atl_atlBinding(),
+			source,
+			new String[] {
+				"body", "TC_mapBinding"
+		});
+		addAnnotation
+		(getTC_mapBinding_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapBinding"
+		});
+		addAnnotation
+		(getTC_mapBinding_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapBinding"
+		});
+		addAnnotation
+		(getTC_mapBinding_Qvtr_qvtrPart(),
+			source,
+			new String[] {
+				"body", "TC_mapBinding"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlDefinition(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Attribute"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Attribute"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlFeature(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Attribute"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlType(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Attribute"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Invocation_mapHelper_Context(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Attribute",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Attribute"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlContext(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Context"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlDefinition(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Context"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlHelper(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Context"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlReturnType(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Context"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Invocation_mapVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Context",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Qvtr_qvtrFunction(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Context"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlDefinition(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Operation"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Operation"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlFeature(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Operation"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlType(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Operation"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Invocation_mapHelper_Context(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Operation",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapHelper_Operation"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Atl_atlCondition(),
+			source,
+			new String[] {
+				"body", "TC_mapIfExp"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Atl_atlElse(),
+			source,
+			new String[] {
+				"body", "TC_mapIfExp"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Atl_atlThen(),
+			source,
+			new String[] {
+				"body", "TC_mapIfExp"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Qvtr_qvtrCondition(),
+			source,
+			new String[] {
+				"body", "TC_mapIfExp"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Qvtr_qvtrElse(),
+			source,
+			new String[] {
+				"body", "TC_mapIfExp"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Qvtr_qvtrThen(),
+			source,
+			new String[] {
+				"body", "TC_mapIfExp"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Atl_atlPattern(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Atl_atlRule(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern_filter"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Atl_atlPattern(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern_filter"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Atl_atlRule(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern_filter"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern_filter"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern_filter"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_w(),
+			source,
+			new String[] {
+				"body", "TC_mapInPattern_filter"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Atl_matchedRule(),
+			source,
+			new String[] {
+				"body", "TC_mapMatchedRule"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"body", "TC_mapMatchedRule"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_super_Atl_atlChildRule(),
+			source,
+			new String[] {
+				"body", "TC_mapMatchedRule_super"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_super_Qvtr_qvtrOverridesRelation(),
+			source,
+			new String[] {
+				"body", "TC_mapMatchedRule_super"
+		});
+		addAnnotation
+		(getTC_mapModule_Atl_atlModule(),
+			source,
+			new String[] {
+				"body", "TC_mapModule"
+		});
+		addAnnotation
+		(getTC_mapModule_Qvtr__5(),
+			source,
+			new String[] {
+				"body", "TC_mapModule"
+		});
+		addAnnotation
+		(getTC_mapModule_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"body", "TC_mapModule"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlSource(),
+			source,
+			new String[] {
+				"body", "TC_mapNavigationOrAttributeCallExp_Helper"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"body", "TC_mapNavigationOrAttributeCallExp_Helper"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlSource(),
+			source,
+			new String[] {
+				"body", "TC_mapNavigationOrAttributeCallExp_Property"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"body", "TC_mapNavigationOrAttributeCallExp_Property"
+		});
+		addAnnotation
+		(getTC_mapOclMetamodel_Atl_oclMetamodel(),
+			source,
+			new String[] {
+				"body", "TC_mapOclMetamodel"
+		});
+		addAnnotation
+		(getTC_mapOclMetamodel_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"body", "TC_mapOclMetamodel"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Atl_oclModel(),
+			source,
+			new String[] {
+				"body", "TC_mapOclModel_IN"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"body", "TC_mapOclModel_IN"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Atl_oclModel(),
+			source,
+			new String[] {
+				"body", "TC_mapOclModel_OUT"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"body", "TC_mapOclModel_OUT"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Atl_atlSource(),
+			source,
+			new String[] {
+				"body", "TC_mapOperationCallExp_Helper"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"body", "TC_mapOperationCallExp_Helper"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Atl_atlSource(),
+			source,
+			new String[] {
+				"body", "TC_mapOperationCallExp_Operation"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"body", "TC_mapOperationCallExp_Operation"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_argument_Atl_atlArgument(),
+			source,
+			new String[] {
+				"body", "TC_mapOperationCallExp_argument"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_argument_Qvtr_qvtrArgument(),
+			source,
+			new String[] {
+				"body", "TC_mapOperationCallExp_argument"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Atl_atlSource(),
+			source,
+			new String[] {
+				"body", "TC_mapOperatorCallExp"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"body", "TC_mapOperatorCallExp"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Atl_atlPattern(),
+			source,
+			new String[] {
+				"body", "TC_mapOutPattern"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Atl_atlRule(),
+			source,
+			new String[] {
+				"body", "TC_mapOutPattern"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"body", "TC_mapOutPattern"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Atl_atlElement(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleInPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Atl_atlRule(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleInPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Invocation_mapVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleInPatternElement",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrTemplate(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleInPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleInPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Atl_atlElement(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleOutPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Atl_atlRule(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleOutPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Invocation_mapVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleOutPatternElement",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrTemplate(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleOutPatternElement"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapSimpleOutPatternElement"
+		});
+		addAnnotation
+		(getTC_mapVariable_Atl_atlVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapVariable"
+		});
+		addAnnotation
+		(getTC_mapVariable_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapVariable"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_Invocation_mapVariableExp_referredVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Atl_atlExpression1(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Qvtr_qvtrExpression1(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable_Helper"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Invocation_mapVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable_Helper",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable_Helper"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable_VariableDeclaration"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Invocation_mapVariable(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable_VariableDeclaration",
+				"unique", "false",
+				"upper", "*"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TC_mapVariableExp_referredVariable_VariableDeclaration"
+		});
+		addAnnotation
+		(getTI_mapHelper_Atl_atlHelper(),
+			source,
+			new String[] {
+				"body", "TI_mapHelper"
+		});
+		addAnnotation
+		(getTI_mapHelper_Qvtr_qvtrFunction(),
+			source,
+			new String[] {
+				"body", "TI_mapHelper"
+		});
+		addAnnotation
+		(getTI_mapOclExpression_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "TI_mapOclExpression"
+		});
+		addAnnotation
+		(getTI_mapOclExpression_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "TI_mapOclExpression"
+		});
+		addAnnotation
+		(getWI_mapVariableExp_referredVariable_Atl_atlExpression(),
+			source,
+			new String[] {
+				"body", "WI_mapVariableExp_referredVariable"
+		});
+		addAnnotation
+		(getWI_mapVariableExp_referredVariable_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"body", "WI_mapVariableExp_referredVariable"
+		});
 	}
 
 	/**
@@ -4229,1025 +4377,1025 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	protected void createQvtDomainsAnnotations() {
 		String source = "http://www.eclipse.org/qvt#Domains";
 		addAnnotation
-		  (getTC_mapBinding_Atl_atlBinding(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Atl_atlOutPatternElement(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Primitive_propertyName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Qvtr_qvtrPart(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapBinding_Qvtr_qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapBooleanExp_Primitive_symbol(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlDefinition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlFeature(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Atl_atlType(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Primitive_attributeName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Attribute_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlContext(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlDefinition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlHelper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Atl_atlReturnType(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Qvtr_qvtrFunction(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Context_Qvtr_qvtrParameter(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlDefinition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlFeature(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Atl_atlType(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Primitive_operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapHelper_Operation_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Atl_atlCondition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Atl_atlElse(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Atl_atlThen(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Qvtr_qvtrCondition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Qvtr_qvtrElse(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapIfExp_Qvtr_qvtrThen(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Atl_atlModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_p(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapInPattern_filter_Qvtr_w(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapIntegerExp_Primitive_symbol(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Atl_matchedRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Primitive_ruleName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_super_Atl_atlChildRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_super_Atl_atlSuperRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_super_Qvtr_qvtrOverriddenRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapMatchedRule_super_Qvtr_qvtrOverridesRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Primitive_txName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Qvtr__3(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Qvtr__4(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Qvtr__5(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapModule_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlAttributes(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Primitive_propertyName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrOperation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrSourceArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrThisVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlAttributes(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Primitive_propertyName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrProperty(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOclMetamodel_Atl_oclMetamodel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclMetamodel_Primitive_tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapOclMetamodel_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Atl_oclMetamodel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Atl_oclModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Primitive_tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_IN_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Atl_oclMetamodel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Atl_oclModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Primitive_tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOclModel_OUT_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Atl_atlOperations(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Primitive_operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Qvtr_qvtrOperation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Qvtr_qvtrSourceArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Qvtr_qvtrThisVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Helper_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Atl_atlOperations(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Primitive_operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Qvtr_qvtrOperation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_Operation_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_argument_Atl_atlArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_argument_Atl_atlParent(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_argument_Qvtr_qvtrArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperationCallExp_argument_Qvtr_qvtrParent(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Atl_atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Primitive_operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Qvtr_qvtrOperation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Qvtr_qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOperatorCallExp_Qvtr_qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Atl_atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapOutPattern_Qvtr_qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Atl_atlElement(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Primitive_elementName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain1(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleInPatternElement_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Atl_atlElement(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Atl_atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Atl_atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Primitive_elementName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain1(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapStringExp_Primitive_symbol(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapVariable_Atl_atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariable_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_Atl_atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_Primitive_varName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Atl_atlExpression1(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Qvtr_qvtrExpression1(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Atl_atlHelper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Atl_atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTI_mapHelper_Atl_atlHelper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTI_mapHelper_Qvtr_qvtrFunction(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTI_mapOclExpression_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTI_mapOclExpression_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getWI_mapVariableExp_referredVariable_Atl_atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getWI_mapVariableExp_referredVariable_Qvtr_qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
+		(getTC_mapBinding_Atl_atlBinding(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapBinding_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapBinding_Atl_atlOutPatternElement(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapBinding_Primitive_propertyName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapBinding_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapBinding_Qvtr_qvtrPart(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapBinding_Qvtr_qvtrTemplate(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapBooleanExp_Primitive_symbol(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlDefinition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlFeature(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Atl_atlType(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Primitive_attributeName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapHelper_Attribute_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlContext(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlDefinition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlHelper(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Atl_atlReturnType(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Qvtr_qvtrFunction(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapHelper_Context_Qvtr_qvtrParameter(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlDefinition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlFeature(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Atl_atlType(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Primitive_operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapHelper_Operation_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Atl_atlCondition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Atl_atlElse(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Atl_atlThen(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Qvtr_qvtrCondition(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Qvtr_qvtrElse(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapIfExp_Qvtr_qvtrThen(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Atl_atlModel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Atl_atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Atl_atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Atl_atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Atl_atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_p(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapInPattern_filter_Qvtr_w(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapIntegerExp_Primitive_symbol(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Atl_matchedRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Primitive_ruleName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_super_Atl_atlChildRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_super_Atl_atlSuperRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_super_Qvtr_qvtrOverriddenRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapMatchedRule_super_Qvtr_qvtrOverridesRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapModule_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapModule_Primitive_txName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapModule_Qvtr__3(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapModule_Qvtr__4(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapModule_Qvtr__5(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapModule_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlAttributes(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Atl_atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Primitive_propertyName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrOperation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrSourceArgument(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrThisVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Helper_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlAttributes(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Atl_atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Primitive_propertyName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrProperty(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapNavigationOrAttributeCallExp_Property_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOclMetamodel_Atl_oclMetamodel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclMetamodel_Primitive_tmName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapOclMetamodel_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Atl_oclMetamodel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Atl_oclModel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Primitive_tmName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOclModel_IN_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Atl_oclMetamodel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Atl_oclModel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Primitive_tmName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOclModel_OUT_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Atl_atlOperations(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Atl_atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Primitive_operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Qvtr_qvtrOperation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Qvtr_qvtrSourceArgument(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Qvtr_qvtrThisVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Helper_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Atl_atlOperations(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Atl_atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Primitive_operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Qvtr_qvtrOperation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_Operation_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_argument_Atl_atlArgument(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_argument_Atl_atlParent(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_argument_Qvtr_qvtrArgument(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperationCallExp_argument_Qvtr_qvtrParent(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Atl_atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Primitive_operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Qvtr_qvtrOperation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Qvtr_qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOperatorCallExp_Qvtr_qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Atl_atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Atl_atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Atl_atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapOutPattern_Qvtr_qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Atl_atlElement(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Atl_atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Atl_atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Primitive_elementName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrDomain1(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrPattern(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrTemplate(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleInPatternElement_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Atl_atlElement(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Atl_atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Atl_atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Primitive_elementName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrDomain1(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrPattern(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrTemplate(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapSimpleOutPatternElement_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapStringExp_Primitive_symbol(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapVariable_Atl_atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariable_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_Atl_atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_Primitive_varName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Atl_atlExpression1(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Qvtr_qvtrExpression1(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Atl_atlHelper(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Atl_atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_Helper_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Atl_atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTC_mapVariableExp_referredVariable_VariableDeclaration_Qvtr_qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTI_mapHelper_Atl_atlHelper(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTI_mapHelper_Qvtr_qvtrFunction(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTI_mapOclExpression_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTI_mapOclExpression_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getWI_mapVariableExp_referredVariable_Atl_atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getWI_mapVariableExp_referredVariable_Qvtr_qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
 	}
 
 } //trace_ATL2QVTrPackageImpl
