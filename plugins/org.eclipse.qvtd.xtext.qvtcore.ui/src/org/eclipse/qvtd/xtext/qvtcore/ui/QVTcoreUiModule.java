@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui;
 
+import org.eclipse.ocl.xtext.base.ui.commands.ToggleNatureCommand;
 import org.eclipse.qvtd.xtext.qvtbase.ui.QVTbaseJavaClassPathResourceForIEditorInputFactory;
+import org.eclipse.qvtd.xtext.qvtbase.ui.commands.ToggleQVTdNatureCommand;
 import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 import org.eclipse.qvtd.xtext.qvtcore.ui.model.QVTcoreDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -36,5 +38,9 @@ public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQ
 	@Override
 	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
 		return QVTbaseJavaClassPathResourceForIEditorInputFactory.class;
+	}
+
+	public Class<? extends ToggleNatureCommand> bindToggleNatureCommand() {
+		return ToggleQVTdNatureCommand.class;
 	}
 }
