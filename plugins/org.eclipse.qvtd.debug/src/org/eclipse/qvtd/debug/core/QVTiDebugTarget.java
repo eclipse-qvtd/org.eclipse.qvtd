@@ -25,7 +25,7 @@ public class QVTiDebugTarget extends VMDebugTarget
 	public @NonNull QVTiDebugCore getDebugCore() {
 		return QVTiDebugCore.INSTANCE;
 	}
-	
+
 	@Override
 	public @NonNull String getModelIdentifier() {
 		return getDebugCore().getModelId();

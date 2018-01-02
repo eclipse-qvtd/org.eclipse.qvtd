@@ -33,6 +33,7 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestUIUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.xtext.base.ui.model.BaseEditorCallback;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
@@ -53,6 +55,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
+import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
+import com.google.inject.Injector;
+
+import junit.framework.TestCase;
+import test.hsl.HSLTree.HSLTreePackage;
+import test.hsv.HSVTree.HSVTreePackage;
+import test.middle.HSV2HSL.HSV2HSLPackage;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -188,6 +197,15 @@ public class QVTiDebuggerTests extends XtextTestCase
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			return;
 		}
+		// Debugger is interpreted and the HSV2HSL.qvti uses *.ecore not compiled models
+		assert !EPackage.Registry.INSTANCE.containsKey(HSVTreePackage.eNS_URI);
+		assert !EPackage.Registry.INSTANCE.containsKey(HSLTreePackage.eNS_URI);
+		assert !EPackage.Registry.INSTANCE.containsKey(HSV2HSLPackage.eNS_URI);
+		//		VMVirtualMachine.PRE_VISIT.setState(true);
+		//		VMVirtualMachine.POST_VISIT.setState(true);
+		//		VMVirtualMachine.VM_EVENT.setState(true);
+		//		VMVirtualMachine.VM_REQUEST.setState(true);
+		//		VMVirtualMachine.VM_RESPONSE.setState(true);
 		final @NonNull String inName = "hsl";
 		final @NonNull String outName = "hsv";
 		final @NonNull String middleName = "middle";
@@ -195,6 +213,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.closeIntro();
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
+		Injector injector = QVTimperativeActivator.getInstance().getInjector(QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE);
+		injector.getInstance(BaseEditorCallback.class).setDontAskForNatureAgain();
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
 		IProject iProject = TestUIUtil.createIProject("QVTiDebuggerDebugTests");
@@ -203,15 +223,16 @@ public class QVTiDebuggerTests extends XtextTestCase
 		copyIFile2(uriConverter, iProject.getFile("HSLTree.ecore"), getModelsURI("HSV2HSL/HSLTree.ecore"), null);
 		copyIFile2(uriConverter, iProject.getFile("HSV2HSL.ecore"), getModelsURI("HSV2HSL/HSV2HSL.ecore"), null);
 		IFile inFile = copyIFile2(uriConverter, iProject.getFile("HSVNode.xmi"), getModelsURI("HSV2HSL/HSVNode.xmi"), null);
+
 		IFile outFile = iProject.getFile("HSLNode.xmi");
 		IFile middleFile = iProject.getFile("HSV2HSLNode.xmi");
 		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
 		URI inURI = URI.createPlatformResourceURI(inFile.getFullPath().toString(), true);
 		URI outURI = URI.createPlatformResourceURI(outFile.getFullPath().toString(), true);
 		URI middleURI = URI.createPlatformResourceURI(middleFile.getFullPath().toString(), true);
-		Map<String,String> inMap = new HashMap<String,String>();
+		Map<String,String> inMap = new HashMap<>();
 		inMap.put(outName, inURI.toString());
-		Map<String,String> outMap = new HashMap<String,String>();
+		Map<String,String> outMap = new HashMap<>();
 		outMap.put(inName, outURI.toString());
 		outMap.put(middleName, middleURI.toString());
 
@@ -245,13 +266,9 @@ public class QVTiDebuggerTests extends XtextTestCase
 		IThread vmThread = debugTarget.getThreads()[0];
 		assert vmThread != null;
 		TestUIUtil.waitForSuspended(vmThread);
+		TestUIUtil.waitForNotStepping(vmThread);
 		//
-		try {
-			checkPosition(vmThread, 8, 448, 455);		// Values with OCL BaseLocationInFileProvider fix
-		}
-		catch (java.lang.AssertionError e) {
-			checkPosition(vmThread, 8, 433, 447);		// FIXME 495979 Old values without OCL BaseLocationInFileProvider fix
-		}
+		checkPosition(vmThread, 8, 448, 455);		// Values with OCL BaseLocationInFileProvider fix for Bug 495979
 		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "this", outName, inName, middleName);
 		checkVariable(vmThread, VMVirtualMachine.PC_NAME, asTransformation);
 		checkVariable(vmThread, "this", vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
@@ -267,7 +284,29 @@ public class QVTiDebuggerTests extends XtextTestCase
 		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getRootMapping(asTransformation));
 		//
 		vmThread.stepReturn();
-		TestUIUtil.waitForTerminated(vmThread);
+		//		TestUIUtil.waitForTerminated(vmThread);
+		boolean hasTerminated = false;
+		for (int i = 0; i < 10; i++){
+			TestUIUtil.flushEvents();
+			Thread.sleep(100);
+			if (vmThread.isTerminated()) {
+				hasTerminated = true;
+				break;
+			}
+		}
+		if (!hasTerminated) {
+			IStackFrame topStackFrame = vmThread.getTopStackFrame();
+			IVariable[] variables = topStackFrame.getVariables();
+			if (variables != null){
+				for (IVariable variable : variables) {
+					if (VMVirtualMachine.EXCEPTION_NAME.equals(variable.getName()) && (variable instanceof VMVariable)) {
+						Object valueObject = ((VMVariable)variable).getVmVar().valueObject;
+						throw (Exception)valueObject;
+					}
+				}
+			}
+			TestCase.fail("Failed to terminate");
+		}
 		assertEquals(0, vm.getExitCode());
 		//
 		TestUIUtil.flushEvents();

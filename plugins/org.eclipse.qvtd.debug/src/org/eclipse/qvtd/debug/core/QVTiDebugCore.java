@@ -33,7 +33,7 @@ public class QVTiDebugCore extends VMDebugCore
 	public static final @NonNull String DEBUGGER_ACTIVE_PROPERTY = "org.eclipse.qvtd.debug.debuggerActive"; //$NON-NLS-1$
 
 	// The plug-in fBreakpointID
-	public static final @NonNull String PLUGIN_ID = QVTiDebugPlugin.PLUGIN_ID; 
+	public static final @NonNull String PLUGIN_ID = QVTiDebugPlugin.PLUGIN_ID;
 
 	private static final @NonNull String EXCEPTIONS_CATCHING = PLUGIN_ID + "/exceptions/catching"; //$NON-NLS-1$
 	private static final @NonNull String EXCEPTIONS_THROWING = PLUGIN_ID + "/exceptions/throwing"; //$NON-NLS-1$
@@ -49,6 +49,16 @@ public class QVTiDebugCore extends VMDebugCore
 	@Override
 	public @NonNull String getBreakpointMarkerId() {
 		return BREAKPOINT_MARKER_ID;
+	}
+
+	@Override
+	public @NonNull String getDebugTargetName() {
+		return "QVTi Debug target";
+	}
+
+	@Override
+	public @NonNull String getDebugThreadName() {
+		return "QVTi Debug UI";
 	}
 
 	@Override
@@ -89,6 +99,6 @@ public class QVTiDebugCore extends VMDebugCore
 
 	@Override
 	public @NonNull String getVMThreadName() {
-		return "QVTi VM";
+		return "QVTi Debug VM";
 	}
 }

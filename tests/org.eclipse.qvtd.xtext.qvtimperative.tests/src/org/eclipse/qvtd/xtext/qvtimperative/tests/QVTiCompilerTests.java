@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -33,6 +34,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCase.GlobalStateMemento;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
@@ -78,6 +80,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import junit.framework.TestCase;
+import tree2talltree.tree.TreePackage;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -93,6 +96,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	protected static class MyQVT extends OCLInternal
 	{
 		protected final @NonNull TestProject testProject;
+		private GlobalStateMemento globalStateMemento = new GlobalStateMemento();
 
 		public MyQVT(@NonNull TestProject testProject, @NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
@@ -118,6 +122,13 @@ public class QVTiCompilerTests extends LoadTestCase
 		public @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
 			QVTiTransformationExecutor executor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 			return executor.getTransformer();
+		}
+
+		@Override
+		public synchronized void dispose() {
+			super.dispose();
+			globalStateMemento.restoreGlobalState();
+			globalStateMemento = null;
 		}
 
 		public @NonNull Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws Exception {
@@ -356,6 +367,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_CG() throws Exception {
+		EPackage.Registry.INSTANCE.put(TreePackage.eNS_URI, TreePackage.eINSTANCE);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		URI modelsProjectURI = getModelsURI("Tree2TallTree");
 		URI samplesProjectURI = modelsProjectURI.appendSegment("samples");
@@ -378,6 +390,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_Changed_CG() throws Exception {
+		EPackage.Registry.INSTANCE.put(TreePackage.eNS_URI, TreePackage.eINSTANCE);
 		URI modelsProjectURI = getModelsURI("Tree2TallTree");
 		URI samplesProjectURI = modelsProjectURI.appendSegment("samples");
 		URI transformURI = modelsProjectURI.appendSegment("Tree2TallTree.qvti");
@@ -467,6 +480,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testQVTiCompiler_Tree2TallTree_Deleted_CG() throws Exception {
+		EPackage.Registry.INSTANCE.put(TreePackage.eNS_URI, TreePackage.eINSTANCE);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		URI modelsProjectURI = getModelsURI("Tree2TallTree");
 		URI samplesProjectURI = modelsProjectURI.appendSegment("samples");
