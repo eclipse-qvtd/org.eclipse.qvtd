@@ -4,6 +4,7 @@
       label="%featureName"
       version="0.15.0.qualifier"
       provider-name="%providerName"
+      plugin="org.eclipse.qvtd.doc"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">
 
