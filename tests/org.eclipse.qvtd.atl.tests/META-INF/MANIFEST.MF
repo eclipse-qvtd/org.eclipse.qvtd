@@ -15,7 +15,7 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.pivot.qvtimperative;bundle-version="[0.15.0,1.0.0)",
  org.eclipse.qvtd.pivot.qvtrelation;bundle-version="[0.15.0,1.0.0)",
  org.eclipse.m2m.atl.emftvm.compiler;bundle-version="[4.0.0,5.0.0)",
- org.eclipse.m2m.atl.dsls;bundle-version="[4.00,5.0.0)",
+ org.eclipse.m2m.atl.dsls;bundle-version="[4.0.0,5.0.0)",
  org.eclipse.m2m.atl.emftvm;bundle-version="[4.0.0,5.0.0)",
  org.eclipse.m2m.atl.engine;bundle-version="[4.0.0,5.0.0)"
 Automatic-Module-Name: org.eclipse.qvtd.atl.tests
