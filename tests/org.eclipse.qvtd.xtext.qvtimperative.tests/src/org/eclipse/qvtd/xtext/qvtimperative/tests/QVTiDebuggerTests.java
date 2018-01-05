@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.core.VMVariable;
 import org.eclipse.ocl.examples.xtext.tests.TestUIUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
@@ -58,8 +59,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
  */
 public class QVTiDebuggerTests extends XtextTestCase
 {
-	protected static final @NonNull String PC_NAME = "$pc";
-
 	private void checkPosition(@NonNull IThread vmThread, int lineNumber, int charStart, int charEnd) throws DebugException {
 		IStackFrame topStackFrame = vmThread.getTopStackFrame();
 		assertEquals("lineNumber", lineNumber, topStackFrame.getLineNumber());
@@ -253,8 +252,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		catch (java.lang.AssertionError e) {
 			checkPosition(vmThread, 8, 433, 447);		// FIXME 495979 Old values without OCL BaseLocationInFileProvider fix
 		}
-		checkVariables(vmThread, PC_NAME, "this", outName, inName, middleName);
-		checkVariable(vmThread, PC_NAME, asTransformation);
+		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "this", outName, inName, middleName);
+		checkVariable(vmThread, VMVirtualMachine.PC_NAME, asTransformation);
 		checkVariable(vmThread, "this", vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
 		checkVariable(vmThread, outName, vmRootEvaluationEnvironment.getValueOf(asOutVariable));
 		checkVariable(vmThread, inName, vmRootEvaluationEnvironment.getValueOf(asInVariable));
@@ -264,8 +263,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.waitForSuspended(vmThread);
 		//
 		checkPosition(vmThread, 21, 1067, 1075);
-		checkVariables(vmThread, PC_NAME, "nodes");
-		checkVariable(vmThread, PC_NAME, QVTimperativeUtil.getRootMapping(asTransformation));
+		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "nodes");
+		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getRootMapping(asTransformation));
 		//
 		vmThread.stepReturn();
 		TestUIUtil.waitForTerminated(vmThread);

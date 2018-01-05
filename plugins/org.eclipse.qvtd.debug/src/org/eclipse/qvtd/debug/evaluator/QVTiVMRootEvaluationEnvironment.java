@@ -18,6 +18,7 @@ import java.util.Stack;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
+import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
@@ -53,7 +54,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		myCurrentIP = executableObject;
 		this.id = id;
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
-		pcVariable.setName("$pc");
+		pcVariable.setName(VMVirtualMachine.PC_NAME);
 		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.NAMED_ELEMENT.getName());
 		pcVariable.setType(((EnvironmentFactoryInternalExtension)environmentFactory).getASClass(typeName));
 	}
