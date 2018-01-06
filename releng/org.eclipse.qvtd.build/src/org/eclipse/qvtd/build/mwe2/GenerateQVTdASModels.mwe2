@@ -137,7 +137,6 @@ Workflow {
     }
     bean = EcoreGenModelSetup { resourceSet = resourceSet2 }
  
-
     component = @SubGenerateASModel { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	genModelFile =  "model/QVTbase.genmodel"

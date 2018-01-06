@@ -250,7 +250,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return QVTcorePackage.eINSTANCE;
+	  return QVTcorePackage.eINSTANCE;
 	}
 
 	/**

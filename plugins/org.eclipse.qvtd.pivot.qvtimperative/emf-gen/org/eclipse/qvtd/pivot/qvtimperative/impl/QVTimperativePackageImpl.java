@@ -306,13 +306,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTimperativePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTimperativeValidator.INSTANCE;
-			}
-		});
+			(theQVTimperativePackage,
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTimperativeValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
@@ -1889,10 +1888,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -1904,149 +1903,149 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForValue"
+		   });
 		addAnnotation
-		(getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForValue"
+		   });
 		addAnnotation
-		(getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TypeIsBoolean"
-		});
+		  (getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "TypeIsBoolean"
+		   });
 		addAnnotation
-		(getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForCheckedValue"
-		});
+		  (getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForCheckedValue"
+		   });
 		addAnnotation
-		(getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForUncheckedValue"
-		});
+		  (getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForUncheckedValue"
+		   });
 		addAnnotation
-		(getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "allRulesAreMappings"
-		});
+		  (getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "allRulesAreMappings"
+		   });
 		addAnnotation
-		(getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NameIsNotNull"
-		});
+		  (getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsNotNull"
+		   });
 		addAnnotation
-		(getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NotBothCheckedAndEnforced"
-		});
+		  (getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NotBothCheckedAndEnforced"
+		   });
 		addAnnotation
-		(getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NameIsNotNull"
-		});
+		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsNotNull"
+		   });
 		addAnnotation
-		(getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "MappingParameterNamesAreUnique"
-		});
+		  (getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "MappingParameterNamesAreUnique"
+		   });
 		addAnnotation
-		(getMapping__ValidateLocalVariableNamesAreUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "LocalVariableNamesAreUnique"
-		});
+		  (getMapping__ValidateLocalVariableNamesAreUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "LocalVariableNamesAreUnique"
+		   });
 		addAnnotation
-		(getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "MatchingCallBindings"
-		});
+		  (getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "MatchingCallBindings"
+		   });
 		addAnnotation
-		(getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NotBothInstallAndInvoke"
-		});
+		  (getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NotBothInstallAndInvoke"
+		   });
 		addAnnotation
-		(getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "UniqueCallBindings"
-		});
+		  (getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "UniqueCallBindings"
+		   });
 		addAnnotation
-		(getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ParameterIsMappingParameter"
-		});
+		  (getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ParameterIsMappingParameter"
+		   });
 		addAnnotation
-		(getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForValue"
+		   });
 		addAnnotation
-		(getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NonDataTypeForType"
-		});
+		  (getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NonDataTypeForType"
+		   });
 		addAnnotation
-		(getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleClassForProperty"
-		});
+		  (getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleClassForProperty"
+		   });
 		addAnnotation
-		(getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForPartialValue"
-		});
+		  (getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForPartialValue"
+		   });
 		addAnnotation
-		(getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForTotalValue"
-		});
+		  (getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForTotalValue"
+		   });
 		addAnnotation
-		(getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ValueDoesNotNavigateFromRealizedVariables"
-		});
+		  (getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ValueDoesNotNavigateFromRealizedVariables"
+		   });
 		addAnnotation
-		(getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TargetPropertyIsNotReadOnly"
-		});
+		  (getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "TargetPropertyIsNotReadOnly"
+		   });
 		addAnnotation
-		(getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForCheckedValue"
-		});
+		  (getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForCheckedValue"
+		   });
 		addAnnotation
-		(getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForUncheckedValue"
-		});
+		  (getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleTypeForUncheckedValue"
+		   });
 	}
 
 } //QVTimperativePackageImpl

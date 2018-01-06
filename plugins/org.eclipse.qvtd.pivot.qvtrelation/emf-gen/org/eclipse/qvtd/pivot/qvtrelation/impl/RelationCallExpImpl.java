@@ -327,7 +327,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet, final /*@NonInvalid*/ java.lang.@Nullable Object e_0) {
-							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = e_0;
+							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = (Object)e_0;
 							final /*@Thrown*/ java.lang.@Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, symbol_0);
 							return oclContainer;
 						}
@@ -361,7 +361,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet_0, final /*@NonInvalid*/ java.lang.@Nullable Object e_1) {
-							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_1 = e_1;
+							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_1 = (Object)e_1;
 							final /*@Thrown*/ java.lang.@Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, symbol_1);
 							return oclContainer_0;
 						}

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="P-qvttemplate" name="qvttemplate" nsURI="http://www.eclipse.org/qvt/2015/QVTtemplate"
-    nsPrefix="qvtt">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmi:id="P-qvttemplate" name="qvttemplate" nsURI="http://www.eclipse.org/qvt/2015/QVTtemplate" nsPrefix="qvtt">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
     <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-CollectionTemplateExp"
-      name="CollectionTemplateExp" eSuperTypes="#T-qvttemplate-TemplateExp">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-CollectionTemplateExp" name="CollectionTemplateExp" eSuperTypes="#T-qvttemplate-TemplateExp">
     <eOperations name="validateMemberTypeisCollectionElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="MemberTypeisCollectionElementType"/>
@@ -54,24 +52,21 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-CollectionTemplateExp-member"
-        name="member" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
-        containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-CollectionTemplateExp-member" name="member" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression" containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="listContainer"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-CollectionTemplateExp-referredCollectionType"
-        name="referredCollectionType" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CollectionType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-CollectionTemplateExp-rest"
-        name="rest" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-CollectionTemplateExp-referredCollectionType" name="referredCollectionType"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CollectionType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-CollectionTemplateExp-rest" name="rest" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="matchingExp"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-ObjectTemplateExp" name="ObjectTemplateExp"
-      eSuperTypes="#T-qvttemplate-TemplateExp">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-ObjectTemplateExp" name="ObjectTemplateExp" eSuperTypes="#T-qvttemplate-TemplateExp">
     <eOperations name="validatePartPropertyIsUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="PartPropertyIsUnique"/>
@@ -102,14 +97,12 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-ObjectTemplateExp-part"
-        name="part" ordered="false" upperBound="-1" eType="#T-qvttemplate-PropertyTemplateItem"
-        containment="true" eOpposite="#F-qvttemplate-PropertyTemplateItem-objContainer"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-ObjectTemplateExp-referredClass"
-        name="referredClass" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-ObjectTemplateExp-part" name="part" ordered="false" upperBound="-1"
+        eType="#T-qvttemplate-PropertyTemplateItem" containment="true" eOpposite="#F-qvttemplate-PropertyTemplateItem-objContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-ObjectTemplateExp-referredClass" name="referredClass" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-PropertyTemplateItem"
-      name="PropertyTemplateItem" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-PropertyTemplateItem" name="PropertyTemplateItem" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eOperations name="validateCompatibleClassForProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="CompatibleClassForProperty"/>
@@ -170,35 +163,31 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-objContainer"
-        name="objContainer" lowerBound="1" eType="#T-qvttemplate-ObjectTemplateExp"
-        transient="true" eOpposite="#F-qvttemplate-ObjectTemplateExp-part"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-referredProperty"
-        name="referredProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-objContainer" name="objContainer" lowerBound="1"
+        eType="#T-qvttemplate-ObjectTemplateExp" transient="true" eOpposite="#F-qvttemplate-ObjectTemplateExp-part"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-referredProperty" name="referredProperty"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="propertyItem"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-value"
-        name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-value" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="propertyItem"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvttemplate-PropertyTemplateItem-isOpposite"
-        name="isOpposite" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-resolvedProperty"
-        name="resolvedProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvttemplate-PropertyTemplateItem-isOpposite" name="isOpposite" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-PropertyTemplateItem-resolvedProperty" name="resolvedProperty"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property" changeable="false" volatile="true"
+        transient="true" derived="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="&#xA;&#x9;if isOpposite then referredProperty.opposite else referredProperty endif&#xA;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-TemplateExp" name="TemplateExp"
-      abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-LiteralExp ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvttemplate-TemplateExp" name="TemplateExp" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-LiteralExp ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eOperations name="validateWhereIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="WhereIsBoolean"/>
@@ -214,14 +203,12 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-TemplateExp-bindsTo"
-        name="bindsTo" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-TemplateExp-bindsTo" name="bindsTo" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="templateExp"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-TemplateExp-where"
-        name="where" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvttemplate-TemplateExp-where" name="where" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="owner"/>

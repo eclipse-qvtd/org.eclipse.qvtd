@@ -30,10 +30,9 @@ import org.eclipse.ocl.pivot.utilities.PivotAS2XMIidVisitor;
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-@SuppressWarnings("deprecation")
 public abstract class AbstractQVTbaseAS2XMIidVisitor
-extends PivotAS2XMIidVisitor
-implements QVTbaseVisitor<Boolean>
+	extends PivotAS2XMIidVisitor
+	implements QVTbaseVisitor<Boolean>
 {
 	/**
 	 * Initializes me with an initial value for my result.

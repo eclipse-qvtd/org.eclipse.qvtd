@@ -1,7 +1,7 @@
 /*******************************************************************************
  * <copyright>
  *
- * Copyright (c) 2013, 2017 Willink Transformations and others.
+ * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -496,213 +496,213 @@ public class QVTcoreTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Area =
-			{
-				Fragments._Area__OclAny /* 0 */,
-				Fragments._Area__OclElement /* 1 */,
-				Fragments._Area__Visitable /* 2 */,
-				Fragments._Area__Element /* 3 */,
-				Fragments._Area__Area /* 4 */
-			};
+		{
+			Fragments._Area__OclAny /* 0 */,
+			Fragments._Area__OclElement /* 1 */,
+			Fragments._Area__Visitable /* 2 */,
+			Fragments._Area__Element /* 3 */,
+			Fragments._Area__Area /* 4 */
+		};
 		private static final int @NonNull [] __Area = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Assignment =
-			{
-				Fragments._Assignment__OclAny /* 0 */,
-				Fragments._Assignment__OclElement /* 1 */,
-				Fragments._Assignment__Visitable /* 2 */,
-				Fragments._Assignment__Element /* 3 */,
-				Fragments._Assignment__Assignment /* 4 */
-			};
+		{
+			Fragments._Assignment__OclAny /* 0 */,
+			Fragments._Assignment__OclElement /* 1 */,
+			Fragments._Assignment__Visitable /* 2 */,
+			Fragments._Assignment__Element /* 3 */,
+			Fragments._Assignment__Assignment /* 4 */
+		};
 		private static final int @NonNull [] __Assignment = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _BottomPattern =
-			{
-				Fragments._BottomPattern__OclAny /* 0 */,
-				Fragments._BottomPattern__OclElement /* 1 */,
-				Fragments._BottomPattern__Visitable /* 2 */,
-				Fragments._BottomPattern__Element /* 3 */,
-				Fragments._BottomPattern__Pattern /* 4 */,
-				Fragments._BottomPattern__CorePattern /* 5 */,
-				Fragments._BottomPattern__BottomPattern /* 6 */
-			};
+		{
+			Fragments._BottomPattern__OclAny /* 0 */,
+			Fragments._BottomPattern__OclElement /* 1 */,
+			Fragments._BottomPattern__Visitable /* 2 */,
+			Fragments._BottomPattern__Element /* 3 */,
+			Fragments._BottomPattern__Pattern /* 4 */,
+			Fragments._BottomPattern__CorePattern /* 5 */,
+			Fragments._BottomPattern__BottomPattern /* 6 */
+		};
 		private static final int @NonNull [] __BottomPattern = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _BottomVariable =
-			{
-				Fragments._BottomVariable__OclAny /* 0 */,
-				Fragments._BottomVariable__OclElement /* 1 */,
-				Fragments._BottomVariable__Nameable /* 2 */,
-				Fragments._BottomVariable__Visitable /* 2 */,
-				Fragments._BottomVariable__Element /* 3 */,
-				Fragments._BottomVariable__NamedElement /* 4 */,
-				Fragments._BottomVariable__TypedElement /* 5 */,
-				Fragments._BottomVariable__VariableDeclaration /* 6 */,
-				Fragments._BottomVariable__Variable /* 7 */,
-				Fragments._BottomVariable__BottomVariable /* 8 */
-			};
+		{
+			Fragments._BottomVariable__OclAny /* 0 */,
+			Fragments._BottomVariable__OclElement /* 1 */,
+			Fragments._BottomVariable__Nameable /* 2 */,
+			Fragments._BottomVariable__Visitable /* 2 */,
+			Fragments._BottomVariable__Element /* 3 */,
+			Fragments._BottomVariable__NamedElement /* 4 */,
+			Fragments._BottomVariable__TypedElement /* 5 */,
+			Fragments._BottomVariable__VariableDeclaration /* 6 */,
+			Fragments._BottomVariable__Variable /* 7 */,
+			Fragments._BottomVariable__BottomVariable /* 8 */
+		};
 		private static final int @NonNull [] __BottomVariable = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CoreDomain =
-			{
-				Fragments._CoreDomain__OclAny /* 0 */,
-				Fragments._CoreDomain__OclElement /* 1 */,
-				Fragments._CoreDomain__Nameable /* 2 */,
-				Fragments._CoreDomain__ReferringElement /* 2 */,
-				Fragments._CoreDomain__Visitable /* 2 */,
-				Fragments._CoreDomain__Element /* 3 */,
-				Fragments._CoreDomain__Area /* 4 */,
-				Fragments._CoreDomain__NamedElement /* 4 */,
-				Fragments._CoreDomain__Domain /* 5 */,
-				Fragments._CoreDomain__CoreDomain /* 6 */
-			};
+		{
+			Fragments._CoreDomain__OclAny /* 0 */,
+			Fragments._CoreDomain__OclElement /* 1 */,
+			Fragments._CoreDomain__Nameable /* 2 */,
+			Fragments._CoreDomain__ReferringElement /* 2 */,
+			Fragments._CoreDomain__Visitable /* 2 */,
+			Fragments._CoreDomain__Element /* 3 */,
+			Fragments._CoreDomain__Area /* 4 */,
+			Fragments._CoreDomain__NamedElement /* 4 */,
+			Fragments._CoreDomain__Domain /* 5 */,
+			Fragments._CoreDomain__CoreDomain /* 6 */
+		};
 		private static final int @NonNull [] __CoreDomain = { 1,1,3,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CoreModel =
-			{
-				Fragments._CoreModel__OclAny /* 0 */,
-				Fragments._CoreModel__OclElement /* 1 */,
-				Fragments._CoreModel__Nameable /* 2 */,
-				Fragments._CoreModel__Visitable /* 2 */,
-				Fragments._CoreModel__Element /* 3 */,
-				Fragments._CoreModel__NamedElement /* 4 */,
-				Fragments._CoreModel__Namespace /* 5 */,
-				Fragments._CoreModel__Model /* 6 */,
-				Fragments._CoreModel__BaseModel /* 7 */,
-				Fragments._CoreModel__CoreModel /* 8 */
-			};
+		{
+			Fragments._CoreModel__OclAny /* 0 */,
+			Fragments._CoreModel__OclElement /* 1 */,
+			Fragments._CoreModel__Nameable /* 2 */,
+			Fragments._CoreModel__Visitable /* 2 */,
+			Fragments._CoreModel__Element /* 3 */,
+			Fragments._CoreModel__NamedElement /* 4 */,
+			Fragments._CoreModel__Namespace /* 5 */,
+			Fragments._CoreModel__Model /* 6 */,
+			Fragments._CoreModel__BaseModel /* 7 */,
+			Fragments._CoreModel__CoreModel /* 8 */
+		};
 		private static final int @NonNull [] __CoreModel = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CorePattern =
-			{
-				Fragments._CorePattern__OclAny /* 0 */,
-				Fragments._CorePattern__OclElement /* 1 */,
-				Fragments._CorePattern__Visitable /* 2 */,
-				Fragments._CorePattern__Element /* 3 */,
-				Fragments._CorePattern__Pattern /* 4 */,
-				Fragments._CorePattern__CorePattern /* 5 */
-			};
+		{
+			Fragments._CorePattern__OclAny /* 0 */,
+			Fragments._CorePattern__OclElement /* 1 */,
+			Fragments._CorePattern__Visitable /* 2 */,
+			Fragments._CorePattern__Element /* 3 */,
+			Fragments._CorePattern__Pattern /* 4 */,
+			Fragments._CorePattern__CorePattern /* 5 */
+		};
 		private static final int @NonNull [] __CorePattern = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _EnforcementMode =
-			{
-				Fragments._EnforcementMode__OclAny /* 0 */,
-				Fragments._EnforcementMode__OclElement /* 1 */,
-				Fragments._EnforcementMode__OclType /* 2 */,
-				Fragments._EnforcementMode__OclEnumeration /* 3 */,
-				Fragments._EnforcementMode__EnforcementMode /* 4 */
-			};
+		{
+			Fragments._EnforcementMode__OclAny /* 0 */,
+			Fragments._EnforcementMode__OclElement /* 1 */,
+			Fragments._EnforcementMode__OclType /* 2 */,
+			Fragments._EnforcementMode__OclEnumeration /* 3 */,
+			Fragments._EnforcementMode__EnforcementMode /* 4 */
+		};
 		private static final int @NonNull [] __EnforcementMode = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _EnforcementOperation =
-			{
-				Fragments._EnforcementOperation__OclAny /* 0 */,
-				Fragments._EnforcementOperation__OclElement /* 1 */,
-				Fragments._EnforcementOperation__Visitable /* 2 */,
-				Fragments._EnforcementOperation__Element /* 3 */,
-				Fragments._EnforcementOperation__EnforcementOperation /* 4 */
-			};
+		{
+			Fragments._EnforcementOperation__OclAny /* 0 */,
+			Fragments._EnforcementOperation__OclElement /* 1 */,
+			Fragments._EnforcementOperation__Visitable /* 2 */,
+			Fragments._EnforcementOperation__Element /* 3 */,
+			Fragments._EnforcementOperation__EnforcementOperation /* 4 */
+		};
 		private static final int @NonNull [] __EnforcementOperation = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _GuardPattern =
-			{
-				Fragments._GuardPattern__OclAny /* 0 */,
-				Fragments._GuardPattern__OclElement /* 1 */,
-				Fragments._GuardPattern__Visitable /* 2 */,
-				Fragments._GuardPattern__Element /* 3 */,
-				Fragments._GuardPattern__Pattern /* 4 */,
-				Fragments._GuardPattern__CorePattern /* 5 */,
-				Fragments._GuardPattern__GuardPattern /* 6 */
-			};
+		{
+			Fragments._GuardPattern__OclAny /* 0 */,
+			Fragments._GuardPattern__OclElement /* 1 */,
+			Fragments._GuardPattern__Visitable /* 2 */,
+			Fragments._GuardPattern__Element /* 3 */,
+			Fragments._GuardPattern__Pattern /* 4 */,
+			Fragments._GuardPattern__CorePattern /* 5 */,
+			Fragments._GuardPattern__GuardPattern /* 6 */
+		};
 		private static final int @NonNull [] __GuardPattern = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _GuardVariable =
-			{
-				Fragments._GuardVariable__OclAny /* 0 */,
-				Fragments._GuardVariable__OclElement /* 1 */,
-				Fragments._GuardVariable__Nameable /* 2 */,
-				Fragments._GuardVariable__Visitable /* 2 */,
-				Fragments._GuardVariable__Element /* 3 */,
-				Fragments._GuardVariable__NamedElement /* 4 */,
-				Fragments._GuardVariable__TypedElement /* 5 */,
-				Fragments._GuardVariable__VariableDeclaration /* 6 */,
-				Fragments._GuardVariable__Variable /* 7 */,
-				Fragments._GuardVariable__GuardVariable /* 8 */
-			};
+		{
+			Fragments._GuardVariable__OclAny /* 0 */,
+			Fragments._GuardVariable__OclElement /* 1 */,
+			Fragments._GuardVariable__Nameable /* 2 */,
+			Fragments._GuardVariable__Visitable /* 2 */,
+			Fragments._GuardVariable__Element /* 3 */,
+			Fragments._GuardVariable__NamedElement /* 4 */,
+			Fragments._GuardVariable__TypedElement /* 5 */,
+			Fragments._GuardVariable__VariableDeclaration /* 6 */,
+			Fragments._GuardVariable__Variable /* 7 */,
+			Fragments._GuardVariable__GuardVariable /* 8 */
+		};
 		private static final int @NonNull [] __GuardVariable = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Mapping =
-			{
-				Fragments._Mapping__OclAny /* 0 */,
-				Fragments._Mapping__OclElement /* 1 */,
-				Fragments._Mapping__Nameable /* 2 */,
-				Fragments._Mapping__Visitable /* 2 */,
-				Fragments._Mapping__Element /* 3 */,
-				Fragments._Mapping__Area /* 4 */,
-				Fragments._Mapping__NamedElement /* 4 */,
-				Fragments._Mapping__Rule /* 5 */,
-				Fragments._Mapping__Mapping /* 6 */
-			};
+		{
+			Fragments._Mapping__OclAny /* 0 */,
+			Fragments._Mapping__OclElement /* 1 */,
+			Fragments._Mapping__Nameable /* 2 */,
+			Fragments._Mapping__Visitable /* 2 */,
+			Fragments._Mapping__Element /* 3 */,
+			Fragments._Mapping__Area /* 4 */,
+			Fragments._Mapping__NamedElement /* 4 */,
+			Fragments._Mapping__Rule /* 5 */,
+			Fragments._Mapping__Mapping /* 6 */
+		};
 		private static final int @NonNull [] __Mapping = { 1,1,2,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NavigationAssignment =
-			{
-				Fragments._NavigationAssignment__OclAny /* 0 */,
-				Fragments._NavigationAssignment__OclElement /* 1 */,
-				Fragments._NavigationAssignment__Visitable /* 2 */,
-				Fragments._NavigationAssignment__Element /* 3 */,
-				Fragments._NavigationAssignment__Assignment /* 4 */,
-				Fragments._NavigationAssignment__NavigationAssignment /* 5 */
-			};
+		{
+			Fragments._NavigationAssignment__OclAny /* 0 */,
+			Fragments._NavigationAssignment__OclElement /* 1 */,
+			Fragments._NavigationAssignment__Visitable /* 2 */,
+			Fragments._NavigationAssignment__Element /* 3 */,
+			Fragments._NavigationAssignment__Assignment /* 4 */,
+			Fragments._NavigationAssignment__NavigationAssignment /* 5 */
+		};
 		private static final int @NonNull [] __NavigationAssignment = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _OppositePropertyAssignment =
-			{
-				Fragments._OppositePropertyAssignment__OclAny /* 0 */,
-				Fragments._OppositePropertyAssignment__OclElement /* 1 */,
-				Fragments._OppositePropertyAssignment__Visitable /* 2 */,
-				Fragments._OppositePropertyAssignment__Element /* 3 */,
-				Fragments._OppositePropertyAssignment__Assignment /* 4 */,
-				Fragments._OppositePropertyAssignment__NavigationAssignment /* 5 */,
-				Fragments._OppositePropertyAssignment__OppositePropertyAssignment /* 6 */
-			};
+		{
+			Fragments._OppositePropertyAssignment__OclAny /* 0 */,
+			Fragments._OppositePropertyAssignment__OclElement /* 1 */,
+			Fragments._OppositePropertyAssignment__Visitable /* 2 */,
+			Fragments._OppositePropertyAssignment__Element /* 3 */,
+			Fragments._OppositePropertyAssignment__Assignment /* 4 */,
+			Fragments._OppositePropertyAssignment__NavigationAssignment /* 5 */,
+			Fragments._OppositePropertyAssignment__OppositePropertyAssignment /* 6 */
+		};
 		private static final int @NonNull [] __OppositePropertyAssignment = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PropertyAssignment =
-			{
-				Fragments._PropertyAssignment__OclAny /* 0 */,
-				Fragments._PropertyAssignment__OclElement /* 1 */,
-				Fragments._PropertyAssignment__Visitable /* 2 */,
-				Fragments._PropertyAssignment__Element /* 3 */,
-				Fragments._PropertyAssignment__Assignment /* 4 */,
-				Fragments._PropertyAssignment__NavigationAssignment /* 5 */,
-				Fragments._PropertyAssignment__PropertyAssignment /* 6 */
-			};
+		{
+			Fragments._PropertyAssignment__OclAny /* 0 */,
+			Fragments._PropertyAssignment__OclElement /* 1 */,
+			Fragments._PropertyAssignment__Visitable /* 2 */,
+			Fragments._PropertyAssignment__Element /* 3 */,
+			Fragments._PropertyAssignment__Assignment /* 4 */,
+			Fragments._PropertyAssignment__NavigationAssignment /* 5 */,
+			Fragments._PropertyAssignment__PropertyAssignment /* 6 */
+		};
 		private static final int @NonNull [] __PropertyAssignment = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RealizedVariable =
-			{
-				Fragments._RealizedVariable__OclAny /* 0 */,
-				Fragments._RealizedVariable__OclElement /* 1 */,
-				Fragments._RealizedVariable__Nameable /* 2 */,
-				Fragments._RealizedVariable__Visitable /* 2 */,
-				Fragments._RealizedVariable__Element /* 3 */,
-				Fragments._RealizedVariable__NamedElement /* 4 */,
-				Fragments._RealizedVariable__TypedElement /* 5 */,
-				Fragments._RealizedVariable__VariableDeclaration /* 6 */,
-				Fragments._RealizedVariable__Variable /* 7 */,
-				Fragments._RealizedVariable__RealizedVariable /* 8 */
-			};
+		{
+			Fragments._RealizedVariable__OclAny /* 0 */,
+			Fragments._RealizedVariable__OclElement /* 1 */,
+			Fragments._RealizedVariable__Nameable /* 2 */,
+			Fragments._RealizedVariable__Visitable /* 2 */,
+			Fragments._RealizedVariable__Element /* 3 */,
+			Fragments._RealizedVariable__NamedElement /* 4 */,
+			Fragments._RealizedVariable__TypedElement /* 5 */,
+			Fragments._RealizedVariable__VariableDeclaration /* 6 */,
+			Fragments._RealizedVariable__Variable /* 7 */,
+			Fragments._RealizedVariable__RealizedVariable /* 8 */
+		};
 		private static final int @NonNull [] __RealizedVariable = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _VariableAssignment =
-			{
-				Fragments._VariableAssignment__OclAny /* 0 */,
-				Fragments._VariableAssignment__OclElement /* 1 */,
-				Fragments._VariableAssignment__Visitable /* 2 */,
-				Fragments._VariableAssignment__Element /* 3 */,
-				Fragments._VariableAssignment__Assignment /* 4 */,
-				Fragments._VariableAssignment__VariableAssignment /* 5 */
-			};
+		{
+			Fragments._VariableAssignment__OclAny /* 0 */,
+			Fragments._VariableAssignment__OclElement /* 1 */,
+			Fragments._VariableAssignment__Visitable /* 2 */,
+			Fragments._VariableAssignment__Element /* 3 */,
+			Fragments._VariableAssignment__Assignment /* 4 */,
+			Fragments._VariableAssignment__VariableAssignment /* 5 */
+		};
 		private static final int @NonNull [] __VariableAssignment = { 1,1,1,1,1,1 };
 
 		/**
