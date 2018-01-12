@@ -166,7 +166,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			if (relation != null) {
 				@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNameExp);
 				relationCallExp.setReferredRelation(relation);
-				context.setType(relationCallExp, standardLibrary.getBooleanType(), true);
+				helper.setType(relationCallExp, standardLibrary.getBooleanType(), true);
 				List<Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
 				resolveRelationArgumentTypes(rootVariables, csRoundBracketedClause);
 				resolveRelationArguments(csRoundBracketedClause, null, relation, relationCallExp);
@@ -177,7 +177,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				//				Operation baseOperation = metamodelManager.resolveBaseOperation(function);
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
-				context.setType(operationCallExp, function.getType(), function.isIsRequired());
+				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				Type owningClass = function.getOwningClass();
